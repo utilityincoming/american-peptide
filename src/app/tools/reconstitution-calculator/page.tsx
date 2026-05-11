@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, Syringe, AlertTriangle, Info } from 'lucide-react'
+import { ArrowLeft, Syringe, AlertTriangle } from 'lucide-react'
 
 const VIAL_PRESETS = [2, 5, 10, 15, 20, 30]
 const DOSE_PRESETS = [100, 250, 500, 750, 1000, 1500, 2000]
@@ -260,35 +260,6 @@ export default function ReconstitutionCalculatorPage() {
           </ul>
         </section>
 
-        {/* ── Footer ── */}
-        <footer className="space-y-4">
-          <div className="rounded-2xl border border-amber-500/15 bg-amber-500/[0.04] px-5 py-4">
-            <div className="mb-1 flex items-center gap-2">
-              <Info className="h-3.5 w-3.5 text-amber-400/80" />
-              <span className="text-xs font-semibold text-amber-400/80">Disclaimer</span>
-            </div>
-            <p className="text-xs leading-relaxed text-amber-400/60">
-              This calculator is for research and educational purposes only. Not intended as
-              medical advice. Consult appropriate guidelines for your specific research
-              application.
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-2 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
-            <Link
-              href="/"
-              className="transition-colors hover:text-white"
-            >
-              ← Back to AmericanPeptide.com
-            </Link>
-            <Link
-              href="/research"
-              className="text-[#2DD4A8]/80 transition-colors hover:text-[#2DD4A8]"
-            >
-              Ask the AI Research Agent a question →
-            </Link>
-          </div>
-        </footer>
       </main>
     </div>
   )
