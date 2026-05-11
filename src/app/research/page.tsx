@@ -29,10 +29,14 @@ What would you like to research today?`,
 }
 
 const SUGGESTIONS = [
-  'Design a GLP-1 receptor agonist peptide analog',
-  'Summarize recent peptide-based clinical trials for obesity',
-  'Compare cyclic vs linear peptide metabolic stability',
-  'What peptide therapeutics are targeting PCSK9?',
+  'Best peptide for tanning',
+  'Best peptide for skin anti-aging',
+  'GHK-Cu for hair growth',
+  'BPC-157 vs TB-500 for healing',
+  'How to reconstitute peptides',
+  'How to read a peptide COA',
+  'Best copper peptide serum ingredients',
+  'Peptide storage and shelf life',
 ]
 
 const md: Components = {
