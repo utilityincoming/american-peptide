@@ -1,5 +1,17 @@
 import Link from 'next/link'
 import { ArrowRight, Dna, BarChart3, FlaskConical, Search, Sparkles, Telescope } from 'lucide-react'
+import { PEPTIDES, CATEGORIES } from '@/lib/peptides'
+
+const SPOTLIGHT_SLUGS = [
+  'semaglutide',
+  'tirzepatide',
+  'retatrutide',
+  'bpc-157',
+  'pt-141',
+  'ghk-cu',
+  'mots-c',
+  'epitalon',
+] as const
 
 const features = [
   {
@@ -172,6 +184,109 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* ── Catalog Spotlight ── */}
+      <section className="relative z-10 mx-auto max-w-6xl px-6 pb-24 md:px-10">
+        <Link
+          href="/catalog"
+          className="group relative block overflow-hidden rounded-3xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] via-[#2DD4A8]/[0.03] to-transparent p-8 transition-all duration-300 hover:border-[#2DD4A8]/35 hover:shadow-[0_20px_80px_rgba(45,212,168,0.10)] md:p-12"
+        >
+          {/* Subtle dot pattern */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-40"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+              backgroundSize: '24px 24px',
+            }}
+          />
+          {/* Glow */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-[#2DD4A8] opacity-[0.08] blur-[120px] transition-opacity duration-500 group-hover:opacity-[0.14]"
+          />
+
+          <div className="relative grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
+            {/* Left column */}
+            <div>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.10] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#2DD4A8]">
+                <Sparkles className="h-3 w-3" />
+                New · Now live
+              </div>
+
+              <h2 className="mb-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-[40px]">
+                The peptide reference
+                <br />
+                <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+                  catalog is live.
+                </span>
+              </h2>
+
+              <p className="mb-6 max-w-md text-[15px] leading-relaxed text-white/55">
+                Browse {PEPTIDES.length} research peptides across {CATEGORIES.length} categories — each
+                entry carries mechanism, sequence, and PubChem-enriched chemistry. Built to evolve
+                into a transparent supplier marketplace.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-4">
+                <span className="inline-flex items-center gap-2 rounded-xl bg-[#2DD4A8] px-6 py-3 text-sm font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(45,212,168,0)] transition-all group-hover:bg-[#34ddb0] group-hover:shadow-[0_0_40px_rgba(45,212,168,0.35)]">
+                  Open Catalog
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
+                <span className="text-xs text-white/35">
+                  {PEPTIDES.filter((p) => p.fdaApproved).length} FDA-approved · {PEPTIDES.filter((p) => p.sequence).length} with full sequence
+                </span>
+              </div>
+            </div>
+
+            {/* Right column — peptide preview chips */}
+            <div className="relative">
+              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35">
+                Featured entries
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {SPOTLIGHT_SLUGS.map((slug) => {
+                  const p = PEPTIDES.find((x) => x.slug === slug)
+                  if (!p) return null
+                  return (
+                    <span
+                      key={slug}
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-white/[0.03] px-2.5 py-1.5 text-xs text-white/70 transition-colors group-hover:border-[#2DD4A8]/20 group-hover:bg-white/[0.05]"
+                    >
+                      {p.name}
+                      {p.fdaApproved && (
+                        <span className="rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+                          FDA
+                        </span>
+                      )}
+                    </span>
+                  )
+                })}
+                <span className="inline-flex items-center rounded-lg border border-dashed border-white/[0.12] bg-transparent px-2.5 py-1.5 text-xs text-white/40">
+                  +{PEPTIDES.length - SPOTLIGHT_SLUGS.length} more
+                </span>
+              </div>
+
+              <div className="mt-5 border-t border-white/[0.06] pt-4">
+                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35">
+                  Categories
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {CATEGORIES.map((c) => (
+                    <span
+                      key={c.id}
+                      className="rounded-md border border-white/[0.06] bg-white/[0.02] px-2 py-0.5 text-[10px] text-white/50"
+                    >
+                      {c.label}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Link>
       </section>
 
       {/* ── Feature Cards ── */}

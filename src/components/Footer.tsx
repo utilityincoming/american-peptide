@@ -6,7 +6,7 @@ const LINKS = [
   { href: '/research', label: 'Research Agent' },
   { href: '/compounds', label: 'Compounds' },
   { href: '/trials', label: 'Clinical Trials' },
-  { href: '/tools/reconstitution-calculator', label: 'Peptide Reconstitution Calculator' },
+  { href: '/tools/reconstitution-calculator', label: 'Peptide Calculator' },
 ]
 
 export default function Footer() {
