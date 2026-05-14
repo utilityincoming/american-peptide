@@ -1,0 +1,184 @@
+{
+  "semaglutide": {
+    "cid": 56843331,
+    "matchedName": "semaglutide",
+    "molecularWeight": 4114,
+    "molecularFormula": "C187H291N45O59",
+    "iupacName": "18-[[(1R)-4-[2-[2-[2-[2-[2-[2-[[(5S)-5-[[(2S)-2-[[(2S)-2-[[(2S)-5-amino-2-[[2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S,3R)-2-[[(2S)-2-[[(2S,3R)-2-[[2-[[(2S)-2-[[2-[[(2S)-2-amino-3-(1H-imidazol-5-yl)propanoyl]amino]-2-methylpropanoyl]amino]-4-carboxybutanoyl]amino]acetyl]amino]-3-hydroxybutanoyl]amino]-3-phenylpropanoyl]amino]-3-hydroxybutanoyl]amino]-3-hydroxypropanoyl]amino]-3-carboxypropanoyl]amino]-3-methylbutanoyl]amino]-3-hydroxypropanoyl]amino]-3-hydroxypropanoyl]amino]-3-(4-hydroxyphenyl)propanoyl]amino]-4-methylpentanoyl]amino]-4-carboxybutanoyl]amino]acetyl]amino]-5-oxopentanoyl]amino]propanoyl]amino]propanoyl]amino]-6-[[(2S)-1-[[(2S)-1-[[(2S,3S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-5-carbamimidamido-1-[[2-[[(2S)-5-carbamimidamido-1-(carboxymethylamino)-1-oxopentan-2-yl]amino]-2-oxoethyl]amino]-1-oxopentan-2-yl]amino]-3-methyl-1-oxobutan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-3-(1H-indol-3-yl)-1-oxopropan-2-yl]amino]-1-oxopropan-2-yl]amino]-3-methyl-1-oxopentan-2-yl]amino]-1-oxo-3-phenylpropan-2-yl]amino]-4-carboxy-1-oxobutan-2-yl]amino]-6-oxohexyl]amino]-2-oxoethoxy]ethoxy]ethylamino]-2-oxoethoxy]ethoxy]ethylamino]-1-carboxy-4-oxobutyl]amino]-18-oxooctadecanoic acid"
+  },
+  "tirzepatide": {
+    "cid": 166567236,
+    "matchedName": "tirzepatide",
+    "molecularWeight": 4813,
+    "molecularFormula": "C225H348N48O68",
+    "iupacName": "20-[[(1S)-4-[2-[2-[2-[2-[2-[2-[[(5S)-5-[[(2S)-5-amino-2-[[(2S)-2-[[(2S,3S)-2-[[(2S)-6-amino-2-[[(2S)-2-[[(2S)-2-[[2-[[(2S,3S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S,3R)-2-[[(2S)-2-[[(2S,3R)-2-[[2-[[(2S)-2-[[2-[[(2S)-2-amino-3-(4-hydroxyphenyl)propanoyl]amino]-2-methylpropanoyl]amino]-4-carboxybutanoyl]amino]acetyl]amino]-3-hydroxybutanoyl]amino]-3-phenylpropanoyl]amino]-3-hydroxybutanoyl]amino]-3-hydroxypropanoyl]amino]-3-carboxypropanoyl]amino]-3-(4-hydroxyphenyl)propanoyl]amino]-3-hydroxypropanoyl]amino]-3-methylpentanoyl]amino]-2-methylpropanoyl]amino]-4-methylpentanoyl]amino]-3-carboxypropanoyl]amino]hexanoyl]amino]-3-methylpentanoyl]amino]propanoyl]amino]-5-oxopentanoyl]amino]-6-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-5-amino-1-[[(2S)-1-[[(2S)-1-[[(2S,3S)-1-[[(2S)-1-[[2-[[2-[(2S)-2-[[(2S)-1-[[(2S)-1-[[2-[[(2S)-1-[(2S)-2-[(2S)-2-[(2S)-2-[[(2S)-1-amino-3-hydroxy-1-oxopropan-2-yl]carbamoyl]pyrrolidine-1-carbonyl]pyrrolidine-1-carbonyl]pyrrolidin-1-yl]-1-oxopropan-2-yl]amino]-2-oxoethyl]amino]-3-hydroxy-1-oxopropan-2-yl]amino]-3-hydroxy-1-oxopropan-2-yl]carbamoyl]pyrrolidin-1-yl]-2-oxoethyl]amino]-2-oxoethyl]amino]-1-oxopropan-2-yl]amino]-3-methyl-1-oxopentan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-3-(1H-indol-3-yl)-1-oxopropan-2-yl]amino]-1,5-dioxopentan-2-yl]amino]-3-methyl-1-oxobutan-2-yl]amino]-1-oxo-3-phenylpropan-2-yl]amino]-1-oxopropan-2-yl]amino]-6-oxohexyl]amino]-2-oxoethoxy]ethoxy]ethylamino]-2-oxoethoxy]ethoxy]ethylamino]-1-carboxy-4-oxobutyl]amino]-20-oxoicosanoic acid"
+  },
+  "retatrutide": {
+    "cid": 171390338,
+    "matchedName": "retatrutide",
+    "molecularWeight": 4731,
+    "molecularFormula": "C221H342N46O68",
+    "iupacName": "20-[[(1S)-4-[2-[2-[2-[[(5S)-5-[[(2S)-6-amino-2-[[(2S)-2-[[(2S)-2-[[(2R)-2-[[(3S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S,3R)-2-[[(2S)-2-[[(2S,3R)-2-[[2-[[(2S)-5-amino-2-[[2-[[(2S)-2-amino-3-(4-hydroxyphenyl)propanoyl]amino]-2-methylpropanoyl]amino]-5-oxopentanoyl]amino]acetyl]amino]-3-hydroxybutanoyl]amino]-3-phenylpropanoyl]amino]-3-hydroxybutanoyl]amino]-3-hydroxypropanoyl]amino]-3-carboxypropanoyl]amino]-3-(4-hydroxyphenyl)propanoyl]amino]-3-hydroxypropanoyl]amino]-3-methylpentanoyl]amino]-2,4-dimethylpentanoyl]amino]-4-methylpentanoyl]amino]-3-carboxypropanoyl]amino]hexanoyl]amino]-6-[[(2S)-1-[[(2S)-5-amino-1-[[1-[[(2S)-1-[[(2S)-1-[[(3S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[2-[[2-[(2S)-2-[[(2S)-1-[[(2S)-1-[[2-[[(2S)-1-[(2S)-2-[(2S)-2-[(2S)-2-[[(2S)-1-amino-3-hydroxy-1-oxopropan-2-yl]carbamoyl]pyrrolidine-1-carbonyl]pyrrolidine-1-carbonyl]pyrrolidin-1-yl]-1-oxopropan-2-yl]amino]-2-oxoethyl]amino]-3-hydroxy-1-oxopropan-2-yl]amino]-3-hydroxy-1-oxopropan-2-yl]carbamoyl]pyrrolidin-1-yl]-2-oxoethyl]amino]-2-oxoethyl]amino]-4-carboxy-1-oxobutan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-3-(4-hydroxyphenyl)-1-oxopropan-2-yl]amino]-4-carboxy-1-oxobutan-2-yl]amino]-3-methyl-1-oxopentan-2-yl]amino]-1-oxo-3-phenylpropan-2-yl]amino]-1-oxopropan-2-yl]amino]-2-methyl-1-oxopropan-2-yl]amino]-1,5-dioxopentan-2-yl]amino]-1-oxopropan-2-yl]amino]-6-oxohexyl]amino]-2-oxoethoxy]ethoxy]ethylamino]-1-carboxy-4-oxobutyl]amino]-20-oxoicosanoic acid"
+  },
+  "cagrilintide": {
+    "cid": 171397054,
+    "matchedName": "cagrilintide",
+    "molecularWeight": 4409,
+    "molecularFormula": "C194H312N54O59S2",
+    "iupacName": "20-[[(1S)-4-[[(2S)-6-amino-1-[[(4R,7S,10S,13S,16S,19R)-4-[[(2S)-1-[[(2S,3R)-1-[[(2S)-5-amino-1-[[(2S)-1-[[(2R)-1-[[(2R)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-4-amino-1-[[(2S)-4-amino-1-[[(2S)-1-[[2-[(2S)-2-[[(2S,3S)-1-[[(2R)-1-[(2R)-2-[(2R)-2-[[(2R,3S)-1-[[(2R)-4-amino-1-[[(2R)-1-[[2-[[(2R)-1-[[(2R)-4-amino-1-[[(2R,3S)-1-[(2R)-2-carbamoylpyrrolidin-1-yl]-3-hydroxy-1-oxobutan-2-yl]amino]-1,4-dioxobutan-2-yl]amino]-3-hydroxy-1-oxopropan-2-yl]amino]-2-oxoethyl]amino]-3-methyl-1-oxobutan-2-yl]amino]-1,4-dioxobutan-2-yl]amino]-3-hydroxy-1-oxobutan-2-yl]carbamoyl]pyrrolidine-1-carbonyl]pyrrolidin-1-yl]-4-methyl-1-oxopentan-2-yl]amino]-3-methyl-1-oxopentan-2-yl]carbamoyl]pyrrolidin-1-yl]-2-oxoethyl]amino]-1-oxo-3-phenylpropan-2-yl]amino]-1,4-dioxobutan-2-yl]amino]-1,4-dioxobutan-2-yl]amino]-3-hydroxy-1-oxopropan-2-yl]amino]-3-hydroxy-1-oxopropan-2-yl]amino]-3-(1H-imidazol-4-yl)-1-oxopropan-2-yl]amino]-5-carbamimidamido-1-oxopentan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-1-oxo-3-phenylpropan-2-yl]amino]-4-carboxy-1-oxobutan-2-yl]amino]-1-oxopropan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-5-carbamimidamido-1-oxopentan-2-yl]amino]-1,5-dioxopentan-2-yl]amino]-3-hydroxy-1-oxobutan-2-yl]amino]-1-oxopropan-2-yl]carbamoyl]-16-(2-amino-2-oxoethyl)-7,13-bis[(1R)-1-hydroxyethyl]-10-methyl-6,9,12,15,18-pentaoxo-1,2-dithia-5,8,11,14,17-pentazacycloicos-19-yl]amino]-1-oxohexan-2-yl]amino]-1-carboxy-4-oxobutyl]amino]-20-oxoicosanoic acid"
+  },
+  "bpc-157": {
+    "cid": 9941957,
+    "matchedName": "BPC-157",
+    "molecularWeight": 1419.5,
+    "molecularFormula": "C62H98N16O22",
+    "iupacName": "(4S)-4-[(2-aminoacetyl)amino]-5-[(2S)-2-[(2S)-2-[(2S)-2-[[2-[[(2S)-6-amino-1-[(2S)-2-[[(2S)-1-[[(2S)-3-carboxy-1-[[(2S)-3-carboxy-1-[[(2S)-1-[[2-[[(2S)-1-[[(1S)-1-carboxy-2-methylpropyl]amino]-4-methyl-1-oxopentan-2-yl]amino]-2-oxoethyl]amino]-1-oxopropan-2-yl]amino]-1-oxopropan-2-yl]amino]-1-oxopropan-2-yl]amino]-1-oxopropan-2-yl]carbamoyl]pyrrolidin-1-yl]-1-oxohexan-2-yl]amino]-2-oxoethyl]carbamoyl]pyrrolidine-1-carbonyl]pyrrolidine-1-carbonyl]pyrrolidin-1-yl]-5-oxopentanoic acid"
+  },
+  "tb-500": {
+    "cid": 62707662,
+    "matchedName": "TB-500",
+    "molecularWeight": 889,
+    "molecularFormula": "C38H68N10O14",
+    "iupacName": "(2S)-2-[[(2S,3R)-2-[[(2S)-2-[[(2S,3R)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-acetamido-4-methylpentanoyl]amino]-6-aminohexanoyl]amino]-6-aminohexanoyl]amino]-3-hydroxybutanoyl]amino]-4-carboxybutanoyl]amino]-3-hydroxybutanoyl]amino]-5-amino-5-oxopentanoic acid"
+  },
+  "ghk-cu": {
+    "cid": 139035031,
+    "matchedName": "GHK-Cu",
+    "molecularWeight": 400.9,
+    "molecularFormula": "C14H21CuN6O4-",
+    "iupacName": "copper (2S)-6-amino-2-[[(2S)-2-(2-azanidylacetyl)azanidyl-3-(1H-imidazol-4-yl)propanoyl]amino]hexanoate"
+  },
+  "cjc-1295-no-dac": {
+    "cid": 91971820,
+    "matchedName": "CJC-1295",
+    "molecularWeight": 3647.2,
+    "molecularFormula": "C165H269N47O46",
+    "iupacName": "(3S)-4-[[(2S)-1-[[(2S,3S)-1-[[(2S)-1-[[(2S,3R)-1-[[(2S)-5-amino-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-6-amino-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-5-amino-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-6-amino-1-[[(2S)-1-[[(2S)-1-[[(2S)-5-amino-1-[[(2S)-1-[[(2S,3S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-amino-6-[3-(2,5-dioxopyrrol-1-yl)propanoylamino]-1-oxohexan-2-yl]amino]-5-carbamimidamido-1-oxopentan-2-yl]amino]-3-hydroxy-1-oxopropan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-3-methyl-1-oxopentan-2-yl]amino]-3-carboxy-1-oxopropan-2-yl]amino]-1,5-dioxopentan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-1-oxohexan-2-yl]amino]-5-carbamimidamido-1-oxopentan-2-yl]amino]-1-oxopropan-2-yl]amino]-3-hydroxy-1-oxopropan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-1,5-dioxopentan-2-yl]amino]-1-oxopropan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-3-methyl-1-oxobutan-2-yl]amino]-1-oxohexan-2-yl]amino]-5-carbamimidamido-1-oxopentan-2-yl]amino]-3-(4-hydroxyphenyl)-1-oxopropan-2-yl]amino]-3-hydroxy-1-oxopropan-2-yl]amino]-1,5-dioxopentan-2-yl]amino]-3-hydroxy-1-oxobutan-2-yl]amino]-1-oxo-3-phenylpropan-2-yl]amino]-3-methyl-1-oxopentan-2-yl]amino]-1-oxopropan-2-yl]amino]-3-[[(2R)-2-[[(2S)-2-amino-3-(4-hydroxyphenyl)propanoyl]amino]propanoyl]amino]-4-oxobutanoic acid"
+  },
+  "ipamorelin": {
+    "cid": 9831659,
+    "matchedName": "ipamorelin",
+    "molecularWeight": 711.9,
+    "molecularFormula": "C38H49N9O5",
+    "iupacName": "(2S)-6-amino-2-[[(2R)-2-[[(2R)-2-[[(2S)-2-[(2-amino-2-methylpropanoyl)amino]-3-(1H-imidazol-5-yl)propanoyl]amino]-3-naphthalen-2-ylpropanoyl]amino]-3-phenylpropanoyl]amino]hexanamide"
+  },
+  "tesamorelin": {
+    "cid": 16137828,
+    "matchedName": "tesamorelin",
+    "molecularWeight": 5136,
+    "molecularFormula": "C221H366N72O67S",
+    "iupacName": "(4S)-4-[[2-[[(2S)-5-amino-2-[[(2S)-5-amino-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S,3S)-2-[[(2S)-2-[[(2S)-5-amino-2-[[(2S)-2-[[(2S)-2-[[(2S)-6-amino-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-5-amino-2-[[2-[[(2S)-2-[[(2S)-2-[[(2S)-6-amino-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-4-amino-2-[[(2S,3R)-2-[[(2S)-2-[[(2S,3S)-2-[[(2S)-2-[[(2S)-3-carboxy-2-[[(2S)-2-[[(2S)-2-[[(E)-hex-3-enoyl]amino]-3-(4-hydroxyphenyl)propanoyl]amino]propanoyl]amino]propanoyl]amino]propanoyl]amino]-3-methylpentanoyl]amino]-3-phenylpropanoyl]amino]-3-hydroxybutanoyl]amino]-4-oxobutanoyl]amino]-3-hydroxypropanoyl]amino]-3-(4-hydroxyphenyl)propanoyl]amino]-5-carbamimidamidopentanoyl]amino]hexanoyl]amino]-3-methylbutanoyl]amino]-4-methylpentanoyl]amino]acetyl]amino]-5-oxopentanoyl]amino]-4-methylpentanoyl]amino]-3-hydroxypropanoyl]amino]propanoyl]amino]-5-carbamimidamidopentanoyl]amino]hexanoyl]amino]-4-methylpentanoyl]amino]-4-methylpentanoyl]amino]-5-oxopentanoyl]amino]-3-carboxypropanoyl]amino]-3-methylpentanoyl]amino]-4-methylsulfanylbutanoyl]amino]-3-hydroxypropanoyl]amino]-5-carbamimidamidopentanoyl]amino]-5-oxopentanoyl]amino]-5-oxopentanoyl]amino]acetyl]amino]-5-[[(2S)-1-[[(2S)-4-amino-1-[[(2S)-5-amino-1-[[(2S)-1-[[(2S)-1-[[2-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-amino-4-methyl-1-oxopentan-2-yl]amino]-5-carbamimidamido-1-oxopentan-2-yl]amino]-1-oxopropan-2-yl]amino]-5-carbamimidamido-1-oxopentan-2-yl]amino]-1-oxopropan-2-yl]amino]-2-oxoethyl]amino]-5-carbamimidamido-1-oxopentan-2-yl]amino]-4-carboxy-1-oxobutan-2-yl]amino]-1,5-dioxopentan-2-yl]amino]-1,4-dioxobutan-2-yl]amino]-3-hydroxy-1-oxopropan-2-yl]amino]-5-oxopentanoic acid"
+  },
+  "sermorelin": {
+    "cid": 16132413,
+    "matchedName": "sermorelin",
+    "molecularWeight": 3357.9,
+    "molecularFormula": "C149H246N44O42S",
+    "iupacName": "(3S)-4-[[(2S)-1-[[(2S,3S)-1-[[(2S)-1-[[(2S,3R)-1-[[(2S)-4-amino-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-6-amino-1-[[(2S)-1-[[(2S)-1-[[2-[[(2S)-5-amino-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-6-amino-1-[[(2S)-1-[[(2S)-1-[[(2S)-5-amino-1-[[(2S)-1-[[(2S,3S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-amino-5-carbamimidamido-1-oxopentan-2-yl]amino]-3-hydroxy-1-oxopropan-2-yl]amino]-4-methylsulfanyl-1-oxobutan-2-yl]amino]-3-methyl-1-oxopentan-2-yl]amino]-3-carboxy-1-oxopropan-2-yl]amino]-1,5-dioxopentan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-1-oxohexan-2-yl]amino]-5-carbamimidamido-1-oxopentan-2-yl]amino]-1-oxopropan-2-yl]amino]-3-hydroxy-1-oxopropan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-1,5-dioxopentan-2-yl]amino]-2-oxoethyl]amino]-4-methyl-1-oxopentan-2-yl]amino]-3-methyl-1-oxobutan-2-yl]amino]-1-oxohexan-2-yl]amino]-5-carbamimidamido-1-oxopentan-2-yl]amino]-3-(4-hydroxyphenyl)-1-oxopropan-2-yl]amino]-3-hydroxy-1-oxopropan-2-yl]amino]-1,4-dioxobutan-2-yl]amino]-3-hydroxy-1-oxobutan-2-yl]amino]-1-oxo-3-phenylpropan-2-yl]amino]-3-methyl-1-oxopentan-2-yl]amino]-1-oxopropan-2-yl]amino]-3-[[(2S)-2-[[(2S)-2-amino-3-(4-hydroxyphenyl)propanoyl]amino]propanoyl]amino]-4-oxobutanoic acid"
+  },
+  "hexarelin": {
+    "cid": 6918297,
+    "matchedName": "hexarelin",
+    "molecularWeight": 887,
+    "molecularFormula": "C47H58N12O6",
+    "iupacName": "(2S)-6-amino-2-[[(2R)-2-[[(2S)-2-[[(2S)-2-[[(2R)-2-[[(2S)-2-amino-3-(1H-imidazol-5-yl)propanoyl]amino]-3-(2-methyl-1H-indol-3-yl)propanoyl]amino]propanoyl]amino]-3-(1H-indol-3-yl)propanoyl]amino]-3-phenylpropanoyl]amino]hexanamide"
+  },
+  "mots-c": {
+    "cid": 146675088,
+    "matchedName": "MOTS-c",
+    "molecularWeight": 2174.6,
+    "molecularFormula": "C101H152N28O22S2",
+    "iupacName": "(4S)-4-[[(2S)-5-amino-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]-5-carbamimidamidopentanoyl]amino]-3-(1H-indol-3-yl)propanoyl]amino]-5-oxopentanoyl]amino]-5-[[(2S)-1-[[2-[[(2S)-1-[[(2S,3S)-1-[[(2S)-1-[[(2S)-1-[(2S)-2-[[(2S)-1-[[(2S)-6-amino-1-[[(2S)-1-[[(1S)-4-carbamimidamido-1-carboxybutyl]amino]-4-methyl-1-oxopentan-2-yl]amino]-1-oxohexan-2-yl]amino]-5-carbamimidamido-1-oxopentan-2-yl]carbamoyl]pyrrolidin-1-yl]-3-(4-hydroxyphenyl)-1-oxopropan-2-yl]amino]-1-oxo-3-phenylpropan-2-yl]amino]-3-methyl-1-oxopentan-2-yl]amino]-3-(4-hydroxyphenyl)-1-oxopropan-2-yl]amino]-2-oxoethyl]amino]-4-methylsulfanyl-1-oxobutan-2-yl]amino]-5-oxopentanoic acid"
+  },
+  "ss-31": {
+    "cid": 11764719,
+    "matchedName": "elamipretide",
+    "molecularWeight": 639.8,
+    "molecularFormula": "C32H49N9O5",
+    "iupacName": "(2S)-6-amino-2-[[(2S)-2-[[(2R)-2-amino-5-(diaminomethylideneamino)pentanoyl]amino]-3-(4-hydroxy-2,6-dimethylphenyl)propanoyl]amino]-N-[(2S)-1-amino-1-oxo-3-phenylpropan-2-yl]hexanamide"
+  },
+  "epitalon": {
+    "cid": 219042,
+    "matchedName": "epitalon",
+    "molecularWeight": 390.35,
+    "molecularFormula": "C14H22N4O9",
+    "iupacName": "(4S)-4-[[(2S)-2-aminopropanoyl]amino]-5-[[(2S)-3-carboxy-1-(carboxymethylamino)-1-oxopropan-2-yl]amino]-5-oxopentanoic acid"
+  },
+  "semax": {
+    "cid": 9811102,
+    "matchedName": "semax",
+    "molecularWeight": 813.9,
+    "molecularFormula": "C37H51N9O10S",
+    "iupacName": "(2S)-1-[2-[[(2S)-1-[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-amino-4-methylsulfanylbutanoyl]amino]-4-carboxybutanoyl]amino]-3-(1H-imidazol-5-yl)propanoyl]amino]-3-phenylpropanoyl]pyrrolidine-2-carbonyl]amino]acetyl]pyrrolidine-2-carboxylic acid"
+  },
+  "selank": {
+    "cid": 11765600,
+    "matchedName": "selank",
+    "molecularWeight": 751.9,
+    "molecularFormula": "C33H57N11O9",
+    "iupacName": "(2S)-1-[2-[[(2S)-1-[(2S)-2-[[(2S)-1-[(2S)-6-amino-2-[[(2S,3R)-2-amino-3-hydroxybutanoyl]amino]hexanoyl]pyrrolidine-2-carbonyl]amino]-5-(diaminomethylideneamino)pentanoyl]pyrrolidine-2-carbonyl]amino]acetyl]pyrrolidine-2-carboxylic acid"
+  },
+  "dsip": {
+    "cid": 68816,
+    "matchedName": "delta sleep-inducing peptide",
+    "molecularWeight": 848.8,
+    "molecularFormula": "C35H48N10O15",
+    "iupacName": "(2S)-2-[[2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[2-[[2-[[(2S)-2-[[(2S)-2-amino-3-(1H-indol-3-yl)propanoyl]amino]propanoyl]amino]acetyl]amino]acetyl]amino]-3-carboxypropanoyl]amino]propanoyl]amino]-3-hydroxypropanoyl]amino]acetyl]amino]pentanedioic acid"
+  },
+  "melanotan-2": {
+    "cid": 92432,
+    "matchedName": "melanotan II",
+    "molecularWeight": 1024.2,
+    "molecularFormula": "C50H69N15O9",
+    "iupacName": "(3S,6S,9R,12S,15S,23S)-15-[[(2S)-2-acetamidohexanoyl]amino]-9-benzyl-6-[3-(diaminomethylideneamino)propyl]-12-(1H-imidazol-5-ylmethyl)-3-(1H-indol-3-ylmethyl)-2,5,8,11,14,17-hexaoxo-1,4,7,10,13,18-hexazacyclotricosane-23-carboxamide"
+  },
+  "pt-141": {
+    "cid": 9941379,
+    "matchedName": "bremelanotide",
+    "molecularWeight": 1025.2,
+    "molecularFormula": "C50H68N14O10",
+    "iupacName": "(3S,6S,9R,12S,15S,23S)-15-[[(2S)-2-acetamidohexanoyl]amino]-9-benzyl-6-[3-(diaminomethylideneamino)propyl]-12-(1H-imidazol-5-ylmethyl)-3-(1H-indol-3-ylmethyl)-2,5,8,11,14,17-hexaoxo-1,4,7,10,13,18-hexazacyclotricosane-23-carboxylic acid"
+  },
+  "kisspeptin-10": {
+    "cid": 25240297,
+    "matchedName": "kisspeptin-10",
+    "molecularWeight": 1302.4,
+    "molecularFormula": "C63H83N17O14",
+    "iupacName": "(2S)-N-[(2S)-1-[[(2S)-4-amino-1-[[(2S)-1-[[(2S)-1-[[2-[[(2S)-1-[[(2S)-1-[[(2S)-1-amino-1-oxo-3-phenylpropan-2-yl]amino]-5-(diaminomethylideneamino)-1-oxopentan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-2-oxoethyl]amino]-1-oxo-3-phenylpropan-2-yl]amino]-3-hydroxy-1-oxopropan-2-yl]amino]-1,4-dioxobutan-2-yl]amino]-3-(1H-indol-3-yl)-1-oxopropan-2-yl]-2-[[(2S)-2-amino-3-(4-hydroxyphenyl)propanoyl]amino]butanediamide"
+  },
+  "thymosin-alpha-1": {
+    "cid": 16130571,
+    "matchedName": "thymalfasin",
+    "molecularWeight": 3108.3,
+    "molecularFormula": "C129H215N33O55",
+    "iupacName": "(4S)-4-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S,3R)-2-[[(2S,3R)-2-[[(2S,3S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S,3R)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-acetamido-3-hydroxypropanoyl]amino]-3-carboxypropanoyl]amino]propanoyl]amino]propanoyl]amino]-3-methylbutanoyl]amino]-3-carboxypropanoyl]amino]-3-hydroxybutanoyl]amino]-3-hydroxypropanoyl]amino]-3-hydroxypropanoyl]amino]-4-carboxybutanoyl]amino]-3-methylpentanoyl]amino]-3-hydroxybutanoyl]amino]-3-hydroxybutanoyl]amino]-6-aminohexanoyl]amino]-3-carboxypropanoyl]amino]-4-methylpentanoyl]amino]-6-aminohexanoyl]amino]-4-carboxybutanoyl]amino]-6-aminohexanoyl]amino]-6-aminohexanoyl]amino]-4-carboxybutanoyl]amino]-3-methylbutanoyl]amino]-3-methylbutanoyl]amino]-4-carboxybutanoyl]amino]-4-carboxybutanoyl]amino]propanoyl]amino]-5-[[(1S)-3-amino-1-carboxy-3-oxopropyl]amino]-5-oxopentanoic acid"
+  },
+  "ll-37": {
+    "cid": 16198951,
+    "matchedName": "LL-37",
+    "molecularWeight": 4493,
+    "molecularFormula": "C205H340N60O53",
+    "iupacName": "(4S)-5-[[(2S)-6-amino-1-[[(2S,3S)-1-[[2-[[(2S)-6-amino-1-[[(2S)-1-[[(2S)-1-[[(2S)-6-amino-1-[[(2S)-1-[[(2S,3S)-1-[[(2S)-1-[[(2S)-5-amino-1-[[(2S)-1-[[(2S,3S)-1-[[(2S)-6-amino-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-1-[[(2S)-4-amino-1-[[(2S)-1-[[(2S)-1-[(2S)-2-[[(2S)-5-carbamimidamido-1-[[(2S,3R)-1-[[(2S)-4-carboxy-1-[[(1S)-1-carboxy-2-hydroxyethyl]amino]-1-oxobutan-2-yl]amino]-3-hydroxy-1-oxobutan-2-yl]amino]-1-oxopentan-2-yl]carbamoyl]pyrrolidin-1-yl]-3-methyl-1-oxobutan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-1,4-dioxobutan-2-yl]amino]-5-carbamimidamido-1-oxopentan-2-yl]amino]-4-methyl-1-oxopentan-2-yl]amino]-1-oxo-3-phenylpropan-2-yl]amino]-3-carboxy-1-oxopropan-2-yl]amino]-1-oxohexan-2-yl]amino]-3-methyl-1-oxopentan-2-yl]amino]-5-carbamimidamido-1-oxopentan-2-yl]amino]-1,5-dioxopentan-2-yl]amino]-3-methyl-1-oxobutan-2-yl]amino]-3-methyl-1-oxopentan-2-yl]amino]-5-carbamimidamido-1-oxopentan-2-yl]amino]-1-oxohexan-2-yl]amino]-1-oxo-3-phenylpropan-2-yl]amino]-4-carboxy-1-oxobutan-2-yl]amino]-1-oxohexan-2-yl]amino]-2-oxoethyl]amino]-3-methyl-1-oxopentan-2-yl]amino]-1-oxohexan-2-yl]amino]-4-[[(2S)-6-amino-2-[[(2S)-2-[[(2S)-6-amino-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-[[2-[[(2S)-2-[[(2S)-2-amino-4-methylpentanoyl]amino]-4-methylpentanoyl]amino]acetyl]amino]-3-carboxypropanoyl]amino]-3-phenylpropanoyl]amino]-3-phenylpropanoyl]amino]-5-carbamimidamidopentanoyl]amino]hexanoyl]amino]-3-hydroxypropanoyl]amino]hexanoyl]amino]-5-oxopentanoic acid"
+  },
+  "aod-9604": {
+    "cid": 71300630,
+    "matchedName": "AOD-9604",
+    "molecularWeight": 1815.1,
+    "molecularFormula": "C78H123N23O23S2",
+    "iupacName": "(2S)-2-[[2-[[(4R,7S,13S,16S,19S,22S,25R)-25-[[(2S)-5-amino-2-[[(2S)-2-[[(2S,3S)-2-[[(2S)-2-[[(2S)-2-[[(2S)-2-amino-3-(4-hydroxyphenyl)propanoyl]amino]-4-methylpentanoyl]amino]-5-carbamimidamidopentanoyl]amino]-3-methylpentanoyl]amino]-3-methylbutanoyl]amino]-5-oxopentanoyl]amino]-22-(3-carbamimidamidopropyl)-13-(2-carboxyethyl)-7,19-bis(hydroxymethyl)-6,9,12,15,18,21,24-heptaoxo-16-propan-2-yl-1,2-dithia-5,8,11,14,17,20,23-heptazacyclohexacosane-4-carbonyl]amino]acetyl]amino]-3-phenylpropanoic acid"
+  },
+  "5-amino-1mq": {
+    "cid": 950107,
+    "matchedName": "5-amino-1-methylquinolinium",
+    "molecularWeight": 159.21,
+    "molecularFormula": "C10H11N2+",
+    "iupacName": "1-methylquinolin-1-ium-5-amine"
+  },
+  "nad-plus": {
+    "cid": 5892,
+    "matchedName": "NAD+",
+    "molecularWeight": 663.4,
+    "molecularFormula": "C21H27N7O14P2",
+    "iupacName": "[[(2R,3S,4R,5R)-5-(6-aminopurin-9-yl)-3,4-dihydroxyoxolan-2-yl]methoxy-hydroxyphosphoryl] [(2R,3S,4R,5R)-5-(3-carbamoylpyridin-1-ium-1-yl)-3,4-dihydroxyoxolan-2-yl]methyl phosphate"
+  }
+}
