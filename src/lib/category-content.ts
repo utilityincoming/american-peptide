@@ -371,6 +371,48 @@ export const CATEGORY_CONTENT: Partial<
       },
     ],
   },
+
+  mitochondrial: {
+    metaTitle: 'Mitochondrial Peptides — Bioenergetics Research | AmericanPeptide',
+    metaDescription:
+      'A research reference on mitochondrial peptides — mitochondrial-derived signaling, cristae integrity, and the redox cofactor economy. MOTS-c, SS-31, NAD+.',
+    heading: 'Mitochondrial Peptides',
+    tagline:
+      'Compounds studied at three levels of the same organelle: genome signaling, membrane structure, and redox chemistry.',
+    intro:
+      'This category shares its compounds with longevity but frames them differently. Longevity organizes around the aging endpoint; this page organizes around the organelle itself — bioenergetics at the level of mitochondrial signaling, inner-membrane architecture, and the electron-carrier economy. Reading the two pages together gives the mechanism (here) and the aging-hallmark context (longevity). This is a mechanistic research reference, not medical or dosing guidance.',
+    howItWorks: [
+      'The first level is the mitochondrial genome as a signaling source. MOTS-c is a mitochondrial-derived peptide (MDP) — encoded within the mitochondrial 12S rRNA region rather than the nuclear genome — and is studied as a retrograde signal from mitochondrion to cell, with AMPK activation and adaptation to metabolic stress as the principal research themes. The MDP concept itself is the notable idea: the organelle is not only a power plant but a source of regulatory peptides.',
+      'The second level is inner-membrane architecture. SS-31 (elamipretide) concentrates in the inner mitochondrial membrane and binds cardiolipin, the signature phospholipid that organizes electron-transport-chain supercomplexes and cristae curvature. It is studied for preserving cristae integrity and electron-transport efficiency, and it is the most clinically advanced entry — investigated in primary mitochondrial myopathy and Barth syndrome — making it the bridge between mechanistic research and clinical mitochondrial medicine.',
+      'The third level is the redox cofactor economy. NAD+ is the central electron carrier for oxidative phosphorylation and the obligate substrate for sirtuins and PARPs; its availability gates both bioenergetic flux and NAD+-dependent signaling. Catalogued as a research reagent and investigational therapeutic, it represents the chemistry layer beneath the signaling and structural layers — three different entry points into the same organelle rather than three interchangeable compounds.',
+    ],
+    researchThemes: [
+      'Mitochondrial-derived peptides (MDPs) and retrograde signaling',
+      'AMPK activation and metabolic-stress adaptation',
+      'Cardiolipin binding and cristae / supercomplex organization',
+      'Electron-transport-chain efficiency',
+      'NAD+ redox economy and sirtuin/PARP substrate supply',
+      'Mechanistic framing vs. the longevity aging-hallmark view',
+    ],
+    faqs: [
+      {
+        q: 'What is a mitochondrial peptide?',
+        a: 'In this catalog, a mitochondrial peptide is a compound studied at the level of mitochondrial function — genome-derived signaling (MOTS-c), inner-membrane structure (SS-31), or the redox cofactor economy (NAD+). Entries are mechanistic reference profiles, not products or treatment recommendations.',
+      },
+      {
+        q: 'How is this category different from longevity?',
+        a: 'They share compounds but not framing. This page organizes them by organelle-level mechanism — signaling, membrane structure, redox chemistry. The longevity page organizes the same peptides around the aging endpoint and hallmarks of aging. Reading both gives mechanism plus aging context.',
+      },
+      {
+        q: 'What is a mitochondrial-derived peptide (MDP)?',
+        a: 'An MDP is a peptide encoded within the mitochondrial genome rather than the nuclear genome. MOTS-c, encoded in the mitochondrial 12S rRNA region, is the catalog\'s example — studied as a retrograde signal from mitochondrion to cell, with AMPK activation as a principal theme.',
+      },
+      {
+        q: 'Is this page medical or dosing advice?',
+        a: 'No. AmericanPeptide.com is a computational research and reference platform, not a medical device or clinical decision-support system. Nothing here is medical advice, a dosing protocol, or an offer to sell. Independent expert and regulatory review is required before any experimental use.',
+      },
+    ],
+  },
 }
 
 export function getCategoryContent(
