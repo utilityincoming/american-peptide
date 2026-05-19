@@ -119,6 +119,48 @@ export const CATEGORY_CONTENT: Partial<
       },
     ],
   },
+
+  'growth-hormone': {
+    metaTitle: 'Growth Hormone Peptides — GHRH & GHRP Research | AmericanPeptide',
+    metaDescription:
+      'A research reference on growth-hormone peptides — GHRH analogs and ghrelin-receptor secretagogues. Pulsatile GH release, half-life engineering, and the compounds under study.',
+    heading: 'Growth Hormone Peptides',
+    tagline:
+      'GHRH analogs and ghrelin-receptor secretagogues studied for endogenous, pulsatile growth-hormone release.',
+    intro:
+      'Growth-hormone peptides are studied not as replacement hormone but as secretagogues — compounds that prompt the pituitary to release the body\'s own growth hormone in its natural pulsatile rhythm. The class splits cleanly along two receptor systems, and a recurring engineering theme is extending the very short native signal into a usable research half-life. This page is a research reference to those mechanisms and the catalogued compounds; it is not medical or dosing guidance.',
+    howItWorks: [
+      'The first branch is the GHRH-receptor agonists — sermorelin, the CJC-1295 analogs, and tesamorelin. These mimic growth-hormone-releasing hormone and act on pituitary somatotrophs to stimulate synthesis and release of endogenous GH. Because they work upstream of the pituitary, they are studied as preserving the body\'s feedback regulation and pulsatility rather than overriding it, which is the conceptual contrast with exogenous recombinant GH.',
+      'The second branch is the growth-hormone secretagogues that act on the ghrelin receptor (GHS-R1a) — ipamorelin and hexarelin. These mimic ghrelin to trigger a GH pulse through a separate pathway, and selectivity is the differentiating research variable: ipamorelin is studied for releasing GH with minimal effect on cortisol or prolactin, whereas earlier-generation secretagogues are less selective. GHRH-pathway and ghrelin-pathway compounds are frequently studied in combination because their signals are complementary.',
+      'Half-life engineering defines much of the catalogued variation. Native GHRH is cleared within minutes; sermorelin (GHRH 1-29) is the truncated parent sequence, modified GRF (1-29) adds stabilizing substitutions, and the DAC ("Drug Affinity Complex") variant of CJC-1295 adds an albumin-binding moiety that extends exposure from minutes to days. Evidence maturity is uneven across the class: tesamorelin carries an FDA approval for HIV-associated lipodystrophy and sermorelin was historically approved, while the secretagogue side remains largely investigational.',
+    ],
+    researchThemes: [
+      'GHRH-receptor agonism and pituitary somatotroph signaling',
+      'Ghrelin-receptor (GHS-R1a) secretagogue pathways',
+      'Preservation of endogenous GH pulsatility vs. exogenous GH',
+      'Secretagogue selectivity (cortisol / prolactin sparing)',
+      'Half-life engineering: truncation, substitution, albumin binding (DAC)',
+      'Evidence maturity: approved members vs. investigational secretagogues',
+    ],
+    faqs: [
+      {
+        q: 'What is a growth-hormone peptide?',
+        a: 'In this catalog, a growth-hormone peptide is a secretagogue — a compound studied for prompting the pituitary to release endogenous growth hormone, either through the GHRH receptor or the ghrelin (GHS-R1a) receptor. These are reference profiles, not products, hormone replacement, or treatment recommendations.',
+      },
+      {
+        q: 'How do GHRH analogs differ from ghrelin-receptor secretagogues?',
+        a: 'GHRH analogs (sermorelin, CJC-1295, tesamorelin) mimic growth-hormone-releasing hormone at the pituitary GHRH receptor. Ghrelin-receptor secretagogues (ipamorelin, hexarelin) act on GHS-R1a through a separate pathway. The two are mechanistically complementary and are often studied together in the literature.',
+      },
+      {
+        q: 'What does the "DAC" in CJC-1295 with DAC mean?',
+        a: 'DAC is a Drug Affinity Complex — an albumin-binding moiety added to modified GRF (1-29). Native GHRH is cleared within minutes; the DAC linker binds serum albumin and extends exposure from minutes to days, which is the main pharmacokinetic difference between the with-DAC and no-DAC CJC-1295 entries.',
+      },
+      {
+        q: 'Is this page medical or dosing advice?',
+        a: 'No. AmericanPeptide.com is a computational research and reference platform, not a medical device or clinical decision-support system. Nothing here is medical advice, a dosing protocol, or an offer to sell. Independent expert and regulatory review is required before any experimental use.',
+      },
+    ],
+  },
 }
 
 export function getCategoryContent(
