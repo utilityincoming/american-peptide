@@ -287,6 +287,48 @@ export const CATEGORY_CONTENT: Partial<
       },
     ],
   },
+
+  immune: {
+    metaTitle: 'Immune Peptides — Immunomodulation Research | AmericanPeptide',
+    metaDescription:
+      'A research reference on immune peptides — thymic immunopotentiators, cathelicidin antimicrobials, and anti-inflammatory fragments. Mechanisms and compounds under study.',
+    heading: 'Immune Peptides',
+    tagline:
+      'Immunomodulators studied in both directions — potentiating host defense and resolving inflammation.',
+    intro:
+      'The defining feature of this category is that it runs in two opposite directions. Some catalogued peptides are studied for potentiating immune responses and host defense; others for dampening and resolving inflammation. "Immunomodulation" is therefore not a single effect here, and the research question for any given compound depends on which arm of the immune response it engages. This page is a mechanistic research reference, not medical or dosing guidance.',
+    howItWorks: [
+      'The immunopotentiating arm is anchored by Thymosin α1, a 28-amino-acid thymic peptide studied for TLR9-mediated dendritic-cell activation and Th1 immune polarization. It is the most clinically mature entry in the category — approved in numerous countries as an adjunct in chronic viral hepatitis and as a general immune modulator — and is studied in sepsis and oncology-adjunct contexts where restoring a depressed immune response is the goal.',
+      'The innate-defense arm is represented by LL-37, the only cathelicidin expressed in humans. It is studied for direct membrane disruption of bacteria, fungi, and viruses, and separately for immunomodulatory signaling and chemotaxis via the FPRL1 receptor. This dual role — direct antimicrobial action plus host-signaling — places it at the interface of innate immunity and wound healing, which is why it is also catalogued under healing-repair.',
+      'The resolution arm runs the other way. KPV is the C-terminal tripeptide of α-MSH and retains much of α-MSH\'s anti-inflammatory activity — studied for NF-κB pathway inhibition and reduction of pro-inflammatory cytokines — without the pigmentary effects of the parent hormone. It is studied in colitis and skin-inflammation models, representing the inflammation-resolving counterweight to the potentiating compounds in the same category.',
+    ],
+    researchThemes: [
+      'Thymic immunopotentiation and Th1 polarization',
+      'TLR9-mediated dendritic-cell activation',
+      'Cathelicidin antimicrobial activity and FPRL1 signaling',
+      'NF-κB inhibition and inflammation resolution',
+      'Innate immunity at the repair interface',
+      'Bidirectional immunomodulation (potentiate vs. resolve)',
+    ],
+    faqs: [
+      {
+        q: 'What is an immune peptide?',
+        a: 'In this catalog, an immune peptide is a compound studied for modulating the immune response — either potentiating host defense (e.g. Thymosin α1, LL-37) or resolving inflammation (e.g. KPV). The category deliberately spans both directions, so entries are mechanistic reference profiles, not products or treatment recommendations.',
+      },
+      {
+        q: 'Why does this category contain opposite mechanisms?',
+        a: 'Immunomodulation is not a single effect. Thymosin α1 and LL-37 are studied for potentiating immune and antimicrobial responses, while KPV is studied for dampening inflammation via NF-κB inhibition. They share the "immune" classification because they all act on the immune system, but they engage different arms of it.',
+      },
+      {
+        q: 'Which immune peptide has the most clinical support?',
+        a: 'Thymosin α1 (thymalfasin) is the most clinically mature entry — approved in numerous countries as an adjunct in chronic viral hepatitis and as an immune modulator. LL-37 is an endogenous peptide heavily studied in innate-immunity research, while KPV remains largely preclinical.',
+      },
+      {
+        q: 'Is this page medical or dosing advice?',
+        a: 'No. AmericanPeptide.com is a computational research and reference platform, not a medical device or clinical decision-support system. Nothing here is medical advice, a dosing protocol, or an offer to sell. Independent expert and regulatory review is required before any experimental use.',
+      },
+    ],
+  },
 }
 
 export function getCategoryContent(
