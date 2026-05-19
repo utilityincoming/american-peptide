@@ -161,6 +161,48 @@ export const CATEGORY_CONTENT: Partial<
       },
     ],
   },
+
+  longevity: {
+    metaTitle: 'Longevity Peptides — Mitochondrial & NAD+ Research | AmericanPeptide',
+    metaDescription:
+      'A research reference on longevity peptides — mitochondrial bioenergetics, the NAD+ axis, and telomere biology. Mechanisms and the compounds under active study.',
+    heading: 'Longevity Peptides',
+    tagline:
+      'Compounds studied against the cellular hallmarks of aging — mitochondrial function, the NAD+ axis, and telomere biology.',
+    intro:
+      'Longevity peptides are studied not for a single endpoint but against the underlying cellular processes that decline with age. In this catalog the cluster organizes around three mechanistic axes rather than the cosmetic "anti-aging" framing common elsewhere: mitochondrial bioenergetics, the NAD+ cofactor economy, and telomere/pineal biology. Evidence here is mixed and often early-stage, so this page is a research reference to mechanisms and directions — not a claim of efficacy, and not medical or dosing guidance.',
+    howItWorks: [
+      'The largest axis is mitochondrial function. Mitochondrial dysfunction is a recognized hallmark of aging, and several catalogued compounds target it directly: MOTS-c is a mitochondrially-encoded peptide studied for AMPK activation and metabolic-stress signaling, while SS-31 (elamipretide) concentrates in the inner mitochondrial membrane and binds cardiolipin, studied for stabilizing cristae architecture and electron-transport efficiency. SS-31 is the most clinically advanced entry in the category, with trials in primary mitochondrial myopathy and Barth syndrome.',
+      'The second axis is the NAD+ economy. NAD+ is an essential redox cofactor and substrate for sirtuins and PARPs, and its availability declines with age. The category includes NAD+ itself as a research reagent and 5-Amino-1MQ, an NNMT inhibitor studied for preserving cellular NAD+ and methyl-donor pools rather than supplementing the cofactor directly — two mechanistically different routes to the same metabolic endpoint, which is why both sit in this category.',
+      'The third axis is telomere and pineal biology. Epitalon is a synthetic tetrapeptide derived from the pineal peptide epithalamin; it is studied in a telomere-maintenance and circadian framework, though the telomerase-activation narrative often attached to it rests largely on earlier-stage and regionally-concentrated studies rather than broad randomized human data. We present it as a mechanistic hypothesis under investigation, not an established effect.',
+    ],
+    researchThemes: [
+      'Mitochondrial bioenergetics and cristae integrity',
+      'Cardiolipin binding and electron-transport efficiency',
+      'NAD+ cofactor economy and sirtuin/PARP substrate supply',
+      'NNMT inhibition vs. direct cofactor supplementation',
+      'Telomere maintenance and pineal/circadian signaling',
+      'Hallmarks-of-aging framing and evidence maturity',
+    ],
+    faqs: [
+      {
+        q: 'What is a longevity peptide?',
+        a: 'In this catalog, a longevity peptide is a compound studied against a cellular hallmark of aging — most commonly mitochondrial dysfunction, NAD+ decline, or telomere attrition — rather than a cosmetic anti-aging product. Entries are mechanistic reference profiles, not products or treatment recommendations.',
+      },
+      {
+        q: 'How do MOTS-c and SS-31 differ?',
+        a: 'Both target mitochondria but differently. MOTS-c is a mitochondrially-encoded peptide studied for AMPK activation and metabolic-stress signaling; SS-31 (elamipretide) is a cardiolipin-binding tetrapeptide studied for stabilizing inner-membrane cristae and electron-transport efficiency. SS-31 is the more clinically advanced of the two.',
+      },
+      {
+        q: 'Is the telomerase claim for Epitalon established?',
+        a: 'No. Epitalon is studied within a telomere-maintenance and circadian framework, but the telomerase-activation narrative rests largely on earlier-stage and regionally-concentrated research rather than broad randomized human trials. We present it as a mechanistic hypothesis under investigation, not an established effect.',
+      },
+      {
+        q: 'Is this page medical or dosing advice?',
+        a: 'No. AmericanPeptide.com is a computational research and reference platform, not a medical device or clinical decision-support system. Nothing here is medical advice, a dosing protocol, or an offer to sell. Independent expert and regulatory review is required before any experimental use.',
+      },
+    ],
+  },
 }
 
 export function getCategoryContent(
