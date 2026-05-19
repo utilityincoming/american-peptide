@@ -203,6 +203,48 @@ export const CATEGORY_CONTENT: Partial<
       },
     ],
   },
+
+  reproductive: {
+    metaTitle: 'Reproductive Peptides — Melanocortin & HPG-Axis Research | AmericanPeptide',
+    metaDescription:
+      'A research reference on reproductive peptides — central melanocortin agonists and kisspeptin/HPG-axis signaling. Mechanisms and the compounds under study.',
+    heading: 'Reproductive Peptides',
+    tagline:
+      'Two neuroendocrine entry points: central melanocortin signaling and upstream kisspeptin/HPG-axis drive.',
+    intro:
+      'Reproductive peptides in this catalog act on the central nervous system and the hypothalamic–pituitary–gonadal (HPG) axis rather than peripherally. The cluster divides along two distinct neuroendocrine pathways, and the research distinction that matters most is central versus vascular: these compounds are studied for signaling effects in the brain, not for the peripheral hemodynamic mechanism of more familiar agents. This page is a mechanistic research reference, not medical or dosing guidance.',
+    howItWorks: [
+      'The first pathway is central melanocortin signaling. Melanotan II is a non-selective agonist across MC1R–MC5R, while PT-141 (bremelanotide) is melanocortin-4-receptor preferential and acts within hypothalamic circuits — its sexual-response effect is studied as centrally mediated rather than vascular, which is the key mechanistic contrast with PDE5-type agents. PT-141 is the most clinically mature entry in the category, carrying an FDA approval for hypoactive sexual desire disorder in premenopausal women; Melanotan II remains investigational and is also catalogued under cosmetic for its pigmentary activity.',
+      'The second pathway is upstream of the gonadal hormones entirely. Kisspeptin-10 is the minimum bioactive fragment of kisspeptin and acts on KISS1R (GPR54) on hypothalamic GnRH neurons. It sits at the top of the HPG cascade — stimulating GnRH release, which drives pituitary LH and FSH and downstream sex-steroid production — which is why it is studied in reproductive endocrinology contexts such as hypothalamic amenorrhea and as a probe of HPG-axis integrity.',
+      'The organizing theme of the category is therefore neuroendocrine level of action: melanocortin compounds act on central sexual-response circuitry, while kisspeptin acts as the master upstream regulator of the hormonal axis itself. They are not interchangeable and are studied for different research questions despite both being classed as "reproductive".',
+    ],
+    researchThemes: [
+      'Central (CNS) vs. vascular mechanisms of sexual response',
+      'Melanocortin receptor pharmacology (MC4R preference vs. non-selective)',
+      'Kisspeptin / KISS1R (GPR54) signaling on GnRH neurons',
+      'HPG-axis cascade: GnRH → LH/FSH → sex steroids',
+      'Reproductive-endocrinology research models (e.g. amenorrhea)',
+      'Evidence maturity: approved vs. investigational members',
+    ],
+    faqs: [
+      {
+        q: 'What is a reproductive peptide?',
+        a: 'In this catalog, a reproductive peptide is a compound studied for effects on central sexual-response circuitry or the hypothalamic–pituitary–gonadal axis — through either melanocortin receptors or kisspeptin signaling. Entries are mechanistic reference profiles, not products or treatment recommendations.',
+      },
+      {
+        q: 'How is PT-141 different from vascular agents?',
+        a: 'PT-141 (bremelanotide) is a melanocortin-4-receptor-preferential agonist studied for a centrally mediated effect within hypothalamic circuits, rather than the peripheral vascular mechanism of PDE5-type agents. That central-vs-vascular distinction is the defining mechanistic feature of the melanocortin pathway in this category.',
+      },
+      {
+        q: 'Why is kisspeptin grouped with melanocortin peptides?',
+        a: 'Both are reproductive-axis compounds but act at different levels. Kisspeptin-10 acts upstream on hypothalamic GnRH neurons (KISS1R/GPR54), driving the whole HPG cascade, whereas melanocortin agonists act on central sexual-response circuitry. They share the category but are studied for distinct research questions.',
+      },
+      {
+        q: 'Is this page medical or dosing advice?',
+        a: 'No. AmericanPeptide.com is a computational research and reference platform, not a medical device or clinical decision-support system. Nothing here is medical advice, a dosing protocol, or an offer to sell. Independent expert and regulatory review is required before any experimental use.',
+      },
+    ],
+  },
 }
 
 export function getCategoryContent(
