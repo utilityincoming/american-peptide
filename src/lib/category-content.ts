@@ -245,6 +245,48 @@ export const CATEGORY_CONTENT: Partial<
       },
     ],
   },
+
+  cognitive: {
+    metaTitle: 'Cognitive Peptides — Neurotrophic & Neuromodulatory Research | AmericanPeptide',
+    metaDescription:
+      'A research reference on cognitive peptides — neurotrophic, anxiolytic, and sleep-architecture mechanisms. Semax, Selank, DSIP, and the science under study.',
+    heading: 'Cognitive Peptides',
+    tagline:
+      'CNS peptides studied for neurotrophic support, anxiolysis, and sleep-architecture modulation.',
+    intro:
+      'Cognitive peptides act within the central nervous system, but "cognitive" here is an umbrella over three mechanistically distinct subtypes rather than a single nootropic effect. The catalogued compounds were largely developed in Russian neuroscience programs, so a recurring evidence theme is that their clinical use is regionally concentrated rather than supported by broad international randomized trials. This page is a mechanistic research reference, not medical or dosing guidance.',
+    howItWorks: [
+      'The first subtype is neurotrophic and neuroprotective signaling. Semax is a heptapeptide analog of the ACTH(4-10) fragment studied for induction of BDNF and NGF and for melanocortin-system signaling without activating the HPA stress axis. It is used clinically in Russia in ischemic-stroke and cognitive contexts, and the research interest centers on neuroplasticity and neuroprotection following ischemic insult.',
+      'The second subtype is anxiolytic neuromodulation. Selank is a synthetic analog of the immunomodulatory peptide tuftsin, studied for modulation of GABAergic and serotonergic systems and for inhibition of enkephalin degradation. The differentiating research observation is anxiolytic activity reported without the sedation or dependence liability associated with conventional anxiolytics — which is the property that makes it a distinct probe rather than a benzodiazepine analog.',
+      'The third subtype is sleep-architecture and neuroendocrine modulation. DSIP (delta sleep-inducing peptide) is an endogenous nonapeptide studied for promotion of delta-wave activity and for lowering cortisol and ACTH, placing it at the interface of sleep biology and the stress axis. Its mechanism remains incompletely characterized and is likely multimodal, which is itself a notable feature of the category — these peptides are grouped by CNS locus of action, not by a shared receptor.',
+    ],
+    researchThemes: [
+      'BDNF / NGF induction and neuroplasticity',
+      'Neuroprotection in ischemic / stroke models',
+      'GABAergic and serotonergic anxiolytic modulation',
+      'Enkephalinase inhibition',
+      'Delta-wave sleep architecture and the cortisol/ACTH axis',
+      'Regionally-concentrated clinical evidence vs. international trials',
+    ],
+    faqs: [
+      {
+        q: 'What is a cognitive peptide?',
+        a: 'In this catalog, a cognitive peptide is a CNS-acting compound studied for neurotrophic support, anxiolysis, or sleep-architecture modulation. The grouping is by central locus of action rather than a shared receptor, and entries are mechanistic reference profiles — not products or treatment recommendations.',
+      },
+      {
+        q: 'How do Semax, Selank, and DSIP differ?',
+        a: 'They represent three different subtypes. Semax is studied for BDNF/NGF-mediated neurotrophic and neuroprotective effects; Selank for GABAergic/serotonergic anxiolysis without sedation or dependence; DSIP for delta-wave sleep promotion and cortisol/ACTH modulation. They share the category but not a mechanism.',
+      },
+      {
+        q: 'How strong is the clinical evidence for this class?',
+        a: 'Several of these peptides see clinical use in Russia, but the supporting evidence is regionally concentrated rather than drawn from broad international randomized trials, and DSIP\'s mechanism remains incompletely characterized. This page reports studied mechanisms and research directions, not established international clinical efficacy.',
+      },
+      {
+        q: 'Is this page medical or dosing advice?',
+        a: 'No. AmericanPeptide.com is a computational research and reference platform, not a medical device or clinical decision-support system. Nothing here is medical advice, a dosing protocol, or an offer to sell. Independent expert and regulatory review is required before any experimental use.',
+      },
+    ],
+  },
 }
 
 export function getCategoryContent(
