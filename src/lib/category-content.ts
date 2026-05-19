@@ -77,6 +77,48 @@ export const CATEGORY_CONTENT: Partial<
       },
     ],
   },
+
+  'healing-repair': {
+    metaTitle: 'Healing & Repair Peptides — Mechanisms & Research | AmericanPeptide',
+    metaDescription:
+      'A research reference on tissue-repair peptides — BPC-157, TB-500, GHK-Cu and related compounds. Angiogenesis, cell migration, and ECM remodeling mechanisms.',
+    heading: 'Healing & Repair Peptides',
+    tagline:
+      'Regenerative peptides studied for angiogenesis, cell migration, and extracellular-matrix remodeling.',
+    intro:
+      'Healing and repair peptides are studied for their role in the cascade the body runs after tissue injury — recruiting blood supply, moving repair cells to the damage site, and rebuilding the structural matrix that holds tissue together. Unlike the metabolic class, much of this category rests on preclinical and mechanistic evidence rather than large human trials, so the research framing matters: these are reference profiles of investigational compounds, not validated therapies or dosing guidance.',
+    howItWorks: [
+      'Tissue repair is a staged process — hemostasis, inflammation, proliferation, and remodeling — and the peptides in this class are studied for their effects on the proliferation and remodeling phases in particular. The recurring theme is angiogenesis: re-establishing microvasculature so that oxygen and repair cells can reach hypoxic, damaged tissue. Compounds such as BPC-157 are studied for upregulation of the VEGF/VEGFR2 axis and nitric-oxide signaling in injured tendon, ligament, muscle, and gastrointestinal tissue.',
+      'A second mechanism is directed cell migration. Thymosin-β4-derived sequences (TB-500) act on the actin cytoskeleton — sequestering G-actin and modulating polymerization — which in preclinical models accelerates the movement of endothelial and progenitor cells into the wound bed. This is mechanistically distinct from angiogenic signaling but complementary to it, which is why these two peptides are frequently studied together in the literature.',
+      'The third axis is matrix remodeling and cytoprotection. Copper-binding peptides such as GHK-Cu are studied for modulation of collagen and elastin synthesis and a broad influence on extracellular-matrix and antioxidant gene programs. Other catalogued entries (LL-37, KPV) sit at the interface of repair and immune signaling — antimicrobial defense and resolution of inflammation are part of how a wound progresses to closure, so the healing and immune categories deliberately overlap.',
+    ],
+    researchThemes: [
+      'Angiogenesis and the VEGF/VEGFR2 axis',
+      'Actin-cytoskeleton modulation and cell migration',
+      'Collagen, elastin, and extracellular-matrix remodeling',
+      'Cytoprotection and growth-factor pathway modulation',
+      'Repair–immune interface (antimicrobial, inflammation resolution)',
+      'Preclinical evidence maturity vs. human trial data',
+    ],
+    faqs: [
+      {
+        q: 'What is a healing or repair peptide?',
+        a: 'In this catalog, a healing/repair peptide is a peptide whose primary studied activity supports tissue regeneration — typically through angiogenesis, directed cell migration, or extracellular-matrix remodeling. Entries are reference profiles of investigational compounds, not products or treatment recommendations.',
+      },
+      {
+        q: 'How do BPC-157 and TB-500 differ mechanistically?',
+        a: 'They act on different parts of the repair cascade. BPC-157 is studied primarily for pro-angiogenic and cytoprotective activity (VEGFR2 and nitric-oxide pathways), while TB-500 — a thymosin-β4 fragment — is studied for actin-cytoskeleton modulation that promotes cell migration to injury sites. They are mechanistically complementary, which is why the literature often examines them in parallel.',
+      },
+      {
+        q: 'How strong is the evidence for this peptide class?',
+        a: 'Evidence maturity varies widely and is generally earlier-stage than the metabolic class. Much of the supporting work is preclinical or mechanistic rather than large randomized human trials. This page reports studied mechanisms and research directions, not established clinical efficacy.',
+      },
+      {
+        q: 'Is this page medical or dosing advice?',
+        a: 'No. AmericanPeptide.com is a computational research and reference platform, not a medical device or clinical decision-support system. Nothing here is medical advice, a dosing protocol, or an offer to sell. Independent expert and regulatory review is required before any experimental use.',
+      },
+    ],
+  },
 }
 
 export function getCategoryContent(
