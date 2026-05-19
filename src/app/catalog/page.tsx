@@ -155,6 +155,22 @@ export default function CatalogPage() {
             )}
           </div>
 
+          {active && (
+            <Link
+              href={`/catalog/category/${active}`}
+              className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] px-4 py-3 transition-colors hover:border-[#2DD4A8]/30 hover:bg-[#2DD4A8]/[0.07]"
+            >
+              <span className="text-sm text-white/65">
+                Read the full{' '}
+                <span className="font-semibold text-[#2DD4A8]">
+                  {CATEGORIES.find((c) => c.id === active)?.label}
+                </span>{' '}
+                research guide — mechanisms, themes & FAQ
+              </span>
+              <ArrowRight className="h-4 w-4 shrink-0 text-[#2DD4A8]" />
+            </Link>
+          )}
+
           {filtered.length === 0 ? (
             <EmptyState />
           ) : (

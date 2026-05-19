@@ -75,12 +75,13 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
         <div className="mx-auto max-w-5xl">
           <div className="mb-4 flex flex-wrap items-center gap-2">
             {peptide.categories.map((cat) => (
-              <span
+              <Link
                 key={cat}
-                className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2 py-0.5 text-[10px] uppercase tracking-wider text-white/55"
+                href={`/catalog/category/${cat}`}
+                className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2 py-0.5 text-[10px] uppercase tracking-wider text-white/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-[#2DD4A8]"
               >
                 {CATEGORIES.find((c) => c.id === cat)?.label ?? cat}
-              </span>
+              </Link>
             ))}
             {peptide.fdaApproved && (
               <span className="rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
