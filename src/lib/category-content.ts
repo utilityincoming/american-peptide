@@ -329,6 +329,48 @@ export const CATEGORY_CONTENT: Partial<
       },
     ],
   },
+
+  cosmetic: {
+    metaTitle: 'Cosmetic Peptides — Dermal & Pigmentary Research | AmericanPeptide',
+    metaDescription:
+      'A research reference on cosmetic peptides — dermal matrix remodeling and melanocortin pigmentation. GHK-Cu, Melanotan II, and the mechanisms under study.',
+    heading: 'Cosmetic Peptides',
+    tagline:
+      'Skin-targeting peptides studied along two unrelated axes: dermal matrix remodeling and melanocortin pigmentation.',
+    intro:
+      'This is a small, deliberately heterogeneous category. The catalogued compounds share a skin-relevant research context but not a mechanism — one acts on the dermal extracellular matrix, the other on melanocyte pigmentation through the melanocortin system. Treating "cosmetic" as a single mechanism would be misleading, so this page separates the two. It is a mechanistic research reference, not cosmetic-efficacy marketing, medical advice, or dosing guidance.',
+    howItWorks: [
+      'The dermal-matrix axis is GHK-Cu, the copper complex of the endogenous tripeptide glycyl-L-histidyl-L-lysine, originally isolated from human plasma. It has one of the longest research histories in the catalog and is studied for copper delivery, modulation of collagen and elastin synthesis, fibroblast activity, antioxidant gene programs, and hair-follicle proliferation. Because matrix remodeling is also the substrate of tissue repair, GHK-Cu is cross-listed under healing-repair — the cosmetic framing is one application of a broader ECM-remodeling mechanism.',
+      'The pigmentary axis is Melanotan II, a non-selective melanocortin agonist active across MC1R–MC5R. Its pigmentary effect is studied through MC1R agonism on melanocytes, driving eumelanin synthesis, with photoprotection as a research interest. Because the compound is non-selective rather than MC1R-specific, its activity extends beyond pigmentation — which is why it is also cross-listed under reproductive. It is investigational and unapproved, and is presented here as a mechanistic reference only, not an endorsement of use.',
+      'The organizing point of the category is therefore divergence, not convergence: a well-characterized endogenous matrix peptide and a non-selective investigational melanocortin agonist happen to share a skin-relevant research surface but should not be read as a single class.',
+    ],
+    researchThemes: [
+      'Copper delivery and ECM/antioxidant gene modulation',
+      'Collagen and elastin synthesis; fibroblast activity',
+      'Hair-follicle proliferation',
+      'MC1R agonism and eumelanin synthesis',
+      'Photoprotection research',
+      'Endogenous, well-characterized vs. non-selective investigational',
+    ],
+    faqs: [
+      {
+        q: 'What is a cosmetic peptide?',
+        a: 'In this catalog, a cosmetic peptide is a compound studied in a skin-relevant research context — either dermal matrix remodeling (GHK-Cu) or melanocortin-driven pigmentation (Melanotan II). The two share the category label but not a mechanism, and entries are mechanistic reference profiles, not products or treatment recommendations.',
+      },
+      {
+        q: 'Why are GHK-Cu and Melanotan II in the same category?',
+        a: 'Only by skin-relevant research surface, not by mechanism. GHK-Cu is an endogenous copper tripeptide studied for extracellular-matrix remodeling; Melanotan II is a non-selective melanocortin agonist studied for pigmentation. They are cross-listed elsewhere (GHK-Cu under healing-repair, Melanotan II under reproductive) because their mechanisms extend beyond cosmetic context.',
+      },
+      {
+        q: 'Is Melanotan II approved?',
+        a: 'No. Melanotan II is investigational and unapproved. It is presented here as a mechanistic reference profile only — not an endorsement of use. GHK-Cu, by contrast, is an endogenous peptide with a long research history, though catalog entries remain reference material rather than treatment recommendations.',
+      },
+      {
+        q: 'Is this page medical or dosing advice?',
+        a: 'No. AmericanPeptide.com is a computational research and reference platform, not a medical device or clinical decision-support system. Nothing here is medical advice, a dosing protocol, or an offer to sell. Independent expert and regulatory review is required before any experimental use.',
+      },
+    ],
+  },
 }
 
 export function getCategoryContent(
