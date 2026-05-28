@@ -1,8 +1,8 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import Link from 'next/link'
-import { ArrowLeft, Syringe, AlertTriangle } from 'lucide-react'
+import { Syringe, AlertTriangle } from 'lucide-react'
+import OfflineStatus from '@/components/OfflineStatus'
 
 const VIAL_PRESETS = [2, 5, 10, 15, 20, 30]
 const DOSE_PRESETS = [100, 250, 500, 750, 1000, 1500, 2000]
@@ -60,25 +60,18 @@ export default function ReconstitutionCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
-      {/* ── Header ── */}
-      <header className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3 md:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 text-sm text-white/35 transition-colors hover:text-white"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          <span className="hidden sm:inline">AmericanPeptide</span>
-        </Link>
-        <div className="h-4 w-px bg-white/10" />
-        <div className="flex items-center gap-2">
-          <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
-            <Syringe className="h-4 w-4 text-[#2DD4A8]" strokeWidth={1.75} />
-          </div>
-          <span className="text-sm font-medium">Reconstitution Calculator</span>
+      {/* ── Page identity ── */}
+      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+        <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
+          <Syringe className="h-4 w-4 text-[#2DD4A8]" strokeWidth={1.75} />
         </div>
+        <span className="text-sm font-medium">Reconstitution Calculator</span>
       </header>
 
       <main className="mx-auto max-w-4xl px-4 py-8 md:px-6">
+        {/* ── Offline status / install ── */}
+        <OfflineStatus />
+
         {/* ── Page heading (SEO) ── */}
         <div className="mb-8">
           <h1 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
@@ -86,7 +79,8 @@ export default function ReconstitutionCalculatorPage() {
           </h1>
           <p className="max-w-2xl text-sm leading-relaxed text-white/55 md:text-base">
             Calculate bacteriostatic water volume, peptide concentration, and dose volume on
-            a U-100 insulin syringe. Inputs and results update in real time.
+            a U-100 insulin syringe. Inputs and results update in real time — installable as
+            an app for offline bench use.
           </p>
         </div>
 

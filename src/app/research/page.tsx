@@ -1,8 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import Link from 'next/link'
-import { ArrowLeft, Send, Dna, SquarePen } from 'lucide-react'
+import { Send, Dna, SquarePen } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import type { Components } from 'react-markdown'
@@ -209,25 +208,15 @@ export default function ResearchPage() {
   return (
     <div className="flex h-screen flex-col bg-[#0B1220] text-white">
 
-      {/* ── Header ── */}
+      {/* ── Page identity ── */}
       <header className="flex flex-shrink-0 items-center justify-between border-b border-white/[0.06] px-4 py-3 md:px-6">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/"
-            className="flex items-center gap-1.5 text-sm text-white/35 transition-colors hover:text-white"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span className="hidden sm:inline">AmericanPeptide</span>
-          </Link>
-          <div className="h-4 w-px bg-white/10" />
-          <div className="flex items-center gap-2">
-            <AgentAvatar />
-            <div>
-              <span className="text-sm font-medium">Research Agent</span>
-              <span className="ml-2 hidden text-xs text-white/30 sm:inline">
-                claude-sonnet-4-20250514
-              </span>
-            </div>
+        <div className="flex items-center gap-2">
+          <AgentAvatar />
+          <div>
+            <span className="text-sm font-medium">Research Agent</span>
+            <span className="ml-2 hidden text-xs text-white/30 sm:inline">
+              claude-sonnet-4-20250514
+            </span>
           </div>
         </div>
 

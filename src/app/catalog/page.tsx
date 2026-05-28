@@ -1,18 +1,68 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, Search, FlaskConical, ShieldCheck, Sparkles, X } from 'lucide-react'
+import {
+  ArrowRight,
+  Check,
+  FlaskConical,
+  GitCompareArrows,
+  Plus,
+  Search,
+  ShieldCheck,
+  Sparkles,
+  X,
+} from 'lucide-react'
 import {
   PEPTIDES,
   CATEGORIES,
   type Peptide,
   type PeptideCategory,
 } from '@/lib/peptides'
+import WaitlistForm from '@/components/WaitlistForm'
+
+const MAX_COMPARE = 4
+const STORAGE_KEY = 'amp-catalog-compare-selected'
 
 export default function CatalogPage() {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState<PeptideCategory | null>(null)
+  const [selected, setSelected] = useState<string[]>([])
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY)
+      if (!raw) return
+      const parsed = JSON.parse(raw)
+      if (Array.isArray(parsed)) {
+        const valid = parsed
+          .filter((s): s is string => typeof s === 'string')
+          .filter((s) => PEPTIDES.some((p) => p.slug === s))
+          .slice(0, MAX_COMPARE)
+        setSelected(valid)
+      }
+    } catch {
+      /* ignore */
+    }
+  }, [])
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(selected))
+    } catch {
+      /* ignore */
+    }
+  }, [selected])
+
+  const toggleSelected = useCallback((slug: string) => {
+    setSelected((prev) => {
+      if (prev.includes(slug)) return prev.filter((s) => s !== slug)
+      if (prev.length >= MAX_COMPARE) return prev
+      return [...prev, slug]
+    })
+  }, [])
+
+  const clearSelected = useCallback(() => setSelected([]), [])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -26,21 +76,10 @@ export default function CatalogPage() {
     })
   }, [query, active])
 
+  const atCap = selected.length >= MAX_COMPARE
+
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
-      {/* ── Header ── */}
-      <header className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3 md:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 text-sm text-white/35 transition-colors hover:text-white"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          <span className="hidden sm:inline">AmericanPeptide</span>
-        </Link>
-        <span className="text-white/20">/</span>
-        <span className="text-sm font-medium">Catalog</span>
-      </header>
-
       {/* ── Hero ── */}
       <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-16 md:px-10">
         <div
@@ -89,6 +128,10 @@ export default function CatalogPage() {
               body="Per-mg pricing across suppliers, refreshed continuously — no DMs required."
             />
           </div>
+
+          <div className="mt-8 max-w-2xl">
+            <WaitlistForm source="catalog-hero" variant="full" />
+          </div>
         </div>
       </section>
 
@@ -135,7 +178,13 @@ export default function CatalogPage() {
       </section>
 
       {/* ── Grid ── */}
-      <section className="px-6 py-12 md:px-10">
+      <section
+        className={
+          selected.length > 0
+            ? 'px-6 pb-28 pt-12 md:px-10'
+            : 'px-6 py-12 md:px-10'
+        }
+      >
         <div className="mx-auto max-w-6xl">
           <div className="mb-5 flex items-center justify-between text-xs text-white/40">
             <span>
@@ -175,70 +224,216 @@ export default function CatalogPage() {
             <EmptyState />
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {filtered.map((p) => (
-                <PeptideCard key={p.slug} peptide={p} />
-              ))}
+              {filtered.map((p) => {
+                const isSelected = selected.includes(p.slug)
+                return (
+                  <PeptideCard
+                    key={p.slug}
+                    peptide={p}
+                    selected={isSelected}
+                    disableAdd={atCap && !isSelected}
+                    onToggle={() => toggleSelected(p.slug)}
+                  />
+                )
+              })}
             </div>
           )}
         </div>
       </section>
+
+      <CompareBar
+        selected={selected}
+        onRemove={toggleSelected}
+        onClear={clearSelected}
+      />
     </div>
   )
 }
 
-function PeptideCard({ peptide }: { peptide: Peptide }) {
+function PeptideCard({
+  peptide,
+  selected,
+  disableAdd,
+  onToggle,
+}: {
+  peptide: Peptide
+  selected: boolean
+  disableAdd: boolean
+  onToggle: () => void
+}) {
   return (
-    <Link
-      href={`/catalog/${peptide.slug}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 transition-all duration-300 hover:border-[#2DD4A8]/25 hover:bg-white/[0.04] hover:shadow-[0_8px_40px_rgba(45,212,168,0.06)]"
+    <div
+      className={
+        'group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white/[0.025] p-5 transition-all duration-300 hover:bg-white/[0.04] hover:shadow-[0_8px_40px_rgba(45,212,168,0.06)] ' +
+        (selected
+          ? 'border-[#2DD4A8]/55 bg-[#2DD4A8]/[0.05]'
+          : 'border-white/[0.07] hover:border-[#2DD4A8]/25')
+      }
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2DD4A8]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <Link
+        href={`/catalog/${peptide.slug}`}
+        aria-label={`View ${peptide.name}`}
+        className="absolute inset-0 z-0"
+      />
 
-      <div className="mb-3 flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h3 className="truncate text-base font-semibold tracking-tight">
-            {peptide.name}
-          </h3>
-          {peptide.aliases?.[0] && (
-            <p className="mt-0.5 truncate text-xs text-white/35">
-              aka {peptide.aliases.join(', ')}
-            </p>
+      <button
+        type="button"
+        onClick={onToggle}
+        disabled={disableAdd}
+        aria-pressed={selected}
+        aria-label={
+          selected
+            ? `Remove ${peptide.name} from comparison`
+            : disableAdd
+            ? `Comparison full (max ${MAX_COMPARE})`
+            : `Add ${peptide.name} to comparison`
+        }
+        className={
+          'absolute right-3 top-3 z-20 inline-flex h-7 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors ' +
+          (selected
+            ? 'border-[#2DD4A8]/45 bg-[#2DD4A8]/15 text-[#2DD4A8]'
+            : disableAdd
+            ? 'cursor-not-allowed border-white/[0.06] bg-white/[0.02] text-white/25'
+            : 'border-white/[0.10] bg-white/[0.04] text-white/55 hover:border-[#2DD4A8]/40 hover:text-[#2DD4A8]')
+        }
+      >
+        {selected ? (
+          <>
+            <Check className="h-3 w-3" />
+            Compare
+          </>
+        ) : (
+          <>
+            <Plus className="h-3 w-3" />
+            Compare
+          </>
+        )}
+      </button>
+
+      <div className="pointer-events-none relative z-10 flex h-full flex-col">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2DD4A8]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+        <div className="mb-3 flex items-start justify-between gap-3 pr-24">
+          <div className="min-w-0">
+            <h3 className="truncate text-base font-semibold tracking-tight">
+              {peptide.name}
+            </h3>
+            {peptide.aliases?.[0] && (
+              <p className="mt-0.5 truncate text-xs text-white/35">
+                aka {peptide.aliases.join(', ')}
+              </p>
+            )}
+          </div>
+          {peptide.fdaApproved && (
+            <span className="shrink-0 rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+              FDA
+            </span>
           )}
         </div>
-        {peptide.fdaApproved && (
-          <span className="shrink-0 rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
-            FDA
+
+        <p className="mb-4 line-clamp-3 flex-1 text-[13px] leading-relaxed text-white/55">
+          {peptide.shortDescription}
+        </p>
+
+        <div className="flex flex-wrap gap-1.5">
+          {peptide.categories.slice(0, 3).map((cat) => (
+            <span
+              key={cat}
+              className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2 py-0.5 text-[10px] text-white/50"
+            >
+              {CATEGORIES.find((c) => c.id === cat)?.label ?? cat}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-4 flex items-center justify-between border-t border-white/[0.06] pt-3 text-[11px] text-white/30">
+          <span>
+            {peptide.molecularWeight
+              ? `${peptide.molecularWeight.toLocaleString()} Da`
+              : 'Reference entry'}
           </span>
-        )}
+          <span className="flex items-center gap-1 text-[#2DD4A8]/70 transition-colors group-hover:text-[#2DD4A8]">
+            View
+            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+          </span>
+        </div>
       </div>
+    </div>
+  )
+}
 
-      <p className="mb-4 line-clamp-3 flex-1 text-[13px] leading-relaxed text-white/55">
-        {peptide.shortDescription}
-      </p>
+function CompareBar({
+  selected,
+  onRemove,
+  onClear,
+}: {
+  selected: string[]
+  onRemove: (slug: string) => void
+  onClear: () => void
+}) {
+  if (selected.length === 0) return null
+  const canCompare = selected.length >= 2
+  const peptides = selected
+    .map((s) => PEPTIDES.find((p) => p.slug === s))
+    .filter((p): p is Peptide => Boolean(p))
 
-      <div className="flex flex-wrap gap-1.5">
-        {peptide.categories.slice(0, 3).map((cat) => (
-          <span
-            key={cat}
-            className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2 py-0.5 text-[10px] text-white/50"
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/[0.08] bg-[#0B1220]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0B1220]/85">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3 md:px-10">
+        <div className="flex items-center gap-2 text-xs text-white/55">
+          <GitCompareArrows className="h-4 w-4 text-[#2DD4A8]" />
+          <span className="font-medium text-white/80">
+            Compare ({selected.length}/{MAX_COMPARE})
+          </span>
+        </div>
+
+        <div className="flex min-w-0 flex-1 flex-wrap items-center gap-1.5">
+          {peptides.map((p) => (
+            <span
+              key={p.slug}
+              className="inline-flex items-center gap-1 rounded-md border border-white/[0.10] bg-white/[0.04] py-0.5 pl-2 pr-1 text-[11px] text-white/75"
+            >
+              {p.name}
+              <button
+                type="button"
+                onClick={() => onRemove(p.slug)}
+                aria-label={`Remove ${p.name}`}
+                className="rounded p-0.5 text-white/40 transition-colors hover:bg-white/[0.08] hover:text-white"
+              >
+                <X className="h-3 w-3" />
+              </button>
+            </span>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={onClear}
+            className="rounded-lg px-3 py-1.5 text-xs text-white/50 transition-colors hover:bg-white/[0.04] hover:text-white"
           >
-            {CATEGORIES.find((c) => c.id === cat)?.label ?? cat}
-          </span>
-        ))}
+            Clear
+          </button>
+          {canCompare ? (
+            <Link
+              href={`/catalog/compare?ids=${selected.join(',')}`}
+              className="inline-flex items-center gap-1.5 rounded-lg bg-[#2DD4A8] px-4 py-1.5 text-xs font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+            >
+              Compare
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          ) : (
+            <span
+              aria-disabled
+              className="cursor-not-allowed rounded-lg border border-white/[0.08] bg-white/[0.02] px-4 py-1.5 text-xs font-medium text-white/35"
+              title="Select at least 2 peptides to compare"
+            >
+              Compare
+            </span>
+          )}
+        </div>
       </div>
-
-      <div className="mt-4 flex items-center justify-between border-t border-white/[0.06] pt-3 text-[11px] text-white/30">
-        <span>
-          {peptide.molecularWeight
-            ? `${peptide.molecularWeight.toLocaleString()} Da`
-            : 'Reference entry'}
-        </span>
-        <span className="flex items-center gap-1 text-[#2DD4A8]/70 transition-colors group-hover:text-[#2DD4A8]">
-          View
-          <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-        </span>
-      </div>
-    </Link>
+    </div>
   )
 }
 

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1b2a"/>
+      <stop offset="100%" stop-color="#1b2d4a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5b0"/>
+      <stop offset="50%" stop-color="#00d4aa"/>
+      <stop offset="100%" stop-color="#00b894"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5b0" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00b894" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00d4aa" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background rounded square -->
+  <rect width="512" height="512" rx="96" ry="96" fill="url(#bg)"/>
+  
+  <!-- Subtle peptide bond dots in background -->
+  <circle cx="80" cy="120" r="6" fill="#00d4aa" opacity="0.12"/>
+  <circle cx="432" cy="392" r="6" fill="#00d4aa" opacity="0.12"/>
+  <circle cx="120" cy="400" r="4" fill="#00d4aa" opacity="0.08"/>
+  <circle cx="400" cy="100" r="4" fill="#00d4aa" opacity="0.08"/>
+  
+  <!-- Peptide chain backbone - subtle helix behind the letters -->
+  <path d="M 100 180 Q 160 140 200 200 Q 240 260 300 220 Q 360 180 420 240" 
+        stroke="#00d4aa" stroke-width="3" fill="none" opacity="0.15" stroke-linecap="round"/>
+  <path d="M 90 320 Q 150 280 210 340 Q 270 400 340 350 Q 400 310 430 360" 
+        stroke="#00d4aa" stroke-width="3" fill="none" opacity="0.15" stroke-linecap="round"/>
+  
+  <!-- Amino acid node dots on the chains -->
+  <circle cx="200" cy="200" r="5" fill="#00d4aa" opacity="0.2"/>
+  <circle cx="300" cy="220" r="5" fill="#00d4aa" opacity="0.2"/>
+  <circle cx="210" cy="340" r="5" fill="#00d4aa" opacity="0.2"/>
+  <circle cx="340" cy="350" r="5" fill="#00d4aa" opacity="0.2"/>
+  
+  <!-- "AP" letterform -->
+  <text x="256" y="310" 
+        font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" 
+        font-weight="700" 
+        font-size="260" 
+        text-anchor="middle" 
+        fill="url(#accent)"
+        filter="url(#shadow)"
+        letter-spacing="-12">AP</text>
+  
+  <!-- Small molecular formula accent -->
+  <line x1="130" y1="380" x2="382" y2="380" stroke="#00d4aa" stroke-width="2" opacity="0.25" stroke-linecap="round"/>
+  
+</svg>
