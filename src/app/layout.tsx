@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.americanpeptide.com'),
   title: 'AmericanPeptide.com — AI-Powered Peptide Drug Discovery',
   description:
     'AI-assisted computational research platform for peptide drug discovery. Design sequences, monitor clinical trials, and synthesize literature at machine speed.',
