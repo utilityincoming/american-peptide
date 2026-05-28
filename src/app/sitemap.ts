@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { PEPTIDES, CATEGORIES } from '@/lib/peptides'
 
-const SITE = 'https://americanpeptide.com'
+const SITE = 'https://www.americanpeptide.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [

@@ -17,7 +17,7 @@ import {
 import { getCategoryContent } from '@/lib/category-content'
 import WaitlistForm from '@/components/WaitlistForm'
 
-const SITE = 'https://americanpeptide.com'
+const SITE = 'https://www.americanpeptide.com'
 
 interface RouteParams {
   params: Promise<{ id: string }>

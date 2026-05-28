@@ -8,7 +8,7 @@ import {
   type Peptide,
 } from '@/lib/peptides'
 
-const SITE = 'https://americanpeptide.com'
+const SITE = 'https://www.americanpeptide.com'
 const MAX_COMPARE = 4
 
 interface Props {
