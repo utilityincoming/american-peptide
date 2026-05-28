@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://americanpeptide.com/sitemap.xml
+Sitemap: https://www.americanpeptide.com/sitemap.xml
