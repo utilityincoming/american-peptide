@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/catalog',
     '/research',
     '/compounds',
+    '/compounds/builder',
     '/trials',
     '/tools/reconstitution-calculator',
   ].map((path) => ({
