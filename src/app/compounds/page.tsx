@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, Search, ExternalLink, FlaskConical } from 'lucide-react'
+import { ArrowRight, Dna, Search, ExternalLink, FlaskConical } from 'lucide-react'
 
 interface Compound {
   cid: number
@@ -70,28 +70,44 @@ export default function CompoundsPage() {
 
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
-      {/* ── Header ── */}
-      <header className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3 md:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 text-sm text-white/35 transition-colors hover:text-white"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          <span className="hidden sm:inline">AmericanPeptide</span>
-        </Link>
-        <div className="h-4 w-px bg-white/10" />
-        <div className="flex items-center gap-2">
-          <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
-            <FlaskConical className="h-4 w-4 text-[#2DD4A8]" strokeWidth={1.75} />
-          </div>
-          <div>
-            <span className="text-sm font-medium">Compound Search</span>
-            <span className="ml-2 hidden text-xs text-white/30 sm:inline">PubChem</span>
-          </div>
+      {/* ── Page identity ── */}
+      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+        <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
+          <FlaskConical className="h-4 w-4 text-[#2DD4A8]" strokeWidth={1.75} />
+        </div>
+        <div>
+          <span className="text-sm font-medium">Compound Search</span>
+          <span className="ml-2 hidden text-xs text-white/30 sm:inline">PubChem</span>
         </div>
       </header>
 
       <main className="mx-auto max-w-5xl px-4 py-8 md:px-6">
+        {/* ── PeptideForge CTA ── */}
+        <Link
+          href="/compounds/builder"
+          className="group mb-8 flex items-center gap-4 overflow-hidden rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-5 transition-all hover:border-[#2DD4A8]/35 hover:shadow-[0_8px_40px_rgba(45,212,168,0.08)]"
+        >
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-[#2DD4A8]">
+            <Dna className="h-5 w-5" strokeWidth={1.75} />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2">
+              <h2 className="text-sm font-semibold text-white">PeptideForge</h2>
+              <span className="rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+                New
+              </span>
+            </div>
+            <p className="mt-0.5 text-xs text-white/55">
+              Build your own peptide residue by residue — live chemistry,
+              challenges, and XP.
+            </p>
+          </div>
+          <span className="flex shrink-0 items-center gap-1 text-xs font-medium text-[#2DD4A8] transition-transform group-hover:translate-x-0.5">
+            Open builder
+            <ArrowRight className="h-3.5 w-3.5" />
+          </span>
+        </Link>
+
         {/* ── Search bar ── */}
         <div className="mb-8">
           <div className="flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 transition-colors focus-within:border-[#2DD4A8]/25">
