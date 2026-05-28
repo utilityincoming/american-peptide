@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
-  ArrowLeft,
   ArrowRight,
   FlaskConical,
   HelpCircle,
@@ -16,6 +15,7 @@ import {
   type PeptideCategory,
 } from '@/lib/peptides'
 import { getCategoryContent } from '@/lib/category-content'
+import WaitlistForm from '@/components/WaitlistForm'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -117,16 +117,8 @@ export default async function CategoryPage({ params }: RouteParams) {
         />
       )}
 
-      {/* ── Header ── */}
-      <header className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3 md:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 text-sm text-white/35 transition-colors hover:text-white"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          <span className="hidden sm:inline">AmericanPeptide</span>
-        </Link>
-        <span className="text-white/20">/</span>
+      {/* ── Breadcrumb ── */}
+      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
         <Link
           href="/catalog"
           className="text-sm text-white/35 transition-colors hover:text-white"
@@ -202,6 +194,14 @@ export default async function CategoryPage({ params }: RouteParams) {
                 ))}
               </div>
             </div>
+
+            {/* Waitlist */}
+            <WaitlistForm
+              source={`category:${meta.id}`}
+              variant="compact"
+              heading={`Track new ${meta.label.toLowerCase()} listings`}
+              description="One email when the first vetted suppliers list in this category. No other mail."
+            />
 
             {/* FAQ */}
             {content?.faqs && content.faqs.length > 0 && (

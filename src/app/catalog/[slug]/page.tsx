@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
-  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   Bell,
@@ -50,16 +49,8 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
 
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
-      {/* ── Header ── */}
-      <header className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3 md:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 text-sm text-white/35 transition-colors hover:text-white"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          <span className="hidden sm:inline">AmericanPeptide</span>
-        </Link>
-        <span className="text-white/20">/</span>
+      {/* ── Breadcrumb ── */}
+      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
         <Link
           href="/catalog"
           className="text-sm text-white/35 transition-colors hover:text-white"

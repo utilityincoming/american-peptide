@@ -1,8 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
-import Link from 'next/link'
-import { ArrowLeft, Search, ExternalLink, Activity, Users } from 'lucide-react'
+import { Search, ExternalLink, Activity, Users } from 'lucide-react'
 
 interface Trial {
   nctId: string
@@ -83,26 +82,16 @@ export default function TrialsPage() {
 
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
-      {/* ── Header ── */}
-      <header className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3 md:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 text-sm text-white/35 transition-colors hover:text-white"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          <span className="hidden sm:inline">AmericanPeptide</span>
-        </Link>
-        <div className="h-4 w-px bg-white/10" />
-        <div className="flex items-center gap-2">
-          <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
-            <Activity className="h-4 w-4 text-[#2DD4A8]" strokeWidth={1.75} />
-          </div>
-          <div>
-            <span className="text-sm font-medium">Clinical Trials</span>
-            <span className="ml-2 hidden text-xs text-white/30 sm:inline">
-              ClinicalTrials.gov
-            </span>
-          </div>
+      {/* ── Page identity ── */}
+      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+        <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
+          <Activity className="h-4 w-4 text-[#2DD4A8]" strokeWidth={1.75} />
+        </div>
+        <div>
+          <span className="text-sm font-medium">Clinical Trials</span>
+          <span className="ml-2 hidden text-xs text-white/30 sm:inline">
+            ClinicalTrials.gov
+          </span>
         </div>
       </header>
 

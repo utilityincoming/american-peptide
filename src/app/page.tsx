@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, Dna, BarChart3, FlaskConical, Search, Sparkles, Telescope } from 'lucide-react'
 import { PEPTIDES, CATEGORIES } from '@/lib/peptides'
+import WaitlistForm from '@/components/WaitlistForm'
 
 const SPOTLIGHT_SLUGS = [
   'semaglutide',
@@ -86,43 +87,8 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0B1220]/60" />
       </div>
 
-      {/* ── Navigation ── */}
-      <nav className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-10">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#2DD4A8]">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              className="h-5 w-5 text-[#0B1220]"
-            >
-              <path d="M4 5c4.5 0 7.5 4 7.5 7S15.5 19 20 19" />
-              <path d="M20 5c-4.5 0-7.5 4-7.5 7S8.5 19 4 19" />
-            </svg>
-          </div>
-          <span className="text-[15px] font-semibold tracking-tight">AmericanPeptide</span>
-        </div>
-
-        <div className="flex items-center gap-6">
-          <Link
-            href="/research"
-            className="hidden text-sm text-white/50 transition-colors hover:text-white md:block"
-          >
-            Research
-          </Link>
-          <Link
-            href="/research"
-            className="rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-4 py-1.5 text-sm font-medium text-[#2DD4A8] transition-all hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/20"
-          >
-            Launch App →
-          </Link>
-        </div>
-      </nav>
-
       {/* ── Hero ── */}
-      <section className="relative z-10 mx-auto max-w-5xl px-6 pb-24 pt-16 text-center md:px-10 md:pt-24">
+      <section className="relative z-10 mx-auto max-w-5xl px-6 pb-24 pt-12 text-center md:px-10 md:pt-20">
 
         {/* Status badge */}
         <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-4 py-1.5 text-xs font-medium text-[#2DD4A8]">
@@ -334,6 +300,29 @@ export default function HomePage() {
             </Link>
           ))}
         </div>
+      </section>
+
+      {/* ── Marketplace Waitlist ── */}
+      <section className="relative z-10 mx-auto max-w-3xl px-6 pb-32 md:px-10">
+        <div className="mb-6 text-center">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-[#2DD4A8]">
+            <Sparkles className="h-3 w-3" />
+            Marketplace · Coming soon
+          </div>
+          <h2 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
+            A transparent marketplace for research peptides
+          </h2>
+          <p className="mx-auto max-w-xl text-sm text-white/45 md:text-base">
+            Vetted suppliers, third-party COAs, per-mg pricing. Be first to
+            know when listings go live.
+          </p>
+        </div>
+        <WaitlistForm
+          source="home"
+          variant="full"
+          heading="Join the marketplace waitlist"
+          description="Researchers get early access. Suppliers can request onboarding."
+        />
       </section>
 
       {/* ── How It Works ── */}

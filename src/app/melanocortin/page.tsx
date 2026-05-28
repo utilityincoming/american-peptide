@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import {
-  ArrowLeft,
   ArrowRight,
   ChevronDown,
   ChevronUp,
@@ -490,19 +489,11 @@ export default function MelanocortinPage() {
         <div className="absolute bottom-0 right-1/2 h-96 w-96 rounded-full bg-amber-500 opacity-[0.025] blur-[120px]" />
       </div>
 
-      {/* ── Nav / breadcrumb ── */}
+      {/* ── Page identity / metadata ── */}
       <nav className="relative z-10 flex items-center justify-between border-b border-white/[0.06] px-6 py-4 md:px-10">
-        <div className="flex items-center gap-2 text-sm">
-          <Link
-            href="/"
-            className="flex items-center gap-1.5 text-white/40 transition-colors hover:text-white"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span className="hidden sm:inline">AmericanPeptide</span>
-          </Link>
-          <span className="text-white/15">/</span>
-          <span className="font-medium text-white/70">Melanocortin Research Hub</span>
-        </div>
+        <span className="text-sm font-medium text-white/70">
+          Melanocortin Research Hub
+        </span>
         <div className="flex items-center gap-1.5 text-xs text-white/25">
           <Calendar className="h-3.5 w-3.5" />
           Last updated: May 2026
