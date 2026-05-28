@@ -18,10 +18,18 @@ const features = [
   {
     Icon: Dna,
     name: 'PeptideForge',
-    badge: 'AI Sequence Design',
+    badge: 'Interactive Builder',
+    href: '/compounds/builder',
+    description:
+      'Build a peptide residue by residue and watch mass, hydropathy, and net charge update live. Clear chemistry challenges to earn XP — a hands-on way to learn sequence design.',
+  },
+  {
+    Icon: Sparkles,
+    name: 'Research Agent',
+    badge: 'AI Assistant',
     href: '/research',
     description:
-      'Generate novel peptide sequences optimized for target binding affinity, metabolic stability, and membrane permeability — powered by models trained on structural biology and proteomics databases.',
+      'Ask in plain language and get citation-backed answers — the agent cross-references PubChem structures, ClinicalTrials.gov studies, and mechanisms into structured evidence.',
   },
   {
     Icon: BarChart3,
@@ -262,11 +270,11 @@ export default function HomePage() {
             Research Modules
           </h2>
           <p className="text-sm text-white/40 md:text-base">
-            Three integrated tools. One unified research environment.
+            Four integrated tools. One unified research environment.
           </p>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {features.map(({ Icon, name, badge, href, description }) => (
             <Link
               key={name}

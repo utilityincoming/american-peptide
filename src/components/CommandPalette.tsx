@@ -74,6 +74,14 @@ const PAGES: CommandItem[] = [
     keywords: 'compounds pubchem structure molecule chemistry cid',
   },
   {
+    id: 'page-builder',
+    kind: 'page',
+    label: 'PeptideForge',
+    subtitle: 'Build a peptide & earn XP',
+    href: '/compounds/builder',
+    keywords: 'peptideforge builder build amino acid sequence game xp challenge',
+  },
+  {
     id: 'page-calculator',
     kind: 'page',
     label: 'Reconstitution Calculator',
