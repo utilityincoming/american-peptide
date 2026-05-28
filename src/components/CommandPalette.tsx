@@ -50,6 +50,14 @@ const PAGES: CommandItem[] = [
     keywords: 'catalog browse peptides reference',
   },
   {
+    id: 'page-research-areas',
+    kind: 'page',
+    label: 'Research Areas',
+    subtitle: 'Browse peptides by indication',
+    href: '/research-areas',
+    keywords: 'research areas indication use case weight loss wound healing cognition longevity guide',
+  },
+  {
     id: 'page-research',
     kind: 'page',
     label: 'Research Agent',

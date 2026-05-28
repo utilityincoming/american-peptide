@@ -16,6 +16,7 @@ import {
   getPeptideBySlug,
   type Peptide,
 } from '@/lib/peptides'
+import { getAreasForPeptide } from '@/lib/research-areas'
 
 interface RouteParams {
   params: Promise<{ slug: string }>
@@ -46,6 +47,8 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
       p.slug !== peptide.slug &&
       p.categories.some((c) => peptide.categories.includes(c)),
   ).slice(0, 3)
+
+  const areas = getAreasForPeptide(peptide)
 
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
@@ -127,6 +130,23 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                     </li>
                   ))}
                 </ul>
+              </Block>
+            )}
+
+            {areas.length > 0 && (
+              <Block title="Research-area guides">
+                <div className="flex flex-wrap gap-2">
+                  {areas.map((a) => (
+                    <Link
+                      key={a.slug}
+                      href={`/research-areas/${a.slug}`}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] px-3 py-1 text-xs text-white/60 transition-colors hover:border-[#2DD4A8]/30 hover:text-[#2DD4A8]"
+                    >
+                      <FlaskConical className="h-3 w-3 text-[#2DD4A8]/70" />
+                      {a.label}
+                    </Link>
+                  ))}
+                </div>
               </Block>
             )}
 
