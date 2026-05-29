@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowRight, ArrowLeft, Layers } from 'lucide-react'
+import { ArrowRight, ArrowLeft, HelpCircle, Layers } from 'lucide-react'
 import { CATEGORIES, type Peptide } from '@/lib/peptides'
 import {
   RESEARCH_AREAS,
@@ -84,6 +84,18 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
     ],
   }
 
+  const faqLd = area.faqs.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: area.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      }
+    : null
+
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
       <script
@@ -94,6 +106,12 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
+      {faqLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+        />
+      )}
 
       {/* ── Breadcrumb ── */}
       <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
@@ -168,6 +186,34 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
                 </p>
               )}
             </div>
+
+            {/* FAQ */}
+            {area.faqs.length > 0 && (
+              <div>
+                <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-white/40">
+                  <HelpCircle className="h-3.5 w-3.5" />
+                  Frequently asked questions
+                </h2>
+                <div className="space-y-3">
+                  {area.faqs.map((f) => (
+                    <details
+                      key={f.q}
+                      className="group rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 [&_summary::-webkit-details-marker]:hidden"
+                    >
+                      <summary className="flex cursor-pointer items-center justify-between gap-3 text-sm font-semibold text-white/85">
+                        {f.q}
+                        <span className="text-white/30 transition-transform group-open:rotate-45">
+                          +
+                        </span>
+                      </summary>
+                      <p className="mt-3 text-sm leading-relaxed text-white/55">
+                        {f.a}
+                      </p>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Sidebar */}
