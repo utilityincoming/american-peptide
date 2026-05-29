@@ -23,6 +23,8 @@ export interface ResearchArea {
   matchers: string[]
   /** Catalog categories to cross-link from this area. */
   relatedCategories: PeptideCategory[]
+  /** Indication-level FAQs — render on the page and emit FAQPage schema. */
+  faqs: { q: string; a: string }[]
 }
 
 export const RESEARCH_AREAS: ResearchArea[] = [
@@ -48,6 +50,20 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'cardiovascular risk',
     ],
     relatedCategories: ['metabolic'],
+    faqs: [
+      {
+        q: 'What kinds of peptides are studied for weight loss?',
+        a: 'The most studied are incretin receptor agonists — GLP-1, dual GLP-1/GIP, and triple GLP-1/GIP/glucagon agonists — alongside amylin analogs. They act on satiety, insulin secretion, gastric emptying, and energy expenditure.',
+      },
+      {
+        q: 'How do GLP-1 receptor agonists support weight reduction?',
+        a: 'In studies they slow gastric emptying and signal satiety in the brain while improving glucose-dependent insulin release, which together reduce caloric intake and improve glycemic control.',
+      },
+      {
+        q: 'Are these peptides approved or investigational?',
+        a: 'Several GLP-1 and dual-agonist peptides are FDA-approved for type 2 diabetes and chronic weight management; others remain investigational. This page is a research reference, not medical advice.',
+      },
+    ],
   },
   {
     slug: 'wound-healing',
@@ -69,6 +85,20 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'tissue repair',
     ],
     relatedCategories: ['healing-repair'],
+    faqs: [
+      {
+        q: 'How are peptides studied for tissue repair?',
+        a: 'Research focuses on angiogenesis, fibroblast and keratinocyte activity, and cytoprotective signaling — measured in dermal wound, tendon, cartilage, and ischemic repair models.',
+      },
+      {
+        q: 'What mechanisms do repair peptides act through?',
+        a: 'Commonly studied mechanisms include upregulation of growth-factor receptors, nitric-oxide modulation, actin sequestration and cell migration, and copper-dependent remodeling of the extracellular matrix.',
+      },
+      {
+        q: 'Is the evidence clinical or preclinical?',
+        a: 'Most tissue-repair peptide evidence is preclinical (cell and animal models), so model selection and endpoint definition matter and independent human validation is generally lacking.',
+      },
+    ],
   },
   {
     slug: 'cognition-neuroprotection',
@@ -83,6 +113,20 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     ],
     matchers: ['cognition', 'cognitive', 'neuroprotection', 'stroke', 'neurodegeneration'],
     relatedCategories: ['cognitive'],
+    faqs: [
+      {
+        q: 'Which peptides are studied for cognition?',
+        a: 'Neuroactive peptides studied for memory, focus, stroke recovery, and neurodegeneration models — typically acting through neurotrophic and synaptic-plasticity pathways.',
+      },
+      {
+        q: 'What mechanisms underlie neuroprotective peptides?',
+        a: 'Proposed mechanisms include modulation of BDNF and other neurotrophins, regulation of monoaminergic and GABAergic tone, and protection of neuronal mitochondria.',
+      },
+      {
+        q: 'Why does blood–brain-barrier permeability matter?',
+        a: 'A peptide must cross the blood–brain barrier to act centrally, so permeability is a key research variable that shapes route, dose, and sequence design.',
+      },
+    ],
   },
   {
     slug: 'anxiety-mood',
@@ -97,6 +141,20 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     ],
     matchers: ['anxiety', 'stress physiology', 'mood'],
     relatedCategories: ['cognitive'],
+    faqs: [
+      {
+        q: 'How are peptides studied for anxiety?',
+        a: 'A few regulatory peptides are studied for anxiolytic and mood-stabilizing effects, often with the goal of calm without the sedation, dependence, or cognitive dulling of classic GABAergic agents.',
+      },
+      {
+        q: 'What pathways are involved?',
+        a: 'Investigated mechanisms include modulation of the HPA (stress) axis, neurotrophic support, and effects on serotonergic and GABAergic signaling.',
+      },
+      {
+        q: 'Is the human evidence strong?',
+        a: 'Much of the human data is early-stage and concentrated in specific research traditions, so findings should be treated as preliminary.',
+      },
+    ],
   },
   {
     slug: 'sleep-circadian',
@@ -111,6 +169,20 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     ],
     matchers: ['sleep', 'circadian', 'pineal'],
     relatedCategories: ['cognitive', 'longevity'],
+    faqs: [
+      {
+        q: 'How are peptides linked to sleep?',
+        a: 'Sleep- and circadian-active peptides are studied for effects on sleep architecture, biological-clock timing, and the pineal signaling that links light exposure to rest cycles.',
+      },
+      {
+        q: 'What sleep measures are studied?',
+        a: 'Research looks at slow-wave (deep) sleep, melatonin-adjacent pathways, and interactions between the sleep system and the stress axis.',
+      },
+      {
+        q: 'How does this relate to aging?',
+        a: 'Circadian regulation declines with age, so this area overlaps heavily with longevity research and shares several regulatory peptides.',
+      },
+    ],
   },
   {
     slug: 'longevity-aging',
@@ -125,6 +197,20 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     ],
     matchers: ['aging biology', 'nad+', 'sarcopenia', 'senescence'],
     relatedCategories: ['longevity', 'mitochondrial'],
+    faqs: [
+      {
+        q: 'What does longevity peptide research target?',
+        a: 'The hallmarks of aging — cellular senescence, mitochondrial decline, telomere maintenance, NAD+ metabolism, and loss of circadian and hormonal regulation — usually with healthspan as the goal.',
+      },
+      {
+        q: 'Why are outcomes hard to measure?',
+        a: 'Aging endpoints are slow and multifactorial, so research relies on biomarkers, model organisms, and mechanistic work rather than large outcome trials.',
+      },
+      {
+        q: 'Where do these peptides come from?',
+        a: 'Many are endogenous regulatory peptides whose expression falls with age, studied as candidates to restore more youthful signaling.',
+      },
+    ],
   },
   {
     slug: 'growth-hormone-axis',
@@ -139,6 +225,20 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     ],
     matchers: ['gh ', 'growth hormone', 'igf', 'pituitary', 'body composition'],
     relatedCategories: ['growth-hormone'],
+    faqs: [
+      {
+        q: 'How do GH secretagogues differ from growth hormone itself?',
+        a: 'Secretagogues stimulate the body’s own pulsatile GH release rather than supplying exogenous hormone, aiming to preserve natural feedback and pulsatility.',
+      },
+      {
+        q: 'What are GHRH analogs versus GHRPs?',
+        a: 'GHRH analogs and growth-hormone-releasing peptides (GHRPs) act on distinct receptors and are frequently studied in combination for synergistic GH release.',
+      },
+      {
+        q: 'What endpoints are measured?',
+        a: 'Common endpoints are GH pulse amplitude, downstream IGF-1 elevation, and body-composition changes such as visceral-fat reduction and lean-mass support.',
+      },
+    ],
   },
   {
     slug: 'skin-hair',
@@ -153,6 +253,20 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     ],
     matchers: ['skin aging', 'hair follicle', 'hair growth', 'pigmentation', 'photoprotection'],
     relatedCategories: ['cosmetic'],
+    faqs: [
+      {
+        q: 'How are peptides used in skin and hair research?',
+        a: 'They’re studied for collagen synthesis, pigmentation pathways, photoprotection, and the hair-follicle cycle, spanning copper-binding, melanocortin, and signal peptides.',
+      },
+      {
+        q: 'What outcomes are measured?',
+        a: 'Endpoints include skin elasticity and wrinkle depth, follicular density and anagen (growth-phase) duration, and UV-response markers.',
+      },
+      {
+        q: 'Why do these overlap with wound healing?',
+        a: 'Skin and hair peptides share matrix-remodeling and angiogenesis pathways with tissue-repair biology, so the two areas frequently intersect.',
+      },
+    ],
   },
   {
     slug: 'sexual-reproductive',
@@ -167,6 +281,20 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     ],
     matchers: ['sexual', 'hsdd', 'reproductive', 'amenorrhea', 'puberty', 'erectile'],
     relatedCategories: ['reproductive', 'cosmetic'],
+    faqs: [
+      {
+        q: 'What pathways do these peptides act on?',
+        a: 'Two dominate the literature: central melanocortin signaling, studied for sexual-response disorders, and kisspeptin signaling, the upstream regulator of the HPG axis.',
+      },
+      {
+        q: 'What conditions are studied?',
+        a: 'Research contexts include hypoactive sexual desire disorder (HSDD), CNS-mediated arousal, hypothalamic amenorrhea, and the study of puberty.',
+      },
+      {
+        q: 'Why is dose timing important?',
+        a: 'Because these peptides act centrally and on hormone cascades, timing and feedback regulation strongly influence the response observed in studies.',
+      },
+    ],
   },
   {
     slug: 'immune-inflammation',
@@ -190,6 +318,20 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'atopic dermatitis',
     ],
     relatedCategories: ['immune'],
+    faqs: [
+      {
+        q: 'How do immunoactive peptides work?',
+        a: 'They’re studied to modulate innate and adaptive immunity — restoring T-cell function, balancing cytokines, and in some cases acting directly as antimicrobials.',
+      },
+      {
+        q: 'What are host-defense peptides?',
+        a: 'Antimicrobial (host-defense) peptides are part of innate immunity and draw renewed research interest as antibiotic resistance grows.',
+      },
+      {
+        q: 'What conditions appear in this research?',
+        a: 'Contexts span chronic viral infection, sepsis and oncology adjunct settings, antimicrobial-resistance models, and inflammatory conditions like IBD and atopic dermatitis.',
+      },
+    ],
   },
   {
     slug: 'mitochondrial',
@@ -204,6 +346,20 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     ],
     matchers: ['mitochondri', 'barth syndrome', 'bioenergetic', 'heart failure', 'exercise physiology'],
     relatedCategories: ['mitochondrial', 'longevity'],
+    faqs: [
+      {
+        q: 'What are mitochondrial peptides?',
+        a: 'They include mitochondria-derived peptides encoded in the mitochondrial genome and synthetic compounds targeting the inner membrane, studied for bioenergetic efficiency.',
+      },
+      {
+        q: 'What endpoints are studied?',
+        a: 'Research looks at cardiolipin stabilization, electron-transport efficiency, exercise capacity and metabolic flexibility, and mitochondrial dysfunction.',
+      },
+      {
+        q: 'Which disorders are modeled?',
+        a: 'Models include mitochondrial myopathy, Barth syndrome, and heart failure, with substantial overlap into aging and metabolic research.',
+      },
+    ],
   },
 ]
 
