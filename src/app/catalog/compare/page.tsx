@@ -66,8 +66,49 @@ export default async function ComparePage({ searchParams }: Props) {
   const { ids } = await searchParams
   const peptides = resolvePeptides(parseIds(ids))
 
+  const itemListLd =
+    peptides.length >= 2
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          name: `Compare: ${peptides.map((p) => p.name).join(' vs ')}`,
+          itemListElement: peptides.map((p, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: p.name,
+            url: `${SITE}/catalog/${p.slug}`,
+          })),
+        }
+      : null
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
+      { '@type': 'ListItem', position: 2, name: 'Catalog', item: `${SITE}/catalog` },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Compare',
+        item: `${SITE}/catalog/compare`,
+      },
+    ],
+  }
+
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
+      {itemListLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
+        />
+      )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+
       <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
         <Link
           href="/catalog"
