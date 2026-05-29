@@ -18,6 +18,8 @@ import {
 } from '@/lib/peptides'
 import { getAreasForPeptide } from '@/lib/research-areas'
 
+const SITE = 'https://www.americanpeptide.com'
+
 interface RouteParams {
   params: Promise<{ slug: string }>
 }
@@ -31,9 +33,17 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   const peptide = getPeptideBySlug(slug)
   if (!peptide) return { title: 'Not Found' }
 
+  const url = `${SITE}/catalog/${peptide.slug}`
   return {
     title: `${peptide.name} — AmericanPeptide.com Catalog`,
     description: peptide.shortDescription,
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${peptide.name} — AmericanPeptide.com Catalog`,
+      description: peptide.shortDescription,
+      url,
+      type: 'article',
+    },
   }
 }
 
@@ -50,8 +60,69 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
 
   const areas = getAreasForPeptide(peptide)
 
+  const url = `${SITE}/catalog/${peptide.slug}`
+
+  const sameAs: string[] = []
+  if (peptide.pubchemCid)
+    sameAs.push(`https://pubchem.ncbi.nlm.nih.gov/compound/${peptide.pubchemCid}`)
+  if (peptide.uniprotId)
+    sameAs.push(`https://www.uniprot.org/uniprotkb/${peptide.uniprotId}`)
+
+  const identifier: {
+    '@type': 'PropertyValue'
+    propertyID: string
+    value: string
+  }[] = []
+  if (peptide.cas)
+    identifier.push({ '@type': 'PropertyValue', propertyID: 'CAS', value: peptide.cas })
+  if (peptide.pubchemCid)
+    identifier.push({
+      '@type': 'PropertyValue',
+      propertyID: 'PubChem CID',
+      value: String(peptide.pubchemCid),
+    })
+  if (peptide.uniprotId)
+    identifier.push({
+      '@type': 'PropertyValue',
+      propertyID: 'UniProt',
+      value: peptide.uniprotId,
+    })
+
+  const substanceLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ChemicalSubstance',
+    name: peptide.name,
+    description: peptide.shortDescription,
+    url,
+    ...(peptide.aliases?.length ? { alternateName: peptide.aliases } : {}),
+    ...(peptide.molecularFormula
+      ? { molecularFormula: peptide.molecularFormula }
+      : {}),
+    ...(sameAs.length ? { sameAs } : {}),
+    ...(identifier.length ? { identifier } : {}),
+  }
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
+      { '@type': 'ListItem', position: 2, name: 'Catalog', item: `${SITE}/catalog` },
+      { '@type': 'ListItem', position: 3, name: peptide.name, item: url },
+    ],
+  }
+
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(substanceLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+
       {/* ── Breadcrumb ── */}
       <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
         <Link
