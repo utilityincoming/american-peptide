@@ -20,6 +20,7 @@ import {
   type PeptideCategory,
 } from '@/lib/peptides'
 import WaitlistForm from '@/components/WaitlistForm'
+import OfflineReference from '@/components/OfflineReference'
 
 const MAX_COMPARE = 4
 const STORAGE_KEY = 'amp-catalog-compare-selected'
@@ -186,6 +187,8 @@ export default function CatalogPage() {
         }
       >
         <div className="mx-auto max-w-6xl">
+          <OfflineReference />
+
           <div className="mb-5 flex items-center justify-between text-xs text-white/40">
             <span>
               {filtered.length} result{filtered.length === 1 ? '' : 's'}

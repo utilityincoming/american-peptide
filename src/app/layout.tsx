@@ -5,6 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import Footer from '@/components/Footer'
 import SiteHeader from '@/components/SiteHeader'
+import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -55,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ServiceWorkerRegistrar />
         <SiteHeader />
         {children}
         <Footer />
