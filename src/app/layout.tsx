@@ -6,6 +6,7 @@ import './globals.css'
 import Footer from '@/components/Footer'
 import SiteHeader from '@/components/SiteHeader'
 import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar'
+import ResearchUseGate from '@/components/ResearchUseGate'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -60,6 +61,7 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <Footer />
+        <ResearchUseGate />
         <Analytics />
         <SpeedInsights />
       </body>
