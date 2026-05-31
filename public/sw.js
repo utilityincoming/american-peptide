@@ -1,29 +1,41 @@
 // AmericanPeptide.com — offline service worker
 //
-// Scope: makes the reconstitution calculator (and other visited pages)
-// usable offline after at least one online visit.
+// Goal: make the site a genuine offline peptide reference. The calculator,
+// catalog hubs, and all visited pages work offline after one online visit;
+// an opt-in "Download reference" action bulk-caches every catalog + glossary
+// page so the full reference works offline with no prior browsing.
 //
 // Strategy:
-//   - HTML routes: network-first with cache fallback (so users get fresh
-//     deploys when online, last-good cache when offline)
+//   - HTML routes: network-first with cache fallback (fresh when online,
+//     last-good cache when offline)
 //   - /_next/static/* (fingerprinted JS/CSS): cache-first (immutable)
-//   - manifest + icon: cache-first
-//   - Cross-origin requests: passed through to the network (no SW handling)
+//   - manifest + icons: cache-first
+//   - Cross-origin requests: passed through (no SW handling)
 //
-// Versioned cache name: bump CACHE_VERSION on breaking SW changes to evict
-// stale entries. Routine deploys don't need a bump because /_next/static/*
-// URLs change with every build.
+// Two caches:
+//   amp-offline-<ver>  — runtime + precached hubs; evicted on version bump
+//   amp-reference-v1   — the opt-in downloaded reference; PERSISTS across SW
+//                        version bumps so a user's offline copy isn't wiped
+//                        by a routine deploy.
 
-// Bumped from v1 → v2 after icon set swap (old /icon.svg / /icon-maskable.svg
-// no longer exist; bumping evicts the stale cache for any installed clients).
-const CACHE_VERSION = 'v2'
+const CACHE_VERSION = 'v3'
 const CACHE_NAME = `amp-offline-${CACHE_VERSION}`
+const REFERENCE_CACHE = 'amp-reference-v1'
 
 const OFFLINE_FALLBACK = '/tools/reconstitution-calculator'
 
-// Pre-cache the calculator HTML route so the first offline launch works
-// even if the user installs the app and immediately drops connection.
-const PRECACHE_URLS = ['/tools/reconstitution-calculator', '/manifest.json']
+// Precache the core hubs + the open catalog JSON on install, so the first
+// offline launch has working entry points and all peptide data on hand.
+const PRECACHE_URLS = [
+  '/',
+  '/catalog',
+  '/glossary',
+  '/research-areas',
+  '/tools/reconstitution-calculator',
+  '/developers',
+  '/manifest.json',
+  '/api/catalog',
+]
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -49,11 +61,51 @@ self.addEventListener('activate', (event) => {
       .then((keys) =>
         Promise.all(
           keys
+            // Only evict stale versioned offline caches. The reference cache
+            // (different prefix) deliberately survives version bumps.
             .filter((k) => k.startsWith('amp-offline-') && k !== CACHE_NAME)
             .map((k) => caches.delete(k)),
         ),
       )
       .then(() => self.clients.claim()),
+  )
+})
+
+// ── Opt-in bulk caching ──────────────────────────────────────────────────────
+// The client posts { type: 'CACHE_REFERENCE', urls: [...] }. We fetch and store
+// each into the persistent reference cache, then report progress back so the UI
+// can show "Saved N pages". Failures are tolerated per-URL.
+self.addEventListener('message', (event) => {
+  const data = event.data
+  if (!data || data.type !== 'CACHE_REFERENCE' || !Array.isArray(data.urls)) {
+    return
+  }
+
+  event.waitUntil(
+    caches.open(REFERENCE_CACHE).then(async (cache) => {
+      let cached = 0
+      await Promise.all(
+        data.urls.map(async (url) => {
+          try {
+            const res = await fetch(url, { cache: 'reload' })
+            if (res.ok) {
+              await cache.put(url, res)
+              cached += 1
+            }
+          } catch {
+            /* tolerate individual failures */
+          }
+        }),
+      )
+      const clients = await self.clients.matchAll({ includeUncontrolled: true })
+      for (const client of clients) {
+        client.postMessage({
+          type: 'REFERENCE_CACHED',
+          count: cached,
+          total: data.urls.length,
+        })
+      }
+    }),
   )
 })
 
@@ -81,8 +133,9 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url)
   if (url.origin !== self.location.origin) return
 
-  // Network-first for HTML routes — fresh content when online,
-  // cached fallback when offline.
+  // Network-first for HTML routes — fresh content when online, cached fallback
+  // when offline. caches.match() searches ALL caches, so a page saved in the
+  // reference cache is served offline even if never visited this session.
   if (isHtmlRequest(request)) {
     event.respondWith(
       fetch(request)
@@ -112,8 +165,7 @@ self.addEventListener('fetch', (event) => {
     return
   }
 
-  // Cache-first for fingerprinted static assets — they are immutable
-  // by URL, so a cache hit is always safe.
+  // Cache-first for fingerprinted static assets — immutable by URL.
   if (isStaticAsset(url)) {
     event.respondWith(
       caches.match(request).then((cached) => {
