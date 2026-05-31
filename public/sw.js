@@ -18,16 +18,18 @@
 //                        version bumps so a user's offline copy isn't wiped
 //                        by a routine deploy.
 
-const CACHE_VERSION = 'v3'
+const CACHE_VERSION = 'v4'
 const CACHE_NAME = `amp-offline-${CACHE_VERSION}`
 const REFERENCE_CACHE = 'amp-reference-v1'
 
-const OFFLINE_FALLBACK = '/tools/reconstitution-calculator'
+// Branded fallback shown when an uncached page is requested offline.
+const OFFLINE_FALLBACK = '/offline'
 
 // Precache the core hubs + the open catalog JSON on install, so the first
 // offline launch has working entry points and all peptide data on hand.
 const PRECACHE_URLS = [
   '/',
+  '/offline',
   '/catalog',
   '/glossary',
   '/research-areas',
