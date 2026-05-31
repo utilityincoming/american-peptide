@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/compounds/builder',
     '/trials',
     '/tools/reconstitution-calculator',
+    '/developers',
   ].map((path) => ({
     url: `${SITE}${path}`,
     changeFrequency: 'weekly' as const,

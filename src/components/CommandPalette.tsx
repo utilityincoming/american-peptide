@@ -112,6 +112,14 @@ const PAGES: CommandItem[] = [
     href: '/melanocortin',
     keywords: 'melanocortin mc1r mc3r mc4r mc5r pt-141 bremelanotide',
   },
+  {
+    id: 'page-developers',
+    kind: 'page',
+    label: 'Developers / API',
+    subtitle: 'Open catalog JSON API',
+    href: '/developers',
+    keywords: 'developers api json open data catalog endpoint integrate cc-by',
+  },
 ]
 
 const PEPTIDE_ITEMS: CommandItem[] = PEPTIDES.map((p) => ({
