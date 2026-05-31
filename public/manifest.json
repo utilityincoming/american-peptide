@@ -1,7 +1,8 @@
 {
+  "id": "/",
   "name": "AmericanPeptide.com",
   "short_name": "AmericanPeptide",
-  "description": "AI-powered peptide drug discovery research platform — with an offline reconstitution calculator for the bench.",
+  "description": "Peptide research reference — catalog, glossary, and reconstitution calculator that work offline at the bench.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

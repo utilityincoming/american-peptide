@@ -34,12 +34,13 @@ export default function OfflineStatus() {
       return
     }
     if (process.env.NODE_ENV !== 'production') {
-      // In dev, just report ready without registering.
+      // In dev, just report ready (no SW is registered in development).
       setCacheState('ready')
       return
     }
-    navigator.serviceWorker
-      .register('/sw.js', { scope: '/' })
+    // Registration is handled site-wide by ServiceWorkerRegistrar; here we just
+    // wait for the active worker and report readiness.
+    navigator.serviceWorker.ready
       .then(() => setCacheState('ready'))
       .catch(() => setCacheState('error'))
   }, [])
