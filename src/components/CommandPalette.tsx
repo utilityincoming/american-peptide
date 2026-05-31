@@ -58,6 +58,14 @@ const PAGES: CommandItem[] = [
     keywords: 'research areas indication use case weight loss wound healing cognition longevity guide',
   },
   {
+    id: 'page-glossary',
+    kind: 'page',
+    label: 'Glossary',
+    subtitle: 'Peptide terms & definitions',
+    href: '/glossary',
+    keywords: 'glossary terms definitions dictionary meaning what is reconstitution glp-1 gravy',
+  },
+  {
     id: 'page-research',
     kind: 'page',
     label: 'Research Agent',

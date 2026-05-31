@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { PEPTIDES, CATEGORIES } from '@/lib/peptides'
 import { RESEARCH_AREAS } from '@/lib/research-areas'
+import { GLOSSARY } from '@/lib/glossary'
 
 const SITE = 'https://www.americanpeptide.com'
 
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/catalog',
     '/research-areas',
+    '/glossary',
     '/research',
     '/compounds',
     '/compounds/builder',
@@ -32,6 +34,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
+  const glossaryRoutes = GLOSSARY.map((t) => ({
+    url: `${SITE}/glossary/${t.slug}`,
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }))
+
   const peptideRoutes = PEPTIDES.map((p) => ({
     url: `${SITE}/catalog/${p.slug}`,
     changeFrequency: 'monthly' as const,
@@ -42,6 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticRoutes,
     ...categoryRoutes,
     ...researchAreaRoutes,
+    ...glossaryRoutes,
     ...peptideRoutes,
   ]
 }
