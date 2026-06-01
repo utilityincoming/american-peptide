@@ -51,6 +51,12 @@ export interface Peptide {
   description: string
   mechanism?: string
   researchAreas?: string[]
+  /** Longer-form discovery/context paragraphs rendered on the detail page. */
+  background?: string[]
+  /** Notable research findings — research-framed bullets. */
+  keyResearch?: string[]
+  /** Per-peptide FAQs — rendered as an accordion and emitted as FAQPage schema. */
+  faqs?: { q: string; a: string }[]
   molecularWeight?: number // Daltons
   molecularFormula?: string
   sequence?: string
@@ -175,13 +181,42 @@ const SEED_PEPTIDES: Peptide[] = [
   {
     slug: 'ghk-cu',
     name: 'GHK-Cu',
-    aliases: ['Copper Peptide', 'Tripeptide-1 Copper'],
+    aliases: ['Copper Peptide', 'Tripeptide-1 Copper', 'Copper Tripeptide-1'],
     categories: ['cosmetic', 'healing-repair'],
     shortDescription: 'Endogenous copper-binding tripeptide widely studied in skin and hair biology.',
     description:
       'GHK-Cu is the copper complex of the tripeptide glycyl-L-histidyl-L-lysine, an endogenous fragment first isolated from human plasma. Reported to modulate ECM remodeling, fibroblast activity, and antioxidant defense.',
     mechanism: 'Copper delivery, ECM gene modulation, antioxidant pathway activation.',
     researchAreas: ['Skin aging', 'Hair follicle biology', 'Wound healing'],
+    background: [
+      'GHK-Cu is the copper(II) complex of glycyl-L-histidyl-L-lysine (GHK), a tripeptide first isolated from human plasma in 1973. The free GHK sequence binds copper with high affinity, and the resulting complex is generally regarded as the biologically active species. Plasma GHK is highest in early adulthood and declines with age, which has motivated long-standing interest in its role in tissue maintenance and repair.',
+      'Because copper is a cofactor for enzymes involved in extracellular-matrix (ECM) remodeling and antioxidant defense, much of the research framing treats GHK-Cu as a signaling and copper-delivery molecule rather than a simple nutrient source. It is one of the most extensively studied "copper peptides" in the dermatologic and wound-healing literature and is widely used as a topical cosmetic ingredient under the INCI name Copper Tripeptide-1.',
+    ],
+    keyResearch: [
+      'Extracellular-matrix remodeling — studied for effects on collagen, elastin, glycosaminoglycan, and decorin synthesis in dermal fibroblast models.',
+      'Wound healing & angiogenesis — investigated for fibroblast activation and new-vessel formation in tissue-repair models.',
+      'Antioxidant & anti-inflammatory signaling — reported to modulate oxidative-stress and inflammatory pathways.',
+      'Hair-follicle biology — examined for effects on follicle size and the growth (anagen) phase.',
+      'Gene expression — a widely cited transcriptomic analysis reported GHK can shift the expression of a large set of human genes, often framed as a move toward a more youthful profile.',
+    ],
+    faqs: [
+      {
+        q: 'What is GHK-Cu?',
+        a: 'GHK-Cu is the copper complex of the naturally occurring tripeptide glycyl-L-histidyl-L-lysine (GHK), first isolated from human plasma. The copper-bound form is considered the active species in most research.',
+      },
+      {
+        q: 'What is GHK-Cu studied for?',
+        a: 'Research focuses on skin remodeling (collagen and elastin), wound healing and angiogenesis, antioxidant and anti-inflammatory signaling, and hair-follicle biology. It is a reference compound in the "copper peptide" literature.',
+      },
+      {
+        q: 'Why does it contain copper?',
+        a: 'The GHK tripeptide binds copper(II) with high affinity, and copper is a cofactor for matrix-remodeling and antioxidant enzymes — so the complex is studied as both a signaling molecule and a copper-delivery vehicle.',
+      },
+      {
+        q: 'Is GHK-Cu the same as the copper peptides used in skincare?',
+        a: 'Yes — cosmetic "copper peptide" ingredients are typically GHK-Cu (INCI name Copper Tripeptide-1), applied topically. This page is a research and educational reference, not a product or usage recommendation.',
+      },
+    ],
     sequence: 'GHK',
     molecularWeight: 340.8,
     cas: '49557-75-7',

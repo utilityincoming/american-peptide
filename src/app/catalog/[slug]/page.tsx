@@ -5,9 +5,11 @@ import {
   ArrowRight,
   ArrowUpRight,
   Bell,
+  BookOpen,
   Building2,
   FileCheck2,
   FlaskConical,
+  HelpCircle,
   ShieldCheck,
 } from 'lucide-react'
 import {
@@ -112,6 +114,40 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
     ],
   }
 
+  const faqLd = peptide.faqs?.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: peptide.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      }
+    : null
+
+  // Authoritative external references, generated from identifiers/name — no
+  // fabricated citations. Rendered as a "Further reading" block.
+  const references: { label: string; href: string }[] = []
+  if (peptide.pubchemCid)
+    references.push({
+      label: 'PubChem compound record',
+      href: `https://pubchem.ncbi.nlm.nih.gov/compound/${peptide.pubchemCid}`,
+    })
+  if (peptide.uniprotId)
+    references.push({
+      label: 'UniProt entry',
+      href: `https://www.uniprot.org/uniprotkb/${peptide.uniprotId}`,
+    })
+  references.push({
+    label: 'PubMed literature search',
+    href: `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(peptide.name)}`,
+  })
+  references.push({
+    label: 'ClinicalTrials.gov search',
+    href: `https://clinicaltrials.gov/search?term=${encodeURIComponent(peptide.name)}`,
+  })
+
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
       <script
@@ -122,6 +158,12 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
+      {faqLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+        />
+      )}
 
       {/* ── Breadcrumb ── */}
       <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
@@ -180,11 +222,39 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
               </p>
             </Block>
 
+            {peptide.background && peptide.background.length > 0 && (
+              <Block title="Background">
+                <div className="space-y-4">
+                  {peptide.background.map((para, i) => (
+                    <p key={i} className="text-sm leading-relaxed text-white/65">
+                      {para}
+                    </p>
+                  ))}
+                </div>
+              </Block>
+            )}
+
             {peptide.mechanism && (
               <Block title="Mechanism">
                 <p className="text-sm leading-relaxed text-white/65">
                   {peptide.mechanism}
                 </p>
+              </Block>
+            )}
+
+            {peptide.keyResearch && peptide.keyResearch.length > 0 && (
+              <Block title="Key research findings">
+                <ul className="space-y-2.5">
+                  {peptide.keyResearch.map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex gap-2.5 text-sm leading-relaxed text-white/65"
+                    >
+                      <FlaskConical className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#2DD4A8]/70" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </Block>
             )}
 
@@ -219,6 +289,33 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                   ))}
                 </div>
               </Block>
+            )}
+
+            {peptide.faqs && peptide.faqs.length > 0 && (
+              <div>
+                <h2 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-white/40">
+                  <HelpCircle className="h-3.5 w-3.5" />
+                  Frequently asked questions
+                </h2>
+                <div className="space-y-3">
+                  {peptide.faqs.map((f) => (
+                    <details
+                      key={f.q}
+                      className="group rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 [&_summary::-webkit-details-marker]:hidden"
+                    >
+                      <summary className="flex cursor-pointer items-center justify-between gap-3 text-sm font-semibold text-white/85">
+                        {f.q}
+                        <span className="text-white/30 transition-transform group-open:rotate-45">
+                          +
+                        </span>
+                      </summary>
+                      <p className="mt-3 text-sm leading-relaxed text-white/55">
+                        {f.a}
+                      </p>
+                    </details>
+                  ))}
+                </div>
+              </div>
             )}
 
             {related.length > 0 && (
@@ -314,6 +411,33 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 <Bell className="h-3.5 w-3.5" />
                 Notify me when live
               </button>
+            </div>
+
+            {/* Further reading — generated authoritative sources */}
+            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
+              <h3 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-white/40">
+                <BookOpen className="h-3.5 w-3.5" />
+                Further reading
+              </h3>
+              <ul className="space-y-2.5">
+                {references.map((r) => (
+                  <li key={r.href}>
+                    <a
+                      href={r.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[13px] text-white/65 transition-colors hover:text-[#2DD4A8]"
+                    >
+                      <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-[#2DD4A8]/70" />
+                      {r.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-[10px] leading-relaxed text-white/30">
+                Links open external databases. AmericanPeptide does not endorse
+                specific results.
+              </p>
             </div>
 
             {/* Disclaimer */}
