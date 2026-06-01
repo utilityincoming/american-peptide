@@ -106,6 +106,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Semaglutide is a 31-amino-acid GLP-1 receptor agonist engineered for once-weekly dosing via fatty-acid acylation and amino-acid substitutions that resist DPP-4 degradation. Approved by the FDA for type 2 diabetes (2017) and chronic weight management (2021).',
     mechanism: 'GLP-1 receptor agonism → glucose-dependent insulin secretion, slowed gastric emptying, central appetite suppression.',
     researchAreas: ['Type 2 diabetes', 'Obesity', 'MASH', 'Cardiovascular risk reduction'],
+    background: [
+      'Semaglutide is a glucagon-like peptide-1 (GLP-1) receptor agonist built on the backbone of human GLP-1. Two engineering changes define it: a C18 fatty-diacid chain attached through a linker that promotes reversible binding to albumin, and amino-acid substitutions that resist degradation by the enzyme DPP-4. Together these extend its half-life to roughly a week, enabling once-weekly administration.',
+      'It reached the market first for type 2 diabetes (Ozempic, 2017; oral Rybelsus, 2019) and then for chronic weight management (Wegovy, 2021). Large cardiovascular-outcome and weight-management trials have made it one of the most studied metabolic peptides of the past decade, and its template — acylation plus DPP-4 resistance — now informs the broader incretin class.',
+    ],
+    keyResearch: [
+      'Glycemic control — studied for glucose-dependent insulin secretion and glucagon suppression in type 2 diabetes.',
+      'Weight management — chronic-weight-management trials reported substantial mean body-weight reduction versus placebo.',
+      'Cardiovascular outcomes — investigated for reduction of major adverse cardiovascular events in at-risk populations.',
+      'MASH / hepatic fat — examined as an endpoint in metabolic liver-disease research.',
+      'Half-life engineering — fatty-acid acylation and DPP-4-resistant substitutions are the basis of its once-weekly profile.',
+    ],
+    faqs: [
+      {
+        q: 'What is semaglutide?',
+        a: 'Semaglutide is a long-acting GLP-1 receptor agonist approved for type 2 diabetes and chronic weight management. It is marketed as Ozempic, Wegovy, and Rybelsus.',
+      },
+      {
+        q: 'How does semaglutide promote weight loss?',
+        a: 'In studies it slows gastric emptying and acts on appetite centers in the brain while enhancing glucose-dependent insulin release, which together reduce caloric intake.',
+      },
+      {
+        q: 'Why is it dosed once weekly?',
+        a: 'Fatty-acid acylation promotes reversible binding to albumin and amino-acid substitutions resist DPP-4 breakdown, extending its half-life to about a week.',
+      },
+      {
+        q: 'What is the difference between Ozempic, Wegovy, and Rybelsus?',
+        a: 'All three are semaglutide. Ozempic and oral Rybelsus are approved for type 2 diabetes; Wegovy is approved for chronic weight management. This page is a research reference, not medical advice.',
+      },
+    ],
     molecularWeight: 4113.6,
     cas: '910463-68-2',
     fdaApproved: true,
@@ -121,6 +150,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Tirzepatide is a 39-amino-acid synthetic peptide acting as a dual agonist at GIP and GLP-1 receptors. Approved by the FDA for type 2 diabetes (2022) and chronic weight management (2023).',
     mechanism: 'Co-activation of GIP + GLP-1 receptors; complementary insulinotropic and satiety effects.',
     researchAreas: ['Type 2 diabetes', 'Obesity', 'Obstructive sleep apnea'],
+    background: [
+      'Tirzepatide is a synthetic 39-amino-acid peptide that activates two incretin receptors at once — GIP (glucose-dependent insulinotropic polypeptide) and GLP-1. It carries a fatty-acid chain for albumin binding and once-weekly dosing, and is sometimes described as a "twincretin" for its dual mechanism.',
+      'Developed by Eli Lilly, it was approved for type 2 diabetes (Mounjaro, 2022) and chronic weight management (Zepbound, 2023). In placebo-controlled and head-to-head trials it produced some of the largest weight reductions reported for a pharmacologic agent, which has driven intense research interest in multi-receptor incretin design.',
+    ],
+    keyResearch: [
+      'Glycemic control — dual GIP/GLP-1 activation studied for insulin secretion and HbA1c reduction.',
+      'Weight management — trials reported weight reductions exceeding those of single GLP-1 agonists.',
+      'Obstructive sleep apnea — investigated as an endpoint in people with obesity.',
+      'Cardiometabolic markers — examined for effects on lipids, blood pressure, and hepatic fat.',
+      'Dual-agonism rationale — GIP is studied as complementary to GLP-1 for insulinotropic and satiety effects.',
+    ],
+    faqs: [
+      {
+        q: 'What is tirzepatide?',
+        a: 'Tirzepatide is a dual GIP/GLP-1 receptor agonist approved for type 2 diabetes (Mounjaro) and chronic weight management (Zepbound).',
+      },
+      {
+        q: 'How is tirzepatide different from semaglutide?',
+        a: 'Semaglutide activates the GLP-1 receptor alone; tirzepatide activates both GIP and GLP-1 receptors, a dual mechanism studied for greater metabolic effect.',
+      },
+      {
+        q: 'What does "twincretin" mean?',
+        a: 'It is an informal term for a peptide that engages two incretin pathways — here GIP and GLP-1 — within a single molecule.',
+      },
+      {
+        q: 'Is tirzepatide FDA approved?',
+        a: 'Yes, for type 2 diabetes and chronic weight management under the brand names Mounjaro and Zepbound. This page is a research and educational reference.',
+      },
+    ],
     molecularWeight: 4813.5,
     cas: '2023788-19-2',
     fdaApproved: true,
@@ -136,6 +194,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Retatrutide is an Eli Lilly–developed triple agonist targeting GIP, GLP-1, and glucagon receptors. Phase 2 trials reported ~24% mean weight reduction at 48 weeks at the highest dose.',
     mechanism: 'GIP + GLP-1 (insulinotropic, satiety) plus glucagon (energy expenditure, lipolysis).',
     researchAreas: ['Obesity', 'Type 2 diabetes', 'MASH'],
+    background: [
+      'Retatrutide (development code LY3437943) is an investigational single peptide that activates three receptors — GIP, GLP-1, and glucagon. Adding glucagon-receptor agonism to the incretin pair is studied as a way to increase energy expenditure and lipolysis on top of the insulinotropic and satiety effects of GIP and GLP-1.',
+      'Developed by Eli Lilly, it remains investigational and has not been approved. Phase 2 results reported notably large mean weight reductions at the highest doses over roughly a year, placing it among the most closely watched "triple agonist" candidates in late-stage metabolic research.',
+    ],
+    keyResearch: [
+      'Triple agonism — combines GIP/GLP-1 (insulin, satiety) with glucagon (energy expenditure, lipolysis).',
+      'Weight reduction — Phase 2 trials reported among the largest mean reductions seen for an investigational agent.',
+      'Type 2 diabetes — studied for glycemic endpoints alongside weight.',
+      'MASH / hepatic fat — examined as a metabolic-liver-disease endpoint.',
+      'Investigational status — not approved; under continued clinical evaluation.',
+    ],
+    faqs: [
+      {
+        q: 'What is retatrutide?',
+        a: 'Retatrutide is an investigational triple agonist targeting the GIP, GLP-1, and glucagon receptors, studied in late-stage trials for obesity and type 2 diabetes.',
+      },
+      {
+        q: 'How does a triple agonist differ from dual or single agonists?',
+        a: 'It adds glucagon-receptor activation — studied for increased energy expenditure and fat breakdown — to the insulinotropic and satiety effects of GIP and GLP-1.',
+      },
+      {
+        q: 'Is retatrutide approved?',
+        a: 'No. It is investigational and has not received FDA approval; all data comes from clinical research.',
+      },
+      {
+        q: 'Who develops retatrutide?',
+        a: 'Eli Lilly. This page is a research and educational reference, not medical advice or an offer for sale.',
+      },
+    ],
     molecularWeight: 4731.5,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
@@ -161,6 +248,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'BPC-157 is a 15-amino-acid sequence derived from a protective protein found in human gastric juice. Preclinical work suggests pro-angiogenic and cytoprotective activity across tendon, ligament, muscle, and GI tissue.',
     mechanism: 'Putative upregulation of VEGFR2 and modulation of nitric oxide / growth factor pathways.',
     researchAreas: ['Tendinopathy', 'Wound healing', 'IBD models'],
+    background: [
+      'BPC-157 (Body Protective Compound-157) is a synthetic 15-amino-acid sequence derived from a protective protein identified in human gastric juice. It is studied as a cytoprotective and pro-angiogenic agent, with most of the interest centered on connective-tissue and gastrointestinal repair.',
+      'Essentially all of the evidence is preclinical — cell cultures and rodent models — and BPC-157 is not approved by the FDA for any use. It is widely discussed in the tissue-repair literature but lacks the controlled human trials that characterize approved peptides, so model choice and endpoint definition are central caveats.',
+    ],
+    keyResearch: [
+      'Tendon & ligament repair — rodent models studied for healing of tendon, ligament, and muscle injury.',
+      'Gastrointestinal protection — examined in models of ulcer and inflammatory bowel disease.',
+      'Angiogenesis — proposed to upregulate the VEGFR2 receptor and promote new-vessel formation.',
+      'Nitric-oxide & growth-factor pathways — investigated as part of its cytoprotective mechanism.',
+      'Preclinical only — no controlled human trials; not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is BPC-157?',
+        a: 'BPC-157 is a synthetic 15-amino-acid peptide derived from a protein in gastric juice, studied in preclinical models for tissue repair and cytoprotection.',
+      },
+      {
+        q: 'What is BPC-157 studied for?',
+        a: 'Research contexts include tendon, ligament, and muscle repair, gastrointestinal protection, and angiogenesis — almost entirely in cell and animal models.',
+      },
+      {
+        q: 'Is BPC-157 FDA approved?',
+        a: 'No. BPC-157 is not approved for any medical use and the evidence base is preclinical. This page is a research and educational reference only.',
+      },
+      {
+        q: 'What is the proposed mechanism?',
+        a: 'Studies point to upregulation of the VEGFR2 receptor and modulation of nitric-oxide and growth-factor pathways, though the mechanism is not fully established.',
+      },
+    ],
     molecularWeight: 1419.5,
     sequence: 'GEPPPGKPADDAGLV',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
@@ -175,6 +291,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'TB-500 corresponds to the active actin-binding region of thymosin β4. Preclinical studies report effects on endothelial cell migration, angiogenesis, and wound healing.',
     mechanism: 'G-actin sequestration; modulation of cell migration and angiogenesis.',
     researchAreas: ['Wound healing', 'Cardiac repair models', 'Hair growth'],
+    background: [
+      'TB-500 is a synthetic peptide corresponding to the actin-binding region of thymosin β4, a naturally occurring protein involved in cell migration and tissue repair. By sequestering G-actin, thymosin β4 influences cytoskeletal dynamics, and TB-500 is studied as a fragment that reproduces part of this activity.',
+      'As with BPC-157, the evidence for TB-500 is largely preclinical and it is not FDA-approved; it is also a prohibited substance in regulated sport. Research interest centers on endothelial cell migration, angiogenesis, and wound healing, with cardiac and dermal repair among the contexts studied.',
+    ],
+    keyResearch: [
+      'Cell migration — derived from the actin-binding domain of thymosin β4, studied for endothelial and keratinocyte migration.',
+      'Angiogenesis & wound healing — examined in dermal and vascular repair models.',
+      'Cardiac repair — investigated in models of myocardial injury.',
+      'Hair growth — explored for effects on the follicle in preclinical work.',
+      'Preclinical / prohibited in sport — not FDA-approved; banned by WADA.',
+    ],
+    faqs: [
+      {
+        q: 'What is TB-500?',
+        a: 'TB-500 is a synthetic peptide based on the actin-binding region of thymosin β4, studied in preclinical models for cell migration and tissue repair.',
+      },
+      {
+        q: 'How is TB-500 related to thymosin β4?',
+        a: 'TB-500 corresponds to the active actin-binding fragment of the larger thymosin β4 protein, reproducing part of its cytoskeletal activity.',
+      },
+      {
+        q: 'Is TB-500 approved or allowed in sport?',
+        a: 'No — it is not FDA-approved and is prohibited by the World Anti-Doping Agency. This page is a research and educational reference.',
+      },
+      {
+        q: 'What is TB-500 studied for?',
+        a: 'Research contexts include wound healing, angiogenesis, cardiac repair, and hair-follicle biology, primarily in animal and cell models.',
+      },
+    ],
     sequence: 'LKKTETQ',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
