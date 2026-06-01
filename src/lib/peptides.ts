@@ -235,6 +235,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Cagrilintide is a 37-amino-acid acylated amylin analog with affinity at all five amylin receptor subtypes. Investigated by Novo Nordisk both as monotherapy and in combination with semaglutide (CagriSema).',
     mechanism: 'Amylin and calcitonin receptor agonism → satiety, slowed gastric emptying.',
     researchAreas: ['Obesity', 'Combination metabolic therapy'],
+    background: [
+      'Cagrilintide is a long-acting, acylated analog of amylin — the pancreatic hormone co-secreted with insulin that signals satiety and slows gastric emptying. It binds across the amylin and calcitonin receptor subtypes and carries a fatty-acid chain that supports once-weekly dosing.',
+      'Developed by Novo Nordisk, it is investigational and studied both on its own and in a fixed combination with semaglutide known as CagriSema, where the amylin and GLP-1 pathways are paired for additive weight effect.',
+    ],
+    keyResearch: [
+      'Satiety signaling — amylin-receptor agonism studied for appetite suppression and slowed gastric emptying.',
+      'Combination therapy — investigated with semaglutide (CagriSema) for additive weight reduction.',
+      'Obesity endpoints — Phase 2 trials reported meaningful mean weight loss alone and in combination.',
+      'Half-life engineering — acylation supports a once-weekly profile.',
+      'Investigational status — not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is cagrilintide?',
+        a: 'Cagrilintide is an investigational long-acting amylin analog studied for weight management, both alone and combined with semaglutide (CagriSema).',
+      },
+      {
+        q: 'What is CagriSema?',
+        a: 'CagriSema is the investigational fixed combination of cagrilintide (amylin) and semaglutide (GLP-1), pairing two appetite pathways for additive effect.',
+      },
+      {
+        q: 'How does amylin differ from GLP-1?',
+        a: 'Both promote satiety, but amylin acts through amylin and calcitonin receptors while GLP-1 acts through the GLP-1 receptor; combining them is studied for complementary effects.',
+      },
+      {
+        q: 'Is cagrilintide approved?',
+        a: 'No — it is investigational. This page is a research and educational reference.',
+      },
+    ],
     molecularWeight: 3858.3,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
@@ -377,6 +406,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'CJC-1295 without DAC is a 30-amino-acid analog of GHRH(1-29) with four substitutions that improve stability against DPP-4. Half-life ~30 minutes; commonly studied alongside GHRPs for pulsatile GH release.',
     mechanism: 'GHRH receptor agonism on pituitary somatotrophs.',
     researchAreas: ['GH pulsatility', 'Body composition models'],
+    background: [
+      'CJC-1295 without DAC — also called Modified GRF(1-29) — is a 30-amino-acid analog of the first 29 residues of growth-hormone-releasing hormone (GHRH). Four amino-acid substitutions improve stability against the enzyme DPP-4 while preserving GHRH-receptor activity.',
+      'Without the Drug Affinity Complex (DAC), its plasma half-life is short — on the order of 30 minutes — so it produces a brief GH pulse. It is commonly studied alongside a GHRP such as ipamorelin, where the two receptor classes act synergistically. It is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Pulsatile GH release — GHRH-receptor agonism studied for short, physiologic GH pulses.',
+      'DPP-4 resistance — substitutions extend stability versus native GHRH(1-29).',
+      'GHRP synergy — frequently paired with ghrelin-receptor agonists for amplified release.',
+      'Body composition — examined in models for lean-mass and fat endpoints.',
+      'Not FDA-approved — research compound.',
+    ],
+    faqs: [
+      {
+        q: 'What is CJC-1295 (no DAC)?',
+        a: 'It is a stabilized GHRH(1-29) analog (Modified GRF 1-29) studied for short, pulsatile growth-hormone release.',
+      },
+      {
+        q: 'What does "no DAC" mean?',
+        a: 'DAC (Drug Affinity Complex) is an albumin-binding addition that greatly extends half-life. Without it, the peptide acts briefly, producing a short GH pulse.',
+      },
+      {
+        q: 'Why is it studied with GHRPs?',
+        a: 'GHRH analogs and ghrelin-receptor agonists (GHRPs) act on different receptors; combining them is studied for synergistic GH release.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is a research compound, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
     sequence: 'YADAIFTQSYRKVLAQLSARKLLQDIMSR',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
@@ -390,6 +448,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Adds a maleimidopropionic acid (DAC) moiety to modified GRF(1-29), enabling covalent binding to serum albumin and extending half-life to roughly 6–8 days.',
     mechanism: 'GHRH receptor agonism with albumin-mediated extended exposure.',
     researchAreas: ['Sustained GH release', 'IGF-1 elevation'],
+    background: [
+      'CJC-1295 with DAC adds a Drug Affinity Complex — a maleimidopropionic acid group — to Modified GRF(1-29), allowing the peptide to bind covalently to serum albumin. This extends its half-life to roughly 6–8 days, replacing the brief pulse of the no-DAC form with prolonged elevation.',
+      'The trade-off studied in the literature is physiologic: sustained GHRH-receptor exposure raises baseline GH and IGF-1 but blunts the natural pulsatility of the GH axis. It is a research compound and is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Sustained exposure — albumin binding extends half-life to about a week.',
+      'IGF-1 elevation — prolonged GHRH signaling studied for raised baseline IGF-1.',
+      'Pulsatility trade-off — continuous exposure differs from the body’s pulsatile GH pattern.',
+      'Body composition — examined for lean-mass and fat endpoints in models.',
+      'Not FDA-approved — research compound.',
+    ],
+    faqs: [
+      {
+        q: 'What is CJC-1295 with DAC?',
+        a: 'A long-acting GHRH analog whose Drug Affinity Complex binds albumin, extending its half-life to roughly a week for sustained GH and IGF-1 elevation.',
+      },
+      {
+        q: 'How does it differ from the no-DAC version?',
+        a: 'The no-DAC form produces a brief GH pulse; the DAC form gives prolonged elevation by binding albumin, at the cost of natural pulsatility.',
+      },
+      {
+        q: 'What is a Drug Affinity Complex?',
+        a: 'A chemical group that lets the peptide covalently attach to serum albumin, dramatically slowing its clearance.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is a research compound. This page is a research and educational reference.',
+      },
+    ],
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -401,6 +488,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Ipamorelin is a pentapeptide GHRP that selectively activates the GHS-R1a (ghrelin) receptor, releasing growth hormone with minimal impact on ACTH, cortisol, or prolactin.',
     mechanism: 'Selective GHS-R1a agonism.',
     researchAreas: ['GH secretion studies', 'Pituitary function'],
+    background: [
+      'Ipamorelin is a pentapeptide growth-hormone-releasing peptide (GHRP) that selectively activates the ghrelin receptor (GHS-R1a) on pituitary somatotrophs. Its defining feature is selectivity: it releases GH with minimal effect on ACTH, cortisol, or prolactin compared with earlier GHRPs.',
+      'Because of that clean profile, it is one of the most studied GHRPs in the research literature and is frequently paired with a GHRH analog such as CJC-1295. It is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Selective GH release — GHS-R1a agonism with minimal cortisol/prolactin impact.',
+      'GHRH synergy — commonly studied alongside GHRH analogs for amplified pulses.',
+      'Pituitary function — used in GH-secretion research.',
+      'Tolerability profile — selectivity is a recurring theme versus earlier GHRPs.',
+      'Not FDA-approved — research compound.',
+    ],
+    faqs: [
+      {
+        q: 'What is ipamorelin?',
+        a: 'Ipamorelin is a selective ghrelin-receptor agonist (a GHRP) studied for growth-hormone release with minimal effect on cortisol or prolactin.',
+      },
+      {
+        q: 'How is it different from other GHRPs?',
+        a: 'Its selectivity — releasing GH without significantly raising ACTH, cortisol, or prolactin — distinguishes it from earlier, less selective GHRPs.',
+      },
+      {
+        q: 'Why is it paired with CJC-1295?',
+        a: 'GHRPs and GHRH analogs act on separate receptors; combining them is studied for synergistic GH release.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is a research compound. This page is a research and educational reference.',
+      },
+    ],
     sequence: 'Aib-His-D-2-Nal-D-Phe-Lys-NH2',
     molecularWeight: 711.9,
     cas: '170851-70-4',
@@ -416,6 +532,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Tesamorelin is a stabilized 44-amino-acid GHRH analog approved by the FDA in 2010 for reduction of excess abdominal fat in HIV-infected patients with lipodystrophy.',
     mechanism: 'GHRH receptor agonism → endogenous GH release.',
     researchAreas: ['Visceral adiposity', 'HIV-associated lipodystrophy', 'Cognition'],
+    background: [
+      'Tesamorelin is a stabilized 44-amino-acid analog of growth-hormone-releasing hormone (GHRH). By stimulating the pituitary to release endogenous GH, it preserves more of the body’s natural feedback than exogenous GH would.',
+      'It is FDA-approved (Egrifta, 2010) specifically to reduce excess visceral abdominal fat in people with HIV-associated lipodystrophy. Beyond that indication it has been studied for visceral adiposity more broadly and, in research settings, for effects on cognition.',
+    ],
+    keyResearch: [
+      'Visceral fat reduction — the approved use, lowering excess abdominal fat in HIV-associated lipodystrophy.',
+      'GH axis — GHRH-receptor agonism raising endogenous GH and IGF-1.',
+      'Cognition — examined in research for effects related to GH signaling.',
+      'Hepatic fat — studied as a metabolic endpoint.',
+      'FDA-approved (Egrifta) — for a specific HIV-related indication.',
+    ],
+    faqs: [
+      {
+        q: 'What is tesamorelin?',
+        a: 'Tesamorelin is a GHRH analog FDA-approved (Egrifta) to reduce excess abdominal fat in people with HIV-associated lipodystrophy.',
+      },
+      {
+        q: 'How does it work?',
+        a: 'It stimulates the pituitary to release the body’s own growth hormone, rather than supplying GH directly.',
+      },
+      {
+        q: 'What is it approved for?',
+        a: 'Reduction of excess visceral abdominal fat in HIV-associated lipodystrophy. Other uses described here are research contexts, not approved indications.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this page is a research and educational reference, not medical advice or a dosing protocol.',
+      },
+    ],
     molecularWeight: 5135.9,
     cas: '218949-48-5',
     fdaApproved: true,
@@ -431,6 +576,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Sermorelin is the first 29 amino acids of endogenous GHRH and was approved by the FDA in 1990 (subsequently discontinued commercially) for diagnostic and pediatric GH deficiency use.',
     mechanism: 'GHRH receptor agonism.',
     researchAreas: ['GH axis evaluation', 'Pediatric GH deficiency (historical)'],
+    background: [
+      'Sermorelin is the first 29 amino acids of endogenous GHRH — the shortest fragment that retains full GH-releasing activity. As a GHRH-receptor agonist it prompts the pituitary to release the body’s own growth hormone.',
+      'It was FDA-approved in 1990 (Geref) for diagnostic evaluation of pituitary GH reserve and for pediatric GH deficiency, but was later discontinued commercially. It remains a widely referenced GHRH analog in research.',
+    ],
+    keyResearch: [
+      'GH-axis evaluation — historically used to test pituitary GH reserve.',
+      'Pediatric GH deficiency — a historical approved use, since discontinued.',
+      'GHRH-receptor agonism — the minimal active GHRH fragment.',
+      'Short half-life — brief, pulsatile GH release.',
+      'Discontinued commercially — referenced as a research compound.',
+    ],
+    faqs: [
+      {
+        q: 'What is sermorelin?',
+        a: 'Sermorelin is GHRH(1-29), the shortest active fragment of growth-hormone-releasing hormone, historically approved to assess and treat GH deficiency.',
+      },
+      {
+        q: 'Is sermorelin still FDA-approved?',
+        a: 'It was approved in 1990 (Geref) but later discontinued commercially. It is referenced today largely as a research compound.',
+      },
+      {
+        q: 'How does it differ from CJC-1295?',
+        a: 'CJC-1295 is a stabilized, longer-acting modification of the same GHRH(1-29) backbone; sermorelin is the unmodified fragment with a short half-life.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this page is a research and educational reference.',
+      },
+    ],
     sequence: 'YADAIFTNSYRKVLGQLSARKLLQDIMSR',
     molecularWeight: 3358,
     cas: '86168-78-7',
@@ -445,6 +619,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Hexarelin is a synthetic GHRP-6 analog and a potent GH secretagogue with documented cardioprotective effects in preclinical models, mediated in part via CD36.',
     mechanism: 'GHS-R1a and CD36 agonism.',
     researchAreas: ['GH release', 'Cardioprotection models'],
+    background: [
+      'Hexarelin is a synthetic hexapeptide in the GHRP family — a close analog of GHRP-6 — and one of the more potent growth-hormone secretagogues studied. It activates the ghrelin receptor (GHS-R1a) on pituitary somatotrophs.',
+      'A distinctive research thread is its action at the CD36 receptor, through which preclinical studies report cardioprotective effects independent of GH release. It is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Potent GH release — GHS-R1a agonism among the stronger GHRP secretagogues.',
+      'Cardioprotection — CD36-mediated effects studied in preclinical cardiac models.',
+      'GHRH synergy — combinable with GHRH analogs.',
+      'Receptor desensitization — sustained exposure studied for tolerance effects.',
+      'Not FDA-approved — research compound.',
+    ],
+    faqs: [
+      {
+        q: 'What is hexarelin?',
+        a: 'Hexarelin is a potent synthetic GHRP (a GHRP-6 analog) studied for growth-hormone release and, separately, cardioprotective effects.',
+      },
+      {
+        q: 'What is the CD36 connection?',
+        a: 'Beyond GH release, hexarelin binds the CD36 receptor, through which preclinical studies report cardioprotective activity.',
+      },
+      {
+        q: 'How does it compare with ipamorelin?',
+        a: 'Both are GHRPs, but hexarelin is more potent and less selective; ipamorelin is valued for releasing GH with minimal cortisol or prolactin effect.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is a research compound. This page is a research and educational reference.',
+      },
+    ],
     sequence: 'His-D-2-MeTrp-Ala-Trp-D-Phe-Lys-NH2',
     cas: '140703-51-1',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
@@ -458,6 +661,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'MOTS-c is a 16-amino-acid peptide encoded within the mitochondrial 12S rRNA region. Preclinical studies report improved insulin sensitivity, AMPK activation, and exercise capacity.',
     mechanism: 'AMPK activation; modulation of folate / methionine cycle.',
     researchAreas: ['Metabolic disease', 'Exercise physiology', 'Aging biology'],
+    background: [
+      'MOTS-c is a mitochondria-derived peptide: a 16-amino-acid sequence encoded within the mitochondrial 12S rRNA gene rather than the nuclear genome. It is one of a small family of peptides that the mitochondrion itself produces as signaling molecules.',
+      'Preclinical research reports that MOTS-c activates the cellular energy sensor AMPK and influences the folate–methionine cycle, with downstream effects on insulin sensitivity and exercise capacity. Its expression declines with age, fueling interest in metabolic and aging research.',
+    ],
+    keyResearch: [
+      'AMPK activation — studied as a regulator of cellular energy metabolism.',
+      'Insulin sensitivity — reported improvements in metabolic models.',
+      'Exercise physiology — examined for exercise capacity and metabolic flexibility.',
+      'Aging biology — expression declines with age, a focus of longevity research.',
+      'Preclinical — not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is MOTS-c?',
+        a: 'MOTS-c is a mitochondria-derived peptide encoded in mitochondrial DNA, studied for effects on energy metabolism, insulin sensitivity, and exercise capacity.',
+      },
+      {
+        q: 'What does "mitochondria-derived" mean?',
+        a: 'Unlike most peptides, which are encoded by the nuclear genome, MOTS-c is encoded within the mitochondrial genome and acts as a signaling molecule.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Research focuses on AMPK activation, insulin sensitivity, exercise physiology, and aging biology, largely in preclinical models.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is a research compound. This page is a research and educational reference.',
+      },
+    ],
     sequence: 'MRWQEMGYIFYPRKLR',
     molecularWeight: 2174.6,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
@@ -472,6 +704,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'SS-31 (elamipretide) is a synthetic tetrapeptide that concentrates in the inner mitochondrial membrane and binds cardiolipin, stabilizing electron transport chain organization in clinical trials for primary mitochondrial myopathy and Barth syndrome.',
     mechanism: 'Cardiolipin binding; preservation of cristae architecture and ETC efficiency.',
     researchAreas: ['Mitochondrial myopathy', 'Barth syndrome', 'Heart failure'],
+    background: [
+      'SS-31 (elamipretide, formerly Bendavia) is a synthetic tetrapeptide engineered to concentrate in the inner mitochondrial membrane, where it binds the phospholipid cardiolipin. Cardiolipin is essential to the organization of the electron-transport chain, and stabilizing it is the peptide’s proposed mechanism.',
+      'Unlike many catalogued peptides, SS-31 has advanced into clinical trials — for primary mitochondrial myopathy, Barth syndrome, and heart failure — though it has not received FDA approval. It is among the most clinically studied mitochondria-targeted compounds.',
+    ],
+    keyResearch: [
+      'Cardiolipin binding — concentrates in the inner mitochondrial membrane to stabilize cristae.',
+      'ETC efficiency — studied for preserved electron-transport-chain function.',
+      'Mitochondrial myopathy & Barth syndrome — clinical-trial contexts.',
+      'Heart failure — examined for cardiac energetics.',
+      'Investigational — in clinical trials, not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is SS-31?',
+        a: 'SS-31 (elamipretide) is a mitochondria-targeted tetrapeptide that binds cardiolipin to stabilize the inner mitochondrial membrane, studied in mitochondrial disease and heart failure.',
+      },
+      {
+        q: 'What is elamipretide?',
+        a: 'Elamipretide is the development name for SS-31; both refer to the same cardiolipin-binding peptide.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Clinical research contexts include primary mitochondrial myopathy, Barth syndrome, and heart failure.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it remains investigational despite clinical trials. This page is a research and educational reference.',
+      },
+    ],
     sequence: 'D-Arg-Dmt-Lys-Phe-NH2',
     cas: '736992-21-5',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
@@ -486,6 +747,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Epitalon is a synthetic four-amino-acid peptide derived from the pineal peptide epithalamin. Russian-led clinical work has reported effects on melatonin secretion and lifespan endpoints in rodent models.',
     mechanism: 'Reported telomerase upregulation; pineal-axis modulation.',
     researchAreas: ['Aging biology', 'Circadian biology', 'Pineal function'],
+    background: [
+      'Epitalon (epithalon) is a synthetic four-amino-acid peptide modeled on epithalamin, a peptide extract of the pineal gland. It emerged from Russian gerontology research, where the pineal axis is studied as a regulator of aging and circadian rhythm.',
+      'Russian-led studies have reported effects on melatonin secretion, telomerase activity, and lifespan endpoints in animal models. The evidence base is concentrated in that research tradition, independent replication is limited, and Epitalon is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Telomerase activity — reported upregulation in cell and animal studies.',
+      'Circadian / pineal function — examined for effects on melatonin secretion.',
+      'Aging endpoints — lifespan effects reported in rodent models.',
+      'Research concentration — evidence largely from a single research tradition.',
+      'Not FDA-approved — research compound.',
+    ],
+    faqs: [
+      {
+        q: 'What is Epitalon?',
+        a: 'Epitalon is a synthetic tetrapeptide derived from a pineal extract (epithalamin), studied in aging and circadian research, largely in animal models.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Reported effects include telomerase activity, melatonin regulation, and lifespan endpoints, primarily in Russian-led preclinical work.',
+      },
+      {
+        q: 'How strong is the evidence?',
+        a: 'It is concentrated in a specific research tradition with limited independent replication, so findings should be treated as preliminary.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is a research compound. This page is a research and educational reference.',
+      },
+    ],
     sequence: 'AEDG',
     molecularWeight: 390.4,
     cas: '307297-39-8',
@@ -500,6 +790,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Semax is a heptapeptide analog of ACTH(4-10) developed in Russia, used clinically there for stroke and cognitive disorders. Preclinical studies report BDNF / NGF upregulation.',
     mechanism: 'BDNF / NGF induction; melanocortin signaling without HPA activation.',
     researchAreas: ['Ischemic stroke recovery', 'Cognition', 'Neuroprotection'],
+    background: [
+      'Semax is a synthetic heptapeptide based on a fragment of adrenocorticotropic hormone, ACTH(4-10), modified for stability. It was developed in Russia, where it is used clinically for stroke and cognitive disorders.',
+      'Unlike full ACTH, Semax does not activate the stress (HPA) axis; instead, preclinical research focuses on its reported induction of neurotrophic factors such as BDNF and NGF. Outside Russia it is not FDA-approved and the controlled-trial base is limited.',
+    ],
+    keyResearch: [
+      'Neurotrophic induction — reported BDNF and NGF upregulation in preclinical work.',
+      'Ischemic stroke — used clinically in Russia for stroke recovery.',
+      'Cognition — studied for attention and memory effects.',
+      'No HPA activation — melanocortin signaling without raising cortisol.',
+      'Not FDA-approved — research compound outside Russia.',
+    ],
+    faqs: [
+      {
+        q: 'What is Semax?',
+        a: 'Semax is a synthetic ACTH(4-10) analog studied for nootropic and neuroprotective effects, used clinically in Russia for stroke and cognitive disorders.',
+      },
+      {
+        q: 'How does it work?',
+        a: 'Research points to induction of neurotrophic factors (BDNF, NGF) and melanocortin signaling, without activating the stress axis.',
+      },
+      {
+        q: 'Is Semax FDA-approved?',
+        a: 'No — it is approved and used in Russia but is a research compound elsewhere. This page is a research and educational reference.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Ischemic stroke recovery, cognition, and neuroprotection, with most controlled data from Russian clinical use.',
+      },
+    ],
     sequence: 'MEHFPGP',
     cas: '80714-61-0',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
@@ -513,6 +832,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Selank is a synthetic analog of the immunomodulatory peptide tuftsin, developed in Russia. Reported activity includes anxiolytic effects without sedation or dependence in clinical and preclinical work.',
     mechanism: 'Modulation of GABAergic and serotonergic systems; enkephalinase inhibition.',
     researchAreas: ['Generalized anxiety', 'Cognitive performance'],
+    background: [
+      'Selank is a synthetic heptapeptide based on tuftsin, an immunomodulatory peptide fragment. Like Semax, it was developed in Russia, where it is used clinically as an anxiolytic.',
+      'Research interest centers on achieving anxiolytic and mild cognitive effects without the sedation, dependence, or withdrawal associated with benzodiazepines. Proposed mechanisms include modulation of GABAergic and serotonergic signaling and inhibition of enkephalin breakdown. It is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Anxiolytic activity — studied for calm without sedation or dependence.',
+      'Neurotransmitter modulation — GABAergic and serotonergic effects investigated.',
+      'Enkephalinase inhibition — proposed to extend endogenous enkephalin activity.',
+      'Cognitive performance — examined alongside anxiolytic effects.',
+      'Not FDA-approved — research compound outside Russia.',
+    ],
+    faqs: [
+      {
+        q: 'What is Selank?',
+        a: 'Selank is a synthetic tuftsin analog studied as an anxiolytic, used clinically in Russia, with reported calming effects without sedation or dependence.',
+      },
+      {
+        q: 'How does it differ from benzodiazepines?',
+        a: 'Research interest is in anxiolytic effects without the sedation, tolerance, and withdrawal characteristic of benzodiazepines, via different proposed mechanisms.',
+      },
+      {
+        q: 'Is Selank approved?',
+        a: 'It is approved and used in Russia but is a research compound elsewhere; it is not FDA-approved. This page is a research and educational reference.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Generalized anxiety and cognitive performance.',
+      },
+    ],
     sequence: 'TKPRPGP',
     cas: '129954-34-3',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
@@ -527,6 +875,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'DSIP is a nine-amino-acid neuropeptide first isolated from rabbit cerebral venous blood. Reported effects span sleep architecture, stress response, and circadian rhythm modulation.',
     mechanism: 'Mechanism remains incompletely characterized; likely multimodal CNS modulation.',
     researchAreas: ['Sleep biology', 'Stress physiology'],
+    background: [
+      'DSIP (Delta Sleep-Inducing Peptide) is a naturally occurring nine-amino-acid neuropeptide, first isolated in the 1970s from the blood of rabbits during induced sleep. Its name reflects the early observation that it promoted slow-wave (delta) sleep.',
+      'Decades of research have linked DSIP to sleep architecture, stress-response regulation, and circadian rhythm, but its precise mechanism and receptor remain incompletely characterized. It is a research compound and is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Sleep architecture — studied for effects on slow-wave (delta) sleep.',
+      'Stress physiology — examined for interactions with the stress axis.',
+      'Circadian rhythm — investigated as a modulator of biological timing.',
+      'Uncharacterized mechanism — receptor and pathway not fully established.',
+      'Not FDA-approved — research compound.',
+    ],
+    faqs: [
+      {
+        q: 'What is DSIP?',
+        a: 'DSIP (Delta Sleep-Inducing Peptide) is a naturally occurring neuropeptide first isolated for its sleep-promoting properties, studied in sleep and stress research.',
+      },
+      {
+        q: 'How does DSIP work?',
+        a: 'Its mechanism is not fully characterized; it is thought to act through multiple central nervous system pathways rather than a single identified receptor.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Sleep architecture, stress physiology, and circadian rhythm modulation.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is a research compound. This page is a research and educational reference.',
+      },
+    ],
     sequence: 'WAGGDASGE',
     molecularWeight: 848.8,
     cas: '62568-57-4',
@@ -542,6 +919,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Melanotan II is a cyclic heptapeptide α-MSH analog developed at the University of Arizona. Acts as a non-selective agonist across MC1R, MC3R, MC4R, and MC5R — pigmentation and sexual-response effects have both been documented.',
     mechanism: 'Non-selective melanocortin receptor (MC1-5R) agonism.',
     researchAreas: ['Pigmentation biology', 'Sexual dysfunction', 'Photoprotection'],
+    background: [
+      'Melanotan II is a synthetic cyclic analog of α-melanocyte-stimulating hormone (α-MSH), developed at the University of Arizona. It is a non-selective agonist across the melanocortin receptors MC1R through MC5R.',
+      'Through MC1R it stimulates melanin production (pigmentation); through MC4R it influences central sexual-response pathways. Both effects are documented in research, but its non-selectivity also drives side effects, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Pigmentation — MC1R agonism studied for melanin production and tanning response.',
+      'Sexual response — MC4R activity studied for effects on arousal.',
+      'Photoprotection — examined in the context of UV response.',
+      'Non-selectivity — broad MC1–5R activity underlies both effects and side effects.',
+      'Not FDA-approved — research compound.',
+    ],
+    faqs: [
+      {
+        q: 'What is Melanotan II?',
+        a: 'Melanotan II is a synthetic, non-selective melanocortin-receptor agonist (an α-MSH analog) studied for pigmentation and sexual-response effects.',
+      },
+      {
+        q: 'How is it related to PT-141?',
+        a: 'PT-141 (bremelanotide) is a melanocortin agonist with preferential MC4R activity studied for sexual function; Melanotan II is non-selective and also drives pigmentation.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — Melanotan II is not FDA-approved. This page is a research and educational reference, not a usage recommendation.',
+      },
+      {
+        q: 'What receptors does it act on?',
+        a: 'It activates melanocortin receptors MC1R through MC5R without selectivity.',
+      },
+    ],
     cas: '121062-08-6',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
@@ -555,6 +961,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Bremelanotide (PT-141) is a cyclic heptapeptide melanocortin agonist with preferential activity at MC4R. Approved by the FDA in 2019 for hypoactive sexual desire disorder in premenopausal women.',
     mechanism: 'MC4R-preferential melanocortin agonism in CNS sexual-response circuits.',
     researchAreas: ['HSDD', 'CNS sexual response', 'Ischemia models'],
+    background: [
+      'PT-141 (bremelanotide) is a cyclic heptapeptide melanocortin agonist with preferential activity at the MC4R receptor. It is a metabolite of Melanotan II, refined away from pigmentation toward central sexual-response pathways.',
+      'Unlike vascular treatments for sexual dysfunction, PT-141 acts in the central nervous system on the circuits that govern desire and arousal. It is FDA-approved (Vyleesi, 2019) for hypoactive sexual desire disorder (HSDD) in premenopausal women.',
+    ],
+    keyResearch: [
+      'HSDD — the approved indication, in premenopausal women.',
+      'Central mechanism — MC4R-preferential action on CNS sexual-response circuits.',
+      'Distinct from vascular agents — acts centrally rather than on blood flow.',
+      'Ischemia models — examined in separate preclinical research.',
+      'FDA-approved (Vyleesi) — for a specific indication.',
+    ],
+    faqs: [
+      {
+        q: 'What is PT-141?',
+        a: 'PT-141 (bremelanotide) is a melanocortin MC4R agonist FDA-approved (Vyleesi) for hypoactive sexual desire disorder in premenopausal women.',
+      },
+      {
+        q: 'How does it differ from erectile-dysfunction drugs?',
+        a: 'Those act on blood flow; PT-141 acts centrally, on the brain circuits that govern sexual desire and arousal.',
+      },
+      {
+        q: 'How is it related to Melanotan II?',
+        a: 'PT-141 is a metabolite of Melanotan II, refined toward MC4R and sexual-response activity and away from pigmentation.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this page is a research and educational reference, not medical advice.',
+      },
+    ],
     cas: '189691-06-3',
     fdaApproved: true,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
@@ -568,6 +1003,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Kisspeptin-10 (KP-10) is the minimum bioactive fragment of kisspeptin, encoded by KISS1. Administration stimulates hypothalamic GnRH release and downstream LH / FSH secretion.',
     mechanism: 'KISS1R (GPR54) agonism on hypothalamic GnRH neurons.',
     researchAreas: ['Reproductive endocrinology', 'Hypothalamic amenorrhea', 'Puberty'],
+    background: [
+      'Kisspeptin-10 is the shortest fully active fragment of kisspeptin, the neuropeptide encoded by the KISS1 gene that sits at the top of the reproductive hormone cascade. It signals through the KISS1R (GPR54) receptor on hypothalamic GnRH neurons.',
+      'By stimulating GnRH release, kisspeptin drives downstream secretion of LH and FSH — making it a research tool for probing and potentially restoring reproductive-axis function. It is investigational and not FDA-approved.',
+    ],
+    keyResearch: [
+      'GnRH stimulation — KISS1R agonism triggers the reproductive hormone cascade.',
+      'Hypothalamic amenorrhea — studied for restoring axis signaling.',
+      'Puberty — kisspeptin is a key regulator of pubertal onset.',
+      'Fertility research — examined as a physiologic trigger of LH and FSH.',
+      'Investigational — not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Kisspeptin-10?',
+        a: 'Kisspeptin-10 is the active fragment of kisspeptin, a neuropeptide that triggers GnRH release at the top of the reproductive hormone axis.',
+      },
+      {
+        q: 'What is the HPG-axis connection?',
+        a: 'Kisspeptin is the upstream regulator of the hypothalamic-pituitary-gonadal axis, stimulating GnRH and downstream LH and FSH.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Reproductive endocrinology, hypothalamic amenorrhea, puberty, and fertility research.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is investigational. This page is a research and educational reference.',
+      },
+    ],
     sequence: 'YNWNSFGLRF-NH2',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
@@ -581,6 +1045,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'Thymosin α1 is a 28-amino-acid peptide originally isolated from thymic tissue. Approved in numerous countries as adjunctive therapy in chronic hepatitis B / C and as an immune-system modulator.',
     mechanism: 'TLR9-mediated DC activation; Th1 immune polarization.',
     researchAreas: ['Chronic viral hepatitis', 'Sepsis adjunct', 'Oncology adjunct'],
+    background: [
+      'Thymosin alpha-1 (Tα1, thymalfasin) is a 28-amino-acid peptide originally isolated from the thymus, the organ where T cells mature. It acts as an immune modulator, helping to restore and direct T-cell responses.',
+      'Unlike most catalogued peptides, Tα1 is approved in many countries (marketed as Zadaxin) as an adjunct in chronic hepatitis B and C and in other immune contexts, though it is not FDA-approved in the United States. It is among the most clinically studied immunomodulatory peptides.',
+    ],
+    keyResearch: [
+      'T-cell modulation — TLR9-mediated dendritic-cell activation and Th1 polarization.',
+      'Chronic viral hepatitis — adjunctive use studied and approved in many countries.',
+      'Sepsis — examined as an immune-restoring adjunct.',
+      'Oncology — studied as an adjunct to support immune response.',
+      'Approved abroad — marketed as Zadaxin; not FDA-approved in the US.',
+    ],
+    faqs: [
+      {
+        q: 'What is Thymosin alpha-1?',
+        a: 'Thymosin alpha-1 is a thymus-derived immunomodulatory peptide (Zadaxin) used in many countries as an adjunct in chronic hepatitis and other immune conditions.',
+      },
+      {
+        q: 'How does it work?',
+        a: 'It supports and directs T-cell responses, in part through TLR9-mediated dendritic-cell activation and a shift toward Th1 immunity.',
+      },
+      {
+        q: 'Is it FDA-approved?',
+        a: 'It is approved in numerous countries but not by the US FDA. This page is a research and educational reference.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Chronic viral hepatitis, and as an immune-supporting adjunct in sepsis and oncology research.',
+      },
+    ],
     sequence: 'SDAAVDTSSEITTKDLKEKKEVVEEAEN',
     molecularWeight: 3108.3,
     cas: '62304-98-7',
@@ -596,6 +1089,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'LL-37 is the C-terminal 37-residue fragment of human cathelicidin hCAP-18 and the only cathelicidin expressed in humans. Roles span direct antimicrobial activity, chemotaxis, and wound healing.',
     mechanism: 'Membrane disruption of pathogens; immunomodulatory signaling via FPRL1.',
     researchAreas: ['Antimicrobial resistance', 'Chronic wound healing', 'Innate immunity'],
+    background: [
+      'LL-37 is the only cathelicidin antimicrobial peptide expressed in humans — a 37-residue fragment released from the precursor protein hCAP-18. It is a frontline component of innate immunity, found in neutrophils, epithelial cells, and skin.',
+      'Beyond directly disrupting the membranes of bacteria, fungi, and some viruses, LL-37 also acts as a signaling molecule that recruits immune cells and supports wound healing. Interest has grown as antibiotic resistance renews attention on host-defense peptides. It is studied as a research compound.',
+    ],
+    keyResearch: [
+      'Broad antimicrobial activity — membrane disruption across bacteria, fungi, and viruses.',
+      'Antimicrobial resistance — host-defense peptides studied as an alternative strategy.',
+      'Wound healing — chemotaxis and tissue-repair signaling.',
+      'Immunomodulation — signaling via the FPRL1 receptor.',
+      'Research compound — not an approved drug.',
+    ],
+    faqs: [
+      {
+        q: 'What is LL-37?',
+        a: 'LL-37 is the only human cathelicidin antimicrobial peptide, part of innate immunity, with direct antimicrobial and wound-healing roles.',
+      },
+      {
+        q: 'Why is it of interest for antibiotic resistance?',
+        a: 'As a host-defense peptide that disrupts microbial membranes, it represents a mechanism distinct from conventional antibiotics, of growing interest as resistance spreads.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Antimicrobial-resistance research, chronic wound healing, and innate immunity.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is a research compound. This page is a research and educational reference.',
+      },
+    ],
     molecularWeight: 4493.3,
     cas: '154947-66-7',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
@@ -609,6 +1131,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'KPV (Lys-Pro-Val) is the C-terminal tripeptide of α-MSH and retains much of α-MSH\'s anti-inflammatory activity without pigmentary effects. Preclinical work in colitis and skin inflammation models.',
     mechanism: 'NF-κB pathway inhibition; reduction of pro-inflammatory cytokines.',
     researchAreas: ['IBD models', 'Atopic dermatitis', 'Oral inflammation'],
+    background: [
+      'KPV is the C-terminal tripeptide (lysine-proline-valine) of α-melanocyte-stimulating hormone (α-MSH). It retains much of the parent hormone’s anti-inflammatory activity while shedding its pigmentary effects, making it a focused research tool for inflammation.',
+      'Preclinical studies report that KPV reduces pro-inflammatory signaling — in part by interfering with the NF-κB pathway — in models of colitis, skin inflammation, and oral inflammation. It is a research compound and is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Anti-inflammatory signaling — NF-κB pathway inhibition reducing cytokine output.',
+      'Inflammatory bowel disease — studied in colitis models.',
+      'Skin inflammation — examined in atopic-dermatitis models.',
+      'No pigmentary effect — retains α-MSH anti-inflammation without tanning.',
+      'Preclinical — not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is KPV?',
+        a: 'KPV is the anti-inflammatory C-terminal tripeptide of α-MSH, studied in preclinical models of colitis and skin inflammation.',
+      },
+      {
+        q: 'How is it related to α-MSH?',
+        a: 'KPV is the final three residues of α-MSH and keeps much of its anti-inflammatory activity without the pigmentation effect.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Inflammatory bowel disease, atopic dermatitis, and oral inflammation, primarily in preclinical models.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is a research compound. This page is a research and educational reference.',
+      },
+    ],
     sequence: 'KPV',
     molecularWeight: 342.4,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
@@ -622,6 +1173,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'AOD-9604 is a 16-amino-acid synthetic peptide derived from the lipolytic C-terminal domain of human growth hormone. Reached Phase IIb obesity trials without meeting weight-loss endpoints; later repositioned to cartilage / joint research.',
     mechanism: 'Putative β3-adrenergic mediated lipolysis without GH receptor binding.',
     researchAreas: ['Obesity (historical)', 'Cartilage repair'],
+    background: [
+      'AOD-9604 is a 16-amino-acid synthetic peptide corresponding to the lipolytic C-terminal region (residues 177–191) of human growth hormone. It was designed to reproduce GH’s fat-metabolizing effect without the growth-promoting or glucose effects of the full hormone.',
+      'It advanced into Phase IIb obesity trials but did not meet its weight-loss endpoints, after which research interest shifted toward cartilage and joint applications. It is not FDA-approved as a therapeutic.',
+    ],
+    keyResearch: [
+      'Lipolysis — the GH fragment studied for fat metabolism without GH-receptor binding.',
+      'Obesity trials — reached Phase IIb but did not meet weight-loss endpoints.',
+      'Cartilage repair — repositioned toward joint research.',
+      'Mechanism — proposed β3-adrenergic-mediated lipolysis.',
+      'Not FDA-approved — did not meet clinical endpoints for obesity.',
+    ],
+    faqs: [
+      {
+        q: 'What is AOD-9604?',
+        a: 'AOD-9604 is a fragment of human growth hormone (residues 177–191) studied for fat metabolism (lipolysis) without GH’s other effects.',
+      },
+      {
+        q: 'Did it work for weight loss?',
+        a: 'It reached Phase IIb obesity trials but did not meet its weight-loss endpoints; research later shifted toward cartilage and joint applications.',
+      },
+      {
+        q: 'How does it differ from full GH?',
+        a: 'It is designed to reproduce GH’s lipolytic effect without binding the GH receptor or driving growth and glucose effects.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is not FDA-approved as a therapeutic. This page is a research and educational reference.',
+      },
+    ],
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -633,6 +1213,35 @@ const SEED_PEPTIDES: Peptide[] = [
       '5-Amino-1MQ is a selective inhibitor of nicotinamide N-methyltransferase (NNMT). Preclinical work links NNMT inhibition to improvements in adipose tissue metabolism and skeletal muscle aging.',
     mechanism: 'NNMT inhibition → preserved cellular NAD+ / SAM pools.',
     researchAreas: ['Obesity', 'Sarcopenia', 'NAD+ biology'],
+    background: [
+      '5-Amino-1MQ is a small molecule — not a peptide — that is frequently catalogued alongside research peptides because of its metabolic focus. It selectively inhibits the enzyme nicotinamide N-methyltransferase (NNMT).',
+      'NNMT consumes methyl groups and influences cellular NAD+ and SAM pools; inhibiting it is studied in preclinical work for improved adipose-tissue metabolism and muscle aging. It is a research compound and is not FDA-approved.',
+    ],
+    keyResearch: [
+      'NNMT inhibition — selectively blocks nicotinamide N-methyltransferase.',
+      'Adipose metabolism — studied for effects on fat-tissue energy handling.',
+      'Sarcopenia — examined for skeletal-muscle aging.',
+      'NAD+ / SAM pools — NNMT inhibition linked to preserved methyl-donor and NAD+ metabolism.',
+      'Small molecule — not a peptide; not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is 5-Amino-1MQ?',
+        a: '5-Amino-1MQ is a small-molecule inhibitor of the enzyme NNMT, studied in metabolic and aging research; it is catalogued here alongside peptides for its metabolic relevance.',
+      },
+      {
+        q: 'Is it a peptide?',
+        a: 'No — it is a small molecule, not a peptide, but it is grouped with metabolic research compounds.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Obesity, sarcopenia (muscle aging), and NAD+ biology, primarily in preclinical models.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is a research compound. This page is a research and educational reference.',
+      },
+    ],
     cas: '209783-80-2',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
@@ -646,6 +1255,35 @@ const SEED_PEPTIDES: Peptide[] = [
       'NAD+ is a ubiquitous coenzyme required for electron transport, sirtuin activity, and PARP-mediated DNA repair. Often supplied as a research reagent and increasingly as an investigational therapeutic.',
     mechanism: 'Cofactor for hundreds of redox and signaling enzymes including sirtuins and PARPs.',
     researchAreas: ['Aging biology', 'Mitochondrial dysfunction', 'Neurodegeneration'],
+    background: [
+      'NAD+ (nicotinamide adenine dinucleotide) is not a peptide but a universal coenzyme, included here for its central place in metabolic and longevity research. Every cell uses it to carry electrons through energy metabolism and to power signaling enzymes.',
+      'Two enzyme families make NAD+ a focus of aging research: sirtuins, which depend on it to regulate gene expression and stress resistance, and PARPs, which use it for DNA repair. Cellular NAD+ declines with age, and restoring it — directly or via precursors — is widely studied.',
+    ],
+    keyResearch: [
+      'Energy metabolism — essential electron carrier in the mitochondrial electron-transport chain.',
+      'Sirtuin activity — required cofactor for sirtuin-mediated longevity signaling.',
+      'DNA repair — consumed by PARP enzymes during repair.',
+      'Age-related decline — NAD+ falls with age, a central theme in longevity research.',
+      'Cofactor / reagent — supplied as a research reagent and investigational therapeutic.',
+    ],
+    faqs: [
+      {
+        q: 'What is NAD+?',
+        a: 'NAD+ (nicotinamide adenine dinucleotide) is an essential coenzyme central to energy metabolism, sirtuin activity, and DNA repair — a major focus of aging research.',
+      },
+      {
+        q: 'Is NAD+ a peptide?',
+        a: 'No — it is a coenzyme (a dinucleotide), included in the catalog for its central role in mitochondrial and longevity research.',
+      },
+      {
+        q: 'Why does NAD+ matter for aging?',
+        a: 'Cellular NAD+ declines with age, and the sirtuin and PARP enzymes that depend on it govern stress resistance and DNA repair, so restoring NAD+ is widely studied.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'NAD+ is used as a research reagent and studied as an investigational therapeutic. This page is a research and educational reference.',
+      },
+    ],
     molecularWeight: 663.4,
     cas: '53-84-9',
     pubchemCid: 5893,
