@@ -122,22 +122,24 @@ export default function DevelopersPage() {
             structured JSON. No key, no signup. Free to embed with attribution.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            {/* Real anchor: this is an API route, not a page — load the raw JSON. */}
+            <Link
+              href="/catalog"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#2DD4A8] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+            >
+              Browse the catalog
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            {/* Raw API endpoint — clearly labeled "JSON" so a visitor knows it
+                returns data, not a page (a bare JSON tab reads as an error). */}
             <a
               href="/api/catalog"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-xl bg-[#2DD4A8] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
-            >
-              Try /api/catalog
-              <ArrowRight className="h-4 w-4" />
-            </a>
-            <Link
-              href="/catalog"
               className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 px-5 py-2.5 text-sm font-medium text-white/60 transition-colors hover:border-white/20 hover:text-white"
             >
-              Browse the catalog
-            </Link>
+              <Code2 className="h-4 w-4" />
+              View live JSON
+            </a>
           </div>
         </div>
       </section>
