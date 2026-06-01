@@ -9,6 +9,7 @@ import {
   apiHeaders,
   apiMeta,
   serializePeptide,
+  isBrowserDocumentRequest,
   CORS_HEADERS,
 } from '@/lib/catalog-api'
 
@@ -21,6 +22,16 @@ export const runtime = 'nodejs'
 //   ?q=<text>        search name / aliases / description
 export async function GET(req: NextRequest) {
   const sp = req.nextUrl.searchParams
+
+  // A human typing this URL in the address bar would otherwise see a raw JSON
+  // dump (which reads as a broken page). Send bare browser navigations to the
+  // documented /developers page; API clients and the service worker get JSON.
+  if (isBrowserDocumentRequest(req) && [...sp.keys()].length === 0) {
+    const url = req.nextUrl.clone()
+    url.pathname = '/developers'
+    url.search = ''
+    return NextResponse.redirect(url, 307)
+  }
   const category = sp.get('category')?.trim().toLowerCase() || null
   const area = sp.get('area')?.trim().toLowerCase() || null
   const fdaOnly = sp.get('fda') === 'true'
