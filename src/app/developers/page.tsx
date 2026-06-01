@@ -129,10 +129,11 @@ export default function DevelopersPage() {
               Browse the catalog
               <ArrowRight className="h-4 w-4" />
             </Link>
-            {/* Raw API endpoint — clearly labeled "JSON" so a visitor knows it
-                returns data, not a page (a bare JSON tab reads as an error). */}
+            {/* A filtered example: the query param makes the endpoint return
+                JSON even on a direct click (bare navigations redirect to docs),
+                and shows a small preview rather than the full dump. */}
             <a
-              href="/api/catalog"
+              href="/api/catalog?area=weight-loss&fda=true"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 px-5 py-2.5 text-sm font-medium text-white/60 transition-colors hover:border-white/20 hover:text-white"

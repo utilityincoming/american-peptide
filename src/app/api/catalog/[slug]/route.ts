@@ -1,9 +1,10 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { getPeptideBySlug } from '@/lib/peptides'
 import {
   apiHeaders,
   apiMeta,
   serializePeptide,
+  isBrowserDocumentRequest,
   CORS_HEADERS,
 } from '@/lib/catalog-api'
 
@@ -14,9 +15,19 @@ interface RouteContext {
 }
 
 // GET /api/catalog/{slug} — a single peptide by slug.
-export async function GET(_req: Request, { params }: RouteContext) {
+export async function GET(req: NextRequest, { params }: RouteContext) {
   const { slug } = await params
   const peptide = getPeptideBySlug(slug)
+
+  // Browser navigations go to a real page (the peptide's catalog entry, or the
+  // docs if the slug is unknown) instead of a raw JSON dump. API clients + the
+  // service worker still get JSON.
+  if (isBrowserDocumentRequest(req)) {
+    const url = req.nextUrl.clone()
+    url.pathname = peptide ? `/catalog/${peptide.slug}` : '/developers'
+    url.search = ''
+    return NextResponse.redirect(url, 307)
+  }
 
   if (!peptide) {
     return NextResponse.json(

@@ -76,6 +76,19 @@ export function serializePeptide(p: Peptide): ApiPeptide {
   }
 }
 
+// True when the request is a top-level browser navigation (address bar, link,
+// new tab) rather than a programmatic API call. Used to redirect humans to the
+// docs page instead of showing them a raw JSON dump. The service worker and
+// fetch()/XHR clients send Sec-Fetch-Dest other than "document", so they still
+// receive JSON.
+export function isBrowserDocumentRequest(req: Request): boolean {
+  const dest = req.headers.get('sec-fetch-dest')
+  if (dest) return dest === 'document'
+  // Fallback for clients that don't send Sec-Fetch-* (older browsers/crawlers).
+  const accept = req.headers.get('accept') || ''
+  return accept.includes('text/html') && !accept.includes('application/json')
+}
+
 export function apiMeta() {
   return {
     version: API_VERSION,
