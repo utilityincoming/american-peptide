@@ -38,6 +38,9 @@ export interface ApiPeptide {
   researchAreaGuides: { slug: string; label: string; url: string }[]
   shortDescription: string
   description: string
+  background: string[]
+  keyResearch: string[]
+  faqs: { q: string; a: string }[]
   mechanism: string | null
   molecularWeight: number | null
   molecularFormula: string | null
@@ -64,6 +67,9 @@ export function serializePeptide(p: Peptide): ApiPeptide {
     })),
     shortDescription: p.shortDescription,
     description: p.description,
+    background: p.background ?? [],
+    keyResearch: p.keyResearch ?? [],
+    faqs: p.faqs ?? [],
     mechanism: p.mechanism ?? null,
     molecularWeight: p.molecularWeight ?? null,
     molecularFormula: p.molecularFormula ?? null,

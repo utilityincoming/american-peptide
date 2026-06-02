@@ -69,7 +69,7 @@ const features = [
   {
     Icon: Database,
     title: 'PubChem-enriched',
-    body: 'Each entry carries mechanism, sequence, molecular weight/formula, CAS, PubChem CID, and UniProt where available.',
+    body: 'Each entry carries mechanism, sequence, molecular weight/formula, identifiers (CAS, PubChem CID, UniProt), plus editorial background, research findings, and FAQs.',
   },
   {
     Icon: Zap,
