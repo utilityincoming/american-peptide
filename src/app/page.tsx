@@ -200,8 +200,8 @@ export default function HomePage() {
 
               <p className="mb-6 max-w-md text-[15px] leading-relaxed text-white/55">
                 Browse {PEPTIDES.length} research peptides across {CATEGORIES.length} categories — each
-                entry carries mechanism, sequence, and PubChem-enriched chemistry. Built to evolve
-                into a transparent supplier marketplace.
+                entry carries mechanism, sequence, and PubChem-enriched chemistry, with
+                manufacturing and quality context from the synthesis guide.
               </p>
 
               <div className="flex flex-wrap items-center gap-4">
@@ -310,31 +310,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Marketplace Waitlist ── */}
-      <section className="relative z-10 mx-auto max-w-3xl px-6 pb-32 md:px-10">
-        <div className="mb-6 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-[#2DD4A8]">
-            <Sparkles className="h-3 w-3" />
-            Marketplace · Coming soon
-          </div>
-          <h2 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
-            A transparent marketplace for research peptides
-          </h2>
-          <p className="mx-auto max-w-xl text-sm text-white/45 md:text-base">
-            Vetted suppliers, third-party COAs, per-mg pricing. Be first to
-            know when listings go live.
-          </p>
-        </div>
-        <WaitlistForm
-          source="home"
-          variant="full"
-          heading="Join the marketplace waitlist"
-          description="Researchers get early access. Suppliers can request onboarding."
-        />
-      </section>
-
       {/* ── How It Works ── */}
-      <section className="relative z-10 mx-auto max-w-6xl px-6 pb-32 md:px-10">
+      <section className="relative z-10 mx-auto max-w-6xl px-6 pb-24 md:px-10">
         <div className="mb-10 text-center">
           <h2 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">How It Works</h2>
           <p className="text-sm text-white/40 md:text-base">
@@ -361,6 +338,29 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* ── Marketplace Waitlist (de-emphasized: moved below the fold, muted styling) ── */}
+      <section className="relative z-10 mx-auto max-w-2xl px-6 pb-32 md:px-10">
+        <div className="mb-5 text-center">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/[0.10] bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-white/45">
+            <Sparkles className="h-3 w-3 text-[#2DD4A8]/70" />
+            Marketplace · In development
+          </div>
+          <h2 className="mb-2 text-xl font-semibold tracking-tight md:text-2xl">
+            A transparent marketplace is on the way
+          </h2>
+          <p className="mx-auto max-w-md text-[13px] leading-relaxed text-white/40">
+            Vetted suppliers, third-party COAs, per-mg pricing. Join the
+            waitlist for early access when listings go live.
+          </p>
+        </div>
+        <WaitlistForm
+          source="home"
+          variant="full"
+          heading="Join the marketplace waitlist"
+          description="Researchers get early access. Suppliers can request onboarding."
+        />
       </section>
     </div>
   )

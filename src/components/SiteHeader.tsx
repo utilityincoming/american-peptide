@@ -8,6 +8,7 @@ import CommandPalette from './CommandPalette'
 
 const NAV_LINKS = [
   { href: '/catalog', label: 'Catalog', match: ['/catalog'] },
+  { href: '/synthesis', label: 'Synthesis', match: ['/synthesis'] },
   { href: '/research', label: 'Research', match: ['/research'] },
   { href: '/trials', label: 'Trials', match: ['/trials'] },
   { href: '/compounds', label: 'Compounds', match: ['/compounds'] },

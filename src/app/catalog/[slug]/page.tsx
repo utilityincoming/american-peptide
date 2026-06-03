@@ -7,10 +7,13 @@ import {
   Bell,
   BookOpen,
   Building2,
+  Droplets,
+  Factory,
   FileCheck2,
   FlaskConical,
   HelpCircle,
   ShieldCheck,
+  Snowflake,
 } from 'lucide-react'
 import {
   PEPTIDES,
@@ -257,6 +260,69 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 </ul>
               </Block>
             )}
+
+            {/* Handling, storage & why purity is hard — universal consumer-hardening callout */}
+            <div className="rounded-2xl border border-[#2DD4A8]/15 bg-gradient-to-br from-[#2DD4A8]/[0.05] to-transparent p-6">
+              <div className="mb-3 flex items-center gap-2.5">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-[#2DD4A8]">
+                  <Factory className="h-4 w-4" strokeWidth={1.75} />
+                </span>
+                <h2 className="text-sm font-semibold tracking-tight">
+                  Handling, storage &amp; why purity is hard
+                </h2>
+              </div>
+
+              <p className="text-sm leading-relaxed text-white/65">
+                {peptide.synthesisNotes ??
+                  `Producing ${peptide.name} to a genuine purity spec means solid-phase synthesis, preparative HPLC purification, and batch quality control — none of it cheap, and none of it something you can verify by eye.`}
+              </p>
+
+              {(peptide.storage || peptide.handling) && (
+                <dl className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {peptide.storage && (
+                    <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">
+                      <dt className="mb-1 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#2DD4A8]/80">
+                        <Snowflake className="h-3 w-3" />
+                        Storage
+                      </dt>
+                      <dd className="text-[12.5px] leading-relaxed text-white/60">
+                        {peptide.storage}
+                      </dd>
+                    </div>
+                  )}
+                  {peptide.handling && (
+                    <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">
+                      <dt className="mb-1 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#2DD4A8]/80">
+                        <Droplets className="h-3 w-3" />
+                        Handling
+                      </dt>
+                      <dd className="text-[12.5px] leading-relaxed text-white/60">
+                        {peptide.handling}
+                      </dd>
+                    </div>
+                  )}
+                </dl>
+              )}
+
+              <div className="mt-4 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">
+                <p className="text-[12.5px] leading-relaxed text-white/55">
+                  <span className="font-semibold text-white/75">
+                    Don&apos;t judge a vial by its cake.
+                  </span>{' '}
+                  A fluffy, good-looking lyophilized powder reflects bulking
+                  agents and freeze-drying parameters — not purity. Insist on a
+                  batch-specific certificate of analysis.
+                </p>
+              </div>
+
+              <Link
+                href="/synthesis"
+                className="group mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-[#2DD4A8]"
+              >
+                How peptides are made — the full pipeline
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+            </div>
 
             {peptide.researchAreas && peptide.researchAreas.length > 0 && (
               <Block title="Research areas">
