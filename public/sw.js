@@ -18,7 +18,7 @@
 //                        version bumps so a user's offline copy isn't wiped
 //                        by a routine deploy.
 
-const CACHE_VERSION = 'v5'
+const CACHE_VERSION = 'v6'
 const CACHE_NAME = `amp-offline-${CACHE_VERSION}`
 const REFERENCE_CACHE = 'amp-reference-v1'
 
@@ -31,6 +31,7 @@ const PRECACHE_URLS = [
   '/',
   '/offline',
   '/catalog',
+  '/learn',
   '/synthesis',
   '/glossary',
   '/research-areas',

@@ -1,14 +1,21 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import {
+  ArrowRight,
+  BookOpen,
+  ChevronDown,
+  Compass,
+  Factory,
+  Menu,
+  X,
+} from 'lucide-react'
 import CommandPalette from './CommandPalette'
 
 const NAV_LINKS = [
   { href: '/catalog', label: 'Catalog', match: ['/catalog'] },
-  { href: '/synthesis', label: 'Synthesis', match: ['/synthesis'] },
   { href: '/research', label: 'Research', match: ['/research'] },
   { href: '/trials', label: 'Trials', match: ['/trials'] },
   { href: '/compounds', label: 'Compounds', match: ['/compounds'] },
@@ -19,6 +26,30 @@ const NAV_LINKS = [
   },
 ] as const
 
+// Educational surfaces, grouped under a single "Learn" nav item.
+const LEARN_LINKS = [
+  {
+    href: '/synthesis',
+    label: 'Synthesis',
+    desc: 'How peptides are made — cost, purity, cold chain.',
+    Icon: Factory,
+  },
+  {
+    href: '/research-areas',
+    label: 'Research Areas',
+    desc: 'Browse peptides by indication and use case.',
+    Icon: Compass,
+  },
+  {
+    href: '/glossary',
+    label: 'Glossary',
+    desc: 'Key peptide terms in plain English.',
+    Icon: BookOpen,
+  },
+] as const
+
+const LEARN_MATCH = ['/learn', '/synthesis', '/research-areas', '/glossary']
+
 function isActive(pathname: string, prefixes: readonly string[]) {
   return prefixes.some(
     (p) => pathname === p || pathname.startsWith(`${p}/`),
@@ -28,6 +59,7 @@ function isActive(pathname: string, prefixes: readonly string[]) {
 export default function SiteHeader() {
   const pathname = usePathname() ?? '/'
   const [open, setOpen] = useState(false)
+  const learnActive = isActive(pathname, LEARN_MATCH)
 
   useEffect(() => {
     setOpen(false)
@@ -73,18 +105,69 @@ export default function SiteHeader() {
             {NAV_LINKS.map((link) => {
               const active = isActive(pathname, link.match)
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  aria-current={active ? 'page' : undefined}
-                  className={
-                    active
-                      ? 'rounded-lg px-3 py-1.5 text-sm font-medium text-[#2DD4A8]'
-                      : 'rounded-lg px-3 py-1.5 text-sm text-white/65 transition-colors hover:bg-white/[0.04] hover:text-white'
-                  }
-                >
-                  {link.label}
-                </Link>
+                <Fragment key={link.href}>
+                  <Link
+                    href={link.href}
+                    aria-current={active ? 'page' : undefined}
+                    className={
+                      active
+                        ? 'rounded-lg px-3 py-1.5 text-sm font-medium text-[#2DD4A8]'
+                        : 'rounded-lg px-3 py-1.5 text-sm text-white/65 transition-colors hover:bg-white/[0.04] hover:text-white'
+                    }
+                  >
+                    {link.label}
+                  </Link>
+
+                  {/* Learn dropdown — slotted right after Catalog */}
+                  {link.href === '/catalog' && (
+                    <div className="group relative">
+                      <Link
+                        href="/learn"
+                        aria-current={learnActive ? 'page' : undefined}
+                        className={
+                          'inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm transition-colors ' +
+                          (learnActive
+                            ? 'font-medium text-[#2DD4A8]'
+                            : 'text-white/65 hover:bg-white/[0.04] hover:text-white')
+                        }
+                      >
+                        Learn
+                        <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
+                      </Link>
+
+                      <div className="invisible absolute left-0 top-full z-50 pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                        <div className="w-72 rounded-xl border border-white/[0.08] bg-[#0F1828] p-1.5 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+                          {LEARN_LINKS.map((l) => (
+                            <Link
+                              key={l.href}
+                              href={l.href}
+                              className="flex items-start gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-white/[0.05]"
+                            >
+                              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#2DD4A8]/12 text-[#2DD4A8]">
+                                <l.Icon className="h-3.5 w-3.5" strokeWidth={1.75} />
+                              </span>
+                              <span className="min-w-0">
+                                <span className="block text-sm font-medium text-white/90">
+                                  {l.label}
+                                </span>
+                                <span className="block text-xs leading-snug text-white/45">
+                                  {l.desc}
+                                </span>
+                              </span>
+                            </Link>
+                          ))}
+                          <Link
+                            href="/learn"
+                            className="mt-1 flex items-center justify-between rounded-lg px-3 py-2 text-xs font-medium text-[#2DD4A8] transition-colors hover:bg-white/[0.04]"
+                          >
+                            Browse all learning resources
+                            <ArrowRight className="h-3.5 w-3.5" />
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </Fragment>
               )
             })}
           </nav>
@@ -120,18 +203,59 @@ export default function SiteHeader() {
             {NAV_LINKS.map((link) => {
               const active = isActive(pathname, link.match)
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  aria-current={active ? 'page' : undefined}
-                  className={
-                    active
-                      ? 'rounded-lg bg-[#2DD4A8]/[0.08] px-3 py-2 text-sm font-medium text-[#2DD4A8]'
-                      : 'rounded-lg px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/[0.04] hover:text-white'
-                  }
-                >
-                  {link.label}
-                </Link>
+                <Fragment key={link.href}>
+                  <Link
+                    href={link.href}
+                    aria-current={active ? 'page' : undefined}
+                    className={
+                      active
+                        ? 'rounded-lg bg-[#2DD4A8]/[0.08] px-3 py-2 text-sm font-medium text-[#2DD4A8]'
+                        : 'rounded-lg px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/[0.04] hover:text-white'
+                    }
+                  >
+                    {link.label}
+                  </Link>
+
+                  {/* Learn group — slotted right after Catalog */}
+                  {link.href === '/catalog' && (
+                    <div className="my-1 rounded-lg border border-white/[0.05] bg-white/[0.02] p-1">
+                      <Link
+                        href="/learn"
+                        aria-current={learnActive ? 'page' : undefined}
+                        className={
+                          'flex items-center justify-between rounded-md px-3 py-2 text-sm ' +
+                          (learnActive
+                            ? 'font-medium text-[#2DD4A8]'
+                            : 'text-white/70 hover:bg-white/[0.04] hover:text-white')
+                        }
+                      >
+                        Learn
+                        <span className="text-[10px] uppercase tracking-wider text-white/30">
+                          Hub
+                        </span>
+                      </Link>
+                      {LEARN_LINKS.map((l) => {
+                        const subActive = isActive(pathname, [l.href])
+                        return (
+                          <Link
+                            key={l.href}
+                            href={l.href}
+                            aria-current={subActive ? 'page' : undefined}
+                            className={
+                              'flex items-center gap-2 rounded-md px-3 py-2 pl-5 text-sm ' +
+                              (subActive
+                                ? 'font-medium text-[#2DD4A8]'
+                                : 'text-white/60 transition-colors hover:bg-white/[0.04] hover:text-white')
+                            }
+                          >
+                            <l.Icon className="h-3.5 w-3.5 text-[#2DD4A8]/70" />
+                            {l.label}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  )}
+                </Fragment>
               )
             })}
             <Link

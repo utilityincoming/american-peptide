@@ -50,6 +50,22 @@ const PAGES: CommandItem[] = [
     keywords: 'catalog browse peptides reference',
   },
   {
+    id: 'page-learn',
+    kind: 'page',
+    label: 'Learn',
+    subtitle: 'Synthesis, research areas & glossary',
+    href: '/learn',
+    keywords: 'learn education hub resources guides synthesis glossary research areas terminology',
+  },
+  {
+    id: 'page-synthesis',
+    kind: 'page',
+    label: 'Synthesis',
+    subtitle: 'How peptides are made — cost & cold chain',
+    href: '/synthesis',
+    keywords: 'synthesis manufacturing how peptides are made spps hplc purification lyophilization cost coa cold chain quality purity',
+  },
+  {
     id: 'page-research-areas',
     kind: 'page',
     label: 'Research Areas',
