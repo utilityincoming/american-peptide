@@ -65,6 +65,12 @@ export interface Peptide {
   uniprotId?: string
   fdaApproved?: boolean
   market?: MarketStub
+  /** Storage guidance — lyophilized + reconstituted stability, temperature. */
+  storage?: string
+  /** Handling notes — reconstitution, light/heat/moisture sensitivity. */
+  handling?: string
+  /** Synthesis context — sequence length, difficult couplings, why purity is hard for this peptide. */
+  synthesisNotes?: string
 }
 
 import pubchemCache from './peptides.pubchem.json'
@@ -139,6 +145,12 @@ const SEED_PEPTIDES: Peptide[] = [
     cas: '910463-68-2',
     fdaApproved: true,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+    synthesisNotes:
+      'Beyond its 31-residue chain, semaglutide carries a fatty-diacid side chain on a linker — extra synthetic steps that each add cost and another opportunity for impurities to form. Genuine material is purified to a defined spec and documented on a certificate of analysis, never judged by appearance.',
+    storage:
+      'Lyophilized: store frozen and protected from light; stable for extended periods. Reconstituted: refrigerate at 2–8 °C and use within weeks, not months.',
+    handling:
+      'Reconstitute gently — swirl rather than shake, since agitation can shear the peptide. Protect from heat and minimize freeze–thaw cycles.',
   },
   {
     slug: 'tirzepatide',
@@ -183,6 +195,12 @@ const SEED_PEPTIDES: Peptide[] = [
     cas: '2023788-19-2',
     fdaApproved: true,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+    synthesisNotes:
+      'At 39 residues with a fatty-acid chain and a dual-receptor design, tirzepatide is a long, demanding synthesis — more coupling cycles mean more deletion and truncation impurities for purification to remove. Its length is exactly why a credible purity figure and an actual chromatogram matter here.',
+    storage:
+      'Lyophilized: keep frozen and shielded from light. Reconstituted: store at 2–8 °C and use within weeks.',
+    handling:
+      'Swirl to dissolve rather than shaking; keep away from heat and minimize repeated freeze–thaw.',
   },
   {
     slug: 'retatrutide',
@@ -309,6 +327,12 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 1419.5,
     sequence: 'GEPPPGKPADDAGLV',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+    synthesisNotes:
+      'At 15 residues BPC-157 is a comparatively short synthesis, which makes it cheap to produce — and cheap to fake. The short, low-cost sequence is exactly why the market is flooded with under-characterized material; a batch-specific certificate of analysis is the only way to tell real from filler.',
+    storage:
+      'Lyophilized: store frozen and protected from light for long-term stability. Reconstituted: refrigerate at 2–8 °C and use within weeks.',
+    handling:
+      'Reconstitute gently and avoid shaking; protect from heat, light, and repeated freeze–thaw.',
   },
   {
     slug: 'tb-500',
