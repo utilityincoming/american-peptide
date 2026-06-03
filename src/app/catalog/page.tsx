@@ -95,7 +95,7 @@ export default function CatalogPage() {
         <div className="relative mx-auto max-w-6xl">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-[#2DD4A8]">
             <Sparkles className="h-3 w-3" />
-            Catalog preview · Marketplace launching soon
+            Peptide research reference
           </div>
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             The peptide reference catalog,
@@ -106,9 +106,8 @@ export default function CatalogPage() {
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-white/55 md:text-lg">
             Browse a curated reference of {PEPTIDES.length}+ research peptides. Each entry
-            captures mechanism, sequence, and research areas — and is structured to plug
-            into supplier listings, certificates of analysis, and transparent pricing as
-            the marketplace comes online.
+            captures mechanism, sequence, structure, and the research areas it’s
+            studied for — with manufacturing and quality context from the synthesis guide.
           </p>
         </div>
       </section>
