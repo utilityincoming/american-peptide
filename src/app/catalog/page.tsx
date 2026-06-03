@@ -110,29 +110,6 @@ export default function CatalogPage() {
             into supplier listings, certificates of analysis, and transparent pricing as
             the marketplace comes online.
           </p>
-
-          {/* Trust strip */}
-          <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <TrustItem
-              Icon={ShieldCheck}
-              title="Supplier vetting"
-              body="Future suppliers undergo identity, COA, and dispute-resolution checks before listing."
-            />
-            <TrustItem
-              Icon={FlaskConical}
-              title="COA repository"
-              body="Each variant will link to third-party certificates of analysis on file."
-            />
-            <TrustItem
-              Icon={Sparkles}
-              title="Transparent pricing"
-              body="Per-mg pricing across suppliers, refreshed continuously — no DMs required."
-            />
-          </div>
-
-          <div className="mt-8 max-w-2xl">
-            <WaitlistForm source="catalog-hero" variant="full" />
-          </div>
         </div>
       </section>
 
@@ -179,13 +156,7 @@ export default function CatalogPage() {
       </section>
 
       {/* ── Grid ── */}
-      <section
-        className={
-          selected.length > 0
-            ? 'px-6 pb-28 pt-12 md:px-10'
-            : 'px-6 py-12 md:px-10'
-        }
-      >
+      <section className="px-6 py-12 md:px-10">
         <div className="mx-auto max-w-6xl">
           <OfflineReference />
 
@@ -241,6 +212,55 @@ export default function CatalogPage() {
               })}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* ── Marketplace waitlist (moved to bottom — marketplace not yet open) ── */}
+      <section
+        className={
+          selected.length > 0
+            ? 'border-t border-white/[0.06] px-6 pb-28 pt-14 md:px-10'
+            : 'border-t border-white/[0.06] px-6 py-14 md:px-10'
+        }
+      >
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-6 text-center">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/[0.10] bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-white/45">
+              <Sparkles className="h-3 w-3 text-[#2DD4A8]/70" />
+              Marketplace · Not yet open
+            </div>
+            <h2 className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
+              Be first when the marketplace opens
+            </h2>
+            <p className="mx-auto max-w-xl text-sm leading-relaxed text-white/45">
+              The catalog is a research reference today. Vetted suppliers,
+              third-party COAs, and transparent per-mg pricing are on the way —
+              join the waitlist for early access.
+            </p>
+          </div>
+
+          {/* What's coming */}
+          <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <TrustItem
+              Icon={ShieldCheck}
+              title="Supplier vetting"
+              body="Future suppliers undergo identity, COA, and dispute-resolution checks before listing."
+            />
+            <TrustItem
+              Icon={FlaskConical}
+              title="COA repository"
+              body="Each variant will link to third-party certificates of analysis on file."
+            />
+            <TrustItem
+              Icon={Sparkles}
+              title="Transparent pricing"
+              body="Per-mg pricing across suppliers, refreshed continuously — no DMs required."
+            />
+          </div>
+
+          <div className="mx-auto max-w-2xl">
+            <WaitlistForm source="catalog-footer" variant="full" />
+          </div>
         </div>
       </section>
 
