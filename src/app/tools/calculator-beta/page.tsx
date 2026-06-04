@@ -120,6 +120,20 @@ export default function CalculatorBetaPage() {
             reverse solver that tells you how much bacteriostatic water to add
             for a target draw size. Inputs and results update in real time.
           </p>
+          <div className="mt-4 flex flex-wrap gap-3 text-xs">
+            <Link
+              href="/tools/blend-calculator"
+              className="rounded-lg border border-white/[0.08] px-3 py-2 text-white/60 transition-colors hover:border-[#2DD4A8]/25 hover:text-[#2DD4A8]"
+            >
+              Blend calculator (beta) →
+            </Link>
+            <Link
+              href="/learn/compatibility"
+              className="rounded-lg border border-white/[0.08] px-3 py-2 text-white/60 transition-colors hover:border-[#2DD4A8]/25 hover:text-[#2DD4A8]"
+            >
+              Compatibility &amp; stability guide →
+            </Link>
+          </div>
         </div>
 
         {/* ── Inputs ── */}

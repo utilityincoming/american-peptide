@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/catalog',
     '/learn',
+    '/learn/compatibility',
     '/synthesis',
     '/research-areas',
     '/glossary',

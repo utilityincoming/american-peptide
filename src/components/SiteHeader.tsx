@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
   ArrowRight,
+  Beaker,
   BookOpen,
   ChevronDown,
   Compass,
@@ -33,6 +34,12 @@ const LEARN_LINKS = [
     label: 'Synthesis',
     desc: 'How peptides are made — cost, purity, cold chain.',
     Icon: Factory,
+  },
+  {
+    href: '/learn/compatibility',
+    label: 'Compatibility & stability',
+    desc: 'What can be combined, and what degrades peptides.',
+    Icon: Beaker,
   },
   {
     href: '/research-areas',
