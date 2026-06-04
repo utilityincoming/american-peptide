@@ -3,8 +3,6 @@ import Link from 'next/link'
 const LINKS = [
   { href: '/', label: 'Home' },
   { href: '/catalog', label: 'Catalog' },
-  { href: '/learn', label: 'Learn' },
-  { href: '/synthesis', label: 'How Peptides Are Made' },
   { href: '/research-areas', label: 'Research Areas' },
   { href: '/glossary', label: 'Glossary' },
   { href: '/research', label: 'Research Agent' },

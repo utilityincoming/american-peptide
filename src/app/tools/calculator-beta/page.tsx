@@ -2,11 +2,11 @@
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
-import { Syringe, AlertTriangle, ArrowRight } from 'lucide-react'
-import OfflineStatus from '@/components/OfflineStatus'
+import { Syringe, AlertTriangle, FlaskConical } from 'lucide-react'
 
 const VIAL_PRESETS = [2, 5, 10, 15, 20, 30]
 const DOSE_PRESETS = [100, 250, 500, 750, 1000, 1500, 2000]
+const DRAW_PRESETS = [10, 20, 25, 50]
 const REF_VIALS = [2, 5, 10]
 const REF_WATERS = [1, 2, 3, 5]
 
@@ -23,16 +23,28 @@ function fmt(n: number, decimals = 2): string {
   })
 }
 
-export default function ReconstitutionCalculatorPage() {
+export default function CalculatorBetaPage() {
+  const [mode, setMode] = useState<'forward' | 'reverse'>('forward')
   const [vialMg, setVialMg] = useState('5')
   const [doseMcg, setDoseMcg] = useState('250')
   const [waterMl, setWaterMl] = useState('2')
+  const [drawUnits, setDrawUnits] = useState('20')
 
   const calc = useMemo(() => {
     const vial = parsePositive(vialMg)
     const dose = parsePositive(doseMcg)
-    const water = parsePositive(waterMl)
     const vialMcg = vial * 1000
+    const draw = parsePositive(drawUnits)
+
+    // Forward: user types the water volume.
+    // Reverse: solve for the water that makes `draw` units deliver `dose`.
+    const water =
+      mode === 'reverse'
+        ? dose > 0
+          ? (vialMcg * (draw * 0.01)) / dose
+          : 0
+        : parsePositive(waterMl)
+
     const concentrationPerMl = water > 0 ? vialMcg / water : 0
     const concentrationPerTick = concentrationPerMl / 10
     const volumePerInjectionMl = concentrationPerMl > 0 ? dose / concentrationPerMl : 0
@@ -49,7 +61,7 @@ export default function ReconstitutionCalculatorPage() {
       unitsPerInjection,
       dosesPerVial,
     }
-  }, [vialMg, doseMcg, waterMl])
+  }, [mode, vialMg, doseMcg, waterMl, drawUnits])
 
   const onConcentrationEdit = (raw: string) => {
     const c = parseFloat(raw)
@@ -66,42 +78,93 @@ export default function ReconstitutionCalculatorPage() {
         <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
           <Syringe className="h-4 w-4 text-[#2DD4A8]" strokeWidth={1.75} />
         </div>
-        <span className="text-sm font-medium">Reconstitution Calculator</span>
+        <span className="text-sm font-medium">Peptide Calculator</span>
+        <span className="rounded-full border border-amber-500/30 bg-amber-500/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-amber-400/80">
+          Beta
+        </span>
       </header>
 
       <main className="mx-auto max-w-4xl px-4 py-8 md:px-6">
-        {/* ── Offline status / install ── */}
-        <OfflineStatus />
+        {/* ── Beta banner ── */}
+        <div className="mb-6 flex items-start gap-3 rounded-2xl border border-amber-500/20 bg-amber-500/[0.05] p-4">
+          <FlaskConical
+            className="mt-0.5 h-4 w-4 shrink-0 text-amber-400/80"
+            strokeWidth={1.75}
+          />
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-amber-300/90">
+              Beta · in development
+            </p>
+            <p className="mt-0.5 text-xs leading-relaxed text-white/50">
+              An experimental calculator with extra modes we&apos;re still
+              testing — features may change and this version isn&apos;t part of
+              the offline app. For the stable, offline-installable tool, use the{' '}
+              <Link
+                href="/tools/reconstitution-calculator"
+                className="text-[#2DD4A8] underline-offset-2 hover:underline"
+              >
+                reconstitution calculator
+              </Link>
+              .
+            </p>
+          </div>
+        </div>
 
-        {/* ── Beta calculator link ── */}
-        <Link
-          href="/tools/calculator-beta"
-          className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-2.5 text-xs transition-colors hover:border-[#2DD4A8]/25 hover:bg-white/[0.04]"
-        >
-          <span className="text-white/55">
-            <span className="font-semibold text-[#2DD4A8]">New ·</span> Try the
-            beta calculator with a reverse-dose solver
-          </span>
-          <ArrowRight className="h-3.5 w-3.5 shrink-0 text-[#2DD4A8]" />
-        </Link>
-
-        {/* ── Page heading (SEO) ── */}
+        {/* ── Page heading ── */}
         <div className="mb-8">
           <h1 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
-            Peptide Reconstitution Calculator
+            Peptide Calculator <span className="text-amber-400/80">Beta</span>
           </h1>
           <p className="max-w-2xl text-sm leading-relaxed text-white/55 md:text-base">
-            Calculate bacteriostatic water volume, peptide concentration, and dose volume on
-            a U-100 insulin syringe. Inputs and results update in real time — installable as
-            an app for offline bench use.
+            The reconstitution calculator plus experimental modes — including a
+            reverse solver that tells you how much bacteriostatic water to add
+            for a target draw size. Inputs and results update in real time.
           </p>
         </div>
 
         {/* ── Inputs ── */}
         <section className="mb-6 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
-          <h2 className="mb-5 text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
-            Inputs
-          </h2>
+          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
+              Inputs
+            </h2>
+
+            {/* Mode toggle */}
+            <div className="inline-flex rounded-xl border border-white/[0.08] bg-white/[0.02] p-0.5 text-xs">
+              <button
+                type="button"
+                onClick={() => setMode('forward')}
+                aria-pressed={mode === 'forward'}
+                className={
+                  'rounded-lg px-3 py-1.5 font-medium transition-colors ' +
+                  (mode === 'forward'
+                    ? 'bg-[#2DD4A8]/15 text-[#2DD4A8]'
+                    : 'text-white/55 hover:text-white')
+                }
+              >
+                Solve for draw volume
+              </button>
+              <button
+                type="button"
+                onClick={() => setMode('reverse')}
+                aria-pressed={mode === 'reverse'}
+                className={
+                  'rounded-lg px-3 py-1.5 font-medium transition-colors ' +
+                  (mode === 'reverse'
+                    ? 'bg-[#2DD4A8]/15 text-[#2DD4A8]'
+                    : 'text-white/55 hover:text-white')
+                }
+              >
+                Solve for water to add
+              </button>
+            </div>
+          </div>
+
+          <p className="mb-5 text-xs leading-relaxed text-white/40">
+            {mode === 'forward'
+              ? 'Enter the water you plan to add — get your draw volume and concentration.'
+              : 'Enter the draw size you want — get the exact bacteriostatic water to add. Handy for keeping a consistent draw across vials of different masses.'}
+          </p>
 
           <div className="grid gap-6 md:grid-cols-2">
             <NumberField
@@ -122,39 +185,56 @@ export default function ReconstitutionCalculatorPage() {
               presetLabel={(n) => `${n}mcg`}
               onPreset={(n) => setDoseMcg(String(n))}
             />
-            <NumberField
-              label="Bacteriostatic water to add"
-              unit="mL"
-              value={waterMl}
-              onChange={setWaterMl}
-              hint="Edit either this OR the concentration below — they're linked."
-            />
-            <NumberField
-              label="Desired concentration"
-              unit="mcg per 0.1 mL"
-              value={
-                calc.concentrationPerTick > 0
-                  ? calc.concentrationPerTick.toFixed(2).replace(/\.?0+$/, '')
-                  : ''
-              }
-              onChange={onConcentrationEdit}
-              hint="Auto-calculated from water volume; type to override."
-            />
+
+            {mode === 'forward' ? (
+              <>
+                <NumberField
+                  label="Bacteriostatic water to add"
+                  unit="mL"
+                  value={waterMl}
+                  onChange={setWaterMl}
+                  hint="Edit either this OR the concentration below — they're linked."
+                />
+                <NumberField
+                  label="Desired concentration"
+                  unit="mcg per 0.1 mL"
+                  value={
+                    calc.concentrationPerTick > 0
+                      ? calc.concentrationPerTick.toFixed(2).replace(/\.?0+$/, '')
+                      : ''
+                  }
+                  onChange={onConcentrationEdit}
+                  hint="Auto-calculated from water volume; type to override."
+                />
+              </>
+            ) : (
+              <NumberField
+                label="Desired draw size"
+                unit="units (U-100)"
+                value={drawUnits}
+                onChange={setDrawUnits}
+                presets={DRAW_PRESETS}
+                presetLabel={(n) => `${n}u`}
+                onPreset={(n) => setDrawUnits(String(n))}
+                hint="1 unit = 0.01 mL on a U-100 insulin syringe."
+              />
+            )}
           </div>
         </section>
 
         {/* ── Results ── */}
         <section className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <ResultCard
-            label="Total water"
+            label={mode === 'reverse' ? 'BAC water to add' : 'Total water'}
             value={fmt(calc.water)}
             unit="mL"
+            highlight={mode === 'reverse'}
           />
           <ResultCard
             label="Concentration"
             value={fmt(calc.concentrationPerTick)}
             unit="mcg / 0.1 mL"
-            highlight
+            highlight={mode === 'forward'}
           />
           <ResultCard
             label="Doses per vial"
@@ -165,7 +245,7 @@ export default function ReconstitutionCalculatorPage() {
             label="Volume per injection"
             value={fmt(calc.volumePerInjectionMl, 3)}
             unit={`mL · ${fmt(calc.unitsPerInjection, 1)} units`}
-            highlight
+            highlight={mode === 'forward'}
           />
         </section>
 
