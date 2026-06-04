@@ -66,6 +66,22 @@ const PAGES: CommandItem[] = [
     keywords: 'synthesis manufacturing how peptides are made spps hplc purification lyophilization cost coa cold chain quality purity',
   },
   {
+    id: 'page-compatibility',
+    kind: 'page',
+    label: 'Compatibility & Stability',
+    subtitle: 'Mixing, degradation & handling chemistry',
+    href: '/learn/compatibility',
+    keywords: 'compatibility stability mixing blend combine pairing stacking degradation reconstitution storage handling matrix',
+  },
+  {
+    id: 'page-blend-calculator',
+    kind: 'page',
+    label: 'Blend Calculator (Beta)',
+    subtitle: 'Combine peptides into one vial — blend math',
+    href: '/tools/blend-calculator',
+    keywords: 'blend calculator combine mix multiple peptides one vial doses draw volume beta',
+  },
+  {
     id: 'page-research-areas',
     kind: 'page',
     label: 'Research Areas',

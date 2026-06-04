@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
   ArrowRight,
+  Beaker,
   BookOpen,
   Compass,
   Factory,
@@ -21,6 +22,14 @@ const RESOURCES = [
     description:
       'How a pure peptide is actually made — the full manufacturing pipeline, what the equipment and operations cost, and how purity holds across the cold chain.',
     meta: `${STAGES.length}-stage pipeline`,
+  },
+  {
+    href: '/learn/compatibility',
+    Icon: Beaker,
+    label: 'Compatibility & Stability',
+    description:
+      'The chemistry of what can be combined and what degrades peptides — reconstitution, storage, and why blending un-characterized peptides multiplies risk.',
+    meta: 'guide + beta tools',
   },
   {
     href: '/research-areas',
