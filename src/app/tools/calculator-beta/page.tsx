@@ -1,14 +1,26 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
-import { Syringe, AlertTriangle, FlaskConical } from 'lucide-react'
+import {
+  Syringe,
+  AlertTriangle,
+  FlaskConical,
+  Share2,
+  Check,
+  ArrowRightLeft,
+} from 'lucide-react'
 
-const VIAL_PRESETS = [2, 5, 10, 15, 20, 30]
-const DOSE_PRESETS = [100, 250, 500, 750, 1000, 1500, 2000]
+const VIAL_PRESETS_MG = [2, 5, 10, 15, 20, 30]
+const DOSE_PRESETS_MCG = [100, 250, 500, 750, 1000, 1500, 2000]
+const VIAL_PRESETS_IU = [4, 10, 12, 15, 24, 36]
+const DOSE_PRESETS_IU = [1, 2, 3, 4, 5, 8]
 const DRAW_PRESETS = [10, 20, 25, 50]
 const REF_VIALS = [2, 5, 10]
 const REF_WATERS = [1, 2, 3, 5]
+
+type Measurement = 'mcg' | 'iu'
+type Mode = 'forward' | 'reverse'
 
 function parsePositive(s: string): number {
   const n = parseFloat(s)
@@ -24,50 +36,136 @@ function fmt(n: number, decimals = 2): string {
 }
 
 export default function CalculatorBetaPage() {
-  const [mode, setMode] = useState<'forward' | 'reverse'>('forward')
+  const [measurement, setMeasurement] = useState<Measurement>('mcg')
+  const [mode, setMode] = useState<Mode>('forward')
   const [vialMg, setVialMg] = useState('5')
   const [doseMcg, setDoseMcg] = useState('250')
+  const [vialIu, setVialIu] = useState('10')
+  const [doseIu, setDoseIu] = useState('2')
   const [waterMl, setWaterMl] = useState('2')
   const [drawUnits, setDrawUnits] = useState('20')
+  const [copied, setCopied] = useState(false)
+
+  // Prefill from a shared link.
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search)
+    const m = p.get('m')
+    if (m === 'iu' || m === 'mcg') setMeasurement(m)
+    const md = p.get('mode')
+    if (md === 'r') setMode('reverse')
+    else if (md === 'f') setMode('forward')
+    const v = p.get('v')
+    const d = p.get('d')
+    const w = p.get('w')
+    const u = p.get('u')
+    if (w) setWaterMl(w)
+    if (u) setDrawUnits(u)
+    if (m === 'iu') {
+      if (v) setVialIu(v)
+      if (d) setDoseIu(d)
+    } else {
+      if (v) setVialMg(v)
+      if (d) setDoseMcg(d)
+    }
+  }, [])
+
+  const isIu = measurement === 'iu'
+  const unitLabel = isIu ? 'IU' : 'mcg'
+  const vialUnit = isIu ? 'IU' : 'mg'
+  const vialValue = isIu ? vialIu : vialMg
+  const setVialValue = isIu ? setVialIu : setVialMg
+  const doseValue = isIu ? doseIu : doseMcg
+  const setDoseValue = isIu ? setDoseIu : setDoseMcg
 
   const calc = useMemo(() => {
-    const vial = parsePositive(vialMg)
-    const dose = parsePositive(doseMcg)
-    const vialMcg = vial * 1000
+    const dose = parsePositive(doseValue)
     const draw = parsePositive(drawUnits)
+    // Vial amount expressed in the dose unit: mcg (mg × 1000) or IU (as entered).
+    const vialAmount = isIu
+      ? parsePositive(vialIu)
+      : parsePositive(vialMg) * 1000
 
-    // Forward: user types the water volume.
-    // Reverse: solve for the water that makes `draw` units deliver `dose`.
+    // Forward: user types the water. Reverse: solve water for a target draw.
     const water =
       mode === 'reverse'
         ? dose > 0
-          ? (vialMcg * (draw * 0.01)) / dose
+          ? (vialAmount * (draw * 0.01)) / dose
           : 0
         : parsePositive(waterMl)
 
-    const concentrationPerMl = water > 0 ? vialMcg / water : 0
+    const concentrationPerMl = water > 0 ? vialAmount / water : 0
     const concentrationPerTick = concentrationPerMl / 10
-    const volumePerInjectionMl = concentrationPerMl > 0 ? dose / concentrationPerMl : 0
+    const volumePerInjectionMl =
+      concentrationPerMl > 0 ? dose / concentrationPerMl : 0
     const unitsPerInjection = volumePerInjectionMl * 100
-    const dosesPerVial = dose > 0 ? Math.floor(vialMcg / dose) : 0
+    const dosesPerVial = dose > 0 ? Math.floor(vialAmount / dose) : 0
     return {
-      vial,
       dose,
+      vialAmount,
       water,
-      vialMcg,
       concentrationPerMl,
       concentrationPerTick,
       volumePerInjectionMl,
       unitsPerInjection,
       dosesPerVial,
     }
-  }, [mode, vialMg, doseMcg, waterMl, drawUnits])
+  }, [isIu, mode, vialMg, vialIu, doseValue, waterMl, drawUnits])
 
   const onConcentrationEdit = (raw: string) => {
     const c = parseFloat(raw)
-    if (Number.isFinite(c) && c > 0 && calc.vialMcg > 0) {
-      const newWater = calc.vialMcg / (c * 10)
+    if (Number.isFinite(c) && c > 0 && calc.vialAmount > 0) {
+      const newWater = calc.vialAmount / (c * 10)
       setWaterMl(newWater >= 0.01 ? newWater.toFixed(2) : '')
+    }
+  }
+
+  const summary = useMemo(() => {
+    const v = parsePositive(vialValue)
+    const d = parsePositive(doseValue)
+    if (!(v > 0 && d > 0 && calc.water > 0))
+      return 'Enter a vial amount, dose, and water volume to see a summary.'
+    const water = fmt(calc.water)
+    const conc = fmt(calc.concentrationPerTick)
+    const vol = fmt(calc.volumePerInjectionMl, 3)
+    const u = fmt(calc.unitsPerInjection, 1)
+    if (mode === 'reverse')
+      return `For a ${fmt(d)} ${unitLabel} dose drawn at ${fmt(
+        parsePositive(drawUnits),
+        1,
+      )} units, add ${water} mL BAC water to a ${fmt(v)} ${vialUnit} vial (${conc} ${unitLabel}/0.1 mL).`
+    return `Add ${water} mL BAC water to a ${fmt(
+      v,
+    )} ${vialUnit} vial → ${conc} ${unitLabel}/0.1 mL. Draw ${u} units (${vol} mL) for a ${fmt(
+      d,
+    )} ${unitLabel} dose.`
+  }, [
+    vialValue,
+    doseValue,
+    drawUnits,
+    mode,
+    unitLabel,
+    vialUnit,
+    calc.water,
+    calc.concentrationPerTick,
+    calc.volumePerInjectionMl,
+    calc.unitsPerInjection,
+  ])
+
+  const share = async () => {
+    const p = new URLSearchParams()
+    p.set('m', measurement)
+    p.set('mode', mode === 'reverse' ? 'r' : 'f')
+    p.set('v', vialValue)
+    p.set('d', doseValue)
+    p.set('w', waterMl)
+    p.set('u', drawUnits)
+    const url = `${window.location.origin}${window.location.pathname}?${p.toString()}`
+    try {
+      await navigator.clipboard.writeText(url)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    } catch {
+      /* clipboard unavailable */
     }
   }
 
@@ -116,9 +214,10 @@ export default function CalculatorBetaPage() {
             Peptide Calculator <span className="text-amber-400/80">Beta</span>
           </h1>
           <p className="max-w-2xl text-sm leading-relaxed text-white/55 md:text-base">
-            The reconstitution calculator plus experimental modes — including a
-            reverse solver that tells you how much bacteriostatic water to add
-            for a target draw size. Inputs and results update in real time.
+            The reconstitution calculator plus experimental modes — a reverse
+            solver (water for a target draw), an <span className="text-white/80">IU
+            mode for HGH &amp; GH</span>, quick unit converters, and shareable
+            links. Inputs and results update in real time.
           </p>
           <div className="mt-4 flex flex-wrap gap-3 text-xs">
             <Link
@@ -138,39 +237,30 @@ export default function CalculatorBetaPage() {
 
         {/* ── Inputs ── */}
         <section className="mb-6 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
-          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
-              Inputs
-            </h2>
+          <div className="mb-4 flex flex-col gap-3">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
+                Inputs
+              </h2>
+              {/* Mode toggle */}
+              <div className="inline-flex rounded-xl border border-white/[0.08] bg-white/[0.02] p-0.5 text-xs">
+                <Toggle active={mode === 'forward'} onClick={() => setMode('forward')}>
+                  Solve for draw volume
+                </Toggle>
+                <Toggle active={mode === 'reverse'} onClick={() => setMode('reverse')}>
+                  Solve for water to add
+                </Toggle>
+              </div>
+            </div>
 
-            {/* Mode toggle */}
-            <div className="inline-flex rounded-xl border border-white/[0.08] bg-white/[0.02] p-0.5 text-xs">
-              <button
-                type="button"
-                onClick={() => setMode('forward')}
-                aria-pressed={mode === 'forward'}
-                className={
-                  'rounded-lg px-3 py-1.5 font-medium transition-colors ' +
-                  (mode === 'forward'
-                    ? 'bg-[#2DD4A8]/15 text-[#2DD4A8]'
-                    : 'text-white/55 hover:text-white')
-                }
-              >
-                Solve for draw volume
-              </button>
-              <button
-                type="button"
-                onClick={() => setMode('reverse')}
-                aria-pressed={mode === 'reverse'}
-                className={
-                  'rounded-lg px-3 py-1.5 font-medium transition-colors ' +
-                  (mode === 'reverse'
-                    ? 'bg-[#2DD4A8]/15 text-[#2DD4A8]'
-                    : 'text-white/55 hover:text-white')
-                }
-              >
-                Solve for water to add
-              </button>
+            {/* Measurement toggle */}
+            <div className="inline-flex self-start rounded-xl border border-white/[0.08] bg-white/[0.02] p-0.5 text-xs">
+              <Toggle active={!isIu} onClick={() => setMeasurement('mcg')}>
+                mcg · peptides
+              </Toggle>
+              <Toggle active={isIu} onClick={() => setMeasurement('iu')}>
+                IU · HGH / GH
+              </Toggle>
             </div>
           </div>
 
@@ -178,26 +268,27 @@ export default function CalculatorBetaPage() {
             {mode === 'forward'
               ? 'Enter the water you plan to add — get your draw volume and concentration.'
               : 'Enter the draw size you want — get the exact bacteriostatic water to add. Handy for keeping a consistent draw across vials of different masses.'}
+            {isIu && ' HGH and growth-hormone analogs are dosed in international units (IU), not mcg.'}
           </p>
 
           <div className="grid gap-6 md:grid-cols-2">
             <NumberField
-              label="Peptide amount in vial"
-              unit="mg"
-              value={vialMg}
-              onChange={setVialMg}
-              presets={VIAL_PRESETS}
-              presetLabel={(n) => `${n}mg`}
-              onPreset={(n) => setVialMg(String(n))}
+              label="Amount in vial"
+              unit={vialUnit}
+              value={vialValue}
+              onChange={setVialValue}
+              presets={isIu ? VIAL_PRESETS_IU : VIAL_PRESETS_MG}
+              presetLabel={(n) => `${n}${vialUnit}`}
+              onPreset={(n) => setVialValue(String(n))}
             />
             <NumberField
               label="Desired dose per injection"
-              unit="mcg"
-              value={doseMcg}
-              onChange={setDoseMcg}
-              presets={DOSE_PRESETS}
-              presetLabel={(n) => `${n}mcg`}
-              onPreset={(n) => setDoseMcg(String(n))}
+              unit={unitLabel}
+              value={doseValue}
+              onChange={setDoseValue}
+              presets={isIu ? DOSE_PRESETS_IU : DOSE_PRESETS_MCG}
+              presetLabel={(n) => `${n}${unitLabel}`}
+              onPreset={(n) => setDoseValue(String(n))}
             />
 
             {mode === 'forward' ? (
@@ -211,7 +302,7 @@ export default function CalculatorBetaPage() {
                 />
                 <NumberField
                   label="Desired concentration"
-                  unit="mcg per 0.1 mL"
+                  unit={`${unitLabel} per 0.1 mL`}
                   value={
                     calc.concentrationPerTick > 0
                       ? calc.concentrationPerTick.toFixed(2).replace(/\.?0+$/, '')
@@ -237,7 +328,7 @@ export default function CalculatorBetaPage() {
         </section>
 
         {/* ── Results ── */}
-        <section className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <section className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <ResultCard
             label={mode === 'reverse' ? 'BAC water to add' : 'Total water'}
             value={fmt(calc.water)}
@@ -247,7 +338,7 @@ export default function CalculatorBetaPage() {
           <ResultCard
             label="Concentration"
             value={fmt(calc.concentrationPerTick)}
-            unit="mcg / 0.1 mL"
+            unit={`${unitLabel} / 0.1 mL`}
             highlight={mode === 'forward'}
           />
           <ResultCard
@@ -261,6 +352,28 @@ export default function CalculatorBetaPage() {
             unit={`mL · ${fmt(calc.unitsPerInjection, 1)} units`}
             highlight={mode === 'forward'}
           />
+        </section>
+
+        {/* ── Summary + share ── */}
+        <section className="mb-6 flex items-start justify-between gap-4 rounded-2xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-4">
+          <p className="text-sm leading-relaxed text-white/75">{summary}</p>
+          <button
+            type="button"
+            onClick={share}
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-1.5 text-xs font-medium text-[#2DD4A8] transition-colors hover:bg-[#2DD4A8]/20"
+          >
+            {copied ? (
+              <>
+                <Check className="h-3.5 w-3.5" />
+                Copied!
+              </>
+            ) : (
+              <>
+                <Share2 className="h-3.5 w-3.5" />
+                Share
+              </>
+            )}
+          </button>
         </section>
 
         {/* ── Syringe diagram ── */}
@@ -279,17 +392,39 @@ export default function CalculatorBetaPage() {
           </p>
         </section>
 
-        {/* ── Reference table ── */}
+        {/* ── Quick converters ── */}
         <section className="mb-10 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
-          <h2 className="mb-1 text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
-            Quick Reference
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
+            Quick Converters
           </h2>
-          <p className="mb-4 text-xs text-white/40">
-            Concentration in mcg per 0.1 mL by vial size and water volume. Your current
-            selection is highlighted.
-          </p>
-          <ReferenceTable currentVial={calc.vial} currentWater={calc.water} />
+          <div className="grid gap-4 sm:grid-cols-3">
+            <Converter leftUnit="mg" rightUnit="mcg" factor={1000} />
+            <Converter leftUnit="mL" rightUnit="units" factor={100} />
+            <Converter
+              leftUnit="mg"
+              rightUnit="IU"
+              factor={3}
+              note="HGH ≈ 3 IU per mg"
+            />
+          </div>
         </section>
+
+        {/* ── Reference table (mcg / peptide mode only) ── */}
+        {!isIu && (
+          <section className="mb-10 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
+            <h2 className="mb-1 text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
+              Quick Reference
+            </h2>
+            <p className="mb-4 text-xs text-white/40">
+              Concentration in mcg per 0.1 mL by vial size and water volume. Your current
+              selection is highlighted.
+            </p>
+            <ReferenceTable
+              currentVial={parsePositive(vialMg)}
+              currentWater={calc.water}
+            />
+          </section>
+        )}
 
         {/* ── Educational content ── */}
         <section className="mb-10 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 md:p-6">
@@ -360,7 +495,6 @@ export default function CalculatorBetaPage() {
             </li>
           </ul>
         </section>
-
       </main>
     </div>
   )
@@ -369,6 +503,30 @@ export default function CalculatorBetaPage() {
 // ─────────────────────────────────────────────────────────
 // Sub-components
 // ─────────────────────────────────────────────────────────
+
+function Toggle({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean
+  onClick: () => void
+  children: React.ReactNode
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={
+        'rounded-lg px-3 py-1.5 font-medium transition-colors ' +
+        (active ? 'bg-[#2DD4A8]/15 text-[#2DD4A8]' : 'text-white/55 hover:text-white')
+      }
+    >
+      {children}
+    </button>
+  )
+}
 
 function NumberField({
   label,
@@ -457,6 +615,72 @@ function ResultCard({
       </p>
       <p className="mt-0.5 text-[11px] text-white/40">{unit}</p>
     </div>
+  )
+}
+
+function Converter({
+  leftUnit,
+  rightUnit,
+  factor,
+  note,
+}: {
+  leftUnit: string
+  rightUnit: string
+  factor: number
+  note?: string
+}) {
+  const [left, setLeft] = useState('')
+  const [right, setRight] = useState('')
+
+  const trim = (n: number) =>
+    Number.isFinite(n) ? String(Number(n.toFixed(6))) : ''
+
+  const onLeft = (v: string) => {
+    setLeft(v)
+    const n = parseFloat(v)
+    setRight(Number.isFinite(n) ? trim(n * factor) : '')
+  }
+  const onRight = (v: string) => {
+    setRight(v)
+    const n = parseFloat(v)
+    setLeft(Number.isFinite(n) ? trim(n / factor) : '')
+  }
+
+  return (
+    <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+      <div className="flex items-center gap-2">
+        <ConvInput unit={leftUnit} value={left} onChange={onLeft} />
+        <ArrowRightLeft className="h-3.5 w-3.5 shrink-0 text-white/30" />
+        <ConvInput unit={rightUnit} value={right} onChange={onRight} />
+      </div>
+      {note && <p className="mt-2 text-[10px] text-white/30">{note}</p>}
+    </div>
+  )
+}
+
+function ConvInput({
+  unit,
+  value,
+  onChange,
+}: {
+  unit: string
+  value: string
+  onChange: (v: string) => void
+}) {
+  return (
+    <label className="flex min-w-0 flex-1 items-center gap-1 rounded-lg border border-white/[0.08] bg-white/[0.03] px-2 py-1.5 focus-within:border-[#2DD4A8]/40">
+      <input
+        type="number"
+        inputMode="decimal"
+        min={0}
+        step="any"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="0"
+        className="w-full min-w-0 bg-transparent font-mono text-sm text-white placeholder:text-white/25 outline-none"
+      />
+      <span className="shrink-0 text-[10px] text-white/35">{unit}</span>
+    </label>
   )
 }
 
