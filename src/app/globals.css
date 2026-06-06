@@ -10,9 +10,60 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-space-grotesk);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Display typeface for headings — scoped to the homepage for now (prototype).
+   To roll out site-wide, change `.home :is(...)` to plain `:is(h1, h2, h3)`. */
+.home :is(h1, h2, h3) {
+  font-family: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* ── Hero molecular visual ── */
+@keyframes heroFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+@keyframes heroPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes heroSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.hero-float {
+  animation: heroFloat 8s ease-in-out infinite;
+}
+.hero-node {
+  animation: heroPulse 3.2s ease-in-out infinite;
+}
+.hero-orbit {
+  transform-origin: center;
+  animation: heroSpin 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-float,
+  .hero-node,
+  .hero-orbit {
+    animation: none;
+  }
 }
