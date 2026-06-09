@@ -14,10 +14,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/semaglutide-vs-tirzepatide', priority: 0.9 },
     // ── Healing & Repair cluster ──────────────────────────
     { path: '/bpc-157', priority: 0.9 },
+    // ── GH Axis cluster ───────────────────────────────────
+    { path: '/gh-peptides', priority: 0.9 },
+    { path: '/cjc-1295-vs-ipamorelin', priority: 0.8 },
+    // ── Longevity cluster ─────────────────────────────────
+    { path: '/longevity-peptides', priority: 0.8 },
+    // ── Cognitive cluster ─────────────────────────────────
+    { path: '/cognitive-peptides', priority: 0.8 },
     // ── Catalog & Learning ────────────────────────────────
     { path: '/catalog', priority: 0.8 },
     { path: '/learn', priority: 0.8 },
     { path: '/learn/compatibility', priority: 0.8 },
+    { path: '/learn/evidence-hierarchy', priority: 0.8 },
     { path: '/synthesis', priority: 0.8 },
     { path: '/research-areas', priority: 0.8 },
     { path: '/glossary', priority: 0.8 },
