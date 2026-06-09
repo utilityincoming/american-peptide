@@ -1,0 +1,522 @@
+'use client'
+
+import { useEffect, useMemo, useState } from 'react'
+import Link from 'next/link'
+import {
+  Dna,
+  Shuffle,
+  Trash2,
+  Share2,
+  Check,
+  Save,
+  ExternalLink,
+  ArrowRight,
+} from 'lucide-react'
+import {
+  AMINO_ACIDS,
+  AA_CATEGORIES,
+  sequenceStats,
+  toThreeLetter,
+} from '@/lib/amino-acids'
+import {
+  chargeAtPH,
+  isoelectricPoint,
+  extinctionCoefficient,
+  a280Point1pct,
+  sanitizeSequence,
+} from '@/lib/peptide-properties'
+import { PEPTIDES } from '@/lib/peptides'
+
+const SAVE_KEY = 'amp-design-lab-saved'
+
+const PRESETS = PEPTIDES.filter((p) => p.sequence)
+  .map((p) => ({ name: p.name, slug: p.slug, seq: sanitizeSequence(p.sequence ?? '') }))
+  .filter((p) => p.seq.length >= 2)
+  .sort((a, b) => a.name.localeCompare(b.name))
+
+const TOOLS = [
+  {
+    name: 'AlphaFold Server',
+    href: 'https://alphafoldserver.com/',
+    desc: '3D structure prediction',
+  },
+  {
+    name: 'RFdiffusion',
+    href: 'https://github.com/RosettaCommons/RFdiffusion',
+    desc: 'De novo backbone design',
+  },
+  {
+    name: 'ProteinMPNN',
+    href: 'https://github.com/dauparas/ProteinMPNN',
+    desc: 'Inverse folding / sequence design',
+  },
+  {
+    name: 'ExPASy ProtParam',
+    href: 'https://web.expasy.org/protparam/',
+    desc: 'Independent property cross-check',
+  },
+]
+
+const PIPELINE = [
+  'Define goal',
+  'Predict properties',
+  '3D structure',
+  'Optimize sequence',
+  'Validate folding',
+  'Lab synthesis',
+]
+
+function fmt(n: number, decimals = 2): string {
+  if (!Number.isFinite(n)) return '—'
+  return n.toLocaleString(undefined, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: decimals,
+  })
+}
+
+export default function DesignLabPage() {
+  const [seq, setSeq] = useState('GEPPPGKPADDAGLV')
+  const [ph, setPh] = useState(7.4)
+  const [saved, setSaved] = useState<{ seq: string; ts: number }[]>([])
+  const [copied, setCopied] = useState(false)
+
+  // Load saved designs + any shared-link state.
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(SAVE_KEY)
+      if (raw) {
+        const parsed = JSON.parse(raw)
+        if (Array.isArray(parsed)) setSaved(parsed)
+      }
+    } catch {
+      /* ignore */
+    }
+    const p = new URLSearchParams(window.location.search)
+    const s = p.get('s')
+    const phQ = p.get('p')
+    if (s) setSeq(sanitizeSequence(s))
+    if (phQ && Number.isFinite(parseFloat(phQ))) {
+      setPh(Math.min(14, Math.max(0, parseFloat(phQ))))
+    }
+  }, [])
+
+  const codes = useMemo(() => seq.split(''), [seq])
+  const stats = useMemo(() => sequenceStats(codes), [codes])
+  const charge = useMemo(() => chargeAtPH(codes, ph), [codes, ph])
+  const pI = useMemo(() => isoelectricPoint(codes), [codes])
+  const ext = useMemo(() => extinctionCoefficient(codes), [codes])
+  const a280 = a280Point1pct(ext.reduced, stats.mass)
+
+  const append = (code: string) => setSeq((s) => s + code)
+  const clear = () => setSeq('')
+  const randomize = () => {
+    const len = 5 + Math.floor(Math.random() * 8)
+    let s = ''
+    for (let i = 0; i < len; i++)
+      s += AMINO_ACIDS[Math.floor(Math.random() * AMINO_ACIDS.length)].code
+    setSeq(s)
+  }
+
+  const save = () => {
+    if (!seq) return
+    setSaved((prev) => {
+      const next = [{ seq, ts: Date.now() }, ...prev.filter((x) => x.seq !== seq)].slice(0, 12)
+      try {
+        localStorage.setItem(SAVE_KEY, JSON.stringify(next))
+      } catch {
+        /* ignore */
+      }
+      return next
+    })
+  }
+  const removeSaved = (s: string) =>
+    setSaved((prev) => {
+      const next = prev.filter((x) => x.seq !== s)
+      try {
+        localStorage.setItem(SAVE_KEY, JSON.stringify(next))
+      } catch {
+        /* ignore */
+      }
+      return next
+    })
+
+  const share = async () => {
+    const p = new URLSearchParams({ s: seq, p: String(ph) })
+    const url = `${window.location.origin}${window.location.pathname}?${p.toString()}`
+    try {
+      await navigator.clipboard.writeText(url)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    } catch {
+      /* ignore */
+    }
+  }
+
+  const cysNote = stats.cysteines >= 2
+
+  return (
+    <div className="min-h-screen bg-[#0B1220] text-white">
+      {/* ── Page identity ── */}
+      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+        <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
+          <Dna className="h-4 w-4 text-[#2DD4A8]" strokeWidth={1.75} />
+        </div>
+        <span className="text-sm font-medium">Design Lab</span>
+        <span className="rounded-full border border-amber-500/30 bg-amber-500/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-amber-400/80">
+          Beta
+        </span>
+      </header>
+
+      <main className="mx-auto max-w-5xl px-4 py-8 md:px-6">
+        {/* ── Beta banner ── */}
+        <div className="mb-6 flex items-start gap-3 rounded-2xl border border-amber-500/20 bg-amber-500/[0.05] p-4">
+          <Dna className="mt-0.5 h-4 w-4 shrink-0 text-amber-400/80" strokeWidth={1.75} />
+          <p className="min-w-0 text-xs leading-relaxed text-white/55">
+            <span className="font-semibold text-amber-300/90">Beta · in development. </span>
+            A research-use sequence property calculator. Property values are
+            estimates — cross-check before relying on them. Prefer a hands-on,
+            gamified build? Try{' '}
+            <Link
+              href="/compounds/builder"
+              className="text-[#2DD4A8] underline-offset-2 hover:underline"
+            >
+              PeptideForge
+            </Link>
+            .
+          </p>
+        </div>
+
+        {/* ── Heading ── */}
+        <div className="mb-8">
+          <h1 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
+            Peptide Design Lab
+          </h1>
+          <p className="max-w-2xl text-sm leading-relaxed text-white/55 md:text-base">
+            Build a sequence, paste one, or load a catalog peptide — then read
+            molecular weight, pH-dependent net charge, isoelectric point, GRAVY,
+            and the 280&nbsp;nm extinction coefficient in real time.
+          </p>
+        </div>
+
+        {/* ── Sequence input ── */}
+        <section className="mb-6 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
+              Sequence
+            </h2>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={randomize}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] px-2.5 py-1.5 text-xs text-white/60 transition-colors hover:border-[#2DD4A8]/25 hover:text-[#2DD4A8]"
+              >
+                <Shuffle className="h-3.5 w-3.5" />
+                Random
+              </button>
+              <button
+                type="button"
+                onClick={clear}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] px-2.5 py-1.5 text-xs text-white/60 transition-colors hover:border-red-400/30 hover:text-red-400/80"
+              >
+                <Trash2 className="h-3.5 w-3.5" />
+                Clear
+              </button>
+            </div>
+          </div>
+
+          <input
+            type="text"
+            value={seq}
+            onChange={(e) => setSeq(sanitizeSequence(e.target.value))}
+            placeholder="Type or paste single-letter codes, e.g. GEPPPGKPADDAGLV"
+            spellCheck={false}
+            className="w-full rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 font-mono text-base tracking-wider text-white placeholder:text-white/25 outline-none transition-colors focus:border-[#2DD4A8]/40"
+          />
+
+          {/* Catalog presets */}
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <span className="text-[11px] text-white/35">Load from catalog:</span>
+            <select
+              value=""
+              onChange={(e) => {
+                const hit = PRESETS.find((p) => p.slug === e.target.value)
+                if (hit) setSeq(hit.seq)
+              }}
+              className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-2.5 py-1.5 text-xs text-white/70 outline-none focus:border-[#2DD4A8]/40"
+            >
+              <option value="" className="bg-[#0F1828]">
+                Select a peptide… ({PRESETS.length})
+              </option>
+              {PRESETS.map((p) => (
+                <option key={p.slug} value={p.slug} className="bg-[#0F1828]">
+                  {p.name} ({p.seq.length} aa)
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Residue palette */}
+          <div className="mt-5 space-y-2.5">
+            {AA_CATEGORIES.map((cat) => (
+              <div key={cat.id} className="flex flex-wrap items-center gap-1.5">
+                <span className={`mr-1 w-16 text-[11px] ${cat.text}`}>{cat.label}</span>
+                {AMINO_ACIDS.filter((aa) => aa.category === cat.id).map((aa) => (
+                  <button
+                    key={aa.code}
+                    type="button"
+                    onClick={() => append(aa.code)}
+                    title={`${aa.name} (${aa.three})`}
+                    className={`h-8 w-8 rounded-lg border font-mono text-sm transition-colors ${cat.border} ${cat.bg} ${cat.text} ${cat.hoverBg}`}
+                  >
+                    {aa.code}
+                  </button>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── pH slider ── */}
+        <section className="mb-6 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
+          <div className="mb-2 flex items-center justify-between">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
+              pH environment
+            </h2>
+            <span className="font-mono text-sm text-[#2DD4A8]">pH {ph.toFixed(1)}</span>
+          </div>
+          <input
+            type="range"
+            min={0}
+            max={14}
+            step={0.1}
+            value={ph}
+            onChange={(e) => setPh(parseFloat(e.target.value))}
+            className="w-full accent-[#2DD4A8]"
+          />
+          <div className="mt-1 flex justify-between text-[10px] text-white/30">
+            <span>0 · acidic</span>
+            <span>7.4 · physiological</span>
+            <span>14 · basic</span>
+          </div>
+        </section>
+
+        {/* ── Analysis ── */}
+        <section className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <StatCard label="Length" value={stats.length ? String(stats.length) : '—'} unit="residues" />
+          <StatCard label="Molecular weight" value={fmt(stats.mass)} unit="Da (avg)" highlight />
+          <StatCard
+            label={`Net charge @ pH ${ph.toFixed(1)}`}
+            value={stats.length ? (charge >= 0 ? `+${fmt(charge)}` : fmt(charge)) : '—'}
+            unit="e"
+            highlight
+          />
+          <StatCard label="Isoelectric point" value={stats.length ? fmt(pI, 2) : '—'} unit="pI" highlight />
+          <StatCard
+            label="GRAVY"
+            value={stats.length ? fmt(stats.gravy, 2) : '—'}
+            unit="hydropathy"
+          />
+          <StatCard
+            label="Extinction ε₂₈₀"
+            value={stats.length ? fmt(ext.reduced, 0) : '—'}
+            unit={
+              cysNote
+                ? `M⁻¹cm⁻¹ · ${fmt(ext.cystine, 0)} w/ S–S`
+                : 'M⁻¹·cm⁻¹ (reduced)'
+            }
+          />
+          <StatCard label="A280 (0.1%)" value={stats.length ? fmt(a280, 3) : '—'} unit="1 g/L" />
+          <StatCard label="Aromatic" value={String(stats.aromatic)} unit="F/W/Y/H" />
+          <StatCard
+            label="Cysteines"
+            value={String(stats.cysteines)}
+            unit={cysNote ? `up to ${Math.floor(stats.cysteines / 2)} disulfide(s)` : 'thiols'}
+          />
+        </section>
+
+        {/* ── Composition + sequence ── */}
+        <section className="mb-6 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
+            Composition
+          </h2>
+          <div className="mb-3 flex h-2.5 w-full overflow-hidden rounded-full bg-white/[0.05]">
+            {AA_CATEGORIES.map((cat) => {
+              const n = stats.counts[cat.id]
+              const pct = stats.length ? (n / stats.length) * 100 : 0
+              if (pct <= 0) return null
+              return (
+                <div
+                  key={cat.id}
+                  className={cat.solid}
+                  style={{ width: `${pct}%` }}
+                  title={`${cat.label}: ${n}`}
+                />
+              )
+            })}
+          </div>
+          <div className="flex flex-wrap gap-x-4 gap-y-1">
+            {AA_CATEGORIES.map((cat) => (
+              <span key={cat.id} className="inline-flex items-center gap-1.5 text-[11px] text-white/55">
+                <span className={`h-2.5 w-2.5 rounded-sm ${cat.solid}`} />
+                {cat.label}: {stats.counts[cat.id]}
+              </span>
+            ))}
+          </div>
+          {stats.length > 0 && (
+            <p className="mt-4 break-words font-mono text-xs text-white/45">
+              {toThreeLetter(codes)}
+            </p>
+          )}
+        </section>
+
+        {/* ── Save / share ── */}
+        <section className="mb-6 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={save}
+              disabled={!seq}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.10] bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-[#2DD4A8] disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              <Save className="h-3.5 w-3.5" />
+              Save design
+            </button>
+            <button
+              type="button"
+              onClick={share}
+              disabled={!seq}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-1.5 text-xs font-medium text-[#2DD4A8] transition-colors hover:bg-[#2DD4A8]/20 disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              {copied ? <Check className="h-3.5 w-3.5" /> : <Share2 className="h-3.5 w-3.5" />}
+              {copied ? 'Copied!' : 'Share link'}
+            </button>
+          </div>
+
+          {saved.length > 0 && (
+            <div className="mt-4">
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-white/35">
+                My saved designs
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {saved.map((s) => (
+                  <span
+                    key={s.ts}
+                    className="inline-flex items-center gap-1 rounded-md border border-white/[0.08] bg-white/[0.03] py-1 pl-2 pr-1 text-[11px]"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setSeq(s.seq)}
+                      title="Load"
+                      className="max-w-[140px] truncate font-mono text-white/70 hover:text-[#2DD4A8]"
+                    >
+                      {s.seq}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => removeSaved(s.seq)}
+                      aria-label="Delete"
+                      className="rounded p-0.5 text-white/35 hover:bg-white/[0.08] hover:text-white"
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </button>
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* ── Research pipeline + tools ── */}
+        <section className="mb-10 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
+            From design to bench
+          </h2>
+          <ol className="mb-6 flex flex-wrap items-center gap-2">
+            {PIPELINE.map((step, i) => (
+              <li key={step} className="flex items-center gap-2">
+                <span
+                  className={
+                    'rounded-lg border px-2.5 py-1.5 text-[11px] ' +
+                    (i === 1
+                      ? 'border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.08] font-medium text-[#2DD4A8]'
+                      : 'border-white/[0.07] bg-white/[0.02] text-white/55')
+                  }
+                >
+                  {step}
+                  {i === 1 && <span className="ml-1 text-[9px] text-[#2DD4A8]/70">you are here</span>}
+                </span>
+                {i < PIPELINE.length - 1 && (
+                  <ArrowRight className="h-3.5 w-3.5 shrink-0 text-white/20" />
+                )}
+              </li>
+            ))}
+          </ol>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {TOOLS.map((t) => (
+              <a
+                key={t.href}
+                href={t.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 transition-colors hover:border-[#2DD4A8]/25 hover:bg-white/[0.04]"
+              >
+                <div>
+                  <p className="text-sm font-medium text-white/85">{t.name}</p>
+                  <p className="text-[12px] text-white/45">{t.desc}</p>
+                </div>
+                <ExternalLink className="h-3.5 w-3.5 shrink-0 text-[#2DD4A8]/70 transition-colors group-hover:text-[#2DD4A8]" />
+              </a>
+            ))}
+          </div>
+          <p className="mt-3 text-[10px] text-white/30">
+            External research tools open in a new tab. AmericanPeptide is not
+            affiliated with and does not endorse these services.
+          </p>
+        </section>
+
+        <div className="mb-10 rounded-xl border border-amber-500/15 bg-amber-500/[0.04] px-4 py-3">
+          <p className="text-[11px] leading-relaxed text-amber-400/65">
+            <span className="font-semibold text-amber-400/85">Research use only.</span>{' '}
+            Computed properties are estimates for educational/research reference,
+            not medical advice or an offer for sale. Validate independently.
+          </p>
+        </div>
+      </main>
+    </div>
+  )
+}
+
+function StatCard({
+  label,
+  value,
+  unit,
+  highlight,
+}: {
+  label: string
+  value: string
+  unit: string
+  highlight?: boolean
+}) {
+  return (
+    <div
+      className={`rounded-2xl border p-4 ${
+        highlight
+          ? 'border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.04]'
+          : 'border-white/[0.07] bg-white/[0.025]'
+      }`}
+    >
+      <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-white/40">
+        {label}
+      </p>
+      <p
+        className={`mt-1.5 font-mono text-xl font-semibold tabular-nums leading-tight md:text-2xl ${
+          highlight ? 'text-[#2DD4A8]' : 'text-white'
+        }`}
+      >
+        {value}
+      </p>
+      <p className="mt-0.5 text-[11px] text-white/40">{unit}</p>
+    </div>
+  )
+}
