@@ -228,3 +228,32 @@ export const COLD_CHAIN: ColdChainItem[] = [
     note: 'Every hand-off is a chance to lose purity. Fewer, shorter, domestic hops protect the material.',
   },
 ]
+
+/**
+ * Compact plain-text digest of the synthesis pipeline for grounding the
+ * research agent. Built from the same STAGES / ECONOMICS / COLD_CHAIN data the
+ * /synthesis page renders, so the agent's knowledge and the page never drift
+ * apart — edit the data above and both update together.
+ */
+export function synthesisDigest(): string {
+  const stages = STAGES.map((s) => {
+    const lines = [`${s.num}. ${s.title} — ${s.summary}`]
+    s.detail.forEach((d) => lines.push(`   ${d}`))
+    if (s.cost) lines.push(`   Cost: ${s.cost}`)
+    if (s.risk) lines.push(`   Where purity is won or lost: ${s.risk}`)
+    if (s.americanStandard) lines.push(`   American standard: ${s.americanStandard}`)
+    return lines.join('\n')
+  }).join('\n\n')
+
+  const economics = ECONOMICS.map((e) => `- ${e.label}: ${e.note}`).join('\n')
+  const coldChain = COLD_CHAIN.map((c) => `- ${c.label}: ${c.note}`).join('\n')
+
+  return [
+    'THE PEPTIDE SYNTHESIS PIPELINE — the authoritative, end-to-end account of how a pure research peptide is actually made (the full visual walkthrough lives at /synthesis):',
+    stages,
+    'WHAT REAL SYNTHESIS COSTS — the capital and operating wall behind genuine work:',
+    economics,
+    'HOLDING PURITY ACROSS THE COLD CHAIN — purity earned in the lab is kept or lost in handling and shipping:',
+    coldChain,
+  ].join('\n\n')
+}

@@ -21,6 +21,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import { STAGES, ECONOMICS, COLD_CHAIN } from '@/lib/synthesis'
+import SynthesisWalk from '@/components/SynthesisWalk'
 
 const SITE = 'https://www.americanpeptide.com'
 
@@ -160,80 +161,8 @@ export default function SynthesisPage() {
         </div>
       </section>
 
-      {/* ── Stage cards ── */}
-      <section className="px-6 py-12 md:px-10">
-        <div className="mx-auto max-w-5xl space-y-4">
-          {STAGES.map((s) => {
-            const Icon = ICONS[s.icon] ?? FlaskConical
-            return (
-              <article
-                key={s.slug}
-                id={s.slug}
-                className="scroll-mt-20 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 md:p-7"
-              >
-                <div className="mb-4 flex items-start gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#2DD4A8]/12 text-[#2DD4A8]">
-                    <Icon className="h-5 w-5" strokeWidth={1.75} />
-                  </span>
-                  <div className="min-w-0">
-                    <div className="mb-1 flex items-center gap-2">
-                      <span className="font-mono text-[11px] text-[#2DD4A8]/70">
-                        Step {s.num} / {STAGES.length}
-                      </span>
-                    </div>
-                    <h2 className="text-lg font-semibold tracking-tight">
-                      {s.title}
-                    </h2>
-                    <p className="mt-0.5 text-[13px] leading-relaxed text-white/45">
-                      {s.summary}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 text-sm leading-relaxed text-white/70">
-                  {s.detail.map((p, i) => (
-                    <p key={i}>{p}</p>
-                  ))}
-                </div>
-
-                <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                  {s.cost && (
-                    <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">
-                      <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-amber-400/70">
-                        What it costs
-                      </p>
-                      <p className="text-[12.5px] leading-relaxed text-white/60">
-                        {s.cost}
-                      </p>
-                    </div>
-                  )}
-                  {s.risk && (
-                    <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">
-                      <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-red-400/70">
-                        Where purity is lost
-                      </p>
-                      <p className="text-[12.5px] leading-relaxed text-white/60">
-                        {s.risk}
-                      </p>
-                    </div>
-                  )}
-                  {s.americanStandard && (
-                    <div className="rounded-xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] px-4 py-3 sm:col-span-2">
-                      <p className="mb-1 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#2DD4A8]/80">
-                        <Flag className="h-3 w-3" />
-                        The American standard
-                      </p>
-                      <p className="text-[12.5px] leading-relaxed text-white/65">
-                        {s.americanStandard}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </article>
-            )
-          })}
-        </div>
-      </section>
+      {/* ── Stage walk (scrollytelling) ── */}
+      <SynthesisWalk stages={STAGES} />
 
       {/* ── Economics ── */}
       <section className="border-t border-white/[0.06] px-6 py-14 md:px-10">

@@ -106,38 +106,39 @@ export default function HomePage() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2DD4A8] opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2DD4A8]" />
               </span>
-              AI Research Platform · Peptide Drug Discovery
+              AI Research Platform · Peptide Science
             </div>
 
             {/* Headline */}
             <h1 className="mb-6 text-5xl font-bold leading-[1.04] tracking-tight md:text-6xl">
-              <span className="text-white">AI&#8209;Powered</span>
+              <span className="text-white">The Science &amp; Craft of</span>
               <br />
               <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
-                Peptide Drug Discovery
+                Peptide Synthesis
               </span>
             </h1>
 
             {/* Subtitle */}
             <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-white/60 md:text-xl lg:mx-0">
-              From sequence hypothesis to clinical candidate — accelerate every phase of peptide
-              research with AI tools built for computational biologists and medicinal chemists.
+              From the first residue on the resin to the certificate of analysis — see how
+              peptides are designed, built, purified, and proven. An AI research agent, an open
+              catalog, and hands-on tools for people who want to understand the molecule.
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <Link
-                href="/research"
+                href="/synthesis"
                 className="group inline-flex items-center gap-2 rounded-xl bg-[#2DD4A8] px-8 py-3.5 text-[15px] font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(45,212,168,0)] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_40px_rgba(45,212,168,0.35)]"
               >
-                Start Research
+                See how peptides are made
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
-                href="#features"
+                href="/research"
                 className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-8 py-3.5 text-[15px] font-medium text-white/60 transition-colors hover:border-white/20 hover:text-white"
               >
-                Explore Features
+                Ask the research agent
               </Link>
             </div>
           </div>
@@ -152,8 +153,8 @@ export default function HomePage() {
         <div className="mx-auto mt-14 max-w-xl overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.025] px-5 py-3.5 text-center font-mono text-xs md:text-sm">
           <span className="text-white/30">sequence · </span>
           <span className="text-[#2DD4A8]/80">HKIGAQKYFLNHSGECGFHKIGAQK</span>
-          <span className="text-white/30"> · target: ACE2 · score: </span>
-          <span className="text-[#2DD4A8]">0.94</span>
+          <span className="text-white/30"> · residues: 25 · purity </span>
+          <span className="text-[#2DD4A8]">≥ 98%</span>
         </div>
 
         {/* Stats row */}
