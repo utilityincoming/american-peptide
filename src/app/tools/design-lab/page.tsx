@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -15,6 +15,7 @@ import {
   ArrowRight,
   Sparkles,
   Loader2,
+  Atom,
 } from 'lucide-react'
 import {
   AMINO_ACIDS,
@@ -46,6 +47,43 @@ const SCORE_CHIP: Record<string, string> = {
 }
 
 const SAVE_KEY = 'amp-design-lab-saved'
+
+// 3Dmol.js is loaded on demand from CDN (only when the user predicts a
+// structure) — this is a beta, online-only page, so no offline concern.
+type Mol3DViewer = {
+  addModel: (data: string, format: string) => void
+  setStyle: (sel: Record<string, unknown>, style: Record<string, unknown>) => void
+  zoomTo: () => void
+  render: () => void
+  spin: (axis: string) => void
+}
+type Mol3D = {
+  createViewer: (el: HTMLElement, config?: Record<string, unknown>) => Mol3DViewer
+}
+declare global {
+  interface Window {
+    $3Dmol?: Mol3D
+  }
+}
+
+let molPromise: Promise<Mol3D> | null = null
+function load3Dmol(): Promise<Mol3D> {
+  if (typeof window !== 'undefined' && window.$3Dmol) return Promise.resolve(window.$3Dmol)
+  if (molPromise) return molPromise
+  molPromise = new Promise<Mol3D>((resolve, reject) => {
+    const s = document.createElement('script')
+    s.src = 'https://3Dmol.org/build/3Dmol-min.js'
+    s.async = true
+    s.onload = () =>
+      window.$3Dmol ? resolve(window.$3Dmol) : reject(new Error('3D viewer failed to initialize.'))
+    s.onerror = () => {
+      molPromise = null
+      reject(new Error('Could not load the 3D viewer.'))
+    }
+    document.head.appendChild(s)
+  })
+  return molPromise
+}
 
 const PRESETS = PEPTIDES.filter((p) => p.sequence)
   .map((p) => ({ name: p.name, slug: p.slug, seq: sanitizeSequence(p.sequence ?? '') }))
@@ -100,6 +138,10 @@ export default function DesignLabPage() {
   const [analysis, setAnalysis] = useState<string | null>(null)
   const [analyzing, setAnalyzing] = useState(false)
   const [analysisError, setAnalysisError] = useState<string | null>(null)
+  const [folding, setFolding] = useState(false)
+  const [foldError, setFoldError] = useState<string | null>(null)
+  const [hasStructure, setHasStructure] = useState(false)
+  const viewerRef = useRef<HTMLDivElement | null>(null)
 
   // Load saved designs + any shared-link state.
   useEffect(() => {
@@ -213,6 +255,50 @@ export default function DesignLabPage() {
       setAnalysisError('Network error — please try again.')
     } finally {
       setAnalyzing(false)
+    }
+  }
+
+  // Reset any rendered structure when the sequence changes.
+  useEffect(() => {
+    setHasStructure(false)
+    setFoldError(null)
+    if (viewerRef.current) viewerRef.current.innerHTML = ''
+  }, [seq])
+
+  const predictStructure = async () => {
+    if (codes.length < 2) return
+    setFolding(true)
+    setFoldError(null)
+    try {
+      const res = await fetch('/api/fold-peptide', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sequence: seq }),
+      })
+      const data = await res.json()
+      if (!res.ok || !data.pdb) {
+        setFoldError(
+          typeof data.error === 'string' ? data.error : 'Structure prediction failed.',
+        )
+        return
+      }
+      const mol = await load3Dmol()
+      const el = viewerRef.current
+      if (!el) return
+      el.innerHTML = ''
+      const viewer = mol.createViewer(el, { backgroundColor: '#0B1220' })
+      viewer.addModel(data.pdb, 'pdb')
+      viewer.setStyle(
+        {},
+        { cartoon: { color: 'spectrum' }, stick: { radius: 0.18 } },
+      )
+      viewer.zoomTo()
+      viewer.render()
+      setHasStructure(true)
+    } catch (err) {
+      setFoldError(err instanceof Error ? err.message : 'Structure prediction failed.')
+    } finally {
+      setFolding(false)
     }
   }
 
@@ -514,6 +600,77 @@ export default function DesignLabPage() {
               </p>
             )
           )}
+        </section>
+
+        {/* ── 3D structure ── */}
+        <section className="mb-6 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
+              3D structure
+            </h2>
+            <button
+              type="button"
+              onClick={predictStructure}
+              disabled={folding || codes.length < 2}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-1.5 text-xs font-medium text-[#2DD4A8] transition-colors hover:bg-[#2DD4A8]/20 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {folding ? (
+                <>
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  Folding…
+                </>
+              ) : (
+                <>
+                  <Atom className="h-3.5 w-3.5" />
+                  {hasStructure ? 'Re-predict' : 'Predict structure'}
+                </>
+              )}
+            </button>
+          </div>
+
+          {foldError && (
+            <p className="mb-2 text-xs leading-relaxed text-amber-400/75">{foldError}</p>
+          )}
+
+          <div className="relative h-[420px] w-full overflow-hidden rounded-xl border border-white/[0.07] bg-[#0B1220]">
+            <div ref={viewerRef} className="absolute inset-0" />
+            {!hasStructure && (
+              <div className="pointer-events-none absolute inset-0 grid place-items-center px-6 text-center">
+                {folding ? (
+                  <div className="flex flex-col items-center gap-2 text-white/50">
+                    <Loader2 className="h-5 w-5 animate-spin text-[#2DD4A8]" />
+                    <span className="text-xs">
+                      Folding with ESMFold — this can take a few seconds…
+                    </span>
+                  </div>
+                ) : (
+                  <div className="text-white/35">
+                    <Atom className="mx-auto mb-2 h-6 w-6 text-[#2DD4A8]/50" />
+                    <p className="text-xs">Predict a 3D structure for this sequence.</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {hasStructure && (
+            <p className="mt-2 text-[11px] text-white/40">
+              Drag to rotate · scroll to zoom · colored N→C (spectrum).
+            </p>
+          )}
+          <p className="mt-2 text-[10px] leading-relaxed text-white/30">
+            Structure predicted with{' '}
+            <a
+              href="https://esmatlas.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#2DD4A8]/70 hover:text-[#2DD4A8]"
+            >
+              ESMFold
+            </a>{' '}
+            (Meta) — a computational prediction, not an experimental structure.
+            For larger or higher-confidence models, use AlphaFold Server below.
+          </p>
         </section>
 
         {/* ── Save / share ── */}
