@@ -32,10 +32,10 @@ const SUGGESTIONS = [
   'Best peptide for skin anti-aging',
   'GHK-Cu for hair growth',
   'BPC-157 vs TB-500 for healing',
-  'How to reconstitute peptides',
+  'How is a research peptide actually made?',
+  'Why are pure peptides so expensive to make?',
   'How to read a peptide COA',
-  'Best copper peptide serum ingredients',
-  'Peptide storage and shelf life',
+  'What makes American synthesis different?',
 ]
 
 const md: Components = {
