@@ -145,7 +145,7 @@ export default function LearnPage() {
             <Link
               key={href}
               href={href}
-              className="group flex flex-col rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 transition-all hover:border-[#2DD4A8]/25 hover:bg-white/[0.04]"
+              className="group flex flex-col rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/25 hover:bg-white/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.12)]"
             >
               <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-[#2DD4A8]">
                 <Icon className="h-5 w-5" strokeWidth={1.75} />

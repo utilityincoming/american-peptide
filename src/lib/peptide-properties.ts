@@ -91,3 +91,123 @@ export function sanitizeSequence(raw: string): string {
     .filter((c) => STANDARD_AA.includes(c))
     .join('')
 }
+
+// ── Synthesis difficulty (research-use heuristics) ──────────────────────────
+//
+// Flags well-known synthesis/stability liabilities from sequence alone. These
+// are educational heuristics, not a manufacturability guarantee — they tie the
+// Design Lab to the /synthesis "what it costs / where purity is lost" thesis.
+
+export type FlagLevel = 'info' | 'caution' | 'warn'
+export interface SynthesisFlag {
+  level: FlagLevel
+  label: string
+  detail: string
+}
+export type DifficultyScore = 'straightforward' | 'moderate' | 'challenging'
+
+export function synthesisDifficulty(codes: string[]): {
+  score: DifficultyScore
+  flags: SynthesisFlag[]
+} {
+  const flags: SynthesisFlag[] = []
+  const n = codes.length
+  if (n === 0) return { score: 'straightforward', flags: [] }
+
+  const seq = codes.join('')
+  const count = (set: string) => codes.filter((c) => set.includes(c)).length
+
+  // Length
+  if (n > 30)
+    flags.push({
+      level: 'warn',
+      label: 'Long sequence',
+      detail: `${n} residues — long chains accumulate deletion/truncation impurities and are harder, costlier to purify.`,
+    })
+  else if (n >= 15)
+    flags.push({
+      level: 'caution',
+      label: 'Moderate length',
+      detail: `${n} residues — more coupling cycles than a short peptide; per-cycle losses compound.`,
+    })
+
+  // Cysteines / disulfides
+  const cys = count('C')
+  if (cys >= 2)
+    flags.push({
+      level: 'caution',
+      label: `${cys} cysteines`,
+      detail: 'Disulfide formation and scrambling must be controlled; thiols are oxidation-prone.',
+    })
+  else if (cys === 1)
+    flags.push({
+      level: 'info',
+      label: 'Free cysteine',
+      detail: 'A single thiol is oxidation-prone and can dimerize.',
+    })
+
+  // Oxidation-prone residues (Met, Trp)
+  const met = count('M')
+  const trp = count('W')
+  if (met + trp > 0)
+    flags.push({
+      level: met + trp >= 2 ? 'caution' : 'info',
+      label: 'Oxidation-prone residues',
+      detail: `${met} Met, ${trp} Trp — sensitive to oxidation; protect from air and light.`,
+    })
+
+  // Aspartimide-prone motifs (Fmoc SPPS): Asp-X (G/S/N/P/T) and Asn-Gly
+  const aspMotifs = seq.match(/D[GSNPT]|NG/g)
+  if (aspMotifs && aspMotifs.length)
+    flags.push({
+      level: 'caution',
+      label: 'Aspartimide-prone motif',
+      detail: `${[...new Set(aspMotifs)].join(', ')} — Asp/Asn-X sequences risk aspartimide side products in Fmoc synthesis.`,
+    })
+
+  // Hydrophobic aggregation ("difficult sequences")
+  const hyd = 'VILFAM'
+  let run = 0
+  let maxRun = 0
+  for (const c of codes) {
+    if (hyd.includes(c)) {
+      run++
+      maxRun = Math.max(maxRun, run)
+    } else run = 0
+  }
+  if (maxRun >= 4)
+    flags.push({
+      level: 'warn',
+      label: 'Hydrophobic run',
+      detail: `${maxRun} consecutive hydrophobic residues — strong on-resin aggregation / "difficult sequence" risk.`,
+    })
+  else if (maxRun === 3)
+    flags.push({
+      level: 'caution',
+      label: 'Hydrophobic stretch',
+      detail: 'Three consecutive hydrophobic residues — mild aggregation risk during synthesis.',
+    })
+
+  // Proline-rich / repeats
+  if (n >= 6 && count('P') / n > 0.25)
+    flags.push({
+      level: 'info',
+      label: 'Proline-rich',
+      detail: 'High proline content can slow couplings and complicate folding.',
+    })
+  if (/(.)\1\1/.test(seq))
+    flags.push({
+      level: 'info',
+      label: 'Repeat run',
+      detail: 'Three or more identical residues in a row can be harder to couple cleanly.',
+    })
+
+  // Overall score
+  const warns = flags.filter((f) => f.level === 'warn').length
+  const cautions = flags.filter((f) => f.level === 'caution').length
+  let score: DifficultyScore = 'straightforward'
+  if (warns >= 1 || cautions >= 3 || n > 30) score = 'challenging'
+  else if (cautions >= 1 || n >= 15) score = 'moderate'
+
+  return { score, flags }
+}

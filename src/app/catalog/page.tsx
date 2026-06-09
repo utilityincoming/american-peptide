@@ -286,7 +286,7 @@ function PeptideCard({
   return (
     <div
       className={
-        'group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white/[0.025] p-5 transition-all duration-300 hover:bg-white/[0.04] hover:shadow-[0_8px_40px_rgba(45,212,168,0.06)] ' +
+        'group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)] ' +
         (selected
           ? 'border-[#2DD4A8]/55 bg-[#2DD4A8]/[0.05]'
           : 'border-white/[0.07] hover:border-[#2DD4A8]/25')

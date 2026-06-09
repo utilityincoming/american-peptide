@@ -18,9 +18,9 @@ body {
   color: var(--foreground);
 }
 
-/* Display typeface for headings — scoped to the homepage for now (prototype).
-   To roll out site-wide, change `.home :is(...)` to plain `:is(h1, h2, h3)`. */
-.home :is(h1, h2, h3) {
+/* Display typeface for headings — rolled out site-wide. Utility classes like
+   `tracking-[...]` still override letter-spacing where set (higher specificity). */
+:is(h1, h2, h3) {
   font-family: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
   letter-spacing: -0.02em;
 }
