@@ -47,6 +47,20 @@ export const metadata: Metadata = {
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
+  openGraph: {
+    type: 'website',
+    siteName: 'AmericanPeptide.com',
+    title: 'AmericanPeptide.com — AI-Powered Peptide Research',
+    description:
+      'AI-assisted research platform and open reference for peptide science — catalog, research agent, clinical trials, synthesis guides, and hands-on tools.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@americanpeptide',
+    title: 'AmericanPeptide.com — AI-Powered Peptide Research',
+    description:
+      'AI-assisted research platform and open reference for peptide science — catalog, research agent, clinical trials, synthesis guides, and hands-on tools.',
+  },
 }
 
 export const viewport: Viewport = {

@@ -7,23 +7,25 @@ const SITE = 'https://www.americanpeptide.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
-    '',
-    '/catalog',
-    '/learn',
-    '/learn/compatibility',
-    '/synthesis',
-    '/research-areas',
-    '/glossary',
-    '/research',
-    '/compounds',
-    '/compounds/builder',
-    '/trials',
-    '/tools/reconstitution-calculator',
-    '/developers',
-  ].map((path) => ({
+    { path: '', priority: 1.0 },
+    { path: '/glp-1', priority: 0.9 },
+    { path: '/catalog', priority: 0.8 },
+    { path: '/learn', priority: 0.8 },
+    { path: '/learn/compatibility', priority: 0.8 },
+    { path: '/synthesis', priority: 0.8 },
+    { path: '/research-areas', priority: 0.8 },
+    { path: '/glossary', priority: 0.8 },
+    { path: '/research', priority: 0.8 },
+    { path: '/compounds', priority: 0.8 },
+    { path: '/compounds/builder', priority: 0.8 },
+    { path: '/trials', priority: 0.8 },
+    { path: '/melanocortin', priority: 0.7 },
+    { path: '/tools/reconstitution-calculator', priority: 0.8 },
+    { path: '/developers', priority: 0.8 },
+  ].map(({ path, priority }) => ({
     url: `${SITE}${path}`,
     changeFrequency: 'weekly' as const,
-    priority: path === '' ? 1 : 0.8,
+    priority,
   }))
 
   const categoryRoutes = CATEGORIES.map((c) => ({
