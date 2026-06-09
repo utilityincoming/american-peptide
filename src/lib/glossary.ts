@@ -511,6 +511,84 @@ export const GLOSSARY: GlossaryTerm[] = [
     relatedTerms: ['molecular-weight', 'pubchem-cid'],
   },
 
+  {
+    slug: 'vegf',
+    term: 'VEGF',
+    abbr: 'VEGF',
+    category: 'biology',
+    short: 'Vascular endothelial growth factor — the primary driver of new blood vessel formation.',
+    definition:
+      'VEGF (vascular endothelial growth factor) is a signaling protein that stimulates angiogenesis — the growth of new blood vessels from existing ones. It acts through VEGF receptors (notably VEGFR2) on endothelial cells. Upregulation of the VEGFR2 pathway is one of the proposed mechanisms of BPC-157 in tissue-repair models.',
+    aliases: ['vascular endothelial growth factor', 'VEGFR2'],
+    relatedTerms: ['angiogenesis'],
+    relatedAreas: ['wound-healing'],
+    relatedPeptides: ['bpc-157', 'ghk-cu', 'tb-500'],
+  },
+  {
+    slug: 'alpha-msh',
+    term: 'α-MSH',
+    abbr: 'α-MSH',
+    category: 'biology',
+    short: 'Alpha-melanocyte-stimulating hormone — the master endogenous melanocortin peptide.',
+    definition:
+      'α-MSH (alpha-melanocyte-stimulating hormone) is a 13-amino-acid peptide cleaved from POMC (pro-opiomelanocortin). It is the primary endogenous agonist of melanocortin receptors, activating MC1R (pigmentation), MC3R (energy balance), MC4R (sexual response, appetite), and MC5R (exocrine secretion). Synthetic analogs of α-MSH include melanotan-2 and PT-141, and fragments include KPV.',
+    aliases: ['alpha-melanocyte-stimulating hormone', 'alpha-MSH', 'melanocyte stimulating hormone'],
+    relatedTerms: ['melanocortin', 'kisspeptin'],
+    relatedAreas: ['sexual-reproductive', 'skin-hair', 'immune-inflammation'],
+    relatedPeptides: ['melanotan-2', 'pt-141', 'kpv'],
+  },
+  {
+    slug: 'ampk',
+    term: 'AMPK',
+    abbr: 'AMPK',
+    category: 'biology',
+    short: 'AMP-activated protein kinase — the cell\'s central energy-sensing enzyme.',
+    definition:
+      'AMPK (AMP-activated protein kinase) is an enzyme that acts as a master energy sensor, activated when cellular AMP:ATP ratio rises (indicating low energy). It promotes catabolic pathways (fatty-acid oxidation, glucose uptake) and suppresses anabolic ones. MOTS-c, the mitochondrially-encoded peptide, is proposed to activate AMPK as part of its signaling mechanism.',
+    aliases: ['AMP-activated protein kinase', 'AMP kinase'],
+    relatedTerms: ['nad', 'cardiolipin'],
+    relatedAreas: ['longevity-aging', 'mitochondrial', 'weight-loss'],
+    relatedPeptides: ['mots-c', '5-amino-1mq'],
+  },
+  {
+    slug: 'blood-brain-barrier',
+    term: 'Blood–Brain Barrier',
+    abbr: 'BBB',
+    category: 'biology',
+    short: 'The selective barrier between blood and brain tissue that restricts most peptides from entering the CNS.',
+    definition:
+      'The blood–brain barrier (BBB) is formed by tight junctions between the endothelial cells lining cerebral capillaries. It restricts the passage of most large molecules — including most peptides — from blood into brain tissue. BBB permeability is a key determinant of whether a cognitive or neuroprotective peptide can act centrally. Semax and selank are studied in part because of reported CNS activity despite the barrier.',
+    aliases: ['BBB', 'blood brain barrier'],
+    relatedTerms: ['bioavailability'],
+    relatedAreas: ['cognition-neuroprotection', 'anxiety-mood'],
+    relatedPeptides: ['semax', 'selank', 'dsip'],
+  },
+  {
+    slug: 'spps',
+    term: 'SPPS',
+    abbr: 'SPPS',
+    category: 'chemistry',
+    short: 'Solid-phase peptide synthesis — the primary method for manufacturing research peptides.',
+    definition:
+      'SPPS (solid-phase peptide synthesis) is the standard technique for manufacturing peptides in research and pharmaceutical production. Amino acids are added one at a time to a growing chain anchored to a resin bead, with protecting groups removed after each coupling step. The method enables the synthesis of any defined sequence but introduces deletion and truncation impurities that must be removed by HPLC purification. Virtually all research peptides — including BPC-157, semaglutide, and BPC-157 — are produced by SPPS.',
+    aliases: ['solid-phase peptide synthesis', 'solid phase synthesis'],
+    relatedTerms: ['peptide-bond', 'sequence', 'coa'],
+    relatedAreas: ['wound-healing', 'weight-loss'],
+  },
+  {
+    slug: 'binding-affinity',
+    term: 'Binding Affinity',
+    abbr: 'Ki / EC₅₀',
+    category: 'research',
+    short: 'A measure of how tightly a compound binds to or activates its receptor target.',
+    definition:
+      'Binding affinity describes the strength of the interaction between a compound and its receptor. Ki (inhibition constant) measures binding strength in displacement assays — lower Ki means tighter binding. EC₅₀ (half-maximal effective concentration) is the concentration that produces 50% of maximum receptor activation. These metrics appear in pharmacology papers and are central to comparing selectivity across receptor subtypes — for example, tirzepatide\'s GIP-R affinity relative to its GLP-1R affinity.',
+    aliases: ['Ki', 'EC50', 'IC50', 'receptor affinity', 'binding constant'],
+    relatedTerms: ['agonist', 'incretin', 'melanocortin'],
+    relatedAreas: ['weight-loss', 'sexual-reproductive'],
+    relatedPeptides: ['tirzepatide', 'retatrutide', 'pt-141'],
+  },
+
   // ── Research & Regulatory ─────────────────────────────────────────────────
   {
     slug: 'mash',

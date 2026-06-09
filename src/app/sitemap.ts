@@ -7,21 +7,29 @@ const SITE = 'https://www.americanpeptide.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
+    // ── Core ──────────────────────────────────────────────
     { path: '', priority: 1.0 },
+    // ── GLP-1 / Metabolic cluster ─────────────────────────
     { path: '/glp-1', priority: 0.9 },
+    { path: '/semaglutide-vs-tirzepatide', priority: 0.9 },
+    // ── Healing & Repair cluster ──────────────────────────
+    { path: '/bpc-157', priority: 0.9 },
+    // ── Catalog & Learning ────────────────────────────────
     { path: '/catalog', priority: 0.8 },
     { path: '/learn', priority: 0.8 },
     { path: '/learn/compatibility', priority: 0.8 },
     { path: '/synthesis', priority: 0.8 },
     { path: '/research-areas', priority: 0.8 },
     { path: '/glossary', priority: 0.8 },
+    // ── Tools & Research ──────────────────────────────────
     { path: '/research', priority: 0.8 },
     { path: '/compounds', priority: 0.8 },
     { path: '/compounds/builder', priority: 0.8 },
     { path: '/trials', priority: 0.8 },
-    { path: '/melanocortin', priority: 0.7 },
     { path: '/tools/reconstitution-calculator', priority: 0.8 },
-    { path: '/developers', priority: 0.8 },
+    // ── Specialized hubs ──────────────────────────────────
+    { path: '/melanocortin', priority: 0.7 },
+    { path: '/developers', priority: 0.7 },
   ].map(({ path, priority }) => ({
     url: `${SITE}${path}`,
     changeFrequency: 'weekly' as const,
