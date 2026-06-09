@@ -21,6 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/longevity-peptides', priority: 0.8 },
     // ── Cognitive cluster ─────────────────────────────────
     { path: '/cognitive-peptides', priority: 0.8 },
+    // ── Immune cluster ────────────────────────────────────
+    { path: '/immune-peptides', priority: 0.8 },
     // ── Catalog & Learning ────────────────────────────────
     { path: '/catalog', priority: 0.8 },
     { path: '/learn', priority: 0.8 },
