@@ -134,7 +134,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     tagline: 'Regulatory peptides studied for anxiolysis and stress-axis modulation.',
     metaTitle: 'Anxiety, Mood & Stress Peptides — Research Guide | AmericanPeptide.com',
     metaDescription:
-      'Research reference for peptides studied in anxiety, mood, and stress physiology — anxiolytic signaling without the sedation profile of classic GABAergic drugs.',
+      'Research reference for peptides studied in anxiety, mood, and stress physiology — anxiolytic signaling without the sedation profile of classic GABAergic medications.',
     intro: [
       'A small set of regulatory peptides is studied for anxiolytic and mood-stabilizing effects, often with interest in achieving calm without the sedation, dependence, or cognitive dulling associated with classic GABAergic agents.',
       'Investigated mechanisms include modulation of the stress (HPA) axis, neurotrophic support, and effects on serotonergic and GABAergic signaling. As with other neuroactive peptides, much of the human data is early-stage and concentrated in specific research traditions.',
