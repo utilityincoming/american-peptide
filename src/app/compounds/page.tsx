@@ -108,6 +108,18 @@ export default function CompoundsPage() {
           </span>
         </Link>
 
+        {/* Design Lab (beta) link */}
+        <Link
+          href="/tools/design-lab"
+          className="group mb-8 flex items-center justify-between gap-3 rounded-xl border border-white/[0.08] bg-white/[0.02] px-4 py-2.5 text-xs transition-colors hover:border-[#2DD4A8]/25 hover:bg-white/[0.04]"
+        >
+          <span className="text-white/55">
+            <span className="font-semibold text-[#2DD4A8]">Beta ·</span> Design
+            Lab — sequence properties, pI, ε280 &amp; synthesis-difficulty flags
+          </span>
+          <ArrowRight className="h-3.5 w-3.5 shrink-0 text-[#2DD4A8]" />
+        </Link>
+
         {/* ── Search bar ── */}
         <div className="mb-8">
           <div className="flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 transition-colors focus-within:border-[#2DD4A8]/25">

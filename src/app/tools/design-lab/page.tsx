@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import {
   Dna,
   Shuffle,
@@ -11,6 +13,8 @@ import {
   Save,
   ExternalLink,
   ArrowRight,
+  Sparkles,
+  Loader2,
 } from 'lucide-react'
 import {
   AMINO_ACIDS,
@@ -24,8 +28,22 @@ import {
   extinctionCoefficient,
   a280Point1pct,
   sanitizeSequence,
+  synthesisDifficulty,
+  type FlagLevel,
 } from '@/lib/peptide-properties'
 import { PEPTIDES } from '@/lib/peptides'
+
+const FLAG_DOT: Record<FlagLevel, string> = {
+  info: 'bg-white/30',
+  caution: 'bg-amber-400',
+  warn: 'bg-red-400',
+}
+
+const SCORE_CHIP: Record<string, string> = {
+  straightforward: 'border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.10] text-[#2DD4A8]',
+  moderate: 'border-amber-500/30 bg-amber-500/[0.10] text-amber-400',
+  challenging: 'border-red-500/30 bg-red-500/[0.10] text-red-400',
+}
 
 const SAVE_KEY = 'amp-design-lab-saved'
 
@@ -79,6 +97,9 @@ export default function DesignLabPage() {
   const [ph, setPh] = useState(7.4)
   const [saved, setSaved] = useState<{ seq: string; ts: number }[]>([])
   const [copied, setCopied] = useState(false)
+  const [analysis, setAnalysis] = useState<string | null>(null)
+  const [analyzing, setAnalyzing] = useState(false)
+  const [analysisError, setAnalysisError] = useState<string | null>(null)
 
   // Load saved designs + any shared-link state.
   useEffect(() => {
@@ -106,6 +127,7 @@ export default function DesignLabPage() {
   const pI = useMemo(() => isoelectricPoint(codes), [codes])
   const ext = useMemo(() => extinctionCoefficient(codes), [codes])
   const a280 = a280Point1pct(ext.reduced, stats.mass)
+  const difficulty = useMemo(() => synthesisDifficulty(codes), [codes])
 
   const append = (code: string) => setSeq((s) => s + code)
   const clear = () => setSeq('')
@@ -149,6 +171,48 @@ export default function DesignLabPage() {
       setTimeout(() => setCopied(false), 1500)
     } catch {
       /* ignore */
+    }
+  }
+
+  const analyze = async () => {
+    if (codes.length < 2) return
+    setAnalyzing(true)
+    setAnalysisError(null)
+    try {
+      const res = await fetch('/api/analyze-peptide', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sequence: seq,
+          pH: ph,
+          properties: {
+            Length: stats.length,
+            'MW (Da, avg)': Math.round(stats.mass),
+            'Net charge': `${charge >= 0 ? '+' : ''}${charge.toFixed(2)} at pH ${ph.toFixed(1)}`,
+            'Isoelectric point': pI.toFixed(2),
+            GRAVY: stats.gravy.toFixed(2),
+            'Extinction e280 (reduced)': ext.reduced,
+            Aromatic: stats.aromatic,
+            Cysteines: stats.cysteines,
+            'Synthesis difficulty (heuristic)': difficulty.score,
+          },
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setAnalysis(null)
+        setAnalysisError(
+          typeof data.error === 'string'
+            ? data.error.slice(0, 200)
+            : 'Analysis failed.',
+        )
+      } else {
+        setAnalysis(data.content)
+      }
+    } catch {
+      setAnalysisError('Network error — please try again.')
+    } finally {
+      setAnalyzing(false)
     }
   }
 
@@ -366,6 +430,89 @@ export default function DesignLabPage() {
             <p className="mt-4 break-words font-mono text-xs text-white/45">
               {toThreeLetter(codes)}
             </p>
+          )}
+        </section>
+
+        {/* ── Synthesis difficulty ── */}
+        <section className="mb-6 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
+              Synthesis difficulty
+            </h2>
+            <span
+              className={`rounded-full border px-2.5 py-0.5 text-[11px] font-medium capitalize ${SCORE_CHIP[difficulty.score]}`}
+            >
+              {difficulty.score}
+            </span>
+          </div>
+          {difficulty.flags.length === 0 ? (
+            <p className="text-sm text-white/45">
+              No major synthesis liabilities flagged for this sequence.
+            </p>
+          ) : (
+            <ul className="space-y-2">
+              {difficulty.flags.map((f, i) => (
+                <li key={i} className="flex gap-2.5 text-sm leading-relaxed">
+                  <span className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${FLAG_DOT[f.level]}`} />
+                  <span>
+                    <span className="font-medium text-white/85">{f.label}.</span>{' '}
+                    <span className="text-white/55">{f.detail}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+          <p className="mt-3 text-[10px] leading-relaxed text-white/30">
+            Heuristic estimate from sequence — see the{' '}
+            <Link href="/synthesis" className="text-[#2DD4A8]/70 hover:text-[#2DD4A8]">
+              synthesis guide
+            </Link>{' '}
+            for what drives cost &amp; purity.
+          </p>
+        </section>
+
+        {/* ── AI analysis ── */}
+        <section className="mb-6 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
+              AI design analysis
+            </h2>
+            <button
+              type="button"
+              onClick={analyze}
+              disabled={analyzing || codes.length < 2}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-1.5 text-xs font-medium text-[#2DD4A8] transition-colors hover:bg-[#2DD4A8]/20 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {analyzing ? (
+                <>
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  Analyzing…
+                </>
+              ) : (
+                <>
+                  <Sparkles className="h-3.5 w-3.5" />
+                  Analyze design
+                </>
+              )}
+            </button>
+          </div>
+
+          {analysisError && (
+            <p className="mb-2 text-xs leading-relaxed text-amber-400/75">{analysisError}</p>
+          )}
+
+          {analysis ? (
+            <div className="space-y-2 text-sm leading-relaxed text-white/70 [&_a]:text-[#2DD4A8] [&_a]:underline [&_h1]:text-base [&_h1]:font-semibold [&_h1]:text-white [&_h2]:mt-3 [&_h2]:text-sm [&_h2]:font-semibold [&_h2]:text-white/90 [&_h3]:mt-2 [&_h3]:font-semibold [&_h3]:text-white/85 [&_strong]:text-white/90 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-5">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{analysis}</ReactMarkdown>
+            </div>
+          ) : (
+            !analyzing && (
+              <p className="text-sm leading-relaxed text-white/45">
+                Get a research-framed read on this sequence — charge &amp;
+                solubility, stability &amp; synthesis liabilities, and similar
+                known peptides. Not medical, dosing, or administration advice.
+              </p>
+            )
           )}
         </section>
 

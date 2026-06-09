@@ -111,7 +111,7 @@ export default function ResearchAreasPage() {
             <Link
               key={area.slug}
               href={`/research-areas/${area.slug}`}
-              className="group flex flex-col rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 transition-all hover:border-[#2DD4A8]/25 hover:bg-white/[0.04]"
+              className="group flex flex-col rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/25 hover:bg-white/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.12)]"
             >
               <div className="mb-3 flex items-center justify-between">
                 <span className="inline-flex items-center gap-1.5 text-[11px] text-white/40">
