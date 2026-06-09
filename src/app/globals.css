@@ -67,3 +67,202 @@ body {
     animation: none;
   }
 }
+
+/* ── Synthesis walk (scrollytelling) visuals ── */
+@keyframes swEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes swPulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes swFloat2 {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+@keyframes swRise {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-178px);
+    opacity: 0;
+  }
+}
+@keyframes swScan {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  92% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(230px);
+    opacity: 0;
+  }
+}
+@keyframes swVapor {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-78px) scale(0.35);
+    opacity: 0;
+  }
+}
+@keyframes swCrossA {
+  0%,
+  38% {
+    opacity: 1;
+  }
+  62%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes swCrossB {
+  0%,
+  38% {
+    opacity: 0;
+  }
+  62%,
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes swFill {
+  0%,
+  100% {
+    transform: scaleY(0.2);
+  }
+  50% {
+    transform: scaleY(0.92);
+  }
+}
+@keyframes swMove {
+  0% {
+    transform: translateX(0);
+  }
+  92%,
+  100% {
+    transform: translateX(188px);
+  }
+}
+@keyframes swFall {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(var(--dx, 0), 62px);
+    opacity: 0;
+  }
+}
+@keyframes swBlink {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.sw-enter {
+  animation: swEnter 0.5s ease both;
+}
+.sw-pulse {
+  animation: swPulse 2.6s ease-in-out infinite;
+}
+.sw-float2 {
+  animation: swFloat2 5s ease-in-out infinite;
+}
+.sw-rise {
+  animation: swRise 4.5s ease-in-out infinite;
+}
+.sw-scan {
+  animation: swScan 3.4s ease-in-out infinite;
+}
+.sw-vapor {
+  animation: swVapor 3s ease-in-out infinite;
+}
+.sw-crossA {
+  animation: swCrossA 4s ease-in-out infinite;
+}
+.sw-crossB {
+  animation: swCrossB 4s ease-in-out infinite;
+}
+.sw-fill {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  animation: swFill 4s ease-in-out infinite;
+}
+.sw-move {
+  animation: swMove 5s ease-in-out infinite;
+}
+.sw-fall {
+  animation: swFall 3.2s ease-in-out infinite;
+}
+.sw-blink {
+  animation: swBlink 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sw-enter,
+  .sw-pulse,
+  .sw-float2,
+  .sw-rise,
+  .sw-scan,
+  .sw-vapor,
+  .sw-crossA,
+  .sw-crossB,
+  .sw-fill,
+  .sw-move,
+  .sw-fall,
+  .sw-blink {
+    animation: none;
+  }
+  /* Settle to a legible static state when motion is reduced. */
+  .sw-rise,
+  .sw-vapor,
+  .sw-scan,
+  .sw-crossB,
+  .sw-fall {
+    opacity: 1;
+  }
+}

@@ -17,7 +17,7 @@ const WELCOME: Message = {
   role: 'assistant',
   content: `Welcome to the **AmericanPeptide Research Agent**.
 
-I'm your AI assistant for peptide drug discovery. I can help you:
+I'm your AI assistant for peptide research. I can help you:
 
 - **Design peptide sequences** — optimize for binding affinity, stability, and permeability
 - **Analyze clinical trials** — search and interpret data from ClinicalTrials.gov
@@ -32,10 +32,10 @@ const SUGGESTIONS = [
   'Best peptide for skin anti-aging',
   'GHK-Cu for hair growth',
   'BPC-157 vs TB-500 for healing',
-  'How to reconstitute peptides',
+  'How is a research peptide actually made?',
+  'Why are pure peptides so expensive to make?',
   'How to read a peptide COA',
-  'Best copper peptide serum ingredients',
-  'Peptide storage and shelf life',
+  'What makes American synthesis different?',
 ]
 
 const md: Components = {
