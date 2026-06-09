@@ -166,15 +166,6 @@ const compounds = [
   },
 ]
 
-const EVIDENCE_LABELS = [
-  { level: 0, label: 'In vitro', color: 'text-white/40' },
-  { level: 1, label: 'Preclinical', color: 'text-amber-400' },
-  { level: 2, label: 'Phase 1/2', color: 'text-blue-400' },
-  { level: 3, label: 'Phase 3', color: 'text-[#60A5FA]' },
-  { level: 4, label: 'Approved (non-US)', color: 'text-emerald-400' },
-  { level: 5, label: 'FDA Approved', color: 'text-[#2DD4A8]' },
-]
-
 export default function ImmunePeptidesPage() {
   return (
     <div className="min-h-screen bg-[#0B1220] text-white">
