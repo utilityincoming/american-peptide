@@ -82,6 +82,14 @@ const PAGES: CommandItem[] = [
     keywords: 'blend calculator combine mix multiple peptides one vial doses draw volume beta',
   },
   {
+    id: 'page-design-lab',
+    kind: 'page',
+    label: 'Design Lab (Beta)',
+    subtitle: 'Sequence properties: MW, charge, pI, GRAVY, ε280',
+    href: '/tools/design-lab',
+    keywords: 'design lab sequence properties molecular weight net charge isoelectric point pi gravy hydropathy extinction coefficient builder beta',
+  },
+  {
     id: 'page-research-areas',
     kind: 'page',
     label: 'Research Areas',
