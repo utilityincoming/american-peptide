@@ -22,6 +22,7 @@ import {
   type Peptide,
 } from '@/lib/peptides'
 import { getAreasForPeptide } from '@/lib/research-areas'
+import PeptideStory from '@/components/PeptideStory'
 
 const SITE = 'https://www.americanpeptide.com'
 
@@ -260,6 +261,9 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 </ul>
               </Block>
             )}
+
+            {/* Per-peptide "born here" story — ties the synthesis pipeline to this molecule */}
+            <PeptideStory peptide={peptide} />
 
             {/* Handling, storage & why purity is hard — universal consumer-hardening callout */}
             <div className="rounded-2xl border border-[#2DD4A8]/15 bg-gradient-to-br from-[#2DD4A8]/[0.05] to-transparent p-6">
