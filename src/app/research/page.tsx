@@ -17,7 +17,7 @@ const WELCOME: Message = {
   role: 'assistant',
   content: `Welcome to the **AmericanPeptide Research Agent**.
 
-I'm your AI assistant for peptide drug discovery. I can help you:
+I'm your AI assistant for peptide research. I can help you:
 
 - **Design peptide sequences** — optimize for binding affinity, stability, and permeability
 - **Analyze clinical trials** — search and interpret data from ClinicalTrials.gov

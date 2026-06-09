@@ -26,9 +26,9 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.americanpeptide.com'),
-  title: 'AmericanPeptide.com — AI-Powered Peptide Drug Discovery',
+  title: 'AmericanPeptide.com — AI-Powered Peptide Research',
   description:
-    'AI-assisted computational research platform for peptide drug discovery. Design sequences, monitor clinical trials, and synthesize literature at machine speed.',
+    'An AI-assisted research platform and open reference for peptide science — explore how peptides are designed, synthesized, purified, and proven, with a research agent, an open catalog, and hands-on tools.',
   manifest: '/manifest.json',
   applicationName: 'AmericanPeptide',
   appleWebApp: {

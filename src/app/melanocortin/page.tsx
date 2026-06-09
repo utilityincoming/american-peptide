@@ -520,14 +520,14 @@ export default function MelanocortinPage() {
           </h1>
           <p className="max-w-2xl text-lg leading-relaxed text-white/50">
             Exploring MC1R–MC5R receptor agonists — from FDA-approved therapeutics to
-            next-generation candidates. 3 approved drugs · 5 receptor subtypes · expanding
+            next-generation candidates. 3 approved therapies · 5 receptor subtypes · expanding
             pipeline.
           </p>
 
           {/* Hero stat pills */}
           <div className="mt-8 flex flex-wrap gap-3">
             {[
-              { value: '3', label: 'FDA-Approved Drugs' },
+              { value: '3', label: 'FDA-Approved Therapies' },
               { value: '5', label: 'Receptor Subtypes' },
               { value: '3+', label: 'Pipeline Candidates' },
             ].map(({ value, label }) => (
@@ -542,12 +542,12 @@ export default function MelanocortinPage() {
           </div>
         </section>
 
-        {/* ── Approved Drugs ── */}
+        {/* ── Approved Therapies ── */}
         <section className="mb-20">
           <SectionHeader
             eyebrow="Approved Therapeutics"
             title="FDA-Approved Melanocortin Agonists"
-            subtitle="Three approved drugs targeting the melanocortin system across distinct therapeutic indications"
+            subtitle="Three approved therapies targeting the melanocortin system across distinct therapeutic indications"
           />
           <div className="grid gap-5 md:grid-cols-3">
             {DRUGS.map((drug) => (
@@ -694,7 +694,7 @@ export default function MelanocortinPage() {
           <SectionHeader
             eyebrow="Platform Tools"
             title="Continue Your Research"
-            subtitle="Use AmericanPeptide's integrated tools to go deeper into melanocortin biology and drug development"
+            subtitle="Use AmericanPeptide's integrated tools to go deeper into melanocortin biology and therapeutic development"
           />
           <div className="grid gap-4 sm:grid-cols-3">
             <ToolCard
@@ -749,7 +749,7 @@ export default function MelanocortinPage() {
           <div className="rounded-xl border border-amber-500/15 bg-amber-500/[0.04] px-5 py-4">
             <p className="text-xs leading-relaxed text-amber-400/60">
               <span className="font-semibold text-amber-400/80">Research Disclaimer: </span>
-              This page contains curated scientific information for research purposes only. Drug
+              This page contains curated scientific information for research purposes only. Regulatory
               approval status, clinical trial phases, pipeline timelines, and receptor binding data
               reflect publicly available information as of May 2026 and may not reflect current
               regulatory status or commercial availability. Receptor binding selectivity values in

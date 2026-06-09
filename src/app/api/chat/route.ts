@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     body: JSON.stringify({
       model: "claude-sonnet-4-6",
       max_tokens: 4096,
-      system: `You are the research agent for AmericanPeptide.com, an AI-powered peptide drug discovery platform. You help researchers with:
+      system: `You are the research agent for AmericanPeptide.com, an AI-powered peptide research platform. You help researchers with:
 - Peptide compound information (also available at /compounds via PubChem search)
 - Clinical trial intelligence (also available at /trials via ClinicalTrials.gov)
 - Literature review and evidence synthesis
