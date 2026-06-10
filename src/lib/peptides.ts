@@ -427,6 +427,88 @@ const SEED_PEPTIDES: Peptide[] = [
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
+    slug: 'somatropin',
+    name: 'Somatropin (rHGH)',
+    aliases: [
+      'Recombinant human growth hormone',
+      'rhGH',
+      '191aa HGH',
+      'Human growth hormone',
+      'Genotropin',
+      'Humatrope',
+      'Norditropin',
+      'Nutropin',
+      'Saizen',
+      'Omnitrope',
+      'Serostim',
+    ],
+    categories: ['growth-hormone', 'longevity'],
+    shortDescription:
+      'Recombinant 191-amino-acid human growth hormone — a folded protein biologic identical in sequence to pituitary GH, not a synthetic research peptide.',
+    description:
+      'Somatropin is recombinant human growth hormone (rHGH): a single 191-amino-acid polypeptide, ~22.1 kDa, with the exact sequence of the major form secreted by the human pituitary. Unlike the short synthetic peptides elsewhere in this catalog, it is a folded protein biologic — produced in engineered cells, stabilized by two internal disulfide bonds, and dependent on its three-dimensional structure for activity. It is FDA-approved for several growth-hormone-deficiency and short-stature indications, and is simultaneously one of the most misunderstood molecules in the anti-aging conversation.',
+    mechanism:
+      'Binds a single GH receptor that then dimerizes, activating JAK2/STAT5 signaling. Most anabolic and growth effects are mediated indirectly through hepatic IGF-1 induction; GH also acts directly to drive lipolysis and oppose insulin.',
+    researchAreas: [
+      'Growth hormone deficiency',
+      'Body composition',
+      'Anti-aging (off-label)',
+      'Longevity',
+      'GH/IGF-1 axis',
+    ],
+    background: [
+      'Somatropin is a biologic, and that distinction is the point of including it here. The research peptides in this catalog are mostly short chains built by solid-phase synthesis; somatropin is a full 191-residue protein with defined secondary and tertiary structure — a four-helix bundle held by two disulfide bridges (Cys53–Cys165 and Cys182–Cys189). Its sequence is identical to the dominant 22 kDa form of growth hormone the pituitary releases, which is why it is called "recombinant human" growth hormone rather than an analog. Activity lives in the fold: denature the protein and you do not get a weaker peptide, you get an inactive one.',
+      'The molecule also carries its own history. Until 1985, growth hormone was extracted from cadaveric pituitaries — a supply that was abruptly halted when several recipients developed Creutzfeldt–Jakob disease from prion contamination. Recombinant production solved both the supply and the safety problem. The first recombinant product (somatrem) carried an extra N-terminal methionine, a 192-amino-acid artifact of bacterial expression; somatropin is the true 191-amino-acid, native-sequence version that followed and now defines the class across brands such as Genotropin, Humatrope, Norditropin, and Saizen.',
+      'Mechanistically, growth hormone is a relay, not a direct effector. It binds and dimerizes the GH receptor, triggering JAK2/STAT5 signaling, and much of what people attribute to "GH" is actually the work of IGF-1 produced downstream in the liver. GH does have direct actions — it mobilizes fat and antagonizes insulin — but the growth and anabolic story runs largely through the GH/IGF-1 axis. This is also why the secretagogues elsewhere in this catalog (the GHRH analogs and GHRPs) exist: they coax the pituitary into releasing this same molecule, preserving the body’s pulsatile feedback rather than supplying a flat exogenous dose.',
+      'Then there is the drama. In 1990 a small New England Journal of Medicine study by Daniel Rudman gave GH to twelve older men and reported reduced fat and increased lean mass over six months. That single paper — 12 subjects, no functional endpoints — became the founding myth of the GH anti-aging industry. The journal’s own editors later published an unusual note cautioning against using it to justify anti-aging treatment, and subsequent work documented the costs of supraphysiologic GH in healthy adults: fluid retention, carpal tunnel syndrome, joint pain, and insulin resistance. The headline rarely traveled with the footnotes.',
+      'The deepest irony is the longevity science. Across model organisms, it is reduced GH/IGF-1 signaling — not elevated — that tracks with extended lifespan: GH-receptor-knockout mice are among the longest-lived strains known, and humans with Laron syndrome (GH-receptor insensitivity) show strikingly low rates of cancer and diabetes. So a hormone marketed for "longevity" sits on an axis whose downregulation is one of the most reproducible pro-longevity signals in biology. That tension — real, FDA-approved medicine for genuine deficiency; oversold and legally restricted as an anti-aging tonic; and pointing the opposite direction from the longevity data — is exactly why it belongs in an honest reference.',
+    ],
+    keyResearch: [
+      'Growth hormone deficiency — the core approved use, in both pediatric and adult GHD, restoring GH/IGF-1 signaling to a physiologic range.',
+      'Approved short-stature and wasting indications — Turner syndrome, Prader-Willi syndrome, chronic renal insufficiency, SHOX deficiency, idiopathic short stature, AIDS wasting, and short bowel syndrome, depending on the specific product label.',
+      'Body composition — supraphysiologic GH reduces fat mass and increases lean/water mass, the effect that drives off-label anti-aging and athletic use; functional and long-term benefit in healthy adults is not established.',
+      'Documented adverse effects — fluid retention/edema, carpal tunnel syndrome, arthralgia, and insulin resistance are recurrent findings when GH is given above physiologic need.',
+      'Longevity paradox — reduced GH/IGF-1 signaling (GH-receptor knockout models, Laron syndrome) is associated with extended lifespan and lower cancer/diabetes risk, complicating the "anti-aging" rationale.',
+      'Legally restricted — U.S. federal law (21 U.S.C. § 333(e)) makes distribution of hGH for any use not specifically authorized by the FDA a crime; this is a near-unique statutory restriction among prescription drugs.',
+    ],
+    faqs: [
+      {
+        q: 'What is somatropin (191aa rHGH)?',
+        a: 'Somatropin is recombinant human growth hormone — a 191-amino-acid protein, ~22 kDa, with the same sequence as the growth hormone made by the human pituitary. It is a folded biologic, not a synthetic peptide, and is FDA-approved for several growth-hormone-deficiency and short-stature conditions.',
+      },
+      {
+        q: 'Why is it described as a biologic rather than a peptide?',
+        a: 'Its activity depends on three-dimensional structure — a four-helix fold stabilized by two disulfide bonds — and it is produced in living cells, not by solid-phase synthesis. That makes its manufacturing, characterization, and quality control much closer to a protein drug than to a short research peptide.',
+      },
+      {
+        q: 'Is it really used for anti-aging?',
+        a: 'Off-label, yes — that use traces largely to a small 1990 study whose authors and journal later warned against extrapolating it. Healthy-adult use carries documented side effects (edema, carpal tunnel, joint pain, insulin resistance), and U.S. law specifically restricts distributing hGH for uses the FDA has not authorized.',
+      },
+      {
+        q: 'Does growth hormone extend lifespan?',
+        a: 'The reverse is better supported in research: lower GH/IGF-1 signaling is associated with longer lifespan in animal models and with reduced cancer and diabetes in people with GH-receptor insensitivity (Laron syndrome). The popular "longevity" framing runs against much of the aging biology.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No. This is a research and educational reference. Somatropin is a prescription biologic with specific approved indications and significant legal restrictions; nothing here is a recommendation to obtain or use it.',
+      },
+    ],
+    sequence:
+      'FPTIPLSRLFDNAMLRAHRLHQLAFDTYQEFEEAYIPKEQKYSFLQNPQTSLCFSESIPTPSNREETQQKSNLELLRISLLLIQSWLEPVQFLRSVFANSLVYGASDSNVYDLLKDLEEGIQTLMGRLEDGSPRTGQIFKQTYSKFDTNSHNDDALLKNYGLLYCFRKDMDKVETFLRIVQCRSVEGSCGF',
+    molecularWeight: 22124,
+    molecularFormula: 'C990H1528N262O300S7',
+    cas: '12629-01-5',
+    uniprotId: 'P01241',
+    fdaApproved: true,
+    storage:
+      'Lyophilized somatropin is stored refrigerated (2–8 °C); most products must stay cold and are reconstituted with a supplied diluent. Reconstituted solution is typically used within days to weeks under refrigeration and must not be frozen — freezing and agitation can denature and aggregate the protein.',
+    handling:
+      'As a folded biologic it is sensitive to heat, freeze–thaw, vigorous shaking, and surface adsorption, any of which can unfold or aggregate it and destroy potency without changing appearance. Aggregated protein is also a potential immunogenicity concern, which is why protein therapeutics carry a tighter cold chain than small peptides.',
+    synthesisNotes:
+      'Somatropin is not made by solid-phase peptide synthesis. It is expressed recombinantly — historically in E. coli (often as inclusion bodies requiring refolding) and in mammalian cell lines — then purified by multi-step chromatography and verified for correct folding and disulfide pairing. Identity and potency rest on protein-specific methods (peptide mapping, mass spectrometry, bioassay/cell-based potency, host-cell-protein and endotoxin testing), not an HPLC purity percentage alone. This is the defining difference between a complex biologic hormone and the short synthetic peptides in the rest of this catalog.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
     slug: 'cjc-1295-no-dac',
     name: 'CJC-1295 (no DAC)',
     aliases: ['Modified GRF (1-29)', 'Mod GRF 1-29'],

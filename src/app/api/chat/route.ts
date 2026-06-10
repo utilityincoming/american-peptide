@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server'
 import { AGENT_TOOLS, executeAgentTool } from '@/lib/agent-tools'
 import { rateLimit, clientKey, tooManyRequests } from '@/lib/rate-limit'
 import { synthesisDigest } from '@/lib/synthesis'
-import { siteIndexDigest } from '@/lib/llms'
+import { siteIndexDigest, retrievalFallback } from '@/lib/llms'
 
 // ── Hardening knobs ──────────────────────────────────────────────────────────
 const MODEL = 'claude-fable-5'
@@ -244,17 +244,27 @@ export async function POST(request: NextRequest) {
 
   if (!finalText) {
     if (DEBUG) console.log(`[chat] empty finalText, lastStop=${lastStop}`)
-    // The model declined to produce a free-form answer (safety stop). Be honest
-    // and steer the user to the structured reference, which is model-independent
-    // and always available — don't pretend we "ran out of research steps."
+    // The model produced no answer (a safety refusal, or it ran out of rounds).
+    // Rather than fail, fall back to our own published reference content matched
+    // to the question — the assistant degrades from generative to retrieval.
+    const lastUser = [...cleaned].reverse().find((m) => m.role === 'user')
+    const query = typeof lastUser?.content === 'string' ? lastUser.content : ''
+    const reference = retrievalFallback(query)
+
     if (lastStop === 'refusal') {
-      finalText =
-        "I'm not able to give a free-form answer to that question. You can still get the underlying facts from the structured reference, which doesn't depend on the chat model: browse the [catalog](/catalog), open a specific compound's page, or check the [research-area guides](/research-areas) and [clinical trials dashboard](/trials). You can also try rephrasing the question."
+      finalText = reference
+        ? `I can't generate a custom answer to that one, but here's the relevant entry from the AmericanPeptide.com reference:\n\n${reference}`
+        : "I'm not able to give a free-form answer to that question. You can still get the underlying facts from the structured reference, which doesn't depend on the chat model: browse the [catalog](/catalog), open a specific compound's page, or check the [research-area guides](/research-areas) and [clinical trials dashboard](/trials). You can also try rephrasing the question."
     } else {
-      finalText =
-        'I gathered some data but ran out of research steps before composing a full answer. Please ask again or narrow the question.'
+      finalText = reference
+        ? `Here's the relevant entry from the AmericanPeptide.com reference:\n\n${reference}`
+        : 'I gathered some data but ran out of research steps before composing a full answer. Please ask again or narrow the question.'
     }
   }
 
-  return Response.json({ role: 'assistant', content: finalText, ...(lastStop === 'refusal' ? { stop: 'refusal' } : {}) })
+  return Response.json({
+    role: 'assistant',
+    content: finalText,
+    ...(lastStop === 'refusal' ? { stop: 'refusal' } : {}),
+  })
 }
