@@ -319,6 +319,116 @@ export function siteIndexDigest(): string {
   return lines.join('\n')
 }
 
+// ── Retrieval fallback (used when the chat model declines to answer) ─────────
+//
+// claude-fable-5 currently refuses a broad set of legitimate peptide-research
+// questions at the safety layer (stop_reason=refusal, empty content). Rather
+// than return nothing, the chat route falls back to THIS: a match of the user's
+// question against our own published, vetted reference content. The assistant
+// degrades from generative to retrieval — surfacing the catalog/area/comparison
+// entry the user could have navigated to anyway — instead of failing.
+
+// A few common entity-free phrasings → the peptide they're really asking about.
+const INTENT_HINTS: { pattern: RegExp; slug: string }[] = [
+  { pattern: /\btan(ning|ned)?\b|sunless tan/, slug: 'melanotan-2' },
+  { pattern: /\blibido\b|sex(ual)? desire/, slug: 'pt-141' },
+]
+
+function peptideBrief(p: Peptide): string {
+  const lines: string[] = [`**${p.name}** — ${p.shortDescription}`, '', p.description, '']
+  if (p.mechanism) lines.push(`**Mechanism.** ${p.mechanism}`, '')
+  if (p.keyResearch?.length) {
+    lines.push(...p.keyResearch.slice(0, 4).map((k) => `- ${k}`), '')
+  }
+  lines.push(
+    `Full reference: [/catalog/${p.slug}](/catalog/${p.slug}) · Research and educational content, not medical advice.`,
+  )
+  return lines.join('\n')
+}
+
+function areaBrief(a: ResearchArea): string {
+  const peps = getPeptidesForArea(a)
+  const lines: string[] = [`**${a.label}** — ${a.tagline}`, '', a.intro[0] ?? '', '']
+  if (peps.length) {
+    lines.push('Peptides studied in this area:', '')
+    lines.push(
+      ...peps.slice(0, 8).map((p) => `- [${p.name}](/catalog/${p.slug}): ${p.shortDescription}`),
+      '',
+    )
+  }
+  lines.push(`Full guide: [/research-areas/${a.slug}](/research-areas/${a.slug})`)
+  return lines.join('\n')
+}
+
+function comparisonBrief(c: Comparison): string {
+  const lines: string[] = [`**${c.aName} vs ${c.bName}** — ${c.headline}`, '', c.intro[0] ?? '', '']
+  if (c.atAGlance.length) {
+    lines.push(`| Dimension | ${c.aName} | ${c.bName} |`, '| --- | --- | --- |')
+    lines.push(...c.atAGlance.slice(0, 6).map((r) => `| ${r.dim} | ${r.a} | ${r.b} |`), '')
+  }
+  lines.push(`Full comparison: [/compare/${c.slug}](/compare/${c.slug})`)
+  return lines.join('\n')
+}
+
+/**
+ * Match free-text against our published reference content. Returns grounded
+ * markdown for the best match, or null if nothing relevant is found.
+ */
+export function retrievalFallback(userText: string): string | null {
+  const t = userText.toLowerCase()
+
+  // 1. A comparison wins if both compounds are named.
+  for (const c of COMPARISONS) {
+    if (t.includes(c.aName.toLowerCase()) && t.includes(c.bName.toLowerCase())) {
+      return comparisonBrief(c)
+    }
+  }
+
+  // 2. Best (longest, most specific) peptide name/alias/slug match.
+  let best: Peptide | null = null
+  let bestLen = 0
+  for (const p of PEPTIDES) {
+    const candidates = [p.name, ...(p.aliases ?? []), p.slug.replace(/-/g, ' '), p.slug]
+    for (const cand of candidates) {
+      const c = cand.toLowerCase()
+      if (c.length >= 3 && t.includes(c) && c.length > bestLen) {
+        best = p
+        bestLen = c.length
+      }
+    }
+  }
+  if (best) return peptideBrief(best)
+
+  // 3. Entity-free intent hints (e.g. "tanning" → Melanotan II).
+  for (const h of INTENT_HINTS) {
+    if (h.pattern.test(t)) {
+      const p = PEPTIDES.find((x) => x.slug === h.slug)
+      if (p) return peptideBrief(p)
+    }
+  }
+
+  // 4. Research area by matcher substring or slug-as-phrase ("weight loss").
+  for (const a of RESEARCH_AREAS) {
+    const slugPhrase = a.slug.replace(/-/g, ' ')
+    if (a.matchers.some((m) => t.includes(m.toLowerCase())) || t.includes(slugPhrase)) {
+      return areaBrief(a)
+    }
+  }
+
+  // 5. Synthesis / quality questions → the synthesis walkthrough.
+  if (/\bcoa\b|certificate of analysis|\bpurity\b|\bhplc\b|lyophiliz|\bsynthesis\b|reconstitut|how .*\bmade\b/.test(t)) {
+    return [
+      'How research peptides are actually made — synthesis, purification, lyophilization, and reading a certificate of analysis (COA) — is covered in depth in our walkthrough.',
+      '',
+      'A COA should show: purity by **HPLC** (%), identity by **mass spectrometry**, **peptide/net content**, water/counterion, and endotoxin. Appearance (a fluffy lyophilized cake) is not a purity signal.',
+      '',
+      'Full walkthrough: [/synthesis](/synthesis)',
+    ].join('\n')
+  }
+
+  return null
+}
+
 // ── /llms-full.txt — full catalog dump ───────────────────────────────────────
 
 export function llmsFullMarkdown(): string {

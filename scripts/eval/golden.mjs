@@ -28,7 +28,8 @@ export const GOLDEN = [
     id: 'semaglutide-vs-tirzepatide',
     question: 'How does semaglutide compare to tirzepatide for weight loss?',
     mustInclude: ['tirzepatide', 'GLP-1', 'GIP'],
-    expectLink: 'semaglutide-vs-tirzepatide',
+    // Either the comparison page or both catalog pages is valid internal citation.
+    expectLink: true,
     rubric:
       'Explains tirzepatide is a dual GIP/GLP-1 agonist vs semaglutide GLP-1-only, and that tirzepatide shows larger weight-loss endpoints in trials. Confident where evidence is clear. Links the comparison page or both catalog pages.',
   },
