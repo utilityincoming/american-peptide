@@ -157,6 +157,11 @@ export default function HomePage() {
           <span className="text-[#2DD4A8]">≥ 98%</span>
         </div>
 
+        {/* Synthesis patience line */}
+        <p className="mt-4 text-center text-xs tracking-wide text-white/25 italic">
+          Purity is what happens while you wait.
+        </p>
+
         {/* Stats row */}
         <div className="mt-12 grid grid-cols-3 gap-4 border-t border-white/[0.07] pt-10">
           {stats.map(({ value, label }) => (
@@ -350,7 +355,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Marketplace Waitlist (de-emphasized: moved below the fold, muted styling) ── */}
+      {/* ── Marketplace Waitlist ── */}
       <section className="relative z-10 mx-auto max-w-2xl px-6 pb-32 md:px-10">
         <div className="mb-5 text-center">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/[0.10] bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-white/45">
@@ -358,17 +363,21 @@ export default function HomePage() {
             Marketplace · In development
           </div>
           <h2 className="mb-2 text-xl font-semibold tracking-tight md:text-2xl">
-            A transparent marketplace is on the way
+            Good peptides make you wait.
+            <br />
+            <span className="text-white/50">So does the marketplace.</span>
           </h2>
           <p className="mx-auto max-w-md text-[13px] leading-relaxed text-white/40">
-            Vetted suppliers, third-party COAs, per-mg pricing. Join the
-            waitlist for early access when listings go live.
+            Each coupling step is 30–60 minutes. A 40-residue chain takes days
+            on the synthesizer, then HPLC, then lyophilization. The wait is the
+            COA. Vetted suppliers, third-party certificates, per-mg pricing —
+            worth it when it arrives.
           </p>
         </div>
         <WaitlistForm
           source="home"
           variant="full"
-          heading="Join the marketplace waitlist"
+          heading="Join the waitlist"
           description="Researchers get early access. Suppliers can request onboarding."
         />
       </section>
