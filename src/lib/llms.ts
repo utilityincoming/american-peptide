@@ -293,6 +293,32 @@ export function llmsIndexMarkdown(): string {
   return lines.join('\n')
 }
 
+// ── Site-index digest (for the research agent's internal-linking) ────────────
+
+// A compact map of every internal page the agent may link, injected as a
+// cached system block. Lets the agent turn each answer into a distribution
+// surface for our own URLs — and only these URLs, so it never invents links.
+export function siteIndexDigest(): string {
+  const lines: string[] = [
+    'INTERNAL PAGES — link to these with the EXACT url shown when you mention the compound, indication, or comparison. Never invent a url not in this list.',
+    '',
+    `Peptides (${API_SITE}/catalog/{slug}):`,
+  ]
+  for (const p of PEPTIDES) {
+    const aka = p.aliases?.length ? ` (${p.aliases.join(', ')})` : ''
+    lines.push(`- ${p.name}${aka} -> ${API_SITE}/catalog/${p.slug}`)
+  }
+  lines.push('', `Research-area guides (${API_SITE}/research-areas/{slug}):`)
+  for (const a of RESEARCH_AREAS) {
+    lines.push(`- ${a.label} -> ${API_SITE}/research-areas/${a.slug}`)
+  }
+  lines.push('', `Head-to-head comparisons (${API_SITE}/compare/{slug}):`)
+  for (const c of COMPARISONS) {
+    lines.push(`- ${c.aName} vs ${c.bName} -> ${API_SITE}/compare/${c.slug}`)
+  }
+  return lines.join('\n')
+}
+
 // ── /llms-full.txt — full catalog dump ───────────────────────────────────────
 
 export function llmsFullMarkdown(): string {
