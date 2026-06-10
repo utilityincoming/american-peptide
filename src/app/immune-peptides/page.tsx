@@ -420,7 +420,7 @@ export default function ImmunePeptidesPage() {
           </div>
 
           <p className="mb-4 text-sm leading-relaxed text-white/60">
-            Despite sharing the "thymosin" name, thymosin β4 (Tβ4) is{' '}
+            Despite sharing the &ldquo;thymosin&rdquo; name, thymosin β4 (Tβ4) is{' '}
             <strong className="text-white/80">mechanistically unrelated</strong> to thymosin α1.
             Where thymosin α1 acts on immune-cell differentiation via TLR signaling, Tβ4 works
             by sequestering G-actin monomers — regulating cytoskeletal dynamics, wound healing,
