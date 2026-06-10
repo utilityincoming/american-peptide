@@ -71,6 +71,11 @@ const endpoints = [
     path: '/llms-full.txt',
     desc: 'The entire catalog as one markdown document.',
   },
+  {
+    method: 'MCP',
+    path: '/api/mcp',
+    desc: 'Remote MCP server (Streamable HTTP) — connect from Claude, ChatGPT, or Cursor.',
+  },
 ]
 
 const params = [
@@ -278,6 +283,39 @@ export default function DevelopersPage() {
                 attribution, and send CORS-open headers — cite
                 AmericanPeptide.com when content travels.
               </p>
+            </div>
+          </div>
+
+          {/* MCP server */}
+          <div>
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+              Connect via MCP
+            </h2>
+            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6">
+              <p className="mb-4 text-sm leading-relaxed text-white/60">
+                AmericanPeptide.com is also a remote{' '}
+                <a
+                  href="https://modelcontextprotocol.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#2DD4A8] underline-offset-2 hover:underline"
+                >
+                  MCP server
+                </a>
+                . Connect it to Claude, ChatGPT, Cursor, or any MCP client and
+                your AI gets live tools for catalog search, full peptide
+                references, research-area guides, head-to-head comparisons, and
+                grounded lookups against ClinicalTrials.gov, PubMed, and
+                PubChem — every result with a canonical link back here.
+              </p>
+              <pre className="overflow-x-auto rounded-xl border border-white/[0.07] bg-black/40 p-4 font-mono text-[12px] leading-relaxed text-white/75">
+                {`# Endpoint (Streamable HTTP, no auth)
+https://www.americanpeptide.com/api/mcp
+
+# Claude Code
+claude mcp add --transport http american-peptide \\
+  https://www.americanpeptide.com/api/mcp`}
+              </pre>
             </div>
           </div>
 

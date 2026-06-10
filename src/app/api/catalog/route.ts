@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PEPTIDES, CATEGORIES, type Peptide } from '@/lib/peptides'
-import {
-  RESEARCH_AREAS,
-  getResearchAreaBySlug,
-  getPeptidesForArea,
-} from '@/lib/research-areas'
+import { CATEGORIES } from '@/lib/peptides'
+import { RESEARCH_AREAS } from '@/lib/research-areas'
 import {
   apiHeaders,
   apiMeta,
+  filterPeptides,
   serializePeptide,
   isBrowserDocumentRequest,
   CORS_HEADERS,
@@ -37,40 +34,14 @@ export async function GET(req: NextRequest) {
   const fdaOnly = sp.get('fda') === 'true'
   const q = sp.get('q')?.trim().toLowerCase() || null
 
-  let items: Peptide[] = PEPTIDES
-
-  if (area) {
-    const meta = getResearchAreaBySlug(area)
-    if (!meta) {
-      return NextResponse.json(
-        {
-          ...apiMeta(),
-          error: `Unknown research area '${area}'. See documentation for valid slugs.`,
-        },
-        { status: 400, headers: CORS_HEADERS },
-      )
-    }
-    items = getPeptidesForArea(meta)
-  }
-
-  if (category) {
-    items = items.filter((p) =>
-      p.categories.some((c) => c.toLowerCase() === category),
+  const result = filterPeptides({ category, area, fdaOnly, q })
+  if ('error' in result) {
+    return NextResponse.json(
+      { ...apiMeta(), error: result.error },
+      { status: 400, headers: CORS_HEADERS },
     )
   }
-
-  if (fdaOnly) {
-    items = items.filter((p) => p.fdaApproved)
-  }
-
-  if (q) {
-    items = items.filter((p) => {
-      const hay = [p.name, p.shortDescription, p.description, ...(p.aliases ?? [])]
-        .join(' ')
-        .toLowerCase()
-      return hay.includes(q)
-    })
-  }
+  const items = result.items
 
   return NextResponse.json(
     {
