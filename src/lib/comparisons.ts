@@ -166,7 +166,7 @@ export const COMPARISONS: Comparison[] = [
       { q: 'What does GIP add to GLP-1 agonism?', a: 'GIP provides a complementary insulinotropic signal through pancreatic GIPR and potentially an adipose-tissue signal through peripheral GIPR. In tirzepatide, co-activation of both receptor types is hypothesized to produce synergistic satiety and metabolic effects exceeding GLP-1 agonism alone — supported by the magnitude of weight loss in trials.' },
       { q: 'How does retatrutide compare to both?', a: 'Retatrutide (LY3437943) adds glucagon-receptor agonism to the GIP/GLP-1 dual mechanism — a triple agonist. In Phase 2 trials it reported approximately 24% mean body-weight reduction at the highest dose, exceeding both semaglutide and tirzepatide data. It remains investigational and is not FDA-approved.' },
     ],
-    relatedAreas: ['metabolic-weight', 'metabolic', 'obesity', 'diabetes-metabolic'],
+    relatedAreas: ['weight-loss'],
     about: [
       { name: 'Semaglutide', alternateName: 'Ozempic' },
       { name: 'Tirzepatide', alternateName: 'Mounjaro' },
@@ -238,7 +238,7 @@ export const COMPARISONS: Comparison[] = [
       { q: 'Are CJC-1295 and ipamorelin FDA-approved?', a: 'No. Neither compound is FDA-approved. Both are prohibited by the World Anti-Doping Agency under category S2 (Peptide Hormones). The only currently approved GH-axis peptide in this catalog is tesamorelin (Egrifta), for a specific HIV-related indication.' },
       { q: 'What is the evidence base for CJC-1295 and ipamorelin?', a: 'Both have pharmacological characterization data (receptor binding, GH release curves) and some human PK/PD data — peer-reviewed human PK exists for CJC-1295. Evidence for specific endpoints like body composition is thinner, mostly from small trials or case series. Neither has completed Phase 3 trials.' },
     ],
-    relatedAreas: ['growth-hormone', 'gh-axis', 'anti-aging-longevity'],
+    relatedAreas: ['growth-hormone-axis', 'longevity-aging'],
     about: [{ name: 'CJC-1295' }, { name: 'Ipamorelin' }],
   },
 ]
