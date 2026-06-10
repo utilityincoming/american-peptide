@@ -241,6 +241,173 @@ export const COMPARISONS: Comparison[] = [
     relatedAreas: ['growth-hormone-axis', 'longevity-aging'],
     about: [{ name: 'CJC-1295' }, { name: 'Ipamorelin' }],
   },
+  {
+    slug: 'bpc-157-vs-tb-500',
+    aSlug: 'bpc-157',
+    bSlug: 'tb-500',
+    aName: 'BPC-157',
+    bName: 'TB-500',
+    aPill: 'Pentadecapeptide · tissue repair',
+    bPill: 'Tβ4 fragment · cell migration',
+    metaTitle:
+      'BPC-157 vs TB-500 — Mechanism, Repair Pathways & Key Differences | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of BPC-157 and TB-500 — distinct repair mechanisms (angiogenesis/cytoprotection vs actin regulation and cell migration), origins, evidence base, and why they are often studied together.',
+    keywords: [
+      'BPC-157 vs TB-500',
+      'BPC-157 TB-500 stack',
+      'BPC-157 mechanism',
+      'TB-500 thymosin beta-4',
+      'peptide repair comparison',
+    ],
+    breadcrumb: { label: 'Healing & Repair', href: '/catalog/category/healing-repair' },
+    headline: 'two repair peptides, two different mechanisms',
+    intro: [
+      'BPC-157 and TB-500 are the two most-studied research peptides in the tissue-repair space, and are often discussed together — but they act through entirely different mechanisms. Neither is FDA-approved, and the human evidence base for both is limited.',
+    ],
+    atAGlance: [
+      { dim: 'Origin', a: 'Stable fragment of body-protection compound (gastric)', b: 'Synthetic fragment of thymosin β4' },
+      { dim: 'Chain length', a: '15 AA (pentadecapeptide)', b: '7 AA actin-binding motif (LKKTETQ)' },
+      { dim: 'Primary mechanism', a: 'Angiogenesis (VEGFR2) + cytoprotection', b: 'G-actin sequestration → cell migration' },
+      { dim: 'Signaling', a: 'Nitric-oxide & growth-factor modulation', b: 'Actin dynamics, downstream migration/angiogenesis' },
+      { dim: 'Most-studied for', a: 'Tendon/ligament & GI-tract repair', b: 'Cell migration, soft-tissue & cardiac repair (preclinical)' },
+      { dim: 'Evidence base', a: 'Largely rodent models; scant human data', b: 'Largely rodent models; scant human data' },
+      { dim: 'FDA approval', a: 'None', b: 'None' },
+      { dim: 'WADA status', a: 'Prohibited (S0/S2 context)', b: 'Prohibited (S2)' },
+    ],
+    columnSections: [
+      {
+        title: 'How the repair mechanisms differ',
+        columns: [
+          {
+            heading: 'BPC-157 — angiogenesis & cytoprotection',
+            accent: 'a',
+            points: [
+              'Reported upregulation of VEGFR2, promoting new-vessel formation',
+              'Modulation of the nitric-oxide system and several growth-factor pathways',
+              'Cytoprotective effects studied prominently in GI-tract models',
+              'Preclinical focus on tendon, ligament, and gut-lining repair',
+            ],
+          },
+          {
+            heading: 'TB-500 — actin regulation & migration',
+            accent: 'b',
+            points: [
+              'Sequesters monomeric G-actin, regulating cytoskeletal dynamics',
+              'Promotes directed cell migration into injured tissue',
+              'Downstream angiogenesis and reduced inflammation reported',
+              'Derived from thymosin β4’s actin-binding domain',
+            ],
+          },
+        ],
+      },
+    ],
+    proseSections: [
+      {
+        title: 'Why they are often studied together',
+        paragraphs: [
+          'Because the two act on non-overlapping pathways — BPC-157 on angiogenesis and cytoprotection, TB-500 on actin-driven cell migration — repair-focused research protocols sometimes examine them in combination on the rationale that they address different stages of the repair cascade. This is a mechanistic rationale, not a proven clinical synergy: rigorous human combination data does not exist.',
+          'Both should be read as preclinical research compounds. The bulk of published evidence is from animal models, and neither has completed controlled human trials for any repair indication.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the evidence supports',
+      paragraphs: [
+        'These are complementary research tools, not interchangeable ones: BPC-157’s evidence centers on angiogenesis and GI/tendon cytoprotection, TB-500’s on actin regulation and cell migration. For both, the strongest data is preclinical, and human efficacy/safety for repair endpoints remains unestablished. Treat any comparison as a mechanistic contrast, not a clinical recommendation.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between BPC-157 and TB-500?', a: 'BPC-157 is a 15-amino-acid stable gastric peptide studied for angiogenesis (via VEGFR2) and cytoprotection, with a research focus on tendon, ligament, and GI repair. TB-500 is a synthetic fragment of thymosin β4 that sequesters G-actin and is studied for cell migration and cytoskeletal regulation. They act through different mechanisms.' },
+      { q: 'Are BPC-157 and TB-500 used together?', a: 'They are sometimes studied in combination because they target different parts of the repair process — BPC-157 on angiogenesis/cytoprotection and TB-500 on actin-driven cell migration. This is a mechanistic rationale; controlled human data on the combination does not exist. This page is a research reference, not a protocol.' },
+      { q: 'Is BPC-157 or TB-500 FDA-approved?', a: 'Neither is FDA-approved for any indication. Both are research compounds, and both are prohibited in sport by the World Anti-Doping Agency. Most published evidence for either is from animal models.' },
+      { q: 'Is TB-500 the same as thymosin β4?', a: 'TB-500 is a synthetic peptide based on thymosin β4 — typically representing the actin-binding region (the LKKTETQ motif) rather than the full 43-residue protein. Research framing should distinguish the marketed fragment from native thymosin β4.' },
+    ],
+    relatedAreas: ['wound-healing'],
+    about: [{ name: 'BPC-157' }, { name: 'TB-500', alternateName: 'Thymosin beta-4 fragment' }],
+  },
+  {
+    slug: 'retatrutide-vs-tirzepatide',
+    aSlug: 'retatrutide',
+    bSlug: 'tirzepatide',
+    aName: 'Retatrutide',
+    bName: 'Tirzepatide',
+    aPill: 'Triple agonist · investigational',
+    bPill: 'Dual agonist · FDA approved',
+    metaTitle:
+      'Retatrutide vs Tirzepatide — Triple vs Dual Agonist, Trials & Differences | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of retatrutide (GIP/GLP-1/glucagon triple agonist) and tirzepatide (GIP/GLP-1 dual agonist) — what the glucagon arm adds, trial weight-loss data, and approval status.',
+    keywords: [
+      'retatrutide vs tirzepatide',
+      'triple agonist vs dual agonist',
+      'retatrutide weight loss',
+      'LY3437943 vs tirzepatide',
+      'glucagon GLP-1 GIP',
+    ],
+    breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
+    headline: 'triple vs dual incretin agonism',
+    intro: [
+      'Both are Eli Lilly incretin agonists, but retatrutide adds a third receptor — glucagon — to tirzepatide’s GIP/GLP-1 dual mechanism. Tirzepatide is FDA-approved; retatrutide is investigational. This page covers what the added glucagon agonism does and what the trials show.',
+    ],
+    atAGlance: [
+      { dim: 'Receptor targets', a: 'GIP-R + GLP-1R + glucagon-R', b: 'GIP-R + GLP-1R' },
+      { dim: 'Agonism class', a: 'Triple agonist', b: 'Dual agonist ("twincretin")' },
+      { dim: 'Developer', a: 'Eli Lilly (LY3437943)', b: 'Eli Lilly' },
+      { dim: 'Approval status', a: 'Investigational (Phase 3 — TRIUMPH program)', b: 'FDA approved (Mounjaro 2022 · Zepbound 2023)' },
+      { dim: 'Peak weight ↓ (trial)', a: '~24% (Phase 2, 48 wk, highest dose)', b: '~22.5% (SURMOUNT-1, 72 wk, 15 mg)' },
+      { dim: 'Glucagon arm', a: 'Adds energy expenditure + hepatic lipolysis', b: 'None' },
+      { dim: 'Maturity of evidence', a: 'Phase 2 complete; Phase 3 ongoing', b: 'Multiple completed Phase 3 trials' },
+    ],
+    columnSections: [
+      {
+        title: 'What the third receptor adds',
+        columns: [
+          {
+            heading: 'Shared GIP + GLP-1 (both)',
+            accent: 'neutral',
+            points: [
+              'GLP-1: glucose-dependent insulin, glucagon suppression, satiety',
+              'GIP: complementary insulinotropic + adipose signaling',
+              'Together drive the appetite and glycemic effects of the dual class',
+            ],
+          },
+          {
+            heading: 'Glucagon agonism (retatrutide only)',
+            accent: 'a',
+            points: [
+              'Increases energy expenditure beyond appetite suppression alone',
+              'Promotes hepatic lipolysis — studied for liver-fat reduction',
+              'Proposed basis for the larger weight reduction seen in Phase 2',
+              'Requires careful glycemic balancing against GLP-1/GIP insulinotropic effects',
+            ],
+          },
+        ],
+      },
+    ],
+    trials: [
+      { name: 'Retatrutide Phase 2', arm: 'Retatrutide 12 mg', n: '338', duration: '48 wk', endpoint: 'Mean body-weight change', result: '~24% vs ~2% (placebo)', note: 'Jastreboff et al., NEJM 2023; highest-dose arm' },
+      { name: 'SURMOUNT-1', arm: 'Tirzepatide 15 mg', n: '2539', duration: '72 wk', endpoint: 'Mean body-weight change', result: '−22.5% vs −2.4% (placebo)', note: 'Pivotal obesity trial for Zepbound' },
+      { name: 'TRIUMPH program', arm: 'Retatrutide (multiple)', duration: 'Ongoing', endpoint: 'Phase 3 efficacy/safety', result: 'In progress — not yet reported', note: 'Approval depends on these outcomes' },
+    ],
+    verdict: {
+      title: 'What the evidence supports',
+      paragraphs: [
+        'Retatrutide’s triple mechanism produced the largest weight reduction reported among incretin agonists in Phase 2 (~24%), exceeding tirzepatide’s pivotal data — but the comparison is across different trials and stages, not a head-to-head, and retatrutide’s Phase 3 (TRIUMPH) results and full safety profile are still pending. Tirzepatide is the established, FDA-approved option with multiple completed Phase 3 trials. These are population means from trial data, not predictions for any individual.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between retatrutide and tirzepatide?', a: 'Tirzepatide is a dual agonist of the GIP and GLP-1 receptors. Retatrutide is a triple agonist that adds glucagon-receptor agonism on top of GIP/GLP-1. The glucagon arm is associated with increased energy expenditure and hepatic lipolysis, and is the proposed basis for retatrutide’s larger weight-loss in Phase 2.' },
+      { q: 'Is retatrutide more effective than tirzepatide for weight loss?', a: 'In Phase 2, retatrutide reported ~24% mean body-weight reduction at the highest dose, exceeding tirzepatide’s pivotal SURMOUNT-1 result (~22.5%). However, these are separate trials at different durations and stages — not a head-to-head comparison — and retatrutide’s Phase 3 results are not yet reported. Individual responses vary.' },
+      { q: 'Is retatrutide FDA-approved?', a: 'No. Retatrutide (LY3437943) is investigational and in Phase 3 trials (the TRIUMPH program). Tirzepatide is FDA-approved as Mounjaro (type 2 diabetes, 2022) and Zepbound (chronic weight management, 2023).' },
+      { q: 'What does glucagon-receptor agonism add?', a: 'Beyond the appetite suppression and glycemic control of GLP-1/GIP, glucagon-receptor agonism is studied for increased energy expenditure and hepatic lipolysis (liver-fat reduction). The trade-off is that glucagon can raise glucose, so a triple agonist must balance it against the insulinotropic GLP-1/GIP signals.' },
+    ],
+    relatedAreas: ['weight-loss'],
+    about: [
+      { name: 'Retatrutide', alternateName: 'LY3437943' },
+      { name: 'Tirzepatide', alternateName: 'Mounjaro' },
+    ],
+  },
 ]
 
 export const COMPARISON_BY_SLUG: Record<string, Comparison> = Object.fromEntries(

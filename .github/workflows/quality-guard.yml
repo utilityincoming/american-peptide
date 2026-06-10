@@ -1,0 +1,67 @@
+name: Quality guard
+
+# Prevents the "broken commit silently freezes production" failure: a build
+# that fails typecheck/lint/compile can't be deployed, so catch it in CI before
+# it reaches main. Also crawls the built site for broken internal links (the
+# kind a route refactor introduces). next build runs both ESLint and TypeScript
+# checking, so it is the real deploy gate; the explicit tsc step just fails
+# faster with clearer errors.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 5 * * *' # nightly 05:00 UTC — catches main-state regressions
+  workflow_dispatch: {}
+
+concurrency:
+  group: quality-guard-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Fast, clear type errors before the full build (build re-checks anyway).
+      - name: Typecheck
+        run: node node_modules/typescript/bin/tsc --noEmit
+
+      # The deploy gate: next build runs ESLint + type-checking + compile.
+      - name: Build
+        run: npm run build
+
+      - name: Start server
+        env:
+          CRON_SECRET: ci-guard
+        run: |
+          npm start &
+          echo "SERVER_PID=$!" >> "$GITHUB_ENV"
+          for i in $(seq 1 60); do
+            curl -sf -o /dev/null "http://localhost:3000/" && { echo "up after ${i}s"; break; }
+            sleep 1
+          done
+
+      # Crawl internal links only — external link rot is flaky in CI (rate
+      # limits, bot blocking) and would make this guard noisy. Fails on any
+      # broken internal link.
+      - name: Check internal links
+        run: >-
+          npx --yes linkinator http://localhost:3000/
+          --recurse
+          --skip "^https?://(?!localhost)"
+          --timeout 20000
+
+      - name: Stop server
+        if: always()
+        run: kill "$SERVER_PID" 2>/dev/null || true
