@@ -8,6 +8,7 @@ import {
   getResearchAreaBySlug,
   getPeptidesForArea,
 } from '@/lib/research-areas'
+import EvidenceContext from '@/components/EvidenceContext'
 
 const SITE = 'https://www.americanpeptide.com'
 
@@ -214,6 +215,12 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
                 </div>
               </div>
             )}
+
+            {/* Contextual education — evidence primer + area-scoped key terms */}
+            <EvidenceContext
+              areaSlugs={[area.slug]}
+              moreLinks={[{ href: '/research-areas', label: 'All research areas' }]}
+            />
           </div>
 
           {/* Sidebar */}
