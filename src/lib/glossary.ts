@@ -1404,3 +1404,23 @@ export function resolveRelatedTerms(term: GlossaryTerm): GlossaryTerm[] {
     .map((s) => GLOSSARY_BY_SLUG[s])
     .filter((t): t is GlossaryTerm => Boolean(t))
 }
+
+/** Glossary terms relevant to one or more research areas (via relatedAreas),
+ *  ranked by how many of the given areas each term touches. For scoped
+ *  "key terms" modules on research-area and comparison pages. */
+export function getGlossaryForAreas(areaSlugs: string[], limit = 6): GlossaryTerm[] {
+  const set = new Set(areaSlugs)
+  return GLOSSARY.filter((t) => (t.relatedAreas ?? []).some((a) => set.has(a)))
+    .sort(
+      (a, b) =>
+        (b.relatedAreas ?? []).filter((x) => set.has(x)).length -
+        (a.relatedAreas ?? []).filter((x) => set.has(x)).length,
+    )
+    .slice(0, limit)
+}
+
+/** Glossary terms relevant to one or more catalog peptides (via relatedPeptides). */
+export function getGlossaryForPeptides(peptideSlugs: string[], limit = 6): GlossaryTerm[] {
+  const set = new Set(peptideSlugs)
+  return GLOSSARY.filter((t) => (t.relatedPeptides ?? []).some((p) => set.has(p))).slice(0, limit)
+}

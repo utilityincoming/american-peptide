@@ -13,6 +13,22 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   compress: true,
+  // Legacy bespoke comparison URLs → programmatic /compare/[pair]. 301 to
+  // preserve any accrued link equity.
+  async redirects() {
+    return [
+      {
+        source: '/semaglutide-vs-tirzepatide',
+        destination: '/compare/semaglutide-vs-tirzepatide',
+        permanent: true,
+      },
+      {
+        source: '/cjc-1295-vs-ipamorelin',
+        destination: '/compare/cjc-1295-vs-ipamorelin',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {
