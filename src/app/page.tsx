@@ -106,22 +106,22 @@ export default function HomePage() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2DD4A8] opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2DD4A8]" />
               </span>
-              AI Research Platform · Peptide Drug Discovery
+              Cited reference · Chemistry-grade · Works offline
             </div>
 
             {/* Headline */}
             <h1 className="mb-6 text-5xl font-bold leading-[1.04] tracking-tight md:text-6xl">
-              <span className="text-white">AI&#8209;Powered</span>
+              <span className="text-white">Peptide data you can</span>
               <br />
               <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
-                Peptide Drug Discovery
+                actually trust
               </span>
             </h1>
 
             {/* Subtitle */}
             <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-white/60 md:text-xl lg:mx-0">
-              From sequence hypothesis to clinical candidate — accelerate every phase of peptide
-              research with AI tools built for computational biologists and medicinal chemists.
+              Cited, chemistry-grade reference and AI answers that show their sources — calculators,
+              catalog, and trial data that keep working at the bench, even with no signal.
             </p>
 
             {/* CTAs */}
