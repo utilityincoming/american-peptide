@@ -289,6 +289,70 @@ const SEED_PEPTIDES: Peptide[] = [
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
+    slug: 'insulin',
+    name: 'Insulin (human)',
+    aliases: [
+      'Recombinant human insulin',
+      'rhInsulin',
+      'regular insulin',
+      'Humulin',
+      'Novolin',
+    ],
+    categories: ['metabolic'],
+    shortDescription:
+      'The archetypal protein biologic — a 51-amino-acid two-chain hormone, disulfide-linked, and the first recombinant DNA drug ever marketed.',
+    description:
+      'Insulin is the hormone that defined the biologic era. It is a small but genuinely complex protein: two peptide chains — an A chain of 21 residues and a B chain of 30 — held together by two interchain disulfide bonds, with a third disulfide looping within the A chain. At ~5.8 kDa it is the smallest hormone in this catalog’s biologic tier, yet it is assembled, folded, and processed exactly like the larger proteins, and it was the molecule that proved recombinant human therapeutics were possible.',
+    mechanism:
+      'Binds the insulin receptor, a tyrosine kinase, triggering autophosphorylation and the PI3K/AKT cascade that drives GLUT4 translocation and glucose uptake into muscle and fat, suppresses hepatic glucose output, and promotes glycogen, lipid, and protein synthesis.',
+    researchAreas: ['Type 1 diabetes', 'Type 2 diabetes', 'Glucose metabolism', 'Anabolic signaling'],
+    background: [
+      'Insulin is synthesized in the body as a single chain — preproinsulin → proinsulin — that folds and forms its disulfide bonds before a connecting C-peptide is excised, leaving the mature two-chain hormone. That biosynthetic detail is why early recombinant manufacturing expressed the A and B chains (or proinsulin) in bacteria and then handled folding and disulfide pairing as a controlled step: the chemistry that the body does enzymatically has to be reproduced and verified in a reactor. Get the disulfides wrong and you get a misfolded, inactive — or immunogenic — product.',
+      'Its history is foundational twice over. Insulin was discovered in 1921 in Toronto by Banting, Best, Macleod, and Collip, and the patent was famously sold to the university for one dollar on the principle that "insulin belongs to the world." Six decades later, in 1982, recombinant human insulin (Humulin) became the first recombinant-DNA drug ever approved — the proof of concept for the entire modern biologic industry, including most of the engineered peptides elsewhere in this catalog.',
+      'And then the American drama. Despite the dollar patent and a century of manufacturing experience, US insulin list prices roughly tripled between 2002 and 2013, pushing some patients to ration a drug they cannot live without — a recurring, deadly access failure that sits uncomfortably against the molecule’s origin story. For a reference that takes provenance and honest pricing seriously, insulin is the clearest case study in the gap between what a medicine costs to make and what it is sold for.',
+      'Insulin is also widely misunderstood at the edges: it is occasionally misused in bodybuilding for its anabolic effects, where dosing errors cause life-threatening hypoglycemia, and the modern GLP-1 era has shifted public perception of what "diabetes medicine" even means. It remains, first and foremost, essential replacement therapy for type 1 diabetes and an important tool in advanced type 2.',
+    ],
+    keyResearch: [
+      'Type 1 diabetes — life-sustaining replacement therapy; the body produces no insulin without it.',
+      'Type 2 diabetes — used when oral agents and incretins no longer maintain glycemic control.',
+      'Insulin-receptor signaling — the PI3K/AKT and MAPK pathways that make it a central anabolic and metabolic hormone.',
+      'Analog engineering — rapid-acting (lispro, aspart) and long-acting (glargine, detemir) analogs re-engineer the sequence/formulation to reshape the absorption curve.',
+      'First recombinant drug — Humulin (1982) established recombinant human protein manufacturing.',
+      'Hypoglycemia risk — narrow therapeutic margin; misuse outside medical supervision is dangerous.',
+    ],
+    faqs: [
+      {
+        q: 'What is human insulin?',
+        a: 'A 51-amino-acid protein hormone made of two disulfide-linked chains that lowers blood glucose by driving its uptake into cells. Recombinant human insulin is produced in engineered bacteria or yeast and was the first recombinant-DNA drug approved (1982).',
+      },
+      {
+        q: 'Why is insulin considered a biologic and not just a peptide?',
+        a: 'It is a folded, multi-chain protein whose activity depends on correct disulfide pairing, and it is produced in living cells. Its manufacturing and quality control are protein-grade, not the solid-phase synthesis used for short research peptides.',
+      },
+      {
+        q: 'Why is insulin so expensive in the US if the patent was sold for a dollar?',
+        a: 'The original patent was sold for $1, but modern insulin products, manufacturing, and the US pricing system are separate from that history. List prices rose sharply in the 2000s–2010s, a widely documented access problem.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No. This is a research and educational reference. Insulin has a narrow safety margin and is a prescription medicine; nothing here is dosing guidance.',
+      },
+    ],
+    sequence:
+      'A chain: GIVEQCCTSICSLYQLENYCN | B chain: FVNQHLCGSHLVEALYLVCGERGFFYTPKT',
+    molecularWeight: 5808,
+    molecularFormula: 'C257H383N65O77S6',
+    cas: '11061-68-0',
+    fdaApproved: true,
+    storage:
+      'Unopened insulin is refrigerated (2–8 °C); in-use vials/pens are typically kept at room temperature for a limited number of days per the product label. It must not be frozen — freezing denatures the protein and destroys activity — and should be protected from heat and direct light.',
+    handling:
+      'As a folded protein it is sensitive to heat, freezing, and agitation, which can cause aggregation (visible as clumping or frosting) and loss of potency. Aggregated insulin should never be used.',
+    synthesisNotes:
+      'Recombinant human insulin is expressed in E. coli or yeast — historically as separate A and B chains or as proinsulin — then folded, disulfide-paired, and (for the proinsulin route) enzymatically processed to remove C-peptide. Release testing is protein-specific: identity by peptide mapping and mass spectrometry, correct disulfide connectivity, potency by bioassay, plus host-cell-protein and endotoxin limits. This is biologic manufacturing, not peptide synthesis.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
     slug: 'bpc-157',
     name: 'BPC-157',
     aliases: ['Body Protective Compound 157', 'PL 14736'],
@@ -506,6 +570,69 @@ const SEED_PEPTIDES: Peptide[] = [
       'As a folded biologic it is sensitive to heat, freeze–thaw, vigorous shaking, and surface adsorption, any of which can unfold or aggregate it and destroy potency without changing appearance. Aggregated protein is also a potential immunogenicity concern, which is why protein therapeutics carry a tighter cold chain than small peptides.',
     synthesisNotes:
       'Somatropin is not made by solid-phase peptide synthesis. It is expressed recombinantly — historically in E. coli (often as inclusion bodies requiring refolding) and in mammalian cell lines — then purified by multi-step chromatography and verified for correct folding and disulfide pairing. Identity and potency rest on protein-specific methods (peptide mapping, mass spectrometry, bioassay/cell-based potency, host-cell-protein and endotoxin testing), not an HPLC purity percentage alone. This is the defining difference between a complex biologic hormone and the short synthetic peptides in the rest of this catalog.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'igf-1',
+    name: 'IGF-1 (Mecasermin)',
+    aliases: [
+      'Insulin-like growth factor 1',
+      'Mecasermin',
+      'Increlex',
+      'Somatomedin C',
+      'rhIGF-1',
+    ],
+    categories: ['growth-hormone', 'longevity'],
+    shortDescription:
+      'The downstream effector of growth hormone — a 70-amino-acid recombinant protein, structurally a cousin of proinsulin, that carries out most of GH’s growth signal.',
+    description:
+      'IGF-1 is the molecule that does much of growth hormone’s work. It is a 70-amino-acid single-chain protein (~7.6 kDa) with three disulfide bonds, structurally homologous to proinsulin — which is why insulin and IGF-1 signaling overlap. Produced mainly in the liver under GH stimulation, it is the mediator most responsible for GH’s anabolic and growth-promoting effects. The recombinant therapeutic version, mecasermin, is FDA-approved for severe IGF-1 deficiency. It pairs naturally with somatropin in this catalog: GH is the signal, IGF-1 is the message that actually reaches the tissues.',
+    mechanism:
+      'Binds the IGF-1 receptor (a tyrosine kinase) and, with lower affinity, the insulin receptor, activating PI3K/AKT and MAPK signaling to drive cell growth, proliferation, and survival. Circulating IGF-1 is largely bound to IGF-binding proteins, which modulate its availability.',
+    researchAreas: ['Severe primary IGF-1 deficiency', 'GH/IGF-1 axis', 'Growth disorders', 'Longevity'],
+    background: [
+      'Where somatropin is the broadcast, IGF-1 is the signal received. Growth hormone acts on the liver and other tissues to induce IGF-1, and it is IGF-1 — acting through its own tyrosine-kinase receptor — that mediates most of the downstream growth and anabolic effects. Its structural kinship to proinsulin is not a coincidence: the IGF and insulin systems are evolutionary relatives, which is why IGF-1 has weak insulin-like (hypoglycemic) activity and why dosing is constrained by that overlap.',
+      'The therapeutic form, mecasermin (Increlex), is recombinant human IGF-1 approved in 2005 for children with severe primary IGF-1 deficiency or growth-hormone insensitivity — the Laron syndrome population, in whom GH itself does not work because the receptor or its signaling is broken. In those patients, supplying IGF-1 directly bypasses the failed step.',
+      'IGF-1 carries the same two layers of drama as growth hormone, sharpened. It is banned in sport and has been a recurring doping target; the most public episode was the 2013 "deer antler velvet spray" affair, in which an IGF-1-marketed product was tied to several athletes — a reminder that much of what is sold as IGF-1 outside medicine is unverified. And the longevity paradox is, if anything, cleaner here: low IGF-1 signaling is one of the most reproducible pro-longevity signals in biology, with IGF-1-pathway mutants living longer across species and Laron-syndrome individuals showing strikingly low cancer and diabetes incidence. A protein marketed for anti-aging sits on the very axis whose suppression extends life.',
+    ],
+    keyResearch: [
+      'Severe primary IGF-1 deficiency — the approved use of mecasermin, supplying IGF-1 where GH signaling has failed.',
+      'GH/IGF-1 axis — IGF-1 is the principal mediator of growth hormone’s anabolic effects.',
+      'Insulin cross-talk — structural homology to proinsulin gives it weak hypoglycemic activity, a dosing constraint.',
+      'Longevity paradox — reduced IGF-1 signaling tracks with extended lifespan and lower cancer/diabetes risk (Laron syndrome).',
+      'Doping target — WADA-banned; "deer antler velvet" IGF-1 products are a notable case of unverified marketing.',
+      'IGF-binding proteins — circulating IGF-1 is mostly protein-bound, which regulates its activity and half-life.',
+    ],
+    faqs: [
+      {
+        q: 'What is IGF-1?',
+        a: 'Insulin-like growth factor 1 — a 70-amino-acid protein, made mainly in the liver under growth-hormone stimulation, that carries out most of GH’s growth-promoting effects. The recombinant drug mecasermin (Increlex) is approved for severe IGF-1 deficiency.',
+      },
+      {
+        q: 'How is IGF-1 related to growth hormone?',
+        a: 'GH stimulates the liver to produce IGF-1, and IGF-1 then does much of the actual signaling to tissues. That is why IGF-1 can treat people whose GH does not work (Laron syndrome).',
+      },
+      {
+        q: 'Why is it called "insulin-like"?',
+        a: 'IGF-1 is structurally homologous to proinsulin and binds the insulin receptor weakly, giving it mild insulin-like (glucose-lowering) effects.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference. Mecasermin is a prescription biologic; much of what is sold as IGF-1 outside medicine is unverified.',
+      },
+    ],
+    sequence: 'GPETLCGAELVDALQFVCGDRGFYFNKPTGYGSSSRRAPQTGIVDECCFRSCDLRRLEMYCAPLKPAKSA',
+    molecularWeight: 7649,
+    molecularFormula: 'C331H512N94O101S7',
+    cas: '68562-41-4',
+    uniprotId: 'P05019',
+    fdaApproved: true,
+    storage:
+      'Mecasermin is stored refrigerated (2–8 °C) and protected from light; it must not be frozen, and reconstituted/in-use solution is used within the label’s limited window.',
+    handling:
+      'A folded disulfide-bonded protein, sensitive to heat, freeze–thaw, and agitation. Because of its insulin-like activity, hypoglycemia is a specific handling/clinical concern.',
+    synthesisNotes:
+      'Recombinant IGF-1 is expressed (classically in E. coli), refolded to its native three-disulfide structure, and purified by chromatography. Release testing is protein-grade — peptide mapping, mass spectrometry, correct disulfide pairing, cell-based potency, host-cell-protein and endotoxin limits — not an HPLC purity figure alone.',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -1145,6 +1272,65 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     sequence: 'YNWNSFGLRF-NH2',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'hcg',
+    name: 'HCG',
+    aliases: [
+      'Human chorionic gonadotropin',
+      'Choriogonadotropin alfa',
+      'Ovidrel',
+      'Pregnyl',
+      'Novarel',
+    ],
+    categories: ['reproductive'],
+    shortDescription:
+      'A heterodimeric glycoprotein hormone — two different glycosylated subunits — that mimics the LH surge; the pregnancy hormone, also the subject of a debunked diet.',
+    description:
+      'Human chorionic gonadotropin is the most structurally complex hormone in this catalog. It is not a single chain but a non-covalent heterodimer of two different subunits — a 92-amino-acid alpha subunit (shared with LH, FSH, and TSH) and a 145-amino-acid beta subunit that is specific to hCG — each heavily decorated with sugar chains. That glycosylation is not decoration: it is essential to the hormone’s long circulating half-life and biological activity, and it makes hCG a true glycoprotein biologic, roughly 36–40 kDa, that cannot be captured as a simple amino-acid formula.',
+    mechanism:
+      'Acts as an agonist at the LH/CG receptor, reproducing the luteinizing-hormone signal: in women it triggers ovulation and sustains the corpus luteum’s progesterone; in men it stimulates Leydig-cell testosterone production. Its long half-life, conferred by glycosylation, lets a single dose mimic the natural LH surge.',
+    researchAreas: ['Ovulation induction', 'Assisted reproduction', 'Male hypogonadism', 'Fertility preservation'],
+    background: [
+      'hCG’s biology is defined by its architecture. The alpha subunit is common to the whole glycoprotein-hormone family (LH, FSH, TSH); specificity comes entirely from the beta subunit and the way the two fold together. Because the subunits are made and then assembled — and because the sugar chains are added by the producing cell — hCG is a genuine glycoprotein: recombinant versions (choriogonadotropin alfa) are made in mammalian (CHO) cells precisely so that human-like glycosylation can occur, while older products are purified from the urine of pregnant women. This is biology that bacterial synthesis cannot reproduce.',
+      'In medicine it is well established: it triggers ovulation in assisted reproduction, supports early-pregnancy progesterone, and is used in male hypogonadism and to preserve testicular function and fertility — including alongside testosterone therapy, where it keeps the testes signaled. It is also, famously, the hormone that pregnancy tests detect.',
+      'The drama is the HCG diet. In the 1950s a British physician, Albert Simeons, claimed hCG injections plus a 500-calorie diet caused targeted fat loss. The diet was repeatedly debunked — the weight loss comes from near-starvation, not the hormone — yet it resurfaces continually, and the FDA has explicitly warned that over-the-counter "homeopathic" hCG weight-loss products are illegal and ineffective. A second, quieter misunderstanding surrounds its use in performance and TRT communities. Both make hCG a clean example of a legitimate, well-characterized hormone whose public reputation is dominated by uses it was never validated for.',
+    ],
+    keyResearch: [
+      'Ovulation induction & ART — the approved use, supplying the LH-like trigger for egg release and luteal support.',
+      'Male hypogonadism — stimulates endogenous testosterone via the LH/CG receptor; used to maintain testicular function.',
+      'Glycoprotein structure — a heterodimer whose shared alpha + specific beta subunits and glycosylation define its activity and half-life.',
+      'The HCG diet — repeatedly debunked; the FDA warns OTC homeopathic hCG weight-loss products are illegal and ineffective.',
+      'Pregnancy detection — the hormone measured by home and clinical pregnancy tests.',
+    ],
+    faqs: [
+      {
+        q: 'What is HCG?',
+        a: 'Human chorionic gonadotropin — a glycoprotein hormone made of two different glycosylated subunits that mimics luteinizing hormone. It triggers ovulation, supports early pregnancy, and stimulates testosterone in men. It is also the hormone pregnancy tests detect.',
+      },
+      {
+        q: 'Why is HCG a glycoprotein rather than a simple peptide?',
+        a: 'It is a two-subunit protein heavily modified with sugar chains that are essential to its half-life and activity. Recombinant hCG is made in mammalian cells so that human-like glycosylation can occur — something bacterial peptide synthesis cannot do.',
+      },
+      {
+        q: 'Does the HCG diet work?',
+        a: 'No. The HCG diet has been repeatedly debunked — any weight loss comes from the extreme calorie restriction, not the hormone — and the FDA has warned that OTC homeopathic hCG weight-loss products are illegal and ineffective.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference. hCG is a prescription hormone with specific approved indications.',
+      },
+    ],
+    molecularWeight: 36700,
+    cas: '9002-61-3',
+    fdaApproved: true,
+    storage:
+      'Depending on the product, hCG is stored refrigerated (2–8 °C) and, once reconstituted, used within the label’s window; it must not be frozen. Glycoprotein integrity is sensitive to heat and freeze–thaw.',
+    handling:
+      'A glycosylated heterodimer sensitive to heat, freezing, and agitation, any of which can dissociate the subunits or aggregate the protein and reduce potency.',
+    synthesisNotes:
+      'hCG is either purified from the urine of pregnant women or, as choriogonadotropin alfa, produced recombinantly in mammalian (CHO) cells so that the essential glycosylation is human-like. Its molecular weight (~36–40 kDa) is approximate and varies with glycosylation, so it is not represented by a single molecular formula. Characterization includes subunit identity, glycan profiling, and bioassay potency — glycoprotein-grade analytics well beyond an HPLC purity number.',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
