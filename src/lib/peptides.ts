@@ -1192,6 +1192,8 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'KPV',
     molecularWeight: 342.4,
+    molecularFormula: 'C16H30N4O4',
+    pubchemCid: 125672,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {

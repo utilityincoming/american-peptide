@@ -44,12 +44,49 @@ interface PubchemEvidence {
   molecularFormula: string | null
   molecularWeight: number | null
   url: string | null
+  /** True when resolved from the catalog's curated pubchemCid (authoritative);
+   *  false when resolved by fuzzy name search (which can hit the wrong record). */
+  viaCid: boolean
 }
 
 // ── Evidence gathering (reuses the agent's own grounding tools) ───────────────
 
+// Direct property lookup by CID — authoritative, no name-resolution ambiguity.
+async function pubchemByCid(cid: number): Promise<PubchemEvidence | null> {
+  try {
+    const ctrl = new AbortController()
+    const timer = setTimeout(() => ctrl.abort(), 8000)
+    const res = await fetch(
+      `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${cid}/property/MolecularFormula,MolecularWeight/JSON`,
+      { signal: ctrl.signal, headers: { Accept: 'application/json' } },
+    )
+    clearTimeout(timer)
+    if (!res.ok) return null
+    const data = (await res.json()) as {
+      PropertyTable?: { Properties?: Array<{ MolecularFormula?: string; MolecularWeight?: string }> }
+    }
+    const p = data.PropertyTable?.Properties?.[0]
+    if (!p) return null
+    return {
+      cid,
+      molecularFormula: p.MolecularFormula ?? null,
+      molecularWeight: p.MolecularWeight == null ? null : Number(p.MolecularWeight) || null,
+      url: `https://pubchem.ncbi.nlm.nih.gov/compound/${cid}`,
+      viaCid: true,
+    }
+  } catch {
+    return null
+  }
+}
+
 async function pubchemEvidence(peptide: Peptide): Promise<PubchemEvidence | null> {
-  // Try the canonical name, then aliases, until PubChem resolves a compound.
+  // Prefer the curated CID — it pins the exact compound and sidesteps the
+  // wrong-record class entirely. Fall back to name/alias search only if absent.
+  if (peptide.pubchemCid) {
+    const byCid = await pubchemByCid(peptide.pubchemCid)
+    if (byCid) return byCid
+  }
+
   const candidates = [peptide.name, ...(peptide.aliases ?? [])]
   for (const name of candidates) {
     const { content, isError } = await executeAgentTool('search_pubchem', { name })
@@ -63,6 +100,7 @@ async function pubchemEvidence(peptide: Peptide): Promise<PubchemEvidence | null
         molecularFormula: typeof j.molecularFormula === 'string' ? j.molecularFormula : null,
         molecularWeight: mw == null ? null : Number(mw) || null,
         url: typeof j.url === 'string' ? j.url : null,
+        viaCid: false,
       }
     } catch {
       // Tool returned a "no compound found" sentence, not JSON — try next alias.
@@ -113,6 +151,28 @@ function compareFormulas(catalog: string, source: string): FormulaVerdict {
 function checkChemistry(peptide: Peptide, ev: PubchemEvidence): Finding[] {
   const out: Finding[] = []
   const base = { slug: peptide.slug, name: peptide.name, evidenceUrl: ev.url ?? undefined }
+
+  // Wrong-record guard: a peptide (has a sequence) whose name-resolved PubChem
+  // record contains no nitrogen cannot be the same molecule — fuzzy name search
+  // hit an unrelated compound (e.g. "KPV" → a nitrogen-free C11H12O3). Don't
+  // raise a spurious weight/formula error; flag the resolution failure instead.
+  if (
+    !ev.viaCid &&
+    peptide.sequence &&
+    ev.molecularFormula &&
+    parseFormula(ev.molecularFormula).N == null
+  ) {
+    return [
+      {
+        ...base,
+        field: 'pubchem',
+        severity: 'low',
+        catalog: peptide.name,
+        source: ev.molecularFormula,
+        note: `PubChem name search resolved a nitrogen-free record (${ev.molecularFormula}) — almost certainly the wrong compound for a peptide. Add a pubchemCid to pin the correct record.`,
+      },
+    ]
+  }
 
   // Molecular formula
   if (peptide.molecularFormula && ev.molecularFormula) {
