@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { runFactQa, reportToMarkdown } from '@/lib/fact-qa'
+import { runFactQa, reportToMarkdown, buildVerificationManifest } from '@/lib/fact-qa'
 
 // Overnight fact-QA job: verifies catalog chemistry/claims against PubChem +
 // ClinicalTrials.gov and returns a findings report. Read-only — never edits.
@@ -37,7 +37,17 @@ export async function GET(request: NextRequest) {
   const limit = Math.min(Math.max(Number(sp.get('limit')) || 25, 1), 200)
   const offset = Math.max(Number(sp.get('offset')) || 0, 0)
   const useLlm = sp.get('llm') === '1'
-  const format = sp.get('format') === 'md' ? 'md' : 'json'
+  const fmt = sp.get('format')
+  const format = fmt === 'md' ? 'md' : fmt === 'manifest' ? 'manifest' : 'json'
+
+  // Manifest mode: emit the verified-provenance map that powers the on-page
+  // "verified against PubChem" badge. Pipe to src/lib/verification.ts.
+  if (format === 'manifest') {
+    const checkedAt = new Date().toISOString().slice(0, 10)
+    const manifest = await buildVerificationManifest(checkedAt)
+    console.log(`[fact-qa] manifest: ${Object.keys(manifest).length} entries verified`)
+    return Response.json(manifest)
+  }
 
   if (useLlm && !process.env.ANTHROPIC_API_KEY) {
     return Response.json(

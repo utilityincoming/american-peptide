@@ -454,3 +454,57 @@ export function reportToMarkdown(report: FactQaReport): string {
   }
   return lines.join('\n')
 }
+
+// ── Verification manifest (powers the on-page "verified" provenance badge) ────
+
+export interface VerificationRecord {
+  cid: number
+  molecularFormula: string | null
+  molecularWeight: number | null
+  checkedAt: string
+}
+
+// Build a manifest of catalog entries whose chemistry is confidently confirmed
+// against a specific PubChem record. Confidence gate:
+//   - curated pubchemCid  → authoritative (verified against that exact record)
+//   - name-resolved only  → accepted ONLY if the record contains nitrogen (peptide
+//     sanity — rejects wrong-compound hits like KPV→C11H12O3) AND its weight
+//     matches the catalog within tolerance.
+// Only confident matches earn the badge, so the "verified" claim stays honest.
+export async function buildVerificationManifest(
+  checkedAt: string,
+  delayMs = 350,
+): Promise<Record<string, VerificationRecord>> {
+  const out: Record<string, VerificationRecord> = {}
+  for (const peptide of PEPTIDES) {
+    try {
+      const ev = await pubchemEvidence(peptide)
+      if (ev && ev.cid != null) {
+        let confident = ev.viaCid
+        if (!confident) {
+          const hasNitrogen = ev.molecularFormula
+            ? parseFormula(ev.molecularFormula).N != null
+            : false
+          const weightMatches =
+            peptide.molecularWeight != null && ev.molecularWeight != null
+              ? Math.abs(peptide.molecularWeight - ev.molecularWeight) <=
+                ev.molecularWeight * WEIGHT_TOLERANCE_FRAC
+              : false
+          confident = hasNitrogen && weightMatches
+        }
+        if (confident) {
+          out[peptide.slug] = {
+            cid: ev.cid,
+            molecularFormula: ev.molecularFormula,
+            molecularWeight: ev.molecularWeight,
+            checkedAt,
+          }
+        }
+      }
+    } catch {
+      // skip entries that error — they simply don't earn a badge
+    }
+    if (delayMs) await new Promise((r) => setTimeout(r, delayMs))
+  }
+  return out
+}
