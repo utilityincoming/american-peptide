@@ -22,6 +22,7 @@ import {
   type Peptide,
 } from '@/lib/peptides'
 import { getAreasForPeptide } from '@/lib/research-areas'
+import { getPubchemVerification } from '@/lib/verification'
 import PeptideStory from '@/components/PeptideStory'
 
 const SITE = 'https://www.americanpeptide.com'
@@ -517,6 +518,41 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 )}
               </dl>
             </div>
+
+            {/* Verified-provenance panel — shown only for entries confirmed
+                against a PubChem record by the fact-QA pass. */}
+            {(() => {
+              const v = getPubchemVerification(peptide.slug)
+              if (!v) return null
+              return (
+                <div className="rounded-2xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.05] p-5">
+                  <div className="mb-2 flex items-center gap-2">
+                    <ShieldCheck className="h-4 w-4 text-[#2DD4A8]" strokeWidth={2} />
+                    <h3 className="text-sm font-semibold text-[#2DD4A8]">Chemistry verified</h3>
+                  </div>
+                  <p className="text-[13px] leading-relaxed text-white/60">
+                    Cross-referenced against the PubChem reference record on{' '}
+                    <span className="text-white/75">{v.checkedAt}</span>
+                    {v.molecularFormula ? (
+                      <>
+                        {' '}— formula{' '}
+                        <span className="font-mono text-white/75">{v.molecularFormula}</span>
+                      </>
+                    ) : null}
+                    .
+                  </p>
+                  <a
+                    href={`https://pubchem.ncbi.nlm.nih.gov/compound/${v.cid}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-2.5 inline-flex items-center gap-1 text-[13px] font-medium text-[#2DD4A8] hover:underline"
+                  >
+                    Verify on PubChem · CID {v.cid}
+                    <ArrowUpRight className="h-3 w-3" />
+                  </a>
+                </div>
+              )
+            })()}
 
             {/* Marketplace status panel */}
             <div className="overflow-hidden rounded-2xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-5">

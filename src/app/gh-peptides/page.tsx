@@ -310,7 +310,7 @@ export default function GHPeptidesPage() {
                   body composition, IGF-1, fat distribution — is the central research question
                   distinguishing the two CJC-1295 forms.
                 </p>
-                <Link href="/cjc-1295-vs-ipamorelin"
+                <Link href="/compare/cjc-1295-vs-ipamorelin"
                   className="group inline-flex items-center gap-1.5 text-xs font-medium text-[#2DD4A8]">
                   CJC-1295 vs ipamorelin — detailed comparison
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -359,7 +359,7 @@ export default function GHPeptidesPage() {
             <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
               <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">Related</p>
               {[
-                { href: '/cjc-1295-vs-ipamorelin', label: 'CJC-1295 vs Ipamorelin', sub: 'Detailed comparison' },
+                { href: '/compare/cjc-1295-vs-ipamorelin', label: 'CJC-1295 vs Ipamorelin', sub: 'Detailed comparison' },
                 { href: '/research-areas/growth-hormone-axis', label: 'GH & Body Composition', sub: 'Research area guide' },
                 { href: '/catalog/category/growth-hormone', label: 'GH Peptides category', sub: 'Full catalog view' },
                 { href: '/trials', label: 'GH peptide trials', sub: 'ClinicalTrials.gov' },

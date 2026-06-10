@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 import { PEPTIDES, CATEGORIES } from '@/lib/peptides'
 import { RESEARCH_AREAS } from '@/lib/research-areas'
 import { GLOSSARY } from '@/lib/glossary'
+import { COMPARISONS } from '@/lib/comparisons'
 
 const SITE = 'https://www.americanpeptide.com'
 
@@ -11,12 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '', priority: 1.0 },
     // ── GLP-1 / Metabolic cluster ─────────────────────────
     { path: '/glp-1', priority: 0.9 },
-    { path: '/semaglutide-vs-tirzepatide', priority: 0.9 },
     // ── Healing & Repair cluster ──────────────────────────
     { path: '/bpc-157', priority: 0.9 },
     // ── GH Axis cluster ───────────────────────────────────
     { path: '/gh-peptides', priority: 0.9 },
-    { path: '/cjc-1295-vs-ipamorelin', priority: 0.8 },
+    // ── Comparisons index ─────────────────────────────────
+    { path: '/compare', priority: 0.8 },
     // ── Longevity cluster ─────────────────────────────────
     { path: '/longevity-peptides', priority: 0.8 },
     // ── Cognitive cluster ─────────────────────────────────
@@ -70,11 +71,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
+  const comparisonRoutes = COMPARISONS.map((c) => ({
+    url: `${SITE}/compare/${c.slug}`,
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }))
+
   return [
     ...staticRoutes,
     ...categoryRoutes,
     ...researchAreaRoutes,
     ...glossaryRoutes,
     ...peptideRoutes,
+    ...comparisonRoutes,
   ]
 }
