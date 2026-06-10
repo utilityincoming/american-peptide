@@ -7,23 +7,43 @@ const SITE = 'https://www.americanpeptide.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
-    '',
-    '/catalog',
-    '/learn',
-    '/learn/compatibility',
-    '/synthesis',
-    '/research-areas',
-    '/glossary',
-    '/research',
-    '/compounds',
-    '/compounds/builder',
-    '/trials',
-    '/tools/reconstitution-calculator',
-    '/developers',
-  ].map((path) => ({
+    // ── Core ──────────────────────────────────────────────
+    { path: '', priority: 1.0 },
+    // ── GLP-1 / Metabolic cluster ─────────────────────────
+    { path: '/glp-1', priority: 0.9 },
+    { path: '/semaglutide-vs-tirzepatide', priority: 0.9 },
+    // ── Healing & Repair cluster ──────────────────────────
+    { path: '/bpc-157', priority: 0.9 },
+    // ── GH Axis cluster ───────────────────────────────────
+    { path: '/gh-peptides', priority: 0.9 },
+    { path: '/cjc-1295-vs-ipamorelin', priority: 0.8 },
+    // ── Longevity cluster ─────────────────────────────────
+    { path: '/longevity-peptides', priority: 0.8 },
+    // ── Cognitive cluster ─────────────────────────────────
+    { path: '/cognitive-peptides', priority: 0.8 },
+    // ── Immune cluster ────────────────────────────────────
+    { path: '/immune-peptides', priority: 0.8 },
+    // ── Catalog & Learning ────────────────────────────────
+    { path: '/catalog', priority: 0.8 },
+    { path: '/learn', priority: 0.8 },
+    { path: '/learn/compatibility', priority: 0.8 },
+    { path: '/learn/evidence-hierarchy', priority: 0.8 },
+    { path: '/synthesis', priority: 0.8 },
+    { path: '/research-areas', priority: 0.8 },
+    { path: '/glossary', priority: 0.8 },
+    // ── Tools & Research ──────────────────────────────────
+    { path: '/research', priority: 0.8 },
+    { path: '/compounds', priority: 0.8 },
+    { path: '/compounds/builder', priority: 0.8 },
+    { path: '/trials', priority: 0.8 },
+    { path: '/tools/reconstitution-calculator', priority: 0.8 },
+    // ── Specialized hubs ──────────────────────────────────
+    { path: '/melanocortin', priority: 0.7 },
+    { path: '/developers', priority: 0.7 },
+  ].map(({ path, priority }) => ({
     url: `${SITE}${path}`,
     changeFrequency: 'weekly' as const,
-    priority: path === '' ? 1 : 0.8,
+    priority,
   }))
 
   const categoryRoutes = CATEGORIES.map((c) => ({
