@@ -282,7 +282,10 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No — it is investigational. This page is a research and educational reference.',
       },
     ],
-    molecularWeight: 3858.3,
+    molecularWeight: 4409.2,
+    molecularFormula: 'C194H312N54O59S2',
+    cas: '1415456-99-3',
+    pubchemCid: 171397054,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -416,7 +419,10 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     sequence: 'GHK',
-    molecularWeight: 340.8,
+    // GHK-Cu is the copper(II) complex C14H22CuN6O4 (~401.9 Da). The bare GHK
+    // tripeptide is ~340.4 Da — do not use that here; this entry is the complex.
+    molecularWeight: 401.9,
+    molecularFormula: 'C14H22CuN6O4',
     cas: '49557-75-7',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
@@ -1186,6 +1192,8 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'KPV',
     molecularWeight: 342.4,
+    molecularFormula: 'C16H30N4O4',
+    pubchemCid: 125672,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {

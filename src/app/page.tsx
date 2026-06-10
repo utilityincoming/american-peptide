@@ -106,23 +106,22 @@ export default function HomePage() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2DD4A8] opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2DD4A8]" />
               </span>
-              AI Research Platform · Peptide Science
+              Cited reference · Chemistry-grade · Works offline
             </div>
 
             {/* Headline */}
             <h1 className="mb-6 text-5xl font-bold leading-[1.04] tracking-tight md:text-6xl">
-              <span className="text-white">From Sequence</span>
+              <span className="text-white">Peptide data you can</span>
               <br />
               <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
-                to Evidence
+                actually trust
               </span>
             </h1>
 
             {/* Subtitle */}
             <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-white/60 md:text-xl lg:mx-0">
-              Design peptides residue by residue, trace every mechanism to the receptor, and
-              verify claims against cross-referenced PubChem structures and live
-              ClinicalTrials.gov data — built for researchers who think at the molecular level.
+              Cited, chemistry-grade reference and AI answers that show their sources — calculators,
+              catalog, and trial data that keep working at the bench, even with no signal.
             </p>
 
             {/* CTAs */}

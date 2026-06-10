@@ -1,7 +1,10 @@
 import { NextRequest } from 'next/server'
+import { rateLimit, clientKey, tooManyRequests } from '@/lib/rate-limit'
 
 // Research-use AI analysis of a designed peptide sequence. Mirrors the fetch
 // pattern in /api/chat (no SDK dependency). Returns markdown text.
+
+const MAX_SEQUENCE_LEN = 200 // residues; longer designs aren't bench-realistic here
 
 interface AnalyzeBody {
   sequence?: string
@@ -17,6 +20,12 @@ export async function POST(request: NextRequest) {
     )
   }
 
+  // Per-IP rate limit — one model call per request, so a looser cap than chat.
+  const rl = await rateLimit(clientKey(request, 'analyze'), { limit: 20, windowSec: 60 })
+  if (!rl.ok) {
+    return tooManyRequests(rl, 'Too many analyses. Please wait a moment and try again.')
+  }
+
   let body: AnalyzeBody
   try {
     body = await request.json()
@@ -24,7 +33,10 @@ export async function POST(request: NextRequest) {
     return Response.json({ error: 'Invalid request body' }, { status: 400 })
   }
 
-  const sequence = (body.sequence ?? '').toUpperCase().replace(/[^ACDEFGHIKLMNPQRSTVWY]/g, '')
+  const sequence = (body.sequence ?? '')
+    .toUpperCase()
+    .replace(/[^ACDEFGHIKLMNPQRSTVWY]/g, '')
+    .slice(0, MAX_SEQUENCE_LEN)
   if (sequence.length < 2) {
     return Response.json({ error: 'A sequence of at least 2 residues is required.' }, { status: 400 })
   }
@@ -67,19 +79,26 @@ Rules:
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1200,
-        system,
+        model: 'claude-fable-5',
+        max_tokens: 1500,
+        // Cache the static rules block: reused on every analysis at ~0.1x.
+        system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
         messages: [{ role: 'user', content: userPrompt }],
       }),
     })
 
     const rawText = await response.text()
     if (!response.ok) {
-      return Response.json({ error: rawText }, { status: response.status })
+      // Log detail server-side; don't echo the upstream body to the client.
+      console.error(`[analyze] upstream error ${response.status}: ${rawText.slice(0, 500)}`)
+      return Response.json({ error: 'AI analysis service returned an error.' }, { status: 502 })
     }
     const data = JSON.parse(rawText)
-    const content = data.content?.[0]?.text || 'No analysis generated.'
+    // Find the text block rather than assuming index 0 (robust to thinking/other blocks).
+    const textBlock = Array.isArray(data.content)
+      ? data.content.find((b: { type?: string }) => b?.type === 'text')
+      : null
+    const content = textBlock?.text || 'No analysis generated.'
     return Response.json({ content })
   } catch (err) {
     return Response.json(
