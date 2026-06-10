@@ -18,8 +18,13 @@ import {
   getPeptidesByCategory,
   type Peptide,
 } from './peptides'
-import { RESEARCH_AREAS, getAreasForPeptide } from './research-areas'
-import { COMPARISONS } from './comparisons'
+import {
+  RESEARCH_AREAS,
+  getAreasForPeptide,
+  getPeptidesForArea,
+  type ResearchArea,
+} from './research-areas'
+import { COMPARISONS, type Comparison } from './comparisons'
 import { GLOSSARY } from './glossary'
 import {
   API_SITE,
@@ -144,6 +149,65 @@ export function peptideMarkdown(p: Peptide): string {
   return lines.join('\n')
 }
 
+// ── Research area → markdown ─────────────────────────────────────────────────
+
+export function researchAreaMarkdown(a: ResearchArea): string {
+  const canonical = `${API_SITE}/research-areas/${a.slug}`
+  const peps = getPeptidesForArea(a)
+  const lines: string[] = []
+
+  lines.push(`# ${a.label}`, '', `> ${a.tagline}`, '')
+  lines.push(...a.intro.flatMap((p) => [p, '']))
+
+  if (peps.length) {
+    lines.push('## Peptides studied in this area', '')
+    lines.push(
+      ...peps.map(
+        (p) =>
+          `- [${p.name}](${API_SITE}/catalog/${p.slug}.md): ${p.shortDescription}`,
+      ),
+      '',
+    )
+  }
+
+  if (a.faqs.length) lines.push('## FAQs', '', ...faqBlock(a.faqs))
+
+  lines.push(attributionFooter(canonical))
+  return lines.join('\n')
+}
+
+// ── Comparison → markdown ────────────────────────────────────────────────────
+
+export function comparisonMarkdown(c: Comparison): string {
+  const canonical = `${API_SITE}/compare/${c.slug}`
+  const lines: string[] = []
+
+  lines.push(`# ${c.aName} vs ${c.bName}`, '', `> ${c.headline}`, '')
+  lines.push(...c.intro.flatMap((p) => [p, '']))
+
+  if (c.atAGlance.length) {
+    lines.push('## At a glance', '')
+    lines.push(`| Dimension | ${c.aName} | ${c.bName} |`, '| --- | --- | --- |')
+    lines.push(...c.atAGlance.map((r) => `| ${r.dim} | ${r.a} | ${r.b} |`), '')
+  }
+
+  if (c.trials?.length) {
+    lines.push('## Key trials', '')
+    lines.push('| Trial | Arm | Result |', '| --- | --- | --- |')
+    lines.push(
+      ...c.trials.map((t) => `| ${t.name} | ${t.arm} | ${t.result} |`),
+      '',
+    )
+  }
+
+  for (const s of c.proseSections ?? []) {
+    lines.push(`## ${s.title}`, '', ...s.paragraphs.flatMap((p) => [p, '']))
+  }
+
+  lines.push(attributionFooter(canonical))
+  return lines.join('\n')
+}
+
 // ── /llms.txt — curated index ────────────────────────────────────────────────
 
 export function llmsIndexMarkdown(): string {
@@ -212,6 +276,7 @@ export function llmsIndexMarkdown(): string {
     `- [Developer docs](${API_SITE}/developers): free, open JSON API — query by category, research area, or slug. No key required.`,
     `- [Full catalog JSON](${API_SITE}/api/catalog): every peptide, PubChem-enriched, ${API_LICENSE}.`,
     `- [Full catalog markdown](${API_SITE}/llms-full.txt): the entire catalog as one markdown document.`,
+    `- MCP server (Streamable HTTP): ${API_SITE}/api/mcp — connect from Claude, ChatGPT, Cursor, or any MCP client for live tools: search_peptides, get_peptide, get_research_area, compare_peptides, search_clinical_trials, search_pubmed, search_pubchem.`,
     '',
   )
 

@@ -4,8 +4,12 @@
 // the internal `market` stub (forward-looking, not real data) so the open
 // dataset never ships placeholder values.
 
-import { getCategoryLabel, type Peptide } from './peptides'
-import { getAreasForPeptide } from './research-areas'
+import { PEPTIDES, getCategoryLabel, type Peptide } from './peptides'
+import {
+  getAreasForPeptide,
+  getResearchAreaBySlug,
+  getPeptidesForArea,
+} from './research-areas'
 
 export const API_SITE = 'https://www.americanpeptide.com'
 export const API_VERSION = '1.0'
@@ -80,6 +84,53 @@ export function serializePeptide(p: Peptide): ApiPeptide {
     fdaApproved: Boolean(p.fdaApproved),
     url: `${API_SITE}/catalog/${p.slug}`,
   }
+}
+
+export interface PeptideFilter {
+  category?: string | null
+  area?: string | null
+  fdaOnly?: boolean
+  q?: string | null
+}
+
+/**
+ * Shared catalog filtering — one definition of the query semantics used by
+ * both the JSON API (/api/catalog) and the MCP server (/api/mcp).
+ * Returns an error string (instead of items) for an unknown research area.
+ */
+export function filterPeptides(
+  f: PeptideFilter,
+): { items: Peptide[] } | { error: string } {
+  let items: Peptide[] = PEPTIDES
+
+  if (f.area) {
+    const meta = getResearchAreaBySlug(f.area.toLowerCase())
+    if (!meta) {
+      return {
+        error: `Unknown research area '${f.area}'. See documentation for valid slugs.`,
+      }
+    }
+    items = getPeptidesForArea(meta)
+  }
+
+  if (f.category) {
+    const cat = f.category.toLowerCase()
+    items = items.filter((p) => p.categories.some((c) => c.toLowerCase() === cat))
+  }
+
+  if (f.fdaOnly) items = items.filter((p) => p.fdaApproved)
+
+  if (f.q) {
+    const q = f.q.toLowerCase()
+    items = items.filter((p) => {
+      const hay = [p.name, p.shortDescription, p.description, ...(p.aliases ?? [])]
+        .join(' ')
+        .toLowerCase()
+      return hay.includes(q)
+    })
+  }
+
+  return { items }
 }
 
 // True when the request is a top-level browser navigation (address bar, link,
