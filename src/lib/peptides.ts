@@ -1002,7 +1002,7 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'PT-141 (bremelanotide) is a melanocortin MC4R agonist FDA-approved (Vyleesi) for hypoactive sexual desire disorder in premenopausal women.',
       },
       {
-        q: 'How does it differ from erectile-dysfunction drugs?',
+        q: 'How does it differ from erectile-dysfunction medications?',
         a: 'Those act on blood flow; PT-141 acts centrally, on the brain circuits that govern sexual desire and arousal.',
       },
       {
@@ -1122,7 +1122,7 @@ const SEED_PEPTIDES: Peptide[] = [
       'Antimicrobial resistance — host-defense peptides studied as an alternative strategy.',
       'Wound healing — chemotaxis and tissue-repair signaling.',
       'Immunomodulation — signaling via the FPRL1 receptor.',
-      'Research compound — not an approved drug.',
+      'Research compound — not an approved medicine.',
     ],
     faqs: [
       {

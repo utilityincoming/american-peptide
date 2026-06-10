@@ -22,8 +22,36 @@ import {
   type Peptide,
 } from '@/lib/peptides'
 import { getAreasForPeptide } from '@/lib/research-areas'
+import PeptideStory from '@/components/PeptideStory'
 
 const SITE = 'https://www.americanpeptide.com'
+
+const DRUG_METADATA: Record<string, {
+  drugClass: string
+  administrationRoute: string
+  brandName?: string[]
+}> = {
+  semaglutide: {
+    drugClass: 'GLP-1 receptor agonist',
+    administrationRoute: 'subcutaneous injection; oral tablet',
+    brandName: ['Ozempic', 'Wegovy', 'Rybelsus'],
+  },
+  tirzepatide: {
+    drugClass: 'GLP-1/GIP dual receptor agonist',
+    administrationRoute: 'subcutaneous injection',
+    brandName: ['Mounjaro', 'Zepbound'],
+  },
+  tesamorelin: {
+    drugClass: 'GHRH analog',
+    administrationRoute: 'subcutaneous injection',
+    brandName: ['Egrifta'],
+  },
+  'pt-141': {
+    drugClass: 'Melanocortin receptor agonist',
+    administrationRoute: 'subcutaneous injection',
+    brandName: ['Vyleesi'],
+  },
+}
 
 interface RouteParams {
   params: Promise<{ slug: string }>
@@ -129,6 +157,32 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
       }
     : null
 
+  const drugMeta = DRUG_METADATA[peptide.slug]
+  const drugLd =
+    peptide.fdaApproved && drugMeta
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Drug',
+          name: peptide.name,
+          description: peptide.shortDescription,
+          url,
+          ...(peptide.aliases?.length ? { alternateName: peptide.aliases } : {}),
+          drugClass: drugMeta.drugClass,
+          ...(peptide.mechanism ? { mechanismOfAction: peptide.mechanism } : {}),
+          administrationRoute: drugMeta.administrationRoute,
+          legalStatus: 'PrescriptionOnly',
+          recognizingAuthority: {
+            '@type': 'Organization',
+            name: 'U.S. Food and Drug Administration',
+            url: 'https://www.fda.gov',
+          },
+          ...(drugMeta.brandName?.length
+            ? { brand: drugMeta.brandName.map((b) => ({ '@type': 'Brand', name: b })) }
+            : {}),
+          ...(sameAs.length ? { sameAs } : {}),
+        }
+      : null
+
   // Authoritative external references, generated from identifiers/name — no
   // fabricated citations. Rendered as a "Further reading" block.
   const references: { label: string; href: string }[] = []
@@ -165,6 +219,12 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+        />
+      )}
+      {drugLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(drugLd) }}
         />
       )}
 
@@ -260,6 +320,9 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 </ul>
               </Block>
             )}
+
+            {/* Per-peptide "born here" story — ties the synthesis pipeline to this molecule */}
+            <PeptideStory peptide={peptide} />
 
             {/* Handling, storage & why purity is hard — universal consumer-hardening callout */}
             <div className="rounded-2xl border border-[#2DD4A8]/15 bg-gradient-to-br from-[#2DD4A8]/[0.05] to-transparent p-6">

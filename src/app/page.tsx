@@ -127,17 +127,17 @@ export default function HomePage() {
             {/* CTAs */}
             <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <Link
-                href="/research"
+                href="/compounds/builder"
                 className="group inline-flex items-center gap-2 rounded-xl bg-[#2DD4A8] px-8 py-3.5 text-[15px] font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(45,212,168,0)] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_40px_rgba(45,212,168,0.35)]"
               >
-                Start Research
+                Open PeptideForge
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
-                href="#features"
+                href="/research"
                 className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-8 py-3.5 text-[15px] font-medium text-white/60 transition-colors hover:border-white/20 hover:text-white"
               >
-                Explore Features
+                Explore the research
               </Link>
             </div>
           </div>
@@ -152,9 +152,14 @@ export default function HomePage() {
         <div className="mx-auto mt-14 max-w-xl overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.025] px-5 py-3.5 text-center font-mono text-xs md:text-sm">
           <span className="text-white/30">sequence · </span>
           <span className="text-[#2DD4A8]/80">HKIGAQKYFLNHSGECGFHKIGAQK</span>
-          <span className="text-white/30"> · target: ACE2 · score: </span>
-          <span className="text-[#2DD4A8]">0.94</span>
+          <span className="text-white/30"> · residues: 25 · purity </span>
+          <span className="text-[#2DD4A8]">≥ 98%</span>
         </div>
+
+        {/* Synthesis patience line */}
+        <p className="mt-4 text-center text-xs tracking-wide text-white/25 italic">
+          Purity is what happens while you wait.
+        </p>
 
         {/* Stats row */}
         <div className="mt-12 grid grid-cols-3 gap-4 border-t border-white/[0.07] pt-10">
@@ -349,7 +354,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Marketplace Waitlist (de-emphasized: moved below the fold, muted styling) ── */}
+      {/* ── Marketplace Waitlist ── */}
       <section className="relative z-10 mx-auto max-w-2xl px-6 pb-32 md:px-10">
         <div className="mb-5 text-center">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/[0.10] bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-white/45">
@@ -357,17 +362,21 @@ export default function HomePage() {
             Marketplace · In development
           </div>
           <h2 className="mb-2 text-xl font-semibold tracking-tight md:text-2xl">
-            A transparent marketplace is on the way
+            Good peptides make you wait.
+            <br />
+            <span className="text-white/50">So does the marketplace.</span>
           </h2>
           <p className="mx-auto max-w-md text-[13px] leading-relaxed text-white/40">
-            Vetted suppliers, third-party COAs, per-mg pricing. Join the
-            waitlist for early access when listings go live.
+            Each coupling step is 30–60 minutes. A 40-residue chain takes days
+            on the synthesizer, then HPLC, then lyophilization. The wait is the
+            COA. Vetted suppliers, third-party certificates, per-mg pricing —
+            worth it when it arrives.
           </p>
         </div>
         <WaitlistForm
           source="home"
           variant="full"
-          heading="Join the marketplace waitlist"
+          heading="Join the waitlist"
           description="Researchers get early access. Suppliers can request onboarding."
         />
       </section>

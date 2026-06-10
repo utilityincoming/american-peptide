@@ -226,7 +226,7 @@ export default function CompatibilityGuidePage() {
                 solution can&apos;t be checked the way a single peptide can.
               </p>
               <p>
-                Real co-formulation — combining drugs into one product — is
+                Real co-formulation — combining compounds into one product — is
                 formulation science: stability studies, sterility, controlled
                 fill-finish. DIY syringe blending is the opposite of that, and
                 the honest caveat is that{' '}
