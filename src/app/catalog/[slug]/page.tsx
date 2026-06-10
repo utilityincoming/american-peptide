@@ -71,7 +71,10 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
   return {
     title: `${peptide.name} — AmericanPeptide.com Catalog`,
     description: peptide.shortDescription,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      types: { 'text/markdown': `${url}.md` },
+    },
     openGraph: {
       title: `${peptide.name} — AmericanPeptide.com Catalog`,
       description: peptide.shortDescription,
