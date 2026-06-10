@@ -7,7 +7,8 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "enrich": "node scripts/enrich-peptides.mjs"
+    "enrich": "node scripts/enrich-peptides.mjs",
+    "eval": "node scripts/eval-agent.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
