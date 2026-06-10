@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next'
+import path from 'node:path'
 
 const securityHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
@@ -13,6 +14,10 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   compress: true,
+  // Pin the workspace root to this project. A stray package-lock.json in a
+  // parent directory otherwise makes Next infer the wrong root, which can
+  // mis-trace files for serverless/standalone bundling on deploy.
+  outputFileTracingRoot: path.join(__dirname),
   // Legacy bespoke comparison URLs → programmatic /compare/[pair]. 301 to
   // preserve any accrued link equity.
   async redirects() {
