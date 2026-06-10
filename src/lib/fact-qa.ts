@@ -73,8 +73,41 @@ async function pubchemEvidence(peptide: Peptide): Promise<PubchemEvidence | null
 
 // ── Layer 1: deterministic chemistry diff ─────────────────────────────────────
 
-function normalizeFormula(f: string): string {
-  return f.replace(/\s+/g, '').trim()
+// Parse a molecular formula into element→count, ignoring any trailing charge
+// (e.g. "C14H21CuN6O4-" → {C:14,H:21,Cu:1,N:6,O:4}).
+function parseFormula(f: string): Record<string, number> {
+  const counts: Record<string, number> = {}
+  const body = f.replace(/\s+/g, '').replace(/[+-]+$/, '')
+  for (const m of body.matchAll(/([A-Z][a-z]?)(\d*)/g)) {
+    if (!m[1]) continue
+    counts[m[1]] = (counts[m[1]] ?? 0) + (m[2] ? Number(m[2]) : 1)
+  }
+  return counts
+}
+
+type FormulaVerdict =
+  | { verdict: 'match' }
+  | { verdict: 'charge-variant'; detail: string }
+  | { verdict: 'mismatch' }
+
+// Compare formulas by element composition. A difference of only hydrogen (≤2 H)
+// is treated as a protonation / charge-state variant — common for salts, metal
+// complexes, and zwitterions, where PubChem name-search often returns a charged
+// tautomer rather than the neutral species. Anything else is a real mismatch.
+function compareFormulas(catalog: string, source: string): FormulaVerdict {
+  const a = parseFormula(catalog)
+  const b = parseFormula(source)
+  const elements = new Set([...Object.keys(a), ...Object.keys(b)])
+  const diffs: string[] = []
+  for (const el of elements) {
+    const d = (a[el] ?? 0) - (b[el] ?? 0)
+    if (d !== 0) diffs.push(`${el}${d > 0 ? '+' : ''}${d}`)
+  }
+  if (diffs.length === 0) return { verdict: 'match' }
+  if (diffs.length === 1 && diffs[0].startsWith('H') && Math.abs((a.H ?? 0) - (b.H ?? 0)) <= 2) {
+    return { verdict: 'charge-variant', detail: `${Math.abs((a.H ?? 0) - (b.H ?? 0))} H` }
+  }
+  return { verdict: 'mismatch' }
 }
 
 function checkChemistry(peptide: Peptide, ev: PubchemEvidence): Finding[] {
@@ -83,7 +116,8 @@ function checkChemistry(peptide: Peptide, ev: PubchemEvidence): Finding[] {
 
   // Molecular formula
   if (peptide.molecularFormula && ev.molecularFormula) {
-    if (normalizeFormula(peptide.molecularFormula) !== normalizeFormula(ev.molecularFormula)) {
+    const cmp = compareFormulas(peptide.molecularFormula, ev.molecularFormula)
+    if (cmp.verdict === 'mismatch') {
       out.push({
         ...base,
         field: 'molecularFormula',
@@ -91,6 +125,15 @@ function checkChemistry(peptide: Peptide, ev: PubchemEvidence): Finding[] {
         catalog: peptide.molecularFormula,
         source: ev.molecularFormula,
         note: 'Catalog molecular formula does not match PubChem.',
+      })
+    } else if (cmp.verdict === 'charge-variant') {
+      out.push({
+        ...base,
+        field: 'molecularFormula',
+        severity: 'info',
+        catalog: peptide.molecularFormula,
+        source: ev.molecularFormula,
+        note: `Formulas match except for ${cmp.detail} — likely a protonation/charge-state difference (PubChem resolved a charged tautomer; common for salts and metal complexes).`,
       })
     }
   } else if (!peptide.molecularFormula && ev.molecularFormula) {
