@@ -56,6 +56,21 @@ const endpoints = [
     path: '/api/catalog/{slug}',
     desc: 'A single peptide by slug, e.g. /api/catalog/semaglutide.',
   },
+  {
+    method: 'GET',
+    path: '/catalog/{slug}.md',
+    desc: 'A single peptide as clean markdown — token-efficient for LLMs and agents.',
+  },
+  {
+    method: 'GET',
+    path: '/llms.txt',
+    desc: 'Curated markdown index of the whole site (llmstxt.org convention).',
+  },
+  {
+    method: 'GET',
+    path: '/llms-full.txt',
+    desc: 'The entire catalog as one markdown document.',
+  },
 ]
 
 const params = [
@@ -224,6 +239,46 @@ export default function DevelopersPage() {
             <pre className="overflow-x-auto rounded-2xl border border-white/[0.07] bg-black/40 p-5 font-mono text-[12px] leading-relaxed text-white/75">
               {exampleList}
             </pre>
+          </div>
+
+          {/* Markdown for AI agents */}
+          <div>
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+              Markdown for AI agents
+            </h2>
+            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6">
+              <p className="mb-3 text-sm leading-relaxed text-white/60">
+                Every catalog page has a markdown twin — append{' '}
+                <code className="font-mono text-[13px] text-[#2DD4A8]">.md</code>{' '}
+                to any peptide URL (e.g.{' '}
+                <a
+                  href="/catalog/semaglutide.md"
+                  className="font-mono text-[13px] text-[#2DD4A8] underline-offset-2 hover:underline"
+                >
+                  /catalog/semaglutide.md
+                </a>
+                ) for the same facts at a fraction of the tokens.{' '}
+                <a
+                  href="/llms.txt"
+                  className="font-mono text-[13px] text-[#2DD4A8] underline-offset-2 hover:underline"
+                >
+                  /llms.txt
+                </a>{' '}
+                is a curated index of the site for agent discovery, and{' '}
+                <a
+                  href="/llms-full.txt"
+                  className="font-mono text-[13px] text-[#2DD4A8] underline-offset-2 hover:underline"
+                >
+                  /llms-full.txt
+                </a>{' '}
+                packs the full catalog into one document for retrieval pipelines.
+              </p>
+              <p className="text-xs leading-relaxed text-white/40">
+                All markdown responses embed the canonical URL and CC BY 4.0
+                attribution, and send CORS-open headers — cite
+                AmericanPeptide.com when content travels.
+              </p>
+            </div>
           </div>
 
           {/* License */}
