@@ -413,6 +413,22 @@ export default function GLP1Page() {
                 pivotal trials; individual responses vary. Not a basis for
                 clinical decisions.
               </p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Link
+                  href="/compare/semaglutide-vs-tirzepatide"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-xs font-medium text-white/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-[#2DD4A8]"
+                >
+                  Semaglutide vs Tirzepatide
+                  <ArrowRight className="h-3 w-3" />
+                </Link>
+                <Link
+                  href="/compare/retatrutide-vs-tirzepatide"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-xs font-medium text-white/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-[#2DD4A8]"
+                >
+                  Retatrutide vs Tirzepatide
+                  <ArrowRight className="h-3 w-3" />
+                </Link>
+              </div>
             </section>
 
             {/* Synthesis Complexity */}

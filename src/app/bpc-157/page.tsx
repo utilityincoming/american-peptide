@@ -531,6 +531,7 @@ export default function BPC157Page() {
                 Related resources
               </p>
               {[
+                { href: '/compare/bpc-157-vs-tb-500', label: 'BPC-157 vs TB-500', sub: 'Head-to-head comparison' },
                 { href: '/research-areas/wound-healing', label: 'Wound Healing & Tissue Repair', sub: 'Research area guide' },
                 { href: '/catalog/category/healing-repair', label: 'Healing & Repair peptides', sub: 'Full category' },
                 { href: '/trials', label: 'Peptide clinical trials', sub: 'Search ClinicalTrials.gov' },
