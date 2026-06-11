@@ -146,6 +146,14 @@ const PAGES: CommandItem[] = [
     keywords: 'tools calculator reconstitution dose dilution syringe insulin units',
   },
   {
+    id: 'page-coa-decoder',
+    kind: 'page',
+    label: 'COA Decoder',
+    subtitle: 'Read & grade a Certificate of Analysis',
+    href: '/tools/coa-decoder',
+    keywords: 'coa certificate of analysis purity hplc mass spec peptide content endotoxin quality grade transparency',
+  },
+  {
     id: 'page-melanocortin',
     kind: 'page',
     label: 'Melanocortin Research Hub',

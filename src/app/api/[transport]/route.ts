@@ -17,6 +17,7 @@ import { PEPTIDES, CATEGORIES, getPeptideBySlug } from '@/lib/peptides'
 import { RESEARCH_AREAS, getResearchAreaBySlug } from '@/lib/research-areas'
 import { COMPARISONS, getComparison } from '@/lib/comparisons'
 import { executeAgentTool } from '@/lib/agent-tools'
+import { analyzeCoa } from '@/lib/coa'
 import {
   API_SITE,
   API_LICENSE,
@@ -151,6 +152,20 @@ const handler = createMcpHandler(
       async ({ query }) => {
         const r = await executeAgentTool('search_pubmed', { query })
         return r.isError ? errorText(r.content) : text(r.content)
+      },
+    )
+
+    server.tool(
+      'analyze_coa',
+      'Decode and grade a peptide Certificate of Analysis (COA). Pass the COA text; returns each transparency field explained (HPLC purity, mass-spec identity, net peptide content, water, counterion, endotoxin), a 0-100 transparency score + letter grade, red flags, and — when the peptide is recognized — a cross-check of the claimed molecular weight/formula/sequence against verified catalog data. Rule-based, no storage.',
+      {
+        text: z.string().describe('The full text of the Certificate of Analysis to analyze.'),
+      },
+      async ({ text: coaText }) => {
+        if (!coaText || coaText.trim().length < 20) {
+          return errorText('Provide the full COA text (at least a few lines).')
+        }
+        return text(JSON.stringify(analyzeCoa(coaText), null, 1))
       },
     )
 

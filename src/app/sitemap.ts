@@ -38,6 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/compounds/builder', priority: 0.8 },
     { path: '/trials', priority: 0.8 },
     { path: '/tools/reconstitution-calculator', priority: 0.8 },
+    { path: '/tools/coa-decoder', priority: 0.8 },
     // ── Specialized hubs ──────────────────────────────────
     { path: '/melanocortin', priority: 0.7 },
     { path: '/developers', priority: 0.7 },
