@@ -12,6 +12,7 @@ import {
   FileCheck2,
   FlaskConical,
   HelpCircle,
+  Newspaper,
   ShieldCheck,
   Snowflake,
 } from 'lucide-react'
@@ -23,9 +24,15 @@ import {
 } from '@/lib/peptides'
 import { getAreasForPeptide } from '@/lib/research-areas'
 import { getPubchemVerification } from '@/lib/verification'
+import { getLatestResearch } from '@/lib/freshness'
 import PeptideStory from '@/components/PeptideStory'
 
 const SITE = 'https://www.americanpeptide.com'
+
+// ISR: re-render at most once per day so the live "Latest research" section
+// stays current without rebuilding. External fetches in getLatestResearch are
+// themselves day-cached and fail soft, so this never blocks or breaks a render.
+export const revalidate = 86400
 
 const DRUG_METADATA: Record<string, {
   drugClass: string
@@ -96,6 +103,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
   ).slice(0, 3)
 
   const areas = getAreasForPeptide(peptide)
+  const latest = await getLatestResearch(peptide)
 
   const url = `${SITE}/catalog/${peptide.slug}`
 
@@ -420,6 +428,74 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                       {a.label}
                     </Link>
                   ))}
+                </div>
+              </Block>
+            )}
+
+            {(latest.trials.length > 0 || latest.articles.length > 0) && (
+              <Block title="Latest research">
+                <p className="mb-4 text-xs leading-relaxed text-white/40">
+                  Recent clinical trials and publications mentioning{' '}
+                  <span className="text-white/60">{latest.query}</span>, pulled
+                  automatically from ClinicalTrials.gov and PubMed and refreshed
+                  daily. Listings are unfiltered search results, not curated
+                  endorsements.
+                </p>
+                <div className="grid gap-6 md:grid-cols-2">
+                  {latest.trials.length > 0 && (
+                    <div>
+                      <h3 className="mb-2.5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-white/45">
+                        <FlaskConical className="h-3.5 w-3.5 text-[#2DD4A8]/70" />
+                        Recent trials
+                      </h3>
+                      <ul className="space-y-2">
+                        {latest.trials.map((t) => (
+                          <li key={t.nctId}>
+                            <a
+                              href={t.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group block rounded-lg border border-white/[0.06] bg-white/[0.02] px-3 py-2.5 transition-colors hover:border-[#2DD4A8]/30"
+                            >
+                              <span className="block text-sm leading-snug text-white/75 group-hover:text-white/90">
+                                {t.title}
+                              </span>
+                              <span className="mt-1 block text-[11px] text-white/40">
+                                {[t.status, t.phase, t.nctId].filter(Boolean).join(' · ')}
+                              </span>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {latest.articles.length > 0 && (
+                    <div>
+                      <h3 className="mb-2.5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-white/45">
+                        <Newspaper className="h-3.5 w-3.5 text-[#2DD4A8]/70" />
+                        Recent publications
+                      </h3>
+                      <ul className="space-y-2">
+                        {latest.articles.map((a) => (
+                          <li key={a.pmid}>
+                            <a
+                              href={a.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group block rounded-lg border border-white/[0.06] bg-white/[0.02] px-3 py-2.5 transition-colors hover:border-[#2DD4A8]/30"
+                            >
+                              <span className="block text-sm leading-snug text-white/75 group-hover:text-white/90">
+                                {a.title}
+                              </span>
+                              <span className="mt-1 block text-[11px] text-white/40">
+                                {[a.journal, a.date, `PMID ${a.pmid}`].filter(Boolean).join(' · ')}
+                              </span>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </Block>
             )}

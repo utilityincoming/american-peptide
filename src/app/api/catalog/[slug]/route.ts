@@ -8,6 +8,7 @@ import {
   CORS_HEADERS,
 } from '@/lib/catalog-api'
 import { enforceApiAccess } from '@/lib/api-auth'
+import { getLatestResearch } from '@/lib/freshness'
 
 export const runtime = 'nodejs'
 
@@ -40,11 +41,14 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
     )
   }
 
+  const latestResearch = await getLatestResearch(peptide)
+
   return NextResponse.json(
     {
       ...apiMeta(),
       generated: new Date().toISOString(),
       peptide: serializePeptide(peptide),
+      latestResearch,
     },
     { headers: { ...apiHeaders(), ...access.headers } },
   )
