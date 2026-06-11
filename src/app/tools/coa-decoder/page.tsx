@@ -1,15 +1,20 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Link from 'next/link'
 import {
   AlertTriangle,
+  Check,
   CheckCircle2,
+  ChevronDown,
+  Copy,
   FileSearch,
   Info,
   Lock,
   MinusCircle,
+  Send,
   ShieldCheck,
+  Upload,
 } from 'lucide-react'
 import type { CoaReport, FieldStatus } from '@/lib/coa'
 
@@ -43,11 +48,97 @@ function gradeColor(grade: string): string {
   return 'text-red-400 border-red-400/30 bg-red-400/[0.08]'
 }
 
+// The transparency checklist, disclosed on the page so the grade is auditable.
+const RUBRIC: { label: string; weight: number }[] = [
+  { label: 'Purity (HPLC)', weight: 2 },
+  { label: 'Identity — mass spectrometry', weight: 2 },
+  { label: 'Peptide / net content', weight: 2 },
+  { label: 'Water content (Karl Fischer)', weight: 1 },
+  { label: 'Counterion (acetate / TFA)', weight: 1 },
+  { label: 'Endotoxin / sterility', weight: 1 },
+  { label: 'Lot, dates & traceability', weight: 1 },
+  { label: 'Test methods named', weight: 1 },
+]
+
+// Extract text from a PDF entirely in the browser (pdfjs is lazy-loaded so it
+// never weighs down the initial page). The worker is pulled from a CDN matching
+// the installed version. Scanned/image-only PDFs yield no text — handled above.
+async function extractPdfText(file: File): Promise<string> {
+  const pdfjs = await import('pdfjs-dist')
+  pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
+  const data = await file.arrayBuffer()
+  const doc = await pdfjs.getDocument({ data }).promise
+  let out = ''
+  for (let i = 1; i <= doc.numPages; i++) {
+    const page = await doc.getPage(i)
+    const content = await page.getTextContent()
+    out += content.items.map((it) => (it as { str?: string }).str ?? '').join(' ') + '\n'
+  }
+  return out.trim()
+}
+
+function reportToText(r: CoaReport): string {
+  const lines: string[] = ['Peptide COA analysis — AmericanPeptide.com', '']
+  if (r.detectedPeptide) lines.push(`Identified: ${r.detectedPeptide.name}`)
+  lines.push(`Transparency grade: ${r.score.grade} (${r.score.percent}%)`, r.score.summary, '', 'Checklist:')
+  for (const f of r.fields)
+    lines.push(`  [${f.status === 'good' ? 'x' : ' '}] ${f.label}${f.value ? `: ${f.value}` : ''}`)
+  if (r.catalogChecks.length) {
+    lines.push('', 'Identity cross-check vs verified reference:')
+    for (const c of r.catalogChecks) lines.push(`  ${c.label}: COA ${c.claimed} vs ${c.reference} — ${c.verdict}`)
+  }
+  if (r.redFlags.length) {
+    lines.push('', 'Red flags:')
+    for (const f of r.redFlags) lines.push(`  - ${f}`)
+  }
+  lines.push('', r.supplierRequest, '', 'Graded free at https://www.americanpeptide.com/tools/coa-decoder')
+  return lines.join('\n')
+}
+
 export default function CoaDecoderPage() {
   const [text, setText] = useState('')
   const [report, setReport] = useState<CoaReport | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [fileBusy, setFileBusy] = useState(false)
+  const [copied, setCopied] = useState<string | null>(null)
+  const fileRef = useRef<HTMLInputElement>(null)
+
+  async function handleFile(file: File | undefined) {
+    if (!file) return
+    setError(null)
+    setReport(null)
+    const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')
+    try {
+      setFileBusy(true)
+      if (isPdf) {
+        const extracted = await extractPdfText(file)
+        if (extracted.length < 20) {
+          setError(
+            'Could not read text from that PDF — it may be a scanned image. Paste the COA text instead.',
+          )
+          return
+        }
+        setText(extracted)
+      } else {
+        setText((await file.text()).slice(0, 20000))
+      }
+    } catch {
+      setError('Could not read that file. Paste the COA text instead.')
+    } finally {
+      setFileBusy(false)
+    }
+  }
+
+  async function copy(kind: string, value: string) {
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopied(kind)
+      setTimeout(() => setCopied(null), 2000)
+    } catch {
+      /* clipboard unavailable — no-op */
+    }
+  }
 
   async function analyze() {
     setLoading(true)
@@ -109,12 +200,33 @@ export default function CoaDecoderPage() {
         <div className="mx-auto max-w-4xl space-y-8">
           {/* Input */}
           <div>
-            <textarea
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              placeholder="Paste the full text of your Certificate of Analysis here…"
-              rows={10}
-              className="w-full resize-y rounded-2xl border border-white/[0.08] bg-white/[0.02] p-4 font-mono text-sm text-white/85 placeholder:text-white/25 focus:border-[#2DD4A8]/40 focus:outline-none"
+            <div
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => {
+                e.preventDefault()
+                handleFile(e.dataTransfer.files?.[0])
+              }}
+              className="relative"
+            >
+              <textarea
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder="Paste your Certificate of Analysis text here — or drop a PDF / click Upload."
+                rows={10}
+                className="w-full resize-y rounded-2xl border border-white/[0.08] bg-white/[0.02] p-4 font-mono text-sm text-white/85 placeholder:text-white/25 focus:border-[#2DD4A8]/40 focus:outline-none"
+              />
+              {fileBusy && (
+                <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-[#0B1220]/70 text-sm text-white/70">
+                  Reading file…
+                </div>
+              )}
+            </div>
+            <input
+              ref={fileRef}
+              type="file"
+              accept=".pdf,.txt,application/pdf,text/plain"
+              className="hidden"
+              onChange={(e) => handleFile(e.target.files?.[0])}
             />
             <div className="mt-3 flex flex-wrap items-center gap-3">
               <button
@@ -124,6 +236,13 @@ export default function CoaDecoderPage() {
               >
                 <FileSearch className="h-4 w-4" />
                 {loading ? 'Analyzing…' : 'Analyze COA'}
+              </button>
+              <button
+                onClick={() => fileRef.current?.click()}
+                className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 px-4 py-2.5 text-sm font-medium text-white/60 transition-colors hover:border-white/20 hover:text-white"
+              >
+                <Upload className="h-4 w-4" />
+                Upload PDF
               </button>
               <button
                 onClick={() => setText(SAMPLE_COA)}
@@ -145,6 +264,27 @@ export default function CoaDecoderPage() {
               )}
             </div>
             {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
+
+            <details className="group mt-4 rounded-xl border border-white/[0.06] bg-white/[0.02] [&_summary::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer items-center justify-between gap-3 px-4 py-3 text-xs font-medium text-white/50 hover:text-white/75">
+                How this grade is calculated
+                <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" />
+              </summary>
+              <div className="border-t border-white/[0.06] px-4 py-3 text-xs leading-relaxed text-white/45">
+                <p className="mb-2.5">
+                  Each transparency item present on the COA earns its weight; the score is the sum over the
+                  maximum. Grades: A ≥85% · B ≥70% · C ≥55% · D ≥40% · F below.
+                </p>
+                <ul className="grid gap-1 sm:grid-cols-2">
+                  {RUBRIC.map((r) => (
+                    <li key={r.label} className="flex items-center justify-between gap-2 font-mono text-[11px]">
+                      <span>{r.label}</span>
+                      <span className="text-white/30">×{r.weight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </details>
           </div>
 
           {/* Report */}
@@ -178,6 +318,15 @@ export default function CoaDecoderPage() {
                     </div>
                     <p className="mt-2.5 text-sm leading-relaxed text-white/55">{report.score.summary}</p>
                   </div>
+                </div>
+                <div className="mt-4 border-t border-white/[0.06] pt-4">
+                  <button
+                    onClick={() => copy('report', reportToText(report))}
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-white/60 transition-colors hover:border-white/20 hover:text-white"
+                  >
+                    {copied === 'report' ? <Check className="h-3.5 w-3.5 text-[#2DD4A8]" /> : <Copy className="h-3.5 w-3.5" />}
+                    {copied === 'report' ? 'Copied' : 'Copy full report'}
+                  </button>
                 </div>
               </div>
 
@@ -256,6 +405,24 @@ export default function CoaDecoderPage() {
                 </div>
               )}
 
+              {/* Supplier request — operationalize the gaps */}
+              {report.missing.length > 0 && (
+                <div className="rounded-2xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] p-6">
+                  <div className="mb-2.5 flex items-center gap-2">
+                    <Send className="h-4 w-4 text-[#2DD4A8]" />
+                    <h2 className="text-sm font-semibold">Ask your supplier</h2>
+                  </div>
+                  <p className="mb-3 text-sm leading-relaxed text-white/65">{report.supplierRequest}</p>
+                  <button
+                    onClick={() => copy('supplier', report.supplierRequest)}
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1.5 text-xs font-medium text-[#2DD4A8] transition-colors hover:bg-[#2DD4A8]/[0.14]"
+                  >
+                    {copied === 'supplier' ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                    {copied === 'supplier' ? 'Copied' : 'Copy supplier request'}
+                  </button>
+                </div>
+              )}
+
               {/* Checklist */}
               <div>
                 <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
@@ -281,6 +448,11 @@ export default function CoaDecoderPage() {
                             <p className="mt-1.5 text-xs leading-relaxed text-white/45">{f.explanation}</p>
                             {f.note && (
                               <p className={'mt-1.5 text-xs leading-relaxed ' + color}>{f.note}</p>
+                            )}
+                            {f.action && (
+                              <p className="mt-1 text-[11px] text-white/35">
+                                Ask the supplier for {f.action}.
+                              </p>
                             )}
                           </div>
                         </div>
