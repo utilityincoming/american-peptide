@@ -1186,6 +1186,245 @@ const SEED_PEPTIDES: Peptide[] = [
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
+    slug: 'apitegromab',
+    name: 'Apitegromab',
+    aliases: ['SRK-015', 'SRK-439'],
+    categories: ['growth-hormone', 'metabolic'],
+    shortDescription:
+      'A monoclonal antibody that selectively blocks pro/latent myostatin — the muscle brake — studied to preserve lean mass during GLP-1 weight loss.',
+    description:
+      'Apitegromab is a fully human monoclonal antibody (Scholar Rock) and the first of the anti-myostatin biologics in this catalog. Where myostatin is the growth factor that brakes muscle and follistatin is the body’s natural antagonist, apitegromab is an engineered antagonist: an antibody that binds the inactive precursor forms of myostatin (pro- and latent myostatin) and prevents their activation. Its selectivity for those precursors — rather than mature myostatin or the related GDF11/activins — is its defining design feature.',
+    mechanism:
+      'Binds pro-myostatin and latent myostatin, blocking the proteolytic activation that releases mature, active myostatin. Lowering active myostatin disinhibits muscle growth via the ActRIIB/Smad pathway.',
+    researchAreas: ['Spinal muscular atrophy', 'Muscle preservation', 'GLP-1 muscle preservation', 'Body composition'],
+    background: [
+      'Apitegromab’s lead program is in spinal muscular atrophy (SMA), where it is added on top of SMN-targeted therapy to build motor-relevant muscle. The same mechanism underlies its forward-looking metabolic use: in the Phase 2 EMBRAZE study, adding apitegromab to tirzepatide preserved lean mass during weight loss compared with tirzepatide alone, and its precursor-selectivity was framed as a potential tolerability advantage over broader myostatin/activin blockers.',
+      'As a biologic it sits a full step beyond the protein hormones elsewhere in this catalog: it is an antibody (~150 kDa), produced in mammalian cells, designed to deplete a specific target. It is investigational — not an approved drug — and is included here as the antibody arm of the myostatin axis that myostatin and follistatin introduce.',
+    ],
+    keyResearch: [
+      'Precursor-selective — binds pro/latent myostatin rather than mature myostatin or GDF11/activins, the basis of its selectivity claim.',
+      'SMA — the lead clinical program, building muscle on top of SMN-directed therapy.',
+      'GLP-1 muscle preservation — Phase 2 EMBRAZE preserved lean mass when added to tirzepatide.',
+      'Antibody biologic — a ~150 kDa monoclonal antibody, the far end of the biologic spectrum from synthetic peptides.',
+      'Investigational — not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is apitegromab?',
+        a: 'A monoclonal antibody that selectively blocks the precursor forms of myostatin, the growth factor that limits muscle. It is studied in spinal muscular atrophy and, in combination with GLP-1/GIP drugs, to preserve muscle during weight loss.',
+      },
+      {
+        q: 'How is it different from blocking mature myostatin?',
+        a: 'Apitegromab targets pro- and latent (inactive) myostatin before it is activated, rather than the mature protein — a selectivity intended to avoid hitting related factors and improve tolerability.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference. Apitegromab is an investigational antibody, not an approved drug.',
+      },
+    ],
+    molecularWeight: 150000,
+    fdaApproved: false,
+    storage:
+      'Monoclonal antibodies are stored refrigerated (2–8 °C), protected from light and freezing, and never shaken. Investigational handling follows the trial protocol.',
+    handling:
+      'A large folded, glycosylated antibody — sensitive to freezing, heat, and agitation, which can aggregate it. Aggregation is an immunogenicity concern.',
+    synthesisNotes:
+      'Apitegromab is a recombinant monoclonal antibody (~150 kDa) produced in mammalian cell culture — the most complex biologic class in this catalog, far removed from solid-phase peptide synthesis. Characterization is antibody-grade: glycan and charge-variant profiling, identity by mass spectrometry, and target-binding/cell-based potency, with host-cell-protein and endotoxin limits.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'trevogrumab',
+    name: 'Trevogrumab',
+    aliases: ['REGN1033'],
+    categories: ['growth-hormone', 'metabolic'],
+    shortDescription:
+      'An anti-myostatin antibody (Regeneron) now studied in obesity combinations to cut lean-mass loss and deepen fat loss alongside semaglutide.',
+    description:
+      'Trevogrumab is a monoclonal antibody from Regeneron that neutralizes mature myostatin. After an earlier life in sarcopenia research, it has re-emerged squarely in the GLP-1 era: as a muscle-sparing add-on to incretin weight-loss drugs, and as one leg of a triple combination designed to maximize fat loss while protecting muscle.',
+    mechanism:
+      'Binds and neutralizes mature myostatin (GDF-8), removing its brake on muscle growth via the ActRIIB/Smad pathway. Used to offset the lean-mass loss that accompanies large GLP-1-driven weight loss.',
+    researchAreas: ['Obesity', 'Muscle preservation', 'GLP-1 muscle preservation', 'Body composition'],
+    background: [
+      'Trevogrumab is the clearest worked example of the muscle-preservation thesis. In trial data, semaglutide alone reduced both fat (~−15.7%) and lean mass (~−6.5%); adding trevogrumab roughly halved the lean-mass loss (to ~−3.3 to −3.8%) while increasing fat loss (up to ~−19.1%). The triple combination of semaglutide + trevogrumab + garetosmab (an anti-activin-A antibody) produced the most favorable body-composition profile of all — heavy fat loss with minimal lean loss — and is being tested in the COURAGE program expected to read out in late 2026.',
+      'It is a monoclonal antibody (~150 kDa) and an investigational agent. Its inclusion rounds out the myostatin axis with a mature-myostatin neutralizer, complementing apitegromab’s precursor-selective approach.',
+    ],
+    keyResearch: [
+      'GLP-1 muscle preservation — roughly halved semaglutide-associated lean-mass loss while deepening fat loss in trial data.',
+      'Triple combination — semaglutide + trevogrumab + garetosmab gave the best body-composition profile; COURAGE trial expected to complete late 2026.',
+      'Mature-myostatin neutralizer — binds active myostatin, complementing precursor-selective antibodies.',
+      'Sarcopenia origins — earlier studied for age-related muscle loss before the obesity pivot.',
+      'Investigational — not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is trevogrumab?',
+        a: 'A Regeneron monoclonal antibody that neutralizes myostatin, studied as a muscle-sparing add-on to GLP-1 weight-loss drugs and in a triple combination with semaglutide and garetosmab.',
+      },
+      {
+        q: 'What does adding it to semaglutide do?',
+        a: 'In trial data it roughly halved the lean-mass loss seen with semaglutide alone while increasing fat loss — the core "quality of weight loss" idea.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference. Trevogrumab is an investigational antibody, not an approved drug.',
+      },
+    ],
+    molecularWeight: 150000,
+    fdaApproved: false,
+    storage:
+      'Stored refrigerated (2–8 °C), protected from light and freezing, not shaken; investigational handling per trial protocol.',
+    handling:
+      'A large glycosylated antibody sensitive to freezing, heat, and agitation, which can cause aggregation.',
+    synthesisNotes:
+      'Trevogrumab is a recombinant monoclonal antibody (~150 kDa) made in mammalian cell culture, characterized with antibody-grade analytics (glycan/charge-variant profiling, mass spectrometry, binding/potency bioassay) — not a synthetic peptide.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'emugrobart',
+    name: 'Emugrobart',
+    aliases: ['GYM-329', 'RG6237', 'RG-70240'],
+    categories: ['growth-hormone', 'metabolic'],
+    shortDescription:
+      'A "sweeping" anti-myostatin antibody (Roche/Chugai) that not only blocks but actively clears myostatin — a cautionary case after its rare-disease trials failed.',
+    description:
+      'Emugrobart is a humanized IgG1 monoclonal antibody developed by Chugai and Roche, and it is the most mechanistically distinctive entry on the myostatin axis. Beyond binding pro- and latent myostatin to block their activation, it uses a "sweeping antibody" design: pH-dependent binding that ferries captured myostatin into cells for degradation and then releases it, recycling the antibody to capture more. The intent is not just to block myostatin but to actively lower its levels.',
+    mechanism:
+      'Binds pro/latent myostatin to prevent activation, and via pH-dependent (recycling/sweeping) engineering accelerates clearance of bound myostatin — reducing the circulating pool rather than only neutralizing it in place.',
+    researchAreas: ['Spinal muscular atrophy', 'FSHD', 'Obesity', 'Muscle preservation'],
+    background: [
+      'Emugrobart is also the catalog’s clearest honest-evidence cautionary tale. Its lead muscular-disease programs failed: in March 2026, Roche/Genentech discontinued development in spinal muscular atrophy (SMA) and facioscapulohumeral muscular dystrophy (FSHD) after the MANATEE trial showed no consistent benefit over risdiplam monotherapy. Notably, the company stated that the scientific rationale in obesity remained, and the Phase 2 obesity program was set to continue.',
+      'That split — a failed rare-disease readout but a continuing metabolic program — is exactly the kind of nuance a credible reference should carry, against the marketing that treats every "myostatin antibody" as a guaranteed muscle-builder. Emugrobart is an investigational antibody (~150 kDa); its sweeping-clearance design is its scientific signature.',
+    ],
+    keyResearch: [
+      'Sweeping/recycling design — pH-dependent binding actively clears myostatin rather than only blocking it.',
+      'MANATEE failure — discontinued in SMA and FSHD (March 2026) after no consistent benefit over risdiplam.',
+      'Obesity program continued — the metabolic rationale was retained even as rare-disease use was dropped.',
+      'Pro/latent myostatin target — binds the inactive precursor forms.',
+      'Investigational — not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is emugrobart?',
+        a: 'A Roche/Chugai anti-myostatin antibody (GYM-329) with a "sweeping" design that actively clears myostatin. It was studied in muscular diseases and obesity.',
+      },
+      {
+        q: 'What happened in its trials?',
+        a: 'Its spinal muscular atrophy and FSHD programs were discontinued in March 2026 after the MANATEE trial showed no consistent benefit over standard therapy; the obesity program was reported to be continuing.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference. Emugrobart is an investigational antibody, not an approved drug.',
+      },
+    ],
+    molecularWeight: 150000,
+    fdaApproved: false,
+    storage:
+      'Stored refrigerated (2–8 °C), protected from light and freezing, not shaken; investigational handling per trial protocol.',
+    handling:
+      'A large glycosylated antibody sensitive to freezing, heat, and agitation, which can cause aggregation.',
+    synthesisNotes:
+      'Emugrobart is a humanized IgG1 monoclonal antibody (~150 kDa) produced in mammalian cell culture, engineered for pH-dependent recycling. Characterization is antibody-grade (glycan/charge-variant profiling, mass spectrometry, binding/potency bioassay) — not a synthetic peptide.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'garetosmab',
+    name: 'Garetosmab',
+    aliases: ['REGN2477'],
+    categories: ['growth-hormone', 'metabolic'],
+    shortDescription:
+      'An anti-activin-A antibody (Regeneron) — closest to approval of the axis (FOP), and a partner in obesity muscle-preservation combinations.',
+    description:
+      'Garetosmab is a monoclonal antibody from Regeneron that neutralizes activin A — a TGF-β-superfamily ligand that, like myostatin, signals through the activin type II receptors. Blocking activin A widens the axis beyond myostatin alone, and garetosmab plays two roles in this catalog: it is the most clinically advanced agent here, and it is the third leg of the triple obesity combination.',
+    mechanism:
+      'Binds and neutralizes activin A, blocking its signaling through ActRII. In bone disease this prevents activin-A-driven abnormal ossification; in the metabolic setting, adding activin-A blockade to myostatin blockade and incretin therapy further shifts body composition toward fat loss with preserved muscle.',
+    researchAreas: ['Fibrodysplasia ossificans progressiva', 'Obesity', 'Body composition', 'Muscle preservation'],
+    background: [
+      'Garetosmab’s lead indication is fibrodysplasia ossificans progressiva (FOP) — an ultra-rare disease in which soft tissue turns to bone, driven by activin A. Its Phase 3 OPTIMA trial was positive (roughly 90–94% reduction in new heterotopic bone lesions), and its FDA Biologics License Application was accepted for Priority Review with a decision target around August 2026 — making it the closest-to-approval molecule on this axis, albeit for a rare bone disease rather than obesity.',
+      'Its metabolic role is as the activin-A arm of the semaglutide + trevogrumab + garetosmab triple combination, which produced the best body-composition profile in early data. As an anti-activin-A antibody (~150 kDa), it illustrates that the "myostatin axis" is really a broader activin/ActRII network with multiple blockable nodes.',
+    ],
+    keyResearch: [
+      'FOP — positive Phase 3 OPTIMA (~90–94% reduction in new abnormal bone lesions); the lead indication.',
+      'Regulatory status — BLA accepted for FDA Priority Review (target decision ~Aug 2026), the most advanced agent on this axis.',
+      'Anti-activin A — widens muscle/fat modulation beyond myostatin by blocking a related ActRII ligand.',
+      'Triple combination — the activin-A leg of semaglutide + trevogrumab + garetosmab for body composition.',
+      'Investigational in obesity — its metabolic use is not approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is garetosmab?',
+        a: 'A Regeneron monoclonal antibody that neutralizes activin A. Its lead use is the rare bone disease FOP, and it is also a component of an obesity triple-combination aimed at preserving muscle.',
+      },
+      {
+        q: 'Why does an FOP drug appear alongside obesity compounds?',
+        a: 'Activin A signals through the same ActRII receptors as myostatin. Blocking it both prevents abnormal bone formation in FOP and, combined with myostatin blockade and a GLP-1 drug, shifts weight loss toward fat while sparing muscle.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference. Garetosmab’s obesity use is investigational; its FOP application was under FDA review.',
+      },
+    ],
+    molecularWeight: 150000,
+    fdaApproved: false,
+    storage:
+      'Stored refrigerated (2–8 °C), protected from light and freezing, not shaken; investigational handling per trial protocol.',
+    handling:
+      'A large glycosylated antibody sensitive to freezing, heat, and agitation, which can cause aggregation.',
+    synthesisNotes:
+      'Garetosmab is a recombinant monoclonal antibody (~150 kDa) produced in mammalian cell culture, characterized with antibody-grade analytics (glycan/charge-variant profiling, mass spectrometry, binding/potency bioassay) — not a synthetic peptide.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'bimagrumab',
+    name: 'Bimagrumab',
+    aliases: ['BYM338'],
+    categories: ['growth-hormone', 'metabolic'],
+    shortDescription:
+      'An antibody that blocks the activin type II receptor itself — shutting off myostatin AND activin signaling at once; famous for adding muscle while cutting fat.',
+    description:
+      'Bimagrumab is a fully human monoclonal antibody that blocks the activin type II receptors (ActRIIA/ActRIIB) — the receptor every ligand on this axis must use. By acting at the receptor rather than on a single ligand, it shuts down myostatin and activin signaling simultaneously, which is why it produces the axis’s most striking body-composition effect: in trials it has both reduced fat and increased lean mass, an unusual combination for a weight-affecting drug.',
+    mechanism:
+      'Binds ActRIIA/ActRIIB and prevents their natural ligands (myostatin, activins, and related factors) from signaling. Blocking the shared receptor disinhibits muscle growth broadly while reducing fat mass.',
+    researchAreas: ['Obesity', 'Type 2 diabetes', 'Muscle wasting', 'Body composition'],
+    background: [
+      'Bimagrumab’s history maps the whole field. It was developed (as BYM338, Novartis) for muscle-wasting conditions — sporadic inclusion body myositis (where its pivotal trial failed), sarcopenia, and COPD-related wasting — before a notable Phase 2 in type 2 diabetes showed it cut fat mass substantially while adding lean mass. That fat-down/muscle-up profile made it a centerpiece of the obesity muscle-preservation thesis: Versanis advanced it, and Eli Lilly acquired Versanis for roughly $2 billion in 2023 to pair it with tirzepatide.',
+      'The honest update is that the path has not been smooth: a combination Phase 2 with semaglutide showed weight loss with preserved/added lean mass, but Lilly subsequently terminated a mid-stage obesity study pairing bimagrumab with its own incretin therapy. As the receptor-level blocker of the axis, bimagrumab is the broadest-acting and the most-watched — and a reminder that even the most mechanistically compelling agent has to clear real trials. It is investigational for these uses.',
+    ],
+    keyResearch: [
+      'Receptor-level blockade — targets ActRIIA/B, blocking myostatin and activin signaling together (broadest mechanism on the axis).',
+      'Fat down, muscle up — Phase 2 in type 2 diabetes reduced fat mass while increasing lean mass, an unusual profile.',
+      'GLP-1 combination — bimagrumab + semaglutide preserved/added lean mass alongside weight loss in Phase 2.',
+      'Commercial bet and setback — Lilly acquired Versanis (~$2B, 2023) but later terminated a mid-stage obesity combination study.',
+      'Muscle-wasting origins — earlier developed for inclusion body myositis (pivotal trial failed), sarcopenia, and COPD.',
+    ],
+    faqs: [
+      {
+        q: 'What is bimagrumab?',
+        a: 'A monoclonal antibody that blocks the activin type II receptor, shutting off both myostatin and activin signaling. It is notable for reducing fat while increasing muscle mass, and has been studied in obesity and type 2 diabetes.',
+      },
+      {
+        q: 'How is it different from the myostatin antibodies?',
+        a: 'The myostatin antibodies neutralize a ligand; bimagrumab blocks the shared receptor those ligands use, so it acts more broadly across the whole activin/myostatin axis.',
+      },
+      {
+        q: 'Is bimagrumab approved for obesity?',
+        a: 'No. Despite encouraging body-composition data and a major acquisition, it remains investigational, and at least one mid-stage obesity combination study was terminated.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference. Bimagrumab is an investigational antibody, not an approved drug.',
+      },
+    ],
+    molecularWeight: 150000,
+    fdaApproved: false,
+    storage:
+      'Stored refrigerated (2–8 °C), protected from light and freezing, not shaken; investigational handling per trial protocol.',
+    handling:
+      'A large glycosylated antibody sensitive to freezing, heat, and agitation, which can cause aggregation.',
+    synthesisNotes:
+      'Bimagrumab is a fully human recombinant monoclonal antibody (~150 kDa) produced in mammalian cell culture, characterized with antibody-grade analytics (glycan/charge-variant profiling, mass spectrometry, receptor-binding/cell-based potency) — not a synthetic peptide.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
     slug: 'mots-c',
     name: 'MOTS-c',
     categories: ['mitochondrial', 'longevity', 'metabolic'],
