@@ -27,6 +27,8 @@ export interface CoaField {
   status: FieldStatus
   /** Contribution to the transparency score when present. */
   weight: number
+  /** Concrete next step when this item is missing or weak (what to ask for). */
+  action?: string
 }
 
 export interface CatalogCheck {
@@ -44,6 +46,8 @@ export interface CoaReport {
   catalogChecks: CatalogCheck[]
   redFlags: string[]
   missing: string[]
+  /** A ready-to-send sentence asking the supplier for what's missing. */
+  supplierRequest: string
   score: {
     points: number
     max: number
@@ -352,6 +356,19 @@ export function analyzeCoa(rawText: string): CoaReport {
     },
   ]
 
+  // Concrete "ask the supplier" step for anything missing or weak.
+  const ACTIONS: Record<string, string> = {
+    purity: 'the HPLC purity value with the actual chromatogram',
+    massSpec: 'mass-spec (ESI/MALDI) identity confirmation with the observed mass',
+    peptideContent: 'the net peptide content (% peptide by weight)',
+    water: 'the water content by Karl Fischer titration',
+    counterion: 'the counterion identity (acetate vs TFA) and its percentage',
+    endotoxin: 'endotoxin (LAL, EU/mg) and sterility data, for any in-vivo use',
+    lotDates: 'the lot/batch number and manufacture + retest dates',
+    methods: 'the analytical method used for each reported value',
+  }
+  for (const f of fields) if (f.status !== 'good') f.action = ACTIONS[f.key]
+
   const catalogChecks = peptide ? buildCatalogChecks(text, peptide) : []
 
   // ── Score ──
@@ -374,6 +391,13 @@ export function analyzeCoa(rawText: string): CoaReport {
       redFlags.push(`${c.label} on the COA (${c.claimed}) does not match the reference (${c.reference}).`)
 
   const missing = fields.filter((f) => !f.found).map((f) => f.label)
+
+  const asks = fields.filter((f) => f.status === 'missing' || f.status === 'warn')
+  const supplierRequest = asks.length
+    ? `Your certificate of analysis${peptide ? ` for ${peptide.name}` : ''} is missing or incomplete on: ${asks
+        .map((f) => f.label)
+        .join(', ')}. To complete it, please provide ${asks.map((f) => f.action).join('; ')}.`
+    : 'This COA covers the core transparency fields — no additional items needed.'
 
   const summary =
     grade === 'A'
@@ -398,6 +422,7 @@ export function analyzeCoa(rawText: string): CoaReport {
     catalogChecks,
     redFlags,
     missing,
+    supplierRequest,
     score: { points, max, percent, grade, summary },
   }
 }
