@@ -26,6 +26,7 @@ import { getAreasForPeptide } from '@/lib/research-areas'
 import { getPubchemVerification } from '@/lib/verification'
 import { getLatestResearch } from '@/lib/freshness'
 import PeptideStory from '@/components/PeptideStory'
+import WatchButton from '@/components/WatchButton'
 
 const SITE = 'https://www.americanpeptide.com'
 
@@ -283,6 +284,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
           <p className="max-w-3xl text-base leading-relaxed text-white/65 md:text-lg">
             {peptide.shortDescription}
           </p>
+          <WatchButton slug={peptide.slug} />
         </div>
       </section>
 
