@@ -154,6 +154,14 @@ const PAGES: CommandItem[] = [
     keywords: 'coa certificate of analysis purity hplc mass spec peptide content endotoxin quality grade transparency',
   },
   {
+    id: 'page-workspace',
+    kind: 'page',
+    label: 'Workspace',
+    subtitle: 'Your watchlist, latest research & saved designs',
+    href: '/workspace',
+    keywords: 'workspace watchlist saved designs my peptides tracking latest research personal',
+  },
+  {
     id: 'page-melanocortin',
     kind: 'page',
     label: 'Melanocortin Research Hub',

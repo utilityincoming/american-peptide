@@ -25,6 +25,7 @@ const NAV_LINKS = [
     label: 'Calculator',
     match: ['/tools'],
   },
+  { href: '/workspace', label: 'Workspace', match: ['/workspace'] },
 ] as const
 
 // Educational surfaces, grouped under a single "Learn" nav item.
