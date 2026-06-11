@@ -353,6 +353,61 @@ const SEED_PEPTIDES: Peptide[] = [
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
+    slug: 'glucagon',
+    name: 'Glucagon',
+    aliases: ['GlucaGen', 'Baqsimi', 'Gvoke'],
+    categories: ['metabolic'],
+    shortDescription:
+      'Insulin’s counter-hormone — a 29-amino-acid peptide that raises blood glucose, the emergency rescue for severe lows, and the "G" in the new triple agonists.',
+    description:
+      'Glucagon is the metabolic mirror image of insulin. Released by the pancreatic alpha cells when blood sugar falls, this 29-amino-acid peptide tells the liver to break down glycogen and make new glucose, pushing blood sugar back up. It is the body’s primary defense against hypoglycemia, the basis of emergency rescue products, and — in a development that has put it back at the center of metabolic drug design — one of the three receptors the newest weight-loss agonists deliberately engage.',
+    mechanism:
+      'Binds the glucagon receptor on hepatocytes, raising cAMP and driving glycogenolysis and gluconeogenesis to increase blood glucose. It opposes insulin in the moment-to-moment regulation of blood sugar.',
+    researchAreas: ['Severe hypoglycemia', 'Glucose counter-regulation', 'Triple-agonist metabolic drugs'],
+    background: [
+      'Glucagon and insulin are a push-pull pair: insulin lowers blood glucose, glucagon raises it, and health depends on their balance. When blood sugar drops dangerously — most often in insulin-treated diabetes — glucagon is the rescue, which is why it is sold as emergency kits: the classic reconstituted injection (GlucaGen), a nasal powder (Baqsimi, 2019), and a ready-to-use autoinjector (Gvoke). It is also used in radiology and endoscopy to relax smooth muscle.',
+      'As a molecule it is a 29-residue peptide derived from the same precursor (preproglucagon) that gives rise to GLP-1 and GLP-2 — a family relationship that matters more than it first appears. For decades glucagon was framed only as the hormone you suppress in diabetes. The reframing came from drug design: adding glucagon-receptor agonism to incretin drugs increases energy expenditure and fat mobilization, and the glucagon receptor is the "G" in the GIP/GLP-1/glucagon triple agonists (such as retatrutide) now posting the largest weight-loss numbers in trials.',
+      'That is the forward-looking turn — the same hormone that, unopposed, worsens diabetic hyperglycemia becomes, when balanced against incretin signaling, a lever for greater fat loss and metabolic rate. It is a clean example of how a "bad" hormone in one context is a deliberate design ingredient in another.',
+    ],
+    keyResearch: [
+      'Severe hypoglycemia rescue — the approved use; raises blood glucose fast via hepatic glycogenolysis.',
+      'Insulin counter-regulation — the opposing arm of moment-to-moment glucose control.',
+      'Triple-agonist drugs — glucagon-receptor agonism is the "G" in GIP/GLP-1/glucagon agonists studied for large weight loss.',
+      'Procedural use — relaxes GI smooth muscle for imaging and endoscopy.',
+      'Preproglucagon family — shares a precursor with GLP-1 and GLP-2.',
+    ],
+    faqs: [
+      {
+        q: 'What does glucagon do?',
+        a: 'Glucagon raises blood sugar — it is the counter-hormone to insulin. The pancreas releases it when glucose falls, signaling the liver to release stored glucose. As a drug it is the emergency rescue for severe hypoglycemia.',
+      },
+      {
+        q: 'Why is glucagon in weight-loss drugs?',
+        a: 'Glucagon-receptor agonism increases energy expenditure and fat mobilization. It is the "G" in the GIP/GLP-1/glucagon triple agonists (like retatrutide) that show the largest weight-loss effects in trials.',
+      },
+      {
+        q: 'How is it related to GLP-1?',
+        a: 'Both come from the same precursor protein, preproglucagon. Glucagon raises blood sugar; GLP-1 lowers it and curbs appetite — different products of one parent molecule.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance.',
+      },
+    ],
+    sequence: 'HSQGTFTSDYSKYLDSRRAQDFVQWLMNT',
+    molecularWeight: 3485,
+    molecularFormula: 'C153H225N43O49S',
+    cas: '16941-32-5',
+    fdaApproved: true,
+    storage:
+      'Older glucagon kits are stored as lyophilized powder + diluent and reconstituted immediately before use; ready-to-use and nasal products follow their own label storage. The peptide is unstable in solution and is not kept reconstituted.',
+    handling:
+      'Reconstituted glucagon should be used promptly — it can aggregate/fibrillate in solution. Emergency products are designed for immediate single use.',
+    synthesisNotes:
+      'Glucagon is a 29-residue peptide produced by chemical synthesis or recombinant expression. It is prone to aggregation and fibrillation in aqueous solution, which is why traditional products are lyophilized and reconstituted at the point of use, and why newer formulations engineered for ready-to-use stability were a meaningful advance.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
     slug: 'bpc-157',
     name: 'BPC-157',
     aliases: ['Body Protective Compound 157', 'PL 14736'],
@@ -550,6 +605,61 @@ const SEED_PEPTIDES: Peptide[] = [
       'A glycosylated protein sensitive to heat, freezing, and agitation, which can aggregate it and reduce potency. Aggregated protein is also an immunogenicity concern — historically linked to rare pure red-cell aplasia from anti-EPO antibodies.',
     synthesisNotes:
       'EPO is produced recombinantly in mammalian (CHO) cell culture so that its essential N- and O-linked glycosylation is human-like; its ~30–34 kDa mass is approximate and varies with glycosylation, so it has no single molecular formula. Characterization is glycoprotein-grade — glycan/isoform profiling, identity by mass spectrometry and peptide mapping, and cell-based potency — far beyond an HPLC purity figure.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'teriparatide',
+    name: 'Teriparatide (PTH 1-34)',
+    aliases: ['PTH(1-34)', 'Forteo', 'Bonsity', 'recombinant parathyroid hormone'],
+    categories: ['healing-repair', 'longevity'],
+    shortDescription:
+      'The active fragment of parathyroid hormone — a recombinant peptide that builds bone, exploiting a paradox: the same hormone resorbs bone when continuous, but builds it when pulsed.',
+    description:
+      'Teriparatide is the first 34 amino acids of parathyroid hormone (PTH), the body’s master regulator of calcium. It is one of the few osteoporosis drugs that is genuinely anabolic — it builds new bone rather than just slowing its loss — and it does so by exploiting a striking biological paradox. The same PTH signal that dissolves bone when it is chronically elevated stimulates bone formation when it is delivered as a brief, once-daily pulse. Teriparatide turns that timing trick into a therapy.',
+    mechanism:
+      'Agonist at the PTH1 receptor on osteoblasts. Intermittent (once-daily) exposure favors osteoblast activity and new bone formation; continuous elevation (as in hyperparathyroidism) instead drives osteoclastic resorption. The therapeutic effect depends entirely on the pulsatile dosing.',
+    researchAreas: ['Osteoporosis', 'Bone formation', 'Fracture healing', 'Calcium regulation'],
+    background: [
+      'Parathyroid hormone is the body’s calcium thermostat, and the N-terminal 1-34 fragment retains its full receptor activity — which is why teriparatide is that fragment rather than the whole 84-residue hormone. Its defining feature is the dose-pattern paradox: a continuously high PTH level (the disease state of hyperparathyroidism) leaches calcium from bone, but a short daily spike tips the balance toward the bone-building osteoblasts. Teriparatide (Forteo, approved 2002) was among the first treatments to add bone rather than merely preserve it, used in severe osteoporosis and high fracture risk.',
+      'It also carries one of the more instructive drug-safety stories. Teriparatide launched with a black-box warning for osteosarcoma, a bone cancer seen when rats were given very high, lifelong doses — which translated into a strict two-year lifetime limit on use in people. Over nearly two decades of post-marketing data that signal did not materialize in humans, and in 2020 the FDA removed the boxed warning and the lifetime restriction. It is a useful case of a precautionary animal-derived warning being revised as real-world human evidence accumulated.',
+      'For a reference catalog, teriparatide is a clean example of how *timing*, not just the molecule, determines a hormone’s effect — and of how a peptide fragment can outperform the full hormone for a specific therapeutic goal.',
+    ],
+    keyResearch: [
+      'Anabolic osteoporosis therapy — builds new bone, distinct from antiresorptives that only slow loss.',
+      'The dose-pattern paradox — intermittent PTH builds bone; continuous PTH resorbs it.',
+      'Fracture-risk reduction — the approved use in severe osteoporosis and high fracture risk.',
+      'Boxed-warning reversal — the rat osteosarcoma warning and 2-year limit were removed by the FDA in 2020 after human data.',
+      'PTH1-receptor signaling — acts on osteoblasts; the 1-34 fragment retains full activity of the 84-residue hormone.',
+    ],
+    faqs: [
+      {
+        q: 'What is teriparatide?',
+        a: 'Teriparatide is PTH(1-34), the active fragment of parathyroid hormone, used as a recombinant injectable (Forteo) for osteoporosis. Unlike most bone drugs, it is anabolic — it builds new bone.',
+      },
+      {
+        q: 'How can parathyroid hormone both build and break down bone?',
+        a: 'It is about timing. A brief once-daily pulse of PTH favors bone-building osteoblasts, while a continuously high level (as in hyperparathyroidism) drives bone resorption. Teriparatide uses the pulsatile pattern deliberately.',
+      },
+      {
+        q: 'Is teriparatide still limited to two years?',
+        a: 'The original 2-year lifetime limit and osteosarcoma boxed warning — based on high-dose rat studies — were removed by the FDA in 2020 after long-term human data did not show that risk.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance.',
+      },
+    ],
+    sequence: 'SVSEIQLMHNLGKHLNSMERVEWLRKKLQDVHNF',
+    molecularWeight: 4117.8,
+    molecularFormula: 'C181H291N55O51S2',
+    cas: '52232-67-4',
+    fdaApproved: true,
+    storage:
+      'Teriparatide is supplied as a refrigerated (2–8 °C) solution pen; it must not be frozen and is protected from light, with an in-use window defined by the label.',
+    handling:
+      'A peptide in aqueous solution — kept cold, not frozen or shaken. Pen devices deliver fixed daily doses to maintain the pulsatile exposure the mechanism depends on.',
+    synthesisNotes:
+      'Teriparatide is recombinant human PTH(1-34), expressed in E. coli and purified to a defined 34-residue peptide. Because it is the minimal active fragment rather than the full 84-residue hormone, it can be manufactured and characterized more like a long synthetic/recombinant peptide than a large folded protein — identity by mass spectrometry and peptide mapping, with potency confirmed functionally.',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -1515,6 +1625,120 @@ const SEED_PEPTIDES: Peptide[] = [
       'A glycosylated heterodimer sensitive to heat, freezing, and agitation, any of which can dissociate the subunits or aggregate the protein and reduce potency.',
     synthesisNotes:
       'hCG is either purified from the urine of pregnant women or, as choriogonadotropin alfa, produced recombinantly in mammalian (CHO) cells so that the essential glycosylation is human-like. Its molecular weight (~36–40 kDa) is approximate and varies with glycosylation, so it is not represented by a single molecular formula. Characterization includes subunit identity, glycan profiling, and bioassay potency — glycoprotein-grade analytics well beyond an HPLC purity number.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'oxytocin',
+    name: 'Oxytocin',
+    aliases: ['Pitocin', 'Syntocinon', 'the love hormone'],
+    categories: ['reproductive', 'cognitive'],
+    shortDescription:
+      'A 9-amino-acid cyclic hormone of labor and bonding — historically the first peptide hormone ever chemically synthesized, and the most over-marketed "love hormone."',
+    description:
+      'Oxytocin is a tiny but pivotal hormone: a 9-amino-acid cyclic peptide, closed by a single disulfide bridge, released from the posterior pituitary. It drives uterine contractions in labor and milk letdown in nursing, and it acts in the brain on social behavior — the source of its "love hormone" fame. It also holds a place in scientific history: in 1953 Vincent du Vigneaud synthesized it, the first polypeptide hormone ever made in the lab, a feat that won the 1955 Nobel Prize in Chemistry and opened the door to synthetic peptide therapeutics.',
+    mechanism:
+      'Agonist at the oxytocin receptor (a G-protein-coupled receptor). Peripherally it contracts uterine smooth muscle and the mammary myoepithelium; centrally it modulates circuits involved in social bonding, trust, and stress, which is the basis of its behavioral research.',
+    researchAreas: ['Labor induction', 'Lactation', 'Social bonding', 'Anxiety and stress'],
+    background: [
+      'Oxytocin’s established medicine is obstetric. As Pitocin it is one of the most widely used drugs in childbirth — to induce or augment labor and to control bleeding afterward — and it mediates the milk-ejection reflex during breastfeeding. Structurally it is almost a twin of vasopressin, differing in only two residues, which is why the two hormones’ effects sometimes overlap.',
+      'Its fame, though, comes from the brain. Animal and early human work tied oxytocin to pair-bonding, maternal behavior, trust, and social affiliation, and the popular press crowned it the "love hormone" or "cuddle chemical." That framing drove a wave of intranasal-oxytocin research and products promising better social functioning — in autism, social anxiety, even relationship enhancement.',
+      'The honest reckoning is more sober. Rigorous, larger trials of intranasal oxytocin — including in autism — have largely failed to reproduce the early promise, and there are real questions about how much intranasal oxytocin even reaches the brain. Oxytocin is a genuine, important hormone whose behavioral marketing ran far ahead of the evidence — a textbook case of a misunderstood molecule, which is exactly why it belongs in an honest reference.',
+    ],
+    keyResearch: [
+      'Labor and delivery — induction/augmentation of labor and control of postpartum bleeding (the core approved use).',
+      'Lactation — mediates the milk-ejection (letdown) reflex.',
+      'Social neuroscience — studied for bonding, trust, and stress modulation; the basis of the "love hormone" label.',
+      'Intranasal hype vs evidence — larger trials (including autism) have largely not confirmed early behavioral claims.',
+      'A historic first — the first peptide hormone chemically synthesized (du Vigneaud, 1953; Nobel Prize 1955).',
+    ],
+    faqs: [
+      {
+        q: 'What is oxytocin?',
+        a: 'A 9-amino-acid cyclic hormone from the posterior pituitary that drives uterine contractions and milk letdown, and acts in the brain on social behavior. As a drug (Pitocin) it is used in labor.',
+      },
+      {
+        q: 'Is oxytocin really the "love hormone"?',
+        a: 'It does play a role in bonding and social behavior, but the "love hormone" label is overstated. Rigorous trials of intranasal oxytocin for social conditions, including autism, have largely failed to confirm the early hype.',
+      },
+      {
+        q: 'Why is oxytocin historically important?',
+        a: 'It was the first peptide hormone ever chemically synthesized (Vincent du Vigneaud, 1953), which won the 1955 Nobel Prize in Chemistry and helped launch the field of synthetic peptide therapeutics.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance.',
+      },
+    ],
+    sequence: 'CYIQNCPLG-NH2',
+    molecularWeight: 1007.19,
+    molecularFormula: 'C43H66N12O12S2',
+    cas: '50-56-6',
+    fdaApproved: true,
+    storage:
+      'Oxytocin injection is stored refrigerated (2–8 °C) per most labels; the cyclic disulfide peptide is sensitive to heat over time. Nasal/compounded forms follow their own storage.',
+    handling:
+      'A small disulfide-bridged peptide; protect from heat and prolonged storage in solution to preserve potency.',
+    synthesisNotes:
+      'Oxytocin is a 9-residue cyclic peptide with a single intramolecular disulfide bond, made by solid-phase peptide synthesis — fittingly, since its 1953 chemical synthesis was the historical proof that peptide hormones could be built in the lab at all. Its small size and defined structure make it straightforward to characterize by mass spectrometry and HPLC, unlike the large folded biologics elsewhere in this catalog.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'fsh',
+    name: 'FSH (Follitropin)',
+    aliases: [
+      'Follicle-stimulating hormone',
+      'Follitropin alfa',
+      'Gonal-f',
+      'Follistim',
+      'Puregon',
+    ],
+    categories: ['reproductive'],
+    shortDescription:
+      'A heterodimeric glycoprotein gonadotropin that drives follicle growth and spermatogenesis — the workhorse of IVF stimulation, and a sister molecule to HCG and LH.',
+    description:
+      'Follicle-stimulating hormone is one of the three pituitary glycoprotein gonadotropins, and like its siblings LH and HCG it is built from a shared alpha subunit paired with a hormone-specific beta subunit, heavily glycosylated. FSH is the signal that recruits and grows ovarian follicles in women and supports sperm production in men, which makes recombinant FSH (follitropin) the central tool of assisted reproduction — the drug that drives controlled ovarian stimulation in IVF.',
+    mechanism:
+      'Binds the FSH receptor on ovarian granulosa cells (driving follicle maturation and estrogen production) and on testicular Sertoli cells (supporting spermatogenesis). Its glycosylation governs its circulating half-life and activity.',
+    researchAreas: ['Ovarian stimulation', 'IVF / assisted reproduction', 'Anovulation', 'Male infertility'],
+    background: [
+      'FSH completes the gonadotropin picture alongside HCG and LH in this catalog: the same alpha subunit, a distinct beta subunit, and obligatory glycosylation that makes it a true glycoprotein hormone rather than a simple peptide. Its job is the front half of the reproductive cycle — recruiting and maturing ovarian follicles — where LH and the LH-mimicking HCG handle the ovulatory trigger that follows.',
+      'Therapeutically, recombinant FSH (follitropin alfa, Gonal-f; follitropin beta, Follistim) is produced in mammalian cells so its glycosylation is human-like, and it is the backbone of controlled ovarian stimulation in IVF — driving the development of multiple follicles in a cycle — as well as treatment for anovulation and certain male infertility. Older urine-derived gonadotropin products (menotropins) supplied FSH and LH activity together; recombinant versions allow precise, consistent dosing.',
+      'FSH is less surrounded by pop-culture drama than oxytocin or HCG, but it carries the same molecular lesson: glycoprotein hormones are assembled, glycosylated biologics whose sugar chains are part of the drug, which is why they are grown in cells and characterized by glycan and bioassay analytics rather than a simple purity figure.',
+    ],
+    keyResearch: [
+      'Controlled ovarian stimulation — the core use; drives multi-follicle development for IVF.',
+      'Anovulation — used to induce follicle growth when ovulation fails.',
+      'Male infertility — supports spermatogenesis via Sertoli-cell FSH receptors.',
+      'Gonadotropin family — shares an alpha subunit with LH, HCG, and TSH; specificity is in the beta subunit.',
+      'Recombinant vs urinary — recombinant follitropin allows precise dosing vs older urine-derived menotropins.',
+    ],
+    faqs: [
+      {
+        q: 'What does FSH do?',
+        a: 'Follicle-stimulating hormone drives the growth of ovarian follicles in women and supports sperm production in men. As recombinant follitropin it is the main drug used to stimulate the ovaries in IVF.',
+      },
+      {
+        q: 'How is FSH related to HCG and LH?',
+        a: 'They are all glycoprotein gonadotropins sharing the same alpha subunit; their unique beta subunits give them different jobs. FSH grows follicles, while LH and the LH-mimicking HCG trigger ovulation.',
+      },
+      {
+        q: 'Why is FSH a glycoprotein biologic?',
+        a: 'It is a two-subunit, heavily glycosylated protein whose sugar chains are essential to its activity and half-life. It is made in mammalian cells so glycosylation is human-like — not by peptide synthesis.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance.',
+      },
+    ],
+    molecularWeight: 30000,
+    uniprotId: 'P01225',
+    fdaApproved: true,
+    storage:
+      'Recombinant FSH products are refrigerated (2–8 °C) and protected from light and freezing; reconstituted/in-use pens follow the label’s window. Glycoprotein integrity is sensitive to heat and freeze–thaw.',
+    handling:
+      'A glycosylated heterodimer sensitive to heat, freezing, and agitation, which can dissociate the subunits or aggregate the protein and reduce potency.',
+    synthesisNotes:
+      'Recombinant follitropin is produced in mammalian (CHO) cells so its essential glycosylation is human-like; its ~30 kDa mass is approximate and varies with glycosylation, so it has no single molecular formula. Characterization is glycoprotein-grade — subunit identity, glycan/isoform profiling, and bioassay potency — well beyond an HPLC purity number.',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
