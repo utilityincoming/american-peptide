@@ -491,6 +491,68 @@ const SEED_PEPTIDES: Peptide[] = [
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
+    slug: 'epo',
+    name: 'EPO (Erythropoietin)',
+    aliases: [
+      'Erythropoietin',
+      'Epoetin alfa',
+      'Epogen',
+      'Procrit',
+      'recombinant human erythropoietin',
+      'rhEPO',
+    ],
+    categories: ['healing-repair'],
+    shortDescription:
+      'A glycoprotein hormone that drives red-blood-cell production — a recombinant biologic famous in medicine for treating anemia and infamous in sport for blood doping.',
+    description:
+      'Erythropoietin is the hormone the kidneys release to tell the bone marrow to make more red blood cells. It is a 165-amino-acid glycoprotein, roughly 30–34 kDa once its sugar chains are counted, and like other glycoprotein hormones its carbohydrate is not optional — the glycosylation governs its stability and circulating half-life. Recombinant versions (epoetin alfa and its relatives) are produced in mammalian cells so that human-like glycosylation occurs, and beyond its core role in red-cell production it has a substantial research literature in tissue protection.',
+    mechanism:
+      'Binds the erythropoietin receptor on red-cell progenitors in the bone marrow, activating JAK2/STAT5 signaling that promotes their survival, proliferation, and maturation into erythrocytes — raising the blood’s oxygen-carrying capacity. The same receptor is expressed in other tissues, the basis for its cytoprotective research.',
+    researchAreas: ['Anemia', 'Tissue protection', 'Neuroprotection', 'Erythropoiesis'],
+    background: [
+      'EPO is a glycoprotein, and that places it firmly in the biologic tier of this catalog. Its 165-residue chain folds into a four-helix bundle (the same architectural family as growth hormone) and is decorated with three N-linked and one O-linked glycan. Those sugars are functionally decisive: more heavily glycosylated, engineered versions (such as darbepoetin) circulate far longer. This is why EPO is made in mammalian cell culture rather than bacteria — only a eukaryotic cell adds the human-style glycosylation the molecule needs.',
+      'In medicine it is well established and genuinely important: recombinant EPO treats the anemia of chronic kidney disease, chemotherapy, and other marrow-suppressed states, sparing transfusions for millions. Its receptor turns up in the nervous system and elsewhere, which has driven a long research thread into EPO as a cytoprotective and neuroprotective agent after ischemic injury — promising in models, unproven as therapy.',
+      'Then there is the doping. EPO became the defining drug of endurance-sport scandals: by raising red-cell mass it boosts oxygen delivery and stamina, and it sat at the center of professional cycling’s doping era. The misuse carries real danger — thickened blood raises the risk of clots, stroke, and heart attack — and the same caution emerged in medicine, where trials showed that over-correcting hemoglobin to normal or high targets increased cardiovascular events and mortality. EPO is a clean example of a molecule whose reputation splits sharply between its legitimate, life-improving medical use and its dangerous performance misuse.',
+    ],
+    keyResearch: [
+      'Anemia of chronic kidney disease — the core approved use, replacing the EPO failing kidneys no longer make.',
+      'Chemotherapy-induced anemia — used to reduce transfusion need in selected patients.',
+      'Hemoglobin-target caution — trials found that normalizing/over-correcting hemoglobin raised cardiovascular events and mortality, reshaping dosing.',
+      'Tissue/neuroprotection — EPO-receptor signaling outside marrow is studied for cytoprotection after ischemic injury (research, not approved).',
+      'Endurance doping — banned in sport; raising red-cell mass increases clot, stroke, and heart-attack risk.',
+      'Glycosylation engineering — added glycans (darbepoetin) extend half-life, underscoring that the sugar defines the drug.',
+    ],
+    faqs: [
+      {
+        q: 'What is EPO?',
+        a: 'Erythropoietin — a glycoprotein hormone, mainly from the kidneys, that signals the bone marrow to produce red blood cells. Recombinant EPO (epoetin alfa) treats anemia in kidney disease and chemotherapy.',
+      },
+      {
+        q: 'Why is EPO a biologic rather than a peptide?',
+        a: 'It is a folded, glycosylated 165-amino-acid protein whose sugar chains are essential to its activity and half-life. It is produced in mammalian cells so that human-like glycosylation occurs — something bacterial peptide synthesis cannot do.',
+      },
+      {
+        q: 'Why is EPO associated with doping?',
+        a: 'By increasing red-cell mass it raises oxygen delivery and endurance, which made it a notorious performance drug, especially in cycling. The misuse is dangerous — it thickens the blood and raises clot, stroke, and heart-attack risk.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference. EPO is a prescription biologic with significant cardiovascular risks when misused.',
+      },
+    ],
+    molecularWeight: 30400,
+    cas: '113427-24-0',
+    uniprotId: 'P01588',
+    fdaApproved: true,
+    storage:
+      'Recombinant EPO is stored refrigerated (2–8 °C) and protected from light; it must not be frozen or shaken. Glycoprotein integrity is sensitive to heat and freeze–thaw.',
+    handling:
+      'A glycosylated protein sensitive to heat, freezing, and agitation, which can aggregate it and reduce potency. Aggregated protein is also an immunogenicity concern — historically linked to rare pure red-cell aplasia from anti-EPO antibodies.',
+    synthesisNotes:
+      'EPO is produced recombinantly in mammalian (CHO) cell culture so that its essential N- and O-linked glycosylation is human-like; its ~30–34 kDa mass is approximate and varies with glycosylation, so it has no single molecular formula. Characterization is glycoprotein-grade — glycan/isoform profiling, identity by mass spectrometry and peptide mapping, and cell-based potency — far beyond an HPLC purity figure.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
     slug: 'somatropin',
     name: 'Somatropin (rHGH)',
     aliases: [
@@ -889,6 +951,128 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'His-D-2-MeTrp-Ala-Trp-D-Phe-Lys-NH2',
     cas: '140703-51-1',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'myostatin',
+    name: 'Myostatin (GDF-8)',
+    aliases: ['GDF-8', 'Growth differentiation factor 8', 'MSTN'],
+    categories: ['growth-hormone', 'metabolic'],
+    shortDescription:
+      'The body’s brake on muscle growth — a TGF-β-family growth factor whose inhibition is the leading strategy to preserve muscle, including during GLP-1 weight loss.',
+    description:
+      'Myostatin (GDF-8) is the molecule that limits how much muscle you build. A member of the TGF-β superfamily, it is a negative regulator of skeletal-muscle mass: secreted by muscle itself, it signals muscle to stop growing. That makes myostatin unusual in this catalog — the therapeutic interest is almost entirely in blocking it, not supplying it — and it has become a forward-looking target precisely because the GLP-1 era exposed a problem myostatin inhibition could solve.',
+    mechanism:
+      'Synthesized as a precursor and processed to a disulfide-linked dimer that signals through the activin type II receptors (ActRIIB) and the Smad2/3 pathway to suppress muscle-fiber growth. Removing or blocking myostatin releases that brake, increasing muscle mass; follistatin is a natural antagonist of this signal.',
+    researchAreas: [
+      'Muscle growth',
+      'Body composition',
+      'Sarcopenia',
+      'Muscular dystrophy',
+      'GLP-1 muscle preservation',
+    ],
+    background: [
+      'Myostatin is best understood by what happens when it is missing. Cattle breeds with loss-of-function mutations — the "double-muscled" Belgian Blue — are dramatically more muscular; so are myostatin-null mice, a strain of "bully whippets," and, in a well-documented 2004 case, a human child with a myostatin mutation born unusually strong. The lesson is consistent across species: myostatin is a brake, and releasing it builds muscle. That is why the drug development around it aims to inhibit the pathway — with antibodies, ligand traps, and receptor blockers — rather than administer the growth factor.',
+      'The clinical targets were originally the diseases of muscle loss: muscular dystrophies, sarcopenia (age-related muscle wasting), and cachexia. Results have been mixed — blocking myostatin reliably adds muscle mass, but translating that into durable strength and function has proven harder — which is the honest state of the field.',
+      'The forward-looking turn is metabolic. The GLP-1 and dual/triple-agonist drugs produce large weight loss, but a substantial fraction of that loss is lean muscle, not just fat — a growing concern about the *quality* of weight loss as these drugs scale. Myostatin-pathway inhibition is the leading strategy to preserve or build muscle alongside that fat loss, and combinations of incretin agonists with muscle-sparing agents are an active frontier. This is the real "next chapter" beyond first-generation GLP-1 fat loss: not just losing weight, but keeping the muscle.',
+      'It is also a doping and hype target — "myostatin blockers" are marketed well ahead of the evidence, and the pathway is banned in sport. As a reference entry, myostatin is the target and the science; specific inhibitor drugs are described as research and investigational, not endorsements.',
+    ],
+    keyResearch: [
+      'Negative regulator of muscle — loss of myostatin (cattle, mice, dogs, a human case) produces dramatic muscle overgrowth.',
+      'Inhibition as the therapeutic angle — antibodies, ligand traps, and receptor blockers aim to release the brake, not supply the factor.',
+      'Muscle-wasting disease — studied in muscular dystrophy, sarcopenia, and cachexia; mass gains are more reliable than functional gains so far.',
+      'GLP-1 muscle preservation — a leading strategy to counter the lean-mass loss that accompanies incretin-driven weight loss (the forward-looking use).',
+      'ActRIIB/Smad signaling — myostatin acts through activin receptors; follistatin is its natural antagonist.',
+      'Not an approved drug — no myostatin-targeting therapy is broadly approved; agents remain investigational.',
+    ],
+    faqs: [
+      {
+        q: 'What is myostatin?',
+        a: 'Myostatin (GDF-8) is a TGF-β-family growth factor that limits skeletal-muscle growth — the body’s brake on muscle mass. Most therapeutic interest is in blocking it to increase muscle, not in administering it.',
+      },
+      {
+        q: 'Why is myostatin relevant to GLP-1 weight loss?',
+        a: 'GLP-1 and related drugs cause large weight loss that includes significant muscle, not just fat. Inhibiting the myostatin pathway is the leading approach to preserve muscle during that weight loss — a major forward-looking direction.',
+      },
+      {
+        q: 'Do myostatin blockers work?',
+        a: 'Blocking myostatin reliably increases muscle mass in studies, but translating that into lasting strength and function has been inconsistent. No myostatin-targeting drug is broadly approved; they remain investigational.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference. Myostatin-targeting agents are investigational and, as a pathway, are banned in sport.',
+      },
+    ],
+    molecularWeight: 12400,
+    uniprotId: 'O14793',
+    fdaApproved: false,
+    storage:
+      'As a research protein, recombinant myostatin/GDF-8 is handled like other growth factors — stored frozen as lyophilized powder, kept cold and protected from repeated freeze–thaw once reconstituted.',
+    handling:
+      'A disulfide-linked dimeric protein sensitive to heat, repeated freeze–thaw, and agitation, any of which can disrupt the dimer and reduce activity.',
+    synthesisNotes:
+      'Myostatin is a processed, disulfide-linked dimer of the TGF-β superfamily — not a solid-phase synthetic peptide. Its mature monomer is ~12.4 kDa and the active form is a ~25 kDa dimer; because it is produced and processed in cells (and is studied as a target rather than supplied as a drug), it has no single small-molecule formula. Most therapeutics in this space are antibodies or engineered receptor traps, which are biologic-grade products in their own right.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'follistatin',
+    name: 'Follistatin',
+    aliases: ['FST', 'FS-288', 'FS-315', 'follistatin-344'],
+    categories: ['growth-hormone', 'metabolic'],
+    shortDescription:
+      'A natural myostatin and activin antagonist — by neutralizing the muscle brake it is one of the most potent pro-muscle factors studied, and a doping and gene-therapy flashpoint.',
+    description:
+      'Follistatin is the body’s own counterweight to myostatin. It is a secreted glycoprotein that binds and neutralizes TGF-β-superfamily ligands — most importantly myostatin and activin — and by mopping up the signals that restrain muscle, it becomes one of the most powerful pro-muscle factors in the research literature. If myostatin is the brake on muscle growth, follistatin takes the foot off it.',
+    mechanism:
+      'Binds activin and myostatin with high affinity and sequesters them from their receptors, blocking the ActRIIB/Smad2/3 signaling that suppresses muscle growth. The net effect is disinhibition of muscle-fiber growth, studied as both a protein and a gene-therapy payload.',
+    researchAreas: [
+      'Muscle growth',
+      'Muscular dystrophy',
+      'Sarcopenia',
+      'Body composition',
+      'GLP-1 muscle preservation',
+    ],
+    background: [
+      'Follistatin exists in the body precisely to oppose the activin/myostatin axis, and overexpressing it produces some of the most striking muscle-growth phenotypes in animal research — larger gains than knocking out myostatin alone, because follistatin blocks multiple inhibitory ligands at once. It occurs in several isoforms (the FS-288 and FS-315 forms differ in how tightly they bind to cell surfaces and heparan sulfate), and as a secreted glycoprotein it is a true biologic, not a synthetic peptide.',
+      'Most of the serious work on follistatin has been as gene therapy: delivering a follistatin gene (often the FS-344 construct) to muscle has shown durable muscle growth in models and has been explored in early human trials for muscular dystrophies and inclusion-body myositis. That gene-therapy route — rather than injecting the protein — reflects both follistatin’s short half-life and the goal of sustained local expression.',
+      'It shares the forward-looking metabolic angle with myostatin: as GLP-1-class drugs drive large weight loss that includes muscle, follistatin-based and myostatin-antagonist approaches are part of the strategy to protect lean mass and improve the *quality* of that weight loss. It is, equally, a doping and hype target — "follistatin" products are marketed far beyond the evidence, and the pathway is banned in sport.',
+      'For a reference, follistatin is best framed honestly: a genuinely potent muscle-growth regulator with real promise in muscle-wasting disease and a real frontier role alongside metabolic drugs — but one whose most credible results come from gene therapy in research settings, not from the supplements and injectables sold under its name.',
+    ],
+    keyResearch: [
+      'Potent muscle growth — neutralizing activin and myostatin disinhibits muscle, often exceeding myostatin knockout alone.',
+      'Gene therapy — follistatin (FS-344) gene delivery has shown durable muscle growth in models and early human dystrophy/myositis trials.',
+      'Muscle-wasting disease — studied across muscular dystrophies, sarcopenia, and cachexia.',
+      'GLP-1 muscle preservation — part of the forward-looking strategy to protect lean mass during incretin-driven weight loss.',
+      'Multiple isoforms — FS-288 vs FS-315 differ in cell-surface binding and bioavailability.',
+      'Doping/hype caution — banned in sport; marketed products run well ahead of the evidence.',
+    ],
+    faqs: [
+      {
+        q: 'What is follistatin?',
+        a: 'A secreted glycoprotein that binds and neutralizes myostatin and activin, removing the brakes on muscle growth. It is one of the most potent pro-muscle factors in research, studied mainly as a gene therapy.',
+      },
+      {
+        q: 'How is follistatin different from myostatin?',
+        a: 'Myostatin restrains muscle growth; follistatin blocks myostatin (and activin), so it does the opposite. Follistatin can exceed the muscle gains of removing myostatin alone because it neutralizes several inhibitory signals.',
+      },
+      {
+        q: 'Does follistatin build muscle in humans?',
+        a: 'The most credible results come from follistatin gene therapy in research and early trials, not from injectable proteins or supplements sold as "follistatin," which run ahead of the evidence. No follistatin therapy is broadly approved.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference. Follistatin-based approaches are investigational and the pathway is banned in sport.',
+      },
+    ],
+    molecularWeight: 34000,
+    uniprotId: 'P19883',
+    fdaApproved: false,
+    storage:
+      'Recombinant follistatin is handled as a research glycoprotein — stored frozen as lyophilized powder, kept cold and protected from repeated freeze–thaw after reconstitution.',
+    handling:
+      'A glycosylated protein sensitive to heat, freeze–thaw, and agitation, which can aggregate it and reduce activity.',
+    synthesisNotes:
+      'Follistatin is a secreted glycoprotein (isoforms ~31–38 kDa with glycosylation), produced recombinantly in eukaryotic cells rather than by solid-phase synthesis; its mass varies with isoform and glycosylation, so it has no single molecular formula. Much of the credible therapeutic work uses follistatin gene delivery, characterized as a gene-therapy product, with the expressed protein verified by glycoprotein-grade analytics.',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
