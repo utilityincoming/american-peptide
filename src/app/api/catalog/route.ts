@@ -9,6 +9,7 @@ import {
   isBrowserDocumentRequest,
   CORS_HEADERS,
 } from '@/lib/catalog-api'
+import { enforceApiAccess } from '@/lib/api-auth'
 
 export const runtime = 'nodejs'
 
@@ -29,6 +30,11 @@ export async function GET(req: NextRequest) {
     url.search = ''
     return NextResponse.redirect(url, 307)
   }
+
+  // API clients (not browser navigations): apply tiered access + metering.
+  const access = await enforceApiAccess(req, 'catalog')
+  if (!access.ok) return access.response
+
   const category = sp.get('category')?.trim().toLowerCase() || null
   const area = sp.get('area')?.trim().toLowerCase() || null
   const fdaOnly = sp.get('fda') === 'true'
@@ -56,7 +62,7 @@ export async function GET(req: NextRequest) {
       count: items.length,
       peptides: items.map(serializePeptide),
     },
-    { headers: apiHeaders() },
+    { headers: { ...apiHeaders(), ...access.headers } },
   )
 }
 

@@ -28,7 +28,7 @@ import {
   researchAreaMarkdown,
   comparisonMarkdown,
 } from '@/lib/llms'
-import { rateLimit, clientKey, tooManyRequests } from '@/lib/rate-limit'
+import { enforceApiAccess } from '@/lib/api-auth'
 
 export const runtime = 'nodejs'
 export const maxDuration = 60
@@ -177,11 +177,13 @@ const handler = createMcpHandler(
   },
 )
 
-// Modest per-IP rate limit so an agent loop can't hammer the upstream public
-// APIs through us. Catalog-only calls are cheap; the limit is sized for them.
+// Tiered access + metering so an agent loop can't hammer the upstream public
+// APIs through us, and so MCP usage shows up in the same analytics as the REST
+// API. An API key (Authorization: Bearer / x-api-key) raises the limits and
+// attributes usage; anonymous clients still work at the anonymous tier.
 async function limited(req: Request): Promise<Response> {
-  const rl = await rateLimit(clientKey(req, 'mcp'), { limit: 60, windowSec: 60 })
-  if (!rl.ok) return tooManyRequests(rl, 'Rate limit exceeded — retry shortly.')
+  const access = await enforceApiAccess(req, 'mcp')
+  if (!access.ok) return access.response
   return handler(req)
 }
 

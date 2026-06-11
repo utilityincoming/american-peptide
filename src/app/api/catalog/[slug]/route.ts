@@ -7,6 +7,7 @@ import {
   isBrowserDocumentRequest,
   CORS_HEADERS,
 } from '@/lib/catalog-api'
+import { enforceApiAccess } from '@/lib/api-auth'
 
 export const runtime = 'nodejs'
 
@@ -29,6 +30,9 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
     return NextResponse.redirect(url, 307)
   }
 
+  const access = await enforceApiAccess(req, 'catalog')
+  if (!access.ok) return access.response
+
   if (!peptide) {
     return NextResponse.json(
       { ...apiMeta(), error: `No peptide with slug '${slug}'.` },
@@ -42,7 +46,7 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
       generated: new Date().toISOString(),
       peptide: serializePeptide(peptide),
     },
-    { headers: apiHeaders() },
+    { headers: { ...apiHeaders(), ...access.headers } },
   )
 }
 
