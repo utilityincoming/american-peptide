@@ -78,7 +78,37 @@ function faqBlock(faqs: { q: string; a: string }[]): string[] {
 
 // ── Single peptide → markdown ────────────────────────────────────────────────
 
-export function peptideMarkdown(p: Peptide): string {
+import type { LatestResearch } from './freshness'
+
+function latestResearchBlock(latest: LatestResearch): string[] {
+  const lines: string[] = []
+  if (!latest.trials.length && !latest.articles.length) return lines
+  lines.push(
+    '## Latest research',
+    '',
+    `Recent trials and publications mentioning ${latest.query}, pulled automatically from ClinicalTrials.gov and PubMed (unfiltered search results, refreshed daily).`,
+    '',
+  )
+  if (latest.trials.length) {
+    lines.push('### Recent trials', '')
+    for (const t of latest.trials) {
+      const meta = [t.status, t.phase, t.nctId].filter(Boolean).join(' · ')
+      lines.push(`- [${t.title}](${t.url})${meta ? ` — ${meta}` : ''}`)
+    }
+    lines.push('')
+  }
+  if (latest.articles.length) {
+    lines.push('### Recent publications', '')
+    for (const a of latest.articles) {
+      const meta = [a.journal, a.date].filter(Boolean).join(', ')
+      lines.push(`- [${a.title}](${a.url})${meta ? ` — ${meta}` : ''} (PMID ${a.pmid})`)
+    }
+    lines.push('')
+  }
+  return lines
+}
+
+export function peptideMarkdown(p: Peptide, latest?: LatestResearch): string {
   const canonical = `${API_SITE}/catalog/${p.slug}`
   const areas = getAreasForPeptide(p)
   const lines: string[] = []
@@ -144,6 +174,8 @@ export function peptideMarkdown(p: Peptide): string {
   if (practical.length) lines.push('## Storage, handling & synthesis', '', ...practical)
 
   if (p.faqs?.length) lines.push('## FAQs', '', ...faqBlock(p.faqs))
+
+  if (latest) lines.push(...latestResearchBlock(latest))
 
   lines.push(attributionFooter(canonical))
   return lines.join('\n')

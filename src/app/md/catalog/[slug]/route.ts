@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server'
 import { getPeptideBySlug, PEPTIDES } from '@/lib/peptides'
 import { peptideMarkdown, markdownHeaders } from '@/lib/llms'
+import { getLatestResearch } from '@/lib/freshness'
 import { API_SITE } from '@/lib/catalog-api'
 
 export const runtime = 'nodejs'
@@ -26,7 +27,8 @@ export async function GET(_req: NextRequest, { params }: RouteContext) {
     )
   }
 
-  return new Response(peptideMarkdown(peptide), {
+  const latest = await getLatestResearch(peptide)
+  return new Response(peptideMarkdown(peptide, latest), {
     headers: markdownHeaders({
       contentType: 'text/markdown',
       canonical: `${API_SITE}/catalog/${peptide.slug}`,
