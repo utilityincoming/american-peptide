@@ -12,8 +12,8 @@
 
 import { PEPTIDES, type Peptide } from '@/lib/peptides'
 import { executeAgentTool } from '@/lib/agent-tools'
+import { MODELS, shouldFailover } from '@/lib/models'
 
-const MODEL = 'claude-opus-4-8'
 const WEIGHT_TOLERANCE_FRAC = 0.005 // 0.5% — accommodates salt-form / rounding differences
 
 export type Severity = 'high' | 'medium' | 'low' | 'info'
@@ -306,23 +306,28 @@ ${trials.content}
 
 Return findings for claims that are contradicted or unsupported by this evidence.`
 
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-    },
-    body: JSON.stringify({
-      model: MODEL,
-      max_tokens: 2000,
-      output_config: { format: { type: 'json_schema', schema: ADJUDICATION_SCHEMA } },
-      system,
-      messages: [{ role: 'user', content: userPrompt }],
-    }),
-  })
+  // Try each model in the failover chain; advance only on a retryable failure.
+  let res: Response | null = null
+  for (const model of MODELS) {
+    res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({
+        model,
+        max_tokens: 2000,
+        output_config: { format: { type: 'json_schema', schema: ADJUDICATION_SCHEMA } },
+        system,
+        messages: [{ role: 'user', content: userPrompt }],
+      }),
+    })
+    if (res.ok || !shouldFailover(res.status)) break
+  }
 
-  if (!res.ok) {
+  if (!res || !res.ok) {
     return [
       {
         slug: peptide.slug,
@@ -331,7 +336,7 @@ Return findings for claims that are contradicted or unsupported by this evidence
         severity: 'info',
         catalog: null,
         source: null,
-        note: `LLM adjudication skipped — upstream ${res.status}.`,
+        note: `LLM adjudication skipped — upstream ${res?.status ?? 'no response'}.`,
       },
     ]
   }
@@ -421,7 +426,7 @@ export async function runFactQa(opts: RunFactQaOptions = {}): Promise<FactQaRepo
 
   return {
     ranAt: new Date().toISOString(),
-    model: MODEL,
+    model: MODELS[0],
     checked: slice.length,
     withLlm: useLlm && !!apiKey,
     findings,

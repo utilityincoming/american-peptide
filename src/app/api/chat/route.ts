@@ -3,9 +3,9 @@ import { AGENT_TOOLS, executeAgentTool } from '@/lib/agent-tools'
 import { rateLimit, clientKey, tooManyRequests } from '@/lib/rate-limit'
 import { synthesisDigest } from '@/lib/synthesis'
 import { siteIndexDigest, retrievalFallback } from '@/lib/llms'
+import { MODELS, shouldFailover } from '@/lib/models'
 
 // ── Hardening knobs ──────────────────────────────────────────────────────────
-const MODEL = 'claude-opus-4-8'
 const EFFORT = process.env.AGENT_EFFORT ?? 'medium' // low | medium | high | max
 const MAX_TOKENS = 8000 // non-streaming; well under SDK HTTP timeout
 const MAX_TOOL_ROUNDS = 5 // cap the agentic loop
@@ -102,7 +102,7 @@ interface AnthResult {
   errorText?: string
 }
 
-async function callAnthropic(apiKey: string, messages: Msg[]): Promise<AnthResult> {
+async function callModel(apiKey: string, model: string, messages: Msg[]): Promise<AnthResult> {
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -111,7 +111,7 @@ async function callAnthropic(apiKey: string, messages: Msg[]): Promise<AnthResul
       'anthropic-version': '2023-06-01',
     },
     body: JSON.stringify({
-      model: MODEL,
+      model,
       max_tokens: MAX_TOKENS,
       thinking: { type: 'adaptive' },
       output_config: { effort: EFFORT },
@@ -134,6 +134,21 @@ async function callAnthropic(apiKey: string, messages: Msg[]): Promise<AnthResul
   } catch {
     return { ok: false, status: 502, errorText: 'Malformed upstream response' }
   }
+}
+
+// Try each model in the failover chain. The first to respond wins; only advance
+// to the next on a retryable upstream failure (model unavailable, overload, 5xx)
+// — a non-retryable error (bad request, auth) would fail identically downstream.
+async function callAnthropic(apiKey: string, messages: Msg[]): Promise<AnthResult> {
+  let last: AnthResult = { ok: false, status: 502, errorText: 'No model responded' }
+  for (const model of MODELS) {
+    const result = await callModel(apiKey, model, messages)
+    if (result.ok) return result
+    last = result
+    if (!shouldFailover(result.status)) break
+    console.warn(`[chat] model ${model} failed (${result.status}); trying next in chain`)
+  }
+  return last
 }
 
 function extractText(content: unknown[]): string {
