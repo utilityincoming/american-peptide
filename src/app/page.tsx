@@ -3,6 +3,7 @@ import { ArrowRight, Dna, BarChart3, FlaskConical, Search, Sparkles, Telescope }
 import { PEPTIDES, CATEGORIES } from '@/lib/peptides'
 import { STATIC_FAQS, faqPageJsonLd } from '@/lib/faqs'
 import FaqAccordion from '@/components/FaqAccordion'
+import DynamicFaqs from '@/components/DynamicFaqs'
 
 const SPOTLIGHT_SLUGS = [
   'semaglutide',
@@ -368,6 +369,10 @@ export default function HomePage() {
         </div>
 
         <FaqAccordion items={STATIC_FAQS} />
+
+        {/* Dynamic, usage-sourced group — popular Agent questions; self-hides
+            when empty and stays out of the JSON-LD above. */}
+        <DynamicFaqs />
 
         {/* The "dynamic" path: anything not curated above routes to the Agent. */}
         <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent px-6 py-5 text-center sm:flex-row sm:text-left">
