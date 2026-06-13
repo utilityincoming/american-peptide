@@ -225,7 +225,7 @@ export default function ResearchPage() {
           <div>
             <span className="text-sm font-medium">Peptide Agent</span>
             <span className="ml-2 hidden text-xs text-white/30 sm:inline">
-              claude-sonnet-4-20250514
+              claude-opus-4-8
             </span>
           </div>
         </div>

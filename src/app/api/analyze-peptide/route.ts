@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server'
 import { rateLimit, clientKey, tooManyRequests } from '@/lib/rate-limit'
+import { MODELS, shouldFailover } from '@/lib/models'
 
 // Research-use AI analysis of a designed peptide sequence. Mirrors the fetch
 // pattern in /api/chat (no SDK dependency). Returns markdown text.
@@ -71,35 +72,41 @@ Rules:
 - Output clean markdown. No preamble like "Great question."`
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: 'claude-fable-5',
-        max_tokens: 1500,
-        // Cache the static rules block: reused on every analysis at ~0.1x.
-        system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
-        messages: [{ role: 'user', content: userPrompt }],
-      }),
-    })
+    // Try each model in the failover chain; advance only on a retryable
+    // upstream failure (model unavailable, overload, 5xx).
+    for (const model of MODELS) {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': process.env.ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+        },
+        body: JSON.stringify({
+          model,
+          max_tokens: 1500,
+          // Cache the static rules block: reused on every analysis at ~0.1x.
+          system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
+          messages: [{ role: 'user', content: userPrompt }],
+        }),
+      })
 
-    const rawText = await response.text()
-    if (!response.ok) {
-      // Log detail server-side; don't echo the upstream body to the client.
-      console.error(`[analyze] upstream error ${response.status}: ${rawText.slice(0, 500)}`)
-      return Response.json({ error: 'AI analysis service returned an error.' }, { status: 502 })
+      const rawText = await response.text()
+      if (!response.ok) {
+        // Log detail server-side; don't echo the upstream body to the client.
+        console.error(`[analyze] model ${model} error ${response.status}: ${rawText.slice(0, 500)}`)
+        if (shouldFailover(response.status)) continue
+        break
+      }
+      const data = JSON.parse(rawText)
+      // Find the text block rather than assuming index 0 (robust to thinking/other blocks).
+      const textBlock = Array.isArray(data.content)
+        ? data.content.find((b: { type?: string }) => b?.type === 'text')
+        : null
+      const content = textBlock?.text || 'No analysis generated.'
+      return Response.json({ content })
     }
-    const data = JSON.parse(rawText)
-    // Find the text block rather than assuming index 0 (robust to thinking/other blocks).
-    const textBlock = Array.isArray(data.content)
-      ? data.content.find((b: { type?: string }) => b?.type === 'text')
-      : null
-    const content = textBlock?.text || 'No analysis generated.'
-    return Response.json({ content })
+    return Response.json({ error: 'AI analysis service returned an error.' }, { status: 502 })
   } catch (err) {
     return Response.json(
       { error: err instanceof Error ? err.message : 'Analysis request failed.' },
