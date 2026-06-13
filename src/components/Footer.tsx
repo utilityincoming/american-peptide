@@ -4,7 +4,7 @@ const LINKS = [
   { href: '/', label: 'Home' },
   { href: '/catalog', label: 'Catalog' },
   { href: '/research-areas', label: 'Research Areas' },
-  { href: '/research', label: 'Research Agent' },
+  { href: '/research', label: 'Peptide Agent' },
   { href: '/compounds', label: 'Compounds' },
   { href: '/trials', label: 'Clinical Trials' },
   { href: '/tools/reconstitution-calculator', label: 'Peptide Calculator' },

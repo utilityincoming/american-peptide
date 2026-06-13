@@ -714,9 +714,9 @@ export default function MelanocortinPage() {
             <ToolCard
               icon={<MessageSquare className="h-5 w-5" />}
               title="Ask the AI Agent"
-              description="Deep-dive into melanocortin receptor biology with the AI research assistant"
+              description="Deep-dive into melanocortin receptor biology with the Peptide Agent"
               href="/research?q=Give+me+a+comprehensive+overview+of+the+melanocortin+system%2C+its+five+receptor+subtypes%2C+and+the+therapeutic+applications+of+MC+receptor+agonists"
-              cta="Open research agent"
+              cta="Open Peptide Agent"
               accent
             />
           </div>
@@ -742,7 +742,7 @@ export default function MelanocortinPage() {
               href="/research"
               className="transition-colors hover:text-white/60"
             >
-              Research Agent →
+              Peptide Agent →
             </Link>
           </div>
 

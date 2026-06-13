@@ -8,6 +8,7 @@ import {
   Factory,
   GraduationCap,
 } from 'lucide-react'
+import Toolkit from '@/components/Toolkit'
 import { STAGES } from '@/lib/synthesis'
 import { RESEARCH_AREAS } from '@/lib/research-areas'
 import { GLOSSARY } from '@/lib/glossary'
@@ -169,7 +170,9 @@ export default function LearnPage() {
           ))}
         </div>
 
-        <div className="mx-auto mt-8 max-w-5xl rounded-xl border border-amber-500/15 bg-amber-500/[0.04] px-4 py-3">
+        <Toolkit className="mx-auto mt-14 max-w-5xl" />
+
+        <div className="mx-auto mt-14 max-w-5xl rounded-xl border border-amber-500/15 bg-amber-500/[0.04] px-4 py-3">
           <p className="text-[11px] leading-relaxed text-amber-400/65">
             <span className="font-semibold text-amber-400/85">
               Research use only.

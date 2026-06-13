@@ -3,12 +3,12 @@ import type { Metadata } from 'next'
 const SITE = 'https://www.americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Peptide Research Agent — AI-Powered Queries | AmericanPeptide.com',
+  title: 'Peptide Agent — AI-Powered Peptide Research | AmericanPeptide.com',
   description:
-    'Ask the AI research agent about peptide mechanisms, synthesis, clinical evidence, and compound profiles — citation-backed answers sourced from PubMed, PubChem, and ClinicalTrials.gov.',
+    'Ask the Peptide Agent about peptide mechanisms, synthesis, clinical evidence, and compound profiles — citation-backed answers sourced from PubMed, PubChem, and ClinicalTrials.gov.',
   alternates: { canonical: `${SITE}/research` },
   openGraph: {
-    title: 'Peptide Research Agent — AI-Powered Queries',
+    title: 'Peptide Agent — AI-Powered Peptide Research',
     description:
       'AI-powered peptide research with citation-backed answers — mechanisms, synthesis, clinical evidence, compound profiles.',
     url: `${SITE}/research`,
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Peptide Research Agent | AmericanPeptide.com',
+    title: 'Peptide Agent | AmericanPeptide.com',
     description:
-      'AI-powered research agent for peptide mechanisms, clinical evidence, and synthesis — citation-backed answers.',
+      'AI-powered Peptide Agent for peptide mechanisms, clinical evidence, and synthesis — citation-backed answers.',
   },
 }
 
