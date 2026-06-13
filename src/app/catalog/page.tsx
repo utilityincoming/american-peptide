@@ -7,6 +7,7 @@ import {
   Check,
   FlaskConical,
   GitCompareArrows,
+  LayoutGrid,
   Plus,
   Search,
   ShieldCheck,
@@ -109,6 +110,25 @@ export default function CatalogPage() {
             captures mechanism, sequence, structure, and the research areas it’s
             studied for — with manufacturing and quality context from the synthesis guide.
           </p>
+
+          {/* In-section features, surfaced on the page instead of a sub-nav.
+              Compare also works inline — tick peptides below to stack the bar. */}
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/catalog/compare"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-2.5 text-sm font-medium text-white/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-white"
+            >
+              <GitCompareArrows className="h-4 w-4 text-[#2DD4A8]" />
+              Compare side-by-side
+            </Link>
+            <Link
+              href="/workspace"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-2.5 text-sm font-medium text-white/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-white"
+            >
+              <LayoutGrid className="h-4 w-4 text-[#2DD4A8]" />
+              Research Workspace
+            </Link>
+          </div>
         </div>
       </section>
 
