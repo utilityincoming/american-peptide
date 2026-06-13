@@ -2,11 +2,9 @@ import Link from 'next/link'
 
 const LINKS = [
   { href: '/', label: 'Home' },
+  { href: '/research', label: 'AI Agent' },
   { href: '/catalog', label: 'Catalog' },
-  { href: '/research-areas', label: 'Research Areas' },
-  { href: '/research', label: 'Peptide Agent' },
   { href: '/compounds', label: 'Compounds' },
-  { href: '/trials', label: 'Clinical Trials' },
   { href: '/tools/reconstitution-calculator', label: 'Peptide Calculator' },
   { href: '/developers', label: 'Developers / API' },
 ]
