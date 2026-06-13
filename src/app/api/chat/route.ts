@@ -5,7 +5,7 @@ import { synthesisDigest } from '@/lib/synthesis'
 import { siteIndexDigest, retrievalFallback } from '@/lib/llms'
 
 // ── Hardening knobs ──────────────────────────────────────────────────────────
-const MODEL = 'claude-fable-5'
+const MODEL = 'claude-opus-4-8'
 const EFFORT = process.env.AGENT_EFFORT ?? 'medium' // low | medium | high | max
 const MAX_TOKENS = 8000 // non-streaming; well under SDK HTTP timeout
 const MAX_TOOL_ROUNDS = 5 // cap the agentic loop

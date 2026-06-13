@@ -79,7 +79,7 @@ Rules:
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-fable-5',
+        model: 'claude-opus-4-8',
         max_tokens: 1500,
         // Cache the static rules block: reused on every analysis at ~0.1x.
         system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],

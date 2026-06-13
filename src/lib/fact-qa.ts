@@ -13,7 +13,7 @@
 import { PEPTIDES, type Peptide } from '@/lib/peptides'
 import { executeAgentTool } from '@/lib/agent-tools'
 
-const MODEL = 'claude-fable-5'
+const MODEL = 'claude-opus-4-8'
 const WEIGHT_TOLERANCE_FRAC = 0.005 // 0.5% — accommodates salt-form / rounding differences
 
 export type Severity = 'high' | 'medium' | 'low' | 'info'

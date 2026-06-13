@@ -353,9 +353,9 @@ export function siteIndexDigest(): string {
 
 // ── Retrieval fallback (used when the chat model declines to answer) ─────────
 //
-// claude-fable-5 currently refuses a broad set of legitimate peptide-research
-// questions at the safety layer (stop_reason=refusal, empty content). Rather
-// than return nothing, the chat route falls back to THIS: a match of the user's
+// The chat model can refuse a subset of legitimate peptide-research questions
+// at the safety layer (stop_reason=refusal, empty content). Rather than return
+// nothing, the chat route falls back to THIS: a match of the user's
 // question against our own published, vetted reference content. The assistant
 // degrades from generative to retrieval — surfacing the catalog/area/comparison
 // entry the user could have navigated to anyway — instead of failing.
