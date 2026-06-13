@@ -10,7 +10,7 @@ Next.js 15 + TypeScript + Tailwind CSS + App Router.
 - Styling: Tailwind CSS
 - Charts: Recharts
 - Icons: Lucide React
-- AI: Anthropic Claude API (claude-fable-5; raw fetch, no SDK). Research agent at
+- AI: Anthropic Claude API (claude-opus-4-8; raw fetch, no SDK). Research agent at
   /api/chat uses adaptive thinking + grounding tools (PubChem/ClinicalTrials/PubMed)
   via src/lib/agent-tools.ts. Static system prompts are sent as cached blocks.
 
