@@ -189,6 +189,16 @@ export default function ResearchPage() {
     [messages, loading],
   )
 
+  // Deep link: /research?q=... auto-asks the question once on load, so prompt
+  // hand-offs (e.g. the research-areas Agent box) land mid-conversation.
+  const initialized = useRef(false)
+  useEffect(() => {
+    if (initialized.current) return
+    initialized.current = true
+    const q = new URLSearchParams(window.location.search).get('q')
+    if (q && q.trim()) sendMessage(q)
+  }, [sendMessage])
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
