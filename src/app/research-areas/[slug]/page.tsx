@@ -9,6 +9,7 @@ import {
   getPeptidesForArea,
 } from '@/lib/research-areas'
 import EvidenceContext from '@/components/EvidenceContext'
+import Toolkit from '@/components/Toolkit'
 
 const SITE = 'https://www.americanpeptide.com'
 
@@ -283,6 +284,10 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
             </div>
           </aside>
         </div>
+      </section>
+
+      <section className="border-t border-white/[0.06] px-6 py-12 md:px-10">
+        <Toolkit className="mx-auto max-w-5xl" />
       </section>
     </div>
   )

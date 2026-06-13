@@ -348,7 +348,7 @@ export default function EvidenceHierarchyPage() {
             </div>
 
             <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">Research agent</p>
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">Peptide Agent</p>
               <p className="mb-4 text-xs leading-relaxed text-white/45">
                 Ask about evidence quality for a specific compound — backed by PubMed and ClinicalTrials.gov.
               </p>

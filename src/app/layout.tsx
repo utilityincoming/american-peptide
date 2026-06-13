@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.americanpeptide.com'),
   title: 'AmericanPeptide.com — AI-Powered Peptide Research',
   description:
-    'An AI-assisted research platform and open reference for peptide science — explore how peptides are designed, synthesized, purified, and proven, with a research agent, an open catalog, and hands-on tools.',
+    'An AI-assisted research platform and open reference for peptide science — explore how peptides are designed, synthesized, purified, and proven, with the Peptide Agent, an open catalog, and hands-on tools.',
   manifest: '/manifest.json',
   applicationName: 'AmericanPeptide',
   appleWebApp: {
@@ -53,14 +53,14 @@ export const metadata: Metadata = {
     siteName: 'AmericanPeptide.com',
     title: 'AmericanPeptide.com — AI-Powered Peptide Research',
     description:
-      'AI-assisted research platform and open reference for peptide science — catalog, research agent, clinical trials, synthesis guides, and hands-on tools.',
+      'AI-assisted research platform and open reference for peptide science — catalog, Peptide Agent, clinical trials, synthesis guides, and hands-on tools.',
   },
   twitter: {
     card: 'summary_large_image',
     site: '@americanpeptide',
     title: 'AmericanPeptide.com — AI-Powered Peptide Research',
     description:
-      'AI-assisted research platform and open reference for peptide science — catalog, research agent, clinical trials, synthesis guides, and hands-on tools.',
+      'AI-assisted research platform and open reference for peptide science — catalog, Peptide Agent, clinical trials, synthesis guides, and hands-on tools.',
   },
 }
 

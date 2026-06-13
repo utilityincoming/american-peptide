@@ -578,7 +578,7 @@ export default function BPC157Page() {
             {/* Research agent CTA */}
             <div className="rounded-xl border border-white/[0.07] bg-white/[0.03] p-5">
               <p className="mb-1 text-sm font-semibold text-white/80">
-                Ask the research agent
+                Ask the Peptide Agent
               </p>
               <p className="mb-4 text-xs leading-relaxed text-white/40">
                 Get citation-backed answers about BPC-157 mechanisms, trial
@@ -588,7 +588,7 @@ export default function BPC157Page() {
                 href="/research"
                 className="flex items-center justify-center gap-2 rounded-lg border border-white/[0.10] bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-white/70 transition-colors hover:border-white/20 hover:text-white"
               >
-                Open research agent
+                Open Peptide Agent
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

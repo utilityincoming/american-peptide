@@ -33,7 +33,7 @@ const SECTIONS: Section[] = [
       { href: '/synthesis', label: 'Synthesis' },
       { href: '/learn/compatibility', label: 'Compatibility' },
       { href: '/glossary', label: 'Glossary' },
-      { href: '/research', label: 'Agent' },
+      { href: '/research', label: 'Peptide Agent' },
     ],
   },
 ]
