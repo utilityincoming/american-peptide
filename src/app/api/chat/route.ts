@@ -1,9 +1,10 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, after } from 'next/server'
 import { AGENT_TOOLS, executeAgentTool } from '@/lib/agent-tools'
 import { rateLimit, clientKey, tooManyRequests } from '@/lib/rate-limit'
 import { synthesisDigest } from '@/lib/synthesis'
 import { siteIndexDigest, retrievalFallback } from '@/lib/llms'
 import { MODELS, shouldFailover } from '@/lib/models'
+import { logAgentQuestion } from '@/lib/agent-faqs'
 
 // ── Hardening knobs ──────────────────────────────────────────────────────────
 const EFFORT = process.env.AGENT_EFFORT ?? 'medium' // low | medium | high | max
@@ -275,6 +276,15 @@ export async function POST(request: NextRequest) {
         ? `Here's the relevant entry from the AmericanPeptide.com reference:\n\n${reference}`
         : 'I gathered some data but ran out of research steps before composing a full answer. Please ask again or narrow the question.'
     }
+  }
+
+  // Record the question for the dynamic "popular questions" FAQ — best-effort,
+  // after the response is sent. Skip refusals so we never surface a question the
+  // Agent won't answer.
+  if (lastStop !== 'refusal') {
+    const current = [...cleaned].reverse().find((m) => m.role === 'user')
+    const q = typeof current?.content === 'string' ? current.content : ''
+    if (q) after(() => logAgentQuestion(q))
   }
 
   return Response.json({
