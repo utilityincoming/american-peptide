@@ -80,18 +80,11 @@ export const STATIC_FAQS: Faq[] = [
   },
 ]
 
-/**
- * Dynamic / Agent-sourced FAQs. Intentionally empty for now and kept out of the
- * JSON-LD so the indexed structured data stays stable.
- *
- * To wire this up later: source the most-asked Peptide Agent questions (from
- * logs / KV / an edge config you curate), return them here, and render them in a
- * separate "More questions" group below the static set. Promote the durable ones
- * into STATIC_FAQS by hand when they've earned a permanent, indexed spot.
- */
-export async function getDynamicFaqs(): Promise<Faq[]> {
-  return []
-}
+// Dynamic / Agent-sourced FAQs now live in lib/agent-faqs.ts (KV-backed, ranked
+// by real /api/chat usage) and render client-side via the DynamicFaqs component,
+// kept out of the JSON-LD below so the indexed structured data stays stable.
+// Promote durable popular questions up into STATIC_FAQS by hand when they've
+// earned a permanent, indexed spot.
 
 /**
  * Build schema.org FAQPage structured data from the static set. Inject the
