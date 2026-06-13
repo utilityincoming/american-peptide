@@ -5,6 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import Footer from '@/components/Footer'
 import SiteHeader from '@/components/SiteHeader'
+import SectionNav from '@/components/SectionNav'
 import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar'
 import ResearchUseGate from '@/components/ResearchUseGate'
 
@@ -81,6 +82,7 @@ export default function RootLayout({
       >
         <ServiceWorkerRegistrar />
         <SiteHeader />
+        <SectionNav />
         {children}
         <Footer />
         <ResearchUseGate />
