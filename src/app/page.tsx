@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { ArrowRight, Dna, BarChart3, FlaskConical, Search, Sparkles, Telescope } from 'lucide-react'
 import { PEPTIDES, CATEGORIES } from '@/lib/peptides'
-import WaitlistForm from '@/components/WaitlistForm'
+import { STATIC_FAQS, faqPageJsonLd } from '@/lib/faqs'
+import FaqAccordion from '@/components/FaqAccordion'
 
 const SPOTLIGHT_SLUGS = [
   'semaglutide',
@@ -16,20 +17,20 @@ const SPOTLIGHT_SLUGS = [
 
 const features = [
   {
-    Icon: Dna,
-    name: 'PeptideForge',
-    badge: 'Interactive Builder',
-    href: '/compounds/builder',
-    description:
-      'Build a peptide residue by residue and watch mass, hydropathy, and net charge update live. Clear chemistry challenges to earn XP — a hands-on way to learn sequence design.',
-  },
-  {
     Icon: Sparkles,
     name: 'Peptide Agent',
     badge: 'AI Assistant',
     href: '/research',
     description:
       'Ask in plain language and get citation-backed answers — the agent cross-references PubChem structures, ClinicalTrials.gov studies, and mechanisms into structured evidence.',
+  },
+  {
+    Icon: Dna,
+    name: 'PeptideForge',
+    badge: 'Interactive Builder',
+    href: '/compounds/builder',
+    description:
+      'Build a peptide residue by residue and watch mass, hydropathy, and net charge update live. Clear chemistry challenges to earn XP — a hands-on way to learn sequence design.',
   },
   {
     Icon: BarChart3,
@@ -109,35 +110,36 @@ export default function HomePage() {
               Cited reference · Chemistry-grade · Works offline
             </div>
 
-            {/* Headline */}
+            {/* Headline — the USP: the only peptide app you can trust */}
             <h1 className="mb-6 text-5xl font-bold leading-[1.04] tracking-tight md:text-6xl">
-              <span className="text-white">Peptide data you can</span>
+              <span className="text-white">The only peptide app</span>
               <br />
               <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
-                actually trust
+                you can actually trust
               </span>
             </h1>
 
             {/* Subtitle */}
             <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-white/60 md:text-xl lg:mx-0">
-              Cited, chemistry-grade reference and AI answers that show their sources — calculators,
-              catalog, and trial data that keep working at the bench, even with no signal.
+              Cited, chemistry-grade reference plus AI answers that show their sources —
+              catalog, calculators, and trial data ready at the bench, even with no signal.
             </p>
 
-            {/* CTAs */}
+            {/* CTAs — lead with the Peptide Agent */}
             <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <Link
-                href="/compounds/builder"
+                href="/research"
                 className="group inline-flex items-center gap-2 rounded-xl bg-[#2DD4A8] px-8 py-3.5 text-[15px] font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(45,212,168,0)] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_40px_rgba(45,212,168,0.35)]"
               >
-                Open PeptideForge
+                <Sparkles className="h-4 w-4" />
+                Ask the Peptide Agent
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
-                href="/research"
+                href="/catalog"
                 className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-8 py-3.5 text-[15px] font-medium text-white/60 transition-colors hover:border-white/20 hover:text-white"
               >
-                Explore the research
+                Browse the catalog
               </Link>
             </div>
           </div>
@@ -354,30 +356,39 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Marketplace Waitlist ── */}
-      <section className="relative z-10 mx-auto max-w-2xl px-6 pb-32 md:px-10">
-        <div className="mb-5 text-center">
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/[0.10] bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-white/45">
-            <Sparkles className="h-3 w-3 text-[#2DD4A8]/70" />
-            Marketplace · In development
-          </div>
-          <h2 className="mb-2 text-xl font-semibold tracking-tight md:text-2xl">
-            Good peptides make you wait.
-            <br />
-            <span className="text-white/50">So does the marketplace.</span>
+      {/* ── FAQ ── */}
+      <section id="faq" className="relative z-10 mx-auto max-w-3xl px-6 pb-32 md:px-10">
+        <div className="mb-8 text-center">
+          <h2 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
+            Frequently asked questions
           </h2>
-          <p className="mx-auto max-w-md text-[13px] leading-relaxed text-white/40">
-            Each coupling step is 30–60 minutes. A 40-residue chain takes days
-            on the synthesizer, then HPLC, then lyophilization. The wait is the
-            COA. Vetted suppliers, third-party certificates, per-mg pricing —
-            worth it when it arrives.
+          <p className="text-sm text-white/55 md:text-base">
+            The essentials — and the Peptide Agent for everything else.
           </p>
         </div>
-        <WaitlistForm
-          source="home"
-          variant="full"
-          heading="Join the waitlist"
-          description="Researchers get early access. Suppliers can request onboarding."
+
+        <FaqAccordion items={STATIC_FAQS} />
+
+        {/* The "dynamic" path: anything not curated above routes to the Agent. */}
+        <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent px-6 py-5 text-center sm:flex-row sm:text-left">
+          <p className="text-sm text-white/65">
+            Have a question that isn&apos;t here? Ask the Peptide Agent for a
+            citation-backed answer.
+          </p>
+          <Link
+            href="/research"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#2DD4A8] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+          >
+            <Sparkles className="h-4 w-4" />
+            Ask the Agent
+          </Link>
+        </div>
+
+        {/* FAQPage structured data — curated/static questions only, so the
+            indexed schema stays stable. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd()) }}
         />
       </section>
     </div>
