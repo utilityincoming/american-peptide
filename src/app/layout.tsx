@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Space_Grotesk } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 import Footer from '@/components/Footer'
 import SiteHeader from '@/components/SiteHeader'
@@ -70,6 +71,11 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
+// GA4 measurement ID (e.g. "G-XXXXXXXXXX"). Set NEXT_PUBLIC_GA_ID in the
+// environment (Vercel project settings) to enable Google Analytics; when unset
+// — local dev, previews — GA simply doesn't load. Coexists with Vercel Analytics.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -88,6 +94,7 @@ export default function RootLayout({
         <ResearchUseGate />
         <Analytics />
         <SpeedInsights />
+        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
       </body>
     </html>
   )
