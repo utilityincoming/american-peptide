@@ -3,21 +3,19 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import { Menu, Sparkles, X } from 'lucide-react'
 import CommandPalette from './CommandPalette'
 
-// Top-level categories only. The deep links within Catalog (compare, workspace)
-// and Research (areas, synthesis, compatibility, glossary, agent) surface as a
-// contextual sub-nav inside those sections (see SectionNav), not as header
-// dropdowns — keeping the global nav clean.
+// The Peptide Agent leads as a prominent, standalone CTA. The rest are plain
+// top-level categories; their deep links surface as the in-page SectionNav.
+// Trials is no longer top-level — it lives at the tail of the Research section.
 const NAV_LINKS = [
   { href: '/catalog', label: 'Catalog', match: ['/catalog', '/workspace'] },
   {
     href: '/research-areas',
     label: 'Research',
-    match: ['/research', '/research-areas', '/synthesis', '/learn', '/glossary'],
+    match: ['/research-areas', '/synthesis', '/learn', '/glossary', '/trials'],
   },
-  { href: '/trials', label: 'Trials', match: ['/trials'] },
   { href: '/compounds', label: 'Compounds', match: ['/compounds'] },
   { href: '/tools/reconstitution-calculator', label: 'Calculator', match: ['/tools'] },
 ] as const
@@ -29,6 +27,7 @@ function isActive(pathname: string, prefixes: readonly string[]) {
 export default function SiteHeader() {
   const pathname = usePathname() ?? '/'
   const [open, setOpen] = useState(false)
+  const agentActive = isActive(pathname, ['/research'])
 
   useEffect(() => {
     setOpen(false)
@@ -65,7 +64,22 @@ export default function SiteHeader() {
         </Link>
 
         <div className="flex items-center gap-2">
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-1.5 md:flex">
+            {/* Lead feature: the Peptide Agent */}
+            <Link
+              href="/research"
+              aria-current={agentActive ? 'page' : undefined}
+              className={
+                'inline-flex items-center gap-1.5 rounded-lg border px-3.5 py-1.5 text-sm font-medium transition-all ' +
+                (agentActive
+                  ? 'border-[#2DD4A8]/50 bg-[#2DD4A8]/20 text-[#2DD4A8]'
+                  : 'border-[#2DD4A8]/30 bg-[#2DD4A8]/10 text-[#2DD4A8] hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/20')
+              }
+            >
+              <Sparkles className="h-4 w-4" />
+              Peptide Agent
+            </Link>
+
             {NAV_LINKS.map((link) => {
               const active = isActive(pathname, link.match)
               return (
@@ -87,13 +101,6 @@ export default function SiteHeader() {
 
           <CommandPalette />
 
-          <Link
-            href="/research"
-            className="ml-1 hidden rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3.5 py-1.5 text-sm font-medium text-[#2DD4A8] transition-all hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/20 md:inline-block"
-          >
-            Launch App →
-          </Link>
-
           <button
             type="button"
             aria-expanded={open}
@@ -110,6 +117,14 @@ export default function SiteHeader() {
       {open && (
         <div id="site-mobile-nav" className="border-t border-white/[0.06] bg-[#0B1220]/95 backdrop-blur md:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
+            <Link
+              href="/research"
+              aria-current={agentActive ? 'page' : undefined}
+              className="mb-1 flex items-center gap-2 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-2 text-sm font-medium text-[#2DD4A8]"
+            >
+              <Sparkles className="h-4 w-4" />
+              Peptide Agent
+            </Link>
             {NAV_LINKS.map((link) => {
               const active = isActive(pathname, link.match)
               return (
@@ -127,12 +142,6 @@ export default function SiteHeader() {
                 </Link>
               )
             })}
-            <Link
-              href="/research"
-              className="mt-1 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-2 text-center text-sm font-medium text-[#2DD4A8]"
-            >
-              Launch App →
-            </Link>
           </nav>
         </div>
       )}

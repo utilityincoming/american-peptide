@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, Compass, FlaskConical } from 'lucide-react'
+import { ArrowRight, Activity, Compass, FlaskConical } from 'lucide-react'
 import { RESEARCH_AREAS, getPeptidesForArea } from '@/lib/research-areas'
 import Toolkit from '@/components/Toolkit'
 import LearnMore from '@/components/LearnMore'
+import AgentPrompt from '@/components/AgentPrompt'
 
 const SITE = 'https://www.americanpeptide.com'
 
@@ -106,8 +107,16 @@ export default function ResearchAreasPage() {
         </div>
       </section>
 
+      {/* ── Lead feature: Peptide Agent ── */}
+      <section className="px-6 pt-12 md:px-10">
+        <AgentPrompt className="mx-auto max-w-5xl" />
+      </section>
+
       {/* ── Grid ── */}
       <section className="px-6 py-12 md:px-10">
+        <h2 className="mx-auto mb-5 max-w-5xl text-lg font-semibold tracking-tight md:text-xl">
+          Browse by indication
+        </h2>
         <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {areas.map(({ area, count }) => (
             <Link
@@ -138,6 +147,26 @@ export default function ResearchAreasPage() {
         <LearnMore className="mx-auto mt-14 max-w-5xl" />
 
         <Toolkit className="mx-auto mt-14 max-w-5xl" />
+
+        {/* Clinical trials — the pipeline behind the research areas */}
+        <Link
+          href="/trials"
+          className="group mx-auto mt-14 flex max-w-5xl items-center gap-4 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 transition-all hover:-translate-y-0.5 hover:border-[#2DD4A8]/25 hover:bg-white/[0.04]"
+        >
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-[#2DD4A8]">
+            <Activity className="h-5 w-5" strokeWidth={1.75} />
+          </span>
+          <div className="min-w-0 flex-1">
+            <h2 className="text-sm font-semibold text-white/90">Track the clinical pipeline</h2>
+            <p className="mt-0.5 text-[13px] leading-relaxed text-white/50">
+              See which peptides are in active human trials — live intelligence from ClinicalTrials.gov.
+            </p>
+          </div>
+          <span className="flex shrink-0 items-center gap-1 text-xs font-medium text-[#2DD4A8] transition-transform group-hover:translate-x-0.5">
+            Clinical Trials
+            <ArrowRight className="h-3.5 w-3.5" />
+          </span>
+        </Link>
 
         <div className="mx-auto mt-14 max-w-5xl rounded-xl border border-amber-500/15 bg-amber-500/[0.04] px-4 py-3">
           <p className="text-[11px] leading-relaxed text-amber-400/65">
