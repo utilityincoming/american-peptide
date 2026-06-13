@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Compass, FlaskConical } from 'lucide-react'
 import { RESEARCH_AREAS, getPeptidesForArea } from '@/lib/research-areas'
+import Toolkit from '@/components/Toolkit'
+import LearnMore from '@/components/LearnMore'
 
 const SITE = 'https://www.americanpeptide.com'
 
@@ -133,7 +135,11 @@ export default function ResearchAreasPage() {
           ))}
         </div>
 
-        <div className="mx-auto mt-8 max-w-5xl rounded-xl border border-amber-500/15 bg-amber-500/[0.04] px-4 py-3">
+        <LearnMore className="mx-auto mt-14 max-w-5xl" />
+
+        <Toolkit className="mx-auto mt-14 max-w-5xl" />
+
+        <div className="mx-auto mt-14 max-w-5xl rounded-xl border border-amber-500/15 bg-amber-500/[0.04] px-4 py-3">
           <p className="text-[11px] leading-relaxed text-amber-400/65">
             <span className="font-semibold text-amber-400/85">
               Research use only.

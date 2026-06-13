@@ -108,10 +108,10 @@ const PAGES: CommandItem[] = [
   {
     id: 'page-research',
     kind: 'page',
-    label: 'Research Agent',
+    label: 'Peptide Agent',
     subtitle: 'AI research assistant',
     href: '/research',
-    keywords: 'research agent chat ai assistant claude',
+    keywords: 'peptide agent research chat ai assistant claude',
   },
   {
     id: 'page-trials',
