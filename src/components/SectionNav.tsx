@@ -18,14 +18,8 @@ interface Section {
 }
 
 const SECTIONS: Section[] = [
-  {
-    match: ['/catalog', '/workspace'],
-    tabs: [
-      { href: '/catalog', label: 'Browse' },
-      { href: '/catalog/compare', label: 'Compare' },
-      { href: '/workspace', label: 'Workspace' },
-    ],
-  },
+  // Catalog section removed — Compare and Workspace are surfaced on the catalog
+  // page itself, so the whole catalog/compare/workspace area has no sub-nav.
   {
     match: ['/research', '/research-areas', '/synthesis', '/learn', '/glossary', '/trials'],
     tabs: [
@@ -38,6 +32,11 @@ const SECTIONS: Section[] = [
     ],
   },
 ]
+
+// Pages that opt out of the section sub-nav. These surface their in-section
+// features on the page itself instead: the Peptide Agent stays a focused,
+// chrome-free workspace, and the catalog exposes Compare + Workspace inline.
+const HIDE_ON_EXACT = new Set(['/research', '/catalog'])
 
 function inPath(pathname: string, prefix: string): boolean {
   return pathname === prefix || pathname.startsWith(`${prefix}/`)
@@ -53,6 +52,7 @@ function activeHref(pathname: string, tabs: SectionTab[]): string | null {
 
 export default function SectionNav() {
   const pathname = usePathname() ?? '/'
+  if (HIDE_ON_EXACT.has(pathname)) return null
   const section = SECTIONS.find((s) => s.match.some((m) => inPath(pathname, m)))
   if (!section) return null
   const active = activeHref(pathname, section.tabs)
