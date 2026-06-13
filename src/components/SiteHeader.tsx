@@ -25,10 +25,17 @@ const NAV_LINKS = [
     label: 'Calculator',
     match: ['/tools'],
   },
+  { href: '/workspace', label: 'Workspace', match: ['/workspace'] },
 ] as const
 
-// Educational surfaces, grouped under a single "Learn" nav item.
-const LEARN_LINKS = [
+// Education + reference surfaces, grouped under the "Research Areas" umbrella.
+const RESEARCH_AREA_LINKS = [
+  {
+    href: '/research-areas',
+    label: 'Browse by indication',
+    desc: 'Peptides grouped by what they are studied for.',
+    Icon: Compass,
+  },
   {
     href: '/synthesis',
     label: 'Synthesis',
@@ -42,12 +49,6 @@ const LEARN_LINKS = [
     Icon: Beaker,
   },
   {
-    href: '/research-areas',
-    label: 'Research Areas',
-    desc: 'Browse peptides by indication and use case.',
-    Icon: Compass,
-  },
-  {
     href: '/glossary',
     label: 'Glossary',
     desc: 'Key peptide terms in plain English.',
@@ -55,7 +56,7 @@ const LEARN_LINKS = [
   },
 ] as const
 
-const LEARN_MATCH = ['/learn', '/synthesis', '/research-areas', '/glossary']
+const RESEARCH_AREA_MATCH = ['/research-areas', '/synthesis', '/learn', '/glossary']
 
 function isActive(pathname: string, prefixes: readonly string[]) {
   return prefixes.some(
@@ -66,7 +67,7 @@ function isActive(pathname: string, prefixes: readonly string[]) {
 export default function SiteHeader() {
   const pathname = usePathname() ?? '/'
   const [open, setOpen] = useState(false)
-  const learnActive = isActive(pathname, LEARN_MATCH)
+  const researchAreasActive = isActive(pathname, RESEARCH_AREA_MATCH)
 
   useEffect(() => {
     setOpen(false)
@@ -125,26 +126,26 @@ export default function SiteHeader() {
                     {link.label}
                   </Link>
 
-                  {/* Learn dropdown — slotted right after Catalog */}
+                  {/* Research Areas dropdown — slotted right after Catalog */}
                   {link.href === '/catalog' && (
                     <div className="group relative">
                       <Link
-                        href="/learn"
-                        aria-current={learnActive ? 'page' : undefined}
+                        href="/research-areas"
+                        aria-current={researchAreasActive ? 'page' : undefined}
                         className={
                           'inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm transition-colors ' +
-                          (learnActive
+                          (researchAreasActive
                             ? 'font-medium text-[#2DD4A8]'
                             : 'text-white/65 hover:bg-white/[0.04] hover:text-white')
                         }
                       >
-                        Learn
+                        Research Areas
                         <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
                       </Link>
 
                       <div className="invisible absolute left-0 top-full z-50 pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                         <div className="w-72 rounded-xl border border-white/[0.08] bg-[#0F1828] p-1.5 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
-                          {LEARN_LINKS.map((l) => (
+                          {RESEARCH_AREA_LINKS.map((l) => (
                             <Link
                               key={l.href}
                               href={l.href}
@@ -223,25 +224,22 @@ export default function SiteHeader() {
                     {link.label}
                   </Link>
 
-                  {/* Learn group — slotted right after Catalog */}
+                  {/* Research Areas group — slotted right after Catalog */}
                   {link.href === '/catalog' && (
                     <div className="my-1 rounded-lg border border-white/[0.05] bg-white/[0.02] p-1">
                       <Link
-                        href="/learn"
-                        aria-current={learnActive ? 'page' : undefined}
+                        href="/research-areas"
+                        aria-current={researchAreasActive ? 'page' : undefined}
                         className={
                           'flex items-center justify-between rounded-md px-3 py-2 text-sm ' +
-                          (learnActive
+                          (researchAreasActive
                             ? 'font-medium text-[#2DD4A8]'
                             : 'text-white/70 hover:bg-white/[0.04] hover:text-white')
                         }
                       >
-                        Learn
-                        <span className="text-[10px] uppercase tracking-wider text-white/30">
-                          Hub
-                        </span>
+                        Research Areas
                       </Link>
-                      {LEARN_LINKS.map((l) => {
+                      {RESEARCH_AREA_LINKS.map((l) => {
                         const subActive = isActive(pathname, [l.href])
                         return (
                           <Link
