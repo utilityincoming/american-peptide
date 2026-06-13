@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ChevronRight, Mail, MessageSquare, Send } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import ContactForm from '@/components/ContactForm'
 
 const SITE = 'https://www.americanpeptide.com'
@@ -20,24 +20,6 @@ export const metadata: Metadata = {
     type: 'website',
   },
 }
-
-const lanes = [
-  {
-    Icon: MessageSquare,
-    title: 'Peptide Agent feedback',
-    body: 'Flag a wrong answer, a missing study, or a peptide we should add. The fastest path is the Telegram channel.',
-  },
-  {
-    Icon: Mail,
-    title: 'Catalog & data',
-    body: 'Corrections to a catalog entry, questions about the open API, or attribution for reuse under CC BY 4.0.',
-  },
-  {
-    Icon: Send,
-    title: 'Partnerships & press',
-    body: 'Suppliers, labs, collaborators, and journalists — tell us what you have in mind and we’ll route it.',
-  },
-]
 
 export default function ContactPage() {
   return (
@@ -78,41 +60,7 @@ export default function ContactPage() {
       </section>
 
       <section className="px-6 py-12 md:px-10">
-        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-[1fr_1.4fr]">
-          {/* Left rail: lanes + Telegram */}
-          <div className="space-y-4">
-            {lanes.map(({ Icon, title, body }) => (
-              <div
-                key={title}
-                className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5"
-              >
-                <div className="mb-2.5 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-[#2DD4A8]">
-                  <Icon className="h-4 w-4" strokeWidth={1.75} />
-                </div>
-                <h2 className="mb-1.5 text-sm font-semibold">{title}</h2>
-                <p className="text-xs leading-relaxed text-white/50">{body}</p>
-              </div>
-            ))}
-
-            <a
-              href={TELEGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-5 transition-colors hover:border-[#2DD4A8]/40"
-            >
-              <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#2DD4A8] text-[#0B1220]">
-                <Send className="h-5 w-5" strokeWidth={2} />
-              </div>
-              <div>
-                <p className="text-sm font-semibold">Telegram group</p>
-                <p className="text-xs text-white/45">
-                  Peptide Agent feedback · invite-only
-                </p>
-              </div>
-            </a>
-          </div>
-
-          {/* Right: the form */}
+        <div className="mx-auto max-w-2xl">
           <ContactForm />
         </div>
       </section>
