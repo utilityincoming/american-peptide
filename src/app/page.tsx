@@ -25,7 +25,7 @@ const features = [
   },
   {
     Icon: Sparkles,
-    name: 'Research Agent',
+    name: 'Peptide Agent',
     badge: 'AI Assistant',
     href: '/research',
     description:
@@ -60,7 +60,7 @@ const steps = [
     Icon: Search,
     name: 'Search',
     description:
-      'Query PubChem for compounds, ClinicalTrials.gov for studies, or ask the research agent in natural language.',
+      'Query PubChem for compounds, ClinicalTrials.gov for studies, or ask the Peptide Agent in natural language.',
   },
   {
     Icon: Sparkles,

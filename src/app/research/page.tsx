@@ -15,7 +15,7 @@ interface Message {
 
 const WELCOME: Message = {
   role: 'assistant',
-  content: `Welcome to the **AmericanPeptide Research Agent**.
+  content: `Welcome to the **Peptide Agent** from AmericanPeptide.com.
 
 I'm your AI assistant for peptide research. I can help you:
 
@@ -213,7 +213,7 @@ export default function ResearchPage() {
         <div className="flex items-center gap-2">
           <AgentAvatar />
           <div>
-            <span className="text-sm font-medium">Research Agent</span>
+            <span className="text-sm font-medium">Peptide Agent</span>
             <span className="ml-2 hidden text-xs text-white/30 sm:inline">
               claude-sonnet-4-20250514
             </span>
