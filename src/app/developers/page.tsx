@@ -56,6 +56,36 @@ const endpoints = [
     path: '/api/catalog/{slug}',
     desc: 'A single peptide by slug, e.g. /api/catalog/semaglutide.',
   },
+  {
+    method: 'GET',
+    path: '/catalog/{slug}.md',
+    desc: 'A single peptide as clean markdown — token-efficient for LLMs and agents.',
+  },
+  {
+    method: 'GET',
+    path: '/llms.txt',
+    desc: 'Curated markdown index of the whole site (llmstxt.org convention).',
+  },
+  {
+    method: 'GET',
+    path: '/llms-full.txt',
+    desc: 'The entire catalog as one markdown document.',
+  },
+  {
+    method: 'MCP',
+    path: '/api/mcp',
+    desc: 'Remote MCP server (Streamable HTTP) — connect from Claude, ChatGPT, or Cursor.',
+  },
+  {
+    method: 'POST',
+    path: '/api/keys',
+    desc: 'Self-serve a free API key — higher rate + daily limits. Returned once.',
+  },
+  {
+    method: 'GET',
+    path: '/api/keys',
+    desc: 'Your key’s tier, limits, and usage (authenticate with the key itself).',
+  },
 ]
 
 const params = [
@@ -224,6 +254,151 @@ export default function DevelopersPage() {
             <pre className="overflow-x-auto rounded-2xl border border-white/[0.07] bg-black/40 p-5 font-mono text-[12px] leading-relaxed text-white/75">
               {exampleList}
             </pre>
+          </div>
+
+          {/* Markdown for AI agents */}
+          <div>
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+              Markdown for AI agents
+            </h2>
+            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6">
+              <p className="mb-3 text-sm leading-relaxed text-white/60">
+                Every catalog page has a markdown twin — append{' '}
+                <code className="font-mono text-[13px] text-[#2DD4A8]">.md</code>{' '}
+                to any peptide URL (e.g.{' '}
+                <a
+                  href="/catalog/semaglutide.md"
+                  className="font-mono text-[13px] text-[#2DD4A8] underline-offset-2 hover:underline"
+                >
+                  /catalog/semaglutide.md
+                </a>
+                ) for the same facts at a fraction of the tokens.{' '}
+                <a
+                  href="/llms.txt"
+                  className="font-mono text-[13px] text-[#2DD4A8] underline-offset-2 hover:underline"
+                >
+                  /llms.txt
+                </a>{' '}
+                is a curated index of the site for agent discovery, and{' '}
+                <a
+                  href="/llms-full.txt"
+                  className="font-mono text-[13px] text-[#2DD4A8] underline-offset-2 hover:underline"
+                >
+                  /llms-full.txt
+                </a>{' '}
+                packs the full catalog into one document for retrieval pipelines.
+              </p>
+              <p className="text-xs leading-relaxed text-white/40">
+                All markdown responses embed the canonical URL and CC BY 4.0
+                attribution, and send CORS-open headers — cite
+                AmericanPeptide.com when content travels.
+              </p>
+            </div>
+          </div>
+
+          {/* Authentication & limits */}
+          <div>
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+              Authentication & limits
+            </h2>
+            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6">
+              <p className="mb-4 text-sm leading-relaxed text-white/60">
+                The API works with no key at the{' '}
+                <span className="text-white/80">Anonymous</span> tier. Want
+                higher limits? Mint a free key — no signup — and send it with
+                each request:
+              </p>
+              <pre className="mb-4 overflow-x-auto rounded-xl border border-white/[0.07] bg-black/40 p-4 font-mono text-[12px] leading-relaxed text-white/75">
+                {`# Get a free key (save it — shown once)
+curl -X POST https://www.americanpeptide.com/api/keys
+
+# Use it on any endpoint
+curl https://www.americanpeptide.com/api/catalog?fda=true \\
+  -H "Authorization: Bearer amp_sk_…"
+
+# Check your usage
+curl https://www.americanpeptide.com/api/keys \\
+  -H "Authorization: Bearer amp_sk_…"`}
+              </pre>
+              <div className="overflow-hidden rounded-xl border border-white/[0.07]">
+                <div className="grid grid-cols-3 gap-2 border-b border-white/[0.06] px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-white/40">
+                  <span>Tier</span>
+                  <span className="text-right">Per minute</span>
+                  <span className="text-right">Per day</span>
+                </div>
+                {[
+                  { tier: 'Anonymous', min: '30', day: '1,000' },
+                  { tier: 'Free (with key)', min: '120', day: '10,000' },
+                  { tier: 'Pro', min: '600', day: '200,000' },
+                ].map((row, i) => (
+                  <div
+                    key={row.tier}
+                    className={
+                      'grid grid-cols-3 gap-2 px-4 py-2.5 text-sm ' +
+                      (i > 0 ? 'border-t border-white/[0.06] ' : '') +
+                      (row.tier === 'Pro' ? 'text-white/45' : 'text-white/75')
+                    }
+                  >
+                    <span>
+                      {row.tier}
+                      {row.tier === 'Pro' && (
+                        <span className="ml-2 text-[10px] uppercase tracking-wider text-white/30">
+                          coming soon
+                        </span>
+                      )}
+                    </span>
+                    <span className="text-right font-mono">{row.min}</span>
+                    <span className="text-right font-mono">{row.day}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-4 text-xs leading-relaxed text-white/40">
+                Every response carries{' '}
+                <code className="font-mono text-[11px] text-white/60">
+                  RateLimit-*
+                </code>{' '}
+                and{' '}
+                <code className="font-mono text-[11px] text-white/60">
+                  X-Quota-Remaining
+                </code>{' '}
+                headers so you always know your remaining budget. Keys also work
+                with the MCP server. Send your key as a Bearer token to the MCP
+                endpoint to connect at your tier.
+              </p>
+            </div>
+          </div>
+
+          {/* MCP server */}
+          <div>
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+              Connect via MCP
+            </h2>
+            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6">
+              <p className="mb-4 text-sm leading-relaxed text-white/60">
+                AmericanPeptide.com is also a remote{' '}
+                <a
+                  href="https://modelcontextprotocol.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#2DD4A8] underline-offset-2 hover:underline"
+                >
+                  MCP server
+                </a>
+                . Connect it to Claude, ChatGPT, Cursor, or any MCP client and
+                your AI gets live tools for catalog search, full peptide
+                references, research-area guides, head-to-head comparisons, and
+                grounded lookups against ClinicalTrials.gov, PubMed, and
+                PubChem — every result with a canonical link back here.
+              </p>
+              <pre className="overflow-x-auto rounded-xl border border-white/[0.07] bg-black/40 p-4 font-mono text-[12px] leading-relaxed text-white/75">
+                {`# Endpoint (Streamable HTTP, no auth)
+https://www.americanpeptide.com/api/mcp
+
+# Claude Code
+claude mcp add --transport http american-peptide \\
+  https://www.americanpeptide.com/api/mcp`}
+              </pre>
+            </div>
           </div>
 
           {/* License */}
