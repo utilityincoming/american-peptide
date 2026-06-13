@@ -11,13 +11,13 @@ import {
   Compass,
   Factory,
   Menu,
+  Sparkles,
   X,
 } from 'lucide-react'
 import CommandPalette from './CommandPalette'
 
 const NAV_LINKS = [
   { href: '/catalog', label: 'Catalog', match: ['/catalog'] },
-  { href: '/research', label: 'Research', match: ['/research'] },
   { href: '/trials', label: 'Trials', match: ['/trials'] },
   { href: '/compounds', label: 'Compounds', match: ['/compounds'] },
   {
@@ -28,8 +28,15 @@ const NAV_LINKS = [
   { href: '/workspace', label: 'Workspace', match: ['/workspace'] },
 ] as const
 
-// Education + reference surfaces, grouped under the "Research Areas" umbrella.
-const RESEARCH_AREA_LINKS = [
+// Everything research-related, grouped under one "Research" umbrella — the AI
+// agent, indication guides, and the education/reference surfaces.
+const RESEARCH_LINKS = [
+  {
+    href: '/research',
+    label: 'Research Agent',
+    desc: 'AI assistant for peptide, compound, and trial research.',
+    Icon: Sparkles,
+  },
   {
     href: '/research-areas',
     label: 'Browse by indication',
@@ -56,7 +63,7 @@ const RESEARCH_AREA_LINKS = [
   },
 ] as const
 
-const RESEARCH_AREA_MATCH = ['/research-areas', '/synthesis', '/learn', '/glossary']
+const RESEARCH_MATCH = ['/research', '/research-areas', '/synthesis', '/learn', '/glossary']
 
 function isActive(pathname: string, prefixes: readonly string[]) {
   return prefixes.some(
@@ -67,7 +74,7 @@ function isActive(pathname: string, prefixes: readonly string[]) {
 export default function SiteHeader() {
   const pathname = usePathname() ?? '/'
   const [open, setOpen] = useState(false)
-  const researchAreasActive = isActive(pathname, RESEARCH_AREA_MATCH)
+  const researchActive = isActive(pathname, RESEARCH_MATCH)
 
   useEffect(() => {
     setOpen(false)
@@ -126,26 +133,26 @@ export default function SiteHeader() {
                     {link.label}
                   </Link>
 
-                  {/* Research Areas dropdown — slotted right after Catalog */}
+                  {/* Research dropdown — slotted right after Catalog */}
                   {link.href === '/catalog' && (
                     <div className="group relative">
                       <Link
-                        href="/research-areas"
-                        aria-current={researchAreasActive ? 'page' : undefined}
+                        href="/research"
+                        aria-current={researchActive ? 'page' : undefined}
                         className={
                           'inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm transition-colors ' +
-                          (researchAreasActive
+                          (researchActive
                             ? 'font-medium text-[#2DD4A8]'
                             : 'text-white/65 hover:bg-white/[0.04] hover:text-white')
                         }
                       >
-                        Research Areas
+                        Research
                         <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" />
                       </Link>
 
                       <div className="invisible absolute left-0 top-full z-50 pt-2 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                         <div className="w-72 rounded-xl border border-white/[0.08] bg-[#0F1828] p-1.5 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
-                          {RESEARCH_AREA_LINKS.map((l) => (
+                          {RESEARCH_LINKS.map((l) => (
                             <Link
                               key={l.href}
                               href={l.href}
@@ -224,22 +231,22 @@ export default function SiteHeader() {
                     {link.label}
                   </Link>
 
-                  {/* Research Areas group — slotted right after Catalog */}
+                  {/* Research group — slotted right after Catalog */}
                   {link.href === '/catalog' && (
                     <div className="my-1 rounded-lg border border-white/[0.05] bg-white/[0.02] p-1">
                       <Link
-                        href="/research-areas"
-                        aria-current={researchAreasActive ? 'page' : undefined}
+                        href="/research"
+                        aria-current={researchActive ? 'page' : undefined}
                         className={
                           'flex items-center justify-between rounded-md px-3 py-2 text-sm ' +
-                          (researchAreasActive
+                          (researchActive
                             ? 'font-medium text-[#2DD4A8]'
                             : 'text-white/70 hover:bg-white/[0.04] hover:text-white')
                         }
                       >
-                        Research Areas
+                        Research
                       </Link>
-                      {RESEARCH_AREA_LINKS.map((l) => {
+                      {RESEARCH_LINKS.map((l) => {
                         const subActive = isActive(pathname, [l.href])
                         return (
                           <Link
