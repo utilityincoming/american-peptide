@@ -9,7 +9,6 @@ import {
   FlaskConical,
   Info,
   Mail,
-  MessageCircle,
   Send,
   ShieldCheck,
   Sparkles,
@@ -234,7 +233,7 @@ export default function AboutPage() {
               addition, or compare notes with other researchers.
             </p>
 
-            <div className="grid gap-4 sm:grid-cols-[1.3fr_1fr]">
+            <div className="grid gap-4 sm:grid-cols-2">
               {/* Telegram — the live channel */}
               <a
                 href={TELEGRAM_URL}
@@ -272,38 +271,45 @@ export default function AboutPage() {
                 </span>
               </a>
 
-              {/* Proposed / future channels */}
-              <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6">
-                <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                  <MessageCircle className="h-4 w-4 text-white/50" />
-                  More channels, soon
-                </h3>
-                <ul className="space-y-2.5 text-sm text-white/55">
-                  <li className="flex items-center justify-between gap-2">
-                    <span>X / @americanpeptide</span>
-                    <span className="text-[10px] uppercase tracking-wider text-white/30">
-                      planned
-                    </span>
-                  </li>
-                  <li className="flex items-center justify-between gap-2">
-                    <span>GitHub — open catalog data</span>
-                    <span className="text-[10px] uppercase tracking-wider text-white/30">
-                      planned
-                    </span>
-                  </li>
-                  <li className="flex items-center justify-between gap-2">
-                    <span>Discord — research workspace</span>
-                    <span className="text-[10px] uppercase tracking-wider text-white/30">
-                      exploring
-                    </span>
-                  </li>
-                </ul>
-                <p className="mt-4 text-xs leading-relaxed text-white/35">
-                  We open a channel only when we can keep it sourced and useful.
-                  Telegram is first because feedback on the Agent is the most
-                  valuable signal we can get right now.
-                </p>
-              </div>
+              {/* X — live channel */}
+              <a
+                href="https://x.com/USPeptide"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col justify-between rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-6 transition-colors hover:border-[#2DD4A8]/40"
+              >
+                <div>
+                  <div className="mb-3 flex items-center gap-3">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#2DD4A8] text-[#0B1220]">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="h-4 w-4"
+                        aria-hidden
+                      >
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-sm font-semibold">X</h3>
+                        <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+                          Live
+                        </span>
+                      </div>
+                      <p className="text-xs text-white/45">@USPeptide</p>
+                    </div>
+                  </div>
+                  <p className="text-sm leading-relaxed text-white/60">
+                    Release notes, new catalog entries, and notable peptide
+                    research as we publish it.
+                  </p>
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#2DD4A8]">
+                  Follow on X
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </a>
             </div>
           </div>
 
