@@ -27,13 +27,14 @@ const SECTIONS: Section[] = [
     ],
   },
   {
-    match: ['/research', '/research-areas', '/synthesis', '/learn', '/glossary'],
+    match: ['/research', '/research-areas', '/synthesis', '/learn', '/glossary', '/trials'],
     tabs: [
+      { href: '/research', label: 'Peptide Agent' },
       { href: '/research-areas', label: 'Research Areas' },
       { href: '/synthesis', label: 'Synthesis' },
       { href: '/learn/compatibility', label: 'Compatibility' },
       { href: '/glossary', label: 'Glossary' },
-      { href: '/research', label: 'Peptide Agent' },
+      { href: '/trials', label: 'Clinical Trials' },
     ],
   },
 ]
