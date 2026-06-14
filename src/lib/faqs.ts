@@ -42,7 +42,7 @@ export const STATIC_FAQS: Faq[] = [
     id: 'buy-peptides',
     question: 'Can I buy peptides here?',
     answer:
-      'No. AmericanPeptide.com is a reference and research platform — not a pharmacy, vendor, or store. We publish chemistry, mechanisms, and evidence so researchers can make informed decisions; we do not sell compounds or take orders.',
+      'No — AmericanPeptide.com does not sell peptides or take orders; our role is to help you evaluate a source, not to be one. We publish the chemistry, the evidence, and the criteria that separate a trustworthy vendor from a questionable one, so wherever you buy you can judge it on its COA, third-party testing, and purity.',
   },
   {
     id: 'medical-advice',
