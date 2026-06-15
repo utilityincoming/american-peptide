@@ -35,8 +35,10 @@ export interface VendorTrust {
 }
 
 export interface VendorAffiliate {
-  /** Internal tracked redirect path, e.g. "/go/<id>". Built later. */
+  /** Internal tracked redirect path, e.g. "/go/<id>". */
   trackedPath?: string
+  /** The destination referral/affiliate URL that trackedPath redirects to. */
+  url?: string
   /** Coupon / referral code, if any. */
   code?: string
   /** True once a paid affiliate relationship is active — the disclosure gate. */
@@ -101,7 +103,35 @@ export function trustScore(v: Vendor): number {
 //     notes: 'Verify the COA lot matches your vial before use.',
 //   }
 //
-export const VENDORS: Vendor[] = []
+export const VENDORS: Vendor[] = [
+  {
+    id: 'alpha-bio-med',
+    name: 'Alpha Bio Med Labs',
+    url: 'https://alphabiomedlabs.com',
+    blurb:
+      'US research-supply lab advertising 100% lot-level third-party HPLC/MS testing and >99% purity.',
+    peptides: 'all',
+    shipsTo: ['us'],
+    trust: {
+      // Sourced from the vendor's own public claims (alphabiomedlabs.com),
+      // NOT independently confirmed. Only flags they explicitly state are set.
+      coaOnFile: false, // they tout lot-level testing, but customer COA access is unconfirmed
+      thirdPartyTested: true, // "100% Lots Third-Party Tested" — HPLC + MS
+      perBatchTesting: true, // "100% Lots" / lot-level traceability
+      purityPct: 99, // ">99% Purity by HPLC"
+      reshipPolicy: false, // not stated
+      refundPolicy: true, // published "Refund and Order Resolution Policy"
+    },
+    affiliate: {
+      trackedPath: '/go/alpha-bio-med',
+      url: 'https://alphabiomedlabs.com/pages/register?ref=AmericanPeptides',
+      code: 'AmericanPeptides',
+      active: true,
+    },
+    notes:
+      'Trust signals reflect the vendor’s own published claims, not independent verification. Request the third-party COA for your specific lot before any use.',
+  },
+]
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -115,4 +145,20 @@ export function getVendorsForPeptide(slug: string): Vendor[] {
 /** All vendors, best-trust first. */
 export function vendorsRanked(): Vendor[] {
   return [...VENDORS].sort((a, b) => trustScore(b) - trustScore(a))
+}
+
+/**
+ * The href to use when linking to a vendor.
+ * Prefer the internal tracked redirect when an affiliate relationship is active
+ * (keeps the referral param server-side and lets us attach disclosure +
+ * rel="sponsored nofollow" at the link); otherwise the plain public homepage.
+ */
+export function vendorHref(v: Vendor): string {
+  if (v.affiliate?.active && v.affiliate.trackedPath) return v.affiliate.trackedPath
+  return v.url
+}
+
+/** Whether a vendor link is a disclosed affiliate link (needs FTC disclosure). */
+export function isAffiliate(v: Vendor): boolean {
+  return Boolean(v.affiliate?.active)
 }
