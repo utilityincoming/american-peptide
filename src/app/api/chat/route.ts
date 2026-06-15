@@ -5,6 +5,7 @@ import { synthesisDigest } from '@/lib/synthesis'
 import { siteIndexDigest, retrievalFallback } from '@/lib/llms'
 import { MODELS, shouldFailover } from '@/lib/models'
 import { logAgentQuestion } from '@/lib/agent-faqs'
+import { sanitizeAgentLinks } from '@/lib/agent-output'
 
 // ── Hardening knobs ──────────────────────────────────────────────────────────
 const EFFORT = process.env.AGENT_EFFORT ?? 'medium' // low | medium | high | max
@@ -13,6 +14,7 @@ const MAX_TOOL_ROUNDS = 5 // cap the agentic loop
 const MAX_MESSAGES = 40 // trailing turns kept
 const MAX_MSG_CHARS = 8000 // per-message hard cap
 const MAX_TOTAL_CHARS = 60000 // whole-conversation hard cap
+const MODEL_TIMEOUT_MS = 60000 // per model call; abort a hung upstream connection
 const DEBUG = process.env.AGENT_DEBUG === '1'
 
 const SYSTEM_PROMPT = `You are the Peptide Agent for AmericanPeptide.com, an AI-powered peptide research platform. You help researchers with:
@@ -103,30 +105,53 @@ interface AnthResult {
   errorText?: string
 }
 
-async function callModel(apiKey: string, model: string, messages: Msg[]): Promise<AnthResult> {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-    },
-    body: JSON.stringify({
-      model,
-      max_tokens: MAX_TOKENS,
-      thinking: { type: 'adaptive' },
-      output_config: { effort: EFFORT },
-      // System rendered as cached blocks: the instruction prompt and the
-      // (large, static) internal-page index each get an ephemeral breakpoint,
-      // so the whole prefix is billed at ~0.1x on reuse.
-      system: [
-        { type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } },
-        { type: 'text', text: SITE_INDEX, cache_control: { type: 'ephemeral' } },
-      ],
-      tools: AGENT_TOOLS,
-      messages,
-    }),
-  })
+interface CallOpts {
+  /** Forbid tool calls so the model must answer in text (used on the final
+   *  round, when no further tool round is available). */
+  forceText?: boolean
+}
+
+async function callModel(
+  apiKey: string,
+  model: string,
+  messages: Msg[],
+  opts: CallOpts = {},
+): Promise<AnthResult> {
+  let res: Response
+  try {
+    res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({
+        model,
+        max_tokens: MAX_TOKENS,
+        thinking: { type: 'adaptive' },
+        output_config: { effort: EFFORT },
+        // System rendered as cached blocks: the instruction prompt and the
+        // (large, static) internal-page index each get an ephemeral breakpoint,
+        // so the whole prefix is billed at ~0.1x on reuse.
+        system: [
+          { type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } },
+          { type: 'text', text: SITE_INDEX, cache_control: { type: 'ephemeral' } },
+        ],
+        tools: AGENT_TOOLS,
+        ...(opts.forceText ? { tool_choice: { type: 'none' } } : {}),
+        messages,
+      }),
+      // Abort a hung connection so it can fail over / degrade instead of
+      // stalling the serverless function to its platform limit.
+      signal: AbortSignal.timeout(MODEL_TIMEOUT_MS),
+    })
+  } catch (err) {
+    // Network error or client-side timeout — no HTTP response. status 0 is
+    // treated as retryable so the caller fails over to the next model.
+    const msg = err instanceof Error ? err.message : 'network error'
+    return { ok: false, status: 0, errorText: msg }
+  }
 
   const text = await res.text()
   if (!res.ok) return { ok: false, status: res.status, errorText: text }
@@ -138,12 +163,17 @@ async function callModel(apiKey: string, model: string, messages: Msg[]): Promis
 }
 
 // Try each model in the failover chain. The first to respond wins; only advance
-// to the next on a retryable upstream failure (model unavailable, overload, 5xx)
-// — a non-retryable error (bad request, auth) would fail identically downstream.
-async function callAnthropic(apiKey: string, messages: Msg[]): Promise<AnthResult> {
+// to the next on a retryable upstream failure (model unavailable, overload, 5xx,
+// or a transport-level error) — a non-retryable error (bad request, auth) would
+// fail identically downstream.
+async function callAnthropic(
+  apiKey: string,
+  messages: Msg[],
+  opts: CallOpts = {},
+): Promise<AnthResult> {
   let last: AnthResult = { ok: false, status: 502, errorText: 'No model responded' }
   for (const model of MODELS) {
-    const result = await callModel(apiKey, model, messages)
+    const result = await callModel(apiKey, model, messages, opts)
     if (result.ok) return result
     last = result
     if (!shouldFailover(result.status)) break
@@ -163,6 +193,26 @@ function extractText(content: unknown[]): string {
     .trim()
 }
 
+// Reject cross-origin browser requests. This endpoint exists only for the
+// site's own UI and bills the Anthropic API, so a third-party page must not be
+// able to spend the budget. A same-origin fetch sends an Origin whose host
+// equals Host; a cross-origin one differs. Requests with no Origin (non-browser
+// clients) are left to the IP rate limiter rather than blocked here.
+function crossOriginBlocked(request: Request): boolean {
+  const origin = request.headers.get('origin')
+  if (!origin) return false
+  try {
+    return new URL(origin).host !== request.headers.get('host')
+  } catch {
+    return true // malformed Origin header
+  }
+}
+
+function lastUserText(msgs: Msg[]): string {
+  const u = [...msgs].reverse().find((m) => m.role === 'user')
+  return typeof u?.content === 'string' ? u.content : ''
+}
+
 export async function POST(request: NextRequest) {
   const apiKey = process.env.ANTHROPIC_API_KEY
   if (!apiKey) {
@@ -170,6 +220,11 @@ export async function POST(request: NextRequest) {
       { error: 'ANTHROPIC_API_KEY is not configured. Add it to .env.local.' },
       { status: 500 },
     )
+  }
+
+  // Same-origin gate: block cross-origin browser callers from spending the budget.
+  if (crossOriginBlocked(request)) {
+    return Response.json({ error: 'Cross-origin requests are not allowed.' }, { status: 403 })
   }
 
   // Per-IP rate limit before any work. The agentic loop can fan out to several
@@ -228,9 +283,23 @@ export async function POST(request: NextRequest) {
     const result = await callAnthropic(apiKey, messages)
 
     if (!result.ok || !result.data) {
-      // Log detail server-side; return a generic error to the client.
+      // Every model in the failover chain failed (HTTP error or transport-level
+      // failure). Don't hard-fail: degrade to our own published reference
+      // content if it matches the question, so the user still gets grounded
+      // facts instead of a 502.
       console.error(`[chat] upstream error ${result.status}: ${result.errorText?.slice(0, 500)}`)
-      return Response.json({ error: 'The model service returned an error.' }, { status: 502 })
+      const reference = retrievalFallback(lastUserText(cleaned))
+      if (reference) {
+        return Response.json({
+          role: 'assistant',
+          content: `The research model is briefly unavailable, but here's the relevant entry from the AmericanPeptide.com reference:\n\n${reference}`,
+          degraded: true,
+        })
+      }
+      return Response.json(
+        { error: 'The model service is temporarily unavailable. Please try again.' },
+        { status: 502 },
+      )
     }
 
     const { content, stop_reason } = result.data
@@ -258,13 +327,24 @@ export async function POST(request: NextRequest) {
     break
   }
 
+  // If we exhausted the tool rounds while still mid-tool-use, the model never
+  // got to write an answer. Give it one final, tool-free turn to compose a
+  // response from the data it already gathered.
+  if (!finalText && lastStop === 'tool_use') {
+    if (DEBUG) console.log('[chat] forcing final tool-free completion')
+    const forced = await callAnthropic(apiKey, messages, { forceText: true })
+    if (forced.ok && forced.data) {
+      lastStop = forced.data.stop_reason
+      finalText = extractText(forced.data.content)
+    }
+  }
+
   if (!finalText) {
     if (DEBUG) console.log(`[chat] empty finalText, lastStop=${lastStop}`)
     // The model produced no answer (a safety refusal, or it ran out of rounds).
     // Rather than fail, fall back to our own published reference content matched
     // to the question — the assistant degrades from generative to retrieval.
-    const lastUser = [...cleaned].reverse().find((m) => m.role === 'user')
-    const query = typeof lastUser?.content === 'string' ? lastUser.content : ''
+    const query = lastUserText(cleaned)
     const reference = retrievalFallback(query)
 
     if (lastStop === 'refusal') {
@@ -282,14 +362,18 @@ export async function POST(request: NextRequest) {
   // after the response is sent. Skip refusals so we never surface a question the
   // Agent won't answer.
   if (lastStop !== 'refusal') {
-    const current = [...cleaned].reverse().find((m) => m.role === 'user')
-    const q = typeof current?.content === 'string' ? current.content : ''
+    const q = lastUserText(cleaned)
     if (q) after(() => logAgentQuestion(q))
   }
 
+  // Output-side guardrail: strip any links to fabricated internal entity pages
+  // (the enforceable backstop for the "never invent a URL" rule).
+  const safe = sanitizeAgentLinks(finalText)
+  if (DEBUG && safe.stripped) console.log(`[chat] stripped ${safe.stripped} fabricated link(s)`)
+
   return Response.json({
     role: 'assistant',
-    content: finalText,
+    content: safe.text,
     ...(lastStop === 'refusal' ? { stop: 'refusal' } : {}),
   })
 }
