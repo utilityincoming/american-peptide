@@ -160,6 +160,34 @@ export const VENDORS: Vendor[] = [
     notes:
       'Refunds are restrictive: peptides are non-returnable, accepted returns carry a 15% restocking fee, and only carrier-lost (non-delivered) packages are reshipped free. Trust signals reflect the vendor’s published claims; verify the COA for your specific lot.',
   },
+  {
+    id: 'amino-club',
+    name: 'Amino Club',
+    url: 'https://aminoclub.com',
+    blurb:
+      'US research-peptide distributor; every batch ships a lot-matched third-party COA (MZ Biolabs / Janoshik) at ≥99% HPLC purity.',
+    peptides: 'all',
+    shipsTo: ['us'],
+    trust: {
+      // Sourced from the vendor's public claims + third-party COAs (MZ Biolabs /
+      // Janoshik report numbers are independently verifiable). Not personally
+      // confirmed, but COAs are externally checkable — stronger than self-report.
+      coaOnFile: true, // batch-specific, lot-matched COA available before purchase
+      thirdPartyTested: true, // independent labs (MZ Biolabs / Janoshik), HPLC + MS
+      perBatchTesting: true, // tests every new batch, not a single "golden batch"
+      purityPct: 99, // "≥99% baseline" HPLC
+      reshipPolicy: true, // lost/damaged/stolen packages reshipped free
+      refundPolicy: true, // 60-day money-back guarantee
+    },
+    affiliate: {
+      trackedPath: '/go/amino-club',
+      url: 'https://aminoclub.com?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+      code: 'AMERICANPEPTIDE',
+      active: true,
+    },
+    notes:
+      'COAs are independently verifiable via the Janoshik / MZ Biolabs report number on each certificate — confirm the report for your specific lot. 60-day money-back guarantee; change-of-mind returns are excluded.',
+  },
 ]
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
