@@ -408,6 +408,487 @@ export const COMPARISONS: Comparison[] = [
       { name: 'Tirzepatide', alternateName: 'Mounjaro' },
     ],
   },
+  {
+    slug: 'cjc-1295-vs-sermorelin',
+    aSlug: 'cjc-1295-with-dac',
+    bSlug: 'sermorelin',
+    aName: 'CJC-1295',
+    bName: 'Sermorelin',
+    aPill: 'GHRH analog · extended half-life',
+    bPill: 'GHRH(1-29) · short-acting',
+    metaTitle:
+      'CJC-1295 vs Sermorelin — GHRH Analogs & Half-Life Compared | AmericanPeptide.com',
+    metaDescription:
+      'Both are GHRH analogs that prompt natural GH release. Sermorelin is the short-acting GHRH(1-29) fragment; CJC-1295 with DAC binds albumin for a multi-day half-life. A cited research comparison.',
+    keywords: [
+      'CJC-1295 vs sermorelin',
+      'GHRH analog comparison',
+      'sermorelin half-life',
+      'CJC-1295 DAC',
+      'growth hormone peptide comparison',
+    ],
+    breadcrumb: { label: 'GH Peptides', href: '/gh-peptides' },
+    headline: 'same GHRH backbone, different duration',
+    intro: [
+      'CJC-1295 and sermorelin are built on the same GHRH(1-29) sequence and act on the same receptor — the difference is how long each one lasts, and what that does to the GH pulse.',
+    ],
+    atAGlance: [
+      { dim: 'Class', a: 'Modified GHRH(1-29) analog', b: 'Native GHRH(1-29) fragment' },
+      { dim: 'Receptor', a: 'GHRH receptor (GHRHR)', b: 'GHRH receptor (GHRHR)' },
+      { dim: 'Half-life', a: '~30 min (no DAC) / ~6–8 days (DAC)', b: '~minutes' },
+      { dim: 'GH release pattern', a: 'Pulsatile (no DAC) / sustained (DAC)', b: 'Discrete physiologic pulse' },
+      { dim: 'Pulsatility preserved', a: 'Yes (no DAC) / blunted (DAC)', b: 'Yes' },
+      { dim: 'Key modification', a: 'DPP-4-resistant substitutions ± albumin-binding DAC', b: 'None (unmodified fragment)' },
+      { dim: 'Pituitary feedback', a: 'Preserved', b: 'Preserved (somatostatin feedback intact)' },
+      { dim: 'FDA approval', a: 'None (research compound)', b: 'Approved 1990 (Geref), since discontinued' },
+      { dim: 'Commonly paired with', a: 'A GHRP (e.g. ipamorelin)', b: 'A GHRP' },
+    ],
+    proseSections: [
+      {
+        title: 'Why duration is the whole story',
+        paragraphs: [
+          'Sermorelin is the first 29 amino acids of GHRH — the shortest fragment that keeps full GH-releasing activity. It binds GHRHR on pituitary somatotrophs, activating the cAMP cascade to release the body’s own GH in a short, discrete pulse. That brevity is a feature: it preserves the natural somatostatin feedback loop and circadian rhythm of GH secretion.',
+          'CJC-1295 starts from that same backbone but adds DPP-4-resistant substitutions and, in the DAC form, a Drug Affinity Complex that binds serum albumin — extending the half-life to roughly 6–8 days (Teichman et al., 2006). The trade-off is physiologic: sustained GHRHR exposure raises baseline GH and IGF-1 but blunts the pulsatility that sermorelin keeps intact.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These are the same molecule family at two ends of a duration spectrum. Sermorelin offers the most physiologic, pulse-preserving profile and has an actual (if discontinued) approval history; CJC-1295 with DAC offers sustained elevation at the cost of natural pulsatility. Both are studied alongside a GHRP, where GHRH and ghrelin-receptor signals converge for a larger combined pulse. Neither is a current FDA-approved therapy for the uses discussed here.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between CJC-1295 and sermorelin?', a: 'Both are GHRH analogs that stimulate the pituitary to release growth hormone. Sermorelin is the native GHRH(1-29) fragment with a half-life of minutes, producing a short pulse. CJC-1295 is a stabilized version of the same backbone; with a DAC it binds albumin and lasts roughly 6–8 days.' },
+      { q: 'Which is more physiologic?', a: 'Sermorelin. Its short half-life produces a discrete GH pulse that preserves the natural somatostatin feedback loop. CJC-1295 with DAC raises baseline GH and IGF-1 but blunts that pulsatility.' },
+      { q: 'Is either FDA-approved?', a: 'Sermorelin was approved in 1990 (Geref) for GH-deficiency evaluation and pediatric use but was later discontinued commercially. CJC-1295 is a research compound and is not FDA-approved. This page is a research and educational reference.' },
+      { q: 'Why are they paired with a GHRP?', a: 'GHRH analogs (like these) and GHRPs act on different receptors on the same pituitary cells. Combining them is studied for synergistic GH release that exceeds either alone.' },
+    ],
+    relatedAreas: ['growth-hormone-axis'],
+    about: [
+      { name: 'CJC-1295' },
+      { name: 'Sermorelin', alternateName: 'GRF 1-29' },
+    ],
+  },
+  {
+    slug: 'ipamorelin-vs-hexarelin',
+    aSlug: 'ipamorelin',
+    bSlug: 'hexarelin',
+    aName: 'Ipamorelin',
+    bName: 'Hexarelin',
+    aPill: 'GHRP · selective',
+    bPill: 'GHRP · potent',
+    metaTitle:
+      'Ipamorelin vs Hexarelin — Selectivity vs Potency | AmericanPeptide.com',
+    metaDescription:
+      'Both are GHRPs acting on the ghrelin receptor. Ipamorelin releases GH cleanly without raising cortisol or prolactin; hexarelin is more potent but less selective. A cited research comparison.',
+    keywords: [
+      'ipamorelin vs hexarelin',
+      'GHRP comparison',
+      'selective growth hormone secretagogue',
+      'hexarelin cortisol prolactin',
+      'ghrelin receptor peptide',
+    ],
+    breadcrumb: { label: 'GH Peptides', href: '/gh-peptides' },
+    headline: 'selectivity versus potency',
+    intro: [
+      'Ipamorelin and hexarelin are both GHRPs that act on the ghrelin receptor (GHS-R1a) — but they sit at opposite ends of a selectivity-versus-potency trade-off.',
+    ],
+    atAGlance: [
+      { dim: 'Class', a: 'Pentapeptide GHRP', b: 'Hexapeptide GHRP (GHRP-6 analog)' },
+      { dim: 'Receptor', a: 'GHS-R1a (ghrelin receptor)', b: 'GHS-R1a + CD36' },
+      { dim: 'GH potency', a: 'Moderate, selective', b: 'High — strongest of common GHRPs' },
+      { dim: 'Cortisol / ACTH', a: 'Minimal (selective)', b: 'Can elevate' },
+      { dim: 'Prolactin', a: 'Minimal', b: 'Can elevate' },
+      { dim: 'Receptor desensitization', a: 'Lower', b: 'Greater' },
+      { dim: 'Notable extra activity', a: '—', b: 'CD36-mediated cardioprotection (preclinical)' },
+      { dim: 'FDA approval', a: 'None', b: 'None' },
+      { dim: 'Characterizing study', a: 'Raun et al., 1998', b: 'GHRP-6 analog literature' },
+    ],
+    proseSections: [
+      {
+        title: 'The trade-off in one line',
+        paragraphs: [
+          'Ipamorelin was characterized as the first GHRP to release GH without meaningfully raising ACTH, cortisol, or prolactin (Raun et al., 1998, Eur J Endocrinol) — a “clean” selective profile that also shows less receptor desensitization over repeated exposure. That selectivity is its defining research feature.',
+          'Hexarelin releases more GH per dose than GHRP-2, GHRP-6, or ipamorelin, making it the more potent secretagogue — but it recruits cortisol and prolactin and desensitizes the receptor faster. It also carries a distinct research thread: CD36-mediated cardioprotective effects independent of GH release.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'If the research question prioritizes a clean, sustainable GH signal, ipamorelin’s selectivity is the draw. If it prioritizes raw GH output (or the separate CD36 / cardiac line of inquiry), hexarelin is the more potent but less selective tool. Both act on the same receptor, both are commonly studied with a GHRH analog, and neither is FDA-approved.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between ipamorelin and hexarelin?', a: 'Both are GHRPs acting on the ghrelin receptor (GHS-R1a). Ipamorelin is selective, releasing GH without meaningfully raising cortisol or prolactin. Hexarelin is more potent but also elevates cortisol and prolactin and desensitizes the receptor faster.' },
+      { q: 'Why is ipamorelin called “selective”?', a: 'In its characterizing study (Raun et al., 1998), ipamorelin released GH without the ACTH and cortisol increases seen with earlier GHRPs, earning it the description “the first selective growth hormone secretagogue.”' },
+      { q: 'What is hexarelin’s CD36 connection?', a: 'Beyond GH release, hexarelin binds the CD36 receptor, through which preclinical studies report cardioprotective effects independent of growth hormone.' },
+      { q: 'Are either FDA-approved?', a: 'No. Both are research compounds and are not FDA-approved; both are also prohibited in sport. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['growth-hormone-axis'],
+    about: [
+      { name: 'Ipamorelin' },
+      { name: 'Hexarelin' },
+    ],
+  },
+  {
+    slug: 'semax-vs-selank',
+    aSlug: 'semax',
+    bSlug: 'selank',
+    aName: 'Semax',
+    bName: 'Selank',
+    aPill: 'ACTH(4-10) analog · nootropic',
+    bPill: 'Tuftsin analog · anxiolytic',
+    metaTitle: 'Semax vs Selank — Focus vs Calm | AmericanPeptide.com',
+    metaDescription:
+      'Semax (an ACTH(4-10) analog) is studied for cognition and BDNF; Selank (a tuftsin analog) for anxiety via GABA / serotonin. A cited research comparison of the two Russian neuropeptides.',
+    keywords: [
+      'semax vs selank',
+      'nootropic peptide comparison',
+      'semax BDNF',
+      'selank anxiety',
+      'russian neuropeptides',
+    ],
+    breadcrumb: { label: 'Cognitive Peptides', href: '/cognitive-peptides' },
+    headline: 'sharpen versus soothe',
+    intro: [
+      'Semax and Selank are often lumped together as Russian “nootropic” peptides, but they target different problems — cognition and focus versus anxiety and stress.',
+    ],
+    atAGlance: [
+      { dim: 'Derived from', a: 'ACTH(4-10)', b: 'Tuftsin' },
+      { dim: 'Primary research focus', a: 'Cognition, focus, neuroprotection', b: 'Anxiety, stress resilience' },
+      { dim: 'Key mechanism', a: 'BDNF / trkB upregulation; dopaminergic & serotonergic tone', b: 'GABAergic & serotonergic modulation; enkephalinase inhibition' },
+      { dim: 'HPA (stress) axis', a: 'Not activated', b: 'Not activated' },
+      { dim: 'Sedation / dependence', a: 'No', b: 'No (unlike benzodiazepines)' },
+      { dim: 'Common form', a: 'Intranasal (research)', b: 'Intranasal (research)' },
+      { dim: 'Russian clinical status', a: 'Approved (stroke, cognition, optic nerve)', b: 'Approved (anxiety)' },
+      { dim: 'FDA approval', a: 'None', b: 'None' },
+    ],
+    proseSections: [
+      {
+        title: 'Two peptides, two jobs',
+        paragraphs: [
+          'Semax, an ACTH(4-10) analog, is studied for upregulating BDNF and trkB in the hippocampus and basal forebrain (Dolotov et al., 2006) and for enhancing dopaminergic and serotonergic signaling — without activating the stress axis. That profile underlies its association with attention, memory, and neuroprotection; it is approved in Russia for stroke, cognitive impairment, and optic-nerve disease.',
+          'Selank, derived from the immunopeptide tuftsin, is studied for anxiolytic effects via GABAergic and serotonergic modulation, with clinical reports of benzodiazepine-comparable anxiety relief but without sedation or dependence. The simplest model: Semax sharpens, Selank soothes — which is why the two are frequently studied as a complementary pair.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These are complements, not substitutes: Semax for cognition / neuroprotection, Selank for anxiety / calm. Both avoid the HPA-axis activation and dependence concerns of older agents in their respective spaces. The important caveat for both is evidence quality — most controlled data are Russian-language, and independent Western replication is limited. Neither is FDA-approved.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between Semax and Selank?', a: 'Semax is an ACTH(4-10) analog studied for cognition, focus and neuroprotection via BDNF upregulation. Selank is a tuftsin analog studied for anxiety via GABAergic and serotonergic modulation. A simple model: Semax to sharpen, Selank to soothe.' },
+      { q: 'Can they be used together?', a: 'In the research literature they are often studied as a complementary pair — Semax for cognitive / neuroprotective endpoints and Selank for anxiety — because their mechanisms and targets differ.' },
+      { q: 'Do they cause sedation or dependence?', a: 'Research interest in both centers on effects without the sedation, tolerance, or withdrawal associated with classic agents (e.g. benzodiazepines for Selank), and neither activates the HPA stress axis.' },
+      { q: 'Are they FDA-approved?', a: 'No. Both are approved and used in Russia but are research compounds elsewhere and not FDA-approved. Western peer-reviewed replication is limited. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['cognition-neuroprotection', 'anxiety-mood'],
+    about: [
+      { name: 'Semax' },
+      { name: 'Selank' },
+    ],
+  },
+  {
+    slug: 'pt-141-vs-kisspeptin',
+    aSlug: 'pt-141',
+    bSlug: 'kisspeptin-10',
+    aName: 'PT-141',
+    bName: 'Kisspeptin',
+    aPill: 'Melanocortin agonist · MC3R/MC4R',
+    bPill: 'KISS1R / GPR54 · GnRH axis',
+    metaTitle:
+      'PT-141 vs Kisspeptin — Central Arousal vs the GnRH Axis | AmericanPeptide.com',
+    metaDescription:
+      'PT-141 (bremelanotide) acts on brain melanocortin receptors for acute arousal; kisspeptin drives the upstream GnRH hormone axis. A cited research comparison of two approaches to sexual function.',
+    keywords: [
+      'PT-141 vs kisspeptin',
+      'bremelanotide vs kisspeptin',
+      'melanocortin vs GnRH',
+      'sexual function peptide comparison',
+      'kisspeptin GnRH',
+    ],
+    breadcrumb: { label: 'Sexual & Reproductive', href: '/research-areas/sexual-reproductive' },
+    headline: 'central arousal versus the hormone axis',
+    intro: [
+      'PT-141 and kisspeptin are both studied for sexual function, but through entirely different systems — central melanocortin arousal versus the upstream reproductive-hormone axis.',
+    ],
+    atAGlance: [
+      { dim: 'Structure', a: 'Cyclic heptapeptide (α-MSH analog)', b: 'Hypothalamic neuropeptide' },
+      { dim: 'Receptor', a: 'Melanocortin MC3R / MC4R (CNS)', b: 'KISS1R / GPR54 (GnRH neurons)' },
+      { dim: 'Pathway', a: 'Central arousal, hormone-independent', b: 'GnRH → LH / FSH → sex steroids' },
+      { dim: 'Research framing', a: 'Acute central desire', b: 'Hormonal-axis regulation' },
+      { dim: 'Onset', a: 'Acute', b: 'Physiologic (axis-driven)' },
+      { dim: 'FDA status', a: 'Approved (Vyleesi, HSDD in premenopausal women)', b: 'Investigational' },
+      { dim: 'Characterizing work', a: 'Molinoff / Diamond et al., 2003', b: 'KISS1R / GnRH endocrinology' },
+    ],
+    proseSections: [
+      {
+        title: 'Two levels of the same system',
+        paragraphs: [
+          'PT-141 (bremelanotide) is a cyclic α-MSH analog that acts in the brain on melanocortin MC3R / MC4R receptors to generate sexual arousal independent of the reproductive hormone axis — an acute, central, on-demand mechanism (Molinoff / Diamond et al., 2003). It is FDA-approved (Vyleesi) for hypoactive sexual desire disorder in premenopausal women.',
+          'Kisspeptin works one level upstream: it signals through KISS1R / GPR54 on GnRH neurons, increasing GnRH pulsatility and downstream LH, FSH, and sex-steroid production — and, via limbic KISS1R expression, contributes directly to sexual motivation. So PT-141 addresses acute central arousal, while kisspeptin addresses the hormonal regulation of the reproductive axis.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These answer different research questions. PT-141 is the tool for acute central arousal and is the only one of the two with an FDA approval; kisspeptin is the tool for probing or restoring the GnRH hormone axis and remains investigational. They are not interchangeable, and in principle act on complementary parts of the same overall system.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between PT-141 and kisspeptin?', a: 'PT-141 (bremelanotide) is a melanocortin MC3R/MC4R agonist that produces acute central sexual arousal independent of reproductive hormones. Kisspeptin acts on KISS1R/GPR54 on GnRH neurons to drive the reproductive hormone axis (GnRH, LH, FSH, sex steroids). Different systems, different research uses.' },
+      { q: 'Is PT-141 FDA-approved?', a: 'Yes — bremelanotide (PT-141) is FDA-approved as Vyleesi for hypoactive sexual desire disorder in premenopausal women. Kisspeptin remains investigational.' },
+      { q: 'How does kisspeptin affect sexual function?', a: 'Kisspeptin stimulates GnRH pulsatility and downstream LH / FSH and sex-steroid secretion, and KISS1R is also expressed in limbic brain regions, which is studied as a direct route to sexual motivation.' },
+      { q: 'Is this medical advice?', a: 'No — this page is a research and educational reference, not medical advice or a dosing protocol.' },
+    ],
+    relatedAreas: ['sexual-reproductive'],
+    about: [
+      { name: 'PT-141', alternateName: 'Bremelanotide' },
+      { name: 'Kisspeptin-10' },
+    ],
+  },
+  {
+    slug: 'melanotan-2-vs-melanotan-1',
+    aSlug: 'melanotan-2',
+    aName: 'Melanotan II',
+    bName: 'Melanotan I (Afamelanotide)',
+    aPill: 'Non-selective MC1–5R agonist',
+    bPill: 'MC1R-selective · FDA-approved',
+    metaTitle:
+      'Melanotan I vs Melanotan II — MC1R Selectivity & Safety | AmericanPeptide.com',
+    metaDescription:
+      'Afamelanotide (Melanotan I) is MC1R-selective and FDA-approved; Melanotan II is non-selective and activates MC4R, driving side effects. A cited melanocortin research comparison.',
+    keywords: [
+      'melanotan 1 vs melanotan 2',
+      'afamelanotide vs melanotan II',
+      'MC1R selectivity',
+      'melanocortin receptor comparison',
+      'melanotan side effects',
+    ],
+    breadcrumb: { label: 'Melanocortin Peptides', href: '/melanocortin' },
+    headline: 'selectivity is the whole difference',
+    intro: [
+      'Both are α-MSH analogs studied for pigmentation, but they differ in receptor selectivity — and that difference explains Melanotan II’s notorious side-effect profile.',
+    ],
+    atAGlance: [
+      { dim: 'Structure', a: '7-aa cyclic truncated analog', b: '13-aa linear α-MSH analog' },
+      { dim: 'Receptor profile', a: 'Non-selective: MC1R / MC3R / MC4R / MC5R', b: 'MC1R-selective (~1000× lower MC3R/MC4R)' },
+      { dim: 'Primary effect', a: 'Pigmentation + MC4R central effects', b: 'Pigmentation via MC1R' },
+      { dim: 'Notable side effects', a: 'Nausea, flushing, spontaneous erections (MC4R)', b: 'Fewer off-target effects' },
+      { dim: 'FDA status', a: 'Not approved', b: 'Approved (Scenesse) for EPP photoprotection' },
+      { dim: 'Characterizing work', a: 'Dorr et al., 1996 (Phase I)', b: 'Afamelanotide / Scenesse program' },
+    ],
+    proseSections: [
+      {
+        title: 'Why selectivity drives safety',
+        paragraphs: [
+          'Both peptides activate Gs-coupled melanocortin receptors, raising cAMP to drive melanin production. Afamelanotide (Melanotan I) is a 13-amino-acid analog highly selective for MC1R — roughly 1000-fold lower affinity for MC3R / MC4R — so its action stays largely confined to pigmentation. It is FDA-approved as Scenesse for photoprotection in erythropoietic protoporphyria.',
+          'Melanotan II is a truncated 7-amino-acid cyclic analog with much less selectivity, also hitting MC4R centrally. In a 1996 Phase I study (Dorr et al.) it produced tanning alongside dose-dependent nausea, flushing, and spontaneous erections — effects consistent with MC4R activation. Those off-target effects are why MT-II never reached approval: they can’t be cleanly separated from the tan.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'The two are a textbook case of selectivity determining safety. Afamelanotide’s MC1R selectivity gives it a clean enough profile to be an approved drug; Melanotan II’s non-selectivity drives both its broader effects and its side effects, and it remains unapproved. This page is a research and educational reference, not a usage recommendation.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between Melanotan I and Melanotan II?', a: 'Melanotan I (afamelanotide) is a 13-amino-acid analog highly selective for the MC1R receptor and is FDA-approved as Scenesse. Melanotan II is a truncated cyclic analog that activates MC1R, MC3R, MC4R and MC5R non-selectively; its MC4R activity drives side effects, and it is not approved.' },
+      { q: 'Why does Melanotan II cause more side effects?', a: 'Because it is non-selective and activates MC4R in the brain, producing nausea, flushing and spontaneous erections (documented in Dorr et al., 1996) that cannot be cleanly separated from its pigmentation effect.' },
+      { q: 'Is either FDA-approved?', a: 'Afamelanotide (Melanotan I) is FDA-approved as Scenesse for photoprotection in erythropoietic protoporphyria. Melanotan II is not FDA-approved. This page is a research and educational reference.' },
+      { q: 'Do both cause tanning?', a: 'Both stimulate melanin production through MC1R. Melanotan I does so selectively; Melanotan II does so along with broader, non-selective melanocortin effects.' },
+    ],
+    relatedAreas: ['skin-hair'],
+    about: [
+      { name: 'Melanotan II', alternateName: 'MT-II' },
+      { name: 'Afamelanotide', alternateName: 'Melanotan I' },
+    ],
+  },
+  {
+    slug: 'ghk-cu-vs-ahk-cu',
+    aSlug: 'ghk-cu',
+    bSlug: 'ahk-cu',
+    aName: 'GHK-Cu',
+    bName: 'AHK-Cu',
+    aPill: 'Copper tripeptide · skin',
+    bPill: 'Copper tripeptide · hair',
+    metaTitle:
+      'GHK-Cu vs AHK-Cu — Copper Peptides for Skin vs Hair (vs Matrixyl) | AmericanPeptide.com',
+    metaDescription:
+      'GHK-Cu and AHK-Cu share copper-binding chemistry but target different tissue — skin remodeling vs the hair follicle. How they compare, and where the non-copper peptide Matrixyl fits. Cited.',
+    keywords: [
+      'GHK-Cu vs AHK-Cu',
+      'copper peptide comparison',
+      'GHK-Cu vs Matrixyl',
+      'copper peptide hair',
+      'copper peptide skin',
+    ],
+    breadcrumb: { label: 'Cosmetic Peptides', href: '/catalog/category/cosmetic' },
+    headline: 'same copper chemistry, different target tissue',
+    intro: [
+      '"Copper peptide" gets used as one term, but GHK-Cu and AHK-Cu are distinct molecules with different target tissue — and Matrixyl, often grouped with them, is not a copper peptide at all.',
+    ],
+    atAGlance: [
+      { dim: 'Structure', a: 'Cu-bound tripeptide (Gly-His-Lys)', b: 'Cu-bound tripeptide (Ala-His-Lys)' },
+      { dim: 'Copper-based?', a: 'Yes', b: 'Yes' },
+      { dim: 'Primary research focus', a: 'Skin repair, collagen, antioxidant', b: 'Hair follicle / hair growth' },
+      { dim: 'Key mechanism', a: 'Copper delivery + ECM remodeling-gene modulation', b: 'Copper delivery + VEGF / anti-apoptotic signaling in DPCs' },
+      { dim: 'Reference compound for', a: 'Facial-skin remodeling', b: 'Follicular biology' },
+      { dim: 'Evidence stage', a: 'Extensive dermatologic literature', b: 'Preclinical (cell / ex-vivo follicle)' },
+      { dim: 'Status', a: 'Cosmetic ingredient (Copper Tripeptide-1)', b: 'Cosmetic / research compound' },
+    ],
+    proseSections: [
+      {
+        title: 'Skin, hair — and the non-copper outlier',
+        paragraphs: [
+          'GHK-Cu (glycyl-histidyl-lysine + copper) is the most-studied copper peptide, carrying copper into tissue and modulating a broad set of remodeling and antioxidant genes that support collagen, elastin, and wound repair. AHK-Cu (alanyl-histidyl-lysine + copper) shares the same histidine–lysine copper-binding motif but is oriented toward the hair follicle: it is studied for dermal-papilla-cell proliferation, anti-apoptotic signaling, and VEGF-driven angiogenesis (Pyo & Yoo et al., 2007).',
+          'The common third name, Matrixyl (palmitoyl pentapeptide-4), is not a copper peptide at all. It is a "matrikine" whose KTTKS core mimics a procollagen-I fragment, signaling fibroblasts to make collagen — backed by a 12-week split-face RCT (Robinson et al., 2005). So the real choice isn’t "which copper peptide" but skin remodeling (GHK-Cu) vs hair (AHK-Cu) vs signaling-only anti-wrinkle (Matrixyl).',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'GHK-Cu is the reference for facial-skin remodeling; AHK-Cu applies the same copper chemistry to the hair follicle; Matrixyl is a separate, copper-free matrikine for collagen signaling. All three are cosmetic / research compounds, not approved drugs. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between GHK-Cu and AHK-Cu?', a: 'Both are copper-bound tripeptides sharing a histidine–lysine copper-binding motif. GHK-Cu (glycyl-histidyl-lysine) is the most-studied for facial-skin remodeling, collagen, and wound repair. AHK-Cu (alanyl-histidyl-lysine) is oriented toward the hair follicle and follicular angiogenesis.' },
+      { q: 'Is Matrixyl a copper peptide?', a: 'No. Matrixyl (palmitoyl pentapeptide-4) contains no copper. It is a matrikine that signals fibroblasts to produce collagen by mimicking a collagen-breakdown fragment, where GHK-Cu and AHK-Cu deliver copper.' },
+      { q: 'Which copper peptide is better for hair?', a: 'AHK-Cu is the one studied specifically for the hair follicle — dermal-papilla-cell proliferation and VEGF-driven angiogenesis — while GHK-Cu is the reference for facial skin. Both remain preclinical / cosmetic, not approved drugs.' },
+      { q: 'Are these FDA-approved?', a: 'No. GHK-Cu, AHK-Cu, and Matrixyl are cosmetic / research compounds, not approved drugs. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['skin-hair'],
+    about: [
+      { name: 'GHK-Cu', alternateName: 'Copper Tripeptide-1' },
+      { name: 'AHK-Cu' },
+    ],
+  },
+  {
+    slug: 'igf-1-lr3-vs-mgf',
+    aSlug: 'igf-1-lr3',
+    bSlug: 'mgf',
+    aName: 'IGF-1 LR3',
+    bName: 'MGF',
+    aPill: 'Long-acting IGF-1 analog · systemic',
+    bPill: 'IGF-1 splice variant · local',
+    metaTitle:
+      'IGF-1 LR3 vs MGF — Hypertrophy vs Satellite-Cell Activation | AmericanPeptide.com',
+    metaDescription:
+      'IGF-1 LR3 is a long-acting systemic IGF-1 analog studied for hypertrophy; MGF is a local IGF-1 splice variant studied for satellite-cell activation. A cited research comparison.',
+    keywords: [
+      'IGF-1 LR3 vs MGF',
+      'mechano growth factor comparison',
+      'IGF-1 splice variant',
+      'satellite cell activation',
+      'muscle peptide comparison',
+    ],
+    breadcrumb: { label: 'GH Peptides', href: '/gh-peptides' },
+    headline: 'systemic hypertrophy versus local repair',
+    intro: [
+      'Both come from the IGF-1 gene, but one is a long-acting systemic growth factor and the other a short-lived local repair signal — and they do different jobs in muscle.',
+    ],
+    atAGlance: [
+      { dim: 'Origin', a: 'Modified long-acting IGF-1 analog', b: 'Splice variant of IGF-1 (IGF-1Ec)' },
+      { dim: 'Action radius', a: 'Systemic', b: 'Local (site of mechanical stress)' },
+      { dim: 'Duration', a: 'Prolonged (hours–days)', b: 'Transient (rapid, post-damage)' },
+      { dim: 'Primary effect', a: 'Hypertrophy — protein synthesis in existing fibers', b: 'Satellite-cell proliferation (new myonuclei)' },
+      { dim: 'Key modification', a: 'Arg-3 substitution + N-terminal extension (↓ IGFBP binding)', b: 'Exon-5 insert → distinct C-terminal E-peptide' },
+      { dim: 'Potency note', a: '~2–3× native IGF-1', b: 'Pulse signal, not sustained' },
+      { dim: 'Status', a: 'Research / cell-culture; WADA-banned', b: 'Research; WADA-banned' },
+    ],
+    proseSections: [
+      {
+        title: 'Initiate versus sustain',
+        paragraphs: [
+          'MGF is the splice variant the body upregulates immediately after mechanical overload or muscle damage; its role is to activate satellite cells, expanding the pool of cells that can fuse and donate nuclei (McKoy, Ashley, Yang et al., 1999; Goldspink group, UCL). IGF-1 LR3 is engineered for a long half-life — an arginine-3 substitution and N-terminal extension reduce IGF-binding-protein binding — and acts systemically to sustain protein synthesis over hours to days.',
+          'The sequence in the literature is therefore: MGF initiates the repair phase, IGF-1 LR3 sustains it. A nuance worth stating is that running both simultaneously may be counterproductive, since IGF-1 can drive premature differentiation before MGF has expanded the satellite-cell pool.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These are complementary, not interchangeable: MGF is the local, transient initiator of repair; IGF-1 LR3 is the systemic, long-acting driver of hypertrophy. Both are research compounds (IGF-1 LR3 is also a cell-culture standard), neither is FDA-approved, and both are prohibited in sport. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between IGF-1 LR3 and MGF?', a: 'IGF-1 LR3 is a modified, long-acting, systemic IGF-1 analog studied for hypertrophy via sustained protein synthesis. MGF (mechano growth factor) is a local IGF-1 splice variant upregulated after muscle damage that activates satellite cells. MGF initiates repair; IGF-1 LR3 sustains it.' },
+      { q: 'Should IGF-1 LR3 and MGF be used together?', a: 'In the research literature they are typically sequenced rather than combined simultaneously, because IGF-1 may promote premature differentiation before MGF has expanded the satellite-cell pool.' },
+      { q: 'Why is IGF-1 LR3 longer-acting?', a: 'An arginine-3 substitution and a 13-residue N-terminal extension reduce its binding to IGF-binding proteins, leaving more peptide free and active and extending its half-life versus native IGF-1.' },
+      { q: 'Are they FDA-approved?', a: 'No. Both are research compounds — IGF-1 LR3 is also widely used in cell culture — and neither is FDA-approved; both are prohibited in sport. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['growth-hormone-axis'],
+    about: [
+      { name: 'IGF-1 LR3', alternateName: 'Long R3 IGF-1' },
+      { name: 'MGF', alternateName: 'Mechano Growth Factor' },
+    ],
+  },
+  {
+    slug: 'epitalon-vs-mots-c',
+    aSlug: 'epitalon',
+    bSlug: 'mots-c',
+    aName: 'Epitalon',
+    bName: 'MOTS-c',
+    aPill: 'Pineal tetrapeptide · telomeres',
+    bPill: 'Mitochondrial peptide · metabolism',
+    metaTitle:
+      'Epitalon vs MOTS-c — Telomere vs Mitochondrial Longevity | AmericanPeptide.com',
+    metaDescription:
+      'Two longevity peptides, two mechanisms: Epitalon is studied for telomerase upregulation, MOTS-c for mitochondrial and metabolic regulation. A cited research comparison.',
+    keywords: [
+      'Epitalon vs MOTS-c',
+      'longevity peptide comparison',
+      'telomerase peptide',
+      'mitochondrial peptide',
+      'anti-aging peptide',
+    ],
+    breadcrumb: { label: 'Longevity Peptides', href: '/longevity-peptides' },
+    headline: 'telomere maintenance versus mitochondrial metabolism',
+    intro: [
+      'Epitalon and MOTS-c are both studied under the longevity banner, but they act on entirely different aging mechanisms — telomere maintenance versus mitochondrial energy metabolism.',
+    ],
+    atAGlance: [
+      { dim: 'Structure', a: 'Tetrapeptide (AEDG), pineal-derived', b: 'Mitochondrial-derived peptide (16 aa)' },
+      { dim: 'Primary mechanism', a: 'Telomerase upregulation → telomere length', b: 'Mitochondrial / AMPK metabolic regulation' },
+      { dim: 'Longevity rationale', a: 'Replicative lifespan, circadian / pineal axis', b: 'Metabolic healthspan, exercise mimetic' },
+      { dim: 'Originating research', a: 'Khavinson group (St. Petersburg)', b: 'Mitochondrial-derived-peptide field (USC / Cohen lab)' },
+      { dim: 'Evidence stage', a: 'Preclinical / early; limited Western RCTs', b: 'Preclinical (largely rodent / cell)' },
+      { dim: 'Status', a: 'Research compound', b: 'Research compound' },
+    ],
+    proseSections: [
+      {
+        title: 'Two routes to the same banner',
+        paragraphs: [
+          'Epitalon (AEDG), a pineal-derived tetrapeptide developed by Khavinson’s group, is studied for upregulating the telomerase catalytic subunit and extending telomere length — one study extended human fibroblast replicative lifespan beyond the Hayflick limit without malignant transformation. Its longevity rationale is telomere maintenance and the pineal / circadian axis.',
+          'MOTS-c is a mitochondrial-derived peptide studied for metabolic regulation — activating AMPK and acting as an exercise-mimetic signal that improves insulin sensitivity and metabolic flexibility in models. So the two address aging from opposite ends: Epitalon at the replicative / telomere level, MOTS-c at the mitochondrial / metabolic level.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These are not substitutes — they target different aging mechanisms. Epitalon’s draw is telomere maintenance (with the caveat that its evidence is concentrated in a single research tradition and lacks large Western RCTs); MOTS-c’s is mitochondrial / metabolic regulation (largely preclinical). Both are research compounds, neither is FDA-approved. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between Epitalon and MOTS-c?', a: 'Epitalon (AEDG) is a pineal-derived tetrapeptide studied for telomerase upregulation and telomere length. MOTS-c is a mitochondrial-derived peptide studied for metabolic regulation via AMPK as an exercise-mimetic signal. They target different aging mechanisms.' },
+      { q: 'How strong is the evidence for each?', a: 'Epitalon’s research is concentrated in the Khavinson tradition with limited independent Western RCTs; MOTS-c data is largely preclinical (rodent and cell). Both should be read as early-stage.' },
+      { q: 'Can they be studied together?', a: 'Because they act on different mechanisms — telomere maintenance versus mitochondrial metabolism — they are studied as complementary longevity approaches rather than alternatives.' },
+      { q: 'Are they FDA-approved?', a: 'No. Both are research compounds and not FDA-approved. This page is a research and educational reference, not medical advice.' },
+    ],
+    relatedAreas: ['longevity-aging', 'mitochondrial'],
+    about: [
+      { name: 'Epitalon' },
+      { name: 'MOTS-c' },
+    ],
+  },
 ]
 
 export const COMPARISON_BY_SLUG: Record<string, Comparison> = Object.fromEntries(

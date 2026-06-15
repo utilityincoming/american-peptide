@@ -52,7 +52,7 @@ const features = [
 ]
 
 const stats = [
-  { value: '3', label: 'FDA-Approved Melanocortin Agonists' },
+  { value: '37M+', label: 'Biomedical Citations (PubMed)' },
   { value: '400K+', label: 'Compounds Searchable via PubChem' },
   { value: '500K+', label: 'Clinical Trials Indexed' },
 ]
