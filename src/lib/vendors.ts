@@ -85,8 +85,63 @@ export function trustScore(v: Vendor): number {
   return score
 }
 
+// ── Trust tiers ─────────────────────────────────────────────────────────────────
+// A legible HIERARCHY derived from the same transparency signals as trustScore —
+// so a growing affiliate list groups into meaningful bands instead of one flat
+// ranking. Tiers are presentational; trustScore remains the within-tier sort key.
+// NEVER commission-based — placement is earned only by verifiable transparency.
+//
+//   documented → publishes third-party, per-batch COA (COA + 3rd-party + per-batch)
+//   claimed    → states third-party testing OR COAs, not yet independently confirmed
+//   unvetted   → insufficient public transparency signals to place higher
+export type VendorTier = 'documented' | 'claimed' | 'unvetted'
+
+export interface VendorTierMeta {
+  id: VendorTier
+  label: string
+  blurb: string
+}
+
+/** Ordered best → least; drives grouping order in the UI. */
+export const VENDOR_TIERS: VendorTierMeta[] = [
+  {
+    id: 'documented',
+    label: 'Independently documented',
+    blurb: 'Publishes a third-party, per-batch COA you can match to your specific lot.',
+  },
+  {
+    id: 'claimed',
+    label: 'Vendor-claimed testing',
+    blurb: 'States third-party testing or COAs — not yet independently confirmed here.',
+  },
+  {
+    id: 'unvetted',
+    label: 'Unvetted',
+    blurb: 'Insufficient public transparency signals to place higher.',
+  },
+]
+
+/** Derive a vendor's trust tier from its transparency signals (never commission). */
+export function vendorTier(v: Vendor): VendorTier {
+  const t = v.trust
+  if (t.coaOnFile && t.thirdPartyTested && t.perBatchTesting) return 'documented'
+  if (t.thirdPartyTested || t.coaOnFile) return 'claimed'
+  return 'unvetted'
+}
+
 // ── Data ──────────────────────────────────────────────────────────────────────
-// Empty until real entries are compiled and verified. Template for a new entry:
+// Adding an affiliate program (keep the discipline — this is the trust standard):
+//   1. Capture the public homepage (`url`) AND the referral link separately.
+//   2. Read the vendor's OWN published claims for each trust signal; set only the
+//      flags they explicitly state. Never infer or fabricate. Note the source.
+//   3. Put unverified / unconfirmed items in `notes` (e.g. lab unnamed, COA not
+//      confirmed per-lot, refund terms unread).
+//   4. Set affiliate.active = true to arm the /go/<id> redirect + FTC disclosure +
+//      rel="sponsored nofollow". Leave false for a plain editorial reference.
+//   5. trustScore() + vendorTier() rank and band it automatically — no manual
+//      ordering. Verify with `npx tsc --noEmit`.
+//
+// Template for a new entry:
 //
 //   {
 //     id: 'example-labs',
@@ -300,4 +355,20 @@ export function vendorHref(v: Vendor): string {
 /** Whether a vendor link is a disclosed affiliate link (needs FTC disclosure). */
 export function isAffiliate(v: Vendor): boolean {
   return Boolean(v.affiliate?.active)
+}
+
+/**
+ * Vendors grouped into trust tiers (documented → claimed → unvetted), best-trust
+ * first WITHIN each tier. Empty tiers are dropped. This is the dynamic hierarchy:
+ * add a vendor and it self-files into the right band from its own signals — no
+ * manual ordering. Pass a pre-filtered list (e.g. getVendorsForPeptide(slug)) to
+ * tier a peptide-specific set.
+ */
+export function vendorsByTier(
+  list: Vendor[] = vendorsRanked(),
+): { tier: VendorTierMeta; vendors: Vendor[] }[] {
+  return VENDOR_TIERS.map((tier) => ({
+    tier,
+    vendors: list.filter((v) => vendorTier(v) === tier.id),
+  })).filter((group) => group.vendors.length > 0)
 }
