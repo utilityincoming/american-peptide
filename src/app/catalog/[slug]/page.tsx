@@ -7,6 +7,7 @@ import {
   Bell,
   BookOpen,
   Building2,
+  Check,
   Droplets,
   Factory,
   FileCheck2,
@@ -27,6 +28,13 @@ import { getPubchemVerification } from '@/lib/verification'
 import { getLatestResearch } from '@/lib/freshness'
 import PeptideStory from '@/components/PeptideStory'
 import WatchButton from '@/components/WatchButton'
+import AffiliateDisclosure from '@/components/AffiliateDisclosure'
+import {
+  getVendorsForPeptide,
+  trustScore,
+  vendorHref,
+  type Vendor,
+} from '@/lib/vendors'
 
 const SITE = 'https://www.americanpeptide.com'
 
@@ -635,29 +643,15 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
               )
             })()}
 
-            {/* Marketplace status panel */}
-            <div className="overflow-hidden rounded-2xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-5">
-              <div className="mb-3 flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] text-[#2DD4A8]">
-                  <Building2 className="h-3.5 w-3.5" strokeWidth={1.75} />
-                </div>
-                <h3 className="text-sm font-semibold">Marketplace</h3>
-              </div>
-
-              <div className="mb-4 space-y-2 text-xs text-white/55">
-                <MarketRow Icon={Building2} label="Vetted suppliers" value="Coming soon" />
-                <MarketRow Icon={FileCheck2} label="COAs on file"     value="Coming soon" />
-                <MarketRow Icon={ShieldCheck} label="Escrow protection" value="Coming soon" />
-              </div>
-
-              <button
-                disabled
-                className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-2 text-xs font-medium text-[#2DD4A8] opacity-80"
-              >
-                <Bell className="h-3.5 w-3.5" />
-                Notify me when live
-              </button>
-            </div>
+            {/* Marketplace panel — live vendor when we have one, else status */}
+            {(() => {
+              const vendor = getVendorsForPeptide(peptide.slug)[0]
+              return vendor ? (
+                <VendorPanel vendor={vendor} />
+              ) : (
+                <MarketplaceComingSoon />
+              )
+            })()}
 
             {/* Further reading — generated authoritative sources */}
             <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
@@ -764,6 +758,107 @@ function MarketRow({
         {label}
       </span>
       <span className="text-white/40">{value}</span>
+    </div>
+  )
+}
+
+function MarketplaceComingSoon() {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-5">
+      <div className="mb-3 flex items-center gap-2">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] text-[#2DD4A8]">
+          <Building2 className="h-3.5 w-3.5" strokeWidth={1.75} />
+        </div>
+        <h3 className="text-sm font-semibold">Marketplace</h3>
+      </div>
+
+      <div className="mb-4 space-y-2 text-xs text-white/55">
+        <MarketRow Icon={Building2} label="Vetted suppliers" value="Coming soon" />
+        <MarketRow Icon={FileCheck2} label="COAs on file" value="Coming soon" />
+        <MarketRow Icon={ShieldCheck} label="Escrow protection" value="Coming soon" />
+      </div>
+
+      <button
+        disabled
+        className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-2 text-xs font-medium text-[#2DD4A8] opacity-80"
+      >
+        <Bell className="h-3.5 w-3.5" />
+        Notify me when live
+      </button>
+    </div>
+  )
+}
+
+function VendorPanel({ vendor }: { vendor: Vendor }) {
+  const score = trustScore(vendor)
+  const t = vendor.trust
+  const signals: { label: string; ok: boolean }[] = [
+    { label: 'Independent third-party testing (HPLC/MS)', ok: t.thirdPartyTested },
+    { label: 'Per-batch / lot-level testing', ok: t.perBatchTesting },
+    {
+      label: t.purityPct ? `Stated purity ≥ ${t.purityPct}%` : 'Stated purity',
+      ok: Boolean(t.purityPct),
+    },
+    { label: 'Published refund policy', ok: t.refundPolicy },
+    { label: 'Per-lot COA available to customers', ok: t.coaOnFile },
+  ]
+
+  return (
+    <div className="overflow-hidden rounded-2xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-5">
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] text-[#2DD4A8]">
+            <Building2 className="h-3.5 w-3.5" strokeWidth={1.75} />
+          </div>
+          <h3 className="text-sm font-semibold">Where to source</h3>
+        </div>
+        <span className="rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 text-[10px] font-semibold text-[#2DD4A8]">
+          Trust {score}/100
+        </span>
+      </div>
+
+      <div className="mb-1 text-sm font-semibold">{vendor.name}</div>
+      <p className="mb-4 text-xs leading-relaxed text-white/55">{vendor.blurb}</p>
+
+      <ul className="mb-4 space-y-2 text-xs">
+        {signals.map((s) => (
+          <li key={s.label} className="flex items-start gap-2">
+            {s.ok ? (
+              <Check className="mt-0.5 h-3 w-3 shrink-0 text-[#2DD4A8]" strokeWidth={2.5} />
+            ) : (
+              <HelpCircle className="mt-0.5 h-3 w-3 shrink-0 text-white/30" />
+            )}
+            <span className={s.ok ? 'text-white/70' : 'text-white/40'}>{s.label}</span>
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href={vendorHref(vendor)}
+        target="_blank"
+        rel="sponsored nofollow noopener"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/15 px-3 py-2 text-xs font-medium text-[#2DD4A8] transition-colors hover:bg-[#2DD4A8]/25"
+      >
+        Visit {vendor.name}
+        <ArrowUpRight className="h-3.5 w-3.5" />
+      </a>
+
+      {vendor.affiliate?.code && (
+        <p className="mt-2 text-center text-[11px] text-white/45">
+          Referral code{' '}
+          <span className="font-mono font-semibold text-white/70">
+            {vendor.affiliate.code}
+          </span>
+        </p>
+      )}
+
+      {vendor.notes && (
+        <p className="mt-3 text-[11px] leading-relaxed text-amber-400/70">
+          {vendor.notes}
+        </p>
+      )}
+
+      <AffiliateDisclosure className="mt-3" />
     </div>
   )
 }

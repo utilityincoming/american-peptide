@@ -42,7 +42,8 @@ export const STATIC_FAQS: Faq[] = [
     id: 'buy-peptides',
     question: 'Can I buy peptides here?',
     answer:
-      'No — AmericanPeptide.com does not sell peptides or take orders; our role is to help you evaluate a source, not to be one. We publish the chemistry, the evidence, and the criteria that separate a trustworthy vendor from a questionable one, so wherever you buy you can judge it on its COA, third-party testing, and purity.',
+      'No — AmericanPeptide.com does not sell peptides or take orders; our role is to help you evaluate a source, not to be one. We publish the chemistry, the evidence, and the criteria that separate a trustworthy vendor from a questionable one, so wherever you buy you can judge it on its COA, third-party testing, and purity. Where we do point you to an outside vendor it is a clearly disclosed affiliate referral, ranked by those same trust signals and never by commission — we may earn a fee if you buy through it, at no extra cost to you.',
+    cta: { label: 'Browse the catalog', href: '/catalog' },
   },
   {
     id: 'medical-advice',
