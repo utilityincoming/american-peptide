@@ -643,11 +643,11 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
               )
             })()}
 
-            {/* Marketplace panel — live vendor when we have one, else status */}
+            {/* Marketplace panel — live trust-ranked vendors, else status */}
             {(() => {
-              const vendor = getVendorsForPeptide(peptide.slug)[0]
-              return vendor ? (
-                <VendorPanel vendor={vendor} />
+              const vendors = getVendorsForPeptide(peptide.slug)
+              return vendors.length ? (
+                <MarketplacePanel vendors={vendors} />
               ) : (
                 <MarketplaceComingSoon />
               )
@@ -789,7 +789,40 @@ function MarketplaceComingSoon() {
   )
 }
 
-function VendorPanel({ vendor }: { vendor: Vendor }) {
+function MarketplacePanel({ vendors }: { vendors: Vendor[] }) {
+  const shown = vendors.slice(0, 3)
+  const hidden = vendors.length - shown.length
+
+  return (
+    <div className="overflow-hidden rounded-2xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-5">
+      <div className="mb-4 flex items-center gap-2">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] text-[#2DD4A8]">
+          <Building2 className="h-3.5 w-3.5" strokeWidth={1.75} />
+        </div>
+        <h3 className="text-sm font-semibold">Where to source</h3>
+        <span className="ml-auto text-[10px] uppercase tracking-wider text-white/35">
+          Ranked by trust
+        </span>
+      </div>
+
+      <div className="space-y-4">
+        {shown.map((v, i) => (
+          <VendorCard key={v.id} vendor={v} rank={i} />
+        ))}
+      </div>
+
+      {hidden > 0 && (
+        <p className="mt-3 text-[11px] text-white/40">
+          +{hidden} more vendor{hidden > 1 ? 's' : ''} not shown.
+        </p>
+      )}
+
+      <AffiliateDisclosure className="mt-4" />
+    </div>
+  )
+}
+
+function VendorCard({ vendor, rank }: { vendor: Vendor; rank: number }) {
   const score = trustScore(vendor)
   const t = vendor.trust
   const signals: { label: string; ok: boolean }[] = [
@@ -799,28 +832,30 @@ function VendorPanel({ vendor }: { vendor: Vendor }) {
       label: t.purityPct ? `Stated purity ≥ ${t.purityPct}%` : 'Stated purity',
       ok: Boolean(t.purityPct),
     },
-    { label: 'Published refund policy', ok: t.refundPolicy },
     { label: 'Per-lot COA available to customers', ok: t.coaOnFile },
+    { label: 'Reship on carrier loss', ok: t.reshipPolicy },
+    { label: 'Published refund policy', ok: t.refundPolicy },
   ]
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-5">
-      <div className="mb-3 flex items-center justify-between gap-2">
+    <div className={rank > 0 ? 'border-t border-white/[0.07] pt-4' : ''}>
+      <div className="mb-1 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] text-[#2DD4A8]">
-            <Building2 className="h-3.5 w-3.5" strokeWidth={1.75} />
-          </div>
-          <h3 className="text-sm font-semibold">Where to source</h3>
+          <span className="text-sm font-semibold">{vendor.name}</span>
+          {rank === 0 && (
+            <span className="rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#2DD4A8]">
+              Best trust
+            </span>
+          )}
         </div>
-        <span className="rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 text-[10px] font-semibold text-[#2DD4A8]">
-          Trust {score}/100
+        <span className="shrink-0 rounded-full border border-white/15 px-2 py-0.5 text-[10px] font-semibold text-white/70">
+          {score}/100
         </span>
       </div>
 
-      <div className="mb-1 text-sm font-semibold">{vendor.name}</div>
-      <p className="mb-4 text-xs leading-relaxed text-white/55">{vendor.blurb}</p>
+      <p className="mb-3 text-xs leading-relaxed text-white/55">{vendor.blurb}</p>
 
-      <ul className="mb-4 space-y-2 text-xs">
+      <ul className="mb-3 space-y-1.5 text-xs">
         {signals.map((s) => (
           <li key={s.label} className="flex items-start gap-2">
             {s.ok ? (
@@ -857,8 +892,6 @@ function VendorPanel({ vendor }: { vendor: Vendor }) {
           {vendor.notes}
         </p>
       )}
-
-      <AffiliateDisclosure className="mt-3" />
     </div>
   )
 }
