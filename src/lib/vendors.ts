@@ -215,6 +215,61 @@ export const VENDORS: Vendor[] = [
     notes:
       'COAs are batch-traceable (Janoshik certificates are publicly queryable by batch ID) — confirm the report for your specific lot. 30-day returns on unopened items; replacements for damaged/defective.',
   },
+  {
+    id: 'dynamic-peptide',
+    name: 'Dynamic Peptide',
+    url: 'https://dynamicpeptide.com',
+    blurb:
+      'US-made research peptides advertising per-batch independent HPLC/MS testing at >99% purity, with a COA on each product.',
+    peptides: 'all',
+    shipsTo: ['us'],
+    trust: {
+      // Sourced from the vendor's published claims (surfaced via search; the
+      // site blocks direct fetch). NOT independently confirmed. Only flags they
+      // explicitly state are set.
+      coaOnFile: true, // "Each product includes a Certificate of Analysis"
+      thirdPartyTested: true, // "independent third-party testing using HPLC and MS"
+      perBatchTesting: true, // "Every batch undergoes independent third-party testing"
+      purityPct: 99, // "purity levels above 99%"
+      reshipPolicy: false, // not stated
+      refundPolicy: false, // not confirmed on the published material reviewed
+    },
+    affiliate: {
+      trackedPath: '/go/dynamic-peptide',
+      url: 'https://dynamicpeptide.com/aff/27/',
+      active: true,
+    },
+    notes:
+      'Trust signals reflect the vendor’s published claims (surfaced via search; the site blocks direct review), not independent verification. Testing lab is not named and refund/reship terms were not confirmed — request the third-party COA for your specific lot before any use.',
+  },
+  {
+    id: 'apollo-peptide-sciences',
+    name: 'Apollo Peptide Sciences',
+    // Canonical homepage; the affiliate link below uses the apollopeptidescience.com
+    // (singular) domain the referral was issued on, which 301s here with the param.
+    url: 'https://apollopeptidesciences.com',
+    blurb:
+      'US research-peptide vendor that publishes COAs and states products are routinely third-party lab tested; ships USPS Priority/Express.',
+    peptides: 'all',
+    shipsTo: ['us'],
+    trust: {
+      // Sourced from the vendor's own public claims (apollopeptidesciences.com),
+      // NOT independently confirmed. Only flags they explicitly state are set.
+      coaOnFile: true, // "You can see our COA's here"
+      thirdPartyTested: true, // "routinely tested by the most trusted labs"
+      perBatchTesting: false, // not stated as per-batch / lot-matched
+      // purityPct omitted — no HPLC purity figure stated
+      reshipPolicy: false, // not stated
+      refundPolicy: true, // "complete satisfaction guarantee" + Refund and Returns Policy page
+    },
+    affiliate: {
+      trackedPath: '/go/apollo-peptide-sciences',
+      url: 'https://apollopeptidescience.com/?rfsn=9172552.14e196',
+      active: true,
+    },
+    notes:
+      'Trust signals reflect the vendor’s published claims, not independent verification. COAs are published but not confirmed as per-lot, no HPLC purity figure or testing lab is named — request and match the COA for your specific lot before any use.',
+  },
 ]
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
