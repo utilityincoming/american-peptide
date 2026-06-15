@@ -790,7 +790,7 @@ function MarketplaceComingSoon() {
 }
 
 function MarketplacePanel({ vendors }: { vendors: Vendor[] }) {
-  const shown = vendors.slice(0, 3)
+  const shown = vendors.slice(0, 6)
   const hidden = vendors.length - shown.length
 
   return (

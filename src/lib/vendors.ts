@@ -188,6 +188,33 @@ export const VENDORS: Vendor[] = [
     notes:
       'COAs are independently verifiable via the Janoshik / MZ Biolabs report number on each certificate — confirm the report for your specific lot. 60-day money-back guarantee; change-of-mind returns are excluded.',
   },
+  {
+    id: 'midwest-peptide',
+    name: 'Midwest Peptide',
+    url: 'https://midwestpeptide.com',
+    blurb:
+      'US research-peptide supplier; every batch ships a third-party COA (US lab Chromate / Janoshik) at ≥99% HPLC purity, free shipping.',
+    peptides: 'all',
+    shipsTo: ['us'],
+    trust: {
+      // Sourced from the vendor's public claims + third-party COAs. Not
+      // personally confirmed; Janoshik COAs are queryable by batch ID.
+      coaOnFile: true, // every batch ships a traceable third-party COA
+      thirdPartyTested: true, // independent US lab (Chromate); some via Janoshik
+      perBatchTesting: true, // "every batch is third-party tested"
+      purityPct: 99, // ">=99%", often >99.9%
+      reshipPolicy: false, // damaged/defective replaced, but no stated carrier-lost reship
+      refundPolicy: true, // 30-day return on unopened; refunds/replacements for defects
+    },
+    affiliate: {
+      trackedPath: '/go/midwest-peptide',
+      url: 'https://midwestpeptide.com/?ref=AMERICANPEPTIDE',
+      code: 'AMERICANPEPTIDE',
+      active: true,
+    },
+    notes:
+      'COAs are batch-traceable (Janoshik certificates are publicly queryable by batch ID) — confirm the report for your specific lot. 30-day returns on unopened items; replacements for damaged/defective.',
+  },
 ]
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
