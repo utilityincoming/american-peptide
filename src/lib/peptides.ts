@@ -415,18 +415,18 @@ const SEED_PEPTIDES: Peptide[] = [
     shortDescription: 'Synthetic gastric pentadecapeptide investigated for tendon, ligament, and GI repair.',
     description:
       'BPC-157 is a 15-amino-acid sequence derived from a protective protein found in human gastric juice. Preclinical work suggests pro-angiogenic and cytoprotective activity across tendon, ligament, muscle, and GI tissue.',
-    mechanism: 'Putative upregulation of VEGFR2 and modulation of nitric oxide / growth factor pathways.',
+    mechanism: 'Activates the VEGFR2–Akt–eNOS pathway (with upstream Src / Caveolin-1 signaling), driving nitric-oxide–dependent angiogenesis; also modulates growth-factor signaling and the gut–brain axis.',
     researchAreas: ['Tendinopathy', 'Wound healing', 'IBD models'],
     background: [
       'BPC-157 (Body Protective Compound-157) is a synthetic 15-amino-acid sequence derived from a protective protein identified in human gastric juice. It is studied as a cytoprotective and pro-angiogenic agent, with most of the interest centered on connective-tissue and gastrointestinal repair.',
       'Essentially all of the evidence is preclinical — cell cultures and rodent models — and BPC-157 is not approved by the FDA for any use. It is widely discussed in the tissue-repair literature but lacks the controlled human trials that characterize approved peptides, so model choice and endpoint definition are central caveats.',
     ],
     keyResearch: [
-      'Tendon & ligament repair — rodent models studied for healing of tendon, ligament, and muscle injury.',
-      'Gastrointestinal protection — examined in models of ulcer and inflammatory bowel disease.',
-      'Angiogenesis — proposed to upregulate the VEGFR2 receptor and promote new-vessel formation.',
-      'Nitric-oxide & growth-factor pathways — investigated as part of its cytoprotective mechanism.',
-      'Preclinical only — no controlled human trials; not FDA-approved.',
+      'Angiogenesis mechanism — repair effects are attributed largely to activation of the VEGFR2–Akt–eNOS pathway (with upstream Src / Caveolin-1 signaling), increasing nitric-oxide–dependent new-vessel formation in hypovascular tissue such as tendon.',
+      'Nitric-oxide modulation — the Sikiric research group first linked the gastric-protective effect to NO generation; subsequent L-NAME / L-arginine co-treatment studies support NO involvement across multiple tissue-injury models.',
+      'Tendon, ligament & GI repair — the most-replicated preclinical domains, spanning musculoskeletal injury and ulcer / inflammatory-bowel models.',
+      'Compared to TB-500 — both are studied as healing peptides but differ mechanistically: BPC-157 is perfusion-led (angiogenesis / NO) while TB-500 is migration-led (actin regulation), which is why the two are often examined together.',
+      'Evidence quality — extensive rodent data (much of it from a single research group) but no controlled human trials; not FDA-approved.',
     ],
     faqs: [
       {
@@ -471,11 +471,11 @@ const SEED_PEPTIDES: Peptide[] = [
       'As with BPC-157, the evidence for TB-500 is largely preclinical and it is not FDA-approved; it is also a prohibited substance in regulated sport. Research interest centers on endothelial cell migration, angiogenesis, and wound healing, with cardiac and dermal repair among the contexts studied.',
     ],
     keyResearch: [
-      'Cell migration — derived from the actin-binding domain of thymosin β4, studied for endothelial and keratinocyte migration.',
-      'Angiogenesis & wound healing — examined in dermal and vascular repair models.',
-      'Cardiac repair — investigated in models of myocardial injury.',
-      'Hair growth — explored for effects on the follicle in preclinical work.',
-      'Preclinical / prohibited in sport — not FDA-approved; banned by WADA.',
+      'Actin regulation — corresponds to the actin-binding motif of thymosin β4; promotes G-actin sequestration and the polymerization / depolymerization cycle that mobilizes cells to injury sites.',
+      'Angiogenesis & re-epithelialization — thymosin β4 research reports accelerated wound closure in rodent full-thickness models, with increased collagen deposition and new-vessel growth.',
+      'Cardiac & dermal repair — investigated in myocardial-injury and dermal wound models, and explored in hair-follicle biology.',
+      'Compared to BPC-157 — complementary mechanism: TB-500 is migration-led (actin / cell mobilization) while BPC-157 is perfusion-led (angiogenesis / NO).',
+      'Evidence quality — much of the data derives from thymosin β4 rather than the TB-500 fragment specifically; preclinical, not FDA-approved, and prohibited by WADA.',
     ],
     faqs: [
       {
@@ -497,6 +497,10 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'LKKTETQ',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+    storage:
+      'Lyophilized: store frozen and protected from light for long-term stability. Reconstituted: refrigerate at 2–8 °C and use within weeks.',
+    handling:
+      'Reconstitute gently and avoid shaking; protect from heat, light, and repeated freeze–thaw.',
   },
   {
     slug: 'ghk-cu',
@@ -517,7 +521,8 @@ const SEED_PEPTIDES: Peptide[] = [
       'Wound healing & angiogenesis — investigated for fibroblast activation and new-vessel formation in tissue-repair models.',
       'Antioxidant & anti-inflammatory signaling — reported to modulate oxidative-stress and inflammatory pathways.',
       'Hair-follicle biology — examined for effects on follicle size and the growth (anagen) phase.',
-      'Gene expression — a widely cited transcriptomic analysis reported GHK can shift the expression of a large set of human genes, often framed as a move toward a more youthful profile.',
+      'Gene expression — a widely cited transcriptomic analysis (originating from Loren Pickart\'s work) reported GHK can shift the expression of a large set of human genes, often framed as a move toward a more youthful profile.',
+      'Compared to other copper / collagen peptides — GHK-Cu is the most-studied for skin remodeling; AHK-Cu is oriented toward the hair follicle, while Matrixyl (palmitoyl pentapeptide-4) stimulates collagen via matrikine signaling and contains no copper.',
     ],
     faqs: [
       {
@@ -544,6 +549,104 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C14H22CuN6O4',
     cas: '49557-75-7',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+    storage:
+      'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and use within weeks; copper complexes are light- and oxidation-sensitive.',
+    handling:
+      'Reconstitute gently; protect from light and air, since the copper(II) complex is prone to oxidation. The characteristic blue color indicates copper binding but is not a substitute for assay.',
+  },
+  {
+    slug: 'ahk-cu',
+    name: 'AHK-Cu',
+    aliases: ['Copper Tripeptide AHK', 'Ala-His-Lys Copper'],
+    categories: ['cosmetic'],
+    shortDescription: 'Copper-binding tripeptide (Ala-His-Lys) studied for hair-follicle stimulation and dermal repair.',
+    description:
+      'AHK-Cu is the copper complex of the tripeptide alanyl-L-histidyl-L-lysine, structurally related to GHK-Cu but studied primarily in hair-follicle biology rather than facial-skin remodeling.',
+    mechanism: 'Copper delivery with VEGF upregulation and anti-apoptotic signaling in dermal papilla cells.',
+    researchAreas: ['Hair growth', 'Dermal repair'],
+    background: [
+      'AHK-Cu is the copper(II) complex of the tripeptide alanyl-L-histidyl-L-lysine (AHK). It shares the histidine–lysine copper-binding motif of the better-known GHK-Cu but differs at the first residue (alanine in place of glycine), and the research interest is oriented toward the hair follicle rather than facial skin.',
+      'Like other copper peptides it is studied as both a copper-delivery vehicle and a signaling molecule. The evidence base is preclinical — cell and ex-vivo follicle models — and it is used as a cosmetic ingredient rather than an approved drug.',
+    ],
+    keyResearch: [
+      'Dermal papilla cells — studied for stimulating proliferation and reducing apoptosis (raised Bcl-2/Bax ratio, lower cleaved caspase-3 / PARP) in DPCs (Pyo & Yoo et al., 2007).',
+      'Hair-follicle elongation — promotes elongation of human hair follicles ex vivo in preclinical work.',
+      'Angiogenesis — upregulates VEGF and stimulates dermal fibroblast proliferation while reducing TGF-β1 secretion.',
+      'Compared to GHK-Cu — the same copper-binding chemistry but oriented toward the follicle, where GHK-Cu is the reference compound for facial-skin remodeling.',
+      'Preclinical / cosmetic — not FDA-approved as a drug.',
+    ],
+    faqs: [
+      {
+        q: 'What is AHK-Cu?',
+        a: 'AHK-Cu is the copper complex of the tripeptide alanyl-histidyl-lysine, a copper peptide studied primarily for hair-follicle stimulation and dermal repair.',
+      },
+      {
+        q: 'How does AHK-Cu differ from GHK-Cu?',
+        a: 'They share the same histidine–lysine copper-binding motif but differ at the first residue. GHK-Cu is the reference compound for facial-skin remodeling; AHK-Cu research is oriented toward the hair follicle.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Dermal-papilla-cell proliferation, hair-follicle elongation, and angiogenesis (VEGF) — mostly in cell and ex-vivo models. It is used as a cosmetic ingredient, not an approved drug.',
+      },
+      {
+        q: 'Is AHK-Cu FDA-approved?',
+        a: 'No. It is a research and cosmetic compound, not an approved drug. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'AHK',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+    storage:
+      'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and use within weeks; copper complexes are light- and oxidation-sensitive.',
+    handling:
+      'Reconstitute gently; protect from light and air, since the copper(II) complex is prone to oxidation.',
+  },
+  {
+    slug: 'matrixyl',
+    name: 'Matrixyl (Palmitoyl Pentapeptide-4)',
+    aliases: ['Palmitoyl Pentapeptide-4', 'Pal-KTTKS', 'Matrixyl'],
+    categories: ['cosmetic'],
+    shortDescription: 'Palmitoylated matrikine peptide that signals fibroblasts to synthesize collagen — contains no copper.',
+    description:
+      'Matrixyl is palmitoyl pentapeptide-4 (Pal-KTTKS), a lipidated peptide whose KTTKS core is a fragment of type-I procollagen. Rather than delivering copper, it acts as a matrikine signal that stimulates extracellular-matrix synthesis.',
+    mechanism: 'Matrikine signaling — mimics a procollagen-I fragment to upregulate collagen and fibronectin synthesis.',
+    researchAreas: ['Skin aging', 'Collagen synthesis'],
+    background: [
+      'Matrixyl is the trade name for palmitoyl pentapeptide-4, a five-amino-acid sequence (KTTKS) joined to a palmitic-acid chain that improves skin penetration. The KTTKS sequence is a fragment naturally cleaved from the C-terminal propeptide of type-I procollagen during collagen assembly.',
+      'The body uses that fragment as a feedback signal — a "matrikine" — telling fibroblasts to keep producing matrix. Matrixyl exploits this: it is studied not as a copper peptide but as a signaling molecule that drives collagen synthesis, and it is one of the better-evidenced cosmetic peptide ingredients.',
+    ],
+    keyResearch: [
+      'Matrikine signaling — the KTTKS core mimics a procollagen-I breakdown fragment, signaling fibroblasts to upregulate collagen I, collagen IV, and fibronectin.',
+      'Clinical cosmetic data — a 12-week split-face randomized controlled trial (Robinson et al., 2005) reported improvements in wrinkle depth and skin roughness at low concentration.',
+      'Palmitoylation — the lipid chain improves penetration of the otherwise hydrophilic peptide through the stratum corneum.',
+      'Compared to copper peptides — unlike GHK-Cu or AHK-Cu, Matrixyl contains no copper and works purely by signaling, not metal delivery.',
+      'Cosmetic ingredient — topical use; not a drug.',
+    ],
+    faqs: [
+      {
+        q: 'What is Matrixyl?',
+        a: 'Matrixyl is palmitoyl pentapeptide-4 (Pal-KTTKS), a lipidated peptide whose KTTKS core is a procollagen-I fragment that signals fibroblasts to produce collagen. It is a widely used cosmetic ingredient.',
+      },
+      {
+        q: 'Is Matrixyl a copper peptide?',
+        a: 'No. Unlike GHK-Cu and AHK-Cu, Matrixyl contains no copper. It works as a matrikine signal, not by delivering a metal.',
+      },
+      {
+        q: 'What is the evidence for Matrixyl?',
+        a: 'A 12-week split-face randomized controlled trial (Robinson et al., 2005) reported improvements in wrinkle depth and skin roughness, making it one of the better-evidenced cosmetic peptides.',
+      },
+      {
+        q: 'How does it work?',
+        a: 'Its KTTKS sequence mimics a collagen-breakdown fragment, signaling fibroblasts to upregulate collagen I, collagen IV, and fibronectin synthesis.',
+      },
+    ],
+    sequence: 'KTTKS',
+    molecularWeight: 802.0,
+    cas: '214047-00-4',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+    storage:
+      'Store the lyophilized peptide frozen and protected from light; in cosmetic formulation, follow the product’s stability guidance.',
+    handling:
+      'Palmitoylation makes it amphiphilic — disperse carefully in formulation. Protect from heat and light.',
   },
   {
     slug: 'epo',
@@ -774,6 +877,7 @@ const SEED_PEPTIDES: Peptide[] = [
       'Longevity paradox — reduced IGF-1 signaling tracks with extended lifespan and lower cancer/diabetes risk (Laron syndrome).',
       'Doping target — WADA-banned; "deer antler velvet" IGF-1 products are a notable case of unverified marketing.',
       'IGF-binding proteins — circulating IGF-1 is mostly protein-bound, which regulates its activity and half-life.',
+      'Research analogs & splice variants — IGF-1 LR3 is a long-acting modified analog studied for systemic hypertrophy, while MGF (mechano growth factor) is a local IGF-1 splice variant studied for satellite-cell activation after muscle damage.',
     ],
     faqs: [
       {
@@ -806,6 +910,97 @@ const SEED_PEPTIDES: Peptide[] = [
     synthesisNotes:
       'Recombinant IGF-1 is expressed (classically in E. coli), refolded to its native three-disulfide structure, and purified by chromatography. Release testing is protein-grade — peptide mapping, mass spectrometry, correct disulfide pairing, cell-based potency, host-cell-protein and endotoxin limits — not an HPLC purity figure alone.',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'igf-1-lr3',
+    name: 'IGF-1 LR3',
+    aliases: ['Long R3 IGF-1', 'LR3 IGF-1'],
+    categories: ['growth-hormone'],
+    shortDescription: 'A long-acting modified IGF-1 analog with reduced IGFBP binding and prolonged systemic activity.',
+    description:
+      'IGF-1 LR3 (Long R3 IGF-1) is an 83-amino-acid analog of IGF-1 with an arginine substitution at position 3 and a 13-residue N-terminal extension. These changes reduce binding to IGF-binding proteins, extending its half-life and potency versus native IGF-1.',
+    mechanism: 'IGF-1 receptor agonism with reduced IGFBP binding → prolonged systemic anabolic signaling.',
+    researchAreas: ['Muscle hypertrophy', 'Cell proliferation', 'GH/IGF-1 axis'],
+    background: [
+      'IGF-1 LR3 ("Long R3 IGF-1") is a modified version of insulin-like growth factor 1, engineered for a much longer duration of action. Two changes define it: arginine replaces glutamic acid at position 3, and a 13-amino-acid extension is added to the N-terminus.',
+      'Together these reduce the analog’s affinity for IGF-binding proteins — the carriers that normally sequester circulating IGF-1 — so more remains free and active, extending half-life and increasing potency roughly two- to three-fold over native IGF-1 (~9.1 kDa). It is a research compound, widely used in cell culture, and is not FDA-approved; it is also prohibited in sport.',
+    ],
+    keyResearch: [
+      'Reduced IGFBP binding — the R3 substitution lowers affinity for IGF-binding proteins, leaving more peptide free and active.',
+      'Prolonged potency — systemic, long-acting anabolic signaling roughly two- to three-fold more potent than native IGF-1.',
+      'Cell-culture standard — widely used as a serum-free supplement to promote cell proliferation in bioprocessing.',
+      'Compared to MGF — IGF-1 LR3 is systemic and long-acting (hypertrophy), while MGF is a local, transient splice variant (satellite-cell activation).',
+      'Preclinical / prohibited in sport — not FDA-approved; WADA-banned.',
+    ],
+    faqs: [
+      {
+        q: 'What is IGF-1 LR3?',
+        a: 'IGF-1 LR3 (Long R3 IGF-1) is a modified, long-acting analog of IGF-1 with an arginine-3 substitution and an N-terminal extension that reduce IGF-binding-protein binding and extend its activity.',
+      },
+      {
+        q: 'Why does the R3 modification matter?',
+        a: 'It lowers the analog’s affinity for IGF-binding proteins, so more remains free and active in circulation — extending half-life and increasing potency versus native IGF-1.',
+      },
+      {
+        q: 'How does it compare to MGF?',
+        a: 'IGF-1 LR3 is systemic and long-acting, studied for hypertrophy; MGF is a local, transient IGF-1 splice variant studied for satellite-cell activation. The two are typically sequenced, not combined.',
+      },
+      {
+        q: 'Is IGF-1 LR3 approved?',
+        a: 'No. It is a research compound (also common in cell culture), not FDA-approved, and is prohibited in sport. This page is a research and educational reference.',
+      },
+    ],
+    cas: '946870-92-4',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+    storage:
+      'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and minimize freeze–thaw — a folded, disulfide-bonded protein.',
+    handling:
+      'A disulfide-bonded protein sensitive to heat, agitation, and freeze–thaw. Reconstitute gently (swirl, do not shake).',
+  },
+  {
+    slug: 'mgf',
+    name: 'MGF (Mechano Growth Factor)',
+    aliases: ['Mechano Growth Factor', 'IGF-1Ec', 'IGF-1 Ec'],
+    categories: ['growth-hormone'],
+    shortDescription: 'A splice variant of IGF-1 expressed after muscle damage; studied for satellite-cell activation.',
+    description:
+      'MGF is the IGF-1Ec splice variant — produced locally in muscle after mechanical overload or injury. Its distinct C-terminal E-peptide is studied for activating satellite cells, upstream of IGF-1’s hypertrophic role.',
+    mechanism: 'Local IGF-1 splice variant; the E-peptide activates muscle satellite (stem) cells, complementing IGF-1-receptor signaling.',
+    researchAreas: ['Muscle repair', 'Satellite-cell activation'],
+    background: [
+      'Mechano growth factor (MGF) is a splice variant of IGF-1, also called IGF-1Ec. A 49-base-pair insert in exon 5 introduces a reading-frame shift, producing a distinct C-terminal peptide (the "E-domain") not found in the main circulating IGF-1 isoform.',
+      'MGF is expressed rapidly and locally in muscle after mechanical overload or damage — the experimental basis was established by Geoffrey Goldspink and colleagues (UCL) beginning in the late 1990s. Its proposed role is to begin repair by activating satellite cells before differentiation, complementing the longer-acting hypertrophic signal of IGF-1 itself. It is a research compound, not FDA-approved.',
+    ],
+    keyResearch: [
+      'Satellite-cell activation — the E-peptide is proposed to act upstream, promoting satellite-cell proliferation before differentiation.',
+      'Damage-induced expression — produced locally and rapidly after mechanical overload or muscle injury (McKoy, Ashley, Yang et al., 1999).',
+      'Splice-variant origin — an exon-5 insert gives IGF-1Ec a distinct C-terminal peptide versus the main IGF-1 isoform.',
+      'Compared to IGF-1 LR3 — MGF is local and transient, driving satellite-cell activation; IGF-1 LR3 is systemic and long-acting, driving hypertrophy. The two are sequenced rather than combined.',
+      'Preclinical / prohibited in sport — not FDA-approved; WADA-banned.',
+    ],
+    faqs: [
+      {
+        q: 'What is MGF?',
+        a: 'MGF (mechano growth factor) is a splice variant of IGF-1 (IGF-1Ec) produced locally in muscle after damage. Its distinct E-peptide is studied for activating satellite cells.',
+      },
+      {
+        q: 'How is MGF different from IGF-1?',
+        a: 'MGF is a splice variant with a unique C-terminal peptide, expressed locally after mechanical stress. Where standard IGF-1 sustains hypertrophy systemically, MGF is studied for initiating repair by activating satellite cells.',
+      },
+      {
+        q: 'How does MGF compare to IGF-1 LR3?',
+        a: 'MGF is local and transient (satellite-cell activation); IGF-1 LR3 is systemic and long-acting (hypertrophy). They are generally studied in sequence rather than together.',
+      },
+      {
+        q: 'Is MGF approved?',
+        a: 'No. It is a research compound, not FDA-approved, and is prohibited in sport. This page is a research and educational reference.',
+      },
+    ],
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+    storage:
+      'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and use within weeks; minimize freeze–thaw.',
+    handling:
+      'Reconstitute gently and avoid shaking; protect from heat and light. PEGylated forms (PEG-MGF) are handled similarly but differ in half-life.',
   },
   {
     slug: 'cjc-1295-no-dac',
@@ -864,10 +1059,10 @@ const SEED_PEPTIDES: Peptide[] = [
       'The trade-off studied in the literature is physiologic: sustained GHRH-receptor exposure raises baseline GH and IGF-1 but blunts the natural pulsatility of the GH axis. It is a research compound and is not FDA-approved.',
     ],
     keyResearch: [
-      'Sustained exposure — albumin binding extends half-life to about a week.',
-      'IGF-1 elevation — prolonged GHRH signaling studied for raised baseline IGF-1.',
-      'Pulsatility trade-off — continuous exposure differs from the body’s pulsatile GH pattern.',
-      'Body composition — examined for lean-mass and fat endpoints in models.',
+      'Sustained exposure — albumin binding extends half-life to roughly 6–8 days (Teichman et al., 2006, J Clin Endocrinol Metab).',
+      'GH / IGF-1 elevation — in early human study a single dose produced dose-dependent ~2–10-fold mean GH elevations and sustained IGF-1 increases lasting about 9–11 days.',
+      'Pulsatility trade-off — continuous exposure raises baseline GH and IGF-1 but blunts the body’s natural pulsatile pattern.',
+      'Compared to sermorelin / no-DAC — the same GHRH(1-29) backbone, but the DAC converts a minutes-long pulse into multi-day elevation.',
       'Not FDA-approved — research compound.',
     ],
     faqs: [
@@ -904,10 +1099,10 @@ const SEED_PEPTIDES: Peptide[] = [
       'Because of that clean profile, it is one of the most studied GHRPs in the research literature and is frequently paired with a GHRH analog such as CJC-1295. It is not FDA-approved.',
     ],
     keyResearch: [
-      'Selective GH release — GHS-R1a agonism with minimal cortisol/prolactin impact.',
-      'GHRH synergy — commonly studied alongside GHRH analogs for amplified pulses.',
-      'Pituitary function — used in GH-secretion research.',
-      'Tolerability profile — selectivity is a recurring theme versus earlier GHRPs.',
+      'Selective GH release — characterized as the first GHRP to release GH without meaningfully raising ACTH, cortisol, or prolactin (Raun et al., 1998).',
+      'GHRH synergy — commonly studied alongside GHRH analogs (CJC-1295 / sermorelin) for amplified, pulse-preserving release.',
+      'Compared to hexarelin — trades raw potency for selectivity: hexarelin releases more GH per dose but recruits cortisol / prolactin and desensitizes the receptor faster.',
+      'Lower desensitization — its clean receptor profile is studied as more sustainable over repeated exposure.',
       'Not FDA-approved — research compound.',
     ],
     faqs: [
@@ -992,11 +1187,11 @@ const SEED_PEPTIDES: Peptide[] = [
       'It was FDA-approved in 1990 (Geref) for diagnostic evaluation of pituitary GH reserve and for pediatric GH deficiency, but was later discontinued commercially. It remains a widely referenced GHRH analog in research.',
     ],
     keyResearch: [
-      'GH-axis evaluation — historically used to test pituitary GH reserve.',
-      'Pediatric GH deficiency — a historical approved use, since discontinued.',
-      'GHRH-receptor agonism — the minimal active GHRH fragment.',
-      'Short half-life — brief, pulsatile GH release.',
-      'Discontinued commercially — referenced as a research compound.',
+      'GHRH-receptor agonism — binds GHRHR on pituitary somatotrophs, activating adenylyl cyclase / cAMP to drive endogenous GH synthesis and release.',
+      'Physiologic pulsatility — the short half-life is a design feature, producing a discrete GH pulse that preserves somatostatin negative feedback rather than sustained elevation.',
+      'GH-axis evaluation — historically used to test pituitary GH reserve; a former approved use in pediatric GH deficiency, since discontinued.',
+      'Compared to CJC-1295 — the same GHRH(1-29) backbone; CJC-1295 stabilizes and (with DAC) extends it for multi-day action, trading pulsatility for duration.',
+      'Discontinued commercially — referenced today as a research compound.',
     ],
     faqs: [
       {
@@ -1035,10 +1230,10 @@ const SEED_PEPTIDES: Peptide[] = [
       'A distinctive research thread is its action at the CD36 receptor, through which preclinical studies report cardioprotective effects independent of GH release. It is not FDA-approved.',
     ],
     keyResearch: [
-      'Potent GH release — GHS-R1a agonism among the stronger GHRP secretagogues.',
-      'Cardioprotection — CD36-mediated effects studied in preclinical cardiac models.',
-      'GHRH synergy — combinable with GHRH analogs.',
-      'Receptor desensitization — sustained exposure studied for tolerance effects.',
+      'Potent GH release — among the strongest GHRP secretagogues; at equivalent doses releases more GH than GHRP-2, GHRP-6, or ipamorelin.',
+      'Cardioprotection — CD36-mediated effects studied in preclinical cardiac models, independent of GH release.',
+      'Compared to ipamorelin — more potent but less selective: hexarelin can elevate cortisol and prolactin where ipamorelin does not.',
+      'Receptor desensitization — its broader, stronger activation shows greater tolerance / desensitization with sustained exposure.',
       'Not FDA-approved — research compound.',
     ],
     faqs: [
@@ -1524,11 +1719,11 @@ const SEED_PEPTIDES: Peptide[] = [
       'Russian-led studies have reported effects on melatonin secretion, telomerase activity, and lifespan endpoints in animal models. The evidence base is concentrated in that research tradition, independent replication is limited, and Epitalon is not FDA-approved.',
     ],
     keyResearch: [
-      'Telomerase activity — reported upregulation in cell and animal studies.',
-      'Circadian / pineal function — examined for effects on melatonin secretion.',
-      'Aging endpoints — lifespan effects reported in rodent models.',
-      'Research concentration — evidence largely from a single research tradition.',
-      'Not FDA-approved — research compound.',
+      'Telomerase upregulation — studies report increased expression of the telomerase catalytic subunit and telomere elongation in human somatic cells (Khavinson, Bondarev & Butyugov, 2003).',
+      'Replicative lifespan — the originating study extended human fetal fibroblast lifespan beyond the Hayflick limit without signs of malignant transformation.',
+      'Circadian / pineal function — examined for effects on melatonin secretion via the pineal axis.',
+      'Compared to other longevity peptides — a distinct mechanism: Epitalon targets telomere maintenance, where thymosin α-1 works through immune modulation and MOTS-c through mitochondrial / metabolic regulation.',
+      'Evidence quality — concentrated in a single research tradition (the Khavinson group); large independent Western RCTs are not available.',
     ],
     faqs: [
       {
@@ -1567,11 +1762,11 @@ const SEED_PEPTIDES: Peptide[] = [
       'Unlike full ACTH, Semax does not activate the stress (HPA) axis; instead, preclinical research focuses on its reported induction of neurotrophic factors such as BDNF and NGF. Outside Russia it is not FDA-approved and the controlled-trial base is limited.',
     ],
     keyResearch: [
-      'Neurotrophic induction — reported BDNF and NGF upregulation in preclinical work.',
-      'Ischemic stroke — used clinically in Russia for stroke recovery.',
-      'Cognition — studied for attention and memory effects.',
-      'No HPA activation — melanocortin signaling without raising cortisol.',
-      'Not FDA-approved — research compound outside Russia.',
+      'Neurotrophic induction — reported to increase BDNF protein and trkB phosphorylation in the rat hippocampus and basal forebrain (Dolotov et al., 2006).',
+      'Monoaminergic modulation — studied for enhancing dopaminergic and serotonergic signaling, alongside melanocortin activity, without activating the HPA stress axis.',
+      'Ischemic stroke & cognition — approved in Russia for stroke, cognitive impairment, and optic-nerve disease; studied for attention and memory.',
+      'Compared to Selank — both Russian neuropeptides, but Semax is oriented toward focus / cognition / neuroprotection where Selank targets anxiety; the two are often paired.',
+      'Evidence quality — most controlled data are Russian-language; Western peer-reviewed replication is limited.',
     ],
     faqs: [
       {
@@ -1609,11 +1804,11 @@ const SEED_PEPTIDES: Peptide[] = [
       'Research interest centers on achieving anxiolytic and mild cognitive effects without the sedation, dependence, or withdrawal associated with benzodiazepines. Proposed mechanisms include modulation of GABAergic and serotonergic signaling and inhibition of enkephalin breakdown. It is not FDA-approved.',
     ],
     keyResearch: [
-      'Anxiolytic activity — studied for calm without sedation or dependence.',
-      'Neurotransmitter modulation — GABAergic and serotonergic effects investigated.',
-      'Enkephalinase inhibition — proposed to extend endogenous enkephalin activity.',
-      'Cognitive performance — examined alongside anxiolytic effects.',
-      'Not FDA-approved — research compound outside Russia.',
+      'Anxiolytic activity — clinical studies report an anxiolytic effect comparable to benzodiazepines but without sedation or dependence.',
+      'GABAergic modulation — alters expression of genes in GABAergic neurotransmission and modulates GABA-A complexes allosterically, without binding the benzodiazepine site directly (Front Pharmacol, 2017).',
+      'Serotonergic & enkephalin effects — also modulates serotonin metabolism and inhibits enkephalin breakdown — a multi-system rather than single-receptor profile.',
+      'Compared to Semax — the same Russian neuropeptide lineage, but Selank soothes (anxiety) where Semax sharpens (cognition).',
+      'Evidence quality — approved and used in Russia; not FDA-approved, and Western replication is limited.',
     ],
     faqs: [
       {
@@ -1696,11 +1891,11 @@ const SEED_PEPTIDES: Peptide[] = [
       'Through MC1R it stimulates melanin production (pigmentation); through MC4R it influences central sexual-response pathways. Both effects are documented in research, but its non-selectivity also drives side effects, and it is not FDA-approved.',
     ],
     keyResearch: [
-      'Pigmentation — MC1R agonism studied for melanin production and tanning response.',
-      'Sexual response — MC4R activity studied for effects on arousal.',
-      'Photoprotection — examined in the context of UV response.',
-      'Non-selectivity — broad MC1–5R activity underlies both effects and side effects.',
-      'Not FDA-approved — research compound.',
+      'Pigmentation — MC1R agonism stimulates eumelanin production via Gs-coupled cAMP signaling.',
+      'Central sexual response — MC4R activation drives arousal effects; the same MC4R activity also produces the nausea, flushing, and spontaneous erections documented in human studies.',
+      'Compared to Melanotan I (afamelanotide) — MT-II is a truncated, non-selective MC1–5R agonist, whereas afamelanotide is highly MC1R-selective and FDA-approved (Scenesse) for photoprotection in erythropoietic protoporphyria.',
+      'Relationship to PT-141 — PT-141 (bremelanotide) is a metabolite refined toward MC4R / sexual response and away from pigmentation.',
+      'Not FDA-approved — its non-selectivity drives off-target effects; research compound.',
     ],
     faqs: [
       {
@@ -1738,10 +1933,10 @@ const SEED_PEPTIDES: Peptide[] = [
       'Unlike vascular treatments for sexual dysfunction, PT-141 acts in the central nervous system on the circuits that govern desire and arousal. It is FDA-approved (Vyleesi, 2019) for hypoactive sexual desire disorder (HSDD) in premenopausal women.',
     ],
     keyResearch: [
-      'HSDD — the approved indication, in premenopausal women.',
-      'Central mechanism — MC4R-preferential action on CNS sexual-response circuits.',
-      'Distinct from vascular agents — acts centrally rather than on blood flow.',
-      'Ischemia models — examined in separate preclinical research.',
+      'Central arousal mechanism — a cyclic α-MSH analog acting on melanocortin MC3R / MC4R in the hypothalamus to drive sexual desire independent of the reproductive hormone axis (Molinoff / Diamond et al., 2003).',
+      'HSDD — FDA-approved (Vyleesi, 2019) for hypoactive sexual desire disorder in premenopausal women.',
+      'Distinct from vascular agents — acts on central desire circuits rather than on blood flow.',
+      'Compared to kisspeptin — PT-141 produces acute central arousal via melanocortin receptors, while kisspeptin acts upstream on the GnRH hormone axis; they address different research questions.',
       'FDA-approved (Vyleesi) — for a specific indication.',
     ],
     faqs: [
@@ -1780,10 +1975,10 @@ const SEED_PEPTIDES: Peptide[] = [
       'By stimulating GnRH release, kisspeptin drives downstream secretion of LH and FSH — making it a research tool for probing and potentially restoring reproductive-axis function. It is investigational and not FDA-approved.',
     ],
     keyResearch: [
-      'GnRH stimulation — KISS1R agonism triggers the reproductive hormone cascade.',
-      'Hypothalamic amenorrhea — studied for restoring axis signaling.',
-      'Puberty — kisspeptin is a key regulator of pubertal onset.',
-      'Fertility research — examined as a physiologic trigger of LH and FSH.',
+      'GnRH stimulation — KISS1R (GPR54) agonism on hypothalamic GnRH neurons increases GnRH pulsatility and downstream LH / FSH and sex-steroid secretion.',
+      'Reproductive-axis probe — studied for restoring signaling in hypothalamic amenorrhea and as a physiologic trigger of LH / FSH in fertility research.',
+      'Puberty & limbic effects — a key regulator of pubertal onset; KISS1R is also expressed in limbic areas, enabling direct central sexual-motivation effects.',
+      'Compared to PT-141 — kisspeptin acts upstream on the hormonal axis (GnRH → LH / FSH), where PT-141 produces acute central arousal via melanocortin receptors.',
       'Investigational — not FDA-approved.',
     ],
     faqs: [
