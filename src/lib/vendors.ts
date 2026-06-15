@@ -110,7 +110,9 @@ export const VENDORS: Vendor[] = [
     url: 'https://alphabiomedlabs.com',
     blurb:
       'US research-supply lab advertising 100% lot-level third-party HPLC/MS testing and >99% purity.',
-    peptides: 'all',
+    // Scoped to the GLP-1 / amylin set only: the affiliate link is a provider
+    // ONBOARDING (/register) flow, not a general product link.
+    peptides: ['tirzepatide', 'retatrutide', 'cagrilintide', 'semaglutide'],
     shipsTo: ['us'],
     trust: {
       // Sourced from the vendor's own public claims (alphabiomedlabs.com),
@@ -130,6 +132,33 @@ export const VENDORS: Vendor[] = [
     },
     notes:
       'Trust signals reflect the vendor’s own published claims, not independent verification. Request the third-party COA for your specific lot before any use.',
+  },
+  {
+    id: 'modern-aminos',
+    name: 'Modern Aminos',
+    url: 'https://modernaminos.com',
+    blurb:
+      'US-made research compounds; every product third-party HPLC tested with a per-batch COA matched to each lot.',
+    peptides: 'all',
+    shipsTo: ['us'],
+    trust: {
+      // Sourced from the vendor's own public claims (modernaminos.com),
+      // NOT independently confirmed. Only flags they explicitly state are set.
+      coaOnFile: true, // per-batch COA, customer-matchable to each lot
+      thirdPartyTested: true, // "third-party testing with full HPLC documentation"
+      perBatchTesting: true, // "Batch testing… match each peptide to its corresponding COA"
+      purityPct: 99, // "99% Purity (HPLC)"
+      reshipPolicy: true, // carrier-lost / non-delivered packages reshipped free
+      refundPolicy: true, // published refund policy (restrictive — see notes)
+    },
+    affiliate: {
+      trackedPath: '/go/modern-aminos',
+      url: 'https://modernaminos.com?wlr_ref=REF-7E3-F9T',
+      code: 'REF-7E3-F9T',
+      active: true,
+    },
+    notes:
+      'Refunds are restrictive: peptides are non-returnable, accepted returns carry a 15% restocking fee, and only carrier-lost (non-delivered) packages are reshipped free. Trust signals reflect the vendor’s published claims; verify the COA for your specific lot.',
   },
 ]
 
