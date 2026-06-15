@@ -24,11 +24,14 @@ export const MODELS: string[] = [
 /**
  * Whether an upstream HTTP status warrants trying the next model in the chain.
  * Retry "the model is gone / busy / the server hiccuped" (404, 408, 409, 425,
- * 429, 529, 5xx). Do NOT retry "this exact request is wrong" (400 invalid body,
- * 401/403 auth) — the next model would reject it identically.
+ * 429, 529, 5xx) and transport-level failures (status 0 = network error or
+ * client-side timeout, which the caller maps to 0). Do NOT retry "this exact
+ * request is wrong" (400 invalid body, 401/403 auth) — the next model would
+ * reject it identically.
  */
 export function shouldFailover(status: number): boolean {
   return (
+    status === 0 || // network error / client timeout (no HTTP response)
     status === 404 || // unknown / unavailable model
     status === 408 || // request timeout
     status === 409 || // conflict
