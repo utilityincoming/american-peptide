@@ -110,7 +110,9 @@ export const VENDORS: Vendor[] = [
     url: 'https://alphabiomedlabs.com',
     blurb:
       'US research-supply lab advertising 100% lot-level third-party HPLC/MS testing and >99% purity.',
-    peptides: 'all',
+    // Scoped to the GLP-1 / amylin set only: the affiliate link is a provider
+    // ONBOARDING (/register) flow, not a general product link.
+    peptides: ['tirzepatide', 'retatrutide', 'cagrilintide', 'semaglutide'],
     shipsTo: ['us'],
     trust: {
       // Sourced from the vendor's own public claims (alphabiomedlabs.com),
