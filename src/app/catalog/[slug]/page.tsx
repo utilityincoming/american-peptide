@@ -33,6 +33,7 @@ import {
   getVendorsForPeptide,
   trustScore,
   vendorHref,
+  vendorsByTier,
   type Vendor,
 } from '@/lib/vendors'
 
@@ -790,8 +791,11 @@ function MarketplaceComingSoon() {
 }
 
 function MarketplacePanel({ vendors }: { vendors: Vendor[] }) {
-  const shown = vendors.slice(0, 6)
+  const CAP = 8
+  const shown = vendors.slice(0, CAP)
   const hidden = vendors.length - shown.length
+  // Group the already trust-ranked list into tiers; each tier keeps trust order.
+  const groups = vendorsByTier(shown)
 
   return (
     <div className="overflow-hidden rounded-2xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-5">
@@ -805,9 +809,29 @@ function MarketplacePanel({ vendors }: { vendors: Vendor[] }) {
         </span>
       </div>
 
-      <div className="space-y-4">
-        {shown.map((v, i) => (
-          <VendorCard key={v.id} vendor={v} rank={i} />
+      <div className="space-y-6">
+        {groups.map((group, gi) => (
+          <div key={group.tier.id}>
+            <div className="mb-1 flex items-baseline gap-2">
+              <h4 className="text-[11px] font-semibold uppercase tracking-wider text-[#2DD4A8]/80">
+                {group.tier.label}
+              </h4>
+              <span className="text-[10px] text-white/35">{group.vendors.length}</span>
+            </div>
+            <p className="mb-3 text-[11px] leading-relaxed text-white/40">
+              {group.tier.blurb}
+            </p>
+            <div className="space-y-4">
+              {group.vendors.map((v, j) => (
+                <VendorCard
+                  key={v.id}
+                  vendor={v}
+                  isFirst={j === 0}
+                  isBest={gi === 0 && j === 0}
+                />
+              ))}
+            </div>
+          </div>
         ))}
       </div>
 
@@ -822,7 +846,15 @@ function MarketplacePanel({ vendors }: { vendors: Vendor[] }) {
   )
 }
 
-function VendorCard({ vendor, rank }: { vendor: Vendor; rank: number }) {
+function VendorCard({
+  vendor,
+  isFirst,
+  isBest,
+}: {
+  vendor: Vendor
+  isFirst: boolean
+  isBest: boolean
+}) {
   const score = trustScore(vendor)
   const t = vendor.trust
   const signals: { label: string; ok: boolean }[] = [
@@ -838,11 +870,11 @@ function VendorCard({ vendor, rank }: { vendor: Vendor; rank: number }) {
   ]
 
   return (
-    <div className={rank > 0 ? 'border-t border-white/[0.07] pt-4' : ''}>
+    <div className={isFirst ? '' : 'border-t border-white/[0.07] pt-4'}>
       <div className="mb-1 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <span className="text-sm font-semibold">{vendor.name}</span>
-          {rank === 0 && (
+          {isBest && (
             <span className="rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#2DD4A8]">
               Best trust
             </span>
