@@ -325,6 +325,37 @@ export const VENDORS: Vendor[] = [
     notes:
       'Trust signals reflect the vendor’s published claims, not independent verification. COAs are published but not confirmed as per-lot, no HPLC purity figure or testing lab is named — request and match the COA for your specific lot before any use.',
   },
+  {
+    id: 'swiss-chems',
+    name: 'Swiss Chems',
+    url: 'https://swisschems.is',
+    blurb:
+      'US-based broad research vendor (peptides, SARMs, PCT) advertising ISO/IEC-17025 third-party COAs (HPLC / LC-MS/MS / NMR) at >99% purity, with a test-it-yourself full-refund guarantee.',
+    // Scoped to Swiss Chems' best-selling peptides that exist in our catalog.
+    // They notably do NOT carry semaglutide or tirzepatide.
+    peptides: [
+      'bpc-157', 'tb-500', 'pt-141', 'ipamorelin', 'selank',
+      'epitalon', 'mots-c', 'ghk-cu', 'retatrutide', 'melanotan-2',
+    ],
+    shipsTo: ['us', 'global'],
+    trust: {
+      // Sourced from the vendor's own public claims (swisschems.is), NOT
+      // independently confirmed. Only flags they explicitly state are set.
+      coaOnFile: true, // full COA ships per product (identity, purity, heavy metals, residual solvent)
+      thirdPartyTested: true, // ISO/IEC-17025-accredited third-party labs; HPLC, LC-MS/MS, NMR
+      perBatchTesting: false, // COA published per product but not stated as per-lot/batch-matched
+      purityPct: 99, // ">99% purity"
+      reshipPolicy: true, // "dissatisfied for any reason — reship or refund"
+      refundPolicy: true, // test at any HPLC lab; full refund + shipping if it fails
+    },
+    affiliate: {
+      trackedPath: '/go/swiss-chems',
+      url: 'https://swisschems.is/ref/6835/',
+      active: true,
+    },
+    notes:
+      'Scoped to Swiss Chems’ best-selling peptides — they don’t carry semaglutide or tirzepatide. Standout policy: independently HPLC-test any product and they refund in full plus shipping if it fails. Caveat: independent peptide-testing reputation is mixed (Finnrick ~3.6/10 for peptides vs ~4.2/5 Trustpilot overall) despite the ISO-17025 COA claims — request and match the COA for your specific lot.',
+  },
 ]
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
