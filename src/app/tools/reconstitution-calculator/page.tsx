@@ -401,7 +401,7 @@ function SyringeDiagram({ units }: { units: number }) {
         width={BARREL_W}
         height={BARREL_H}
         rx="2"
-        fill="#0F1A2E"
+        fill="var(--panel)"
         stroke="#2A3548"
         strokeWidth="1"
       />

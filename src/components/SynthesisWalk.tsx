@@ -469,7 +469,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
       {/* ── Sticky animated visual (desktop) ── */}
       <div className="hidden lg:block">
         <div className="sticky top-24">
-          <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-ink/[0.07] bg-ink/[0.02]">
+          <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-ink/[0.07] bg-viz">
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-50"
@@ -524,7 +524,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
               className="scroll-mt-24 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6 md:p-7"
             >
               {/* Inline visual — mobile only */}
-              <div className="mb-5 aspect-[5/3] w-full overflow-hidden rounded-xl border border-ink/[0.06] bg-ink/[0.015] lg:hidden">
+              <div className="mb-5 aspect-[5/3] w-full overflow-hidden rounded-xl border border-ink/[0.06] bg-viz lg:hidden">
                 <div className="mx-auto h-full max-w-[260px]">
                   <StageVisual slug={s.slug} />
                 </div>
