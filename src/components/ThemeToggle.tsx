@@ -23,6 +23,10 @@ export default function ThemeToggle() {
   function toggle() {
     const next: Theme = theme === 'light' ? 'dark' : 'light'
     document.documentElement.classList.toggle('light', next === 'light')
+    // Keep the mobile browser-chrome color in sync with the applied theme.
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', next === 'light' ? '#F7F9FB' : '#0B1220')
     try {
       localStorage.setItem('theme', next)
     } catch {
