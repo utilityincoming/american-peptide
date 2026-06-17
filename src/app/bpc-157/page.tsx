@@ -406,7 +406,7 @@ export default function BPC157Page() {
                         <span className="text-accent">BPC-157</span>
                       </th>
                       <th className="pb-3 font-medium">
-                        <span className="text-[#818CF8]">TB-500</span>
+                        <span className="text-accent-indigo">TB-500</span>
                       </th>
                     </tr>
                   </thead>

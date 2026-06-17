@@ -205,7 +205,7 @@ export default function ImmunePeptidesPage() {
             <span className="text-ink/60">Immune Peptides</span>
           </nav>
 
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#60A5FA]/25 bg-[#60A5FA]/[0.08] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#60A5FA]">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#60A5FA]/25 bg-[#60A5FA]/[0.08] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent-blue">
             <Shield className="h-3 w-3" />
             Immune Modulation Cluster
           </div>
@@ -251,11 +251,11 @@ export default function ImmunePeptidesPage() {
           {/* Adaptive */}
           <div className="rounded-2xl border border-[#60A5FA]/20 bg-[#60A5FA]/[0.04] p-6">
             <div className="mb-4 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#60A5FA]/25 bg-[#60A5FA]/10 text-[#60A5FA]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#60A5FA]/25 bg-[#60A5FA]/10 text-accent-blue">
                 <Shield className="h-5 w-5" strokeWidth={1.75} />
               </div>
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-[#60A5FA]/70">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-accent-blue/70">
                   Axis 1
                 </p>
                 <h3 className="font-semibold">Adaptive Immunity</h3>
@@ -280,19 +280,19 @@ export default function ImmunePeptidesPage() {
                 </div>
               ))}
             </div>
-            <div className="mt-4 rounded-lg border border-[#60A5FA]/15 bg-[#60A5FA]/[0.05] px-3 py-2 text-xs text-[#60A5FA]/80">
-              Primary compound: <strong className="text-[#60A5FA]">Thymosin α1</strong>
+            <div className="mt-4 rounded-lg border border-[#60A5FA]/15 bg-[#60A5FA]/[0.05] px-3 py-2 text-xs text-accent-blue/80">
+              Primary compound: <strong className="text-accent-blue">Thymosin α1</strong>
             </div>
           </div>
 
           {/* Innate */}
           <div className="rounded-2xl border border-[#A78BFA]/20 bg-[#A78BFA]/[0.04] p-6">
             <div className="mb-4 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#A78BFA]/25 bg-[#A78BFA]/10 text-[#A78BFA]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#A78BFA]/25 bg-[#A78BFA]/10 text-accent-purple">
                 <Zap className="h-5 w-5" strokeWidth={1.75} />
               </div>
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-[#A78BFA]/70">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-accent-purple/70">
                   Axis 2
                 </p>
                 <h3 className="font-semibold">Innate Immunity</h3>
@@ -316,8 +316,8 @@ export default function ImmunePeptidesPage() {
                 </div>
               ))}
             </div>
-            <div className="mt-4 rounded-lg border border-[#A78BFA]/15 bg-[#A78BFA]/[0.05] px-3 py-2 text-xs text-[#A78BFA]/80">
-              Primary compound: <strong className="text-[#A78BFA]">LL-37 (cathelicidin)</strong>
+            <div className="mt-4 rounded-lg border border-[#A78BFA]/15 bg-[#A78BFA]/[0.05] px-3 py-2 text-xs text-accent-purple/80">
+              Primary compound: <strong className="text-accent-purple">LL-37 (cathelicidin)</strong>
             </div>
           </div>
         </div>
@@ -472,7 +472,7 @@ export default function ImmunePeptidesPage() {
         <h2 className="mb-2 text-2xl font-bold tracking-tight">Evidence Summary</h2>
         <p className="mb-6 text-sm text-ink/50">
           Evidence levels across the immune cluster — matched to the{' '}
-          <Link href="/learn/evidence-hierarchy" className="text-[#60A5FA] underline-offset-2 hover:underline">
+          <Link href="/learn/evidence-hierarchy" className="text-accent-blue underline-offset-2 hover:underline">
             6-level evidence hierarchy
           </Link>
           .

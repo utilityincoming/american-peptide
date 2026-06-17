@@ -138,7 +138,7 @@ export default function CognitivePeptidesPage() {
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-40"
           style={{ backgroundImage: 'radial-gradient(circle, rgba(129,140,248,0.10) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#818CF8]/25 bg-[#818CF8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-[#818CF8]">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#818CF8]/25 bg-[#818CF8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent-indigo">
             CNS research · 3 compounds · BBB considerations
           </div>
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
@@ -283,9 +283,9 @@ export default function CognitivePeptidesPage() {
 
             <div className="rounded-xl border border-[#818CF8]/20 bg-[#818CF8]/[0.05] p-5">
               <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#818CF8]/10">
-                <FlaskConical className="h-4 w-4 text-[#818CF8]" />
+                <FlaskConical className="h-4 w-4 text-accent-indigo" />
               </div>
-              <p className="mb-1 text-sm font-semibold text-[#818CF8]">Marketplace coming soon</p>
+              <p className="mb-1 text-sm font-semibold text-accent-indigo">Marketplace coming soon</p>
               <p className="mb-4 text-xs text-ink/45">COA-verified cognitive research peptides.</p>
               <Link href="/catalog"
                 className="flex items-center justify-center gap-2 rounded-lg bg-[#818CF8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] hover:opacity-90">

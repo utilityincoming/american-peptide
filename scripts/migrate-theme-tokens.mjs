@@ -38,6 +38,12 @@ const rules = [
   [/\btext-\[#2DD4A8\]/g, 'text-accent', 'text #2DD4A8→accent'],
   [/\btext-\[#34D399\]/g, 'text-accent', 'text #34D399→accent'],
   [/\btext-\[#5EEBC8\]/g, 'text-accent', 'text #5EEBC8→accent'],
+
+  // 4) Category accents used as TEXT -> semantic tokens (darken on light for
+  //    contrast). Their bright fills/borders stay literal.
+  [/\btext-\[#818CF8\]/g, 'text-accent-indigo', 'text #818CF8→accent-indigo'],
+  [/\btext-\[#60A5FA\]/g, 'text-accent-blue', 'text #60A5FA→accent-blue'],
+  [/\btext-\[#A78BFA\]/g, 'text-accent-purple', 'text #A78BFA→accent-purple'],
 ]
 
 const totals = {}
