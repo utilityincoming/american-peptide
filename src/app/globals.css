@@ -14,6 +14,7 @@
   --surface-deep: #040810; /* deepest background (footers, code wells) */
   --panel: #0F1828;        /* raised solid panels */
   --accent: #2DD4A8;       /* teal accent, used as text/link color */
+  --viz: #0B1220;          /* immersive viz "stage" — stays dark in both themes */
 
   --background: var(--surface);
   --foreground: var(--ink);
@@ -35,6 +36,7 @@ html.light {
   --color-surface-deep: var(--surface-deep);
   --color-panel: var(--panel);
   --color-accent: var(--accent);
+  --color-viz: var(--viz);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-space-grotesk);
