@@ -99,7 +99,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
     : null
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
@@ -116,19 +116,19 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
       )}
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
         <Link
           href="/research-areas"
-          className="text-sm text-white/35 transition-colors hover:text-white"
+          className="text-sm text-ink/35 transition-colors hover:text-ink"
         >
           Research areas
         </Link>
-        <span className="text-white/20">/</span>
+        <span className="text-ink/20">/</span>
         <span className="truncate text-sm font-medium">{area.label}</span>
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -139,7 +139,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
           }}
         />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-[#2DD4A8]">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Layers className="h-3 w-3" />
             Research area · {peptides.length} peptide
             {peptides.length === 1 ? '' : 's'}
@@ -147,7 +147,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             {area.label}
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-white/55 md:text-lg">
+          <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
             {area.tagline}
           </p>
         </div>
@@ -159,12 +159,12 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
           <div className="space-y-12">
             {/* Overview */}
             <div>
-              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Overview
               </h2>
               <div className="space-y-4">
                 {area.intro.map((para, i) => (
-                  <p key={i} className="text-sm leading-relaxed text-white/65">
+                  <p key={i} className="text-sm leading-relaxed text-ink/65">
                     {para}
                   </p>
                 ))}
@@ -173,7 +173,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
 
             {/* Peptides */}
             <div>
-              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Peptides studied in {area.label.toLowerCase()}
               </h2>
               {peptides.length > 0 ? (
@@ -183,7 +183,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
                   ))}
                 </div>
               ) : (
-                <p className="text-sm text-white/40">
+                <p className="text-sm text-ink/40">
                   No catalog entries mapped yet.
                 </p>
               )}
@@ -192,7 +192,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
             {/* FAQ */}
             {area.faqs.length > 0 && (
               <div>
-                <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-white/40">
+                <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
                   <HelpCircle className="h-3.5 w-3.5" />
                   Frequently asked questions
                 </h2>
@@ -200,15 +200,15 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
                   {area.faqs.map((f) => (
                     <details
                       key={f.q}
-                      className="group rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 [&_summary::-webkit-details-marker]:hidden"
+                      className="group rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5 [&_summary::-webkit-details-marker]:hidden"
                     >
-                      <summary className="flex cursor-pointer items-center justify-between gap-3 text-sm font-semibold text-white/85">
+                      <summary className="flex cursor-pointer items-center justify-between gap-3 text-sm font-semibold text-ink/85">
                         {f.q}
-                        <span className="text-white/30 transition-transform group-open:rotate-45">
+                        <span className="text-ink/30 transition-transform group-open:rotate-45">
                           +
                         </span>
                       </summary>
-                      <p className="mt-3 text-sm leading-relaxed text-white/55">
+                      <p className="mt-3 text-sm leading-relaxed text-ink/55">
                         {f.a}
                       </p>
                     </details>
@@ -228,8 +228,8 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
           <aside className="space-y-6">
             {/* Related categories */}
             {area.relatedCategories.length > 0 && (
-              <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
-                <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+              <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
+                <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
                   Related catalog categories
                 </h3>
                 <div className="flex flex-wrap gap-1.5">
@@ -237,7 +237,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
                     <Link
                       key={cat}
                       href={`/catalog/category/${cat}`}
-                      className="rounded-full border border-white/[0.08] bg-white/[0.02] px-3 py-1 text-xs text-white/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-[#2DD4A8]"
+                      className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
                     >
                       {CATEGORIES.find((c) => c.id === cat)?.label ?? cat}
                     </Link>
@@ -247,8 +247,8 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
             )}
 
             {/* Other research areas */}
-            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
-              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Other research areas
               </h3>
               <div className="flex flex-wrap gap-1.5">
@@ -256,7 +256,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
                   <Link
                     key={a.slug}
                     href={`/research-areas/${a.slug}`}
-                    className="rounded-full border border-white/[0.08] bg-white/[0.02] px-3 py-1 text-xs text-white/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-[#2DD4A8]"
+                    className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
                   >
                     {a.label}
                   </Link>
@@ -266,7 +266,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
 
             <Link
               href="/research-areas"
-              className="flex items-center gap-1.5 text-xs text-white/45 transition-colors hover:text-white"
+              className="flex items-center gap-1.5 text-xs text-ink/45 transition-colors hover:text-ink"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
               All research areas
@@ -286,7 +286,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
         </div>
       </section>
 
-      <section className="border-t border-white/[0.06] px-6 py-12 md:px-10">
+      <section className="border-t border-ink/[0.06] px-6 py-12 md:px-10">
         <Toolkit className="mx-auto max-w-5xl" />
       </section>
     </div>
@@ -297,20 +297,20 @@ function AreaPeptideCard({ peptide }: { peptide: Peptide }) {
   return (
     <Link
       href={`/catalog/${peptide.slug}`}
-      className="group flex flex-col rounded-xl border border-white/[0.07] bg-white/[0.025] p-4 transition-all hover:border-[#2DD4A8]/25 hover:bg-white/[0.04]"
+      className="group flex flex-col rounded-xl border border-ink/[0.07] bg-ink/[0.025] p-4 transition-all hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
     >
       <div className="mb-1.5 flex items-center justify-between gap-2">
         <h3 className="truncate text-sm font-semibold">{peptide.name}</h3>
         {peptide.fdaApproved && (
-          <span className="shrink-0 rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+          <span className="shrink-0 rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-accent">
             FDA
           </span>
         )}
       </div>
-      <p className="mb-3 line-clamp-2 flex-1 text-xs leading-relaxed text-white/50">
+      <p className="mb-3 line-clamp-2 flex-1 text-xs leading-relaxed text-ink/50">
         {peptide.shortDescription}
       </p>
-      <span className="flex items-center gap-1 text-[11px] text-[#2DD4A8]/70 transition-colors group-hover:text-[#2DD4A8]">
+      <span className="flex items-center gap-1 text-[11px] text-accent/70 transition-colors group-hover:text-accent">
         View profile
         <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
       </span>

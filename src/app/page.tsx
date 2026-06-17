@@ -80,7 +80,7 @@ const steps = [
 
 export default function HomePage() {
   return (
-    <div className="home relative min-h-screen overflow-hidden bg-[#0B1220] text-white">
+    <div className="home relative min-h-screen overflow-hidden bg-surface text-ink">
 
       {/* ── Background layer ── */}
       <div aria-hidden className="pointer-events-none absolute inset-0 select-none">
@@ -94,7 +94,7 @@ export default function HomePage() {
         />
         <div className="absolute -top-32 left-1/3 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-[#2DD4A8] opacity-[0.08] blur-[140px]" />
         <div className="absolute top-2/3 right-1/4 h-96 w-96 rounded-full bg-[#2DD4A8] opacity-[0.04] blur-[100px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0B1220]/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface/60" />
       </div>
 
       {/* ── Hero ── */}
@@ -103,7 +103,7 @@ export default function HomePage() {
           {/* Left — copy */}
           <div className="text-center lg:text-left">
             {/* Status badge */}
-            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-4 py-1.5 text-xs font-medium text-[#2DD4A8]">
+            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-4 py-1.5 text-xs font-medium text-accent">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2DD4A8] opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2DD4A8]" />
@@ -113,7 +113,7 @@ export default function HomePage() {
 
             {/* Headline — the USP: the only peptide app you can trust */}
             <h1 className="mb-6 text-5xl font-bold leading-[1.04] tracking-tight md:text-6xl">
-              <span className="text-white">The only peptide app</span>
+              <span className="text-ink">The only peptide app</span>
               <br />
               <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
                 you can actually trust
@@ -121,7 +121,7 @@ export default function HomePage() {
             </h1>
 
             {/* Subtitle */}
-            <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-white/60 md:text-xl lg:mx-0">
+            <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-ink/60 md:text-xl lg:mx-0">
               Cited, chemistry-grade reference plus AI answers that show their sources —
               catalog, calculators, and trial data ready at the bench, even with no signal.
             </p>
@@ -138,7 +138,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/catalog"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-8 py-3.5 text-[15px] font-medium text-white/60 transition-colors hover:border-white/20 hover:text-white"
+                className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-8 py-3.5 text-[15px] font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
               >
                 Browse the catalog
               </Link>
@@ -152,26 +152,26 @@ export default function HomePage() {
         </div>
 
         {/* Peptide sequence decoration */}
-        <div className="mx-auto mt-14 max-w-xl overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.025] px-5 py-3.5 text-center font-mono text-xs md:text-sm">
-          <span className="text-white/30">sequence · </span>
-          <span className="text-[#2DD4A8]/80">HKIGAQKYFLNHSGECGFHKIGAQK</span>
-          <span className="text-white/30"> · residues: 25 · purity </span>
-          <span className="text-[#2DD4A8]">≥ 98%</span>
+        <div className="mx-auto mt-14 max-w-xl overflow-hidden rounded-xl border border-ink/[0.06] bg-ink/[0.025] px-5 py-3.5 text-center font-mono text-xs md:text-sm">
+          <span className="text-ink/30">sequence · </span>
+          <span className="text-accent/80">HKIGAQKYFLNHSGECGFHKIGAQK</span>
+          <span className="text-ink/30"> · residues: 25 · purity </span>
+          <span className="text-accent">≥ 98%</span>
         </div>
 
         {/* Synthesis patience line */}
-        <p className="mt-4 text-center text-xs tracking-wide text-white/25 italic">
+        <p className="mt-4 text-center text-xs tracking-wide text-ink/25 italic">
           Purity is what happens while you wait.
         </p>
 
         {/* Stats row */}
-        <div className="mt-12 grid grid-cols-3 gap-4 border-t border-white/[0.07] pt-10">
+        <div className="mt-12 grid grid-cols-3 gap-4 border-t border-ink/[0.07] pt-10">
           {stats.map(({ value, label }) => (
             <div key={label} className="text-center">
-              <div className="font-display text-3xl font-bold tracking-tight text-[#2DD4A8] md:text-4xl">
+              <div className="font-display text-3xl font-bold tracking-tight text-accent md:text-4xl">
                 {value}
               </div>
-              <div className="mt-1 text-xs text-white/50 md:text-sm">{label}</div>
+              <div className="mt-1 text-xs text-ink/50 md:text-sm">{label}</div>
             </div>
           ))}
         </div>
@@ -202,7 +202,7 @@ export default function HomePage() {
           <div className="relative grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
             {/* Left column */}
             <div>
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.10] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#2DD4A8]">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.10] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
                 <Sparkles className="h-3 w-3" />
                 New · Now live
               </div>
@@ -215,7 +215,7 @@ export default function HomePage() {
                 </span>
               </h2>
 
-              <p className="mb-6 max-w-md text-[15px] leading-relaxed text-white/55">
+              <p className="mb-6 max-w-md text-[15px] leading-relaxed text-ink/55">
                 Browse {PEPTIDES.length} research peptides across {CATEGORIES.length} categories — each
                 entry carries mechanism, sequence, and PubChem-enriched chemistry, with
                 manufacturing and quality context from the synthesis guide.
@@ -226,7 +226,7 @@ export default function HomePage() {
                   Open Catalog
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
-                <span className="text-xs text-white/35">
+                <span className="text-xs text-ink/35">
                   {PEPTIDES.filter((p) => p.fdaApproved).length} FDA-approved · {PEPTIDES.filter((p) => p.sequence).length} with full sequence
                 </span>
               </div>
@@ -234,7 +234,7 @@ export default function HomePage() {
 
             {/* Right column — peptide preview chips */}
             <div className="relative">
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35">
+              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/35">
                 Featured entries
               </p>
               <div className="flex flex-wrap gap-2">
@@ -244,31 +244,31 @@ export default function HomePage() {
                   return (
                     <span
                       key={slug}
-                      className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] bg-white/[0.03] px-2.5 py-1.5 text-xs text-white/70 transition-colors group-hover:border-[#2DD4A8]/20 group-hover:bg-white/[0.05]"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1.5 text-xs text-ink/70 transition-colors group-hover:border-[#2DD4A8]/20 group-hover:bg-ink/[0.05]"
                     >
                       {p.name}
                       {p.fdaApproved && (
-                        <span className="rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+                        <span className="rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-accent">
                           FDA
                         </span>
                       )}
                     </span>
                   )
                 })}
-                <span className="inline-flex items-center rounded-lg border border-dashed border-white/[0.12] bg-transparent px-2.5 py-1.5 text-xs text-white/40">
+                <span className="inline-flex items-center rounded-lg border border-dashed border-ink/[0.12] bg-transparent px-2.5 py-1.5 text-xs text-ink/40">
                   +{PEPTIDES.length - SPOTLIGHT_SLUGS.length} more
                 </span>
               </div>
 
-              <div className="mt-5 border-t border-white/[0.06] pt-4">
-                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35">
+              <div className="mt-5 border-t border-ink/[0.06] pt-4">
+                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/35">
                   Categories
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {CATEGORIES.map((c) => (
                     <span
                       key={c.id}
-                      className="rounded-md border border-white/[0.06] bg-white/[0.02] px-2 py-0.5 text-[10px] text-white/50"
+                      className="rounded-md border border-ink/[0.06] bg-ink/[0.02] px-2 py-0.5 text-[10px] text-ink/50"
                     >
                       {c.label}
                     </span>
@@ -286,7 +286,7 @@ export default function HomePage() {
           <h2 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
             Research Modules
           </h2>
-          <p className="text-sm text-white/55 md:text-base">
+          <p className="text-sm text-ink/55 md:text-base">
             Four integrated tools. One unified research environment.
           </p>
         </div>
@@ -296,18 +296,18 @@ export default function HomePage() {
             <Link
               key={name}
               href={href}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.025] p-8 shadow-[0_1px_0_rgba(255,255,255,0.04)_inset] transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/30 hover:bg-white/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)]"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-8 shadow-[0_1px_0_rgba(255,255,255,0.04)_inset] transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/30 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)]"
             >
               {/* Top accent line revealed on hover */}
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2DD4A8]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
               {/* Icon */}
-              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-[#2DD4A8]">
+              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
                 <Icon className="h-5 w-5" strokeWidth={1.75} />
               </div>
 
               {/* Module type */}
-              <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/60">
+              <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-accent/60">
                 {badge}
               </p>
 
@@ -315,10 +315,10 @@ export default function HomePage() {
               <h3 className="mb-3 text-xl font-semibold tracking-tight">{name}</h3>
 
               {/* Description */}
-              <p className="flex-1 text-sm leading-relaxed text-white/55">{description}</p>
+              <p className="flex-1 text-sm leading-relaxed text-ink/55">{description}</p>
 
               {/* Explore link */}
-              <div className="mt-6 flex translate-x-0 items-center gap-1.5 text-sm font-medium text-[#2DD4A8] opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100">
+              <div className="mt-6 flex translate-x-0 items-center gap-1.5 text-sm font-medium text-accent opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100">
                 Explore module
                 <ArrowRight className="h-3.5 w-3.5" />
               </div>
@@ -331,7 +331,7 @@ export default function HomePage() {
       <section className="relative z-10 mx-auto max-w-6xl px-6 pb-24 md:px-10">
         <div className="mb-10 text-center">
           <h2 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">How It Works</h2>
-          <p className="text-sm text-white/55 md:text-base">
+          <p className="text-sm text-ink/55 md:text-base">
             Search → Analyze → Discover
           </p>
         </div>
@@ -340,18 +340,18 @@ export default function HomePage() {
           {steps.map(({ Icon, name, description }, idx) => (
             <div
               key={name}
-              className="relative rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/[0.12] hover:bg-white/[0.03]"
+              className="relative rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-ink/[0.12] hover:bg-ink/[0.03]"
             >
               <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.08] text-[#2DD4A8]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.08] text-accent">
                   <Icon className="h-4 w-4" strokeWidth={1.75} />
                 </div>
-                <span className="font-mono text-[11px] text-white/30">
+                <span className="font-mono text-[11px] text-ink/30">
                   Step {idx + 1}
                 </span>
               </div>
               <h3 className="mb-2 text-base font-semibold">{name}</h3>
-              <p className="text-sm leading-relaxed text-white/45">{description}</p>
+              <p className="text-sm leading-relaxed text-ink/45">{description}</p>
             </div>
           ))}
         </div>
@@ -363,7 +363,7 @@ export default function HomePage() {
           <h2 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
             Frequently asked questions
           </h2>
-          <p className="text-sm text-white/55 md:text-base">
+          <p className="text-sm text-ink/55 md:text-base">
             The essentials — and the Peptide Agent for everything else.
           </p>
         </div>
@@ -376,7 +376,7 @@ export default function HomePage() {
 
         {/* The "dynamic" path: anything not curated above routes to the Agent. */}
         <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent px-6 py-5 text-center sm:flex-row sm:text-left">
-          <p className="text-sm text-white/65">
+          <p className="text-sm text-ink/65">
             Have a question that isn&apos;t here? Ask the Peptide Agent for a
             citation-backed answer.
           </p>

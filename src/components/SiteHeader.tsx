@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, Sparkles, X } from 'lucide-react'
 import CommandPalette from './CommandPalette'
+import ThemeToggle from './ThemeToggle'
 
 // The Peptide Agent leads as a prominent, standalone CTA. The rest are plain
 // top-level categories; their deep links surface as the in-page SectionNav.
@@ -43,9 +44,9 @@ export default function SiteHeader() {
   }, [open])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-[#0B1220]/85 backdrop-blur supports-[backdrop-filter]:bg-[#0B1220]/70">
+    <header className="sticky top-0 z-40 border-b border-ink/[0.06] bg-surface/85 backdrop-blur supports-[backdrop-filter]:bg-surface/70">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
-        <Link href="/" className="flex items-center gap-2.5 text-white transition-opacity hover:opacity-90">
+        <Link href="/" className="flex items-center gap-2.5 text-ink transition-opacity hover:opacity-90">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]">
             <svg
               viewBox="0 0 24 24"
@@ -72,8 +73,8 @@ export default function SiteHeader() {
               className={
                 'inline-flex items-center gap-1.5 rounded-lg border px-3.5 py-1.5 text-sm font-medium transition-all ' +
                 (agentActive
-                  ? 'border-[#2DD4A8]/50 bg-[#2DD4A8]/20 text-[#2DD4A8]'
-                  : 'border-[#2DD4A8]/30 bg-[#2DD4A8]/10 text-[#2DD4A8] hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/20')
+                  ? 'border-[#2DD4A8]/50 bg-[#2DD4A8]/20 text-accent'
+                  : 'border-[#2DD4A8]/30 bg-[#2DD4A8]/10 text-accent hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/20')
               }
             >
               <Sparkles className="h-4 w-4" />
@@ -89,8 +90,8 @@ export default function SiteHeader() {
                   aria-current={active ? 'page' : undefined}
                   className={
                     active
-                      ? 'rounded-lg px-3 py-1.5 text-sm font-medium text-[#2DD4A8]'
-                      : 'rounded-lg px-3 py-1.5 text-sm text-white/65 transition-colors hover:bg-white/[0.04] hover:text-white'
+                      ? 'rounded-lg px-3 py-1.5 text-sm font-medium text-accent'
+                      : 'rounded-lg px-3 py-1.5 text-sm text-ink/65 transition-colors hover:bg-ink/[0.04] hover:text-ink'
                   }
                 >
                   {link.label}
@@ -101,13 +102,15 @@ export default function SiteHeader() {
 
           <CommandPalette />
 
+          <ThemeToggle />
+
           <button
             type="button"
             aria-expanded={open}
             aria-controls="site-mobile-nav"
             aria-label={open ? 'Close menu' : 'Open menu'}
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.02] text-white/75 transition-colors hover:bg-white/[0.06] hover:text-white md:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-ink/[0.08] bg-ink/[0.02] text-ink/75 transition-colors hover:bg-ink/[0.06] hover:text-ink md:hidden"
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -115,12 +118,12 @@ export default function SiteHeader() {
       </div>
 
       {open && (
-        <div id="site-mobile-nav" className="border-t border-white/[0.06] bg-[#0B1220]/95 backdrop-blur md:hidden">
+        <div id="site-mobile-nav" className="border-t border-ink/[0.06] bg-surface/95 backdrop-blur md:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
             <Link
               href="/research"
               aria-current={agentActive ? 'page' : undefined}
-              className="mb-1 flex items-center gap-2 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-2 text-sm font-medium text-[#2DD4A8]"
+              className="mb-1 flex items-center gap-2 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-2 text-sm font-medium text-accent"
             >
               <Sparkles className="h-4 w-4" />
               Peptide Agent
@@ -134,8 +137,8 @@ export default function SiteHeader() {
                   aria-current={active ? 'page' : undefined}
                   className={
                     active
-                      ? 'rounded-lg bg-[#2DD4A8]/[0.08] px-3 py-2 text-sm font-medium text-[#2DD4A8]'
-                      : 'rounded-lg px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/[0.04] hover:text-white'
+                      ? 'rounded-lg bg-[#2DD4A8]/[0.08] px-3 py-2 text-sm font-medium text-accent'
+                      : 'rounded-lg px-3 py-2 text-sm text-ink/70 transition-colors hover:bg-ink/[0.04] hover:text-ink'
                   }
                 >
                   {link.label}

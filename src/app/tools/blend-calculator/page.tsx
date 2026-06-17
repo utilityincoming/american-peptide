@@ -78,11 +78,11 @@ export default function BlendCalculatorPage() {
   }, [waterMl, rows])
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       {/* ── Page identity ── */}
-      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
         <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
-          <Blend className="h-4 w-4 text-[#2DD4A8]" strokeWidth={1.75} />
+          <Blend className="h-4 w-4 text-accent" strokeWidth={1.75} />
         </div>
         <span className="text-sm font-medium">Blend Calculator</span>
         <span className="rounded-full border border-amber-500/30 bg-amber-500/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-amber-400/80">
@@ -95,7 +95,7 @@ export default function BlendCalculatorPage() {
           <h1 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
             Peptide blend calculator
           </h1>
-          <p className="max-w-2xl text-sm leading-relaxed text-white/55 md:text-base">
+          <p className="max-w-2xl text-sm leading-relaxed text-ink/55 md:text-base">
             Combine multiple peptides into a single vial and see how many doses
             the blend supports, the draw volume per injection, and the actual
             mass each draw delivers per peptide — versus what you intended.
@@ -108,7 +108,7 @@ export default function BlendCalculatorPage() {
             className="mt-0.5 h-4 w-4 shrink-0 text-amber-400/80"
             strokeWidth={1.75}
           />
-          <div className="min-w-0 text-xs leading-relaxed text-white/55">
+          <div className="min-w-0 text-xs leading-relaxed text-ink/55">
             <p className="mb-1 font-semibold text-amber-300/90">
               Math only — not administration guidance, and read this first.
             </p>
@@ -126,7 +126,7 @@ export default function BlendCalculatorPage() {
                 Review pair-level handling first in the{' '}
                 <Link
                   href="/learn/compatibility"
-                  className="text-[#2DD4A8] underline-offset-2 hover:underline"
+                  className="text-accent underline-offset-2 hover:underline"
                 >
                   compatibility &amp; stability guide
                 </Link>
@@ -137,15 +137,15 @@ export default function BlendCalculatorPage() {
         </div>
 
         {/* ── Inputs ── */}
-        <section className="mb-6 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
+        <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
             Blend setup
           </h2>
 
           <div className="mb-5 max-w-xs">
-            <label className="mb-1.5 block text-xs font-medium text-white/55">
+            <label className="mb-1.5 block text-xs font-medium text-ink/55">
               Total bacteriostatic water in blend vial{' '}
-              <span className="text-white/30">(mL)</span>
+              <span className="text-ink/30">(mL)</span>
             </label>
             <input
               type="number"
@@ -154,7 +154,7 @@ export default function BlendCalculatorPage() {
               step="any"
               value={waterMl}
               onChange={(e) => setWaterMl(e.target.value)}
-              className="w-full rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 font-mono text-base text-white outline-none transition-colors focus:border-[#2DD4A8]/40"
+              className="w-full rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-2.5 font-mono text-base text-ink outline-none transition-colors focus:border-[#2DD4A8]/40"
             />
           </div>
 
@@ -162,14 +162,14 @@ export default function BlendCalculatorPage() {
             {rows.map((r, i) => (
               <div
                 key={i}
-                className="grid grid-cols-1 gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3 sm:grid-cols-[1fr_auto_auto_auto]"
+                className="grid grid-cols-1 gap-3 rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-3 sm:grid-cols-[1fr_auto_auto_auto]"
               >
                 <input
                   type="text"
                   value={r.name}
                   onChange={(e) => setRow(i, { name: e.target.value })}
                   placeholder={`Peptide ${i + 1} (optional name)`}
-                  className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2 text-sm text-white placeholder:text-white/25 outline-none focus:border-[#2DD4A8]/40"
+                  className="rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-sm text-ink placeholder:text-ink/25 outline-none focus:border-[#2DD4A8]/40"
                 />
                 <div className="flex items-center gap-2">
                   <input
@@ -180,9 +180,9 @@ export default function BlendCalculatorPage() {
                     value={r.mass}
                     onChange={(e) => setRow(i, { mass: e.target.value })}
                     placeholder="mg"
-                    className="w-20 rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2 font-mono text-sm text-white placeholder:text-white/25 outline-none focus:border-[#2DD4A8]/40"
+                    className="w-20 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 font-mono text-sm text-ink placeholder:text-ink/25 outline-none focus:border-[#2DD4A8]/40"
                   />
-                  <span className="text-[11px] text-white/35">mg vial</span>
+                  <span className="text-[11px] text-ink/35">mg vial</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <input
@@ -193,16 +193,16 @@ export default function BlendCalculatorPage() {
                     value={r.dose}
                     onChange={(e) => setRow(i, { dose: e.target.value })}
                     placeholder="mcg"
-                    className="w-24 rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2 font-mono text-sm text-white placeholder:text-white/25 outline-none focus:border-[#2DD4A8]/40"
+                    className="w-24 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 font-mono text-sm text-ink placeholder:text-ink/25 outline-none focus:border-[#2DD4A8]/40"
                   />
-                  <span className="text-[11px] text-white/35">mcg dose</span>
+                  <span className="text-[11px] text-ink/35">mcg dose</span>
                 </div>
                 <button
                   type="button"
                   onClick={() => removeRow(i)}
                   disabled={rows.length <= MIN_PEPTIDES}
                   aria-label={`Remove peptide ${i + 1}`}
-                  className="inline-flex h-9 w-9 items-center justify-center self-center rounded-lg border border-white/[0.08] text-white/45 transition-colors hover:border-red-400/30 hover:text-red-400/80 disabled:cursor-not-allowed disabled:opacity-30"
+                  className="inline-flex h-9 w-9 items-center justify-center self-center rounded-lg border border-ink/[0.08] text-ink/45 transition-colors hover:border-red-400/30 hover:text-red-400/80 disabled:cursor-not-allowed disabled:opacity-30"
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>
@@ -214,7 +214,7 @@ export default function BlendCalculatorPage() {
             type="button"
             onClick={addRow}
             disabled={rows.length >= MAX_PEPTIDES}
-            className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] px-3 py-2 text-xs text-white/60 transition-colors hover:border-[#2DD4A8]/25 hover:text-[#2DD4A8] disabled:cursor-not-allowed disabled:opacity-30"
+            className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] px-3 py-2 text-xs text-ink/60 transition-colors hover:border-[#2DD4A8]/25 hover:text-accent disabled:cursor-not-allowed disabled:opacity-30"
           >
             <Plus className="h-3.5 w-3.5" />
             Add peptide ({rows.length}/{MAX_PEPTIDES})
@@ -243,41 +243,41 @@ export default function BlendCalculatorPage() {
         </section>
 
         {/* ── Per-dose verification ── */}
-        <section className="mb-6 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 md:p-6">
-          <h2 className="mb-1 text-sm font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/70">
+        <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+          <h2 className="mb-1 text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
             Per-dose verification
           </h2>
-          <p className="mb-4 text-xs text-white/40">
+          <p className="mb-4 text-xs text-ink/40">
             What each {fmt(calc.units, 1)}-unit draw actually delivers, versus
             what you intended.
           </p>
 
-          <div className="overflow-x-auto rounded-xl border border-white/[0.07]">
+          <div className="overflow-x-auto rounded-xl border border-ink/[0.07]">
             <table className="w-full border-collapse text-sm">
               <thead>
-                <tr className="bg-white/[0.04] text-left">
-                  <th className="px-3 py-2.5 font-medium text-white/55">Peptide</th>
-                  <th className="px-3 py-2.5 text-right font-medium text-white/55">
+                <tr className="bg-ink/[0.04] text-left">
+                  <th className="px-3 py-2.5 font-medium text-ink/55">Peptide</th>
+                  <th className="px-3 py-2.5 text-right font-medium text-ink/55">
                     Vial
                   </th>
-                  <th className="px-3 py-2.5 text-right font-medium text-white/55">
+                  <th className="px-3 py-2.5 text-right font-medium text-ink/55">
                     Intended
                   </th>
-                  <th className="px-3 py-2.5 text-right font-medium text-white/55">
+                  <th className="px-3 py-2.5 text-right font-medium text-ink/55">
                     Delivered / dose
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {calc.perPeptide.map((p, i) => (
-                  <tr key={i} className="border-t border-white/[0.05]">
-                    <td className="px-3 py-2.5 text-white/75">
+                  <tr key={i} className="border-t border-ink/[0.05]">
+                    <td className="px-3 py-2.5 text-ink/75">
                       {p.name || `Peptide ${i + 1}`}
                     </td>
-                    <td className="px-3 py-2.5 text-right font-mono text-white/55">
+                    <td className="px-3 py-2.5 text-right font-mono text-ink/55">
                       {p.ok ? `${fmt(p.mass)} mg` : '—'}
                     </td>
-                    <td className="px-3 py-2.5 text-right font-mono text-white/55">
+                    <td className="px-3 py-2.5 text-right font-mono text-ink/55">
                       {p.ok ? `${fmt(p.dose)} mcg` : '—'}
                     </td>
                     <td className="px-3 py-2.5 text-right font-mono">
@@ -286,7 +286,7 @@ export default function BlendCalculatorPage() {
                           className={
                             p.overPct > 2
                               ? 'text-amber-400'
-                              : 'text-[#2DD4A8]'
+                              : 'text-accent'
                           }
                         >
                           {fmt(p.deliveredMcg)} mcg
@@ -297,7 +297,7 @@ export default function BlendCalculatorPage() {
                           )}
                         </span>
                       ) : (
-                        <span className="text-white/30">—</span>
+                        <span className="text-ink/30">—</span>
                       )}
                     </td>
                   </tr>
@@ -320,13 +320,13 @@ export default function BlendCalculatorPage() {
         <div className="mb-10 flex flex-wrap gap-3 text-xs">
           <Link
             href="/learn/compatibility"
-            className="rounded-lg border border-white/[0.08] px-3 py-2 text-white/60 transition-colors hover:border-[#2DD4A8]/25 hover:text-[#2DD4A8]"
+            className="rounded-lg border border-ink/[0.08] px-3 py-2 text-ink/60 transition-colors hover:border-[#2DD4A8]/25 hover:text-accent"
           >
             Compatibility &amp; stability guide →
           </Link>
           <Link
             href="/tools/reconstitution-calculator"
-            className="rounded-lg border border-white/[0.08] px-3 py-2 text-white/60 transition-colors hover:border-[#2DD4A8]/25 hover:text-[#2DD4A8]"
+            className="rounded-lg border border-ink/[0.08] px-3 py-2 text-ink/60 transition-colors hover:border-[#2DD4A8]/25 hover:text-accent"
           >
             Single-peptide calculator →
           </Link>
@@ -352,20 +352,20 @@ function ResultCard({
       className={`rounded-2xl border p-4 ${
         highlight
           ? 'border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.04]'
-          : 'border-white/[0.07] bg-white/[0.025]'
+          : 'border-ink/[0.07] bg-ink/[0.025]'
       }`}
     >
-      <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-white/40">
+      <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-ink/40">
         {label}
       </p>
       <p
         className={`mt-1.5 font-mono text-2xl font-semibold tabular-nums leading-tight md:text-3xl ${
-          highlight ? 'text-[#2DD4A8]' : 'text-white'
+          highlight ? 'text-accent' : 'text-ink'
         }`}
       >
         {value}
       </p>
-      <p className="mt-0.5 text-[11px] text-white/40">{unit}</p>
+      <p className="mt-0.5 text-[11px] text-ink/40">{unit}</p>
     </div>
   )
 }

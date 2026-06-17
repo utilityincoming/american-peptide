@@ -31,14 +31,14 @@ export default function AgentPrompt({ className = '' }: { className?: string }) 
         className
       }
     >
-      <div className="mb-1 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+      <div className="mb-1 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-accent">
         <Sparkles className="h-3.5 w-3.5" />
         Peptide Agent
       </div>
       <h2 className="mt-3 max-w-2xl text-2xl font-bold leading-tight tracking-tight md:text-3xl">
         Ask anything about peptide research
       </h2>
-      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/55">
+      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/55">
         Mechanisms, comparisons, clinical evidence, synthesis, certificates of analysis — citation-backed
         answers grounded in PubMed, PubChem, and ClinicalTrials.gov.
       </p>
@@ -54,7 +54,7 @@ export default function AgentPrompt({ className = '' }: { className?: string }) 
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Ask about a peptide, mechanism, or indication…"
-          className="flex-1 rounded-xl border border-white/[0.10] bg-[#0B1220]/60 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:border-[#2DD4A8]/40 focus:outline-none"
+          className="flex-1 rounded-xl border border-ink/[0.10] bg-surface/60 px-4 py-3 text-sm text-ink placeholder:text-ink/30 focus:border-[#2DD4A8]/40 focus:outline-none"
         />
         <button
           type="submit"
@@ -72,7 +72,7 @@ export default function AgentPrompt({ className = '' }: { className?: string }) 
             key={ex}
             type="button"
             onClick={() => ask(ex)}
-            className="rounded-full border border-white/[0.08] bg-white/[0.02] px-3 py-1.5 text-left text-xs text-white/50 transition-colors hover:border-[#2DD4A8]/30 hover:text-white/80"
+            className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1.5 text-left text-xs text-ink/50 transition-colors hover:border-[#2DD4A8]/30 hover:text-ink/80"
           >
             {ex}
           </button>

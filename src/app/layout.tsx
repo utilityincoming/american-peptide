@@ -65,8 +65,11 @@ export const metadata: Metadata = {
   },
 }
 
+// themeColor (mobile browser chrome) is driven by JS in the no-flash script
+// below so it tracks the actually-applied theme — OS preference *and* the
+// user's manual toggle — not just prefers-color-scheme. The <meta> default is
+// rendered in <head>; the script and ThemeToggle update its content.
 export const viewport: Viewport = {
-  themeColor: '#0B1220',
   width: 'device-width',
   initialScale: 1,
 }
@@ -82,7 +85,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Default chrome color (dark); the script below flips it to match the
+            applied theme before paint. */}
+        <meta name="theme-color" content="#0B1220" />
+        {/* No-flash theme: apply the stored/OS preference before first paint,
+            so light-mode users never see a dark flash. Default is dark. Also
+            syncs the mobile browser-chrome color to the resolved theme. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem('theme');var m=window.matchMedia('(prefers-color-scheme: light)').matches;var light=(s==='light'||(!s&&m));if(light){document.documentElement.classList.add('light');}var mc=document.querySelector('meta[name="theme-color"]');if(mc){mc.setAttribute('content',light?'#F7F9FB':'#0B1220');}}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} antialiased`}
       >

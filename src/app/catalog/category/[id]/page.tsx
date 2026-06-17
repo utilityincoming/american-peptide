@@ -119,7 +119,7 @@ export default async function CategoryPage({ params }: RouteParams) {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
@@ -136,19 +136,19 @@ export default async function CategoryPage({ params }: RouteParams) {
       )}
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
         <Link
           href="/catalog"
-          className="text-sm text-white/35 transition-colors hover:text-white"
+          className="text-sm text-ink/35 transition-colors hover:text-ink"
         >
           Catalog
         </Link>
-        <span className="text-white/20">/</span>
+        <span className="text-ink/20">/</span>
         <span className="truncate text-sm font-medium">{meta.label}</span>
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -159,7 +159,7 @@ export default async function CategoryPage({ params }: RouteParams) {
           }}
         />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-[#2DD4A8]">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Layers className="h-3 w-3" />
             Catalog category · {peptides.length} entr
             {peptides.length === 1 ? 'y' : 'ies'}
@@ -167,11 +167,11 @@ export default async function CategoryPage({ params }: RouteParams) {
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             {content?.heading ?? `${meta.label} Peptides`}
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-white/55 md:text-lg">
+          <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
             {content?.tagline ?? meta.blurb}
           </p>
           {content?.intro && (
-            <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-white/60">
+            <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-ink/60">
               {content.intro}
             </p>
           )}
@@ -185,14 +185,14 @@ export default async function CategoryPage({ params }: RouteParams) {
             {/* How this class works */}
             {content?.howItWorks && content.howItWorks.length > 0 && (
               <div>
-                <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+                <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
                   How this class works
                 </h2>
                 <div className="space-y-4">
                   {content.howItWorks.map((para, i) => (
                     <p
                       key={i}
-                      className="text-sm leading-relaxed text-white/65"
+                      className="text-sm leading-relaxed text-ink/65"
                     >
                       {para}
                     </p>
@@ -203,7 +203,7 @@ export default async function CategoryPage({ params }: RouteParams) {
 
             {/* Peptides in this category */}
             <div>
-              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 {meta.label} peptides in the catalog
               </h2>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -224,7 +224,7 @@ export default async function CategoryPage({ params }: RouteParams) {
             {/* FAQ */}
             {content?.faqs && content.faqs.length > 0 && (
               <div>
-                <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-white/40">
+                <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
                   <HelpCircle className="h-3.5 w-3.5" />
                   Frequently asked questions
                 </h2>
@@ -232,12 +232,12 @@ export default async function CategoryPage({ params }: RouteParams) {
                   {content.faqs.map((f) => (
                     <div
                       key={f.q}
-                      className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5"
+                      className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5"
                     >
-                      <h3 className="mb-2 text-sm font-semibold text-white/85">
+                      <h3 className="mb-2 text-sm font-semibold text-ink/85">
                         {f.q}
                       </h3>
-                      <p className="text-sm leading-relaxed text-white/55">
+                      <p className="text-sm leading-relaxed text-ink/55">
                         {f.a}
                       </p>
                     </div>
@@ -251,17 +251,17 @@ export default async function CategoryPage({ params }: RouteParams) {
           <aside className="space-y-6">
             {content?.researchThemes &&
               content.researchThemes.length > 0 && (
-                <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
-                  <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+                <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
+                  <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
                     Research themes
                   </h3>
                   <ul className="space-y-2.5">
                     {content.researchThemes.map((t) => (
                       <li
                         key={t}
-                        className="flex gap-2 text-[13px] leading-snug text-white/65"
+                        className="flex gap-2 text-[13px] leading-snug text-ink/65"
                       >
-                        <FlaskConical className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#2DD4A8]/70" />
+                        <FlaskConical className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent/70" />
                         {t}
                       </li>
                     ))}
@@ -270,8 +270,8 @@ export default async function CategoryPage({ params }: RouteParams) {
               )}
 
             {/* Other categories */}
-            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
-              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Browse other categories
               </h3>
               <div className="flex flex-wrap gap-1.5">
@@ -279,7 +279,7 @@ export default async function CategoryPage({ params }: RouteParams) {
                   <Link
                     key={c.id}
                     href={`/catalog/category/${c.id}`}
-                    className="rounded-full border border-white/[0.08] bg-white/[0.02] px-3 py-1 text-xs text-white/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-[#2DD4A8]"
+                    className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
                   >
                     {c.label}
                   </Link>
@@ -308,20 +308,20 @@ function CategoryPeptideCard({ peptide }: { peptide: Peptide }) {
   return (
     <Link
       href={`/catalog/${peptide.slug}`}
-      className="group flex flex-col rounded-xl border border-white/[0.07] bg-white/[0.025] p-4 transition-all hover:border-[#2DD4A8]/25 hover:bg-white/[0.04]"
+      className="group flex flex-col rounded-xl border border-ink/[0.07] bg-ink/[0.025] p-4 transition-all hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
     >
       <div className="mb-1.5 flex items-center justify-between gap-2">
         <h3 className="truncate text-sm font-semibold">{peptide.name}</h3>
         {peptide.fdaApproved && (
-          <span className="shrink-0 rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+          <span className="shrink-0 rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-accent">
             FDA
           </span>
         )}
       </div>
-      <p className="mb-3 line-clamp-2 flex-1 text-xs leading-relaxed text-white/50">
+      <p className="mb-3 line-clamp-2 flex-1 text-xs leading-relaxed text-ink/50">
         {peptide.shortDescription}
       </p>
-      <span className="flex items-center gap-1 text-[11px] text-[#2DD4A8]/70 transition-colors group-hover:text-[#2DD4A8]">
+      <span className="flex items-center gap-1 text-[11px] text-accent/70 transition-colors group-hover:text-accent">
         View profile
         <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
       </span>

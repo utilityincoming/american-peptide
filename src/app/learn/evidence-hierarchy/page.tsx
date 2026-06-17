@@ -169,22 +169,22 @@ export default function EvidenceHierarchyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
-      <header className="flex flex-wrap items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
-        <Link href="/learn" className="text-sm text-white/35 hover:text-white transition-colors">Learn</Link>
-        <span className="text-white/20">/</span>
+      <header className="flex flex-wrap items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+        <Link href="/learn" className="text-sm text-ink/35 hover:text-ink transition-colors">Learn</Link>
+        <span className="text-ink/20">/</span>
         <span className="text-sm font-medium truncate">Evidence hierarchy</span>
       </header>
 
-      <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-14 md:px-10">
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-14 md:px-10">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-30"
           style={{ backgroundImage: 'radial-gradient(circle, rgba(45,212,168,0.08) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
         <div className="relative mx-auto max-w-3xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-[#2DD4A8]">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             Learning guide · evidence quality
           </div>
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
@@ -194,7 +194,7 @@ export default function EvidenceHierarchyPage() {
               peptide research
             </span>
           </h1>
-          <p className="max-w-2xl text-sm leading-relaxed text-white/55 md:text-base">
+          <p className="max-w-2xl text-sm leading-relaxed text-ink/55 md:text-base">
             &ldquo;Studies show&rdquo; is not a single category. A cell-culture result and a
             Phase 3 randomized trial are separated by a decade of work and a high
             failure rate. This guide explains the hierarchy and what each level
@@ -209,38 +209,38 @@ export default function EvidenceHierarchyPage() {
 
             {/* Evidence ladder */}
             <section>
-              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-white/40">The evidence ladder</h2>
-              <p className="mb-8 text-xs text-white/30">Six levels from weakest to strongest — each answers different questions</p>
+              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">The evidence ladder</h2>
+              <p className="mb-8 text-xs text-ink/30">Six levels from weakest to strongest — each answers different questions</p>
               <div className="space-y-px">
                 {LEVELS.map((l, i) => (
                   <div key={l.level} className="relative flex gap-4">
                     {/* Connector line */}
                     {i < LEVELS.length - 1 && (
-                      <div className="absolute left-4 top-10 h-full w-px bg-white/[0.06]" />
+                      <div className="absolute left-4 top-10 h-full w-px bg-ink/[0.06]" />
                     )}
                     {/* Level badge */}
                     <div className="relative mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold"
                       style={{ borderColor: l.color, color: l.color, backgroundColor: `${l.color}12` }}>
                       {l.level}
                     </div>
-                    <div className="mb-8 flex-1 rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
+                    <div className="mb-8 flex-1 rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5">
                       <div className="mb-3 flex flex-wrap items-center gap-2">
                         <p className="text-sm font-semibold" style={{ color: l.color }}>{l.label}</p>
-                        <span className="rounded-full bg-white/[0.06] px-2 py-0.5 text-[10px] text-white/40">{l.strength}</span>
+                        <span className="rounded-full bg-ink/[0.06] px-2 py-0.5 text-[10px] text-ink/40">{l.strength}</span>
                       </div>
-                      <p className="mb-3 text-xs leading-relaxed text-white/55">{l.what}</p>
+                      <p className="mb-3 text-xs leading-relaxed text-ink/55">{l.what}</p>
                       <div className="grid gap-3 sm:grid-cols-2">
                         <div>
-                          <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-white/30">What it tells you</p>
-                          <p className="text-xs leading-relaxed text-white/55">{l.tells}</p>
+                          <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-ink/30">What it tells you</p>
+                          <p className="text-xs leading-relaxed text-ink/55">{l.tells}</p>
                         </div>
                         <div>
-                          <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-white/30">What it misses</p>
-                          <p className="text-xs leading-relaxed text-white/40">{l.misses}</p>
+                          <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-ink/30">What it misses</p>
+                          <p className="text-xs leading-relaxed text-ink/40">{l.misses}</p>
                         </div>
                       </div>
-                      <p className="mt-3 text-xs text-white/30">
-                        <span className="font-medium text-white/40">Example: </span>{l.example}
+                      <p className="mt-3 text-xs text-ink/30">
+                        <span className="font-medium text-ink/40">Example: </span>{l.example}
                       </p>
                     </div>
                   </div>
@@ -250,12 +250,12 @@ export default function EvidenceHierarchyPage() {
 
             {/* Key concepts */}
             <section>
-              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-white/40">Five concepts that change how you read a study</h2>
+              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/40">Five concepts that change how you read a study</h2>
               <div className="space-y-4">
                 {CONCEPTS.map((c) => (
-                  <div key={c.term} className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
-                    <p className="mb-1.5 text-sm font-semibold text-white/85">{c.term}</p>
-                    <p className="text-sm leading-relaxed text-white/55">{c.def}</p>
+                  <div key={c.term} className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5">
+                    <p className="mb-1.5 text-sm font-semibold text-ink/85">{c.term}</p>
+                    <p className="text-sm leading-relaxed text-ink/55">{c.def}</p>
                   </div>
                 ))}
               </div>
@@ -263,17 +263,17 @@ export default function EvidenceHierarchyPage() {
 
             {/* Quick reference */}
             <section>
-              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-white/40">Quick reference: compounds on this platform by evidence level</h2>
+              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/40">Quick reference: compounds on this platform by evidence level</h2>
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[420px] text-xs">
                   <thead>
-                    <tr className="border-b border-white/[0.06] text-left text-white/35">
+                    <tr className="border-b border-ink/[0.06] text-left text-ink/35">
                       <th className="pb-3 pr-6 font-medium">Compound(s)</th>
                       <th className="pb-3 pr-6 font-medium">Highest evidence level</th>
                       <th className="pb-3 font-medium">Notes</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/[0.04]">
+                  <tbody className="divide-y divide-ink/[0.04]">
                     {[
                       { compounds: 'Semaglutide, Tirzepatide', level: 'Phase 3 + FDA approved', color: '#2DD4A8', note: 'Multiple large RCTs; head-to-head data' },
                       { compounds: 'Tesamorelin', level: 'Phase 3 + FDA approved', color: '#2DD4A8', note: 'Approved for specific HIV-related indication only' },
@@ -286,14 +286,14 @@ export default function EvidenceHierarchyPage() {
                       { compounds: 'Epitalon, DSIP', level: 'Preclinical (limited)', color: '#94A3B8', note: 'Evidence concentrated or mechanistically incomplete' },
                     ].map((r) => (
                       <tr key={r.compounds}>
-                        <td className="py-3 pr-6 font-medium text-white/70">{r.compounds}</td>
+                        <td className="py-3 pr-6 font-medium text-ink/70">{r.compounds}</td>
                         <td className="py-3 pr-6">
                           <span className="rounded-full px-2 py-0.5 text-[10px] font-medium"
                             style={{ backgroundColor: `${r.color}15`, color: r.color }}>
                             {r.level}
                           </span>
                         </td>
-                        <td className="py-3 text-white/40 leading-relaxed">{r.note}</td>
+                        <td className="py-3 text-ink/40 leading-relaxed">{r.note}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -303,12 +303,12 @@ export default function EvidenceHierarchyPage() {
 
             {/* FAQ */}
             <section>
-              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-white/40">Frequently asked questions</h2>
+              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-ink/40">Frequently asked questions</h2>
               <div className="space-y-5">
                 {FAQS.map((f) => (
-                  <div key={f.q} className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
-                    <p className="mb-2 text-sm font-semibold text-white/90">{f.q}</p>
-                    <p className="text-sm leading-relaxed text-white/55">{f.a}</p>
+                  <div key={f.q} className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5">
+                    <p className="mb-2 text-sm font-semibold text-ink/90">{f.q}</p>
+                    <p className="text-sm leading-relaxed text-ink/55">{f.a}</p>
                   </div>
                 ))}
               </div>
@@ -316,8 +316,8 @@ export default function EvidenceHierarchyPage() {
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-6 lg:self-start">
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">Learning guides</p>
+            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">Learning guides</p>
               {[
                 { href: '/learn', label: 'Learn hub', sub: 'All guides' },
                 { href: '/synthesis', label: 'How peptides are made', sub: 'Synthesis & COA' },
@@ -326,34 +326,34 @@ export default function EvidenceHierarchyPage() {
                 { href: '/glossary/fda-approved', label: 'FDA Approved definition', sub: 'Glossary entry' },
               ].map((l) => (
                 <Link key={l.href} href={l.href}
-                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-white/[0.04]">
+                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-ink/[0.04]">
                   <div>
-                    <p className="text-sm font-medium text-white/70 group-hover:text-white">{l.label}</p>
-                    <p className="text-xs text-white/30">{l.sub}</p>
+                    <p className="text-sm font-medium text-ink/70 group-hover:text-ink">{l.label}</p>
+                    <p className="text-xs text-ink/30">{l.sub}</p>
                   </div>
-                  <ChevronRight className="h-3.5 w-3.5 text-white/20 group-hover:text-white/50" />
+                  <ChevronRight className="h-3.5 w-3.5 text-ink/20 group-hover:text-ink/50" />
                 </Link>
               ))}
             </div>
 
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">Search trials</p>
-              <p className="mb-4 text-xs leading-relaxed text-white/45">
+            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">Search trials</p>
+              <p className="mb-4 text-xs leading-relaxed text-ink/45">
                 Check the current evidence base for any compound directly on ClinicalTrials.gov.
               </p>
               <Link href="/trials"
-                className="flex items-center justify-center gap-2 rounded-lg border border-white/[0.10] bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-white/70 hover:border-white/20 hover:text-white">
+                className="flex items-center justify-center gap-2 rounded-lg border border-ink/[0.10] bg-ink/[0.04] px-4 py-2.5 text-sm font-medium text-ink/70 hover:border-ink/20 hover:text-ink">
                 ClinicalPulse <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
 
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">Peptide Agent</p>
-              <p className="mb-4 text-xs leading-relaxed text-white/45">
+            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">Peptide Agent</p>
+              <p className="mb-4 text-xs leading-relaxed text-ink/45">
                 Ask about evidence quality for a specific compound — backed by PubMed and ClinicalTrials.gov.
               </p>
               <Link href="/research"
-                className="flex items-center justify-center gap-2 rounded-lg border border-white/[0.10] bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-white/70 hover:border-white/20 hover:text-white">
+                className="flex items-center justify-center gap-2 rounded-lg border border-ink/[0.10] bg-ink/[0.04] px-4 py-2.5 text-sm font-medium text-ink/70 hover:border-ink/20 hover:text-ink">
                 Ask the agent <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

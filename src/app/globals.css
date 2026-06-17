@@ -1,21 +1,77 @@
 @import "tailwindcss";
 
+/* ── Theme tokens ──────────────────────────────────────────────────────────
+   The UI is built on a neutral "ink" (foreground/overlay) over a "surface"
+   (page background), with teal as the brand accent. Tokens are CSS variables
+   so a single class swap on <html> flips the whole palette. Opacity modifiers
+   (e.g. text-ink/40, border-ink/[0.06]) keep working via Tailwind's color-mix.
+
+   Default (no class) = dark, the established brand look. `html.light` opts in
+   to light mode — the no-flash script in layout.tsx sets it before paint. */
 :root {
-  --background: #0B1220;
-  --foreground: #ffffff;
+  --ink: #ffffff;          /* foreground + light overlays (borders, panels) */
+  --surface: #0B1220;      /* page background */
+  --surface-deep: #040810; /* deepest background (footers, code wells) */
+  --panel: #0F1828;        /* raised solid panels */
+  --accent: #2DD4A8;       /* teal accent, used as text/link color */
+  /* Category accents — bright on dark; darkened in light for text contrast.
+     Only the text-* usages are tokenized; bright fills/borders stay literal. */
+  --accent-indigo: #818CF8;
+  --accent-blue: #60A5FA;
+  --accent-purple: #A78BFA;
+  --viz: #0B1220;          /* immersive viz "stage" — stays dark in both themes */
+
+  --background: var(--surface);
+  --foreground: var(--ink);
+}
+
+html.light {
+  --ink: #0B1220;          /* dark ink on light surfaces */
+  --surface: #F7F9FB;
+  --surface-deep: #ECF1F6;
+  --panel: #FFFFFF;
+  --accent: #0E9C82;       /* darker teal for legible text on light */
+  --accent-indigo: #4F46E5;
+  --accent-blue: #2563EB;
+  --accent-purple: #7C3AED;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-surface: var(--surface);
+  --color-surface-deep: var(--surface-deep);
+  --color-panel: var(--panel);
+  --color-accent: var(--accent);
+  --color-accent-indigo: var(--accent-indigo);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-purple: var(--accent-purple);
+  --color-viz: var(--viz);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-space-grotesk);
 }
 
+html {
+  background: var(--surface);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Smooth the flip; don't animate on first paint or for reduced-motion users. */
+html.theme-ready body,
+html.theme-ready body * {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-ready body,
+  html.theme-ready body * {
+    transition: none;
+  }
 }
 
 /* Display typeface for headings — rolled out site-wide. Utility classes like

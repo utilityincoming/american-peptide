@@ -61,27 +61,27 @@ export default function ResearchUseGate() {
       aria-describedby="research-ack-body"
       className="fixed inset-0 z-[70] flex items-center justify-center px-4"
     >
-      <div className="absolute inset-0 bg-[#040810]/80 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-surface-deep/80 backdrop-blur-sm" />
 
-      <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0F1828] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.5)] md:p-7">
-        <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-[#2DD4A8]">
+      <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-ink/[0.08] bg-panel p-6 shadow-[0_30px_80px_rgba(0,0,0,0.5)] md:p-7">
+        <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
           <FlaskConical className="h-5 w-5" strokeWidth={1.75} />
         </div>
 
         <h2
           id="research-ack-title"
-          className="mb-3 text-xl font-bold tracking-tight text-white"
+          className="mb-3 text-xl font-bold tracking-tight text-ink"
         >
           Research &amp; educational use only
         </h2>
 
         <div
           id="research-ack-body"
-          className="space-y-3 text-sm leading-relaxed text-white/60"
+          className="space-y-3 text-sm leading-relaxed text-ink/60"
         >
           <p>
             AmericanPeptide.com is a computational research and educational
-            reference. It is <span className="text-white/80">not a medical
+            reference. It is <span className="text-ink/80">not a medical
             device</span> and does not provide medical advice, diagnosis,
             treatment, dosing protocols, or an offer to sell any compound.
           </p>
