@@ -111,14 +111,14 @@ export default function OfflineStatus() {
         <button
           type="button"
           onClick={onInstall}
-          className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/35 bg-[#2DD4A8]/[0.10] px-3 py-1 text-[11px] font-semibold text-[#2DD4A8] transition-colors hover:border-[#2DD4A8]/55 hover:bg-[#2DD4A8]/[0.18]"
+          className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/35 bg-[#2DD4A8]/[0.10] px-3 py-1 text-[11px] font-semibold text-accent transition-colors hover:border-[#2DD4A8]/55 hover:bg-[#2DD4A8]/[0.18]"
         >
           <Download className="h-3 w-3" />
           Install for offline use
         </button>
       )}
       {installed && (
-        <span className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.06] px-2.5 py-1 text-[11px] font-medium text-[#2DD4A8]/85">
+        <span className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.06] px-2.5 py-1 text-[11px] font-medium text-accent/85">
           <CheckCircle2 className="h-3 w-3" />
           Installed
         </span>
@@ -136,7 +136,7 @@ function StatusPill({
 }) {
   if (cacheState === 'unsupported') {
     return (
-      <span className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] px-2.5 py-1 text-[11px] text-white/45">
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.08] bg-ink/[0.02] px-2.5 py-1 text-[11px] text-ink/45">
         <CloudOff className="h-3 w-3" />
         Offline mode unsupported on this browser
       </span>
@@ -144,7 +144,7 @@ function StatusPill({
   }
   if (cacheState === 'registering') {
     return (
-      <span className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 text-[11px] text-white/55">
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1 text-[11px] text-ink/55">
         <Loader2 className="h-3 w-3 animate-spin" />
         Caching for offline use…
       </span>
@@ -160,7 +160,7 @@ function StatusPill({
   }
   // ready
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2.5 py-1 text-[11px] font-medium text-[#2DD4A8]">
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2.5 py-1 text-[11px] font-medium text-accent">
       <CheckCircle2 className="h-3 w-3" />
       {online ? 'Available offline' : 'Running offline'}
     </span>

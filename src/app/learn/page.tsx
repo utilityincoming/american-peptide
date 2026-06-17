@@ -94,7 +94,7 @@ export default function LearnPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
@@ -105,15 +105,15 @@ export default function LearnPage() {
       />
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
         <span className="flex items-center gap-1.5 text-sm font-medium">
-          <GraduationCap className="h-4 w-4 text-[#2DD4A8]" />
+          <GraduationCap className="h-4 w-4 text-accent" />
           Learn
         </span>
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -130,7 +130,7 @@ export default function LearnPage() {
               science behind the vial
             </span>
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-white/55 md:text-lg">
+          <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
             Everything you need to evaluate research peptides like a
             professional — how they’re manufactured, what they’re studied for,
             and the terminology that turns a certificate of analysis from
@@ -146,23 +146,23 @@ export default function LearnPage() {
             <Link
               key={href}
               href={href}
-              className="group flex flex-col rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/25 hover:bg-white/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.12)]"
+              className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.12)]"
             >
-              <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-[#2DD4A8]">
+              <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
                 <Icon className="h-5 w-5" strokeWidth={1.75} />
               </span>
               <div className="mb-2 flex items-center gap-2">
                 <h2 className="text-base font-semibold tracking-tight">
                   {label}
                 </h2>
-                <span className="rounded-full border border-white/[0.08] bg-white/[0.02] px-2 py-0.5 text-[10px] text-white/40">
+                <span className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-2 py-0.5 text-[10px] text-ink/40">
                   {meta}
                 </span>
               </div>
-              <p className="mb-5 flex-1 text-[13px] leading-relaxed text-white/50">
+              <p className="mb-5 flex-1 text-[13px] leading-relaxed text-ink/50">
                 {description}
               </p>
-              <span className="flex items-center gap-1 text-[11px] text-[#2DD4A8]/70 transition-colors group-hover:text-[#2DD4A8]">
+              <span className="flex items-center gap-1 text-[11px] text-accent/70 transition-colors group-hover:text-accent">
                 Open
                 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
               </span>

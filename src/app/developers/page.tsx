@@ -115,17 +115,17 @@ const features = [
 
 export default function DevelopersPage() {
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
         <span className="flex items-center gap-1.5 text-sm font-medium">
-          <Code2 className="h-4 w-4 text-[#2DD4A8]" />
+          <Code2 className="h-4 w-4 text-accent" />
           Developers
         </span>
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -136,7 +136,7 @@ export default function DevelopersPage() {
           }}
         />
         <div className="relative mx-auto max-w-5xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-[#2DD4A8]">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Database className="h-3 w-3" />
             Open data · CC BY 4.0
           </div>
@@ -146,7 +146,7 @@ export default function DevelopersPage() {
               catalog API
             </span>
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-white/55 md:text-lg">
+          <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
             Build on the same {PEPTIDES.length}-peptide reference that powers
             this site — mechanism, sequence, and PubChem-enriched chemistry as
             structured JSON. No key, no signup. Free to embed with attribution.
@@ -166,7 +166,7 @@ export default function DevelopersPage() {
               href="/api/catalog?area=weight-loss&fda=true"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 px-5 py-2.5 text-sm font-medium text-white/60 transition-colors hover:border-white/20 hover:text-white"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
             >
               <Code2 className="h-4 w-4" />
               View live JSON
@@ -182,40 +182,40 @@ export default function DevelopersPage() {
             {features.map(({ Icon, title, body }) => (
               <div
                 key={title}
-                className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5"
+                className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5"
               >
-                <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-[#2DD4A8]">
+                <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
                   <Icon className="h-4 w-4" strokeWidth={1.75} />
                 </div>
                 <h3 className="mb-1.5 text-sm font-semibold">{title}</h3>
-                <p className="text-xs leading-relaxed text-white/50">{body}</p>
+                <p className="text-xs leading-relaxed text-ink/50">{body}</p>
               </div>
             ))}
           </div>
 
           {/* Endpoints */}
           <div>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
               Endpoints
             </h2>
-            <div className="overflow-hidden rounded-2xl border border-white/[0.07]">
+            <div className="overflow-hidden rounded-2xl border border-ink/[0.07]">
               {endpoints.map((e, i) => (
                 <div
                   key={e.path}
                   className={
                     'flex flex-col gap-1 px-5 py-4 sm:flex-row sm:items-center sm:gap-4 ' +
-                    (i > 0 ? 'border-t border-white/[0.06]' : '')
+                    (i > 0 ? 'border-t border-ink/[0.06]' : '')
                   }
                 >
                   <div className="flex items-center gap-3">
-                    <span className="rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 font-mono text-[10px] font-semibold text-[#2DD4A8]">
+                    <span className="rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 font-mono text-[10px] font-semibold text-accent">
                       {e.method}
                     </span>
-                    <code className="font-mono text-sm text-white/85">
+                    <code className="font-mono text-sm text-ink/85">
                       {e.path}
                     </code>
                   </div>
-                  <span className="text-xs text-white/45 sm:ml-auto sm:text-right">
+                  <span className="text-xs text-ink/45 sm:ml-auto sm:text-right">
                     {e.desc}
                   </span>
                 </div>
@@ -225,9 +225,9 @@ export default function DevelopersPage() {
 
           {/* Query params */}
           <div>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
               Query parameters
-              <span className="ml-2 font-normal normal-case tracking-normal text-white/30">
+              <span className="ml-2 font-normal normal-case tracking-normal text-ink/30">
                 (list endpoint)
               </span>
             </h2>
@@ -235,12 +235,12 @@ export default function DevelopersPage() {
               {params.map((p) => (
                 <div
                   key={p.name}
-                  className="flex flex-col gap-1 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 sm:flex-row sm:items-baseline sm:gap-4"
+                  className="flex flex-col gap-1 rounded-xl border border-ink/[0.06] bg-ink/[0.02] px-4 py-3 sm:flex-row sm:items-baseline sm:gap-4"
                 >
-                  <code className="font-mono text-sm text-[#2DD4A8]">
+                  <code className="font-mono text-sm text-accent">
                     {p.name}
                   </code>
-                  <span className="text-xs text-white/55">{p.desc}</span>
+                  <span className="text-xs text-ink/55">{p.desc}</span>
                 </div>
               ))}
             </div>
@@ -248,47 +248,47 @@ export default function DevelopersPage() {
 
           {/* Example */}
           <div>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
               Example
             </h2>
-            <pre className="overflow-x-auto rounded-2xl border border-white/[0.07] bg-black/40 p-5 font-mono text-[12px] leading-relaxed text-white/75">
+            <pre className="overflow-x-auto rounded-2xl border border-ink/[0.07] bg-black/40 p-5 font-mono text-[12px] leading-relaxed text-ink/75">
               {exampleList}
             </pre>
           </div>
 
           {/* Markdown for AI agents */}
           <div>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
               Markdown for AI agents
             </h2>
-            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6">
-              <p className="mb-3 text-sm leading-relaxed text-white/60">
+            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6">
+              <p className="mb-3 text-sm leading-relaxed text-ink/60">
                 Every catalog page has a markdown twin — append{' '}
-                <code className="font-mono text-[13px] text-[#2DD4A8]">.md</code>{' '}
+                <code className="font-mono text-[13px] text-accent">.md</code>{' '}
                 to any peptide URL (e.g.{' '}
                 <a
                   href="/catalog/semaglutide.md"
-                  className="font-mono text-[13px] text-[#2DD4A8] underline-offset-2 hover:underline"
+                  className="font-mono text-[13px] text-accent underline-offset-2 hover:underline"
                 >
                   /catalog/semaglutide.md
                 </a>
                 ) for the same facts at a fraction of the tokens.{' '}
                 <a
                   href="/llms.txt"
-                  className="font-mono text-[13px] text-[#2DD4A8] underline-offset-2 hover:underline"
+                  className="font-mono text-[13px] text-accent underline-offset-2 hover:underline"
                 >
                   /llms.txt
                 </a>{' '}
                 is a curated index of the site for agent discovery, and{' '}
                 <a
                   href="/llms-full.txt"
-                  className="font-mono text-[13px] text-[#2DD4A8] underline-offset-2 hover:underline"
+                  className="font-mono text-[13px] text-accent underline-offset-2 hover:underline"
                 >
                   /llms-full.txt
                 </a>{' '}
                 packs the full catalog into one document for retrieval pipelines.
               </p>
-              <p className="text-xs leading-relaxed text-white/40">
+              <p className="text-xs leading-relaxed text-ink/40">
                 All markdown responses embed the canonical URL and CC BY 4.0
                 attribution, and send CORS-open headers — cite
                 AmericanPeptide.com when content travels.
@@ -298,17 +298,17 @@ export default function DevelopersPage() {
 
           {/* Authentication & limits */}
           <div>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
               Authentication & limits
             </h2>
-            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6">
-              <p className="mb-4 text-sm leading-relaxed text-white/60">
+            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6">
+              <p className="mb-4 text-sm leading-relaxed text-ink/60">
                 The API works with no key at the{' '}
-                <span className="text-white/80">Anonymous</span> tier. Want
+                <span className="text-ink/80">Anonymous</span> tier. Want
                 higher limits? Mint a free key — no signup — and send it with
                 each request:
               </p>
-              <pre className="mb-4 overflow-x-auto rounded-xl border border-white/[0.07] bg-black/40 p-4 font-mono text-[12px] leading-relaxed text-white/75">
+              <pre className="mb-4 overflow-x-auto rounded-xl border border-ink/[0.07] bg-black/40 p-4 font-mono text-[12px] leading-relaxed text-ink/75">
                 {`# Get a free key (save it — shown once)
 curl -X POST https://www.americanpeptide.com/api/keys
 
@@ -320,8 +320,8 @@ curl https://www.americanpeptide.com/api/catalog?fda=true \\
 curl https://www.americanpeptide.com/api/keys \\
   -H "Authorization: Bearer amp_sk_…"`}
               </pre>
-              <div className="overflow-hidden rounded-xl border border-white/[0.07]">
-                <div className="grid grid-cols-3 gap-2 border-b border-white/[0.06] px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-white/40">
+              <div className="overflow-hidden rounded-xl border border-ink/[0.07]">
+                <div className="grid grid-cols-3 gap-2 border-b border-ink/[0.06] px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-ink/40">
                   <span>Tier</span>
                   <span className="text-right">Per minute</span>
                   <span className="text-right">Per day</span>
@@ -335,14 +335,14 @@ curl https://www.americanpeptide.com/api/keys \\
                     key={row.tier}
                     className={
                       'grid grid-cols-3 gap-2 px-4 py-2.5 text-sm ' +
-                      (i > 0 ? 'border-t border-white/[0.06] ' : '') +
-                      (row.tier === 'Pro' ? 'text-white/45' : 'text-white/75')
+                      (i > 0 ? 'border-t border-ink/[0.06] ' : '') +
+                      (row.tier === 'Pro' ? 'text-ink/45' : 'text-ink/75')
                     }
                   >
                     <span>
                       {row.tier}
                       {row.tier === 'Pro' && (
-                        <span className="ml-2 text-[10px] uppercase tracking-wider text-white/30">
+                        <span className="ml-2 text-[10px] uppercase tracking-wider text-ink/30">
                           coming soon
                         </span>
                       )}
@@ -352,13 +352,13 @@ curl https://www.americanpeptide.com/api/keys \\
                   </div>
                 ))}
               </div>
-              <p className="mt-4 text-xs leading-relaxed text-white/40">
+              <p className="mt-4 text-xs leading-relaxed text-ink/40">
                 Every response carries{' '}
-                <code className="font-mono text-[11px] text-white/60">
+                <code className="font-mono text-[11px] text-ink/60">
                   RateLimit-*
                 </code>{' '}
                 and{' '}
-                <code className="font-mono text-[11px] text-white/60">
+                <code className="font-mono text-[11px] text-ink/60">
                   X-Quota-Remaining
                 </code>{' '}
                 headers so you always know your remaining budget. Keys also work
@@ -370,17 +370,17 @@ curl https://www.americanpeptide.com/api/keys \\
 
           {/* MCP server */}
           <div>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
               Connect via MCP
             </h2>
-            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6">
-              <p className="mb-4 text-sm leading-relaxed text-white/60">
+            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6">
+              <p className="mb-4 text-sm leading-relaxed text-ink/60">
                 AmericanPeptide.com is also a remote{' '}
                 <a
                   href="https://modelcontextprotocol.io"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#2DD4A8] underline-offset-2 hover:underline"
+                  className="text-accent underline-offset-2 hover:underline"
                 >
                   MCP server
                 </a>
@@ -390,7 +390,7 @@ curl https://www.americanpeptide.com/api/keys \\
                 grounded lookups against ClinicalTrials.gov, PubMed, and
                 PubChem — every result with a canonical link back here.
               </p>
-              <pre className="overflow-x-auto rounded-xl border border-white/[0.07] bg-black/40 p-4 font-mono text-[12px] leading-relaxed text-white/75">
+              <pre className="overflow-x-auto rounded-xl border border-ink/[0.07] bg-black/40 p-4 font-mono text-[12px] leading-relaxed text-ink/75">
                 {`# Endpoint (Streamable HTTP, no auth)
 https://www.americanpeptide.com/api/mcp
 
@@ -402,27 +402,27 @@ claude mcp add --transport http american-peptide \\
           </div>
 
           {/* License */}
-          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6">
+          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6">
             <div className="mb-3 flex items-center gap-2">
-              <Scale className="h-4 w-4 text-[#2DD4A8]" />
+              <Scale className="h-4 w-4 text-accent" />
               <h2 className="text-sm font-semibold">License & attribution</h2>
             </div>
-            <p className="mb-3 text-sm leading-relaxed text-white/60">
+            <p className="mb-3 text-sm leading-relaxed text-ink/60">
               The catalog data is offered under{' '}
               <a
                 href="https://creativecommons.org/licenses/by/4.0/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#2DD4A8] underline-offset-2 hover:underline"
+                className="text-accent underline-offset-2 hover:underline"
               >
                 Creative Commons Attribution 4.0
               </a>
               . You may use, adapt, and redistribute it — including commercially
               — provided you credit{' '}
-              <span className="text-white/80">AmericanPeptide.com</span> with a
+              <span className="text-ink/80">AmericanPeptide.com</span> with a
               link back to the source.
             </p>
-            <p className="text-xs leading-relaxed text-white/40">
+            <p className="text-xs leading-relaxed text-ink/40">
               Reference data is for research and educational use only. It is not
               medical advice, a dosing protocol, or an offer for sale, and
               should be independently validated before any experimental use.

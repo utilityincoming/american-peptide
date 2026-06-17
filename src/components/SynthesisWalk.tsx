@@ -469,7 +469,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
       {/* ── Sticky animated visual (desktop) ── */}
       <div className="hidden lg:block">
         <div className="sticky top-24">
-          <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-white/[0.07] bg-white/[0.02]">
+          <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-ink/[0.07] bg-ink/[0.02]">
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-50"
@@ -486,10 +486,10 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
           {/* progress + active label */}
           <div className="mt-5">
             <div className="mb-3 flex items-center justify-between">
-              <span className="font-mono text-[11px] text-[#2DD4A8]/70">
+              <span className="font-mono text-[11px] text-accent/70">
                 Step {activeStage.num} / {stages.length}
               </span>
-              <span className="text-[11px] text-white/40">{activeStage.title.split(' (')[0]}</span>
+              <span className="text-[11px] text-ink/40">{activeStage.title.split(' (')[0]}</span>
             </div>
             <div className="flex gap-1.5">
               {stages.map((s, i) => (
@@ -500,7 +500,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
                   }
                   aria-label={`Go to step ${s.num}: ${s.title}`}
                   className={`h-1.5 flex-1 rounded-full transition-colors ${
-                    i === active ? 'bg-[#2DD4A8]' : 'bg-white/10 hover:bg-white/25'
+                    i === active ? 'bg-[#2DD4A8]' : 'bg-ink/10 hover:bg-ink/25'
                   }`}
                 />
               ))}
@@ -521,29 +521,29 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
               ref={(el) => {
                 sectionRefs.current[i] = el
               }}
-              className="scroll-mt-24 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 md:p-7"
+              className="scroll-mt-24 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6 md:p-7"
             >
               {/* Inline visual — mobile only */}
-              <div className="mb-5 aspect-[5/3] w-full overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.015] lg:hidden">
+              <div className="mb-5 aspect-[5/3] w-full overflow-hidden rounded-xl border border-ink/[0.06] bg-ink/[0.015] lg:hidden">
                 <div className="mx-auto h-full max-w-[260px]">
                   <StageVisual slug={s.slug} />
                 </div>
               </div>
 
               <div className="mb-4 flex items-start gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#2DD4A8]/12 text-[#2DD4A8]">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#2DD4A8]/12 text-accent">
                   <Icon className="h-5 w-5" strokeWidth={1.75} />
                 </span>
                 <div className="min-w-0">
-                  <span className="font-mono text-[11px] text-[#2DD4A8]/70">
+                  <span className="font-mono text-[11px] text-accent/70">
                     Step {s.num} / {stages.length}
                   </span>
                   <h2 className="text-lg font-semibold tracking-tight">{s.title}</h2>
-                  <p className="mt-0.5 text-[13px] leading-relaxed text-white/45">{s.summary}</p>
+                  <p className="mt-0.5 text-[13px] leading-relaxed text-ink/45">{s.summary}</p>
                 </div>
               </div>
 
-              <div className="space-y-3 text-sm leading-relaxed text-white/70">
+              <div className="space-y-3 text-sm leading-relaxed text-ink/70">
                 {s.detail.map((p, idx) => (
                   <p key={idx}>{p}</p>
                 ))}
@@ -551,28 +551,28 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
 
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 {s.cost && (
-                  <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">
+                  <div className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] px-4 py-3">
                     <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-amber-400/70">
                       What it costs
                     </p>
-                    <p className="text-[12.5px] leading-relaxed text-white/60">{s.cost}</p>
+                    <p className="text-[12.5px] leading-relaxed text-ink/60">{s.cost}</p>
                   </div>
                 )}
                 {s.risk && (
-                  <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">
+                  <div className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] px-4 py-3">
                     <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-red-400/70">
                       Where purity is lost
                     </p>
-                    <p className="text-[12.5px] leading-relaxed text-white/60">{s.risk}</p>
+                    <p className="text-[12.5px] leading-relaxed text-ink/60">{s.risk}</p>
                   </div>
                 )}
                 {s.americanStandard && (
                   <div className="rounded-xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] px-4 py-3 sm:col-span-2">
-                    <p className="mb-1 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#2DD4A8]/80">
+                    <p className="mb-1 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-accent/80">
                       <Flag className="h-3 w-3" />
                       The American standard
                     </p>
-                    <p className="text-[12.5px] leading-relaxed text-white/65">{s.americanStandard}</p>
+                    <p className="text-[12.5px] leading-relaxed text-ink/65">{s.americanStandard}</p>
                   </div>
                 )}
               </div>

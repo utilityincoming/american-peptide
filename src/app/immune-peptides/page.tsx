@@ -168,7 +168,7 @@ const compounds = [
 
 export default function ImmunePeptidesPage() {
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
@@ -183,7 +183,7 @@ export default function ImmunePeptidesPage() {
       />
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-white/[0.06]">
+      <section className="relative overflow-hidden border-b border-ink/[0.06]">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
@@ -199,10 +199,10 @@ export default function ImmunePeptidesPage() {
 
         <div className="relative mx-auto max-w-5xl px-6 py-16 md:px-10 md:py-24">
           {/* Breadcrumb */}
-          <nav className="mb-8 flex items-center gap-2 text-xs text-white/40">
-            <Link href="/" className="hover:text-white/70">Home</Link>
+          <nav className="mb-8 flex items-center gap-2 text-xs text-ink/40">
+            <Link href="/" className="hover:text-ink/70">Home</Link>
             <span>/</span>
-            <span className="text-white/60">Immune Peptides</span>
+            <span className="text-ink/60">Immune Peptides</span>
           </nav>
 
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#60A5FA]/25 bg-[#60A5FA]/[0.08] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#60A5FA]">
@@ -218,11 +218,11 @@ export default function ImmunePeptidesPage() {
             </span>
           </h1>
 
-          <p className="mb-8 max-w-2xl text-lg leading-relaxed text-white/60">
+          <p className="mb-8 max-w-2xl text-lg leading-relaxed text-ink/60">
             Peptides that modulate immune function span two distinct axes: the{' '}
-            <strong className="font-semibold text-white/80">adaptive immune system</strong> —
+            <strong className="font-semibold text-ink/80">adaptive immune system</strong> —
             T-cell maturation, dendritic-cell priming, antigen presentation — and the{' '}
-            <strong className="font-semibold text-white/80">innate immune system</strong> —
+            <strong className="font-semibold text-ink/80">innate immune system</strong> —
             antimicrobial defense, pattern recognition, and rapid first-response signaling.
           </p>
 
@@ -242,7 +242,7 @@ export default function ImmunePeptidesPage() {
       {/* ── Two-axis framing ── */}
       <section className="mx-auto max-w-5xl px-6 py-16 md:px-10">
         <h2 className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">Two Immune Axes</h2>
-        <p className="mb-10 max-w-2xl text-sm leading-relaxed text-white/50">
+        <p className="mb-10 max-w-2xl text-sm leading-relaxed text-ink/50">
           Immune-modulating peptides divide cleanly by mechanism. Understanding which axis a
           compound acts on is the first step in interpreting research findings.
         </p>
@@ -261,7 +261,7 @@ export default function ImmunePeptidesPage() {
                 <h3 className="font-semibold">Adaptive Immunity</h3>
               </div>
             </div>
-            <p className="mb-4 text-sm leading-relaxed text-white/55">
+            <p className="mb-4 text-sm leading-relaxed text-ink/55">
               The adaptive system learns and remembers. Peptides like thymosin α1 act on dendritic
               cells and T-cell progenitors, promoting differentiation from naïve to effector cells
               and upregulating MHC class I — the machinery that presents antigens to cytotoxic T
@@ -274,7 +274,7 @@ export default function ImmunePeptidesPage() {
                 'MHC class I upregulation',
                 'Antiviral and antifungal adjunct research',
               ].map((point) => (
-                <div key={point} className="flex items-start gap-2 text-xs text-white/55">
+                <div key={point} className="flex items-start gap-2 text-xs text-ink/55">
                   <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#60A5FA]/60" />
                   {point}
                 </div>
@@ -298,7 +298,7 @@ export default function ImmunePeptidesPage() {
                 <h3 className="font-semibold">Innate Immunity</h3>
               </div>
             </div>
-            <p className="mb-4 text-sm leading-relaxed text-white/55">
+            <p className="mb-4 text-sm leading-relaxed text-ink/55">
               The innate system responds fast and non-specifically. Antimicrobial peptides like
               LL-37 disrupt pathogen membranes directly, modulate TLR signaling to calibrate the
               inflammatory response, and recruit immune cells to sites of infection or injury.
@@ -310,7 +310,7 @@ export default function ImmunePeptidesPage() {
                 'Neutrophil and monocyte chemotaxis',
                 'Anti-biofilm activity in vitro',
               ].map((point) => (
-                <div key={point} className="flex items-start gap-2 text-xs text-white/55">
+                <div key={point} className="flex items-start gap-2 text-xs text-ink/55">
                   <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#A78BFA]/60" />
                   {point}
                 </div>
@@ -326,7 +326,7 @@ export default function ImmunePeptidesPage() {
       {/* ── Compound cards ── */}
       <section className="mx-auto max-w-5xl px-6 pb-16 md:px-10">
         <h2 className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">Compound Profiles</h2>
-        <p className="mb-8 text-sm text-white/50">
+        <p className="mb-8 text-sm text-ink/50">
           Mechanism, evidence level, and key research context for each compound in this cluster.
         </p>
 
@@ -334,7 +334,7 @@ export default function ImmunePeptidesPage() {
           {compounds.map((c) => (
             <div
               key={c.slug}
-              className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 md:p-8"
+              className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6 md:p-8"
             >
               <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
                 <div>
@@ -358,10 +358,10 @@ export default function ImmunePeptidesPage() {
                 </span>
               </div>
 
-              <p className="mb-5 text-sm leading-relaxed text-white/60">{c.keyAction}</p>
+              <p className="mb-5 text-sm leading-relaxed text-ink/60">{c.keyAction}</p>
 
               {c.note && (
-                <div className="mb-5 rounded-lg border border-white/[0.07] bg-white/[0.03] px-4 py-2.5 text-xs text-white/50">
+                <div className="mb-5 rounded-lg border border-ink/[0.07] bg-ink/[0.03] px-4 py-2.5 text-xs text-ink/50">
                   {c.note}
                 </div>
               )}
@@ -373,11 +373,11 @@ export default function ImmunePeptidesPage() {
                   { label: 'Receptor', value: c.receptor },
                   { label: 'FDA status', value: c.fda },
                 ].map(({ label, value }) => (
-                  <div key={label} className="rounded-lg border border-white/[0.06] bg-white/[0.02] px-3 py-2.5">
-                    <p className="mb-0.5 text-[9px] font-semibold uppercase tracking-wider text-white/30">
+                  <div key={label} className="rounded-lg border border-ink/[0.06] bg-ink/[0.02] px-3 py-2.5">
+                    <p className="mb-0.5 text-[9px] font-semibold uppercase tracking-wider text-ink/30">
                       {label}
                     </p>
-                    <p className="text-xs font-medium text-white/70">{value}</p>
+                    <p className="text-xs font-medium text-ink/70">{value}</p>
                   </div>
                 ))}
               </div>
@@ -385,7 +385,7 @@ export default function ImmunePeptidesPage() {
               <div className="mt-4 flex items-center gap-2">
                 <Link
                   href={`/catalog/${c.slug}`}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.08] px-3 py-1.5 text-xs font-medium text-white/60 transition-colors hover:border-white/20 hover:text-white"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] px-3 py-1.5 text-xs font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
                 >
                   Full catalog entry
                   <ArrowRight className="h-3 w-3" />
@@ -394,7 +394,7 @@ export default function ImmunePeptidesPage() {
                   href={`https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(c.name)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.06] px-3 py-1.5 text-xs font-medium text-white/40 transition-colors hover:text-white/70"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.06] px-3 py-1.5 text-xs font-medium text-ink/40 transition-colors hover:text-ink/70"
                 >
                   PubMed search ↗
                 </Link>
@@ -408,20 +408,20 @@ export default function ImmunePeptidesPage() {
       <section className="mx-auto max-w-5xl px-6 pb-16 md:px-10">
         <div className="rounded-2xl border border-[#34D399]/20 bg-[#34D399]/[0.04] p-6 md:p-8">
           <div className="mb-4 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#34D399]/25 bg-[#34D399]/10 text-[#34D399]">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#34D399]/25 bg-[#34D399]/10 text-accent">
               <Activity className="h-5 w-5" strokeWidth={1.75} />
             </div>
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-[#34D399]/70">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-accent/70">
                 Immune–Repair Interface
               </p>
               <h3 className="font-semibold">Thymosin β4 — a different mechanism entirely</h3>
             </div>
           </div>
 
-          <p className="mb-4 text-sm leading-relaxed text-white/60">
+          <p className="mb-4 text-sm leading-relaxed text-ink/60">
             Despite sharing the &ldquo;thymosin&rdquo; name, thymosin β4 (Tβ4) is{' '}
-            <strong className="text-white/80">mechanistically unrelated</strong> to thymosin α1.
+            <strong className="text-ink/80">mechanistically unrelated</strong> to thymosin α1.
             Where thymosin α1 acts on immune-cell differentiation via TLR signaling, Tβ4 works
             by sequestering G-actin monomers — regulating cytoskeletal dynamics, wound healing,
             and angiogenesis. Its anti-inflammatory effects are largely mediated by the Ac-SDKP
@@ -444,8 +444,8 @@ export default function ImmunePeptidesPage() {
               },
             ].map(({ label, desc }) => (
               <div key={label} className="rounded-xl border border-[#34D399]/15 bg-[#34D399]/[0.04] p-4">
-                <p className="mb-1.5 text-xs font-semibold text-[#34D399]">{label}</p>
-                <p className="text-xs leading-relaxed text-white/50">{desc}</p>
+                <p className="mb-1.5 text-xs font-semibold text-accent">{label}</p>
+                <p className="text-xs leading-relaxed text-ink/50">{desc}</p>
               </div>
             ))}
           </div>
@@ -453,13 +453,13 @@ export default function ImmunePeptidesPage() {
           <div className="mt-4 flex gap-3">
             <Link
               href="/catalog/thymosin-beta-4"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[#34D399]/20 px-3 py-1.5 text-xs font-medium text-[#34D399]/80 transition-colors hover:border-[#34D399]/40 hover:text-[#34D399]"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-[#34D399]/20 px-3 py-1.5 text-xs font-medium text-accent/80 transition-colors hover:border-[#34D399]/40 hover:text-accent"
             >
               Thymosin β4 catalog entry <ArrowRight className="h-3 w-3" />
             </Link>
             <Link
               href="/bpc-157"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.07] px-3 py-1.5 text-xs font-medium text-white/40 transition-colors hover:text-white/70"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.07] px-3 py-1.5 text-xs font-medium text-ink/40 transition-colors hover:text-ink/70"
             >
               Healing & Repair cluster ↗
             </Link>
@@ -470,7 +470,7 @@ export default function ImmunePeptidesPage() {
       {/* ── Evidence table ── */}
       <section className="mx-auto max-w-5xl px-6 pb-16 md:px-10">
         <h2 className="mb-2 text-2xl font-bold tracking-tight">Evidence Summary</h2>
-        <p className="mb-6 text-sm text-white/50">
+        <p className="mb-6 text-sm text-ink/50">
           Evidence levels across the immune cluster — matched to the{' '}
           <Link href="/learn/evidence-hierarchy" className="text-[#60A5FA] underline-offset-2 hover:underline">
             6-level evidence hierarchy
@@ -478,15 +478,15 @@ export default function ImmunePeptidesPage() {
           .
         </p>
 
-        <div className="overflow-x-auto rounded-2xl border border-white/[0.07]">
+        <div className="overflow-x-auto rounded-2xl border border-ink/[0.07]">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-white/[0.07] bg-white/[0.02]">
+              <tr className="border-b border-ink/[0.07] bg-ink/[0.02]">
                 {['Compound', 'Axis', 'Highest evidence', 'Human trials', 'Approval status'].map(
                   (h) => (
                     <th
                       key={h}
-                      className="px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-wider text-white/40"
+                      className="px-4 py-3 text-left text-[10px] font-semibold uppercase tracking-wider text-ink/40"
                     >
                       {h}
                     </th>
@@ -535,7 +535,7 @@ export default function ImmunePeptidesPage() {
               ].map((row, i) => (
                 <tr
                   key={row.name}
-                  className={`border-b border-white/[0.04] ${i % 2 === 0 ? '' : 'bg-white/[0.015]'}`}
+                  className={`border-b border-ink/[0.04] ${i % 2 === 0 ? '' : 'bg-ink/[0.015]'}`}
                 >
                   <td className="px-4 py-3 font-medium">{row.name}</td>
                   <td className="px-4 py-3">
@@ -546,8 +546,8 @@ export default function ImmunePeptidesPage() {
                   <td className={`px-4 py-3 text-xs font-semibold ${row.evidenceColor}`}>
                     {row.evidence}
                   </td>
-                  <td className="px-4 py-3 text-xs text-white/55">{row.human}</td>
-                  <td className="px-4 py-3 text-xs text-white/55">{row.approval}</td>
+                  <td className="px-4 py-3 text-xs text-ink/55">{row.human}</td>
+                  <td className="px-4 py-3 text-xs text-ink/55">{row.approval}</td>
                 </tr>
               ))}
             </tbody>
@@ -562,12 +562,12 @@ export default function ImmunePeptidesPage() {
           {faqLd.mainEntity.map((item) => (
             <details
               key={item.name}
-              className="group rounded-xl border border-white/[0.07] bg-white/[0.02] px-5 py-4"
+              className="group rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-5 py-4"
             >
-              <summary className="cursor-pointer list-none text-sm font-semibold text-white/80 group-open:text-white">
+              <summary className="cursor-pointer list-none text-sm font-semibold text-ink/80 group-open:text-ink">
                 {item.name}
               </summary>
-              <p className="mt-3 text-sm leading-relaxed text-white/55">
+              <p className="mt-3 text-sm leading-relaxed text-ink/55">
                 {item.acceptedAnswer.text}
               </p>
             </details>
@@ -577,8 +577,8 @@ export default function ImmunePeptidesPage() {
 
       {/* ── Cluster nav ── */}
       <section className="mx-auto max-w-5xl px-6 pb-24 md:px-10">
-        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/35">
+        <div className="rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-6">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/35">
             Other Research Clusters
           </p>
           <div className="flex flex-wrap gap-2">
@@ -593,7 +593,7 @@ export default function ImmunePeptidesPage() {
               <Link
                 key={href}
                 href={href}
-                className="rounded-lg border border-white/[0.07] px-3 py-1.5 text-xs text-white/50 transition-colors hover:border-white/15 hover:text-white/80"
+                className="rounded-lg border border-ink/[0.07] px-3 py-1.5 text-xs text-ink/50 transition-colors hover:border-ink/15 hover:text-ink/80"
               >
                 {label}
               </Link>
@@ -603,7 +603,7 @@ export default function ImmunePeptidesPage() {
       </section>
 
       {/* Disclaimer */}
-      <div className="mx-auto max-w-5xl border-t border-white/[0.06] px-6 py-8 text-center text-xs leading-relaxed text-white/25 md:px-10">
+      <div className="mx-auto max-w-5xl border-t border-ink/[0.06] px-6 py-8 text-center text-xs leading-relaxed text-ink/25 md:px-10">
         This page is for research and educational purposes only. AmericanPeptide.com is not a
         medical device, does not provide medical advice, and does not sell compounds. All
         statements describe research findings, not clinical outcomes. Consult a licensed

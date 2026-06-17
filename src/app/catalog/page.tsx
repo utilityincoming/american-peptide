@@ -81,9 +81,9 @@ export default function CatalogPage() {
   const atCap = selected.length >= MAX_COMPARE
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -94,7 +94,7 @@ export default function CatalogPage() {
           }}
         />
         <div className="relative mx-auto max-w-6xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-[#2DD4A8]">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Sparkles className="h-3 w-3" />
             Peptide research reference
           </div>
@@ -105,7 +105,7 @@ export default function CatalogPage() {
               built for research transparency.
             </span>
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-white/55 md:text-lg">
+          <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
             Browse a curated reference of {PEPTIDES.length}+ research peptides. Each entry
             captures mechanism, sequence, structure, and the research areas it’s
             studied for — with manufacturing and quality context from the synthesis guide.
@@ -116,16 +116,16 @@ export default function CatalogPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/catalog/compare"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-2.5 text-sm font-medium text-white/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-white"
+              className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-ink"
             >
-              <GitCompareArrows className="h-4 w-4 text-[#2DD4A8]" />
+              <GitCompareArrows className="h-4 w-4 text-accent" />
               Compare side-by-side
             </Link>
             <Link
               href="/workspace"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-2.5 text-sm font-medium text-white/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-white"
+              className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-ink"
             >
-              <LayoutGrid className="h-4 w-4 text-[#2DD4A8]" />
+              <LayoutGrid className="h-4 w-4 text-accent" />
               Research Workspace
             </Link>
           </div>
@@ -133,23 +133,23 @@ export default function CatalogPage() {
       </section>
 
       {/* ── Filters ── */}
-      <section className="sticky top-0 z-30 border-b border-white/[0.06] bg-[#0B1220]/85 px-6 py-4 backdrop-blur md:px-10">
+      <section className="sticky top-0 z-30 border-b border-ink/[0.06] bg-surface/85 px-6 py-4 backdrop-blur md:px-10">
         <div className="mx-auto max-w-6xl space-y-3">
           {/* Search */}
           <div className="relative">
-            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/30" />
+            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/30" />
             <input
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search peptides, aliases, or research areas…"
-              className="w-full rounded-xl border border-white/[0.07] bg-white/[0.03] py-3 pl-10 pr-10 text-sm text-white placeholder:text-white/30 focus:border-[#2DD4A8]/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
+              className="w-full rounded-xl border border-ink/[0.07] bg-ink/[0.03] py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/30 focus:border-[#2DD4A8]/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
             />
             {query && (
               <button
                 onClick={() => setQuery('')}
                 aria-label="Clear search"
-                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-white/40 transition-colors hover:bg-white/5 hover:text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-ink/40 transition-colors hover:bg-ink/5 hover:text-ink"
               >
                 <X className="h-3.5 w-3.5" />
               </button>
@@ -179,7 +179,7 @@ export default function CatalogPage() {
         <div className="mx-auto max-w-6xl">
           <OfflineReference />
 
-          <div className="mb-5 flex items-center justify-between text-xs text-white/40">
+          <div className="mb-5 flex items-center justify-between text-xs text-ink/40">
             <span>
               {filtered.length} result{filtered.length === 1 ? '' : 's'}
               {active ? ` in ${CATEGORIES.find((c) => c.id === active)?.label}` : ''}
@@ -190,7 +190,7 @@ export default function CatalogPage() {
                   setQuery('')
                   setActive(null)
                 }}
-                className="text-[#2DD4A8]/80 transition-colors hover:text-[#2DD4A8]"
+                className="text-accent/80 transition-colors hover:text-accent"
               >
                 Reset filters
               </button>
@@ -202,14 +202,14 @@ export default function CatalogPage() {
               href={`/catalog/category/${active}`}
               className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] px-4 py-3 transition-colors hover:border-[#2DD4A8]/30 hover:bg-[#2DD4A8]/[0.07]"
             >
-              <span className="text-sm text-white/65">
+              <span className="text-sm text-ink/65">
                 Read the full{' '}
-                <span className="font-semibold text-[#2DD4A8]">
+                <span className="font-semibold text-accent">
                   {CATEGORIES.find((c) => c.id === active)?.label}
                 </span>{' '}
                 research guide — mechanisms, themes & FAQ
               </span>
-              <ArrowRight className="h-4 w-4 shrink-0 text-[#2DD4A8]" />
+              <ArrowRight className="h-4 w-4 shrink-0 text-accent" />
             </Link>
           )}
 
@@ -238,20 +238,20 @@ export default function CatalogPage() {
       <section
         className={
           selected.length > 0
-            ? 'border-t border-white/[0.06] px-6 pb-28 pt-14 md:px-10'
-            : 'border-t border-white/[0.06] px-6 py-14 md:px-10'
+            ? 'border-t border-ink/[0.06] px-6 pb-28 pt-14 md:px-10'
+            : 'border-t border-ink/[0.06] px-6 py-14 md:px-10'
         }
       >
         <div className="mx-auto max-w-6xl">
           <div className="mb-6 text-center">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/[0.10] bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-white/45">
-              <Sparkles className="h-3 w-3 text-[#2DD4A8]/70" />
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-ink/[0.10] bg-ink/[0.03] px-3 py-1 text-[11px] font-medium text-ink/45">
+              <Sparkles className="h-3 w-3 text-accent/70" />
               Marketplace · Not yet open
             </div>
             <h2 className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
               Be first when the marketplace opens
             </h2>
-            <p className="mx-auto max-w-xl text-sm leading-relaxed text-white/45">
+            <p className="mx-auto max-w-xl text-sm leading-relaxed text-ink/45">
               The catalog is a research reference today. Vetted suppliers,
               third-party COAs, and transparent per-mg pricing are on the way —
               join the waitlist for early access.
@@ -306,10 +306,10 @@ function PeptideCard({
   return (
     <div
       className={
-        'group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)] ' +
+        'group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)] ' +
         (selected
           ? 'border-[#2DD4A8]/55 bg-[#2DD4A8]/[0.05]'
-          : 'border-white/[0.07] hover:border-[#2DD4A8]/25')
+          : 'border-ink/[0.07] hover:border-[#2DD4A8]/25')
       }
     >
       <Link
@@ -333,10 +333,10 @@ function PeptideCard({
         className={
           'absolute right-3 top-3 z-20 inline-flex h-7 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors ' +
           (selected
-            ? 'border-[#2DD4A8]/45 bg-[#2DD4A8]/15 text-[#2DD4A8]'
+            ? 'border-[#2DD4A8]/45 bg-[#2DD4A8]/15 text-accent'
             : disableAdd
-            ? 'cursor-not-allowed border-white/[0.06] bg-white/[0.02] text-white/25'
-            : 'border-white/[0.10] bg-white/[0.04] text-white/55 hover:border-[#2DD4A8]/40 hover:text-[#2DD4A8]')
+            ? 'cursor-not-allowed border-ink/[0.06] bg-ink/[0.02] text-ink/25'
+            : 'border-ink/[0.10] bg-ink/[0.04] text-ink/55 hover:border-[#2DD4A8]/40 hover:text-accent')
         }
       >
         {selected ? (
@@ -361,19 +361,19 @@ function PeptideCard({
               {peptide.name}
             </h3>
             {peptide.aliases?.[0] && (
-              <p className="mt-0.5 truncate text-xs text-white/35">
+              <p className="mt-0.5 truncate text-xs text-ink/35">
                 aka {peptide.aliases.join(', ')}
               </p>
             )}
           </div>
           {peptide.fdaApproved && (
-            <span className="shrink-0 rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+            <span className="shrink-0 rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
               FDA
             </span>
           )}
         </div>
 
-        <p className="mb-4 line-clamp-3 flex-1 text-[13px] leading-relaxed text-white/55">
+        <p className="mb-4 line-clamp-3 flex-1 text-[13px] leading-relaxed text-ink/55">
           {peptide.shortDescription}
         </p>
 
@@ -381,20 +381,20 @@ function PeptideCard({
           {peptide.categories.slice(0, 3).map((cat) => (
             <span
               key={cat}
-              className="rounded-md border border-white/[0.07] bg-white/[0.03] px-2 py-0.5 text-[10px] text-white/50"
+              className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-2 py-0.5 text-[10px] text-ink/50"
             >
               {CATEGORIES.find((c) => c.id === cat)?.label ?? cat}
             </span>
           ))}
         </div>
 
-        <div className="mt-4 flex items-center justify-between border-t border-white/[0.06] pt-3 text-[11px] text-white/30">
+        <div className="mt-4 flex items-center justify-between border-t border-ink/[0.06] pt-3 text-[11px] text-ink/30">
           <span>
             {peptide.molecularWeight
               ? `${peptide.molecularWeight.toLocaleString()} Da`
               : 'Reference entry'}
           </span>
-          <span className="flex items-center gap-1 text-[#2DD4A8]/70 transition-colors group-hover:text-[#2DD4A8]">
+          <span className="flex items-center gap-1 text-accent/70 transition-colors group-hover:text-accent">
             View
             <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
           </span>
@@ -420,11 +420,11 @@ function CompareBar({
     .filter((p): p is Peptide => Boolean(p))
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/[0.08] bg-[#0B1220]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0B1220]/85">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ink/[0.08] bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/85">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3 md:px-10">
-        <div className="flex items-center gap-2 text-xs text-white/55">
-          <GitCompareArrows className="h-4 w-4 text-[#2DD4A8]" />
-          <span className="font-medium text-white/80">
+        <div className="flex items-center gap-2 text-xs text-ink/55">
+          <GitCompareArrows className="h-4 w-4 text-accent" />
+          <span className="font-medium text-ink/80">
             Compare ({selected.length}/{MAX_COMPARE})
           </span>
         </div>
@@ -433,14 +433,14 @@ function CompareBar({
           {peptides.map((p) => (
             <span
               key={p.slug}
-              className="inline-flex items-center gap-1 rounded-md border border-white/[0.10] bg-white/[0.04] py-0.5 pl-2 pr-1 text-[11px] text-white/75"
+              className="inline-flex items-center gap-1 rounded-md border border-ink/[0.10] bg-ink/[0.04] py-0.5 pl-2 pr-1 text-[11px] text-ink/75"
             >
               {p.name}
               <button
                 type="button"
                 onClick={() => onRemove(p.slug)}
                 aria-label={`Remove ${p.name}`}
-                className="rounded p-0.5 text-white/40 transition-colors hover:bg-white/[0.08] hover:text-white"
+                className="rounded p-0.5 text-ink/40 transition-colors hover:bg-ink/[0.08] hover:text-ink"
               >
                 <X className="h-3 w-3" />
               </button>
@@ -452,7 +452,7 @@ function CompareBar({
           <button
             type="button"
             onClick={onClear}
-            className="rounded-lg px-3 py-1.5 text-xs text-white/50 transition-colors hover:bg-white/[0.04] hover:text-white"
+            className="rounded-lg px-3 py-1.5 text-xs text-ink/50 transition-colors hover:bg-ink/[0.04] hover:text-ink"
           >
             Clear
           </button>
@@ -467,7 +467,7 @@ function CompareBar({
           ) : (
             <span
               aria-disabled
-              className="cursor-not-allowed rounded-lg border border-white/[0.08] bg-white/[0.02] px-4 py-1.5 text-xs font-medium text-white/35"
+              className="cursor-not-allowed rounded-lg border border-ink/[0.08] bg-ink/[0.02] px-4 py-1.5 text-xs font-medium text-ink/35"
               title="Select at least 2 peptides to compare"
             >
               Compare
@@ -493,8 +493,8 @@ function Chip({
       onClick={onClick}
       className={
         active
-          ? 'rounded-full border border-[#2DD4A8]/40 bg-[#2DD4A8]/15 px-3 py-1 text-xs font-medium text-[#2DD4A8] transition-colors'
-          : 'rounded-full border border-white/[0.08] bg-white/[0.02] px-3 py-1 text-xs text-white/55 transition-colors hover:border-white/15 hover:text-white'
+          ? 'rounded-full border border-[#2DD4A8]/40 bg-[#2DD4A8]/15 px-3 py-1 text-xs font-medium text-accent transition-colors'
+          : 'rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-ink/15 hover:text-ink'
       }
     >
       {children}
@@ -512,23 +512,23 @@ function TrustItem({
   body: string
 }) {
   return (
-    <div className="rounded-xl border border-white/[0.07] bg-white/[0.025] p-4">
+    <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.025] p-4">
       <div className="mb-2 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.08] text-[#2DD4A8]">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.08] text-accent">
           <Icon className="h-3.5 w-3.5" strokeWidth={1.75} />
         </div>
         <h3 className="text-sm font-semibold">{title}</h3>
       </div>
-      <p className="text-xs leading-relaxed text-white/45">{body}</p>
+      <p className="text-xs leading-relaxed text-ink/45">{body}</p>
     </div>
   )
 }
 
 function EmptyState() {
   return (
-    <div className="rounded-2xl border border-dashed border-white/[0.08] bg-white/[0.015] px-6 py-16 text-center">
-      <p className="text-sm text-white/50">No peptides match those filters.</p>
-      <p className="mt-1 text-xs text-white/30">
+    <div className="rounded-2xl border border-dashed border-ink/[0.08] bg-ink/[0.015] px-6 py-16 text-center">
+      <p className="text-sm text-ink/50">No peptides match those filters.</p>
+      <p className="mt-1 text-xs text-ink/30">
         Try a broader search or reset the category filter.
       </p>
     </div>

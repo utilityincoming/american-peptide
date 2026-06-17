@@ -208,7 +208,7 @@ export default function BPC157Page() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
@@ -223,16 +223,16 @@ export default function BPC157Page() {
       />
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
-        <Link href="/" className="text-sm text-white/35 transition-colors hover:text-white">
+      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+        <Link href="/" className="text-sm text-ink/35 transition-colors hover:text-ink">
           Home
         </Link>
-        <span className="text-white/20">/</span>
+        <span className="text-ink/20">/</span>
         <span className="truncate text-sm font-medium">BPC-157</span>
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-40"
@@ -244,7 +244,7 @@ export default function BPC157Page() {
         />
         <div className="relative mx-auto max-w-4xl">
           <div className="mb-2 flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-medium text-[#2DD4A8]">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-medium text-accent">
               <FlaskConical className="h-3 w-3" />
               Healing &amp; Repair · 15 residues
             </span>
@@ -259,14 +259,14 @@ export default function BPC157Page() {
               {' '}Research Guide
             </span>
           </h1>
-          <p className="max-w-2xl text-sm leading-relaxed text-white/55 md:text-base">
+          <p className="max-w-2xl text-sm leading-relaxed text-ink/55 md:text-base">
             Body Protective Compound 157 is a synthetic 15-amino-acid
             peptide derived from a cytoprotective protein in human gastric
             juice. It is the most studied non-approved tissue-repair research
             peptide, with a substantial preclinical literature and no
             completed human clinical trials.
           </p>
-          <p className="mt-3 text-xs text-white/30">
+          <p className="mt-3 text-xs text-ink/30">
             Research and educational reference only. Not medical advice,
             dosing guidance, or an offer for sale.
           </p>
@@ -280,10 +280,10 @@ export default function BPC157Page() {
 
             {/* What it is */}
             <section>
-              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 What BPC-157 is
               </h2>
-              <div className="space-y-4 text-sm leading-relaxed text-white/65">
+              <div className="space-y-4 text-sm leading-relaxed text-ink/65">
                 <p>
                   BPC-157 is a synthetic pentadecapeptide — a 15-amino-acid
                   chain (sequence: GEPPPGKPADDAGLV) derived from a protective
@@ -313,10 +313,10 @@ export default function BPC157Page() {
 
             {/* Proposed mechanisms */}
             <section>
-              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-white/40">
+              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Proposed mechanisms
               </h2>
-              <p className="mb-6 text-xs text-white/30">
+              <p className="mb-6 text-xs text-ink/30">
                 None fully established in humans; based on cell culture and
                 rodent experiments
               </p>
@@ -324,7 +324,7 @@ export default function BPC157Page() {
                 {MECHANISMS.map((m) => (
                   <div
                     key={m.label}
-                    className="rounded-xl border border-white/[0.07] bg-white/[0.03] p-5"
+                    className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-5"
                     style={{ borderTopColor: m.color, borderTopWidth: 2 }}
                   >
                     <div
@@ -336,7 +336,7 @@ export default function BPC157Page() {
                     <p className="mb-2 text-sm font-semibold" style={{ color: m.color }}>
                       {m.label}
                     </p>
-                    <p className="text-xs leading-relaxed text-white/50">{m.desc}</p>
+                    <p className="text-xs leading-relaxed text-ink/50">{m.desc}</p>
                   </div>
                 ))}
               </div>
@@ -344,30 +344,30 @@ export default function BPC157Page() {
 
             {/* Evidence table */}
             <section>
-              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-white/40">
+              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Evidence summary
               </h2>
-              <p className="mb-5 text-xs text-white/30">
+              <p className="mb-5 text-xs text-ink/30">
                 All completed studies are in cell or animal models
               </p>
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[520px] text-sm">
                   <thead>
-                    <tr className="border-b border-white/[0.06] text-left text-xs text-white/35">
+                    <tr className="border-b border-ink/[0.06] text-left text-xs text-ink/35">
                       <th className="pb-3 pr-4 font-medium">Research context</th>
                       <th className="pb-3 pr-4 font-medium">Model</th>
                       <th className="pb-3 pr-4 font-medium">Reported finding</th>
                       <th className="pb-3 font-medium">Evidence level</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/[0.04]">
+                  <tbody className="divide-y divide-ink/[0.04]">
                     {EVIDENCE_TABLE.map((row) => (
-                      <tr key={row.context} className="hover:bg-white/[0.02]">
-                        <td className="py-3 pr-4 text-sm font-medium text-white/80">
+                      <tr key={row.context} className="hover:bg-ink/[0.02]">
+                        <td className="py-3 pr-4 text-sm font-medium text-ink/80">
                           {row.context}
                         </td>
-                        <td className="py-3 pr-4 text-xs text-white/50">{row.model}</td>
-                        <td className="py-3 pr-4 text-xs leading-relaxed text-white/55">
+                        <td className="py-3 pr-4 text-xs text-ink/50">{row.model}</td>
+                        <td className="py-3 pr-4 text-xs leading-relaxed text-ink/55">
                           {row.finding}
                         </td>
                         <td className="py-3">
@@ -390,40 +390,40 @@ export default function BPC157Page() {
 
             {/* BPC-157 vs TB-500 */}
             <section>
-              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-white/40">
+              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 BPC-157 vs TB-500
               </h2>
-              <p className="mb-5 text-xs text-white/30">
+              <p className="mb-5 text-xs text-ink/30">
                 Two distinct peptides frequently studied in overlapping
                 contexts — different sequences, different mechanisms
               </p>
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[480px] text-sm">
                   <thead>
-                    <tr className="border-b border-white/[0.06] text-left text-xs text-white/35">
+                    <tr className="border-b border-ink/[0.06] text-left text-xs text-ink/35">
                       <th className="pb-3 pr-4 font-medium w-32">Dimension</th>
                       <th className="pb-3 pr-4 font-medium">
-                        <span className="text-[#2DD4A8]">BPC-157</span>
+                        <span className="text-accent">BPC-157</span>
                       </th>
                       <th className="pb-3 font-medium">
                         <span className="text-[#818CF8]">TB-500</span>
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/[0.04]">
+                  <tbody className="divide-y divide-ink/[0.04]">
                     {VS_TB500.map((row) => (
-                      <tr key={row.dim} className="hover:bg-white/[0.02]">
-                        <td className="py-3 pr-4 text-xs font-medium text-white/40">
+                      <tr key={row.dim} className="hover:bg-ink/[0.02]">
+                        <td className="py-3 pr-4 text-xs font-medium text-ink/40">
                           {row.dim}
                         </td>
-                        <td className="py-3 pr-4 text-xs text-white/65">{row.bpc}</td>
-                        <td className="py-3 text-xs text-white/65">{row.tb}</td>
+                        <td className="py-3 pr-4 text-xs text-ink/65">{row.bpc}</td>
+                        <td className="py-3 text-xs text-ink/65">{row.tb}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <p className="mt-3 text-xs text-white/30">
+              <p className="mt-3 text-xs text-ink/30">
                 The two compounds are often compared because they appear in
                 overlapping tissue-repair research contexts, but their
                 sequences, targets, and proposed mechanisms are unrelated.
@@ -432,10 +432,10 @@ export default function BPC157Page() {
 
             {/* Synthesis quality */}
             <section>
-              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Synthesis quality and purity
               </h2>
-              <div className="space-y-4 text-sm leading-relaxed text-white/65">
+              <div className="space-y-4 text-sm leading-relaxed text-ink/65">
                 <p>
                   BPC-157&rsquo;s 15-residue length places it at the short end of
                   research peptides, making synthesis comparatively
@@ -456,7 +456,7 @@ export default function BPC157Page() {
                 </p>
                 <Link
                   href="/synthesis"
-                  className="group inline-flex items-center gap-1.5 text-xs font-medium text-[#2DD4A8]"
+                  className="group inline-flex items-center gap-1.5 text-xs font-medium text-accent"
                 >
                   How research peptides are synthesized and characterized
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -466,17 +466,17 @@ export default function BPC157Page() {
 
             {/* FAQ */}
             <section>
-              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-white/40">
+              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Frequently asked questions
               </h2>
               <div className="space-y-5">
                 {FAQS.map((faq) => (
                   <div
                     key={faq.q}
-                    className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5"
+                    className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5"
                   >
-                    <p className="mb-2 text-sm font-semibold text-white/90">{faq.q}</p>
-                    <p className="text-sm leading-relaxed text-white/55">{faq.a}</p>
+                    <p className="mb-2 text-sm font-semibold text-ink/90">{faq.q}</p>
+                    <p className="text-sm leading-relaxed text-ink/55">{faq.a}</p>
                   </div>
                 ))}
               </div>
@@ -485,8 +485,8 @@ export default function BPC157Page() {
             {/* Disclaimer */}
             <section className="flex gap-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5">
               <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400/70" />
-              <div className="text-xs leading-relaxed text-white/45">
-                <strong className="text-white/60">Research reference only.</strong>{' '}
+              <div className="text-xs leading-relaxed text-ink/45">
+                <strong className="text-ink/60">Research reference only.</strong>{' '}
                 BPC-157 is not approved for any medical use. The evidence base
                 is preclinical; controlled human efficacy data do not exist.
                 Nothing on this page constitutes medical advice, dosing
@@ -499,8 +499,8 @@ export default function BPC157Page() {
           {/* ── Sidebar ── */}
           <aside className="space-y-6 lg:sticky lg:top-6 lg:self-start">
             {/* Catalog entries */}
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Catalog entries
               </p>
               {[
@@ -511,23 +511,23 @@ export default function BPC157Page() {
                 <Link
                   key={item.slug}
                   href={`/catalog/${item.slug}`}
-                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-white/[0.04]"
+                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-ink/[0.04]"
                 >
                   <div>
-                    <p className="text-sm font-medium transition-colors group-hover:text-[#2DD4A8]"
+                    <p className="text-sm font-medium transition-colors group-hover:text-accent"
                        style={{ color: item.color }}>
                       {item.label}
                     </p>
-                    <p className="text-xs text-white/30">{item.sub}</p>
+                    <p className="text-xs text-ink/30">{item.sub}</p>
                   </div>
-                  <ChevronRight className="h-3.5 w-3.5 text-white/20 transition-colors group-hover:text-[#2DD4A8]" />
+                  <ChevronRight className="h-3.5 w-3.5 text-ink/20 transition-colors group-hover:text-accent" />
                 </Link>
               ))}
             </div>
 
             {/* Related resources */}
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Related resources
               </p>
               {[
@@ -541,15 +541,15 @@ export default function BPC157Page() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-white/[0.04]"
+                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-ink/[0.04]"
                 >
                   <div>
-                    <p className="text-sm font-medium text-white/70 transition-colors group-hover:text-white">
+                    <p className="text-sm font-medium text-ink/70 transition-colors group-hover:text-ink">
                       {link.label}
                     </p>
-                    <p className="text-xs text-white/30">{link.sub}</p>
+                    <p className="text-xs text-ink/30">{link.sub}</p>
                   </div>
-                  <ChevronRight className="h-3.5 w-3.5 text-white/20 group-hover:text-white/50" />
+                  <ChevronRight className="h-3.5 w-3.5 text-ink/20 group-hover:text-ink/50" />
                 </Link>
               ))}
             </div>
@@ -557,12 +557,12 @@ export default function BPC157Page() {
             {/* Marketplace CTA */}
             <div className="rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] p-5">
               <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]/10">
-                <FlaskConical className="h-4 w-4 text-[#2DD4A8]" />
+                <FlaskConical className="h-4 w-4 text-accent" />
               </div>
-              <p className="mb-1 text-sm font-semibold text-[#2DD4A8]">
+              <p className="mb-1 text-sm font-semibold text-accent">
                 Marketplace coming soon
               </p>
-              <p className="mb-4 text-xs leading-relaxed text-white/45">
+              <p className="mb-4 text-xs leading-relaxed text-ink/45">
                 COA-verified research peptides with transparent pricing.
                 Be first when the healing-peptide marketplace opens.
               </p>
@@ -576,17 +576,17 @@ export default function BPC157Page() {
             </div>
 
             {/* Research agent CTA */}
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.03] p-5">
-              <p className="mb-1 text-sm font-semibold text-white/80">
+            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-5">
+              <p className="mb-1 text-sm font-semibold text-ink/80">
                 Ask the Peptide Agent
               </p>
-              <p className="mb-4 text-xs leading-relaxed text-white/40">
+              <p className="mb-4 text-xs leading-relaxed text-ink/40">
                 Get citation-backed answers about BPC-157 mechanisms, trial
                 status, and related compounds.
               </p>
               <Link
                 href="/research"
-                className="flex items-center justify-center gap-2 rounded-lg border border-white/[0.10] bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-white/70 transition-colors hover:border-white/20 hover:text-white"
+                className="flex items-center justify-center gap-2 rounded-lg border border-ink/[0.10] bg-ink/[0.04] px-4 py-2.5 text-sm font-medium text-ink/70 transition-colors hover:border-ink/20 hover:text-ink"
               >
                 Open Peptide Agent
                 <ArrowRight className="h-4 w-4" />

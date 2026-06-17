@@ -191,9 +191,9 @@ const PIPELINE: PipelineEntry[] = [
 ]
 
 const MATURITY = {
-  approved:   { label: 'Approved',        dot: 'bg-[#2DD4A8]',    badge: 'bg-[#2DD4A8]/10 text-[#2DD4A8] border-[#2DD4A8]/20',      ring: 'border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.03]' },
+  approved:   { label: 'Approved',        dot: 'bg-[#2DD4A8]',    badge: 'bg-[#2DD4A8]/10 text-accent border-[#2DD4A8]/20',      ring: 'border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.03]' },
   clinical:   { label: 'Clinical Trials', dot: 'bg-amber-400',    badge: 'bg-amber-500/10 text-amber-400 border-amber-500/20',       ring: 'border-amber-500/15 bg-amber-500/[0.02]'  },
-  preclinical:{ label: 'Preclinical',     dot: 'bg-white/20',     badge: 'bg-white/[0.04] text-white/35 border-white/10',            ring: 'border-white/[0.07] bg-white/[0.015]'     },
+  preclinical:{ label: 'Preclinical',     dot: 'bg-ink/20',     badge: 'bg-ink/[0.04] text-ink/35 border-ink/10',            ring: 'border-ink/[0.07] bg-ink/[0.015]'     },
 }
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -209,11 +209,11 @@ function SectionHeader({
 }) {
   return (
     <div className="mb-8">
-      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-[#2DD4A8]/60">
+      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-accent/60">
         {eyebrow}
       </p>
-      <h2 className="mb-2 text-2xl font-bold tracking-tight text-white md:text-3xl">{title}</h2>
-      <p className="max-w-2xl text-sm text-white/40 md:text-base">{subtitle}</p>
+      <h2 className="mb-2 text-2xl font-bold tracking-tight text-ink md:text-3xl">{title}</h2>
+      <p className="max-w-2xl text-sm text-ink/40 md:text-base">{subtitle}</p>
     </div>
   )
 }
@@ -221,10 +221,10 @@ function SectionHeader({
 function DetailRow({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="mb-0.5 text-[9px] font-semibold uppercase tracking-widest text-white/25">
+      <p className="mb-0.5 text-[9px] font-semibold uppercase tracking-widest text-ink/25">
         {label}
       </p>
-      <p className="text-xs leading-relaxed text-white/60">{value}</p>
+      <p className="text-xs leading-relaxed text-ink/60">{value}</p>
     </div>
   )
 }
@@ -233,7 +233,7 @@ function Tag({ label, accent = false }: { label: string; accent?: boolean }) {
   return (
     <span
       className={`rounded-md px-2.5 py-1 text-[11px] font-medium ${
-        accent ? 'bg-[#2DD4A8]/10 text-[#2DD4A8]' : 'bg-white/[0.05] text-white/50'
+        accent ? 'bg-[#2DD4A8]/10 text-accent' : 'bg-ink/[0.05] text-ink/50'
       }`}
     >
       {label}
@@ -265,7 +265,7 @@ function DrugCard({ drug }: { drug: Drug }) {
         <div className="mb-4 flex items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="mb-0.5 flex flex-wrap items-center gap-2">
-              <h3 className="text-lg font-bold text-white">{drug.name}</h3>
+              <h3 className="text-lg font-bold text-ink">{drug.name}</h3>
               <span
                 className="rounded px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide"
                 style={{
@@ -276,7 +276,7 @@ function DrugCard({ drug }: { drug: Drug }) {
                 FDA {drug.approvedYear}
               </span>
             </div>
-            <p className="text-sm text-white/35">{drug.brand}</p>
+            <p className="text-sm text-ink/35">{drug.brand}</p>
           </div>
           <div
             className="flex-shrink-0 rounded-lg border px-3 py-1 text-xs font-semibold"
@@ -291,23 +291,23 @@ function DrugCard({ drug }: { drug: Drug }) {
         </div>
 
         {/* Indication */}
-        <p className="mb-4 flex-1 text-sm leading-relaxed text-white/55">
-          <span className="font-medium text-white/70">Indication: </span>
+        <p className="mb-4 flex-1 text-sm leading-relaxed text-ink/55">
+          <span className="font-medium text-ink/70">Indication: </span>
           {drug.indication}
         </p>
 
         {/* Expanded detail panel */}
         {open && (
-          <div className="mb-4 space-y-3 rounded-xl border border-white/[0.06] bg-white/[0.025] p-4">
+          <div className="mb-4 space-y-3 rounded-xl border border-ink/[0.06] bg-ink/[0.025] p-4">
             <DetailRow label="Sponsor" value={drug.sponsor} />
             <DetailRow label="Target" value={drug.targetFull} />
             <DetailRow label="Structure" value={drug.structure} />
             {drug.sequence && (
               <div>
-                <p className="mb-1 text-[9px] font-semibold uppercase tracking-widest text-white/25">
+                <p className="mb-1 text-[9px] font-semibold uppercase tracking-widest text-ink/25">
                   Sequence
                 </p>
-                <code className="block font-mono text-xs leading-relaxed text-[#2DD4A8]/80">
+                <code className="block font-mono text-xs leading-relaxed text-accent/80">
                   {drug.sequence}
                 </code>
               </div>
@@ -324,7 +324,7 @@ function DrugCard({ drug }: { drug: Drug }) {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setOpen(!open)}
-            className="flex items-center gap-1.5 rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-white/50 transition-colors hover:border-white/20 hover:text-white"
+            className="flex items-center gap-1.5 rounded-lg border border-ink/10 px-3 py-1.5 text-xs font-medium text-ink/50 transition-colors hover:border-ink/20 hover:text-ink"
           >
             {open ? (
               <>
@@ -358,7 +358,7 @@ function ReceptorCard({ receptor }: { receptor: Receptor }) {
       className={`flex flex-col rounded-2xl border p-5 transition-all duration-200 hover:brightness-110 ${m.ring}`}
     >
       <div className="mb-3 flex items-start justify-between gap-2">
-        <span className="text-2xl font-bold text-white">{receptor.id}</span>
+        <span className="text-2xl font-bold text-ink">{receptor.id}</span>
         <span
           className={`rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${m.badge}`}
         >
@@ -367,28 +367,28 @@ function ReceptorCard({ receptor }: { receptor: Receptor }) {
       </div>
       <div className="space-y-2.5 text-xs">
         <div>
-          <p className="mb-0.5 text-[9px] font-semibold uppercase tracking-widest text-white/25">
+          <p className="mb-0.5 text-[9px] font-semibold uppercase tracking-widest text-ink/25">
             Location
           </p>
-          <p className="text-white/50">{receptor.location}</p>
+          <p className="text-ink/50">{receptor.location}</p>
         </div>
         <div>
-          <p className="mb-0.5 text-[9px] font-semibold uppercase tracking-widest text-white/25">
+          <p className="mb-0.5 text-[9px] font-semibold uppercase tracking-widest text-ink/25">
             Function
           </p>
-          <p className="leading-relaxed text-white/50">{receptor.primaryFunction}</p>
+          <p className="leading-relaxed text-ink/50">{receptor.primaryFunction}</p>
         </div>
         <div>
-          <p className="mb-0.5 text-[9px] font-semibold uppercase tracking-widest text-white/25">
+          <p className="mb-0.5 text-[9px] font-semibold uppercase tracking-widest text-ink/25">
             Key agonist
           </p>
           <p
             className={`font-medium ${
               receptor.maturity === 'approved'
-                ? 'text-[#2DD4A8]'
+                ? 'text-accent'
                 : receptor.maturity === 'clinical'
                   ? 'text-amber-400'
-                  : 'text-white/30'
+                  : 'text-ink/30'
             }`}
           >
             {receptor.keyAgonist}
@@ -410,13 +410,13 @@ function RadarTooltip({
 }) {
   if (!active || !payload?.length) return null
   return (
-    <div className="rounded-xl border border-white/10 bg-[#0F1A2E] p-3 text-xs shadow-xl">
-      <p className="mb-2 font-semibold text-white">{label}</p>
+    <div className="rounded-xl border border-ink/10 bg-panel p-3 text-xs shadow-xl">
+      <p className="mb-2 font-semibold text-ink">{label}</p>
       {payload.map((p) => (
         <div key={p.name} className="flex items-center gap-2 py-0.5">
           <div className="h-2 w-2 flex-shrink-0 rounded-full" style={{ backgroundColor: p.color }} />
-          <span className="text-white/50">{p.name}:</span>
-          <span className="ml-auto pl-3 text-white">{p.value}</span>
+          <span className="text-ink/50">{p.name}:</span>
+          <span className="ml-auto pl-3 text-ink">{p.value}</span>
         </div>
       ))}
     </div>
@@ -444,21 +444,21 @@ function ToolCard({
       className={`group flex flex-col rounded-2xl border p-6 transition-all duration-200 ${
         accent
           ? 'border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.05] hover:border-[#2DD4A8]/40 hover:bg-[#2DD4A8]/[0.08]'
-          : 'border-white/[0.07] bg-white/[0.025] hover:border-white/[0.12] hover:bg-white/[0.035]'
+          : 'border-ink/[0.07] bg-ink/[0.025] hover:border-ink/[0.12] hover:bg-ink/[0.035]'
       }`}
     >
       <div
         className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl ${
-          accent ? 'bg-[#2DD4A8]/15 text-[#2DD4A8]' : 'bg-white/[0.06] text-white/50'
+          accent ? 'bg-[#2DD4A8]/15 text-accent' : 'bg-ink/[0.06] text-ink/50'
         }`}
       >
         {icon}
       </div>
-      <h3 className="mb-1.5 font-semibold text-white">{title}</h3>
-      <p className="mb-4 flex-1 text-sm leading-relaxed text-white/45">{description}</p>
+      <h3 className="mb-1.5 font-semibold text-ink">{title}</h3>
+      <p className="mb-4 flex-1 text-sm leading-relaxed text-ink/45">{description}</p>
       <div
         className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${
-          accent ? 'text-[#2DD4A8]' : 'text-white/40 group-hover:text-white/70'
+          accent ? 'text-accent' : 'text-ink/40 group-hover:text-ink/70'
         }`}
       >
         {cta}
@@ -472,7 +472,7 @@ function ToolCard({
 
 export default function MelanocortinPage() {
   return (
-    <div className="relative min-h-screen bg-[#0B1220] text-white">
+    <div className="relative min-h-screen bg-surface text-ink">
 
       {/* Background */}
       <div aria-hidden className="pointer-events-none fixed inset-0 select-none">
@@ -490,11 +490,11 @@ export default function MelanocortinPage() {
       </div>
 
       {/* ── Page identity / metadata ── */}
-      <nav className="relative z-10 flex items-center justify-between border-b border-white/[0.06] px-6 py-4 md:px-10">
-        <span className="text-sm font-medium text-white/70">
+      <nav className="relative z-10 flex items-center justify-between border-b border-ink/[0.06] px-6 py-4 md:px-10">
+        <span className="text-sm font-medium text-ink/70">
           Melanocortin Research Hub
         </span>
-        <div className="flex items-center gap-1.5 text-xs text-white/25">
+        <div className="flex items-center gap-1.5 text-xs text-ink/25">
           <Calendar className="h-3.5 w-3.5" />
           Last updated: May 2026
         </div>
@@ -504,7 +504,7 @@ export default function MelanocortinPage() {
 
         {/* ── Hero ── */}
         <section className="mb-20 max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.07] px-3.5 py-1.5 text-xs font-medium text-[#2DD4A8]">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.07] px-3.5 py-1.5 text-xs font-medium text-accent">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2DD4A8] opacity-75" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2DD4A8]" />
@@ -518,7 +518,7 @@ export default function MelanocortinPage() {
               Research Hub
             </span>
           </h1>
-          <p className="max-w-2xl text-lg leading-relaxed text-white/50">
+          <p className="max-w-2xl text-lg leading-relaxed text-ink/50">
             Exploring MC1R–MC5R receptor agonists — from FDA-approved therapeutics to
             next-generation candidates. 3 approved therapies · 5 receptor subtypes · expanding
             pipeline.
@@ -533,10 +533,10 @@ export default function MelanocortinPage() {
             ].map(({ value, label }) => (
               <div
                 key={label}
-                className="flex items-center gap-2.5 rounded-xl border border-white/[0.07] bg-white/[0.03] px-4 py-2.5"
+                className="flex items-center gap-2.5 rounded-xl border border-ink/[0.07] bg-ink/[0.03] px-4 py-2.5"
               >
-                <span className="text-xl font-bold text-[#2DD4A8]">{value}</span>
-                <span className="text-sm text-white/40">{label}</span>
+                <span className="text-xl font-bold text-accent">{value}</span>
+                <span className="text-sm text-ink/40">{label}</span>
               </div>
             ))}
           </div>
@@ -568,7 +568,7 @@ export default function MelanocortinPage() {
           <div className="mb-5 flex flex-wrap items-center gap-5">
             {(Object.entries(MATURITY) as [keyof typeof MATURITY, (typeof MATURITY)[keyof typeof MATURITY]][]).map(
               ([key, cfg]) => (
-                <div key={key} className="flex items-center gap-1.5 text-xs text-white/40">
+                <div key={key} className="flex items-center gap-1.5 text-xs text-ink/40">
                   <div className={`h-2 w-2 rounded-full ${cfg.dot}`} />
                   {cfg.label}
                 </div>
@@ -584,16 +584,16 @@ export default function MelanocortinPage() {
           </div>
 
           {/* Radar chart */}
-          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 md:p-8">
+          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 md:p-8">
             <div className="mb-1">
-              <h3 className="text-base font-semibold text-white">
+              <h3 className="text-base font-semibold text-ink">
                 Receptor Binding Selectivity Profiles
               </h3>
-              <p className="mt-1 text-xs text-white/35">
+              <p className="mt-1 text-xs text-ink/35">
                 Relative binding activity across MC1R–MC5R for each FDA-approved agonist
               </p>
             </div>
-            <p className="mb-6 flex items-center gap-1.5 text-[10px] text-white/25">
+            <p className="mb-6 flex items-center gap-1.5 text-[10px] text-ink/25">
               <Info className="h-3 w-3 flex-shrink-0" />
               Normalized relative values (0–100) for visualization only — not exact K<sub>i</sub> or
               EC<sub>50</sub> data.
@@ -656,14 +656,14 @@ export default function MelanocortinPage() {
             {PIPELINE.map((item, idx) => (
               <div
                 key={idx}
-                className="flex flex-col gap-4 rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 transition-colors hover:border-white/[0.11] hover:bg-white/[0.03] sm:flex-row sm:items-start"
+                className="flex flex-col gap-4 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6 transition-colors hover:border-ink/[0.11] hover:bg-ink/[0.03] sm:flex-row sm:items-start"
               >
                 {/* Status badge */}
                 <div className="flex-shrink-0 pt-0.5">
                   <span
                     className={`inline-flex rounded-lg px-3 py-1 text-xs font-semibold ${
                       item.status === 'active'
-                        ? 'bg-[#2DD4A8]/10 text-[#2DD4A8]'
+                        ? 'bg-[#2DD4A8]/10 text-accent'
                         : 'bg-amber-500/10 text-amber-400'
                     }`}
                   >
@@ -674,10 +674,10 @@ export default function MelanocortinPage() {
                 {/* Content */}
                 <div className="min-w-0 flex-1">
                   <div className="mb-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <h4 className="text-base font-semibold text-white">{item.name}</h4>
-                    <span className="text-sm text-white/35">{item.sponsor}</span>
+                    <h4 className="text-base font-semibold text-ink">{item.name}</h4>
+                    <span className="text-sm text-ink/35">{item.sponsor}</span>
                   </div>
-                  <p className="mb-3 text-sm text-white/55">{item.indication}</p>
+                  <p className="mb-3 text-sm text-ink/55">{item.indication}</p>
                   <div className="flex flex-wrap gap-2">
                     <Tag label={item.target} />
                     <Tag label={item.modality} />
@@ -724,23 +724,23 @@ export default function MelanocortinPage() {
       </div>
 
       {/* ── Footer ── */}
-      <footer className="relative z-10 border-t border-white/[0.06] px-6 py-10 md:px-10">
+      <footer className="relative z-10 border-t border-ink/[0.06] px-6 py-10 md:px-10">
         <div className="mx-auto max-w-7xl space-y-5">
-          <div className="flex flex-col gap-2 text-xs text-white/30 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-2 text-xs text-ink/30 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <Link href="/" className="transition-colors hover:text-white/60">
+              <Link href="/" className="transition-colors hover:text-ink/60">
                 AmericanPeptide.com
               </Link>
-              <span className="text-white/15">·</span>
+              <span className="text-ink/15">·</span>
               <span>Melanocortin Research Hub</span>
-              <span className="text-white/15">·</span>
+              <span className="text-ink/15">·</span>
               <span className="flex items-center gap-1">
                 <Calendar className="h-3 w-3" /> May 2026
               </span>
             </div>
             <Link
               href="/research"
-              className="transition-colors hover:text-white/60"
+              className="transition-colors hover:text-ink/60"
             >
               Peptide Agent →
             </Link>

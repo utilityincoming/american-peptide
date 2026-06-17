@@ -81,13 +81,13 @@ export default function WaitlistForm({
       >
         <div className="flex items-start gap-3">
           <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#2DD4A8]/15">
-            <Check className="h-4 w-4 text-[#2DD4A8]" />
+            <Check className="h-4 w-4 text-accent" />
           </div>
           <div>
-            <p className="text-sm font-semibold text-white">
+            <p className="text-sm font-semibold text-ink">
               Thanks — you&apos;re in.
             </p>
-            <p className="mt-1 text-sm text-white/65">{message}</p>
+            <p className="mt-1 text-sm text-ink/65">{message}</p>
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ export default function WaitlistForm({
     <form
       onSubmit={onSubmit}
       className={
-        'rounded-2xl border border-white/[0.08] bg-white/[0.025] ' +
+        'rounded-2xl border border-ink/[0.08] bg-ink/[0.025] ' +
         (isFull ? 'px-6 py-6 md:px-8 md:py-7' : 'px-5 py-5')
       }
       noValidate
@@ -109,8 +109,8 @@ export default function WaitlistForm({
         <h3
           className={
             isFull
-              ? 'mb-1.5 text-lg font-semibold text-white md:text-xl'
-              : 'mb-1 text-base font-semibold text-white'
+              ? 'mb-1.5 text-lg font-semibold text-ink md:text-xl'
+              : 'mb-1 text-base font-semibold text-ink'
           }
         >
           {heading}
@@ -120,8 +120,8 @@ export default function WaitlistForm({
         <p
           className={
             isFull
-              ? 'mb-5 max-w-xl text-sm leading-relaxed text-white/55 md:text-[15px]'
-              : 'mb-4 text-xs leading-relaxed text-white/55'
+              ? 'mb-5 max-w-xl text-sm leading-relaxed text-ink/55 md:text-[15px]'
+              : 'mb-4 text-xs leading-relaxed text-ink/55'
           }
         >
           {description}
@@ -145,7 +145,7 @@ export default function WaitlistForm({
         aria-label="I am a…"
         disabled={status === 'submitting'}
       >
-        <legend className="mb-1.5 w-full text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40">
+        <legend className="mb-1.5 w-full text-[11px] font-semibold uppercase tracking-[0.14em] text-ink/40">
           I am a…
         </legend>
         <RoleChip
@@ -177,7 +177,7 @@ export default function WaitlistForm({
         }
       >
         <div className="relative flex-1">
-          <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/35" />
+          <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/35" />
           <input
             id={emailId}
             type="email"
@@ -193,7 +193,7 @@ export default function WaitlistForm({
             disabled={status === 'submitting'}
             aria-invalid={status === 'error'}
             aria-describedby={status === 'error' ? `${emailId}-err` : undefined}
-            className="w-full rounded-xl border border-white/[0.08] bg-white/[0.03] py-2.5 pl-9 pr-3 text-sm text-white placeholder:text-white/30 focus:border-[#2DD4A8]/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40 disabled:opacity-50"
+            className="w-full rounded-xl border border-ink/[0.08] bg-ink/[0.03] py-2.5 pl-9 pr-3 text-sm text-ink placeholder:text-ink/30 focus:border-[#2DD4A8]/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40 disabled:opacity-50"
           />
         </div>
         <button
@@ -226,7 +226,7 @@ export default function WaitlistForm({
         </p>
       )}
 
-      <p className="mt-3 text-[11px] text-white/35">
+      <p className="mt-3 text-[11px] text-ink/35">
         No spam. One email when the marketplace opens. Unsubscribe anytime.
       </p>
     </form>
@@ -251,8 +251,8 @@ function RoleChip({
       className={
         'inline-flex cursor-pointer items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors ' +
         (active
-          ? 'border-[#2DD4A8]/40 bg-[#2DD4A8]/15 text-[#2DD4A8]'
-          : 'border-white/[0.08] bg-white/[0.02] text-white/55 hover:border-white/15 hover:text-white')
+          ? 'border-[#2DD4A8]/40 bg-[#2DD4A8]/15 text-accent'
+          : 'border-ink/[0.08] bg-ink/[0.02] text-ink/55 hover:border-ink/15 hover:text-ink')
       }
     >
       <input

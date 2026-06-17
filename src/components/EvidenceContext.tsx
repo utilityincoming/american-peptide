@@ -37,10 +37,10 @@ export default function EvidenceContext({
     .slice(0, 6)
 
   return (
-    <section className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6">
+    <section className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6">
       <div className="mb-4 flex items-center gap-2">
-        <GraduationCap className="h-4 w-4 text-[#2DD4A8]" strokeWidth={1.75} />
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-white/40">
+        <GraduationCap className="h-4 w-4 text-accent" strokeWidth={1.75} />
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-ink/40">
           Understand the evidence
         </h2>
       </div>
@@ -50,24 +50,24 @@ export default function EvidenceContext({
         href="/learn/evidence-hierarchy"
         className="group flex items-start gap-3 rounded-xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-4 transition-colors hover:border-[#2DD4A8]/30 hover:bg-[#2DD4A8]/[0.07]"
       >
-        <Scale className="mt-0.5 h-4 w-4 shrink-0 text-[#2DD4A8]" strokeWidth={1.75} />
+        <Scale className="mt-0.5 h-4 w-4 shrink-0 text-accent" strokeWidth={1.75} />
         <div className="flex-1">
-          <p className="mb-0.5 text-sm font-medium text-white/85">
+          <p className="mb-0.5 text-sm font-medium text-ink/85">
             How to weigh this evidence
           </p>
-          <p className="text-[13px] leading-relaxed text-white/55">
+          <p className="text-[13px] leading-relaxed text-ink/55">
             Preclinical, observational, and randomized findings carry very
             different weight. The evidence hierarchy shows how to rank what you
             read before drawing conclusions.
           </p>
         </div>
-        <ArrowUpRight className="h-4 w-4 shrink-0 text-[#2DD4A8]/70 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        <ArrowUpRight className="h-4 w-4 shrink-0 text-accent/70 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </Link>
 
       {/* Scoped key terms */}
       {terms.length > 0 && (
         <div className="mt-4">
-          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/35">
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink/35">
             Key terms
           </p>
           <div className="flex flex-wrap gap-1.5">
@@ -76,7 +76,7 @@ export default function EvidenceContext({
                 key={t.slug}
                 href={`/glossary/${t.slug}`}
                 title={t.short}
-                className="inline-flex items-center rounded-lg border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 text-xs text-white/65 transition-colors hover:border-[#2DD4A8]/25 hover:text-[#2DD4A8]"
+                className="inline-flex items-center rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1 text-xs text-ink/65 transition-colors hover:border-[#2DD4A8]/25 hover:text-accent"
               >
                 {t.abbr ?? t.term}
               </Link>
@@ -86,7 +86,7 @@ export default function EvidenceContext({
       )}
 
       {/* Cross-links back into the learn cluster */}
-      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-white/[0.06] pt-4 text-[13px]">
+      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-ink/[0.06] pt-4 text-[13px]">
         {[
           { href: '/learn', label: 'Learn hub' },
           { href: '/glossary', label: 'Glossary' },
@@ -95,7 +95,7 @@ export default function EvidenceContext({
           <Link
             key={l.href}
             href={l.href}
-            className="inline-flex items-center gap-1 text-[#2DD4A8]/80 transition-colors hover:text-[#2DD4A8]"
+            className="inline-flex items-center gap-1 text-accent/80 transition-colors hover:text-accent"
           >
             {l.label}
             <ArrowRight className="h-3 w-3" />
