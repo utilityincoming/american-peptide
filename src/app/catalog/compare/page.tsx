@@ -97,7 +97,7 @@ export default async function ComparePage({ searchParams }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       {itemListLd && (
         <script
           type="application/ld+json"
@@ -109,28 +109,28 @@ export default async function ComparePage({ searchParams }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
 
-      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
         <Link
           href="/catalog"
-          className="text-sm text-white/35 transition-colors hover:text-white"
+          className="text-sm text-ink/35 transition-colors hover:text-ink"
         >
           Catalog
         </Link>
-        <span className="text-white/20">/</span>
+        <span className="text-ink/20">/</span>
         <span className="truncate text-sm font-medium">Compare</span>
       </header>
 
-      <section className="border-b border-white/[0.06] px-6 py-10 md:px-10">
+      <section className="border-b border-ink/[0.06] px-6 py-10 md:px-10">
         <div className="mx-auto max-w-6xl">
           <h1 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
             Compare peptides
           </h1>
-          <p className="max-w-2xl text-sm leading-relaxed text-white/55 md:text-base">
+          <p className="max-w-2xl text-sm leading-relaxed text-ink/55 md:text-base">
             Side-by-side reference for sequence, molecular weight, mechanism,
             and approval status. Add or remove peptides from the{' '}
             <Link
               href="/catalog"
-              className="text-[#2DD4A8] underline-offset-2 hover:underline"
+              className="text-accent underline-offset-2 hover:underline"
             >
               catalog
             </Link>
@@ -151,20 +151,20 @@ export default async function ComparePage({ searchParams }: Props) {
 function EmptyState({ count }: { count: number }) {
   return (
     <section className="px-6 py-16 md:px-10">
-      <div className="mx-auto max-w-2xl rounded-2xl border border-dashed border-white/[0.10] bg-white/[0.015] px-6 py-12 text-center">
-        <p className="mb-2 text-sm text-white/70">
+      <div className="mx-auto max-w-2xl rounded-2xl border border-dashed border-ink/[0.10] bg-ink/[0.015] px-6 py-12 text-center">
+        <p className="mb-2 text-sm text-ink/70">
           {count === 0
             ? 'No peptides selected for comparison yet.'
             : 'Select at least one more peptide to compare.'}
         </p>
-        <p className="mb-6 text-xs text-white/40">
+        <p className="mb-6 text-xs text-ink/40">
           On the catalog page, tap{' '}
-          <span className="font-medium text-white/65">+ Compare</span> on any
+          <span className="font-medium text-ink/65">+ Compare</span> on any
           peptide card to add it.
         </p>
         <Link
           href="/catalog"
-          className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-4 py-2 text-sm font-medium text-[#2DD4A8] transition-colors hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/20"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-4 py-2 text-sm font-medium text-accent transition-colors hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/20"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Back to catalog
@@ -184,7 +184,7 @@ const ROWS: Row[] = [
     label: 'Aliases',
     render: (p) =>
       p.aliases && p.aliases.length > 0 ? (
-        <span className="text-white/75">{p.aliases.join(' · ')}</span>
+        <span className="text-ink/75">{p.aliases.join(' · ')}</span>
       ) : (
         <Dash />
       ),
@@ -197,7 +197,7 @@ const ROWS: Row[] = [
           <Link
             key={c}
             href={`/catalog/category/${c}`}
-            className="rounded-md border border-white/[0.07] bg-white/[0.03] px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-white/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-[#2DD4A8]"
+            className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
           >
             {CATEGORIES.find((cm) => cm.id === c)?.label ?? c}
           </Link>
@@ -209,12 +209,12 @@ const ROWS: Row[] = [
     label: 'FDA approved',
     render: (p) =>
       p.fdaApproved ? (
-        <span className="inline-flex items-center gap-1 rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+        <span className="inline-flex items-center gap-1 rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent">
           <Check className="h-3 w-3" />
           Approved
         </span>
       ) : (
-        <span className="text-[11px] uppercase tracking-wider text-white/35">
+        <span className="text-[11px] uppercase tracking-wider text-ink/35">
           Investigational
         </span>
       ),
@@ -223,7 +223,7 @@ const ROWS: Row[] = [
     label: 'Molecular weight',
     render: (p) =>
       p.molecularWeight ? (
-        <span className="font-mono text-[13px] text-white/80">
+        <span className="font-mono text-[13px] text-ink/80">
           {p.molecularWeight.toLocaleString()} Da
         </span>
       ) : (
@@ -234,7 +234,7 @@ const ROWS: Row[] = [
     label: 'Molecular formula',
     render: (p) =>
       p.molecularFormula ? (
-        <span className="font-mono text-[13px] text-white/80">
+        <span className="font-mono text-[13px] text-ink/80">
           {p.molecularFormula}
         </span>
       ) : (
@@ -245,7 +245,7 @@ const ROWS: Row[] = [
     label: 'Sequence',
     render: (p) =>
       p.sequence ? (
-        <code className="block max-h-40 overflow-y-auto whitespace-pre-wrap break-all rounded-md border border-white/[0.06] bg-black/30 px-2 py-1.5 font-mono text-[11px] leading-relaxed text-[#5EEBC8]">
+        <code className="block max-h-40 overflow-y-auto whitespace-pre-wrap break-all rounded-md border border-ink/[0.06] bg-black/30 px-2 py-1.5 font-mono text-[11px] leading-relaxed text-accent">
           {p.sequence}
         </code>
       ) : (
@@ -256,7 +256,7 @@ const ROWS: Row[] = [
     label: 'Mechanism',
     render: (p) =>
       p.mechanism ? (
-        <p className="text-[13px] leading-relaxed text-white/70">
+        <p className="text-[13px] leading-relaxed text-ink/70">
           {p.mechanism}
         </p>
       ) : (
@@ -267,7 +267,7 @@ const ROWS: Row[] = [
     label: 'Research areas',
     render: (p) =>
       p.researchAreas && p.researchAreas.length > 0 ? (
-        <ul className="space-y-0.5 text-[12px] text-white/65">
+        <ul className="space-y-0.5 text-[12px] text-ink/65">
           {p.researchAreas.map((a) => (
             <li key={a}>· {a}</li>
           ))}
@@ -280,7 +280,7 @@ const ROWS: Row[] = [
     label: 'CAS',
     render: (p) =>
       p.cas ? (
-        <span className="font-mono text-[12px] text-white/75">{p.cas}</span>
+        <span className="font-mono text-[12px] text-ink/75">{p.cas}</span>
       ) : (
         <Dash />
       ),
@@ -293,7 +293,7 @@ const ROWS: Row[] = [
           href={`https://pubchem.ncbi.nlm.nih.gov/compound/${p.pubchemCid}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-mono text-[12px] text-[#2DD4A8] underline-offset-2 hover:underline"
+          className="font-mono text-[12px] text-accent underline-offset-2 hover:underline"
         >
           {p.pubchemCid}
         </a>
@@ -309,7 +309,7 @@ const ROWS: Row[] = [
           href={`https://www.uniprot.org/uniprotkb/${p.uniprotId}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-mono text-[12px] text-[#2DD4A8] underline-offset-2 hover:underline"
+          className="font-mono text-[12px] text-accent underline-offset-2 hover:underline"
         >
           {p.uniprotId}
         </a>
@@ -321,7 +321,7 @@ const ROWS: Row[] = [
 
 function Dash() {
   return (
-    <span className="inline-flex h-4 items-center text-white/25">
+    <span className="inline-flex h-4 items-center text-ink/25">
       <Minus className="h-3 w-3" />
     </span>
   )
@@ -336,13 +336,13 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
     <>
       <section className="px-6 py-10 md:px-10">
         <div className="mx-auto max-w-6xl">
-          <div className="overflow-x-auto rounded-2xl border border-white/[0.07] bg-white/[0.015]">
+          <div className="overflow-x-auto rounded-2xl border border-ink/[0.07] bg-ink/[0.015]">
             <table className="w-full min-w-[720px] border-collapse text-left align-top">
               <thead>
-                <tr className="border-b border-white/[0.08] bg-white/[0.025]">
+                <tr className="border-b border-ink/[0.08] bg-ink/[0.025]">
                   <th
                     scope="col"
-                    className="sticky left-0 z-10 w-44 min-w-[10rem] border-r border-white/[0.06] bg-white/[0.025] px-4 py-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/45"
+                    className="sticky left-0 z-10 w-44 min-w-[10rem] border-r border-ink/[0.06] bg-ink/[0.025] px-4 py-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/45"
                   >
                     Attribute
                   </th>
@@ -350,26 +350,26 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
                     <th
                       key={p.slug}
                       scope="col"
-                      className="min-w-[14rem] border-l border-white/[0.06] px-4 py-4 align-top"
+                      className="min-w-[14rem] border-l border-ink/[0.06] px-4 py-4 align-top"
                     >
                       <Link
                         href={`/catalog/${p.slug}`}
                         className="block"
                       >
                         <div className="mb-1 flex items-baseline gap-2">
-                          <span className="text-base font-semibold text-white">
+                          <span className="text-base font-semibold text-ink">
                             {p.name}
                           </span>
                           {p.fdaApproved && (
-                            <span className="shrink-0 rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+                            <span className="shrink-0 rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-accent">
                               FDA
                             </span>
                           )}
                         </div>
-                        <p className="line-clamp-2 text-[11px] leading-snug text-white/45">
+                        <p className="line-clamp-2 text-[11px] leading-snug text-ink/45">
                           {p.shortDescription}
                         </p>
-                        <span className="mt-2 inline-flex items-center gap-1 text-[11px] text-[#2DD4A8]/70 hover:text-[#2DD4A8]">
+                        <span className="mt-2 inline-flex items-center gap-1 text-[11px] text-accent/70 hover:text-accent">
                           View profile
                           <ArrowRight className="h-3 w-3" />
                         </span>
@@ -384,20 +384,20 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
                     key={row.label}
                     className={
                       ri % 2 === 0
-                        ? 'border-b border-white/[0.05]'
-                        : 'border-b border-white/[0.05] bg-white/[0.012]'
+                        ? 'border-b border-ink/[0.05]'
+                        : 'border-b border-ink/[0.05] bg-ink/[0.012]'
                     }
                   >
                     <th
                       scope="row"
-                      className="sticky left-0 z-10 w-44 min-w-[10rem] border-r border-white/[0.06] bg-[#0B1220] px-4 py-4 text-left text-[11px] font-medium uppercase tracking-wider text-white/45"
+                      className="sticky left-0 z-10 w-44 min-w-[10rem] border-r border-ink/[0.06] bg-surface px-4 py-4 text-left text-[11px] font-medium uppercase tracking-wider text-ink/45"
                     >
                       {row.label}
                     </th>
                     {peptides.map((p) => (
                       <td
                         key={p.slug}
-                        className="min-w-[14rem] border-l border-white/[0.06] px-4 py-4 align-top text-sm"
+                        className="min-w-[14rem] border-l border-ink/[0.06] px-4 py-4 align-top text-sm"
                       >
                         {row.render(p)}
                       </td>
@@ -408,7 +408,7 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
             </table>
           </div>
 
-          <p className="mt-4 text-[11px] text-white/35">
+          <p className="mt-4 text-[11px] text-ink/35">
             Empty fields indicate the attribute is not catalogued for that
             peptide. Data is reference-only; independent validation required
             before experimental use.
@@ -417,9 +417,9 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
       </section>
 
       {otherSlugs.length > 0 && (
-        <section className="border-t border-white/[0.06] px-6 py-10 md:px-10">
+        <section className="border-t border-ink/[0.06] px-6 py-10 md:px-10">
           <div className="mx-auto max-w-6xl">
-            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-white/45">
+            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/45">
               Swap in another peptide
             </h2>
             <div className="flex flex-wrap gap-1.5">
@@ -430,7 +430,7 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
                     ...peptides.slice(0, MAX_COMPARE - 1).map((pp) => pp.slug),
                     p.slug,
                   ].join(',')}`}
-                  className="rounded-full border border-white/[0.08] bg-white/[0.02] px-3 py-1 text-xs text-white/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-[#2DD4A8]"
+                  className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
                 >
                   + {p.name}
                 </Link>

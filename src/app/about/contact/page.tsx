@@ -23,26 +23,26 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       {/* ── Breadcrumb (nested under About) ── */}
-      <header className="flex items-center gap-1.5 border-b border-white/[0.06] px-4 py-3 text-sm md:px-6">
+      <header className="flex items-center gap-1.5 border-b border-ink/[0.06] px-4 py-3 text-sm md:px-6">
         <Link
           href="/about"
-          className="text-white/50 transition-colors hover:text-white"
+          className="text-ink/50 transition-colors hover:text-ink"
         >
           About
         </Link>
-        <ChevronRight className="h-3.5 w-3.5 text-white/30" />
-        <span className="font-medium text-white">Contact</span>
+        <ChevronRight className="h-3.5 w-3.5 text-ink/30" />
+        <span className="font-medium text-ink">Contact</span>
       </header>
 
       {/* ── Hero ── */}
-      <section className="border-b border-white/[0.06] px-6 py-12 md:px-10">
+      <section className="border-b border-ink/[0.06] px-6 py-12 md:px-10">
         <div className="mx-auto max-w-5xl">
           <h1 className="mb-3 text-3xl font-bold leading-[1.1] tracking-tight md:text-4xl">
             Get in touch
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-white/55">
+          <p className="max-w-2xl text-base leading-relaxed text-ink/55">
             We read everything. Corrections and Peptide Agent feedback get
             answered first — they make the platform better for everyone. For a
             real-time loop, the{' '}
@@ -50,7 +50,7 @@ export default function ContactPage() {
               href={TELEGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#2DD4A8] underline-offset-2 hover:underline"
+              className="text-accent underline-offset-2 hover:underline"
             >
               Telegram channel
             </a>{' '}

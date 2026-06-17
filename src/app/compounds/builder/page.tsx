@@ -242,24 +242,24 @@ export default function PeptideForgePage() {
   const sequenceString = seq.join('')
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       {/* ── Page identity ── */}
-      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
         <Link
           href="/compounds"
-          className="text-sm text-white/35 transition-colors hover:text-white"
+          className="text-sm text-ink/35 transition-colors hover:text-ink"
         >
           Compounds
         </Link>
-        <span className="text-white/20">/</span>
+        <span className="text-ink/20">/</span>
         <span className="flex items-center gap-1.5 text-sm font-medium">
-          <Dna className="h-4 w-4 text-[#2DD4A8]" />
+          <Dna className="h-4 w-4 text-accent" />
           PeptideForge
         </span>
       </header>
 
       {/* ── Hero / level strip ── */}
-      <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-8 md:px-10">
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-8 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -271,38 +271,38 @@ export default function PeptideForgePage() {
         />
         <div className="relative mx-auto flex max-w-5xl flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-medium text-[#2DD4A8]">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-medium text-accent">
               <Sparkles className="h-3 w-3" />
               PeptideForge · Build & score your own peptide
             </div>
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
               Forge a peptide, residue by residue
             </h1>
-            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/55 md:text-base">
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/55 md:text-base">
               Tap amino acids to grow a chain and watch the chemistry update
               live. Clear challenges to earn XP and level up your bench cred.
             </p>
           </div>
 
           {/* Level card */}
-          <div className="w-full shrink-0 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4 md:w-72">
+          <div className="w-full shrink-0 rounded-2xl border border-ink/[0.08] bg-ink/[0.025] p-4 md:w-72">
             <div className="mb-2 flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 text-sm font-semibold">
-                <Trophy className="h-4 w-4 text-[#2DD4A8]" />
+                <Trophy className="h-4 w-4 text-accent" />
                 Lv {current.level} · {current.title}
               </span>
-              <span className="inline-flex items-center gap-1 font-mono text-xs text-white/55">
-                <Zap className="h-3 w-3 text-[#2DD4A8]" />
+              <span className="inline-flex items-center gap-1 font-mono text-xs text-ink/55">
+                <Zap className="h-3 w-3 text-accent" />
                 {xp} XP
               </span>
             </div>
-            <div className="h-2 overflow-hidden rounded-full bg-white/[0.06]">
+            <div className="h-2 overflow-hidden rounded-full bg-ink/[0.06]">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-[#2DD4A8] to-[#5EEBC8] transition-all duration-500"
                 style={{ width: `${pct}%` }}
               />
             </div>
-            <p className="mt-1.5 text-[11px] text-white/40">
+            <p className="mt-1.5 text-[11px] text-ink/40">
               {next
                 ? `${next.min - xp} XP to Lv ${next.level} · ${next.title}`
                 : 'Max level reached — Forge Master!'}
@@ -314,15 +314,15 @@ export default function PeptideForgePage() {
       {/* ── Challenge completion flash ── */}
       {flash && (
         <div className="pointer-events-none fixed inset-x-0 top-20 z-50 flex justify-center px-4">
-          <div className="pointer-events-auto flex items-center gap-3 rounded-xl border border-[#2DD4A8]/30 bg-[#0F1828] px-4 py-3 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+          <div className="pointer-events-auto flex items-center gap-3 rounded-xl border border-[#2DD4A8]/30 bg-panel px-4 py-3 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#2DD4A8]/15">
-              <Award className="h-5 w-5 text-[#2DD4A8]" />
+              <Award className="h-5 w-5 text-accent" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-white">
+              <p className="text-sm font-semibold text-ink">
                 Challenge complete: {flash.title}
               </p>
-              <p className="text-xs text-[#2DD4A8]">+{flash.xp} XP</p>
+              <p className="text-xs text-accent">+{flash.xp} XP</p>
             </div>
           </div>
         </div>
@@ -332,9 +332,9 @@ export default function PeptideForgePage() {
         {/* ── Builder column ── */}
         <div className="space-y-6">
           {/* Sequence display */}
-          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
+          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5">
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-white/40">
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Your peptide
               </h2>
               <div className="flex items-center gap-1.5">
@@ -342,7 +342,7 @@ export default function PeptideForgePage() {
                   type="button"
                   onClick={removeLast}
                   disabled={seq.length === 0}
-                  className="inline-flex items-center gap-1 rounded-lg border border-white/[0.08] px-2.5 py-1 text-[11px] text-white/55 transition-colors hover:border-white/15 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+                  className="inline-flex items-center gap-1 rounded-lg border border-ink/[0.08] px-2.5 py-1 text-[11px] text-ink/55 transition-colors hover:border-ink/15 hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <Delete className="h-3 w-3" />
                   Undo
@@ -351,7 +351,7 @@ export default function PeptideForgePage() {
                   type="button"
                   onClick={clear}
                   disabled={seq.length === 0}
-                  className="inline-flex items-center gap-1 rounded-lg border border-white/[0.08] px-2.5 py-1 text-[11px] text-white/55 transition-colors hover:border-white/15 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+                  className="inline-flex items-center gap-1 rounded-lg border border-ink/[0.08] px-2.5 py-1 text-[11px] text-ink/55 transition-colors hover:border-ink/15 hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <Eraser className="h-3 w-3" />
                   Clear
@@ -360,14 +360,14 @@ export default function PeptideForgePage() {
             </div>
 
             {seq.length === 0 ? (
-              <div className="rounded-xl border border-dashed border-white/[0.10] px-4 py-10 text-center text-sm text-white/35">
+              <div className="rounded-xl border border-dashed border-ink/[0.10] px-4 py-10 text-center text-sm text-ink/35">
                 Tap an amino acid below (or press its letter key) to start your
                 chain.
               </div>
             ) : (
               <>
                 <div className="flex flex-wrap items-center gap-1.5">
-                  <span className="mr-1 font-mono text-[10px] uppercase tracking-wider text-white/30">
+                  <span className="mr-1 font-mono text-[10px] uppercase tracking-wider text-ink/30">
                     H₂N–
                   </span>
                   {seq.map((code, i) => {
@@ -383,11 +383,11 @@ export default function PeptideForgePage() {
                       </span>
                     )
                   })}
-                  <span className="ml-1 font-mono text-[10px] uppercase tracking-wider text-white/30">
+                  <span className="ml-1 font-mono text-[10px] uppercase tracking-wider text-ink/30">
                     –COOH
                   </span>
                 </div>
-                <p className="mt-3 break-all font-mono text-[11px] leading-relaxed text-white/45">
+                <p className="mt-3 break-all font-mono text-[11px] leading-relaxed text-ink/45">
                   {toThreeLetter(seq)}
                 </p>
               </>
@@ -411,11 +411,11 @@ export default function PeptideForgePage() {
 
           {/* Composition */}
           {stats.length > 0 && (
-            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
-              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Composition
               </h2>
-              <div className="flex h-2.5 overflow-hidden rounded-full bg-white/[0.05]">
+              <div className="flex h-2.5 overflow-hidden rounded-full bg-ink/[0.05]">
                 {AA_CATEGORIES.map((c) => {
                   const n = stats.counts[c.id]
                   if (n === 0) return null
@@ -434,8 +434,8 @@ export default function PeptideForgePage() {
                 {AA_CATEGORIES.map((c) => (
                   <span key={c.id} className="inline-flex items-center gap-1.5">
                     <span className={`h-2 w-2 rounded-full ${c.solid}`} />
-                    <span className="text-white/55">{c.label}</span>
-                    <span className="font-mono text-white/35">
+                    <span className="text-ink/55">{c.label}</span>
+                    <span className="font-mono text-ink/35">
                       {stats.counts[c.id]}
                     </span>
                   </span>
@@ -445,8 +445,8 @@ export default function PeptideForgePage() {
           )}
 
           {/* Palette */}
-          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
-            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-white/40">
+          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/40">
               Amino acids
             </h2>
             <div className="grid grid-cols-4 gap-2 sm:grid-cols-5">
@@ -458,12 +458,12 @@ export default function PeptideForgePage() {
                     type="button"
                     onClick={() => add(aa.code)}
                     title={`${aa.name} · ${aa.residueMass.toFixed(1)} Da · press ${aa.code}`}
-                    className={`group flex flex-col items-center rounded-xl border bg-white/[0.02] py-2.5 transition-all hover:-translate-y-0.5 ${cat.border} ${cat.hoverBg}`}
+                    className={`group flex flex-col items-center rounded-xl border bg-ink/[0.02] py-2.5 transition-all hover:-translate-y-0.5 ${cat.border} ${cat.hoverBg}`}
                   >
                     <span className={`font-mono text-lg font-bold ${cat.text}`}>
                       {aa.code}
                     </span>
-                    <span className="text-[10px] text-white/45">{aa.three}</span>
+                    <span className="text-[10px] text-ink/45">{aa.three}</span>
                   </button>
                 )
               })}
@@ -475,10 +475,10 @@ export default function PeptideForgePage() {
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="min-w-0">
                 <h2 className="flex items-center gap-2 text-base font-semibold">
-                  <FlaskConical className="h-4 w-4 text-[#2DD4A8]" />
+                  <FlaskConical className="h-4 w-4 text-accent" />
                   Forge it for real
                 </h2>
-                <p className="mt-1 max-w-md text-sm text-white/55">
+                <p className="mt-1 max-w-md text-sm text-ink/55">
                   {seq.length >= 2
                     ? `Custom synthesis of your ${stats.length}-mer (~${stats.mass.toFixed(0)} Da) launches with the marketplace. Join the waitlist to request a quote.`
                     : 'Build a sequence, then request a custom-synthesis quote. Synthesis launches with the marketplace.'}
@@ -493,13 +493,13 @@ export default function PeptideForgePage() {
               </Link>
             </div>
             {sequenceString && (
-              <p className="mt-4 break-all rounded-lg border border-white/[0.06] bg-black/30 px-3 py-2 font-mono text-[11px] text-[#5EEBC8]">
+              <p className="mt-4 break-all rounded-lg border border-ink/[0.06] bg-black/30 px-3 py-2 font-mono text-[11px] text-accent">
                 {sequenceString}
               </p>
             )}
           </div>
 
-          <p className="text-[11px] leading-relaxed text-white/30">
+          <p className="text-[11px] leading-relaxed text-ink/30">
             PeptideForge is an educational sandbox. Calculated mass, GRAVY, and
             charge are simplified estimates for learning — not a synthesis spec.
             Independent validation required for any experimental use.
@@ -508,12 +508,12 @@ export default function PeptideForgePage() {
 
         {/* ── Challenges sidebar ── */}
         <aside className="space-y-4">
-          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
+          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-white/40">
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Challenges
               </h2>
-              <span className="font-mono text-[11px] text-white/40">
+              <span className="font-mono text-[11px] text-ink/40">
                 {doneCount}/{CHALLENGES.length}
               </span>
             </div>
@@ -527,7 +527,7 @@ export default function PeptideForgePage() {
                       'flex items-start gap-2.5 rounded-xl border px-3 py-2.5 transition-colors ' +
                       (done
                         ? 'border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.06]'
-                        : 'border-white/[0.06] bg-white/[0.02]')
+                        : 'border-ink/[0.06] bg-ink/[0.02]')
                     }
                   >
                     <div
@@ -535,7 +535,7 @@ export default function PeptideForgePage() {
                         'mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border ' +
                         (done
                           ? 'border-[#2DD4A8] bg-[#2DD4A8] text-[#0B1220]'
-                          : 'border-white/20')
+                          : 'border-ink/20')
                       }
                     >
                       {done && <Check className="h-3 w-3" strokeWidth={3} />}
@@ -545,16 +545,16 @@ export default function PeptideForgePage() {
                         <span
                           className={
                             'text-[13px] font-medium ' +
-                            (done ? 'text-white' : 'text-white/80')
+                            (done ? 'text-ink' : 'text-ink/80')
                           }
                         >
                           {ch.title}
                         </span>
-                        <span className="shrink-0 font-mono text-[10px] text-[#2DD4A8]/70">
+                        <span className="shrink-0 font-mono text-[10px] text-accent/70">
                           +{ch.xp}
                         </span>
                       </div>
-                      <p className="mt-0.5 text-[11px] leading-snug text-white/45">
+                      <p className="mt-0.5 text-[11px] leading-snug text-ink/45">
                         {ch.description}
                       </p>
                     </div>
@@ -579,13 +579,13 @@ function Stat({
   unit?: string
 }) {
   return (
-    <div className="rounded-xl border border-white/[0.07] bg-white/[0.025] px-4 py-3">
-      <p className="text-[10px] uppercase tracking-wider text-white/40">
+    <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.025] px-4 py-3">
+      <p className="text-[10px] uppercase tracking-wider text-ink/40">
         {label}
       </p>
-      <p className="mt-1 font-mono text-lg font-semibold text-white">
+      <p className="mt-1 font-mono text-lg font-semibold text-ink">
         {value}
-        {unit && <span className="ml-1 text-xs text-white/35">{unit}</span>}
+        {unit && <span className="ml-1 text-xs text-ink/35">{unit}</span>}
       </p>
     </div>
   )
