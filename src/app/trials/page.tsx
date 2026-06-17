@@ -81,15 +81,15 @@ export default function TrialsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       {/* ── Page identity ── */}
-      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
         <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
-          <Activity className="h-4 w-4 text-[#2DD4A8]" strokeWidth={1.75} />
+          <Activity className="h-4 w-4 text-accent" strokeWidth={1.75} />
         </div>
         <div>
           <span className="text-sm font-medium">Clinical Trials</span>
-          <span className="ml-2 hidden text-xs text-white/30 sm:inline">
+          <span className="ml-2 hidden text-xs text-ink/30 sm:inline">
             ClinicalTrials.gov
           </span>
         </div>
@@ -98,14 +98,14 @@ export default function TrialsPage() {
       <main className="mx-auto max-w-5xl px-4 py-8 md:px-6">
         {/* ── Search bar ── */}
         <form onSubmit={handleSubmit} className="mb-5">
-          <div className="flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 transition-colors focus-within:border-[#2DD4A8]/25">
-            <Search className="h-4 w-4 flex-shrink-0 text-white/30" />
+          <div className="flex items-center gap-3 rounded-2xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-3 transition-colors focus-within:border-[#2DD4A8]/25">
+            <Search className="h-4 w-4 flex-shrink-0 text-ink/30" />
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search clinical trials…"
-              className="flex-1 bg-transparent text-sm text-white placeholder-white/20 outline-none"
+              className="flex-1 bg-transparent text-sm text-ink placeholder-ink/20 outline-none"
             />
             {status === 'loading' && (
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-[#2DD4A8]/30 border-t-[#2DD4A8]" />
@@ -127,8 +127,8 @@ export default function TrialsPage() {
               onClick={() => setFilter(f.id)}
               className={`rounded-full border px-3 py-1 text-xs transition-colors ${
                 filter === f.id
-                  ? 'border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.08] text-[#2DD4A8]'
-                  : 'border-white/[0.08] bg-white/[0.02] text-white/50 hover:border-white/[0.15] hover:text-white/80'
+                  ? 'border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.08] text-accent'
+                  : 'border-ink/[0.08] bg-ink/[0.02] text-ink/50 hover:border-ink/[0.15] hover:text-ink/80'
               }`}
             >
               {f.label}
@@ -138,7 +138,7 @@ export default function TrialsPage() {
 
         {/* ── Counts ── */}
         {status === 'success' && (
-          <p className="mb-5 text-xs text-white/40">
+          <p className="mb-5 text-xs text-ink/40">
             Showing {filtered.length} of {trials.length} loaded
             {totalCount > trials.length && ` · ${totalCount.toLocaleString()} total matches on ClinicalTrials.gov`}
           </p>
@@ -146,7 +146,7 @@ export default function TrialsPage() {
 
         {/* ── States ── */}
         {status === 'loading' && trials.length === 0 && (
-          <div className="py-16 text-center text-sm text-white/30">Loading trials…</div>
+          <div className="py-16 text-center text-sm text-ink/30">Loading trials…</div>
         )}
 
         {status === 'error' && (
@@ -157,9 +157,9 @@ export default function TrialsPage() {
         )}
 
         {status === 'success' && filtered.length === 0 && (
-          <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] py-16 text-center">
-            <p className="text-sm text-white/55">No trials match this filter</p>
-            <p className="mt-1 text-xs text-white/30">
+          <div className="rounded-2xl border border-ink/[0.06] bg-ink/[0.02] py-16 text-center">
+            <p className="text-sm text-ink/55">No trials match this filter</p>
+            <p className="mt-1 text-xs text-ink/30">
               Try a different filter or search term.
             </p>
           </div>
@@ -184,7 +184,7 @@ function PhaseBadge({ phase }: { phase: string }) {
     'Phase 3': 'border-emerald-400/25 bg-emerald-400/[0.08] text-emerald-300',
   }
   const cls =
-    styles[phase] ?? 'border-white/[0.08] bg-white/[0.04] text-white/55'
+    styles[phase] ?? 'border-ink/[0.08] bg-ink/[0.04] text-ink/55'
   return (
     <span className={`rounded-md border px-2 py-0.5 text-[10px] font-medium ${cls}`}>
       {phase}
@@ -195,10 +195,10 @@ function PhaseBadge({ phase }: { phase: string }) {
 function StatusBadge({ status }: { status: string }) {
   const styles: Record<string, string> = {
     RECRUITING: 'border-emerald-400/25 bg-emerald-400/[0.08] text-emerald-300',
-    COMPLETED: 'border-white/[0.1] bg-white/[0.05] text-white/55',
+    COMPLETED: 'border-ink/[0.1] bg-ink/[0.05] text-ink/55',
     ACTIVE_NOT_RECRUITING: 'border-amber-400/25 bg-amber-400/[0.08] text-amber-300',
   }
-  const cls = styles[status] ?? 'border-white/[0.08] bg-white/[0.03] text-white/45'
+  const cls = styles[status] ?? 'border-ink/[0.08] bg-ink/[0.03] text-ink/45'
   const label = status.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())
   return (
     <span className={`rounded-md border px-2 py-0.5 text-[10px] font-medium ${cls}`}>
@@ -209,13 +209,13 @@ function StatusBadge({ status }: { status: string }) {
 
 function TrialCard({ trial }: { trial: Trial }) {
   return (
-    <div className="rounded-2xl border border-white/[0.06] bg-white/[0.025] p-5 transition-colors hover:border-[#2DD4A8]/20">
+    <div className="rounded-2xl border border-ink/[0.06] bg-ink/[0.025] p-5 transition-colors hover:border-[#2DD4A8]/20">
       <div className="mb-2 flex flex-wrap items-center gap-2">
         <a
           href={`https://clinicaltrials.gov/study/${trial.nctId}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1 font-mono text-xs text-[#2DD4A8] hover:underline"
+          className="flex items-center gap-1 font-mono text-xs text-accent hover:underline"
         >
           {trial.nctId}
           <ExternalLink className="h-3 w-3" />
@@ -226,20 +226,20 @@ function TrialCard({ trial }: { trial: Trial }) {
         ))}
       </div>
 
-      <h3 className="mb-3 text-sm leading-snug text-white/85">{trial.title}</h3>
+      <h3 className="mb-3 text-sm leading-snug text-ink/85">{trial.title}</h3>
 
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-white/45">
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-ink/45">
         {trial.sponsor && (
           <span>
-            <span className="text-white/30">Sponsor:</span>{' '}
-            <span className="text-white/65">{trial.sponsor}</span>
+            <span className="text-ink/30">Sponsor:</span>{' '}
+            <span className="text-ink/65">{trial.sponsor}</span>
           </span>
         )}
         {trial.enrollment !== null && (
           <span className="flex items-center gap-1">
-            <Users className="h-3 w-3 text-white/30" />
-            <span className="text-white/65">{trial.enrollment.toLocaleString()}</span>
-            <span className="text-white/30">enrolled</span>
+            <Users className="h-3 w-3 text-ink/30" />
+            <span className="text-ink/65">{trial.enrollment.toLocaleString()}</span>
+            <span className="text-ink/30">enrolled</span>
           </span>
         )}
       </div>

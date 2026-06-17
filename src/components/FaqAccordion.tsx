@@ -23,7 +23,7 @@ export default function FaqAccordion({
   )
 
   return (
-    <div className="divide-y divide-white/[0.06] overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02]">
+    <div className="divide-y divide-ink/[0.06] overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.02]">
       {items.map((f) => {
         const isOpen = openId === f.id
         return (
@@ -35,12 +35,12 @@ export default function FaqAccordion({
                 aria-expanded={isOpen}
                 aria-controls={`faq-panel-${f.id}`}
                 onClick={() => setOpenId(isOpen ? null : f.id)}
-                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-white/[0.02] focus:outline-none focus-visible:bg-white/[0.03]"
+                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-ink/[0.02] focus:outline-none focus-visible:bg-ink/[0.03]"
               >
                 <span
                   className={
                     'text-sm font-medium transition-colors md:text-[15px] ' +
-                    (isOpen ? 'text-white' : 'text-white/80')
+                    (isOpen ? 'text-ink' : 'text-ink/80')
                   }
                 >
                   {f.question}
@@ -48,7 +48,7 @@ export default function FaqAccordion({
                 <ChevronDown
                   aria-hidden
                   className={
-                    'h-4 w-4 shrink-0 text-[#2DD4A8] transition-transform duration-300 ' +
+                    'h-4 w-4 shrink-0 text-accent transition-transform duration-300 ' +
                     (isOpen ? 'rotate-180' : '')
                   }
                 />
@@ -69,13 +69,13 @@ export default function FaqAccordion({
               }}
             >
               <div className="overflow-hidden" style={{ minHeight: 0 }}>
-                <div className="px-5 pb-5 text-sm leading-relaxed text-white/55">
+                <div className="px-5 pb-5 text-sm leading-relaxed text-ink/55">
                   <p className="m-0">{f.answer}</p>
                   {f.cta && (
                     <Link
                       href={f.cta.href}
                       tabIndex={isOpen ? undefined : -1}
-                      className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[#2DD4A8] underline-offset-2 hover:underline"
+                      className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-accent underline-offset-2 hover:underline"
                     >
                       {f.cta.label}
                       <span aria-hidden>→</span>

@@ -123,22 +123,22 @@ export default function CognitivePeptidesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
-      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
-        <Link href="/" className="text-sm text-white/35 hover:text-white transition-colors">Home</Link>
-        <span className="text-white/20">/</span>
+      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+        <Link href="/" className="text-sm text-ink/35 hover:text-ink transition-colors">Home</Link>
+        <span className="text-ink/20">/</span>
         <span className="text-sm font-medium truncate">Cognitive &amp; Nootropic Peptides</span>
       </header>
 
-      <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-40"
           style={{ backgroundImage: 'radial-gradient(circle, rgba(129,140,248,0.10) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#818CF8]/25 bg-[#818CF8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-[#818CF8]">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#818CF8]/25 bg-[#818CF8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent-indigo">
             CNS research · 3 compounds · BBB considerations
           </div>
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
@@ -148,12 +148,12 @@ export default function CognitivePeptidesPage() {
               Peptide Research
             </span>
           </h1>
-          <p className="max-w-2xl text-sm leading-relaxed text-white/55 md:text-base">
+          <p className="max-w-2xl text-sm leading-relaxed text-ink/55 md:text-base">
             Peptides studied for effects on cognition, neuroprotection, anxiety, and sleep —
             through BDNF/NGF induction, GABAergic modulation, and circadian pathways.
             Most evidence is preclinical; Semax and Selank have clinical use in Russia.
           </p>
-          <p className="mt-3 text-xs text-white/30">Research reference only. Not medical advice.</p>
+          <p className="mt-3 text-xs text-ink/30">Research reference only. Not medical advice.</p>
         </div>
       </section>
 
@@ -162,8 +162,8 @@ export default function CognitivePeptidesPage() {
           <div className="space-y-16">
 
             <section>
-              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">The BBB constraint</h2>
-              <div className="rounded-xl border border-[#818CF8]/20 bg-[#818CF8]/[0.04] p-5 text-sm leading-relaxed text-white/60">
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">The BBB constraint</h2>
+              <div className="rounded-xl border border-[#818CF8]/20 bg-[#818CF8]/[0.04] p-5 text-sm leading-relaxed text-ink/60">
                 <p className="mb-3">
                   The blood–brain barrier (BBB) restricts most peptides from reaching CNS targets.
                   For a peptide to produce central nervous system effects, it must cross this barrier —
@@ -180,33 +180,33 @@ export default function CognitivePeptidesPage() {
             </section>
 
             <section>
-              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-white/40">Compound profiles</h2>
+              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/40">Compound profiles</h2>
               <div className="space-y-5">
                 {COMPOUNDS.map((c) => (
                   <Link key={c.slug} href={`/catalog/${c.slug}`}
-                    className="group flex flex-col gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 transition-colors hover:border-white/[0.12] hover:bg-white/[0.04]"
+                    className="group flex flex-col gap-3 rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5 transition-colors hover:border-ink/[0.12] hover:bg-ink/[0.04]"
                     style={{ borderLeftColor: c.color, borderLeftWidth: 3 }}>
                     <div className="flex flex-wrap items-start justify-between gap-2">
                       <div>
-                        <p className="text-sm font-semibold group-hover:text-[#2DD4A8] transition-colors" style={{ color: c.color }}>{c.name}</p>
-                        <p className="text-xs text-white/30">{c.origin}</p>
+                        <p className="text-sm font-semibold group-hover:text-accent transition-colors" style={{ color: c.color }}>{c.name}</p>
+                        <p className="text-xs text-ink/30">{c.origin}</p>
                       </div>
-                      <span className="rounded-full bg-white/[0.06] px-2 py-0.5 text-[10px] text-white/40">{c.evidence}</span>
+                      <span className="rounded-full bg-ink/[0.06] px-2 py-0.5 text-[10px] text-ink/40">{c.evidence}</span>
                     </div>
-                    <p className="text-xs text-white/40">Mechanism: <span className="text-white/55">{c.mechanism}</span></p>
+                    <p className="text-xs text-ink/40">Mechanism: <span className="text-ink/55">{c.mechanism}</span></p>
                     <div className="flex flex-wrap gap-2">
                       {c.areas.map((a) => (
-                        <span key={a} className="rounded-full bg-white/[0.05] px-2 py-0.5 text-[10px] text-white/40">{a}</span>
+                        <span key={a} className="rounded-full bg-ink/[0.05] px-2 py-0.5 text-[10px] text-ink/40">{a}</span>
                       ))}
                     </div>
-                    <p className="text-xs leading-relaxed text-white/45">{c.note}</p>
+                    <p className="text-xs leading-relaxed text-ink/45">{c.note}</p>
                   </Link>
                 ))}
               </div>
             </section>
 
             <section>
-              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">Related research areas</h2>
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">Related research areas</h2>
               <div className="grid gap-3 sm:grid-cols-3">
                 {[
                   { href: '/research-areas/cognition-neuroprotection', label: 'Cognition & Neuroprotection', color: '#2DD4A8' },
@@ -214,9 +214,9 @@ export default function CognitivePeptidesPage() {
                   { href: '/research-areas/sleep-circadian', label: 'Sleep & Circadian Rhythm', color: '#FB923C' },
                 ].map((ra) => (
                   <Link key={ra.href} href={ra.href}
-                    className="group rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:border-white/[0.12]">
-                    <p className="text-sm font-medium group-hover:text-[#2DD4A8] transition-colors" style={{ color: ra.color }}>{ra.label}</p>
-                    <p className="mt-1 flex items-center gap-1 text-xs text-white/30 group-hover:text-white/50">
+                    className="group rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4 transition-colors hover:border-ink/[0.12]">
+                    <p className="text-sm font-medium group-hover:text-accent transition-colors" style={{ color: ra.color }}>{ra.label}</p>
+                    <p className="mt-1 flex items-center gap-1 text-xs text-ink/30 group-hover:text-ink/50">
                       Research area guide <ArrowRight className="h-3 w-3" />
                     </p>
                   </Link>
@@ -225,12 +225,12 @@ export default function CognitivePeptidesPage() {
             </section>
 
             <section>
-              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-white/40">Frequently asked questions</h2>
+              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-ink/40">Frequently asked questions</h2>
               <div className="space-y-5">
                 {FAQS.map((f) => (
-                  <div key={f.q} className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
-                    <p className="mb-2 text-sm font-semibold text-white/90">{f.q}</p>
-                    <p className="text-sm leading-relaxed text-white/55">{f.a}</p>
+                  <div key={f.q} className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5">
+                    <p className="mb-2 text-sm font-semibold text-ink/90">{f.q}</p>
+                    <p className="text-sm leading-relaxed text-ink/55">{f.a}</p>
                   </div>
                 ))}
               </div>
@@ -238,8 +238,8 @@ export default function CognitivePeptidesPage() {
 
             <section className="flex gap-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5">
               <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400/70" />
-              <p className="text-xs leading-relaxed text-white/45">
-                <strong className="text-white/60">Research reference only.</strong> None of these compounds are FDA-approved.
+              <p className="text-xs leading-relaxed text-ink/45">
+                <strong className="text-ink/60">Research reference only.</strong> None of these compounds are FDA-approved.
                 Clinical data for Semax and Selank exists but originates from Russian clinical practice and has not been
                 replicated in large Western trials. Nothing here constitutes medical advice.
               </p>
@@ -247,22 +247,22 @@ export default function CognitivePeptidesPage() {
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-6 lg:self-start">
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">Catalog entries</p>
+            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">Catalog entries</p>
               {COMPOUNDS.map((c) => (
                 <Link key={c.slug} href={`/catalog/${c.slug}`}
-                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-white/[0.04]">
+                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-ink/[0.04]">
                   <div>
-                    <p className="text-sm font-medium group-hover:text-[#2DD4A8] transition-colors" style={{ color: c.color }}>{c.name}</p>
-                    <p className="text-xs text-white/30 truncate max-w-[140px]">{c.mechanism.split(';')[0]}</p>
+                    <p className="text-sm font-medium group-hover:text-accent transition-colors" style={{ color: c.color }}>{c.name}</p>
+                    <p className="text-xs text-ink/30 truncate max-w-[140px]">{c.mechanism.split(';')[0]}</p>
                   </div>
-                  <ChevronRight className="h-3.5 w-3.5 text-white/20 group-hover:text-[#2DD4A8]" />
+                  <ChevronRight className="h-3.5 w-3.5 text-ink/20 group-hover:text-accent" />
                 </Link>
               ))}
             </div>
 
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">Related</p>
+            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">Related</p>
               {[
                 { href: '/catalog/category/cognitive', label: 'Cognitive category', sub: 'All cognitive peptides' },
                 { href: '/glossary/bdnf', label: 'BDNF definition', sub: 'Glossary entry' },
@@ -271,22 +271,22 @@ export default function CognitivePeptidesPage() {
                 { href: '/trials', label: 'CNS peptide trials', sub: 'ClinicalTrials.gov' },
               ].map((l) => (
                 <Link key={l.href} href={l.href}
-                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-white/[0.04]">
+                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-ink/[0.04]">
                   <div>
-                    <p className="text-sm font-medium text-white/70 group-hover:text-white">{l.label}</p>
-                    <p className="text-xs text-white/30">{l.sub}</p>
+                    <p className="text-sm font-medium text-ink/70 group-hover:text-ink">{l.label}</p>
+                    <p className="text-xs text-ink/30">{l.sub}</p>
                   </div>
-                  <ChevronRight className="h-3.5 w-3.5 text-white/20 group-hover:text-white/50" />
+                  <ChevronRight className="h-3.5 w-3.5 text-ink/20 group-hover:text-ink/50" />
                 </Link>
               ))}
             </div>
 
             <div className="rounded-xl border border-[#818CF8]/20 bg-[#818CF8]/[0.05] p-5">
               <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#818CF8]/10">
-                <FlaskConical className="h-4 w-4 text-[#818CF8]" />
+                <FlaskConical className="h-4 w-4 text-accent-indigo" />
               </div>
-              <p className="mb-1 text-sm font-semibold text-[#818CF8]">Marketplace coming soon</p>
-              <p className="mb-4 text-xs text-white/45">COA-verified cognitive research peptides.</p>
+              <p className="mb-1 text-sm font-semibold text-accent-indigo">Marketplace coming soon</p>
+              <p className="mb-4 text-xs text-ink/45">COA-verified cognitive research peptides.</p>
               <Link href="/catalog"
                 className="flex items-center justify-center gap-2 rounded-lg bg-[#818CF8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] hover:opacity-90">
                 Browse catalog <ArrowRight className="h-4 w-4" />

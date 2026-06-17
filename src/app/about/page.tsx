@@ -81,17 +81,17 @@ const pillars = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
         <span className="flex items-center gap-1.5 text-sm font-medium">
-          <Info className="h-4 w-4 text-[#2DD4A8]" />
+          <Info className="h-4 w-4 text-accent" />
           About
         </span>
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -102,7 +102,7 @@ export default function AboutPage() {
           }}
         />
         <div className="relative mx-auto max-w-5xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-[#2DD4A8]">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <ShieldCheck className="h-3 w-3" />
             The trust layer for peptide research
           </div>
@@ -112,7 +112,7 @@ export default function AboutPage() {
               legible and honest
             </span>
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-white/55 md:text-lg">
+          <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
             Peptide research is moving fast and the public record is messy —
             scattered across PubChem entries, trial registries, vendor PDFs, and
             forum lore. AmericanPeptide.com pulls that record into one place an
@@ -128,17 +128,17 @@ export default function AboutPage() {
           {/* ── Story / mission ── */}
           <div className="grid gap-8 md:grid-cols-[1.4fr_1fr]">
             <div className="space-y-4">
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-white/40">
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-ink/40">
                 Why we exist
               </h2>
-              <p className="text-sm leading-relaxed text-white/65 md:text-[15px]">
+              <p className="text-sm leading-relaxed text-ink/65 md:text-[15px]">
                 Most peptide information online sits at one of two extremes:
                 dense primary literature written for specialists, or marketing
                 copy written to sell. The middle — accurate, sourced, plainly
                 explained — barely exists. That gap is where bad decisions get
                 made.
               </p>
-              <p className="text-sm leading-relaxed text-white/65 md:text-[15px]">
+              <p className="text-sm leading-relaxed text-ink/65 md:text-[15px]">
                 We&apos;re building the middle. A research-grade reference layered
                 over the free public datasets, an AI agent that answers from
                 those sources instead of inventing them, and tooling that turns
@@ -147,18 +147,18 @@ export default function AboutPage() {
                 asks a question about a peptide, the honest, cited answer should
                 be the easiest one to find.
               </p>
-              <p className="text-sm leading-relaxed text-white/65 md:text-[15px]">
+              <p className="text-sm leading-relaxed text-ink/65 md:text-[15px]">
                 AmericanPeptide.com is the name on that effort because the domain
                 should be an authority asset, not a storefront. We treat it that
                 way.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6">
-              <h3 className="mb-4 text-sm font-semibold text-white">
+            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6">
+              <h3 className="mb-4 text-sm font-semibold text-ink">
                 What we&apos;re not
               </h3>
-              <ul className="space-y-3 text-sm leading-relaxed text-white/55">
+              <ul className="space-y-3 text-sm leading-relaxed text-ink/55">
                 <li className="flex gap-2.5">
                   <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400/70" />
                   Not a pharmacy, clinic, or source of medical advice.
@@ -177,7 +177,7 @@ export default function AboutPage() {
 
           {/* ── What we build (pillars) ── */}
           <div>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
               What we build
             </h2>
             <div className="grid gap-4 sm:grid-cols-3">
@@ -185,16 +185,16 @@ export default function AboutPage() {
                 <Link
                   key={label}
                   href={href}
-                  className="group rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 transition-colors hover:border-[#2DD4A8]/25 hover:bg-white/[0.04]"
+                  className="group rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
                 >
-                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-[#2DD4A8]">
+                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
                   </div>
                   <h3 className="mb-1.5 flex items-center gap-1 text-sm font-semibold">
                     {label}
-                    <ArrowRight className="h-3.5 w-3.5 -translate-x-1 text-[#2DD4A8] opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                    <ArrowRight className="h-3.5 w-3.5 -translate-x-1 text-accent opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
                   </h3>
-                  <p className="text-xs leading-relaxed text-white/50">{body}</p>
+                  <p className="text-xs leading-relaxed text-ink/50">{body}</p>
                 </Link>
               ))}
             </div>
@@ -202,20 +202,20 @@ export default function AboutPage() {
 
           {/* ── Principles ── */}
           <div>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
               Our principles
             </h2>
             <div className="grid gap-4 sm:grid-cols-2">
               {principles.map(({ Icon, title, body }) => (
                 <div
                   key={title}
-                  className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5"
+                  className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5"
                 >
-                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-[#2DD4A8]">
+                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
                   </div>
                   <h3 className="mb-1.5 text-sm font-semibold">{title}</h3>
-                  <p className="text-xs leading-relaxed text-white/50">{body}</p>
+                  <p className="text-xs leading-relaxed text-ink/50">{body}</p>
                 </div>
               ))}
             </div>
@@ -223,10 +223,10 @@ export default function AboutPage() {
 
           {/* ── Community & feedback ── */}
           <div>
-            <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-white/40">
+            <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
               Community &amp; feedback
             </h2>
-            <p className="mb-4 max-w-2xl text-sm leading-relaxed text-white/55">
+            <p className="mb-4 max-w-2xl text-sm leading-relaxed text-ink/55">
               The Peptide Agent gets better when researchers tell us where it&apos;s
               right, where it&apos;s wrong, and what&apos;s missing. We run an open
               channel for exactly that — flag an answer, suggest a catalog
@@ -249,23 +249,23 @@ export default function AboutPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <h3 className="text-sm font-semibold">Telegram group</h3>
-                        <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+                        <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
                           Live
                         </span>
                       </div>
-                      <p className="text-xs text-white/45">
+                      <p className="text-xs text-ink/45">
                         Peptide Agent feedback · invite-only
                       </p>
                     </div>
                   </div>
-                  <p className="text-sm leading-relaxed text-white/60">
+                  <p className="text-sm leading-relaxed text-ink/60">
                     The Peptide Agent feedback loop. Drop a question the Agent got
                     wrong, a study it should know about, or a peptide we&apos;re
                     missing — corrections feed straight back into the catalog and
                     the Agent&apos;s grounding.
                   </p>
                 </div>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#2DD4A8]">
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
                   Accept invite &amp; join
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
@@ -293,19 +293,19 @@ export default function AboutPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <h3 className="text-sm font-semibold">X</h3>
-                        <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+                        <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
                           Live
                         </span>
                       </div>
-                      <p className="text-xs text-white/45">@USPeptide</p>
+                      <p className="text-xs text-ink/45">@USPeptide</p>
                     </div>
                   </div>
-                  <p className="text-sm leading-relaxed text-white/60">
+                  <p className="text-sm leading-relaxed text-ink/60">
                     Release notes, new catalog entries, and notable peptide
                     research as we publish it.
                   </p>
                 </div>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#2DD4A8]">
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
                   Follow on X
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
@@ -314,14 +314,14 @@ export default function AboutPage() {
           </div>
 
           {/* ── Contact (nested subsection → /about/contact) ── */}
-          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-6 md:p-8">
+          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6 md:p-8">
             <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div className="max-w-xl">
                 <div className="mb-2 flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-[#2DD4A8]" />
+                  <Mail className="h-4 w-4 text-accent" />
                   <h2 className="text-sm font-semibold">Contact us</h2>
                 </div>
-                <p className="text-sm leading-relaxed text-white/55">
+                <p className="text-sm leading-relaxed text-ink/55">
                   Corrections, data questions, partnership and supplier
                   inquiries, or press — reach the team directly. We read
                   everything and reply to research and correction notes first.

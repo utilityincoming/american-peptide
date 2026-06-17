@@ -52,10 +52,10 @@ function VerifiedLine({ slug, name }: { slug?: string; name: string }) {
   const peptide = getPeptideBySlug(slug)
   if (!v && !peptide) return null
   return (
-    <div className="flex items-start gap-2 text-[13px] leading-relaxed text-white/55">
-      <FlaskConical className="mt-0.5 h-3.5 w-3.5 shrink-0 text-white/40" strokeWidth={1.75} />
+    <div className="flex items-start gap-2 text-[13px] leading-relaxed text-ink/55">
+      <FlaskConical className="mt-0.5 h-3.5 w-3.5 shrink-0 text-ink/40" strokeWidth={1.75} />
       <span>
-        <span className="text-white/75">{name}</span>
+        <span className="text-ink/75">{name}</span>
         {peptide?.molecularFormula ? <> · {peptide.molecularFormula}</> : null}
         {peptide?.molecularWeight ? <> · {peptide.molecularWeight.toLocaleString()} Da</> : null}
         {v ? (
@@ -65,7 +65,7 @@ function VerifiedLine({ slug, name }: { slug?: string; name: string }) {
               href={`https://pubchem.ncbi.nlm.nih.gov/compound/${v.cid}`}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1 text-[#2DD4A8] hover:underline"
+              className="inline-flex items-center gap-1 text-accent hover:underline"
             >
               <ShieldCheck className="h-3 w-3" /> verified · PubChem CID {v.cid}
             </a>
@@ -114,24 +114,24 @@ export default async function ComparePage({ params }: RouteParams) {
   const peptideSlugs = [c.aSlug, c.bSlug].filter((s): s is string => Boolean(s))
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       {/* Breadcrumb */}
-      <header className="flex flex-wrap items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
-        <Link href={c.breadcrumb.href} className="text-sm text-white/35 transition-colors hover:text-white">
+      <header className="flex flex-wrap items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+        <Link href={c.breadcrumb.href} className="text-sm text-ink/35 transition-colors hover:text-ink">
           {c.breadcrumb.label}
         </Link>
-        <span className="text-white/20">/</span>
+        <span className="text-ink/20">/</span>
         <span className="truncate text-sm font-medium">
           {c.aName} vs {c.bName}
         </span>
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-40"
@@ -148,7 +148,7 @@ export default async function ComparePage({ params }: RouteParams) {
             >
               {c.aName} · {c.aPill}
             </span>
-            <span className="self-center text-white/20">vs</span>
+            <span className="self-center text-ink/20">vs</span>
             <span
               className="inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-medium"
               style={{ borderColor: `${B}40`, background: `${B}14`, color: B }}
@@ -159,14 +159,14 @@ export default async function ComparePage({ params }: RouteParams) {
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             {c.aName} vs {c.bName}
             <br />
-            <span className="text-2xl font-normal text-white/40 md:text-3xl">{c.headline}</span>
+            <span className="text-2xl font-normal text-ink/40 md:text-3xl">{c.headline}</span>
           </h1>
           {c.intro.map((p, i) => (
-            <p key={i} className="max-w-2xl text-sm leading-relaxed text-white/55 md:text-base">
+            <p key={i} className="max-w-2xl text-sm leading-relaxed text-ink/55 md:text-base">
               {p}
             </p>
           ))}
-          <p className="mt-3 text-xs text-white/30">
+          <p className="mt-3 text-xs text-ink/30">
             Research reference only. Not medical advice, prescribing guidance, or a product recommendation.
           </p>
         </div>
@@ -178,22 +178,22 @@ export default async function ComparePage({ params }: RouteParams) {
           <div className="space-y-16">
             {/* At a glance */}
             <section>
-              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-white/40">At a glance</h2>
+              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/40">At a glance</h2>
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[480px] text-sm">
                   <thead>
-                    <tr className="border-b border-white/[0.06] text-left text-xs">
-                      <th className="w-40 pb-3 pr-6 font-medium text-white/30">Dimension</th>
+                    <tr className="border-b border-ink/[0.06] text-left text-xs">
+                      <th className="w-40 pb-3 pr-6 font-medium text-ink/30">Dimension</th>
                       <th className="pb-3 pr-6 font-medium" style={{ color: A }}>{c.aName}</th>
                       <th className="pb-3 font-medium" style={{ color: B }}>{c.bName}</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/[0.04]">
+                  <tbody className="divide-y divide-ink/[0.04]">
                     {c.atAGlance.map((row) => (
-                      <tr key={row.dim} className="hover:bg-white/[0.02]">
-                        <td className="py-3 pr-6 text-xs font-medium text-white/35">{row.dim}</td>
-                        <td className="py-3 pr-6 text-sm text-white/70">{row.a}</td>
-                        <td className="py-3 text-sm text-white/70">{row.b}</td>
+                      <tr key={row.dim} className="hover:bg-ink/[0.02]">
+                        <td className="py-3 pr-6 text-xs font-medium text-ink/35">{row.dim}</td>
+                        <td className="py-3 pr-6 text-sm text-ink/70">{row.a}</td>
+                        <td className="py-3 text-sm text-ink/70">{row.b}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -204,14 +204,14 @@ export default async function ComparePage({ params }: RouteParams) {
             {/* Column sections (mechanisms) */}
             {c.columnSections?.map((sec) => (
               <section key={sec.title}>
-                <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-white/40">{sec.title}</h2>
+                <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/40">{sec.title}</h2>
                 <div className="grid gap-4 sm:grid-cols-2">
                   {sec.columns.map((col) => {
                     const accent = col.accent === 'a' ? A : col.accent === 'b' ? B : '#9CA3AF'
                     return (
-                      <div key={col.heading} className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
+                      <div key={col.heading} className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
                         <h3 className="mb-3 text-sm font-semibold" style={{ color: accent }}>{col.heading}</h3>
-                        <ul className="space-y-2 text-[13px] leading-relaxed text-white/60">
+                        <ul className="space-y-2 text-[13px] leading-relaxed text-ink/60">
                           {col.points.map((pt, i) => (
                             <li key={i} className="flex gap-2">
                               <span style={{ color: accent }}>·</span>
@@ -229,8 +229,8 @@ export default async function ComparePage({ params }: RouteParams) {
             {/* Prose sections */}
             {c.proseSections?.map((sec) => (
               <section key={sec.title}>
-                <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">{sec.title}</h2>
-                <div className="space-y-4 text-sm leading-relaxed text-white/65">
+                <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">{sec.title}</h2>
+                <div className="space-y-4 text-sm leading-relaxed text-ink/65">
                   {sec.paragraphs.map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
@@ -241,16 +241,16 @@ export default async function ComparePage({ params }: RouteParams) {
             {/* Trials */}
             {c.trials && c.trials.length > 0 && (
               <section>
-                <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-white/40">Key clinical trials</h2>
+                <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/40">Key clinical trials</h2>
                 <div className="space-y-3">
                   {c.trials.map((t) => (
-                    <div key={t.name} className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                    <div key={t.name} className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4">
                       <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
-                        <span className="text-sm font-semibold text-white/85">{t.name}</span>
-                        <span className="text-xs text-white/40">{t.arm}</span>
+                        <span className="text-sm font-semibold text-ink/85">{t.name}</span>
+                        <span className="text-xs text-ink/40">{t.arm}</span>
                       </div>
-                      <p className="text-sm text-white/70">{t.result}</p>
-                      <p className="mt-1 text-xs text-white/40">
+                      <p className="text-sm text-ink/70">{t.result}</p>
+                      <p className="mt-1 text-xs text-ink/40">
                         {[t.endpoint, t.n ? `n=${t.n}` : null, t.duration].filter(Boolean).join(' · ')}
                         {t.note ? ` — ${t.note}` : ''}
                       </p>
@@ -263,29 +263,29 @@ export default async function ComparePage({ params }: RouteParams) {
             {/* Extra tables (synthesis) */}
             {c.tables?.map((tbl) => (
               <section key={tbl.title}>
-                <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-white/40">{tbl.title}</h2>
+                <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/40">{tbl.title}</h2>
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[480px] text-sm">
-                    <tbody className="divide-y divide-white/[0.04]">
+                    <tbody className="divide-y divide-ink/[0.04]">
                       {tbl.rows.map((row) => (
-                        <tr key={row.dim} className="hover:bg-white/[0.02]">
-                          <td className="w-40 py-3 pr-6 text-xs font-medium text-white/35">{row.dim}</td>
-                          <td className="py-3 pr-6 text-sm text-white/70">{row.a}</td>
-                          <td className="py-3 text-sm text-white/70">{row.b}</td>
+                        <tr key={row.dim} className="hover:bg-ink/[0.02]">
+                          <td className="w-40 py-3 pr-6 text-xs font-medium text-ink/35">{row.dim}</td>
+                          <td className="py-3 pr-6 text-sm text-ink/70">{row.a}</td>
+                          <td className="py-3 text-sm text-ink/70">{row.b}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
-                {tbl.note && <p className="mt-3 text-xs text-white/40">{tbl.note}</p>}
+                {tbl.note && <p className="mt-3 text-xs text-ink/40">{tbl.note}</p>}
               </section>
             ))}
 
             {/* Verdict */}
             {c.verdict && (
               <section className="rounded-2xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-6">
-                <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-[#2DD4A8]/80">{c.verdict.title}</h2>
-                <div className="space-y-3 text-sm leading-relaxed text-white/70">
+                <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-accent/80">{c.verdict.title}</h2>
+                <div className="space-y-3 text-sm leading-relaxed text-ink/70">
                   {c.verdict.paragraphs.map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
@@ -296,18 +296,18 @@ export default async function ComparePage({ params }: RouteParams) {
             {/* FAQ */}
             {c.faqs.length > 0 && (
               <section>
-                <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-white/40">Frequently asked questions</h2>
+                <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-ink/40">Frequently asked questions</h2>
                 <div className="space-y-3">
                   {c.faqs.map((f) => (
                     <details
                       key={f.q}
-                      className="group rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 [&_summary::-webkit-details-marker]:hidden"
+                      className="group rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5 [&_summary::-webkit-details-marker]:hidden"
                     >
-                      <summary className="flex cursor-pointer items-center justify-between gap-3 text-sm font-semibold text-white/85">
+                      <summary className="flex cursor-pointer items-center justify-between gap-3 text-sm font-semibold text-ink/85">
                         {f.q}
-                        <span className="text-white/30 transition-transform group-open:rotate-45">+</span>
+                        <span className="text-ink/30 transition-transform group-open:rotate-45">+</span>
                       </summary>
-                      <p className="mt-3 text-sm leading-relaxed text-white/55">{f.a}</p>
+                      <p className="mt-3 text-sm leading-relaxed text-ink/55">{f.a}</p>
                     </details>
                   ))}
                 </div>
@@ -319,20 +319,20 @@ export default async function ComparePage({ params }: RouteParams) {
           <aside className="space-y-6">
             {/* Verified provenance */}
             {peptideSlugs.length > 0 && (
-              <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
-                <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-white/40">Compound identity</h3>
+              <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
+                <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/40">Compound identity</h3>
                 <div className="space-y-3">
                   <VerifiedLine slug={c.aSlug} name={c.aName} />
                   <VerifiedLine slug={c.bSlug} name={c.bName} />
                 </div>
-                <div className="mt-4 flex flex-col gap-1.5 border-t border-white/[0.06] pt-3 text-[13px]">
+                <div className="mt-4 flex flex-col gap-1.5 border-t border-ink/[0.06] pt-3 text-[13px]">
                   {c.aSlug && (
-                    <Link href={`/catalog/${c.aSlug}`} className="inline-flex items-center gap-1 text-[#2DD4A8]/80 hover:text-[#2DD4A8]">
+                    <Link href={`/catalog/${c.aSlug}`} className="inline-flex items-center gap-1 text-accent/80 hover:text-accent">
                       {c.aName} in catalog <ArrowRight className="h-3 w-3" />
                     </Link>
                   )}
                   {c.bSlug && (
-                    <Link href={`/catalog/${c.bSlug}`} className="inline-flex items-center gap-1 text-[#2DD4A8]/80 hover:text-[#2DD4A8]">
+                    <Link href={`/catalog/${c.bSlug}`} className="inline-flex items-center gap-1 text-accent/80 hover:text-accent">
                       {c.bName} in catalog <ArrowRight className="h-3 w-3" />
                     </Link>
                   )}
