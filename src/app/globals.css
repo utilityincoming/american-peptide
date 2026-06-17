@@ -14,6 +14,11 @@
   --surface-deep: #040810; /* deepest background (footers, code wells) */
   --panel: #0F1828;        /* raised solid panels */
   --accent: #2DD4A8;       /* teal accent, used as text/link color */
+  /* Category accents — bright on dark; darkened in light for text contrast.
+     Only the text-* usages are tokenized; bright fills/borders stay literal. */
+  --accent-indigo: #818CF8;
+  --accent-blue: #60A5FA;
+  --accent-purple: #A78BFA;
   --viz: #0B1220;          /* immersive viz "stage" — stays dark in both themes */
 
   --background: var(--surface);
@@ -26,6 +31,9 @@ html.light {
   --surface-deep: #ECF1F6;
   --panel: #FFFFFF;
   --accent: #0E9C82;       /* darker teal for legible text on light */
+  --accent-indigo: #4F46E5;
+  --accent-blue: #2563EB;
+  --accent-purple: #7C3AED;
 }
 
 @theme inline {
@@ -36,6 +44,9 @@ html.light {
   --color-surface-deep: var(--surface-deep);
   --color-panel: var(--panel);
   --color-accent: var(--accent);
+  --color-accent-indigo: var(--accent-indigo);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-purple: var(--accent-purple);
   --color-viz: var(--viz);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
