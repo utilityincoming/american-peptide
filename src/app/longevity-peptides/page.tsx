@@ -159,18 +159,18 @@ export default function LongevityPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
-      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
-        <Link href="/" className="text-sm text-white/35 hover:text-white transition-colors">Home</Link>
-        <span className="text-white/20">/</span>
+      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+        <Link href="/" className="text-sm text-ink/35 hover:text-ink transition-colors">Home</Link>
+        <span className="text-ink/20">/</span>
         <span className="text-sm font-medium truncate">Longevity Peptides</span>
       </header>
 
-      <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-40"
           style={{ backgroundImage: 'radial-gradient(circle, rgba(45,212,168,0.08) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
         <div className="relative mx-auto max-w-4xl">
@@ -184,12 +184,12 @@ export default function LongevityPage() {
               Peptide Research
             </span>
           </h1>
-          <p className="max-w-2xl text-sm leading-relaxed text-white/55 md:text-base">
+          <p className="max-w-2xl text-sm leading-relaxed text-ink/55 md:text-base">
             Compounds studied across three distinct axes of aging biology —
             mitochondrial signaling (MOTS-c, SS-31), NAD⁺ economy (NAD⁺, 5-amino-1MQ),
             and pineal biology (Epitalon). Unrelated mechanisms grouped by shared research context.
           </p>
-          <p className="mt-3 text-xs text-white/30">Research reference only. Not medical advice.</p>
+          <p className="mt-3 text-xs text-ink/30">Research reference only. Not medical advice.</p>
         </div>
       </section>
 
@@ -198,17 +198,17 @@ export default function LongevityPage() {
           <div className="space-y-16">
 
             <section>
-              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-white/40">Three mechanistic axes</h2>
-              <p className="mb-6 text-xs text-white/30">These compounds share a research context but have unrelated receptor targets</p>
+              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">Three mechanistic axes</h2>
+              <p className="mb-6 text-xs text-ink/30">These compounds share a research context but have unrelated receptor targets</p>
               <div className="grid gap-4 sm:grid-cols-3">
                 {AXES.map((a) => (
-                  <div key={a.label} className="rounded-xl border border-white/[0.07] bg-white/[0.03] p-5"
+                  <div key={a.label} className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-5"
                     style={{ borderTopColor: a.color, borderTopWidth: 2 }}>
                     <p className="mb-2 text-sm font-semibold" style={{ color: a.color }}>{a.label}</p>
-                    <p className="mb-4 text-xs leading-relaxed text-white/50">{a.desc}</p>
+                    <p className="mb-4 text-xs leading-relaxed text-ink/50">{a.desc}</p>
                     <ul className="space-y-1">
                       {a.peptides.map((p) => (
-                        <li key={p} className="flex gap-2 text-xs text-white/40">
+                        <li key={p} className="flex gap-2 text-xs text-ink/40">
                           <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full" style={{ backgroundColor: a.color + '80' }} />{p}
                         </li>
                       ))}
@@ -219,34 +219,34 @@ export default function LongevityPage() {
             </section>
 
             <section>
-              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-white/40">Compound profiles</h2>
+              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/40">Compound profiles</h2>
               <div className="space-y-4">
                 {COMPOUNDS.map((c) => (
                   <Link key={c.slug} href={`/catalog/${c.slug}`}
-                    className="group flex flex-col gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 transition-colors hover:border-white/[0.12] hover:bg-white/[0.04]">
+                    className="group flex flex-col gap-2 rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5 transition-colors hover:border-ink/[0.12] hover:bg-ink/[0.04]">
                     <div className="flex flex-wrap items-start justify-between gap-2">
                       <div>
-                        <p className="text-sm font-semibold group-hover:text-[#2DD4A8] transition-colors" style={{ color: c.color }}>{c.name}</p>
-                        <p className="text-xs text-white/30">{c.axis}</p>
+                        <p className="text-sm font-semibold group-hover:text-accent transition-colors" style={{ color: c.color }}>{c.name}</p>
+                        <p className="text-xs text-ink/30">{c.axis}</p>
                       </div>
                       <div className="flex flex-wrap gap-2 text-[10px]">
-                        <span className="rounded-full bg-white/[0.06] px-2 py-0.5 text-white/40">{c.evidence}</span>
+                        <span className="rounded-full bg-ink/[0.06] px-2 py-0.5 text-ink/40">{c.evidence}</span>
                       </div>
                     </div>
-                    <p className="text-xs font-medium text-white/40">Mechanism: <span className="text-white/55 font-normal">{c.mechanism}</span></p>
-                    <p className="text-xs leading-relaxed text-white/45">{c.note}</p>
+                    <p className="text-xs font-medium text-ink/40">Mechanism: <span className="text-ink/55 font-normal">{c.mechanism}</span></p>
+                    <p className="text-xs leading-relaxed text-ink/45">{c.note}</p>
                   </Link>
                 ))}
               </div>
             </section>
 
             <section>
-              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-white/40">Frequently asked questions</h2>
+              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-ink/40">Frequently asked questions</h2>
               <div className="space-y-5">
                 {FAQS.map((f) => (
-                  <div key={f.q} className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5">
-                    <p className="mb-2 text-sm font-semibold text-white/90">{f.q}</p>
-                    <p className="text-sm leading-relaxed text-white/55">{f.a}</p>
+                  <div key={f.q} className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5">
+                    <p className="mb-2 text-sm font-semibold text-ink/90">{f.q}</p>
+                    <p className="text-sm leading-relaxed text-ink/55">{f.a}</p>
                   </div>
                 ))}
               </div>
@@ -254,8 +254,8 @@ export default function LongevityPage() {
 
             <section className="flex gap-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5">
               <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400/70" />
-              <p className="text-xs leading-relaxed text-white/45">
-                <strong className="text-white/60">Research reference only.</strong> None of these compounds are FDA-approved for anti-aging indications.
+              <p className="text-xs leading-relaxed text-ink/45">
+                <strong className="text-ink/60">Research reference only.</strong> None of these compounds are FDA-approved for anti-aging indications.
                 Evidence quality varies — SS-31 has clinical-trial data; Epitalon has concentrated preclinical data with limited independent replication.
                 Nothing here constitutes medical advice.
               </p>
@@ -263,22 +263,22 @@ export default function LongevityPage() {
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-6 lg:self-start">
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">Catalog entries</p>
+            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">Catalog entries</p>
               {COMPOUNDS.map((c) => (
                 <Link key={c.slug} href={`/catalog/${c.slug}`}
-                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-white/[0.04]">
+                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-ink/[0.04]">
                   <div>
-                    <p className="text-sm font-medium group-hover:text-[#2DD4A8] transition-colors" style={{ color: c.color }}>{c.name}</p>
-                    <p className="text-xs text-white/30">{c.axis}</p>
+                    <p className="text-sm font-medium group-hover:text-accent transition-colors" style={{ color: c.color }}>{c.name}</p>
+                    <p className="text-xs text-ink/30">{c.axis}</p>
                   </div>
-                  <ChevronRight className="h-3.5 w-3.5 text-white/20 group-hover:text-[#2DD4A8]" />
+                  <ChevronRight className="h-3.5 w-3.5 text-ink/20 group-hover:text-accent" />
                 </Link>
               ))}
             </div>
 
-            <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-white/40">Related</p>
+            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">Related</p>
               {[
                 { href: '/research-areas/longevity-aging', label: 'Longevity & Aging', sub: 'Research area guide' },
                 { href: '/research-areas/mitochondrial', label: 'Mitochondrial & Bioenergetics', sub: 'Research area guide' },
@@ -287,12 +287,12 @@ export default function LongevityPage() {
                 { href: '/learn/evidence-hierarchy', label: 'Reading the evidence', sub: 'Trial quality guide' },
               ].map((l) => (
                 <Link key={l.href} href={l.href}
-                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-white/[0.04]">
+                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-ink/[0.04]">
                   <div>
-                    <p className="text-sm font-medium text-white/70 group-hover:text-white">{l.label}</p>
-                    <p className="text-xs text-white/30">{l.sub}</p>
+                    <p className="text-sm font-medium text-ink/70 group-hover:text-ink">{l.label}</p>
+                    <p className="text-xs text-ink/30">{l.sub}</p>
                   </div>
-                  <ChevronRight className="h-3.5 w-3.5 text-white/20 group-hover:text-white/50" />
+                  <ChevronRight className="h-3.5 w-3.5 text-ink/20 group-hover:text-ink/50" />
                 </Link>
               ))}
             </div>
@@ -302,7 +302,7 @@ export default function LongevityPage() {
                 <FlaskConical className="h-4 w-4 text-[#818CF8]" />
               </div>
               <p className="mb-1 text-sm font-semibold text-[#818CF8]">Marketplace coming soon</p>
-              <p className="mb-4 text-xs text-white/45">COA-verified longevity research peptides.</p>
+              <p className="mb-4 text-xs text-ink/45">COA-verified longevity research peptides.</p>
               <Link href="/catalog"
                 className="flex items-center justify-center gap-2 rounded-lg bg-[#818CF8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] hover:opacity-90">
                 Browse catalog <ArrowRight className="h-4 w-4" />

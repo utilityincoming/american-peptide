@@ -81,29 +81,29 @@ export default function Toolkit({
   return (
     <section className={className}>
       <h2 className="text-lg font-semibold tracking-tight md:text-xl">{title}</h2>
-      {subtitle && <p className="mt-1 text-sm text-white/50">{subtitle}</p>}
+      {subtitle && <p className="mt-1 text-sm text-ink/50">{subtitle}</p>}
       <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {tools.map((t) => (
           <Link
             key={t.href}
             href={t.href}
-            className="group flex flex-col rounded-2xl border border-white/[0.07] bg-gradient-to-br from-[#2DD4A8]/[0.06] to-transparent p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/30 hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.18)]"
+            className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-gradient-to-br from-[#2DD4A8]/[0.06] to-transparent p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/30 hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.18)]"
           >
             <div className="mb-3 flex items-center justify-between">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-[#2DD4A8]">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
                 <t.Icon className="h-5 w-5" strokeWidth={1.75} />
               </span>
               {t.badge && (
-                <span className="rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+                <span className="rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
                   {t.badge}
                 </span>
               )}
             </div>
             <div className="flex items-center gap-1.5">
-              <h3 className="text-sm font-semibold text-white/90">{t.name}</h3>
-              <ArrowUpRight className="h-3.5 w-3.5 text-white/30 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#2DD4A8]" />
+              <h3 className="text-sm font-semibold text-ink/90">{t.name}</h3>
+              <ArrowUpRight className="h-3.5 w-3.5 text-ink/30 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />
             </div>
-            <p className="mt-1 text-[13px] leading-relaxed text-white/50">{t.desc}</p>
+            <p className="mt-1 text-[13px] leading-relaxed text-ink/50">{t.desc}</p>
           </Link>
         ))}
       </div>

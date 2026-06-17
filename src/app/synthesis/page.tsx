@@ -83,7 +83,7 @@ export default function SynthesisPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B1220] text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
@@ -94,15 +94,15 @@ export default function SynthesisPage() {
       />
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
         <span className="flex items-center gap-1.5 text-sm font-medium">
-          <Factory className="h-4 w-4 text-[#2DD4A8]" />
+          <Factory className="h-4 w-4 text-accent" />
           Synthesis
         </span>
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-white/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -119,7 +119,7 @@ export default function SynthesisPage() {
               actually made
             </span>
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-white/55 md:text-lg">
+          <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
             Behind every vial is a chain of expensive, exacting operations — from
             an automated synthesizer to preparative HPLC, freeze-drying, and a
             certificate of analysis. Walk the real pipeline, see what it costs,
@@ -130,9 +130,9 @@ export default function SynthesisPage() {
       </section>
 
       {/* ── Pipeline rail (visual) ── */}
-      <section className="border-b border-white/[0.06] px-6 py-8 md:px-10">
+      <section className="border-b border-ink/[0.06] px-6 py-8 md:px-10">
         <div className="mx-auto max-w-5xl">
-          <p className="mb-4 text-[11px] font-semibold uppercase tracking-wider text-white/35">
+          <p className="mb-4 text-[11px] font-semibold uppercase tracking-wider text-ink/35">
             The pipeline, end to end
           </p>
           <ol className="flex gap-2 overflow-x-auto pb-2">
@@ -142,17 +142,17 @@ export default function SynthesisPage() {
                 <li key={s.slug} className="flex items-center gap-2">
                   <a
                     href={`#${s.slug}`}
-                    className="group flex w-28 shrink-0 flex-col items-center gap-2 rounded-xl border border-white/[0.07] bg-white/[0.025] px-2 py-3 text-center transition-all hover:border-[#2DD4A8]/25 hover:bg-white/[0.04]"
+                    className="group flex w-28 shrink-0 flex-col items-center gap-2 rounded-xl border border-ink/[0.07] bg-ink/[0.025] px-2 py-3 text-center transition-all hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
                   >
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]/12 text-[#2DD4A8]">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]/12 text-accent">
                       <Icon className="h-4 w-4" strokeWidth={1.75} />
                     </span>
-                    <span className="text-[10px] font-medium leading-tight text-white/60 group-hover:text-white/85">
+                    <span className="text-[10px] font-medium leading-tight text-ink/60 group-hover:text-ink/85">
                       {s.title.split(' (')[0]}
                     </span>
                   </a>
                   {s.num < STAGES.length && (
-                    <ArrowRight className="h-3.5 w-3.5 shrink-0 text-white/20" />
+                    <ArrowRight className="h-3.5 w-3.5 shrink-0 text-ink/20" />
                   )}
                 </li>
               )
@@ -165,12 +165,12 @@ export default function SynthesisPage() {
       <SynthesisWalk stages={STAGES} />
 
       {/* ── Economics ── */}
-      <section className="border-t border-white/[0.06] px-6 py-14 md:px-10">
+      <section className="border-t border-ink/[0.06] px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
             What it actually costs
           </h2>
-          <p className="mb-8 max-w-2xl text-sm leading-relaxed text-white/50">
+          <p className="mb-8 max-w-2xl text-sm leading-relaxed text-ink/50">
             A genuine, well-characterized peptide can&apos;t be a commodity —
             and once you see the capital and coordination behind it, the
             suspiciously cheap vial starts telling on itself. Here is the wall a
@@ -182,15 +182,15 @@ export default function SynthesisPage() {
               return (
                 <div
                   key={item.label}
-                  className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5"
+                  className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5"
                 >
-                  <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#2DD4A8]/12 text-[#2DD4A8]">
+                  <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#2DD4A8]/12 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
                   </span>
                   <h3 className="mb-1 text-sm font-semibold tracking-tight">
                     {item.label}
                   </h3>
-                  <p className="text-[12.5px] leading-relaxed text-white/50">
+                  <p className="text-[12.5px] leading-relaxed text-ink/50">
                     {item.note}
                   </p>
                 </div>
@@ -201,12 +201,12 @@ export default function SynthesisPage() {
       </section>
 
       {/* ── Cold chain ── */}
-      <section className="border-t border-white/[0.06] px-6 py-14 md:px-10">
+      <section className="border-t border-ink/[0.06] px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
             The cold chain
           </h2>
-          <p className="mb-8 max-w-2xl text-sm leading-relaxed text-white/50">
+          <p className="mb-8 max-w-2xl text-sm leading-relaxed text-ink/50">
             Purity is won in the lab and lost in transit. Every hand-off between
             synthesis and your bench is a chance to spend the material&apos;s
             stability budget — which is exactly why a short, cold, accountable
@@ -218,15 +218,15 @@ export default function SynthesisPage() {
               return (
                 <div
                   key={item.label}
-                  className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5"
+                  className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5"
                 >
-                  <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#2DD4A8]/12 text-[#2DD4A8]">
+                  <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#2DD4A8]/12 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
                   </span>
                   <h3 className="mb-1 text-sm font-semibold tracking-tight">
                     {item.label}
                   </h3>
-                  <p className="text-[12.5px] leading-relaxed text-white/50">
+                  <p className="text-[12.5px] leading-relaxed text-ink/50">
                     {item.note}
                   </p>
                 </div>
@@ -237,19 +237,19 @@ export default function SynthesisPage() {
       </section>
 
       {/* ── Provenance / American standard ── */}
-      <section className="border-t border-white/[0.06] px-6 py-14 md:px-10">
+      <section className="border-t border-ink/[0.06] px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <div className="rounded-2xl border border-[#2DD4A8]/15 bg-gradient-to-br from-[#2DD4A8]/[0.06] to-transparent p-7 md:p-9">
-            <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-[#2DD4A8]">
+            <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
               <Flag className="h-5 w-5" strokeWidth={1.75} />
             </span>
             <h2 className="mb-3 max-w-2xl text-2xl font-bold tracking-tight md:text-3xl">
               What &ldquo;Made in America&rdquo; should mean
             </h2>
-            <div className="max-w-3xl space-y-3 text-sm leading-relaxed text-white/65">
+            <div className="max-w-3xl space-y-3 text-sm leading-relaxed text-ink/65">
               <p>
                 American researchers deserve the real thing — peptides{' '}
-                <span className="text-white/90">synthesized</span> here, purified
+                <span className="text-ink/90">synthesized</span> here, purified
                 here, and documented here, by people who put their name on the
                 batch record. We have the chemists, the instruments, and the
                 standards to do every step on this page on home soil.
@@ -262,7 +262,7 @@ export default function SynthesisPage() {
                 roof — with a short, cold supply chain between the lab and your
                 bench.
               </p>
-              <p className="text-white/80">
+              <p className="text-ink/80">
                 Don&apos;t settle for a flag on a label. Ask where the peptide
                 was synthesized, ask for the batch-specific COA, and reward the
                 operations that can answer. That&apos;s how the American Peptide
@@ -274,32 +274,32 @@ export default function SynthesisPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="border-t border-white/[0.06] px-6 py-12 md:px-10">
+      <section className="border-t border-ink/[0.06] px-6 py-12 md:px-10">
         <div className="mx-auto flex max-w-5xl flex-col gap-4 sm:flex-row">
           <Link
             href="/catalog"
-            className="group flex flex-1 items-center justify-between rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 transition-all hover:border-[#2DD4A8]/25 hover:bg-white/[0.04]"
+            className="group flex flex-1 items-center justify-between rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
           >
             <div>
               <h3 className="text-sm font-semibold">Browse the catalog</h3>
-              <p className="mt-0.5 text-[12.5px] text-white/45">
+              <p className="mt-0.5 text-[12.5px] text-ink/45">
                 Apply what you&apos;ve learned to specific research peptides.
               </p>
             </div>
-            <ArrowRight className="h-4 w-4 shrink-0 text-[#2DD4A8] transition-transform group-hover:translate-x-0.5" />
+            <ArrowRight className="h-4 w-4 shrink-0 text-accent transition-transform group-hover:translate-x-0.5" />
           </Link>
           <Link
             href="/glossary"
-            className="group flex flex-1 items-center justify-between rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 transition-all hover:border-[#2DD4A8]/25 hover:bg-white/[0.04]"
+            className="group flex flex-1 items-center justify-between rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
           >
             <div>
               <h3 className="text-sm font-semibold">Read the glossary</h3>
-              <p className="mt-0.5 text-[12.5px] text-white/45">
+              <p className="mt-0.5 text-[12.5px] text-ink/45">
                 COA, HPLC, lyophilization, endotoxin — the terms in plain
                 English.
               </p>
             </div>
-            <ArrowRight className="h-4 w-4 shrink-0 text-[#2DD4A8] transition-transform group-hover:translate-x-0.5" />
+            <ArrowRight className="h-4 w-4 shrink-0 text-accent transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
 

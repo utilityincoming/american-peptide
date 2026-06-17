@@ -111,7 +111,7 @@ const PAGES: CommandItem[] = [
     label: 'Peptide Agent',
     subtitle: 'AI research assistant',
     href: '/research',
-    keywords: 'peptide agent research chat ai assistant claude',
+    keywords: 'peptide agent research chat ai assistant',
   },
   {
     id: 'page-trials',
@@ -342,19 +342,19 @@ export default function CommandPalette() {
             type="button"
             aria-label="Close search"
             onClick={() => setOpen(false)}
-            className="absolute inset-0 bg-[#040810]/75 backdrop-blur-sm"
+            className="absolute inset-0 bg-surface-deep/75 backdrop-blur-sm"
           />
 
-          <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0F1828] shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
-            <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3">
-              <Search className="h-4 w-4 shrink-0 text-white/40" />
+          <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-ink/[0.08] bg-panel shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
+            <div className="flex items-center gap-3 border-b border-ink/[0.06] px-4 py-3">
+              <Search className="h-4 w-4 shrink-0 text-ink/40" />
               <input
                 ref={inputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={onInputKey}
                 placeholder="Search peptides, categories, tools…"
-                className="flex-1 bg-transparent text-sm text-white placeholder:text-white/30 focus:outline-none"
+                className="flex-1 bg-transparent text-sm text-ink placeholder:text-ink/30 focus:outline-none"
                 aria-label="Search query"
                 aria-controls="cmd-results"
                 aria-activedescendant={
@@ -368,12 +368,12 @@ export default function CommandPalette() {
                   type="button"
                   onClick={() => setQuery('')}
                   aria-label="Clear search"
-                  className="rounded-md p-1 text-white/40 transition-colors hover:bg-white/[0.05] hover:text-white"
+                  className="rounded-md p-1 text-ink/40 transition-colors hover:bg-ink/[0.05] hover:text-ink"
                 >
                   <X className="h-3.5 w-3.5" />
                 </button>
               )}
-              <kbd className="hidden rounded border border-white/[0.10] bg-white/[0.03] px-1.5 py-0.5 font-mono text-[10px] text-white/40 sm:inline">
+              <kbd className="hidden rounded border border-ink/[0.10] bg-ink/[0.03] px-1.5 py-0.5 font-mono text-[10px] text-ink/40 sm:inline">
                 esc
               </kbd>
             </div>
@@ -385,9 +385,9 @@ export default function CommandPalette() {
               className="max-h-[60vh] overflow-y-auto px-2 py-2"
             >
               {flat.length === 0 ? (
-                <div className="px-3 py-10 text-center text-sm text-white/40">
+                <div className="px-3 py-10 text-center text-sm text-ink/40">
                   No results for{' '}
-                  <span className="text-white/70">&ldquo;{query}&rdquo;</span>.
+                  <span className="text-ink/70">&ldquo;{query}&rdquo;</span>.
                   Try a peptide name, alias, or category.
                 </div>
               ) : (
@@ -395,8 +395,8 @@ export default function CommandPalette() {
                   const startIndex = flat.indexOf(g.items[0])
                   return (
                     <div key={g.title} className="mb-1">
-                      <div className="flex items-center gap-2 px-3 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/35">
-                        <g.Icon className="h-3 w-3 text-[#2DD4A8]/70" />
+                      <div className="flex items-center gap-2 px-3 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/35">
+                        <g.Icon className="h-3 w-3 text-accent/70" />
                         {g.title}
                       </div>
                       {g.items.map((item, i) => {
@@ -415,8 +415,8 @@ export default function CommandPalette() {
                             className={
                               'flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors ' +
                               (active
-                                ? 'bg-[#2DD4A8]/[0.10] text-white'
-                                : 'text-white/80 hover:bg-white/[0.04]')
+                                ? 'bg-[#2DD4A8]/[0.10] text-ink'
+                                : 'text-ink/80 hover:bg-ink/[0.04]')
                             }
                           >
                             <div className="min-w-0 flex-1">
@@ -425,13 +425,13 @@ export default function CommandPalette() {
                                   {item.label}
                                 </span>
                                 {item.hint && (
-                                  <span className="truncate text-[11px] text-white/35">
+                                  <span className="truncate text-[11px] text-ink/35">
                                     {item.hint}
                                   </span>
                                 )}
                               </div>
                               {item.subtitle && (
-                                <p className="mt-0.5 line-clamp-1 text-xs text-white/45">
+                                <p className="mt-0.5 line-clamp-1 text-xs text-ink/45">
                                   {item.subtitle}
                                 </p>
                               )}
@@ -440,7 +440,7 @@ export default function CommandPalette() {
                               className={
                                 'h-3.5 w-3.5 shrink-0 transition-opacity ' +
                                 (active
-                                  ? 'text-[#2DD4A8] opacity-100'
+                                  ? 'text-accent opacity-100'
                                   : 'opacity-0')
                               }
                             />
@@ -453,7 +453,7 @@ export default function CommandPalette() {
               )}
             </div>
 
-            <div className="flex items-center justify-between gap-3 border-t border-white/[0.06] bg-white/[0.015] px-4 py-2 text-[11px] text-white/40">
+            <div className="flex items-center justify-between gap-3 border-t border-ink/[0.06] bg-ink/[0.015] px-4 py-2 text-[11px] text-ink/40">
               <div className="flex items-center gap-3">
                 <Hint icon={<ArrowDown className="h-3 w-3" />}>
                   <Hint icon={<ArrowUp className="h-3 w-3" />}>navigate</Hint>
@@ -474,7 +474,7 @@ export default function CommandPalette() {
 function Hint({ icon, children }: { icon: ReactNode; children: ReactNode }) {
   return (
     <span className="inline-flex items-center gap-1">
-      <span className="inline-flex h-4 w-4 items-center justify-center rounded border border-white/[0.10] bg-white/[0.03] text-white/55">
+      <span className="inline-flex h-4 w-4 items-center justify-center rounded border border-ink/[0.10] bg-ink/[0.03] text-ink/55">
         {icon}
       </span>
       <span>{children}</span>
@@ -495,11 +495,11 @@ function SearchTrigger({ onOpen }: { onOpen: () => void }) {
         type="button"
         onClick={onOpen}
         aria-label="Open search"
-        className="hidden items-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-sm text-white/55 transition-colors hover:border-white/[0.15] hover:text-white md:inline-flex"
+        className="hidden items-center gap-2 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-1.5 text-sm text-ink/55 transition-colors hover:border-ink/[0.15] hover:text-ink md:inline-flex"
       >
         <Search className="h-3.5 w-3.5" />
         <span>Search…</span>
-        <kbd className="ml-2 rounded border border-white/[0.10] bg-white/[0.03] px-1.5 py-0.5 font-mono text-[10px] text-white/45">
+        <kbd className="ml-2 rounded border border-ink/[0.10] bg-ink/[0.03] px-1.5 py-0.5 font-mono text-[10px] text-ink/45">
           {isMac ? '⌘K' : 'Ctrl K'}
         </kbd>
       </button>
@@ -508,7 +508,7 @@ function SearchTrigger({ onOpen }: { onOpen: () => void }) {
         type="button"
         onClick={onOpen}
         aria-label="Open search"
-        className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.02] text-white/75 transition-colors hover:bg-white/[0.06] hover:text-white md:hidden"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-ink/[0.08] bg-ink/[0.02] text-ink/75 transition-colors hover:bg-ink/[0.06] hover:text-ink md:hidden"
       >
         <Search className="h-4 w-4" />
       </button>

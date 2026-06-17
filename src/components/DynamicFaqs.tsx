@@ -38,8 +38,8 @@ export default function DynamicFaqs() {
 
   return (
     <div className="mt-8">
-      <h3 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-white/40">
-        <MessageCircle className="h-4 w-4 text-[#2DD4A8]" />
+      <h3 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+        <MessageCircle className="h-4 w-4 text-accent" />
         What researchers are asking the Agent
       </h3>
       <div className="flex flex-col gap-2">
@@ -47,14 +47,14 @@ export default function DynamicFaqs() {
           <Link
             key={q.text}
             href={`/research?q=${encodeURIComponent(q.text)}`}
-            className="group flex items-center justify-between gap-3 rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-3 text-sm text-white/70 transition-colors hover:border-[#2DD4A8]/25 hover:bg-white/[0.04] hover:text-white"
+            className="group flex items-center justify-between gap-3 rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-4 py-3 text-sm text-ink/70 transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04] hover:text-ink"
           >
             <span>{q.text}</span>
-            <ArrowRight className="h-4 w-4 shrink-0 text-[#2DD4A8] opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />
+            <ArrowRight className="h-4 w-4 shrink-0 text-accent opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />
           </Link>
         ))}
       </div>
-      <p className="mt-2 text-[11px] text-white/30">
+      <p className="mt-2 text-[11px] text-ink/30">
         Trending Peptide Agent questions — opens the Agent for a live, cited answer.
       </p>
     </div>
