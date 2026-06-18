@@ -6,6 +6,7 @@ import { COMPARISONS, getComparison } from '@/lib/comparisons'
 import { getPeptideBySlug } from '@/lib/peptides'
 import { getPubchemVerification } from '@/lib/verification'
 import EvidenceContext from '@/components/EvidenceContext'
+import AgentPrompt from '@/components/AgentPrompt'
 
 const SITE = 'https://www.americanpeptide.com'
 const A = '#2DD4A8'
@@ -313,6 +314,17 @@ export default async function ComparePage({ params }: RouteParams) {
                 </div>
               </section>
             )}
+
+            <AgentPrompt
+              context={{ kind: 'comparison', slug: c.slug }}
+              heading={`Ask the Agent: ${c.aName} vs ${c.bName}`}
+              subhead={`Mechanism, evidence, and trade-offs between ${c.aName} and ${c.bName} — citation-backed answers grounded in PubMed, PubChem, and ClinicalTrials.gov.`}
+              examples={[
+                `How do ${c.aName} and ${c.bName} differ in mechanism?`,
+                `Which has stronger clinical evidence, ${c.aName} or ${c.bName}?`,
+                `What are the trade-offs between ${c.aName} and ${c.bName}?`,
+              ]}
+            />
           </div>
 
           {/* Sidebar */}

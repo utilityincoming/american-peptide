@@ -26,6 +26,7 @@ import {
 import { getAreasForPeptide } from '@/lib/research-areas'
 import { getPubchemVerification } from '@/lib/verification'
 import { getLatestResearch } from '@/lib/freshness'
+import AgentPrompt from '@/components/AgentPrompt'
 import PeptideStory from '@/components/PeptideStory'
 import WatchButton from '@/components/WatchButton'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
@@ -547,6 +548,17 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 </div>
               </Block>
             )}
+
+            <AgentPrompt
+              context={{ kind: 'compound', slug: peptide.slug }}
+              heading={`Ask the Agent about ${peptide.name}`}
+              subhead={`Dosing protocols, mechanism, comparisons, and the latest trials — citation-backed answers grounded in PubMed, PubChem, and ClinicalTrials.gov.`}
+              examples={[
+                `What does the research say about ${peptide.name} dosing protocols?`,
+                `What is the mechanism of action of ${peptide.name}?`,
+                `What side effects of ${peptide.name} are documented in the literature?`,
+              ]}
+            />
           </div>
 
           {/* Sidebar */}
