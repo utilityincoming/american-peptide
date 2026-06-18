@@ -344,7 +344,8 @@ if (ab) {
         r.on.jdg?.grounding != null && r.off.jdg?.grounding != null
           ? r.on.jdg.grounding - r.off.jdg.grounding
           : null
-      lines.push(`| ${r.id} | ${fmt(r.on)} | ${fmt(r.off)} | ${dg == null ? '—' : `${dg >= 0 ? '+' : ''}${dg}`} |`)
+      const dgFmt = dg == null ? '—' : `${dg >= 0 ? '+' : ''}${Math.round(dg * 10) / 10}`
+      lines.push(`| ${r.id} | ${fmt(r.on)} | ${fmt(r.off)} | ${dgFmt} |`)
     }
     lines.push(
       '',
