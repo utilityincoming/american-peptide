@@ -5,6 +5,7 @@ import { Send, Dna, SquarePen } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import type { Components } from 'react-markdown'
+import ProfilePanel from '@/components/ProfilePanel'
 
 type Role = 'user' | 'assistant'
 
@@ -139,6 +140,10 @@ export default function ResearchPage() {
   const [loading, setLoading] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+  // Session page context, set once from the ?ctx=kind:slug deep-link param
+  // (e.g. a compound page hands off "compound:semaglutide"). Sent with every
+  // request so bare follow-ups resolve to the compound the user came from.
+  const pageCtx = useRef<{ kind: string; slug: string } | null>(null)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -163,11 +168,27 @@ export default function ResearchPage() {
       const firstUser = next.findIndex((m) => m.role === 'user')
       const apiMessages = next.slice(firstUser)
 
+      // Assemble per-request context: page (from the deep-link param) + an
+      // optional reader profile from localStorage (forward-compatible with a
+      // future settings UI). The server re-validates every field.
+      const context: { page?: { kind: string; slug: string }; profile?: unknown } = {}
+      if (pageCtx.current) context.page = pageCtx.current
+      try {
+        const raw = localStorage.getItem('ap_profile')
+        if (raw) {
+          const profile = JSON.parse(raw)
+          if (profile && typeof profile === 'object') context.profile = profile
+        }
+      } catch {
+        // malformed/absent profile — send without it
+      }
+      const hasContext = Object.keys(context).length > 0
+
       try {
         const res = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ messages: apiMessages }),
+          body: JSON.stringify({ messages: apiMessages, ...(hasContext ? { context } : {}) }),
         })
 
         const data = await res.json()
@@ -195,7 +216,21 @@ export default function ResearchPage() {
   useEffect(() => {
     if (initialized.current) return
     initialized.current = true
-    const q = new URLSearchParams(window.location.search).get('q')
+    const params = new URLSearchParams(window.location.search)
+
+    // ?ctx=kind:slug — capture page context before the first question fires.
+    const KINDS = ['compound', 'research-area', 'comparison']
+    const ctxParam = params.get('ctx')
+    if (ctxParam) {
+      const i = ctxParam.indexOf(':')
+      if (i > 0) {
+        const kind = ctxParam.slice(0, i)
+        const slug = ctxParam.slice(i + 1)
+        if (KINDS.includes(kind) && slug) pageCtx.current = { kind, slug }
+      }
+    }
+
+    const q = params.get('q')
     if (q && q.trim()) sendMessage(q)
   }, [sendMessage])
 
@@ -230,16 +265,19 @@ export default function ResearchPage() {
           </div>
         </div>
 
-        <button
-          onClick={() => {
-            setMessages([WELCOME])
-            setInput('')
-          }}
-          className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-ink/35 transition-colors hover:bg-ink/[0.05] hover:text-ink"
-        >
-          <SquarePen className="h-3.5 w-3.5" />
-          <span className="hidden sm:inline">New chat</span>
-        </button>
+        <div className="flex items-center gap-1">
+          <ProfilePanel />
+          <button
+            onClick={() => {
+              setMessages([WELCOME])
+              setInput('')
+            }}
+            className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-ink/35 transition-colors hover:bg-ink/[0.05] hover:text-ink"
+          >
+            <SquarePen className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">New chat</span>
+          </button>
+        </div>
       </header>
 
       {/* ── Messages ── */}

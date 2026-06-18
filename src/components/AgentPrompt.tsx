@@ -7,21 +7,44 @@ import { Sparkles, ArrowRight } from 'lucide-react'
 // Prominent entry point to the Peptide Agent. Type a question and it hands off
 // to /research?q=… which auto-asks on load. The lead feature of the research
 // section.
+//
+// When dropped on an entity page, pass `context` so the hand-off also carries
+// &ctx=kind:slug — the research page then tells the Agent which compound / area
+// / comparison the user came from, so bare follow-ups ("what's the dose?")
+// resolve correctly.
 
-const EXAMPLES = [
+export type AgentContext = {
+  kind: 'compound' | 'research-area' | 'comparison'
+  slug: string
+}
+
+const DEFAULT_EXAMPLES = [
   'What is the best-studied peptide for muscle preservation during GLP-1 weight loss?',
   'How do I read a peptide certificate of analysis?',
   'Compare semaglutide and tirzepatide.',
 ]
 
-export default function AgentPrompt({ className = '' }: { className?: string }) {
+export default function AgentPrompt({
+  className = '',
+  context,
+  heading = 'Ask anything about peptide research',
+  subhead = 'Mechanisms, comparisons, clinical evidence, synthesis, certificates of analysis — citation-backed answers grounded in PubMed, PubChem, and ClinicalTrials.gov.',
+  examples = DEFAULT_EXAMPLES,
+}: {
+  className?: string
+  context?: AgentContext
+  heading?: string
+  subhead?: string
+  examples?: string[]
+}) {
   const router = useRouter()
   const [q, setQ] = useState('')
 
   function ask(question: string) {
     const text = question.trim()
     if (!text) return
-    router.push(`/research?q=${encodeURIComponent(text)}`)
+    const ctx = context ? `&ctx=${encodeURIComponent(`${context.kind}:${context.slug}`)}` : ''
+    router.push(`/research?q=${encodeURIComponent(text)}${ctx}`)
   }
 
   return (
@@ -36,12 +59,9 @@ export default function AgentPrompt({ className = '' }: { className?: string }) 
         Peptide Agent
       </div>
       <h2 className="mt-3 max-w-2xl text-2xl font-bold leading-tight tracking-tight md:text-3xl">
-        Ask anything about peptide research
+        {heading}
       </h2>
-      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/55">
-        Mechanisms, comparisons, clinical evidence, synthesis, certificates of analysis — citation-backed
-        answers grounded in PubMed, PubChem, and ClinicalTrials.gov.
-      </p>
+      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/55">{subhead}</p>
 
       <form
         onSubmit={(e) => {
@@ -67,7 +87,7 @@ export default function AgentPrompt({ className = '' }: { className?: string }) 
       </form>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        {EXAMPLES.map((ex) => (
+        {examples.map((ex) => (
           <button
             key={ex}
             type="button"
