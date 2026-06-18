@@ -8,6 +8,7 @@ import {
   getResearchAreaBySlug,
   getPeptidesForArea,
 } from '@/lib/research-areas'
+import AgentPrompt from '@/components/AgentPrompt'
 import EvidenceContext from '@/components/EvidenceContext'
 import Toolkit from '@/components/Toolkit'
 
@@ -288,6 +289,20 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
 
       <section className="border-t border-ink/[0.06] px-6 py-12 md:px-10">
         <Toolkit className="mx-auto max-w-5xl" />
+      </section>
+
+      <section className="border-t border-ink/[0.06] px-6 py-12 md:px-10">
+        <AgentPrompt
+          className="mx-auto max-w-5xl"
+          context={{ kind: 'research-area', slug: area.slug }}
+          heading={`Ask the Agent about ${area.label}`}
+          subhead={`Which peptides are best studied for ${area.label.toLowerCase()}, how they compare, and what the clinical evidence shows — citation-backed answers grounded in PubMed, PubChem, and ClinicalTrials.gov.`}
+          examples={[
+            `Which peptides are best studied for ${area.label.toLowerCase()}?`,
+            `What does the clinical evidence show for ${area.label.toLowerCase()}?`,
+            `Compare the leading options for ${area.label.toLowerCase()}.`,
+          ]}
+        />
       </section>
     </div>
   )
