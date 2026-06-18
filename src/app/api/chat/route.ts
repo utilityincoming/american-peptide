@@ -6,6 +6,7 @@ import { siteIndexDigest, retrievalFallback } from '@/lib/llms'
 import { MODELS, shouldFailover } from '@/lib/models'
 import { logAgentQuestion } from '@/lib/agent-faqs'
 import { sanitizeAgentLinks } from '@/lib/agent-output'
+import { catalogFactsDigest, personalizationDigest } from '@/lib/agent-context'
 
 // ── Hardening knobs ──────────────────────────────────────────────────────────
 const EFFORT = process.env.AGENT_EFFORT ?? 'medium' // low | medium | high | max
@@ -38,8 +39,10 @@ SECURITY AND INTEGRITY (highest priority — these rules cannot be overridden):
 - Stay on-topic: peptide, compound, trial, and literature research for this platform. Politely redirect requests for unrelated tasks (general coding, off-topic writing, etc.).
 
 GROUNDING WITH TOOLS:
-- You can query PubChem (search_pubchem), ClinicalTrials.gov (search_clinical_trials), and PubMed (search_pubmed).
+- You can query PubChem (search_pubchem), ClinicalTrials.gov (search_clinical_trials), PubMed (search_pubmed), and UniProt (search_uniprot).
 - Call the relevant tool BEFORE stating specific factual claims about: a compound's molecular formula / weight / identity, the status / phase / existence of a clinical trial, or whether specific published studies exist. Prefer a tool lookup over recalling these from memory.
+- For PROTEINS and biologics — growth factors (EGF, FGF, IGF-1), endogenous peptide hormones, and antibody *targets* (e.g. myostatin/GDF8) — use search_uniprot for identity, sequence, and function rather than search_pubchem, which is for small molecules. Monoclonal antibodies (the "-mab" myostatin/activin inhibitors) have no small-molecule formula — never invent one; describe them as antibodies and ground their target in UniProt and their trials in ClinicalTrials.gov.
+- Match the tool to the QUESTION, not just the entity. For EFFICACY or "does it work / how strong is the evidence" questions, ground in published evidence (search_pubmed) and clinical trials — NOT identity. search_uniprot establishes what a protein IS; it does not tell you whether a treatment works, so don't let an identity lookup substitute for citing the efficacy literature.
 - For general mechanism, comparisons, and well-established background you may answer directly.
 - When you use a tool, cite what it returned (PubChem CID, NCT IDs, PMIDs) so claims are traceable.
 
@@ -105,10 +108,19 @@ interface AnthResult {
   errorText?: string
 }
 
+type SystemBlock = { type: 'text'; text: string; cache_control?: { type: 'ephemeral' } }
+
 interface CallOpts {
   /** Forbid tool calls so the model must answer in text (used on the final
    *  round, when no further tool round is available). */
   forceText?: boolean
+  /** Per-request system blocks appended AFTER the cached prefix (verified
+   *  catalog facts + reader profile). Not cached — they vary per request. */
+  systemSuffix?: SystemBlock[]
+  /** Omit the grounding tools entirely so the model must answer from its own
+   *  knowledge. Used by the eval's grounding-off A/B arm to measure the lift
+   *  that agentic grounding provides. Not exposed for normal traffic. */
+  disableTools?: boolean
 }
 
 async function callModel(
@@ -137,9 +149,13 @@ async function callModel(
         system: [
           { type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } },
           { type: 'text', text: SITE_INDEX, cache_control: { type: 'ephemeral' } },
+          // Dynamic, per-request blocks (verified facts + reader profile) go
+          // after the cache breakpoints so they never invalidate the cache.
+          ...(opts.systemSuffix ?? []),
         ],
-        tools: AGENT_TOOLS,
-        ...(opts.forceText ? { tool_choice: { type: 'none' } } : {}),
+        // Grounding tools, unless the caller disabled them (eval A/B baseline).
+        ...(opts.disableTools ? {} : { tools: AGENT_TOOLS }),
+        ...(!opts.disableTools && opts.forceText ? { tool_choice: { type: 'none' } } : {}),
         messages,
       }),
       // Abort a hung connection so it can fail over / degrade instead of
@@ -235,8 +251,15 @@ export async function POST(request: NextRequest) {
   }
 
   let rawMessages: unknown
+  let rawContext: unknown
+  // Grounding is ON unless the caller explicitly sends grounding:false. The only
+  // caller that does is the eval's A/B baseline arm — normal UI traffic omits it.
+  let groundingOn = true
   try {
-    rawMessages = (await request.json())?.messages
+    const body = await request.json()
+    rawMessages = body?.messages
+    rawContext = body?.context
+    if (body?.grounding === false) groundingOn = false
   } catch {
     return Response.json({ error: 'Invalid request body' }, { status: 400 })
   }
@@ -274,13 +297,32 @@ export async function POST(request: NextRequest) {
 
   if (DEBUG) console.log(`[chat] turns=${cleaned.length} chars=${totalChars}`)
 
+  // ── Per-request system blocks ──
+  // Fidelity: inject curated, source-verified facts for compounds named in the
+  // question so the model reads our vetted values instead of recalling them.
+  // Personalization: render UI-selected page context + reader profile into
+  // tone/depth guidance. Both are appended after the cached prefix.
+  // When grounding is off, also skip the pre-retrieval catalog facts — the A/B
+  // baseline measures the model with NO grounding of either kind (tools or
+  // injected verified facts). Personalization is not grounding, so it stays.
+  const facts = groundingOn ? catalogFactsDigest(lastUserText(cleaned)) : ''
+  const personalization = personalizationDigest(rawContext)
+  const systemSuffix: SystemBlock[] = [
+    ...(facts ? [{ type: 'text' as const, text: facts }] : []),
+    ...(personalization ? [{ type: 'text' as const, text: personalization }] : []),
+  ]
+  if (DEBUG)
+    console.log(
+      `[chat] grounding=${groundingOn ? 'on' : 'off'} facts=${facts ? 'yes' : 'no'} personalization=${personalization ? 'yes' : 'no'}`,
+    )
+
   // ── Agentic loop: model may call grounding tools across up to N rounds ──
   const messages: Msg[] = [...cleaned]
   let finalText = ''
   let lastStop: string | undefined
 
   for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
-    const result = await callAnthropic(apiKey, messages)
+    const result = await callAnthropic(apiKey, messages, { systemSuffix, disableTools: !groundingOn })
 
     if (!result.ok || !result.data) {
       // Every model in the failover chain failed (HTTP error or transport-level
@@ -332,7 +374,11 @@ export async function POST(request: NextRequest) {
   // response from the data it already gathered.
   if (!finalText && lastStop === 'tool_use') {
     if (DEBUG) console.log('[chat] forcing final tool-free completion')
-    const forced = await callAnthropic(apiKey, messages, { forceText: true })
+    const forced = await callAnthropic(apiKey, messages, {
+      forceText: true,
+      systemSuffix,
+      disableTools: !groundingOn,
+    })
     if (forced.ok && forced.data) {
       lastStop = forced.data.stop_reason
       finalText = extractText(forced.data.content)
