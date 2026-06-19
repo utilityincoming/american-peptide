@@ -130,13 +130,19 @@ async function searchTrials(query: string): Promise<string> {
   )
   const raw = pick(data, 'studies')
   const studies = Array.isArray(raw)
-    ? raw.map((s) => ({
-        nctId: pick(s, 'protocolSection', 'identificationModule', 'nctId') ?? null,
-        title: pick(s, 'protocolSection', 'identificationModule', 'briefTitle') ?? null,
-        status: pick(s, 'protocolSection', 'statusModule', 'overallStatus') ?? null,
-        phases: pick(s, 'protocolSection', 'designModule', 'phases') ?? null,
-        conditions: pick(s, 'protocolSection', 'conditionsModule', 'conditions') ?? null,
-      }))
+    ? raw.map((s) => {
+        const nctId = (pick(s, 'protocolSection', 'identificationModule', 'nctId') as string) ?? null
+        return {
+          nctId,
+          title: pick(s, 'protocolSection', 'identificationModule', 'briefTitle') ?? null,
+          status: pick(s, 'protocolSection', 'statusModule', 'overallStatus') ?? null,
+          phases: pick(s, 'protocolSection', 'designModule', 'phases') ?? null,
+          conditions: pick(s, 'protocolSection', 'conditionsModule', 'conditions') ?? null,
+          // Canonical link, for parity with the PubChem/PubMed tools — gives the
+          // model a verifiable URL to cite so it surfaces the NCT id, not just a title.
+          url: nctId ? `https://clinicaltrials.gov/study/${nctId}` : null,
+        }
+      })
     : []
   if (studies.length === 0) return `No ClinicalTrials.gov studies found for "${query}".`
   return JSON.stringify({ source: 'ClinicalTrials.gov', count: studies.length, studies })

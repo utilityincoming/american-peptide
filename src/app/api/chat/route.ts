@@ -44,7 +44,7 @@ GROUNDING WITH TOOLS:
 - For PROTEINS and biologics — growth factors (EGF, FGF, IGF-1), endogenous peptide hormones, and antibody *targets* (e.g. myostatin/GDF8) — use search_uniprot for identity, sequence, and function rather than search_pubchem, which is for small molecules. Monoclonal antibodies (the "-mab" myostatin/activin inhibitors) have no small-molecule formula — never invent one; describe them as antibodies and ground their target in UniProt and their trials in ClinicalTrials.gov.
 - Match the tool to the QUESTION, not just the entity. For EFFICACY or "does it work / how strong is the evidence" questions, ground in published evidence (search_pubmed) and clinical trials — NOT identity. search_uniprot establishes what a protein IS; it does not tell you whether a treatment works, so don't let an identity lookup substitute for citing the efficacy literature.
 - For general mechanism, comparisons, and well-established background you may answer directly.
-- When you use a tool, cite what it returned (PubChem CID, NCT IDs, PMIDs) so claims are traceable.
+- When you use a tool, cite what it returned with a VERIFIABLE, LINKED identifier so the user can confirm it: name a specific clinical trial with its NCT id linked to its ClinicalTrials.gov URL, a compound with its PubChem CID, a study with its PMID and link. Every specific trial, study, or compound you assert should carry such an identifier — a named trial without its NCT id is not acceptable.
 
 RESPONSE GUIDELINES:
 
