@@ -1919,6 +1919,48 @@ const SEED_PEPTIDES: Peptide[] = [
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
+    slug: 'melanotan-1',
+    name: 'Afamelanotide',
+    aliases: ['Melanotan I', 'Melanotan-1', 'MT-I', 'MT-1', 'CUV1647', 'Scenesse'],
+    categories: ['cosmetic'],
+    shortDescription:
+      'MC1R-selective α-MSH analog; FDA-approved (Scenesse) for photoprotection in erythropoietic protoporphyria.',
+    description:
+      'Afamelanotide (Melanotan I) is a 13-amino-acid linear analog of α-melanocyte-stimulating hormone (α-MSH), highly selective for the melanocortin-1 receptor (MC1R). It is FDA-approved as Scenesse — delivered as a controlled-release subcutaneous implant — to increase pain-free light exposure in adults with a history of phototoxic reactions from erythropoietic protoporphyria (EPP).',
+    mechanism:
+      'MC1R-selective melanocortin agonism, driving eumelanin synthesis (photoprotection) via Gs-coupled cAMP signaling.',
+    researchAreas: ['Photoprotection', 'Pigmentation biology'],
+    background: [
+      'Afamelanotide is the [Nle4, D-Phe7] analog of α-MSH — substitutions that confer metabolic stability and high MC1R selectivity (roughly three orders of magnitude lower affinity for MC3R/MC4R than for MC1R).',
+      'Unlike the non-selective Melanotan II, afamelanotide’s MC1R selectivity keeps its action largely confined to pigmentation/photoprotection, which is what allowed it to reach approval. It is administered as a controlled-release subcutaneous implant (Scenesse) rather than by injection.',
+    ],
+    keyResearch: [
+      'FDA-approved as Scenesse (2019) for photoprotection in erythropoietic protoporphyria (EPP) — the first approved treatment for the condition.',
+      'MC1R-selective — ~1000-fold lower affinity for MC3R/MC4R, so it drives eumelanin production without the MC4R-mediated sexual-response and nausea effects of non-selective analogs.',
+      'Studied beyond EPP in solar urticaria, nonsegmental vitiligo (with narrow-band UVB), and xeroderma pigmentosum.',
+      'Compared to Melanotan II — afamelanotide is linear, MC1R-selective, and approved; Melanotan II is cyclic, non-selective (MC1–5R), and unapproved.',
+    ],
+    faqs: [
+      {
+        q: 'What is afamelanotide?',
+        a: 'Afamelanotide (Melanotan I) is an MC1R-selective α-MSH analog, FDA-approved as Scenesse for photoprotection in erythropoietic protoporphyria.',
+      },
+      {
+        q: 'How is it different from Melanotan II?',
+        a: 'Afamelanotide is MC1R-selective and FDA-approved; Melanotan II is non-selective across MC1–5R (including the MC4R activity that drives side effects) and is not approved.',
+      },
+      {
+        q: 'How is it administered?',
+        a: 'As a controlled-release subcutaneous implant (Scenesse), not a self-administered injection.',
+      },
+    ],
+    molecularFormula: 'C78H111N21O19',
+    molecularWeight: 1646.8,
+    pubchemCid: 16197727,
+    fdaApproved: true,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
     slug: 'pt-141',
     name: 'PT-141',
     aliases: ['Bremelanotide', 'Vyleesi'],
