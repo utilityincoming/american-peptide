@@ -16,6 +16,8 @@
 // outbound link. The `affiliate.active` flag below is the intended gate for
 // both. Until then, links are plain editorial references.
 
+import { IS_APP_BUILD } from '@/lib/platform'
+
 /** Region codes a vendor ships to (ISO-ish, plus 'global'). */
 export type ShipRegion = 'us' | 'eu' | 'uk' | 'ca' | 'au' | 'asia' | 'global'
 
@@ -389,6 +391,8 @@ export const VENDORS: Vendor[] = [
 
 /** Vendors known to carry a given peptide, best-trust first. */
 export function getVendorsForPeptide(slug: string): Vendor[] {
+  // Reference-only on the Play (TWA) build: no outbound vendor/affiliate links.
+  if (IS_APP_BUILD) return []
   return VENDORS.filter(
     (v) => v.peptides === 'all' || v.peptides.includes(slug),
   ).sort((a, b) => trustScore(b) - trustScore(a))
@@ -396,6 +400,8 @@ export function getVendorsForPeptide(slug: string): Vendor[] {
 
 /** All vendors, best-trust first. */
 export function vendorsRanked(): Vendor[] {
+  // Reference-only on the Play (TWA) build: no outbound vendor/affiliate links.
+  if (IS_APP_BUILD) return []
   return [...VENDORS].sort((a, b) => trustScore(b) - trustScore(a))
 }
 

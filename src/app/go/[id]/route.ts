@@ -6,11 +6,18 @@
 
 import { NextResponse } from 'next/server'
 import { VENDORS } from '@/lib/vendors'
+import { IS_APP_BUILD } from '@/lib/platform'
 
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  // Reference-only on the Play (TWA) build: never route out to a vendor, even
+  // via a deep link. Fall back to the catalog.
+  if (IS_APP_BUILD) {
+    return NextResponse.redirect(new URL('/catalog', req.url), 302)
+  }
+
   const { id } = await params
   const vendor = VENDORS.find((v) => v.id === id)
   const dest =
