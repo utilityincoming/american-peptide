@@ -358,6 +358,33 @@ export const VENDORS: Vendor[] = [
     notes:
       'Scoped to Swiss Chems’ best-selling peptides — they don’t carry semaglutide or tirzepatide. Standout policy: independently HPLC-test any product and they refund in full plus shipping if it fails. Caveat: independent peptide-testing reputation is mixed (Finnrick ~3.6/10 for peptides vs ~4.2/5 Trustpilot overall) despite the ISO-17025 COA claims — request and match the COA for your specific lot.',
   },
+  {
+    id: 'spartan-peptides',
+    name: 'Spartan Peptides',
+    url: 'https://spartanpeptides.com',
+    blurb:
+      'US research-peptide vendor publishing a per-batch third-party COA (HPLC + mass spec, signed by the analytical chemist) at ≥98% verified purity; same-day US dispatch.',
+    peptides: 'all',
+    shipsTo: ['us'],
+    trust: {
+      // Sourced from the vendor's own public claims (spartanpeptides.com), NOT
+      // independently confirmed. Only flags they explicitly state are set.
+      coaOnFile: true, // "third-party Certificates of Analysis… view the original lab reports" for every compound
+      thirdPartyTested: true, // "independently verified via HPLC and mass spectrometry"
+      perBatchTesting: true, // "Every batch independently verified"
+      purityPct: 98, // "≥98% HPLC-Verified Purity"
+      reshipPolicy: false, // not stated
+      refundPolicy: false, // not stated
+    },
+    affiliate: {
+      trackedPath: '/go/spartan-peptides',
+      url: 'https://spartanpeptides.com/?a_aid=AMERICANPEPTIDE',
+      code: 'AMERICANPEPTIDE',
+      active: true,
+    },
+    notes:
+      'Trust signals reflect the vendor’s own published claims, not independent verification. Testing lab is unnamed; reship and refund terms are not stated; the stated purity bar is ≥98% (below the ≥99% several peers claim). Request and match the third-party COA for your specific lot before any use.',
+  },
 ]
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
