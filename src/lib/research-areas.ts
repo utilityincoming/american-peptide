@@ -361,6 +361,38 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       },
     ],
   },
+  {
+    slug: 'bioregulators',
+    label: 'Peptide Bioregulators',
+    tagline: 'Short, tissue-specific peptides proposed to regulate gene expression — the Khavinson series.',
+    metaTitle: 'Peptide Bioregulators — Khavinson Short Peptides Research Guide | AmericanPeptide.com',
+    metaDescription:
+      'Research reference for short peptide bioregulators — the Khavinson Cytomax/Cytogen series. Tissue-specific di-, tri-, and tetrapeptides, the gene-regulatory hypothesis, and an honest read of the evidence.',
+    intro: [
+      'Peptide bioregulators are a distinct research program rather than a single indication: very short peptides — typically two to four amino acids — developed largely by the St. Petersburg Institute of Bioregulation and Gerontology (the "Khavinson" school). Each is associated with a specific tissue and is proposed to act not as a hormone or receptor ligand but as a direct regulator of gene expression in that tissue.',
+      'The series began with animal-tissue extracts (the "Cytomax" preparations such as Thymalin) and moved to defined synthetic short peptides (the "Cytogens" — Vilon, Epitalon, Vesugen, Pinealon, Bronchogen, Cardiogen, Pancragen). The central, still-debated hypothesis is that these peptides enter the cell, reach the nucleus, and bind sequence-specific promoter regions of DNA, switching on tissue-relevant genes that fall silent with age. Crucially, almost all clinical and lifespan data come from a single research tradition with limited independent Western replication — so this area is framed as preliminary and evidence-graded, not promotional. It is a research reference, not medical advice.',
+    ],
+    matchers: ['bioregulator'],
+    relatedCategories: ['bioregulator', 'longevity', 'immune'],
+    faqs: [
+      {
+        q: 'What is a peptide bioregulator?',
+        a: 'A very short, tissue-specific peptide — usually 2 to 4 amino acids — from the Khavinson Cytomax/Cytogen series, proposed to regulate gene expression in a particular organ rather than act as a hormone or receptor ligand.',
+      },
+      {
+        q: 'How are they thought to work?',
+        a: 'The class hypothesis is that the short peptide enters the cell, reaches the nucleus, and binds specific DNA promoter regions, modulating transcription in a tissue-selective way. This mechanism is proposed and partially supported in the originating literature, not firmly established by independent structural work.',
+      },
+      {
+        q: 'How strong is the evidence?',
+        a: 'Weaker and narrower than the popularity suggests. Most clinical and lifespan data come from a single research tradition with limited independent replication, so findings should be treated as preliminary.',
+      },
+      {
+        q: 'How is this different from the longevity research area?',
+        a: 'Longevity is an indication (the aging endpoint); bioregulators is a class (short tissue-regulating peptides). Several members — Epitalon, Vilon, Vesugen — appear in both, framed by endpoint in one and by the shared bioregulator hypothesis here.',
+      },
+    ],
+  },
 ]
 
 export const RESEARCH_AREA_BY_SLUG: Record<string, ResearchArea> =
