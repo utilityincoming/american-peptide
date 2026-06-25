@@ -15,6 +15,7 @@ export type PeptideCategory =
   | 'reproductive'
   | 'immune'
   | 'mitochondrial'
+  | 'bioregulator'
 
 export interface CategoryMeta {
   id: PeptideCategory
@@ -32,6 +33,7 @@ export const CATEGORIES: CategoryMeta[] = [
   { id: 'reproductive',    label: 'Reproductive',     blurb: 'HPG-axis, kisspeptin, and reproductive hormones.' },
   { id: 'immune',          label: 'Immune',           blurb: 'Thymic peptides and immunomodulators.' },
   { id: 'mitochondrial',   label: 'Mitochondrial',    blurb: 'Mitochondrial bioenergetics and NAD+ axis.' },
+  { id: 'bioregulator',    label: 'Bioregulators',    blurb: 'Short peptide bioregulators (Khavinson peptides) — tissue-specific gene-regulatory peptides.' },
 ]
 
 export interface MarketStub {
@@ -1708,12 +1710,12 @@ const SEED_PEPTIDES: Peptide[] = [
     slug: 'epitalon',
     name: 'Epitalon',
     aliases: ['Epithalon', 'Epithalamin fragment'],
-    categories: ['longevity'],
+    categories: ['longevity', 'bioregulator'],
     shortDescription: 'Synthetic tetrapeptide investigated for telomerase activity and circadian effects.',
     description:
       'Epitalon is a synthetic four-amino-acid peptide derived from the pineal peptide epithalamin. Russian-led clinical work has reported effects on melatonin secretion and lifespan endpoints in rodent models.',
     mechanism: 'Reported telomerase upregulation; pineal-axis modulation.',
-    researchAreas: ['Aging biology', 'Circadian biology', 'Pineal function'],
+    researchAreas: ['Aging biology', 'Circadian biology', 'Pineal function', 'Peptide bioregulators'],
     background: [
       'Epitalon (epithalon) is a synthetic four-amino-acid peptide modeled on epithalamin, a peptide extract of the pineal gland. It emerged from Russian gerontology research, where the pineal axis is studied as a regulator of aging and circadian rhythm.',
       'Russian-led studies have reported effects on melatonin secretion, telomerase activity, and lifespan endpoints in animal models. The evidence base is concentrated in that research tradition, independent replication is limited, and Epitalon is not FDA-approved.',
@@ -1746,6 +1748,271 @@ const SEED_PEPTIDES: Peptide[] = [
     sequence: 'AEDG',
     molecularWeight: 390.4,
     cas: '307297-39-8',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'thymalin',
+    name: 'Thymalin',
+    aliases: ['Thymulin (distinct)', 'Thymus polypeptide fraction'],
+    categories: ['immune', 'bioregulator'],
+    shortDescription: 'Thymus-derived polypeptide complex — the founding tissue bioregulator (Cytomax) studied for immune restoration.',
+    description:
+      'Thymalin is a polypeptide fraction extracted from calf thymus, developed by the St. Petersburg school of bioregulation as one of the original "Cytomax" tissue bioregulators. Russian clinical work studied it for restoring T-cell function in aging and immunodeficiency.',
+    mechanism: 'Reported normalization of T-lymphocyte populations and cytokine balance; tissue-specific immune regulation.',
+    researchAreas: ['Immune modulation', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Thymalin is a peptide complex isolated from the thymus, introduced in the 1970s–80s as the prototype of the Cytomax class — animal-tissue peptide extracts intended to act as "bioregulators" of the organ they were drawn from. It is the historical anchor of the short-peptide bioregulator program later associated with Vladimir Khavinson.',
+      'Unlike the defined short peptides that followed (Epitalon, Vesugen, Pinealon), Thymalin is a heterogeneous polypeptide fraction rather than a single synthetic sequence. Reported research framed it as restoring age- or stress-depleted thymic function. The evidence base is concentrated in Russian-language clinical literature with limited independent Western replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Immune restoration — Russian clinical studies reported normalization of T-lymphocyte subsets and immune indices in elderly and immunocompromised cohorts.',
+      'Aging / healthspan — long-term observational work from the originating group reported reduced morbidity and mortality endpoints when combined with the pineal preparation epithalamin; these reports are not independently replicated.',
+      'Class context — Thymalin (a tissue extract) is the conceptual parent of the later synthetic Cytogen short peptides such as Vilon (Lys-Glu), a defined dipeptide studied for the same thymic axis.',
+      'Evidence quality — predominantly single-tradition, older, and often open-label; treat findings as preliminary.',
+    ],
+    faqs: [
+      {
+        q: 'What is Thymalin?',
+        a: 'Thymalin is a polypeptide fraction extracted from thymus tissue, studied in Russia as an immune-restoring "bioregulator" and regarded as the founding compound of the tissue-bioregulator class.',
+      },
+      {
+        q: 'How is it different from the short peptide bioregulators?',
+        a: 'Thymalin is a tissue extract (a mix of polypeptides), whereas later bioregulators like Epitalon, Vesugen, and Pinealon are single, defined synthetic short peptides modeled on these extracts.',
+      },
+      {
+        q: 'How strong is the evidence?',
+        a: 'The clinical literature is concentrated in a single research tradition with limited independent replication, so findings should be treated as preliminary. This page is a research and educational reference.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is a research compound and is not FDA-approved.',
+      },
+    ],
+    cas: '86402-19-7',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'vilon',
+    name: 'Vilon',
+    aliases: ['Lys-Glu', 'KE dipeptide'],
+    categories: ['immune', 'bioregulator', 'longevity'],
+    shortDescription: 'Synthetic Lys-Glu dipeptide — the defined short-peptide successor to Thymalin, studied for immune and aging endpoints.',
+    description:
+      'Vilon is a synthetic dipeptide (Lys-Glu) developed as a defined-sequence "Cytogen" successor to the thymic extract Thymalin. Russian research studied it as a tissue bioregulator of immune function and an aging-axis peptide.',
+    mechanism: 'Proposed direct gene-regulatory binding (short peptide–DNA interaction) modulating immune-related gene expression.',
+    researchAreas: ['Immune modulation', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Vilon is one of the simplest members of the Khavinson short-peptide bioregulator class — a two–amino-acid sequence (Lys-Glu) intended to reproduce, in a defined synthetic form, the immune-regulating activity attributed to the thymic extract Thymalin.',
+      'The class hypothesis is that such short peptides penetrate the cell and bind specific promoter regions of DNA, modulating transcription in a tissue-selective way. Reported studies examined effects on immune indices, chromatin activation, and lifespan in model organisms. As with the rest of the class, the literature is concentrated in one research tradition and lacks large independent trials; it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Gene-regulatory hypothesis — the originating group reported that Lys-Glu can interact with DNA and de-condense heterochromatin, proposed as the basis for transcriptional activation of age-silenced genes.',
+      'Immune indices — studied for normalization of immune and interferon parameters in aged animal models.',
+      'Lifespan models — reported increases in mean lifespan in rodents in originating-group studies; not independently replicated.',
+      'Evidence quality — single-tradition, mostly preclinical; findings are preliminary.',
+    ],
+    faqs: [
+      {
+        q: 'What is Vilon?',
+        a: 'Vilon is a synthetic Lys-Glu dipeptide studied in Russia as a defined-sequence immune and aging bioregulator — the short-peptide successor to the thymic extract Thymalin.',
+      },
+      {
+        q: 'How is it thought to work?',
+        a: 'The class hypothesis is that the short peptide enters the cell and binds specific DNA promoter regions, modulating gene expression in a tissue-selective way. This mechanism is proposed, not firmly established.',
+      },
+      {
+        q: 'Is the evidence strong?',
+        a: 'No — it is concentrated in a single research tradition and is largely preclinical, so findings are preliminary. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'KE',
+    molecularWeight: 275.3,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'vesugen',
+    name: 'Vesugen',
+    aliases: ['Lys-Glu-Asp', 'KED tripeptide'],
+    categories: ['bioregulator', 'longevity'],
+    shortDescription: 'Synthetic Lys-Glu-Asp tripeptide studied as a vascular-axis bioregulator.',
+    description:
+      'Vesugen is a synthetic tripeptide (Lys-Glu-Asp) in the Khavinson short-peptide bioregulator series, studied for tissue-specific effects on the vascular wall and endothelium.',
+    mechanism: 'Proposed gene-regulatory modulation of vascular/endothelial gene expression.',
+    researchAreas: ['Vascular biology', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Vesugen (Lys-Glu-Asp) is the vascular-targeted member of the defined short-peptide bioregulator family. Each peptide in the series is associated with a specific tissue; Vesugen is framed around the blood-vessel wall and endothelial function.',
+      'Reported research examined endothelial markers and vascular-tone regulation in cell and animal models, consistent with the class hypothesis of tissue-selective transcriptional modulation. Evidence is concentrated in the originating research tradition, independent replication is limited, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Vascular focus — studied for effects on endothelial cell function and markers of vascular regulation in preclinical models.',
+      'Class mechanism — proposed short peptide–DNA interaction driving tissue-selective gene expression, the shared hypothesis across the Vesugen/Pinealon/Cardiogen series.',
+      'Evidence quality — single-tradition and largely preclinical; treat as preliminary.',
+    ],
+    faqs: [
+      {
+        q: 'What is Vesugen?',
+        a: 'Vesugen is a synthetic Lys-Glu-Asp tripeptide studied as a vascular-axis bioregulator in the Khavinson short-peptide series.',
+      },
+      {
+        q: 'What tissue is it associated with?',
+        a: 'The blood-vessel wall and endothelium — each bioregulator in the series is framed around a specific target tissue.',
+      },
+      {
+        q: 'How strong is the evidence?',
+        a: 'It is concentrated in a single research tradition and is largely preclinical, so findings are preliminary. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'KED',
+    molecularWeight: 390.4,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'pinealon',
+    name: 'Pinealon',
+    aliases: ['Glu-Asp-Arg', 'EDR tripeptide'],
+    categories: ['cognitive', 'bioregulator'],
+    shortDescription: 'Synthetic Glu-Asp-Arg tripeptide studied as a brain/CNS bioregulator.',
+    description:
+      'Pinealon is a synthetic tripeptide (Glu-Asp-Arg) in the Khavinson short-peptide bioregulator series, studied for neuroprotective and CNS-directed effects.',
+    mechanism: 'Proposed gene-regulatory modulation of neuronal gene expression; reported antioxidant / anti-apoptotic effects in neural models.',
+    researchAreas: ['Cognition', 'Neuroprotection', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Pinealon (Glu-Asp-Arg) is the brain-directed member of the defined short-peptide bioregulator family. It is studied in the same gene-regulatory framework as Epitalon, but framed around neuronal tissue rather than the pineal/aging axis.',
+      'Reported research examined protection of neurons against hypoxic and oxidative stress and effects on cognition in animal models. As with the rest of the class, the data originate largely from one research tradition, independent replication is limited, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Neuroprotection — studied for reduced neuronal apoptosis and oxidative damage under hypoxic/oxidative stress in cell and animal models.',
+      'Cognition — examined for effects on learning and behavioral endpoints in rodent models.',
+      'Class mechanism — proposed short peptide–DNA interaction modulating neuronal gene expression, shared with the wider bioregulator series.',
+      'Evidence quality — single-tradition and largely preclinical; preliminary.',
+    ],
+    faqs: [
+      {
+        q: 'What is Pinealon?',
+        a: 'Pinealon is a synthetic Glu-Asp-Arg tripeptide studied as a brain/CNS bioregulator in the Khavinson short-peptide series.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Neuroprotection under oxidative or hypoxic stress and cognition endpoints, mostly in preclinical models.',
+      },
+      {
+        q: 'How strong is the evidence?',
+        a: 'It is concentrated in a single research tradition and is largely preclinical, so findings are preliminary. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'EDR',
+    molecularWeight: 418.4,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'bronchogen',
+    name: 'Bronchogen',
+    aliases: ['Ala-Asp-Glu-Leu', 'ADEL tetrapeptide'],
+    categories: ['immune', 'bioregulator'],
+    shortDescription: 'Synthetic Ala-Asp-Glu-Leu tetrapeptide studied as a respiratory-tissue bioregulator.',
+    description:
+      'Bronchogen is a synthetic tetrapeptide (Ala-Asp-Glu-Leu) in the Khavinson short-peptide bioregulator series, studied for effects on bronchial and respiratory-tract tissue.',
+    mechanism: 'Proposed gene-regulatory modulation of bronchial epithelial gene expression.',
+    researchAreas: ['Respiratory biology', 'Immune modulation', 'Peptide bioregulators'],
+    background: [
+      'Bronchogen (Ala-Asp-Glu-Leu) is the respiratory-directed member of the defined short-peptide bioregulator family, studied in the context of chronic bronchopulmonary conditions in the originating research tradition.',
+      'Reported work examined bronchial epithelial markers and inflammatory indices in respiratory models, consistent with the class hypothesis of tissue-selective transcriptional modulation. Evidence is concentrated in one research tradition with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Respiratory focus — studied for effects on bronchial epithelium and inflammatory markers in models of chronic respiratory disease.',
+      'Class mechanism — proposed short peptide–DNA interaction driving tissue-selective gene expression.',
+      'Evidence quality — single-tradition and largely preclinical; preliminary.',
+    ],
+    faqs: [
+      {
+        q: 'What is Bronchogen?',
+        a: 'Bronchogen is a synthetic Ala-Asp-Glu-Leu tetrapeptide studied as a respiratory-tissue bioregulator in the Khavinson short-peptide series.',
+      },
+      {
+        q: 'What tissue is it associated with?',
+        a: 'The bronchi and respiratory-tract epithelium — each bioregulator in the series is framed around a specific target tissue.',
+      },
+      {
+        q: 'How strong is the evidence?',
+        a: 'It is concentrated in a single research tradition and is largely preclinical, so findings are preliminary. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'ADEL',
+    molecularWeight: 446.5,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'cardiogen',
+    name: 'Cardiogen',
+    aliases: ['Ala-Glu-Asp-Arg', 'AEDR tetrapeptide'],
+    categories: ['bioregulator', 'healing-repair'],
+    shortDescription: 'Synthetic Ala-Glu-Asp-Arg tetrapeptide studied as a cardiac-tissue bioregulator.',
+    description:
+      'Cardiogen is a synthetic tetrapeptide (Ala-Glu-Asp-Arg) in the Khavinson short-peptide bioregulator series, studied for effects on myocardial tissue.',
+    mechanism: 'Proposed gene-regulatory modulation of myocardial gene expression.',
+    researchAreas: ['Cardiac repair', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Cardiogen (Ala-Glu-Asp-Arg) is the heart-directed member of the defined short-peptide bioregulator family, studied in the context of age-related myocardial decline in the originating research tradition.',
+      'Reported research examined cardiomyocyte markers and recovery endpoints in cardiac models, consistent with the class hypothesis of tissue-selective transcriptional modulation. Evidence is concentrated in one research tradition with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Cardiac focus — studied for effects on myocardial tissue and recovery markers in preclinical cardiac models.',
+      'Class mechanism — proposed short peptide–DNA interaction driving tissue-selective gene expression.',
+      'Evidence quality — single-tradition and largely preclinical; preliminary.',
+    ],
+    faqs: [
+      {
+        q: 'What is Cardiogen?',
+        a: 'Cardiogen is a synthetic Ala-Glu-Asp-Arg tetrapeptide studied as a cardiac-tissue bioregulator in the Khavinson short-peptide series.',
+      },
+      {
+        q: 'What tissue is it associated with?',
+        a: 'The myocardium (heart muscle) — each bioregulator in the series is framed around a specific target tissue.',
+      },
+      {
+        q: 'How strong is the evidence?',
+        a: 'It is concentrated in a single research tradition and is largely preclinical, so findings are preliminary. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'AEDR',
+    molecularWeight: 489.5,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'pancragen',
+    name: 'Pancragen',
+    aliases: ['Lys-Glu-Asp-Trp', 'KEDW tetrapeptide', 'Pancragen'],
+    categories: ['bioregulator', 'metabolic'],
+    shortDescription: 'Synthetic Lys-Glu-Asp-Trp tetrapeptide studied as a pancreas-tissue bioregulator.',
+    description:
+      'Pancragen is a synthetic tetrapeptide (Lys-Glu-Asp-Trp) in the Khavinson short-peptide bioregulator series, studied for effects on pancreatic tissue and carbohydrate metabolism.',
+    mechanism: 'Proposed gene-regulatory modulation of pancreatic gene expression.',
+    researchAreas: ['Metabolic', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Pancragen (Lys-Glu-Asp-Trp) is the pancreas-directed member of the defined short-peptide bioregulator family, studied in the context of age-related metabolic and pancreatic decline in the originating research tradition.',
+      'Reported research examined markers of pancreatic function and carbohydrate metabolism in models, consistent with the class hypothesis of tissue-selective transcriptional modulation. Evidence is concentrated in one research tradition with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Pancreatic / metabolic focus — studied for effects on pancreatic tissue markers and carbohydrate-metabolism endpoints in preclinical models.',
+      'Class mechanism — proposed short peptide–DNA interaction driving tissue-selective gene expression.',
+      'Evidence quality — single-tradition and largely preclinical; preliminary.',
+    ],
+    faqs: [
+      {
+        q: 'What is Pancragen?',
+        a: 'Pancragen is a synthetic Lys-Glu-Asp-Trp tetrapeptide studied as a pancreas-tissue bioregulator in the Khavinson short-peptide series.',
+      },
+      {
+        q: 'What tissue is it associated with?',
+        a: 'The pancreas — each bioregulator in the series is framed around a specific target tissue.',
+      },
+      {
+        q: 'How strong is the evidence?',
+        a: 'It is concentrated in a single research tradition and is largely preclinical, so findings are preliminary. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'KEDW',
+    molecularWeight: 576.6,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {

@@ -413,6 +413,47 @@ export const CATEGORY_CONTENT: Partial<
       },
     ],
   },
+  bioregulator: {
+    metaTitle: 'Peptide Bioregulators — Khavinson Short Peptides | AmericanPeptide',
+    metaDescription:
+      'A research reference on short peptide bioregulators — the Khavinson Cytomax/Cytogen series. Tissue-specific di-, tri-, and tetrapeptides, the gene-regulatory hypothesis, and an honest read of the evidence.',
+    heading: 'Peptide Bioregulators',
+    tagline:
+      'Very short, tissue-specific peptides proposed to regulate gene expression — the Khavinson series, read with the evidence in full view.',
+    intro:
+      'Bioregulators are the shortest peptides in this catalog — di-, tri-, and tetrapeptides developed largely by the St. Petersburg Institute of Bioregulation and Gerontology (the "Khavinson" school). Each is associated with a specific tissue and proposed to act not as a hormone or receptor ligand but as a direct regulator of gene expression. The class is popular in longevity circles and unusually thin on independent Western data, which is exactly why it belongs here framed honestly rather than promotionally. This is a mechanistic research reference, not medical, dosing, or purchasing guidance.',
+    howItWorks: [
+      'The class began with tissue extracts. Thymalin, a polypeptide fraction of thymus, was the prototype "Cytomax" — an animal-tissue extract intended to bioregulate the organ it came from. The defined synthetic short peptides that followed (the "Cytogens") were modeled on these extracts: Vilon (Lys-Glu) as a defined stand-in for Thymalin, then a family of organ-specific sequences — Epitalon (pineal), Vesugen (vascular), Pinealon (brain), Bronchogen (lung), Cardiogen (heart), Pancragen (pancreas).',
+      'The central hypothesis is gene-regulatory rather than receptor-mediated. Because these peptides are so small, the originating group proposed that they enter the cell, reach the nucleus, and bind specific promoter sequences in DNA — de-condensing heterochromatin and switching on tissue-relevant genes that fall silent with age. Tissue selectivity, in this model, comes from sequence-specific DNA contacts rather than from a cell-surface receptor. This mechanism is proposed and partially supported in the originating literature, not firmly established by independent structural work.',
+      'The honest caveat is the point, not a footnote. Nearly all of the clinical and lifespan data come from a single research tradition, much of it older, Russian-language, and not independently replicated in large Western trials. Epitalon\'s telomerase and lifespan claims in particular outrun the third-party evidence. For a trust-first reference the value-add is exactly this: clear sequences, a sober evidence grade, and identity/purity scrutiny for a category where short, cheap peptides are easy to misrepresent.',
+    ],
+    researchThemes: [
+      'Tissue-specific short peptides (di-, tri-, tetrapeptides)',
+      'Cytomax tissue extracts vs. defined synthetic Cytogens',
+      'The peptide–DNA gene-regulatory hypothesis',
+      'Heterochromatin de-condensation and age-silenced genes',
+      'Aging / healthspan endpoints in model organisms',
+      'Single-tradition evidence base and replication gaps',
+    ],
+    faqs: [
+      {
+        q: 'What is a peptide bioregulator?',
+        a: 'In this catalog, a bioregulator is a very short, tissue-specific peptide — usually 2 to 4 amino acids — from the Khavinson Cytomax/Cytogen series, proposed to regulate gene expression in a particular organ rather than act as a hormone. Entries are mechanistic reference profiles, not products or treatment recommendations.',
+      },
+      {
+        q: 'How is this different from the longevity or immune categories?',
+        a: 'It is a class (short tissue-regulating peptides), not an indication, so its members are cross-listed by what they are studied for — Epitalon and Vilon also appear under longevity and immune. This page organizes them by the shared bioregulator hypothesis and history.',
+      },
+      {
+        q: 'How strong is the evidence for bioregulators?',
+        a: 'Weaker and narrower than the popularity suggests. Most clinical and lifespan data come from a single research tradition with limited independent Western replication, so findings should be treated as preliminary. We flag this on every entry rather than burying it.',
+      },
+      {
+        q: 'Is this page medical or dosing advice?',
+        a: 'No. AmericanPeptide.com is a computational research and reference platform, not a medical device or clinical decision-support system. Nothing here is medical advice, a dosing protocol, or an offer to sell. Independent expert and regulatory review is required before any experimental use.',
+      },
+    ],
+  },
 }
 
 export function getCategoryContent(
