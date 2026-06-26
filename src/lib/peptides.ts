@@ -16,6 +16,7 @@ export type PeptideCategory =
   | 'immune'
   | 'mitochondrial'
   | 'bioregulator'
+  | 'peptide-hormone'
 
 export interface CategoryMeta {
   id: PeptideCategory
@@ -34,6 +35,7 @@ export const CATEGORIES: CategoryMeta[] = [
   { id: 'immune',          label: 'Immune',           blurb: 'Thymic peptides and immunomodulators.' },
   { id: 'mitochondrial',   label: 'Mitochondrial',    blurb: 'Mitochondrial bioenergetics and NAD+ axis.' },
   { id: 'bioregulator',    label: 'Bioregulators',    blurb: 'Short peptide bioregulators (Khavinson peptides) — tissue-specific gene-regulatory peptides.' },
+  { id: 'peptide-hormone', label: 'Peptide Hormones',  blurb: 'How hormone sequences become manufacturable synthetic drugs — analog engineering, disulfides, acylation, and why purity is hard.' },
 ]
 
 export interface MarketStub {
@@ -300,14 +302,14 @@ const SEED_PEPTIDES: Peptide[] = [
       'Humulin',
       'Novolin',
     ],
-    categories: ['metabolic'],
+    categories: ['metabolic', 'peptide-hormone'],
     shortDescription:
       'The archetypal protein biologic — a 51-amino-acid two-chain hormone, disulfide-linked, and the first recombinant DNA drug ever marketed.',
     description:
       'Insulin is the hormone that defined the biologic era. It is a small but genuinely complex protein: two peptide chains — an A chain of 21 residues and a B chain of 30 — held together by two interchain disulfide bonds, with a third disulfide looping within the A chain. At ~5.8 kDa it is the smallest hormone in this catalog’s biologic tier, yet it is assembled, folded, and processed exactly like the larger proteins, and it was the molecule that proved recombinant human therapeutics were possible.',
     mechanism:
       'Binds the insulin receptor, a tyrosine kinase, triggering autophosphorylation and the PI3K/AKT cascade that drives GLUT4 translocation and glucose uptake into muscle and fat, suppresses hepatic glucose output, and promotes glycogen, lipid, and protein synthesis.',
-    researchAreas: ['Type 1 diabetes', 'Type 2 diabetes', 'Glucose metabolism', 'Anabolic signaling'],
+    researchAreas: ['Type 1 diabetes', 'Type 2 diabetes', 'Glucose metabolism', 'Anabolic signaling', 'Peptide hormones'],
     background: [
       'Insulin is synthesized in the body as a single chain — preproinsulin → proinsulin — that folds and forms its disulfide bonds before a connecting C-peptide is excised, leaving the mature two-chain hormone. That biosynthetic detail is why early recombinant manufacturing expressed the A and B chains (or proinsulin) in bacteria and then handled folding and disulfide pairing as a controlled step: the chemistry that the body does enzymatically has to be reproduced and verified in a reactor. Get the disulfides wrong and you get a misfolded, inactive — or immunogenic — product.',
       'Its history is foundational twice over. Insulin was discovered in 1921 in Toronto by Banting, Best, Macleod, and Collip, and the patent was famously sold to the university for one dollar on the principle that "insulin belongs to the world." Six decades later, in 1982, recombinant human insulin (Humulin) became the first recombinant-DNA drug ever approved — the proof of concept for the entire modern biologic industry, including most of the engineered peptides elsewhere in this catalog.',
@@ -358,14 +360,14 @@ const SEED_PEPTIDES: Peptide[] = [
     slug: 'glucagon',
     name: 'Glucagon',
     aliases: ['GlucaGen', 'Baqsimi', 'Gvoke'],
-    categories: ['metabolic'],
+    categories: ['metabolic', 'peptide-hormone'],
     shortDescription:
       'Insulin’s counter-hormone — a 29-amino-acid peptide that raises blood glucose, the emergency rescue for severe lows, and the "G" in the new triple agonists.',
     description:
       'Glucagon is the metabolic mirror image of insulin. Released by the pancreatic alpha cells when blood sugar falls, this 29-amino-acid peptide tells the liver to break down glycogen and make new glucose, pushing blood sugar back up. It is the body’s primary defense against hypoglycemia, the basis of emergency rescue products, and — in a development that has put it back at the center of metabolic drug design — one of the three receptors the newest weight-loss agonists deliberately engage.',
     mechanism:
       'Binds the glucagon receptor on hepatocytes, raising cAMP and driving glycogenolysis and gluconeogenesis to increase blood glucose. It opposes insulin in the moment-to-moment regulation of blood sugar.',
-    researchAreas: ['Severe hypoglycemia', 'Glucose counter-regulation', 'Triple-agonist metabolic drugs'],
+    researchAreas: ['Severe hypoglycemia', 'Glucose counter-regulation', 'Triple-agonist metabolic drugs', 'Peptide hormones'],
     background: [
       'Glucagon and insulin are a push-pull pair: insulin lowers blood glucose, glucagon raises it, and health depends on their balance. When blood sugar drops dangerously — most often in insulin-treated diabetes — glucagon is the rescue, which is why it is sold as emergency kits: the classic reconstituted injection (GlucaGen), a nasal powder (Baqsimi, 2019), and a ready-to-use autoinjector (Gvoke). It is also used in radiology and endoscopy to relax smooth muscle.',
       'As a molecule it is a 29-residue peptide derived from the same precursor (preproglucagon) that gives rise to GLP-1 and GLP-2 — a family relationship that matters more than it first appears. For decades glucagon was framed only as the hormone you suppress in diabetes. The reframing came from drug design: adding glucagon-receptor agonism to incretin drugs increases energy expenditure and fat mobilization, and the glucagon receptor is the "G" in the GIP/GLP-1/glucagon triple agonists (such as retatrutide) now posting the largest weight-loss numbers in trials.',
@@ -716,14 +718,14 @@ const SEED_PEPTIDES: Peptide[] = [
     slug: 'teriparatide',
     name: 'Teriparatide (PTH 1-34)',
     aliases: ['PTH(1-34)', 'Forteo', 'Bonsity', 'recombinant parathyroid hormone'],
-    categories: ['healing-repair', 'longevity'],
+    categories: ['healing-repair', 'longevity', 'peptide-hormone'],
     shortDescription:
       'The active fragment of parathyroid hormone — a recombinant peptide that builds bone, exploiting a paradox: the same hormone resorbs bone when continuous, but builds it when pulsed.',
     description:
       'Teriparatide is the first 34 amino acids of parathyroid hormone (PTH), the body’s master regulator of calcium. It is one of the few osteoporosis drugs that is genuinely anabolic — it builds new bone rather than just slowing its loss — and it does so by exploiting a striking biological paradox. The same PTH signal that dissolves bone when it is chronically elevated stimulates bone formation when it is delivered as a brief, once-daily pulse. Teriparatide turns that timing trick into a therapy.',
     mechanism:
       'Agonist at the PTH1 receptor on osteoblasts. Intermittent (once-daily) exposure favors osteoblast activity and new bone formation; continuous elevation (as in hyperparathyroidism) instead drives osteoclastic resorption. The therapeutic effect depends entirely on the pulsatile dosing.',
-    researchAreas: ['Osteoporosis', 'Bone formation', 'Fracture healing', 'Calcium regulation'],
+    researchAreas: ['Osteoporosis', 'Bone formation', 'Fracture healing', 'Calcium regulation', 'Peptide hormones'],
     background: [
       'Parathyroid hormone is the body’s calcium thermostat, and the N-terminal 1-34 fragment retains its full receptor activity — which is why teriparatide is that fragment rather than the whole 84-residue hormone. Its defining feature is the dose-pattern paradox: a continuously high PTH level (the disease state of hyperparathyroidism) leaches calcium from bone, but a short daily spike tips the balance toward the bone-building osteoblasts. Teriparatide (Forteo, approved 2002) was among the first treatments to add bone rather than merely preserve it, used in severe osteoporosis and high fracture risk.',
       'It also carries one of the more instructive drug-safety stories. Teriparatide launched with a black-box warning for osteosarcoma, a bone cancer seen when rats were given very high, lifelong doses — which translated into a strict two-year lifetime limit on use in people. Over nearly two decades of post-marketing data that signal did not materialize in humans, and in 2020 the FDA removed the boxed warning and the lifetime restriction. It is a useful case of a precautionary animal-derived warning being revised as real-world human evidence accumulated.',
@@ -2374,14 +2376,14 @@ const SEED_PEPTIDES: Peptide[] = [
     slug: 'oxytocin',
     name: 'Oxytocin',
     aliases: ['Pitocin', 'Syntocinon', 'the love hormone'],
-    categories: ['reproductive', 'cognitive'],
+    categories: ['reproductive', 'cognitive', 'peptide-hormone'],
     shortDescription:
       'A 9-amino-acid cyclic hormone of labor and bonding — historically the first peptide hormone ever chemically synthesized, and the most over-marketed "love hormone."',
     description:
       'Oxytocin is a tiny but pivotal hormone: a 9-amino-acid cyclic peptide, closed by a single disulfide bridge, released from the posterior pituitary. It drives uterine contractions in labor and milk letdown in nursing, and it acts in the brain on social behavior — the source of its "love hormone" fame. It also holds a place in scientific history: in 1953 Vincent du Vigneaud synthesized it, the first polypeptide hormone ever made in the lab, a feat that won the 1955 Nobel Prize in Chemistry and opened the door to synthetic peptide therapeutics.',
     mechanism:
       'Agonist at the oxytocin receptor (a G-protein-coupled receptor). Peripherally it contracts uterine smooth muscle and the mammary myoepithelium; centrally it modulates circuits involved in social bonding, trust, and stress, which is the basis of its behavioral research.',
-    researchAreas: ['Labor induction', 'Lactation', 'Social bonding', 'Anxiety and stress'],
+    researchAreas: ['Labor induction', 'Lactation', 'Social bonding', 'Anxiety and stress', 'Peptide hormones'],
     background: [
       'Oxytocin’s established medicine is obstetric. As Pitocin it is one of the most widely used drugs in childbirth — to induce or augment labor and to control bleeding afterward — and it mediates the milk-ejection reflex during breastfeeding. Structurally it is almost a twin of vasopressin, differing in only two residues, which is why the two hormones’ effects sometimes overlap.',
       'Its fame, though, comes from the brain. Animal and early human work tied oxytocin to pair-bonding, maternal behavior, trust, and social affiliation, and the popular press crowned it the "love hormone" or "cuddle chemical." That framing drove a wave of intranasal-oxytocin research and products promising better social functioning — in autism, social anxiety, even relationship enhancement.',
@@ -2738,6 +2740,351 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 663.4,
     cas: '53-84-9',
     pubchemCid: 5893,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'vasopressin',
+    name: 'Vasopressin',
+    aliases: ['Arginine vasopressin', 'AVP', 'Antidiuretic hormone', 'ADH', 'Vasostrict', 'Desmopressin (analog)'],
+    categories: ['peptide-hormone'],
+    shortDescription:
+      'The body’s water-conservation hormone — a 9-amino-acid posterior-pituitary peptide, near-twin of oxytocin, used as a vasopressor and (as desmopressin) for diabetes insipidus.',
+    description:
+      'Vasopressin is a cyclic nonapeptide released from the posterior pituitary that controls how much water the kidney retains and constricts blood vessels. It differs from oxytocin by only two residues, yet does an entirely different job — a textbook example of how a tiny sequence change repurposes a hormone. In the clinic the native hormone (Vasostrict) is a vasopressor for refractory shock, while its engineered analog desmopressin (dDAVP) treats central diabetes insipidus, bedwetting, and some bleeding disorders.',
+    mechanism:
+      'Agonist at the V2 receptor in the renal collecting duct (inserting aquaporin-2 water channels to concentrate urine) and the V1a receptor on vascular smooth muscle (vasoconstriction). Desmopressin is V2-selective, giving the antidiuretic effect without the pressor action.',
+    researchAreas: ['Diabetes insipidus', 'Vasodilatory shock', 'Osmoregulation', 'Peptide hormones'],
+    background: [
+      'Vasopressin and oxytocin are the two posterior-pituitary nonapeptides, structurally almost identical — they differ at only two of nine positions and share the same disulfide-closed ring — but functionally distinct. That near-identity is a classic illustration of how peptide hormones diversify: gene duplication of an ancestral nonapeptide, then a few substitutions that switch receptor preference and physiological role.',
+      'Its central job is water balance. When the body is dehydrated, vasopressin tells the kidney to reabsorb water, concentrating the urine; failure of this signal — from the pituitary (central) or the kidney (nephrogenic) — causes diabetes insipidus, with copious dilute urine and thirst. The V2-selective analog desmopressin restores that signal in central diabetes insipidus and is also used for nocturnal enuresis and to raise clotting factors in mild hemophilia and von Willebrand disease.',
+      'The native hormone’s second face is vascular. Through V1a receptors it constricts blood vessels, which is why a vasopressin infusion (Vasostrict) is used to raise blood pressure in septic and other vasodilatory shock when catecholamines alone are not enough. One molecule, two receptor systems, two very different clinical uses — selected apart by which analog you reach for.',
+    ],
+    keyResearch: [
+      'Diabetes insipidus — desmopressin (V2-selective) replaces the antidiuretic signal in central DI; the disorder is the classic demonstration of the hormone’s role.',
+      'Vasodilatory shock — native vasopressin is a second-line vasopressor (V1a-mediated) for septic and post-cardiotomy shock refractory to catecholamines.',
+      'Hemostasis — desmopressin releases von Willebrand factor and factor VIII, used in mild hemophilia A and von Willebrand disease.',
+      'Structure–function — two-residue difference from oxytocin reroutes receptor selectivity, a canonical peptide-hormone case study.',
+      'Osmoregulation — the V2/aquaporin-2 axis is the molecular basis of renal water reabsorption.',
+    ],
+    faqs: [
+      {
+        q: 'What does vasopressin do?',
+        a: 'It conserves body water by making the kidney reabsorb it (its "antidiuretic" action) and it constricts blood vessels. As a drug, native vasopressin is used as a vasopressor in shock, and its analog desmopressin treats central diabetes insipidus.',
+      },
+      {
+        q: 'How is it related to oxytocin?',
+        a: 'They are near-twins — both 9-amino-acid posterior-pituitary hormones that differ at only two positions — yet vasopressin governs water balance and blood pressure while oxytocin governs labor and bonding.',
+      },
+      {
+        q: 'What is desmopressin?',
+        a: 'Desmopressin (dDAVP) is a synthetic vasopressin analog engineered to act selectively at the V2 receptor, giving the water-retaining effect without raising blood pressure. It is used for central diabetes insipidus, bedwetting, and some bleeding disorders.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance. Vasopressin and its analogs are prescription medicines.',
+      },
+    ],
+    sequence: 'CYFQNCPRG (1–6 disulfide, C-terminal amide)',
+    molecularWeight: 1084.2,
+    cas: '113-79-1',
+    fdaApproved: true,
+    synthesisNotes:
+      'A nonapeptide built by solid-phase synthesis and then oxidatively folded to close its single 1–6 disulfide, with a C-terminal amide. The synthetically interesting object is the analog: desmopressin (dDAVP) re-engineers the hormone with a deaminated position 1 and a D-arginine at position 8 — a stereochemical substitution that resists aminopeptidase cleavage, strips out the V1a pressor activity, and extends the half-life. It is a compact lesson in how D-amino acids and end-group edits convert a labile hormone into a dosable drug. Identity and disulfide connectivity are the key release tests.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'somatostatin',
+    name: 'Somatostatin',
+    aliases: ['SST', 'Somatotropin release-inhibiting factor', 'SRIF', 'GHIH', 'Octreotide (analog)', 'Sandostatin'],
+    categories: ['peptide-hormone', 'growth-hormone'],
+    shortDescription:
+      'The universal "off switch" — a cyclic hormone that inhibits growth hormone, insulin, glucagon, and gut secretions; its analog octreotide is the workhorse drug.',
+    description:
+      'Somatostatin is an inhibitory hormone with unusually broad reach: it suppresses the release of growth hormone, insulin, glucagon, gastrin, and a range of other pancreatic and gastrointestinal secretions. The endogenous 14-residue cyclic peptide has a half-life of only a couple of minutes, so the therapeutics that exploit its biology are stabilized analogs — octreotide (Sandostatin) and lanreotide — used for acromegaly and hormone-secreting neuroendocrine tumors.',
+    mechanism:
+      'Agonist at five somatostatin receptor subtypes (SSTR1–5), Gi-coupled, lowering cAMP and inhibiting hormone secretion across the pituitary, pancreatic islets, and GI tract. Octreotide is biased toward SSTR2/SSTR5, which carry the clinically useful growth-hormone- and tumor-suppressing effects.',
+    researchAreas: ['Acromegaly', 'Neuroendocrine tumors', 'Growth hormone regulation', 'Peptide hormones'],
+    background: [
+      'Somatostatin is the body’s general inhibitory signal in the endocrine system. Discovered as the hypothalamic factor that blocks growth-hormone release (hence "growth-hormone-inhibiting hormone"), it turned out to be far more widely distributed — in pancreatic delta cells, throughout the gut, and in the nervous system — where it brakes the secretion of insulin, glucagon, gastrin, secretin, and more. It is the counterweight to the body’s many "go" signals.',
+      'Its therapeutic problem is its virtue: it shuts off so much, so briefly. Native somatostatin is cleared within minutes, which makes the raw hormone impractical as a drug. The solution was engineering — octreotide is a synthetic eight-residue analog that keeps the essential receptor-binding core, resists degradation, and lasts long enough to dose. Long-acting depot formulations of octreotide and lanreotide now stretch that to monthly injections.',
+      'Clinically these analogs are the standard medical therapy for acromegaly (growth-hormone excess) and for controlling the hormone-driven symptoms of neuroendocrine tumors such as carcinoid syndrome. The same broad inhibition also makes them useful in certain GI bleeding and secretory states. Somatostatin is the clearest example in this catalog of a hormone too short-lived to use directly, productively reborn as a stabilized analog.',
+    ],
+    keyResearch: [
+      'Acromegaly — somatostatin analogs (octreotide, lanreotide) are first-line medical therapy to suppress excess growth hormone and IGF-1.',
+      'Neuroendocrine tumors — control hormone-mediated symptoms (e.g. carcinoid syndrome) and can slow tumor progression; radiolabeled analogs also enable SSTR-targeted imaging and therapy.',
+      'Broad endocrine inhibition — suppresses GH, insulin, glucagon, gastrin and other GI/pancreatic secretions via SSTR1–5.',
+      'Analog engineering — octreotide distills the 14-residue hormone to a protease-resistant 8-residue peptide, the design that made the biology druggable.',
+      'Short native half-life — endogenous somatostatin lasts only minutes, the reason the raw hormone is not used as a chronic therapy.',
+    ],
+    faqs: [
+      {
+        q: 'What is somatostatin?',
+        a: 'A cyclic peptide hormone that broadly inhibits secretion — of growth hormone, insulin, glucagon, and many gut hormones. It acts as a general "off switch" across the endocrine and digestive systems.',
+      },
+      {
+        q: 'Why is octreotide used instead of somatostatin itself?',
+        a: 'Native somatostatin is cleared within minutes, too briefly to be a practical drug. Octreotide is a stabilized synthetic analog that keeps the key receptor-binding region but resists breakdown, so it can be dosed and even formulated as a long-acting depot.',
+      },
+      {
+        q: 'What is it used to treat?',
+        a: 'Its analogs are standard therapy for acromegaly and for controlling hormone-related symptoms of neuroendocrine tumors such as carcinoid syndrome. This page is a research and educational reference, not treatment guidance.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance.',
+      },
+    ],
+    sequence: 'AGCKNFFWKTFTSC (3–14 disulfide)',
+    molecularWeight: 1637.9,
+    cas: '38916-34-6',
+    synthesisNotes:
+      'A cyclic 14-mer requiring regioselective formation of the 3–14 disulfide after chain assembly. The native peptide is rarely the product worth making — its minutes-long half-life makes it impractical — so the synthetic target is octreotide: the 14-mer distilled to a protease-resistant 8-residue cyclic analog incorporating D-Phe and D-Trp and a reduced C-terminal threoninol. Those D-residue couplings and the controlled disulfide cyclization are the hard steps, and they are exactly what stretch the half-life from minutes to hours. A defining case of pharmacophore minimization in peptide drug design.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'calcitonin',
+    name: 'Calcitonin (salmon)',
+    aliases: ['Salmon calcitonin', 'Miacalcin', 'Fortical', 'sCT'],
+    categories: ['peptide-hormone'],
+    shortDescription:
+      'A calcium-lowering hormone of the thyroid C-cells — the salmon form, far more potent than human, is used for hypercalcemia, Paget’s disease, and bone pain.',
+    description:
+      'Calcitonin is a 32-amino-acid hormone secreted by the thyroid’s parafollicular C-cells that lowers blood calcium — the functional opposite of parathyroid hormone. The therapeutic version is salmon calcitonin, which binds the human receptor far more potently and durably than the human peptide, a quirk of comparative endocrinology that made the fish hormone the drug of choice for hypercalcemia, Paget’s disease of bone, and osteoporosis-related bone pain.',
+    mechanism:
+      'Agonist at the calcitonin receptor (a GPCR) on osteoclasts, inhibiting bone resorption and thereby lowering serum calcium; it also increases renal calcium excretion. The net effect opposes parathyroid hormone in calcium homeostasis.',
+    researchAreas: ['Hypercalcemia', 'Paget’s disease', 'Osteoporosis', 'Calcium regulation', 'Peptide hormones'],
+    background: [
+      'Calcitonin sits on the opposite side of calcium balance from parathyroid hormone (teriparatide, elsewhere in this catalog). PTH raises blood calcium; calcitonin lowers it by switching off the osteoclasts that dissolve bone. In normal human physiology calcitonin’s day-to-day role is relatively minor, but pharmacologically it became a useful brake on bone breakdown.',
+      'The clinically interesting fact is species. Salmon calcitonin binds the human calcitonin receptor with much higher affinity and a longer-lasting effect than human calcitonin, so the marketed drug is the fish sequence, not the human one — a rare case where another species’ hormone is the better human therapeutic. It is available as injection and as a nasal spray (Miacalcin, Fortical).',
+      'Its therapeutic niche has narrowed as more potent agents (bisphosphonates, denosumab, and the anabolic PTH analogs) took over osteoporosis, and long-term nasal-spray data raised a possible malignancy signal that tightened its labeling. Today calcitonin is mainly used short-term for hypercalcemia, for Paget’s disease, and notably for the acute bone pain of vertebral fracture, where it has a distinctive analgesic effect. It is a good example of an older hormone therapy repositioned around its remaining strengths.',
+    ],
+    keyResearch: [
+      'Hypercalcemia — rapidly lowers elevated serum calcium by inhibiting osteoclastic bone resorption; used as short-term acute therapy.',
+      'Paget’s disease of bone — reduces the accelerated bone turnover characteristic of the disease.',
+      'Osteoporotic bone pain — has a recognized analgesic effect on acute pain from vertebral compression fractures.',
+      'Cross-species potency — salmon calcitonin out-binds the human hormone at the human receptor, which is why the fish sequence is the drug.',
+      'PTH counterpoint — physiologically opposes parathyroid hormone in calcium homeostasis.',
+    ],
+    faqs: [
+      {
+        q: 'What does calcitonin do?',
+        a: 'It lowers blood calcium by inhibiting the osteoclasts that break down bone — the functional opposite of parathyroid hormone. As a drug it is used for hypercalcemia, Paget’s disease, and certain bone pain.',
+      },
+      {
+        q: 'Why is salmon calcitonin used instead of the human hormone?',
+        a: 'Salmon calcitonin binds the human calcitonin receptor more potently and for longer than human calcitonin, making the fish version the more effective therapeutic.',
+      },
+      {
+        q: 'Is calcitonin still widely used?',
+        a: 'Less than it once was. More potent bone agents have taken over much of osteoporosis care, and long-term nasal-spray safety data tightened its labeling, so it is now mostly used short-term for hypercalcemia, Paget’s disease, and acute fracture pain.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance.',
+      },
+    ],
+    sequence: 'CSNLSTCVLGKLSQELHKLQTYPRTNTGSGTP (1–7 disulfide, C-terminal amide; salmon)',
+    molecularWeight: 3431.9,
+    cas: '47931-85-1',
+    fdaApproved: true,
+    synthesisNotes:
+      'A 32-residue chain with an N-terminal 1–7 disulfide ring and a C-terminal amide — long by solid-phase standards and prone to on-resin aggregation, so it demands careful coupling, pseudoproline/backbone-protection strategy, and a controlled oxidation step to set the disulfide cleanly. Notably the manufacturing target is the salmon sequence, not the human one, because it binds the human receptor far more potently: a case where pharmacology, not species, dictates what you synthesize. Purity is dominated by deletion sequences and disulfide isomers.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'amylin',
+    name: 'Amylin',
+    aliases: ['IAPP', 'Islet amyloid polypeptide', 'Pramlintide (analog)', 'Symlin'],
+    categories: ['peptide-hormone', 'metabolic'],
+    shortDescription:
+      'The pancreas’s second satiety hormone — co-secreted with insulin from the beta cell; its stabilized analog pramlintide treats diabetes, and the class now drives a new wave of obesity drugs.',
+    description:
+      'Amylin is a 37-amino-acid hormone released alongside insulin from the pancreatic beta cells, where it slows gastric emptying, suppresses glucagon, and promotes satiety — complementing insulin’s glucose-lowering action. Native human amylin is sticky and aggregation-prone (it forms the islet amyloid seen in type 2 diabetes), so the therapeutic is the soluble analog pramlintide (Symlin); the longer-acting analog cagrilintide, profiled separately in this catalog, has pushed the class to the front of obesity drug development.',
+    mechanism:
+      'Agonist at the amylin receptor (a calcitonin-receptor core complexed with receptor-activity-modifying proteins, RAMPs). It slows gastric emptying, suppresses postprandial glucagon, and acts centrally to reduce food intake.',
+    researchAreas: ['Type 1 diabetes', 'Type 2 diabetes', 'Obesity', 'Satiety signaling', 'Peptide hormones'],
+    background: [
+      'Insulin is famous; the hormone the beta cell co-secretes with it is not. Amylin (islet amyloid polypeptide) is released in the same secretory granules and handles the parts of glucose control insulin does not: it puts a brake on gastric emptying so nutrients arrive more slowly, it suppresses the inappropriate glucagon that drives post-meal sugar spikes, and it signals fullness to the brain. In effect amylin and insulin are a co-secreted pair, much as glucagon is insulin’s counter-hormone.',
+      'The molecule has a notorious second identity. Human amylin is amyloidogenic — it misfolds and aggregates into the islet amyloid deposits found in type 2 diabetes, which is both a manufacturing headache and a disease-relevant feature. That stickiness is why the native hormone cannot simply be bottled: pramlintide swaps three residues (prolines that block aggregation) to create a stable, soluble analog usable as an injectable adjunct to insulin in type 1 and type 2 diabetes.',
+      'The forward-looking story is obesity. Because amylin signaling curbs appetite through a pathway distinct from the incretins, long-acting amylin analogs — led by cagrilintide — are being combined with GLP-1 drugs (e.g. cagrilintide plus semaglutide) and are posting some of the largest weight-loss figures in current trials. Amylin is a hormone that spent decades as insulin’s overlooked partner and is now a primary target in its own right.',
+    ],
+    keyResearch: [
+      'Diabetes adjunct — pramlintide, the stabilized analog, is used with mealtime insulin in type 1 and type 2 diabetes to blunt post-meal glucose and aid weight control.',
+      'Obesity — long-acting analogs (cagrilintide) combined with GLP-1 agonists are among the most effective weight-loss combinations in development.',
+      'Satiety and gastric emptying — slows stomach emptying and suppresses glucagon, complementing insulin rather than duplicating it.',
+      'Islet amyloid — native human amylin aggregates into the amyloid deposits characteristic of type 2 diabetes, the reason a substituted analog is required.',
+      'Receptor biology — signals through calcitonin-receptor/RAMP complexes, linking it mechanistically to the calcitonin family.',
+    ],
+    faqs: [
+      {
+        q: 'What is amylin?',
+        a: 'A hormone co-secreted with insulin from the pancreatic beta cells that slows gastric emptying, suppresses glucagon, and promotes satiety — handling parts of glucose control that insulin does not.',
+      },
+      {
+        q: 'What is pramlintide?',
+        a: 'Pramlintide (Symlin) is a synthetic amylin analog with three amino-acid substitutions that prevent the aggregation seen with native human amylin, making it stable enough to use as an injectable add-on to insulin.',
+      },
+      {
+        q: 'Why is amylin important for weight loss?',
+        a: 'Amylin curbs appetite through a pathway separate from the GLP-1 incretins, so long-acting amylin analogs such as cagrilintide — especially combined with GLP-1 drugs — produce large weight-loss effects in trials.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance.',
+      },
+    ],
+    sequence: 'KCNTATCATQRLANFLVHSSNNFGAILSSTNVGSNTY (2–7 disulfide, C-terminal amide; human)',
+    molecularWeight: 3903.3,
+    cas: '122384-88-7',
+    synthesisNotes:
+      'A 37-residue, 2–7-disulfide, C-terminal-amide peptide and one of the hardest sequences in this class to make: native human amylin is intrinsically amyloidogenic, so it aggregates on the resin and in solution. The therapeutic pramlintide is the design answer — three proline substitutions (Ala25, Ser28, Ser29 → Pro) that break the β-sheet stacking, simultaneously making the peptide synthesizable, soluble, and shelf-stable. It is the catalog’s clearest example of engineering *against* aggregation to obtain a manufacturable peptide; the longer-acting analog cagrilintide (profiled separately) extends the same logic.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'acth',
+    name: 'ACTH (Corticotropin)',
+    aliases: ['Adrenocorticotropic hormone', 'Corticotropin', 'Acthar', 'Cosyntropin (1–24 analog)', 'Tetracosactide'],
+    categories: ['peptide-hormone'],
+    shortDescription:
+      'The pituitary’s command to the adrenal gland — a 39-amino-acid hormone that drives cortisol release; its 1–24 fragment is the standard test of adrenal function.',
+    description:
+      'ACTH is a 39-amino-acid hormone released by the anterior pituitary that tells the adrenal cortex to make cortisol — the central relay of the body’s stress (HPA) axis. Clinically it appears in two forms: the full-length hormone as a long-acting gel (Acthar) used in select inflammatory and seizure conditions, and the synthetic 1–24 fragment cosyntropin (tetracosactide), which carries all the receptor activity and is the standard agent for testing adrenal reserve.',
+    mechanism:
+      'Agonist at the melanocortin-2 receptor (MC2R) on adrenocortical cells, raising cAMP and stimulating steroidogenesis — chiefly cortisol — from the adrenal cortex. The biologically essential activity resides in the N-terminal 1–24 residues.',
+    researchAreas: ['Adrenal insufficiency', 'HPA axis', 'Infantile spasms', 'Peptide hormones'],
+    background: [
+      'ACTH is the middle link in the hypothalamic–pituitary–adrenal axis: the hypothalamus releases CRH, the pituitary responds with ACTH, and ACTH drives the adrenal cortex to secrete cortisol, which then feeds back to shut the loop. It is cleaved from a larger precursor, proopiomelanocortin (POMC), the same parent that yields melanocyte-stimulating hormone — which is why high ACTH states can darken the skin.',
+      'Only the first 24 of its 39 residues are needed for full biological activity, and that fact is the basis of its main diagnostic use. Cosyntropin (synthetic ACTH 1–24) is given in the "ACTH stimulation test": a healthy adrenal gland responds with a brisk rise in cortisol, whereas a blunted response reveals adrenal insufficiency. The trimmed fragment is cheaper, fully active, and less immunogenic than the whole hormone.',
+      'The full-length hormone has a separate, more debated life as a therapeutic. Long-acting corticotropin gel (Acthar) is used in conditions such as infantile spasms and certain flares of autoimmune disease, on the rationale that it does more than simply raise cortisol — including direct melanocortin-receptor effects. Its high cost relative to conventional steroids has made it a recurring subject of pricing scrutiny, another instance where the economics around a hormone are as notable as its biology.',
+    ],
+    keyResearch: [
+      'Adrenal function testing — cosyntropin (ACTH 1–24) is the standard stimulus in the ACTH stimulation test for adrenal insufficiency.',
+      'HPA axis — the pituitary signal that drives adrenal cortisol output; central to stress physiology and its feedback regulation.',
+      'Infantile spasms — corticotropin gel is an established treatment for this severe infantile epilepsy.',
+      'Structure–function — biological activity lives in the N-terminal 1–24 residues, the basis of the synthetic diagnostic fragment.',
+      'POMC family — cleaved from the same precursor as MSH, explaining the skin hyperpigmentation of ACTH excess.',
+    ],
+    faqs: [
+      {
+        q: 'What does ACTH do?',
+        a: 'ACTH (corticotropin) is a pituitary hormone that signals the adrenal cortex to release cortisol. It is the pituitary-to-adrenal step of the body’s stress (HPA) axis.',
+      },
+      {
+        q: 'What is cosyntropin?',
+        a: 'Cosyntropin (tetracosactide) is the synthetic first 24 amino acids of ACTH — the portion that carries all the activity. It is used in the ACTH stimulation test to assess whether the adrenal glands respond normally.',
+      },
+      {
+        q: 'Why is corticotropin gel controversial?',
+        a: 'The long-acting full-length hormone (Acthar) is used in conditions like infantile spasms and some autoimmune flares, but its very high cost relative to conventional corticosteroids has made it a frequent subject of pricing scrutiny.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance.',
+      },
+    ],
+    sequence: 'SYSMEHFRWGKPVGKKRRPVKVYPNGAEDESAEAFPLEF (human 1–39)',
+    molecularWeight: 4541.1,
+    cas: '9002-60-2',
+    fdaApproved: true,
+    synthesisNotes:
+      'A 39-residue hormone whose full biological activity lives in the N-terminal 1–24 segment — so the synthetic agent cosyntropin (tetracosactide) is simply that 24-mer. Truncating to the essential pharmacophore makes it markedly shorter and cheaper to build by solid-phase synthesis, avoids the difficult C-terminal residues, and lowers immunogenicity versus the whole hormone. A textbook "synthesize only the part that matters" decision in peptide drug design.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'secretin',
+    name: 'Secretin',
+    aliases: ['ChiRhoStim', 'human secretin'],
+    categories: ['peptide-hormone'],
+    shortDescription:
+      'The first hormone ever discovered — the 1902 gut peptide that coined the word "hormone"; today a diagnostic agent for the pancreas.',
+    description:
+      'Secretin is a 27-amino-acid hormone of the upper small intestine that signals the pancreas and bile ducts to release bicarbonate-rich fluid, neutralizing stomach acid as it enters the duodenum. Its historical importance is hard to overstate: discovered by Bayliss and Starling in 1902, it was the first chemical messenger ever identified, and Starling coined the very word "hormone" to describe it. Synthetic human secretin (ChiRhoStim) is used today mainly as a diagnostic stimulant in pancreatic-function and imaging tests.',
+    mechanism:
+      'Agonist at the secretin receptor (a class B GPCR) on pancreatic duct and biliary cells, raising cAMP and stimulating secretion of water and bicarbonate. It also modestly inhibits gastric acid and gastric emptying.',
+    researchAreas: ['Pancreatic function testing', 'Gastrointestinal physiology', 'Gastrinoma diagnosis', 'Peptide hormones'],
+    background: [
+      'Secretin is where endocrinology begins. In 1902 William Bayliss and Ernest Starling showed that acid in the small intestine triggers pancreatic secretion even when all the nerves are cut — proof that a blood-borne chemical, not a nerve, carried the message. Starling later named this new class of messengers "hormones," from the Greek for "to set in motion." Secretin is therefore both a working hormone and the founding object of the entire field, which is reason enough for it to anchor this category historically.',
+      'Physiologically it is a bicarbonate hormone. Released by S-cells of the duodenum when acidic chyme arrives, secretin drives the pancreas and bile ducts to pour out an alkaline, bicarbonate-rich fluid that protects the intestinal lining and creates the neutral pH that digestive enzymes need. It belongs to the secretin/glucagon/VIP superfamily, sharing a structural template with several other gut and metabolic hormones in this catalog.',
+      'Its modern role is diagnostic rather than therapeutic. Synthetic human secretin is given to stimulate pancreatic output during function testing and secretin-enhanced MRCP imaging, and to provoke gastrin release in the diagnosis of gastrinoma (Zollinger–Ellison syndrome). A once-fashionable hypothesis that secretin might treat autism was tested in controlled trials and clearly failed — a useful, honest footnote to a hormone whose real value is as a precise diagnostic tool.',
+    ],
+    keyResearch: [
+      'Historical first — the first hormone ever discovered (Bayliss & Starling, 1902); the molecule that gave the word "hormone" to science.',
+      'Pancreatic-function testing — synthetic secretin stimulates pancreatic bicarbonate output, used in function tests and secretin-enhanced MRCP.',
+      'Gastrinoma diagnosis — the secretin stimulation test paradoxically raises gastrin in Zollinger–Ellison syndrome, aiding diagnosis.',
+      'Bicarbonate physiology — duodenal S-cells release it in response to acid, triggering alkaline pancreatic/biliary secretion.',
+      'Autism hypothesis refuted — controlled trials of secretin for autism showed no benefit, a clear negative result.',
+    ],
+    faqs: [
+      {
+        q: 'What does secretin do?',
+        a: 'It signals the pancreas and bile ducts to release bicarbonate-rich fluid that neutralizes stomach acid entering the small intestine. It is released by the duodenum in response to acid.',
+      },
+      {
+        q: 'Why is secretin historically important?',
+        a: 'It was the first hormone ever discovered (1902), and its discovery prompted Ernest Starling to coin the word "hormone." It effectively founded the science of endocrinology.',
+      },
+      {
+        q: 'What is secretin used for now?',
+        a: 'Mainly diagnosis — stimulating pancreatic secretion for function tests and MRCP imaging, and provoking gastrin release to diagnose gastrinoma. A past idea that it could treat autism was tested and disproven.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance.',
+      },
+    ],
+    sequence: 'HSDGTFTSELSRLREGARLQRLLQGLV (C-terminal amide; human)',
+    molecularWeight: 3039.4,
+    synthesisNotes:
+      'A 27-residue C-terminal-amide peptide of the secretin/glucagon/VIP family, made by solid-phase synthesis with a terminal amidation step. The meaningful modern change is provenance rather than chemistry: the clinical agent (synthetic human secretin, ChiRhoStim) replaced earlier porcine material extracted from animal tissue. That shift — from variable animal extract to a defined, sequence-verified synthetic product with a certificate of analysis — is the core quality story for older hormone peptides and exactly the transparency this catalog tracks.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'ghrelin',
+    name: 'Ghrelin',
+    aliases: ['Lenomorelin', 'the hunger hormone', 'acyl-ghrelin'],
+    categories: ['peptide-hormone', 'growth-hormone'],
+    shortDescription:
+      'The only hormone that makes you hungry — a stomach peptide, uniquely fatty-acid-modified, that drives appetite and also releases growth hormone.',
+    description:
+      'Ghrelin is a 28-amino-acid hormone made mainly in the stomach and best known as the body’s principal hunger signal — levels rise before meals and fall after eating. It is biochemically unusual: it requires an octanoyl (C8 fatty-acid) group attached to its third residue to be active, the only known hormone modified this way. Beyond appetite, ghrelin is a potent releaser of growth hormone, which links it to the secretagogue peptides elsewhere in this catalog.',
+    mechanism:
+      'Agonist at the growth-hormone secretagogue receptor (GHSR-1a). The octanoyl modification (added by the enzyme GOAT) is required for receptor binding. Activation stimulates appetite via hypothalamic NPY/AgRP neurons and triggers growth-hormone release from the pituitary.',
+    researchAreas: ['Appetite regulation', 'Growth hormone regulation', 'Cachexia', 'Energy balance', 'Peptide hormones'],
+    background: [
+      'Almost every appetite hormone tells you to stop eating; ghrelin is the one that tells you to start. Secreted by the stomach when it is empty, it rises in the run-up to a meal, drives the sensation of hunger through hypothalamic feeding circuits, and falls once you have eaten. That makes it the orexigenic counterweight to satiety hormones like leptin, amylin, and the incretins — and a natural target for the opposite therapeutic goal: stimulating appetite in wasting conditions.',
+      'Its defining oddity is chemical. Ghrelin is the only human hormone known to carry an O-acyl fatty-acid modification — an octanoyl group esterified to the serine at position 3 by a dedicated enzyme (ghrelin O-acyltransferase, GOAT). Without that fatty acid the peptide cannot activate its receptor. This makes the GOAT enzyme an unusual drug target and the acylation a defining feature of how the hormone is studied and measured (acyl- versus des-acyl ghrelin).',
+      'Ghrelin’s second action is on growth hormone: it is the endogenous ligand of the growth-hormone secretagogue receptor, the same receptor hit by synthetic GHRPs such as ipamorelin and hexarelin found elsewhere in this catalog — so ghrelin is, in effect, the natural template those drugs imitate. Therapeutically the interest runs toward appetite stimulation: ghrelin-receptor agonists (anamorelin, relamorelin) have been studied for cancer cachexia and gastroparesis, making the hunger hormone a candidate where too little appetite is the problem.',
+    ],
+    keyResearch: [
+      'Appetite — the principal circulating hunger signal; rises before meals and stimulates feeding via hypothalamic NPY/AgRP neurons.',
+      'Growth hormone — the endogenous ligand of GHSR-1a, the receptor targeted by synthetic secretagogues (ipamorelin, hexarelin).',
+      'Cachexia — ghrelin-receptor agonists (anamorelin) studied to stimulate appetite and lean mass in cancer-related wasting.',
+      'Unique acylation — the only human hormone requiring an octanoyl fatty-acid modification (via GOAT) for activity; the enzyme is a distinctive drug target.',
+      'Energy balance — acts opposite to satiety hormones such as leptin and amylin in body-weight regulation.',
+    ],
+    faqs: [
+      {
+        q: 'What is ghrelin?',
+        a: 'A stomach-derived hormone that is the body’s main hunger signal — it rises before meals to stimulate appetite and falls after eating. It also triggers growth-hormone release.',
+      },
+      {
+        q: 'Why is ghrelin chemically unusual?',
+        a: 'It is the only known human hormone that needs a fatty-acid (octanoyl) group attached to one of its residues to work. The enzyme that adds it, GOAT, is a distinctive potential drug target.',
+      },
+      {
+        q: 'How is ghrelin related to growth-hormone peptides?',
+        a: 'Ghrelin is the natural ligand of the growth-hormone secretagogue receptor — the same receptor that synthetic GHRPs like ipamorelin and hexarelin activate. Those drugs essentially mimic ghrelin’s growth-hormone action.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance.',
+      },
+    ],
+    sequence: 'GSSFLSPEHQRVQQRKESKKPPAKLQPR (Ser3 O-octanoylated; human)',
+    molecularWeight: 3370.9,
+    cas: '304853-26-7',
+    synthesisNotes:
+      'The standout synthetic challenge in this class: activity requires an O-octanoyl ester on the Ser3 hydroxyl — the only such acylation among human hormones (installed biologically by ghrelin O-acyltransferase, GOAT). Standard solid-phase synthesis assembles the 28-mer, but installing and preserving the acid- and base-labile octanoyl ester demands orthogonal side-chain protection and a deliberately mild final deprotection/cleavage, since the unmodified by-product (des-acyl ghrelin) is inactive. The acylation is the purity-defining step, and acyl-vs-des-acyl ratio is the assay that matters most.',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
 ]

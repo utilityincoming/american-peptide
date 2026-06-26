@@ -454,6 +454,47 @@ export const CATEGORY_CONTENT: Partial<
       },
     ],
   },
+  'peptide-hormone': {
+    metaTitle: 'Peptide Hormones — Synthesis & Analog Engineering | AmericanPeptide',
+    metaDescription:
+      'How hormone sequences become manufacturable synthetic drugs: the analog engineering and synthesis behind somatostatin→octreotide, amylin→pramlintide, vasopressin→desmopressin, ACTH→cosyntropin, plus ghrelin’s unique acylation and calcitonin’s disulfide chemistry.',
+    heading: 'Peptide Hormones',
+    tagline:
+      'The synthesis and analog-engineering side of the hormone peptides — how a natural sequence is turned into a pure, stable, manufacturable drug.',
+    intro:
+      'This category profiles the hormone peptides from AmericanPeptide.com’s angle: synthetic science and synthesis. The question here is not what a hormone does in the body — the endogenous physiology is covered in depth at our sister site peptidehormone.com — but how its sequence is built, why the native molecule is so often a poor drug, and what analog engineering turns it into a manufacturable, pure, stable therapeutic. Each entry pairs the sequence, disulfide pattern, and modifications with a synthesis note on the difficult couplings, oxidation/acylation steps, and purity pitfalls that define it. It is a synthesis and medicinal-chemistry reference, not medical, dosing, or purchasing guidance.',
+    howItWorks: [
+      'Start from the sequence and its modifications. These peptides carry the features that make hormone synthesis hard: intramolecular disulfides that must be formed regioselectively after chain assembly (vasopressin’s 1–6 ring, somatostatin’s 3–14, calcitonin’s 1–7, amylin’s 2–7), C-terminal amides, and — in ghrelin’s case — an O-octanoyl ester on Ser3, the only such acylation among human hormones and the purity-defining step in its manufacture. Solid-phase synthesis builds the chain; the chemistry that matters is in the folding, oxidation, and side-chain handling that follow.',
+      'The native hormone is usually a bad drug, and the engineering is the story. Somatostatin lasts only minutes, so the usable medicine is octreotide — the 14-mer distilled to a protease-resistant 8-residue cyclic analog with D-amino acids. Human amylin aggregates into islet amyloid, so pramlintide swaps three residues to prolines that break the β-sheet and make the peptide synthesizable and shelf-stable. Vasopressin becomes desmopressin through a D-arginine and a deamination that split its two receptor activities. ACTH’s whole activity lives in its first 24 residues, so cosyntropin is just that fragment. Each is a distinct design tactic — minimization, anti-aggregation substitution, stereochemical editing, truncation — and reading them together is a short course in peptide drug design.',
+      'Provenance and purity are the throughline this catalog exists to track. Several of these (secretin, calcitonin, ACTH) were historically animal-extracted and are now defined synthetic products with a certificate of analysis — a shift from variable biological material to a sequence-verified, assayable molecule. For each entry the failure modes are concrete: deletion sequences, disulfide isomers, des-acyl by-product, aggregation. That is the layer AmericanPeptide.com adds on top of the biology — what it takes to make one of these correctly and prove it.',
+    ],
+    researchThemes: [
+      'Solid-phase synthesis of disulfide-containing and amidated hormone peptides',
+      'Analog engineering: minimization, truncation, D-amino-acid substitution',
+      'Designing against aggregation (amylin → pramlintide)',
+      'Site-specific acylation and half-life extension (ghrelin, vasopressin)',
+      'Animal-extracted → defined-synthetic provenance and the certificate of analysis',
+      'Purity failure modes: deletion sequences, disulfide isomers, des-acyl by-product',
+    ],
+    faqs: [
+      {
+        q: 'What does this category cover that peptidehormone.com does not?',
+        a: 'The synthesis and analog-engineering side: how each hormone sequence is built, what makes it hard to synthesize, and how analogs are designed to be stable, pure, and manufacturable. The endogenous physiology and clinical biology of these hormones is covered at peptidehormone.com; the two are complementary.',
+      },
+      {
+        q: 'Why do several entries center on an analog drug rather than the hormone itself?',
+        a: 'Because the native hormone is frequently impractical to make or to dose — too short-lived (somatostatin), aggregation-prone (amylin), or unnecessarily long (ACTH). The synthetic analog is where the engineering lives, so octreotide, pramlintide, desmopressin, and cosyntropin are the molecules whose synthesis the entries focus on.',
+      },
+      {
+        q: 'How is this different from the bioregulator category?',
+        a: 'Bioregulators are very short peptides framed around a gene-regulatory hypothesis. This category is framed around synthesis and analog engineering of receptor-active hormone peptides — what their sequences and modifications demand to manufacture and purify.',
+      },
+      {
+        q: 'Is this page medical or dosing advice?',
+        a: 'No. AmericanPeptide.com is a computational research and reference platform, not a medical device or clinical decision-support system. Nothing here is medical advice, a dosing protocol, or an offer to sell. Independent expert and regulatory review is required before any experimental use.',
+      },
+    ],
+  },
 }
 
 export function getCategoryContent(

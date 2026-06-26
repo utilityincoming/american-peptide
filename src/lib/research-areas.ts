@@ -393,6 +393,38 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       },
     ],
   },
+  {
+    slug: 'peptide-hormones',
+    label: 'Peptide Hormone Synthesis',
+    tagline: 'How hormone sequences are turned into pure, stable, manufacturable synthetic drugs.',
+    metaTitle: 'Peptide Hormone Synthesis & Analog Engineering — Research Guide | AmericanPeptide.com',
+    metaDescription:
+      'A synthesis-focused reference on the hormone peptides — disulfide formation, acylation, anti-aggregation design, and the analog engineering behind octreotide, pramlintide, desmopressin, and cosyntropin.',
+    intro: [
+      'This guide covers the hormone peptides from the synthesis and medicinal-chemistry side — the angle AmericanPeptide.com is built around. The biology of what these hormones do in the body is treated in depth at our sister site peptidehormone.com; here the subject is how the sequences are made. That means the features that make hormone synthesis hard: intramolecular disulfides formed regioselectively after chain assembly, C-terminal amides, and site-specific acylations such as ghrelin’s unique Ser3 octanoyl ester. Solid-phase synthesis builds the chain, but the chemistry that decides yield and purity is in the folding, oxidation, and side-chain handling that follow.',
+      'The recurring theme is that the native hormone is frequently a poor drug, and the engineering is the story. Somatostatin lasts minutes, so the medicine is octreotide — a minimized, protease-resistant cyclic analog with D-amino acids. Human amylin aggregates, so pramlintide substitutes three prolines to break the β-sheet and make the peptide synthesizable and shelf-stable. Vasopressin becomes desmopressin through a D-arginine and a deamination; ACTH is truncated to its active 1–24 fragment as cosyntropin. Each is a distinct design tactic, and each entry pairs it with the concrete purity failure modes — deletion sequences, disulfide isomers, des-acyl by-product — that a certificate of analysis has to rule out. This is a synthesis and educational reference, not medical advice.',
+    ],
+    matchers: ['peptide hormone'],
+    relatedCategories: ['peptide-hormone', 'metabolic', 'growth-hormone'],
+    faqs: [
+      {
+        q: 'What does this guide cover that peptidehormone.com does not?',
+        a: 'The synthesis and analog engineering — how each hormone sequence is built, what makes it hard to synthesize and purify, and how analogs are designed to be stable and manufacturable. The endogenous physiology and clinical biology are covered at peptidehormone.com; the two are complementary.',
+      },
+      {
+        q: 'What makes hormone peptides hard to synthesize?',
+        a: 'Intramolecular disulfides that must be formed regioselectively, C-terminal amidation, aggregation-prone sequences (amylin), long chains (calcitonin), and site-specific modifications like ghrelin’s octanoyl ester. The solid-phase chain assembly is only the first step; oxidation, acylation, and purification determine the result.',
+      },
+      {
+        q: 'Why do several entries center on an analog drug?',
+        a: 'Because the native hormone is often impractical to make or dose, so the synthetic analog is where the engineering lives — octreotide for somatostatin, pramlintide for amylin, desmopressin for vasopressin, cosyntropin for ACTH.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No. This is a research and educational reference on synthesis and chemistry; nothing here is dosing guidance, and these molecules are prescription medicines.',
+      },
+    ],
+  },
 ]
 
 export const RESEARCH_AREA_BY_SLUG: Record<string, ResearchArea> =
