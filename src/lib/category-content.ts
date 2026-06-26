@@ -462,7 +462,7 @@ export const CATEGORY_CONTENT: Partial<
     tagline:
       'The synthesis and analog-engineering side of the hormone peptides — how a natural sequence is turned into a pure, stable, manufacturable drug.',
     intro:
-      'This category profiles the hormone peptides from AmericanPeptide.com’s angle: synthetic science and synthesis. The question here is not what a hormone does in the body — the endogenous physiology is covered in depth at our sister site peptidehormone.com — but how its sequence is built, why the native molecule is so often a poor drug, and what analog engineering turns it into a manufacturable, pure, stable therapeutic. Each entry pairs the sequence, disulfide pattern, and modifications with a synthesis note on the difficult couplings, oxidation/acylation steps, and purity pitfalls that define it. It is a synthesis and medicinal-chemistry reference, not medical, dosing, or purchasing guidance.',
+      'This category profiles the hormone peptides from AmericanPeptide.com’s angle: synthetic science and synthesis. The question here is not what a hormone does in the body but how its sequence is built, why the native molecule is so often a poor drug, and what analog engineering turns it into a manufacturable, pure, stable therapeutic. Each entry pairs the sequence, disulfide pattern, and modifications with a synthesis note on the difficult couplings, oxidation/acylation steps, and purity pitfalls that define it. It is a synthesis and medicinal-chemistry reference, not medical, dosing, or purchasing guidance.',
     howItWorks: [
       'Start from the sequence and its modifications. These peptides carry the features that make hormone synthesis hard: intramolecular disulfides that must be formed regioselectively after chain assembly (vasopressin’s 1–6 ring, somatostatin’s 3–14, calcitonin’s 1–7, amylin’s 2–7), C-terminal amides, and — in ghrelin’s case — an O-octanoyl ester on Ser3, the only such acylation among human hormones and the purity-defining step in its manufacture. Solid-phase synthesis builds the chain; the chemistry that matters is in the folding, oxidation, and side-chain handling that follow.',
       'The native hormone is usually a bad drug, and the engineering is the story. Somatostatin lasts only minutes, so the usable medicine is octreotide — the 14-mer distilled to a protease-resistant 8-residue cyclic analog with D-amino acids. Human amylin aggregates into islet amyloid, so pramlintide swaps three residues to prolines that break the β-sheet and make the peptide synthesizable and shelf-stable. Vasopressin becomes desmopressin through a D-arginine and a deamination that split its two receptor activities. ACTH’s whole activity lives in its first 24 residues, so cosyntropin is just that fragment. Each is a distinct design tactic — minimization, anti-aggregation substitution, stereochemical editing, truncation — and reading them together is a short course in peptide drug design.',
@@ -478,8 +478,8 @@ export const CATEGORY_CONTENT: Partial<
     ],
     faqs: [
       {
-        q: 'What does this category cover that peptidehormone.com does not?',
-        a: 'The synthesis and analog-engineering side: how each hormone sequence is built, what makes it hard to synthesize, and how analogs are designed to be stable, pure, and manufacturable. The endogenous physiology and clinical biology of these hormones is covered at peptidehormone.com; the two are complementary.',
+        q: 'What does this category focus on?',
+        a: 'The synthesis and analog-engineering side of the hormone peptides: how each sequence is built, what makes it hard to synthesize, and how analogs are designed to be stable, pure, and manufacturable — rather than the endogenous physiology of what the hormones do in the body.',
       },
       {
         q: 'Why do several entries center on an analog drug rather than the hormone itself?',
