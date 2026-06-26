@@ -60,6 +60,31 @@ export default function CatalogPage() {
     }
   }, [])
 
+  // Deep-link support: arrive from a detail-page chip via ?synthesis=<feature>.
+  useEffect(() => {
+    try {
+      const f = new URLSearchParams(window.location.search).get('synthesis')
+      if (f && FEATURES.includes(f as SyntheticFeature)) {
+        setFeature(f as SyntheticFeature)
+      }
+    } catch {
+      /* ignore */
+    }
+  }, [])
+
+  // Keep the URL in sync so the active facet is shareable and survives reload.
+  const selectFeature = useCallback((f: SyntheticFeature | null) => {
+    setFeature(f)
+    try {
+      const url = new URL(window.location.href)
+      if (f) url.searchParams.set('synthesis', f)
+      else url.searchParams.delete('synthesis')
+      window.history.replaceState(null, '', url)
+    } catch {
+      /* ignore */
+    }
+  }, [])
+
   useEffect(() => {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(selected))
@@ -191,14 +216,14 @@ export default function CatalogPage() {
               <FlaskConical className="h-3 w-3" />
               Synthesis
             </span>
-            <Chip active={feature === null} onClick={() => setFeature(null)}>
+            <Chip active={feature === null} onClick={() => selectFeature(null)}>
               Any
             </Chip>
             {FEATURES.map((f) => (
               <Chip
                 key={f}
                 active={feature === f}
-                onClick={() => setFeature(feature === f ? null : f)}
+                onClick={() => selectFeature(feature === f ? null : f)}
               >
                 {f}
               </Chip>
@@ -223,7 +248,7 @@ export default function CatalogPage() {
                 onClick={() => {
                   setQuery('')
                   setActive(null)
-                  setFeature(null)
+                  selectFeature(null)
                 }}
                 className="text-accent/80 transition-colors hover:text-accent"
               >

@@ -378,12 +378,14 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                     </span>
                   )}
                   {peptide.syntheticFeatures?.map((f) => (
-                    <span
+                    <Link
                       key={f}
-                      className="inline-flex items-center rounded-full border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1 text-[11px] font-medium text-ink/60"
+                      href={`/catalog?synthesis=${encodeURIComponent(f)}`}
+                      title={`Browse peptides with: ${f}`}
+                      className="inline-flex items-center rounded-full border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1 text-[11px] font-medium text-ink/60 transition-colors hover:border-[#2DD4A8]/30 hover:bg-[#2DD4A8]/[0.06] hover:text-accent"
                     >
                       {f}
-                    </span>
+                    </Link>
                   ))}
                 </div>
               )}
