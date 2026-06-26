@@ -21,6 +21,7 @@ import {
   PEPTIDES,
   CATEGORIES,
   getPeptideBySlug,
+  SYNTHESIS_DIFFICULTY_LABEL,
   type Peptide,
 } from '@/lib/peptides'
 import { getAreasForPeptide } from '@/lib/research-areas'
@@ -363,6 +364,29 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 {peptide.synthesisNotes ??
                   `Producing ${peptide.name} to a genuine purity spec means solid-phase synthesis, preparative HPLC purification, and batch quality control — none of it cheap, and none of it something you can verify by eye.`}
               </p>
+
+              {(peptide.synthesisDifficulty ||
+                (peptide.syntheticFeatures && peptide.syntheticFeatures.length > 0)) && (
+                <div className="mt-4 flex flex-wrap items-center gap-1.5">
+                  {peptide.synthesisDifficulty && (
+                    <span
+                      className="inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 px-2.5 py-1 text-[11px] font-medium text-accent"
+                      title="Relative difficulty of synthesizing and purifying to a genuine spec"
+                    >
+                      <FlaskConical className="h-3 w-3" />
+                      {SYNTHESIS_DIFFICULTY_LABEL[peptide.synthesisDifficulty]} synthesis
+                    </span>
+                  )}
+                  {peptide.syntheticFeatures?.map((f) => (
+                    <span
+                      key={f}
+                      className="inline-flex items-center rounded-full border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1 text-[11px] font-medium text-ink/60"
+                    >
+                      {f}
+                    </span>
+                  ))}
+                </div>
+              )}
 
               {(peptide.storage || peptide.handling) && (
                 <dl className="mt-4 grid gap-3 sm:grid-cols-2">

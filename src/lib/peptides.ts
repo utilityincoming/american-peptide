@@ -24,6 +24,37 @@ export interface CategoryMeta {
   blurb: string
 }
 
+/**
+ * Controlled vocabulary of synthetic structural features — the things about a
+ * sequence that actually shape how it is made and purified. Powers the catalog
+ * "what makes it hard to make" facet and the detail-page chips.
+ */
+export type SyntheticFeature =
+  | 'Disulfide bridge'
+  | 'Multiple disulfides'
+  | 'C-terminal amide'
+  | 'N-terminal acetylation'
+  | 'Fatty-acid acylation'
+  | 'Albumin-binding linker'
+  | 'Cyclic / lactam'
+  | 'D-amino acid'
+  | 'Unnatural residue'
+  | 'Copper complex'
+  | 'Glycosylated'
+  | 'Recombinant protein'
+  | 'Monoclonal antibody'
+  | 'Tissue extract'
+  | 'Small molecule'
+
+/** Relative difficulty of synthesizing and purifying a peptide to a genuine spec. */
+export type SynthesisDifficulty = 'standard' | 'moderate' | 'demanding'
+
+export const SYNTHESIS_DIFFICULTY_LABEL: Record<SynthesisDifficulty, string> = {
+  standard: 'Standard',
+  moderate: 'Moderate',
+  demanding: 'Demanding',
+}
+
 export const CATEGORIES: CategoryMeta[] = [
   { id: 'metabolic',       label: 'Metabolic',        blurb: 'GLP-1 / GIP / glucagon agonists and adipose-targeting peptides.' },
   { id: 'growth-hormone',  label: 'Growth Hormone',   blurb: 'GHRH analogs, GHRPs, and growth hormone secretagogues.' },
@@ -75,9 +106,14 @@ export interface Peptide {
   handling?: string
   /** Synthesis context — sequence length, difficult couplings, why purity is hard for this peptide. */
   synthesisNotes?: string
+  /** Controlled-vocabulary synthetic structural features — drive the catalog "made by" facet and detail-page chips. */
+  syntheticFeatures?: SyntheticFeature[]
+  /** Relative difficulty of synthesizing and purifying to a genuine spec. */
+  synthesisDifficulty?: SynthesisDifficulty
 }
 
 import pubchemCache from './peptides.pubchem.json'
+import { SYNTHESIS_PROFILES } from './synthesis-profiles'
 
 interface PubChemEntry {
   cid: number
@@ -94,14 +130,19 @@ const PUBCHEM: Record<string, PubChemEntry> = pubchemCache as Record<
 
 function enrich(seed: Peptide): Peptide {
   const hit = PUBCHEM[seed.slug]
-  if (!hit) return seed
+  const profile = SYNTHESIS_PROFILES[seed.slug]
   return {
     ...seed,
     // Hand-edited seed values win over PubChem; only fill gaps.
-    pubchemCid: seed.pubchemCid ?? hit.cid,
-    molecularWeight: seed.molecularWeight ?? hit.molecularWeight ?? undefined,
+    pubchemCid: seed.pubchemCid ?? hit?.cid,
+    molecularWeight: seed.molecularWeight ?? hit?.molecularWeight ?? undefined,
     molecularFormula:
-      seed.molecularFormula ?? hit.molecularFormula ?? undefined,
+      seed.molecularFormula ?? hit?.molecularFormula ?? undefined,
+    // Synthetic-feature dimension lives in synthesis-profiles.ts (one reviewable
+    // table); inline seed values still win so per-entry overrides are possible.
+    syntheticFeatures: seed.syntheticFeatures ?? profile?.features,
+    synthesisDifficulty: seed.synthesisDifficulty ?? profile?.difficulty,
+    synthesisNotes: seed.synthesisNotes ?? profile?.notes,
   }
 }
 

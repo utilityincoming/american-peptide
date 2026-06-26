@@ -401,15 +401,15 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     metaDescription:
       'A synthesis-focused reference on the hormone peptides — disulfide formation, acylation, anti-aggregation design, and the analog engineering behind octreotide, pramlintide, desmopressin, and cosyntropin.',
     intro: [
-      'This guide covers the hormone peptides from the synthesis and medicinal-chemistry side — the angle AmericanPeptide.com is built around. The biology of what these hormones do in the body is treated in depth at our sister site peptidehormone.com; here the subject is how the sequences are made. That means the features that make hormone synthesis hard: intramolecular disulfides formed regioselectively after chain assembly, C-terminal amides, and site-specific acylations such as ghrelin’s unique Ser3 octanoyl ester. Solid-phase synthesis builds the chain, but the chemistry that decides yield and purity is in the folding, oxidation, and side-chain handling that follow.',
+      'This guide covers the hormone peptides from the synthesis and medicinal-chemistry side — the angle AmericanPeptide.com is built around. The subject here is how the sequences are made, not the endogenous biology of what they do in the body. That means the features that make hormone synthesis hard: intramolecular disulfides formed regioselectively after chain assembly, C-terminal amides, and site-specific acylations such as ghrelin’s unique Ser3 octanoyl ester. Solid-phase synthesis builds the chain, but the chemistry that decides yield and purity is in the folding, oxidation, and side-chain handling that follow.',
       'The recurring theme is that the native hormone is frequently a poor drug, and the engineering is the story. Somatostatin lasts minutes, so the medicine is octreotide — a minimized, protease-resistant cyclic analog with D-amino acids. Human amylin aggregates, so pramlintide substitutes three prolines to break the β-sheet and make the peptide synthesizable and shelf-stable. Vasopressin becomes desmopressin through a D-arginine and a deamination; ACTH is truncated to its active 1–24 fragment as cosyntropin. Each is a distinct design tactic, and each entry pairs it with the concrete purity failure modes — deletion sequences, disulfide isomers, des-acyl by-product — that a certificate of analysis has to rule out. This is a synthesis and educational reference, not medical advice.',
     ],
     matchers: ['peptide hormone'],
     relatedCategories: ['peptide-hormone', 'metabolic', 'growth-hormone'],
     faqs: [
       {
-        q: 'What does this guide cover that peptidehormone.com does not?',
-        a: 'The synthesis and analog engineering — how each hormone sequence is built, what makes it hard to synthesize and purify, and how analogs are designed to be stable and manufacturable. The endogenous physiology and clinical biology are covered at peptidehormone.com; the two are complementary.',
+        q: 'What does this guide focus on?',
+        a: 'The synthesis and analog engineering — how each hormone sequence is built, what makes it hard to synthesize and purify, and how analogs are designed to be stable and manufacturable — rather than the endogenous physiology and clinical biology of the hormones.',
       },
       {
         q: 'What makes hormone peptides hard to synthesize?',
