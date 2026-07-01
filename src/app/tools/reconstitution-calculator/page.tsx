@@ -1,12 +1,13 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
-import { Syringe, AlertTriangle, ArrowRight } from 'lucide-react'
+import { Syringe, AlertTriangle, ArrowRight, Search, X, ExternalLink, Link2, Check } from 'lucide-react'
 import OfflineStatus from '@/components/OfflineStatus'
+import { RECON_PRESETS, RECON_PRESET_GROUPS, type ReconPreset } from '@/lib/reconstitution-presets'
 
-const VIAL_PRESETS = [2, 5, 10, 15, 20, 30]
-const DOSE_PRESETS = [100, 250, 500, 750, 1000, 1500, 2000]
+const VIAL_PRESETS = [1, 2, 5, 10, 15, 20, 30, 50]
+const DOSE_PRESETS = [100, 250, 500, 1000, 2000, 2500, 5000]
 const REF_VIALS = [2, 5, 10]
 const REF_WATERS = [1, 2, 3, 5]
 
@@ -27,6 +28,76 @@ export default function ReconstitutionCalculatorPage() {
   const [vialMg, setVialMg] = useState('5')
   const [doseMcg, setDoseMcg] = useState('250')
   const [waterMl, setWaterMl] = useState('2')
+  const [loaded, setLoaded] = useState<ReconPreset | null>(null)
+
+  // Only start writing the URL after the user actually changes something, so a
+  // freshly-opened page keeps a clean URL. Hydration from a shared link does not
+  // set this flag; the incoming params are simply consumed.
+  const dirty = useRef(false)
+
+  const markDirty = () => {
+    dirty.current = true
+  }
+  const changeVial = (v: string) => {
+    markDirty()
+    setVialMg(v)
+  }
+  const changeDose = (v: string) => {
+    markDirty()
+    setDoseMcg(v)
+  }
+  const changeWater = (v: string) => {
+    markDirty()
+    setWaterMl(v)
+  }
+
+  const loadPreset = (p: ReconPreset) => {
+    markDirty()
+    setVialMg(String(p.vialMg))
+    setDoseMcg(String(p.doseMcg))
+    setWaterMl(String(p.waterMl))
+    setLoaded(p)
+  }
+
+  const clearLoaded = () => {
+    markDirty()
+    setLoaded(null)
+  }
+
+  // Hydrate state from the URL once, on mount. A ?peptide= slug applies that
+  // preset first; explicit vial/dose/water params then override it. This does
+  // not mark the page dirty, so an unshared visit leaves the URL untouched.
+  useEffect(() => {
+    const sp = new URLSearchParams(window.location.search)
+    const pep = sp.get('peptide')
+    const found = pep ? RECON_PRESETS.find((p) => p.slug === pep) ?? null : null
+    if (found) {
+      setVialMg(String(found.vialMg))
+      setDoseMcg(String(found.doseMcg))
+      setWaterMl(String(found.waterMl))
+      setLoaded(found)
+    }
+    const v = sp.get('vial')
+    const d = sp.get('dose')
+    const w = sp.get('water')
+    if (v && parsePositive(v)) setVialMg(v)
+    if (d && parsePositive(d)) setDoseMcg(d)
+    if (w && parsePositive(w)) setWaterMl(w)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Reflect current inputs back into the URL (replace, no history spam) so the
+  // configuration is shareable — but only once the user has interacted.
+  useEffect(() => {
+    if (!dirty.current) return
+    const sp = new URLSearchParams()
+    if (parsePositive(vialMg)) sp.set('vial', vialMg)
+    if (parsePositive(doseMcg)) sp.set('dose', doseMcg)
+    if (parsePositive(waterMl)) sp.set('water', waterMl)
+    if (loaded) sp.set('peptide', loaded.slug)
+    const qs = sp.toString()
+    window.history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname)
+  }, [vialMg, doseMcg, waterMl, loaded])
 
   const calc = useMemo(() => {
     const vial = parsePositive(vialMg)
@@ -55,7 +126,7 @@ export default function ReconstitutionCalculatorPage() {
     const c = parseFloat(raw)
     if (Number.isFinite(c) && c > 0 && calc.vialMcg > 0) {
       const newWater = calc.vialMcg / (c * 10)
-      setWaterMl(newWater >= 0.01 ? newWater.toFixed(2) : '')
+      changeWater(newWater >= 0.01 ? newWater.toFixed(2) : '')
     }
   }
 
@@ -99,34 +170,70 @@ export default function ReconstitutionCalculatorPage() {
 
         {/* ── Inputs ── */}
         <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
-          <h2 className="mb-5 text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
-            Inputs
-          </h2>
+          <div className="mb-5 flex items-center justify-between gap-3">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
+              Inputs
+            </h2>
+            <CopyLinkButton />
+          </div>
+
+          {/* ── Peptide-aware presets ── */}
+          <div className="mb-6">
+            <label className="mb-1.5 block text-xs font-medium text-ink/55">
+              Load a peptide{' '}
+              <span className="text-ink/30">(autofills vial, water &amp; a reference amount)</span>
+            </label>
+            <PeptidePicker loaded={loaded} onSelect={loadPreset} onClear={clearLoaded} />
+            {loaded && (
+              <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] px-3 py-2 text-[11px] text-ink/55">
+                <span>
+                  Loaded <span className="font-semibold text-accent">{loaded.name}</span> ·{' '}
+                  {loaded.vialMg}mg vial · {loaded.waterMl}mL ·{' '}
+                  {loaded.doseMcg >= 1000
+                    ? `${(loaded.doseMcg / 1000).toLocaleString(undefined, { maximumFractionDigits: 2 })}mg`
+                    : `${loaded.doseMcg}mcg`}{' '}
+                  reference amount
+                </span>
+                {loaded.note && <span className="text-amber-400/80">{loaded.note}</span>}
+                <Link
+                  href={`/catalog/${loaded.slug}`}
+                  className="inline-flex items-center gap-1 font-medium text-accent hover:underline"
+                >
+                  View profile <ExternalLink className="h-3 w-3" />
+                </Link>
+              </div>
+            )}
+            <p className="mt-1.5 text-[10px] leading-relaxed text-ink/30">
+              Preset vial sizes and volumes reflect how these compounds are commonly supplied and
+              dissolved for laboratory research. Amounts are calculation reference points only — not
+              dosing guidance or medical advice. Adjust any field freely.
+            </p>
+          </div>
 
           <div className="grid gap-6 md:grid-cols-2">
             <NumberField
               label="Peptide amount in vial"
               unit="mg"
               value={vialMg}
-              onChange={setVialMg}
+              onChange={changeVial}
               presets={VIAL_PRESETS}
               presetLabel={(n) => `${n}mg`}
-              onPreset={(n) => setVialMg(String(n))}
+              onPreset={(n) => changeVial(String(n))}
             />
             <NumberField
               label="Desired dose per injection"
               unit="mcg"
               value={doseMcg}
-              onChange={setDoseMcg}
+              onChange={changeDose}
               presets={DOSE_PRESETS}
-              presetLabel={(n) => `${n}mcg`}
-              onPreset={(n) => setDoseMcg(String(n))}
+              presetLabel={(n) => (n >= 1000 ? `${n / 1000}mg` : `${n}mcg`)}
+              onPreset={(n) => changeDose(String(n))}
             />
             <NumberField
               label="Bacteriostatic water to add"
               unit="mL"
               value={waterMl}
-              onChange={setWaterMl}
+              onChange={changeWater}
               hint="Edit either this OR the concentration below — they're linked."
             />
             <NumberField
@@ -275,6 +382,170 @@ export default function ReconstitutionCalculatorPage() {
 // ─────────────────────────────────────────────────────────
 // Sub-components
 // ─────────────────────────────────────────────────────────
+
+function CopyLinkButton() {
+  const [copied, setCopied] = useState(false)
+
+  const copy = async () => {
+    const url = window.location.href
+    try {
+      await navigator.clipboard.writeText(url)
+    } catch {
+      // Fallback for insecure contexts / clipboard-blocked environments.
+      const el = document.createElement('textarea')
+      el.value = url
+      el.style.position = 'fixed'
+      el.style.opacity = '0'
+      document.body.appendChild(el)
+      el.select()
+      try {
+        document.execCommand('copy')
+      } catch {
+        /* no-op — copy unavailable */
+      }
+      document.body.removeChild(el)
+    }
+    setCopied(true)
+    window.setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      aria-label="Copy a shareable link to this configuration"
+      className={`inline-flex flex-shrink-0 items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] font-medium transition-colors ${
+        copied
+          ? 'border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.08] text-accent'
+          : 'border-ink/[0.1] bg-ink/[0.02] text-ink/55 hover:border-[#2DD4A8]/25 hover:text-ink/85'
+      }`}
+    >
+      {copied ? (
+        <>
+          <Check className="h-3.5 w-3.5" /> Copied
+        </>
+      ) : (
+        <>
+          <Link2 className="h-3.5 w-3.5" /> Copy link
+        </>
+      )}
+    </button>
+  )
+}
+
+function PeptidePicker({
+  loaded,
+  onSelect,
+  onClear,
+}: {
+  loaded: ReconPreset | null
+  onSelect: (p: ReconPreset) => void
+  onClear: () => void
+}) {
+  const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const q = query.trim().toLowerCase()
+  const groups = useMemo(() => {
+    if (!q) return RECON_PRESET_GROUPS
+    return RECON_PRESET_GROUPS.map((g) => ({
+      group: g.group,
+      items: g.items.filter((p) => p.name.toLowerCase().includes(q)),
+    })).filter((g) => g.items.length > 0)
+  }, [q])
+
+  const flat = groups.flatMap((g) => g.items)
+
+  const choose = (p: ReconPreset) => {
+    onSelect(p)
+    setQuery('')
+    setOpen(false)
+    inputRef.current?.blur()
+  }
+
+  return (
+    <div className="relative">
+      <div className="flex items-center gap-2 rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-3 transition-colors focus-within:border-[#2DD4A8]/40">
+        <Search className="h-4 w-4 flex-shrink-0 text-ink/35" strokeWidth={1.75} />
+        <input
+          ref={inputRef}
+          type="text"
+          value={query}
+          placeholder={loaded ? loaded.name : 'Search a peptide…'}
+          onFocus={() => setOpen(true)}
+          onChange={(e) => {
+            setQuery(e.target.value)
+            setOpen(true)
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setOpen(false)
+              inputRef.current?.blur()
+            } else if (e.key === 'Enter' && flat.length > 0) {
+              e.preventDefault()
+              choose(flat[0])
+            }
+          }}
+          className="w-full bg-transparent py-2.5 text-base text-ink outline-none placeholder:text-ink/35"
+        />
+        {(loaded || query) && (
+          <button
+            type="button"
+            aria-label="Clear loaded peptide"
+            onClick={() => {
+              setQuery('')
+              onClear()
+              inputRef.current?.focus()
+            }}
+            className="flex-shrink-0 rounded-md p-1 text-ink/35 transition-colors hover:bg-ink/[0.06] hover:text-ink/70"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        )}
+      </div>
+
+      {open && (
+        <>
+          {/* Backdrop to close on outside click */}
+          <button
+            type="button"
+            tabIndex={-1}
+            aria-hidden="true"
+            className="fixed inset-0 z-10 cursor-default"
+            onClick={() => setOpen(false)}
+          />
+          <div className="absolute left-0 right-0 top-[calc(100%+4px)] z-20 max-h-72 overflow-y-auto rounded-xl border border-ink/[0.1] bg-[var(--panel,#0f1729)] p-1 shadow-xl shadow-black/30">
+            {flat.length === 0 ? (
+              <p className="px-3 py-4 text-center text-xs text-ink/40">No peptides match “{query}”.</p>
+            ) : (
+              groups.map((g) => (
+                <div key={g.group} className="mb-1 last:mb-0">
+                  <p className="px-2.5 pb-0.5 pt-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-ink/35">
+                    {g.group}
+                  </p>
+                  {g.items.map((p) => (
+                    <button
+                      key={p.slug}
+                      type="button"
+                      onClick={() => choose(p)}
+                      className="flex w-full items-center justify-between gap-3 rounded-lg px-2.5 py-2 text-left text-sm text-ink/80 transition-colors hover:bg-[#2DD4A8]/[0.08] hover:text-ink"
+                    >
+                      <span className="font-medium">{p.name}</span>
+                      <span className="flex-shrink-0 font-mono text-[11px] text-ink/40">
+                        {p.vialMg}mg · {p.waterMl}mL
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              ))
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
 
 function NumberField({
   label,
