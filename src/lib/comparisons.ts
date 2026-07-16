@@ -50,6 +50,8 @@ export interface Comparison {
   metaTitle: string
   metaDescription: string
   keywords?: string[]
+  /** ISO date (YYYY-MM-DD) of last editorial review; drives freshness schema + the visible stamp. */
+  updated?: string
   breadcrumb: { label: string; href: string }
   headline: string
   intro: string[]

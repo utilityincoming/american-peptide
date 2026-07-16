@@ -1,7 +1,7 @@
 // Remote MCP server — connect AmericanPeptide.com as a data source from
 // Claude, ChatGPT, Cursor, or any MCP client (Streamable HTTP transport):
 //
-//   https://www.americanpeptide.com/api/mcp
+//   https://americanpeptide.com/api/mcp
 //
 // Tools reuse the same catalog data and grounding executors as the on-site
 // research agent, and every result carries canonical URLs + CC BY 4.0

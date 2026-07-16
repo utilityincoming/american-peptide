@@ -11,7 +11,7 @@ import {
 } from 'lucide-react'
 import SourcingCard from '@/components/SourcingCard'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
   title:

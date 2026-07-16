@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, GitCompare } from 'lucide-react'
 import { COMPARISONS } from '@/lib/comparisons'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
   title: 'Peptide Comparisons — Head-to-Head Research Guides | AmericanPeptide.com',

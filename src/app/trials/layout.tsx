@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 const url = `${SITE}/trials`
 
 const medicalPageLd = {
