@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, Code2, Database, Scale, Zap } from 'lucide-react'
 import { PEPTIDES } from '@/lib/peptides'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
   title: 'Developers — Open Peptide Catalog API | AmericanPeptide.com',
@@ -25,7 +25,7 @@ const exampleList = `GET /api/catalog?area=weight-loss&fda=true
   "version": "1.0",
   "license": "CC BY 4.0",
   "attribution": "AmericanPeptide.com",
-  "documentation": "https://www.americanpeptide.com/developers",
+  "documentation": "https://americanpeptide.com/developers",
   "count": 2,
   "peptides": [
     {
@@ -35,12 +35,12 @@ const exampleList = `GET /api/catalog?area=weight-loss&fda=true
       "categories": ["metabolic"],
       "researchAreaGuides": [
         { "slug": "weight-loss", "label": "Weight Loss & Metabolic Health",
-          "url": "https://www.americanpeptide.com/research-areas/weight-loss" }
+          "url": "https://americanpeptide.com/research-areas/weight-loss" }
       ],
       "molecularFormula": "C157H235N41O47",
       "pubchemCid": 56843331,
       "fdaApproved": true,
-      "url": "https://www.americanpeptide.com/catalog/semaglutide"
+      "url": "https://americanpeptide.com/catalog/semaglutide"
     }
   ]
 }`
@@ -310,14 +310,14 @@ export default function DevelopersPage() {
               </p>
               <pre className="mb-4 overflow-x-auto rounded-xl border border-ink/[0.07] bg-black/40 p-4 font-mono text-[12px] leading-relaxed text-ink/75">
                 {`# Get a free key (save it — shown once)
-curl -X POST https://www.americanpeptide.com/api/keys
+curl -X POST https://americanpeptide.com/api/keys
 
 # Use it on any endpoint
-curl https://www.americanpeptide.com/api/catalog?fda=true \\
+curl https://americanpeptide.com/api/catalog?fda=true \\
   -H "Authorization: Bearer amp_sk_…"
 
 # Check your usage
-curl https://www.americanpeptide.com/api/keys \\
+curl https://americanpeptide.com/api/keys \\
   -H "Authorization: Bearer amp_sk_…"`}
               </pre>
               <div className="overflow-hidden rounded-xl border border-ink/[0.07]">
@@ -392,11 +392,11 @@ curl https://www.americanpeptide.com/api/keys \\
               </p>
               <pre className="overflow-x-auto rounded-xl border border-ink/[0.07] bg-black/40 p-4 font-mono text-[12px] leading-relaxed text-ink/75">
                 {`# Endpoint (Streamable HTTP, no auth)
-https://www.americanpeptide.com/api/mcp
+https://americanpeptide.com/api/mcp
 
 # Claude Code
 claude mcp add --transport http american-peptide \\
-  https://www.americanpeptide.com/api/mcp`}
+  https://americanpeptide.com/api/mcp`}
               </pre>
             </div>
           </div>

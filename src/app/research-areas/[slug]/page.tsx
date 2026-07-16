@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { breadcrumbJsonLd, freshnessProps, WEBSITE_ID } from '@/lib/schema'
 import { ArrowRight, ArrowLeft, HelpCircle, Layers } from 'lucide-react'
 import { CATEGORIES, type Peptide } from '@/lib/peptides'
 import {
@@ -11,8 +12,9 @@ import {
 import AgentPrompt from '@/components/AgentPrompt'
 import EvidenceContext from '@/components/EvidenceContext'
 import Toolkit from '@/components/Toolkit'
+import LastUpdated from '@/components/LastUpdated'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 interface RouteParams {
   params: Promise<{ slug: string }>
@@ -55,7 +57,8 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
     name: `${area.label} Peptides`,
     description: area.metaDescription,
     url: `${SITE}/research-areas/${area.slug}`,
-    isPartOf: { '@type': 'WebSite', name: 'AmericanPeptide.com', url: SITE },
+    isPartOf: { '@id': WEBSITE_ID },
+    ...freshnessProps(area.updated),
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: peptides.map((p, i) => ({
@@ -67,25 +70,10 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
     },
   }
 
-  const breadcrumbLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Research areas',
-        item: `${SITE}/research-areas`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: area.label,
-        item: `${SITE}/research-areas/${area.slug}`,
-      },
-    ],
-  }
+  const breadcrumbLd = breadcrumbJsonLd([
+    { name: 'Research areas', path: '/research-areas' },
+    { name: area.label, path: `/research-areas/${area.slug}` },
+  ])
 
   const faqLd = area.faqs.length
     ? {
@@ -151,6 +139,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
           <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
             {area.tagline}
           </p>
+          <LastUpdated date={area.updated} className="mt-4 text-[11px] text-ink/35" />
         </div>
       </section>
 

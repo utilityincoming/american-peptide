@@ -23,7 +23,7 @@ import {
 import { STAGES, ECONOMICS, COLD_CHAIN } from '@/lib/synthesis'
 import SynthesisWalk from '@/components/SynthesisWalk'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 const ICONS: Record<string, LucideIcon> = {
   PencilRuler,

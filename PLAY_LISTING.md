@@ -108,7 +108,7 @@ calculator, clinical trials, glossary.
 *(Must be live before submission — confirm this page exists on the app
 deployment. If the web build has /privacy, the app build serves it too.)*
 
-**Website:** `https://www.americanpeptide.com`
+**Website:** `https://americanpeptide.com`
 
 ---
 

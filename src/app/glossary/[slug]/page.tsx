@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { breadcrumbJsonLd } from '@/lib/schema'
 import { ArrowLeft, ArrowRight, BookText, FlaskConical } from 'lucide-react'
 import { getPeptideBySlug } from '@/lib/peptides'
 import { getResearchAreaBySlug } from '@/lib/research-areas'
@@ -11,7 +12,7 @@ import {
   resolveRelatedTerms,
 } from '@/lib/glossary'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 interface RouteParams {
   params: Promise<{ slug: string }>
@@ -69,15 +70,10 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
     },
   }
 
-  const breadcrumbLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
-      { '@type': 'ListItem', position: 2, name: 'Glossary', item: `${SITE}/glossary` },
-      { '@type': 'ListItem', position: 3, name: term.term, item: url },
-    ],
-  }
+  const breadcrumbLd = breadcrumbJsonLd([
+    { name: 'Glossary', path: '/glossary' },
+    { name: term.term, path: `/glossary/${term.slug}` },
+  ])
 
   return (
     <div className="min-h-screen bg-surface text-ink">

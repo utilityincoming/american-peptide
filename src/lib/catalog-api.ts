@@ -11,7 +11,7 @@ import {
   getPeptidesForArea,
 } from './research-areas'
 
-export const API_SITE = 'https://www.americanpeptide.com'
+export const API_SITE = 'https://americanpeptide.com'
 export const API_VERSION = '1.0'
 export const API_LICENSE = 'CC BY 4.0'
 export const API_ATTRIBUTION = 'AmericanPeptide.com'

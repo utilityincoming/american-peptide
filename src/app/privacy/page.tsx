@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ShieldCheck, Lock } from 'lucide-react'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 // Keep this date current whenever the policy materially changes — Google Play
 // and app stores cross-check the "last updated" date against listing reviews.
