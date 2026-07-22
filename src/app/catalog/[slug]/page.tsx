@@ -4,13 +4,11 @@ import { notFound } from 'next/navigation'
 import {
   ArrowRight,
   ArrowUpRight,
-  Bell,
   BookOpen,
   Building2,
   Check,
   Droplets,
   Factory,
-  FileCheck2,
   FlaskConical,
   HelpCircle,
   Newspaper,
@@ -643,15 +641,24 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                     ) : null}
                     .
                   </p>
-                  <a
-                    href={`https://pubchem.ncbi.nlm.nih.gov/compound/${v.cid}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-2.5 inline-flex items-center gap-1 text-[13px] font-medium text-accent hover:underline"
-                  >
-                    Verify on PubChem · CID {v.cid}
-                    <ArrowUpRight className="h-3 w-3" />
-                  </a>
+                  <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1.5">
+                    <a
+                      href={`https://pubchem.ncbi.nlm.nih.gov/compound/${v.cid}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 text-[13px] font-medium text-accent hover:underline"
+                    >
+                      Verify on PubChem · CID {v.cid}
+                      <ArrowUpRight className="h-3 w-3" />
+                    </a>
+                    <Link
+                      href="/methodology"
+                      className="inline-flex items-center gap-1 text-[13px] text-ink/50 transition-colors hover:text-accent"
+                    >
+                      How we verify
+                      <ArrowRight className="h-3 w-3" />
+                    </Link>
+                  </div>
                 </div>
               )
             })()}
@@ -755,49 +762,26 @@ function Row({
   )
 }
 
-function MarketRow({
-  Icon,
-  label,
-  value,
-}: {
-  Icon: typeof Building2
-  label: string
-  value: string
-}) {
-  return (
-    <div className="flex items-center justify-between">
-      <span className="flex items-center gap-1.5">
-        <Icon className="h-3 w-3 text-ink/40" />
-        {label}
-      </span>
-      <span className="text-ink/40">{value}</span>
-    </div>
-  )
-}
-
+// Reference-only fallback — shown when there are no directory vendors to rank,
+// which in practice is only the Play (TWA) build (IS_APP_BUILD hides outbound
+// vendor links). The trust-ranked affiliate directory is the CURRENT sourcing
+// layer. A first-party escrow / COA-custody marketplace remains a TABLED future
+// direction (a good idea, not yet built) — deliberately not teased here so we
+// don't promise a product that isn't live. This platform never sells peptides.
 function MarketplaceComingSoon() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-5">
-      <div className="mb-3 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] text-accent">
-          <Building2 className="h-3.5 w-3.5" strokeWidth={1.75} />
+    <div className="overflow-hidden rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-5">
+      <div className="mb-2 flex items-center gap-2">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-ink/10 bg-ink/[0.04] text-ink/50">
+          <BookOpen className="h-3.5 w-3.5" strokeWidth={1.75} />
         </div>
-        <h3 className="text-sm font-semibold">Marketplace</h3>
+        <h3 className="text-sm font-semibold">Reference edition</h3>
       </div>
-
-      <div className="mb-4 space-y-2 text-xs text-ink/55">
-        <MarketRow Icon={Building2} label="Vetted suppliers" value="Coming soon" />
-        <MarketRow Icon={FileCheck2} label="COAs on file" value="Coming soon" />
-        <MarketRow Icon={ShieldCheck} label="Escrow protection" value="Coming soon" />
-      </div>
-
-      <button
-        disabled
-        className="inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-2 text-xs font-medium text-accent opacity-80"
-      >
-        <Bell className="h-3.5 w-3.5" />
-        Notify me when live
-      </button>
+      <p className="text-[13px] leading-relaxed text-ink/55">
+        This edition is a research reference only — no supplier listings or
+        pricing. AmericanPeptide never sells peptides; sourcing is handled on the
+        web through an independently trust-ranked vendor directory.
+      </p>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { AlertCircle, ArrowRight, ChevronRight, FlaskConical } from 'lucide-react'
+import { AlertCircle, ChevronRight } from 'lucide-react'
+import SourcingCard from '@/components/SourcingCard'
 
 const SITE = 'https://www.americanpeptide.com'
 
@@ -297,17 +298,8 @@ export default function LongevityPage() {
               ))}
             </div>
 
-            <div className="rounded-xl border border-[#818CF8]/20 bg-[#818CF8]/[0.05] p-5">
-              <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#818CF8]/10">
-                <FlaskConical className="h-4 w-4 text-accent-indigo" />
-              </div>
-              <p className="mb-1 text-sm font-semibold text-accent-indigo">Marketplace coming soon</p>
-              <p className="mb-4 text-xs text-ink/45">COA-verified longevity research peptides.</p>
-              <Link href="/catalog"
-                className="flex items-center justify-center gap-2 rounded-lg bg-[#818CF8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] hover:opacity-90">
-                Browse catalog <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+            {/* Where to source — trust-ranked directory (hidden on the app build) */}
+            <SourcingCard slugs={['mots-c', 'epitalon', 'ss-31', '5-amino-1mq', 'nad-plus']} accent="#818CF8" />
           </aside>
         </div>
       </div>
