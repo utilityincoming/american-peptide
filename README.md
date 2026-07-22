@@ -9,7 +9,7 @@ grounds every answer in PubChem, ClinicalTrials.gov, PubMed & UniProt, decode a
 Certificate of Analysis, and run bench calculators offline. All content is
 research-framed and openly licensed (CC BY 4.0) so it stays useful wherever it travels.
 
-[Live site](https://www.americanpeptide.com) · [Research agent](https://www.americanpeptide.com/research) · [Remote MCP](https://www.americanpeptide.com/api/mcp) · [Developers](https://www.americanpeptide.com/developers)
+[Live site](https://americanpeptide.com) · [Research agent](https://americanpeptide.com/research) · [Remote MCP](https://americanpeptide.com/api/mcp) · [Developers](https://americanpeptide.com/developers)
 
 ![Next.js](https://img.shields.io/badge/Next.js-15.5-000?logo=next.js) ![React](https://img.shields.io/badge/React-19-149eca?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?logo=tailwindcss) ![License: CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-lightgrey)
 
@@ -72,7 +72,7 @@ runtime via the `AGENT_MODEL` environment variable.
 Connect the catalog as a live data source from any MCP client (Streamable HTTP transport):
 
 ```
-https://www.americanpeptide.com/api/mcp
+https://americanpeptide.com/api/mcp
 ```
 
 Its tools reuse the same catalog data and grounding executors as the on-site agent, and
