@@ -2,16 +2,21 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
   ArrowRight,
+  ArrowUpRight,
   Activity,
   AlertCircle,
+  Building2,
+  Check,
   ChevronRight,
   FlaskConical,
   Scale,
   TrendingDown,
   Zap,
 } from 'lucide-react'
+import AffiliateDisclosure from '@/components/AffiliateDisclosure'
+import { getVendor, vendorHref, type Vendor } from '@/lib/vendors'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
   title:
@@ -588,26 +593,15 @@ export default function GLP1Page() {
               </div>
             </div>
 
-            {/* Marketplace waitlist CTA */}
-            <div className="rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] p-5">
-              <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]/10">
-                <FlaskConical className="h-4 w-4 text-accent" />
-              </div>
-              <p className="mb-1 text-sm font-semibold text-accent">
-                Marketplace coming soon
-              </p>
-              <p className="mb-4 text-xs leading-relaxed text-ink/45">
-                Vetted suppliers, COA-backed material, transparent pricing.
-                Be first when the GLP-1 research marketplace opens.
-              </p>
-              <Link
-                href="/catalog"
-                className="flex items-center justify-center gap-2 rounded-lg bg-[#2DD4A8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
-              >
-                Browse catalog
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+            {/* Research-supply partner onboarding (or coming-soon on app build) */}
+            {(() => {
+              const partner = getVendor('alpha-bio-med')
+              return partner ? (
+                <PartnerOnboardingCard vendor={partner} />
+              ) : (
+                <MarketplaceComingSoon />
+              )
+            })()}
 
             {/* Research agent CTA */}
             <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-5">
@@ -630,6 +624,103 @@ export default function GLP1Page() {
           </aside>
         </div>
       </div>
+    </div>
+  )
+}
+
+// Research-supply partner card — an ONBOARDING placement (registration flow),
+// distinct from the catalog's "buy a vial" directory tiles. Driven by the vendor
+// record so the tracked /go redirect, referral code, and caveat stay in sync.
+function PartnerOnboardingCard({ vendor }: { vendor: Vendor }) {
+  const t = vendor.trust
+  const signals: string[] = []
+  if (t.thirdPartyTested) signals.push('Independent HPLC/MS testing')
+  if (t.perBatchTesting) signals.push('Lot-level (per-batch) testing')
+  if (t.purityPct) signals.push(`Stated purity ≥ ${t.purityPct}%`)
+  if (t.refundPolicy) signals.push('Published refund policy')
+
+  return (
+    <div className="rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] p-5">
+      <div className="mb-3 flex items-center gap-2.5">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#2DD4A8]/10 text-accent">
+          <Building2 className="h-4 w-4" />
+        </div>
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-accent/80">
+            Research-supply partner
+          </p>
+          <p className="text-sm font-semibold text-ink/90">{vendor.name}</p>
+        </div>
+      </div>
+
+      <p className="mb-3 text-xs leading-relaxed text-ink/50">
+        Set up a research-supply account to source the GLP-1 / amylin compounds
+        on this page. {vendor.blurb}
+      </p>
+
+      {signals.length > 0 && (
+        <ul className="mb-4 space-y-1.5 text-xs">
+          {signals.map((s) => (
+            <li key={s} className="flex items-start gap-2 text-ink/65">
+              <Check className="mt-0.5 h-3 w-3 shrink-0 text-accent" strokeWidth={2.5} />
+              {s}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <a
+        href={vendorHref(vendor)}
+        target="_blank"
+        rel="sponsored nofollow noopener"
+        className="flex items-center justify-center gap-2 rounded-lg bg-[#2DD4A8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+      >
+        Set up a research account
+        <ArrowUpRight className="h-4 w-4" />
+      </a>
+
+      {vendor.affiliate?.code && (
+        <p className="mt-2 text-center text-[11px] text-ink/45">
+          Referral code{' '}
+          <span className="font-mono font-semibold text-ink/70">
+            {vendor.affiliate.code}
+          </span>
+        </p>
+      )}
+
+      {vendor.notes && (
+        <p className="mt-3 text-[11px] leading-relaxed text-amber-400/70">
+          {vendor.notes}
+        </p>
+      )}
+
+      <AffiliateDisclosure className="mt-3" />
+    </div>
+  )
+}
+
+// Fallback on the Play (TWA) build, where getVendor() returns undefined and no
+// affiliate UI is rendered.
+function MarketplaceComingSoon() {
+  return (
+    <div className="rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] p-5">
+      <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]/10">
+        <FlaskConical className="h-4 w-4 text-accent" />
+      </div>
+      <p className="mb-1 text-sm font-semibold text-accent">
+        Marketplace coming soon
+      </p>
+      <p className="mb-4 text-xs leading-relaxed text-ink/45">
+        Vetted suppliers, COA-backed material, transparent pricing. Be first when
+        the GLP-1 research marketplace opens.
+      </p>
+      <Link
+        href="/catalog"
+        className="flex items-center justify-center gap-2 rounded-lg bg-[#2DD4A8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+      >
+        Browse catalog
+        <ArrowRight className="h-4 w-4" />
+      </Link>
     </div>
   )
 }
