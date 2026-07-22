@@ -1,14 +1,16 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { breadcrumbJsonLd, freshnessProps, WEBSITE_ID } from '@/lib/schema'
 import { ArrowRight, ShieldCheck, FlaskConical } from 'lucide-react'
 import { COMPARISONS, getComparison } from '@/lib/comparisons'
 import { getPeptideBySlug } from '@/lib/peptides'
 import { getPubchemVerification } from '@/lib/verification'
 import EvidenceContext from '@/components/EvidenceContext'
 import AgentPrompt from '@/components/AgentPrompt'
+import LastUpdated from '@/components/LastUpdated'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 const A = '#2DD4A8'
 const B = '#818CF8'
 
@@ -89,19 +91,15 @@ export default async function ComparePage({ params }: RouteParams) {
     headline: `${c.aName} vs ${c.bName}: ${c.headline}`,
     description: c.metaDescription,
     url,
-    isPartOf: { '@type': 'WebSite', name: 'AmericanPeptide.com', url: SITE },
+    isPartOf: { '@id': WEBSITE_ID },
+    ...freshnessProps(c.updated),
     ...(c.about ? { about: c.about.map((d) => ({ '@type': 'Drug', ...d })) } : {}),
     audience: { '@type': 'MedicalAudience', audienceType: 'MedicalResearcher' },
   }
-  const breadcrumbLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
-      { '@type': 'ListItem', position: 2, name: c.breadcrumb.label, item: `${SITE}${c.breadcrumb.href}` },
-      { '@type': 'ListItem', position: 3, name: `${c.aName} vs ${c.bName}`, item: url },
-    ],
-  }
+  const breadcrumbLd = breadcrumbJsonLd([
+    { name: c.breadcrumb.label, path: c.breadcrumb.href },
+    { name: `${c.aName} vs ${c.bName}`, path: `/compare/${c.slug}` },
+  ])
   const faqLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -162,6 +160,7 @@ export default async function ComparePage({ params }: RouteParams) {
             <br />
             <span className="text-2xl font-normal text-ink/40 md:text-3xl">{c.headline}</span>
           </h1>
+          <LastUpdated date={c.updated} className="mb-4 text-[11px] text-ink/35" />
           {c.intro.map((p, i) => (
             <p key={i} className="max-w-2xl text-sm leading-relaxed text-ink/55 md:text-base">
               {p}

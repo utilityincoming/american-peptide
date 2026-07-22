@@ -15,7 +15,7 @@ import {
 } from 'lucide-react'
 import { PEPTIDES } from '@/lib/peptides'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 // Community channel. Telegram is the first live channel — a feedback loop for
 // the Peptide Agent. Private group invite link.

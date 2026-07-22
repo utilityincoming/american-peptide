@@ -17,6 +17,8 @@ export interface ResearchArea {
   tagline: string
   metaTitle: string
   metaDescription: string
+  /** ISO date (YYYY-MM-DD) of last editorial review; drives freshness schema + the visible stamp. */
+  updated?: string
   /** Editorial intro paragraphs — substance to keep pages out of thin-content territory. */
   intro: string[]
   /** Lowercase substrings matched against peptide.researchAreas. */

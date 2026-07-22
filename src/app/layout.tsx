@@ -9,6 +9,8 @@ import SiteHeader from '@/components/SiteHeader'
 import SectionNav from '@/components/SectionNav'
 import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar'
 import ResearchUseGate from '@/components/ResearchUseGate'
+import JsonLd from '@/components/JsonLd'
+import { siteGraphJsonLd } from '@/lib/schema'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -27,7 +29,7 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.americanpeptide.com'),
+  metadataBase: new URL('https://americanpeptide.com'),
   title: 'AmericanPeptide.com — AI-Powered Peptide Research',
   description:
     'An AI-assisted research platform and open reference for peptide science — explore how peptides are designed, synthesized, purified, and proven, with the Peptide Agent, an open catalog, and hands-on tools.',
@@ -90,6 +92,9 @@ export default function RootLayout({
         {/* Default chrome color (dark); the script below flips it to match the
             applied theme before paint. */}
         <meta name="theme-color" content="#0B1220" />
+        {/* Site-wide entity graph: the Organization + the WebSite it publishes,
+            linked by @id and referenced from every page's structured data. */}
+        <JsonLd data={siteGraphJsonLd()} />
         {/* No-flash theme: apply the stored/OS preference before first paint,
             so light-mode users never see a dark flash. Default is dark. Also
             syncs the mobile browser-chrome color to the resolved theme. */}

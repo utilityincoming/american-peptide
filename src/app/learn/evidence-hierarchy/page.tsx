@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, ChevronRight } from 'lucide-react'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
   title: 'How to Read Peptide Research — Evidence Hierarchy Guide | AmericanPeptide.com',

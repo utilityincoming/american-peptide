@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import ContactForm from '@/components/ContactForm'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 const TELEGRAM_URL = 'https://t.me/+17FKLWux_OQyOGEx'
 

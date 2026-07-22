@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { breadcrumbJsonLd, medicalWebPageJsonLd } from '@/lib/schema'
 import {
   ArrowRight,
   ArrowUpRight,
@@ -28,6 +29,7 @@ import AgentPrompt from '@/components/AgentPrompt'
 import PeptideStory from '@/components/PeptideStory'
 import WatchButton from '@/components/WatchButton'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
+import LastUpdated from '@/components/LastUpdated'
 import {
   getVendorsForPeptide,
   trustScore,
@@ -36,7 +38,7 @@ import {
   type Vendor,
 } from '@/lib/vendors'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 // ISR: re-render at most once per day so the live "Latest research" section
 // stays current without rebuilding. External fetches in getLatestResearch are
@@ -145,6 +147,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
   const substanceLd = {
     '@context': 'https://schema.org',
     '@type': 'ChemicalSubstance',
+    '@id': `${url}#substance`,
     name: peptide.name,
     description: peptide.shortDescription,
     url,
@@ -156,15 +159,20 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
     ...(identifier.length ? { identifier } : {}),
   }
 
-  const breadcrumbLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
-      { '@type': 'ListItem', position: 2, name: 'Catalog', item: `${SITE}/catalog` },
-      { '@type': 'ListItem', position: 3, name: peptide.name, item: url },
-    ],
-  }
+  const breadcrumbLd = breadcrumbJsonLd([
+    { name: 'Catalog', path: '/catalog' },
+    { name: peptide.name, path: `/catalog/${peptide.slug}` },
+  ])
+
+  // The catalog page's live "Latest research" section is refreshed on each daily
+  // ISR revalidation; fetchedAt is that real timestamp — an honest dateModified.
+  const webPageLd = medicalWebPageJsonLd({
+    url,
+    name: `${peptide.name} — AmericanPeptide.com Catalog`,
+    description: peptide.shortDescription,
+    dateModified: latest.fetchedAt,
+    mainEntityId: `${url}#substance`,
+  })
 
   const faqLd = peptide.faqs?.length
     ? {
@@ -236,6 +244,10 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageLd) }}
+      />
       {faqLd && (
         <script
           type="application/ld+json"
@@ -292,6 +304,11 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
           <p className="max-w-3xl text-base leading-relaxed text-ink/65 md:text-lg">
             {peptide.shortDescription}
           </p>
+          <LastUpdated
+            date={latest.fetchedAt}
+            label="Research refreshed"
+            className="mt-4 text-[11px] text-ink/35"
+          />
           <WatchButton slug={peptide.slug} />
         </div>
       </section>

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { AlertCircle, ArrowRight, ChevronRight } from 'lucide-react'
 import SourcingCard from '@/components/SourcingCard'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
   title: 'Cognitive & Nootropic Peptides — Research Guide | AmericanPeptide.com',

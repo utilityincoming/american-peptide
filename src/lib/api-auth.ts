@@ -34,7 +34,7 @@ function quotaError(tier: Tier): Response {
   const t = TIERS[tier]
   const upgrade =
     tier === 'anonymous'
-      ? ' Get a free API key at https://www.americanpeptide.com/developers for a higher daily limit.'
+      ? ' Get a free API key at https://americanpeptide.com/developers for a higher daily limit.'
       : ' Contact us to raise your limit.'
   return Response.json(
     { error: `Daily quota exceeded for the ${t.label} tier (${t.perDay}/day).${upgrade}` },
