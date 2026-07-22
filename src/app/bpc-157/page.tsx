@@ -9,6 +9,7 @@ import {
   ShieldAlert,
   Zap,
 } from 'lucide-react'
+import SourcingCard from '@/components/SourcingCard'
 
 const SITE = 'https://www.americanpeptide.com'
 
@@ -554,26 +555,8 @@ export default function BPC157Page() {
               ))}
             </div>
 
-            {/* Marketplace CTA */}
-            <div className="rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] p-5">
-              <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]/10">
-                <FlaskConical className="h-4 w-4 text-accent" />
-              </div>
-              <p className="mb-1 text-sm font-semibold text-accent">
-                Marketplace coming soon
-              </p>
-              <p className="mb-4 text-xs leading-relaxed text-ink/45">
-                COA-verified research peptides with transparent pricing.
-                Be first when the healing-peptide marketplace opens.
-              </p>
-              <Link
-                href="/catalog"
-                className="flex items-center justify-center gap-2 rounded-lg bg-[#2DD4A8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
-              >
-                Browse catalog
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+            {/* Where to source — trust-ranked directory (hidden on the app build) */}
+            <SourcingCard slugs={['bpc-157', 'tb-500', 'ghk-cu']} />
 
             {/* Research agent CTA */}
             <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-5">
