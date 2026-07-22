@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { AlertCircle, ArrowRight, ChevronRight, FlaskConical, TrendingUp, Zap } from 'lucide-react'
+import { AlertCircle, ArrowRight, ChevronRight, TrendingUp, Zap } from 'lucide-react'
+import SourcingCard from '@/components/SourcingCard'
 
 const SITE = 'https://www.americanpeptide.com'
 
@@ -376,19 +377,8 @@ export default function GHPeptidesPage() {
               ))}
             </div>
 
-            <div className="rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] p-5">
-              <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]/10">
-                <FlaskConical className="h-4 w-4 text-accent" />
-              </div>
-              <p className="mb-1 text-sm font-semibold text-accent">Marketplace coming soon</p>
-              <p className="mb-4 text-xs leading-relaxed text-ink/45">
-                COA-verified GH-axis peptides with transparent pricing.
-              </p>
-              <Link href="/catalog"
-                className="flex items-center justify-center gap-2 rounded-lg bg-[#2DD4A8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90">
-                Browse catalog <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
+            {/* Where to source — trust-ranked directory (hidden on the app build) */}
+            <SourcingCard slugs={['sermorelin', 'ipamorelin', 'cjc-1295-no-dac', 'tesamorelin', 'hexarelin']} />
           </aside>
         </div>
       </div>
