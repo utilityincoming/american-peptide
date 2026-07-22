@@ -12,12 +12,13 @@
 //      fails in production.)
 //
 // Set in the app deployment's env (comma-separated, colon-delimited hex):
-//   ANDROID_PACKAGE_NAME=com.americanpeptide.twa
+//   ANDROID_PACKAGE_NAME=com.americanpeptide.calculator
 //   ANDROID_SHA256_FINGERPRINTS=AA:BB:...:11,CC:DD:...:22
 //
 // Verify after deploy: https://developers.google.com/digital-asset-links/tools/generator
 
-const PACKAGE_NAME = process.env.ANDROID_PACKAGE_NAME ?? 'com.americanpeptide.twa'
+const PACKAGE_NAME =
+  process.env.ANDROID_PACKAGE_NAME ?? 'com.americanpeptide.calculator'
 
 const FINGERPRINTS = (process.env.ANDROID_SHA256_FINGERPRINTS ?? '')
   .split(',')

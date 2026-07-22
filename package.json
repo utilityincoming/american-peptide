@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "enrich": "node scripts/enrich-peptides.mjs",
-    "eval": "node scripts/eval-agent.mjs"
+    "eval": "node scripts/eval-agent.mjs",
+    "gsc": "node scripts/gsc-report.mjs"
   },
   "dependencies": {
     "@next/third-parties": "^15.5.19",

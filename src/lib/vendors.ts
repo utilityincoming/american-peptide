@@ -59,6 +59,14 @@ export interface Vendor {
   shipsTo: ShipRegion[]
   trust: VendorTrust
   affiliate?: VendorAffiliate
+  /**
+   * Surface this vendor in the catalog "where to source" directory listings.
+   * Defaults true. Set false for ONBOARDING partners that are surfaced only via
+   * curated placements (e.g. the GLP-1 hub) and resolved through /go/<id> — they
+   * should not also appear as a trust-ranked product tile in the catalog, where
+   * a registration flow reads as just another "buy a vial" link.
+   */
+  directoryListed?: boolean
   /** Editorial caveats — what to watch for, what's unverified. */
   notes?: string
 }
@@ -67,7 +75,7 @@ export interface Vendor {
 // Transparent, tunable 0–100 score derived ONLY from verifiable transparency
 // signals — never from commission. COA + independent testing dominate because
 // they're the signals that actually protect a researcher. Weights sum to 100.
-const TRUST_WEIGHTS = {
+export const TRUST_WEIGHTS = {
   coaOnFile: 30,
   thirdPartyTested: 30,
   perBatchTesting: 20,
@@ -168,7 +176,9 @@ export const VENDORS: Vendor[] = [
     blurb:
       'US research-supply lab advertising 100% lot-level third-party HPLC/MS testing and >99% purity.',
     // Scoped to the GLP-1 / amylin set only: the affiliate link is a provider
-    // ONBOARDING (/register) flow, not a general product link.
+    // ONBOARDING (/register) flow, not a general product link. It is therefore
+    // surfaced via the GLP-1 hub (/glp-1) as a "research-supply partner" card,
+    // NOT in the catalog directory — see directoryListed below.
     peptides: ['tirzepatide', 'retatrutide', 'cagrilintide', 'semaglutide'],
     shipsTo: ['us'],
     trust: {
@@ -187,6 +197,9 @@ export const VENDORS: Vendor[] = [
       code: 'AmericanPeptides',
       active: true,
     },
+    // Onboarding partner — surfaced only on the GLP-1 hub, kept out of the
+    // catalog "where to source" directory.
+    directoryListed: false,
     notes:
       'Trust signals reflect the vendor’s own published claims, not independent verification. Request the third-party COA for your specific lot before any use.',
   },
@@ -394,15 +407,30 @@ export function getVendorsForPeptide(slug: string): Vendor[] {
   // Reference-only on the Play (TWA) build: no outbound vendor/affiliate links.
   if (IS_APP_BUILD) return []
   return VENDORS.filter(
-    (v) => v.peptides === 'all' || v.peptides.includes(slug),
+    (v) =>
+      v.directoryListed !== false &&
+      (v.peptides === 'all' || v.peptides.includes(slug)),
   ).sort((a, b) => trustScore(b) - trustScore(a))
 }
 
-/** All vendors, best-trust first. */
+/** All directory-listed vendors, best-trust first. */
 export function vendorsRanked(): Vendor[] {
   // Reference-only on the Play (TWA) build: no outbound vendor/affiliate links.
   if (IS_APP_BUILD) return []
-  return [...VENDORS].sort((a, b) => trustScore(b) - trustScore(a))
+  return VENDORS.filter((v) => v.directoryListed !== false).sort(
+    (a, b) => trustScore(b) - trustScore(a),
+  )
+}
+
+/**
+ * A single vendor by id, for curated ONBOARDING placements outside the catalog
+ * directory (e.g. the GLP-1 hub). Returns undefined on the Play (TWA) build so
+ * onboarding callers fall back to a non-affiliate placeholder — matching the
+ * directory's reference-only behavior there.
+ */
+export function getVendor(id: string): Vendor | undefined {
+  if (IS_APP_BUILD) return undefined
+  return VENDORS.find((v) => v.id === id)
 }
 
 /**

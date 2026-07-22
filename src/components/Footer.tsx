@@ -4,9 +4,11 @@ const LINKS = [
   { href: '/', label: 'Home' },
   { href: '/research', label: 'AI Agent' },
   { href: '/catalog', label: 'Catalog' },
+  { href: '/methodology', label: 'The Standard' },
   { href: '/compounds', label: 'Compounds' },
   { href: '/tools/reconstitution-calculator', label: 'Peptide Calculator' },
   { href: '/developers', label: 'Developers / API' },
+  { href: '/privacy', label: 'Privacy' },
 ]
 
 export default function Footer() {

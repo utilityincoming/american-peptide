@@ -143,6 +143,17 @@ export default function HomePage() {
                 Browse the catalog
               </Link>
             </div>
+
+            {/* Starter prompt — deep-links into the Agent and auto-asks on load */}
+            <p className="mt-5 text-center text-xs text-ink/40 lg:text-left">
+              Try:{' '}
+              <Link
+                href={`/research?q=${encodeURIComponent('What GLP-1 analogs are in Phase 3 trials?')}`}
+                className="text-accent/80 underline decoration-accent/30 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent/60"
+              >
+                &ldquo;What GLP-1 analogs are in Phase 3 trials?&rdquo;
+              </Link>
+            </p>
           </div>
 
           {/* Right — molecular visual */}
@@ -151,17 +162,20 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Peptide sequence decoration */}
-        <div className="mx-auto mt-14 max-w-xl overflow-hidden rounded-xl border border-ink/[0.06] bg-ink/[0.025] px-5 py-3.5 text-center font-mono text-xs md:text-sm">
-          <span className="text-ink/30">sequence · </span>
-          <span className="text-accent/80">HKIGAQKYFLNHSGECGFHKIGAQK</span>
-          <span className="text-ink/30"> · residues: 25 · purity </span>
-          <span className="text-accent">≥ 98%</span>
-        </div>
+        {/* Real catalog example — links to the entry so the spec is verifiable */}
+        <Link
+          href="/catalog/bpc-157"
+          className="group mx-auto mt-14 flex max-w-xl items-center justify-center gap-x-2 gap-y-1 overflow-hidden rounded-xl border border-ink/[0.06] bg-ink/[0.025] px-5 py-3.5 text-center font-mono text-xs transition-colors hover:border-[#2DD4A8]/25 md:text-sm"
+        >
+          <span className="text-ink/30">BPC-157 · </span>
+          <span className="text-accent/80">GEPPPGKPADDAGLV</span>
+          <span className="text-ink/30"> · 15 residues</span>
+          <ArrowRight className="h-3.5 w-3.5 text-ink/25 transition-all group-hover:translate-x-0.5 group-hover:text-accent" />
+        </Link>
 
-        {/* Synthesis patience line */}
+        {/* Sourcing line — every catalog entry is cited, not asserted */}
         <p className="mt-4 text-center text-xs tracking-wide text-ink/25 italic">
-          Purity is what happens while you wait.
+          Every sequence traced to its source — not asserted, cited.
         </p>
 
         {/* Stats row */}
@@ -204,7 +218,7 @@ export default function HomePage() {
             <div>
               <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.10] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
                 <Sparkles className="h-3 w-3" />
-                New · Now live
+                Now live
               </div>
 
               <h2 className="mb-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-[40px]">
