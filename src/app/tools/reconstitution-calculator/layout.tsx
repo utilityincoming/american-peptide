@@ -10,7 +10,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
   name: 'Peptide Reconstitution Calculator',
-  url: 'https://www.americanpeptide.com/tools/reconstitution-calculator',
+  url: 'https://americanpeptide.com/tools/reconstitution-calculator',
   applicationCategory: 'HealthApplication',
   author: {
     '@type': 'Organization',

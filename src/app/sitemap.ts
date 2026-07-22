@@ -4,7 +4,7 @@ import { RESEARCH_AREAS } from '@/lib/research-areas'
 import { GLOSSARY } from '@/lib/glossary'
 import { COMPARISONS } from '@/lib/comparisons'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [

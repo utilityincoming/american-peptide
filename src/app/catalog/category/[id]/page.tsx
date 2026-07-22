@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { breadcrumbJsonLd } from '@/lib/schema'
 import {
   ArrowRight,
   FlaskConical,
@@ -16,7 +17,7 @@ import {
 import { getCategoryContent } from '@/lib/category-content'
 import WaitlistForm from '@/components/WaitlistForm'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 interface RouteParams {
   params: Promise<{ id: string }>
@@ -103,20 +104,10 @@ export default async function CategoryPage({ params }: RouteParams) {
       }
     : null
 
-  const breadcrumbLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
-      { '@type': 'ListItem', position: 2, name: 'Catalog', item: `${SITE}/catalog` },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: meta.label,
-        item: `${SITE}/catalog/category/${meta.id}`,
-      },
-    ],
-  }
+  const breadcrumbLd = breadcrumbJsonLd([
+    { name: 'Catalog', path: '/catalog' },
+    { name: meta.label, path: `/catalog/category/${meta.id}` },
+  ])
 
   return (
     <div className="min-h-screen bg-surface text-ink">

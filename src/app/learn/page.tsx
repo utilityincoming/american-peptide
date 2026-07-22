@@ -13,7 +13,7 @@ import { STAGES } from '@/lib/synthesis'
 import { RESEARCH_AREAS } from '@/lib/research-areas'
 import { GLOSSARY } from '@/lib/glossary'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 const RESOURCES = [
   {

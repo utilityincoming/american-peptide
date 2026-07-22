@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.americanpeptide.com/sitemap.xml
+Sitemap: https://americanpeptide.com/sitemap.xml
 
 # AI agents: curated markdown index at /llms.txt, full catalog at /llms-full.txt,
 # and per-peptide markdown at /catalog/{slug}.md. Data CC BY 4.0.

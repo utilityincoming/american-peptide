@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, BookText } from 'lucide-react'
 import { GLOSSARY, glossaryByCategory } from '@/lib/glossary'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
   title: 'Peptide Glossary — Terms & Definitions | AmericanPeptide.com',

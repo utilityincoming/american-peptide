@@ -10,7 +10,7 @@ import {
   Snowflake,
 } from 'lucide-react'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
   title: 'Peptide Compatibility & Stability — Mixing, Degradation & Handling | AmericanPeptide.com',

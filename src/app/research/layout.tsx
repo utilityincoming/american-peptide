@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
   title: 'Peptide Agent — AI-Powered Peptide Research | AmericanPeptide.com',

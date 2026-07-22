@@ -6,7 +6,7 @@ import Toolkit from '@/components/Toolkit'
 import LearnMore from '@/components/LearnMore'
 import AgentPrompt from '@/components/AgentPrompt'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
   title: 'Peptide Research Areas — Indication Guide | AmericanPeptide.com',

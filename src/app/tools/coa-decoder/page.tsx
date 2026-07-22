@@ -91,7 +91,7 @@ function reportToText(r: CoaReport): string {
     lines.push('', 'Red flags:')
     for (const f of r.redFlags) lines.push(`  - ${f}`)
   }
-  lines.push('', r.supplierRequest, '', 'Graded free at https://www.americanpeptide.com/tools/coa-decoder')
+  lines.push('', r.supplierRequest, '', 'Graded free at https://americanpeptide.com/tools/coa-decoder')
   return lines.join('\n')
 }
 

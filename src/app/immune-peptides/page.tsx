@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Shield, Zap, Activity, AlertTriangle } from 'lucide-react'
 
-const SITE = 'https://www.americanpeptide.com'
+const SITE = 'https://americanpeptide.com'
 const url = `${SITE}/immune-peptides`
 
 export const metadata: Metadata = {
