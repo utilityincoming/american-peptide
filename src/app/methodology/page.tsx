@@ -73,8 +73,8 @@ const PILLARS = [
     icon: <Scale className="h-4 w-4" />,
     color: '#818CF8',
     label: 'Sources ranked by trust',
-    desc: 'Where-to-source listings are ordered by verifiable transparency signals — third-party COAs, per-batch testing, published policies — never by commission.',
-    stat: 'Commission never affects ranking',
+    desc: 'Where-to-source listings are ordered by verifiable transparency signals — third-party COAs, per-batch testing, published policies — never by commission. A paid Featured partner slot can sit above that ranking; it is labeled as paid and scored like everyone else.',
+    stat: 'Scores are never for sale',
   },
   {
     icon: <FlaskConical className="h-4 w-4" />,
@@ -294,8 +294,8 @@ export default function MethodologyPage() {
 
             <p className="mt-6 text-sm leading-relaxed text-ink/65">
               Add a vendor and it self-files into the right band from its own
-              signals — there is no manual ordering, and no way to buy a higher
-              placement. {ACTIVE_VENDOR_COUNT} vendor
+              signals — there is no manual ordering, and no amount of commission
+              moves a score. {ACTIVE_VENDOR_COUNT} vendor
               {ACTIVE_VENDOR_COUNT === 1 ? '' : 's'} currently carry a disclosed
               affiliate relationship; each is marked, each outbound link uses{' '}
               <code className="rounded bg-ink/[0.06] px-1 py-0.5 font-mono text-[11px] text-ink/70">
@@ -303,6 +303,26 @@ export default function MethodologyPage() {
               </code>
               , and the score is computed the same way whether we earn a
               commission or not.
+            </p>
+
+            <p className="mt-4 text-sm leading-relaxed text-ink/65">
+              One kind of placement sits <em>above</em> the ranking rather than
+              inside it. A vendor we work with directly can hold a{' '}
+              <span className="font-medium text-ink/80">Featured partner</span>{' '}
+              slot on the compounds they stock — always labeled as paid, always
+              carrying its own unedited score and tier, and never eligible at all
+              if its published signals put it in the bottom band. It buys
+              position, not standing.
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-ink/65">
+              We keep that slot because the most useful diligence is the part a
+              checkbox column structurally cannot hold: whether we know the
+              operators by name, whether someone accountable answers when an
+              order goes wrong, whether the business clears card payments — which
+              means a processor underwrote it and the buyer keeps their
+              chargeback rights. Those are real signals about how a company
+              behaves. They simply aren&rsquo;t machine-readable, so they sit
+              beside the score, in writing, instead of quietly inside it.
             </p>
             <AffiliateDisclosure className="mt-4" />
           </section>
