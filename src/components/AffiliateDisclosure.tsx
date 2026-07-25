@@ -15,7 +15,9 @@ export default function AffiliateDisclosure({
       AmericanPeptide does not sell peptides. This is an independent third-party
       vendor, and we may earn a commission if you register or buy through this
       link — at no extra cost to you. Listing and ranking are based on published
-      transparency signals, never on commission.
+      transparency signals, never on commission. A vendor can pay for prominence
+      only where you see the “Featured partner” label — it buys position, never a
+      better trust score, and never changes the ranking below it.
     </p>
   )
 }

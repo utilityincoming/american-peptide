@@ -43,6 +43,13 @@ export interface VendorAffiliate {
   url?: string
   /** Coupon / referral code, if any. */
   code?: string
+  /**
+   * Reader-facing offer this link carries, if any (e.g. a negotiated discount).
+   * State the mechanism exactly — whether a code is required, and where it
+   * lands — because a reader who doesn't get what this promises at checkout is
+   * a reader we've spent the standard on.
+   */
+  offer?: string
   /** True once a paid affiliate relationship is active — the disclosure gate. */
   active: boolean
 }
@@ -67,6 +74,29 @@ export interface Vendor {
    * a registration flow reads as just another "buy a vial" link.
    */
   directoryListed?: boolean
+  /**
+   * Catalog slugs where this vendor gets a PAID, PROMINENT placement — pinned
+   * above the trust tiers and labeled "Featured partner".
+   *
+   * This is the one place commercial priority is allowed to move placement, and
+   * the deal is that it is always disclosed:
+   *   - it NEVER touches trustScore() or vendorTier() — the vendor's honest tier
+   *     and score render on the featured card exactly as they do anywhere else;
+   *   - the card is explicitly badged as a paid placement, not "best trust";
+   *   - it is gated by canSpotlight() — a vendor in the 'unvetted' tier cannot
+   *     buy prominence, no matter what.
+   * Ranking below the pin stays purely transparency-derived.
+   */
+  spotlight?: string[]
+  /**
+   * Why this vendor holds the featured slot, in our own words — the diligence
+   * that a checkbox column structurally cannot carry: who we actually know
+   * there, how they behave when something goes wrong, what their payment rails
+   * imply. Rendered on the featured card next to the score, never in place of
+   * it. Keep it true and keep it specific; this is the part a reader is
+   * trusting us on personally.
+   */
+  spotlightNote?: string
   /** Editorial caveats — what to watch for, what's unverified. */
   notes?: string
 }
@@ -150,6 +180,9 @@ export function vendorTier(v: Vendor): VendorTier {
 //      rel="sponsored nofollow". Leave false for a plain editorial reference.
 //   5. trustScore() + vendorTier() rank and band it automatically — no manual
 //      ordering. Verify with `npx tsc --noEmit`.
+//   6. ONLY for a paid prominence deal: list the slugs it covers in `spotlight`.
+//      That pins a labeled "Featured partner" card above the tiers and changes
+//      nothing about the vendor's score, tier, or the ranking beneath it.
 //
 // Template for a new entry:
 //
@@ -379,6 +412,51 @@ export const VENDORS: Vendor[] = [
     notes:
       'Trust signals reflect the vendor’s own published claims, not independent verification. Testing lab is unnamed; reship and refund terms are not stated; the stated purity bar is ≥98% (below the ≥99% several peers claim). Request and match the third-party COA for your specific lot before any use.',
   },
+  {
+    id: 'absim-peptides',
+    name: 'ABSIM Peptides',
+    url: 'https://absimpeptides.com',
+    blurb:
+      'US research-peptide supplier publishing a certificate of analysis on every product listing; cGMP-compliant manufacturing, free US shipping over $200.',
+    // Scoped to the products ABSIM actually lists (25 SKUs) that exist in our
+    // catalog. They notably do NOT carry semaglutide, tirzepatide, or
+    // retatrutide.
+    peptides: [
+      'bpc-157', 'tb-500', 'ghk-cu', 'ipamorelin', 'cjc-1295-no-dac',
+      'tesamorelin', 'sermorelin', 'mots-c', 'ss-31', 'nad-plus',
+      'aod-9604', 'epitalon', 'semax', 'selank', 'dsip', 'pt-141', 'kpv',
+    ],
+    shipsTo: ['us'],
+    trust: {
+      // Sourced from the vendor's own published pages (homepage, /about, /faq,
+      // /shipping-policy, /refunds-returns) and the "Certificate of Analysis"
+      // tab on each product page. NOT independently confirmed. Only flags they
+      // explicitly state are set.
+      coaOnFile: true, // every product page publishes a COA under a dedicated tab
+      thirdPartyTested: false, // "tested to meet strict quality standards" — no independent lab claimed or named
+      perBatchTesting: false, // one static COA image per product (e.g. BPC-157-1.jpg), not lot-matched
+      // purityPct omitted — no HPLC purity figure stated anywhere in site copy
+      reshipPolicy: false, // no reship guarantee; carrier-claim process only, and porch theft explicitly disclaimed
+      refundPolicy: true, // published Refunds and Returns policy (wrong item / defect / damage, within 7 days)
+    },
+    affiliate: {
+      trackedPath: '/go/absim-peptides',
+      // Tracking parameter only — not a coupon the buyer enters, so no `code`.
+      url: 'https://absimpeptides.com/?ref=americanpeptide',
+      offer: '20% below list, carried by the link itself — no code to enter.',
+      active: true,
+    },
+    spotlightNote:
+      'A scorecard reads what a vendor publishes. It cannot read who picks up when an order goes wrong. We deal with ABSIM’s owner-operators directly — not a ticket queue — and that line is itself the diligence: every answer has a name attached, and the plain standards of well-run commerce get held to. They clear card payments, too, which is its own quiet vetting — a processor underwrote this business, and your chargeback rights ride along with the order. The signals below are real, and we publish every gap in them. They were simply never the whole picture.',
+    // PAID placement, gated + labeled — see Vendor.spotlight. Scoped to the
+    // bodybuilding / recovery / GH-axis and top-selling compounds they stock.
+    spotlight: [
+      'bpc-157', 'tb-500', 'ipamorelin', 'cjc-1295-no-dac', 'tesamorelin',
+      'sermorelin', 'ghk-cu', 'mots-c', 'aod-9604', 'nad-plus', 'pt-141',
+    ],
+    notes:
+      'A COA is published for every product, but it is a single static certificate per SKU rather than one matched to your lot, no testing lab is named, and no HPLC purity figure is stated — so this is vendor-reported quality, not independent documentation. Checkout requires a registered account. Returns are restrictive: report wrong/damaged items within 7 days with photos, and there is no reship guarantee for carrier loss or package theft. Request a COA matched to your specific lot before any use.',
+  },
 ]
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -444,4 +522,26 @@ export function vendorsByTier(
     tier,
     vendors: list.filter((v) => vendorTier(v) === tier.id),
   })).filter((group) => group.vendors.length > 0)
+}
+
+// ── Featured (paid) placement ─────────────────────────────────────────────────
+// The single commercial lever on placement, and it is fenced in:
+//   1. eligibility is earned, not bought — an 'unvetted' vendor can never be
+//      featured, so the floor is "publishes COAs or states third-party testing";
+//   2. the placement is labeled as paid wherever it renders, never as "best trust";
+//   3. trustScore() and vendorTier() are untouched, so the ranking underneath —
+//      and the vendor's own score on the featured card — stay honest.
+
+/** Whether a vendor is eligible to hold a paid featured placement at all. */
+export function canSpotlight(v: Vendor): boolean {
+  return Boolean(v.affiliate?.active) && vendorTier(v) !== 'unvetted'
+}
+
+/**
+ * The featured partner for a catalog slug, if one is both booked and eligible.
+ * Returns undefined on the Play (TWA) build — no outbound vendor links there.
+ */
+export function getSpotlightVendor(slug: string): Vendor | undefined {
+  if (IS_APP_BUILD) return undefined
+  return VENDORS.find((v) => v.spotlight?.includes(slug) && canSpotlight(v))
 }
