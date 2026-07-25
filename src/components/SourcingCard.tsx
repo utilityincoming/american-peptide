@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRight, ArrowUpRight, Building2, Check, ShieldCheck } from 'lucide-react'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
 import {
+  getSpotlightVendor,
   getVendorsForPeptide,
   trustScore,
   vendorHref,
@@ -48,7 +49,11 @@ export default function SourcingCard({
   const vendors = topVendorsFor(slugs)
   if (vendors.length === 0) return null
 
-  const best = vendors[0]
+  // A paid featured partner takes the slot on the slugs it covers — and says so
+  // in the eyebrow. The tier pill and signal list below stay the vendor's own,
+  // so buying the position never dresses it up as the trust-ranked winner.
+  const featured = slugs.map((s) => getSpotlightVendor(s)).find(Boolean)
+  const best = featured ?? vendors[0]
   const tier = VENDOR_TIERS.find((t) => t.id === vendorTier(best))!
   const t = best.trust
   const signals: string[] = []
@@ -77,7 +82,9 @@ export default function SourcingCard({
             className="text-[10px] font-semibold uppercase tracking-wider"
             style={{ color: accent }}
           >
-            Where to source · ranked by trust
+            {featured
+              ? 'Where to source · featured partner (paid)'
+              : 'Where to source · ranked by trust'}
           </p>
           <p className="truncate text-sm font-semibold text-ink/90">{best.name}</p>
         </div>
@@ -90,6 +97,18 @@ export default function SourcingCard({
         <ShieldCheck className="h-3 w-3" style={{ color: accent }} />
         {tier.label}
       </div>
+
+      {featured && best.affiliate?.offer && (
+        <p className="mb-3 rounded-lg border border-amber-400/25 bg-amber-400/[0.06] px-3 py-2 text-xs font-medium text-amber-200/90">
+          {best.affiliate.offer}
+        </p>
+      )}
+
+      {featured && best.spotlightNote && (
+        <p className="mb-3 border-l-2 border-amber-400/30 pl-3 text-[11px] leading-relaxed text-ink/60">
+          {best.spotlightNote}
+        </p>
+      )}
 
       {signals.length > 0 && (
         <ul className="mb-4 space-y-1.5 text-xs">
