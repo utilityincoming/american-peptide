@@ -31,10 +31,13 @@ import WatchButton from '@/components/WatchButton'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
 import LastUpdated from '@/components/LastUpdated'
 import {
+  getSpotlightVendor,
   getVendorsForPeptide,
   trustScore,
   vendorHref,
   vendorsByTier,
+  vendorTier,
+  VENDOR_TIERS,
   type Vendor,
 } from '@/lib/vendors'
 
@@ -684,7 +687,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
             {(() => {
               const vendors = getVendorsForPeptide(peptide.slug)
               return vendors.length ? (
-                <MarketplacePanel vendors={vendors} />
+                <MarketplacePanel vendors={vendors} slug={peptide.slug} />
               ) : (
                 <MarketplaceComingSoon />
               )
@@ -803,10 +806,16 @@ function MarketplaceComingSoon() {
   )
 }
 
-function MarketplacePanel({ vendors }: { vendors: Vendor[] }) {
+function MarketplacePanel({ vendors, slug }: { vendors: Vendor[]; slug: string }) {
+  // A paid featured partner is pinned above the tiers and pulled out of them, so
+  // it appears once and is never mistaken for the trust-ranked winner. Everything
+  // below it stays ordered purely by transparency signals.
+  const featured = getSpotlightVendor(slug)
+  const ranked = featured ? vendors.filter((v) => v.id !== featured.id) : vendors
+
   const CAP = 8
-  const shown = vendors.slice(0, CAP)
-  const hidden = vendors.length - shown.length
+  const shown = ranked.slice(0, CAP)
+  const hidden = ranked.length - shown.length
   // Group the already trust-ranked list into tiers; each tier keeps trust order.
   const groups = vendorsByTier(shown)
 
@@ -818,9 +827,20 @@ function MarketplacePanel({ vendors }: { vendors: Vendor[] }) {
         </div>
         <h3 className="text-sm font-semibold">Where to source</h3>
         <span className="ml-auto text-[10px] uppercase tracking-wider text-ink/35">
-          Ranked by trust
+          {featured ? 'Featured partner, then ranked by trust' : 'Ranked by trust'}
         </span>
       </div>
+
+      {featured && (
+        <div className="mb-6 rounded-xl border border-amber-400/20 bg-amber-400/[0.04] p-4">
+          <VendorCard
+            vendor={featured}
+            isFirst
+            badge="featured"
+            tierLabel={VENDOR_TIERS.find((t) => t.id === vendorTier(featured))!.label}
+          />
+        </div>
+      )}
 
       <div className="space-y-6">
         {groups.map((group, gi) => (
@@ -840,7 +860,7 @@ function MarketplacePanel({ vendors }: { vendors: Vendor[] }) {
                   key={v.id}
                   vendor={v}
                   isFirst={j === 0}
-                  isBest={gi === 0 && j === 0}
+                  badge={gi === 0 && j === 0 ? 'best' : undefined}
                 />
               ))}
             </div>
@@ -862,11 +882,15 @@ function MarketplacePanel({ vendors }: { vendors: Vendor[] }) {
 function VendorCard({
   vendor,
   isFirst,
-  isBest,
+  badge,
+  tierLabel,
 }: {
   vendor: Vendor
   isFirst: boolean
-  isBest: boolean
+  /** 'best' = top of the trust ranking. 'featured' = paid placement, disclosed as such. */
+  badge?: 'best' | 'featured'
+  /** Shown only for the featured card, which sits outside the tier groups. */
+  tierLabel?: string
 }) {
   const score = trustScore(vendor)
   const t = vendor.trust
@@ -887,18 +911,42 @@ function VendorCard({
       <div className="mb-1 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <span className="text-sm font-semibold">{vendor.name}</span>
-          {isBest && (
+          {badge === 'best' && (
             <span className="rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-accent">
               Best trust
             </span>
           )}
+          {badge === 'featured' && (
+            <span className="rounded-full border border-amber-400/30 bg-amber-400/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-amber-300/90">
+              Featured partner · paid
+            </span>
+          )}
         </div>
-        <span className="shrink-0 rounded-full border border-ink/15 px-2 py-0.5 text-[10px] font-semibold text-ink/70">
-          {score}/100
-        </span>
+        <div className="flex shrink-0 items-center gap-1.5">
+          {tierLabel && (
+            <span className="rounded-full border border-ink/15 px-2 py-0.5 text-[10px] font-medium text-ink/55">
+              {tierLabel}
+            </span>
+          )}
+          <span className="rounded-full border border-ink/15 px-2 py-0.5 text-[10px] font-semibold text-ink/70">
+            {score}/100
+          </span>
+        </div>
       </div>
 
       <p className="mb-3 text-xs leading-relaxed text-ink/55">{vendor.blurb}</p>
+
+      {badge === 'featured' && vendor.affiliate?.offer && (
+        <p className="mb-3 rounded-lg border border-amber-400/25 bg-amber-400/[0.06] px-3 py-2 text-xs font-medium text-amber-200/90">
+          {vendor.affiliate.offer}
+        </p>
+      )}
+
+      {badge === 'featured' && vendor.spotlightNote && (
+        <p className="mb-3 border-l-2 border-amber-400/30 pl-3 text-[11px] leading-relaxed text-ink/60">
+          {vendor.spotlightNote}
+        </p>
+      )}
 
       <ul className="mb-3 space-y-1.5 text-xs">
         {signals.map((s) => (
