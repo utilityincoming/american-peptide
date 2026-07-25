@@ -221,12 +221,6 @@ export const VENDORS: Vendor[] = [
       reshipPolicy: true, // carrier-lost / non-delivered packages reshipped free
       refundPolicy: true, // published refund policy (restrictive — see notes)
     },
-    affiliate: {
-      trackedPath: '/go/modern-aminos',
-      url: 'https://modernaminos.com?wlr_ref=REF-7E3-F9T',
-      code: 'REF-7E3-F9T',
-      active: true,
-    },
     notes:
       'Refunds are restrictive: peptides are non-returnable, accepted returns carry a 15% restocking fee, and only carrier-lost (non-delivered) packages are reshipped free. Trust signals reflect the vendor’s published claims; verify the COA for your specific lot.',
   },
@@ -276,12 +270,6 @@ export const VENDORS: Vendor[] = [
       reshipPolicy: false, // damaged/defective replaced, but no stated carrier-lost reship
       refundPolicy: true, // 30-day return on unopened; refunds/replacements for defects
     },
-    affiliate: {
-      trackedPath: '/go/midwest-peptide',
-      url: 'https://midwestpeptide.com/?ref=AMERICANPEPTIDE',
-      code: 'AMERICANPEPTIDE',
-      active: true,
-    },
     notes:
       'COAs are batch-traceable (Janoshik certificates are publicly queryable by batch ID) — confirm the report for your specific lot. 30-day returns on unopened items; replacements for damaged/defective.',
   },
@@ -315,8 +303,6 @@ export const VENDORS: Vendor[] = [
   {
     id: 'apollo-peptide-sciences',
     name: 'Apollo Peptide Sciences',
-    // Canonical homepage; the affiliate link below uses the apollopeptidescience.com
-    // (singular) domain the referral was issued on, which 301s here with the param.
     url: 'https://apollopeptidesciences.com',
     blurb:
       'US research-peptide vendor that publishes COAs and states products are routinely third-party lab tested; ships USPS Priority/Express.',
@@ -334,7 +320,7 @@ export const VENDORS: Vendor[] = [
     },
     affiliate: {
       trackedPath: '/go/apollo-peptide-sciences',
-      url: 'https://apollopeptidescience.com/?rfsn=9172552.14e196',
+      url: 'https://apollopeptidesciences.com/?rfsn=9172552.14e196',
       active: true,
     },
     notes:
@@ -362,11 +348,6 @@ export const VENDORS: Vendor[] = [
       purityPct: 99, // ">99% purity"
       reshipPolicy: true, // "dissatisfied for any reason — reship or refund"
       refundPolicy: true, // test at any HPLC lab; full refund + shipping if it fails
-    },
-    affiliate: {
-      trackedPath: '/go/swiss-chems',
-      url: 'https://swisschems.is/ref/6835/',
-      active: true,
     },
     notes:
       'Scoped to Swiss Chems’ best-selling peptides — they don’t carry semaglutide or tirzepatide. Standout policy: independently HPLC-test any product and they refund in full plus shipping if it fails. Caveat: independent peptide-testing reputation is mixed (Finnrick ~3.6/10 for peptides vs ~4.2/5 Trustpilot overall) despite the ISO-17025 COA claims — request and match the COA for your specific lot.',
