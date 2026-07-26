@@ -630,7 +630,10 @@ export default function GLP1Page() {
 }
 
 // Fallback on the Play (TWA) build, where the vendor helpers return nothing and
-// no affiliate UI is rendered.
+// no affiliate UI is rendered. Mirrors the catalog detail page's "Reference
+// edition" fallback: this build is reference-only, and we deliberately do NOT
+// tease a marketplace product that isn't live — sourcing on the web is the
+// trust-ranked vendor directory, not a first-party store.
 function MarketplaceComingSoon() {
   return (
     <div className="rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] p-5">
@@ -638,11 +641,12 @@ function MarketplaceComingSoon() {
         <FlaskConical className="h-4 w-4 text-accent" />
       </div>
       <p className="mb-1 text-sm font-semibold text-accent">
-        Marketplace coming soon
+        Reference edition
       </p>
       <p className="mb-4 text-xs leading-relaxed text-ink/45">
-        Vetted suppliers, COA-backed material, transparent pricing. Be first when
-        the GLP-1 research marketplace opens.
+        This edition is a research reference only — no supplier listings or
+        pricing. AmericanPeptide never sells peptides; sourcing is handled on the
+        web through an independently trust-ranked vendor directory.
       </p>
       <Link
         href="/catalog"
