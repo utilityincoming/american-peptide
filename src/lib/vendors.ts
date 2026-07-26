@@ -7,14 +7,15 @@
 // testing, purity, policies) rather than by commission.
 //
 // Discipline, same as the catalog (see lib/peptides.ts): NO fabricated vendor,
-// affiliate, or pricing data. VENDORS ships empty until real, verified entries
-// are compiled.
+// affiliate, or pricing data. Every trust flag below is set from a claim the
+// vendor actually publishes, with the source noted inline; anything unconfirmed
+// goes in `notes` rather than into a flag.
 //
-// COMPLIANCE (not built yet — deferred until monetization is live): once an
-// affiliate link is rendered, it requires (a) a clear FTC affiliate disclosure
-// on every page that surfaces it, and (b) rel="sponsored nofollow" on the
-// outbound link. The `affiliate.active` flag below is the intended gate for
-// both. Until then, links are plain editorial references.
+// COMPLIANCE (live — monetization is active): a rendered affiliate link carries
+// (a) a clear FTC affiliate disclosure on every surface that shows it, and
+// (b) rel="sponsored nofollow" on the outbound anchor. `affiliate.active` is the
+// gate for both; leave it false for a plain editorial reference. Paid prominence
+// is a separate lever with its own rules — see Vendor.spotlight.
 
 import { IS_APP_BUILD } from '@/lib/platform'
 
