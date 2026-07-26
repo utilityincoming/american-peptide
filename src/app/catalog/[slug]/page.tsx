@@ -827,7 +827,7 @@ function MarketplacePanel({ vendors, slug }: { vendors: Vendor[]; slug: string }
         </div>
         <h3 className="text-sm font-semibold">Where to source</h3>
         <span className="ml-auto text-[10px] uppercase tracking-wider text-ink/35">
-          {featured ? 'Featured partner, then ranked by trust' : 'Ranked by trust'}
+          {featured ? 'Featured, then ranked by trust' : 'Ranked by trust'}
         </span>
       </div>
 
@@ -937,7 +937,7 @@ function VendorCard({
       <p className="mb-3 text-xs leading-relaxed text-ink/55">{vendor.blurb}</p>
 
       {badge === 'featured' && vendor.affiliate?.offer && (
-        <p className="mb-3 rounded-lg border border-amber-400/25 bg-amber-400/[0.06] px-3 py-2 text-xs font-medium text-amber-200/90">
+        <p className="mb-3 rounded-lg border border-amber-400/30 bg-amber-400/[0.08] px-3 py-2.5 text-sm font-semibold text-amber-200">
           {vendor.affiliate.offer}
         </p>
       )}
