@@ -448,11 +448,14 @@ export const VENDORS: Vendor[] = [
     },
     spotlightNote:
       'A scorecard reads what a vendor publishes. It cannot read who picks up when an order goes wrong. We deal with ABSIM’s owner-operators directly — not a ticket queue — and that line is itself the diligence: every answer has a name attached, and the plain standards of well-run commerce get held to. They clear card payments, too, which is its own quiet vetting — a processor underwrote this business, and your chargeback rights ride along with the order. The signals below are real, and we publish every gap in them. They were simply never the whole picture.',
-    // PAID placement, gated + labeled — see Vendor.spotlight. Scoped to the
-    // bodybuilding / recovery / GH-axis and top-selling compounds they stock.
+    // PAID placement, gated + labeled — see Vendor.spotlight. Covers every
+    // compound they actually stock: the bodybuilding / recovery / GH-axis and
+    // top sellers first, plus the nootropic and longevity SKUs, so the featured
+    // card follows them across the catalog and the class-landing sidebars.
     spotlight: [
       'bpc-157', 'tb-500', 'ipamorelin', 'cjc-1295-no-dac', 'tesamorelin',
       'sermorelin', 'ghk-cu', 'mots-c', 'aod-9604', 'nad-plus', 'pt-141',
+      'ss-31', 'epitalon', 'semax', 'selank', 'dsip', 'kpv',
     ],
     notes:
       'A COA is published for every product, but it is a single static certificate per SKU rather than one matched to your lot, no testing lab is named, and no HPLC purity figure is stated — so this is vendor-reported quality, not independent documentation. Checkout requires a registered account. Returns are restrictive: report wrong/damaged items within 7 days with photos, and there is no reship guarantee for carrier loss or package theft. Request a COA matched to your specific lot before any use.',
