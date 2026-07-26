@@ -415,7 +415,7 @@ export const VENDORS: Vendor[] = [
       active: true,
     },
     spotlightNote:
-      'Vetted by relationship as well as paperwork. We know the operators here directly, and they clear card payments — a processor underwrote this business, and your chargeback rights ride along with the order.',
+      'Vetted by relationship as well as paperwork. We know the US-based operators directly, and they ship stateside and accept major credit cards — a card processor underwrote this business, so your chargeback protection rides along with every order.',
     // PAID placement, gated + labeled — see Vendor.spotlight. Covers every
     // compound they actually stock: the bodybuilding / recovery / GH-axis and
     // top sellers first, plus the nootropic and longevity SKUs, so the featured
@@ -426,7 +426,7 @@ export const VENDORS: Vendor[] = [
       'ss-31', 'epitalon', 'semax', 'selank', 'dsip', 'kpv',
     ],
     notes:
-      'A COA is published for every product, but it is a single static certificate per SKU rather than one matched to your lot, no testing lab is named, and no HPLC purity figure is stated — so this is vendor-reported quality, not independent documentation. Checkout requires a registered account. Returns are restrictive: report wrong/damaged items within 7 days with photos, and there is no reship guarantee for carrier loss or package theft. Request a COA matched to your specific lot before any use.',
+      'The published COA is one static certificate per SKU, not matched to your lot — request a lot-specific COA before use. Checkout requires an account; returns need photos within 7 days, and carrier loss or porch theft isn’t reshipped.',
   },
 ]
 

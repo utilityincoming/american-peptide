@@ -12,6 +12,7 @@ import {
   Factory,
   FlaskConical,
   HelpCircle,
+  Info,
   Newspaper,
   ShieldCheck,
   Snowflake,
@@ -971,18 +972,31 @@ function VendorCard({
         <ArrowUpRight className="h-3.5 w-3.5" />
       </a>
 
-      {vendor.affiliate?.code && (
-        <p className="mt-2 text-center text-[11px] text-ink/45">
-          Referral code{' '}
-          <span className="font-mono font-semibold text-ink/70">
-            {vendor.affiliate.code}
-          </span>
-        </p>
-      )}
+      {vendor.affiliate?.code &&
+        (badge === 'featured' && vendor.affiliate?.offer ? (
+          // Discount case: the offer above is pure benefit; this line carries the
+          // redemption mechanics so a reader knows it will actually land — the
+          // referral param applies it automatically, the code is the fallback.
+          <p className="mt-2 text-center text-[11px] leading-relaxed text-ink/55">
+            Discount applies automatically — or enter{' '}
+            <span className="font-mono font-semibold text-ink/80">
+              {vendor.affiliate.code}
+            </span>{' '}
+            at checkout.
+          </p>
+        ) : (
+          <p className="mt-2 text-center text-[11px] text-ink/45">
+            Referral code{' '}
+            <span className="font-mono font-semibold text-ink/70">
+              {vendor.affiliate.code}
+            </span>
+          </p>
+        ))}
 
       {vendor.notes && (
-        <p className="mt-3 text-[11px] leading-relaxed text-amber-400/70">
-          {vendor.notes}
+        <p className="mt-3 flex items-start gap-1.5 text-[11px] leading-relaxed text-amber-400/70">
+          <Info className="mt-0.5 h-3 w-3 shrink-0" strokeWidth={2} />
+          <span>{vendor.notes}</span>
         </p>
       )}
     </div>
