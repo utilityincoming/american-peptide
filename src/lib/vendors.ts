@@ -203,40 +203,6 @@ export function vendorTier(v: Vendor): VendorTier {
 //
 export const VENDORS: Vendor[] = [
   {
-    id: 'alpha-bio-med',
-    name: 'Alpha Bio Med Labs',
-    url: 'https://alphabiomedlabs.com',
-    blurb:
-      'US research-supply lab advertising 100% lot-level third-party HPLC/MS testing and >99% purity.',
-    // Scoped to the GLP-1 / amylin set only: the affiliate link is a provider
-    // ONBOARDING (/register) flow, not a general product link. It is therefore
-    // surfaced via the GLP-1 hub (/glp-1) as a "research-supply partner" card,
-    // NOT in the catalog directory — see directoryListed below.
-    peptides: ['tirzepatide', 'retatrutide', 'cagrilintide', 'semaglutide'],
-    shipsTo: ['us'],
-    trust: {
-      // Sourced from the vendor's own public claims (alphabiomedlabs.com),
-      // NOT independently confirmed. Only flags they explicitly state are set.
-      coaOnFile: false, // they tout lot-level testing, but customer COA access is unconfirmed
-      thirdPartyTested: true, // "100% Lots Third-Party Tested" — HPLC + MS
-      perBatchTesting: true, // "100% Lots" / lot-level traceability
-      purityPct: 99, // ">99% Purity by HPLC"
-      reshipPolicy: false, // not stated
-      refundPolicy: true, // published "Refund and Order Resolution Policy"
-    },
-    affiliate: {
-      trackedPath: '/go/alpha-bio-med',
-      url: 'https://alphabiomedlabs.com/pages/register?ref=AmericanPeptides',
-      code: 'AmericanPeptides',
-      active: true,
-    },
-    // Onboarding partner — surfaced only on the GLP-1 hub, kept out of the
-    // catalog "where to source" directory.
-    directoryListed: false,
-    notes:
-      'Trust signals reflect the vendor’s own published claims, not independent verification. Request the third-party COA for your specific lot before any use.',
-  },
-  {
     id: 'modern-aminos',
     name: 'Modern Aminos',
     url: 'https://modernaminos.com',
