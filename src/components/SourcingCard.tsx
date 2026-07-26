@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, ArrowUpRight, Building2, Check, ShieldCheck } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Building2, Check, Info, ShieldCheck } from 'lucide-react'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
 import {
   getSpotlightVendor,
@@ -136,14 +136,26 @@ export default function SourcingCard({
         <ArrowUpRight className="h-4 w-4" />
       </a>
 
-      {best.affiliate?.code && (
-        <p className="mt-2 text-center text-[11px] text-ink/45">
-          Referral code{' '}
-          <span className="font-mono font-semibold text-ink/70">
-            {best.affiliate.code}
-          </span>
-        </p>
-      )}
+      {best.affiliate?.code &&
+        (featured && best.affiliate?.offer ? (
+          // Discount case: the offer above stays pure benefit; this line carries
+          // the redemption mechanics so the discount reads as guaranteed — the
+          // referral link applies it automatically, the code is the fallback.
+          <p className="mt-2 text-center text-[11px] leading-relaxed text-ink/55">
+            Discount applies automatically — or enter{' '}
+            <span className="font-mono font-semibold text-ink/80">
+              {best.affiliate.code}
+            </span>{' '}
+            at checkout.
+          </p>
+        ) : (
+          <p className="mt-2 text-center text-[11px] text-ink/45">
+            Referral code{' '}
+            <span className="font-mono font-semibold text-ink/70">
+              {best.affiliate.code}
+            </span>
+          </p>
+        ))}
 
       {vendors.length > 1 && (
         <Link
@@ -156,8 +168,9 @@ export default function SourcingCard({
       )}
 
       {best.notes && (
-        <p className="mt-3 text-[11px] leading-relaxed text-amber-400/70">
-          {best.notes}
+        <p className="mt-3 flex items-start gap-1.5 text-[11px] leading-relaxed text-amber-400/70">
+          <Info className="mt-0.5 h-3 w-3 shrink-0" strokeWidth={2} />
+          <span>{best.notes}</span>
         </p>
       )}
 
