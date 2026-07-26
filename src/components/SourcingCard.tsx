@@ -99,7 +99,7 @@ export default function SourcingCard({
       </div>
 
       {featured && best.affiliate?.offer && (
-        <p className="mb-3 rounded-lg border border-amber-400/25 bg-amber-400/[0.06] px-3 py-2 text-xs font-medium text-amber-200/90">
+        <p className="mb-3 rounded-lg border border-amber-400/30 bg-amber-400/[0.08] px-3 py-2.5 text-sm font-semibold text-amber-200">
           {best.affiliate.offer}
         </p>
       )}

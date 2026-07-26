@@ -412,8 +412,7 @@ export const VENDORS: Vendor[] = [
       // same string is a live coupon at checkout. Publishing the code as well as
       // the link means a reader still gets the 20% if the referral doesn't stick.
       code: 'AMERICANPEPTIDE',
-      offer:
-        '20% below list — carried by the link, or type the code into the coupon box at checkout.',
+      offer: '20% off — applied through this link, or with the code below at checkout.',
       active: true,
     },
     spotlightNote:
