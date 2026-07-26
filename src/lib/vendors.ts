@@ -441,9 +441,13 @@ export const VENDORS: Vendor[] = [
     },
     affiliate: {
       trackedPath: '/go/absim-peptides',
-      // Tracking parameter only — not a coupon the buyer enters, so no `code`.
       url: 'https://absimpeptides.com/?ref=americanpeptide',
-      offer: '20% below list, carried by the link itself — no code to enter.',
+      // Works both ways per the partner: the link carries the discount, and the
+      // same string is a live coupon at checkout. Publishing the code as well as
+      // the link means a reader still gets the 20% if the referral doesn't stick.
+      code: 'AMERICANPEPTIDE',
+      offer:
+        '20% below list — carried by the link, or type the code into the coupon box at checkout.',
       active: true,
     },
     spotlightNote:
