@@ -46,9 +46,9 @@ export interface VendorAffiliate {
   code?: string
   /**
    * Reader-facing offer this link carries, if any (e.g. a negotiated discount).
-   * State the mechanism exactly — whether a code is required, and where it
-   * lands — because a reader who doesn't get what this promises at checkout is
-   * a reader we've spent the standard on.
+   * Keep it to the benefit — `code` renders directly beneath it, so the
+   * mechanics do not need spelling out. Only promise what actually lands at
+   * checkout: a reader who doesn't get this is a reader we spent the standard on.
    */
   offer?: string
   /** True once a paid affiliate relationship is active — the disclosure gate. */
@@ -90,12 +90,10 @@ export interface Vendor {
    */
   spotlight?: string[]
   /**
-   * Why this vendor holds the featured slot, in our own words — the diligence
-   * that a checkbox column structurally cannot carry: who we actually know
-   * there, how they behave when something goes wrong, what their payment rails
-   * imply. Rendered on the featured card next to the score, never in place of
-   * it. Keep it true and keep it specific; this is the part a reader is
-   * trusting us on personally.
+   * Why this vendor holds the featured slot — the diligence a checkbox column
+   * can't carry: who we know there, what their payment rails imply. Rendered on
+   * the featured card next to the score, never in place of it. State the
+   * finding, not the reasoning behind it: a sentence or two, specific and true.
    */
   spotlightNote?: string
   /** Editorial caveats — what to watch for, what's unverified. */
@@ -413,11 +411,11 @@ export const VENDORS: Vendor[] = [
       // same string is a live coupon at checkout. Publishing the code as well as
       // the link means a reader still gets the 20% if the referral doesn't stick.
       code: 'AMERICANPEPTIDE',
-      offer: '20% off — applied through this link, or with the code below at checkout.',
+      offer: '20% off your order.',
       active: true,
     },
     spotlightNote:
-      'A scorecard reads what a vendor publishes. It cannot read who picks up when an order goes wrong. We deal with ABSIM’s owner-operators directly — not a ticket queue — and that line is itself the diligence: every answer has a name attached, and the plain standards of well-run commerce get held to. They clear card payments, too, which is its own quiet vetting — a processor underwrote this business, and your chargeback rights ride along with the order. The signals below are real, and we publish every gap in them. They were simply never the whole picture.',
+      'Vetted by relationship as well as paperwork. We know the operators here directly, and they clear card payments — a processor underwrote this business, and your chargeback rights ride along with the order.',
     // PAID placement, gated + labeled — see Vendor.spotlight. Covers every
     // compound they actually stock: the bodybuilding / recovery / GH-axis and
     // top sellers first, plus the nootropic and longevity SKUs, so the featured
