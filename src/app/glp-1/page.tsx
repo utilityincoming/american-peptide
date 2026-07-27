@@ -604,6 +604,47 @@ export default function GLP1Page() {
               )
             })()}
 
+            {/* Companion placement — the muscle-preservation frontier.
+                GLP-1 vendors are handled above; this surfaces the GH-axis and
+                metabolic compounds studied for holding lean mass through rapid
+                weight loss. These slugs are deliberately NOT GLP-1s — the
+                featured partner (ABSIM) carries this recovery stack, not the
+                incretins, so it can only ever be featured here, never dressed up
+                as a GLP-1 source. Research framing, not a protocol. */}
+            {(() => {
+              const companionSlugs = [
+                'ipamorelin',
+                'cjc-1295-no-dac',
+                'tesamorelin',
+                'mots-c',
+              ]
+              const hasCompanions = companionSlugs.some(
+                (s) => getVendorsForPeptide(s).length > 0,
+              )
+              if (!hasCompanions) return null
+              return (
+                <div className="space-y-3">
+                  <div className="px-1">
+                    <p className="text-[10px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+                      The muscle-preservation frontier
+                    </p>
+                    <h3 className="mt-1 text-sm font-semibold text-ink/90">
+                      Holding lean mass through the drop
+                    </h3>
+                    <p className="mt-1.5 text-xs leading-relaxed text-ink/50">
+                      Rapid GLP-1 weight loss sheds fat and lean tissue alike —
+                      trials put the muscle fraction as high as a quarter of total
+                      loss. The GH-axis and metabolic peptides below are where the
+                      research is looking to bias that ratio back toward fat.
+                      Reference only — not a protocol, dosing guidance, or medical
+                      advice.
+                    </p>
+                  </div>
+                  <SourcingCard slugs={companionSlugs} />
+                </div>
+              )
+            })()}
+
             {/* Research agent CTA */}
             <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-5">
               <p className="mb-1 text-sm font-semibold text-ink/80">

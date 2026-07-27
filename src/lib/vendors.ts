@@ -202,27 +202,6 @@ export function vendorTier(v: Vendor): VendorTier {
 //
 export const VENDORS: Vendor[] = [
   {
-    id: 'modern-aminos',
-    name: 'Modern Aminos',
-    url: 'https://modernaminos.com',
-    blurb:
-      'US-made research compounds; every product third-party HPLC tested with a per-batch COA matched to each lot.',
-    peptides: 'all',
-    shipsTo: ['us'],
-    trust: {
-      // Sourced from the vendor's own public claims (modernaminos.com),
-      // NOT independently confirmed. Only flags they explicitly state are set.
-      coaOnFile: true, // per-batch COA, customer-matchable to each lot
-      thirdPartyTested: true, // "third-party testing with full HPLC documentation"
-      perBatchTesting: true, // "Batch testing… match each peptide to its corresponding COA"
-      purityPct: 99, // "99% Purity (HPLC)"
-      reshipPolicy: true, // carrier-lost / non-delivered packages reshipped free
-      refundPolicy: true, // published refund policy (restrictive — see notes)
-    },
-    notes:
-      'Refunds are restrictive: peptides are non-returnable, accepted returns carry a 15% restocking fee, and only carrier-lost (non-delivered) packages are reshipped free. Trust signals reflect the vendor’s published claims; verify the COA for your specific lot.',
-  },
-  {
     id: 'amino-club',
     name: 'Amino Club',
     url: 'https://aminoclub.com',
@@ -249,27 +228,6 @@ export const VENDORS: Vendor[] = [
     },
     notes:
       'COAs are independently verifiable via the Janoshik / MZ Biolabs report number on each certificate — confirm the report for your specific lot. 60-day money-back guarantee; change-of-mind returns are excluded.',
-  },
-  {
-    id: 'midwest-peptide',
-    name: 'Midwest Peptide',
-    url: 'https://midwestpeptide.com',
-    blurb:
-      'US research-peptide supplier; every batch ships a third-party COA (US lab Chromate / Janoshik) at ≥99% HPLC purity, free shipping.',
-    peptides: 'all',
-    shipsTo: ['us'],
-    trust: {
-      // Sourced from the vendor's public claims + third-party COAs. Not
-      // personally confirmed; Janoshik COAs are queryable by batch ID.
-      coaOnFile: true, // every batch ships a traceable third-party COA
-      thirdPartyTested: true, // independent US lab (Chromate); some via Janoshik
-      perBatchTesting: true, // "every batch is third-party tested"
-      purityPct: 99, // ">=99%", often >99.9%
-      reshipPolicy: false, // damaged/defective replaced, but no stated carrier-lost reship
-      refundPolicy: true, // 30-day return on unopened; refunds/replacements for defects
-    },
-    notes:
-      'COAs are batch-traceable (Janoshik certificates are publicly queryable by batch ID) — confirm the report for your specific lot. 30-day returns on unopened items; replacements for damaged/defective.',
   },
   {
     id: 'dynamic-peptide',
@@ -323,32 +281,6 @@ export const VENDORS: Vendor[] = [
     },
     notes:
       'Trust signals reflect the vendor’s published claims, not independent verification. COAs are published but not confirmed as per-lot, no HPLC purity figure or testing lab is named — request and match the COA for your specific lot before any use.',
-  },
-  {
-    id: 'swiss-chems',
-    name: 'Swiss Chems',
-    url: 'https://swisschems.is',
-    blurb:
-      'US-based broad research vendor (peptides, SARMs, PCT) advertising ISO/IEC-17025 third-party COAs (HPLC / LC-MS/MS / NMR) at >99% purity, with a test-it-yourself full-refund guarantee.',
-    // Scoped to Swiss Chems' best-selling peptides that exist in our catalog.
-    // They notably do NOT carry semaglutide or tirzepatide.
-    peptides: [
-      'bpc-157', 'tb-500', 'pt-141', 'ipamorelin', 'selank',
-      'epitalon', 'mots-c', 'ghk-cu', 'retatrutide', 'melanotan-2',
-    ],
-    shipsTo: ['us', 'global'],
-    trust: {
-      // Sourced from the vendor's own public claims (swisschems.is), NOT
-      // independently confirmed. Only flags they explicitly state are set.
-      coaOnFile: true, // full COA ships per product (identity, purity, heavy metals, residual solvent)
-      thirdPartyTested: true, // ISO/IEC-17025-accredited third-party labs; HPLC, LC-MS/MS, NMR
-      perBatchTesting: false, // COA published per product but not stated as per-lot/batch-matched
-      purityPct: 99, // ">99% purity"
-      reshipPolicy: true, // "dissatisfied for any reason — reship or refund"
-      refundPolicy: true, // test at any HPLC lab; full refund + shipping if it fails
-    },
-    notes:
-      'Scoped to Swiss Chems’ best-selling peptides — they don’t carry semaglutide or tirzepatide. Standout policy: independently HPLC-test any product and they refund in full plus shipping if it fails. Caveat: independent peptide-testing reputation is mixed (Finnrick ~3.6/10 for peptides vs ~4.2/5 Trustpilot overall) despite the ISO-17025 COA claims — request and match the COA for your specific lot.',
   },
   {
     id: 'spartan-peptides',
