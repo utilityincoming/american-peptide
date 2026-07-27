@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, ArrowUpRight, Building2, Check, Info, ShieldCheck } from 'lucide-react'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
+import SpotlightComparison from '@/components/SpotlightComparison'
 import {
   getSpotlightVendor,
   getVendorsForPeptide,
@@ -104,13 +105,10 @@ export default function SourcingCard({
         </p>
       )}
 
-      {featured && best.spotlightNote && (
-        <p className="mb-3 border-l-2 border-amber-400/30 pl-3 text-[11px] leading-relaxed text-ink/60">
-          {best.spotlightNote}
-        </p>
-      )}
-
-      {signals.length > 0 && (
+      {featured ? (
+        <SpotlightComparison vendor={best} accent={accent} className="mb-4" />
+      ) : (
+        signals.length > 0 && (
         <ul className="mb-4 space-y-1.5 text-xs">
           {signals.map((s) => (
             <li key={s} className="flex items-start gap-2 text-ink/65">
@@ -123,6 +121,7 @@ export default function SourcingCard({
             </li>
           ))}
         </ul>
+        )
       )}
 
       <a
@@ -167,7 +166,9 @@ export default function SourcingCard({
         </Link>
       )}
 
-      {best.notes && (
+      {/* Non-featured: caveats render inline. Featured: the SpotlightComparison
+          above already carries the safety line + fine-print expander. */}
+      {!featured && best.notes && (
         <p className="mt-3 flex items-start gap-1.5 text-[11px] leading-relaxed text-amber-400/70">
           <Info className="mt-0.5 h-3 w-3 shrink-0" strokeWidth={2} />
           <span>{best.notes}</span>
