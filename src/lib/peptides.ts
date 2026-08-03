@@ -73,6 +73,14 @@ export interface Peptide {
   handling?: string
   /** Synthesis context — sequence length, difficult couplings, why purity is hard for this peptide. */
   synthesisNotes?: string
+  /**
+   * Omit from forward-facing catalog browse (catalog grid, category pages,
+   * compounds hub, homepage catalog counts). The entry stays fully present
+   * everywhere else: its monograph page, the sitemap, catalog text search,
+   * the command palette, the API, and llms.txt. Use for compounds that are
+   * off-brand for the product catalog but worth keeping for reference/SEO.
+   */
+  unlisted?: boolean
 }
 
 import pubchemCache from './peptides.pubchem.json'
@@ -292,6 +300,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'insulin',
+    unlisted: true, // hidden from catalog browse (too pharmacy); kept in data/sitemap/search
     name: 'Insulin (human)',
     aliases: [
       'Recombinant human insulin',
@@ -356,6 +365,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'glucagon',
+    unlisted: true, // hidden from catalog browse (too big-brain); kept in data/sitemap/search
     name: 'Glucagon',
     aliases: ['GlucaGen', 'Baqsimi', 'Gvoke'],
     categories: ['metabolic'],
@@ -604,6 +614,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'matrixyl',
+    unlisted: true, // hidden from catalog browse (too niche cosmetic); kept in data/sitemap/search
     name: 'Matrixyl (Palmitoyl Pentapeptide-4)',
     aliases: ['Palmitoyl Pentapeptide-4', 'Pal-KTTKS', 'Matrixyl'],
     categories: ['cosmetic'],
@@ -1384,6 +1395,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'apitegromab',
+    unlisted: true, // hidden from catalog browse (antibody, SMA-focused); kept in data/sitemap/search
     name: 'Apitegromab',
     aliases: ['SRK-015', 'SRK-439'],
     categories: ['growth-hormone', 'metabolic'],
@@ -1478,6 +1490,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'emugrobart',
+    unlisted: true, // hidden from catalog browse (antibody, indications discontinued); kept in data/sitemap/search
     name: 'Emugrobart',
     aliases: ['GYM-329', 'RG6237', 'RG-70240'],
     categories: ['growth-hormone', 'metabolic'],
@@ -1572,6 +1585,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'bimagrumab',
+    unlisted: true, // hidden from catalog browse (antibody, obesity trial terminated); kept in data/sitemap/search
     name: 'Bimagrumab',
     aliases: ['BYM338'],
     categories: ['growth-hormone', 'metabolic'],
@@ -2743,6 +2757,14 @@ const SEED_PEPTIDES: Peptide[] = [
 ]
 
 export const PEPTIDES: Peptide[] = SEED_PEPTIDES.map(enrich)
+
+/**
+ * The curated set shown in forward-facing browse surfaces (catalog grid,
+ * category pages, compounds hub, homepage counts). Excludes `unlisted`
+ * entries — those remain in PEPTIDES for the sitemap, monograph pages,
+ * text search, the API, and llms.txt.
+ */
+export const LISTED_PEPTIDES: Peptide[] = PEPTIDES.filter((p) => !p.unlisted)
 
 export function getPeptideBySlug(slug: string): Peptide | undefined {
   return PEPTIDES.find((p) => p.slug === slug)

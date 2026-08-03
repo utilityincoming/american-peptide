@@ -7,7 +7,7 @@ import {
   FlaskConical,
   Layers,
 } from 'lucide-react'
-import { PEPTIDES, CATEGORIES, type Peptide } from '@/lib/peptides'
+import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES, type Peptide } from '@/lib/peptides'
 import CompoundSearch from './CompoundSearch'
 
 const SITE = 'https://americanpeptide.com'
@@ -70,7 +70,7 @@ for (const slug of PREFERRED_FEATURED) {
   }
   if (featured.length >= 8) break
 }
-for (const p of PEPTIDES) {
+for (const p of LISTED_PEPTIDES) {
   if (featured.length >= 8) break
   if (!featuredSeen.has(p.slug)) {
     featured.push(p)
@@ -78,10 +78,10 @@ for (const p of PEPTIDES) {
   }
 }
 
-// ── Full directory: every peptide once, grouped under its primary category ──
+// ── Full directory: every listed peptide once, grouped under its primary category ──
 const grouped = CATEGORIES.map((c) => ({
   cat: c,
-  items: PEPTIDES.filter((p) => p.categories[0] === c.id).sort((a, b) =>
+  items: LISTED_PEPTIDES.filter((p) => p.categories[0] === c.id).sort((a, b) =>
     a.name.localeCompare(b.name),
   ),
 })).filter((g) => g.items.length > 0)
@@ -117,8 +117,9 @@ export default function CompoundsPage() {
             </span>
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
-            Start with our verified monographs — {PEPTIDES.length} research
-            peptides with mechanism, sequence, structure, and the research
+            Start with our verified monographs — {LISTED_PEPTIDES.length}{' '}
+            research peptides with mechanism, sequence, structure, and the
+            research
             context our team has reviewed. Need something beyond the catalog?
             Search PubChem&apos;s full chemical database further down the page.
           </p>
@@ -206,7 +207,7 @@ export default function CompoundsPage() {
               href="/catalog"
               className="hidden shrink-0 items-center gap-1 text-sm font-medium text-accent transition-colors hover:text-[#5EEBC8] sm:inline-flex"
             >
-              All {PEPTIDES.length}
+              All {LISTED_PEPTIDES.length}
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
@@ -225,8 +226,8 @@ export default function CompoundsPage() {
               Every compound, by category
             </h2>
             <p className="mt-1 text-sm text-ink/50">
-              The complete verified index — {PEPTIDES.length} entries across{' '}
-              {grouped.length} research categories.
+              The complete verified index — {LISTED_PEPTIDES.length} entries
+              across {grouped.length} research categories.
             </p>
           </div>
 

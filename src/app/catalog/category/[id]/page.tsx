@@ -34,7 +34,9 @@ function resolve(id: string) {
   return {
     meta,
     content: getCategoryContent(cat),
-    peptides: getPeptidesByCategory(cat),
+    // Forward-facing category browse shows only listed entries; unlisted ones
+    // remain in data, sitemap, text search, and their own monograph pages.
+    peptides: getPeptidesByCategory(cat).filter((p) => !p.unlisted),
   }
 }
 
