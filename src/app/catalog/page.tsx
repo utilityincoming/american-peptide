@@ -16,6 +16,7 @@ import {
 } from 'lucide-react'
 import {
   PEPTIDES,
+  LISTED_PEPTIDES,
   CATEGORIES,
   type Peptide,
   type PeptideCategory,
@@ -68,7 +69,10 @@ export default function CatalogPage() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return PEPTIDES.filter((p) => {
+    // Browse (no query) shows the curated, listed set. A text query searches
+    // the full catalog so unlisted entries stay findable by name/alias.
+    const source = q ? PEPTIDES : LISTED_PEPTIDES
+    return source.filter((p) => {
       if (active && !p.categories.includes(active)) return false
       if (!q) return true
       const hay = [p.name, p.shortDescription, ...(p.aliases ?? [])]
