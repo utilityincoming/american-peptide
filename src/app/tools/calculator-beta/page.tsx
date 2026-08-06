@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import {
   Syringe,
@@ -9,9 +9,17 @@ import {
   Share2,
   Check,
   ArrowRightLeft,
+  Search,
+  X,
+  ExternalLink,
 } from 'lucide-react'
+import {
+  RECON_PRESETS,
+  RECON_PRESET_GROUPS,
+  type ReconPreset,
+} from '@/lib/reconstitution-presets'
 
-const VIAL_PRESETS_MG = [2, 5, 10, 15, 20, 30]
+const VIAL_PRESETS_MG = [2, 5, 10, 15, 20, 30, 50]
 const DOSE_PRESETS_MCG = [100, 250, 500, 750, 1000, 1500, 2000]
 const VIAL_PRESETS_IU = [4, 10, 12, 15, 24, 36]
 const DOSE_PRESETS_IU = [1, 2, 3, 4, 5, 8]
@@ -19,8 +27,20 @@ const DRAW_PRESETS = [10, 20, 25, 50]
 const REF_VIALS = [2, 5, 10]
 const REF_WATERS = [1, 2, 3, 5]
 
+// GLP-1 pre-filled pens. Tirzepatide, semaglutide, and retatrutide are commonly
+// supplied both as lyophilized vials and as multi-dose pens. A pen arrives
+// already in solution, so there is no bacteriostatic water to add — only a fixed
+// fill volume set at the factory.
+const PEN_PRESETS_MG = [5, 10, 15, 20, 30]
+const PEN_FILL_PRESETS = [0.5, 1, 1.5, 2, 3]
+// Tirzepatide-style titration ladder, stored in mcg but surfaced in mg. This is
+// the crux of pen mode: one pen carries a research subject through the whole
+// escalating range, so the per-injection aliquot changes every few weeks.
+const PEN_DOSE_PRESETS_MCG = [2500, 5000, 7500, 10000, 12500, 15000]
+
 type Measurement = 'mcg' | 'iu'
 type Mode = 'forward' | 'reverse'
+type Form = 'vial' | 'pen'
 
 function parsePositive(s: string): number {
   const n = parseFloat(s)
@@ -38,22 +58,39 @@ function fmt(n: number, decimals = 2): string {
 export default function CalculatorBetaPage() {
   const [measurement, setMeasurement] = useState<Measurement>('mcg')
   const [mode, setMode] = useState<Mode>('forward')
+  const [form, setForm] = useState<Form>('vial')
   const [vialMg, setVialMg] = useState('5')
   const [doseMcg, setDoseMcg] = useState('250')
   const [vialIu, setVialIu] = useState('10')
   const [doseIu, setDoseIu] = useState('2')
   const [waterMl, setWaterMl] = useState('2')
   const [drawUnits, setDrawUnits] = useState('20')
+  const [loaded, setLoaded] = useState<ReconPreset | null>(null)
   const [copied, setCopied] = useState(false)
 
   // Prefill from a shared link.
   useEffect(() => {
     const p = new URLSearchParams(window.location.search)
+    // A ?pep= slug seeds the vial/water/dose from the catalog preset; explicit
+    // params below then override any of those fields.
+    const pep = p.get('pep')
+    const preset = pep ? RECON_PRESETS.find((x) => x.slug === pep) ?? null : null
+    if (preset) {
+      setMeasurement('mcg')
+      setForm('vial')
+      setVialMg(String(preset.vialMg))
+      setDoseMcg(String(preset.doseMcg))
+      setWaterMl(String(preset.waterMl))
+      setLoaded(preset)
+    }
     const m = p.get('m')
     if (m === 'iu' || m === 'mcg') setMeasurement(m)
     const md = p.get('mode')
     if (md === 'r') setMode('reverse')
     else if (md === 'f') setMode('forward')
+    const fm = p.get('f')
+    if (fm === 'pen') setForm('pen')
+    else if (fm === 'vial') setForm('vial')
     const v = p.get('v')
     const d = p.get('d')
     const w = p.get('w')
@@ -70,8 +107,13 @@ export default function CalculatorBetaPage() {
   }, [])
 
   const isIu = measurement === 'iu'
+  // Pens are a peptide (mcg) format only — IU biologics don't ship this way.
+  const isPen = !isIu && form === 'pen'
+  // A pen's fill volume is fixed at the factory, so there's nothing to reverse-solve.
+  const reverse = mode === 'reverse' && !isPen
   const unitLabel = isIu ? 'IU' : 'mcg'
   const vialUnit = isIu ? 'IU' : 'mg'
+  const liquidLabel = isPen ? 'Pen fill volume' : 'Bacteriostatic water to add'
   const vialValue = isIu ? vialIu : vialMg
   const setVialValue = isIu ? setVialIu : setVialMg
   const doseValue = isIu ? doseIu : doseMcg
@@ -85,13 +127,12 @@ export default function CalculatorBetaPage() {
       ? parsePositive(vialIu)
       : parsePositive(vialMg) * 1000
 
-    // Forward: user types the water. Reverse: solve water for a target draw.
-    const water =
-      mode === 'reverse'
-        ? dose > 0
-          ? (vialAmount * (draw * 0.01)) / dose
-          : 0
-        : parsePositive(waterMl)
+    // Forward: user types the water/fill. Reverse: solve water for a target draw.
+    const water = reverse
+      ? dose > 0
+        ? (vialAmount * (draw * 0.01)) / dose
+        : 0
+      : parsePositive(waterMl)
 
     const concentrationPerMl = water > 0 ? vialAmount / water : 0
     const concentrationPerTick = concentrationPerMl / 10
@@ -109,7 +150,7 @@ export default function CalculatorBetaPage() {
       unitsPerInjection,
       dosesPerVial,
     }
-  }, [isIu, mode, vialMg, vialIu, doseValue, waterMl, drawUnits])
+  }, [isIu, reverse, vialMg, vialIu, doseValue, waterMl, drawUnits])
 
   const onConcentrationEdit = (raw: string) => {
     const c = parseFloat(raw)
@@ -119,20 +160,54 @@ export default function CalculatorBetaPage() {
     }
   }
 
+  // Catalog presets describe a lyophilized vial reconstitution, so loading one
+  // snaps the calculator to mcg · vial · forward before seeding the fields.
+  const loadPreset = (p: ReconPreset) => {
+    setMeasurement('mcg')
+    setForm('vial')
+    setMode('forward')
+    setVialMg(String(p.vialMg))
+    setDoseMcg(String(p.doseMcg))
+    setWaterMl(String(p.waterMl))
+    setLoaded(p)
+  }
+  const clearLoaded = () => setLoaded(null)
+  // Changing measurement or form invalidates the "loaded" label (its numbers
+  // were a vial recipe), so drop it when the user switches context.
+  const selectMeasurement = (m: Measurement) => {
+    setMeasurement(m)
+    setLoaded(null)
+  }
+  const selectForm = (f: Form) => {
+    setForm(f)
+    setLoaded(null)
+  }
+
   const summary = useMemo(() => {
     const v = parsePositive(vialValue)
     const d = parsePositive(doseValue)
     if (!(v > 0 && d > 0 && calc.water > 0))
-      return 'Enter a vial amount, dose, and water volume to see a summary.'
+      return isPen
+        ? 'Enter the pen size, dose, and fill volume to see a summary.'
+        : 'Enter a vial amount, dose, and water volume to see a summary.'
     const water = fmt(calc.water)
     const conc = fmt(calc.concentrationPerTick)
     const vol = fmt(calc.volumePerInjectionMl, 3)
     const u = fmt(calc.unitsPerInjection, 1)
-    if (mode === 'reverse')
+    const doses = calc.dosesPerVial
+    if (reverse)
       return `For a ${fmt(d)} ${unitLabel} dose drawn at ${fmt(
         parsePositive(drawUnits),
         1,
       )} units, add ${water} mL BAC water to a ${fmt(v)} ${vialUnit} vial (${conc} ${unitLabel}/0.1 mL).`
+    if (isPen)
+      return `A ${fmt(
+        v,
+      )} ${vialUnit} pen holding ${water} mL → ${conc} ${unitLabel}/0.1 mL. Each ${fmt(
+        d,
+      )} ${unitLabel} dose is ${u} units (${vol} mL)${
+        doses > 0 ? ` — about ${doses} doses per pen at this step` : ''
+      }.`
     return `Add ${water} mL BAC water to a ${fmt(
       v,
     )} ${vialUnit} vial → ${conc} ${unitLabel}/0.1 mL. Draw ${u} units (${vol} mL) for a ${fmt(
@@ -142,23 +217,27 @@ export default function CalculatorBetaPage() {
     vialValue,
     doseValue,
     drawUnits,
-    mode,
+    reverse,
+    isPen,
     unitLabel,
     vialUnit,
     calc.water,
     calc.concentrationPerTick,
     calc.volumePerInjectionMl,
     calc.unitsPerInjection,
+    calc.dosesPerVial,
   ])
 
   const share = async () => {
     const p = new URLSearchParams()
     p.set('m', measurement)
     p.set('mode', mode === 'reverse' ? 'r' : 'f')
+    p.set('f', form)
     p.set('v', vialValue)
     p.set('d', doseValue)
     p.set('w', waterMl)
     p.set('u', drawUnits)
+    if (loaded) p.set('pep', loaded.slug)
     const url = `${window.location.origin}${window.location.pathname}?${p.toString()}`
     try {
       await navigator.clipboard.writeText(url)
@@ -214,9 +293,10 @@ export default function CalculatorBetaPage() {
             Peptide Calculator <span className="text-amber-400/80">Beta</span>
           </h1>
           <p className="max-w-2xl text-sm leading-relaxed text-ink/55 md:text-base">
-            The reconstitution calculator plus experimental modes — a reverse
-            solver (water for a target draw), an <span className="text-ink/80">IU
-            mode for HGH &amp; GH</span>, quick unit converters, and shareable
+            The reconstitution calculator plus experimental modes — a{' '}
+            <span className="text-ink/80">pen mode for GLP-1s</span> (pre-filled
+            pens and 10–50 mg vials), a reverse solver (water for a target draw),
+            an IU mode for HGH &amp; GH, quick unit converters, and shareable
             links. Inputs and results update in real time.
           </p>
           <div className="mt-4 flex flex-wrap gap-3 text-xs">
@@ -242,42 +322,103 @@ export default function CalculatorBetaPage() {
               <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
                 Inputs
               </h2>
-              {/* Mode toggle */}
-              <div className="inline-flex rounded-xl border border-ink/[0.08] bg-ink/[0.02] p-0.5 text-xs">
-                <Toggle active={mode === 'forward'} onClick={() => setMode('forward')}>
-                  Solve for draw volume
-                </Toggle>
-                <Toggle active={mode === 'reverse'} onClick={() => setMode('reverse')}>
-                  Solve for water to add
-                </Toggle>
-              </div>
+              {/* Mode toggle — a pen's fill volume is fixed, so there's no reverse solve. */}
+              {!isPen && (
+                <div className="inline-flex rounded-xl border border-ink/[0.08] bg-ink/[0.02] p-0.5 text-xs">
+                  <Toggle active={mode === 'forward'} onClick={() => setMode('forward')}>
+                    Solve for draw volume
+                  </Toggle>
+                  <Toggle active={mode === 'reverse'} onClick={() => setMode('reverse')}>
+                    Solve for water to add
+                  </Toggle>
+                </div>
+              )}
             </div>
 
-            {/* Measurement toggle */}
-            <div className="inline-flex self-start rounded-xl border border-ink/[0.08] bg-ink/[0.02] p-0.5 text-xs">
-              <Toggle active={!isIu} onClick={() => setMeasurement('mcg')}>
-                mcg · peptides
-              </Toggle>
-              <Toggle active={isIu} onClick={() => setMeasurement('iu')}>
-                IU · HGH / GH
-              </Toggle>
+            <div className="flex flex-wrap items-center gap-3">
+              {/* Measurement toggle */}
+              <div className="inline-flex self-start rounded-xl border border-ink/[0.08] bg-ink/[0.02] p-0.5 text-xs">
+                <Toggle active={!isIu} onClick={() => selectMeasurement('mcg')}>
+                  mcg · peptides
+                </Toggle>
+                <Toggle active={isIu} onClick={() => selectMeasurement('iu')}>
+                  IU · HGH / GH
+                </Toggle>
+              </div>
+
+              {/* Form toggle — vials are reconstituted; GLP-1 pens ship pre-filled. */}
+              {!isIu && (
+                <div className="inline-flex self-start rounded-xl border border-ink/[0.08] bg-ink/[0.02] p-0.5 text-xs">
+                  <Toggle active={!isPen} onClick={() => selectForm('vial')}>
+                    Vial · reconstitute
+                  </Toggle>
+                  <Toggle active={isPen} onClick={() => selectForm('pen')}>
+                    Pen · pre-filled
+                  </Toggle>
+                </div>
+              )}
             </div>
           </div>
 
           <p className="mb-5 text-xs leading-relaxed text-ink/40">
-            {mode === 'forward'
-              ? 'Enter the water you plan to add — get your draw volume and concentration.'
-              : 'Enter the draw size you want — get the exact bacteriostatic water to add. Handy for keeping a consistent draw across vials of different masses.'}
+            {isPen
+              ? 'Enter the pen size and its fill volume — get the per-dose draw and how many doses the pen holds. A pen ships pre-mixed, so there is no water to add.'
+              : reverse
+                ? 'Enter the draw size you want — get the exact bacteriostatic water to add. Handy for keeping a consistent draw across vials of different masses.'
+                : 'Enter the water you plan to add — get your draw volume and concentration.'}
             {isIu && ' HGH and growth-hormone analogs are dosed in international units (IU), not mcg.'}
           </p>
 
+          {/* ── Load a peptide (catalog presets) ── */}
+          {!isIu && (
+            <div className="mb-6">
+              <label className="mb-1.5 block text-xs font-medium text-ink/55">
+                Load a peptide{' '}
+                <span className="text-ink/30">
+                  (autofills vial, water &amp; a reference amount)
+                </span>
+              </label>
+              <PeptidePicker loaded={loaded} onSelect={loadPreset} onClear={clearLoaded} />
+              {loaded && (
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] px-3 py-2 text-[11px] text-ink/55">
+                  <span>
+                    Loaded <span className="font-semibold text-accent">{loaded.name}</span> ·{' '}
+                    {loaded.vialMg}mg vial · {loaded.waterMl}mL ·{' '}
+                    {loaded.doseMcg >= 1000
+                      ? `${(loaded.doseMcg / 1000).toLocaleString(undefined, { maximumFractionDigits: 2 })}mg`
+                      : `${loaded.doseMcg}mcg`}{' '}
+                    reference amount
+                  </span>
+                  {loaded.note && <span className="text-amber-400/80">{loaded.note}</span>}
+                  <Link
+                    href={`/catalog/${loaded.slug}`}
+                    className="inline-flex items-center gap-1 font-medium text-accent hover:underline"
+                  >
+                    View profile <ExternalLink className="h-3 w-3" />
+                  </Link>
+                </div>
+              )}
+              <p className="mt-1.5 text-[10px] leading-relaxed text-ink/30">
+                Preset vial sizes and volumes reflect how these compounds are commonly supplied
+                and dissolved for laboratory research. Amounts are calculation reference points
+                only — not dosing guidance or medical advice. Adjust any field freely.
+              </p>
+              {isPen && (
+                <p className="mt-1 text-[10px] leading-relaxed text-amber-400/70">
+                  Loading a preset switches back to vial mode — catalog references describe
+                  lyophilized vials, not pre-filled pens.
+                </p>
+              )}
+            </div>
+          )}
+
           <div className="grid gap-6 md:grid-cols-2">
             <NumberField
-              label="Amount in vial"
+              label={isPen ? 'Amount in pen' : 'Amount in vial'}
               unit={vialUnit}
               value={vialValue}
               onChange={setVialValue}
-              presets={isIu ? VIAL_PRESETS_IU : VIAL_PRESETS_MG}
+              presets={isIu ? VIAL_PRESETS_IU : isPen ? PEN_PRESETS_MG : VIAL_PRESETS_MG}
               presetLabel={(n) => `${n}${vialUnit}`}
               onPreset={(n) => setVialValue(String(n))}
             />
@@ -286,19 +427,31 @@ export default function CalculatorBetaPage() {
               unit={unitLabel}
               value={doseValue}
               onChange={setDoseValue}
-              presets={isIu ? DOSE_PRESETS_IU : DOSE_PRESETS_MCG}
-              presetLabel={(n) => `${n}${unitLabel}`}
+              presets={isIu ? DOSE_PRESETS_IU : isPen ? PEN_DOSE_PRESETS_MCG : DOSE_PRESETS_MCG}
+              presetLabel={isPen ? (n) => `${n / 1000}mg` : (n) => `${n}${unitLabel}`}
               onPreset={(n) => setDoseValue(String(n))}
+              hint={
+                isPen
+                  ? 'Tirzepatide-style titration steps — semaglutide runs lower (0.25–2.4 mg).'
+                  : undefined
+              }
             />
 
-            {mode === 'forward' ? (
+            {!reverse ? (
               <>
                 <NumberField
-                  label="Bacteriostatic water to add"
+                  label={liquidLabel}
                   unit="mL"
                   value={waterMl}
                   onChange={setWaterMl}
-                  hint="Edit either this OR the concentration below — they're linked."
+                  presets={isPen ? PEN_FILL_PRESETS : undefined}
+                  presetLabel={isPen ? (n) => `${n} mL` : undefined}
+                  onPreset={isPen ? (n) => setWaterMl(String(n)) : undefined}
+                  hint={
+                    isPen
+                      ? 'The volume already in the pen — check the label (e.g. 10 mg / 2 mL).'
+                      : "Edit either this OR the concentration below — they're linked."
+                  }
                 />
                 <NumberField
                   label="Desired concentration"
@@ -309,7 +462,11 @@ export default function CalculatorBetaPage() {
                       : ''
                   }
                   onChange={onConcentrationEdit}
-                  hint="Auto-calculated from water volume; type to override."
+                  hint={
+                    isPen
+                      ? 'Auto-calculated from fill volume; type to override.'
+                      : 'Auto-calculated from water volume; type to override.'
+                  }
                 />
               </>
             ) : (
@@ -330,19 +487,19 @@ export default function CalculatorBetaPage() {
         {/* ── Results ── */}
         <section className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <ResultCard
-            label={mode === 'reverse' ? 'BAC water to add' : 'Total water'}
+            label={reverse ? 'BAC water to add' : isPen ? 'Fill volume' : 'Total water'}
             value={fmt(calc.water)}
             unit="mL"
-            highlight={mode === 'reverse'}
+            highlight={reverse}
           />
           <ResultCard
             label="Concentration"
             value={fmt(calc.concentrationPerTick)}
             unit={`${unitLabel} / 0.1 mL`}
-            highlight={mode === 'forward'}
+            highlight={!reverse}
           />
           <ResultCard
-            label="Doses per vial"
+            label={isPen ? 'Doses per pen' : 'Doses per vial'}
             value={calc.dosesPerVial > 0 ? calc.dosesPerVial.toString() : '—'}
             unit="injections"
           />
@@ -350,7 +507,7 @@ export default function CalculatorBetaPage() {
             label="Volume per injection"
             value={fmt(calc.volumePerInjectionMl, 3)}
             unit={`mL · ${fmt(calc.unitsPerInjection, 1)} units`}
-            highlight={mode === 'forward'}
+            highlight={!reverse}
           />
         </section>
 
@@ -390,6 +547,12 @@ export default function CalculatorBetaPage() {
           <p className="mt-3 text-center text-[11px] text-ink/35">
             Each tick = 1 unit (0.01 mL). Major labeled marks every 10 units (0.1 mL).
           </p>
+          {isPen && (
+            <p className="mt-1 text-center text-[11px] text-ink/35">
+              Shown as a draw into a U-100 syringe. Dialing the pen directly uses
+              its own click scale — check the device insert.
+            </p>
+          )}
         </section>
 
         {/* ── Quick converters ── */}
@@ -409,8 +572,8 @@ export default function CalculatorBetaPage() {
           </div>
         </section>
 
-        {/* ── Reference table (mcg / peptide mode only) ── */}
-        {!isIu && (
+        {/* ── Reference table (mcg vial mode only) ── */}
+        {!isIu && !isPen && (
           <section className="mb-10 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
             <h2 className="mb-1 text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
               Quick Reference
@@ -426,7 +589,43 @@ export default function CalculatorBetaPage() {
           </section>
         )}
 
+        {/* ── Pen usage note (pen mode) ── */}
+        {isPen && (
+          <section className="mb-10 rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-5 md:p-6">
+            <h2 className="mb-4 text-xl font-semibold tracking-tight">
+              Using a Pre-Filled Pen
+            </h2>
+            <ul className="space-y-2.5 text-sm leading-relaxed text-ink/65">
+              <li className="flex gap-2">
+                <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#2DD4A8]/60" />
+                <span>
+                  A pen ships already in solution — there is nothing to
+                  reconstitute. Its concentration is fixed by the total peptide
+                  and the fill volume printed on the label (e.g. 10 mg / 2 mL).
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#2DD4A8]/60" />
+                <span>
+                  Across a titration the per-injection aliquot climbs while the
+                  concentration stays put — so a single pen delivers fewer doses
+                  as the dose escalates.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#2DD4A8]/60" />
+                <span>
+                  Prime and dial per the device insert. The unit figure above
+                  applies only if you instead draw the pen&apos;s solution into a
+                  U-100 syringe.
+                </span>
+              </li>
+            </ul>
+          </section>
+        )}
+
         {/* ── Educational content ── */}
+        {!isPen && (
         <section className="mb-10 rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-5 md:p-6">
           <h2 className="mb-4 text-xl font-semibold tracking-tight">
             How to Reconstitute Peptides
@@ -468,6 +667,7 @@ export default function CalculatorBetaPage() {
             </li>
           </ol>
         </section>
+        )}
 
         <section className="mb-10 rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-5 md:p-6">
           <h2 className="mb-4 text-xl font-semibold tracking-tight">Storage Guidelines</h2>
@@ -525,6 +725,120 @@ function Toggle({
     >
       {children}
     </button>
+  )
+}
+
+function PeptidePicker({
+  loaded,
+  onSelect,
+  onClear,
+}: {
+  loaded: ReconPreset | null
+  onSelect: (p: ReconPreset) => void
+  onClear: () => void
+}) {
+  const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const q = query.trim().toLowerCase()
+  const groups = useMemo(() => {
+    if (!q) return RECON_PRESET_GROUPS
+    return RECON_PRESET_GROUPS.map((g) => ({
+      group: g.group,
+      items: g.items.filter((p) => p.name.toLowerCase().includes(q)),
+    })).filter((g) => g.items.length > 0)
+  }, [q])
+
+  const flat = groups.flatMap((g) => g.items)
+
+  const choose = (p: ReconPreset) => {
+    onSelect(p)
+    setQuery('')
+    setOpen(false)
+    inputRef.current?.blur()
+  }
+
+  return (
+    <div className="relative">
+      <div className="flex items-center gap-2 rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-3 transition-colors focus-within:border-[#2DD4A8]/40">
+        <Search className="h-4 w-4 flex-shrink-0 text-ink/35" strokeWidth={1.75} />
+        <input
+          ref={inputRef}
+          type="text"
+          value={query}
+          placeholder={loaded ? loaded.name : 'Search a peptide…'}
+          onFocus={() => setOpen(true)}
+          onChange={(e) => {
+            setQuery(e.target.value)
+            setOpen(true)
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setOpen(false)
+              inputRef.current?.blur()
+            } else if (e.key === 'Enter' && flat.length > 0) {
+              e.preventDefault()
+              choose(flat[0])
+            }
+          }}
+          className="w-full bg-transparent py-2.5 text-base text-ink outline-none placeholder:text-ink/35"
+        />
+        {(loaded || query) && (
+          <button
+            type="button"
+            aria-label="Clear loaded peptide"
+            onClick={() => {
+              setQuery('')
+              onClear()
+              inputRef.current?.focus()
+            }}
+            className="flex-shrink-0 rounded-md p-1 text-ink/35 transition-colors hover:bg-ink/[0.06] hover:text-ink/70"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        )}
+      </div>
+
+      {open && (
+        <>
+          {/* Backdrop to close on outside click */}
+          <button
+            type="button"
+            tabIndex={-1}
+            aria-hidden="true"
+            className="fixed inset-0 z-10 cursor-default"
+            onClick={() => setOpen(false)}
+          />
+          <div className="absolute left-0 right-0 top-[calc(100%+4px)] z-20 max-h-72 overflow-y-auto rounded-xl border border-ink/[0.1] bg-[var(--panel,#0f1729)] p-1 shadow-xl shadow-black/30">
+            {flat.length === 0 ? (
+              <p className="px-3 py-4 text-center text-xs text-ink/40">No peptides match “{query}”.</p>
+            ) : (
+              groups.map((g) => (
+                <div key={g.group} className="mb-1 last:mb-0">
+                  <p className="px-2.5 pb-0.5 pt-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-ink/35">
+                    {g.group}
+                  </p>
+                  {g.items.map((p) => (
+                    <button
+                      key={p.slug}
+                      type="button"
+                      onClick={() => choose(p)}
+                      className="flex w-full items-center justify-between gap-3 rounded-lg px-2.5 py-2 text-left text-sm text-ink/80 transition-colors hover:bg-[#2DD4A8]/[0.08] hover:text-ink"
+                    >
+                      <span className="font-medium">{p.name}</span>
+                      <span className="flex-shrink-0 font-mono text-[11px] text-ink/40">
+                        {p.vialMg}mg · {p.waterMl}mL
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              ))
+            )}
+          </div>
+        </>
+      )}
+    </div>
   )
 }
 
