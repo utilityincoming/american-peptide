@@ -2,22 +2,23 @@ import Link from 'next/link'
 
 const LINKS = [
   { href: '/', label: 'Home' },
-  { href: '/research', label: 'Research Agent' },
+  { href: '/catalog', label: 'Catalog' },
+  { href: '/us-peptides', label: 'Made in USA' },
   { href: '/compounds', label: 'Compounds' },
-  { href: '/trials', label: 'Clinical Trials' },
-  { href: '/tools/reconstitution-calculator', label: 'Peptide Reconstitution Calculator' },
+  { href: '/tools/reconstitution-calculator', label: 'Peptide Calculator' },
+  { href: '/developers', label: 'Developers / API' },
 ]
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] bg-[#0B1220] px-6 py-10 md:px-10">
+    <footer className="border-t border-ink/[0.06] bg-surface px-6 py-10 md:px-10">
       <div className="mx-auto max-w-6xl space-y-5">
-        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/45">
+        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink/45">
           {LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="transition-colors hover:text-white"
+              className="transition-colors hover:text-ink"
             >
               {l.label}
             </Link>
@@ -38,7 +39,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <p className="text-xs text-white/30">© 2026 AmericanPeptide.com</p>
+        <p className="text-xs text-ink/30">© 2026 AmericanPeptide.com</p>
       </div>
     </footer>
   )

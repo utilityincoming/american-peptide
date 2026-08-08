@@ -1,0 +1,450 @@
+// Vendor / affiliate directory for AmericanPeptide.com
+//
+// Forward-compatible scaffold for an affiliate-backed "where to source" layer.
+// The platform does not sell peptides; this models EXTERNAL vendors so the site
+// can point researchers to sources and — critically — rank them by the same
+// trust signals the rest of the site champions (third-party COAs, independent
+// testing, purity, policies) rather than by commission.
+//
+// Discipline, same as the catalog (see lib/peptides.ts): NO fabricated vendor,
+// affiliate, or pricing data. Every trust flag below is set from a claim the
+// vendor actually publishes, with the source noted inline; anything unconfirmed
+// goes in `notes` rather than into a flag.
+//
+// COMPLIANCE (live — monetization is active): a rendered affiliate link carries
+// (a) a clear FTC affiliate disclosure on every surface that shows it, and
+// (b) rel="sponsored nofollow" on the outbound anchor. `affiliate.active` is the
+// gate for both; leave it false for a plain editorial reference. Paid prominence
+// is a separate lever with its own rules — see Vendor.spotlight.
+
+import { IS_APP_BUILD } from '@/lib/platform'
+
+/** Region codes a vendor ships to (ISO-ish, plus 'global'). */
+export type ShipRegion = 'us' | 'eu' | 'uk' | 'ca' | 'au' | 'asia' | 'global'
+
+export interface VendorTrust {
+  /** A third-party certificate of analysis is published / available on request. */
+  coaOnFile: boolean
+  /** Independent (not in-house) HPLC/MS purity testing. */
+  thirdPartyTested: boolean
+  /** Testing is per-batch, not a single reference COA reused across lots. */
+  perBatchTesting: boolean
+  /** Stated / verified purity, percent (e.g. 99). Omit if undisclosed. */
+  purityPct?: number
+  /** Reship-on-failure / lost-package policy exists. */
+  reshipPolicy: boolean
+  /** Refund / money-back policy exists. */
+  refundPolicy: boolean
+}
+
+export interface VendorAffiliate {
+  /** Internal tracked redirect path, e.g. "/go/<id>". */
+  trackedPath?: string
+  /** The destination referral/affiliate URL that trackedPath redirects to. */
+  url?: string
+  /** Coupon / referral code, if any. */
+  code?: string
+  /**
+   * Reader-facing offer this link carries, if any (e.g. a negotiated discount).
+   * Keep it to the benefit — `code` renders directly beneath it, so the
+   * mechanics do not need spelling out. Only promise what actually lands at
+   * checkout: a reader who doesn't get this is a reader we spent the standard on.
+   */
+  offer?: string
+  /** True once a paid affiliate relationship is active — the disclosure gate. */
+  active: boolean
+}
+
+export interface Vendor {
+  id: string
+  name: string
+  /** Public homepage (NOT the affiliate link). */
+  url: string
+  /** One-line positioning. */
+  blurb: string
+  /** Peptide slugs this vendor is known to carry; 'all' for broad catalogs. */
+  peptides: string[] | 'all'
+  shipsTo: ShipRegion[]
+  trust: VendorTrust
+  affiliate?: VendorAffiliate
+  /**
+   * Surface this vendor in the catalog "where to source" directory listings.
+   * Defaults true. Set false for ONBOARDING partners that are surfaced only via
+   * curated placements (e.g. the GLP-1 hub) and resolved through /go/<id> — they
+   * should not also appear as a trust-ranked product tile in the catalog, where
+   * a registration flow reads as just another "buy a vial" link.
+   */
+  directoryListed?: boolean
+  /**
+   * Catalog slugs where this vendor gets a PAID, PROMINENT placement — pinned
+   * above the trust tiers and labeled "Featured partner".
+   *
+   * This is the one place commercial priority is allowed to move placement, and
+   * the deal is that it is always disclosed:
+   *   - it NEVER touches trustScore() or vendorTier() — the vendor's honest tier
+   *     and score render on the featured card exactly as they do anywhere else;
+   *   - the card is explicitly badged as a paid placement, not "best trust";
+   *   - it is gated by canSpotlight() — a vendor in the 'unvetted' tier cannot
+   *     buy prominence, no matter what.
+   * Ranking below the pin stays purely transparency-derived.
+   */
+  spotlight?: string[]
+  /**
+   * Why this vendor holds the featured slot — the diligence a checkbox column
+   * can't carry: who we know there, what their payment rails imply. Rendered on
+   * the featured card next to the score, never in place of it. State the
+   * finding, not the reasoning behind it: a sentence or two, specific and true.
+   */
+  spotlightNote?: string
+  /** Editorial caveats — what to watch for, what's unverified. */
+  notes?: string
+}
+
+// ── Trust score ───────────────────────────────────────────────────────────────
+// Transparent, tunable 0–100 score derived ONLY from verifiable transparency
+// signals — never from commission. COA + independent testing dominate because
+// they're the signals that actually protect a researcher. Weights sum to 100.
+export const TRUST_WEIGHTS = {
+  coaOnFile: 30,
+  thirdPartyTested: 30,
+  perBatchTesting: 20,
+  reshipPolicy: 10,
+  refundPolicy: 10,
+} as const
+
+/** 0–100 trust score from a vendor's transparency signals. */
+export function trustScore(v: Vendor): number {
+  const t = v.trust
+  let score = 0
+  if (t.coaOnFile) score += TRUST_WEIGHTS.coaOnFile
+  if (t.thirdPartyTested) score += TRUST_WEIGHTS.thirdPartyTested
+  if (t.perBatchTesting) score += TRUST_WEIGHTS.perBatchTesting
+  if (t.reshipPolicy) score += TRUST_WEIGHTS.reshipPolicy
+  if (t.refundPolicy) score += TRUST_WEIGHTS.refundPolicy
+  return score
+}
+
+// ── Trust tiers ─────────────────────────────────────────────────────────────────
+// A legible HIERARCHY derived from the same transparency signals as trustScore —
+// so a growing affiliate list groups into meaningful bands instead of one flat
+// ranking. Tiers are presentational; trustScore remains the within-tier sort key.
+// NEVER commission-based — placement is earned only by verifiable transparency.
+//
+//   documented → publishes third-party, per-batch COA (COA + 3rd-party + per-batch)
+//   claimed    → states third-party testing OR COAs, not yet independently confirmed
+//   unvetted   → insufficient public transparency signals to place higher
+export type VendorTier = 'documented' | 'claimed' | 'unvetted'
+
+export interface VendorTierMeta {
+  id: VendorTier
+  label: string
+  blurb: string
+}
+
+/** Ordered best → least; drives grouping order in the UI. */
+export const VENDOR_TIERS: VendorTierMeta[] = [
+  {
+    id: 'documented',
+    label: 'Independently documented',
+    blurb: 'Publishes a third-party, per-batch COA you can match to your specific lot.',
+  },
+  {
+    id: 'claimed',
+    label: 'Vendor-claimed testing',
+    blurb: 'States third-party testing or COAs — not yet independently confirmed here.',
+  },
+  {
+    id: 'unvetted',
+    label: 'Unvetted',
+    blurb: 'Insufficient public transparency signals to place higher.',
+  },
+]
+
+/** Derive a vendor's trust tier from its transparency signals (never commission). */
+export function vendorTier(v: Vendor): VendorTier {
+  const t = v.trust
+  if (t.coaOnFile && t.thirdPartyTested && t.perBatchTesting) return 'documented'
+  if (t.thirdPartyTested || t.coaOnFile) return 'claimed'
+  return 'unvetted'
+}
+
+// ── Data ──────────────────────────────────────────────────────────────────────
+// Adding an affiliate program (keep the discipline — this is the trust standard):
+//   1. Capture the public homepage (`url`) AND the referral link separately.
+//   2. Read the vendor's OWN published claims for each trust signal; set only the
+//      flags they explicitly state. Never infer or fabricate. Note the source.
+//   3. Put unverified / unconfirmed items in `notes` (e.g. lab unnamed, COA not
+//      confirmed per-lot, refund terms unread).
+//   4. Set affiliate.active = true to arm the /go/<id> redirect + FTC disclosure +
+//      rel="sponsored nofollow". Leave false for a plain editorial reference.
+//   5. trustScore() + vendorTier() rank and band it automatically — no manual
+//      ordering. Verify with `npx tsc --noEmit`.
+//   6. ONLY for a paid prominence deal: list the slugs it covers in `spotlight`.
+//      That pins a labeled "Featured partner" card above the tiers and changes
+//      nothing about the vendor's score, tier, or the ranking beneath it.
+//
+// Template for a new entry:
+//
+//   {
+//     id: 'example-labs',
+//     name: 'Example Labs',
+//     url: 'https://example.com',
+//     blurb: 'Research peptides with per-batch third-party COAs.',
+//     peptides: ['bpc-157', 'tb-500'],          // or 'all'
+//     shipsTo: ['us', 'global'],
+//     trust: {
+//       coaOnFile: true, thirdPartyTested: true, perBatchTesting: true,
+//       purityPct: 99, reshipPolicy: true, refundPolicy: false,
+//     },
+//     affiliate: { trackedPath: '/go/example-labs', code: 'AMPEP', active: false },
+//     notes: 'Verify the COA lot matches your vial before use.',
+//   }
+//
+export const VENDORS: Vendor[] = [
+  {
+    id: 'amino-club',
+    name: 'Amino Club',
+    url: 'https://aminoclub.com',
+    blurb:
+      'US research-peptide distributor; every batch ships a lot-matched third-party COA (MZ Biolabs / Janoshik) at ≥99% HPLC purity.',
+    peptides: 'all',
+    shipsTo: ['us'],
+    trust: {
+      // Sourced from the vendor's public claims + third-party COAs (MZ Biolabs /
+      // Janoshik report numbers are independently verifiable). Not personally
+      // confirmed, but COAs are externally checkable — stronger than self-report.
+      coaOnFile: true, // batch-specific, lot-matched COA available before purchase
+      thirdPartyTested: true, // independent labs (MZ Biolabs / Janoshik), HPLC + MS
+      perBatchTesting: true, // tests every new batch, not a single "golden batch"
+      purityPct: 99, // "≥99% baseline" HPLC
+      reshipPolicy: true, // lost/damaged/stolen packages reshipped free
+      refundPolicy: true, // 60-day money-back guarantee
+    },
+    affiliate: {
+      trackedPath: '/go/amino-club',
+      url: 'https://aminoclub.com?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+      code: 'AMERICANPEPTIDE',
+      active: true,
+    },
+    notes:
+      'COAs are independently verifiable via the Janoshik / MZ Biolabs report number on each certificate — confirm the report for your specific lot. 60-day money-back guarantee; change-of-mind returns are excluded.',
+  },
+  {
+    id: 'dynamic-peptide',
+    name: 'Dynamic Peptide',
+    url: 'https://dynamicpeptide.com',
+    blurb:
+      'US-made research peptides advertising per-batch independent HPLC/MS testing at >99% purity, with a COA on each product.',
+    peptides: 'all',
+    shipsTo: ['us'],
+    trust: {
+      // Sourced from the vendor's published claims (surfaced via search; the
+      // site blocks direct fetch). NOT independently confirmed. Only flags they
+      // explicitly state are set.
+      coaOnFile: true, // "Each product includes a Certificate of Analysis"
+      thirdPartyTested: true, // "independent third-party testing using HPLC and MS"
+      perBatchTesting: true, // "Every batch undergoes independent third-party testing"
+      purityPct: 99, // "purity levels above 99%"
+      reshipPolicy: false, // not stated
+      refundPolicy: false, // not confirmed on the published material reviewed
+    },
+    affiliate: {
+      trackedPath: '/go/dynamic-peptide',
+      url: 'https://dynamicpeptide.com/aff/27/',
+      active: true,
+    },
+    notes:
+      'Trust signals reflect the vendor’s published claims (surfaced via search; the site blocks direct review), not independent verification. Testing lab is not named and refund/reship terms were not confirmed — request the third-party COA for your specific lot before any use.',
+  },
+  {
+    id: 'apollo-peptide-sciences',
+    name: 'Apollo Peptide Sciences',
+    url: 'https://apollopeptidesciences.com',
+    blurb:
+      'US research-peptide vendor that publishes COAs and states products are routinely third-party lab tested; ships USPS Priority/Express.',
+    peptides: 'all',
+    shipsTo: ['us'],
+    trust: {
+      // Sourced from the vendor's own public claims (apollopeptidesciences.com),
+      // NOT independently confirmed. Only flags they explicitly state are set.
+      coaOnFile: true, // "You can see our COA's here"
+      thirdPartyTested: true, // "routinely tested by the most trusted labs"
+      perBatchTesting: false, // not stated as per-batch / lot-matched
+      // purityPct omitted — no HPLC purity figure stated
+      reshipPolicy: false, // not stated
+      refundPolicy: true, // "complete satisfaction guarantee" + Refund and Returns Policy page
+    },
+    affiliate: {
+      trackedPath: '/go/apollo-peptide-sciences',
+      url: 'https://apollopeptidesciences.com/?rfsn=9172552.14e196',
+      active: true,
+    },
+    notes:
+      'Trust signals reflect the vendor’s published claims, not independent verification. COAs are published but not confirmed as per-lot, no HPLC purity figure or testing lab is named — request and match the COA for your specific lot before any use.',
+  },
+  {
+    id: 'spartan-peptides',
+    name: 'Spartan Peptides',
+    url: 'https://spartanpeptides.com',
+    blurb:
+      'US research-peptide vendor publishing a per-batch third-party COA (HPLC + mass spec, signed by the analytical chemist) at ≥98% verified purity; same-day US dispatch.',
+    peptides: 'all',
+    shipsTo: ['us'],
+    trust: {
+      // Sourced from the vendor's own public claims (spartanpeptides.com), NOT
+      // independently confirmed. Only flags they explicitly state are set.
+      coaOnFile: true, // "third-party Certificates of Analysis… view the original lab reports" for every compound
+      thirdPartyTested: true, // "independently verified via HPLC and mass spectrometry"
+      perBatchTesting: true, // "Every batch independently verified"
+      purityPct: 98, // "≥98% HPLC-Verified Purity"
+      reshipPolicy: false, // not stated
+      refundPolicy: false, // not stated
+    },
+    affiliate: {
+      trackedPath: '/go/spartan-peptides',
+      url: 'https://spartanpeptides.com/?a_aid=AMERICANPEPTIDE',
+      code: 'AMERICANPEPTIDE',
+      active: true,
+    },
+    notes:
+      'Trust signals reflect the vendor’s own published claims, not independent verification. Testing lab is unnamed; reship and refund terms are not stated; the stated purity bar is ≥98% (below the ≥99% several peers claim). Request and match the third-party COA for your specific lot before any use.',
+  },
+  {
+    id: 'absim-peptides',
+    name: 'ABSIM Peptides',
+    url: 'https://absimpeptides.com',
+    blurb:
+      'US research-peptide supplier publishing a certificate of analysis on every product listing; cGMP-compliant manufacturing, free US shipping over $200.',
+    // Scoped to the products ABSIM actually lists (25 SKUs) that exist in our
+    // catalog. They notably do NOT carry semaglutide, tirzepatide, or
+    // retatrutide.
+    peptides: [
+      'bpc-157', 'tb-500', 'ghk-cu', 'ipamorelin', 'cjc-1295-no-dac',
+      'tesamorelin', 'sermorelin', 'mots-c', 'ss-31', 'nad-plus',
+      'aod-9604', 'epitalon', 'semax', 'selank', 'dsip', 'pt-141', 'kpv',
+    ],
+    shipsTo: ['us'],
+    trust: {
+      // Sourced from the vendor's own published pages (homepage, /about, /faq,
+      // /shipping-policy, /refunds-returns) and the "Certificate of Analysis"
+      // tab on each product page. NOT independently confirmed. Only flags they
+      // explicitly state are set.
+      coaOnFile: true, // every product page publishes a COA under a dedicated tab
+      thirdPartyTested: false, // "tested to meet strict quality standards" — no independent lab claimed or named
+      perBatchTesting: false, // one static COA image per product (e.g. BPC-157-1.jpg), not lot-matched
+      // purityPct omitted — no HPLC purity figure stated anywhere in site copy
+      reshipPolicy: false, // no reship guarantee; carrier-claim process only, and porch theft explicitly disclaimed
+      refundPolicy: true, // published Refunds and Returns policy (wrong item / defect / damage, within 7 days)
+    },
+    affiliate: {
+      trackedPath: '/go/absim-peptides',
+      url: 'https://absimpeptides.com/?ref=americanpeptide',
+      // Works both ways per the partner: the link carries the discount, and the
+      // same string is a live coupon at checkout. Publishing the code as well as
+      // the link means a reader still gets the 20% if the referral doesn't stick.
+      code: 'AMERICANPEPTIDE',
+      offer: '20% off your order.',
+      active: true,
+    },
+    spotlightNote:
+      'Vetted by relationship as well as paperwork. We know the US-based operators directly, and they ship stateside and accept major credit cards — a card processor underwrote this business, so your chargeback protection rides along with every order.',
+    // PAID placement, gated + labeled — see Vendor.spotlight. Covers every
+    // compound they actually stock: the bodybuilding / recovery / GH-axis and
+    // top sellers first, plus the nootropic and longevity SKUs, so the featured
+    // card follows them across the catalog and the class-landing sidebars.
+    spotlight: [
+      'bpc-157', 'tb-500', 'ipamorelin', 'cjc-1295-no-dac', 'tesamorelin',
+      'sermorelin', 'ghk-cu', 'mots-c', 'aod-9604', 'nad-plus', 'pt-141',
+      'ss-31', 'epitalon', 'semax', 'selank', 'dsip', 'kpv',
+    ],
+    notes:
+      'The published COA is one static certificate per SKU, not matched to your lot — request a lot-specific COA before use. Checkout requires an account; returns need photos within 7 days, and carrier loss or porch theft isn’t reshipped.',
+  },
+]
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+/** Vendors known to carry a given peptide, best-trust first. */
+export function getVendorsForPeptide(slug: string): Vendor[] {
+  // Reference-only on the Play (TWA) build: no outbound vendor/affiliate links.
+  if (IS_APP_BUILD) return []
+  return VENDORS.filter(
+    (v) =>
+      v.directoryListed !== false &&
+      (v.peptides === 'all' || v.peptides.includes(slug)),
+  ).sort((a, b) => trustScore(b) - trustScore(a))
+}
+
+/** All directory-listed vendors, best-trust first. */
+export function vendorsRanked(): Vendor[] {
+  // Reference-only on the Play (TWA) build: no outbound vendor/affiliate links.
+  if (IS_APP_BUILD) return []
+  return VENDORS.filter((v) => v.directoryListed !== false).sort(
+    (a, b) => trustScore(b) - trustScore(a),
+  )
+}
+
+/**
+ * A single vendor by id, for curated ONBOARDING placements outside the catalog
+ * directory (e.g. the GLP-1 hub). Returns undefined on the Play (TWA) build so
+ * onboarding callers fall back to a non-affiliate placeholder — matching the
+ * directory's reference-only behavior there.
+ */
+export function getVendor(id: string): Vendor | undefined {
+  if (IS_APP_BUILD) return undefined
+  return VENDORS.find((v) => v.id === id)
+}
+
+/**
+ * The href to use when linking to a vendor.
+ * Prefer the internal tracked redirect when an affiliate relationship is active
+ * (keeps the referral param server-side and lets us attach disclosure +
+ * rel="sponsored nofollow" at the link); otherwise the plain public homepage.
+ */
+export function vendorHref(v: Vendor): string {
+  if (v.affiliate?.active && v.affiliate.trackedPath) return v.affiliate.trackedPath
+  return v.url
+}
+
+/** Whether a vendor link is a disclosed affiliate link (needs FTC disclosure). */
+export function isAffiliate(v: Vendor): boolean {
+  return Boolean(v.affiliate?.active)
+}
+
+/**
+ * Vendors grouped into trust tiers (documented → claimed → unvetted), best-trust
+ * first WITHIN each tier. Empty tiers are dropped. This is the dynamic hierarchy:
+ * add a vendor and it self-files into the right band from its own signals — no
+ * manual ordering. Pass a pre-filtered list (e.g. getVendorsForPeptide(slug)) to
+ * tier a peptide-specific set.
+ */
+export function vendorsByTier(
+  list: Vendor[] = vendorsRanked(),
+): { tier: VendorTierMeta; vendors: Vendor[] }[] {
+  return VENDOR_TIERS.map((tier) => ({
+    tier,
+    vendors: list.filter((v) => vendorTier(v) === tier.id),
+  })).filter((group) => group.vendors.length > 0)
+}
+
+// ── Featured (paid) placement ─────────────────────────────────────────────────
+// The single commercial lever on placement, and it is fenced in:
+//   1. eligibility is earned, not bought — an 'unvetted' vendor can never be
+//      featured, so the floor is "publishes COAs or states third-party testing";
+//   2. the placement is labeled as paid wherever it renders, never as "best trust";
+//   3. trustScore() and vendorTier() are untouched, so the ranking underneath —
+//      and the vendor's own score on the featured card — stay honest.
+
+/** Whether a vendor is eligible to hold a paid featured placement at all. */
+export function canSpotlight(v: Vendor): boolean {
+  return Boolean(v.affiliate?.active) && vendorTier(v) !== 'unvetted'
+}
+
+/**
+ * The featured partner for a catalog slug, if one is both booked and eligible.
+ * Returns undefined on the Play (TWA) build — no outbound vendor links there.
+ */
+export function getSpotlightVendor(slug: string): Vendor | undefined {
+  if (IS_APP_BUILD) return undefined
+  return VENDORS.find((v) => v.spotlight?.includes(slug) && canSpotlight(v))
+}

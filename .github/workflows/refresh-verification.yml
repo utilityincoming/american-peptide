@@ -1,0 +1,81 @@
+name: Refresh verification manifest
+
+# Keeps src/lib/verification.ts (the on-page "verified against PubChem" badge)
+# fresh and honest. Re-runs the fact-QA manifest pass against PubChem and opens
+# a PR only if anything changed — which doubles as drift detection: a changed
+# CID/formula/weight shows up as a reviewable diff rather than going stale or
+# silently wrong.
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # Mondays 06:00 UTC
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - 'src/lib/peptides.ts' # re-verify when the catalog changes
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: refresh-verification
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      CRON_SECRET: ${{ secrets.CRON_SECRET || 'ci-refresh-token' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Start server
+        run: |
+          npm start &
+          echo "SERVER_PID=$!" >> "$GITHUB_ENV"
+          # Wait (up to 60s) for the server to accept connections.
+          for i in $(seq 1 60); do
+            if curl -sf -o /dev/null "http://localhost:3000/"; then
+              echo "Server up after ${i}s"; break
+            fi
+            sleep 1
+          done
+
+      - name: Regenerate verification manifest
+        run: node scripts/gen-verification.mjs http://localhost:3000 "$CRON_SECRET"
+
+      - name: Stop server
+        if: always()
+        run: kill "$SERVER_PID" 2>/dev/null || true
+
+      - name: Open PR if the manifest changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          add-paths: src/lib/verification.ts
+          branch: chore/refresh-verification
+          delete-branch: true
+          commit-message: 'chore: refresh PubChem verification manifest'
+          title: 'chore: refresh PubChem verification manifest'
+          body: |
+            Automated re-verification of catalog chemistry against PubChem
+            (`/api/jobs/fact-qa?format=manifest`).
+
+            If this PR has changes, a catalog entry's PubChem record (CID /
+            formula / weight) shifted or a new entry became verifiable. Review
+            the diff before merging — it updates the on-page "verified" badges
+            and their `checkedAt` dates.
+
+            Empty diff ⇒ no PR is opened.
+          labels: automated, verification
