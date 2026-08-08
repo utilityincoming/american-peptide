@@ -10,6 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     // ── Core ──────────────────────────────────────────────
     { path: '', priority: 1.0 },
+    // ── Sourcing / trust standard ─────────────────────────
+    { path: '/us-peptides', priority: 0.9 },
     // ── GLP-1 / Metabolic cluster ─────────────────────────
     { path: '/glp-1', priority: 0.9 },
     // ── Healing & Repair cluster ──────────────────────────
