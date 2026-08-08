@@ -37,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ── Tools & Research ──────────────────────────────────
     { path: '/research', priority: 0.8 },
     { path: '/compounds', priority: 0.8 },
-    { path: '/compounds/builder', priority: 0.8 },
+    // /compounds/builder is intentionally omitted — it's a noindex learning game.
     { path: '/trials', priority: 0.8 },
     { path: '/tools/reconstitution-calculator', priority: 0.8 },
     { path: '/tools/coa-decoder', priority: 0.8 },

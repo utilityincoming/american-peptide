@@ -58,8 +58,8 @@ const TOOLS: Tool[] = [
   },
   {
     href: '/compounds',
-    name: 'Compound Search',
-    desc: 'Search PubChem for structures, molecular formulae and weights.',
+    name: 'Compounds',
+    desc: 'Verified peptide monographs plus a live PubChem compound lookup.',
     Icon: Search,
   },
 ]

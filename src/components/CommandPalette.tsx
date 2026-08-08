@@ -124,10 +124,10 @@ const PAGES: CommandItem[] = [
   {
     id: 'page-compounds',
     kind: 'page',
-    label: 'Compound Search',
-    subtitle: 'PubChem structure explorer',
+    label: 'Compounds',
+    subtitle: 'Verified monographs + PubChem lookup',
     href: '/compounds',
-    keywords: 'compounds pubchem structure molecule chemistry cid',
+    keywords: 'compounds monograph catalog pubchem structure molecule chemistry cid',
   },
   {
     id: 'page-builder',

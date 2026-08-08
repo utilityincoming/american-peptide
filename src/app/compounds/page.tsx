@@ -1,234 +1,353 @@
-'use client'
-
-import { useState, useEffect } from 'react'
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, Dna, Search, ExternalLink, FlaskConical } from 'lucide-react'
+import {
+  ArrowRight,
+  Database,
+  Dna,
+  FlaskConical,
+  Layers,
+} from 'lucide-react'
+import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES, type Peptide } from '@/lib/peptides'
+import CompoundSearch from './CompoundSearch'
 
-interface Compound {
-  cid: number
-  name: string
-  molecularFormula: string | null
-  molecularWeight: string | null
+const SITE = 'https://americanpeptide.com'
+
+export const metadata: Metadata = {
+  title:
+    'Peptides & Compounds — Verified Monographs + PubChem Lookup | AmericanPeptide.com',
+  description:
+    'Look up any peptide or compound. Browse verified research monographs — mechanism, sequence, structure, molecular weight, and research context — or search PubChem’s full chemical database by name, formula, or synonym.',
+  alternates: { canonical: `${SITE}/compounds` },
+  openGraph: {
+    title: 'Peptides & Compounds — Verified Monographs + PubChem Lookup',
+    description:
+      'Browse verified peptide monographs — mechanism, sequence, structure — or search PubChem for any compound. Free open reference.',
+    url: `${SITE}/compounds`,
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Peptides & Compounds — Verified Monographs + PubChem Lookup',
+    description:
+      'Verified peptide monographs plus a live PubChem compound lookup. Free open reference from AmericanPeptide.com.',
+  },
 }
 
-type Status = 'idle' | 'loading' | 'success' | 'empty' | 'error'
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Peptides & Compounds',
+  url: `${SITE}/compounds`,
+  description:
+    'A verified reference of research peptides plus a live lookup into the PubChem chemical database.',
+  isPartOf: { '@type': 'WebSite', name: 'AmericanPeptide.com', url: SITE },
+  about: { '@type': 'Thing', name: 'Research peptides and chemical compounds' },
+}
+
+// ── Featured monographs: recognizable compounds first, topped up to a full row ──
+const BY_SLUG = new Map(PEPTIDES.map((p) => [p.slug, p]))
+const PREFERRED_FEATURED = [
+  'semaglutide',
+  'tirzepatide',
+  'retatrutide',
+  'bpc-157',
+  'tesamorelin',
+  'cagrilintide',
+  'ipamorelin',
+  'mots-c',
+  'pt-141',
+  'cjc-1295-no-dac',
+  'melanotan-2',
+  'tb-500',
+]
+const featured: Peptide[] = []
+const featuredSeen = new Set<string>()
+for (const slug of PREFERRED_FEATURED) {
+  const p = BY_SLUG.get(slug)
+  if (p && !featuredSeen.has(p.slug)) {
+    featured.push(p)
+    featuredSeen.add(p.slug)
+  }
+  if (featured.length >= 8) break
+}
+for (const p of LISTED_PEPTIDES) {
+  if (featured.length >= 8) break
+  if (!featuredSeen.has(p.slug)) {
+    featured.push(p)
+    featuredSeen.add(p.slug)
+  }
+}
+
+// ── Full directory: every listed peptide once, grouped under its primary category ──
+const grouped = CATEGORIES.map((c) => ({
+  cat: c,
+  items: LISTED_PEPTIDES.filter((p) => p.categories[0] === c.id).sort((a, b) =>
+    a.name.localeCompare(b.name),
+  ),
+})).filter((g) => g.items.length > 0)
 
 export default function CompoundsPage() {
-  const [query, setQuery] = useState('')
-  const [debounced, setDebounced] = useState('')
-  const [results, setResults] = useState<Compound[]>([])
-  const [status, setStatus] = useState<Status>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
-
-  useEffect(() => {
-    const t = setTimeout(() => setDebounced(query.trim()), 300)
-    return () => clearTimeout(t)
-  }, [query])
-
-  useEffect(() => {
-    if (!debounced) {
-      setStatus('idle')
-      setResults([])
-      return
-    }
-
-    const controller = new AbortController()
-    setStatus('loading')
-
-    ;(async () => {
-      try {
-        const res = await fetch(
-          `/api/pubchem?name=${encodeURIComponent(debounced)}`,
-          { signal: controller.signal },
-        )
-
-        if (res.status === 404) {
-          setResults([])
-          setStatus('empty')
-          return
-        }
-
-        const data = await res.json()
-
-        if (!res.ok) {
-          setErrorMsg(data.error || 'Search failed')
-          setStatus('error')
-          return
-        }
-
-        setResults(data.compounds ?? [])
-        setStatus(data.compounds?.length ? 'success' : 'empty')
-      } catch (err) {
-        if ((err as Error).name === 'AbortError') return
-        setErrorMsg(err instanceof Error ? err.message : 'Network error')
-        setStatus('error')
-      }
-    })()
-
-    return () => controller.abort()
-  }, [debounced])
-
   return (
     <div className="min-h-screen bg-surface text-ink">
-      {/* ── Page identity ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
-          <FlaskConical className="h-4 w-4 text-accent" strokeWidth={1.75} />
-        </div>
-        <div>
-          <span className="text-sm font-medium">Compound Search</span>
-          <span className="ml-2 hidden text-xs text-ink/30 sm:inline">PubChem</span>
-        </div>
-      </header>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
-      <main className="mx-auto max-w-5xl px-4 py-8 md:px-6">
-        {/* ── PeptideForge CTA ── */}
-        <Link
-          href="/compounds/builder"
-          className="group mb-8 flex items-center gap-4 overflow-hidden rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-5 transition-all hover:border-[#2DD4A8]/35 hover:shadow-[0_8px_40px_rgba(45,212,168,0.08)]"
-        >
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
-            <Dna className="h-5 w-5" strokeWidth={1.75} />
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-50"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+            backgroundSize: '28px 28px',
+          }}
+        />
+        <div className="relative mx-auto max-w-6xl">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+            <FlaskConical className="h-3 w-3" />
+            Peptide reference &amp; compound lookup
           </div>
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-2">
-              <h2 className="text-sm font-semibold text-ink">PeptideForge</h2>
-              <span className="rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
-                New
-              </span>
-            </div>
-            <p className="mt-0.5 text-xs text-ink/55">
-              Build your own peptide residue by residue — live chemistry,
-              challenges, and XP.
-            </p>
-          </div>
-          <span className="flex shrink-0 items-center gap-1 text-xs font-medium text-accent transition-transform group-hover:translate-x-0.5">
-            Open builder
-            <ArrowRight className="h-3.5 w-3.5" />
-          </span>
-        </Link>
-
-        {/* Design Lab (beta) link */}
-        <Link
-          href="/tools/design-lab"
-          className="group mb-8 flex items-center justify-between gap-3 rounded-xl border border-ink/[0.08] bg-ink/[0.02] px-4 py-2.5 text-xs transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
-        >
-          <span className="text-ink/55">
-            <span className="font-semibold text-accent">Beta ·</span> Design
-            Lab — sequence properties, pI, ε280 &amp; synthesis-difficulty flags
-          </span>
-          <ArrowRight className="h-3.5 w-3.5 shrink-0 text-accent" />
-        </Link>
-
-        {/* ── Search bar ── */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 rounded-2xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-3 transition-colors focus-within:border-[#2DD4A8]/25">
-            <Search className="h-4 w-4 flex-shrink-0 text-ink/30" />
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search peptides or compounds (e.g. semaglutide, oxytocin, melittin)…"
-              className="flex-1 bg-transparent text-sm text-ink placeholder-ink/20 outline-none"
-              autoFocus
-            />
-            {status === 'loading' && (
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-[#2DD4A8]/30 border-t-[#2DD4A8]" />
-            )}
-          </div>
-          <p className="mt-2 ml-1 text-[10px] text-ink/20">
-            Data source: PubChem (NIH National Library of Medicine)
+          <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
+            Every peptide, one lookup —{' '}
+            <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+              verified first.
+            </span>
+          </h1>
+          <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
+            Start with our verified monographs — {LISTED_PEPTIDES.length}{' '}
+            research peptides with mechanism, sequence, structure, and the
+            research
+            context our team has reviewed. Need something beyond the catalog?
+            Search PubChem&apos;s full chemical database further down the page.
           </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/catalog"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.08] px-5 py-2.5 text-sm font-medium text-accent transition-colors hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/[0.12]"
+            >
+              <Layers className="h-4 w-4" />
+              Browse the full catalog
+            </Link>
+            <a
+              href="#pubchem-search"
+              className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-ink"
+            >
+              <Database className="h-4 w-4 text-accent" />
+              Search PubChem
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <main className="mx-auto max-w-6xl px-6 py-12 md:px-10">
+        {/* ── Interactive tools ── */}
+        <div className="mb-12 grid gap-4 sm:grid-cols-2">
+          <Link
+            href="/compounds/builder"
+            className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-5 transition-all hover:border-[#2DD4A8]/35 hover:shadow-[0_8px_40px_rgba(45,212,168,0.08)]"
+          >
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
+              <Dna className="h-5 w-5" strokeWidth={1.75} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2">
+                <h2 className="text-sm font-semibold text-ink">PeptideForge</h2>
+                <span className="rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
+                  Builder
+                </span>
+              </div>
+              <p className="mt-0.5 text-xs text-ink/55">
+                Build a peptide residue by residue — live chemistry, challenges,
+                and XP.
+              </p>
+            </div>
+            <ArrowRight className="h-4 w-4 shrink-0 text-accent transition-transform group-hover:translate-x-0.5" />
+          </Link>
+
+          <Link
+            href="/tools/design-lab"
+            className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-5 transition-all hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+          >
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-ink/[0.10] bg-ink/[0.04] text-accent">
+              <FlaskConical className="h-5 w-5" strokeWidth={1.75} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2">
+                <h2 className="text-sm font-semibold text-ink">Design Lab</h2>
+                <span className="rounded-full border border-ink/[0.12] bg-ink/[0.04] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-ink/50">
+                  Beta
+                </span>
+              </div>
+              <p className="mt-0.5 text-xs text-ink/55">
+                Sequence properties — pI, &epsilon;280, net charge, and
+                synthesis-difficulty flags.
+              </p>
+            </div>
+            <ArrowRight className="h-4 w-4 shrink-0 text-accent transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </div>
 
-        {/* ── States ── */}
-        {status === 'idle' && (
-          <div className="py-16 text-center text-sm text-ink/30">
-            Type a compound name to search PubChem.
+        {/* ── Featured monographs ── */}
+        <section className="mb-14">
+          <div className="mb-5 flex items-end justify-between gap-3">
+            <div>
+              <h2 className="text-xl font-bold tracking-tight md:text-2xl">
+                Featured monographs
+              </h2>
+              <p className="mt-1 text-sm text-ink/50">
+                Verified reference entries — reviewed, sourced, and cross-checked
+                against known chemistry.
+              </p>
+            </div>
+            <Link
+              href="/catalog"
+              className="hidden shrink-0 items-center gap-1 text-sm font-medium text-accent transition-colors hover:text-[#5EEBC8] sm:inline-flex"
+            >
+              All {LISTED_PEPTIDES.length}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
           </div>
-        )}
 
-        {status === 'empty' && (
-          <div className="rounded-2xl border border-ink/[0.06] bg-ink/[0.02] py-16 text-center">
-            <p className="text-sm text-ink/55">No compound found</p>
-            <p className="mt-1 text-xs text-ink/30">
-              Try a different name, IUPAC identifier, or common synonym.
-            </p>
-          </div>
-        )}
-
-        {status === 'error' && (
-          <div className="rounded-2xl border border-red-400/20 bg-red-400/[0.04] px-5 py-4">
-            <p className="text-sm text-red-300/90">Search error</p>
-            <p className="mt-1 text-xs text-red-300/60">{errorMsg}</p>
-          </div>
-        )}
-
-        {status === 'success' && (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {results.map((c) => (
-              <CompoundCard key={c.cid} compound={c} />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {featured.map((p) => (
+              <MonographCard key={p.slug} peptide={p} />
             ))}
           </div>
-        )}
+        </section>
+
+        {/* ── Full directory by category ── */}
+        <section className="mb-16">
+          <div className="mb-5">
+            <h2 className="text-xl font-bold tracking-tight md:text-2xl">
+              Every compound, by category
+            </h2>
+            <p className="mt-1 text-sm text-ink/50">
+              The complete verified index — {LISTED_PEPTIDES.length} entries
+              across {grouped.length} research categories.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {grouped.map(({ cat, items }) => (
+              <div
+                key={cat.id}
+                className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5"
+              >
+                <div className="mb-3 flex items-baseline justify-between gap-2">
+                  <Link
+                    href={`/catalog/category/${cat.id}`}
+                    className="text-sm font-semibold text-ink transition-colors hover:text-accent"
+                  >
+                    {cat.label}
+                  </Link>
+                  <span className="text-[11px] text-ink/30">
+                    {items.length}
+                  </span>
+                </div>
+                <ul className="flex flex-wrap gap-x-3 gap-y-1.5">
+                  {items.map((p) => (
+                    <li key={p.slug}>
+                      <Link
+                        href={`/catalog/${p.slug}`}
+                        className="text-[13px] text-ink/55 transition-colors hover:text-accent hover:underline"
+                      >
+                        {p.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── PubChem live search ── */}
+        <section id="pubchem-search" className="scroll-mt-6">
+          <div className="mb-5">
+            <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-ink/[0.10] bg-ink/[0.03] px-3 py-1 text-[11px] font-medium text-ink/45">
+              <Database className="h-3 w-3 text-accent/70" />
+              Beyond the catalog
+            </div>
+            <h2 className="text-xl font-bold tracking-tight md:text-2xl">
+              Search any compound in PubChem
+            </h2>
+            <p className="mt-1 max-w-2xl text-sm text-ink/50">
+              For anything not yet in our reference, look it up directly in
+              PubChem — the NIH open chemistry database — and pull its structure,
+              molecular formula, and weight.
+            </p>
+          </div>
+
+          <CompoundSearch />
+        </section>
+
+        {/* ── Research-use note ── */}
+        <p className="mt-14 border-t border-ink/[0.06] pt-6 text-xs leading-relaxed text-ink/30">
+          For research and educational reference only. Entries describe the
+          scientific literature and are not medical advice, dosing guidance, or
+          an offer to sell any compound.
+        </p>
       </main>
     </div>
   )
 }
 
-function CompoundCard({ compound }: { compound: Compound }) {
-  const [imgError, setImgError] = useState(false)
-
+function MonographCard({ peptide }: { peptide: Peptide }) {
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-ink/[0.06] bg-ink/[0.025] transition-colors hover:border-[#2DD4A8]/20">
-      <div className="flex h-48 items-center justify-center border-b border-ink/[0.06] bg-ink/[0.03] p-4">
-        {imgError ? (
-          <span className="text-xs text-ink/30">Structure unavailable</span>
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={`https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${compound.cid}/PNG`}
-            alt={`2D structure of ${compound.name}`}
-            className="max-h-full max-w-full object-contain"
-            onError={() => setImgError(true)}
-            loading="lazy"
-          />
+    <Link
+      href={`/catalog/${peptide.slug}`}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)]"
+    >
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2DD4A8]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+      <div className="mb-3 flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h3 className="truncate text-base font-semibold tracking-tight">
+            {peptide.name}
+          </h3>
+          {peptide.aliases?.[0] && (
+            <p className="mt-0.5 truncate text-xs text-ink/35">
+              aka {peptide.aliases.join(', ')}
+            </p>
+          )}
+        </div>
+        {peptide.fdaApproved && (
+          <span className="shrink-0 rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
+            FDA
+          </span>
         )}
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <div>
-          <h3 className="line-clamp-2 text-sm font-medium leading-snug text-ink/90">
-            {compound.name}
-          </h3>
-          <p className="mt-0.5 font-mono text-[11px] text-ink/35">CID {compound.cid}</p>
-        </div>
+      <p className="mb-4 line-clamp-3 flex-1 text-[13px] leading-relaxed text-ink/55">
+        {peptide.shortDescription}
+      </p>
 
-        <div className="flex-1 space-y-1.5 text-xs">
-          {compound.molecularFormula && (
-            <div className="flex justify-between gap-2">
-              <span className="text-ink/40">Formula</span>
-              <span className="font-mono text-accent/90">{compound.molecularFormula}</span>
-            </div>
-          )}
-          {compound.molecularWeight && (
-            <div className="flex justify-between gap-2">
-              <span className="text-ink/40">MW</span>
-              <span className="font-mono text-ink/70">{compound.molecularWeight} g/mol</span>
-            </div>
-          )}
-        </div>
-
-        <a
-          href={`https://pubchem.ncbi.nlm.nih.gov/compound/${compound.cid}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-1 flex items-center justify-center gap-1.5 rounded-lg border border-ink/[0.06] py-2 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/25 hover:bg-[#2DD4A8]/[0.05] hover:text-accent"
-        >
-          View on PubChem
-          <ExternalLink className="h-3 w-3" />
-        </a>
+      <div className="flex flex-wrap gap-1.5">
+        {peptide.categories.slice(0, 3).map((cat) => (
+          <span
+            key={cat}
+            className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-2 py-0.5 text-[10px] text-ink/50"
+          >
+            {CATEGORIES.find((c) => c.id === cat)?.label ?? cat}
+          </span>
+        ))}
       </div>
-    </div>
+
+      <div className="mt-4 flex items-center justify-between border-t border-ink/[0.06] pt-3 text-[11px] text-ink/30">
+        <span>
+          {peptide.molecularWeight
+            ? `${peptide.molecularWeight.toLocaleString()} Da`
+            : 'Reference entry'}
+        </span>
+        <span className="flex items-center gap-1 text-accent/70 transition-colors group-hover:text-accent">
+          View
+          <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+        </span>
+      </div>
+    </Link>
   )
 }
