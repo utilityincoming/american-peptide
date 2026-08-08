@@ -1,4 +1,4 @@
-import { Check, ChevronDown, Minus, ShieldAlert } from 'lucide-react'
+import { Check, ChevronDown, Minus } from 'lucide-react'
 import type { Vendor } from '@/lib/vendors'
 
 // Featured-partner comparison block.
@@ -12,10 +12,13 @@ import type { Vendor } from '@/lib/vendors'
 // the row says so.
 //
 // The de-emphasis rule, per the trust standard: promotion may reorder and
-// quiet the FINE PRINT, but never hide it. The safety-critical line (request
-// a lot-specific COA) stays visible; the transactional caveats live in an
-// accessible <details> expander — in the DOM, keyboard-reachable, announced
-// by screen readers — not display:none. The FTC disclosure is unaffected.
+// quiet the FINE PRINT, but never hide it. The testing/COA standing stays
+// visible as an honest comparison row (a static per-SKU COA shows as parity,
+// not a win); the transactional caveats live in an accessible <details>
+// expander — in the DOM, keyboard-reachable, announced by screen readers —
+// not display:none. What we DON'T do is dress a static COA up as a safety
+// alarm: a lot-matched certificate is a transparency nicety, not the fraud
+// shield the market markets it as. The FTC disclosure is unaffected.
 
 interface Row {
   label: string
@@ -88,9 +91,6 @@ export default function SpotlightComparison({
   className?: string
 }) {
   const rows: Row[] = [...BASE_ROWS, testingRow(vendor)]
-  // Safety line shows only when the COA is NOT lot-matched — the one caveat
-  // that stays conspicuous rather than folding into the fine print.
-  const showCoaWarning = !vendor.trust.perBatchTesting
 
   return (
     <div className={className}>
@@ -131,17 +131,6 @@ export default function SpotlightComparison({
           ))}
         </ul>
       </div>
-
-      {/* Safety-critical line stays conspicuous — never tucked away. */}
-      {showCoaWarning && (
-        <p className="mt-3 flex items-start gap-1.5 text-[11px] leading-relaxed text-amber-400/80">
-          <ShieldAlert className="mt-0.5 h-3 w-3 shrink-0" strokeWidth={2} />
-          <span>
-            The published COA is one certificate per product, not matched to your vial —
-            request a lot-specific COA before use.
-          </span>
-        </p>
-      )}
 
       {/* Transactional fine print: de-emphasized but fully accessible. */}
       {vendor.notes && (
