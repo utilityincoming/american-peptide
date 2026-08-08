@@ -25,6 +25,22 @@ const REFERENCE_CACHE = 'amp-reference-v1'
 // Branded fallback shown when an uncached page is requested offline.
 const OFFLINE_FALLBACK = '/offline'
 
+// Local-dev guard. This worker only ever registers in production, but once
+// registered on localhost by a prior `next build && next start`, it keeps
+// controlling the origin on later `next dev` runs — where its cache-first
+// `/_next/static/*` rule would serve stale chunks and break hydration. On any
+// loopback origin the worker stays inert: it skips precaching and passes every
+// request straight through to the dev server. Belt-and-suspenders with the dev
+// teardown in src/app/layout.tsx (which also unregisters it). Production hosts
+// are unaffected.
+const HOST = self.location.hostname
+const IS_LOCALHOST =
+  HOST === 'localhost' ||
+  HOST.endsWith('.localhost') ||
+  HOST === '127.0.0.1' ||
+  HOST === '::1' ||
+  HOST === '[::1]'
+
 // Precache the core hubs + the open catalog JSON on install, so the first
 // offline launch has working entry points and all peptide data on hand.
 const PRECACHE_URLS = [
@@ -42,6 +58,11 @@ const PRECACHE_URLS = [
 ]
 
 self.addEventListener('install', (event) => {
+  // Inert on localhost — don't precache into a dev origin.
+  if (IS_LOCALHOST) {
+    event.waitUntil(self.skipWaiting())
+    return
+  }
   event.waitUntil(
     caches
       .open(CACHE_NAME)
@@ -131,6 +152,10 @@ function isStaticAsset(url) {
 }
 
 self.addEventListener('fetch', (event) => {
+  // Never intercept on loopback origins — pass through to the dev server so
+  // `next dev` is never served stale, cache-first chunks by a leftover worker.
+  if (IS_LOCALHOST) return
+
   const { request } = event
   if (request.method !== 'GET') return
 
