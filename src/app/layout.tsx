@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/favicon.ico', sizes: '32x32' },
       { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -103,6 +103,23 @@ export default function RootLayout({
             __html: `(function(){try{var s=localStorage.getItem('theme');var m=window.matchMedia('(prefers-color-scheme: light)').matches;var light=(s==='light'||(!s&&m));if(light){document.documentElement.classList.add('light');}var mc=document.querySelector('meta[name="theme-color"]');if(mc){mc.setAttribute('content',light?'#F7F9FB':'#0B1220');}}catch(e){}})();`,
           }}
         />
+        {/* Dev self-heal: a service worker registered by a prior production
+            build or `next start` on this same origin (localhost) keeps
+            controlling the origin on later `next dev` runs, where its
+            cache-first `/_next/static/*` rule serves STALE JS chunks that no
+            longer match the dev server — breaking hydration ("a client-side
+            exception has occurred"), most visibly under Turbopack. This runs
+            before the app bundle and doesn't depend on React booting, so it
+            recovers even when a stale chunk kills hydration: unregister any
+            leftover SW, drop its caches, and reload once. Never rendered in
+            production, where the SW is a first-class feature. */}
+        {process.env.NODE_ENV !== 'production' && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(){try{if(!('serviceWorker'in navigator))return;navigator.serviceWorker.getRegistrations().then(function(rs){var had=rs.length>0;return Promise.all(rs.map(function(r){return r.unregister()})).then(function(){return typeof caches!=='undefined'?caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf('amp-')===0}).map(function(k){return caches.delete(k)}))}):null}).then(function(){try{if(had&&!sessionStorage.getItem('amp-sw-dev-cleared')){sessionStorage.setItem('amp-sw-dev-cleared','1');location.reload();}}catch(e){}});}).catch(function(){});}catch(e){}})();`,
+            }}
+          />
+        )}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} antialiased`}
