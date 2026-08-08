@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, Dna, BarChart3, FlaskConical, Search, Sparkles, Telescope } from 'lucide-react'
-import { PEPTIDES, CATEGORIES } from '@/lib/peptides'
+import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES } from '@/lib/peptides'
 import { STATIC_FAQS, faqPageJsonLd } from '@/lib/faqs'
 import FaqAccordion from '@/components/FaqAccordion'
 import DynamicFaqs from '@/components/DynamicFaqs'
@@ -230,7 +230,7 @@ export default function HomePage() {
               </h2>
 
               <p className="mb-6 max-w-md text-[15px] leading-relaxed text-ink/55">
-                Browse {PEPTIDES.length} research peptides across {CATEGORIES.length} categories — each
+                Browse {LISTED_PEPTIDES.length} research peptides across {CATEGORIES.length} categories — each
                 entry carries mechanism, sequence, and PubChem-enriched chemistry, with
                 manufacturing and quality context from the synthesis guide.
               </p>
@@ -241,7 +241,7 @@ export default function HomePage() {
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
                 <span className="text-xs text-ink/35">
-                  {PEPTIDES.filter((p) => p.fdaApproved).length} FDA-approved · {PEPTIDES.filter((p) => p.sequence).length} with full sequence
+                  {LISTED_PEPTIDES.filter((p) => p.fdaApproved).length} FDA-approved · {LISTED_PEPTIDES.filter((p) => p.sequence).length} with full sequence
                 </span>
               </div>
             </div>
@@ -270,7 +270,7 @@ export default function HomePage() {
                   )
                 })}
                 <span className="inline-flex items-center rounded-lg border border-dashed border-ink/[0.12] bg-transparent px-2.5 py-1.5 text-xs text-ink/40">
-                  +{PEPTIDES.length - SPOTLIGHT_SLUGS.length} more
+                  +{LISTED_PEPTIDES.length - SPOTLIGHT_SLUGS.length} more
                 </span>
               </div>
 
