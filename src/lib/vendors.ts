@@ -102,14 +102,18 @@ export interface Vendor {
 
 // ── Trust score ───────────────────────────────────────────────────────────────
 // Transparent, tunable 0–100 score derived ONLY from verifiable transparency
-// signals — never from commission. COA + independent testing dominate because
-// they're the signals that actually protect a researcher. Weights sum to 100.
+// signals — never from commission. Weighted toward what actually protects a
+// buyer: fulfillment and recourse (reship on loss, a refund policy) count for
+// more than lab paperwork. A published COA is by now a market-standard marketing
+// signal, and per-lot matching is not the fraud shield it's sold as — real fraud
+// in the established US market is low. Independent testing still counts; a static
+// COA checkbox is not the whole of trust. Keys ordered high → low. Sum to 100.
 export const TRUST_WEIGHTS = {
-  coaOnFile: 30,
-  thirdPartyTested: 30,
-  perBatchTesting: 20,
-  reshipPolicy: 10,
-  refundPolicy: 10,
+  reshipPolicy: 30,
+  refundPolicy: 25,
+  thirdPartyTested: 20,
+  coaOnFile: 15,
+  perBatchTesting: 10,
 } as const
 
 /** 0–100 trust score from a vendor's transparency signals. */
@@ -254,7 +258,7 @@ export const VENDORS: Vendor[] = [
       active: true,
     },
     notes:
-      'Trust signals reflect the vendor’s published claims (surfaced via search; the site blocks direct review), not independent verification. Testing lab is not named and refund/reship terms were not confirmed — request the third-party COA for your specific lot before any use.',
+      'Trust signals reflect the vendor’s published claims (surfaced via search; the site blocks direct review), not independent verification. Testing lab is not named and refund/reship terms were not confirmed.',
   },
   {
     id: 'apollo-peptide-sciences',
@@ -280,7 +284,7 @@ export const VENDORS: Vendor[] = [
       active: true,
     },
     notes:
-      'Trust signals reflect the vendor’s published claims, not independent verification. COAs are published but not confirmed as per-lot, no HPLC purity figure or testing lab is named — request and match the COA for your specific lot before any use.',
+      'Trust signals reflect the vendor’s published claims, not independent verification. COAs are published but not confirmed as per-lot, and no HPLC purity figure or testing lab is named.',
   },
   {
     id: 'spartan-peptides',
@@ -307,7 +311,7 @@ export const VENDORS: Vendor[] = [
       active: true,
     },
     notes:
-      'Trust signals reflect the vendor’s own published claims, not independent verification. Testing lab is unnamed; reship and refund terms are not stated; the stated purity bar is ≥98% (below the ≥99% several peers claim). Request and match the third-party COA for your specific lot before any use.',
+      'Trust signals reflect the vendor’s own published claims, not independent verification. Testing lab is unnamed; reship and refund terms are not stated; the stated purity bar is ≥98% (below the ≥99% several peers claim).',
   },
   {
     id: 'absim-peptides',
@@ -358,7 +362,7 @@ export const VENDORS: Vendor[] = [
       'ss-31', 'epitalon', 'semax', 'selank', 'dsip', 'kpv',
     ],
     notes:
-      'The published COA is one static certificate per SKU, not matched to your lot — request a lot-specific COA before use. Checkout requires an account; returns need photos within 7 days, and carrier loss or porch theft isn’t reshipped.',
+      'Checkout requires an account; returns are accepted within 7 days with photos.',
   },
 ]
 

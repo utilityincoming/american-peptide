@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { peptideHormoneUrl } from '@/lib/network'
 import { breadcrumbJsonLd, medicalWebPageJsonLd } from '@/lib/schema'
 import {
   ArrowRight,
@@ -110,6 +111,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
   const { slug } = await params
   const peptide = getPeptideBySlug(slug)
   if (!peptide) notFound()
+  const phUrl = peptideHormoneUrl(slug)
 
   const related = PEPTIDES.filter(
     (p) =>
@@ -720,6 +722,20 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 specific results.
               </p>
             </div>
+
+            {/* Sister-site monograph — only where PeptideHormone covers the molecule */}
+            {phUrl && (
+              <a
+                href={phUrl}
+                target="_blank"
+                rel="noopener"
+                className="flex items-center gap-2 rounded-2xl border border-accent/20 bg-accent/[0.05] px-4 py-3 text-[13px] font-medium text-accent transition-colors hover:bg-accent/10"
+              >
+                <BookOpen className="h-3.5 w-3.5 shrink-0" />
+                Full research monograph at PeptideHormone
+                <ArrowUpRight className="ml-auto h-3.5 w-3.5 shrink-0" />
+              </a>
+            )}
 
             {/* Disclaimer */}
             <div className="rounded-xl border border-amber-500/15 bg-amber-500/[0.04] px-4 py-3">

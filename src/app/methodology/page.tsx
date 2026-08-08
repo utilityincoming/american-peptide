@@ -240,9 +240,13 @@ export default function MethodologyPage() {
                 AmericanPeptide does not sell peptides. It points researchers to
                 external vendors — and the ranking is the whole product. Every
                 vendor earns a transparent 0&ndash;100 trust score derived{' '}
-                <em>only</em> from verifiable transparency signals. Certificate of
-                analysis and independent testing dominate the weighting because
-                they are the signals that actually protect a researcher.
+                <em>only</em> from verifiable transparency signals — weighted
+                toward what actually protects a buyer. Fulfillment and recourse
+                (reship on loss, a refund policy) count for more than lab
+                paperwork: a published COA is by now a market-standard marketing
+                signal, and per-lot matching isn&rsquo;t the fraud shield it&rsquo;s
+                sold as. Independent testing still counts — it just isn&rsquo;t the
+                whole of trust.
               </p>
             </div>
 
@@ -371,9 +375,7 @@ export default function MethodologyPage() {
               AmericanPeptide.com is an AI-assisted computational research
               platform, not a medical device or clinical decision-support system.
               Trust scores reflect vendors&rsquo; own published claims unless
-              stated otherwise and are not independent certification. Always
-              request and match the third-party COA for your specific lot before
-              any use.
+              stated otherwise and are not independent certification.
             </div>
           </section>
 
