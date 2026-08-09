@@ -19,6 +19,7 @@
   --accent-indigo: #818CF8;
   --accent-blue: #60A5FA;
   --accent-purple: #A78BFA;
+  --accent-amber: #F5B544; /* evidence-tier accent (vendor-reported / community) */
   --viz: #0B1220;          /* immersive viz "stage" — stays dark in both themes */
 
   --background: var(--surface);
@@ -34,6 +35,7 @@ html.light {
   --accent-indigo: #4F46E5;
   --accent-blue: #2563EB;
   --accent-purple: #7C3AED;
+  --accent-amber: #B45309; /* darker amber for legible text on light */
 }
 
 @theme inline {
@@ -47,6 +49,7 @@ html.light {
   --color-accent-indigo: var(--accent-indigo);
   --color-accent-blue: var(--accent-blue);
   --color-accent-purple: var(--accent-purple);
+  --color-accent-amber: var(--accent-amber);
   --color-viz: var(--viz);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
