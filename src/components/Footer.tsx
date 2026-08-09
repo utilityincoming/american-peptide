@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const LINKS = [
   { href: '/', label: 'Home' },
-  { href: '/catalog', label: 'Catalog' },
+  { href: '/tools/calculator-beta', label: 'Peptide Calculator (Beta)' },
   { href: '/us-peptides', label: 'Buy Peptides' },
   { href: '/compounds', label: 'Compounds' },
   { href: '/tools/reconstitution-calculator', label: 'Peptide Calculator' },
