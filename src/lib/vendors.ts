@@ -31,6 +31,13 @@ export interface VendorTrust {
   perBatchTesting: boolean
   /** Stated / verified purity, percent (e.g. 99). Omit if undisclosed. */
   purityPct?: number
+  /**
+   * ISO date of the published COA this purity rests on, when the vendor dates it.
+   * Feeds the purity claim's `retrieved_at` (Validation Tier Schema §4/§6) — the
+   * freshness a sourcing forum never shows. Left unset until a real, dated COA is
+   * on file; NEVER fabricated. Its absence is surfaced, not hidden.
+   */
+  coaDate?: string
   /** Reship-on-failure / lost-package policy exists. */
   reshipPolicy: boolean
   /** Refund / money-back policy exists. */
