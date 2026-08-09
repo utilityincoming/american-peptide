@@ -7,6 +7,7 @@ import {
   Ban,
   BadgeCheck,
   FlaskConical,
+  Layers,
   Microscope,
   Scale,
   ShieldCheck,
@@ -14,7 +15,15 @@ import {
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
 import { PEPTIDES } from '@/lib/peptides'
 import { PUBCHEM_VERIFIED } from '@/lib/verification'
-import { VENDORS, VENDOR_TIERS, TRUST_WEIGHTS } from '@/lib/vendors'
+import { VENDORS, VENDOR_TIERS, TRUST_WEIGHTS, type VendorTier } from '@/lib/vendors'
+import { TierBadge, EvidenceFloor } from '@/components/evidence'
+import {
+  molecularWeightClaim,
+  TIERS as TIER_META,
+  TIER_ORDER,
+  type Claim,
+  type Tier,
+} from '@/lib/evidence'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -331,6 +340,28 @@ export default function MethodologyPage() {
             <AffiliateDisclosure className="mt-4" />
           </section>
 
+          {/* ── Claim-tier provenance scale ── */}
+          <section>
+            <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <Layers className="h-3.5 w-3.5 text-accent" />
+              One scale under all of it: how every claim is tiered
+            </h2>
+            <div className="space-y-4 text-sm leading-relaxed text-ink/65">
+              <p>
+                The two systems above look separate — catalog chemistry checked
+                against a registry, vendors ranked by transparency — but they are
+                one idea applied twice: grade a claim by <em>where it came from</em>,
+                not by how confident it sounds. That scale runs under the whole
+                site, and it is shared with our sister reference, peptidehormone.com.
+                A molecular weight confirmed against PubChem is <em>reference</em>-grade.
+                An independently documented vendor backs a <em>third-party</em> purity
+                claim; a vendor that only states its own numbers backs a{' '}
+                <em>vendor-reported</em> one. Six tiers, strongest to weakest:
+              </p>
+            </div>
+            <ClaimTierScale />
+          </section>
+
           {/* ── 3. What we don't do ── */}
           <section>
             <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
@@ -407,6 +438,130 @@ function Stat({ value, label }: { value: string; label: string }) {
     <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-4">
       <p className="text-2xl font-bold tracking-tight text-ink/90">{value}</p>
       <p className="mt-1 text-[11px] leading-tight text-ink/40">{label}</p>
+    </div>
+  )
+}
+
+/* ── The claim-level provenance scale, rendered with the live badges ── */
+const CLAIM_TIER_GLOSS: Record<Tier, string> = {
+  reference:
+    'Deterministic lookup or computation — formula, molecular weight, a unit conversion. On this site: the PubChem cross-check.',
+  clinical: 'Peer-reviewed human data, or a registered trial with posted results.',
+  preclinical:
+    'Peer-reviewed non-human or in-vitro data — the rodent and cell-culture work behind most research peptides.',
+  third_party:
+    "An independent lab's assay, methods disclosed — the per-batch COA a documented vendor publishes.",
+  vendor_reported:
+    "A supplier's own claim about its own product, reproduced as reported — a claimed vendor's stated purity.",
+  community:
+    'Aggregated user-reported signal — protocol conventions, subjective effects, dosing folklore.',
+}
+
+// How the vendor trust bands (lib/vendors.ts) land on the claim scale — the
+// bridge the GHK-Cu source aggregator will formalize.
+const VENDOR_TIER_TO_CLAIM: Record<VendorTier, Tier> = {
+  documented: 'third_party',
+  claimed: 'vendor_reported',
+  unvetted: 'community',
+}
+
+function demoClaim(field: string, tier: Tier, kind: Claim['estimate_kind']): Claim {
+  return {
+    field,
+    value: '—',
+    tier,
+    freshness: 'current',
+    estimate_kind: kind,
+    scope_note: 'Illustrative record, for rendering the scale.',
+    provenance: {
+      source_type: 'aggregate',
+      source_name: 'illustrative',
+      retrieved_at: '2026-07-20',
+      schema_version: '0.1.0',
+    },
+  }
+}
+
+function ClaimTierScale() {
+  // A real reference-tier claim, straight from the PubChem verification manifest.
+  const mwClaim = molecularWeightClaim(PUBCHEM_VERIFIED['bpc-157'])
+  const floorClaims: Claim[] = [
+    ...(mwClaim ? [mwClaim] : []),
+    demoClaim('mechanism', 'preclinical', 'pharmacodynamic'),
+    demoClaim('listed_purity', 'vendor_reported', 'purity'),
+  ]
+
+  return (
+    <div className="mt-6 space-y-6 rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-6">
+      {/* Legend — six provenance tiers, strongest first */}
+      <ul className="space-y-3">
+        {TIER_ORDER.map((tier) => (
+          <li key={tier} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 sm:flex-nowrap">
+            <span className="inline-flex w-16 shrink-0 items-baseline">
+              <TierBadge tier={tier} />
+            </span>
+            <span className="w-28 shrink-0 text-sm font-semibold text-ink/85">
+              {TIER_META[tier].label}
+            </span>
+            <span className="basis-full text-[13px] leading-6 text-ink/55 sm:basis-0 sm:flex-1">
+              {CLAIM_TIER_GLOSS[tier]}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      {/* A real reference-tier claim from the verification manifest */}
+      {mwClaim && (
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-ink/[0.06] pt-5">
+          <span className="text-[11px] uppercase tracking-wide text-ink/40">
+            Reference tier, for real
+          </span>
+          <span className="text-sm font-medium text-ink/80">
+            BPC-157 · {mwClaim.value} {mwClaim.unit}
+          </span>
+          <TierBadge claim={mwClaim} showDate />
+          <a
+            href={mwClaim.provenance.source_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-accent hover:underline"
+          >
+            {mwClaim.provenance.source_id}
+          </a>
+        </div>
+      )}
+
+      {/* Vendor bands → claim tiers, and the computed page floor */}
+      <div className="flex flex-col gap-5 border-t border-ink/[0.06] pt-5 sm:flex-row sm:items-start sm:justify-between">
+        <div className="space-y-2">
+          <p className="text-[11px] uppercase tracking-wide text-ink/40">
+            Vendor bands map onto the scale
+          </p>
+          <ul className="space-y-1.5">
+            {VENDOR_TIERS.map((v) => (
+              <li key={v.id} className="flex items-center gap-2 text-[13px] text-ink/60">
+                <span className="w-40 shrink-0">{v.label}</span>
+                <span className="text-ink/30">→</span>
+                <TierBadge tier={VENDOR_TIER_TO_CLAIM[v.id]} />
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="space-y-2">
+          <p className="text-[11px] uppercase tracking-wide text-ink/40">A sourcing page&rsquo;s floor</p>
+          <EvidenceFloor claims={floorClaims} />
+        </div>
+      </div>
+
+      <p className="border-t border-ink/[0.06] pt-4 text-xs leading-5 text-ink/40">
+        The floor is the weakest load-bearing claim on a page: a compound with
+        PubChem-grade chemistry but only vendor-reported purity floors at{' '}
+        <em>vendor-reported</em>. That reconciliation is live for GHK-Cu — see the{' '}
+        <Link href="/sources/ghk-cu" className="text-accent hover:underline">
+          source aggregator
+        </Link>
+        , where each vendor&rsquo;s purity claim wears its tier.
+      </p>
     </div>
   )
 }
