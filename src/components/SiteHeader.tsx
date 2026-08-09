@@ -17,7 +17,6 @@ const NAV_LINKS = [
     label: 'Research',
     match: ['/research-areas', '/synthesis', '/learn', '/glossary', '/trials'],
   },
-  { href: '/compounds', label: 'Compounds', match: ['/compounds'] },
   { href: '/tools/reconstitution-calculator', label: 'Calculator', match: ['/tools'] },
 ] as const
 
