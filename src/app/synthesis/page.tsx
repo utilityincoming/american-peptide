@@ -21,6 +21,13 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import { STAGES, ECONOMICS, COLD_CHAIN } from '@/lib/synthesis'
+import {
+  PEPTIDES,
+  SYNTHESIS_DIFFICULTY_LABEL,
+  type Peptide,
+  type SynthesisDifficulty,
+  type SyntheticFeature,
+} from '@/lib/peptides'
 import SynthesisWalk from '@/components/SynthesisWalk'
 
 const SITE = 'https://americanpeptide.com'
@@ -81,6 +88,33 @@ export default function SynthesisPage() {
       },
     ],
   }
+
+  // ── Catalog through the synthesis lens ──
+  // Group the catalog by the per-peptide synthesis-difficulty grade, and rank
+  // the demanding column by feature-count so the richest examples surface first.
+  const difficultyOrder: SynthesisDifficulty[] = [
+    'standard',
+    'moderate',
+    'demanding',
+  ]
+  const featureCount = (p: Peptide) => p.syntheticFeatures?.length ?? 0
+  const byDifficulty = difficultyOrder.map((difficulty) => ({
+    difficulty,
+    peptides: PEPTIDES.filter((p) => p.synthesisDifficulty === difficulty).sort(
+      (a, b) =>
+        difficulty === 'demanding'
+          ? featureCount(b) - featureCount(a)
+          : a.name.localeCompare(b.name),
+    ),
+  }))
+
+  const featureCounts = new Map<SyntheticFeature, number>()
+  for (const p of PEPTIDES)
+    for (const f of p.syntheticFeatures ?? [])
+      featureCounts.set(f, (featureCounts.get(f) ?? 0) + 1)
+  const topFeatures = [...featureCounts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
 
   return (
     <div className="min-h-screen bg-surface text-ink">
@@ -232,6 +266,89 @@ export default function SynthesisPage() {
                 </div>
               )
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Catalog through the synthesis lens ── */}
+      <section className="border-t border-ink/[0.06] px-6 py-14 md:px-10">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
+            See it in the catalog
+          </h2>
+          <p className="mb-8 max-w-2xl text-sm leading-relaxed text-ink/50">
+            The pipeline above is abstract until you attach it to a molecule.
+            Every catalog entry is graded on how hard it is to synthesize and
+            purify to a genuine spec — a linear tripeptide is not a
+            disulfide-bridged, acylated 37-mer. Browse the catalog by what makes
+            a sequence difficult to make.
+          </p>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {byDifficulty.map(({ difficulty, peptides }) => {
+              const shown = peptides.slice(0, 8)
+              const rest = peptides.length - shown.length
+              return (
+                <div
+                  key={difficulty}
+                  className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5"
+                >
+                  <div className="mb-3 flex items-center justify-between">
+                    <span
+                      className={
+                        difficulty === 'demanding'
+                          ? 'inline-flex items-center gap-1.5 rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent'
+                          : 'inline-flex items-center gap-1.5 rounded-md border border-ink/[0.08] bg-ink/[0.03] px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-ink/55'
+                      }
+                    >
+                      <FlaskConical className="h-3 w-3" />
+                      {SYNTHESIS_DIFFICULTY_LABEL[difficulty]}
+                    </span>
+                    <span className="text-[11px] tabular-nums text-ink/35">
+                      {peptides.length}
+                    </span>
+                  </div>
+                  <ul className="flex flex-wrap gap-1.5">
+                    {shown.map((p) => (
+                      <li key={p.slug}>
+                        <Link
+                          href={`/catalog/${p.slug}`}
+                          className="inline-flex rounded-md border border-ink/[0.07] bg-ink/[0.02] px-2 py-1 text-[12px] text-ink/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                        >
+                          {p.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  {rest > 0 && (
+                    <Link
+                      href="/catalog"
+                      className="mt-3 inline-block text-[11px] text-accent/70 transition-colors hover:text-accent"
+                    >
+                      +{rest} more in the catalog →
+                    </Link>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+
+          <div className="mt-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.015] p-5">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-ink/35">
+              Browse by what makes it hard to make
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {topFeatures.map(([feature, count]) => (
+                <Link
+                  key={feature}
+                  href={`/catalog?synthesis=${encodeURIComponent(feature)}`}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/60 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                >
+                  {feature}
+                  <span className="tabular-nums text-ink/35">{count}</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
