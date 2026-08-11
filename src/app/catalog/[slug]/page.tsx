@@ -26,6 +26,8 @@ import {
 } from '@/lib/peptides'
 import { getAreasForPeptide } from '@/lib/research-areas'
 import { getPubchemVerification } from '@/lib/verification'
+import { molecularWeightClaim, molecularFormulaClaim } from '@/lib/evidence'
+import { TierBadge } from '@/components/evidence'
 import { getLatestResearch } from '@/lib/freshness'
 import AgentPrompt from '@/components/AgentPrompt'
 import PeptideStory from '@/components/PeptideStory'
@@ -590,19 +592,43 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 Identity
               </h3>
               <dl className="space-y-3 text-sm">
-                {peptide.molecularWeight && (
-                  <Row
-                    label="Molecular weight"
-                    value={`${peptide.molecularWeight.toLocaleString()} Da`}
-                  />
-                )}
-                {peptide.molecularFormula && (
-                  <Row
-                    label="Molecular formula"
-                    value={peptide.molecularFormula}
-                    mono
-                  />
-                )}
+                {(() => {
+                  // Reference-tier provenance on the two identity claims that are
+                  // cross-checked against PubChem — the badge carries the check
+                  // date, so the value shows not just what it is but when its
+                  // chemistry was last confirmed. The Standard, on every monograph.
+                  const verification = getPubchemVerification(peptide.slug)
+                  const mwClaim = molecularWeightClaim(verification)
+                  const mfClaim = molecularFormulaClaim(verification)
+                  return (
+                    <>
+                      {peptide.molecularWeight && (
+                        <Row
+                          label="Molecular weight"
+                          value={
+                            <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
+                              {`${peptide.molecularWeight.toLocaleString()} Da`}
+                              {mwClaim && <TierBadge claim={mwClaim} showDate />}
+                            </span>
+                          }
+                        />
+                      )}
+                      {peptide.molecularFormula && (
+                        <Row
+                          label="Molecular formula"
+                          value={
+                            <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
+                              <span className="break-all font-mono text-xs text-ink/85">
+                                {peptide.molecularFormula}
+                              </span>
+                              {mfClaim && <TierBadge claim={mfClaim} showDate />}
+                            </span>
+                          }
+                        />
+                      )}
+                    </>
+                  )
+                })()}
                 {peptide.sequence && (
                   <Row label="Sequence" value={peptide.sequence} mono />
                 )}
