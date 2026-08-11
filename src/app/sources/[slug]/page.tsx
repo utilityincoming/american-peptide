@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowRight, BadgeCheck, Layers } from 'lucide-react'
-import { getPeptideBySlug } from '@/lib/peptides'
+import { getPeptideBySlug, PEPTIDES } from '@/lib/peptides'
 import { PUBCHEM_VERIFIED } from '@/lib/verification'
 import { molecularFormulaClaim, molecularWeightClaim } from '@/lib/evidence'
 import { vendorPurityClaim } from '@/lib/evidence/from-vendors'
@@ -13,14 +13,19 @@ import SourceComparison from '@/components/SourceComparison'
 
 const SITE = 'https://americanpeptide.com'
 
-// Flagship for now: GHK-Cu, the Validation Tier Schema's primary use case. The
-// route generalizes to any compound with vendors + a PubChem record — expand by
-// adding slugs here. dynamicParams=false keeps unlisted slugs from generating
-// thin auto-built sourcing pages.
+// A sourcing page earns its place only where there's a real field to rank — a
+// compound at least two vendors carry. amino-club (peptides: 'all') covers every
+// compound, so the ≥2 threshold selects those a second vendor also stocks (today,
+// the ABSIM catalog). Single-vendor compounds would render a one-row "ranking",
+// so they 404 (dynamicParams=false) rather than ship thin sourcing pages. The
+// monograph's "Sources by evidence tier" link is gated by the same ≥2 rule, so a
+// link never points at a compound that 404s here.
 export const dynamicParams = false
 
 export function generateStaticParams() {
-  return [{ slug: 'ghk-cu' }]
+  return PEPTIDES.filter((p) => getVendorsForPeptide(p.slug).length >= 2).map(
+    (p) => ({ slug: p.slug }),
+  )
 }
 
 export async function generateMetadata({
