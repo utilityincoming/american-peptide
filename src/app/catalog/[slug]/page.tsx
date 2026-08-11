@@ -14,6 +14,7 @@ import {
   FlaskConical,
   HelpCircle,
   Info,
+  Layers,
   Newspaper,
   ShieldCheck,
   Snowflake,
@@ -715,10 +716,25 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
             {/* Marketplace panel — live trust-ranked vendors, else status */}
             {(() => {
               const vendors = getVendorsForPeptide(peptide.slug)
-              return vendors.length ? (
-                <MarketplacePanel vendors={vendors} slug={peptide.slug} />
-              ) : (
-                <MarketplaceComingSoon />
+              if (!vendors.length) return <MarketplaceComingSoon />
+              return (
+                <div className="space-y-2">
+                  <MarketplacePanel vendors={vendors} slug={peptide.slug} />
+                  {/* Deep link to the tiered sourcing aggregator — only where it
+                      exists (≥2 vendors), matching /sources generateStaticParams. */}
+                  {vendors.length >= 2 && (
+                    <Link
+                      href={`/sources/${peptide.slug}`}
+                      className="flex items-center justify-between gap-2 rounded-2xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.05] px-5 py-3.5 text-sm font-medium text-accent transition-colors hover:bg-[#2DD4A8]/[0.09]"
+                    >
+                      <span className="inline-flex items-center gap-2">
+                        <Layers className="h-4 w-4" strokeWidth={2} />
+                        Sources by evidence tier
+                      </span>
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  )}
+                </div>
               )
             })()}
 
