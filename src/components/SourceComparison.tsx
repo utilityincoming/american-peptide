@@ -17,9 +17,10 @@ import { TierBadge } from '@/components/evidence'
  * carry `slug`, ranked STRICTLY by the provenance tier of their purity claim
  * (documented → third_party, claimed → vendor_reported), with trustScore as the
  * within-tier order. Placement is by tier, not commission — the paid partner is
- * disclosed inline at its honest tier, never pinned above it. Undated COAs are
- * flagged, not hidden. Renders nothing on the Play (TWA) build, where the vendor
- * helpers gate outbound links.
+ * disclosed inline at its honest tier, never pinned above it. A missing COA date
+ * is surfaced rather than hidden, and read correctly: a warning for a static,
+ * reused certificate, a neutral note for a vendor that dates every lot. Renders
+ * nothing on the Play (TWA) build, where the vendor helpers gate outbound links.
  */
 export default function SourceComparison({ slug }: { slug: string }) {
   const vendors = getVendorsForPeptide(slug)
@@ -99,12 +100,25 @@ export default function SourceComparison({ slug }: { slug: string }) {
                         {hasPct ? `${claim.value}%` : 'Not stated'}
                       </span>
                       <TierBadge claim={claim} showDate />
-                      {!claim.provenance.retrieved_at && (
-                        <span className="inline-flex items-center gap-1 text-[11px] text-amber-400/80">
-                          <Info className="h-3 w-3 shrink-0" strokeWidth={2} />
-                          COA undated — request a lot-matched, dated COA
-                        </span>
-                      )}
+                      {!claim.provenance.retrieved_at &&
+                        (t.perBatchTesting ? (
+                          // A per-batch vendor has no single site-wide COA date
+                          // BY DESIGN — the date that matters is the one on your
+                          // lot's certificate. Flagging that as "undated" would
+                          // read as a deficiency when it's the stronger practice.
+                          <span className="inline-flex items-center gap-1 text-[11px] text-ink/45">
+                            <Info className="h-3 w-3 shrink-0" strokeWidth={2} />
+                            Dated per lot — match the report number on your vial&rsquo;s COA
+                          </span>
+                        ) : (
+                          // A static, reused COA is the case where a missing date
+                          // is genuinely load-bearing: nothing ties the paperwork
+                          // to the vial in the box.
+                          <span className="inline-flex items-center gap-1 text-[11px] text-amber-400/80">
+                            <Info className="h-3 w-3 shrink-0" strokeWidth={2} />
+                            COA undated — request a lot-matched, dated COA
+                          </span>
+                        ))}
                     </div>
 
                     {signals.length > 0 && (
