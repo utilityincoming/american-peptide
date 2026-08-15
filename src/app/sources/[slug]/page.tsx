@@ -7,7 +7,7 @@ import { PUBCHEM_VERIFIED } from '@/lib/verification'
 import { molecularFormulaClaim, molecularWeightClaim } from '@/lib/evidence'
 import { vendorPurityClaim } from '@/lib/evidence/from-vendors'
 import { computeEvidenceFloor, type Claim } from '@/lib/evidence/types'
-import { getVendorsForPeptide } from '@/lib/vendors'
+import { getVendorsForPeptide, hasSourcingPage } from '@/lib/vendors'
 import { TierBadge, EvidenceFloor } from '@/components/evidence'
 import SourceComparison from '@/components/SourceComparison'
 
@@ -15,17 +15,15 @@ const SITE = 'https://americanpeptide.com'
 
 // A sourcing page earns its place only where there's a real field to rank — a
 // compound at least two vendors carry. amino-club (peptides: 'all') covers every
-// compound, so the ≥2 threshold selects those a second vendor also stocks (today,
+// compound, so the threshold selects those a second vendor also stocks (today,
 // the ABSIM catalog). Single-vendor compounds would render a one-row "ranking",
 // so they 404 (dynamicParams=false) rather than ship thin sourcing pages. The
-// monograph's "Sources by evidence tier" link is gated by the same ≥2 rule, so a
-// link never points at a compound that 404s here.
+// /sources index, the sitemap, and the monograph's "Sources by evidence tier"
+// link all gate on the same hasSourcingPage(), so no link points at a 404.
 export const dynamicParams = false
 
 export function generateStaticParams() {
-  return PEPTIDES.filter((p) => getVendorsForPeptide(p.slug).length >= 2).map(
-    (p) => ({ slug: p.slug }),
-  )
+  return PEPTIDES.filter((p) => hasSourcingPage(p.slug)).map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({
@@ -219,6 +217,7 @@ export default async function SourcesPage({
         <section className="flex flex-wrap gap-3">
           {[
             { href: `/catalog/${slug}`, label: `${peptide.name} in the catalog` },
+            { href: '/sources', label: 'Every ranked source' },
             { href: '/methodology', label: 'How the tiers work — the Standard' },
             { href: '/tools/coa-decoder', label: 'Decode a COA' },
           ].map((l) => (
