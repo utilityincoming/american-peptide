@@ -4,6 +4,8 @@
 // so a slow or oversized upstream response cannot stall the request or blow up
 // model context / cost.
 
+import { pubchemFetch } from '@/lib/pubchem-fetch'
+
 export interface AgentTool {
   name: string
   description: string
@@ -91,6 +93,15 @@ async function fetchJson(url: string): Promise<unknown> {
   }
 }
 
+// PubChem gets its own door: shared rate limiting + retry on throttling, which
+// the other upstreams (ClinicalTrials, PubMed) neither need nor should share a
+// budget with. See lib/pubchem-fetch.ts.
+async function fetchPubchemJson(url: string): Promise<unknown> {
+  const res = await pubchemFetch(url, { timeoutMs: TOOL_TIMEOUT_MS })
+  if (!res?.ok) throw new Error(`HTTP ${res?.status ?? 'throttled'}`)
+  return await res.json()
+}
+
 // Narrow helper: read a nested path defensively from an unknown JSON value.
 function pick(obj: unknown, ...keys: (string | number)[]): unknown {
   let cur: unknown = obj
@@ -103,12 +114,14 @@ function pick(obj: unknown, ...keys: (string | number)[]): unknown {
 
 async function searchPubchem(name: string): Promise<string> {
   const enc = encodeURIComponent(name)
-  const cidData = await fetchJson(
+  // Two calls per lookup — this pair is why pacing had to move to the request
+  // level: they fire back-to-back, so a per-peptide sleep never saw them.
+  const cidData = await fetchPubchemJson(
     `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${enc}/cids/JSON`,
   )
   const cid = pick(cidData, 'IdentifierList', 'CID', 0)
   if (cid == null) return `No PubChem compound found for "${name}".`
-  const props = await fetchJson(
+  const props = await fetchPubchemJson(
     `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${cid}/property/MolecularFormula,MolecularWeight,IUPACName,CanonicalSMILES/JSON`,
   )
   const p = pick(props, 'PropertyTable', 'Properties', 0) as Record<string, unknown> | undefined
