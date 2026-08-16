@@ -13,7 +13,29 @@ const base = process.argv[2] || 'http://localhost:3000'
 const bearer = process.argv[3]
 const url = `${base.replace(/\/$/, '')}/api/jobs/fact-qa?format=manifest`
 
-const res = await fetch(url, bearer ? { headers: { Authorization: `Bearer ${bearer}` } } : {})
+// The pass paces itself against PubChem's rate limit, so it takes ~1 minute in
+// good conditions. Bound it explicitly: undici's own 300s headers timeout would
+// otherwise surface a bare UND_ERR_HEADERS_TIMEOUT with nothing about what was
+// being attempted. The circuit breaker in lib/pubchem-fetch.ts should make a
+// blocked run finish long before this fires.
+const TIMEOUT_MS = 240_000
+
+let res
+try {
+  res = await fetch(url, {
+    ...(bearer ? { headers: { Authorization: `Bearer ${bearer}` } } : {}),
+    signal: AbortSignal.timeout(TIMEOUT_MS),
+  })
+} catch (err) {
+  const timedOut = err?.name === 'TimeoutError' || err?.cause?.code === 'UND_ERR_HEADERS_TIMEOUT'
+  console.error(
+    timedOut
+      ? `Manifest pass exceeded ${TIMEOUT_MS / 1000}s. PubChem is likely refusing this host, ` +
+          'so lookups are retrying and stalling. Nothing was written.'
+      : `Manifest fetch failed: ${err}`,
+  )
+  process.exit(1)
+}
 if (!res.ok) {
   console.error(`Manifest fetch failed: HTTP ${res.status}`)
   process.exit(1)
