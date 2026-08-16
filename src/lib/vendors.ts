@@ -18,6 +18,7 @@
 // is a separate lever with its own rules — see Vendor.spotlight.
 
 import { IS_APP_BUILD } from '@/lib/platform'
+import { getPeptideBySlug, type SyntheticFeature } from '@/lib/peptides'
 
 /** Region codes a vendor ships to (ISO-ish, plus 'global'). */
 export type ShipRegion = 'us' | 'eu' | 'uk' | 'ca' | 'au' | 'asia' | 'global'
@@ -301,6 +302,52 @@ export const VENDORS: Vendor[] = [
   },
 ]
 
+// ── What "all" actually means ─────────────────────────────────────────────────
+//
+// `peptides: 'all'` is a claim WE make on a broad-catalog vendor's behalf — a
+// shorthand for "stocks the research-peptide market", not a per-SKU list they
+// published. Taken literally it credits a research-peptide distributor with
+// carrying every entry in the catalog, including compounds nobody sells that
+// way: recombinant biologics grown in bioreactors, monoclonal antibodies, and
+// the endogenous hormones the catalog documents for reference. Rendering
+// "where to source" on those pages asserts availability we never verified,
+// which is precisely the unearned claim the rest of this file exists to refuse.
+//
+// So 'all' is bounded by what the CATALOG DATA already knows, rather than by a
+// hand-maintained list that would silently rot as entries are added:
+//
+//   1. The `peptide-hormone` class — native hormones carried for synthesis and
+//      medicinal-chemistry education. That class page says in its own words that
+//      it is not purchasing guidance; this makes the sourcing layer agree.
+//   2. Compounds whose synthetic route is not peptide synthesis at all —
+//      `Recombinant protein` and `Monoclonal antibody`. A peptide distributor
+//      does not run a mammalian-cell expression line.
+//
+// Deliberately still covered: `Small molecule` (NAD+ and 5-amino-1MQ are staples
+// of exactly these catalogs) and `Tissue extract` (the bioregulator market).
+// Excluding those would under-claim, which is its own kind of wrong.
+//
+// This bounds ONLY the 'all' shorthand. An explicit `peptides: [...]` list is
+// the vendor's own published claim and is always honored verbatim — if a vendor
+// states it carries insulin, that is their statement to make, not ours.
+
+const NON_PEPTIDE_ROUTES: SyntheticFeature[] = [
+  'Recombinant protein',
+  'Monoclonal antibody',
+]
+
+/**
+ * Whether a broad-catalog ('all') vendor can be credited with carrying `slug`.
+ * Unknown slugs stay covered — absence from the catalog is not evidence about
+ * how a compound is made, and every real caller passes a catalog slug.
+ */
+export function coveredByBroadCatalog(slug: string): boolean {
+  const p = getPeptideBySlug(slug)
+  if (!p) return true
+  if (p.categories.includes('peptide-hormone')) return false
+  return !p.syntheticFeatures?.some((f) => NON_PEPTIDE_ROUTES.includes(f))
+}
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 /** Vendors known to carry a given peptide, best-trust first. */
@@ -310,7 +357,9 @@ export function getVendorsForPeptide(slug: string): Vendor[] {
   return VENDORS.filter(
     (v) =>
       v.directoryListed !== false &&
-      (v.peptides === 'all' || v.peptides.includes(slug)),
+      (v.peptides === 'all'
+        ? coveredByBroadCatalog(slug)
+        : v.peptides.includes(slug)),
   ).sort((a, b) => trustScore(b) - trustScore(a))
 }
 
