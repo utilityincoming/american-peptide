@@ -36,6 +36,14 @@ export interface VendorTrust {
    * Feeds the purity claim's `retrieved_at` (Validation Tier Schema §4/§6) — the
    * freshness a sourcing forum never shows. Left unset until a real, dated COA is
    * on file; NEVER fabricated. Its absence is surfaced, not hidden.
+   *
+   * Both current vendors legitimately leave this unset, for OPPOSITE reasons, and
+   * neither is a gap to be filled in later:
+   *   - amino-club tests per batch, so the only meaningful date is the one on the
+   *     buyer's own lot certificate. A single site-wide date would misdescribe it.
+   *   - absim-peptides publishes one static COA image per product and states no
+   *     purity figure at all, so there is no dated claim for a date to qualify.
+   * A CMS upload timestamp is not a COA issue date — don't substitute one.
    */
   coaDate?: string
   /** Reship-on-failure / lost-package policy exists. */
@@ -304,6 +312,21 @@ export function getVendorsForPeptide(slug: string): Vendor[] {
       v.directoryListed !== false &&
       (v.peptides === 'all' || v.peptides.includes(slug)),
   ).sort((a, b) => trustScore(b) - trustScore(a))
+}
+
+/**
+ * Minimum vendors a compound needs before a /sources page earns its place. A
+ * one-row "ranking" isn't a comparison, so single-vendor compounds get no page.
+ */
+export const SOURCING_PAGE_MIN_VENDORS = 2
+
+/**
+ * Whether a compound has a real field to rank — the single gate behind the
+ * /sources index, its static params, the sitemap, and the monograph's deep link.
+ * Keeping one definition is what stops a link from pointing at a 404.
+ */
+export function hasSourcingPage(slug: string): boolean {
+  return getVendorsForPeptide(slug).length >= SOURCING_PAGE_MIN_VENDORS
 }
 
 /** All directory-listed vendors, best-trust first. */

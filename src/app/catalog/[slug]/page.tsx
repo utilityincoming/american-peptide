@@ -38,6 +38,7 @@ import LastUpdated from '@/components/LastUpdated'
 import {
   getSpotlightVendor,
   getVendorsForPeptide,
+  hasSourcingPage,
   trustScore,
   vendorHref,
   vendorsByTier,
@@ -721,8 +722,8 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 <div className="space-y-2">
                   <MarketplacePanel vendors={vendors} slug={peptide.slug} />
                   {/* Deep link to the tiered sourcing aggregator — only where it
-                      exists (≥2 vendors), matching /sources generateStaticParams. */}
-                  {vendors.length >= 2 && (
+                      exists, gated by the same rule /sources generates from. */}
+                  {hasSourcingPage(peptide.slug) && (
                     <Link
                       href={`/sources/${peptide.slug}`}
                       className="flex items-center justify-between gap-2 rounded-2xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.05] px-5 py-3.5 text-sm font-medium text-accent transition-colors hover:bg-[#2DD4A8]/[0.09]"

@@ -3,6 +3,7 @@ import { PEPTIDES, CATEGORIES } from '@/lib/peptides'
 import { RESEARCH_AREAS } from '@/lib/research-areas'
 import { GLOSSARY } from '@/lib/glossary'
 import { COMPARISONS } from '@/lib/comparisons'
+import { hasSourcingPage } from '@/lib/vendors'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -12,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '', priority: 1.0 },
     // ── Sourcing / trust standard ─────────────────────────
     { path: '/us-peptides', priority: 0.9 },
+    { path: '/sources', priority: 0.9 },
+    { path: '/methodology', priority: 0.9 },
     // ── GLP-1 / Metabolic cluster ─────────────────────────
     { path: '/glp-1', priority: 0.9 },
     // ── Healing & Repair cluster ──────────────────────────
@@ -75,6 +78,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
+  // Sourcing pages exist only for compounds with a real field to rank, so the
+  // sitemap derives from the same gate the pages generate from — a compound
+  // gaining or losing a second vendor updates both at once, never just one.
+  const sourceRoutes = PEPTIDES.filter((p) => hasSourcingPage(p.slug)).map((p) => ({
+    url: `${SITE}/sources/${p.slug}`,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }))
+
   const comparisonRoutes = COMPARISONS.map((c) => ({
     url: `${SITE}/compare/${c.slug}`,
     changeFrequency: 'monthly' as const,
@@ -87,6 +99,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...researchAreaRoutes,
     ...glossaryRoutes,
     ...peptideRoutes,
+    ...sourceRoutes,
     ...comparisonRoutes,
   ]
 }
