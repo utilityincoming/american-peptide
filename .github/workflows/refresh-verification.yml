@@ -60,9 +60,42 @@ jobs:
         if: always()
         run: kill "$SERVER_PID" 2>/dev/null || true
 
+      # The build above ran against the OLD manifest — it started the server that
+      # produced the new one. Everything below re-checks the file we are actually
+      # about to propose, because until now nothing had.
+
+      # Catches the failure a build cannot: an empty or collapsed manifest is
+      # valid TypeScript and degrades gracefully at runtime, so it compiles and
+      # renders clean while every "verified" badge quietly vanishes.
+      - name: Sanity-check the manifest delta
+        run: node scripts/check-verification-delta.mjs --summary /tmp/manifest-delta.md
+
+      - name: Typecheck the new manifest
+        run: node node_modules/typescript/bin/tsc --noEmit
+
+      - name: Rebuild with the new manifest
+        run: npm run build
+
+      - name: Load delta summary
+        id: delta
+        run: |
+          {
+            echo 'summary<<DELTA_EOF'
+            cat /tmp/manifest-delta.md
+            echo DELTA_EOF
+          } >> "$GITHUB_OUTPUT"
+
       - name: Open PR if the manifest changed
         uses: peter-evans/create-pull-request@v6
         with:
+          # GitHub deliberately does not trigger workflows for events raised by
+          # the default GITHUB_TOKEN — it is how Actions avoids infinite loops.
+          # The practical consequence is that PRs opened here get NO Quality
+          # guard run, which is why the checks above had to move into this job.
+          # Set a WORKFLOW_PAT repo secret (a fine-grained PAT with contents +
+          # pull-requests write) and the PR starts triggering the guard like any
+          # human one; without it this falls back and the in-job checks stand in.
+          token: ${{ secrets.WORKFLOW_PAT || github.token }}
           add-paths: src/lib/verification.ts
           branch: chore/refresh-verification
           delete-branch: true
@@ -76,6 +109,20 @@ jobs:
             formula / weight) shifted or a new entry became verifiable. Review
             the diff before merging — it updates the on-page "verified" badges
             and their `checkedAt` dates.
+
+            ```
+            ${{ steps.delta.outputs.summary }}
+            ```
+
+            **Removals deserve a read.** An entry leaving this manifest means a
+            compound lost its verified chemistry on the site. The job hard-fails
+            on a wholesale collapse, so anything that reaches you here is small
+            enough to be real drift — but it is still a real loss.
+
+            Checked in-job before this PR was opened: manifest delta, `tsc`, and
+            a full `next build` against the regenerated file. (Unless a
+            `WORKFLOW_PAT` secret is set, PRs from this job cannot trigger the
+            Quality guard workflow — see the comment in the workflow file.)
 
             Empty diff ⇒ no PR is opened.
           labels: automated, verification
