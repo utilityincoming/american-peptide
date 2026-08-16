@@ -1,12 +1,13 @@
 import Link from 'next/link'
-import { IS_APP_BUILD } from '@/lib/platform'
 
+// /sources is deliberately NOT listed here. The sourcing index earns a footer
+// slot only once it shows it helps readers; until then it stays reachable the
+// way it was designed to be found — from the monograph of a compound someone is
+// already reading, plus the sitemap for search. Site-wide navigation is the
+// claim that everyone needs it, and that claim isn't evidenced yet.
 const LINKS = [
   { href: '/', label: 'Home' },
   { href: '/us-peptides', label: 'Buy Peptides' },
-  // The sourcing index renders only where vendor data does — it 404s on the
-  // reference-only Play (TWA) build, so it isn't advertised there.
-  ...(IS_APP_BUILD ? [] : [{ href: '/sources', label: 'Sources by Tier' }]),
   { href: '/compounds', label: 'Compounds' },
   { href: '/tools/calculator-beta', label: 'Peptide Calculator Beta' },
   { href: '/developers', label: 'Developers / API' },
