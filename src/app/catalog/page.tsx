@@ -20,6 +20,7 @@ import {
   CATEGORIES,
   type Peptide,
   type PeptideCategory,
+  type SyntheticFeature,
 } from '@/lib/peptides'
 import WaitlistForm from '@/components/WaitlistForm'
 import OfflineReference from '@/components/OfflineReference'
@@ -27,9 +28,20 @@ import OfflineReference from '@/components/OfflineReference'
 const MAX_COMPARE = 4
 const STORAGE_KEY = 'amp-catalog-compare-selected'
 
+// Synthetic-feature facet — derived once from the catalog so the chip row stays
+// in sync with the data. Ordered by how many peptides carry each feature.
+const FEATURES: SyntheticFeature[] = (() => {
+  const counts = new Map<SyntheticFeature, number>()
+  for (const p of PEPTIDES)
+    for (const f of p.syntheticFeatures ?? [])
+      counts.set(f, (counts.get(f) ?? 0) + 1)
+  return [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([f]) => f)
+})()
+
 export default function CatalogPage() {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState<PeptideCategory | null>(null)
+  const [feature, setFeature] = useState<SyntheticFeature | null>(null)
   const [selected, setSelected] = useState<string[]>([])
 
   useEffect(() => {
@@ -44,6 +56,31 @@ export default function CatalogPage() {
           .slice(0, MAX_COMPARE)
         setSelected(valid)
       }
+    } catch {
+      /* ignore */
+    }
+  }, [])
+
+  // Deep-link support: arrive from a detail-page chip via ?synthesis=<feature>.
+  useEffect(() => {
+    try {
+      const f = new URLSearchParams(window.location.search).get('synthesis')
+      if (f && FEATURES.includes(f as SyntheticFeature)) {
+        setFeature(f as SyntheticFeature)
+      }
+    } catch {
+      /* ignore */
+    }
+  }, [])
+
+  // Keep the URL in sync so the active facet is shareable and survives reload.
+  const selectFeature = useCallback((f: SyntheticFeature | null) => {
+    setFeature(f)
+    try {
+      const url = new URL(window.location.href)
+      if (f) url.searchParams.set('synthesis', f)
+      else url.searchParams.delete('synthesis')
+      window.history.replaceState(null, '', url)
     } catch {
       /* ignore */
     }
@@ -74,13 +111,14 @@ export default function CatalogPage() {
     const source = q ? PEPTIDES : LISTED_PEPTIDES
     return source.filter((p) => {
       if (active && !p.categories.includes(active)) return false
+      if (feature && !(p.syntheticFeatures ?? []).includes(feature)) return false
       if (!q) return true
       const hay = [p.name, p.shortDescription, ...(p.aliases ?? [])]
         .join(' ')
         .toLowerCase()
       return hay.includes(q)
     })
-  }, [query, active])
+  }, [query, active, feature])
 
   const atCap = selected.length >= MAX_COMPARE
 
@@ -175,6 +213,26 @@ export default function CatalogPage() {
               </Chip>
             ))}
           </div>
+
+          {/* Synthetic-feature chips — browse by what makes a sequence hard to make */}
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="mr-0.5 inline-flex items-center gap-1 text-[10.5px] font-semibold uppercase tracking-wider text-ink/35">
+              <FlaskConical className="h-3 w-3" />
+              Synthesis
+            </span>
+            <Chip active={feature === null} onClick={() => selectFeature(null)}>
+              Any
+            </Chip>
+            {FEATURES.map((f) => (
+              <Chip
+                key={f}
+                active={feature === f}
+                onClick={() => selectFeature(feature === f ? null : f)}
+              >
+                {f}
+              </Chip>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -187,12 +245,14 @@ export default function CatalogPage() {
             <span>
               {filtered.length} result{filtered.length === 1 ? '' : 's'}
               {active ? ` in ${CATEGORIES.find((c) => c.id === active)?.label}` : ''}
+              {feature ? ` with ${feature}` : ''}
             </span>
-            {(query || active) && (
+            {(query || active || feature) && (
               <button
                 onClick={() => {
                   setQuery('')
                   setActive(null)
+                  selectFeature(null)
                 }}
                 className="text-accent/80 transition-colors hover:text-accent"
               >

@@ -5,6 +5,7 @@ import {
   PEPTIDES,
   CATEGORIES,
   getPeptideBySlug,
+  SYNTHESIS_DIFFICULTY_LABEL,
   type Peptide,
 } from '@/lib/peptides'
 
@@ -47,13 +48,13 @@ export async function generateMetadata({
     return {
       title: 'Compare peptides — AmericanPeptide.com Catalog',
       description:
-        'Side-by-side comparison of research peptides — sequence, molecular weight, mechanism, FDA status, and PubChem identifiers.',
+        'Side-by-side comparison of research peptides — sequence, molecular weight, mechanism, synthesis difficulty, FDA status, and PubChem identifiers.',
     }
   }
   const names = peptides.map((p) => p.name).join(' vs ')
   return {
     title: `Compare: ${names} — AmericanPeptide.com Catalog`,
-    description: `Side-by-side comparison of ${names}: sequence, molecular weight, mechanism, FDA status, and PubChem identifiers.`,
+    description: `Side-by-side comparison of ${names}: sequence, molecular weight, mechanism, synthesis difficulty, FDA status, and PubChem identifiers.`,
     alternates: {
       canonical: `${SITE}/catalog/compare?ids=${peptides
         .map((p) => p.slug)
@@ -127,7 +128,8 @@ export default async function ComparePage({ searchParams }: Props) {
           </h1>
           <p className="max-w-2xl text-sm leading-relaxed text-ink/55 md:text-base">
             Side-by-side reference for sequence, molecular weight, mechanism,
-            and approval status. Add or remove peptides from the{' '}
+            synthesis difficulty, and approval status. Add or remove peptides
+            from the{' '}
             <Link
               href="/catalog"
               className="text-accent underline-offset-2 hover:underline"
@@ -250,6 +252,40 @@ const ROWS: Row[] = [
         </code>
       ) : (
         <Dash />
+      ),
+  },
+  {
+    label: 'Synthesis difficulty',
+    render: (p) =>
+      p.synthesisDifficulty ? (
+        <span
+          className="inline-flex items-center rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent"
+          title="Relative difficulty of synthesizing and purifying to a genuine spec"
+        >
+          {SYNTHESIS_DIFFICULTY_LABEL[p.synthesisDifficulty]}
+        </span>
+      ) : (
+        <Dash />
+      ),
+  },
+  {
+    label: 'Synthetic features',
+    render: (p) =>
+      p.syntheticFeatures && p.syntheticFeatures.length > 0 ? (
+        <div className="flex flex-wrap gap-1">
+          {p.syntheticFeatures.map((f) => (
+            <Link
+              key={f}
+              href={`/catalog?synthesis=${encodeURIComponent(f)}`}
+              title={`Browse peptides with: ${f}`}
+              className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-1.5 py-0.5 text-[10.5px] font-medium text-ink/60 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+            >
+              {f}
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <span className="text-[11px] text-ink/35">No notable modifications</span>
       ),
   },
   {
