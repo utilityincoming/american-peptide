@@ -12,6 +12,7 @@
 
 import { PEPTIDES, type Peptide } from '@/lib/peptides'
 import { executeAgentTool } from '@/lib/agent-tools'
+import { pubchemFetch } from '@/lib/pubchem-fetch'
 import { MODELS, shouldFailover } from '@/lib/models'
 
 const WEIGHT_TOLERANCE_FRAC = 0.005 // 0.5% — accommodates salt-form / rounding differences
@@ -54,14 +55,11 @@ interface PubchemEvidence {
 // Direct property lookup by CID — authoritative, no name-resolution ambiguity.
 async function pubchemByCid(cid: number): Promise<PubchemEvidence | null> {
   try {
-    const ctrl = new AbortController()
-    const timer = setTimeout(() => ctrl.abort(), 8000)
-    const res = await fetch(
+    // Rate-limited + retried on throttling — see lib/pubchem-fetch.ts.
+    const res = await pubchemFetch(
       `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${cid}/property/MolecularFormula,MolecularWeight/JSON`,
-      { signal: ctrl.signal, headers: { Accept: 'application/json' } },
     )
-    clearTimeout(timer)
-    if (!res.ok) return null
+    if (!res?.ok) return null
     const data = (await res.json()) as {
       PropertyTable?: { Properties?: Array<{ MolecularFormula?: string; MolecularWeight?: string }> }
     }
@@ -476,9 +474,12 @@ export interface VerificationRecord {
 //     sanity — rejects wrong-compound hits like KPV→C11H12O3) AND its weight
 //     matches the catalog within tolerance.
 // Only confident matches earn the badge, so the "verified" claim stays honest.
+// Pacing is NOT done here. This loop used to sleep between peptides, which
+// undercounted every entry that costs two PubChem calls; lib/pubchem-fetch.ts
+// now spaces the requests themselves, so adding a delay here would only make
+// the pass slower without making it politer.
 export async function buildVerificationManifest(
   checkedAt: string,
-  delayMs = 350,
 ): Promise<Record<string, VerificationRecord>> {
   const out: Record<string, VerificationRecord> = {}
   for (const peptide of PEPTIDES) {
@@ -507,9 +508,12 @@ export async function buildVerificationManifest(
         }
       }
     } catch {
-      // skip entries that error — they simply don't earn a badge
+      // Skip entries that error — they simply don't earn a badge. This swallow
+      // is why a throttled pass used to disappear silently: it cannot tell "not
+      // in PubChem" from "PubChem refused us". pubchemFetch retries first so a
+      // 503 rarely reaches here, and scripts/check-verification-delta.mjs
+      // catches the mass-loss case that a per-entry catch structurally can't.
     }
-    if (delayMs) await new Promise((r) => setTimeout(r, delayMs))
   }
   return out
 }
