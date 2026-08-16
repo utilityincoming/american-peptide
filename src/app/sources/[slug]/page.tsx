@@ -14,10 +14,12 @@ import SourceComparison from '@/components/SourceComparison'
 const SITE = 'https://americanpeptide.com'
 
 // A sourcing page earns its place only where there's a real field to rank — a
-// compound at least two vendors carry. amino-club (peptides: 'all') covers every
-// compound, so the threshold selects those a second vendor also stocks (today,
-// the ABSIM catalog). Single-vendor compounds would render a one-row "ranking",
-// so they 404 (dynamicParams=false) rather than ship thin sourcing pages. The
+// compound at least two vendors carry. amino-club (peptides: 'all') covers the
+// research-peptide catalog but NOT the reference entries biologics, antibodies,
+// and native hormones (see coveredByBroadCatalog), so the threshold selects the
+// compounds a second vendor also stocks (today, the ABSIM catalog).
+// Single-vendor compounds would render a one-row "ranking", so they 404
+// (dynamicParams=false) rather than ship thin sourcing pages. The
 // /sources index, the sitemap, and the monograph's "Sources by evidence tier"
 // link all gate on the same hasSourcingPage(), so no link points at a 404.
 export const dynamicParams = false

@@ -27,6 +27,7 @@ import {
   type Peptide,
 } from '@/lib/peptides'
 import { getAreasForPeptide } from '@/lib/research-areas'
+import { IS_APP_BUILD } from '@/lib/platform'
 import { getPubchemVerification } from '@/lib/verification'
 import { molecularWeightClaim, molecularFormulaClaim } from '@/lib/evidence'
 import { TierBadge } from '@/components/evidence'
@@ -743,7 +744,15 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
             {/* Marketplace panel — live trust-ranked vendors, else status */}
             {(() => {
               const vendors = getVendorsForPeptide(peptide.slug)
-              if (!vendors.length) return <MarketplaceComingSoon />
+              // No vendors means two different things. On the Play build it's
+              // the whole directory being hidden; on the web it's a compound the
+              // peptide market doesn't supply. Same emptiness, opposite reasons.
+              if (!vendors.length)
+                return IS_APP_BUILD ? (
+                  <MarketplaceComingSoon />
+                ) : (
+                  <ReferenceCompoundPanel peptide={peptide} />
+                )
               return (
                 <div className="space-y-2">
                   <MarketplacePanel vendors={vendors} slug={peptide.slug} />
@@ -868,12 +877,14 @@ function Row({
   )
 }
 
-// Reference-only fallback — shown when there are no directory vendors to rank,
-// which in practice is only the Play (TWA) build (IS_APP_BUILD hides outbound
-// vendor links). The trust-ranked affiliate directory is the CURRENT sourcing
-// layer. A first-party escrow / COA-custody marketplace remains a TABLED future
-// direction (a good idea, not yet built) — deliberately not teased here so we
-// don't promise a product that isn't live. This platform never sells peptides.
+// Reference-only fallback for the Play (TWA) build, where IS_APP_BUILD hides
+// every outbound vendor link. Its copy points the reader to the web, so it must
+// never render ON the web — a compound with no vendors there is a different
+// situation entirely, handled by ReferenceCompoundPanel below. The trust-ranked
+// affiliate directory is the CURRENT sourcing layer. A first-party escrow /
+// COA-custody marketplace remains a TABLED future direction (a good idea, not
+// yet built) — deliberately not teased here so we don't promise a product that
+// isn't live. This platform never sells peptides.
 function MarketplaceComingSoon() {
   return (
     <div className="overflow-hidden rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-5">
@@ -887,6 +898,48 @@ function MarketplaceComingSoon() {
         This edition is a research reference only — no supplier listings or
         pricing. AmericanPeptide never sells peptides; sourcing is handled on the
         web through an independently trust-ranked vendor directory.
+      </p>
+    </div>
+  )
+}
+
+// Shown on the web for a compound the research-peptide market doesn't supply:
+// a recombinant biologic, a monoclonal antibody, or an endogenous hormone the
+// catalog documents for reference. Saying so plainly is the point — the failure
+// mode this replaces was a broad-catalog vendor being credited with stocking
+// secretin. An empty sourcing panel would read as "we haven't found sources
+// yet"; this says there are none to find, and why.
+function ReferenceCompoundPanel({ peptide }: { peptide: Peptide }) {
+  const isHormone = peptide.categories.includes('peptide-hormone')
+  const features = peptide.syntheticFeatures ?? []
+  const route = features.includes('Monoclonal antibody')
+    ? 'a monoclonal antibody grown in mammalian cell culture'
+    : features.includes('Recombinant protein')
+      ? 'a recombinant protein expressed in living cells, not assembled by peptide synthesis'
+      : null
+
+  return (
+    <div className="overflow-hidden rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-5">
+      <div className="mb-2 flex items-center gap-2">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-ink/10 bg-ink/[0.04] text-ink/50">
+          <BookOpen className="h-3.5 w-3.5" strokeWidth={1.75} />
+        </div>
+        <h3 className="text-sm font-semibold">Reference entry — no sources listed</h3>
+      </div>
+      <p className="text-[13px] leading-relaxed text-ink/55">
+        {peptide.name} is documented here for its chemistry and history, not as
+        something to source.{' '}
+        {route
+          ? `It is ${route}, so it does not come from the research-peptide market at all.`
+          : isHormone
+            ? 'It is a native hormone the catalog carries as a reference point for the analogs engineered from it.'
+            : ''}{' '}
+        None of the vendors we track has published a claim to carry it, and we
+        will not infer one from a broad &ldquo;full catalog&rdquo; statement —{' '}
+        <Link href="/methodology" className="text-accent hover:underline">
+          the Standard
+        </Link>{' '}
+        applies to availability the same way it applies to purity.
       </p>
     </div>
   )
