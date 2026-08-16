@@ -28,9 +28,39 @@ const MAX_RETRIES = 3
 const USER_AGENT =
   'AmericanPeptide.com/1.0 (+https://americanpeptide.com; catalog verification)'
 
+/**
+ * Consecutive throttled responses before we stop retrying for the rest of the
+ * process. Retrying is the right answer to a brief burst and the wrong answer
+ * to a blocked caller: when PubChem is refusing an IP outright — which is what
+ * a CI runner on a shared address tends to hit — every retry multiplies the
+ * work without changing the outcome. A 63-entry pass ground past five minutes
+ * that way and killed its own client on a headers timeout, turning "finishes
+ * empty, fails the delta guard cleanly" into "hangs, then dies opaquely".
+ * Tripping keeps the failure fast and legible.
+ */
+const THROTTLE_TRIP = 5
+
 const RETRYABLE = new Set([429, 500, 502, 503, 504])
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
+
+// Circuit state. Deliberately per-process and never auto-resetting on a timer:
+// the manifest pass is a single short-lived batch, so once PubChem has clearly
+// stopped answering it, the useful thing is to finish quickly and report, not
+// to keep probing. Any success resets the counter.
+let consecutiveThrottles = 0
+let tripped = false
+
+/** Reset the breaker — for tests, or a caller that knows conditions changed. */
+export function resetPubchemBreaker(): void {
+  consecutiveThrottles = 0
+  tripped = false
+}
+
+/** True once PubChem has refused enough consecutive calls to stop trying. */
+export function pubchemBreakerTripped(): boolean {
+  return tripped
+}
 
 // Requests queue through one promise chain, so concurrent callers interleave
 // politely instead of each keeping its own private idea of the rate.
@@ -68,6 +98,10 @@ export async function pubchemFetch(
   url: string,
   { timeoutMs = 8000 }: { timeoutMs?: number } = {},
 ): Promise<Response | null> {
+  // Already established that PubChem isn't answering us — don't spend a slot,
+  // a retry, or a backoff sleep proving it again.
+  if (tripped) return null
+
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     await reserveSlot()
 
@@ -85,12 +119,30 @@ export async function pubchemFetch(
       clearTimeout(timer)
     }
 
-    if (res?.ok) return res
+    if (res?.ok) {
+      consecutiveThrottles = 0
+      return res
+    }
 
-    // A 404 is a real answer: PubChem has no such compound. Don't retry it.
-    if (res && !RETRYABLE.has(res.status)) return res
+    // A 404 is a real answer: PubChem has no such compound. Don't retry it, and
+    // don't count it against the breaker — the service is working fine.
+    if (res && !RETRYABLE.has(res.status)) {
+      consecutiveThrottles = 0
+      return res
+    }
 
     if (attempt < MAX_RETRIES) await sleep(backoffMs(res, attempt))
+  }
+
+  // Exhausted retries: this call was refused throughout.
+  consecutiveThrottles++
+  if (!tripped && consecutiveThrottles >= THROTTLE_TRIP) {
+    tripped = true
+    console.warn(
+      `[pubchem] ${consecutiveThrottles} consecutive requests refused after retries — ` +
+        'giving up for this process. Remaining lookups return no evidence, so the ' +
+        'caller finishes fast rather than grinding against a block.',
+    )
   }
   return null
 }
