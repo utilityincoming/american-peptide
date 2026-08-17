@@ -58,6 +58,20 @@ export interface VendorAffiliate {
   trackedPath?: string
   /** The destination referral/affiliate URL that trackedPath redirects to. */
   url?: string
+  /**
+   * Per-compound referral links, keyed by catalog slug — a reader who clicks
+   * from the GHK-Cu monograph lands on the vendor's GHK-Cu product page rather
+   * than its homepage, with the referral intact.
+   *
+   * Resolved through the same /go/<id> chokepoint (with ?p=<slug>), never
+   * emitted raw, so the redirect stays server-side and the destination is only
+   * ever a value from this map — a slug we don't recognize falls back to `url`
+   * rather than redirecting anywhere a caller names.
+   *
+   * Only add a slug whose deep link the partner actually supplied. A guessed
+   * product URL is a broken landing page and an unpaid referral.
+   */
+  productUrls?: Record<string, string>
   /** Coupon / referral code, if any. */
   code?: string
   /**
@@ -221,6 +235,65 @@ export function vendorTier(v: Vendor): VendorTier {
 //   }
 //
 export const VENDORS: Vendor[] = [
+  {
+    id: 'biolongevity-labs',
+    name: 'BioLongevity Labs',
+    url: 'https://biolongevitylabs.com',
+    blurb:
+      'US-manufactured research peptides with a public, per-lot COA database — every product searchable by its own report number, tested by independent labs at 99% stated purity.',
+    // Read off their public COA database (/all-coas/), which lists the exact
+    // products they stock — a stronger source than marketing copy, since each
+    // entry is backed by a report. Only single-compound vials that map to a
+    // catalog entry are listed. DELIBERATELY EXCLUDED: their blends (GLOW,
+    // KLOW, Regeno), BioStrips (a different delivery format), and the modified
+    // analogs N-Acetyl Semax/Selank Amidate and PEG-MGF — a reader clicking
+    // "Semax" should not land on a different molecule. Their catalog also runs
+    // well beyond ours (Klotho, FLGR242, ARA-290, PNC-27, VIP, FOXO4-DRI and
+    // most of the Khavinson bioregulator range); those simply have no monograph
+    // here yet.
+    peptides: [
+      'bpc-157', 'tb-500', 'ghk-cu', 'kpv', 'ipamorelin', 'tesamorelin',
+      'thymosin-alpha-1', 'mots-c', 'nad-plus', '5-amino-1mq', 'epitalon',
+      'pt-141', 'dsip', 'll-37', 'melanotan-1', 'kisspeptin-10', 'oxytocin',
+      'cagrilintide', 'pinealon', 'bronchogen', 'cardiogen', 'pancragen',
+      'vesugen', 'vilon',
+    ],
+    shipsTo: ['us'],
+    trust: {
+      // Every flag below is a claim they publish themselves (homepage + the
+      // /all-coas/ database + /shipping-and-payments/). Not independently
+      // confirmed by us — but the COA database is externally checkable, which
+      // is what separates this from self-report.
+      coaOnFile: true, // public COA database, searchable per product
+      thirdPartyTested: true, // "three independent, certified laboratories", HPLC + LC-MS
+      perBatchTesting: true, // "Every batch undergoes independent testing… No exceptions" — the DB shows multiple distinct report numbers per product
+      purityPct: 99, // "99% purity research peptides" via solid-phase synthesis
+      // reshipPolicy FALSE: /shipping-and-payments/ promises a replacement only
+      // when an order "is shipped incorrectly or the items received are not the
+      // items ordered". That is a fulfillment-error remedy, not the lost- or
+      // stolen-package guarantee this flag means. They state no such policy.
+      reshipPolicy: false,
+      // refundPolicy FALSE, and stated plainly by them: "Due to regulations
+      // regarding the sale of our products, returns are prohibited." The 10-day
+      // return window on their site covers SUPPLEMENTS, a separate product line
+      // on a separate storefront — it does not apply to research peptides.
+      refundPolicy: false,
+    },
+    affiliate: {
+      trackedPath: '/go/biolongevity-labs',
+      url: 'https://go.biolongevitylabs.com/aff_c?offer_id=1&aff_id=2788',
+      // Partner-supplied deep links only. Everything else in `peptides` routes
+      // to the homepage link above until they provide a url_id for it.
+      productUrls: {
+        'bpc-157': 'https://go.biolongevitylabs.com/aff_c?offer_id=1&aff_id=2788&url_id=85',
+        'ghk-cu': 'https://go.biolongevitylabs.com/aff_c?offer_id=1&aff_id=2788&url_id=112',
+        'tb-500': 'https://go.biolongevitylabs.com/aff_c?offer_id=1&aff_id=2788&url_id=100',
+      },
+      active: true,
+    },
+    notes:
+      'Returns are prohibited on research peptides and no lost-package guarantee is published, so the recourse if an order goes wrong is thinner than the lab documentation suggests — pay by a method that gives you a chargeback. Match the COA report number in their public database to the lot on your vial before use.',
+  },
   {
     id: 'amino-club',
     name: 'Amino Club',
@@ -403,9 +476,19 @@ export function getVendor(id: string): Vendor | undefined {
  * Prefer the internal tracked redirect when an affiliate relationship is active
  * (keeps the referral param server-side and lets us attach disclosure +
  * rel="sponsored nofollow" at the link); otherwise the plain public homepage.
+ *
+ * Pass the compound the reader is looking at and, where the partner supplied a
+ * deep link for it, the redirect lands on that product page instead of the
+ * homepage — the difference between "here's a store that has it" and "here's
+ * the thing you were reading about". Slugs without a deep link fall through to
+ * the vendor's normal destination, so passing one is always safe.
  */
-export function vendorHref(v: Vendor): string {
-  if (v.affiliate?.active && v.affiliate.trackedPath) return v.affiliate.trackedPath
+export function vendorHref(v: Vendor, slug?: string): string {
+  if (v.affiliate?.active && v.affiliate.trackedPath) {
+    return slug && v.affiliate.productUrls?.[slug]
+      ? `${v.affiliate.trackedPath}?p=${encodeURIComponent(slug)}`
+      : v.affiliate.trackedPath
+  }
   return v.url
 }
 
