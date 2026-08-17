@@ -5,6 +5,7 @@ import SpotlightComparison from '@/components/SpotlightComparison'
 import {
   getSpotlightVendor,
   getVendorsForPeptide,
+  hasSourcingPage,
   trustScore,
   vendorHref,
   vendorTier,
@@ -63,8 +64,23 @@ export default function SourcingCard({
   if (t.purityPct) signals.push(`Stated purity ≥ ${t.purityPct}%`)
   if (t.refundPolicy) signals.push('Published refund policy')
 
-  // The primary compound's detail page carries the full trust-ranked panel.
-  const allSourcesHref = `/catalog/${slugs[0]}`
+  // Where "compare the sources" actually leads. This used to point at the
+  // primary compound's monograph, which does carry a trust-ranked panel — the
+  // link was never broken, just aimed at a page whose job is the compound, with
+  // sourcing as one section of it. /sources/<slug> is the page built for this
+  // exact promise: the same vendors ranked by claim tier, with the evidence
+  // floor and verified chemistry alongside. Prefer it wherever it exists.
+  //
+  // A class page covers several compounds, so take the first that has a sourcing
+  // page (gated by the same ≥2-vendor rule the page generates from) and fall
+  // back to the monograph when none does. The count is read from whichever
+  // destination wins, so the label can't promise a number the next page
+  // contradicts.
+  const sourcedSlug = slugs.find(hasSourcingPage)
+  const allSourcesHref = sourcedSlug ? `/sources/${sourcedSlug}` : `/catalog/${slugs[0]}`
+  const linkedVendorCount = sourcedSlug
+    ? getVendorsForPeptide(sourcedSlug).length
+    : vendors.length
 
   return (
     <div
@@ -161,7 +177,7 @@ export default function SourcingCard({
           href={allSourcesHref}
           className="mt-3 flex items-center justify-center gap-1.5 text-xs font-medium text-ink/60 transition-colors hover:text-ink"
         >
-          Compare all {vendors.length} vetted sources
+          Compare all {linkedVendorCount} vetted sources
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       )}
