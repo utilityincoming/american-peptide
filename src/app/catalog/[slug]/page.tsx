@@ -974,6 +974,7 @@ function MarketplacePanel({ vendors, slug }: { vendors: Vendor[]; slug: string }
         <div className="mb-6 rounded-xl border border-amber-400/20 bg-amber-400/[0.04] p-4">
           <VendorCard
             vendor={featured}
+            slug={slug}
             isFirst
             badge="featured"
             tierLabel={VENDOR_TIERS.find((t) => t.id === vendorTier(featured))!.label}
@@ -998,6 +999,7 @@ function MarketplacePanel({ vendors, slug }: { vendors: Vendor[]; slug: string }
                 <VendorCard
                   key={v.id}
                   vendor={v}
+                  slug={slug}
                   isFirst={j === 0}
                   badge={gi === 0 && j === 0 ? 'best' : undefined}
                 />
@@ -1020,11 +1022,14 @@ function MarketplacePanel({ vendors, slug }: { vendors: Vendor[]; slug: string }
 
 function VendorCard({
   vendor,
+  slug,
   isFirst,
   badge,
   tierLabel,
 }: {
   vendor: Vendor
+  /** The compound being viewed — routes the outbound to its product deep link. */
+  slug: string
   isFirst: boolean
   /** 'best' = top of the trust ranking. 'featured' = paid placement, disclosed as such. */
   badge?: 'best' | 'featured'
@@ -1101,7 +1106,7 @@ function VendorCard({
       </ul>
 
       <a
-        href={vendorHref(vendor)}
+        href={vendorHref(vendor, slug)}
         target="_blank"
         rel="sponsored nofollow noopener"
         className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/15 px-3 py-2 text-xs font-medium text-accent transition-colors hover:bg-[#2DD4A8]/25"
