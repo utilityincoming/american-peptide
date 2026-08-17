@@ -20,9 +20,17 @@ export async function GET(
 
   const { id } = await params
   const vendor = VENDORS.find((v) => v.id === id)
+
+  // ?p=<catalog-slug> selects a per-product deep link when the partner supplied
+  // one. The slug is only ever used as a KEY into our own map — never as a URL —
+  // so an unknown or hostile value can't redirect anywhere except the vendor's
+  // normal destination.
+  const slug = new URL(req.url).searchParams.get('p')
+  const productUrl = slug ? vendor?.affiliate?.productUrls?.[slug] : undefined
+
   const dest =
-    vendor?.affiliate?.active && vendor.affiliate.url
-      ? vendor.affiliate.url
+    vendor?.affiliate?.active && (productUrl || vendor.affiliate.url)
+      ? (productUrl ?? vendor.affiliate.url!)
       : null
 
   if (!dest) {

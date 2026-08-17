@@ -144,7 +144,7 @@ export default function SourceComparison({ slug }: { slug: string }) {
 
                     <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5">
                       <a
-                        href={vendorHref(v)}
+                        href={vendorHref(v, slug)}
                         target="_blank"
                         rel="sponsored nofollow noopener"
                         className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.10] bg-ink/[0.04] px-3 py-1.5 text-xs font-medium text-ink/80 transition-colors hover:border-accent/40 hover:text-accent"
