@@ -385,7 +385,7 @@ export default function HomePage() {
             </span>
           </h2>
           <p className="mb-6 max-w-2xl text-[15px] leading-relaxed text-ink/55 md:text-base">
-            The labs worth knowing show their work — sequences traced, testing
+            The labs worth knowing show their work - sequences traced, testing
             published, put in the open. The sourcing standard brings them together
             and ranks them on exactly that, so the community built on this science
             finds its sources by signal alone.
