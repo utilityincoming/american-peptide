@@ -20,6 +20,8 @@ export interface Kv {
   set(key: string, value: string, exSec?: number): Promise<void>
   /** INCR then set/refresh a TTL — used for windowed usage counters. */
   incrWithExpiry(key: string, exSec: number): Promise<number>
+  /** INCR with no expiry — a durable, all-time counter. */
+  incr(key: string): Promise<number>
   hset(key: string, obj: Record<string, string>): Promise<void>
   hgetall(key: string): Promise<Record<string, string> | null>
   sadd(key: string, member: string): Promise<void>
@@ -74,6 +76,9 @@ const upstashKv: Kv = {
       ['EXPIRE', key, exSec, 'NX'],
     ])
     return Number(count) || 0
+  },
+  async incr(key) {
+    return Number(await upstash(['INCR', key])) || 0
   },
   async hset(key, obj) {
     const flat: (string | number)[] = ['HSET', key]
@@ -142,6 +147,13 @@ const memoryKv: Kv = {
     const next = current + 1
     const exp = live(e) ? e!.exp : Date.now() + exSec * 1000
     strings.set(key, { value: String(next), exp })
+    return next
+  },
+  async incr(key) {
+    const e = strings.get(key)
+    const current = live(e) ? Number(e!.value) || 0 : 0
+    const next = current + 1
+    strings.set(key, { value: String(next), exp: live(e) ? e!.exp : null })
     return next
   },
   async hset(key, obj) {
