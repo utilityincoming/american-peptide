@@ -371,6 +371,35 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Sourcing Standard ── */}
+      <section className="relative z-10 mx-auto max-w-6xl px-6 pb-32 md:px-10">
+        <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-[#2DD4A8]/15 bg-gradient-to-br from-[#2DD4A8]/[0.06] via-transparent to-transparent p-8 md:p-10">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
+            <FlaskConical className="h-3 w-3" />
+            The sourcing standard
+          </div>
+          <h2 className="mb-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-4xl">
+            Every source,{' '}
+            <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+              in the open.
+            </span>
+          </h2>
+          <p className="mb-6 max-w-2xl text-[15px] leading-relaxed text-ink/55 md:text-base">
+            The labs worth knowing show their work - sequences traced, testing
+            published, put in the open. The sourcing standard brings them together
+            and ranks them on exactly that, so the community built on this science
+            finds its sources by signal alone.
+          </p>
+          <Link
+            href="/us-peptides"
+            className="group inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-[#5EEBC8]"
+          >
+            Explore the sourcing standard
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+      </section>
+
       {/* ── FAQ ── */}
       <section id="faq" className="relative z-10 mx-auto max-w-3xl px-6 pb-32 md:px-10">
         <div className="mb-8 text-center">
