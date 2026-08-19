@@ -4,9 +4,10 @@
 // attach analytics / rate the outbound later. Only redirects to a vendor whose
 // affiliate relationship is active; everything else falls back to the catalog.
 
-import { NextResponse } from 'next/server'
+import { NextResponse, after } from 'next/server'
 import { VENDORS } from '@/lib/vendors'
 import { IS_APP_BUILD } from '@/lib/platform'
+import { recordReferralClick } from '@/lib/referrals'
 
 export async function GET(
   req: Request,
@@ -33,9 +34,22 @@ export async function GET(
       ? (productUrl ?? vendor.affiliate.url!)
       : null
 
-  if (!dest) {
+  if (!vendor || !dest) {
     return NextResponse.redirect(new URL('/catalog', req.url), 302)
   }
+
+  // Best-effort, no-PII referral analytics on the single outbound chokepoint
+  // (see lib/referrals). Scheduled via after() so a slow or failing store can
+  // never delay or break the redirect — the outbound link is the product. The
+  // per-product counter fires only for a real deep link, not a bare ?p= slug.
+  const productSlug = productUrl ? (slug ?? undefined) : undefined
+  after(async () => {
+    try {
+      await recordReferralClick(vendor.id, productSlug)
+    } catch {
+      /* analytics is a courtesy; never surface a store error to the redirect */
+    }
+  })
 
   return NextResponse.redirect(dest, 302)
 }
