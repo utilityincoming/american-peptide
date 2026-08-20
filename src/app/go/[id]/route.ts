@@ -8,6 +8,7 @@ import { NextResponse, after } from 'next/server'
 import { VENDORS } from '@/lib/vendors'
 import { IS_APP_BUILD } from '@/lib/platform'
 import { recordReferralClick } from '@/lib/referrals'
+import { COMMUNITY_REF_ID, COMMUNITY_URL } from '@/lib/community'
 
 export async function GET(
   req: Request,
@@ -20,6 +21,21 @@ export async function GET(
   }
 
   const { id } = await params
+
+  // The sourcing community (Telegram) is not a vendor, but it rides the same
+  // chokepoint so a join click lands in the same no-PII referral counter. No
+  // ?p= handling and no vendor lookup — the destination is a fixed constant.
+  if (id === COMMUNITY_REF_ID) {
+    after(async () => {
+      try {
+        await recordReferralClick(COMMUNITY_REF_ID)
+      } catch {
+        /* analytics is a courtesy; never surface a store error to the redirect */
+      }
+    })
+    return NextResponse.redirect(COMMUNITY_URL, 302)
+  }
+
   const vendor = VENDORS.find((v) => v.id === id)
 
   // ?p=<catalog-slug> selects a per-product deep link when the partner supplied
