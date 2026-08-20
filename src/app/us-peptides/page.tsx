@@ -504,39 +504,6 @@ export default function MadeInUsaPage() {
                       match the COA for your specific lot before any use.
                     </span>
                   </p>
-
-                  {/* The American Peptide community - an open door, not a vendor
-                      endorsement. Inside count > 0, so it never renders on the
-                      reference-only Play build. */}
-                  <div className="mt-8 overflow-hidden rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-6">
-                    <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-                      <div className="flex gap-4">
-                        <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#2DD4A8] text-[#0B1220]">
-                          <Send className="h-5 w-5" strokeWidth={2} />
-                        </div>
-                        <div>
-                          <p className="mb-1 text-sm font-semibold text-ink/90">
-                            The part that doesn&rsquo;t fit on a page.
-                          </p>
-                          <p className="max-w-xl text-xs leading-relaxed text-ink/55">
-                            A page holds what can be written down. The room holds the
-                            rest - people comparing notes, sharing what they&rsquo;ve
-                            found, looking out for whoever comes next. The door&rsquo;s
-                            open.
-                          </p>
-                        </div>
-                      </div>
-                      <a
-                        href={COMMUNITY_PATH}
-                        target="_blank"
-                        rel="nofollow noopener"
-                        className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg bg-[#2DD4A8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
-                      >
-                        Join the community
-                        <ArrowRight className="h-4 w-4" />
-                      </a>
-                    </div>
-                  </div>
                 </>
               )}
             </section>
@@ -620,9 +587,8 @@ export default function MadeInUsaPage() {
                   </div>
                 </div>
                 <p className="mb-4 text-xs leading-relaxed text-ink/55">
-                  Some things don&rsquo;t fit on a page. There&rsquo;s a room for the
-                  rest - researchers looking out for each other, comparing notes,
-                  passing on what they know. Come to help, or to be helped.
+                  Some knowledge only moves person to person. That&rsquo;s what the
+                  room is for.
                 </p>
                 <a
                   href={COMMUNITY_PATH}
@@ -630,7 +596,7 @@ export default function MadeInUsaPage() {
                   rel="nofollow noopener"
                   className="flex items-center justify-center gap-2 rounded-lg bg-[#2DD4A8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
                 >
-                  Join the community
+                  Join the group
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
