@@ -12,6 +12,7 @@ import {
   ChevronRight,
   Scale,
   Activity,
+  Send,
 } from 'lucide-react'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
 import {
@@ -23,6 +24,8 @@ import {
   TRUST_WEIGHTS,
   VENDOR_TIERS,
 } from '@/lib/vendors'
+import { IS_APP_BUILD } from '@/lib/platform'
+import { COMMUNITY_PATH } from '@/lib/community'
 
 const SITE = 'https://americanpeptide.com'
 const PATH = '/us-peptides'
@@ -501,6 +504,40 @@ export default function MadeInUsaPage() {
                       match the COA for your specific lot before any use.
                     </span>
                   </p>
+
+                  {/* The human trust layer - peer confirmation on top of the
+                      scored directory, at the point of decision. Inside count > 0,
+                      so it never renders on the reference-only Play build. */}
+                  <div className="mt-8 overflow-hidden rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-6">
+                    <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+                      <div className="flex gap-4">
+                        <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#2DD4A8] text-[#0B1220]">
+                          <Send className="h-5 w-5" strokeWidth={2} />
+                        </div>
+                        <div>
+                          <p className="mb-1 text-sm font-semibold text-ink/90">
+                            The paperwork gets you close. The community closes the gap.
+                          </p>
+                          <p className="max-w-xl text-xs leading-relaxed text-ink/55">
+                            Every supplier above is scored on what it publishes. The
+                            community is the part a certificate can&rsquo;t show -
+                            which lots came back clean, whose reship landed on time,
+                            who ships cold and answers fast. Peer confirmation before
+                            you commit.
+                          </p>
+                        </div>
+                      </div>
+                      <a
+                        href={COMMUNITY_PATH}
+                        target="_blank"
+                        rel="nofollow noopener"
+                        className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-lg bg-[#2DD4A8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+                      >
+                        Join the community
+                        <ArrowRight className="h-4 w-4" />
+                      </a>
+                    </div>
+                  </div>
                 </>
               )}
             </section>
@@ -564,6 +601,42 @@ export default function MadeInUsaPage() {
                 </div>
               </div>
             </div>
+
+            {/* Sourcing community - the human read alongside the scored paperwork.
+                Gated off the Play build with the rest of the buying layer. */}
+            {!IS_APP_BUILD && (
+              <div className="rounded-xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.07] to-transparent p-5">
+                <div className="mb-3 flex items-center gap-3">
+                  <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#2DD4A8] text-[#0B1220]">
+                    <Send className="h-4 w-4" strokeWidth={2} />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-semibold text-ink/85">Sourcing community</p>
+                      <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
+                        Open
+                      </span>
+                    </div>
+                    <p className="text-xs text-ink/40">Telegram · researchers</p>
+                  </div>
+                </div>
+                <p className="mb-4 text-xs leading-relaxed text-ink/55">
+                  The directory scores what a supplier publishes. The room tells you
+                  how the order actually landed - which lots tested clean, whose
+                  reship came through, who answered fast. A peer read before you
+                  commit.
+                </p>
+                <a
+                  href={COMMUNITY_PATH}
+                  target="_blank"
+                  rel="nofollow noopener"
+                  className="flex items-center justify-center gap-2 rounded-lg bg-[#2DD4A8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+                >
+                  Join the community
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+            )}
 
             {/* Related */}
             <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">

@@ -11,6 +11,7 @@
 
 import { kv } from './kv'
 import { VENDORS } from './vendors'
+import { COMMUNITY_REF_ID } from './community'
 
 const PREFIX = 'go:clk'
 // Monthly buckets self-expire after ~13 months — long enough to read a rolling
@@ -63,11 +64,22 @@ export interface VendorReferralStats {
   byProduct: { slug: string; clicks: number }[]
 }
 
+/**
+ * The sourcing-community (Telegram) chokepoint. Not a vendor and not part of
+ * `totalAllTime` (which is a vendor-outbound sum) — surfaced on its own so a
+ * join click is readable instead of written to a key nothing reads.
+ */
+export interface CommunityReferralStats {
+  allTime: number
+  months: { month: string; clicks: number }[]
+}
+
 export interface ReferralStats {
   generated: string
   persistent: boolean
   months: string[]
   totalAllTime: number
+  community: CommunityReferralStats
   vendors: VendorReferralStats[]
 }
 
@@ -107,11 +119,23 @@ export async function getReferralStats(monthsBack = 6): Promise<ReferralStats> {
     }),
   )
   vendors.sort((a, b) => b.allTime - a.allTime)
+
+  // The community counter shares the go:clk:v:<id> namespace under the reserved
+  // `community` id (see lib/community) — read the same keys the /go route writes.
+  const [communityAllTime, communityMonthVals] = await Promise.all([
+    kv.get(vendorAllKey(COMMUNITY_REF_ID)).then(num),
+    Promise.all(months.map((m) => kv.get(vendorMonthKey(COMMUNITY_REF_ID, m)).then(num))),
+  ])
+
   return {
     generated: new Date().toISOString(),
     persistent: kv.persistent,
     months,
     totalAllTime: vendors.reduce((sum, v) => sum + v.allTime, 0),
+    community: {
+      allTime: communityAllTime,
+      months: months.map((month, i) => ({ month, clicks: communityMonthVals[i] })),
+    },
     vendors,
   }
 }
