@@ -505,9 +505,9 @@ export default function MadeInUsaPage() {
                     </span>
                   </p>
 
-                  {/* The human trust layer - peer confirmation on top of the
-                      scored directory, at the point of decision. Inside count > 0,
-                      so it never renders on the reference-only Play build. */}
+                  {/* The American Peptide community - an open door, not a vendor
+                      endorsement. Inside count > 0, so it never renders on the
+                      reference-only Play build. */}
                   <div className="mt-8 overflow-hidden rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-6">
                     <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                       <div className="flex gap-4">
@@ -516,14 +516,13 @@ export default function MadeInUsaPage() {
                         </div>
                         <div>
                           <p className="mb-1 text-sm font-semibold text-ink/90">
-                            The paperwork gets you close. The community closes the gap.
+                            The part that doesn&rsquo;t fit on a page.
                           </p>
                           <p className="max-w-xl text-xs leading-relaxed text-ink/55">
-                            Every supplier above is scored on what it publishes. The
-                            community is the part a certificate can&rsquo;t show -
-                            which lots came back clean, whose reship landed on time,
-                            who ships cold and answers fast. Peer confirmation before
-                            you commit.
+                            A page holds what can be written down. The room holds the
+                            rest - people comparing notes, sharing what they&rsquo;ve
+                            found, looking out for whoever comes next. The door&rsquo;s
+                            open.
                           </p>
                         </div>
                       </div>
@@ -602,8 +601,8 @@ export default function MadeInUsaPage() {
               </div>
             </div>
 
-            {/* Sourcing community - the human read alongside the scored paperwork.
-                Gated off the Play build with the rest of the buying layer. */}
+            {/* The American Peptide community - a place to help and be helped, not
+                a vendor endorsement. Gated off the Play build with the buying layer. */}
             {!IS_APP_BUILD && (
               <div className="rounded-xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.07] to-transparent p-5">
                 <div className="mb-3 flex items-center gap-3">
@@ -612,7 +611,7 @@ export default function MadeInUsaPage() {
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <p className="text-sm font-semibold text-ink/85">Sourcing community</p>
+                      <p className="text-sm font-semibold text-ink/85">The community</p>
                       <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
                         Open
                       </span>
@@ -621,10 +620,9 @@ export default function MadeInUsaPage() {
                   </div>
                 </div>
                 <p className="mb-4 text-xs leading-relaxed text-ink/55">
-                  The directory scores what a supplier publishes. The room tells you
-                  how the order actually landed - which lots tested clean, whose
-                  reship came through, who answered fast. A peer read before you
-                  commit.
+                  Some things don&rsquo;t fit on a page. There&rsquo;s a room for the
+                  rest - researchers looking out for each other, comparing notes,
+                  passing on what they know. Come to help, or to be helped.
                 </p>
                 <a
                   href={COMMUNITY_PATH}
