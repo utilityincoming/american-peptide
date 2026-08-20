@@ -22,9 +22,9 @@ export async function GET(
 
   const { id } = await params
 
-  // The sourcing community (Telegram) is not a vendor, but it rides the same
-  // chokepoint so a join click lands in the same no-PII referral counter. No
-  // ?p= handling and no vendor lookup — the destination is a fixed constant.
+  // The community (Telegram) is not a vendor, but it rides the same chokepoint
+  // so a join click lands in the same no-PII referral counter. No ?p= handling
+  // and no vendor lookup - the destination is a fixed constant.
   if (id === COMMUNITY_REF_ID) {
     after(async () => {
       try {
