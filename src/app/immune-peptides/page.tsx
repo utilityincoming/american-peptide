@@ -6,7 +6,8 @@ const SITE = 'https://americanpeptide.com'
 const url = `${SITE}/immune-peptides`
 
 export const metadata: Metadata = {
-  title: 'Immune Peptides Research Hub — Thymosin α1, LL-37, Thymosin β4',
+  title:
+    'Immune Peptides — Thymosin α1, LL-37 & Thymosin β4 Research | AmericanPeptide.com',
   description:
     'Research overview of immune-modulating peptides: thymosin alpha-1 for T-cell activation, LL-37 cathelicidin for innate immunity, and thymosin β4 at the immune-repair interface.',
   alternates: { canonical: url },

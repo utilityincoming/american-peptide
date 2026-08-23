@@ -19,7 +19,6 @@ import {
   vendorsRanked,
   vendorsByTier,
   trustScore,
-  vendorTier,
   vendorHref,
   TRUST_WEIGHTS,
   VENDOR_TIERS,
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
   title:
     'US-Made Research Peptides — The Sourcing Standard & Scored Vendor Directory | AmericanPeptide.com',
   description:
-    'Are research peptides made in the USA? AmericanPeptide does not sell peptides — we built a transparent 100-point standard for sourcing and scored every US supplier against it on published third-party COAs and independent HPLC/MS testing, never on commission.',
+    'Are research peptides made in the USA? A transparent 100-point standard scoring every US supplier on third-party COAs and testing — never commission.',
   alternates: { canonical: `${SITE}${PATH}` },
   keywords: [
     'USA peptide manufacturer',

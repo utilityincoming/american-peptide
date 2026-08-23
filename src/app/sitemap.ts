@@ -44,7 +44,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/trials', priority: 0.8 },
     { path: '/tools/reconstitution-calculator', priority: 0.8 },
     { path: '/tools/coa-decoder', priority: 0.8 },
-    { path: '/workspace', priority: 0.4 },
+    // /workspace is intentionally omitted — it's a private, per-browser page
+    // marked noindex, so it must not be advertised for crawling.
     // ── Specialized hubs ──────────────────────────────────
     { path: '/melanocortin', priority: 0.7 },
     { path: '/developers', priority: 0.7 },

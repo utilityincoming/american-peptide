@@ -45,21 +45,32 @@ export async function generateMetadata({
   const { ids } = await searchParams
   const peptides = resolvePeptides(parseIds(ids))
   if (peptides.length < 2) {
+    const title = 'Compare peptides — AmericanPeptide.com Catalog'
+    const description =
+      'Side-by-side comparison of research peptides — sequence, molecular weight, mechanism, synthesis difficulty, FDA status, and PubChem identifiers.'
     return {
-      title: 'Compare peptides — AmericanPeptide.com Catalog',
-      description:
-        'Side-by-side comparison of research peptides — sequence, molecular weight, mechanism, synthesis difficulty, FDA status, and PubChem identifiers.',
+      title,
+      description,
+      alternates: { canonical: `${SITE}/catalog/compare` },
+      openGraph: {
+        title,
+        description,
+        url: `${SITE}/catalog/compare`,
+        type: 'website',
+      },
     }
   }
   const names = peptides.map((p) => p.name).join(' vs ')
+  const title = `Compare: ${names} — AmericanPeptide.com Catalog`
+  const description = `Side-by-side comparison of ${names}: sequence, molecular weight, mechanism, synthesis difficulty, FDA status, and PubChem identifiers.`
+  const url = `${SITE}/catalog/compare?ids=${peptides
+    .map((p) => p.slug)
+    .join(',')}`
   return {
-    title: `Compare: ${names} — AmericanPeptide.com Catalog`,
-    description: `Side-by-side comparison of ${names}: sequence, molecular weight, mechanism, synthesis difficulty, FDA status, and PubChem identifiers.`,
-    alternates: {
-      canonical: `${SITE}/catalog/compare?ids=${peptides
-        .map((p) => p.slug)
-        .join(',')}`,
-    },
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { title, description, url, type: 'website' },
   }
 }
 

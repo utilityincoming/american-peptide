@@ -14,12 +14,13 @@ export const metadata: Metadata = {
     url: `${SITE}/catalog`,
     type: 'website',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Peptide Catalog — 100+ Research Compounds | AmericanPeptide.com',
-    description:
-      'Browse 100+ research peptides — GLP-1 agonists, healing peptides, nootropics, and longevity compounds. Free open reference.',
-  },
+  // No twitter title/description here on purpose. This layout wraps the catalog
+  // index *and* the dynamic children (/catalog/[slug], /category/[id], /compare)
+  // that each set their own openGraph but not twitter. Since a twitter object
+  // doesn't deep-merge, any title set here would stamp the index's title onto
+  // every child's card. Left absent, each page's Twitter card falls back to its
+  // own og:title (and the index to this layout's og:title above). Card type and
+  // @handle come from the root layout.
 }
 
 export default function CatalogLayout({
