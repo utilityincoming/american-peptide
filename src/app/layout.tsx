@@ -58,12 +58,30 @@ export const metadata: Metadata = {
     description:
       'AI-assisted research platform and open reference for peptide science — catalog, Peptide Agent, clinical trials, synthesis guides, and hands-on tools.',
   },
+  // Only the card type + handle are set site-wide. Title/description are left
+  // out on purpose: a per-route metadata object doesn't deep-merge twitter, so
+  // hard-coding them here would stamp the homepage's title on every page that
+  // doesn't set its own twitter block. With them absent, each page's Twitter
+  // card falls back to its own og:title/og:description (and the home page to
+  // the root openGraph above) — no per-page duplication needed.
   twitter: {
     card: 'summary_large_image',
     site: '@americanpeptide',
-    title: 'AmericanPeptide.com — AI-Powered Peptide Research',
-    description:
-      'AI-assisted research platform and open reference for peptide science — catalog, Peptide Agent, clinical trials, synthesis guides, and hands-on tools.',
+  },
+  // Site-wide crawling defaults: index/follow, and let Google show large image
+  // previews and full-length snippets so monographs and tools can win rich
+  // results. Pages that opt out (workspace, beta tools) replace this whole
+  // object with `{ index: false, follow: false }`, so those stay excluded.
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
 }
 

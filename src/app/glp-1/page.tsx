@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title:
     'GLP-1 Peptides — Semaglutide, Tirzepatide & Incretin Agonist Research | AmericanPeptide.com',
   description:
-    'Complete research reference for GLP-1 receptor agonists — semaglutide (Ozempic/Wegovy), tirzepatide (Mounjaro/Zepbound), retatrutide, cagrilintide, and the incretin biology behind them. Compare mechanisms, clinical endpoints, and synthesis complexity.',
+    'Research reference for GLP-1 receptor agonists — semaglutide (Ozempic/Wegovy), tirzepatide (Mounjaro/Zepbound), retatrutide, and the incretin biology.',
   alternates: { canonical: `${SITE}/glp-1` },
   keywords: [
     'GLP-1 peptides',
