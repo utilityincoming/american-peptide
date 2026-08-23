@@ -19,7 +19,6 @@ import {
   vendorsRanked,
   vendorsByTier,
   trustScore,
-  vendorTier,
   vendorHref,
   TRUST_WEIGHTS,
   VENDOR_TIERS,
