@@ -1,9 +1,19 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Dna, BarChart3, FlaskConical, Search, Sparkles, Telescope } from 'lucide-react'
 import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES } from '@/lib/peptides'
 import { STATIC_FAQS, faqPageJsonLd } from '@/lib/faqs'
 import FaqAccordion from '@/components/FaqAccordion'
 import DynamicFaqs from '@/components/DynamicFaqs'
+
+// Self-referencing canonical for the home page. Title, description, and the
+// OpenGraph/Twitter cards are inherited from the root layout's metadata; this
+// only pins the canonical URL (and its og:url), which the layout can't set
+// per-route.
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+  openGraph: { url: '/' },
+}
 
 const SPOTLIGHT_SLUGS = [
   'semaglutide',

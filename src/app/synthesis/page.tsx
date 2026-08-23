@@ -52,7 +52,7 @@ const ICONS: Record<string, LucideIcon> = {
 export const metadata: Metadata = {
   title: 'How Peptides Are Made — Synthesis, Cost & Cold Chain | AmericanPeptide.com',
   description:
-    'The real manufacturing pipeline behind a pure research peptide: solid-phase synthesis, HPLC purification, lyophilization, QC and the certificate of analysis — what the equipment and operations actually cost, and what it takes to hold purity from the reactor to your bench.',
+    'The real manufacturing pipeline behind a pure research peptide — solid-phase synthesis, HPLC purification, lyophilization, and QC — and what it costs.',
   alternates: { canonical: `${SITE}/synthesis` },
   openGraph: {
     title: 'How Peptides Are Made — Synthesis, Cost & Cold Chain',
