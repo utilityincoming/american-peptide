@@ -72,6 +72,26 @@ export default async function SourcesPage({
   // not the reference-grade chemistry above them.
   const floor = computeEvidenceFloor(vendors.map(vendorPurityClaim))
 
+  // Sibling discovery: other sourced compounds that share a category with this
+  // one, most-related (most shared categories) first. Broadening past the single
+  // primary category keeps the cross-links from going thin, while the shared-tag
+  // requirement keeps them relevant. Same hasSourcingPage() gate as everywhere,
+  // so every chip points at a real page — and it links pages that were otherwise
+  // reachable only from their own monograph.
+  const alsoSourceable = PEPTIDES.filter(
+    (p) =>
+      p.slug !== slug &&
+      hasSourcingPage(p.slug) &&
+      p.categories.some((c) => peptide.categories.includes(c)),
+  )
+    .map((p) => ({
+      p,
+      overlap: p.categories.filter((c) => peptide.categories.includes(c)).length,
+    }))
+    .sort((a, b) => b.overlap - a.overlap)
+    .slice(0, 6)
+    .map((x) => x.p)
+
   const breadcrumbLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -184,6 +204,19 @@ export default async function SourcesPage({
                 </a>
               </div>
             </div>
+            {verification.molecularWeight != null && (
+              <p className="mt-4 border-t border-ink/[0.06] pt-3 text-[11px] leading-relaxed text-ink/45">
+                Reading a COA: an independent mass-spec should land on ≈
+                {verification.molecularWeight} Da
+                {verification.molecularFormula ? ` (${verification.molecularFormula})` : ''}. A
+                reported mass far from this isn&rsquo;t {peptide.name}, whatever the purity
+                number says.{' '}
+                <Link href="/tools/coa-decoder" className="text-accent hover:underline">
+                  Decode a COA
+                </Link>
+                .
+              </p>
+            )}
           </section>
         )}
 
@@ -214,6 +247,27 @@ export default async function SourcesPage({
           and match the third-party COA for your specific lot before any use. This
           is not medical advice, dosing guidance, or an offer for sale.
         </section>
+
+        {/* Sibling sourcing pages — discovery + internal linking */}
+        {alsoSourceable.length > 0 && (
+          <section>
+            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              Related compounds you can source
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {alsoSourceable.map((p) => (
+                <Link
+                  key={p.slug}
+                  href={`/sources/${p.slug}`}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                >
+                  {p.name}
+                  <ArrowRight className="h-3 w-3" />
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Related */}
         <section className="flex flex-wrap gap-3">
