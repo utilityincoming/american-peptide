@@ -23,6 +23,28 @@ import { getPeptideBySlug, type SyntheticFeature } from '@/lib/peptides'
 /** Region codes a vendor ships to (ISO-ish, plus 'global'). */
 export type ShipRegion = 'us' | 'eu' | 'uk' | 'ca' | 'au' | 'asia' | 'global'
 
+/** Reader-facing label for each ship region. */
+export const SHIP_REGION_LABEL: Record<ShipRegion, string> = {
+  us: 'US',
+  eu: 'EU',
+  uk: 'UK',
+  ca: 'Canada',
+  au: 'Australia',
+  asia: 'Asia',
+  global: 'Worldwide',
+}
+
+/**
+ * A short "ships to …" phrase for a vendor. Collapses to "Ships worldwide" when
+ * the vendor claims global coverage, otherwise lists the regions it names. Read
+ * straight from the vendor's own published shipping scope — never inferred.
+ */
+export function shipsToLabel(v: Vendor): string {
+  if (v.shipsTo.includes('global')) return 'Ships worldwide'
+  const regions = v.shipsTo.map((r) => SHIP_REGION_LABEL[r])
+  return regions.length ? `Ships to ${regions.join(', ')}` : ''
+}
+
 export interface VendorTrust {
   /** A third-party certificate of analysis is published / available on request. */
   coaOnFile: boolean

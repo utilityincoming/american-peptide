@@ -4,6 +4,7 @@ import {
   getSpotlightVendor,
   getVendorsForPeptide,
   isAffiliate,
+  shipsToLabel,
   trustScore,
   vendorHref,
   vendorTier,
@@ -65,6 +66,7 @@ export default function SourceComparison({ slug }: { slug: string }) {
                 if (t.refundPolicy) signals.push('Refund policy')
                 const affiliate = isAffiliate(v)
                 const featured = spotlight?.id === v.id
+                const ships = shipsToLabel(v)
 
                 return (
                   <div
@@ -83,12 +85,17 @@ export default function SourceComparison({ slug }: { slug: string }) {
                         </div>
                         <p className="mt-0.5 text-xs leading-relaxed text-ink/45">{v.blurb}</p>
                       </div>
-                      <span
-                        className="shrink-0 text-[11px] tabular-nums text-ink/40"
-                        title="Transparency score — the within-tier sort key"
-                      >
-                        {trustScore(v)}/100
-                      </span>
+                      <div className="shrink-0 text-right">
+                        <span
+                          className="block text-[11px] tabular-nums text-ink/40"
+                          title="Transparency score — the within-tier sort key"
+                        >
+                          {trustScore(v)}/100
+                        </span>
+                        {ships && (
+                          <span className="mt-0.5 block text-[10px] text-ink/35">{ships}</span>
+                        )}
+                      </div>
                     </div>
 
                     {/* The purity claim, tiered by the vendor's transparency band */}
