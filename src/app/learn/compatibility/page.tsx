@@ -15,7 +15,7 @@ const SITE = 'https://americanpeptide.com'
 export const metadata: Metadata = {
   title: 'Peptide Compatibility & Stability — Mixing, Degradation & Handling | AmericanPeptide.com',
   description:
-    'The chemistry of peptide compatibility and stability: how peptides degrade, the factors that decide whether they can be combined, reconstitution and storage handling, and why blending un-characterized peptides multiplies risk.',
+    'The chemistry of peptide stability — how peptides degrade, what decides whether they combine, and why blending un-characterized peptides multiplies risk.',
   alternates: { canonical: `${SITE}/learn/compatibility` },
   openGraph: {
     title: 'Peptide Compatibility & Stability',

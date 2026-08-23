@@ -51,7 +51,7 @@ const WEIGHTS = (
 export const metadata: Metadata = {
   title: 'The Standard — How AmericanPeptide Verifies | AmericanPeptide.com',
   description:
-    'The trust methodology behind AmericanPeptide.com: how catalog chemistry is cross-referenced against PubChem, how sources are ranked by transparency signals (never commission), and why every page stays research-grade rather than medical.',
+    'How AmericanPeptide verifies: catalog chemistry checked against PubChem, sources ranked by transparency and never commission, every page research-grade.',
   alternates: { canonical: `${SITE}/methodology` },
   keywords: [
     'peptide verification methodology',
