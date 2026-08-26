@@ -347,7 +347,12 @@ export default function AboutPage() {
               platform, not a medical device or clinical decision-support
               system. All outputs are computational hypotheses requiring
               independent experimental validation, and nothing here is medical
-              advice or an offer for sale.
+              advice or an offer for sale. American Peptide is independent and is
+              not affiliated with, endorsed by, or representing the National
+              Institutes of Health (NIH), the National Library of Medicine (NLM),
+              the National Center for Biotechnology Information (NCBI), or any
+              government agency; ClinicalTrials.gov, PubChem, PubMed, and UniProt
+              are public databases we cite as sources.
             </p>
           </div>
         </div>

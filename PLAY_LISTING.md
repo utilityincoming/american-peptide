@@ -10,6 +10,13 @@ Policy guardrails baked into this copy:
 - No therapeutic, dosing-advice, or health-outcome claims.
 - States plainly it does not sell peptides and is not medical advice.
 - Suitable for an 18+ / Mature content rating.
+- **Misleading Claims / government-info clause** (this is what the first
+  submission was rejected under, 2026-08): the app cites government databases
+  (ClinicalTrials.gov, PubChem, PubMed → NIH/NLM/NCBI), so Play requires (a) an
+  *exhaustive, unhedged* list of every data source — no "like"/"including"/"such
+  as", and no two mismatched partial lists — and (b) a clear disclaimer that the
+  app does not represent a government entity. Both are baked in below. Do not
+  reintroduce hedge words around the source list.
 
 ---
 
@@ -52,34 +59,48 @@ WHAT'S INSIDE
   amount per measured draw for a given vial. Works fully offline.
 
 • Blend calculator — plan multi-peptide reconstitution with clear, per-component
-  figures.
+  figures. Works fully offline.
 
 • COA decoder — make sense of a Certificate of Analysis: what HPLC and mass-spec
   results mean, what purity figures describe, and which questions a COA should
-  answer.
+  answer. Works fully offline.
 
-• Clinical trials tracker — search current and completed studies sourced from
-  ClinicalTrials.gov, so you can see where the real evidence stands.
+• Clinical trials tracker — search current and completed studies from
+  ClinicalTrials.gov, so you can see where the evidence stands.
 
-• Glossary — plain-language definitions of the terms you hit when reading
-  peptide literature.
+• Glossary — plain-language definitions of the terms you meet when reading
+  peptide literature. Works fully offline.
 
-• Research assistant — an AI helper that answers reference questions and is
-  grounded in public databases (PubChem, ClinicalTrials.gov, PubMed). Every
-  answer is a computational reference, not advice.
+• Research assistant — an AI helper that answers reference questions grounded in
+  the public databases listed under DATA SOURCES below. Every answer is a
+  computational reference, not advice.
 
 • Comparison views — side-by-side reference summaries of related compounds.
 
-GROUNDED IN PUBLIC DATA
+DATA SOURCES
 
-The catalog, trials, and assistant draw on open scientific sources — PubChem,
-UniProt, ClinicalTrials.gov, and PubMed. We do not fabricate data. Where a
-figure is unknown, the app says so.
+The catalog, clinical-trials tracker, and research assistant draw on four public
+scientific databases, and only these four:
 
-WORKS OFFLINE
+1. PubChem — https://pubchem.ncbi.nlm.nih.gov — operated by the U.S. National
+   Center for Biotechnology Information (NCBI), part of the National Library of
+   Medicine (NLM), National Institutes of Health (NIH).
+2. PubMed — https://pubmed.ncbi.nlm.nih.gov — operated by NCBI / NLM at NIH.
+3. ClinicalTrials.gov — https://clinicaltrials.gov — operated by NLM at NIH.
+4. UniProt — https://www.uniprot.org — operated by the UniProt Consortium
+   (EMBL-EBI, the SIB Swiss Institute of Bioinformatics, and the Protein
+   Information Resource).
 
-The calculators and core reference work without a connection, so they're useful
-in a lab where Wi-Fi isn't.
+We do not fabricate data. Where a figure is unknown, the app says so.
+
+NOT A GOVERNMENT APP
+
+American Peptide is an independent, privately developed reference tool. It is
+NOT affiliated with, endorsed by, or acting on behalf of the National Institutes
+of Health, the National Library of Medicine, the National Center for
+Biotechnology Information, or any other government agency. ClinicalTrials.gov,
+PubChem, and PubMed are U.S. government public databases; they are cited here
+only as sources of publicly available data.
 
 IMPORTANT
 
@@ -90,7 +111,7 @@ Nothing in the app is a recommendation to acquire, possess, or use any
 substance. Always consult qualified professionals and follow the laws and
 regulations that apply to you. Intended for adults (18+).
 ```
-*(~1,950 chars — well within the 4,000 limit.)*
+*(~2,600 chars — well within the 4,000 limit.)*
 
 ---
 
