@@ -58,6 +58,10 @@ export interface VeniceResult {
   text?: string
   stop?: string
   errorText?: string
+  /** Concatenated grounding-tool outputs from this turn, so the route's
+   *  identifier guardrail knows which NCT/CID/PMID/accession were actually
+   *  looked up (vs confabulated by the model). */
+  toolText?: string
 }
 
 interface VeniceOpts {
@@ -89,6 +93,8 @@ export async function runVeniceAgent(
     { role: 'system', content: systemText },
     ...userMessages.map((m) => ({ role: m.role, content: String(m.content ?? '') })),
   ]
+  // Accumulate tool outputs across rounds — the grounded-identifier allow-set.
+  const toolTexts: string[] = []
 
   for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
     // On the final round forbid tools so the model must commit to prose instead
@@ -152,13 +158,14 @@ export async function runVeniceAgent(
           // returns a "no result" string rather than throwing.
         }
         const { content } = await executeAgentTool(tc.function?.name, input)
+        toolTexts.push(content)
         messages.push({ role: 'tool', tool_call_id: tc.id, content })
       }
       continue
     }
 
     const text = typeof msg?.content === 'string' ? msg.content.trim() : ''
-    return { ok: true, status: res.status, text, stop: finish }
+    return { ok: true, status: res.status, text, stop: finish, toolText: toolTexts.join('\n') }
   }
 
   // Ran out of tool rounds without a text answer.
