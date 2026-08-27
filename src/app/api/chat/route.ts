@@ -5,7 +5,7 @@ import { synthesisDigest } from '@/lib/synthesis'
 import { siteIndexDigest, retrievalFallback } from '@/lib/llms'
 import { MODELS, shouldFailover } from '@/lib/models'
 import { logAgentQuestion } from '@/lib/agent-faqs'
-import { sanitizeAgentLinks } from '@/lib/agent-output'
+import { sanitizeAgentLinks, sanitizeUngroundedIdentifiers } from '@/lib/agent-output'
 import { catalogFactsDigest, personalizationDigest } from '@/lib/agent-context'
 import { runVeniceAgent } from '@/lib/providers/venice'
 
@@ -241,10 +241,12 @@ async function runAnthropicAgent(
   cleaned: Msg[],
   systemSuffix: SystemBlock[],
   groundingOn: boolean,
-): Promise<{ text: string; stop?: string; upstreamError: boolean }> {
+): Promise<{ text: string; stop?: string; upstreamError: boolean; toolText: string }> {
   const messages: Msg[] = [...cleaned]
   let finalText = ''
   let lastStop: string | undefined
+  // Accumulate tool outputs across rounds — the grounded-identifier allow-set.
+  const toolTexts: string[] = []
 
   for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
     const result = await callAnthropic(apiKey, messages, { systemSuffix, disableTools: !groundingOn })
@@ -253,7 +255,7 @@ async function runAnthropicAgent(
       // Every model in the failover chain failed (HTTP or transport-level). Report
       // it as an upstream error; the route decides whether to degrade to reference.
       console.error(`[chat] anthropic upstream error ${result.status}: ${result.errorText?.slice(0, 500)}`)
-      return { text: '', stop: lastStop, upstreamError: true }
+      return { text: '', stop: lastStop, upstreamError: true, toolText: toolTexts.join('\n') }
     }
 
     const { content, stop_reason } = result.data
@@ -271,6 +273,7 @@ async function runAnthropicAgent(
       for (const tu of toolUses) {
         if (DEBUG) console.log(`[chat] tool ${tu.name}`)
         const { content: out, isError } = await executeAgentTool(tu.name, tu.input ?? {})
+        toolTexts.push(out)
         toolResults.push({ type: 'tool_result', tool_use_id: tu.id, content: out, is_error: isError })
       }
       messages.push({ role: 'user', content: toolResults })
@@ -296,7 +299,7 @@ async function runAnthropicAgent(
     }
   }
 
-  return { text: finalText, stop: lastStop, upstreamError: false }
+  return { text: finalText, stop: lastStop, upstreamError: false, toolText: toolTexts.join('\n') }
 }
 
 export async function POST(request: NextRequest) {
@@ -408,6 +411,9 @@ export async function POST(request: NextRequest) {
   let lastStop: string | undefined
   let provider: 'venice' | 'anthropic' | 'reference' = 'reference'
   let hadUpstreamError = false
+  // Concatenated grounding-tool output from whichever provider produced the
+  // answer — the allow-set for the identifier guardrail below.
+  let groundedToolText = ''
 
   // Primary: Venice. Grounding tools are honored unless the caller turned
   // grounding off (the eval's A/B baseline), matching the Anthropic path.
@@ -416,6 +422,7 @@ export async function POST(request: NextRequest) {
     if (v.ok && v.text) {
       finalText = v.text
       provider = 'venice'
+      groundedToolText = v.toolText ?? ''
     } else {
       hadUpstreamError = hadUpstreamError || !v.ok
       console.warn(`[chat] venice primary unavailable (${v.status}): ${v.errorText?.slice(0, 300)}`)
@@ -430,6 +437,7 @@ export async function POST(request: NextRequest) {
     if (a.text) {
       finalText = a.text
       provider = 'anthropic'
+      groundedToolText = a.toolText
     } else {
       hadUpstreamError = hadUpstreamError || a.upstreamError
     }
@@ -475,7 +483,19 @@ export async function POST(request: NextRequest) {
     if (q) after(() => logAgentQuestion(q))
   }
 
-  // Output-side guardrail: strip any links to fabricated internal entity pages
+  // Output-side guardrail #1: neutralize external identifiers (NCT/CID/PMID/
+  // accession) the model emitted that did NOT come from this turn's grounded
+  // sources — the tool results plus the injected verified catalog facts. This is
+  // the enforceable backstop against a weaker primary confabulating citation-grade
+  // ids. Skip the reference floor: that content is our own vetted published text.
+  if (provider !== 'reference') {
+    const grounded = `${groundedToolText}\n${facts}`
+    const g = sanitizeUngroundedIdentifiers(finalText, grounded)
+    if (DEBUG && g.stripped) console.log(`[chat] neutralized ${g.stripped} ungrounded identifier(s)`)
+    finalText = g.text
+  }
+
+  // Output-side guardrail #2: strip any links to fabricated internal entity pages
   // (the enforceable backstop for the "never invent a URL" rule).
   const safe = sanitizeAgentLinks(finalText)
   if (DEBUG && safe.stripped) console.log(`[chat] stripped ${safe.stripped} fabricated link(s)`)
