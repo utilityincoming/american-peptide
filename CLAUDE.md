@@ -10,9 +10,14 @@ Next.js 15 + TypeScript + Tailwind CSS + App Router.
 - Styling: Tailwind CSS
 - Charts: Recharts
 - Icons: Lucide React
-- AI: Anthropic Claude API (claude-opus-4-8; raw fetch, no SDK). Research agent at
-  /api/chat uses adaptive thinking + grounding tools (PubChem/ClinicalTrials/PubMed)
-  via src/lib/agent-tools.ts. Static system prompts are sent as cached blocks.
+- AI: two-tier provider ladder on /api/chat — Venice AI (uncensored, primary) →
+  Anthropic Claude (claude-opus-4-8, reasoning backup) → published reference floor.
+  Both are raw fetch (no SDK). Venice speaks OpenAI's wire format; the translation
+  lives in src/lib/providers/venice.ts. Grounding tools (PubChem/ClinicalTrials/
+  PubMed/UniProt, src/lib/agent-tools.ts) are provider-neutral and shared by both.
+  The Anthropic path uses adaptive thinking + cached system blocks; Venice sends
+  the same system content as one uncached string. Structured routes
+  (/api/analyze-peptide, /api/jobs/fact-qa) stay on Claude.
 
 ## Architecture
 - src/app/ — pages and API routes
