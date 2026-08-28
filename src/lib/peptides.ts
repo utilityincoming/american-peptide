@@ -206,6 +206,54 @@ const SEED_PEPTIDES: Peptide[] = [
       'Reconstitute gently — swirl rather than shake, since agitation can shear the peptide. Protect from heat and minimize freeze–thaw cycles.',
   },
   {
+    slug: 'liraglutide',
+    name: 'Liraglutide',
+    aliases: ['Victoza', 'Saxenda', 'NN2211'],
+    categories: ['metabolic'],
+    shortDescription:
+      'The once-daily GLP-1 agonist that preceded semaglutide — FDA-approved for diabetes (Victoza) and obesity (Saxenda).',
+    description:
+      'Liraglutide is a GLP-1 receptor agonist and the direct predecessor of semaglutide — the drug that proved the once-daily, acylated GLP-1 template before Novo Nordisk stretched it to once-weekly dosing. A fatty-acid chain on the GLP-1 backbone extends its half-life to about 13 hours, enough for daily injection. It was FDA-approved for type 2 diabetes (Victoza, 2010) and later, at higher dose, for chronic weight management (Saxenda, 2014).',
+    mechanism:
+      'GLP-1 receptor agonism → glucose-dependent insulin secretion, glucagon suppression, slowed gastric emptying, and central appetite reduction.',
+    researchAreas: ['Type 2 diabetes', 'Obesity', 'Cardiovascular risk reduction'],
+    background: [
+      'Liraglutide is where the modern GLP-1 story really begins for daily therapy. It is a GLP-1(7-37) analog carrying a single amino-acid substitution and, crucially, a C16 palmitic-acid chain attached through a glutamate spacer to a lysine — an acylation that lets the peptide bind reversibly to albumin and resist rapid clearance. That change pushed GLP-1’s natural half-life of minutes out to roughly half a day, making once-daily injection practical.',
+      'Novo Nordisk brought it to market for type 2 diabetes as Victoza (2010) and then, at a higher dose, for chronic weight management as Saxenda (2014), backed by a cardiovascular-outcomes trial (LEADER) showing benefit in high-risk patients. Semaglutide is its direct successor — the same acylation strategy taken further to reach once-weekly dosing and larger weight effects — which makes liraglutide both a still-used medicine and the historical bridge to the drugs that followed it.',
+    ],
+    keyResearch: [
+      'Glycemic control — the original approved use (Victoza) for type 2 diabetes via GLP-1 receptor agonism.',
+      'Weight management — approved at higher dose as Saxenda for chronic weight management.',
+      'Cardiovascular outcomes — the LEADER trial reported reduced major adverse cardiovascular events in high-risk type 2 diabetes.',
+      'Once-daily acylation — a C16 fatty-acid chain and albumin binding extend its half-life to ~13 hours, the template semaglutide later extended to weekly.',
+      'FDA-approved — Victoza (2010) and Saxenda (2014).',
+    ],
+    faqs: [
+      {
+        q: 'What is liraglutide?',
+        a: 'Liraglutide is a once-daily GLP-1 receptor agonist approved for type 2 diabetes (Victoza) and chronic weight management (Saxenda); it is the direct predecessor of semaglutide.',
+      },
+      {
+        q: 'How is it different from semaglutide?',
+        a: 'Both are acylated GLP-1 agonists, but liraglutide is dosed once daily (~13-hour half-life) while semaglutide was engineered for once-weekly dosing and larger average weight loss.',
+      },
+      {
+        q: 'What is the difference between Victoza and Saxenda?',
+        a: 'Both are liraglutide. Victoza is approved for type 2 diabetes; Saxenda is the higher-dose version approved for chronic weight management.',
+      },
+      {
+        q: 'Is liraglutide FDA-approved?',
+        a: 'Yes — for type 2 diabetes (Victoza) and chronic weight management (Saxenda). This page is a research and educational reference, not medical advice.',
+      },
+    ],
+    molecularWeight: 3751.2,
+    molecularFormula: 'C172H265N43O51',
+    cas: '204656-20-2',
+    pubchemCid: 16134956,
+    fdaApproved: true,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
     slug: 'tirzepatide',
     name: 'Tirzepatide',
     aliases: ['Mounjaro', 'Zepbound'],
@@ -298,6 +346,100 @@ const SEED_PEPTIDES: Peptide[] = [
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
+    slug: 'survodutide',
+    name: 'Survodutide',
+    aliases: ['BI 456906'],
+    categories: ['metabolic'],
+    shortDescription:
+      'Investigational glucagon / GLP-1 dual agonist from Boehringer Ingelheim — Phase 3 for obesity and MASH.',
+    description:
+      'Survodutide (BI 456906) is an investigational once-weekly peptide that activates both the glucagon and GLP-1 receptors. Adding glucagon-receptor agonism to GLP-1 is studied as a way to raise energy expenditure and target liver fat on top of GLP-1’s appetite and glycemic effects. Developed by Boehringer Ingelheim with Zealand Pharma, it is in Phase 3 for obesity and holds FDA Breakthrough Therapy designation for metabolic dysfunction-associated steatohepatitis (MASH).',
+    mechanism:
+      'Dual agonism at the glucagon and GLP-1 receptors — GLP-1 for insulinotropic and satiety effects, glucagon for increased energy expenditure and hepatic-fat reduction.',
+    researchAreas: ['Obesity', 'MASH', 'Type 2 diabetes'],
+    background: [
+      'Survodutide belongs to the glucagon/GLP-1 "dual agonist" branch of the incretin family — the two-receptor design that sits between single GLP-1 agonists like semaglutide and triple agonists like retatrutide. The glucagon arm is the point of interest: rather than only suppressing appetite and stimulating insulin, glucagon-receptor activation is studied for increasing energy expenditure and, notably, mobilizing fat from the liver.',
+      'Developed by Boehringer Ingelheim together with Zealand Pharma, it is dosed once weekly and remains investigational. Its most distinctive program is in liver disease: it received FDA Breakthrough Therapy designation for MASH (metabolic dysfunction-associated steatohepatitis) and is in Phase 3 trials there, alongside Phase 3 obesity trials where it has reported double-digit mean weight reductions. It is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Glucagon / GLP-1 dual agonism — pairs GLP-1’s appetite and glycemic effects with glucagon-driven energy expenditure and hepatic-fat mobilization.',
+      'MASH — holds FDA Breakthrough Therapy designation for metabolic dysfunction-associated steatohepatitis, its most distinctive Phase 3 program.',
+      'Obesity — Phase 3 trials reported substantial double-digit mean weight reduction over ~76 weeks.',
+      'Once-weekly — acylated for a long half-life, like the rest of the modern incretin class.',
+      'Investigational — developed by Boehringer Ingelheim / Zealand Pharma; not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is survodutide?',
+        a: 'Survodutide (BI 456906) is an investigational once-weekly glucagon / GLP-1 dual receptor agonist from Boehringer Ingelheim, studied for obesity and MASH (fatty liver disease).',
+      },
+      {
+        q: 'How does it differ from semaglutide or tirzepatide?',
+        a: 'Semaglutide targets GLP-1 alone and tirzepatide targets GIP + GLP-1; survodutide instead pairs GLP-1 with glucagon-receptor activation, studied for extra energy expenditure and liver-fat reduction.',
+      },
+      {
+        q: 'What is it studied for in the liver?',
+        a: 'It has FDA Breakthrough Therapy designation for MASH (metabolic dysfunction-associated steatohepatitis) and is in Phase 3 trials for it — the glucagon arm is of particular interest for hepatic fat.',
+      },
+      {
+        q: 'Is survodutide approved?',
+        a: 'No — it is investigational and not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+    molecularWeight: 4232,
+    molecularFormula: 'C192H289N47O61',
+    cas: '2805997-46-8',
+    pubchemCid: 171378821,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'mazdutide',
+    name: 'Mazdutide',
+    aliases: ['IBI362', 'LY3305677'],
+    categories: ['metabolic'],
+    shortDescription:
+      'A glucagon / GLP-1 dual agonist (oxyntomodulin-based) approved in China for weight management and diabetes — not yet FDA-approved.',
+    description:
+      'Mazdutide is a once-weekly glucagon / GLP-1 dual receptor agonist based on mammalian oxyntomodulin, the natural gut hormone that activates both receptors. Licensed by Innovent Biologics from Eli Lilly for China, it became the first GCG/GLP-1 dual agonist to reach the market when China’s NMPA approved it in 2025 — first for chronic weight management, then for type 2 diabetes. It is not FDA-approved; Eli Lilly retains rights outside China, where it remains investigational.',
+    mechanism:
+      'Dual agonism at the glucagon and GLP-1 receptors, modeled on oxyntomodulin — combining GLP-1 satiety and insulin effects with glucagon-driven energy expenditure.',
+    researchAreas: ['Obesity', 'Type 2 diabetes', 'MASH'],
+    background: [
+      'Mazdutide is built on oxyntomodulin, a naturally occurring gut hormone that — unusually — activates both the GLP-1 and glucagon receptors on its own. Engineering that dual activity into a stabilized, acylated, once-weekly peptide gives mazdutide the same glucagon/GLP-1 profile as survodutide, reached from a different molecular starting point.',
+      'Its development is notable for geography. Eli Lilly created the molecule (LY3305677) and licensed Chinese rights to Innovent Biologics (as IBI362) in 2019. In 2025 China’s NMPA approved it — first for long-term weight management, then for glycemic control in type 2 diabetes — making it the first glucagon/GLP-1 dual agonist approved anywhere. Late-stage Chinese trials (the GLORY program) reported weight reductions around 20% at higher doses. It is not FDA-approved, and outside China it remains investigational.',
+    ],
+    keyResearch: [
+      'Oxyntomodulin-based dual agonism — activates both glucagon and GLP-1 receptors, modeled on the natural dual-acting gut hormone.',
+      'First-in-class approval (China) — China’s NMPA approved it in 2025 for weight management and then type 2 diabetes; the first GCG/GLP-1 dual agonist to market.',
+      'Weight reduction — late-stage Chinese trials (GLORY) reported ~20% mean weight loss at higher doses.',
+      'Developed by Lilly / Innovent — Innovent holds Chinese rights; Lilly retains rights elsewhere.',
+      'Not FDA-approved — approved in China only; investigational elsewhere.',
+    ],
+    faqs: [
+      {
+        q: 'What is mazdutide?',
+        a: 'Mazdutide is a once-weekly glucagon / GLP-1 dual receptor agonist based on oxyntomodulin, approved in China for weight management and type 2 diabetes and developed by Eli Lilly and Innovent.',
+      },
+      {
+        q: 'Is mazdutide FDA-approved?',
+        a: 'No. It was approved in China (2025) for weight management and diabetes, but it is not FDA-approved; outside China it remains investigational. This page is a research and educational reference.',
+      },
+      {
+        q: 'How is it different from survodutide?',
+        a: 'Both are glucagon / GLP-1 dual agonists, but mazdutide is based on the natural dual-acting hormone oxyntomodulin, while survodutide is a separate engineered peptide; they come from different developers.',
+      },
+      {
+        q: 'What does the glucagon component add?',
+        a: 'Glucagon-receptor activation is studied for increasing energy expenditure and reducing liver fat, complementing GLP-1’s appetite and glucose effects.',
+      },
+    ],
+    molecularWeight: 4476,
+    molecularFormula: 'C207H317N45O65',
+    cas: '2259884-03-0',
+    pubchemCid: 167312357,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
     slug: 'cagrilintide',
     name: 'Cagrilintide',
     categories: ['metabolic'],
@@ -339,6 +481,51 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C194H312N54O59S2',
     cas: '1415456-99-3',
     pubchemCid: 171397054,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'cagrisema',
+    name: 'CagriSema',
+    aliases: ['Cagrilintide/semaglutide', 'cagrilintide + semaglutide'],
+    categories: ['metabolic'],
+    shortDescription:
+      'Novo Nordisk’s investigational fixed combination of cagrilintide (amylin) and semaglutide (GLP-1) — two appetite pathways in one weekly injection.',
+    description:
+      'CagriSema is not a single molecule but a fixed-dose combination of two peptides already in this catalog: cagrilintide, a long-acting amylin analog, and semaglutide, the GLP-1 agonist. Novo Nordisk pairs the amylin and GLP-1 satiety pathways in one once-weekly injection, betting that two complementary appetite mechanisms together drive more weight loss than either alone. It is investigational and in Phase 3.',
+    mechanism:
+      'Co-agonism across two pathways: semaglutide activates the GLP-1 receptor while cagrilintide activates amylin and calcitonin receptors — complementary routes to satiety and slowed gastric emptying.',
+    researchAreas: ['Obesity', 'Type 2 diabetes', 'Combination metabolic therapy'],
+    background: [
+      'CagriSema is a combination product, and that is the whole point of it. Rather than engineer a single peptide that hits several receptors — the multi-agonist route taken by tirzepatide and retatrutide — Novo Nordisk co-formulates two of its existing peptides: the amylin analog cagrilintide and the GLP-1 agonist semaglutide. Both suppress appetite, but through different receptor systems, so combining them is studied for additive weight effect from a single weekly injection.',
+      'Because it is a co-formulation, CagriSema has no molecular formula or sequence of its own — its properties are those of its two components, each documented on its own monograph here. It is investigational, studied in the Phase 3 REDEFINE program, where it produced large mean weight reductions in the low-to-mid twenties percent; the results were strong in absolute terms even as they were scrutinized against very high market expectations. It is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Two-pathway combination — pairs semaglutide (GLP-1) with cagrilintide (amylin) to engage two distinct satiety systems in one weekly injection.',
+      'Not a single molecule — a fixed-dose co-formulation; its chemistry is that of its two component peptides, each catalogued separately here.',
+      'Weight reduction — the Phase 3 REDEFINE program reported large mean reductions in the low-to-mid twenties percent.',
+      'Combination rationale — an alternative to single multi-agonist peptides, reached by combining two proven components.',
+      'Investigational — a Novo Nordisk candidate; not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is CagriSema?',
+        a: 'CagriSema is Novo Nordisk’s investigational fixed combination of two peptides — cagrilintide (an amylin analog) and semaglutide (a GLP-1 agonist) — given as one once-weekly injection for weight management.',
+      },
+      {
+        q: 'Is CagriSema a single peptide?',
+        a: 'No — it is a co-formulation of two separate peptides (cagrilintide and semaglutide), each with its own monograph here, so it has no single molecular formula.',
+      },
+      {
+        q: 'How does it compare with tirzepatide?',
+        a: 'Tirzepatide is one molecule hitting two receptors (GIP + GLP-1); CagriSema instead combines two molecules (amylin + GLP-1). Both aim for additive metabolic effect by different means.',
+      },
+      {
+        q: 'Is CagriSema approved?',
+        a: 'No — it is investigational and in Phase 3. This page is a research and educational reference, not medical advice.',
+      },
+    ],
+    synthesisNotes:
+      'CagriSema is a co-formulation, not a synthesized molecule: it is manufactured by making its two component peptides — cagrilintide and semaglutide — separately, each to its own spec and certificate of analysis, and combining them at fixed doses. Its quality therefore rests on the identity and purity of two peptides at once, described on their individual monographs.',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -705,6 +892,102 @@ const SEED_PEPTIDES: Peptide[] = [
       'Palmitoylation makes it amphiphilic — disperse carefully in formulation. Protect from heat and light.',
   },
   {
+    slug: 'argireline',
+    name: 'Argireline',
+    aliases: ['Acetyl Hexapeptide-8', 'Acetyl Hexapeptide-3', 'Ac-EEMQRR-NH2'],
+    categories: ['cosmetic'],
+    shortDescription:
+      'A topical "neurocosmetic" hexapeptide that mimics SNAP-25 to soften expression wrinkles — often called topical Botox.',
+    description:
+      'Argireline (acetyl hexapeptide-8) is a synthetic hexapeptide widely used in anti-aging cosmetics. It mimics the N-terminal end of SNAP-25, a protein in the SNARE complex that nerve endings use to release the signals that make facial muscles contract. By competing in that complex, Argireline is proposed to reduce the muscle contractions behind expression lines — the reason it is marketed as a topical, needle-free alternative to botulinum toxin.',
+    mechanism:
+      'Mimics the N-terminus of SNAP-25, competitively interfering with SNARE-complex assembly and reducing neurotransmitter release at the neuromuscular junction — dampening the muscle contractions that form expression wrinkles.',
+    researchAreas: ['Topical anti-aging', 'Expression-line reduction', 'Cosmetic formulation'],
+    background: [
+      'Argireline was the peptide that launched the "neurocosmetic" category — topical ingredients that borrow the logic of botulinum toxin without the toxin. Its six-residue, N-acetylated sequence mimics the very end of SNAP-25, one of the SNARE proteins a nerve terminal uses to dock and release its signaling vesicles. By slotting into that machinery, Argireline is proposed to blunt the release that tells a facial muscle to contract, so repeated expressions crease the skin less.',
+      'In practice it is a cosmetic-formulation ingredient, applied to the skin in serums and creams rather than injected, and its measured effects are modest and surface-level compared with injected botulinum toxin. It sits in this catalog alongside the other skin peptides — the copper peptides and matrixyl — as a reference entry: a well-defined, widely sold compound whose mechanism is genuinely interesting even where the marketing outruns the evidence. It is a cosmetic ingredient, not an FDA-approved drug.',
+    ],
+    keyResearch: [
+      'SNAP-25 mimic — its acetylated hexapeptide sequence imitates the SNAP-25 N-terminus, competing in the SNARE complex that drives neurotransmitter release.',
+      'The "topical Botox" concept — marketed as a needle-free way to soften expression lines by reducing muscle contraction; effects are modest and surface-level.',
+      'Cosmetic ingredient — formulated into topical serums and creams (INCI: Acetyl Hexapeptide-8), not injected.',
+      'Well-characterized peptide — a defined synthetic hexapeptide, in contrast to the marketing language around it.',
+      'Not an FDA-approved drug — a cosmetic ingredient; this page is a research and educational reference.',
+    ],
+    faqs: [
+      {
+        q: 'What is Argireline?',
+        a: 'Argireline (acetyl hexapeptide-8) is a synthetic hexapeptide used in anti-aging cosmetics that mimics SNAP-25 to reduce the muscle contractions behind expression wrinkles.',
+      },
+      {
+        q: 'Is it really "topical Botox"?',
+        a: 'It borrows the same SNARE / SNAP-25 logic as botulinum toxin, but it is applied topically and its effects are modest and superficial — not equivalent to injected Botox.',
+      },
+      {
+        q: 'How does it compare with matrixyl?',
+        a: 'Argireline targets muscle-contraction signaling (expression lines); matrixyl (a palmitoyl peptide) signals fibroblasts to make more collagen. They address different aspects of skin aging.',
+      },
+      {
+        q: 'Is Argireline approved?',
+        a: 'It is a cosmetic ingredient, not an FDA-approved drug. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'Ac-Glu-Glu-Met-Gln-Arg-Arg-NH2',
+    molecularWeight: 887.0,
+    molecularFormula: 'C35H62N14O11S',
+    cas: '616204-22-9',
+    pubchemCid: 71587772,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'snap-8',
+    name: 'SNAP-8',
+    aliases: ['Acetyl Octapeptide-3', 'Acetyl Octapeptide-1', 'Ac-EEMQRRAD-NH2'],
+    categories: ['cosmetic'],
+    shortDescription:
+      'An elongated, higher-potency relative of Argireline — an eight-residue SNAP-25 mimic used as a topical, needle-free anti-wrinkle peptide.',
+    description:
+      'SNAP-8 (acetyl octapeptide-3) is a topical anti-aging peptide closely related to Argireline: it extends the same acetylated SNAP-25-mimicking sequence from six residues to eight, and is marketed as a more potent version of the same "topical Botox" concept. Like Argireline, it is proposed to interfere with the SNARE complex that triggers muscle contraction, softening expression lines when applied to the skin.',
+    mechanism:
+      'An elongated SNAP-25 N-terminal mimic that competes in SNARE-complex assembly, reducing neurotransmitter release at the neuromuscular junction and the muscle contractions that create expression wrinkles.',
+    researchAreas: ['Topical anti-aging', 'Expression-line reduction', 'Cosmetic formulation'],
+    background: [
+      'SNAP-8 is Argireline’s longer sibling. Where Argireline is a six-residue fragment mimicking the tip of SNAP-25, SNAP-8 extends the same idea to eight residues (acetyl octapeptide-3), a change its developers positioned as improving the peptide’s ability to compete in the SNARE complex and therefore its wrinkle-softening effect. The mechanism is identical in spirit: interfere with the docking machinery that lets a nerve tell a facial muscle to contract.',
+      'It is used the same way as Argireline — a cosmetic-formulation ingredient in topical serums and creams, not an injectable — and the same caveat applies: the effects are modest and surface-level next to injected botulinum toxin, and the marketing tends to outrun the controlled evidence. It is catalogued here as a well-defined companion to Argireline on the cosmetic-peptide shelf. It is a cosmetic ingredient, not an FDA-approved drug.',
+    ],
+    keyResearch: [
+      'Elongated SNAP-25 mimic — an eight-residue acetylated peptide extending the Argireline concept, proposed to compete more effectively in the SNARE complex.',
+      'Higher-potency positioning — marketed as a stronger version of the "topical Botox" idea than Argireline, though comparative evidence is limited.',
+      'Cosmetic ingredient — used topically in serums and creams (INCI: Acetyl Octapeptide-3), not injected.',
+      'Companion to Argireline — the same mechanism and use, one shelf over in the cosmetic peptides.',
+      'Not an FDA-approved drug — a cosmetic ingredient; this page is a research and educational reference.',
+    ],
+    faqs: [
+      {
+        q: 'What is SNAP-8?',
+        a: 'SNAP-8 (acetyl octapeptide-3) is a topical anti-aging peptide, an eight-residue relative of Argireline that mimics SNAP-25 to soften expression wrinkles.',
+      },
+      {
+        q: 'How is it different from Argireline?',
+        a: 'SNAP-8 extends Argireline’s six-residue sequence to eight residues and is marketed as more potent, but the mechanism and topical use are the same and comparative evidence is limited.',
+      },
+      {
+        q: 'Is it injected like Botox?',
+        a: 'No — like Argireline it is a topical cosmetic ingredient. Its effects are modest and superficial compared with injected botulinum toxin.',
+      },
+      {
+        q: 'Is SNAP-8 approved?',
+        a: 'It is a cosmetic ingredient, not an FDA-approved drug. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'Ac-Glu-Glu-Met-Gln-Arg-Arg-Ala-Asp-NH2',
+    molecularWeight: 1075.2,
+    molecularFormula: 'C41H70N16O16S',
+    cas: '868844-74-0',
+    pubchemCid: 76283482,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
     slug: 'epo',
     name: 'EPO (Erythropoietin)',
     aliases: [
@@ -764,6 +1047,54 @@ const SEED_PEPTIDES: Peptide[] = [
       'A glycosylated protein sensitive to heat, freezing, and agitation, which can aggregate it and reduce potency. Aggregated protein is also an immunogenicity concern — historically linked to rare pure red-cell aplasia from anti-EPO antibodies.',
     synthesisNotes:
       'EPO is produced recombinantly in mammalian (CHO) cell culture so that its essential N- and O-linked glycosylation is human-like; its ~30–34 kDa mass is approximate and varies with glycosylation, so it has no single molecular formula. Characterization is glycoprotein-grade — glycan/isoform profiling, identity by mass spectrometry and peptide mapping, and cell-based potency — far beyond an HPLC purity figure.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'ara-290',
+    name: 'ARA-290',
+    aliases: ['Cibinetide', 'pHBSP', 'Pyroglutamate helix B surface peptide'],
+    categories: ['healing-repair'],
+    shortDescription:
+      'An 11-amino-acid, non-erythropoietic fragment of erythropoietin that keeps EPO’s tissue-protective, anti-inflammatory activity without raising red blood cells.',
+    description:
+      'ARA-290 (cibinetide) is a synthetic 11-amino-acid peptide taken from the helix-B surface of erythropoietin (EPO). It was designed to separate EPO’s tissue-protective and anti-inflammatory effects from its blood-building ones: ARA-290 activates the so-called innate repair receptor without stimulating red-cell production, so it carries none of EPO’s thrombotic risk. It has been studied mainly for neuropathic pain and tissue repair, most notably in sarcoidosis-related small-fiber neuropathy.',
+    mechanism:
+      'Selective agonist at the innate repair receptor — a heterocomplex of the EPO receptor and the β-common receptor (CD131) — driving tissue-protective and anti-inflammatory signaling without erythropoiesis.',
+    researchAreas: ['Neuropathic pain', 'Small-fiber neuropathy', 'Tissue protection', 'Anti-inflammatory / repair'],
+    background: [
+      'ARA-290 is what you get when you ask which part of erythropoietin does the healing. EPO — the red-cell hormone catalogued just above — turns out to have two distinct jobs: it builds red blood cells, and, through a different receptor, it protects and repairs injured tissue and calms inflammation. Those activities are separable, and ARA-290 (cibinetide) is the 11-residue piece of EPO’s helix-B surface engineered to trigger only the second one.',
+      'Because it does not act on the classic EPO receptor that raises red-cell mass, ARA-290 avoids the clotting and blood-thickening dangers that make EPO risky, while retaining EPO’s tissue-protective, anti-inflammatory signaling through the innate repair receptor. Its most developed research is in small-fiber neuropathy — including the neuropathic pain of sarcoidosis — along with broader work in tissue repair and metabolic inflammation. It carries an N-terminal pyroglutamate that improves its stability. It is investigational and not FDA-approved.',
+    ],
+    keyResearch: [
+      'Non-erythropoietic by design — activates EPO’s tissue-protective innate repair receptor without raising red-cell mass, avoiding EPO’s thrombotic risk.',
+      'Neuropathic pain — the most-developed indication; studied in sarcoidosis-associated small-fiber neuropathy.',
+      'Tissue protection & anti-inflammation — retains EPO’s repair and immunomodulatory signaling, examined across injury and metabolic-inflammation models.',
+      'Derived from EPO helix-B — an 11-residue surface fragment with an N-terminal pyroglutamate for stability.',
+      'Investigational — not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is ARA-290?',
+        a: 'ARA-290 (cibinetide) is a synthetic 11-amino-acid fragment of erythropoietin that triggers EPO’s tissue-protective, anti-inflammatory signaling without stimulating red-blood-cell production.',
+      },
+      {
+        q: 'How is it different from EPO?',
+        a: 'EPO both builds red cells and protects tissue; ARA-290 keeps only the tissue-protective, anti-inflammatory activity, so it does not carry EPO’s clotting and blood-thickening risks.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Chiefly neuropathic pain and small-fiber neuropathy — including in sarcoidosis — plus broader tissue-protection and anti-inflammatory research.',
+      },
+      {
+        q: 'Is ARA-290 approved?',
+        a: 'No — it is investigational and not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'pGlu-Glu-Gln-Leu-Glu-Arg-Ala-Leu-Asn-Ser-Ser',
+    molecularWeight: 1257.3,
+    molecularFormula: 'C51H84N16O21',
+    cas: '1208243-50-8',
+    pubchemCid: 91810664,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -1007,6 +1338,56 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     cas: '946870-92-4',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+    storage:
+      'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and minimize freeze–thaw — a folded, disulfide-bonded protein.',
+    handling:
+      'A disulfide-bonded protein sensitive to heat, agitation, and freeze–thaw. Reconstitute gently (swirl, do not shake).',
+  },
+  {
+    slug: 'igf-1-des',
+    name: 'IGF-1 DES',
+    aliases: ['DES(1-3)IGF-1', 'des-IGF-1', 'DES(1-3) IGF-1'],
+    categories: ['growth-hormone'],
+    shortDescription:
+      'A truncated IGF-1 missing its first three residues — sharply reduced IGFBP binding and high local potency, but short-acting.',
+    description:
+      'IGF-1 DES (DES(1-3)IGF-1) is native IGF-1 with the first three N-terminal residues removed — a 67-amino-acid analog. Losing that tripeptide sharply reduces its affinity for the IGF-binding proteins that normally restrain IGF-1, leaving it far more potent locally, though much shorter-acting than the extended LR3 analog.',
+    mechanism:
+      'IGF-1 receptor agonism with greatly reduced IGFBP binding → potent, short-lived local anabolic signaling.',
+    researchAreas: ['Muscle hypertrophy', 'Cell proliferation', 'GH/IGF-1 axis'],
+    background: [
+      'IGF-1 DES is the shortest of the common IGF-1 variants: insulin-like growth factor 1 with the first three amino acids (Gly-Pro-Glu) clipped from the N-terminus, giving a 67-residue peptide versus 70 for native IGF-1. That small deletion has an outsized effect, because the N-terminal tripeptide is part of what IGF-binding proteins grip. Removing it drops IGFBP affinity dramatically, so the peptide stays free and active rather than being sequestered.',
+      'The result is a variant reported as roughly ten-fold more potent than native IGF-1 in some assays, but with a short half-life — the opposite design philosophy to IGF-1 LR3, which is engineered for extended, systemic action. IGF-1 DES is a research compound (~7.4 kDa), widely used in cell culture, not FDA-approved, and prohibited in sport.',
+    ],
+    keyResearch: [
+      'Reduced IGFBP binding — removing the N-terminal Gly-Pro-Glu tripeptide sharply lowers affinity for IGF-binding proteins, leaving more peptide free and active.',
+      'High local potency — reported roughly ten-fold more potent than native IGF-1 in some assays, with a short duration of action.',
+      'Compared to IGF-1 LR3 — DES is short-acting and locally potent; LR3 is engineered (R3 substitution + N-terminal extension) for prolonged systemic activity.',
+      'Cell-culture use — used as a serum supplement where IGFBP-independent activity is wanted.',
+      'Preclinical / prohibited in sport — not FDA-approved; WADA-banned.',
+    ],
+    faqs: [
+      {
+        q: 'What is IGF-1 DES?',
+        a: 'IGF-1 DES (DES(1-3)IGF-1) is a shortened form of IGF-1 missing its first three amino acids, which greatly reduces IGF-binding-protein binding and increases its local potency.',
+      },
+      {
+        q: 'How is it different from IGF-1 LR3?',
+        a: 'Both reduce IGFBP binding, but DES does it by truncation and is short-acting and locally potent, whereas LR3 adds modifications for long, systemic action.',
+      },
+      {
+        q: 'Why does removing three amino acids matter so much?',
+        a: 'The N-terminal tripeptide is part of what IGF-binding proteins grip; without it the peptide escapes sequestration and stays free and active.',
+      },
+      {
+        q: 'Is IGF-1 DES approved?',
+        a: 'No. It is a research compound (also common in cell culture), not FDA-approved, and prohibited in sport. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'TLCGAELVDALQFVCGDRGFYFNKPTGYGSSSRRAPQTGIVDECCFRSCDLRRLEMYCAPLKPAKSA',
+    molecularWeight: 7371.5,
+    cas: '112603-35-7',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     storage:
       'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and minimize freeze–thaw — a folded, disulfide-bonded protein.',
@@ -1312,6 +1693,150 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'His-D-2-MeTrp-Ala-Trp-D-Phe-Lys-NH2',
     cas: '140703-51-1',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'ghrp-2',
+    name: 'GHRP-2',
+    aliases: ['Pralmorelin', 'KP-102', 'GPA-748'],
+    categories: ['growth-hormone'],
+    shortDescription:
+      'Second-generation synthetic GHRP; a potent ghrelin-receptor agonist approved in Japan as a diagnostic for GH deficiency.',
+    description:
+      'GHRP-2 (pralmorelin) is a synthetic hexapeptide growth-hormone secretagogue that activates the GHS-R1a (ghrelin) receptor on pituitary somatotrophs. More potent than its predecessor GHRP-6, it is one of the very few GHRPs to reach regulatory approval anywhere — used in Japan as a single-injection diagnostic test of pituitary GH reserve.',
+    mechanism: 'GHS-R1a (ghrelin receptor) agonism → pulsatile GH release.',
+    researchAreas: ['GH secretion studies', 'GH-deficiency diagnostics', 'Pituitary function'],
+    background: [
+      'GHRP-2 is a second-generation growth-hormone-releasing peptide, developed after GHRP-6 as researchers tuned the original hexapeptide for greater potency. Like the rest of the family it activates the ghrelin receptor (GHS-R1a) on pituitary somatotrophs, driving a discrete pulse of endogenous growth hormone rather than supplying GH directly.',
+      'It occupies an unusual place among research GHRPs: it is actually an approved drug in Japan (as pralmorelin), where a single injection is used to test whether the pituitary can release GH — a diagnostic for growth-hormone deficiency. It is not FDA-approved in the United States. Compared with GHRP-6 it releases more GH per dose and provokes noticeably less of GHRP-6’s hallmark hunger, though it is less selective than ipamorelin and can transiently raise cortisol and prolactin.',
+    ],
+    keyResearch: [
+      'Potent GH release — a second-generation GHRP engineered from GHRP-6 for greater potency; releases GH via GHS-R1a with a stronger response per dose.',
+      'Approved diagnostic (Japan) — marketed as pralmorelin for a single-injection test of pituitary GH reserve; one of the very few GHRPs approved anywhere.',
+      'Less appetite than GHRP-6 — retains ghrelin-receptor agonism but with markedly less of the acute hunger GHRP-6 is known for.',
+      'Cortisol / prolactin — less selective than ipamorelin: at higher doses it can transiently raise ACTH, cortisol, and prolactin.',
+      'Not FDA-approved — a research compound in the US; commonly studied alongside a GHRH analog (CJC-1295 / sermorelin) for complementary, pulse-preserving release.',
+    ],
+    faqs: [
+      {
+        q: 'What is GHRP-2?',
+        a: 'GHRP-2 (pralmorelin) is a synthetic hexapeptide that stimulates the pituitary to release growth hormone by activating the ghrelin receptor. In Japan it is an approved diagnostic for GH deficiency.',
+      },
+      {
+        q: 'How is GHRP-2 different from GHRP-6?',
+        a: 'GHRP-2 is the more potent, more refined successor: it releases more GH per dose and causes much less of the sharp hunger GHRP-6 is known for.',
+      },
+      {
+        q: 'How does it compare with ipamorelin?',
+        a: 'Both are GHRPs, but ipamorelin is prized for releasing GH with minimal cortisol or prolactin; GHRP-2 is more potent yet less selective.',
+      },
+      {
+        q: 'Is GHRP-2 FDA-approved?',
+        a: 'No. It is approved in Japan as a diagnostic (pralmorelin) but is not FDA-approved; in the US it is a research compound. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'D-Ala-D-2-Nal-Ala-Trp-D-Phe-Lys-NH2',
+    molecularWeight: 817.99,
+    molecularFormula: 'C45H55N9O6',
+    cas: '158861-67-7',
+    pubchemCid: 6918245,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'ghrp-6',
+    name: 'GHRP-6',
+    aliases: ['Growth Hormone Releasing Peptide-6', 'Growth hormone-releasing hexapeptide', 'GHRP'],
+    categories: ['growth-hormone'],
+    shortDescription:
+      'The original growth-hormone-releasing peptide — the tool compound that led scientists to the ghrelin receptor and, ultimately, to ghrelin itself.',
+    description:
+      'GHRP-6 is the first-generation growth-hormone-releasing peptide and the historical starting point of the entire GHRP field. A synthetic hexapeptide that activates the GHS-R1a (ghrelin) receptor, it is pivotal beyond its own effects: the hunt for the receptor GHRP-6 bound led to the 1996 cloning of the GH-secretagogue receptor and, in 1999, to the discovery of its natural ligand, ghrelin.',
+    mechanism: 'GHS-R1a (ghrelin receptor) agonism → GH release and appetite stimulation.',
+    researchAreas: ['GH secretion studies', 'Ghrelin-receptor biology', 'Appetite regulation'],
+    background: [
+      'GHRP-6 is where the story of this whole class begins. Grown out of Cyril Bowers’ work on enkephalin-derived peptides, it was among the first peptides shown to release growth hormone through a receptor entirely separate from GHRH. That receptor was an orphan — no one knew its natural ligand — and GHRP-6 became the pharmacological probe used to find it.',
+      'The payoff was foundational: in 1996 the GH-secretagogue receptor (GHS-R1a) was cloned, and in 1999 its endogenous ligand, the stomach hormone ghrelin, was identified — reframing GHRP-6 in hindsight as a synthetic mimic of a hormone that had not yet been discovered. Pharmacologically, GHRP-6’s other signature is appetite: it is the GHRP most associated with a sharp, ghrelin-like spike in hunger, which itself became a research tool for probing feeding circuits. It is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Discovery tool — the probe compound whose target hunt led to cloning the GH-secretagogue receptor (GHS-R1a, 1996) and identifying ghrelin (1999).',
+      'GH release via a non-GHRH pathway — helped establish that a peptide could release GH through a receptor separate from the GHRH receptor.',
+      'Appetite stimulation — the GHRP most strongly associated with acute, ghrelin-like hunger; used to study feeding and energy-balance circuits.',
+      'Compared to GHRP-2 / ipamorelin — the original and least selective of the family; newer GHRPs were engineered from it for more GH per dose (GHRP-2) or fewer off-target effects (ipamorelin).',
+      'Not FDA-approved — a research compound; often studied with a GHRH analog for complementary release.',
+    ],
+    faqs: [
+      {
+        q: 'What is GHRP-6?',
+        a: 'GHRP-6 is the first growth-hormone-releasing peptide — a synthetic hexapeptide that releases GH by activating the ghrelin receptor, and the compound whose study led to the discovery of that receptor and of ghrelin itself.',
+      },
+      {
+        q: 'Why is GHRP-6 historically important?',
+        a: 'It was the pharmacological probe used to identify the GH-secretagogue receptor (cloned 1996) and its natural hormone, ghrelin (1999) — making it foundational to a whole area of endocrinology.',
+      },
+      {
+        q: 'Why does GHRP-6 cause hunger?',
+        a: 'It activates the ghrelin receptor, and ghrelin is the body’s hunger signal; GHRP-6 is the GHRP most associated with a sharp increase in appetite.',
+      },
+      {
+        q: 'How does it compare with GHRP-2 and ipamorelin?',
+        a: 'GHRP-6 is the original and least selective; GHRP-2 was tuned for more potency and less hunger, and ipamorelin for GH release with minimal cortisol or prolactin.',
+      },
+      {
+        q: 'Is GHRP-6 approved?',
+        a: 'No — it is a research compound. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'His-D-Trp-Ala-Trp-D-Phe-Lys-NH2',
+    molecularWeight: 873.04,
+    molecularFormula: 'C46H56N12O6',
+    cas: '87616-84-0',
+    pubchemCid: 4345065,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'mk-677',
+    name: 'MK-677',
+    aliases: ['Ibutamoren', 'Ibutamoren mesylate', 'MK-0677', 'L-163,191'],
+    categories: ['growth-hormone'],
+    shortDescription:
+      'An orally active, non-peptide ghrelin-receptor agonist and growth-hormone secretagogue — a small molecule catalogued alongside the GH peptides.',
+    description:
+      'MK-677 (ibutamoren) is a small molecule — not a peptide — that mimics ghrelin at the GHS-R1a receptor to raise growth hormone and IGF-1. Its defining feature is that it works by mouth and lasts about a day, where the peptide GH secretagogues must be injected — which is why it is almost always catalogued alongside them despite belonging to a different chemical class.',
+    mechanism: 'Oral GHS-R1a (ghrelin receptor) agonism → sustained increase in GH and IGF-1.',
+    researchAreas: ['GH/IGF-1 axis', 'Body composition', 'Bone density', 'Sleep'],
+    background: [
+      'MK-677 is the odd one out among growth-hormone secretagogues: chemically it is a non-peptide small molecule (a spiroindoline built for oral activity), yet functionally it does the same job as the GHRP peptides — it activates the ghrelin receptor to release growth hormone. It was developed by Merck in the 1990s in the search for an orally available GH secretagogue, and it succeeded where peptides could not: a single oral dose raises GH and IGF-1 for roughly 24 hours.',
+      'That practicality is exactly why it sits in this catalog next to the peptide secretagogues — researchers treat them as interchangeable tools even though MK-677 is not a peptide. It has been studied in humans for body composition, bone density, and sleep, and reached late-stage trials (for example in older adults and for hip-fracture recovery) without gaining approval. It is a research compound, not FDA-approved, and prohibited in sport.',
+    ],
+    keyResearch: [
+      'Oral GH secretagogue — a non-peptide ghrelin-receptor agonist active by mouth, raising GH and IGF-1 for about 24 hours per dose.',
+      'Body composition — studied in humans for lean-mass and metabolic effects via sustained GH / IGF-1 elevation.',
+      'Bone & sleep — examined for bone-density and slow-wave-sleep effects in clinical research.',
+      'Not a peptide — a small molecule catalogued alongside the peptide secretagogues (ipamorelin, GHRP-2 / GHRP-6) for its shared mechanism.',
+      'Preclinical / prohibited in sport — reached late-stage trials without approval; WADA-banned; not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is MK-677?',
+        a: 'MK-677 (ibutamoren) is an orally active, non-peptide ghrelin-receptor agonist that raises growth hormone and IGF-1 — a small molecule that does the same job as the injectable GHRP peptides.',
+      },
+      {
+        q: 'Is MK-677 a peptide?',
+        a: 'No. It is a small molecule, not a peptide, but it is catalogued alongside the peptide GH secretagogues because it shares their ghrelin-receptor mechanism and is used the same way.',
+      },
+      {
+        q: 'How is it different from GHRP-2 or ipamorelin?',
+        a: 'It hits the same receptor, but it is orally active and long-lasting (about 24 hours), whereas the GHRP peptides are injected and act in short pulses.',
+      },
+      {
+        q: 'Is MK-677 approved?',
+        a: 'No — it reached late-stage trials but was never approved, and it is prohibited in sport. This page is a research and educational reference.',
+      },
+    ],
+    molecularWeight: 528.67,
+    molecularFormula: 'C27H36N4O5S',
+    cas: '159634-47-6',
+    pubchemCid: 178024,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -1718,6 +2243,54 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'MRWQEMGYIFYPRKLR',
     molecularWeight: 2174.6,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'humanin',
+    name: 'Humanin',
+    aliases: ['HN', 'MT-RNR2 peptide'],
+    categories: ['mitochondrial', 'longevity'],
+    shortDescription:
+      'A 24-amino-acid mitochondrial-derived peptide with cytoprotective, anti-apoptotic activity — a companion to MOTS-c on the mitochondrial-signaling frontier.',
+    description:
+      'Humanin was the first mitochondrial-derived peptide discovered — a 24-amino-acid peptide encoded not in the nuclear genome but within the mitochondrial 16S ribosomal RNA gene. It is cytoprotective and anti-apoptotic: it was originally identified for protecting neurons against Alzheimer’s-related toxicity, and it has since been tied to metabolic regulation and longevity, with higher levels associated with healthy aging.',
+    mechanism:
+      'Cytoprotective, anti-apoptotic signaling — binds and antagonizes the pro-apoptotic protein BAX and signals through a cell-surface receptor complex (CNTFR / WSX-1 / gp130); also interacts with IGFBP-3.',
+    researchAreas: ['Aging biology', 'Neuroprotection', 'Metabolic regulation', 'Cytoprotection'],
+    background: [
+      'Humanin rewrote a small piece of the rulebook when it was found in 2001: a bioactive peptide encoded inside the mitochondrial genome, in the 16S ribosomal RNA region, rather than by nuclear DNA. It was discovered in the search for factors that protect neurons in Alzheimer’s disease — hence the name — and it turned out to be a broadly cytoprotective, anti-apoptotic signal that helps cells survive stress.',
+      'It is now recognized as the founding member of the mitochondrial-derived peptides (MDPs), the same family as MOTS-c catalogued just above, and part of the larger idea that mitochondria actively signal to the rest of the body. Beyond neuroprotection, humanin has been linked to insulin sensitivity, cardiovascular protection, and longevity — circulating levels decline with age and tend to be higher in long-lived individuals. It is a research compound and is not FDA-approved.',
+    ],
+    keyResearch: [
+      'First mitochondrial-derived peptide — encoded within the mitochondrial 16S rRNA gene (MT-RNR2); discovered in 2001 in Alzheimer’s research.',
+      'Cytoprotective / anti-apoptotic — antagonizes the pro-apoptotic protein BAX and signals via a CNTFR / WSX-1 / gp130 receptor complex.',
+      'Longevity association — circulating levels decline with age and are higher in some long-lived individuals; studied in aging biology.',
+      'Metabolic effects — linked to improved insulin sensitivity and cardiovascular protection in preclinical work.',
+      'Companion to MOTS-c — both are mitochondrial-derived signaling peptides; not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Humanin?',
+        a: 'Humanin is a 24-amino-acid mitochondrial-derived peptide with cytoprotective, anti-apoptotic activity, first discovered for protecting neurons in Alzheimer’s research.',
+      },
+      {
+        q: 'What does "mitochondrial-derived" mean?',
+        a: 'Unlike most peptides, humanin is encoded within the mitochondrial genome (the 16S rRNA region), not by nuclear DNA — it was the first such peptide identified.',
+      },
+      {
+        q: 'How does it relate to MOTS-c?',
+        a: 'Both are mitochondrial-derived peptides (MDPs). Humanin is the cytoprotective, anti-apoptotic member; MOTS-c is studied more for metabolism and AMPK activation.',
+      },
+      {
+        q: 'Is Humanin approved?',
+        a: 'No — it is a research compound, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'MAPRGFSCLLLLTSEIDLPVKRRA',
+    molecularWeight: 2687.2,
+    molecularFormula: 'C119H204N34O32S2',
+    cas: '330936-69-1',
+    pubchemCid: 16131438,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -2201,6 +2774,98 @@ const SEED_PEPTIDES: Peptide[] = [
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
+    slug: 'cerebrolysin',
+    name: 'Cerebrolysin',
+    aliases: ['FPF-1070', 'porcine brain-derived peptide preparation'],
+    categories: ['cognitive'],
+    shortDescription:
+      'A porcine-brain-derived mixture of neuropeptides and free amino acids with neurotrophic activity — approved for stroke and dementia outside the US.',
+    description:
+      'Cerebrolysin is not a single molecule but a standardized mixture — low-molecular-weight neuropeptides (about 15%) and free amino acids (about 85%) produced by enzymatic breakdown of purified pig-brain proteins. Its small peptide fraction is able to cross the blood–brain barrier, where it is studied for mimicking the brain’s own neurotrophic factors. It is one of the most widely used injectable nootropics in the world, approved in dozens of countries for stroke, traumatic brain injury, and dementia — though not by the FDA.',
+    mechanism:
+      'Neurotrophic and neuroprotective activity attributed to peptide fragments that mimic endogenous neurotrophic factors (BDNF, NGF, GDNF, CNTF), supporting neuronal survival, neuroplasticity, and synaptogenesis.',
+    researchAreas: ['Stroke recovery', 'Traumatic brain injury', 'Vascular dementia', 'Alzheimer’s disease', 'Neuroprotection'],
+    background: [
+      'Cerebrolysin belongs to a small group of entries in this catalog that are not single peptides at all but defined biological mixtures — like the glycoprotein hormones, it cannot be captured by one molecular formula. It is manufactured by EVER Pharma (originally EBEWE, Austria) from purified porcine brain proteins broken down by controlled enzymatic hydrolysis, yielding a reproducible blend of short neuropeptides and free amino acids standardized by peptide-nitrogen content rather than by a sequence.',
+      'The rationale is neurotrophic mimicry: the low-molecular-weight peptide fraction is small enough to cross the blood–brain barrier and is proposed to reproduce, in part, the actions of the brain’s own growth factors — BDNF, NGF, GDNF and others — that support neuron survival and synapse formation. It has one of the largest clinical literatures of any nootropic, spanning ischemic stroke, traumatic brain injury, vascular dementia, and Alzheimer’s disease, and is approved in roughly 44 countries across Europe and Asia. It is not FDA-approved in the United States, where it is imported and used off-label.',
+    ],
+    keyResearch: [
+      'Neurotrophic mimicry — the peptide fraction is proposed to mimic endogenous neurotrophic factors (BDNF, NGF, GDNF), supporting neuronal survival and plasticity.',
+      'Stroke & TBI — the most-studied indications; used internationally in acute stroke and traumatic brain injury rehabilitation.',
+      'Dementia — studied and approved in several countries for vascular dementia and Alzheimer’s disease.',
+      'A defined mixture — not a single peptide but a standardized porcine-brain hydrolysate (≈15% peptides, ≈85% free amino acids); no single molecular formula.',
+      'Approved abroad, not by FDA — marketed in ~44 countries; not FDA-approved in the US.',
+    ],
+    faqs: [
+      {
+        q: 'What is Cerebrolysin?',
+        a: 'Cerebrolysin is a standardized mixture of small neuropeptides and free amino acids made from purified porcine brain proteins, studied for neurotrophic and neuroprotective effects in stroke, brain injury, and dementia.',
+      },
+      {
+        q: 'Is it a single peptide?',
+        a: 'No — it is a defined biological mixture (about 15% low-molecular-weight peptides and 85% free amino acids), so it has no single sequence or molecular formula.',
+      },
+      {
+        q: 'Is Cerebrolysin FDA-approved?',
+        a: 'No. It is approved in roughly 44 countries across Europe and Asia for stroke, traumatic brain injury, and dementia, but it is not FDA-approved in the United States. This page is a research and educational reference.',
+      },
+      {
+        q: 'How is it thought to work?',
+        a: 'Its small peptides can cross the blood–brain barrier and are proposed to mimic the brain’s own neurotrophic factors (BDNF, NGF, GDNF), supporting neuron survival and synapse formation.',
+      },
+    ],
+    synthesisNotes:
+      'Cerebrolysin is not synthesized but manufactured from purified porcine brain protein by controlled enzymatic hydrolysis, then standardized — its potency is defined by peptide-nitrogen content and a consistent low-molecular-weight profile, not by a single sequence or purity number. Because it is a biological mixture, quality rests on batch-to-batch reproducibility, species-source control, and freedom from larger proteins, closer to a biologic than to a synthetic peptide.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'dihexa',
+    name: 'Dihexa',
+    aliases: ['PNB-0408', 'N-hexanoic-Tyr-Ile-(6) aminohexanoic amide'],
+    categories: ['cognitive'],
+    shortDescription:
+      'An orally active angiotensin IV–derived peptidomimetic reported as an extraordinarily potent synaptogenic (synapse-forming) compound.',
+    description:
+      'Dihexa is a small peptidomimetic derived from angiotensin IV, developed to promote the formation of new synapses. It works through the hepatocyte growth factor (HGF) / c-Met system rather than a classic neurotransmitter pathway, and it was reported in preclinical work to be orders of magnitude more potent than BDNF at driving synaptogenesis — which is why it draws intense interest as a cognitive research compound despite very limited human data.',
+    mechanism:
+      'Proposed potentiation of hepatocyte growth factor (HGF) signaling at its receptor c-Met, promoting synaptogenesis; derived from the angiotensin IV / AT4 system.',
+    researchAreas: ['Cognition', 'Synaptogenesis', 'Neurodegeneration'],
+    background: [
+      'Dihexa came out of work by Joseph Harding and colleagues at Washington State University on angiotensin IV, a fragment of the blood-pressure hormone angiotensin that unexpectedly turned out to support learning and memory. The team engineered a stabilized, orally active, blood–brain-barrier-penetrant derivative — Dihexa — designed to keep the pro-cognitive activity while surviving in the body long enough to matter.',
+      'Its headline claim is potency: in preclinical assays Dihexa was reported to promote new synapse formation at concentrations far below those needed by brain-derived neurotrophic factor (BDNF), acting by enhancing signaling of hepatocyte growth factor (HGF) through its receptor c-Met. That mechanism and potency make it a compelling research tool for neurodegeneration, but the same properties — a small molecule that powerfully drives cell signaling — mean its safety is essentially uncharacterized in humans. It is a research compound and is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Synaptogenesis — reported in preclinical work to promote new synapse formation with very high potency (orders of magnitude beyond BDNF in the original assays).',
+      'HGF / c-Met mechanism — proposed to work by potentiating hepatocyte growth factor signaling at the c-Met receptor.',
+      'Angiotensin IV origin — engineered from the pro-cognitive AT4-system peptide angiotensin IV for oral activity and brain penetration.',
+      'Neurodegeneration research — studied as a candidate for cognitive-decline models; human data are very limited.',
+      'Not FDA-approved — an early-stage research compound with an uncharacterized human safety profile.',
+    ],
+    faqs: [
+      {
+        q: 'What is Dihexa?',
+        a: 'Dihexa is an orally active peptidomimetic derived from angiotensin IV, studied as a highly potent promoter of new synapse formation via the HGF / c-Met pathway.',
+      },
+      {
+        q: 'Why is it considered so potent?',
+        a: 'In the original preclinical assays it promoted synaptogenesis at concentrations orders of magnitude lower than BDNF, a benchmark neurotrophic factor.',
+      },
+      {
+        q: 'How does it work?',
+        a: 'It is proposed to enhance hepatocyte growth factor (HGF) signaling through the c-Met receptor, rather than acting on a classic neurotransmitter system.',
+      },
+      {
+        q: 'Is Dihexa safe or approved?',
+        a: 'No — it is an early-stage research compound, not FDA-approved, and its safety in humans is essentially uncharacterized. This page is a research and educational reference.',
+      },
+    ],
+    molecularWeight: 504.7,
+    molecularFormula: 'C27H44N4O5',
+    cas: '1401708-83-5',
+    pubchemCid: 129010512,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
     slug: 'melanotan-2',
     name: 'Melanotan II',
     aliases: ['MT-2', 'MT-II'],
@@ -2366,6 +3031,62 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     sequence: 'YNWNSFGLRF-NH2',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'gonadorelin',
+    name: 'Gonadorelin',
+    aliases: [
+      'GnRH',
+      'LHRH',
+      'Gonadoliberin',
+      'Luteinizing hormone-releasing hormone',
+      'Factrel',
+      'Lutrepulse',
+    ],
+    categories: ['reproductive', 'peptide-hormone'],
+    shortDescription:
+      'Synthetic GnRH — the native decapeptide at the top of the pituitary-gonadal axis; pulsatile dosing switches the axis on, continuous dosing shuts it down.',
+    description:
+      'Gonadorelin is synthetic gonadotropin-releasing hormone (GnRH), the ten-amino-acid hypothalamic hormone that governs reproduction. Delivered to the pituitary it triggers release of LH and FSH — but only when given in pulses: the receptor’s defining quirk is that continuous exposure desensitizes it and suppresses the very hormones a pulse would release, the paradox that underlies both fertility and hormone-suppression medicine.',
+    mechanism:
+      'GnRH-receptor agonism on pituitary gonadotrophs. Pulsatile stimulation drives LH / FSH secretion; continuous stimulation desensitizes the receptor and suppresses the gonadotropins.',
+    researchAreas: ['Reproductive endocrinology', 'HPG-axis function', 'Fertility', 'Hypogonadism'],
+    background: [
+      'Gonadorelin is the manufactured form of GnRH, the master hormone of reproduction. Isolated and sequenced in 1971 — work that earned Andrew Schally a share of the 1977 Nobel Prize — it sits one step below kisspeptin in the hypothalamic-pituitary-gonadal (HPG) axis and one step above LH and FSH. Its ten residues are the switch that turns the whole reproductive cascade on.',
+      'What makes GnRH biology remarkable is its dependence on rhythm. The pituitary responds to pulses, not to a steady signal: given in a pulsatile pattern gonadorelin stimulates LH and FSH and can reawaken a dormant axis, but given continuously it does the opposite — the receptor downregulates and gonadotropins fall. That single paradox splits its uses in two. Pulsatile gonadorelin was FDA-approved (Lutrepulse, via a programmable pump) for infertility from hypothalamic amenorrhea, and a version (Factrel) served as a diagnostic of pituitary function; both were later discontinued in the US. The same continuous-suppression principle is why long-acting GnRH analogs such as leuprolide are used to shut the axis down.',
+      'In practice gonadorelin draws attention as the axis-signaling counterpart to hormones this catalog already covers: it acts upstream of hCG — which mimics LH at the gonad — and downstream of kisspeptin, which triggers GnRH release in the first place. Its native half-life, measured in minutes, is precisely why the pulsatile-versus-continuous distinction matters so much.',
+    ],
+    keyResearch: [
+      'Native GnRH decapeptide — the manufactured form of the hypothalamic hormone that controls LH and FSH; sequenced in 1971 (Schally, Nobel 1977).',
+      'Pulsatile vs continuous — the defining paradox: pulses stimulate the gonadotropins, continuous exposure desensitizes the receptor and suppresses them.',
+      'Approved uses (historical) — pulsatile Lutrepulse for hypothalamic-amenorrhea infertility and Factrel as a pituitary-function diagnostic; both discontinued in the US.',
+      'Axis position — acts downstream of kisspeptin (which releases GnRH) and upstream of hCG (which mimics LH at the gonad).',
+      'Short half-life — a native peptide cleared within minutes, which is why delivery pattern, not just dose, determines the effect.',
+    ],
+    faqs: [
+      {
+        q: 'What is gonadorelin?',
+        a: 'Gonadorelin is synthetic GnRH — the natural ten-amino-acid hypothalamic hormone that tells the pituitary to release LH and FSH, the hormones that drive the gonads.',
+      },
+      {
+        q: 'Why does pulsatile versus continuous dosing matter?',
+        a: 'The GnRH receptor responds to rhythm: pulses stimulate LH and FSH, while continuous exposure desensitizes the receptor and suppresses them — the basis for both fertility and hormone-suppression uses.',
+      },
+      {
+        q: 'How does gonadorelin relate to hCG and kisspeptin?',
+        a: 'It sits between them on the reproductive axis: kisspeptin triggers GnRH (gonadorelin) release, gonadorelin drives LH and FSH, and hCG acts further down by mimicking LH directly at the gonad.',
+      },
+      {
+        q: 'Is gonadorelin FDA-approved?',
+        a: 'It was historically approved in the US (Lutrepulse for infertility; Factrel as a diagnostic) but both were discontinued. This page is a research and educational reference, not medical advice.',
+      },
+    ],
+    sequence: 'pGlu-His-Trp-Ser-Tyr-Gly-Leu-Arg-Pro-Gly-NH2',
+    molecularWeight: 1182.29,
+    molecularFormula: 'C55H75N17O13',
+    cas: '33515-09-2',
+    pubchemCid: 638793,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -2673,6 +3394,53 @@ const SEED_PEPTIDES: Peptide[] = [
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
+    slug: 'hgh-fragment-176-191',
+    name: 'HGH Fragment 176-191',
+    aliases: ['HGH Frag 176-191', 'hGH 176-191', 'Somatropin fragment 176-191'],
+    categories: ['metabolic'],
+    shortDescription:
+      'The lipolytic C-terminal fragment of human growth hormone — the parent peptide that AOD-9604 was engineered from.',
+    description:
+      'HGH Fragment 176-191 is a 16-amino-acid piece of human growth hormone — residues 176 to 191, the C-terminal tail that carries GH’s fat-metabolizing activity. Isolated from the rest of the hormone, it is studied for lipolysis without the growth-promoting or blood-sugar effects of full GH, and it is the direct structural parent of the engineered analog AOD-9604.',
+    mechanism:
+      'Proposed β3-adrenergic-mediated lipolysis; does not bind the GH receptor or raise IGF-1.',
+    researchAreas: ['Lipolysis', 'Obesity (preclinical)', 'Fat metabolism'],
+    background: [
+      'The idea behind HGH Fragment 176-191 is that growth hormone’s many effects are not all located in the same place on the molecule. Structure-activity work mapped GH’s fat-burning (lipolytic) activity to its C-terminal region, and the fragment spanning residues 176–191 was found to reproduce that effect on its own — while leaving behind the parts of GH responsible for growth signaling and the unwanted rise in blood glucose.',
+      'That makes the fragment a kind of natural experiment: a way to ask whether GH’s lipolysis can be separated from everything else it does. It is closed by a single disulfide bond between its two cysteines, and it is the peptide from which AOD-9604 was derived — AOD-9604 simply swaps the fragment’s N-terminal residue for a tyrosine to improve stability. It is a research compound and is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Lipolytic domain — reproduces the fat-metabolizing activity mapped to GH’s C-terminal region, isolated from the rest of the hormone.',
+      'No GH-receptor binding — studied for fat metabolism without the growth or glucose effects of full growth hormone or its IGF-1 rise.',
+      'Parent of AOD-9604 — the direct structural precursor; AOD-9604 adds an N-terminal tyrosine to the same fragment for stability.',
+      'Disulfide loop — a single Cys–Cys bond closes the peptide, its defining structural feature.',
+      'Preclinical — not FDA-approved as a therapeutic.',
+    ],
+    faqs: [
+      {
+        q: 'What is HGH Fragment 176-191?',
+        a: 'It is a 16-amino-acid piece of human growth hormone (residues 176–191) that carries GH’s fat-metabolizing activity, studied for lipolysis without GH’s growth or blood-sugar effects.',
+      },
+      {
+        q: 'How does it relate to AOD-9604?',
+        a: 'HGH Fragment 176-191 is the parent peptide; AOD-9604 is the engineered version, differing by an added N-terminal tyrosine that improves stability.',
+      },
+      {
+        q: 'Does it raise IGF-1 like growth hormone?',
+        a: 'No — the fragment is studied specifically because it reproduces GH’s lipolytic effect without binding the GH receptor or driving IGF-1.',
+      },
+      {
+        q: 'Is it approved?',
+        a: 'No — it is a research compound, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'FLRIVQCRSVEGSCGF',
+    molecularWeight: 1799.1,
+    molecularFormula: 'C78H123N23O22S2',
+    cas: '66004-57-7',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
     slug: 'aod-9604',
     name: 'AOD-9604',
     categories: ['metabolic'],
@@ -2710,6 +3478,54 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No — it is not FDA-approved as a therapeutic. This page is a research and educational reference.',
       },
     ],
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'adipotide',
+    name: 'Adipotide',
+    aliases: ['FTPP', 'Prohibitin-targeting peptide-1', 'CKGGRAKDC-GG-D(KLAKLAK)2'],
+    categories: ['metabolic'],
+    shortDescription:
+      'A fat-targeting proapoptotic peptide that destroys the blood supply of white fat — striking in animals, but discontinued in humans for kidney toxicity.',
+    description:
+      'Adipotide (FTPP, "fat-targeted proapoptotic peptide") is a chimeric peptide designed to attack obesity from an unusual angle: instead of curbing appetite, it kills the blood vessels that feed white fat. One end is a homing sequence (CKGGRAKDC) that binds prohibitin on the vasculature of fat tissue; the other is a proapoptotic peptide that triggers cell death once delivered. In obese primates it produced rapid, striking fat loss — but its clinical development was halted over kidney toxicity.',
+    mechanism:
+      'A two-domain peptide: a cyclic CKGGRAKDC motif homes to prohibitin on white-adipose-tissue blood vessels, delivering a D(KLAKLAK)2 proapoptotic sequence that disrupts mitochondrial membranes and triggers apoptosis of the vascular endothelium feeding the fat.',
+    researchAreas: ['Obesity (preclinical)', 'Targeted apoptosis', 'Adipose vasculature'],
+    background: [
+      'Adipotide is one of the boldest ideas in metabolic research: treat obesity like a tumor by cutting off its blood supply. Developed at MD Anderson Cancer Center by Renata Pasqualini and Wadih Arap, it is a chimera of two peptides. The targeting half, the cyclic nonapeptide CKGGRAKDC, recognizes prohibitin displayed on the endothelial cells of the vasculature that specifically supplies white adipose tissue. The payload half, a D-amino-acid proapoptotic sequence written D(KLAKLAK)2, is harmless outside cells but disrupts mitochondrial membranes once the targeting domain gets it inside — killing the fat’s blood vessels and, with them, the fat.',
+      'In obese rhesus monkeys the results were dramatic: rapid loss of body weight and fat over a few weeks of treatment. But translating it to people ran into a hard limit. The same peptide accumulates in the kidney, and clinical development was discontinued (around 2019) because of nephrotoxicity — the gap between the fat-reducing dose and the kidney-damaging dose proved too narrow. Adipotide is not FDA-approved and is not in active clinical development; it remains an instructive, cautionary research compound.',
+    ],
+    keyResearch: [
+      'Antiangiogenic mechanism — homes via prohibitin to the blood vessels feeding white fat and triggers their apoptosis, rather than acting on appetite.',
+      'Two-domain design — a cyclic CKGGRAKDC targeting motif fused to a D(KLAKLAK)2 proapoptotic peptide.',
+      'Primate results — produced rapid, marked weight and fat loss in obese rhesus monkeys.',
+      'Discontinued for nephrotoxicity — clinical development halted (~2019); the therapeutic window against kidney toxicity was too narrow.',
+      'Preclinical / not approved — a cautionary research compound, not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Adipotide?',
+        a: 'Adipotide (FTPP) is a fat-targeting proapoptotic peptide that kills the blood vessels supplying white fat, developed at MD Anderson and studied for obesity in animals.',
+      },
+      {
+        q: 'How does it work?',
+        a: 'A targeting sequence (CKGGRAKDC) homes to prohibitin on the vasculature of fat tissue and delivers a proapoptotic peptide that triggers those blood vessels to die — starving the fat rather than suppressing appetite.',
+      },
+      {
+        q: 'Why was its development stopped?',
+        a: 'Clinical development was discontinued (around 2019) because of kidney toxicity — the peptide accumulates in the kidney and the safe dose window proved too narrow. It is not approved.',
+      },
+      {
+        q: 'Is Adipotide approved?',
+        a: 'No — it is a preclinical research compound, discontinued in clinical development and not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'CKGGRAKDC-GG-D(KLAKLAK)2',
+    molecularWeight: 2557.2,
+    molecularFormula: 'C111H206N36O28S2',
+    cas: '859216-15-2',
+    pubchemCid: 163360068,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -3091,6 +3907,54 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 3039.4,
     synthesisNotes:
       'A 27-residue C-terminal-amide peptide of the secretin/glucagon/VIP family, made by solid-phase synthesis with a terminal amidation step. The meaningful modern change is provenance rather than chemistry: the clinical agent (synthetic human secretin, ChiRhoStim) replaced earlier porcine material extracted from animal tissue. That shift — from variable animal extract to a defined, sequence-verified synthetic product with a certificate of analysis — is the core quality story for older hormone peptides and exactly the transparency this catalog tracks.',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'vip',
+    name: 'VIP (Vasoactive Intestinal Peptide)',
+    aliases: ['Vasoactive Intestinal Peptide', 'Aviptadil', 'VIP'],
+    categories: ['peptide-hormone', 'immune'],
+    shortDescription:
+      'A 28-amino-acid neuropeptide and gut hormone with broad anti-inflammatory and vasodilatory activity — studied in chronic inflammatory illness and, as aviptadil, in the lung.',
+    description:
+      'Vasoactive intestinal peptide (VIP) is a 28-residue neuropeptide of the secretin/glucagon/VIP superfamily, released by nerves throughout the gut, lungs, and brain. It is a potent vasodilator and a broad anti-inflammatory and immunomodulatory signal, acting at the VPAC1 and VPAC2 receptors. Its synthetic form, aviptadil, has been investigated for pulmonary conditions, and VIP is used on the grey market as a nasal spray in chronic inflammatory illness protocols.',
+    mechanism:
+      'Agonist at the VPAC1 and VPAC2 receptors (class B GPCRs), raising cAMP; produces vasodilation, bronchodilation, and a broad anti-inflammatory / immunomodulatory shift.',
+    researchAreas: ['Chronic inflammatory response syndrome', 'Anti-inflammatory / immune modulation', 'Pulmonary arterial hypertension', 'Sarcoidosis'],
+    background: [
+      'VIP is one of the body’s master anti-inflammatory signals. A 28-amino-acid member of the secretin/glucagon/VIP superfamily — a structural cousin of secretin and PACAP — it is released by nerve endings across the gastrointestinal tract, lungs, and central nervous system, where it relaxes smooth muscle, widens blood vessels, and damps down inflammatory immune activity by shifting cells away from a pro-inflammatory state.',
+      'That anti-inflammatory breadth is the basis of its research interest. Its synthetic equivalent, aviptadil, has been studied in pulmonary arterial hypertension, sarcoidosis, and acute respiratory failure. Separately, VIP has developed a following in the chronic inflammatory response syndrome (CIRS) community, where an intranasal form is used in the later stages of the mold-illness protocol popularized by Ritchie Shoemaker — a use that is neither FDA-approved nor validated by large trials. VIP is not FDA-approved; its C-terminus is amidated, a modification essential to its receptor activity.',
+    ],
+    keyResearch: [
+      'Broad anti-inflammatory signal — shifts immune activity away from a pro-inflammatory state via VPAC1 / VPAC2 receptors, a basis for its use in inflammatory conditions.',
+      'Vasodilation & lung — a potent vasodilator; the synthetic form aviptadil has been trialed in pulmonary arterial hypertension and acute respiratory failure.',
+      'CIRS / mold-illness protocols — an intranasal form is used in the later stages of the Shoemaker CIRS protocol, a grey-market use not validated by large trials.',
+      'Secretin/glucagon/VIP family — a structural relative of secretin and PACAP, sharing the class B GPCR template.',
+      'Not FDA-approved — investigational; the C-terminal amide is required for activity.',
+    ],
+    faqs: [
+      {
+        q: 'What is VIP?',
+        a: 'Vasoactive intestinal peptide is a 28-amino-acid neuropeptide and gut hormone that dilates blood vessels and broadly damps inflammation, acting at the VPAC1 and VPAC2 receptors.',
+      },
+      {
+        q: 'What is VIP studied for?',
+        a: 'Anti-inflammatory and immune modulation, pulmonary conditions (as aviptadil), and — on the grey market — chronic inflammatory response syndrome (CIRS) via an intranasal form.',
+      },
+      {
+        q: 'What is the CIRS / mold connection?',
+        a: 'Intranasal VIP is used in the later stages of the Shoemaker CIRS ("mold illness") protocol. This is not an FDA-approved use and is not validated by large controlled trials.',
+      },
+      {
+        q: 'Is VIP approved?',
+        a: 'No — VIP (and its synthetic form aviptadil) is investigational, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'HSDAVFTDNYTRLRKQMAVKKYLNSILN-NH2',
+    molecularWeight: 3326.8,
+    molecularFormula: 'C147H237N43O43S',
+    cas: '37221-79-7',
+    pubchemCid: 53314964,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
