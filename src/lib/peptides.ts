@@ -745,6 +745,50 @@ const SEED_PEPTIDES: Peptide[] = [
       'Reconstitute gently and avoid shaking; protect from heat, light, and repeated freeze–thaw.',
   },
   {
+    slug: 'b7-33',
+    name: 'B7-33',
+    aliases: ['Single-chain relaxin', 'relaxin B7-33'],
+    categories: ['healing-repair'],
+    shortDescription:
+      'A 27-residue single-chain relaxin-2 analog and selective RXFP1 agonist — a simplified relaxin mimetic studied for anti-fibrotic effects.',
+    description:
+      'B7-33 is a single-chain peptide derived from the B-chain of human relaxin-2, the hormone best known for remodeling connective tissue in pregnancy. Native relaxin is a complex two-chain, disulfide-linked hormone that is hard to make; B7-33 strips it down to a single 27-residue chain that still activates relaxin’s main receptor, RXFP1. Its research interest is anti-fibrotic: like relaxin, it has reduced or reversed scarring (fibrosis) in preclinical heart and lung models, but as a far simpler, more manufacturable molecule.',
+    mechanism:
+      'Functionally selective agonist of the relaxin receptor RXFP1 — signaling (in part via RXFP1–angiotensin II type-2 receptor heterodimers) toward pERK1/2 and the collagen-degrading enzyme MMP-2, driving anti-fibrotic remodeling.',
+    researchAreas: ['Fibrosis', 'Cardiac repair', 'Pulmonary fibrosis', 'Tissue remodeling'],
+    background: [
+      'B7-33 is an exercise in simplification. Human relaxin-2 is a powerful anti-fibrotic hormone, but it is a two-chain, disulfide-linked protein — expensive and difficult to produce, which has long limited its therapeutic use. Researchers at the Florey Institute engineered B7-33 as a minimal single-chain version: a 27-residue peptide based on relaxin’s B-chain that dispenses with the second chain while still switching on the relaxin receptor RXFP1.',
+      'What makes it notable is that the simplification did not cost the biology. In preclinical rodent models of heart and lung disease, B7-33 prevented or reversed fibrosis with potency similar to native relaxin, apparently through a functionally selective signal (via RXFP1–AT2 receptor complexes) that favors the collagen-degrading enzyme MMP-2. That combination — relaxin-like anti-fibrotic activity in a small, synthesizable peptide — is why it draws interest as a research compound. It is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Single-chain relaxin mimetic — a 27-residue analog of the relaxin-2 B-chain that activates RXFP1 without relaxin’s two-chain, disulfide-linked architecture.',
+      'Anti-fibrotic — prevented or reversed fibrosis in preclinical heart and lung models with potency similar to native relaxin.',
+      'Functionally selective signaling — proposed to act via RXFP1–angiotensin II type-2 receptor heterodimers toward pERK1/2 and MMP-2 (collagen degradation).',
+      'Manufacturability — a small synthetic peptide, far simpler to make than the native two-chain hormone.',
+      'Investigational — a research compound; not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is B7-33?',
+        a: 'B7-33 is a 27-residue single-chain analog of the relaxin-2 B-chain that activates the relaxin receptor RXFP1, studied as a simplified, anti-fibrotic relaxin mimetic.',
+      },
+      {
+        q: 'How is it different from natural relaxin?',
+        a: 'Native relaxin-2 is a two-chain, disulfide-linked protein that is hard to make; B7-33 is a single 27-residue chain that still activates RXFP1, so it is far simpler to synthesize.',
+      },
+      {
+        q: 'What is it studied for?',
+        a: 'Chiefly fibrosis — it reduced or reversed scarring in preclinical heart and lung models — along with broader tissue-remodeling research.',
+      },
+      {
+        q: 'Is B7-33 approved?',
+        a: 'No — it is an investigational research compound, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+    cas: '1818415-56-3',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
     slug: 'ghk-cu',
     name: 'GHK-Cu',
     aliases: ['Copper Peptide', 'Tripeptide-1 Copper', 'Copper Tripeptide-1'],
@@ -2381,6 +2425,95 @@ const SEED_PEPTIDES: Peptide[] = [
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
+    slug: 'endoluten',
+    name: 'Endoluten',
+    aliases: ['A-3 pineal peptide', 'pineal peptide complex'],
+    categories: ['longevity', 'bioregulator'],
+    shortDescription:
+      'The natural pineal peptide bioregulator — the animal-derived counterpart to synthetic Epitalon, marketed for aging and telomere support.',
+    description:
+      'Endoluten is a natural peptide complex extracted from the pineal gland, part of the Russian Cytomax line of tissue bioregulators. It is the animal-derived original that the synthetic tetrapeptide Epitalon was modeled on: where Epitalon is a single defined four-amino-acid sequence, Endoluten is a polypeptide fraction of the whole pineal extract. It is marketed within the Khavinson bioregulator tradition for aging, circadian, and telomere-related endpoints, on an evidence base concentrated in that research lineage.',
+    mechanism:
+      'Proposed pineal-axis and gene-regulatory (bioregulator) activity — the same tradition that reports telomerase and melatonin effects for its synthetic analog Epitalon.',
+    researchAreas: ['Aging biology', 'Pineal function', 'Circadian biology', 'Peptide bioregulators'],
+    background: [
+      'Endoluten sits at the origin of the pineal-peptide story in this catalog. The Khavinson school of Russian gerontology began with natural peptide extracts of specific organs — the Cytomax bioregulators — and the pineal extract, sold as Endoluten, is among the most prominent, promoted for its proposed effects on aging and the body’s central clock. Its defining relationship is with Epitalon: Epitalon (Ala-Glu-Asp-Gly) is the synthetic short peptide distilled from this extract, so Endoluten is the natural, less-defined parent and Epitalon the reproducible synthetic descendant.',
+      'As a tissue extract it has no single molecular formula or sequence — it is a standardized polypeptide fraction, like Thymalin. The claims made for it (telomerase activation, melatonin regulation, lifespan endpoints) come from the same concentrated research tradition that surrounds Epitalon, with limited independent Western replication. It is a research compound and is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Natural pineal bioregulator — a polypeptide extract of the pineal gland in the Cytomax line; the source material behind synthetic Epitalon.',
+      'Aging & telomere claims — promoted within the Khavinson tradition for telomerase and lifespan endpoints, mirroring the Epitalon literature.',
+      'Circadian / melatonin — proposed pineal-axis effects on the body’s central clock.',
+      'A tissue extract — a standardized polypeptide fraction with no single formula or sequence, like Thymalin.',
+      'Evidence quality — concentrated in one research lineage with limited independent replication; not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Endoluten?',
+        a: 'Endoluten is a natural peptide complex extracted from the pineal gland, part of the Russian Cytomax bioregulator line, marketed for aging, circadian, and telomere-related endpoints.',
+      },
+      {
+        q: 'How is it related to Epitalon?',
+        a: 'Epitalon is the synthetic four-amino-acid peptide (Ala-Glu-Asp-Gly) modeled on this pineal extract; Endoluten is the natural, less-defined parent material.',
+      },
+      {
+        q: 'Does it have a molecular formula?',
+        a: 'No — it is a tissue extract (a polypeptide fraction), like Thymalin, so it has no single sequence or molecular formula.',
+      },
+      {
+        q: 'Is Endoluten approved?',
+        a: 'No — it is a research compound, not FDA-approved, and its evidence base is concentrated in one research tradition. This page is a research and educational reference.',
+      },
+    ],
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'foxo4-dri',
+    name: 'FOXO4-DRI',
+    aliases: ['Proxofim', 'FOXO4 D-Retro-Inverso peptide'],
+    categories: ['longevity'],
+    shortDescription:
+      'A senolytic D-retro-inverso peptide that selectively triggers apoptosis in senescent cells by disrupting the FOXO4–p53 interaction.',
+    description:
+      'FOXO4-DRI is one of the most cited experimental senolytics — peptides designed to clear senescent ("zombie") cells that accumulate with age. It works by disrupting the interaction between the transcription factor FOXO4 and the tumor-suppressor p53, a partnership that senescent cells rely on to avoid self-destruction. Breaking it pushes p53 out of the nucleus and drives those cells into apoptosis, while sparing normal cells. It is built as a D-retro-inverso peptide — the sequence reversed and made from D-amino acids — to resist breakdown in the body.',
+    mechanism:
+      'Disrupts the FOXO4–p53 interaction in senescent cells, causing p53 nuclear exclusion and cell-intrinsic apoptosis (a senolytic effect); the D-retro-inverso design confers protease resistance.',
+    researchAreas: ['Senescence / senolytics', 'Aging biology', 'Tissue regeneration'],
+    background: [
+      'FOXO4-DRI came out of a 2017 Cell paper from Peter de Keizer’s group (Baar et al., Erasmus MC) that gave the young field of senolytics one of its most striking results. Senescent cells — damaged cells that stop dividing but refuse to die, secreting inflammatory signals — build up with age and drive tissue decline. The insight was that many of them survive by using the protein FOXO4 to keep p53, the cell’s own suicide switch, sequestered and inactive.',
+      'FOXO4-DRI is a decoy that occupies FOXO4’s binding site, freeing p53 to trigger apoptosis specifically in cells that depend on that leash. In aged and progeroid mice, the peptide reportedly restored fitness, fur density, and kidney function. To survive as a drug it is synthesized as a D-retro-inverso peptide — the amino-acid order reversed and every residue a mirror-image D-form — which keeps its shape and binding while making it highly resistant to proteases. It is an early-stage research compound (sometimes labeled Proxofim), not FDA-approved, with essentially no human safety data.',
+    ],
+    keyResearch: [
+      'Senolytic mechanism — disrupts the FOXO4–p53 interaction so p53 is excluded from the nucleus, selectively driving senescent cells into apoptosis (Baar et al., Cell 2017).',
+      'Preclinical rejuvenation — reported restoration of fitness, fur density, and renal function in aged and progeroid mice.',
+      'D-retro-inverso design — reversed sequence built from D-amino acids for protease resistance and a long functional half-life.',
+      'Selectivity — targets cells dependent on the FOXO4–p53 leash while sparing normal cells.',
+      'Early-stage — not FDA-approved; human safety essentially uncharacterized.',
+    ],
+    faqs: [
+      {
+        q: 'What is FOXO4-DRI?',
+        a: 'FOXO4-DRI is a senolytic peptide that selectively kills senescent cells by disrupting the FOXO4–p53 interaction, freeing p53 to trigger those cells’ apoptosis.',
+      },
+      {
+        q: 'What does "D-retro-inverso" mean?',
+        a: 'The peptide’s sequence is reversed and built from D-amino acids (mirror-image residues), which preserves its binding shape while making it highly resistant to protease breakdown.',
+      },
+      {
+        q: 'What is a senolytic?',
+        a: 'A compound that selectively removes senescent ("zombie") cells — damaged cells that stop dividing but resist death and secrete inflammatory signals associated with aging.',
+      },
+      {
+        q: 'Is FOXO4-DRI approved?',
+        a: 'No — it is an early-stage research compound with essentially no human data, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+    molecularWeight: 5358.2,
+    molecularFormula: 'C228H388N86O64',
+    cas: '2460055-10-9',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
     slug: 'thymalin',
     name: 'Thymalin',
     aliases: ['Thymulin (distinct)', 'Thymus polypeptide fraction'],
@@ -2419,6 +2552,52 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     cas: '86402-19-7',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'thymogen',
+    name: 'Thymogen',
+    aliases: ['Glutamyl-Tryptophan', 'Glu-Trp dipeptide', 'Bestim'],
+    categories: ['immune', 'bioregulator'],
+    shortDescription:
+      'A synthetic thymic dipeptide (Glu-Trp) immunomodulator — the minimal active fragment distilled from thymus peptides.',
+    description:
+      'Thymogen is a synthetic dipeptide, glutamyl-tryptophan (Glu-Trp), developed in the Russian bioregulator tradition as a minimal, defined immunomodulator. It is essentially the shortest active core distilled from thymic peptide preparations like Thymalin — a two-amino-acid sequence studied for restoring and balancing immune function. It has been used in Russia, given intranasally or by injection, as an immunostimulant during infection and recovery.',
+    mechanism:
+      'Immunomodulatory (bioregulator) activity — proposed to normalize T-cell and broader immune-cell function, in the same thymic-peptide tradition as Thymalin and thymosin α-1.',
+    researchAreas: ['Immune modulation', 'Infection recovery', 'Peptide bioregulators'],
+    background: [
+      'Thymogen is the dipeptide endpoint of a long reductionist thread in Russian peptide research: starting from whole thymus extracts (Thymalin), then isolating ever-shorter active fragments, investigators arrived at glutamyl-tryptophan — just two residues — as a sequence that still carried immunomodulatory activity. That makes it a companion to the other thymic peptides in this catalog: Thymalin (the extract) and thymosin α-1 (a 28-residue thymic peptide), with Thymogen as the minimal synthetic core.',
+      'It has been used clinically in Russia as an immunostimulant — given intranasally or by injection to support immune function during infections and convalescence — though, like the rest of the bioregulator tradition, its evidence base is concentrated there with limited independent Western trials. It is a research compound and is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Minimal thymic peptide — glutamyl-tryptophan (Glu-Trp), the shortest active immunomodulatory core distilled from thymic peptide preparations.',
+      'Immune modulation — studied for normalizing T-cell and immune-cell function, in the thymic-peptide tradition of Thymalin and thymosin α-1.',
+      'Clinical use (Russia) — used as an intranasal or injectable immunostimulant for infection and recovery support.',
+      'A defined dipeptide — unlike the Thymalin extract, a single two-residue synthetic sequence.',
+      'Evidence quality — concentrated in one research tradition; not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Thymogen?',
+        a: 'Thymogen is a synthetic dipeptide (glutamyl-tryptophan) immunomodulator — the minimal active core distilled from thymic peptides, studied for balancing immune function.',
+      },
+      {
+        q: 'How does it relate to Thymalin?',
+        a: 'Thymalin is the whole thymus peptide extract; Thymogen is the shortest active synthetic fragment (two amino acids) derived from that tradition.',
+      },
+      {
+        q: 'What is it used for?',
+        a: 'It has been used in Russia as an intranasal or injectable immunostimulant during infections and recovery; its evidence base is concentrated in that research tradition.',
+      },
+      {
+        q: 'Is Thymogen approved?',
+        a: 'No — it is a research compound, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'Glu-Trp',
+    molecularWeight: 333.34,
+    molecularFormula: 'C16H19N3O5',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -2643,6 +2822,211 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'KEDW',
     molecularWeight: 576.6,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'testagen',
+    name: 'Testagen',
+    aliases: ['Lys-Glu-Asp-Gly', 'KEDG tetrapeptide'],
+    categories: ['reproductive', 'bioregulator'],
+    shortDescription: 'Synthetic Lys-Glu-Asp-Gly tetrapeptide studied as a testis / reproductive-tissue bioregulator.',
+    description:
+      'Testagen is a synthetic tetrapeptide (Lys-Glu-Asp-Gly) in the Khavinson short-peptide bioregulator series, directed at reproductive (testicular) tissue and studied for effects on male reproductive and hormonal markers.',
+    mechanism: 'Proposed gene-regulatory modulation of gene expression in reproductive tissue.',
+    researchAreas: ['Reproductive function', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Testagen (Lys-Glu-Asp-Gly) is the reproductive-tissue member of the defined short-peptide bioregulator family — the synthetic, single-sequence counterpart to older testis extracts, framed around age-related decline in male reproductive function within the originating research tradition.',
+      'Reported research examined markers of testicular and reproductive function in models, consistent with the class hypothesis of tissue-selective transcriptional modulation. As with the rest of the series, the evidence is concentrated in one research tradition with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Reproductive focus — studied for effects on testicular and reproductive-tissue markers in preclinical models.',
+      'Class mechanism — proposed short peptide–DNA interaction driving tissue-selective gene expression.',
+      'A defined tetrapeptide — the synthetic single-sequence counterpart to older testis extracts.',
+      'Evidence quality — single-tradition and largely preclinical; preliminary. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Testagen?',
+        a: 'Testagen is a synthetic Lys-Glu-Asp-Gly tetrapeptide studied as a testis / reproductive-tissue bioregulator in the Khavinson short-peptide series.',
+      },
+      {
+        q: 'What tissue is it associated with?',
+        a: 'Reproductive (testicular) tissue — each bioregulator in the series is framed around a specific target tissue.',
+      },
+      {
+        q: 'How strong is the evidence?',
+        a: 'It is concentrated in a single research tradition and is largely preclinical, so findings are preliminary. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'KEDG',
+    molecularWeight: 447.4,
+    molecularFormula: 'C17H29N5O9',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'prostamax',
+    name: 'Prostamax',
+    aliases: ['Lys-Glu-Asp-Pro', 'KEDP tetrapeptide'],
+    categories: ['reproductive', 'bioregulator'],
+    shortDescription:
+      'Synthetic Lys-Glu-Asp-Pro tetrapeptide studied as a prostate-tissue bioregulator — the defined-sequence successor to older prostate extracts.',
+    description:
+      'Prostamax is a synthetic tetrapeptide (Lys-Glu-Asp-Pro) in the Khavinson short-peptide bioregulator series, directed at prostate tissue. It was conceived as the defined single-sequence successor to older bovine prostate extracts (such as Prostatilen), studied for prostate inflammation and age-related remodeling.',
+    mechanism: 'Proposed gene-regulatory modulation of prostate gene expression.',
+    researchAreas: ['Prostate health', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Prostamax (Lys-Glu-Asp-Pro) is the prostate-directed member of the defined short-peptide bioregulator family. Where the earlier generation used bovine prostate extracts (Prostatilen, Vitaprost), Prostamax is the synthetic, single-sequence peptide meant to reproduce that tissue-selective effect in a defined molecule.',
+      'Reported research — largely Khavinson-school animal and cell-culture work — describes reduced prostate inflammation and slowed pathological remodeling in rat prostatitis models. There are no Western randomized trials of the synthetic peptide and no independent replication outside the originating institute, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Prostate focus — studied for reduced prostate inflammation and slowed pathological remodeling in preclinical prostatitis models.',
+      'Successor to extracts — the defined-sequence synthetic counterpart to older bovine prostate extracts (Prostatilen, Vitaprost).',
+      'Class mechanism — proposed short peptide–DNA interaction driving tissue-selective gene expression.',
+      'Evidence quality — single-tradition and largely preclinical; no independent replication. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Prostamax?',
+        a: 'Prostamax is a synthetic Lys-Glu-Asp-Pro tetrapeptide studied as a prostate-tissue bioregulator in the Khavinson short-peptide series.',
+      },
+      {
+        q: 'How does it relate to older prostate extracts?',
+        a: 'It is the defined single-sequence synthetic successor to bovine prostate extracts like Prostatilen and Vitaprost, meant to reproduce their tissue-selective effect in a defined molecule.',
+      },
+      {
+        q: 'How strong is the evidence?',
+        a: 'It is concentrated in one research tradition and largely preclinical, with no independent replication. This page is a research and educational reference.',
+      },
+    ],
+    sequence: 'KEDP',
+    molecularWeight: 487.5,
+    molecularFormula: 'C20H33N5O9',
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'vladonix',
+    name: 'Vladonix',
+    aliases: ['A-6 thymus peptide', 'thymus peptide complex'],
+    categories: ['immune', 'bioregulator'],
+    shortDescription:
+      'A natural thymus peptide complex (Cytomax A-6) — the extract-based counterpart to Thymalin, marketed for immune support and aging.',
+    description:
+      'Vladonix is a natural peptide complex extracted from thymus tissue (peptide complex A-6), part of the Russian Cytomax / Revilab line of tissue bioregulators. It is an extract-based immune bioregulator in the same lineage as Thymalin, marketed within the Khavinson tradition for immune restoration and healthy aging.',
+    mechanism:
+      'Proposed tissue-selective (bioregulator) modulation of thymic / immune-cell gene expression, in the thymic-peptide tradition of Thymalin and Thymogen.',
+    researchAreas: ['Immune modulation', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Vladonix is the thymus-directed natural bioregulator of the Cytomax / Revilab line — the extract that sits alongside the thymic peptides already catalogued: Thymalin (the classic thymus extract) and Thymogen (the minimal Glu-Trp dipeptide). It featured in the long-running Khavinson observational work on immune-function markers with aging.',
+      'As a tissue extract it is a standardized polypeptide fraction, not a single defined molecule, so it has no molecular formula or sequence. Its claims — immune restoration and aging-related endpoints — come from the same concentrated research tradition as the rest of the series, with limited independent replication. It is a research compound / supplement and is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Thymus bioregulator — a natural thymic peptide extract (complex A-6) in the immune-support lineage of Thymalin.',
+      'Immune / aging focus — associated with the Khavinson observational work on immune markers with age.',
+      'A tissue extract — a polypeptide fraction with no single formula or sequence.',
+      'Evidence quality — concentrated in one research tradition; preliminary. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Vladonix?',
+        a: 'Vladonix is a natural thymus peptide complex (Cytomax A-6) marketed for immune support and healthy aging, the extract-based counterpart to Thymalin.',
+      },
+      {
+        q: 'How does it relate to Thymalin and Thymogen?',
+        a: 'All three are thymic peptides: Thymalin and Vladonix are thymus extracts, while Thymogen is the minimal synthetic dipeptide (Glu-Trp) distilled from that tradition.',
+      },
+      {
+        q: 'Does it have a molecular formula?',
+        a: 'No — it is a tissue extract (a polypeptide fraction), so it has no single sequence or molecular formula.',
+      },
+      {
+        q: 'Is Vladonix approved?',
+        a: 'No — it is a research compound / supplement, not FDA-approved, with evidence concentrated in one research tradition. This page is a research and educational reference.',
+      },
+    ],
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'ventfort',
+    name: 'Ventfort',
+    aliases: ['A-3 vessel peptide', 'vascular peptide complex'],
+    categories: ['bioregulator'],
+    shortDescription:
+      'A natural blood-vessel peptide complex (Cytomax A-3) — the extract-based counterpart to Vesugen, targeting vascular tissue.',
+    description:
+      'Ventfort is a natural peptide complex extracted from vascular (blood-vessel) tissue (peptide complex A-3), part of the Russian Cytomax / Revilab bioregulator line. It is the extract-based vascular counterpart to the synthetic tripeptide Vesugen (Lys-Glu-Asp), marketed within the Khavinson tradition for endothelial and vascular support.',
+    mechanism:
+      'Proposed tissue-selective (bioregulator) modulation of vascular / endothelial gene expression, in the same lineage as the synthetic vessel peptide Vesugen.',
+    researchAreas: ['Vascular health', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Ventfort is the vessel-directed natural bioregulator of the Cytomax / Revilab line. It pairs with Vesugen, the synthetic Lys-Glu-Asp tripeptide already in this catalog: Ventfort is the natural vascular extract, Vesugen the defined synthetic short peptide modeled on the same tissue. In Khavinson protocols it is treated as a foundational entry because vascular function underlies every organ.',
+      'As a tissue extract it is a standardized polypeptide fraction with no single molecular formula or sequence. Its vascular claims come from the same concentrated research tradition as the rest of the series, with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Vascular bioregulator — a natural vessel peptide extract (complex A-3), the extract counterpart to synthetic Vesugen.',
+      'Endothelial / vascular focus — marketed for vessel elasticity and endothelial support within Khavinson protocols.',
+      'A tissue extract — a polypeptide fraction with no single formula or sequence.',
+      'Evidence quality — concentrated in one research tradition; preliminary. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Ventfort?',
+        a: 'Ventfort is a natural blood-vessel peptide complex (Cytomax A-3), marketed for vascular and endothelial support — the extract-based counterpart to the synthetic peptide Vesugen.',
+      },
+      {
+        q: 'How does it relate to Vesugen?',
+        a: 'Ventfort is the natural vascular extract; Vesugen is the defined synthetic tripeptide (Lys-Glu-Asp) modeled on the same tissue.',
+      },
+      {
+        q: 'Does it have a molecular formula?',
+        a: 'No — it is a tissue extract (a polypeptide fraction), so it has no single sequence or molecular formula.',
+      },
+      {
+        q: 'Is Ventfort approved?',
+        a: 'No — it is a research compound / supplement, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'chelohart',
+    name: 'Chelohart',
+    aliases: ['A-14 heart peptide', 'cardiac peptide complex'],
+    categories: ['bioregulator'],
+    shortDescription:
+      'A natural heart-muscle peptide complex (Cytomax A-14) — the extract-based counterpart to Cardiogen, targeting cardiac tissue.',
+    description:
+      'Chelohart is a natural peptide complex extracted from cardiac muscle (peptide complex A-14, from the heart of young calves or pigs), part of the Russian Cytomax / Revilab bioregulator line. It is the extract-based cardiac counterpart to the synthetic tetrapeptide Cardiogen (Ala-Glu-Asp-Arg), marketed within the Khavinson tradition for heart-muscle support.',
+    mechanism:
+      'Proposed tissue-selective (bioregulator) modulation of cardiomyocyte gene expression, in the same lineage as the synthetic heart peptide Cardiogen.',
+    researchAreas: ['Cardiac health', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Chelohart is the heart-directed natural bioregulator of the Cytomax / Revilab line, extracted from cardiac muscle tissue. It pairs with Cardiogen, the synthetic Ala-Glu-Asp-Arg tetrapeptide already catalogued: Chelohart is the natural cardiac extract, Cardiogen the defined synthetic short peptide modeled on the same tissue.',
+      'As a tissue extract it is a standardized polypeptide fraction with no single molecular formula or sequence. Its claims — supporting contractile function and cellular repair in cardiac tissue — come from the same concentrated research tradition as the rest of the series, with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Cardiac bioregulator — a natural heart-muscle peptide extract (complex A-14), the extract counterpart to synthetic Cardiogen.',
+      'Cardiomyocyte focus — marketed for contractile function and cellular repair in heart tissue within Khavinson protocols.',
+      'A tissue extract — a polypeptide fraction with no single formula or sequence.',
+      'Evidence quality — concentrated in one research tradition; preliminary. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Chelohart?',
+        a: 'Chelohart is a natural heart-muscle peptide complex (Cytomax A-14), marketed for cardiac support — the extract-based counterpart to the synthetic peptide Cardiogen.',
+      },
+      {
+        q: 'How does it relate to Cardiogen?',
+        a: 'Chelohart is the natural cardiac extract; Cardiogen is the defined synthetic tetrapeptide (Ala-Glu-Asp-Arg) modeled on the same tissue.',
+      },
+      {
+        q: 'Does it have a molecular formula?',
+        a: 'No — it is a tissue extract (a polypeptide fraction), so it has no single sequence or molecular formula.',
+      },
+      {
+        q: 'Is Chelohart approved?',
+        a: 'No — it is a research compound / supplement, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -3611,6 +3995,54 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 663.4,
     cas: '53-84-9',
     pubchemCid: 5893,
+    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
+  },
+  {
+    slug: 'glutathione',
+    name: 'Glutathione',
+    aliases: ['GSH', 'γ-Glu-Cys-Gly', 'reduced glutathione'],
+    categories: ['mitochondrial', 'longevity'],
+    shortDescription:
+      'The body’s master antioxidant — a tripeptide (γ-Glu-Cys-Gly) sold as an injectable for antioxidant, detox, and skin-related use.',
+    description:
+      'Glutathione is the cell’s principal antioxidant: a tripeptide of glutamate, cysteine, and glycine that neutralizes reactive oxygen species and supports detoxification. It is one of the few genuine peptides in the antioxidant/cofactor group of this catalog, though it is usually thought of as a metabolite rather than a "peptide drug." On the grey market it is sold as an injectable and IV additive for antioxidant support, detoxification, and — especially — skin brightening, a popular use for which the evidence is weak.',
+    mechanism:
+      'A redox buffer — its cysteine thiol donates electrons to neutralize reactive oxygen species and is a substrate for glutathione peroxidases and S-transferases in detoxification; cycles between reduced (GSH) and oxidized (GSSG) forms.',
+    researchAreas: ['Oxidative stress', 'Detoxification', 'Skin (depigmentation)', 'Mitochondrial protection'],
+    background: [
+      'Glutathione (GSH) is ubiquitous and essential — present in nearly every cell as the main line of defense against oxidative damage. Structurally it is a small tripeptide with one unusual feature: its glutamate is joined through its side-chain (γ) carboxyl rather than the normal backbone linkage, which protects it from ordinary peptidases. Its business end is the cysteine thiol, which donates electrons to quench reactive oxygen species and then recycles between reduced (GSH) and oxidized (GSSG) states.',
+      'Because oxidative stress and declining glutathione are themes in aging and disease, it is widely sold — as oral, liposomal, and especially injectable / IV forms — for antioxidant support and detoxification. Its most popular grey-market use is cosmetic skin lightening, where it is marketed heavily despite thin and inconsistent clinical evidence and unclear safety for that purpose. It is included here as the rare true peptide among the antioxidant / cofactor compounds; it is a supplement and research reagent, not an FDA-approved drug for these uses.',
+    ],
+    keyResearch: [
+      'Master antioxidant — the cell’s principal redox buffer, neutralizing reactive oxygen species via its cysteine thiol.',
+      'Detoxification — a substrate for glutathione S-transferases and peroxidases that conjugate and clear toxins and peroxides.',
+      'Skin depigmentation — its most popular grey-market use (injectable / IV), marketed for skin lightening on weak clinical evidence.',
+      'γ-glutamyl structure — an unusual side-chain peptide bond that resists ordinary peptidases; cycles between GSH and GSSG.',
+      'Not an approved drug for these uses — sold as a supplement / reagent; antioxidant and cosmetic claims are largely unproven.',
+    ],
+    faqs: [
+      {
+        q: 'What is glutathione?',
+        a: 'Glutathione (GSH) is the body’s master antioxidant — a tripeptide of glutamate, cysteine, and glycine that neutralizes reactive oxygen species and supports detoxification.',
+      },
+      {
+        q: 'Is glutathione a peptide?',
+        a: 'Yes — it is a tripeptide (γ-Glu-Cys-Gly), one of the few true peptides among the antioxidant and cofactor compounds catalogued here, though it is usually thought of as a metabolite.',
+      },
+      {
+        q: 'Does injectable glutathione lighten skin?',
+        a: 'It is marketed heavily for skin lightening, but the clinical evidence is weak and inconsistent and its safety for that use is unclear. This page is a research and educational reference, not medical advice.',
+      },
+      {
+        q: 'Is it FDA-approved?',
+        a: 'No — it is sold as a supplement and research reagent, not an FDA-approved drug for antioxidant, detox, or cosmetic uses.',
+      },
+    ],
+    sequence: 'γ-Glu-Cys-Gly',
+    molecularWeight: 307.32,
+    molecularFormula: 'C10H17N3O6S',
+    cas: '70-18-8',
+    pubchemCid: 124886,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {

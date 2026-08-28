@@ -96,6 +96,12 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     notes:
       'TB-500 is the synthesized active fragment of thymosin β4, typically N-terminally acetylated. It is a linear sequence by solid-phase synthesis with no disulfides, so the main challenges are coupling efficiency over its length and removing deletion sequences during preparative HPLC.',
   },
+  'b7-33': {
+    difficulty: 'moderate',
+    features: [],
+    notes:
+      'B7-33 is a 27-residue single-chain analog of the relaxin-2 B-chain — a deliberate simplification of native relaxin’s two-chain, disulfide-linked structure that makes it a practical linear solid-phase peptide. Coupling efficiency and deletion-sequence removal over its length are the main quality considerations.',
+  },
   'ghk-cu': {
     difficulty: 'moderate',
     features: ['Copper complex'],
@@ -237,6 +243,12 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     notes:
       'NAD+ is a dinucleotide coenzyme, not a peptide; it is produced by enzymatic/fermentation routes and chemical finishing rather than solid-phase synthesis. Stability is the dominant issue — it is hygroscopic and degrades in solution — so handling and assay matter more than synthetic difficulty.',
   },
+  glutathione: {
+    difficulty: 'standard',
+    features: [],
+    notes:
+      'Glutathione (γ-Glu-Cys-Gly) is a tripeptide with an unusual side-chain (γ-glutamyl) bond and a free, oxidation-prone cysteine thiol; it is produced mainly by fermentation or enzymatic synthesis rather than solid-phase chemistry. Keeping the cysteine reduced — it readily oxidizes to the disulfide GSSG — is the dominant quality and stability concern.',
+  },
 
   // ── Bioregulators (Khavinson short peptides) ──
   epitalon: {
@@ -245,11 +257,29 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     notes:
       'Epitalon (Ala-Glu-Asp-Gly) is a tetrapeptide made by routine solid-phase synthesis with no disulfides or modifications — among the simplest sequences in the catalog to assemble. Purity is governed by ordinary deletion-sequence and counterion control.',
   },
+  endoluten: {
+    difficulty: 'moderate',
+    features: ['Tissue extract'],
+    notes:
+      'Endoluten is a natural pineal peptide complex — an extracted, fractionated polypeptide preparation rather than a synthesized molecule, and the natural counterpart to the synthetic tetrapeptide Epitalon. As with Thymalin and the other Cytomax extracts, consistency and characterization of the polypeptide fraction, not coupling chemistry, are the quality challenge.',
+  },
+  'foxo4-dri': {
+    difficulty: 'demanding',
+    features: ['D-amino acid'],
+    notes:
+      'FOXO4-DRI is a long D-retro-inverso peptide — the sequence reversed and built entirely from D-amino acids for protease resistance. Every residue is a specialty D-building block over a long chain, making it a demanding specialty solid-phase synthesis where all-D coupling efficiency and deletion-sequence control dominate.',
+  },
   thymalin: {
     difficulty: 'moderate',
     features: ['Tissue extract'],
     notes:
       'Thymalin is not a defined synthetic peptide but a polypeptide fraction extracted from thymus tissue, so its "synthesis" is really an extraction-and-fractionation process. That makes batch-to-batch consistency and characterization — rather than coupling chemistry — the central quality challenge.',
+  },
+  thymogen: {
+    difficulty: 'standard',
+    features: [],
+    notes:
+      'Thymogen (glutamyl-tryptophan) is a dipeptide — one of the simplest defined immunopeptides — made trivially by solution or solid-phase synthesis. Protecting the oxidation-sensitive tryptophan and controlling the counterion are the only real considerations; there is essentially no synthetic difficulty.',
   },
   vilon: {
     difficulty: 'standard',
@@ -286,6 +316,36 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     features: [],
     notes:
       'Pancragen (Lys-Glu-Asp-Trp) is a tetrapeptide synthesized conventionally; the tryptophan residue calls for care against oxidation during cleavage and storage, but the assembly is otherwise simple.',
+  },
+  testagen: {
+    difficulty: 'standard',
+    features: [],
+    notes:
+      'Testagen (Lys-Glu-Asp-Gly) is a tetrapeptide made by routine solid-phase synthesis with no disulfides or modifications, like the other Khavinson short peptides. Purity is governed by ordinary deletion-sequence and counterion control.',
+  },
+  prostamax: {
+    difficulty: 'standard',
+    features: [],
+    notes:
+      'Prostamax (Lys-Glu-Asp-Pro) is a tetrapeptide made by routine solid-phase synthesis; the proline residue is a standard building block, so assembly is straightforward and quality hinges on deletion-sequence and counterion control.',
+  },
+  vladonix: {
+    difficulty: 'moderate',
+    features: ['Tissue extract'],
+    notes:
+      'Vladonix is a natural thymus peptide extract (complex A-6), not a synthesized molecule — a fractionated polypeptide preparation like Thymalin, where batch-to-batch consistency and characterization, not coupling chemistry, are the quality challenge.',
+  },
+  ventfort: {
+    difficulty: 'moderate',
+    features: ['Tissue extract'],
+    notes:
+      'Ventfort is a natural blood-vessel peptide extract (complex A-3), a fractionated polypeptide preparation rather than a synthesized peptide. As with the other Cytomax extracts, consistency and characterization of the fraction are the quality challenge.',
+  },
+  chelohart: {
+    difficulty: 'moderate',
+    features: ['Tissue extract'],
+    notes:
+      'Chelohart is a natural cardiac-muscle peptide extract (complex A-14), a fractionated polypeptide preparation rather than a synthesized peptide. Consistency and characterization of the extract, not coupling chemistry, determine its quality.',
   },
 
   // ── Cognitive ──
