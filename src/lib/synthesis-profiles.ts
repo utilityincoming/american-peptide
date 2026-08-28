@@ -24,6 +24,12 @@ export interface SynthesisProfile {
 export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
   // ── Metabolic ──
   semaglutide: { difficulty: 'demanding', features: ['Fatty-acid acylation', 'Unnatural residue'] },
+  liraglutide: {
+    difficulty: 'demanding',
+    features: ['Fatty-acid acylation'],
+    notes:
+      'Liraglutide is a GLP-1(7-37) analog carrying a C16 palmitoyl chain attached through a γ-glutamate spacer to a lysine, made by solid-phase synthesis. The single fatty-acid acylation is the defining step; over a 31-residue backbone, coupling efficiency and deletion-sequence removal set the purity.',
+  },
   tirzepatide: { difficulty: 'demanding', features: ['Fatty-acid acylation', 'Unnatural residue'] },
   retatrutide: {
     difficulty: 'demanding',
@@ -36,6 +42,18 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     features: ['Fatty-acid acylation', 'Disulfide bridge', 'C-terminal amide'],
     notes:
       'A long-acting amylin analog: a disulfide-bridged, C-terminally amidated peptide carrying a fatty-diacid acylation for albumin binding. Synthesis combines a regioselective disulfide formation with the acylation over an aggregation-prone backbone, so oxidation control and separating closely related isomers dominate the quality picture.',
+  },
+  survodutide: {
+    difficulty: 'demanding',
+    features: ['Fatty-acid acylation', 'Unnatural residue'],
+    notes:
+      'A ~29-residue glucagon/GLP-1 dual agonist with Aib substitutions and a fatty-acid chain for albumin binding and weekly dosing, built by solid-phase synthesis. The acylation and the sterically hindered Aib couplings are the hard steps, and the length makes deletion-sequence control the dominant purity task.',
+  },
+  mazdutide: {
+    difficulty: 'demanding',
+    features: ['Fatty-acid acylation', 'Unnatural residue'],
+    notes:
+      'An oxyntomodulin-based glucagon/GLP-1 dual agonist, acylated for once-weekly dosing and stabilized with unnatural residues, made by solid-phase synthesis. As with the other long acylated incretins, the fatty-acid step and deletion-sequence control over a long backbone define the quality picture.',
   },
   insulin: { difficulty: 'demanding', features: ['Recombinant protein', 'Multiple disulfides'] },
   glucagon: { difficulty: 'moderate', features: [] },
@@ -50,6 +68,18 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     features: ['Disulfide bridge'],
     notes:
       'AOD-9604 is the hGH(177–191) fragment with an added N-terminal tyrosine and a single disulfide loop (Cys182–Cys189). The short chain is straightforward to assemble, but that disulfide must be formed and verified correctly — its connectivity is the defining quality attribute.',
+  },
+  adipotide: {
+    difficulty: 'demanding',
+    features: ['Disulfide bridge', 'D-amino acid', 'C-terminal amide'],
+    notes:
+      'Adipotide is a chimeric peptide: a disulfide-cyclized CKGGRAKDC targeting domain joined to an all-D-amino-acid D(KLAKLAK)2 proapoptotic sequence with a C-terminal amide. Assembling two chemically distinct domains, forming the disulfide correctly, and handling the D-residues make it demanding to synthesize and purify cleanly.',
+  },
+  'hgh-fragment-176-191': {
+    difficulty: 'moderate',
+    features: ['Disulfide bridge'],
+    notes:
+      'The C-terminal hGH fragment (residues 176–191), made by solid-phase synthesis as a 16-residue peptide with a single disulfide loop between its two cysteines. The short chain assembles readily; forming and verifying that one disulfide correctly is the defining quality attribute — the same challenge as its analog AOD-9604.',
   },
   '5-amino-1mq': {
     difficulty: 'standard',
@@ -85,6 +115,12 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
       'Matrixyl is palmitoyl pentapeptide-4 — a five-residue sequence with a C16 palmitoyl group on the N-terminus to make it lipophilic enough to penetrate skin. The fatty-acid acylation is the characteristic step; the short peptide core is otherwise straightforward solid-phase chemistry.',
   },
   epo: { difficulty: 'demanding', features: ['Recombinant protein', 'Glycosylated', 'Multiple disulfides'] },
+  'ara-290': {
+    difficulty: 'moderate',
+    features: [],
+    notes:
+      'ARA-290 (cibinetide) is an 11-residue linear peptide with an N-terminal pyroglutamate and a free C-terminus, taken from the helix-B surface of erythropoietin. It is made by routine solid-phase synthesis; forming the pyroglutamate terminus correctly and ordinary deletion-sequence removal are the main quality steps.',
+  },
   'll-37': {
     difficulty: 'demanding',
     features: [],
@@ -107,6 +143,12 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     features: ['Recombinant protein', 'Multiple disulfides'],
     notes:
       'IGF-1 LR3 is an 83-residue recombinant analog of IGF-1 (Arg3 substitution plus a 13-residue N-terminal extension) expressed in E. coli, then folded to set its three disulfide bonds. As a folded multi-disulfide protein the hard part is correct disulfide pairing and refolding, verified by peptide mapping and bioassay — biologic manufacturing, not solid-phase synthesis.',
+  },
+  'igf-1-des': {
+    difficulty: 'demanding',
+    features: ['Recombinant protein', 'Multiple disulfides'],
+    notes:
+      'DES(1-3)IGF-1 is a 67-residue analog of IGF-1 lacking the N-terminal Gly-Pro-Glu, produced recombinantly and folded to set IGF-1’s three disulfide bonds. As with IGF-1, correct disulfide pairing and refolding are the hard part, verified by peptide mapping and bioassay — biologic manufacturing, not solid-phase synthesis.',
   },
   mgf: {
     difficulty: 'moderate',
@@ -144,6 +186,24 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     notes:
       'A hexapeptide GHRP with a C-terminal amide and unnatural residues (2-methyl-D-tryptophan, D-2-naphthylalanine). The short chain is offset by difficult D-amino-acid couplings, making purity of the correct diastereomer the key concern.',
   },
+  'ghrp-2': {
+    difficulty: 'moderate',
+    features: ['Unnatural residue', 'D-amino acid', 'C-terminal amide'],
+    notes:
+      'A hexapeptide amide with two D-amino acids and an unnatural D-2-naphthylalanine at position 2. The chain is short and assembles cleanly by solid-phase synthesis; the quality-defining steps are sourcing and coupling the specialty D-2-Nal building block, controlling racemization at the D-residues, and achieving clean C-terminal amidation.',
+  },
+  'ghrp-6': {
+    difficulty: 'moderate',
+    features: ['D-amino acid', 'C-terminal amide'],
+    notes:
+      'A hexapeptide amide built from standard Fmoc building blocks, including D-Trp and D-Phe. A short, straightforward solid-phase assembly; the main concerns are C-terminal amidation and protecting the oxidation- and light-sensitive tryptophan residues during synthesis and storage.',
+  },
+  'mk-677': {
+    difficulty: 'standard',
+    features: ['Small molecule'],
+    notes:
+      'MK-677 (ibutamoren) is a non-peptide small molecule made by conventional organic synthesis, not solid-phase peptide chemistry, and usually supplied as the mesylate salt. Its quality control is small-molecule-style — identity, related substances, residual solvents — rather than a peptide purity number.',
+  },
   myostatin: { difficulty: 'demanding', features: ['Recombinant protein', 'Multiple disulfides'] },
   follistatin: { difficulty: 'demanding', features: ['Recombinant protein', 'Glycosylated'] },
   apitegromab: { difficulty: 'demanding', features: ['Monoclonal antibody'] },
@@ -158,6 +218,12 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     features: [],
     notes:
       'MOTS-c is a 16-residue mitochondrial-derived peptide made by straightforward solid-phase synthesis with no disulfides or special modifications. Coupling efficiency and HPLC removal of deletion sequences are the limiting factors.',
+  },
+  humanin: {
+    difficulty: 'demanding',
+    features: [],
+    notes:
+      'Humanin is a 24-residue mitochondrial-derived peptide with a hydrophobic, aggregation-prone core and both a methionine and a cysteine that are oxidation-sensitive. It is made by solid-phase synthesis, where the length, the difficult hydrophobic stretch, and protecting Met / Cys from oxidation make clean assembly and purification the demanding part.',
   },
   'ss-31': {
     difficulty: 'moderate',
@@ -241,6 +307,13 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     notes:
       'Delta sleep-inducing peptide is a nonapeptide made by routine solid-phase synthesis with no disulfides or modifications. Its acidic sequence is well-behaved; deletion-sequence removal during HPLC is the principal quality step.',
   },
+  cerebrolysin: { difficulty: 'demanding', features: ['Tissue extract'] },
+  dihexa: {
+    difficulty: 'moderate',
+    features: ['Unnatural residue'],
+    notes:
+      'Dihexa is a peptidomimetic — a modified dipeptide core (Tyr-Ile) capped with an N-terminal hexanoyl group and a C-terminal 6-aminohexanoic amide — rather than a standard peptide. It is assembled by short solid-phase / solution steps, but the non-amino-acid caps mean its identity and related-substance control resemble small-molecule QC as much as peptide purity.',
+  },
 
   // ── Cosmetic / pigmentation ──
   'melanotan-2': {
@@ -255,6 +328,18 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     notes:
       'Afamelanotide (melanotan-1) is a 13-residue linear α-MSH analog with norleucine and D-phenylalanine substitutions and a C-terminal amide, made by solid-phase synthesis. The unnatural residues and amidation are the defining steps; it avoids the cyclization of melanotan II.',
   },
+  argireline: {
+    difficulty: 'moderate',
+    features: ['N-terminal acetylation', 'C-terminal amide'],
+    notes:
+      'Argireline (acetyl hexapeptide-8) is a short N-acetylated, C-terminally amidated hexapeptide made by routine solid-phase synthesis. The two end modifications are the defining steps; the sequence is otherwise straightforward, and the acetate counterion and residual solvents dominate cosmetic-grade QC.',
+  },
+  'snap-8': {
+    difficulty: 'moderate',
+    features: ['N-terminal acetylation', 'C-terminal amide'],
+    notes:
+      'SNAP-8 (acetyl octapeptide-3) is the eight-residue analog of Argireline, N-acetylated and C-terminally amidated, made by solid-phase synthesis. The two extra residues add little difficulty; as with Argireline the terminal modifications and counterion control are the quality-defining features.',
+  },
 
   // ── Reproductive ──
   'pt-141': {
@@ -268,6 +353,12 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     features: ['C-terminal amide'],
     notes:
       'Kisspeptin-10 is the 10-residue C-terminal fragment that retains full receptor activity, carrying a C-terminal amide and made by solid-phase synthesis. The C-terminal Phe-amide is essential for activity, so amidation fidelity matters; the sequence is otherwise standard.',
+  },
+  gonadorelin: {
+    difficulty: 'moderate',
+    features: ['C-terminal amide'],
+    notes:
+      'Gonadorelin is the native GnRH decapeptide: an N-terminal pyroglutamate, a C-terminal glycinamide, and otherwise standard residues. Solid-phase assembly is routine, but the pyroglutamate terminus and the C-terminal amide are the two features that must be formed correctly, and the internal Ser/Tyr residues make byproduct control the main purity task.',
   },
   hcg: { difficulty: 'demanding', features: ['Recombinant protein', 'Glycosylated', 'Multiple disulfides'] },
   oxytocin: { difficulty: 'moderate', features: ['Disulfide bridge', 'C-terminal amide'] },
@@ -288,5 +379,11 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
   amylin: { difficulty: 'demanding', features: ['Disulfide bridge', 'C-terminal amide'] },
   acth: { difficulty: 'demanding', features: [] },
   secretin: { difficulty: 'moderate', features: ['C-terminal amide'] },
+  vip: {
+    difficulty: 'demanding',
+    features: ['C-terminal amide'],
+    notes:
+      'VIP is a 28-residue C-terminally amidated neuropeptide of the secretin/glucagon family, made by solid-phase synthesis. The length drives deletion-sequence accumulation and the sequence is aggregation-prone, so coupling efficiency, the C-terminal amidation, and preparative-HPLC purification together define the quality picture.',
+  },
   ghrelin: { difficulty: 'demanding', features: ['Fatty-acid acylation'] },
 }
