@@ -131,10 +131,44 @@ export default function HomePage() {
             </h1>
 
             {/* Subtitle */}
-            <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-ink/60 md:text-xl lg:mx-0">
+            <p className="mx-auto mb-8 max-w-xl text-lg leading-relaxed text-ink/60 md:text-xl lg:mx-0">
               Cited, chemistry-grade reference plus AI answers that show their sources —
               catalog, calculators, and trial data ready at the bench, even with no signal.
             </p>
+
+            {/* Capability strip — three tools, named */}
+            <div className="mx-auto mb-10 grid grid-cols-3 gap-2 lg:mx-0 lg:max-w-lg">
+              {[
+                {
+                  Icon: Dna,
+                  label: 'PeptideForge',
+                  desc: 'Build residue by residue',
+                  href: '/compounds/builder',
+                },
+                {
+                  Icon: Sparkles,
+                  label: 'Research Agent',
+                  desc: 'Citations included',
+                  href: '/research',
+                },
+                {
+                  Icon: BarChart3,
+                  label: 'Trial Intelligence',
+                  desc: 'Live ClinicalTrials data',
+                  href: '/trials',
+                },
+              ].map(({ Icon, label, desc, href }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  className="group flex flex-col items-center gap-1.5 rounded-xl border border-white/[0.07] bg-white/[0.025] px-2 py-3 text-center transition-all hover:border-[#2DD4A8]/30 hover:bg-white/[0.04]"
+                >
+                  <Icon className="h-4 w-4 text-[#2DD4A8]/70 transition-colors group-hover:text-[#2DD4A8]" strokeWidth={1.75} />
+                  <span className="text-[11px] font-semibold text-white/80">{label}</span>
+                  <span className="text-[10px] leading-tight text-white/35">{desc}</span>
+                </Link>
+              ))}
+            </div>
 
             {/* CTAs — lead with the Peptide Agent */}
             <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
