@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Shield, Zap, Activity, AlertTriangle } from 'lucide-react'
+import SourcingCard from '@/components/SourcingCard'
 
 const SITE = 'https://americanpeptide.com'
 const url = `${SITE}/immune-peptides`
@@ -403,6 +404,15 @@ export default function ImmunePeptidesPage() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* ── Sourcing ── */}
+      <section className="mx-auto max-w-5xl px-6 pb-16 md:px-10">
+        <h2 className="mb-2 text-lg font-semibold tracking-tight">Where to source</h2>
+        <p className="mb-5 text-sm text-ink/45">
+          Trust-ranked vendors for immune-cluster compounds — ordered by purity documentation, not commission.
+        </p>
+        <SourcingCard slugs={['thymosin-alpha-1', 'll-37', 'kpv']} accent="#60A5FA" />
       </section>
 
       {/* ── Thymosin β4 bridge callout ── */}
