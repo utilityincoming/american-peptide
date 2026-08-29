@@ -21,6 +21,7 @@ import {
   Tooltip,
   Legend,
 } from 'recharts'
+import SourcingCard from '@/components/SourcingCard'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -687,6 +688,16 @@ export default function MelanocortinPage() {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* ── Sourcing ── */}
+        <section className="mb-20 max-w-4xl">
+          <SectionHeader
+            eyebrow="Research Sourcing"
+            title="Where to Source"
+            subtitle="Trust-ranked vendors for PT-141, melanotan-1, and related melanocortin research peptides — ranked by purity documentation, not commission"
+          />
+          <SourcingCard slugs={['pt-141', 'melanotan-1']} accent="#2DD4A8" />
         </section>
 
         {/* ── Research Tools ── */}
