@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, Activity, Compass, FlaskConical } from 'lucide-react'
+import { ArrowRight, Activity, BookOpenCheck, Compass, FlaskConical, Layers, Route } from 'lucide-react'
 import { RESEARCH_AREAS, getPeptidesForArea } from '@/lib/research-areas'
 import Toolkit from '@/components/Toolkit'
 import LearnMore from '@/components/LearnMore'
@@ -23,10 +23,13 @@ export const metadata: Metadata = {
 }
 
 export default function ResearchAreasPage() {
-  const areas = RESEARCH_AREAS.map((a) => ({
-    area: a,
-    count: getPeptidesForArea(a).length,
-  }))
+  const areas = RESEARCH_AREAS.map((a) => {
+    const peptides = getPeptidesForArea(a)
+    return { area: a, count: peptides.length, preview: peptides.slice(0, 3) }
+  })
+  const totalEntries = new Set(
+    RESEARCH_AREAS.flatMap((a) => getPeptidesForArea(a).map((p) => p.slug)),
+  ).size
 
   const collectionLd = {
     '@context': 'https://schema.org',
@@ -104,12 +107,21 @@ export default function ResearchAreasPage() {
             use case. Each area covers the underlying biology, the peptide
             classes involved, and links to every matching catalog entry.
           </p>
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] text-ink/45">
+            <span className="inline-flex items-center gap-1.5">
+              <Compass className="h-3.5 w-3.5 text-accent/70" />
+              {areas.length} research areas
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <FlaskConical className="h-3.5 w-3.5 text-accent/70" />
+              {totalEntries} catalog entries mapped
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <BookOpenCheck className="h-3.5 w-3.5 text-accent/70" />
+              Indication-level FAQs on every guide
+            </span>
+          </div>
         </div>
-      </section>
-
-      {/* ── Lead feature: Peptide Agent ── */}
-      <section className="px-6 pt-12 md:px-10">
-        <AgentPrompt className="mx-auto max-w-5xl" />
       </section>
 
       {/* ── Grid ── */}
@@ -118,7 +130,7 @@ export default function ResearchAreasPage() {
           Browse by indication
         </h2>
         <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {areas.map(({ area, count }) => (
+          {areas.map(({ area, count, preview }) => (
             <Link
               key={area.slug}
               href={`/research-areas/${area.slug}`}
@@ -130,18 +142,99 @@ export default function ResearchAreasPage() {
                   {count} peptide{count === 1 ? '' : 's'}
                 </span>
               </div>
-              <h2 className="mb-1.5 text-base font-semibold tracking-tight">
+              <h3 className="mb-1.5 text-base font-semibold tracking-tight">
                 {area.label}
-              </h2>
-              <p className="mb-4 line-clamp-2 flex-1 text-[13px] leading-relaxed text-ink/50">
+              </h3>
+              <p className="mb-3 line-clamp-2 flex-1 text-[13px] leading-relaxed text-ink/50">
                 {area.tagline}
               </p>
+              {preview.length > 0 && (
+                <div className="mb-4 flex flex-wrap gap-1.5">
+                  {preview.map((p) => (
+                    <span
+                      key={p.slug}
+                      className="rounded-full border border-ink/[0.07] bg-ink/[0.03] px-2 py-0.5 text-[10.5px] text-ink/45"
+                    >
+                      {p.name}
+                    </span>
+                  ))}
+                  {count > preview.length && (
+                    <span className="rounded-full px-1 py-0.5 text-[10.5px] text-ink/35">
+                      +{count - preview.length} more
+                    </span>
+                  )}
+                </div>
+              )}
               <span className="flex items-center gap-1 text-[11px] text-accent/70 transition-colors group-hover:text-accent">
                 Read guide
                 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
           ))}
+        </div>
+
+        {/* ── How the index works — editorial substance ── */}
+        <div className="mx-auto mt-16 max-w-5xl">
+          <h2 className="mb-2 text-lg font-semibold tracking-tight md:text-xl">
+            How this index works
+          </h2>
+          <p className="mb-6 max-w-3xl text-sm leading-relaxed text-ink/55">
+            Most peptide references sort compounds by chemistry. That’s the
+            right frame if you already know what you’re looking for – but most
+            research questions start from the other end: a biological outcome,
+            and the open question of which signaling systems reach it. These
+            guides are built for that direction of travel.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-3">
+            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
+              <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
+                <Route className="h-4.5 w-4.5" strokeWidth={1.75} />
+              </span>
+              <h3 className="mb-1.5 text-sm font-semibold text-ink/90">
+                Indication-first, mechanism-deep
+              </h3>
+              <p className="text-[13px] leading-relaxed text-ink/50">
+                Each guide starts from the use case – weight loss, tissue
+                repair, cognition – then works down into the receptor systems
+                and peptide classes under study, so the biology explains the
+                grouping rather than the other way around.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
+              <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
+                <Layers className="h-4.5 w-4.5" strokeWidth={1.75} />
+              </span>
+              <h3 className="mb-1.5 text-sm font-semibold text-ink/90">
+                Mapped to the live catalog
+              </h3>
+              <p className="text-[13px] leading-relaxed text-ink/50">
+                Every guide links to each matching{' '}
+                <Link href="/catalog" className="text-accent/80 underline decoration-accent/30 underline-offset-2 hover:text-accent">
+                  catalog entry
+                </Link>{' '}
+                – sequence, mechanism, key research, and evidence tier – so you
+                can move from indication overview to compound detail in one
+                step, and back.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
+              <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
+                <BookOpenCheck className="h-4.5 w-4.5" strokeWidth={1.75} />
+              </span>
+              <h3 className="mb-1.5 text-sm font-semibold text-ink/90">
+                Evidence, stated plainly
+              </h3>
+              <p className="text-[13px] leading-relaxed text-ink/50">
+                Where a class is clinically validated, the guide says so; where
+                the evidence is preclinical, it says that too. The standards
+                behind those calls live on the{' '}
+                <Link href="/methodology" className="text-accent/80 underline decoration-accent/30 underline-offset-2 hover:text-accent">
+                  methodology page
+                </Link>
+                .
+              </p>
+            </div>
+          </div>
         </div>
 
         <LearnMore className="mx-auto mt-14 max-w-5xl" />
@@ -167,6 +260,13 @@ export default function ResearchAreasPage() {
             <ArrowRight className="h-3.5 w-3.5" />
           </span>
         </Link>
+
+        {/* ── Peptide Agent — for questions the guides don't answer ── */}
+        <AgentPrompt
+          className="mx-auto mt-14 max-w-5xl"
+          heading="Still have a question the guides don’t answer?"
+          subhead="Ask the Peptide Agent – citation-backed answers grounded in PubMed, PubChem, and ClinicalTrials.gov, aware of every research area and catalog entry on this site."
+        />
 
         <div className="mx-auto mt-14 max-w-5xl rounded-xl border border-amber-500/15 bg-amber-500/[0.04] px-4 py-3">
           <p className="text-[11px] leading-relaxed text-amber-400/65">
