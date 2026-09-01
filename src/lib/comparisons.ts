@@ -1329,6 +1329,292 @@ export const COMPARISONS: Comparison[] = [
       { name: 'GHK-Cu', alternateName: 'Copper Tripeptide-1' },
     ],
   },
+  {
+    slug: 'cagrisema-vs-tirzepatide',
+    aSlug: 'cagrisema',
+    bSlug: 'tirzepatide',
+    aName: 'CagriSema',
+    bName: 'Tirzepatide',
+    aPill: 'Amylin + GLP-1 · investigational',
+    bPill: 'GIP/GLP-1R · FDA approved',
+    metaTitle:
+      'CagriSema vs Tirzepatide — Combination vs Single-Molecule, Trial Data | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of CagriSema (cagrilintide + semaglutide) and tirzepatide (Zepbound) — two ways to exceed semaglutide: co-formulating two peptides vs one dual-receptor molecule. REDEFINE 1 vs SURMOUNT-1 data, cross-trial. Cited.',
+    keywords: [
+      'cagrisema vs tirzepatide',
+      'cagrisema vs zepbound',
+      'REDEFINE 1 results',
+      'amylin GLP-1 vs GIP GLP-1',
+      'next-gen obesity drugs',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
+    headline: 'two peptides combined versus one dual-receptor molecule',
+    intro: [
+      'CagriSema and tirzepatide are two different answers to the same question — how to beat semaglutide on weight. Tirzepatide engineers a second receptor (GIP) into one molecule; CagriSema instead co-formulates two peptides (amylin plus semaglutide). One is FDA-approved and one is investigational, and their trial numbers land close enough that the design philosophy is the real story.',
+    ],
+    atAGlance: [
+      { dim: 'What it is', a: 'Fixed combination of two peptides', b: 'One synthetic dual-agonist molecule' },
+      { dim: 'Mechanism', a: 'Amylin (cagrilintide) + GLP-1 (semaglutide)', b: 'GIP + GLP-1 co-agonism' },
+      { dim: 'Developer', a: 'Novo Nordisk', b: 'Eli Lilly' },
+      { dim: 'Dosing', a: 'Once weekly (injectable)', b: 'Once weekly (injectable)' },
+      { dim: 'Peak weight ↓ (trial)', a: '~20.4% (REDEFINE 1, 68 wk; up to 22.7% w/ full adherence)', b: '~22.5% (SURMOUNT-1, 72 wk, 15 mg)' },
+      { dim: 'Approval status', a: 'Investigational (Phase 3 REDEFINE)', b: 'FDA approved (Mounjaro 2022 · Zepbound 2023)' },
+      { dim: 'Molecular identity', a: 'No single formula — a co-formulation', b: '39-aa peptide, MW 4813.5' },
+      { dim: 'Maturity of evidence', a: 'Phase 3 program reporting', b: 'Multiple completed Phase 3 + CV/OSA data' },
+    ],
+    proseSections: [
+      {
+        title: 'Combine two, or engineer one',
+        paragraphs: [
+          'Tirzepatide is a single 39-residue peptide designed to hit two incretin receptors at once — GIP and GLP-1 — and it is the approved benchmark, with ~22.5% mean weight loss in SURMOUNT-1 and a full Phase 3 record behind it. CagriSema takes the opposite route: instead of one multi-receptor molecule, Novo Nordisk combines two of its existing peptides in a single weekly injection — the amylin analog cagrilintide and the GLP-1 agonist semaglutide — pairing two different satiety systems.',
+          'In the Phase 3 REDEFINE 1 trial, CagriSema produced roughly 20.4% mean weight loss over 68 weeks (up to 22.7% under a full-adherence analysis) — clearly beating semaglutide alone (14.9%) and cagrilintide alone (11.5%), which is the proof that the amylin arm adds real effect. But it landed close to tirzepatide’s figure rather than above it, and below the ~25% the market had priced in. So the honest read is two comparably powerful approaches: an approved single molecule versus an investigational two-peptide combination.',
+        ],
+      },
+    ],
+    trials: [
+      { name: 'REDEFINE 1', arm: 'CagriSema vs sema 2.4 vs cagri 2.4', n: '3417', duration: '68 wk', endpoint: 'Mean body-weight change (obesity, no diabetes)', result: '−20.4% vs −14.9% (sema) vs −11.5% (cagri) vs −3.0% (placebo)', note: 'Treatment-policy estimand; up to −22.7% under full adherence' },
+      { name: 'SURMOUNT-1', arm: 'Tirzepatide 15 mg', n: '2539', duration: '72 wk', endpoint: 'Mean body-weight change', result: '−22.5% vs −2.4% (placebo)', note: 'Pivotal obesity trial for Zepbound' },
+      { name: 'REDEFINE 2', arm: 'CagriSema (type 2 diabetes)', n: '1206', duration: '68 wk', endpoint: 'Mean body-weight change', result: '−13.7% vs −3.4% (placebo)', note: 'Diabetes population — smaller loss, as expected for the class' },
+    ],
+    verdict: {
+      title: 'What the evidence supports',
+      paragraphs: [
+        'These are two strong, comparably effective strategies rather than a clear winner. Tirzepatide is the FDA-approved single-molecule dual agonist with the deeper evidence base; CagriSema is the investigational two-peptide combination that clearly beats its own components but did not decisively exceed tirzepatide, and came in under lofty expectations. Note that REDEFINE and SURMOUNT are separate trials — this is a cross-trial comparison, not a head-to-head. These are population means, not predictions for any individual.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between CagriSema and tirzepatide?', a: 'Tirzepatide is one synthetic molecule that activates two receptors (GIP and GLP-1). CagriSema is a fixed combination of two separate peptides — cagrilintide (an amylin analog) and semaglutide (a GLP-1 agonist). Both aim to exceed semaglutide’s weight loss, by different means: engineering one multi-receptor molecule versus combining two.' },
+      { q: 'Which produces more weight loss?', a: 'They are close. In REDEFINE 1, CagriSema reported ~20.4% mean weight loss over 68 weeks (up to 22.7% with full adherence); tirzepatide reported ~22.5% in SURMOUNT-1 over 72 weeks. These are different trials, not a head-to-head, so the numbers should not be read as a direct ranking.' },
+      { q: 'Is CagriSema FDA-approved?', a: 'No. CagriSema is investigational and in the Phase 3 REDEFINE program. Tirzepatide is FDA-approved as Mounjaro (type 2 diabetes) and Zepbound (weight management).' },
+      { q: 'Why did CagriSema “disappoint” if it beat semaglutide?', a: 'It clearly beat semaglutide and cagrilintide alone, confirming the combination works. The disappointment was relative to expectations — the market had anticipated ~25% weight loss, and ~20.4% fell short of that bar while still being a strong absolute result. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['weight-loss'],
+    about: [
+      { name: 'CagriSema', alternateName: 'Cagrilintide/semaglutide' },
+      { name: 'Tirzepatide', alternateName: 'Zepbound' },
+    ],
+  },
+  {
+    slug: 'cagrisema-vs-retatrutide',
+    aSlug: 'cagrisema',
+    bSlug: 'retatrutide',
+    aName: 'CagriSema',
+    bName: 'Retatrutide',
+    aPill: 'Amylin + GLP-1 · investigational',
+    bPill: 'Triple agonist · investigational',
+    metaTitle:
+      'CagriSema vs Retatrutide — Novo’s Combo vs Lilly’s Triple Agonist | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of CagriSema (cagrilintide + semaglutide) and retatrutide (GIP/GLP-1/glucagon triple agonist) — the two leading next-generation obesity candidates, reached by opposite strategies. ~20% vs ~24%, cross-trial. Cited.',
+    keywords: [
+      'cagrisema vs retatrutide',
+      'retatrutide vs cagrisema',
+      'next generation obesity drugs',
+      'amylin combination vs triple agonist',
+      'novo vs lilly obesity',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
+    headline: 'the combination versus the triple agonist',
+    intro: [
+      'CagriSema and retatrutide are the two most-watched next-generation obesity candidates, and they represent opposite bets. Novo Nordisk combines two existing peptides (amylin plus GLP-1); Eli Lilly engineers a single molecule that hits three receptors (GIP, GLP-1, and glucagon). Both are investigational, and their reported numbers sit at the top of the field.',
+    ],
+    atAGlance: [
+      { dim: 'Strategy', a: 'Combine two peptides', b: 'One molecule, three receptors' },
+      { dim: 'Mechanism', a: 'Amylin (cagrilintide) + GLP-1 (semaglutide)', b: 'GIP + GLP-1 + glucagon' },
+      { dim: 'Developer', a: 'Novo Nordisk', b: 'Eli Lilly (LY3437943)' },
+      { dim: 'Peak weight ↓ (trial)', a: '~20.4% (REDEFINE 1, 68 wk; up to 22.7% adherence)', b: '~24% (Phase 2, 48 wk, 12 mg)' },
+      { dim: 'Extra vs GLP-1', a: 'Amylin — a separate satiety pathway', b: 'GIP (insulinotropic) + glucagon (energy expenditure, liver fat)' },
+      { dim: 'Approval status', a: 'Investigational (Phase 3 REDEFINE)', b: 'Investigational (Phase 3 TRIUMPH)' },
+      { dim: 'Molecular identity', a: 'No single formula — a co-formulation', b: 'Single peptide, MW 4731.5' },
+      { dim: 'Maturity of evidence', a: 'Phase 3 reporting', b: 'Phase 2 complete; Phase 3 ongoing' },
+    ],
+    columnSections: [
+      {
+        title: 'Two ways to add to GLP-1',
+        columns: [
+          {
+            heading: 'CagriSema — add amylin (combination)',
+            accent: 'a',
+            points: [
+              'Keeps semaglutide’s GLP-1 mechanism intact',
+              'Adds cagrilintide, a long-acting amylin analog, as a second satiety signal',
+              'Two molecules, each with its own certificate of analysis',
+              'REDEFINE 1: ~20.4% over 68 weeks',
+            ],
+          },
+          {
+            heading: 'Retatrutide — add GIP + glucagon (triple)',
+            accent: 'b',
+            points: [
+              'GIP: complementary insulinotropic and adipose signaling',
+              'Glucagon: raises energy expenditure and mobilizes liver fat',
+              'One engineered peptide activating all three receptors',
+              'Phase 2: ~24% over 48 weeks',
+            ],
+          },
+        ],
+      },
+    ],
+    trials: [
+      { name: 'REDEFINE 1', arm: 'CagriSema', n: '3417', duration: '68 wk', endpoint: 'Mean body-weight change (obesity)', result: '−20.4% vs −3.0% (placebo)', note: 'Beat semaglutide (−14.9%) and cagrilintide (−11.5%) alone' },
+      { name: 'Retatrutide Phase 2', arm: 'Retatrutide 12 mg', n: '338', duration: '48 wk', endpoint: 'Mean body-weight change', result: '~24% vs ~2% (placebo)', note: 'Jastreboff et al., NEJM 2023; highest-dose arm' },
+      { name: 'Phase 3 programs', arm: 'REDEFINE (Novo) · TRIUMPH (Lilly)', duration: 'Ongoing', endpoint: 'Confirmatory efficacy/safety', result: 'Reporting — neither FDA-approved', note: 'Head-to-head trials between them have not been run' },
+    ],
+    verdict: {
+      title: 'What the evidence supports — and what it doesn’t',
+      paragraphs: [
+        'On the numbers reported so far, retatrutide’s ~24% (Phase 2, 48 weeks) edges CagriSema’s ~20.4% (Phase 3, 68 weeks) — but these are different trials at different stages, not a head-to-head, so the gap is suggestive at best. The more durable distinction is strategic: a two-peptide combination that can be built from proven parts versus a single triple-agonist molecule that adds glucagon-driven energy expenditure and liver-fat effects GLP-1/amylin do not. Both are investigational; neither is approved. Treat this as mechanism plus early data, not a ranking.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between CagriSema and retatrutide?', a: 'CagriSema is a combination of two peptides — cagrilintide (amylin) and semaglutide (GLP-1). Retatrutide is a single molecule that activates three receptors — GIP, GLP-1, and glucagon. CagriSema adds a separate satiety pathway (amylin); retatrutide adds insulinotropic (GIP) and energy-expenditure/liver-fat (glucagon) mechanisms.' },
+      { q: 'Which causes more weight loss?', a: 'Reported figures put retatrutide at ~24% (Phase 2, 48 weeks) and CagriSema at ~20.4% (Phase 3 REDEFINE 1, 68 weeks). These come from separate trials at different stages, not a direct comparison, and retatrutide’s Phase 3 results are still pending — so it is premature to rank them.' },
+      { q: 'Are either approved?', a: 'No. Both are investigational and in Phase 3 — CagriSema in Novo Nordisk’s REDEFINE program, retatrutide in Eli Lilly’s TRIUMPH program. Neither is FDA-approved.' },
+      { q: 'What does the glucagon arm give retatrutide that CagriSema lacks?', a: 'Glucagon-receptor agonism is studied for increased energy expenditure and hepatic (liver) fat reduction — effects that neither GLP-1 nor amylin provide directly. CagriSema’s advantage is being buildable from two already well-characterized peptides. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['weight-loss'],
+    about: [
+      { name: 'CagriSema', alternateName: 'Cagrilintide/semaglutide' },
+      { name: 'Retatrutide', alternateName: 'LY3437943' },
+    ],
+  },
+  {
+    slug: 'survodutide-vs-retatrutide',
+    aSlug: 'survodutide',
+    bSlug: 'retatrutide',
+    aName: 'Survodutide',
+    bName: 'Retatrutide',
+    aPill: 'Glucagon/GLP-1 · investigational',
+    bPill: 'GIP/GLP-1/glucagon · investigational',
+    metaTitle:
+      'Survodutide vs Retatrutide — Glucagon Dual vs Triple Agonist, MASH & Obesity | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of survodutide (glucagon/GLP-1 dual, MASH Breakthrough) and retatrutide (GIP/GLP-1/glucagon triple) — both lean on the glucagon arm for energy expenditure and liver fat. What adding GIP changes, and the NEJM MASH data. Cited.',
+    keywords: [
+      'survodutide vs retatrutide',
+      'glucagon GLP-1 dual vs triple agonist',
+      'survodutide MASH',
+      'BI 456906 vs LY3437943',
+      'glucagon agonist obesity liver',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
+    headline: 'the glucagon dual versus the triple agonist',
+    intro: [
+      'Survodutide and retatrutide share the receptor that sets them apart from semaglutide and tirzepatide — glucagon. Survodutide pairs glucagon with GLP-1 (a dual agonist); retatrutide adds GIP on top of both (a triple). Both are investigational, and the interesting question is what that third receptor actually buys — and where each one’s evidence is strongest.',
+    ],
+    atAGlance: [
+      { dim: 'Receptor targets', a: 'Glucagon-R + GLP-1R', b: 'GIP-R + GLP-1R + glucagon-R' },
+      { dim: 'Agonism class', a: 'Dual agonist (glucagon/GLP-1)', b: 'Triple agonist' },
+      { dim: 'Developer', a: 'Boehringer Ingelheim / Zealand (BI 456906)', b: 'Eli Lilly (LY3437943)' },
+      { dim: 'Distinctive program', a: 'MASH — FDA Breakthrough Therapy', b: 'Obesity — largest Phase 2 weight figure' },
+      { dim: 'Peak weight ↓ (trial)', a: 'Double-digit mean (Phase 2/3, dose-dependent)', b: '~24% (Phase 2, 48 wk, 12 mg)' },
+      { dim: 'Shared glucagon rationale', a: 'Energy expenditure + hepatic-fat mobilization', b: 'Energy expenditure + hepatic-fat mobilization' },
+      { dim: 'Extra receptor', a: '— (no GIP)', b: 'GIP — complementary insulinotropic/adipose signal' },
+      { dim: 'Approval status', a: 'Investigational (Phase 3 SYNCHRONIZE)', b: 'Investigational (Phase 3 TRIUMPH)' },
+      { dim: 'Molecular weight', a: '4232 Da', b: '4731.5 Da' },
+    ],
+    proseSections: [
+      {
+        title: 'What the third receptor adds',
+        paragraphs: [
+          'Both molecules recruit glucagon for the same reasons: on top of GLP-1’s appetite and glycemic effects, glucagon-receptor activation is studied for raising energy expenditure and mobilizing fat from the liver. That shared logic is why survodutide’s standout data is in the liver — in a Phase 2 MASH trial (NEJM 2024), 62% of patients on the 4.8 mg dose achieved MASH improvement without worsening fibrosis versus 14% on placebo, with fibrosis improvement up to ~52% — earning it FDA Breakthrough Therapy designation for MASH.',
+          'Retatrutide keeps the glucagon and GLP-1 arms and adds a third receptor, GIP, which contributes a complementary insulinotropic and adipose signal. Its headline is weight: ~24% mean reduction at the highest Phase 2 dose, the largest reported for the incretin class. So the practical contrast is emphasis — survodutide is the glucagon/GLP-1 dual with the strongest liver-disease evidence, retatrutide the triple with the largest weight figure. Whether the added GIP is worth the extra complexity is exactly what the two Phase 3 programs are meant to answer.',
+        ],
+      },
+    ],
+    trials: [
+      { name: 'Survodutide MASH Phase 2', arm: 'Survodutide 4.8 mg', n: '293', duration: '48 wk', endpoint: 'MASH improvement, no worsening fibrosis', result: '62% vs 14% (placebo)', note: 'NEJM 2024; fibrosis improvement up to ~52% vs ~26%' },
+      { name: 'Retatrutide Phase 2', arm: 'Retatrutide 12 mg', n: '338', duration: '48 wk', endpoint: 'Mean body-weight change', result: '~24% vs ~2% (placebo)', note: 'Jastreboff et al., NEJM 2023; highest-dose arm' },
+      { name: 'Phase 3 programs', arm: 'SYNCHRONIZE (survodutide) · TRIUMPH (retatrutide)', duration: 'Ongoing', endpoint: 'Confirmatory obesity/metabolic', result: 'Reporting — neither FDA-approved', note: 'No head-to-head between them has been run' },
+    ],
+    verdict: {
+      title: 'What the evidence supports',
+      paragraphs: [
+        'These are close cousins that emphasize different endpoints. Survodutide, the glucagon/GLP-1 dual, has the strongest liver-disease signal — its MASH data is what earned Breakthrough designation. Retatrutide, the triple, adds GIP and reports the largest weight reduction in the class. Both are investigational, both rely on the glucagon arm for energy expenditure and liver fat, and there is no head-to-head trial between them — so the comparison is one of mechanism and program focus, not a settled ranking. These are population means, not individual predictions.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between survodutide and retatrutide?', a: 'Survodutide is a glucagon/GLP-1 dual agonist; retatrutide adds a third receptor, GIP, making it a GIP/GLP-1/glucagon triple agonist. Both use the glucagon arm for energy expenditure and liver-fat reduction. Survodutide’s strongest data is in MASH (fatty liver disease); retatrutide’s is the largest weight loss reported for the class.' },
+      { q: 'Which is better for fatty liver (MASH)?', a: 'Survodutide has the more advanced dedicated liver program — in a Phase 2 MASH trial (NEJM 2024) 62% on the 4.8 mg dose achieved MASH improvement without worsening fibrosis versus 14% on placebo, and it holds FDA Breakthrough Therapy designation for MASH. Retatrutide is also studied for hepatic fat but is framed primarily around weight.' },
+      { q: 'Which causes more weight loss?', a: 'Retatrutide reported ~24% mean weight loss at the highest Phase 2 dose, the largest for the incretin class. Survodutide has reported double-digit mean reductions. These come from separate trials, not a head-to-head, and both are still in Phase 3.' },
+      { q: 'Are either FDA-approved?', a: 'No. Both are investigational — survodutide (Boehringer Ingelheim / Zealand) in the SYNCHRONIZE program and retatrutide (Eli Lilly) in TRIUMPH. Neither is FDA-approved. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['weight-loss'],
+    about: [
+      { name: 'Survodutide', alternateName: 'BI 456906' },
+      { name: 'Retatrutide', alternateName: 'LY3437943' },
+    ],
+  },
+  {
+    slug: 'mazdutide-vs-tirzepatide',
+    aSlug: 'mazdutide',
+    bSlug: 'tirzepatide',
+    aName: 'Mazdutide',
+    bName: 'Tirzepatide',
+    aPill: 'Glucagon/GLP-1 · approved in China',
+    bPill: 'GIP/GLP-1R · FDA approved',
+    metaTitle:
+      'Mazdutide vs Tirzepatide — Glucagon vs GIP as the Partner to GLP-1 | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of mazdutide (glucagon/GLP-1 dual, approved in China) and tirzepatide (GIP/GLP-1 dual, FDA-approved) — same “dual agonist” class, different second receptor, different geography of approval. GLORY-1 vs SURMOUNT-1. Cited.',
+    keywords: [
+      'mazdutide vs tirzepatide',
+      'glucagon GLP-1 vs GIP GLP-1',
+      'mazdutide GLORY-1',
+      'IBI362 vs tirzepatide',
+      'dual agonist comparison',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
+    headline: 'two dual agonists, two different second receptors',
+    intro: [
+      'Mazdutide and tirzepatide are both “dual agonists,” but they pair GLP-1 with a different second receptor — mazdutide with glucagon, tirzepatide with GIP. That single choice changes what each does, and their approval geographies differ too: tirzepatide is FDA-approved, while mazdutide reached the market first in China.',
+    ],
+    atAGlance: [
+      { dim: 'Receptor targets', a: 'Glucagon-R + GLP-1R', b: 'GIP-R + GLP-1R' },
+      { dim: 'Second receptor', a: 'Glucagon — energy expenditure, liver fat', b: 'GIP — insulinotropic, adipose signaling' },
+      { dim: 'Molecular basis', a: 'Oxyntomodulin-based (natural dual hormone)', b: 'Chimeric GIP/GLP-1, de novo design' },
+      { dim: 'Developer', a: 'Eli Lilly / Innovent (IBI362)', b: 'Eli Lilly' },
+      { dim: 'Approval status', a: 'Approved in China (NMPA, 2025); not FDA-approved', b: 'FDA approved (Mounjaro 2022 · Zepbound 2023)' },
+      { dim: 'Peak weight ↓ (trial)', a: '~14.8% (GLORY-1, 6 mg, 48 wk; ~20% at 9 mg)', b: '~22.5% (SURMOUNT-1, 15 mg, 72 wk)' },
+      { dim: 'Pivotal trial', a: 'GLORY-1 (Chinese adults)', b: 'SURMOUNT-1' },
+      { dim: 'Molecular weight', a: '4476 Da', b: '4813.5 Da' },
+    ],
+    proseSections: [
+      {
+        title: 'Glucagon or GIP — the partner matters',
+        paragraphs: [
+          'Both drugs keep GLP-1 and add a second incretin-family receptor, but they choose differently. Tirzepatide pairs GLP-1 with GIP — a complementary insulinotropic and adipose signal — in a de-novo chimeric molecule, and in SURMOUNT-1 it reached ~22.5% mean weight loss, the benchmark for an approved agent. Mazdutide pairs GLP-1 with glucagon, and it is built on oxyntomodulin, the natural gut hormone that already activates both of those receptors on its own; the glucagon arm is studied for extra energy expenditure and liver-fat reduction rather than the insulin-side effect GIP contributes.',
+          'The other real difference is where they are approved. Tirzepatide is FDA-approved in the United States. Mazdutide was approved first by China’s NMPA in 2025 — the first glucagon/GLP-1 dual agonist to reach any market — on the strength of the Phase 3 GLORY-1 trial, where the 6 mg dose produced ~14.8% mean weight loss over 48 weeks in Chinese adults (higher doses reached about 20%). It is not FDA-approved, and a head-to-head Phase 3 against semaglutide (GLORY-3) is underway, but none exists against tirzepatide.',
+        ],
+      },
+    ],
+    trials: [
+      { name: 'GLORY-1', arm: 'Mazdutide 6 mg (and 4 mg)', n: '610', duration: '48 wk', endpoint: 'Mean body-weight change (Chinese adults)', result: '−14.8% (6 mg) · −12.0% (4 mg) vs −0.5% (placebo)', note: 'Basis for China NMPA approval; ~20% reported at 9 mg' },
+      { name: 'SURMOUNT-1', arm: 'Tirzepatide 15 mg', n: '2539', duration: '72 wk', endpoint: 'Mean body-weight change', result: '−22.5% vs −2.4% (placebo)', note: 'Pivotal obesity trial for Zepbound' },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Same class, different partner receptor and different market. Tirzepatide’s GIP pairing and de-novo design underpin the larger reported weight loss and its FDA approval; mazdutide’s glucagon pairing, built from oxyntomodulin, brings an energy-expenditure and liver-fat emphasis and made it the first glucagon/GLP-1 dual approved anywhere — in China. The trial figures come from separate studies in different populations, not a head-to-head, so they are not directly comparable. Neither the numbers nor the approvals make one universally superior; they answer somewhat different questions. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between mazdutide and tirzepatide?', a: 'Both are dual agonists that keep GLP-1 and add a second receptor — but mazdutide adds glucagon (for energy expenditure and liver-fat effects) while tirzepatide adds GIP (an insulinotropic and adipose signal). Mazdutide is built on the natural hormone oxyntomodulin; tirzepatide is a de-novo chimeric peptide.' },
+      { q: 'Is mazdutide FDA-approved?', a: 'No. Mazdutide was approved by China’s NMPA in 2025 — first for weight management, then type 2 diabetes — making it the first glucagon/GLP-1 dual agonist approved anywhere. It is not FDA-approved; outside China it remains investigational. Tirzepatide is FDA-approved (Mounjaro, Zepbound).' },
+      { q: 'Which produces more weight loss?', a: 'Tirzepatide reported ~22.5% in SURMOUNT-1 (15 mg, 72 weeks). Mazdutide reported ~14.8% at 6 mg over 48 weeks in GLORY-1, with about 20% at the higher 9 mg dose. These are separate trials in different populations, not a head-to-head, so they are not directly comparable.' },
+      { q: 'Why choose glucagon over GIP as the second receptor?', a: 'It is a design trade-off, not a settled answer. Glucagon agonism adds energy expenditure and liver-fat mobilization; GIP adds an insulinotropic and adipose signal. The two Phase 3 programs — and eventual head-to-head trials — are what will clarify which pairing wins for which endpoint. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['weight-loss'],
+    about: [
+      { name: 'Mazdutide', alternateName: 'IBI362' },
+      { name: 'Tirzepatide', alternateName: 'Zepbound' },
+    ],
+  },
 ]
 
 export const COMPARISON_BY_SLUG: Record<string, Comparison> = Object.fromEntries(
