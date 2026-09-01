@@ -3,7 +3,7 @@ import { PEPTIDES, CATEGORIES } from '@/lib/peptides'
 import { RESEARCH_AREAS } from '@/lib/research-areas'
 import { GLOSSARY } from '@/lib/glossary'
 import { COMPARISONS } from '@/lib/comparisons'
-import { hasSourcingPage } from '@/lib/vendors'
+import { hasSourcingPage, vendorsRanked } from '@/lib/vendors'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ── Sourcing / trust standard ─────────────────────────
     { path: '/us-peptides', priority: 0.9 },
     { path: '/sources', priority: 0.9 },
+    { path: '/vendors', priority: 0.8 },
     { path: '/methodology', priority: 0.9 },
     // ── GLP-1 / Metabolic cluster ─────────────────────────
     { path: '/glp-1', priority: 0.9 },
@@ -94,6 +95,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
+  // One review page per directory-listed vendor. vendorsRanked() returns [] on
+  // the reference-only Play (TWA) build, so these are naturally absent there —
+  // matching the /vendors/[id] route, which 404s on that build.
+  const vendorRoutes = vendorsRanked().map((v) => ({
+    url: `${SITE}/vendors/${v.id}`,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }))
+
   return [
     ...staticRoutes,
     ...categoryRoutes,
@@ -102,5 +112,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...peptideRoutes,
     ...sourceRoutes,
     ...comparisonRoutes,
+    ...vendorRoutes,
   ]
 }
