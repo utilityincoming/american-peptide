@@ -891,6 +891,444 @@ export const COMPARISONS: Comparison[] = [
       { name: 'MOTS-c' },
     ],
   },
+  {
+    slug: 'semaglutide-vs-liraglutide',
+    aSlug: 'semaglutide',
+    bSlug: 'liraglutide',
+    aName: 'Semaglutide',
+    bName: 'Liraglutide',
+    aPill: 'GLP-1R · once-weekly · FDA approved',
+    bPill: 'GLP-1R · once-daily · FDA approved',
+    metaTitle:
+      'Semaglutide vs Liraglutide — Weekly vs Daily GLP-1, Trials & Differences | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of semaglutide (Ozempic/Wegovy) and liraglutide (Victoza/Saxenda) — the same acylated GLP-1 template at once-weekly vs once-daily dosing, head-to-head STEP 8 and SUSTAIN 10 data, and why the successor outperforms.',
+    keywords: [
+      'semaglutide vs liraglutide',
+      'ozempic vs victoza',
+      'wegovy vs saxenda',
+      'STEP 8 trial',
+      'SUSTAIN 10',
+      'GLP-1 weekly vs daily',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
+    headline: 'the same GLP-1 template, weekly versus daily',
+    intro: [
+      'Liraglutide proved the acylated GLP-1 idea; semaglutide is the successor that stretched it from once-daily to once-weekly and larger average weight loss. They share a mechanism and a maker — the differences are in engineering, dosing, and how they perform head-to-head.',
+    ],
+    atAGlance: [
+      { dim: 'Generic name', a: 'Semaglutide', b: 'Liraglutide' },
+      { dim: 'Brand names', a: 'Ozempic · Wegovy · Rybelsus', b: 'Victoza · Saxenda' },
+      { dim: 'Developer', a: 'Novo Nordisk', b: 'Novo Nordisk' },
+      { dim: 'Receptor target', a: 'GLP-1R (mono-agonist)', b: 'GLP-1R (mono-agonist)' },
+      { dim: 'Dosing', a: 'Once weekly (injectable) · daily oral (Rybelsus)', b: 'Once daily (injectable)' },
+      { dim: 'Half-life', a: '~168 h', b: '~13 h' },
+      { dim: 'Acylation', a: 'C18 fatty-diacid + Aib8, Arg34', b: 'C16 palmitic acid + Arg34, via γGlu spacer' },
+      { dim: 'Backbone', a: 'GLP-1 analog, 31 residues', b: 'GLP-1(7-37) analog' },
+      { dim: 'Approved: T2D', a: 'Yes (Ozempic 2017; oral Rybelsus 2019)', b: 'Yes (Victoza 2010)' },
+      { dim: 'Approved: obesity', a: 'Yes (Wegovy 2021, 2.4 mg)', b: 'Yes (Saxenda 2014, 3.0 mg)' },
+      { dim: 'CV outcome trial', a: 'SUSTAIN-6 · SELECT (MACE reduction)', b: 'LEADER (MACE reduction)' },
+      { dim: 'Molecular weight', a: '4113.6 Da', b: '3751.2 Da' },
+    ],
+    proseSections: [
+      {
+        title: 'One template, taken further',
+        paragraphs: [
+          'Both drugs solve the same problem — native GLP-1 lasts only minutes — the same way: a fatty-acid chain that binds reversibly to albumin, plus substitutions that resist the DPP-4 enzyme. Liraglutide (2010) was the proof of concept, carrying a C16 palmitic-acid chain on a glutamate spacer that stretched GLP-1’s half-life to about 13 hours — enough for once-daily injection.',
+          'Semaglutide is that same strategy pushed harder: a longer C18 fatty-diacid, an Aib substitution at position 8 to further blunt DPP-4, and a linker tuned for tighter albumin binding. The result is a ~1-week half-life — once-weekly dosing — and, at obesity doses, meaningfully larger weight loss. Semaglutide also reaches where liraglutide cannot: an oral tablet (Rybelsus), something a daily-injection molecule never offered.',
+        ],
+      },
+    ],
+    trials: [
+      { name: 'STEP 8', arm: 'Sema 2.4 mg vs Lira 3.0 mg', n: '338', duration: '68 wk', endpoint: 'Mean body-weight change (obesity, no diabetes)', result: '−15.8% (sema) vs −6.4% (lira)', note: 'Rubino et al., JAMA 2022 — direct head-to-head; semaglutide superior' },
+      { name: 'SUSTAIN 10', arm: 'Sema 1.0 mg vs Lira 1.2 mg', n: '577', duration: '30 wk', endpoint: 'HbA1c & weight (type 2 diabetes)', result: 'HbA1c −1.7 vs −1.0% · weight −5.8 vs −1.9 kg', note: 'Open-label; semaglutide superior on both' },
+      { name: 'LEADER', arm: 'Liraglutide', n: '9340', duration: '~3.8 yr', endpoint: 'MACE (CV outcome)', result: '13% MACE reduction vs placebo', note: 'Established liraglutide’s cardiovascular benefit in T2D' },
+      { name: 'SELECT', arm: 'Semaglutide 2.4 mg', n: '17604', duration: '~5 yr', endpoint: 'MACE in obesity without diabetes', result: '20% MACE reduction vs placebo', note: 'Extended CV benefit to obesity without diabetes' },
+    ],
+    verdict: {
+      title: 'What the evidence supports',
+      paragraphs: [
+        'Where the two have been compared directly — STEP 8 in obesity and SUSTAIN 10 in type 2 diabetes — once-weekly semaglutide produced greater weight loss and larger HbA1c reductions than once-daily liraglutide. Both carry proven cardiovascular-outcome data (LEADER for liraglutide; SUSTAIN-6 and SELECT for semaglutide). Liraglutide remains a used medicine and the historical bridge to the weekly era; semaglutide is the more potent successor. These are population means from trials, not predictions for any individual.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the main difference between semaglutide and liraglutide?', a: 'Both are acylated GLP-1 receptor agonists from Novo Nordisk that work by the same mechanism. Liraglutide is dosed once daily (half-life ~13 hours); semaglutide was engineered — a longer fatty-acid chain and an additional DPP-4-resistant substitution — for once-weekly dosing and, at obesity doses, larger average weight loss.' },
+      { q: 'Which causes more weight loss?', a: 'In the head-to-head STEP 8 trial (68 weeks, obesity without diabetes), semaglutide 2.4 mg produced −15.8% mean body-weight change versus −6.4% for liraglutide 3.0 mg. Semaglutide was superior on the primary endpoint. Individual responses vary; these are population means.' },
+      { q: 'What is the difference between Victoza/Saxenda and Ozempic/Wegovy?', a: 'Victoza (liraglutide) and Ozempic (semaglutide) are the diabetes doses; Saxenda (liraglutide 3.0 mg) and Wegovy (semaglutide 2.4 mg) are the higher obesity doses. Within each brand pair the compound is the same; dose and FDA indication differ.' },
+      { q: 'Is one available as a pill?', a: 'Semaglutide is — as oral Rybelsus for type 2 diabetes. Liraglutide is injectable only. Both injectable forms are subcutaneous.' },
+      { q: 'Are both FDA-approved?', a: 'Yes. Liraglutide: Victoza (T2D, 2010) and Saxenda (obesity, 2014). Semaglutide: Ozempic (T2D, 2017), Rybelsus (oral T2D, 2019), and Wegovy (obesity, 2021). This page is a research and educational reference, not medical advice.' },
+    ],
+    relatedAreas: ['weight-loss'],
+    about: [
+      { name: 'Semaglutide', alternateName: 'Ozempic' },
+      { name: 'Liraglutide', alternateName: 'Victoza' },
+    ],
+  },
+  {
+    slug: 'retatrutide-vs-semaglutide',
+    aSlug: 'retatrutide',
+    bSlug: 'semaglutide',
+    aName: 'Retatrutide',
+    bName: 'Semaglutide',
+    aPill: 'Triple agonist · investigational',
+    bPill: 'GLP-1R · FDA approved',
+    metaTitle:
+      'Retatrutide vs Semaglutide — Triple Agonist vs GLP-1, Weight-Loss Data | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of retatrutide (GIP/GLP-1/glucagon triple agonist) and semaglutide (GLP-1 mono-agonist) — what two extra receptors add, the ~24% vs ~15% weight-loss figures, and why this is a cross-trial, not head-to-head, comparison.',
+    keywords: [
+      'retatrutide vs semaglutide',
+      'triple agonist vs GLP-1',
+      'retatrutide vs ozempic',
+      'LY3437943 vs semaglutide',
+      'retatrutide weight loss',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
+    headline: 'three receptors versus one',
+    intro: [
+      'Semaglutide is the established GLP-1 mono-agonist; retatrutide is the investigational triple agonist that adds GIP and glucagon on top. It is the widest mechanistic gap in the incretin field — and, importantly, one that has not been tested head-to-head. This page separates what the trials show from what they don’t.',
+    ],
+    atAGlance: [
+      { dim: 'Receptor targets', a: 'GIP-R + GLP-1R + glucagon-R', b: 'GLP-1R only' },
+      { dim: 'Agonism class', a: 'Triple agonist', b: 'Mono-agonist' },
+      { dim: 'Developer', a: 'Eli Lilly (LY3437943)', b: 'Novo Nordisk' },
+      { dim: 'Approval status', a: 'Investigational (Phase 3 — TRIUMPH)', b: 'FDA approved (2017 T2D · 2021 obesity)' },
+      { dim: 'Peak weight ↓ (trial)', a: '~24% (Phase 2, 48 wk, 12 mg)', b: '~15% (STEP-1, 68 wk, 2.4 mg)' },
+      { dim: 'Extra vs GLP-1', a: 'GIP (insulinotropic) + glucagon (energy expenditure, liver fat)', b: '—' },
+      { dim: 'Dosing', a: 'Once weekly (trial)', b: 'Once weekly (or daily oral)' },
+      { dim: 'Maturity of evidence', a: 'Phase 2 complete; Phase 3 ongoing', b: 'Multiple completed Phase 3 + CV outcomes' },
+    ],
+    columnSections: [
+      {
+        title: 'What the two extra receptors add',
+        columns: [
+          {
+            heading: 'GLP-1 agonism (shared)',
+            accent: 'neutral',
+            points: [
+              'Glucose-dependent insulin secretion and glucagon suppression',
+              'Slowed gastric emptying and central appetite reduction',
+              'The single mechanism behind semaglutide’s full effect',
+            ],
+          },
+          {
+            heading: 'GIP + glucagon (retatrutide only)',
+            accent: 'a',
+            points: [
+              'GIP: a complementary insulinotropic and adipose signal',
+              'Glucagon: raises energy expenditure beyond appetite suppression',
+              'Glucagon: promotes hepatic lipolysis — studied for liver-fat reduction',
+              'The proposed basis for the larger Phase 2 weight reduction',
+            ],
+          },
+        ],
+      },
+    ],
+    trials: [
+      { name: 'Retatrutide Phase 2', arm: 'Retatrutide 12 mg', n: '338', duration: '48 wk', endpoint: 'Mean body-weight change', result: '~24% vs ~2% (placebo)', note: 'Jastreboff et al., NEJM 2023; highest-dose arm' },
+      { name: 'STEP-1', arm: 'Semaglutide 2.4 mg', n: '1961', duration: '68 wk', endpoint: 'Mean body-weight change', result: '−14.9% vs −2.4% (placebo)', note: 'Pivotal obesity trial for Wegovy' },
+      { name: 'TRIUMPH program', arm: 'Retatrutide (multiple)', duration: 'Ongoing', endpoint: 'Phase 3 efficacy/safety', result: 'In progress — not yet reported', note: 'Approval and any label depend on these outcomes' },
+    ],
+    verdict: {
+      title: 'What the evidence supports — and what it doesn’t',
+      paragraphs: [
+        'Retatrutide’s triple mechanism produced the largest mean weight reduction reported for an incretin agent in Phase 2 (~24%), above semaglutide’s pivotal STEP-1 figure (~15%). But these are separate trials at different doses, durations, and stages — not a head-to-head — so the gap is suggestive, not settled. Semaglutide is FDA-approved with completed Phase 3 and cardiovascular-outcome data; retatrutide is investigational, with its Phase 3 (TRIUMPH) results and full safety profile still pending. Treat the comparison as mechanism plus early data, not a ranking.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between retatrutide and semaglutide?', a: 'Semaglutide activates only the GLP-1 receptor. Retatrutide activates three receptors — GIP, GLP-1, and glucagon. The added GIP and glucagon arms are associated with a complementary insulin signal, increased energy expenditure, and hepatic fat reduction, and are the proposed basis for retatrutide’s larger Phase 2 weight loss.' },
+      { q: 'Is retatrutide better than semaglutide for weight loss?', a: 'In Phase 2, retatrutide reported ~24% mean weight reduction at the highest dose versus semaglutide’s ~15% in STEP-1 — but across different trials, not a direct comparison, and retatrutide’s Phase 3 results are not yet reported. It is premature to call one superior on head-to-head evidence, because none exists yet.' },
+      { q: 'Is retatrutide FDA-approved?', a: 'No. Retatrutide (LY3437943) is investigational and in Phase 3 (the TRIUMPH program). Semaglutide is FDA-approved as Ozempic, Rybelsus, and Wegovy.' },
+      { q: 'What does the glucagon receptor add over GLP-1?', a: 'Beyond GLP-1’s appetite and glycemic effects, glucagon-receptor agonism is studied for increased energy expenditure and hepatic lipolysis (liver-fat reduction). The trade-off is that glucagon can raise glucose, so a triple agonist must balance it against the insulinotropic GLP-1/GIP signals.' },
+    ],
+    relatedAreas: ['weight-loss'],
+    about: [
+      { name: 'Retatrutide', alternateName: 'LY3437943' },
+      { name: 'Semaglutide', alternateName: 'Ozempic' },
+    ],
+  },
+  {
+    slug: 'mk-677-vs-ipamorelin',
+    aSlug: 'mk-677',
+    bSlug: 'ipamorelin',
+    aName: 'MK-677',
+    bName: 'Ipamorelin',
+    aPill: 'Oral ghrelin mimetic · non-peptide',
+    bPill: 'Selective GHRP · pentapeptide',
+    metaTitle:
+      'MK-677 vs Ipamorelin — Oral vs Injectable Ghrelin-Receptor GH Secretagogues | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of MK-677 (ibutamoren) and ipamorelin — the same ghrelin receptor, two very different tools: an oral non-peptide with ~24-hour action vs a selective injectable pentapeptide that acts in short pulses. Cited.',
+    keywords: [
+      'MK-677 vs ipamorelin',
+      'ibutamoren vs ipamorelin',
+      'oral GH secretagogue',
+      'ghrelin receptor agonist comparison',
+      'sustained vs pulsatile GH',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GH Peptides', href: '/gh-peptides' },
+    headline: 'same receptor, oral-sustained versus injectable-pulsatile',
+    intro: [
+      'MK-677 and ipamorelin both raise growth hormone through the same ghrelin receptor — but one is an oral small molecule that works for about a day, and the other is a selective injectable peptide that acts in short pulses. The receptor is shared; almost everything about how they behave is not.',
+    ],
+    atAGlance: [
+      { dim: 'Chemical class', a: 'Non-peptide small molecule (spiroindoline)', b: 'Pentapeptide (GHRP)' },
+      { dim: 'Receptor', a: 'GHS-R1a (ghrelin receptor)', b: 'GHS-R1a (ghrelin receptor)' },
+      { dim: 'Route', a: 'Oral', b: 'Injectable (subcutaneous)' },
+      { dim: 'Duration of action', a: '~24 h per dose (sustained)', b: '~2 h (short, pulsatile)' },
+      { dim: 'GH release pattern', a: 'Sustained GH / IGF-1 elevation', b: 'Discrete, physiologic pulse' },
+      { dim: 'Selectivity', a: 'Ghrelin-receptor agonist; can raise appetite, cortisol, glucose', b: 'Highly selective — minimal cortisol / prolactin' },
+      { dim: 'Appetite effect', a: 'Increased (ghrelin mimetic)', b: 'Minimal' },
+      { dim: 'Origin', a: 'Merck (MK-0677), 1990s', b: 'Characterized by Raun et al., 1998' },
+      { dim: 'Molecular weight', a: '528.7 Da', b: '711.9 Da' },
+      { dim: 'FDA approval', a: 'None (reached late-stage trials)', b: 'None' },
+      { dim: 'WADA status', a: 'Prohibited (S2)', b: 'Prohibited (S2)' },
+    ],
+    proseSections: [
+      {
+        title: 'The oral-versus-pulse trade-off',
+        paragraphs: [
+          'The defining fact about MK-677 (ibutamoren) is that it is not a peptide. It is a spiroindoline small molecule Merck designed in the 1990s to do orally what the injectable GHRP peptides do — activate the ghrelin receptor to release growth hormone. A single oral dose raises GH and IGF-1 for roughly 24 hours, which is the practical appeal and, simultaneously, the physiologic caveat: sustained ghrelin-receptor tone raises baseline IGF-1 and blunts the natural pulsatility of the GH axis, and — because it mimics ghrelin — it tends to increase appetite and can nudge cortisol, blood glucose, and water retention.',
+          'Ipamorelin is the opposite design. It is a selective pentapeptide that produces a short, discrete GH pulse and, unlike earlier GHRPs, releases GH with minimal effect on ACTH, cortisol, or prolactin (Raun et al., 1998). It has to be injected and it acts briefly — but that brevity preserves the pulsatile pattern the body uses, and its clean receptor profile is studied as more sustainable over repeated exposure. So the choice is a genuine trade-off: oral convenience and all-day elevation versus injectable, selective, pulse-preserving release.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These are not interchangeable. MK-677 is the tool when oral dosing and sustained GH/IGF-1 elevation are the point — accepting increased appetite and a blunted pulse; ipamorelin is the tool when selectivity and a physiologic, pulsatile signal matter — accepting the need to inject. One is a non-peptide catalogued alongside the peptides for its shared mechanism; the other is the reference selective GHRP. Neither is FDA-approved, and both are prohibited in sport.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between MK-677 and ipamorelin?', a: 'Both activate the same ghrelin receptor (GHS-R1a) to release growth hormone, but MK-677 (ibutamoren) is an oral non-peptide small molecule that elevates GH and IGF-1 for about 24 hours, while ipamorelin is a selective injectable pentapeptide that produces a short GH pulse with minimal cortisol or prolactin.' },
+      { q: 'Is MK-677 a peptide?', a: 'No. MK-677 is a small molecule (a spiroindoline), not a peptide. It is grouped with the GH peptides because it shares their ghrelin-receptor mechanism and is used the same way — but chemically it belongs to a different class.' },
+      { q: 'Which is more physiologic?', a: 'Ipamorelin. Its short half-life produces a discrete pulse that preserves the natural GH rhythm, whereas MK-677’s all-day elevation raises baseline IGF-1 and blunts pulsatility. MK-677 also raises appetite because it mimics ghrelin.' },
+      { q: 'Are either FDA-approved?', a: 'No. MK-677 reached late-stage clinical trials (for example in older adults and hip-fracture recovery) without approval; ipamorelin is a research compound. Both are prohibited in sport. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['growth-hormone-axis'],
+    about: [
+      { name: 'MK-677', alternateName: 'Ibutamoren' },
+      { name: 'Ipamorelin' },
+    ],
+  },
+  {
+    slug: 'tesamorelin-vs-cjc-1295',
+    aSlug: 'tesamorelin',
+    bSlug: 'cjc-1295-with-dac',
+    aName: 'Tesamorelin',
+    bName: 'CJC-1295',
+    aPill: 'GHRH(1-44) · FDA approved',
+    bPill: 'GHRH(1-29) analog · research',
+    metaTitle:
+      'Tesamorelin vs CJC-1295 — The Approved GHRH Analog vs the Research One | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of tesamorelin (Egrifta, the only FDA-approved GHRH analog) and CJC-1295 — full-length GHRH(1-44) with Phase 3 visceral-fat data vs a modified GHRH(1-29) research compound, with or without DAC. Cited.',
+    keywords: [
+      'tesamorelin vs CJC-1295',
+      'GHRH analog comparison',
+      'tesamorelin Egrifta',
+      'CJC-1295 DAC',
+      'visceral fat peptide',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GH Peptides', href: '/gh-peptides' },
+    headline: 'the approved GHRH analog versus the research one',
+    intro: [
+      'Tesamorelin and CJC-1295 are both GHRH-receptor agonists that prompt the pituitary to release the body’s own growth hormone. One is an FDA-approved drug with a specific indication and Phase 3 evidence; the other is a research compound built on a shorter GHRH fragment. That difference — approved-and-characterized versus research-grade — is the real story.',
+    ],
+    atAGlance: [
+      { dim: 'Class', a: 'Stabilized GHRH(1-44) analog', b: 'Modified GHRH(1-29) analog (Mod GRF 1-29)' },
+      { dim: 'Receptor', a: 'GHRH receptor (GHRHR)', b: 'GHRH receptor (GHRHR)' },
+      { dim: 'Key modification', a: 'N-terminal trans-3-hexenoic acid on full-length GHRH(1-44)', b: 'Four DPP-4-resistant substitutions ± albumin-binding DAC' },
+      { dim: 'Duration / dosing', a: 'Short-acting — dosed daily (SC)', b: 'No DAC: ~30 min pulse · with DAC: ~6–8 days' },
+      { dim: 'GH release pattern', a: 'Prompts endogenous, feedback-preserving GH', b: 'Pulsatile (no DAC) / sustained, blunted pulse (DAC)' },
+      { dim: 'Approval status', a: 'FDA approved (Egrifta, 2010)', b: 'None — research compound' },
+      { dim: 'Approved indication', a: 'Excess visceral fat in HIV-associated lipodystrophy', b: '—' },
+      { dim: 'Evidence base', a: 'Completed Phase 3 trials', b: 'Human PK plus preclinical / anecdotal' },
+      { dim: 'Molecular weight', a: '5135.9 Da', b: '~3.6 kDa (with DAC)' },
+      { dim: 'Commonly paired with', a: 'Studied as monotherapy (approved)', b: 'A GHRP (e.g. ipamorelin)' },
+    ],
+    proseSections: [
+      {
+        title: 'Full-length and approved vs truncated and research',
+        paragraphs: [
+          'Tesamorelin is a stabilized analog of the full 44-residue GHRH sequence, capped at the N-terminus with a trans-3-hexenoic acid group that protects it from rapid breakdown. It is short-acting and dosed daily — but it is the only GHRH analog to carry an FDA approval, granted in 2010 (Egrifta) to reduce excess visceral abdominal fat in people with HIV-associated lipodystrophy, backed by completed Phase 3 trials. Because it stimulates the pituitary to release endogenous GH, it preserves more of the body’s natural feedback than exogenous GH would.',
+          'CJC-1295 starts from a shorter piece — the first 29 residues of GHRH — with four substitutions that resist DPP-4. On its own (no DAC) it produces a brief, ~30-minute pulse; with the Drug Affinity Complex, it binds albumin and stretches to a 6–8-day half-life, trading pulsatility for sustained elevation. It is a research compound: its human evidence is largely pharmacokinetic, and it is typically studied alongside a GHRP rather than as a standalone therapy. So beyond the shared receptor, the two diverge on the thing that matters most for a reference — the depth and grade of the evidence behind them.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Both raise endogenous GH through the GHRH receptor, but they sit on opposite sides of the evidence line. Tesamorelin is an approved drug with a defined indication, a known structure, and Phase 3 data — the reference point for what a characterized GHRH analog looks like. CJC-1295 is a research compound on a truncated backbone whose main appeal is the multi-day duration the DAC provides; its evidence is thinner and it is not approved. For research framing, tesamorelin is the benchmark and CJC-1295 the experimental tool.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between tesamorelin and CJC-1295?', a: 'Both are GHRH-receptor agonists that stimulate the pituitary to release growth hormone. Tesamorelin is a stabilized full-length GHRH(1-44) analog and the only FDA-approved GHRH analog (Egrifta, for HIV-associated visceral fat). CJC-1295 is a modified GHRH(1-29) research compound that, with a Drug Affinity Complex (DAC), can last 6–8 days.' },
+      { q: 'Is tesamorelin FDA-approved?', a: 'Yes — as Egrifta (2010), to reduce excess visceral abdominal fat in people with HIV-associated lipodystrophy. CJC-1295 is not FDA-approved for any use.' },
+      { q: 'Which lasts longer?', a: 'CJC-1295 with DAC lasts far longer (6–8 days) than tesamorelin, which is short-acting and dosed daily. Longer duration is not automatically better: sustained GHRH exposure blunts the natural pulsatility of the GH axis, whereas tesamorelin’s daily dosing better preserves it.' },
+      { q: 'Why is CJC-1295 paired with a GHRP?', a: 'GHRH analogs and GHRPs (like ipamorelin) act on different receptors on the same pituitary cells; combining them is studied for synergistic GH release. Tesamorelin, as an approved drug, is used as monotherapy in its indication. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['growth-hormone-axis'],
+    about: [
+      { name: 'Tesamorelin', alternateName: 'Egrifta' },
+      { name: 'CJC-1295' },
+    ],
+  },
+  {
+    slug: 'pt-141-vs-melanotan-2',
+    aSlug: 'pt-141',
+    bSlug: 'melanotan-2',
+    aName: 'PT-141',
+    bName: 'Melanotan II',
+    aPill: 'MC4R-preferential · FDA approved',
+    bPill: 'Non-selective MC1–5R · unapproved',
+    metaTitle:
+      'PT-141 vs Melanotan II — The Libido Metabolite vs the Tanning Peptide | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of PT-141 (bremelanotide) and Melanotan II — how the FDA-approved MC4R agonist for desire was literally derived from the non-selective tanning peptide, and what a single C-terminal change did to selectivity. Cited.',
+    keywords: [
+      'PT-141 vs melanotan 2',
+      'bremelanotide vs melanotan II',
+      'melanocortin agonist comparison',
+      'PT-141 metabolite melanotan',
+      'MC4R vs MC1R',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Melanocortin Peptides', href: '/melanocortin' },
+    headline: 'the same core peptide, one refined toward desire',
+    intro: [
+      'PT-141 and Melanotan II are not rivals so much as parent and offspring: bremelanotide (PT-141) is the active metabolite of Melanotan II, and the story of how one became the other is a lesson in what receptor selectivity buys you. One is FDA-approved for sexual desire; the other is an unapproved, non-selective tanning peptide.',
+    ],
+    atAGlance: [
+      { dim: 'Structure', a: 'Cyclic heptapeptide, C-terminal free acid (-OH)', b: 'Cyclic heptapeptide, C-terminal amide (-NH2)' },
+      { dim: 'Relationship', a: 'Active metabolite of Melanotan II', b: 'The parent compound' },
+      { dim: 'Receptor profile', a: 'MC4R-preferential', b: 'Non-selective: MC1R / MC3R / MC4R / MC5R' },
+      { dim: 'Primary effect', a: 'Central sexual arousal (MC4R)', b: 'Pigmentation (MC1R) + MC4R central effects' },
+      { dim: 'Tanning activity', a: 'Not the target (refined away from MC1R)', b: 'Yes — its best-known use' },
+      { dim: 'FDA status', a: 'Approved (Vyleesi, 2019, HSDD in premenopausal women)', b: 'Not approved' },
+      { dim: 'Known side effects', a: 'Nausea, flushing, transient BP rise', b: 'Nausea, flushing, spontaneous erections, mole/freckle darkening' },
+      { dim: 'Origin', a: 'Palatin Technologies (Molinoff / Diamond et al., 2003)', b: 'University of Arizona' },
+    ],
+    proseSections: [
+      {
+        title: 'How a tanning peptide became a desire drug',
+        paragraphs: [
+          'Melanotan II was developed at the University of Arizona as a non-selective α-MSH analog — it activates all four melanocortin receptors from MC1R to MC5R. Through MC1R it drives pigmentation, which is what it became known for; but through MC4R it also acts on central sexual-response circuits, and in early human studies that MC4R activity showed up as spontaneous erections alongside nausea and flushing. Those “side effects” were the clue: the arousal signal could be separated from the tan.',
+          'PT-141 (bremelanotide) is what that separation looks like chemically. It is the active metabolite of Melanotan II, differing by a single change at the C-terminus — an amide (-NH2) replaced by a free acid (-OH) — which shifts the molecule’s preference toward MC4R and away from the MC1R-driven pigmentation. Refined that way and developed for central arousal, it became FDA-approved (Vyleesi, 2019) for hypoactive sexual desire disorder in premenopausal women. Melanotan II, non-selective and carrying the pigmentation and off-target effects that selectivity removes, never gained approval.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'This is a textbook case of selectivity turning a research peptide into an approved drug. Melanotan II is the non-selective parent — pigmentation plus MC4R effects plus the off-target profile that comes with hitting every melanocortin receptor. PT-141 is the MC4R-preferential metabolite, refined toward sexual desire and cleaned up enough to reach approval for a specific indication. They share a core structure, but only one is a characterized, approved medicine; the other remains an unapproved, gray-market compound. This page is a research and educational reference, not a usage recommendation.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between PT-141 and Melanotan II?', a: 'Melanotan II is a non-selective melanocortin agonist (MC1R–MC5R) best known for pigmentation, and it is not approved. PT-141 (bremelanotide) is its active metabolite, refined toward the MC4R receptor and central sexual arousal, and it is FDA-approved as Vyleesi for hypoactive sexual desire disorder in premenopausal women.' },
+      { q: 'Is PT-141 really derived from Melanotan II?', a: 'Yes. Bremelanotide (PT-141) is the active metabolite of Melanotan II, differing by a single C-terminal change — an amide replaced by a free acid — which shifts its receptor preference toward MC4R and away from the MC1R pigmentation activity. Its development followed the observation that Melanotan II produced arousal effects via MC4R.' },
+      { q: 'Does PT-141 cause tanning?', a: 'Tanning is not its purpose. PT-141 is refined toward MC4R and away from the MC1R activity that drives pigmentation, so it is studied and approved for sexual desire rather than as a tanning agent. Melanotan II is the non-selective one that produces the tan.' },
+      { q: 'Is either FDA-approved?', a: 'PT-141 (bremelanotide) is FDA-approved as Vyleesi (2019). Melanotan II is not approved. This page is a research and educational reference, not medical advice or a usage recommendation.' },
+    ],
+    relatedAreas: ['sexual-reproductive', 'skin-hair'],
+    about: [
+      { name: 'PT-141', alternateName: 'Bremelanotide' },
+      { name: 'Melanotan II', alternateName: 'MT-II' },
+    ],
+  },
+  {
+    slug: 'bpc-157-vs-ghk-cu',
+    aSlug: 'bpc-157',
+    bSlug: 'ghk-cu',
+    aName: 'BPC-157',
+    bName: 'GHK-Cu',
+    aPill: 'Gastric pentadecapeptide · systemic repair',
+    bPill: 'Copper tripeptide · skin & ECM',
+    metaTitle:
+      'BPC-157 vs GHK-Cu — Systemic Tissue Repair vs Copper-Peptide Skin Remodeling | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of BPC-157 and GHK-Cu — two of the most-searched “repair” peptides that work through different mechanisms (angiogenesis/NO vs copper delivery and ECM remodeling) on different tissue. Cited, research-grade.',
+    keywords: [
+      'BPC-157 vs GHK-Cu',
+      'copper peptide vs BPC-157',
+      'repair peptide comparison',
+      'GHK-Cu skin',
+      'BPC-157 tissue repair',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Healing & Repair', href: '/catalog/category/healing-repair' },
+    headline: 'systemic repair versus skin & matrix remodeling',
+    intro: [
+      'BPC-157 and GHK-Cu are often grouped under “recovery” or “regeneration,” but they are quite different molecules doing different jobs in different tissue — a systemic injury-repair peptide versus a copper-carrying skin and matrix signal. Grouping them by outcome hides how little they share by mechanism.',
+    ],
+    atAGlance: [
+      { dim: 'Structure', a: '15-aa pentadecapeptide (gastric-derived)', b: 'Copper-bound tripeptide (Gly-His-Lys)' },
+      { dim: 'Primary mechanism', a: 'VEGFR2–Akt–eNOS angiogenesis + nitric-oxide signaling', b: 'Copper delivery + ECM-remodeling gene modulation' },
+      { dim: 'Target tissue', a: 'Tendon, ligament, muscle, GI tract (systemic)', b: 'Skin, extracellular matrix, hair follicle' },
+      { dim: 'Typical route (research)', a: 'Injected / oral (systemic)', b: 'Topical / local (also injectable)' },
+      { dim: 'Best-studied for', a: 'Musculoskeletal and gut repair', b: 'Collagen / elastin synthesis, wound healing, skin aging' },
+      { dim: 'Evidence base', a: 'Preclinical (largely rodent, one main group); no controlled human trials', b: 'Extensive dermatologic / cosmetic literature, incl. human topical data' },
+      { dim: 'Status', a: 'Research compound — not FDA-approved', b: 'Cosmetic ingredient (Copper Tripeptide-1) / research' },
+      { dim: 'Molecular weight', a: '1419.5 Da', b: '401.9 Da' },
+    ],
+    columnSections: [
+      {
+        title: 'Two different repair mechanisms',
+        columns: [
+          {
+            heading: 'BPC-157 — perfusion-led',
+            accent: 'a',
+            points: [
+              'Attributed to VEGFR2–Akt–eNOS activation → nitric-oxide-dependent angiogenesis',
+              'Studied for new-vessel formation in poorly vascularized tissue like tendon',
+              'Cytoprotective effects prominent in gastrointestinal models',
+              'Acts systemically — the interest is injury repair, not cosmetics',
+            ],
+          },
+          {
+            heading: 'GHK-Cu — matrix-led',
+            accent: 'b',
+            points: [
+              'Carries copper(II), a cofactor for matrix-remodeling and antioxidant enzymes',
+              'Modulates collagen, elastin, glycosaminoglycan and decorin synthesis',
+              'Studied for wound healing, skin aging, and hair-follicle biology',
+              'Predominantly topical / local — the reference “copper peptide”',
+            ],
+          },
+        ],
+      },
+    ],
+    proseSections: [
+      {
+        title: 'Different molecules, different evidence',
+        paragraphs: [
+          'BPC-157 is a 15-residue peptide derived from a protective protein in gastric juice, studied as a systemic pro-angiogenic and cytoprotective agent — its repair effects are attributed largely to the VEGFR2–Akt–eNOS pathway and nitric-oxide signaling, with the most-replicated results in tendon, ligament, and gastrointestinal models. The honest caveat is evidence quality: essentially all of it is preclinical, much from a single research group, with no controlled human trials.',
+          'GHK-Cu is a different kind of molecule and a different kind of literature. It is the copper complex of the tripeptide glycyl-histidyl-lysine, first isolated from human plasma in 1973, and it works by delivering copper and shifting the expression of extracellular-matrix and antioxidant genes. Its evidence is concentrated in dermatology and cosmetics — including human topical data — where it is a reference “copper peptide” (INCI Copper Tripeptide-1) for collagen support, wound healing, and skin aging. So the two overlap only at the vaguest level (“repair”): one is a systemic injury peptide with thin human data, the other a topical skin/matrix signal with a deeper cosmetic record.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These are complementary tools for different questions, not substitutes. BPC-157 is studied for systemic tissue and gut repair through angiogenesis and nitric-oxide signaling, with a preclinical-only evidence base. GHK-Cu is the reference copper peptide for skin and extracellular-matrix remodeling, with a much deeper dermatologic and cosmetic literature. Neither is an FDA-approved drug — GHK-Cu is a cosmetic ingredient, BPC-157 a research compound — and grouping them as one “recovery” category obscures how differently they act. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between BPC-157 and GHK-Cu?', a: 'BPC-157 is a 15-amino-acid peptide studied for systemic tissue repair — tendon, ligament, and gut — through angiogenesis (the VEGFR2–Akt–eNOS pathway) and nitric-oxide signaling. GHK-Cu is a copper-bound tripeptide studied for skin and extracellular-matrix remodeling (collagen, elastin) and wound healing. Different structures, mechanisms, and target tissue.' },
+      { q: 'Are BPC-157 and GHK-Cu used together?', a: 'Because they act on different tissue by different mechanisms, they are sometimes discussed together in “recovery” contexts, but there is no controlled human data on the combination. This page is a research reference, not a protocol.' },
+      { q: 'Which has stronger evidence?', a: 'They have different kinds of evidence. GHK-Cu has an extensive dermatologic and cosmetic literature, including human topical studies. BPC-157’s evidence is almost entirely preclinical (mostly rodent, much from a single group), with no controlled human trials. Neither is an approved drug.' },
+      { q: 'Is either FDA-approved?', a: 'No. BPC-157 is a research compound and is not FDA-approved for any use. GHK-Cu is used as a cosmetic ingredient (Copper Tripeptide-1), not an approved drug. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['wound-healing', 'skin-hair'],
+    about: [
+      { name: 'BPC-157', alternateName: 'Body Protective Compound 157' },
+      { name: 'GHK-Cu', alternateName: 'Copper Tripeptide-1' },
+    ],
+  },
 ]
 
 export const COMPARISON_BY_SLUG: Record<string, Comparison> = Object.fromEntries(
