@@ -5,9 +5,9 @@
 // tier, a scope note, and a provenance record. Nothing ships as a bare number.
 //
 // This module MIRRORS peptidehormone's src/lib/evidence/types.ts — same schema,
-// same weights, same helpers. Keep the two in sync (like lib/network.ts's
-// slug-mirrors). Only the comments below and the presentational token mapping in
-// components/evidence/tierStyles.ts are property-specific.
+// same weights, same helpers. Keep the two in sync. Only the comments below and
+// the presentational token mapping in components/evidence/tierStyles.ts are
+// property-specific.
 //
 // CORE PRINCIPLE — tier the CLAIM, not the compound. A molecule is never
 // "tier 3": its molecular weight is `reference`, its rodent half-life is
