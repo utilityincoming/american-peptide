@@ -467,15 +467,24 @@ export default function MadeInUsaPage() {
                                   </ul>
                                 )}
 
-                                <a
-                                  href={vendorHref(v)}
-                                  target="_blank"
-                                  rel="sponsored nofollow noopener"
-                                  className="inline-flex items-center gap-1.5 rounded-lg bg-[#2DD4A8] px-4 py-2 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
-                                >
-                                  Visit {v.name}
-                                  <ArrowUpRight className="h-4 w-4" />
-                                </a>
+                                <div className="flex flex-wrap items-center gap-3">
+                                  <a
+                                    href={vendorHref(v)}
+                                    target="_blank"
+                                    rel="sponsored nofollow noopener"
+                                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#2DD4A8] px-4 py-2 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+                                  >
+                                    Visit {v.name}
+                                    <ArrowUpRight className="h-4 w-4" />
+                                  </a>
+                                  <Link
+                                    href={`/vendors/${v.id}`}
+                                    className="inline-flex items-center gap-1.5 text-sm font-medium text-accent/80 transition-colors hover:text-accent"
+                                  >
+                                    Read the full review
+                                    <ArrowRight className="h-3.5 w-3.5" />
+                                  </Link>
+                                </div>
 
                                 {v.notes && (
                                   <p className="mt-3 flex items-start gap-1.5 text-[11px] leading-relaxed text-amber-400/70">

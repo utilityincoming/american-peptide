@@ -8,6 +8,7 @@ import Link from 'next/link'
 const LINKS = [
   { href: '/', label: 'Home' },
   { href: '/us-peptides', label: 'Buy Peptides' },
+  { href: '/vendors', label: 'Vendor Reviews' },
   { href: '/compounds', label: 'Compounds' },
   { href: '/tools/calculator-beta', label: 'Peptide Calculator Beta' },
   { href: '/developers', label: 'Developers / API' },
