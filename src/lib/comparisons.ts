@@ -1615,6 +1615,260 @@ export const COMPARISONS: Comparison[] = [
       { name: 'Tirzepatide', alternateName: 'Zepbound' },
     ],
   },
+  {
+    slug: 'ghrp-2-vs-ghrp-6',
+    aSlug: 'ghrp-2',
+    bSlug: 'ghrp-6',
+    aName: 'GHRP-2',
+    bName: 'GHRP-6',
+    aPill: 'GHRP · potent · Japan-approved dx',
+    bPill: 'GHRP · the original · appetite',
+    metaTitle:
+      'GHRP-2 vs GHRP-6 — Potency vs Appetite, the Two Classic GHRPs | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of GHRP-2 (pralmorelin) and GHRP-6 — both hexapeptide ghrelin-receptor GH secretagogues, but GHRP-2 is the more potent, less-hunger successor while GHRP-6 is the original that led to the discovery of ghrelin. Cited.',
+    keywords: [
+      'GHRP-2 vs GHRP-6',
+      'GHRP comparison',
+      'pralmorelin',
+      'GHRP-6 appetite',
+      'growth hormone releasing peptide',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GH Peptides', href: '/gh-peptides' },
+    headline: 'the potent successor versus the original',
+    intro: [
+      'GHRP-2 and GHRP-6 are the two classic “numbered” growth-hormone-releasing peptides — both hexapeptides on the same ghrelin receptor, one generation apart. GHRP-6 came first and made history; GHRP-2 was tuned from it for more growth hormone and less hunger. Choosing between them is really choosing what you want the ghrelin arm to do.',
+    ],
+    atAGlance: [
+      { dim: 'Generation', a: 'Second-generation (refined from GHRP-6)', b: 'First-generation (the original GHRP)' },
+      { dim: 'Receptor', a: 'GHS-R1a (ghrelin receptor)', b: 'GHS-R1a (ghrelin receptor)' },
+      { dim: 'GH potency', a: 'Higher — more GH per dose', b: 'Lower than GHRP-2' },
+      { dim: 'Appetite stimulation', a: 'Modest', b: 'Strong — its hallmark effect' },
+      { dim: 'Cortisol / prolactin', a: 'Can rise at higher doses (less selective than ipamorelin)', b: 'Can rise (least selective of the family)' },
+      { dim: 'Regulatory status', a: 'Approved in Japan as a GH-deficiency diagnostic (pralmorelin)', b: 'None — research compound' },
+      { dim: 'Historical role', a: 'Refined successor', b: 'The probe that led to cloning GHS-R1a (1996) and discovering ghrelin (1999)' },
+      { dim: 'Chain', a: '6 aa (hexapeptide)', b: '6 aa (hexapeptide)' },
+      { dim: 'Molecular weight', a: '818.0 Da', b: '873.0 Da' },
+      { dim: 'FDA approval', a: 'None (US)', b: 'None' },
+    ],
+    proseSections: [
+      {
+        title: 'Same receptor, one generation apart',
+        paragraphs: [
+          'GHRP-6 is where this entire class begins. Developed out of Cyril Bowers’ work on enkephalin-derived peptides, it was among the first compounds shown to release growth hormone through a receptor separate from GHRH — an orphan receptor whose natural ligand was unknown. GHRP-6 became the pharmacological probe used to find it: the hunt led to cloning the GH-secretagogue receptor (GHS-R1a) in 1996 and, in 1999, to identifying its endogenous ligand, the hunger hormone ghrelin. That lineage is why GHRP-6’s signature effect is appetite — it is, in effect, a synthetic mimic of a hormone discovered only afterward, and it provokes the sharpest hunger of the family.',
+          'GHRP-2 (pralmorelin) is the engineered successor. It keeps the same ghrelin-receptor mechanism but was tuned for more growth hormone per dose and markedly less of GHRP-6’s hunger — and it went further than almost any GHRP toward legitimacy, earning approval in Japan as a single-injection diagnostic for pituitary GH reserve. Both remain less selective than ipamorelin, and at higher doses each can nudge cortisol and prolactin. So the practical split is clear: GHRP-2 for a stronger, cleaner GH signal; GHRP-6 when the ghrelin-like appetite effect is itself the point (or the object of study).',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'GHRP-2 is the more useful GH secretagogue of the two — more potent, much less hunger, and the only one with a regulatory approval anywhere (Japan, as a diagnostic). GHRP-6 is historically the more important molecule, the probe that opened up the ghrelin system, and it remains the reference when the appetite effect matters. Neither is FDA-approved, both are less selective than ipamorelin, and both are commonly studied alongside a GHRH analog for complementary, pulse-preserving release. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between GHRP-2 and GHRP-6?', a: 'Both are hexapeptide GHRPs that release growth hormone via the ghrelin receptor. GHRP-2 (pralmorelin) is the more potent, more refined successor — more GH per dose and much less appetite stimulation — and is an approved diagnostic in Japan. GHRP-6 is the original, less potent, and causes the strongest hunger of the family.' },
+      { q: 'Which causes more hunger?', a: 'GHRP-6, by a wide margin. Its strong, ghrelin-like appetite stimulation is its hallmark effect; GHRP-2 was specifically tuned to release GH with much less of that hunger.' },
+      { q: 'Why is GHRP-6 historically important?', a: 'GHRP-6 was the pharmacological probe used to identify the GH-secretagogue receptor (GHS-R1a, cloned 1996) and its natural ligand, ghrelin (1999) — a discovery that reframed GHRP-6 as a synthetic mimic of a hormone found only afterward.' },
+      { q: 'Are either FDA-approved?', a: 'No. GHRP-2 is approved in Japan as a diagnostic (pralmorelin) but not by the FDA; GHRP-6 is a research compound. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['growth-hormone-axis'],
+    about: [
+      { name: 'GHRP-2', alternateName: 'Pralmorelin' },
+      { name: 'GHRP-6' },
+    ],
+  },
+  {
+    slug: 'dihexa-vs-semax',
+    aSlug: 'dihexa',
+    bSlug: 'semax',
+    aName: 'Dihexa',
+    bName: 'Semax',
+    aPill: 'Angiotensin IV–derived · HGF/c-Met',
+    bPill: 'ACTH(4-10) analog · BDNF',
+    metaTitle:
+      'Dihexa vs Semax — Synaptogenesis vs Neurotrophic Induction | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of dihexa and Semax — two very different nootropic peptides: dihexa is a potent angiotensin-IV–derived synaptogenic compound (HGF/c-Met) with little human data, while Semax is an ACTH(4-10) analog with decades of Russian clinical use. Cited.',
+    keywords: [
+      'dihexa vs semax',
+      'nootropic peptide comparison',
+      'dihexa synaptogenesis',
+      'semax BDNF',
+      'cognitive peptide',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Cognitive Peptides', href: '/cognitive-peptides' },
+    headline: 'raw synaptogenic potency versus a proven neuropeptide',
+    intro: [
+      'Dihexa and Semax are both studied for cognition, but they sit at opposite ends of the risk/evidence spectrum. Dihexa is an engineered compound with an extraordinary potency claim and almost no human data; Semax is a neuropeptide with decades of clinical use behind it, in one country. The contrast is as much about evidence as mechanism.',
+    ],
+    atAGlance: [
+      { dim: 'Origin', a: 'Engineered from angiotensin IV (WSU, Harding lab)', b: 'ACTH(4-10) analog (Russia)' },
+      { dim: 'Mechanism', a: 'Potentiates HGF signaling at c-Met → synaptogenesis', b: 'Induces BDNF / NGF; melanocortin signaling, no HPA activation' },
+      { dim: 'Signature claim', a: 'Synaptogenesis orders of magnitude beyond BDNF (preclinical)', b: 'Neurotrophic induction + monoaminergic tone' },
+      { dim: 'Typical route (research)', a: 'Oral (designed for it)', b: 'Intranasal' },
+      { dim: 'Clinical use', a: 'None — early-stage', b: 'Approved in Russia (stroke, cognition, optic-nerve disease)' },
+      { dim: 'Evidence base', a: 'Preclinical only; human safety uncharacterized', b: 'Decades of Russian clinical use; limited Western replication' },
+      { dim: 'FDA approval', a: 'None', b: 'None' },
+    ],
+    proseSections: [
+      {
+        title: 'A potent unknown versus a used-but-under-replicated peptide',
+        paragraphs: [
+          'Dihexa came out of Joseph Harding’s group at Washington State University, engineered from angiotensin IV — a blood-pressure-hormone fragment that unexpectedly supported learning and memory — into a stabilized, orally active, brain-penetrant molecule. Its headline is potency: in the original preclinical assays it promoted new synapse formation at concentrations orders of magnitude below BDNF, working through the hepatocyte growth factor (HGF) / c-Met pathway rather than a classic neurotransmitter system. That is exactly what makes it interesting — and exactly why its safety is a genuine open question: a small molecule that powerfully drives cell-growth signaling has essentially no human characterization.',
+          'Semax is the opposite profile. A heptapeptide analog of ACTH(4-10), it induces neurotrophic factors (BDNF, NGF, trkB) and modulates dopaminergic and serotonergic tone without activating the stress (HPA) axis, and it has been used clinically in Russia for stroke, cognitive impairment, and optic-nerve disease for decades. Its weakness is not safety experience but replication: most controlled data are Russian-language, with limited independent Western confirmation. So the choice is a real trade-off — Semax offers a longer human track record with a thinner Western evidence base; dihexa offers a striking mechanism and potency with almost no human data at all.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These are not interchangeable, and the honest differentiator is evidence, not just mechanism. Semax is a neuropeptide with a long (if geographically narrow) clinical history and a neurotrophic-induction mechanism; dihexa is an early-stage synaptogenic compound with a remarkable preclinical potency claim via HGF/c-Met and an essentially uncharacterized human safety profile. Neither is FDA-approved. For a research reference, Semax is the better-documented of the two, and dihexa the more experimental. This page is a research and educational reference, not medical advice.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between dihexa and Semax?', a: 'Dihexa is an engineered, orally active peptidomimetic derived from angiotensin IV that promotes synapse formation through the HGF / c-Met pathway, with very high preclinical potency but almost no human data. Semax is an ACTH(4-10) analog that induces neurotrophic factors (BDNF, NGF) and is used clinically in Russia for stroke and cognition. Different mechanisms, and very different amounts of human experience.' },
+      { q: 'Which has more evidence in humans?', a: 'Semax — it has been used clinically in Russia for decades for stroke and cognitive disorders, though most controlled data are Russian-language with limited Western replication. Dihexa’s evidence is preclinical, and its human safety is essentially uncharacterized.' },
+      { q: 'Is dihexa safe?', a: 'Its safety in humans is not established. Dihexa is an early-stage research compound that potently drives cell-growth (HGF / c-Met) signaling, and it has not been characterized in controlled human studies. Neither dihexa nor Semax is FDA-approved.' },
+      { q: 'How do their mechanisms differ?', a: 'Dihexa is proposed to work by potentiating hepatocyte growth factor (HGF) signaling at the c-Met receptor to drive synaptogenesis. Semax induces neurotrophic factors (BDNF, NGF) and modulates monoaminergic tone without activating the stress axis. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['cognition-neuroprotection'],
+    about: [
+      { name: 'Dihexa', alternateName: 'PNB-0408' },
+      { name: 'Semax' },
+    ],
+  },
+  {
+    slug: 'cerebrolysin-vs-semax',
+    aSlug: 'cerebrolysin',
+    bSlug: 'semax',
+    aName: 'Cerebrolysin',
+    bName: 'Semax',
+    aPill: 'Porcine neurotrophic mixture · approved abroad',
+    bPill: 'ACTH(4-10) peptide · Russia',
+    metaTitle:
+      'Cerebrolysin vs Semax — A Neurotrophic Mixture vs a Single Neuropeptide | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of Cerebrolysin and Semax — both neuroprotective and used clinically outside the US for stroke, but Cerebrolysin is an injectable porcine-brain peptide mixture that mimics neurotrophic factors, while Semax is a single intranasal ACTH(4-10) peptide that induces them. Cited.',
+    keywords: [
+      'cerebrolysin vs semax',
+      'neuroprotective peptide comparison',
+      'cerebrolysin stroke',
+      'semax nootropic',
+      'neurotrophic peptide',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Cognitive Peptides', href: '/cognitive-peptides' },
+    headline: 'a neurotrophic mixture versus a single neuropeptide',
+    intro: [
+      'Cerebrolysin and Semax are both neuroprotective agents used clinically outside the United States — often for the same indication, stroke recovery — but they could hardly be more different as molecules. One is a defined mixture of many brain-derived fragments; the other is a single seven-residue peptide. And they approach neurotrophic support from opposite directions.',
+    ],
+    atAGlance: [
+      { dim: 'What it is', a: 'Standardized porcine-brain peptide/amino-acid mixture', b: 'Single synthetic heptapeptide (ACTH(4-10) analog)' },
+      { dim: 'Composition', a: '~15% low-MW peptides + ~85% free amino acids', b: 'One defined sequence (MEHFPGP)' },
+      { dim: 'Neurotrophic approach', a: 'Mimics endogenous factors (BDNF, NGF, GDNF)', b: 'Induces the body to make BDNF / NGF' },
+      { dim: 'Route', a: 'Injectable (IV / IM)', b: 'Intranasal' },
+      { dim: 'Lead indications', a: 'Stroke, traumatic brain injury, dementia', b: 'Stroke, cognitive impairment, optic-nerve disease' },
+      { dim: 'Regulatory status', a: 'Approved in ~44 countries (not FDA)', b: 'Approved in Russia (not FDA)' },
+      { dim: 'Molecular identity', a: 'No single formula — a defined mixture', b: '7-aa peptide' },
+      { dim: 'FDA approval', a: 'None (US)', b: 'None (US)' },
+    ],
+    proseSections: [
+      {
+        title: 'Supply the factors, or trigger them',
+        paragraphs: [
+          'Cerebrolysin is one of the few entries here that is not a single peptide at all but a defined biological mixture — low-molecular-weight neuropeptides (about 15%) and free amino acids (about 85%), produced by controlled enzymatic breakdown of purified pig-brain proteins and standardized by peptide-nitrogen content. Its small peptide fraction can cross the blood–brain barrier, where it is proposed to reproduce, in part, the actions of the brain’s own neurotrophic factors — BDNF, NGF, GDNF. It has one of the largest clinical literatures of any nootropic, is delivered by injection, and is approved in roughly 44 countries for stroke, traumatic brain injury, and dementia.',
+          'Semax reaches a related goal from the other end. Rather than supplying neurotrophic-like material, this single ACTH(4-10) heptapeptide induces the body to raise its own BDNF and NGF, alongside monoaminergic effects, without activating the stress axis — and it is given intranasally. It is approved in Russia for stroke, cognitive impairment, and optic-nerve disease. So the mechanistic split is neat: Cerebrolysin is broad neurotrophic replacement in a syringe; Semax is targeted neurotrophic induction in a nasal spray. Both share the same caveat — used and approved abroad, but not FDA-approved, with Western controlled evidence that remains debated.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Two neuroprotective agents that meet at the same indications by different routes and different chemistry. Cerebrolysin is an injectable, broad porcine-brain neurotrophic mixture with a large but debated clinical literature and approval in dozens of countries; Semax is a single intranasal neuropeptide that induces the body’s own neurotrophic factors, approved in Russia. Neither is FDA-approved, and for both the honest limitation is the strength and independence of the controlled evidence. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between Cerebrolysin and Semax?', a: 'Cerebrolysin is a standardized mixture of small peptides and amino acids made from porcine brain, given by injection, that mimics neurotrophic factors like BDNF and NGF. Semax is a single synthetic ACTH(4-10) peptide, given intranasally, that induces the body to produce those factors. One supplies neurotrophic-like material; the other triggers it.' },
+      { q: 'Are they used for the same things?', a: 'They overlap — both are used abroad for stroke recovery and cognition. Cerebrolysin is also used for traumatic brain injury and dementia; Semax is also approved in Russia for optic-nerve disease. Neither is FDA-approved in the US.' },
+      { q: 'Is Cerebrolysin a peptide?', a: 'Not a single one — it is a defined biological mixture (about 15% low-molecular-weight peptides and 85% free amino acids), so it has no single sequence or molecular formula. Semax, by contrast, is one seven-residue peptide.' },
+      { q: 'Are either FDA-approved?', a: 'No. Cerebrolysin is approved in roughly 44 countries and Semax in Russia, but neither is FDA-approved in the United States. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['cognition-neuroprotection'],
+    about: [
+      { name: 'Cerebrolysin' },
+      { name: 'Semax' },
+    ],
+  },
+  {
+    slug: 'survodutide-vs-mazdutide',
+    aSlug: 'survodutide',
+    bSlug: 'mazdutide',
+    aName: 'Survodutide',
+    bName: 'Mazdutide',
+    aPill: 'Glucagon/GLP-1 · MASH · investigational',
+    bPill: 'Glucagon/GLP-1 · approved in China',
+    metaTitle:
+      'Survodutide vs Mazdutide — Two Glucagon/GLP-1 Dual Agonists Compared | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of survodutide (BI 456906) and mazdutide (IBI362) — the two leading glucagon/GLP-1 dual agonists. Same receptor pair, different molecular origins (engineered vs oxyntomodulin-based) and different status (MASH Breakthrough vs China-approved). Cited.',
+    keywords: [
+      'survodutide vs mazdutide',
+      'glucagon GLP-1 dual agonist comparison',
+      'BI 456906 vs IBI362',
+      'survodutide MASH',
+      'mazdutide China approval',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
+    headline: 'two roads to the same dual mechanism',
+    intro: [
+      'Survodutide and mazdutide are the two most advanced glucagon/GLP-1 dual agonists — the same receptor pairing, reached from different molecular starting points and carried by different companies to different milestones. One leads with fatty-liver disease; the other became the first of its class to win an approval anywhere.',
+    ],
+    atAGlance: [
+      { dim: 'Receptor targets', a: 'Glucagon-R + GLP-1R', b: 'Glucagon-R + GLP-1R' },
+      { dim: 'Molecular basis', a: 'Engineered acylated peptide (de novo)', b: 'Oxyntomodulin-based (natural dual hormone)' },
+      { dim: 'Developer', a: 'Boehringer Ingelheim / Zealand (BI 456906)', b: 'Eli Lilly / Innovent (IBI362)' },
+      { dim: 'Distinctive milestone', a: 'FDA Breakthrough Therapy for MASH', b: 'First GCG/GLP-1 dual approved anywhere (China, 2025)' },
+      { dim: 'Approval status', a: 'Investigational (Phase 3 SYNCHRONIZE)', b: 'Approved in China; investigational elsewhere' },
+      { dim: 'Weight data', a: 'Double-digit mean (Phase 2/3)', b: '~14.8% (GLORY-1, 6 mg, 48 wk; ~20% at 9 mg)' },
+      { dim: 'Lead emphasis', a: 'Liver (MASH) + obesity', b: 'Obesity + type 2 diabetes' },
+      { dim: 'Molecular weight', a: '4232 Da', b: '4476 Da' },
+      { dim: 'FDA approval', a: 'None', b: 'None (US)' },
+    ],
+    proseSections: [
+      {
+        title: 'Same receptors, different starting points',
+        paragraphs: [
+          'The two molecules aim at exactly the same target — pairing GLP-1’s appetite and glycemic effects with glucagon-driven energy expenditure and hepatic-fat mobilization — but they were built differently. Survodutide (BI 456906) is a de-novo engineered, acylated once-weekly peptide from Boehringer Ingelheim and Zealand Pharma. Mazdutide (IBI362) is built on oxyntomodulin, the natural gut hormone that already activates both the GLP-1 and glucagon receptors on its own, developed by Eli Lilly and licensed to Innovent for China.',
+          'Where they diverge most is the path each has taken. Survodutide’s standout is the liver: it holds FDA Breakthrough Therapy designation for MASH, and in a Phase 2 MASH trial (NEJM 2024) 62% of patients on the 4.8 mg dose achieved MASH improvement without worsening fibrosis versus 14% on placebo. Mazdutide’s standout is regulatory: on the strength of the Phase 3 GLORY-1 trial (~14.8% mean weight loss at 6 mg over 48 weeks, and about 20% at 9 mg), China’s NMPA approved it in 2025 — making it the first glucagon/GLP-1 dual agonist approved anywhere. Neither is FDA-approved, and no head-to-head trial between them exists.',
+        ],
+      },
+    ],
+    trials: [
+      { name: 'Survodutide MASH Phase 2', arm: 'Survodutide 4.8 mg', n: '293', duration: '48 wk', endpoint: 'MASH improvement, no worsening fibrosis', result: '62% vs 14% (placebo)', note: 'NEJM 2024; earned FDA Breakthrough Therapy designation' },
+      { name: 'GLORY-1', arm: 'Mazdutide 6 mg', n: '610', duration: '48 wk', endpoint: 'Mean body-weight change (Chinese adults)', result: '−14.8% vs −0.5% (placebo)', note: 'Basis for China NMPA approval; ~20% reported at 9 mg' },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These are close siblings in the same drug class, distinguished by origin and trajectory rather than by mechanism. Survodutide is the engineered peptide with the strongest fatty-liver (MASH) evidence and Breakthrough designation; mazdutide is the oxyntomodulin-based one that reached the market first, in China, on its obesity data. Both pair glucagon with GLP-1, both are once-weekly, and there is no head-to-head trial — so the comparison is one of program focus and status, not a settled efficacy ranking. Neither is FDA-approved. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between survodutide and mazdutide?', a: 'Both are once-weekly glucagon/GLP-1 dual agonists that pair GLP-1’s appetite and glycemic effects with glucagon-driven energy expenditure and liver-fat reduction. Survodutide (Boehringer Ingelheim/Zealand) is a de-novo engineered peptide with a lead MASH program; mazdutide (Lilly/Innovent) is built on the natural hormone oxyntomodulin and is approved in China.' },
+      { q: 'Is either approved?', a: 'Mazdutide is approved in China (NMPA, 2025) for weight management and type 2 diabetes — the first glucagon/GLP-1 dual approved anywhere. Survodutide is investigational (Phase 3). Neither is FDA-approved in the United States.' },
+      { q: 'Which is better for fatty liver (MASH)?', a: 'Survodutide has the more advanced dedicated liver program — a Phase 2 MASH trial (NEJM 2024) showed 62% MASH improvement without worsening fibrosis at 4.8 mg versus 14% on placebo, earning FDA Breakthrough Therapy designation. Mazdutide’s lead data are in obesity and diabetes.' },
+      { q: 'Have they been compared head-to-head?', a: 'No. There is no head-to-head trial between survodutide and mazdutide; their numbers come from separate studies in different populations, so they are not directly comparable. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['weight-loss'],
+    about: [
+      { name: 'Survodutide', alternateName: 'BI 456906' },
+      { name: 'Mazdutide', alternateName: 'IBI362' },
+    ],
+  },
 ]
 
 export const COMPARISON_BY_SLUG: Record<string, Comparison> = Object.fromEntries(
