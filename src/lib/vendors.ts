@@ -224,6 +224,72 @@ export function vendorTier(v: Vendor): VendorTier {
   return 'unvetted'
 }
 
+// ── Trust rubric (reader-facing) ────────────────────────────────────────────────
+// One description of what each point on the score MEANS, kept next to the weights
+// so page copy (the vendor-review scorecard, any explainer) can never drift from
+// the number a vendor actually earns. Points come straight from TRUST_WEIGHTS;
+// ordered high → low so the scorecard reads by what protects a buyer most.
+export type TrustSignalKey = keyof typeof TRUST_WEIGHTS
+
+export interface TrustRubricRow {
+  key: TrustSignalKey
+  label: string
+  /** Why this signal protects a researcher — positive-substance, no fear copy. */
+  body: string
+  pts: number
+  /** Palette hook so a segmented bar stays consistent with /us-peptides. */
+  color: string
+}
+
+export const TRUST_RUBRIC: TrustRubricRow[] = [
+  {
+    key: 'reshipPolicy',
+    label: 'Reship on loss',
+    body: 'A published policy for a package that arrives damaged or never arrives at all — the recourse that matters most when something goes wrong in transit.',
+    pts: TRUST_WEIGHTS.reshipPolicy,
+    color: '#FB923C',
+  },
+  {
+    key: 'refundPolicy',
+    label: 'Refund policy',
+    body: 'A stated money-back or returns policy you can actually hold them to, rather than an order that is final the moment it ships.',
+    pts: TRUST_WEIGHTS.refundPolicy,
+    color: '#F472B6',
+  },
+  {
+    key: 'thirdPartyTested',
+    label: 'Independent testing',
+    body: 'HPLC and mass spec run by an outside lab (Janoshik, MZ Biolabs) — not an in-house bench grading its own homework.',
+    pts: TRUST_WEIGHTS.thirdPartyTested,
+    color: '#38BDF8',
+  },
+  {
+    key: 'coaOnFile',
+    label: 'COA on file',
+    body: 'A certificate of analysis you can actually pull for the product — the paperwork, not a promise.',
+    pts: TRUST_WEIGHTS.coaOnFile,
+    color: '#2DD4A8',
+  },
+  {
+    key: 'perBatchTesting',
+    label: 'Per-batch, lot-matched',
+    body: 'Every batch tested and the certificate matched to your specific lot — not one reference batch reused forever.',
+    pts: TRUST_WEIGHTS.perBatchTesting,
+    color: '#818CF8',
+  },
+]
+
+/**
+ * The rubric evaluated for a specific vendor — each row plus whether this vendor
+ * earned it. Powers the review-page scorecard; the earned points sum to
+ * trustScore(v) by construction, so the two can never disagree.
+ */
+export function trustSignals(
+  v: Vendor,
+): (TrustRubricRow & { earned: boolean })[] {
+  return TRUST_RUBRIC.map((r) => ({ ...r, earned: Boolean(v.trust[r.key]) }))
+}
+
 // ── Data ──────────────────────────────────────────────────────────────────────
 // Adding an affiliate program (keep the discipline — this is the trust standard):
 //   1. Capture the public homepage (`url`) AND the referral link separately.
