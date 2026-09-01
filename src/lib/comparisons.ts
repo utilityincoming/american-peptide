@@ -1329,6 +1329,1069 @@ export const COMPARISONS: Comparison[] = [
       { name: 'GHK-Cu', alternateName: 'Copper Tripeptide-1' },
     ],
   },
+  {
+    slug: 'cagrisema-vs-tirzepatide',
+    aSlug: 'cagrisema',
+    bSlug: 'tirzepatide',
+    aName: 'CagriSema',
+    bName: 'Tirzepatide',
+    aPill: 'Amylin + GLP-1 · investigational',
+    bPill: 'GIP/GLP-1R · FDA approved',
+    metaTitle:
+      'CagriSema vs Tirzepatide — Combination vs Single-Molecule, Trial Data | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of CagriSema (cagrilintide + semaglutide) and tirzepatide (Zepbound) — two ways to exceed semaglutide: co-formulating two peptides vs one dual-receptor molecule. REDEFINE 1 vs SURMOUNT-1 data, cross-trial. Cited.',
+    keywords: [
+      'cagrisema vs tirzepatide',
+      'cagrisema vs zepbound',
+      'REDEFINE 1 results',
+      'amylin GLP-1 vs GIP GLP-1',
+      'next-gen obesity drugs',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
+    headline: 'two peptides combined versus one dual-receptor molecule',
+    intro: [
+      'CagriSema and tirzepatide are two different answers to the same question — how to beat semaglutide on weight. Tirzepatide engineers a second receptor (GIP) into one molecule; CagriSema instead co-formulates two peptides (amylin plus semaglutide). One is FDA-approved and one is investigational, and their trial numbers land close enough that the design philosophy is the real story.',
+    ],
+    atAGlance: [
+      { dim: 'What it is', a: 'Fixed combination of two peptides', b: 'One synthetic dual-agonist molecule' },
+      { dim: 'Mechanism', a: 'Amylin (cagrilintide) + GLP-1 (semaglutide)', b: 'GIP + GLP-1 co-agonism' },
+      { dim: 'Developer', a: 'Novo Nordisk', b: 'Eli Lilly' },
+      { dim: 'Dosing', a: 'Once weekly (injectable)', b: 'Once weekly (injectable)' },
+      { dim: 'Peak weight ↓ (trial)', a: '~20.4% (REDEFINE 1, 68 wk; up to 22.7% w/ full adherence)', b: '~22.5% (SURMOUNT-1, 72 wk, 15 mg)' },
+      { dim: 'Approval status', a: 'Investigational (Phase 3 REDEFINE)', b: 'FDA approved (Mounjaro 2022 · Zepbound 2023)' },
+      { dim: 'Molecular identity', a: 'No single formula — a co-formulation', b: '39-aa peptide, MW 4813.5' },
+      { dim: 'Maturity of evidence', a: 'Phase 3 program reporting', b: 'Multiple completed Phase 3 + CV/OSA data' },
+    ],
+    proseSections: [
+      {
+        title: 'Combine two, or engineer one',
+        paragraphs: [
+          'Tirzepatide is a single 39-residue peptide designed to hit two incretin receptors at once — GIP and GLP-1 — and it is the approved benchmark, with ~22.5% mean weight loss in SURMOUNT-1 and a full Phase 3 record behind it. CagriSema takes the opposite route: instead of one multi-receptor molecule, Novo Nordisk combines two of its existing peptides in a single weekly injection — the amylin analog cagrilintide and the GLP-1 agonist semaglutide — pairing two different satiety systems.',
+          'In the Phase 3 REDEFINE 1 trial, CagriSema produced roughly 20.4% mean weight loss over 68 weeks (up to 22.7% under a full-adherence analysis) — clearly beating semaglutide alone (14.9%) and cagrilintide alone (11.5%), which is the proof that the amylin arm adds real effect. But it landed close to tirzepatide’s figure rather than above it, and below the ~25% the market had priced in. So the honest read is two comparably powerful approaches: an approved single molecule versus an investigational two-peptide combination.',
+        ],
+      },
+    ],
+    trials: [
+      { name: 'REDEFINE 1', arm: 'CagriSema vs sema 2.4 vs cagri 2.4', n: '3417', duration: '68 wk', endpoint: 'Mean body-weight change (obesity, no diabetes)', result: '−20.4% vs −14.9% (sema) vs −11.5% (cagri) vs −3.0% (placebo)', note: 'Treatment-policy estimand; up to −22.7% under full adherence' },
+      { name: 'SURMOUNT-1', arm: 'Tirzepatide 15 mg', n: '2539', duration: '72 wk', endpoint: 'Mean body-weight change', result: '−22.5% vs −2.4% (placebo)', note: 'Pivotal obesity trial for Zepbound' },
+      { name: 'REDEFINE 2', arm: 'CagriSema (type 2 diabetes)', n: '1206', duration: '68 wk', endpoint: 'Mean body-weight change', result: '−13.7% vs −3.4% (placebo)', note: 'Diabetes population — smaller loss, as expected for the class' },
+    ],
+    verdict: {
+      title: 'What the evidence supports',
+      paragraphs: [
+        'These are two strong, comparably effective strategies rather than a clear winner. Tirzepatide is the FDA-approved single-molecule dual agonist with the deeper evidence base; CagriSema is the investigational two-peptide combination that clearly beats its own components but did not decisively exceed tirzepatide, and came in under lofty expectations. Note that REDEFINE and SURMOUNT are separate trials — this is a cross-trial comparison, not a head-to-head. These are population means, not predictions for any individual.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between CagriSema and tirzepatide?', a: 'Tirzepatide is one synthetic molecule that activates two receptors (GIP and GLP-1). CagriSema is a fixed combination of two separate peptides — cagrilintide (an amylin analog) and semaglutide (a GLP-1 agonist). Both aim to exceed semaglutide’s weight loss, by different means: engineering one multi-receptor molecule versus combining two.' },
+      { q: 'Which produces more weight loss?', a: 'They are close. In REDEFINE 1, CagriSema reported ~20.4% mean weight loss over 68 weeks (up to 22.7% with full adherence); tirzepatide reported ~22.5% in SURMOUNT-1 over 72 weeks. These are different trials, not a head-to-head, so the numbers should not be read as a direct ranking.' },
+      { q: 'Is CagriSema FDA-approved?', a: 'No. CagriSema is investigational and in the Phase 3 REDEFINE program. Tirzepatide is FDA-approved as Mounjaro (type 2 diabetes) and Zepbound (weight management).' },
+      { q: 'Why did CagriSema “disappoint” if it beat semaglutide?', a: 'It clearly beat semaglutide and cagrilintide alone, confirming the combination works. The disappointment was relative to expectations — the market had anticipated ~25% weight loss, and ~20.4% fell short of that bar while still being a strong absolute result. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['weight-loss'],
+    about: [
+      { name: 'CagriSema', alternateName: 'Cagrilintide/semaglutide' },
+      { name: 'Tirzepatide', alternateName: 'Zepbound' },
+    ],
+  },
+  {
+    slug: 'cagrisema-vs-retatrutide',
+    aSlug: 'cagrisema',
+    bSlug: 'retatrutide',
+    aName: 'CagriSema',
+    bName: 'Retatrutide',
+    aPill: 'Amylin + GLP-1 · investigational',
+    bPill: 'Triple agonist · investigational',
+    metaTitle:
+      'CagriSema vs Retatrutide — Novo’s Combo vs Lilly’s Triple Agonist | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of CagriSema (cagrilintide + semaglutide) and retatrutide (GIP/GLP-1/glucagon triple agonist) — the two leading next-generation obesity candidates, reached by opposite strategies. ~20% vs ~24%, cross-trial. Cited.',
+    keywords: [
+      'cagrisema vs retatrutide',
+      'retatrutide vs cagrisema',
+      'next generation obesity drugs',
+      'amylin combination vs triple agonist',
+      'novo vs lilly obesity',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
+    headline: 'the combination versus the triple agonist',
+    intro: [
+      'CagriSema and retatrutide are the two most-watched next-generation obesity candidates, and they represent opposite bets. Novo Nordisk combines two existing peptides (amylin plus GLP-1); Eli Lilly engineers a single molecule that hits three receptors (GIP, GLP-1, and glucagon). Both are investigational, and their reported numbers sit at the top of the field.',
+    ],
+    atAGlance: [
+      { dim: 'Strategy', a: 'Combine two peptides', b: 'One molecule, three receptors' },
+      { dim: 'Mechanism', a: 'Amylin (cagrilintide) + GLP-1 (semaglutide)', b: 'GIP + GLP-1 + glucagon' },
+      { dim: 'Developer', a: 'Novo Nordisk', b: 'Eli Lilly (LY3437943)' },
+      { dim: 'Peak weight ↓ (trial)', a: '~20.4% (REDEFINE 1, 68 wk; up to 22.7% adherence)', b: '~24% (Phase 2, 48 wk, 12 mg)' },
+      { dim: 'Extra vs GLP-1', a: 'Amylin — a separate satiety pathway', b: 'GIP (insulinotropic) + glucagon (energy expenditure, liver fat)' },
+      { dim: 'Approval status', a: 'Investigational (Phase 3 REDEFINE)', b: 'Investigational (Phase 3 TRIUMPH)' },
+      { dim: 'Molecular identity', a: 'No single formula — a co-formulation', b: 'Single peptide, MW 4731.5' },
+      { dim: 'Maturity of evidence', a: 'Phase 3 reporting', b: 'Phase 2 complete; Phase 3 ongoing' },
+    ],
+    columnSections: [
+      {
+        title: 'Two ways to add to GLP-1',
+        columns: [
+          {
+            heading: 'CagriSema — add amylin (combination)',
+            accent: 'a',
+            points: [
+              'Keeps semaglutide’s GLP-1 mechanism intact',
+              'Adds cagrilintide, a long-acting amylin analog, as a second satiety signal',
+              'Two molecules, each with its own certificate of analysis',
+              'REDEFINE 1: ~20.4% over 68 weeks',
+            ],
+          },
+          {
+            heading: 'Retatrutide — add GIP + glucagon (triple)',
+            accent: 'b',
+            points: [
+              'GIP: complementary insulinotropic and adipose signaling',
+              'Glucagon: raises energy expenditure and mobilizes liver fat',
+              'One engineered peptide activating all three receptors',
+              'Phase 2: ~24% over 48 weeks',
+            ],
+          },
+        ],
+      },
+    ],
+    trials: [
+      { name: 'REDEFINE 1', arm: 'CagriSema', n: '3417', duration: '68 wk', endpoint: 'Mean body-weight change (obesity)', result: '−20.4% vs −3.0% (placebo)', note: 'Beat semaglutide (−14.9%) and cagrilintide (−11.5%) alone' },
+      { name: 'Retatrutide Phase 2', arm: 'Retatrutide 12 mg', n: '338', duration: '48 wk', endpoint: 'Mean body-weight change', result: '~24% vs ~2% (placebo)', note: 'Jastreboff et al., NEJM 2023; highest-dose arm' },
+      { name: 'Phase 3 programs', arm: 'REDEFINE (Novo) · TRIUMPH (Lilly)', duration: 'Ongoing', endpoint: 'Confirmatory efficacy/safety', result: 'Reporting — neither FDA-approved', note: 'Head-to-head trials between them have not been run' },
+    ],
+    verdict: {
+      title: 'What the evidence supports — and what it doesn’t',
+      paragraphs: [
+        'On the numbers reported so far, retatrutide’s ~24% (Phase 2, 48 weeks) edges CagriSema’s ~20.4% (Phase 3, 68 weeks) — but these are different trials at different stages, not a head-to-head, so the gap is suggestive at best. The more durable distinction is strategic: a two-peptide combination that can be built from proven parts versus a single triple-agonist molecule that adds glucagon-driven energy expenditure and liver-fat effects GLP-1/amylin do not. Both are investigational; neither is approved. Treat this as mechanism plus early data, not a ranking.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between CagriSema and retatrutide?', a: 'CagriSema is a combination of two peptides — cagrilintide (amylin) and semaglutide (GLP-1). Retatrutide is a single molecule that activates three receptors — GIP, GLP-1, and glucagon. CagriSema adds a separate satiety pathway (amylin); retatrutide adds insulinotropic (GIP) and energy-expenditure/liver-fat (glucagon) mechanisms.' },
+      { q: 'Which causes more weight loss?', a: 'Reported figures put retatrutide at ~24% (Phase 2, 48 weeks) and CagriSema at ~20.4% (Phase 3 REDEFINE 1, 68 weeks). These come from separate trials at different stages, not a direct comparison, and retatrutide’s Phase 3 results are still pending — so it is premature to rank them.' },
+      { q: 'Are either approved?', a: 'No. Both are investigational and in Phase 3 — CagriSema in Novo Nordisk’s REDEFINE program, retatrutide in Eli Lilly’s TRIUMPH program. Neither is FDA-approved.' },
+      { q: 'What does the glucagon arm give retatrutide that CagriSema lacks?', a: 'Glucagon-receptor agonism is studied for increased energy expenditure and hepatic (liver) fat reduction — effects that neither GLP-1 nor amylin provide directly. CagriSema’s advantage is being buildable from two already well-characterized peptides. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['weight-loss'],
+    about: [
+      { name: 'CagriSema', alternateName: 'Cagrilintide/semaglutide' },
+      { name: 'Retatrutide', alternateName: 'LY3437943' },
+    ],
+  },
+  {
+    slug: 'survodutide-vs-retatrutide',
+    aSlug: 'survodutide',
+    bSlug: 'retatrutide',
+    aName: 'Survodutide',
+    bName: 'Retatrutide',
+    aPill: 'Glucagon/GLP-1 · investigational',
+    bPill: 'GIP/GLP-1/glucagon · investigational',
+    metaTitle:
+      'Survodutide vs Retatrutide — Glucagon Dual vs Triple Agonist, MASH & Obesity | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of survodutide (glucagon/GLP-1 dual, MASH Breakthrough) and retatrutide (GIP/GLP-1/glucagon triple) — both lean on the glucagon arm for energy expenditure and liver fat. What adding GIP changes, and the NEJM MASH data. Cited.',
+    keywords: [
+      'survodutide vs retatrutide',
+      'glucagon GLP-1 dual vs triple agonist',
+      'survodutide MASH',
+      'BI 456906 vs LY3437943',
+      'glucagon agonist obesity liver',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
+    headline: 'the glucagon dual versus the triple agonist',
+    intro: [
+      'Survodutide and retatrutide share the receptor that sets them apart from semaglutide and tirzepatide — glucagon. Survodutide pairs glucagon with GLP-1 (a dual agonist); retatrutide adds GIP on top of both (a triple). Both are investigational, and the interesting question is what that third receptor actually buys — and where each one’s evidence is strongest.',
+    ],
+    atAGlance: [
+      { dim: 'Receptor targets', a: 'Glucagon-R + GLP-1R', b: 'GIP-R + GLP-1R + glucagon-R' },
+      { dim: 'Agonism class', a: 'Dual agonist (glucagon/GLP-1)', b: 'Triple agonist' },
+      { dim: 'Developer', a: 'Boehringer Ingelheim / Zealand (BI 456906)', b: 'Eli Lilly (LY3437943)' },
+      { dim: 'Distinctive program', a: 'MASH — FDA Breakthrough Therapy', b: 'Obesity — largest Phase 2 weight figure' },
+      { dim: 'Peak weight ↓ (trial)', a: 'Double-digit mean (Phase 2/3, dose-dependent)', b: '~24% (Phase 2, 48 wk, 12 mg)' },
+      { dim: 'Shared glucagon rationale', a: 'Energy expenditure + hepatic-fat mobilization', b: 'Energy expenditure + hepatic-fat mobilization' },
+      { dim: 'Extra receptor', a: '— (no GIP)', b: 'GIP — complementary insulinotropic/adipose signal' },
+      { dim: 'Approval status', a: 'Investigational (Phase 3 SYNCHRONIZE)', b: 'Investigational (Phase 3 TRIUMPH)' },
+      { dim: 'Molecular weight', a: '4232 Da', b: '4731.5 Da' },
+    ],
+    proseSections: [
+      {
+        title: 'What the third receptor adds',
+        paragraphs: [
+          'Both molecules recruit glucagon for the same reasons: on top of GLP-1’s appetite and glycemic effects, glucagon-receptor activation is studied for raising energy expenditure and mobilizing fat from the liver. That shared logic is why survodutide’s standout data is in the liver — in a Phase 2 MASH trial (NEJM 2024), 62% of patients on the 4.8 mg dose achieved MASH improvement without worsening fibrosis versus 14% on placebo, with fibrosis improvement up to ~52% — earning it FDA Breakthrough Therapy designation for MASH.',
+          'Retatrutide keeps the glucagon and GLP-1 arms and adds a third receptor, GIP, which contributes a complementary insulinotropic and adipose signal. Its headline is weight: ~24% mean reduction at the highest Phase 2 dose, the largest reported for the incretin class. So the practical contrast is emphasis — survodutide is the glucagon/GLP-1 dual with the strongest liver-disease evidence, retatrutide the triple with the largest weight figure. Whether the added GIP is worth the extra complexity is exactly what the two Phase 3 programs are meant to answer.',
+        ],
+      },
+    ],
+    trials: [
+      { name: 'Survodutide MASH Phase 2', arm: 'Survodutide 4.8 mg', n: '293', duration: '48 wk', endpoint: 'MASH improvement, no worsening fibrosis', result: '62% vs 14% (placebo)', note: 'NEJM 2024; fibrosis improvement up to ~52% vs ~26%' },
+      { name: 'Retatrutide Phase 2', arm: 'Retatrutide 12 mg', n: '338', duration: '48 wk', endpoint: 'Mean body-weight change', result: '~24% vs ~2% (placebo)', note: 'Jastreboff et al., NEJM 2023; highest-dose arm' },
+      { name: 'Phase 3 programs', arm: 'SYNCHRONIZE (survodutide) · TRIUMPH (retatrutide)', duration: 'Ongoing', endpoint: 'Confirmatory obesity/metabolic', result: 'Reporting — neither FDA-approved', note: 'No head-to-head between them has been run' },
+    ],
+    verdict: {
+      title: 'What the evidence supports',
+      paragraphs: [
+        'These are close cousins that emphasize different endpoints. Survodutide, the glucagon/GLP-1 dual, has the strongest liver-disease signal — its MASH data is what earned Breakthrough designation. Retatrutide, the triple, adds GIP and reports the largest weight reduction in the class. Both are investigational, both rely on the glucagon arm for energy expenditure and liver fat, and there is no head-to-head trial between them — so the comparison is one of mechanism and program focus, not a settled ranking. These are population means, not individual predictions.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between survodutide and retatrutide?', a: 'Survodutide is a glucagon/GLP-1 dual agonist; retatrutide adds a third receptor, GIP, making it a GIP/GLP-1/glucagon triple agonist. Both use the glucagon arm for energy expenditure and liver-fat reduction. Survodutide’s strongest data is in MASH (fatty liver disease); retatrutide’s is the largest weight loss reported for the class.' },
+      { q: 'Which is better for fatty liver (MASH)?', a: 'Survodutide has the more advanced dedicated liver program — in a Phase 2 MASH trial (NEJM 2024) 62% on the 4.8 mg dose achieved MASH improvement without worsening fibrosis versus 14% on placebo, and it holds FDA Breakthrough Therapy designation for MASH. Retatrutide is also studied for hepatic fat but is framed primarily around weight.' },
+      { q: 'Which causes more weight loss?', a: 'Retatrutide reported ~24% mean weight loss at the highest Phase 2 dose, the largest for the incretin class. Survodutide has reported double-digit mean reductions. These come from separate trials, not a head-to-head, and both are still in Phase 3.' },
+      { q: 'Are either FDA-approved?', a: 'No. Both are investigational — survodutide (Boehringer Ingelheim / Zealand) in the SYNCHRONIZE program and retatrutide (Eli Lilly) in TRIUMPH. Neither is FDA-approved. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['weight-loss'],
+    about: [
+      { name: 'Survodutide', alternateName: 'BI 456906' },
+      { name: 'Retatrutide', alternateName: 'LY3437943' },
+    ],
+  },
+  {
+    slug: 'mazdutide-vs-tirzepatide',
+    aSlug: 'mazdutide',
+    bSlug: 'tirzepatide',
+    aName: 'Mazdutide',
+    bName: 'Tirzepatide',
+    aPill: 'Glucagon/GLP-1 · approved in China',
+    bPill: 'GIP/GLP-1R · FDA approved',
+    metaTitle:
+      'Mazdutide vs Tirzepatide — Glucagon vs GIP as the Partner to GLP-1 | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of mazdutide (glucagon/GLP-1 dual, approved in China) and tirzepatide (GIP/GLP-1 dual, FDA-approved) — same “dual agonist” class, different second receptor, different geography of approval. GLORY-1 vs SURMOUNT-1. Cited.',
+    keywords: [
+      'mazdutide vs tirzepatide',
+      'glucagon GLP-1 vs GIP GLP-1',
+      'mazdutide GLORY-1',
+      'IBI362 vs tirzepatide',
+      'dual agonist comparison',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
+    headline: 'two dual agonists, two different second receptors',
+    intro: [
+      'Mazdutide and tirzepatide are both “dual agonists,” but they pair GLP-1 with a different second receptor — mazdutide with glucagon, tirzepatide with GIP. That single choice changes what each does, and their approval geographies differ too: tirzepatide is FDA-approved, while mazdutide reached the market first in China.',
+    ],
+    atAGlance: [
+      { dim: 'Receptor targets', a: 'Glucagon-R + GLP-1R', b: 'GIP-R + GLP-1R' },
+      { dim: 'Second receptor', a: 'Glucagon — energy expenditure, liver fat', b: 'GIP — insulinotropic, adipose signaling' },
+      { dim: 'Molecular basis', a: 'Oxyntomodulin-based (natural dual hormone)', b: 'Chimeric GIP/GLP-1, de novo design' },
+      { dim: 'Developer', a: 'Eli Lilly / Innovent (IBI362)', b: 'Eli Lilly' },
+      { dim: 'Approval status', a: 'Approved in China (NMPA, 2025); not FDA-approved', b: 'FDA approved (Mounjaro 2022 · Zepbound 2023)' },
+      { dim: 'Peak weight ↓ (trial)', a: '~14.8% (GLORY-1, 6 mg, 48 wk; ~20% at 9 mg)', b: '~22.5% (SURMOUNT-1, 15 mg, 72 wk)' },
+      { dim: 'Pivotal trial', a: 'GLORY-1 (Chinese adults)', b: 'SURMOUNT-1' },
+      { dim: 'Molecular weight', a: '4476 Da', b: '4813.5 Da' },
+    ],
+    proseSections: [
+      {
+        title: 'Glucagon or GIP — the partner matters',
+        paragraphs: [
+          'Both drugs keep GLP-1 and add a second incretin-family receptor, but they choose differently. Tirzepatide pairs GLP-1 with GIP — a complementary insulinotropic and adipose signal — in a de-novo chimeric molecule, and in SURMOUNT-1 it reached ~22.5% mean weight loss, the benchmark for an approved agent. Mazdutide pairs GLP-1 with glucagon, and it is built on oxyntomodulin, the natural gut hormone that already activates both of those receptors on its own; the glucagon arm is studied for extra energy expenditure and liver-fat reduction rather than the insulin-side effect GIP contributes.',
+          'The other real difference is where they are approved. Tirzepatide is FDA-approved in the United States. Mazdutide was approved first by China’s NMPA in 2025 — the first glucagon/GLP-1 dual agonist to reach any market — on the strength of the Phase 3 GLORY-1 trial, where the 6 mg dose produced ~14.8% mean weight loss over 48 weeks in Chinese adults (higher doses reached about 20%). It is not FDA-approved, and a head-to-head Phase 3 against semaglutide (GLORY-3) is underway, but none exists against tirzepatide.',
+        ],
+      },
+    ],
+    trials: [
+      { name: 'GLORY-1', arm: 'Mazdutide 6 mg (and 4 mg)', n: '610', duration: '48 wk', endpoint: 'Mean body-weight change (Chinese adults)', result: '−14.8% (6 mg) · −12.0% (4 mg) vs −0.5% (placebo)', note: 'Basis for China NMPA approval; ~20% reported at 9 mg' },
+      { name: 'SURMOUNT-1', arm: 'Tirzepatide 15 mg', n: '2539', duration: '72 wk', endpoint: 'Mean body-weight change', result: '−22.5% vs −2.4% (placebo)', note: 'Pivotal obesity trial for Zepbound' },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Same class, different partner receptor and different market. Tirzepatide’s GIP pairing and de-novo design underpin the larger reported weight loss and its FDA approval; mazdutide’s glucagon pairing, built from oxyntomodulin, brings an energy-expenditure and liver-fat emphasis and made it the first glucagon/GLP-1 dual approved anywhere — in China. The trial figures come from separate studies in different populations, not a head-to-head, so they are not directly comparable. Neither the numbers nor the approvals make one universally superior; they answer somewhat different questions. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between mazdutide and tirzepatide?', a: 'Both are dual agonists that keep GLP-1 and add a second receptor — but mazdutide adds glucagon (for energy expenditure and liver-fat effects) while tirzepatide adds GIP (an insulinotropic and adipose signal). Mazdutide is built on the natural hormone oxyntomodulin; tirzepatide is a de-novo chimeric peptide.' },
+      { q: 'Is mazdutide FDA-approved?', a: 'No. Mazdutide was approved by China’s NMPA in 2025 — first for weight management, then type 2 diabetes — making it the first glucagon/GLP-1 dual agonist approved anywhere. It is not FDA-approved; outside China it remains investigational. Tirzepatide is FDA-approved (Mounjaro, Zepbound).' },
+      { q: 'Which produces more weight loss?', a: 'Tirzepatide reported ~22.5% in SURMOUNT-1 (15 mg, 72 weeks). Mazdutide reported ~14.8% at 6 mg over 48 weeks in GLORY-1, with about 20% at the higher 9 mg dose. These are separate trials in different populations, not a head-to-head, so they are not directly comparable.' },
+      { q: 'Why choose glucagon over GIP as the second receptor?', a: 'It is a design trade-off, not a settled answer. Glucagon agonism adds energy expenditure and liver-fat mobilization; GIP adds an insulinotropic and adipose signal. The two Phase 3 programs — and eventual head-to-head trials — are what will clarify which pairing wins for which endpoint. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['weight-loss'],
+    about: [
+      { name: 'Mazdutide', alternateName: 'IBI362' },
+      { name: 'Tirzepatide', alternateName: 'Zepbound' },
+    ],
+  },
+  {
+    slug: 'ghrp-2-vs-ghrp-6',
+    aSlug: 'ghrp-2',
+    bSlug: 'ghrp-6',
+    aName: 'GHRP-2',
+    bName: 'GHRP-6',
+    aPill: 'GHRP · potent · Japan-approved dx',
+    bPill: 'GHRP · the original · appetite',
+    metaTitle:
+      'GHRP-2 vs GHRP-6 — Potency vs Appetite, the Two Classic GHRPs | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of GHRP-2 (pralmorelin) and GHRP-6 — both hexapeptide ghrelin-receptor GH secretagogues, but GHRP-2 is the more potent, less-hunger successor while GHRP-6 is the original that led to the discovery of ghrelin. Cited.',
+    keywords: [
+      'GHRP-2 vs GHRP-6',
+      'GHRP comparison',
+      'pralmorelin',
+      'GHRP-6 appetite',
+      'growth hormone releasing peptide',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GH Peptides', href: '/gh-peptides' },
+    headline: 'the potent successor versus the original',
+    intro: [
+      'GHRP-2 and GHRP-6 are the two classic “numbered” growth-hormone-releasing peptides — both hexapeptides on the same ghrelin receptor, one generation apart. GHRP-6 came first and made history; GHRP-2 was tuned from it for more growth hormone and less hunger. Choosing between them is really choosing what you want the ghrelin arm to do.',
+    ],
+    atAGlance: [
+      { dim: 'Generation', a: 'Second-generation (refined from GHRP-6)', b: 'First-generation (the original GHRP)' },
+      { dim: 'Receptor', a: 'GHS-R1a (ghrelin receptor)', b: 'GHS-R1a (ghrelin receptor)' },
+      { dim: 'GH potency', a: 'Higher — more GH per dose', b: 'Lower than GHRP-2' },
+      { dim: 'Appetite stimulation', a: 'Modest', b: 'Strong — its hallmark effect' },
+      { dim: 'Cortisol / prolactin', a: 'Can rise at higher doses (less selective than ipamorelin)', b: 'Can rise (least selective of the family)' },
+      { dim: 'Regulatory status', a: 'Approved in Japan as a GH-deficiency diagnostic (pralmorelin)', b: 'None — research compound' },
+      { dim: 'Historical role', a: 'Refined successor', b: 'The probe that led to cloning GHS-R1a (1996) and discovering ghrelin (1999)' },
+      { dim: 'Chain', a: '6 aa (hexapeptide)', b: '6 aa (hexapeptide)' },
+      { dim: 'Molecular weight', a: '818.0 Da', b: '873.0 Da' },
+      { dim: 'FDA approval', a: 'None (US)', b: 'None' },
+    ],
+    proseSections: [
+      {
+        title: 'Same receptor, one generation apart',
+        paragraphs: [
+          'GHRP-6 is where this entire class begins. Developed out of Cyril Bowers’ work on enkephalin-derived peptides, it was among the first compounds shown to release growth hormone through a receptor separate from GHRH — an orphan receptor whose natural ligand was unknown. GHRP-6 became the pharmacological probe used to find it: the hunt led to cloning the GH-secretagogue receptor (GHS-R1a) in 1996 and, in 1999, to identifying its endogenous ligand, the hunger hormone ghrelin. That lineage is why GHRP-6’s signature effect is appetite — it is, in effect, a synthetic mimic of a hormone discovered only afterward, and it provokes the sharpest hunger of the family.',
+          'GHRP-2 (pralmorelin) is the engineered successor. It keeps the same ghrelin-receptor mechanism but was tuned for more growth hormone per dose and markedly less of GHRP-6’s hunger — and it went further than almost any GHRP toward legitimacy, earning approval in Japan as a single-injection diagnostic for pituitary GH reserve. Both remain less selective than ipamorelin, and at higher doses each can nudge cortisol and prolactin. So the practical split is clear: GHRP-2 for a stronger, cleaner GH signal; GHRP-6 when the ghrelin-like appetite effect is itself the point (or the object of study).',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'GHRP-2 is the more useful GH secretagogue of the two — more potent, much less hunger, and the only one with a regulatory approval anywhere (Japan, as a diagnostic). GHRP-6 is historically the more important molecule, the probe that opened up the ghrelin system, and it remains the reference when the appetite effect matters. Neither is FDA-approved, both are less selective than ipamorelin, and both are commonly studied alongside a GHRH analog for complementary, pulse-preserving release. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between GHRP-2 and GHRP-6?', a: 'Both are hexapeptide GHRPs that release growth hormone via the ghrelin receptor. GHRP-2 (pralmorelin) is the more potent, more refined successor — more GH per dose and much less appetite stimulation — and is an approved diagnostic in Japan. GHRP-6 is the original, less potent, and causes the strongest hunger of the family.' },
+      { q: 'Which causes more hunger?', a: 'GHRP-6, by a wide margin. Its strong, ghrelin-like appetite stimulation is its hallmark effect; GHRP-2 was specifically tuned to release GH with much less of that hunger.' },
+      { q: 'Why is GHRP-6 historically important?', a: 'GHRP-6 was the pharmacological probe used to identify the GH-secretagogue receptor (GHS-R1a, cloned 1996) and its natural ligand, ghrelin (1999) — a discovery that reframed GHRP-6 as a synthetic mimic of a hormone found only afterward.' },
+      { q: 'Are either FDA-approved?', a: 'No. GHRP-2 is approved in Japan as a diagnostic (pralmorelin) but not by the FDA; GHRP-6 is a research compound. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['growth-hormone-axis'],
+    about: [
+      { name: 'GHRP-2', alternateName: 'Pralmorelin' },
+      { name: 'GHRP-6' },
+    ],
+  },
+  {
+    slug: 'dihexa-vs-semax',
+    aSlug: 'dihexa',
+    bSlug: 'semax',
+    aName: 'Dihexa',
+    bName: 'Semax',
+    aPill: 'Angiotensin IV–derived · HGF/c-Met',
+    bPill: 'ACTH(4-10) analog · BDNF',
+    metaTitle:
+      'Dihexa vs Semax — Synaptogenesis vs Neurotrophic Induction | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of dihexa and Semax — two very different nootropic peptides: dihexa is a potent angiotensin-IV–derived synaptogenic compound (HGF/c-Met) with little human data, while Semax is an ACTH(4-10) analog with decades of Russian clinical use. Cited.',
+    keywords: [
+      'dihexa vs semax',
+      'nootropic peptide comparison',
+      'dihexa synaptogenesis',
+      'semax BDNF',
+      'cognitive peptide',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Cognitive Peptides', href: '/cognitive-peptides' },
+    headline: 'raw synaptogenic potency versus a proven neuropeptide',
+    intro: [
+      'Dihexa and Semax are both studied for cognition, but they sit at opposite ends of the risk/evidence spectrum. Dihexa is an engineered compound with an extraordinary potency claim and almost no human data; Semax is a neuropeptide with decades of clinical use behind it, in one country. The contrast is as much about evidence as mechanism.',
+    ],
+    atAGlance: [
+      { dim: 'Origin', a: 'Engineered from angiotensin IV (WSU, Harding lab)', b: 'ACTH(4-10) analog (Russia)' },
+      { dim: 'Mechanism', a: 'Potentiates HGF signaling at c-Met → synaptogenesis', b: 'Induces BDNF / NGF; melanocortin signaling, no HPA activation' },
+      { dim: 'Signature claim', a: 'Synaptogenesis orders of magnitude beyond BDNF (preclinical)', b: 'Neurotrophic induction + monoaminergic tone' },
+      { dim: 'Typical route (research)', a: 'Oral (designed for it)', b: 'Intranasal' },
+      { dim: 'Clinical use', a: 'None — early-stage', b: 'Approved in Russia (stroke, cognition, optic-nerve disease)' },
+      { dim: 'Evidence base', a: 'Preclinical only; human safety uncharacterized', b: 'Decades of Russian clinical use; limited Western replication' },
+      { dim: 'FDA approval', a: 'None', b: 'None' },
+    ],
+    proseSections: [
+      {
+        title: 'A potent unknown versus a used-but-under-replicated peptide',
+        paragraphs: [
+          'Dihexa came out of Joseph Harding’s group at Washington State University, engineered from angiotensin IV — a blood-pressure-hormone fragment that unexpectedly supported learning and memory — into a stabilized, orally active, brain-penetrant molecule. Its headline is potency: in the original preclinical assays it promoted new synapse formation at concentrations orders of magnitude below BDNF, working through the hepatocyte growth factor (HGF) / c-Met pathway rather than a classic neurotransmitter system. That is exactly what makes it interesting — and exactly why its safety is a genuine open question: a small molecule that powerfully drives cell-growth signaling has essentially no human characterization.',
+          'Semax is the opposite profile. A heptapeptide analog of ACTH(4-10), it induces neurotrophic factors (BDNF, NGF, trkB) and modulates dopaminergic and serotonergic tone without activating the stress (HPA) axis, and it has been used clinically in Russia for stroke, cognitive impairment, and optic-nerve disease for decades. Its weakness is not safety experience but replication: most controlled data are Russian-language, with limited independent Western confirmation. So the choice is a real trade-off — Semax offers a longer human track record with a thinner Western evidence base; dihexa offers a striking mechanism and potency with almost no human data at all.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These are not interchangeable, and the honest differentiator is evidence, not just mechanism. Semax is a neuropeptide with a long (if geographically narrow) clinical history and a neurotrophic-induction mechanism; dihexa is an early-stage synaptogenic compound with a remarkable preclinical potency claim via HGF/c-Met and an essentially uncharacterized human safety profile. Neither is FDA-approved. For a research reference, Semax is the better-documented of the two, and dihexa the more experimental. This page is a research and educational reference, not medical advice.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between dihexa and Semax?', a: 'Dihexa is an engineered, orally active peptidomimetic derived from angiotensin IV that promotes synapse formation through the HGF / c-Met pathway, with very high preclinical potency but almost no human data. Semax is an ACTH(4-10) analog that induces neurotrophic factors (BDNF, NGF) and is used clinically in Russia for stroke and cognition. Different mechanisms, and very different amounts of human experience.' },
+      { q: 'Which has more evidence in humans?', a: 'Semax — it has been used clinically in Russia for decades for stroke and cognitive disorders, though most controlled data are Russian-language with limited Western replication. Dihexa’s evidence is preclinical, and its human safety is essentially uncharacterized.' },
+      { q: 'Is dihexa safe?', a: 'Its safety in humans is not established. Dihexa is an early-stage research compound that potently drives cell-growth (HGF / c-Met) signaling, and it has not been characterized in controlled human studies. Neither dihexa nor Semax is FDA-approved.' },
+      { q: 'How do their mechanisms differ?', a: 'Dihexa is proposed to work by potentiating hepatocyte growth factor (HGF) signaling at the c-Met receptor to drive synaptogenesis. Semax induces neurotrophic factors (BDNF, NGF) and modulates monoaminergic tone without activating the stress axis. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['cognition-neuroprotection'],
+    about: [
+      { name: 'Dihexa', alternateName: 'PNB-0408' },
+      { name: 'Semax' },
+    ],
+  },
+  {
+    slug: 'cerebrolysin-vs-semax',
+    aSlug: 'cerebrolysin',
+    bSlug: 'semax',
+    aName: 'Cerebrolysin',
+    bName: 'Semax',
+    aPill: 'Porcine neurotrophic mixture · approved abroad',
+    bPill: 'ACTH(4-10) peptide · Russia',
+    metaTitle:
+      'Cerebrolysin vs Semax — A Neurotrophic Mixture vs a Single Neuropeptide | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of Cerebrolysin and Semax — both neuroprotective and used clinically outside the US for stroke, but Cerebrolysin is an injectable porcine-brain peptide mixture that mimics neurotrophic factors, while Semax is a single intranasal ACTH(4-10) peptide that induces them. Cited.',
+    keywords: [
+      'cerebrolysin vs semax',
+      'neuroprotective peptide comparison',
+      'cerebrolysin stroke',
+      'semax nootropic',
+      'neurotrophic peptide',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Cognitive Peptides', href: '/cognitive-peptides' },
+    headline: 'a neurotrophic mixture versus a single neuropeptide',
+    intro: [
+      'Cerebrolysin and Semax are both neuroprotective agents used clinically outside the United States — often for the same indication, stroke recovery — but they could hardly be more different as molecules. One is a defined mixture of many brain-derived fragments; the other is a single seven-residue peptide. And they approach neurotrophic support from opposite directions.',
+    ],
+    atAGlance: [
+      { dim: 'What it is', a: 'Standardized porcine-brain peptide/amino-acid mixture', b: 'Single synthetic heptapeptide (ACTH(4-10) analog)' },
+      { dim: 'Composition', a: '~15% low-MW peptides + ~85% free amino acids', b: 'One defined sequence (MEHFPGP)' },
+      { dim: 'Neurotrophic approach', a: 'Mimics endogenous factors (BDNF, NGF, GDNF)', b: 'Induces the body to make BDNF / NGF' },
+      { dim: 'Route', a: 'Injectable (IV / IM)', b: 'Intranasal' },
+      { dim: 'Lead indications', a: 'Stroke, traumatic brain injury, dementia', b: 'Stroke, cognitive impairment, optic-nerve disease' },
+      { dim: 'Regulatory status', a: 'Approved in ~44 countries (not FDA)', b: 'Approved in Russia (not FDA)' },
+      { dim: 'Molecular identity', a: 'No single formula — a defined mixture', b: '7-aa peptide' },
+      { dim: 'FDA approval', a: 'None (US)', b: 'None (US)' },
+    ],
+    proseSections: [
+      {
+        title: 'Supply the factors, or trigger them',
+        paragraphs: [
+          'Cerebrolysin is one of the few entries here that is not a single peptide at all but a defined biological mixture — low-molecular-weight neuropeptides (about 15%) and free amino acids (about 85%), produced by controlled enzymatic breakdown of purified pig-brain proteins and standardized by peptide-nitrogen content. Its small peptide fraction can cross the blood–brain barrier, where it is proposed to reproduce, in part, the actions of the brain’s own neurotrophic factors — BDNF, NGF, GDNF. It has one of the largest clinical literatures of any nootropic, is delivered by injection, and is approved in roughly 44 countries for stroke, traumatic brain injury, and dementia.',
+          'Semax reaches a related goal from the other end. Rather than supplying neurotrophic-like material, this single ACTH(4-10) heptapeptide induces the body to raise its own BDNF and NGF, alongside monoaminergic effects, without activating the stress axis — and it is given intranasally. It is approved in Russia for stroke, cognitive impairment, and optic-nerve disease. So the mechanistic split is neat: Cerebrolysin is broad neurotrophic replacement in a syringe; Semax is targeted neurotrophic induction in a nasal spray. Both share the same caveat — used and approved abroad, but not FDA-approved, with Western controlled evidence that remains debated.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Two neuroprotective agents that meet at the same indications by different routes and different chemistry. Cerebrolysin is an injectable, broad porcine-brain neurotrophic mixture with a large but debated clinical literature and approval in dozens of countries; Semax is a single intranasal neuropeptide that induces the body’s own neurotrophic factors, approved in Russia. Neither is FDA-approved, and for both the honest limitation is the strength and independence of the controlled evidence. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between Cerebrolysin and Semax?', a: 'Cerebrolysin is a standardized mixture of small peptides and amino acids made from porcine brain, given by injection, that mimics neurotrophic factors like BDNF and NGF. Semax is a single synthetic ACTH(4-10) peptide, given intranasally, that induces the body to produce those factors. One supplies neurotrophic-like material; the other triggers it.' },
+      { q: 'Are they used for the same things?', a: 'They overlap — both are used abroad for stroke recovery and cognition. Cerebrolysin is also used for traumatic brain injury and dementia; Semax is also approved in Russia for optic-nerve disease. Neither is FDA-approved in the US.' },
+      { q: 'Is Cerebrolysin a peptide?', a: 'Not a single one — it is a defined biological mixture (about 15% low-molecular-weight peptides and 85% free amino acids), so it has no single sequence or molecular formula. Semax, by contrast, is one seven-residue peptide.' },
+      { q: 'Are either FDA-approved?', a: 'No. Cerebrolysin is approved in roughly 44 countries and Semax in Russia, but neither is FDA-approved in the United States. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['cognition-neuroprotection'],
+    about: [
+      { name: 'Cerebrolysin' },
+      { name: 'Semax' },
+    ],
+  },
+  {
+    slug: 'survodutide-vs-mazdutide',
+    aSlug: 'survodutide',
+    bSlug: 'mazdutide',
+    aName: 'Survodutide',
+    bName: 'Mazdutide',
+    aPill: 'Glucagon/GLP-1 · MASH · investigational',
+    bPill: 'Glucagon/GLP-1 · approved in China',
+    metaTitle:
+      'Survodutide vs Mazdutide — Two Glucagon/GLP-1 Dual Agonists Compared | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of survodutide (BI 456906) and mazdutide (IBI362) — the two leading glucagon/GLP-1 dual agonists. Same receptor pair, different molecular origins (engineered vs oxyntomodulin-based) and different status (MASH Breakthrough vs China-approved). Cited.',
+    keywords: [
+      'survodutide vs mazdutide',
+      'glucagon GLP-1 dual agonist comparison',
+      'BI 456906 vs IBI362',
+      'survodutide MASH',
+      'mazdutide China approval',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
+    headline: 'two roads to the same dual mechanism',
+    intro: [
+      'Survodutide and mazdutide are the two most advanced glucagon/GLP-1 dual agonists — the same receptor pairing, reached from different molecular starting points and carried by different companies to different milestones. One leads with fatty-liver disease; the other became the first of its class to win an approval anywhere.',
+    ],
+    atAGlance: [
+      { dim: 'Receptor targets', a: 'Glucagon-R + GLP-1R', b: 'Glucagon-R + GLP-1R' },
+      { dim: 'Molecular basis', a: 'Engineered acylated peptide (de novo)', b: 'Oxyntomodulin-based (natural dual hormone)' },
+      { dim: 'Developer', a: 'Boehringer Ingelheim / Zealand (BI 456906)', b: 'Eli Lilly / Innovent (IBI362)' },
+      { dim: 'Distinctive milestone', a: 'FDA Breakthrough Therapy for MASH', b: 'First GCG/GLP-1 dual approved anywhere (China, 2025)' },
+      { dim: 'Approval status', a: 'Investigational (Phase 3 SYNCHRONIZE)', b: 'Approved in China; investigational elsewhere' },
+      { dim: 'Weight data', a: 'Double-digit mean (Phase 2/3)', b: '~14.8% (GLORY-1, 6 mg, 48 wk; ~20% at 9 mg)' },
+      { dim: 'Lead emphasis', a: 'Liver (MASH) + obesity', b: 'Obesity + type 2 diabetes' },
+      { dim: 'Molecular weight', a: '4232 Da', b: '4476 Da' },
+      { dim: 'FDA approval', a: 'None', b: 'None (US)' },
+    ],
+    proseSections: [
+      {
+        title: 'Same receptors, different starting points',
+        paragraphs: [
+          'The two molecules aim at exactly the same target — pairing GLP-1’s appetite and glycemic effects with glucagon-driven energy expenditure and hepatic-fat mobilization — but they were built differently. Survodutide (BI 456906) is a de-novo engineered, acylated once-weekly peptide from Boehringer Ingelheim and Zealand Pharma. Mazdutide (IBI362) is built on oxyntomodulin, the natural gut hormone that already activates both the GLP-1 and glucagon receptors on its own, developed by Eli Lilly and licensed to Innovent for China.',
+          'Where they diverge most is the path each has taken. Survodutide’s standout is the liver: it holds FDA Breakthrough Therapy designation for MASH, and in a Phase 2 MASH trial (NEJM 2024) 62% of patients on the 4.8 mg dose achieved MASH improvement without worsening fibrosis versus 14% on placebo. Mazdutide’s standout is regulatory: on the strength of the Phase 3 GLORY-1 trial (~14.8% mean weight loss at 6 mg over 48 weeks, and about 20% at 9 mg), China’s NMPA approved it in 2025 — making it the first glucagon/GLP-1 dual agonist approved anywhere. Neither is FDA-approved, and no head-to-head trial between them exists.',
+        ],
+      },
+    ],
+    trials: [
+      { name: 'Survodutide MASH Phase 2', arm: 'Survodutide 4.8 mg', n: '293', duration: '48 wk', endpoint: 'MASH improvement, no worsening fibrosis', result: '62% vs 14% (placebo)', note: 'NEJM 2024; earned FDA Breakthrough Therapy designation' },
+      { name: 'GLORY-1', arm: 'Mazdutide 6 mg', n: '610', duration: '48 wk', endpoint: 'Mean body-weight change (Chinese adults)', result: '−14.8% vs −0.5% (placebo)', note: 'Basis for China NMPA approval; ~20% reported at 9 mg' },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These are close siblings in the same drug class, distinguished by origin and trajectory rather than by mechanism. Survodutide is the engineered peptide with the strongest fatty-liver (MASH) evidence and Breakthrough designation; mazdutide is the oxyntomodulin-based one that reached the market first, in China, on its obesity data. Both pair glucagon with GLP-1, both are once-weekly, and there is no head-to-head trial — so the comparison is one of program focus and status, not a settled efficacy ranking. Neither is FDA-approved. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between survodutide and mazdutide?', a: 'Both are once-weekly glucagon/GLP-1 dual agonists that pair GLP-1’s appetite and glycemic effects with glucagon-driven energy expenditure and liver-fat reduction. Survodutide (Boehringer Ingelheim/Zealand) is a de-novo engineered peptide with a lead MASH program; mazdutide (Lilly/Innovent) is built on the natural hormone oxyntomodulin and is approved in China.' },
+      { q: 'Is either approved?', a: 'Mazdutide is approved in China (NMPA, 2025) for weight management and type 2 diabetes — the first glucagon/GLP-1 dual approved anywhere. Survodutide is investigational (Phase 3). Neither is FDA-approved in the United States.' },
+      { q: 'Which is better for fatty liver (MASH)?', a: 'Survodutide has the more advanced dedicated liver program — a Phase 2 MASH trial (NEJM 2024) showed 62% MASH improvement without worsening fibrosis at 4.8 mg versus 14% on placebo, earning FDA Breakthrough Therapy designation. Mazdutide’s lead data are in obesity and diabetes.' },
+      { q: 'Have they been compared head-to-head?', a: 'No. There is no head-to-head trial between survodutide and mazdutide; their numbers come from separate studies in different populations, so they are not directly comparable. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['weight-loss'],
+    about: [
+      { name: 'Survodutide', alternateName: 'BI 456906' },
+      { name: 'Mazdutide', alternateName: 'IBI362' },
+    ],
+  },
+  {
+    slug: 'ipamorelin-vs-ghrp-2',
+    aSlug: 'ipamorelin',
+    bSlug: 'ghrp-2',
+    aName: 'Ipamorelin',
+    bName: 'GHRP-2',
+    aPill: 'Selective GHRP · clean',
+    bPill: 'Potent GHRP · Japan-approved dx',
+    metaTitle:
+      'Ipamorelin vs GHRP-2 — Selectivity vs Potency in GH Secretagogues | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of ipamorelin and GHRP-2 (pralmorelin) — both ghrelin-receptor GH secretagogues, but ipamorelin releases GH cleanly with minimal cortisol or prolactin, while GHRP-2 is more potent, mildly appetite-raising, and an approved diagnostic in Japan. Cited.',
+    keywords: [
+      'ipamorelin vs GHRP-2',
+      'GHRP comparison',
+      'selective growth hormone secretagogue',
+      'pralmorelin',
+      'ghrelin receptor peptide',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GH Peptides', href: '/gh-peptides' },
+    headline: 'a clean signal versus a stronger one',
+    intro: [
+      'Ipamorelin and GHRP-2 are both GHRPs on the same ghrelin receptor, and they are the two most common first choices in GH-secretagogue research. The split between them is the recurring GHRP trade-off in its mildest form: ipamorelin for a clean, selective pulse; GHRP-2 for more growth hormone per dose, at the cost of a little selectivity.',
+    ],
+    atAGlance: [
+      { dim: 'Class', a: 'Pentapeptide GHRP', b: 'Hexapeptide GHRP (2nd-generation)' },
+      { dim: 'Receptor', a: 'GHS-R1a (ghrelin receptor)', b: 'GHS-R1a (ghrelin receptor)' },
+      { dim: 'GH potency', a: 'Moderate', b: 'Higher — more GH per dose' },
+      { dim: 'Selectivity', a: 'High — minimal ACTH / cortisol / prolactin', b: 'Lower — can raise cortisol / prolactin at higher doses' },
+      { dim: 'Appetite', a: 'Minimal', b: 'Mild (much less than GHRP-6)' },
+      { dim: 'Regulatory status', a: 'None — research compound', b: 'Approved in Japan as a GH-deficiency diagnostic (pralmorelin)' },
+      { dim: 'Characterizing work', a: 'Raun et al., 1998', b: 'Second-generation GHRP (from GHRP-6)' },
+      { dim: 'Molecular weight', a: '711.9 Da', b: '818.0 Da' },
+      { dim: 'FDA approval', a: 'None', b: 'None (US)' },
+    ],
+    proseSections: [
+      {
+        title: 'Selectivity versus potency, in the mild middle',
+        paragraphs: [
+          'Ipamorelin’s whole identity is selectivity. It was characterized as the first GHRP to release growth hormone without meaningfully raising ACTH, cortisol, or prolactin (Raun et al., 1998) — a clean profile that also shows less receptor desensitization over repeated exposure. It is not the strongest secretagogue in the family; it is the tidiest, which is why it is the default when a pure GH signal is the goal.',
+          'GHRP-2 (pralmorelin) trades a little of that cleanliness for output. As a second-generation GHRP tuned from GHRP-6, it releases more growth hormone per dose and provokes only mild appetite (far less than GHRP-6’s hallmark hunger), but at higher doses it can transiently raise cortisol and prolactin. It also carries something no other GHRP here has: an actual regulatory approval, used in Japan as a single-injection diagnostic of pituitary GH reserve. So against ipamorelin, GHRP-2 is the more potent, slightly less selective option with a real clinical pedigree — a gentler version of the same trade-off ipamorelin makes against the far more potent, far less selective hexarelin.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'If the research goal is a clean GH pulse with minimal off-target hormones, ipamorelin’s selectivity is the reason to pick it; if it is maximal GH release per dose, GHRP-2 is stronger and has the added distinction of an approved diagnostic use in Japan. Both act on the same receptor, both are commonly studied alongside a GHRH analog for complementary release, and neither is FDA-approved in the US. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between ipamorelin and GHRP-2?', a: 'Both are GHRPs that release growth hormone via the ghrelin receptor. Ipamorelin is prized for selectivity — it releases GH with minimal cortisol, prolactin, or appetite. GHRP-2 (pralmorelin) is more potent, raises appetite mildly, can nudge cortisol and prolactin at higher doses, and is an approved GH-deficiency diagnostic in Japan.' },
+      { q: 'Which is “cleaner”?', a: 'Ipamorelin. It was characterized as the first GHRP to release GH without meaningfully raising ACTH, cortisol, or prolactin, and it shows less receptor desensitization. GHRP-2 is stronger but less selective.' },
+      { q: 'Does GHRP-2 cause hunger like GHRP-6?', a: 'Much less. GHRP-2 was tuned from GHRP-6 for more GH and less appetite; it raises hunger only mildly, whereas GHRP-6’s sharp appetite spike is its hallmark. Ipamorelin’s effect on appetite is minimal.' },
+      { q: 'Are either FDA-approved?', a: 'No. GHRP-2 is approved in Japan as a diagnostic (pralmorelin) but not by the FDA; ipamorelin is a research compound. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['growth-hormone-axis'],
+    about: [
+      { name: 'Ipamorelin' },
+      { name: 'GHRP-2', alternateName: 'Pralmorelin' },
+    ],
+  },
+  {
+    slug: 'tesamorelin-vs-sermorelin',
+    aSlug: 'tesamorelin',
+    bSlug: 'sermorelin',
+    aName: 'Tesamorelin',
+    bName: 'Sermorelin',
+    aPill: 'GHRH(1-44) · FDA approved',
+    bPill: 'GHRH(1-29) · approved 1990, discontinued',
+    metaTitle:
+      'Tesamorelin vs Sermorelin — The Two GHRH Analogs That Reached FDA Approval | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of tesamorelin (Egrifta) and sermorelin (Geref) — the full-length GHRH(1-44) analog still on the market vs the GHRH(1-29) fragment approved in 1990 and later discontinued. Both prompt the body’s own GH. Cited.',
+    keywords: [
+      'tesamorelin vs sermorelin',
+      'GHRH analog comparison',
+      'sermorelin Geref',
+      'tesamorelin Egrifta',
+      'GHRH 1-44 vs 1-29',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GH Peptides', href: '/gh-peptides' },
+    headline: 'full-length and current versus the truncated original',
+    intro: [
+      'Tesamorelin and sermorelin are the two GHRH analogs that actually reached FDA approval — which already sets them apart from research GHRH compounds like CJC-1295. Both stimulate the pituitary to release the body’s own growth hormone. The differences are length, indication, and whether they are still on the market.',
+    ],
+    atAGlance: [
+      { dim: 'Fragment', a: 'Full-length GHRH(1-44) analog', b: 'GHRH(1-29) — shortest fully active fragment' },
+      { dim: 'Receptor', a: 'GHRH receptor (GHRHR)', b: 'GHRH receptor (GHRHR)' },
+      { dim: 'Key modification', a: 'N-terminal trans-3-hexenoic acid (stabilized)', b: 'None — the unmodified fragment' },
+      { dim: 'GH release', a: 'Endogenous, feedback-preserving', b: 'Endogenous, discrete physiologic pulse' },
+      { dim: 'FDA approval', a: 'Approved 2010 (Egrifta) — current', b: 'Approved 1990 (Geref) — discontinued commercially' },
+      { dim: 'Approved use', a: 'Excess visceral fat in HIV-associated lipodystrophy', b: 'GH-deficiency evaluation / pediatric GH deficiency (historical)' },
+      { dim: 'Status today', a: 'Marketed drug', b: 'Referenced as a research compound' },
+      { dim: 'Molecular weight', a: '5135.9 Da', b: '3358 Da' },
+    ],
+    proseSections: [
+      {
+        title: 'Same receptor, different fragment and fate',
+        paragraphs: [
+          'Sermorelin is the minimalist: the first 29 residues of GHRH, the shortest piece that keeps full GH-releasing activity. It binds the GHRH receptor and prompts a short, discrete pulse of the body’s own growth hormone, preserving the natural somatostatin feedback loop. It was FDA-approved in 1990 as Geref — used to evaluate pituitary GH reserve and treat pediatric GH deficiency — but was later discontinued commercially, so today it is referenced mainly as a research compound.',
+          'Tesamorelin keeps the whole 44-residue GHRH sequence and stabilizes it with a trans-3-hexenoic acid group at the N-terminus, protecting it from rapid breakdown. That fuller, stabilized molecule is the only GHRH analog with a current FDA approval: Egrifta (2010), for reducing excess visceral abdominal fat in people with HIV-associated lipodystrophy, backed by completed Phase 3 trials. So the two bracket the GHRH-analog story — the original, truncated, now-discontinued fragment and the full-length, stabilized, still-marketed successor — with CJC-1295, the never-approved research modification of the same family, sitting between them in ambition but not in evidence.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Both are GHRH-receptor agonists that raise endogenous GH while preserving feedback, and both cleared FDA approval — but only tesamorelin is still on the market, with a specific visceral-fat indication and Phase 3 evidence behind it. Sermorelin is the historical original, a short GHRH(1-29) fragment approved in 1990 and since discontinued, now a research reference. For a characterized GHRH analog in current use, tesamorelin is the benchmark; sermorelin is the lineage it grew out of. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between tesamorelin and sermorelin?', a: 'Both are GHRH-receptor agonists that stimulate the pituitary to release growth hormone. Sermorelin is the GHRH(1-29) fragment — the shortest fully active piece — approved in 1990 (Geref) and later discontinued. Tesamorelin is a stabilized full-length GHRH(1-44) analog, FDA-approved in 2010 (Egrifta) for HIV-associated visceral fat and still marketed.' },
+      { q: 'Are both FDA-approved?', a: 'Both reached FDA approval, but only tesamorelin (Egrifta, 2010) is currently marketed. Sermorelin (Geref, 1990) was approved and later discontinued commercially. They are the two GHRH analogs to have been approved — unlike CJC-1295, which is a research compound.' },
+      { q: 'Which is more physiologic?', a: 'Both raise the body’s own GH and preserve feedback rather than supplying GH directly. Sermorelin’s short half-life produces a discrete pulse; tesamorelin is also short-acting and dosed daily. Neither creates the sustained, pulsatility-blunting elevation of a long-acting DAC-modified analog.' },
+      { q: 'What is each approved for?', a: 'Tesamorelin is approved to reduce excess visceral abdominal fat in HIV-associated lipodystrophy. Sermorelin was approved for GH-deficiency evaluation and pediatric GH deficiency before being discontinued. This page is a research and educational reference, not medical advice.' },
+    ],
+    relatedAreas: ['growth-hormone-axis'],
+    about: [
+      { name: 'Tesamorelin', alternateName: 'Egrifta' },
+      { name: 'Sermorelin', alternateName: 'Geref' },
+    ],
+  },
+  {
+    slug: 'argireline-vs-matrixyl',
+    aSlug: 'argireline',
+    bSlug: 'matrixyl',
+    aName: 'Argireline',
+    bName: 'Matrixyl',
+    aPill: 'SNAP-25 mimic · expression lines',
+    bPill: 'Matrikine · collagen synthesis',
+    metaTitle:
+      'Argireline vs Matrixyl — Relax the Muscle vs Build the Collagen | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of Argireline (acetyl hexapeptide-8) and Matrixyl (palmitoyl pentapeptide-4) — the two best-known cosmetic peptides, working on opposite problems: Argireline dampens muscle-contraction (expression lines), Matrixyl signals fibroblasts to make collagen. Cited.',
+    keywords: [
+      'argireline vs matrixyl',
+      'cosmetic peptide comparison',
+      'topical botox peptide',
+      'matrixyl collagen',
+      'anti-wrinkle peptide',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Cosmetic Peptides', href: '/catalog/category/cosmetic' },
+    headline: 'relax the muscle versus build the collagen',
+    intro: [
+      'Argireline and Matrixyl are the two most recognizable peptides in skincare, and they are often grouped as interchangeable “anti-wrinkle” ingredients — but they address different causes of a wrinkle. Argireline works on the muscle side (dynamic expression lines); Matrixyl works on the structural side (collagen). Understanding which is which is the whole comparison.',
+    ],
+    atAGlance: [
+      { dim: 'INCI / identity', a: 'Acetyl Hexapeptide-8 (Ac-EEMQRR-NH2)', b: 'Palmitoyl Pentapeptide-4 (Pal-KTTKS)' },
+      { dim: 'Mechanism', a: 'Mimics SNAP-25; interferes with SNARE-driven muscle-contraction signaling', b: 'Matrikine — mimics a procollagen-I fragment to stimulate collagen synthesis' },
+      { dim: 'Targets', a: 'Dynamic expression lines (muscle movement)', b: 'Structural aging (collagen loss)' },
+      { dim: 'Analogy', a: '“Topical Botox”', b: '“Topical collagen signal”' },
+      { dim: 'Evidence', a: 'Modest, surface-level; marketing outruns data', b: '12-week split-face RCT (Robinson et al., 2005)' },
+      { dim: 'Contains copper?', a: 'No', b: 'No (contrast with GHK-Cu / AHK-Cu)' },
+      { dim: 'Use', a: 'Topical cosmetic ingredient', b: 'Topical cosmetic ingredient' },
+      { dim: 'Molecular weight', a: '887.0 Da', b: '802.0 Da' },
+    ],
+    proseSections: [
+      {
+        title: 'Two different causes of a wrinkle',
+        paragraphs: [
+          'Argireline (acetyl hexapeptide-8) launched the “neurocosmetic” idea — borrowing the logic of botulinum toxin without the toxin. Its acetylated six-residue sequence mimics the N-terminus of SNAP-25, one of the SNARE proteins a nerve terminal uses to release the signal that tells a facial muscle to contract. By competing in that machinery, it is proposed to blunt the contraction, so repeated expressions crease the skin less. Applied topically, its measured effects are modest and surface-level next to injected Botox — the mechanism is genuine, but the marketing tends to outrun the evidence.',
+          'Matrixyl (palmitoyl pentapeptide-4) works on the other cause of aging skin: lost structure. Its KTTKS core is a fragment the body cleaves from type-I procollagen during collagen assembly, and it functions as a “matrikine” — a feedback signal telling fibroblasts to keep making matrix. A palmitic-acid chain helps it penetrate the skin barrier. It is one of the better-evidenced cosmetic peptides, with a 12-week split-face randomized trial (Robinson et al., 2005) reporting improvements in wrinkle depth and roughness. So the two are complementary, not competing: Argireline aims to relax the muscle that folds the skin; Matrixyl aims to rebuild the collagen that fills it. Neither, notably, is a copper peptide like GHK-Cu.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These target different mechanisms of skin aging and are best understood as complementary. Argireline addresses dynamic expression lines by dampening the muscle-contraction signal (the “topical Botox” concept), with modest, surface-level effects. Matrixyl addresses structural aging by signaling fibroblasts to synthesize collagen, and it is among the better-evidenced cosmetic peptides. Both are topical cosmetic ingredients, not FDA-approved drugs, and both are copper-free — a contrast with GHK-Cu and AHK-Cu. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between Argireline and Matrixyl?', a: 'Argireline (acetyl hexapeptide-8) mimics SNAP-25 to reduce the muscle contractions behind expression lines — a “topical Botox” concept. Matrixyl (palmitoyl pentapeptide-4) is a matrikine that signals fibroblasts to make collagen. Argireline works on the muscle side of a wrinkle; Matrixyl works on the structural, collagen side.' },
+      { q: 'Can they be used together?', a: 'Yes — because they act on different mechanisms (muscle-contraction signaling vs collagen synthesis), they are commonly combined in cosmetic formulations rather than treated as alternatives.' },
+      { q: 'Which has better evidence?', a: 'Matrixyl has the stronger cosmetic-trial record, including a 12-week split-face randomized controlled trial (Robinson et al., 2005). Argireline’s mechanism is real but its topical effects are modest and less well substantiated than the marketing suggests.' },
+      { q: 'Are they copper peptides?', a: 'No. Unlike GHK-Cu and AHK-Cu, neither Argireline nor Matrixyl contains copper — they work by signaling, not metal delivery. Both are cosmetic ingredients, not FDA-approved drugs. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['skin-hair'],
+    about: [
+      { name: 'Argireline', alternateName: 'Acetyl Hexapeptide-8' },
+      { name: 'Matrixyl', alternateName: 'Palmitoyl Pentapeptide-4' },
+    ],
+  },
+  {
+    slug: 'nad-vs-5-amino-1mq',
+    aSlug: 'nad-plus',
+    bSlug: '5-amino-1mq',
+    aName: 'NAD+',
+    bName: '5-Amino-1MQ',
+    aPill: 'Redox cofactor · direct supply',
+    bPill: 'NNMT inhibitor · small molecule',
+    metaTitle:
+      'NAD+ vs 5-Amino-1MQ — Supply the Cofactor or Inhibit the Enzyme | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of NAD+ and 5-Amino-1MQ — two longevity-metabolic small molecules (neither is a peptide). One supplies the NAD+ cofactor directly; the other inhibits NNMT, the enzyme that depletes NAD+ precursors and methyl donors. Cited.',
+    keywords: [
+      'NAD+ vs 5-amino-1MQ',
+      'NNMT inhibitor',
+      'NAD longevity',
+      'NAD precursor vs NNMT',
+      'metabolic aging compound',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Longevity Peptides', href: '/longevity-peptides' },
+    headline: 'supply the cofactor versus stop the enzyme that wastes it',
+    intro: [
+      'NAD+ and 5-Amino-1MQ both show up under the longevity-and-metabolism banner, and neither is actually a peptide — both are small molecules catalogued here for their metabolic relevance. They approach the same theme, cellular NAD+, from opposite directions: one is the cofactor itself, the other blocks an enzyme that drains its precursors.',
+    ],
+    atAGlance: [
+      { dim: 'What it is', a: 'A coenzyme (dinucleotide) — not a peptide', b: 'A small-molecule enzyme inhibitor — not a peptide' },
+      { dim: 'Strategy', a: 'Supply the NAD+ cofactor directly', b: 'Inhibit NNMT to preserve NAD+ / methyl-donor pools' },
+      { dim: 'Direct target', a: 'Serves as substrate/cofactor for sirtuins, PARPs, redox enzymes', b: 'Nicotinamide N-methyltransferase (NNMT)' },
+      { dim: 'Research focus', a: 'Mitochondrial energy, sirtuin signaling, DNA repair, aging', b: 'Adipose-tissue metabolism, sarcopenia (muscle aging)' },
+      { dim: 'Rationale', a: 'NAD+ declines with age — restore it', b: 'NNMT wastes nicotinamide and SAM — block it upstream' },
+      { dim: 'Evidence stage', a: 'Research reagent / investigational therapeutic', b: 'Preclinical' },
+      { dim: 'FDA approval', a: 'None', b: 'None' },
+    ],
+    proseSections: [
+      {
+        title: 'Direct supply versus upstream preservation',
+        paragraphs: [
+          'NAD+ (nicotinamide adenine dinucleotide) is the workhorse cofactor at the center of the aging conversation. Every cell uses it to carry electrons through energy metabolism and to power two enzyme families that matter for longevity — sirtuins, which depend on it to regulate stress resistance and gene expression, and PARPs, which consume it during DNA repair. Cellular NAD+ falls with age, and the direct strategy is simply to restore it, either as NAD+ itself or through its precursors.',
+          '5-Amino-1MQ comes at the same pool from upstream. It selectively inhibits nicotinamide N-methyltransferase (NNMT), an enzyme that methylates nicotinamide — using up both nicotinamide (a NAD+ salvage precursor) and SAM (the cell’s main methyl donor). By blocking NNMT, 5-Amino-1MQ is studied in preclinical work to preserve those NAD+ and methyl-donor pools, with the metabolic readouts appearing in adipose tissue and aging muscle. So the contrast is clean: NAD+ is direct replacement of the cofactor; 5-Amino-1MQ is an attempt to stop the leak that depletes it. Both are small molecules — not peptides — grouped in this catalog for their metabolic-longevity relevance, and neither is FDA-approved.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Two approaches to the same target, cellular NAD+, at different points in the pathway. NAD+ supplies the cofactor directly and sits at the heart of mitochondrial, sirtuin, and DNA-repair biology; 5-Amino-1MQ works upstream, inhibiting the NNMT enzyme that consumes NAD+ precursors and methyl donors, with a preclinical focus on fat and muscle. Neither is a peptide, and neither is FDA-approved — NAD+ is used as a research reagent and studied therapeutically, while 5-Amino-1MQ remains preclinical. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between NAD+ and 5-Amino-1MQ?', a: 'NAD+ is the coenzyme itself, supplied directly to support energy metabolism, sirtuins, and DNA repair. 5-Amino-1MQ is a small-molecule inhibitor of the enzyme NNMT, studied to preserve NAD+ and methyl-donor (SAM) pools upstream rather than supplying NAD+ directly. Neither is a peptide.' },
+      { q: 'How are they related?', a: 'Both center on cellular NAD+. NAD+ replaces the cofactor directly; 5-Amino-1MQ blocks NNMT, an enzyme that consumes nicotinamide (a NAD+ precursor) and SAM, so inhibiting it is studied as a way to preserve those pools.' },
+      { q: 'Are these peptides?', a: 'No. NAD+ is a dinucleotide coenzyme and 5-Amino-1MQ is a small-molecule enzyme inhibitor. Both are catalogued alongside peptides for their metabolic and longevity relevance, but neither is a peptide.' },
+      { q: 'Are they approved?', a: 'No. NAD+ is used as a research reagent and studied as an investigational therapeutic; 5-Amino-1MQ is a preclinical research compound. Neither is FDA-approved. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['longevity-aging'],
+    about: [
+      { name: 'NAD+', alternateName: 'Nicotinamide Adenine Dinucleotide' },
+      { name: '5-Amino-1MQ' },
+    ],
+  },
+  {
+    slug: 'snap-8-vs-argireline',
+    aSlug: 'snap-8',
+    bSlug: 'argireline',
+    aName: 'SNAP-8',
+    bName: 'Argireline',
+    aPill: 'SNAP-25 mimic · octapeptide',
+    bPill: 'SNAP-25 mimic · hexapeptide',
+    metaTitle:
+      'SNAP-8 vs Argireline — Is the Longer Peptide Actually Stronger? | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of SNAP-8 (acetyl octapeptide-3) and Argireline (acetyl hexapeptide-8) — the same “topical Botox” SNARE mechanism in an eight- vs six-residue peptide. SNAP-8 is marketed as more potent, but the comparative evidence is thin. Cited.',
+    keywords: [
+      'SNAP-8 vs argireline',
+      'acetyl octapeptide-3 vs acetyl hexapeptide-8',
+      'topical botox peptide comparison',
+      'anti-wrinkle peptide',
+      'neurocosmetic peptide',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Cosmetic Peptides', href: '/catalog/category/cosmetic' },
+    headline: 'the same mechanism, two residues longer',
+    intro: [
+      'SNAP-8 and Argireline are the same idea at two lengths: both are acetylated peptides that mimic SNAP-25 to soften expression lines — the “topical Botox” concept — and SNAP-8 is simply the longer sibling, marketed as the more potent version. Whether those two extra residues actually deliver more is the whole question, and the honest answer is that the comparative evidence is thin.',
+    ],
+    atAGlance: [
+      { dim: 'INCI', a: 'Acetyl Octapeptide-3', b: 'Acetyl Hexapeptide-8' },
+      { dim: 'Length', a: '8 residues (Ac-EEMQRRAD-NH2)', b: '6 residues (Ac-EEMQRR-NH2)' },
+      { dim: 'Mechanism', a: 'SNAP-25 mimic; SNARE-complex interference', b: 'SNAP-25 mimic; SNARE-complex interference' },
+      { dim: 'Positioning', a: 'Marketed as the more potent successor', b: 'The original neurocosmetic' },
+      { dim: 'Target', a: 'Dynamic expression lines', b: 'Dynamic expression lines' },
+      { dim: 'Comparative evidence', a: 'Limited — potency edge not well substantiated', b: 'Modest, surface-level effects' },
+      { dim: 'Use', a: 'Topical cosmetic ingredient', b: 'Topical cosmetic ingredient' },
+      { dim: 'Molecular weight', a: '1075.2 Da', b: '887.0 Da' },
+    ],
+    proseSections: [
+      {
+        title: 'Longer, but not clearly stronger',
+        paragraphs: [
+          'Argireline (acetyl hexapeptide-8) is the peptide that created the “neurocosmetic” category — a six-residue acetylated fragment that mimics the N-terminus of SNAP-25, one of the SNARE proteins a nerve terminal uses to release the signal that contracts a facial muscle. Interfering with that machinery is proposed to blunt the contraction, so expressions crease the skin less. Applied topically, its effects are real in mechanism but modest and surface-level.',
+          'SNAP-8 (acetyl octapeptide-3) extends the identical sequence to eight residues, and its developers positioned that as improving the peptide’s ability to compete in the SNARE complex — hence the “more potent than Argireline” marketing. The mechanism is genuinely the same; what is missing is convincing head-to-head evidence that the longer chain meaningfully outperforms the shorter one on skin. So the two are best understood as siblings on the same shelf: SNAP-8 the longer, higher-priced, more-hyped version; Argireline the original, better-known one. Both are cosmetic ingredients, and both sit apart from Matrixyl (which builds collagen) and the copper peptides (which deliver copper).',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These are near-identical tools: the same SNAP-25 / SNARE mechanism aimed at the same dynamic expression lines, differing by two residues. SNAP-8 is marketed as the more potent successor, but the comparative evidence for a real advantage over Argireline is limited, and both produce only modest, surface-level effects next to injected botulinum toxin. Neither is an FDA-approved drug; both are topical cosmetic ingredients. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between SNAP-8 and Argireline?', a: 'They share the same mechanism — both are acetylated peptides that mimic SNAP-25 to reduce the muscle contractions behind expression lines. SNAP-8 (acetyl octapeptide-3) is the eight-residue version; Argireline (acetyl hexapeptide-8) is the six-residue original. SNAP-8 is marketed as more potent.' },
+      { q: 'Is SNAP-8 actually more effective than Argireline?', a: 'It is positioned that way — the longer sequence is claimed to compete more effectively in the SNARE complex — but convincing head-to-head evidence is limited. Both produce modest, surface-level effects, and the potency edge is more a marketing claim than a well-substantiated one.' },
+      { q: 'Are they like injected Botox?', a: 'They borrow the same SNAP-25 / SNARE logic, but they are applied topically and their effects are far milder than injected botulinum toxin. Both are cosmetic ingredients, not injectables.' },
+      { q: 'Are they FDA-approved?', a: 'No. Both SNAP-8 and Argireline are cosmetic ingredients, not FDA-approved drugs. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['skin-hair'],
+    about: [
+      { name: 'SNAP-8', alternateName: 'Acetyl Octapeptide-3' },
+      { name: 'Argireline', alternateName: 'Acetyl Hexapeptide-8' },
+    ],
+  },
+  {
+    slug: 'tb-500-vs-ghk-cu',
+    aSlug: 'tb-500',
+    bSlug: 'ghk-cu',
+    aName: 'TB-500',
+    bName: 'GHK-Cu',
+    aPill: 'Tβ4 fragment · cell migration',
+    bPill: 'Copper tripeptide · ECM',
+    metaTitle:
+      'TB-500 vs GHK-Cu — Cell-Migration Repair vs Copper/ECM Remodeling | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of TB-500 (a thymosin β4 fragment) and GHK-Cu (a copper tripeptide) — two “repair” peptides with different mechanisms: actin-driven cell migration vs copper delivery and extracellular-matrix remodeling. Cited.',
+    keywords: [
+      'TB-500 vs GHK-Cu',
+      'repair peptide comparison',
+      'thymosin beta-4 vs copper peptide',
+      'GHK-Cu skin',
+      'TB-500 tissue repair',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Healing & Repair', href: '/catalog/category/healing-repair' },
+    headline: 'move the cells versus remodel the matrix',
+    intro: [
+      'TB-500 and GHK-Cu both get filed under “repair,” but they do different jobs in different tissue. TB-500 mobilizes cells to a wound by regulating actin; GHK-Cu delivers copper and reshapes the extracellular matrix, mostly in skin. Together with BPC-157, they form a trio of repair peptides that are frequently grouped and rarely distinguished.',
+    ],
+    atAGlance: [
+      { dim: 'Structure', a: 'Synthetic fragment of thymosin β4 (LKKTETQ motif)', b: 'Copper-bound tripeptide (Gly-His-Lys)' },
+      { dim: 'Primary mechanism', a: 'G-actin sequestration → directed cell migration', b: 'Copper delivery + ECM-remodeling gene modulation' },
+      { dim: 'Target tissue', a: 'Soft tissue, cardiac, dermal (systemic)', b: 'Skin, extracellular matrix, hair follicle' },
+      { dim: 'Best-studied for', a: 'Cell migration, wound and cardiac repair', b: 'Collagen / elastin synthesis, skin aging, wound healing' },
+      { dim: 'Typical route (research)', a: 'Injected (systemic)', b: 'Topical / local (also injectable)' },
+      { dim: 'Evidence base', a: 'Preclinical; much derived from thymosin β4 itself', b: 'Extensive dermatologic / cosmetic literature, incl. human topical data' },
+      { dim: 'Status', a: 'Research compound — WADA-prohibited; not FDA-approved', b: 'Cosmetic ingredient (Copper Tripeptide-1) / research' },
+      { dim: 'Molecular weight', a: '~4900 Da (peptide fragment)', b: '401.9 Da' },
+    ],
+    columnSections: [
+      {
+        title: 'Two different repair jobs',
+        columns: [
+          {
+            heading: 'TB-500 — cell migration',
+            accent: 'a',
+            points: [
+              'Reproduces part of thymosin β4’s actin-binding activity',
+              'Sequesters monomeric G-actin, regulating the cytoskeleton',
+              'Promotes directed migration of cells into injured tissue',
+              'Studied in soft-tissue, cardiac, and dermal repair models',
+            ],
+          },
+          {
+            heading: 'GHK-Cu — matrix remodeling',
+            accent: 'b',
+            points: [
+              'Carries copper(II), a cofactor for matrix-remodeling enzymes',
+              'Modulates collagen, elastin, and glycosaminoglycan synthesis',
+              'The reference “copper peptide” for facial-skin remodeling',
+              'Backed by a substantial dermatologic and cosmetic literature',
+            ],
+          },
+        ],
+      },
+    ],
+    proseSections: [
+      {
+        title: 'Different mechanisms, different evidence',
+        paragraphs: [
+          'TB-500 corresponds to the actin-binding region of thymosin β4, a protein involved in cell migration and tissue repair. By sequestering monomeric G-actin it influences the cytoskeletal dynamics that let cells mobilize toward an injury, with research interest in soft-tissue, cardiac, and dermal repair. Its evidence is largely preclinical — and much of it derives from thymosin β4 as a whole rather than the TB-500 fragment specifically — and it is a research compound, prohibited in sport and not FDA-approved.',
+          'GHK-Cu comes at repair from the matrix side. It is the copper complex of the tripeptide glycyl-histidyl-lysine, first isolated from human plasma in 1973, and it works by delivering copper — a cofactor for matrix-remodeling and antioxidant enzymes — while shifting the expression of extracellular-matrix genes. Its literature is concentrated in dermatology and cosmetics, including human topical data, where it is the reference copper peptide for collagen support and skin aging. So the two overlap only in the loose category of “repair”: TB-500 is a systemic, migration-driving research peptide; GHK-Cu is a mostly topical, matrix-remodeling copper peptide with a deeper cosmetic record.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Complementary, not interchangeable. TB-500 is studied for mobilizing cells into injured tissue via actin regulation, with a preclinical evidence base and a WADA prohibition; GHK-Cu is the reference copper peptide for skin and extracellular-matrix remodeling, with a broader dermatologic literature. Neither is an FDA-approved drug — GHK-Cu is a cosmetic ingredient, TB-500 a research compound. Grouping them (and BPC-157) as one “recovery” category obscures how differently they act. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between TB-500 and GHK-Cu?', a: 'TB-500 is a synthetic fragment of thymosin β4 that promotes cell migration by regulating actin, studied for soft-tissue and cardiac repair. GHK-Cu is a copper-bound tripeptide that delivers copper and remodels the extracellular matrix, mainly in skin. Different structures, mechanisms, and target tissue.' },
+      { q: 'Are they used together?', a: 'They are sometimes grouped in “recovery” contexts (often with BPC-157), but because they act on different mechanisms and tissue there is no controlled human data on the combination. This page is a research reference, not a protocol.' },
+      { q: 'Which has stronger evidence?', a: 'GHK-Cu has the deeper literature, especially in dermatology and cosmetics, including human topical studies. TB-500’s evidence is preclinical, and much of it derives from thymosin β4 rather than the fragment itself.' },
+      { q: 'Is either FDA-approved?', a: 'No. TB-500 is a research compound and is prohibited in sport; GHK-Cu is used as a cosmetic ingredient (Copper Tripeptide-1), not an approved drug. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['wound-healing', 'skin-hair'],
+    about: [
+      { name: 'TB-500', alternateName: 'Thymosin beta-4 fragment' },
+      { name: 'GHK-Cu', alternateName: 'Copper Tripeptide-1' },
+    ],
+  },
+  {
+    slug: 'hcg-vs-gonadorelin',
+    aSlug: 'hcg',
+    bSlug: 'gonadorelin',
+    aName: 'HCG',
+    bName: 'Gonadorelin',
+    aPill: 'LH-mimic glycoprotein · FDA approved',
+    bPill: 'GnRH decapeptide · upstream',
+    metaTitle:
+      'HCG vs Gonadorelin — Downstream LH-Mimic vs Upstream GnRH | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of hCG and gonadorelin (GnRH) — two ways to drive the reproductive axis: hCG mimics luteinizing hormone directly at the gonad, while gonadorelin acts upstream on the pituitary. Where each sits on the HPG axis, and why delivery pattern matters. Cited.',
+    keywords: [
+      'hCG vs gonadorelin',
+      'gonadorelin vs hCG TRT',
+      'GnRH vs LH',
+      'HPG axis peptide',
+      'testicular function fertility',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Sexual & Reproductive', href: '/research-areas/sexual-reproductive' },
+    headline: 'drive the gonad directly, or signal the pituitary',
+    intro: [
+      'hCG and gonadorelin both switch on the reproductive axis, but they plug in at different points. hCG mimics luteinizing hormone directly at the gonad; gonadorelin is GnRH, acting one level up on the pituitary to release the body’s own LH and FSH. That difference in where they act — downstream versus upstream — is the whole comparison, and it explains why they behave so differently.',
+    ],
+    atAGlance: [
+      { dim: 'What it is', a: 'Heterodimeric glycoprotein (LH/CG-receptor agonist)', b: 'Native GnRH decapeptide' },
+      { dim: 'Axis position', a: 'Downstream — acts at the gonad', b: 'Upstream — acts on the pituitary' },
+      { dim: 'Direct action', a: 'Mimics the LH signal (Leydig-cell testosterone; ovulation)', b: 'Triggers pituitary LH + FSH release' },
+      { dim: 'Requires a working pituitary?', a: 'No — bypasses it', b: 'Yes — it acts through it' },
+      { dim: 'Delivery sensitivity', a: 'Long half-life (glycosylation) — steady LH-like signal', b: 'Pulsatile stimulates; continuous desensitizes and suppresses' },
+      { dim: 'Half-life', a: 'Long (~day-scale)', b: 'Minutes (native peptide)' },
+      { dim: 'FDA status', a: 'Approved (Ovidrel / Pregnyl / Novarel)', b: 'Historically approved (Lutrepulse, Factrel) — discontinued in US' },
+      { dim: 'Molecular identity', a: 'Glycoprotein, ~36–40 kDa (no single formula)', b: 'Decapeptide, MW 1182.3' },
+    ],
+    proseSections: [
+      {
+        title: 'Downstream versus upstream on the HPG axis',
+        paragraphs: [
+          'hCG is a downstream tool. It is a glycoprotein that binds the same LH/CG receptor as luteinizing hormone, so it reproduces the LH signal directly at the gonad — triggering ovulation and luteal progesterone in women, and Leydig-cell testosterone in men. Crucially, it does this without needing the pituitary at all: it acts below it, and its glycosylation gives it a long half-life, so a single dose behaves like a sustained LH surge. It is FDA-approved (Ovidrel, Pregnyl, Novarel) and is used in assisted reproduction and male hypogonadism — including to keep the testes signaled during testosterone therapy.',
+          'Gonadorelin works one level higher. It is synthetic GnRH, the hypothalamic decapeptide that tells the pituitary to release LH and FSH — so it depends on a functioning pituitary and drives the body’s own gonadotropins rather than replacing them. Its defining feature is rhythm: given in pulses it stimulates the axis, but given continuously it desensitizes the receptor and suppresses the very hormones it would otherwise release. That paradox, plus a half-life of minutes, is why delivery pattern matters so much, and why its historical approvals used a pulsatile pump (Lutrepulse). So the two are complementary levels of the same axis: gonadorelin asks the pituitary to make LH/FSH; hCG skips the pituitary and mimics LH at the gonad directly.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'The choice is really about where you want to act on the reproductive axis. hCG works downstream, mimicking LH at the gonad directly — a long-acting, FDA-approved signal that does not need the pituitary. Gonadorelin works upstream as GnRH, driving the pituitary to make its own LH and FSH, but only when delivered in pulses; continuous exposure shuts the axis down. hCG is the established, currently marketed option; gonadorelin’s US approvals were discontinued. Both are research-and-education topics here, not dosing guidance — the mechanisms differ enough that they are not simple substitutes. This page is a research and educational reference, not medical advice.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between hCG and gonadorelin?', a: 'hCG mimics luteinizing hormone (LH) directly at the gonad, stimulating testosterone (in men) or ovulation (in women) without needing the pituitary. Gonadorelin is GnRH — it acts upstream on the pituitary to release the body’s own LH and FSH, and it only works when given in pulses. hCG is downstream and long-acting; gonadorelin is upstream and rhythm-dependent.' },
+      { q: 'Why does gonadorelin need pulsatile dosing?', a: 'The GnRH receptor responds to rhythm. Pulses stimulate LH and FSH; continuous exposure desensitizes the receptor and suppresses them. hCG has no such requirement — its long half-life and direct action at the gonad give a steady LH-like signal.' },
+      { q: 'How do they relate on the reproductive axis?', a: 'They sit at different levels: kisspeptin triggers GnRH release, gonadorelin (GnRH) drives the pituitary to make LH and FSH, and hCG acts furthest down by mimicking LH directly at the gonad. Gonadorelin is upstream of hCG.' },
+      { q: 'Is either FDA-approved?', a: 'hCG is FDA-approved (Ovidrel, Pregnyl, Novarel) for ovulation induction and other uses. Gonadorelin was historically approved in the US (Lutrepulse for infertility; Factrel as a diagnostic) but both were discontinued. This page is a research and educational reference, not medical advice.' },
+    ],
+    relatedAreas: ['sexual-reproductive'],
+    about: [
+      { name: 'HCG', alternateName: 'Human chorionic gonadotropin' },
+      { name: 'Gonadorelin', alternateName: 'GnRH' },
+    ],
+  },
+  {
+    slug: 'glutathione-vs-nad',
+    aSlug: 'glutathione',
+    bSlug: 'nad-plus',
+    aName: 'Glutathione',
+    bName: 'NAD+',
+    aPill: 'Tripeptide antioxidant',
+    bPill: 'Redox cofactor (not a peptide)',
+    metaTitle:
+      'Glutathione vs NAD+ — Antioxidant Buffer vs Metabolic Cofactor | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of glutathione and NAD+ — two “longevity” injectables that are both about redox but do different jobs: glutathione is a tripeptide antioxidant that neutralizes damage, while NAD+ is a coenzyme that powers energy metabolism and repair signaling. Cited.',
+    keywords: [
+      'glutathione vs NAD+',
+      'antioxidant vs NAD',
+      'longevity injectable comparison',
+      'glutathione IV',
+      'NAD+ therapy',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Longevity Peptides', href: '/longevity-peptides' },
+    headline: 'neutralize the damage versus power the machinery',
+    intro: [
+      'Glutathione and NAD+ are both sold as “longevity” IVs and both live in the world of cellular redox, which is why they get lumped together. But they do genuinely different jobs — one mops up oxidative damage, the other fuels the reactions that produce energy and drive repair — and only one of them is actually a peptide.',
+    ],
+    atAGlance: [
+      { dim: 'What it is', a: 'A tripeptide (γ-Glu-Cys-Gly) — a true peptide', b: 'A coenzyme (dinucleotide) — not a peptide' },
+      { dim: 'Primary role', a: 'Master antioxidant / redox buffer', b: 'Metabolic redox cofactor + signaling substrate' },
+      { dim: 'What it does', a: 'Neutralizes reactive oxygen species; detox conjugation', b: 'Carries electrons; powers sirtuins and PARP-mediated DNA repair' },
+      { dim: 'Key chemistry', a: 'Cysteine thiol donates electrons; cycles GSH ⇄ GSSG', b: 'Cycles NAD+ ⇄ NADH in energy metabolism' },
+      { dim: 'Grey-market use', a: 'Antioxidant, detox, and skin-lightening (weak evidence)', b: 'Energy, longevity, “anti-aging” IVs' },
+      { dim: 'Research focus', a: 'Oxidative stress, detoxification, skin', b: 'Mitochondrial energy, sirtuin longevity signaling, aging' },
+      { dim: 'Status', a: 'Supplement / reagent — not FDA-approved for these uses', b: 'Research reagent / investigational — not FDA-approved' },
+      { dim: 'Molecular weight', a: '307.3 Da', b: '663.4 Da' },
+    ],
+    proseSections: [
+      {
+        title: 'Defense versus fuel',
+        paragraphs: [
+          'Glutathione (GSH) is the cell’s principal antioxidant — and, unlike NAD+, it is a genuine peptide: a tripeptide of glutamate, cysteine, and glycine, joined through an unusual γ-glutamyl bond that resists ordinary peptidases. Its working end is the cysteine thiol, which donates electrons to neutralize reactive oxygen species and serves as a substrate for the enzymes that conjugate and clear toxins, cycling between reduced (GSH) and oxidized (GSSG) forms. On the grey market it is sold as an injectable and IV for antioxidant support and detox, and especially for skin lightening — a use marketed heavily on thin, inconsistent clinical evidence.',
+          'NAD+ is not a peptide at all but a coenzyme, and its job is not to neutralize damage but to run the machinery. Every cell uses it to carry electrons through energy metabolism, and two enzyme families central to aging depend on it: sirtuins, for stress-resistance and longevity signaling, and PARPs, for DNA repair. Cellular NAD+ declines with age, which is why restoring it (directly or via precursors) is a longevity theme and why NAD+ IVs are marketed for energy and “anti-aging.” So the two are complementary rather than competing: glutathione defends the cell against oxidative damage; NAD+ powers the reactions that generate energy and maintain the genome. Both decline with age, both are sold as injectables, and neither is FDA-approved for these uses.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Same broad theme, different roles. Glutathione is a tripeptide antioxidant — it neutralizes reactive oxygen species and supports detoxification, and its most-marketed use (skin lightening) rests on weak evidence. NAD+ is a metabolic coenzyme — not a peptide — that fuels energy production and the sirtuin/PARP machinery tied to aging. They are complementary parts of cellular redox, not substitutes, and neither is FDA-approved for the antioxidant, longevity, or cosmetic uses they are sold for. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between glutathione and NAD+?', a: 'Glutathione is a tripeptide antioxidant that neutralizes reactive oxygen species and supports detoxification. NAD+ is a coenzyme (not a peptide) that carries electrons in energy metabolism and powers sirtuins and DNA-repair enzymes. One defends against oxidative damage; the other fuels metabolic and repair machinery.' },
+      { q: 'Is one a peptide and the other not?', a: 'Yes. Glutathione is a genuine tripeptide (γ-Glu-Cys-Gly). NAD+ is a dinucleotide coenzyme, not a peptide — it is catalogued alongside peptides for its metabolic and longevity relevance.' },
+      { q: 'Do glutathione IVs lighten skin?', a: 'Glutathione is marketed heavily for skin lightening, but the clinical evidence is weak and inconsistent and its safety for that use is unclear. This page is a research and educational reference, not medical advice.' },
+      { q: 'Are they FDA-approved?', a: 'No. Glutathione is sold as a supplement/reagent and NAD+ as a research reagent and investigational therapeutic; neither is FDA-approved for the antioxidant, detox, longevity, or cosmetic uses they are marketed for. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['longevity-aging'],
+    about: [
+      { name: 'Glutathione', alternateName: 'GSH' },
+      { name: 'NAD+', alternateName: 'Nicotinamide Adenine Dinucleotide' },
+    ],
+  },
 ]
 
 export const COMPARISON_BY_SLUG: Record<string, Comparison> = Object.fromEntries(
