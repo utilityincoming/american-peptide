@@ -2117,6 +2117,281 @@ export const COMPARISONS: Comparison[] = [
       { name: '5-Amino-1MQ' },
     ],
   },
+  {
+    slug: 'snap-8-vs-argireline',
+    aSlug: 'snap-8',
+    bSlug: 'argireline',
+    aName: 'SNAP-8',
+    bName: 'Argireline',
+    aPill: 'SNAP-25 mimic · octapeptide',
+    bPill: 'SNAP-25 mimic · hexapeptide',
+    metaTitle:
+      'SNAP-8 vs Argireline — Is the Longer Peptide Actually Stronger? | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of SNAP-8 (acetyl octapeptide-3) and Argireline (acetyl hexapeptide-8) — the same “topical Botox” SNARE mechanism in an eight- vs six-residue peptide. SNAP-8 is marketed as more potent, but the comparative evidence is thin. Cited.',
+    keywords: [
+      'SNAP-8 vs argireline',
+      'acetyl octapeptide-3 vs acetyl hexapeptide-8',
+      'topical botox peptide comparison',
+      'anti-wrinkle peptide',
+      'neurocosmetic peptide',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Cosmetic Peptides', href: '/catalog/category/cosmetic' },
+    headline: 'the same mechanism, two residues longer',
+    intro: [
+      'SNAP-8 and Argireline are the same idea at two lengths: both are acetylated peptides that mimic SNAP-25 to soften expression lines — the “topical Botox” concept — and SNAP-8 is simply the longer sibling, marketed as the more potent version. Whether those two extra residues actually deliver more is the whole question, and the honest answer is that the comparative evidence is thin.',
+    ],
+    atAGlance: [
+      { dim: 'INCI', a: 'Acetyl Octapeptide-3', b: 'Acetyl Hexapeptide-8' },
+      { dim: 'Length', a: '8 residues (Ac-EEMQRRAD-NH2)', b: '6 residues (Ac-EEMQRR-NH2)' },
+      { dim: 'Mechanism', a: 'SNAP-25 mimic; SNARE-complex interference', b: 'SNAP-25 mimic; SNARE-complex interference' },
+      { dim: 'Positioning', a: 'Marketed as the more potent successor', b: 'The original neurocosmetic' },
+      { dim: 'Target', a: 'Dynamic expression lines', b: 'Dynamic expression lines' },
+      { dim: 'Comparative evidence', a: 'Limited — potency edge not well substantiated', b: 'Modest, surface-level effects' },
+      { dim: 'Use', a: 'Topical cosmetic ingredient', b: 'Topical cosmetic ingredient' },
+      { dim: 'Molecular weight', a: '1075.2 Da', b: '887.0 Da' },
+    ],
+    proseSections: [
+      {
+        title: 'Longer, but not clearly stronger',
+        paragraphs: [
+          'Argireline (acetyl hexapeptide-8) is the peptide that created the “neurocosmetic” category — a six-residue acetylated fragment that mimics the N-terminus of SNAP-25, one of the SNARE proteins a nerve terminal uses to release the signal that contracts a facial muscle. Interfering with that machinery is proposed to blunt the contraction, so expressions crease the skin less. Applied topically, its effects are real in mechanism but modest and surface-level.',
+          'SNAP-8 (acetyl octapeptide-3) extends the identical sequence to eight residues, and its developers positioned that as improving the peptide’s ability to compete in the SNARE complex — hence the “more potent than Argireline” marketing. The mechanism is genuinely the same; what is missing is convincing head-to-head evidence that the longer chain meaningfully outperforms the shorter one on skin. So the two are best understood as siblings on the same shelf: SNAP-8 the longer, higher-priced, more-hyped version; Argireline the original, better-known one. Both are cosmetic ingredients, and both sit apart from Matrixyl (which builds collagen) and the copper peptides (which deliver copper).',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These are near-identical tools: the same SNAP-25 / SNARE mechanism aimed at the same dynamic expression lines, differing by two residues. SNAP-8 is marketed as the more potent successor, but the comparative evidence for a real advantage over Argireline is limited, and both produce only modest, surface-level effects next to injected botulinum toxin. Neither is an FDA-approved drug; both are topical cosmetic ingredients. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between SNAP-8 and Argireline?', a: 'They share the same mechanism — both are acetylated peptides that mimic SNAP-25 to reduce the muscle contractions behind expression lines. SNAP-8 (acetyl octapeptide-3) is the eight-residue version; Argireline (acetyl hexapeptide-8) is the six-residue original. SNAP-8 is marketed as more potent.' },
+      { q: 'Is SNAP-8 actually more effective than Argireline?', a: 'It is positioned that way — the longer sequence is claimed to compete more effectively in the SNARE complex — but convincing head-to-head evidence is limited. Both produce modest, surface-level effects, and the potency edge is more a marketing claim than a well-substantiated one.' },
+      { q: 'Are they like injected Botox?', a: 'They borrow the same SNAP-25 / SNARE logic, but they are applied topically and their effects are far milder than injected botulinum toxin. Both are cosmetic ingredients, not injectables.' },
+      { q: 'Are they FDA-approved?', a: 'No. Both SNAP-8 and Argireline are cosmetic ingredients, not FDA-approved drugs. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['skin-hair'],
+    about: [
+      { name: 'SNAP-8', alternateName: 'Acetyl Octapeptide-3' },
+      { name: 'Argireline', alternateName: 'Acetyl Hexapeptide-8' },
+    ],
+  },
+  {
+    slug: 'tb-500-vs-ghk-cu',
+    aSlug: 'tb-500',
+    bSlug: 'ghk-cu',
+    aName: 'TB-500',
+    bName: 'GHK-Cu',
+    aPill: 'Tβ4 fragment · cell migration',
+    bPill: 'Copper tripeptide · ECM',
+    metaTitle:
+      'TB-500 vs GHK-Cu — Cell-Migration Repair vs Copper/ECM Remodeling | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of TB-500 (a thymosin β4 fragment) and GHK-Cu (a copper tripeptide) — two “repair” peptides with different mechanisms: actin-driven cell migration vs copper delivery and extracellular-matrix remodeling. Cited.',
+    keywords: [
+      'TB-500 vs GHK-Cu',
+      'repair peptide comparison',
+      'thymosin beta-4 vs copper peptide',
+      'GHK-Cu skin',
+      'TB-500 tissue repair',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Healing & Repair', href: '/catalog/category/healing-repair' },
+    headline: 'move the cells versus remodel the matrix',
+    intro: [
+      'TB-500 and GHK-Cu both get filed under “repair,” but they do different jobs in different tissue. TB-500 mobilizes cells to a wound by regulating actin; GHK-Cu delivers copper and reshapes the extracellular matrix, mostly in skin. Together with BPC-157, they form a trio of repair peptides that are frequently grouped and rarely distinguished.',
+    ],
+    atAGlance: [
+      { dim: 'Structure', a: 'Synthetic fragment of thymosin β4 (LKKTETQ motif)', b: 'Copper-bound tripeptide (Gly-His-Lys)' },
+      { dim: 'Primary mechanism', a: 'G-actin sequestration → directed cell migration', b: 'Copper delivery + ECM-remodeling gene modulation' },
+      { dim: 'Target tissue', a: 'Soft tissue, cardiac, dermal (systemic)', b: 'Skin, extracellular matrix, hair follicle' },
+      { dim: 'Best-studied for', a: 'Cell migration, wound and cardiac repair', b: 'Collagen / elastin synthesis, skin aging, wound healing' },
+      { dim: 'Typical route (research)', a: 'Injected (systemic)', b: 'Topical / local (also injectable)' },
+      { dim: 'Evidence base', a: 'Preclinical; much derived from thymosin β4 itself', b: 'Extensive dermatologic / cosmetic literature, incl. human topical data' },
+      { dim: 'Status', a: 'Research compound — WADA-prohibited; not FDA-approved', b: 'Cosmetic ingredient (Copper Tripeptide-1) / research' },
+      { dim: 'Molecular weight', a: '~4900 Da (peptide fragment)', b: '401.9 Da' },
+    ],
+    columnSections: [
+      {
+        title: 'Two different repair jobs',
+        columns: [
+          {
+            heading: 'TB-500 — cell migration',
+            accent: 'a',
+            points: [
+              'Reproduces part of thymosin β4’s actin-binding activity',
+              'Sequesters monomeric G-actin, regulating the cytoskeleton',
+              'Promotes directed migration of cells into injured tissue',
+              'Studied in soft-tissue, cardiac, and dermal repair models',
+            ],
+          },
+          {
+            heading: 'GHK-Cu — matrix remodeling',
+            accent: 'b',
+            points: [
+              'Carries copper(II), a cofactor for matrix-remodeling enzymes',
+              'Modulates collagen, elastin, and glycosaminoglycan synthesis',
+              'The reference “copper peptide” for facial-skin remodeling',
+              'Backed by a substantial dermatologic and cosmetic literature',
+            ],
+          },
+        ],
+      },
+    ],
+    proseSections: [
+      {
+        title: 'Different mechanisms, different evidence',
+        paragraphs: [
+          'TB-500 corresponds to the actin-binding region of thymosin β4, a protein involved in cell migration and tissue repair. By sequestering monomeric G-actin it influences the cytoskeletal dynamics that let cells mobilize toward an injury, with research interest in soft-tissue, cardiac, and dermal repair. Its evidence is largely preclinical — and much of it derives from thymosin β4 as a whole rather than the TB-500 fragment specifically — and it is a research compound, prohibited in sport and not FDA-approved.',
+          'GHK-Cu comes at repair from the matrix side. It is the copper complex of the tripeptide glycyl-histidyl-lysine, first isolated from human plasma in 1973, and it works by delivering copper — a cofactor for matrix-remodeling and antioxidant enzymes — while shifting the expression of extracellular-matrix genes. Its literature is concentrated in dermatology and cosmetics, including human topical data, where it is the reference copper peptide for collagen support and skin aging. So the two overlap only in the loose category of “repair”: TB-500 is a systemic, migration-driving research peptide; GHK-Cu is a mostly topical, matrix-remodeling copper peptide with a deeper cosmetic record.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Complementary, not interchangeable. TB-500 is studied for mobilizing cells into injured tissue via actin regulation, with a preclinical evidence base and a WADA prohibition; GHK-Cu is the reference copper peptide for skin and extracellular-matrix remodeling, with a broader dermatologic literature. Neither is an FDA-approved drug — GHK-Cu is a cosmetic ingredient, TB-500 a research compound. Grouping them (and BPC-157) as one “recovery” category obscures how differently they act. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between TB-500 and GHK-Cu?', a: 'TB-500 is a synthetic fragment of thymosin β4 that promotes cell migration by regulating actin, studied for soft-tissue and cardiac repair. GHK-Cu is a copper-bound tripeptide that delivers copper and remodels the extracellular matrix, mainly in skin. Different structures, mechanisms, and target tissue.' },
+      { q: 'Are they used together?', a: 'They are sometimes grouped in “recovery” contexts (often with BPC-157), but because they act on different mechanisms and tissue there is no controlled human data on the combination. This page is a research reference, not a protocol.' },
+      { q: 'Which has stronger evidence?', a: 'GHK-Cu has the deeper literature, especially in dermatology and cosmetics, including human topical studies. TB-500’s evidence is preclinical, and much of it derives from thymosin β4 rather than the fragment itself.' },
+      { q: 'Is either FDA-approved?', a: 'No. TB-500 is a research compound and is prohibited in sport; GHK-Cu is used as a cosmetic ingredient (Copper Tripeptide-1), not an approved drug. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['wound-healing', 'skin-hair'],
+    about: [
+      { name: 'TB-500', alternateName: 'Thymosin beta-4 fragment' },
+      { name: 'GHK-Cu', alternateName: 'Copper Tripeptide-1' },
+    ],
+  },
+  {
+    slug: 'hcg-vs-gonadorelin',
+    aSlug: 'hcg',
+    bSlug: 'gonadorelin',
+    aName: 'HCG',
+    bName: 'Gonadorelin',
+    aPill: 'LH-mimic glycoprotein · FDA approved',
+    bPill: 'GnRH decapeptide · upstream',
+    metaTitle:
+      'HCG vs Gonadorelin — Downstream LH-Mimic vs Upstream GnRH | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of hCG and gonadorelin (GnRH) — two ways to drive the reproductive axis: hCG mimics luteinizing hormone directly at the gonad, while gonadorelin acts upstream on the pituitary. Where each sits on the HPG axis, and why delivery pattern matters. Cited.',
+    keywords: [
+      'hCG vs gonadorelin',
+      'gonadorelin vs hCG TRT',
+      'GnRH vs LH',
+      'HPG axis peptide',
+      'testicular function fertility',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Sexual & Reproductive', href: '/research-areas/sexual-reproductive' },
+    headline: 'drive the gonad directly, or signal the pituitary',
+    intro: [
+      'hCG and gonadorelin both switch on the reproductive axis, but they plug in at different points. hCG mimics luteinizing hormone directly at the gonad; gonadorelin is GnRH, acting one level up on the pituitary to release the body’s own LH and FSH. That difference in where they act — downstream versus upstream — is the whole comparison, and it explains why they behave so differently.',
+    ],
+    atAGlance: [
+      { dim: 'What it is', a: 'Heterodimeric glycoprotein (LH/CG-receptor agonist)', b: 'Native GnRH decapeptide' },
+      { dim: 'Axis position', a: 'Downstream — acts at the gonad', b: 'Upstream — acts on the pituitary' },
+      { dim: 'Direct action', a: 'Mimics the LH signal (Leydig-cell testosterone; ovulation)', b: 'Triggers pituitary LH + FSH release' },
+      { dim: 'Requires a working pituitary?', a: 'No — bypasses it', b: 'Yes — it acts through it' },
+      { dim: 'Delivery sensitivity', a: 'Long half-life (glycosylation) — steady LH-like signal', b: 'Pulsatile stimulates; continuous desensitizes and suppresses' },
+      { dim: 'Half-life', a: 'Long (~day-scale)', b: 'Minutes (native peptide)' },
+      { dim: 'FDA status', a: 'Approved (Ovidrel / Pregnyl / Novarel)', b: 'Historically approved (Lutrepulse, Factrel) — discontinued in US' },
+      { dim: 'Molecular identity', a: 'Glycoprotein, ~36–40 kDa (no single formula)', b: 'Decapeptide, MW 1182.3' },
+    ],
+    proseSections: [
+      {
+        title: 'Downstream versus upstream on the HPG axis',
+        paragraphs: [
+          'hCG is a downstream tool. It is a glycoprotein that binds the same LH/CG receptor as luteinizing hormone, so it reproduces the LH signal directly at the gonad — triggering ovulation and luteal progesterone in women, and Leydig-cell testosterone in men. Crucially, it does this without needing the pituitary at all: it acts below it, and its glycosylation gives it a long half-life, so a single dose behaves like a sustained LH surge. It is FDA-approved (Ovidrel, Pregnyl, Novarel) and is used in assisted reproduction and male hypogonadism — including to keep the testes signaled during testosterone therapy.',
+          'Gonadorelin works one level higher. It is synthetic GnRH, the hypothalamic decapeptide that tells the pituitary to release LH and FSH — so it depends on a functioning pituitary and drives the body’s own gonadotropins rather than replacing them. Its defining feature is rhythm: given in pulses it stimulates the axis, but given continuously it desensitizes the receptor and suppresses the very hormones it would otherwise release. That paradox, plus a half-life of minutes, is why delivery pattern matters so much, and why its historical approvals used a pulsatile pump (Lutrepulse). So the two are complementary levels of the same axis: gonadorelin asks the pituitary to make LH/FSH; hCG skips the pituitary and mimics LH at the gonad directly.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'The choice is really about where you want to act on the reproductive axis. hCG works downstream, mimicking LH at the gonad directly — a long-acting, FDA-approved signal that does not need the pituitary. Gonadorelin works upstream as GnRH, driving the pituitary to make its own LH and FSH, but only when delivered in pulses; continuous exposure shuts the axis down. hCG is the established, currently marketed option; gonadorelin’s US approvals were discontinued. Both are research-and-education topics here, not dosing guidance — the mechanisms differ enough that they are not simple substitutes. This page is a research and educational reference, not medical advice.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between hCG and gonadorelin?', a: 'hCG mimics luteinizing hormone (LH) directly at the gonad, stimulating testosterone (in men) or ovulation (in women) without needing the pituitary. Gonadorelin is GnRH — it acts upstream on the pituitary to release the body’s own LH and FSH, and it only works when given in pulses. hCG is downstream and long-acting; gonadorelin is upstream and rhythm-dependent.' },
+      { q: 'Why does gonadorelin need pulsatile dosing?', a: 'The GnRH receptor responds to rhythm. Pulses stimulate LH and FSH; continuous exposure desensitizes the receptor and suppresses them. hCG has no such requirement — its long half-life and direct action at the gonad give a steady LH-like signal.' },
+      { q: 'How do they relate on the reproductive axis?', a: 'They sit at different levels: kisspeptin triggers GnRH release, gonadorelin (GnRH) drives the pituitary to make LH and FSH, and hCG acts furthest down by mimicking LH directly at the gonad. Gonadorelin is upstream of hCG.' },
+      { q: 'Is either FDA-approved?', a: 'hCG is FDA-approved (Ovidrel, Pregnyl, Novarel) for ovulation induction and other uses. Gonadorelin was historically approved in the US (Lutrepulse for infertility; Factrel as a diagnostic) but both were discontinued. This page is a research and educational reference, not medical advice.' },
+    ],
+    relatedAreas: ['sexual-reproductive'],
+    about: [
+      { name: 'HCG', alternateName: 'Human chorionic gonadotropin' },
+      { name: 'Gonadorelin', alternateName: 'GnRH' },
+    ],
+  },
+  {
+    slug: 'glutathione-vs-nad',
+    aSlug: 'glutathione',
+    bSlug: 'nad-plus',
+    aName: 'Glutathione',
+    bName: 'NAD+',
+    aPill: 'Tripeptide antioxidant',
+    bPill: 'Redox cofactor (not a peptide)',
+    metaTitle:
+      'Glutathione vs NAD+ — Antioxidant Buffer vs Metabolic Cofactor | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of glutathione and NAD+ — two “longevity” injectables that are both about redox but do different jobs: glutathione is a tripeptide antioxidant that neutralizes damage, while NAD+ is a coenzyme that powers energy metabolism and repair signaling. Cited.',
+    keywords: [
+      'glutathione vs NAD+',
+      'antioxidant vs NAD',
+      'longevity injectable comparison',
+      'glutathione IV',
+      'NAD+ therapy',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Longevity Peptides', href: '/longevity-peptides' },
+    headline: 'neutralize the damage versus power the machinery',
+    intro: [
+      'Glutathione and NAD+ are both sold as “longevity” IVs and both live in the world of cellular redox, which is why they get lumped together. But they do genuinely different jobs — one mops up oxidative damage, the other fuels the reactions that produce energy and drive repair — and only one of them is actually a peptide.',
+    ],
+    atAGlance: [
+      { dim: 'What it is', a: 'A tripeptide (γ-Glu-Cys-Gly) — a true peptide', b: 'A coenzyme (dinucleotide) — not a peptide' },
+      { dim: 'Primary role', a: 'Master antioxidant / redox buffer', b: 'Metabolic redox cofactor + signaling substrate' },
+      { dim: 'What it does', a: 'Neutralizes reactive oxygen species; detox conjugation', b: 'Carries electrons; powers sirtuins and PARP-mediated DNA repair' },
+      { dim: 'Key chemistry', a: 'Cysteine thiol donates electrons; cycles GSH ⇄ GSSG', b: 'Cycles NAD+ ⇄ NADH in energy metabolism' },
+      { dim: 'Grey-market use', a: 'Antioxidant, detox, and skin-lightening (weak evidence)', b: 'Energy, longevity, “anti-aging” IVs' },
+      { dim: 'Research focus', a: 'Oxidative stress, detoxification, skin', b: 'Mitochondrial energy, sirtuin longevity signaling, aging' },
+      { dim: 'Status', a: 'Supplement / reagent — not FDA-approved for these uses', b: 'Research reagent / investigational — not FDA-approved' },
+      { dim: 'Molecular weight', a: '307.3 Da', b: '663.4 Da' },
+    ],
+    proseSections: [
+      {
+        title: 'Defense versus fuel',
+        paragraphs: [
+          'Glutathione (GSH) is the cell’s principal antioxidant — and, unlike NAD+, it is a genuine peptide: a tripeptide of glutamate, cysteine, and glycine, joined through an unusual γ-glutamyl bond that resists ordinary peptidases. Its working end is the cysteine thiol, which donates electrons to neutralize reactive oxygen species and serves as a substrate for the enzymes that conjugate and clear toxins, cycling between reduced (GSH) and oxidized (GSSG) forms. On the grey market it is sold as an injectable and IV for antioxidant support and detox, and especially for skin lightening — a use marketed heavily on thin, inconsistent clinical evidence.',
+          'NAD+ is not a peptide at all but a coenzyme, and its job is not to neutralize damage but to run the machinery. Every cell uses it to carry electrons through energy metabolism, and two enzyme families central to aging depend on it: sirtuins, for stress-resistance and longevity signaling, and PARPs, for DNA repair. Cellular NAD+ declines with age, which is why restoring it (directly or via precursors) is a longevity theme and why NAD+ IVs are marketed for energy and “anti-aging.” So the two are complementary rather than competing: glutathione defends the cell against oxidative damage; NAD+ powers the reactions that generate energy and maintain the genome. Both decline with age, both are sold as injectables, and neither is FDA-approved for these uses.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Same broad theme, different roles. Glutathione is a tripeptide antioxidant — it neutralizes reactive oxygen species and supports detoxification, and its most-marketed use (skin lightening) rests on weak evidence. NAD+ is a metabolic coenzyme — not a peptide — that fuels energy production and the sirtuin/PARP machinery tied to aging. They are complementary parts of cellular redox, not substitutes, and neither is FDA-approved for the antioxidant, longevity, or cosmetic uses they are sold for. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between glutathione and NAD+?', a: 'Glutathione is a tripeptide antioxidant that neutralizes reactive oxygen species and supports detoxification. NAD+ is a coenzyme (not a peptide) that carries electrons in energy metabolism and powers sirtuins and DNA-repair enzymes. One defends against oxidative damage; the other fuels metabolic and repair machinery.' },
+      { q: 'Is one a peptide and the other not?', a: 'Yes. Glutathione is a genuine tripeptide (γ-Glu-Cys-Gly). NAD+ is a dinucleotide coenzyme, not a peptide — it is catalogued alongside peptides for its metabolic and longevity relevance.' },
+      { q: 'Do glutathione IVs lighten skin?', a: 'Glutathione is marketed heavily for skin lightening, but the clinical evidence is weak and inconsistent and its safety for that use is unclear. This page is a research and educational reference, not medical advice.' },
+      { q: 'Are they FDA-approved?', a: 'No. Glutathione is sold as a supplement/reagent and NAD+ as a research reagent and investigational therapeutic; neither is FDA-approved for the antioxidant, detox, longevity, or cosmetic uses they are marketed for. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['longevity-aging'],
+    about: [
+      { name: 'Glutathione', alternateName: 'GSH' },
+      { name: 'NAD+', alternateName: 'Nicotinamide Adenine Dinucleotide' },
+    ],
+  },
 ]
 
 export const COMPARISON_BY_SLUG: Record<string, Comparison> = Object.fromEntries(
