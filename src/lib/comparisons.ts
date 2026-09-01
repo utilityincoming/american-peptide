@@ -1869,6 +1869,254 @@ export const COMPARISONS: Comparison[] = [
       { name: 'Mazdutide', alternateName: 'IBI362' },
     ],
   },
+  {
+    slug: 'ipamorelin-vs-ghrp-2',
+    aSlug: 'ipamorelin',
+    bSlug: 'ghrp-2',
+    aName: 'Ipamorelin',
+    bName: 'GHRP-2',
+    aPill: 'Selective GHRP · clean',
+    bPill: 'Potent GHRP · Japan-approved dx',
+    metaTitle:
+      'Ipamorelin vs GHRP-2 — Selectivity vs Potency in GH Secretagogues | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of ipamorelin and GHRP-2 (pralmorelin) — both ghrelin-receptor GH secretagogues, but ipamorelin releases GH cleanly with minimal cortisol or prolactin, while GHRP-2 is more potent, mildly appetite-raising, and an approved diagnostic in Japan. Cited.',
+    keywords: [
+      'ipamorelin vs GHRP-2',
+      'GHRP comparison',
+      'selective growth hormone secretagogue',
+      'pralmorelin',
+      'ghrelin receptor peptide',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GH Peptides', href: '/gh-peptides' },
+    headline: 'a clean signal versus a stronger one',
+    intro: [
+      'Ipamorelin and GHRP-2 are both GHRPs on the same ghrelin receptor, and they are the two most common first choices in GH-secretagogue research. The split between them is the recurring GHRP trade-off in its mildest form: ipamorelin for a clean, selective pulse; GHRP-2 for more growth hormone per dose, at the cost of a little selectivity.',
+    ],
+    atAGlance: [
+      { dim: 'Class', a: 'Pentapeptide GHRP', b: 'Hexapeptide GHRP (2nd-generation)' },
+      { dim: 'Receptor', a: 'GHS-R1a (ghrelin receptor)', b: 'GHS-R1a (ghrelin receptor)' },
+      { dim: 'GH potency', a: 'Moderate', b: 'Higher — more GH per dose' },
+      { dim: 'Selectivity', a: 'High — minimal ACTH / cortisol / prolactin', b: 'Lower — can raise cortisol / prolactin at higher doses' },
+      { dim: 'Appetite', a: 'Minimal', b: 'Mild (much less than GHRP-6)' },
+      { dim: 'Regulatory status', a: 'None — research compound', b: 'Approved in Japan as a GH-deficiency diagnostic (pralmorelin)' },
+      { dim: 'Characterizing work', a: 'Raun et al., 1998', b: 'Second-generation GHRP (from GHRP-6)' },
+      { dim: 'Molecular weight', a: '711.9 Da', b: '818.0 Da' },
+      { dim: 'FDA approval', a: 'None', b: 'None (US)' },
+    ],
+    proseSections: [
+      {
+        title: 'Selectivity versus potency, in the mild middle',
+        paragraphs: [
+          'Ipamorelin’s whole identity is selectivity. It was characterized as the first GHRP to release growth hormone without meaningfully raising ACTH, cortisol, or prolactin (Raun et al., 1998) — a clean profile that also shows less receptor desensitization over repeated exposure. It is not the strongest secretagogue in the family; it is the tidiest, which is why it is the default when a pure GH signal is the goal.',
+          'GHRP-2 (pralmorelin) trades a little of that cleanliness for output. As a second-generation GHRP tuned from GHRP-6, it releases more growth hormone per dose and provokes only mild appetite (far less than GHRP-6’s hallmark hunger), but at higher doses it can transiently raise cortisol and prolactin. It also carries something no other GHRP here has: an actual regulatory approval, used in Japan as a single-injection diagnostic of pituitary GH reserve. So against ipamorelin, GHRP-2 is the more potent, slightly less selective option with a real clinical pedigree — a gentler version of the same trade-off ipamorelin makes against the far more potent, far less selective hexarelin.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'If the research goal is a clean GH pulse with minimal off-target hormones, ipamorelin’s selectivity is the reason to pick it; if it is maximal GH release per dose, GHRP-2 is stronger and has the added distinction of an approved diagnostic use in Japan. Both act on the same receptor, both are commonly studied alongside a GHRH analog for complementary release, and neither is FDA-approved in the US. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between ipamorelin and GHRP-2?', a: 'Both are GHRPs that release growth hormone via the ghrelin receptor. Ipamorelin is prized for selectivity — it releases GH with minimal cortisol, prolactin, or appetite. GHRP-2 (pralmorelin) is more potent, raises appetite mildly, can nudge cortisol and prolactin at higher doses, and is an approved GH-deficiency diagnostic in Japan.' },
+      { q: 'Which is “cleaner”?', a: 'Ipamorelin. It was characterized as the first GHRP to release GH without meaningfully raising ACTH, cortisol, or prolactin, and it shows less receptor desensitization. GHRP-2 is stronger but less selective.' },
+      { q: 'Does GHRP-2 cause hunger like GHRP-6?', a: 'Much less. GHRP-2 was tuned from GHRP-6 for more GH and less appetite; it raises hunger only mildly, whereas GHRP-6’s sharp appetite spike is its hallmark. Ipamorelin’s effect on appetite is minimal.' },
+      { q: 'Are either FDA-approved?', a: 'No. GHRP-2 is approved in Japan as a diagnostic (pralmorelin) but not by the FDA; ipamorelin is a research compound. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['growth-hormone-axis'],
+    about: [
+      { name: 'Ipamorelin' },
+      { name: 'GHRP-2', alternateName: 'Pralmorelin' },
+    ],
+  },
+  {
+    slug: 'tesamorelin-vs-sermorelin',
+    aSlug: 'tesamorelin',
+    bSlug: 'sermorelin',
+    aName: 'Tesamorelin',
+    bName: 'Sermorelin',
+    aPill: 'GHRH(1-44) · FDA approved',
+    bPill: 'GHRH(1-29) · approved 1990, discontinued',
+    metaTitle:
+      'Tesamorelin vs Sermorelin — The Two GHRH Analogs That Reached FDA Approval | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of tesamorelin (Egrifta) and sermorelin (Geref) — the full-length GHRH(1-44) analog still on the market vs the GHRH(1-29) fragment approved in 1990 and later discontinued. Both prompt the body’s own GH. Cited.',
+    keywords: [
+      'tesamorelin vs sermorelin',
+      'GHRH analog comparison',
+      'sermorelin Geref',
+      'tesamorelin Egrifta',
+      'GHRH 1-44 vs 1-29',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'GH Peptides', href: '/gh-peptides' },
+    headline: 'full-length and current versus the truncated original',
+    intro: [
+      'Tesamorelin and sermorelin are the two GHRH analogs that actually reached FDA approval — which already sets them apart from research GHRH compounds like CJC-1295. Both stimulate the pituitary to release the body’s own growth hormone. The differences are length, indication, and whether they are still on the market.',
+    ],
+    atAGlance: [
+      { dim: 'Fragment', a: 'Full-length GHRH(1-44) analog', b: 'GHRH(1-29) — shortest fully active fragment' },
+      { dim: 'Receptor', a: 'GHRH receptor (GHRHR)', b: 'GHRH receptor (GHRHR)' },
+      { dim: 'Key modification', a: 'N-terminal trans-3-hexenoic acid (stabilized)', b: 'None — the unmodified fragment' },
+      { dim: 'GH release', a: 'Endogenous, feedback-preserving', b: 'Endogenous, discrete physiologic pulse' },
+      { dim: 'FDA approval', a: 'Approved 2010 (Egrifta) — current', b: 'Approved 1990 (Geref) — discontinued commercially' },
+      { dim: 'Approved use', a: 'Excess visceral fat in HIV-associated lipodystrophy', b: 'GH-deficiency evaluation / pediatric GH deficiency (historical)' },
+      { dim: 'Status today', a: 'Marketed drug', b: 'Referenced as a research compound' },
+      { dim: 'Molecular weight', a: '5135.9 Da', b: '3358 Da' },
+    ],
+    proseSections: [
+      {
+        title: 'Same receptor, different fragment and fate',
+        paragraphs: [
+          'Sermorelin is the minimalist: the first 29 residues of GHRH, the shortest piece that keeps full GH-releasing activity. It binds the GHRH receptor and prompts a short, discrete pulse of the body’s own growth hormone, preserving the natural somatostatin feedback loop. It was FDA-approved in 1990 as Geref — used to evaluate pituitary GH reserve and treat pediatric GH deficiency — but was later discontinued commercially, so today it is referenced mainly as a research compound.',
+          'Tesamorelin keeps the whole 44-residue GHRH sequence and stabilizes it with a trans-3-hexenoic acid group at the N-terminus, protecting it from rapid breakdown. That fuller, stabilized molecule is the only GHRH analog with a current FDA approval: Egrifta (2010), for reducing excess visceral abdominal fat in people with HIV-associated lipodystrophy, backed by completed Phase 3 trials. So the two bracket the GHRH-analog story — the original, truncated, now-discontinued fragment and the full-length, stabilized, still-marketed successor — with CJC-1295, the never-approved research modification of the same family, sitting between them in ambition but not in evidence.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Both are GHRH-receptor agonists that raise endogenous GH while preserving feedback, and both cleared FDA approval — but only tesamorelin is still on the market, with a specific visceral-fat indication and Phase 3 evidence behind it. Sermorelin is the historical original, a short GHRH(1-29) fragment approved in 1990 and since discontinued, now a research reference. For a characterized GHRH analog in current use, tesamorelin is the benchmark; sermorelin is the lineage it grew out of. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between tesamorelin and sermorelin?', a: 'Both are GHRH-receptor agonists that stimulate the pituitary to release growth hormone. Sermorelin is the GHRH(1-29) fragment — the shortest fully active piece — approved in 1990 (Geref) and later discontinued. Tesamorelin is a stabilized full-length GHRH(1-44) analog, FDA-approved in 2010 (Egrifta) for HIV-associated visceral fat and still marketed.' },
+      { q: 'Are both FDA-approved?', a: 'Both reached FDA approval, but only tesamorelin (Egrifta, 2010) is currently marketed. Sermorelin (Geref, 1990) was approved and later discontinued commercially. They are the two GHRH analogs to have been approved — unlike CJC-1295, which is a research compound.' },
+      { q: 'Which is more physiologic?', a: 'Both raise the body’s own GH and preserve feedback rather than supplying GH directly. Sermorelin’s short half-life produces a discrete pulse; tesamorelin is also short-acting and dosed daily. Neither creates the sustained, pulsatility-blunting elevation of a long-acting DAC-modified analog.' },
+      { q: 'What is each approved for?', a: 'Tesamorelin is approved to reduce excess visceral abdominal fat in HIV-associated lipodystrophy. Sermorelin was approved for GH-deficiency evaluation and pediatric GH deficiency before being discontinued. This page is a research and educational reference, not medical advice.' },
+    ],
+    relatedAreas: ['growth-hormone-axis'],
+    about: [
+      { name: 'Tesamorelin', alternateName: 'Egrifta' },
+      { name: 'Sermorelin', alternateName: 'Geref' },
+    ],
+  },
+  {
+    slug: 'argireline-vs-matrixyl',
+    aSlug: 'argireline',
+    bSlug: 'matrixyl',
+    aName: 'Argireline',
+    bName: 'Matrixyl',
+    aPill: 'SNAP-25 mimic · expression lines',
+    bPill: 'Matrikine · collagen synthesis',
+    metaTitle:
+      'Argireline vs Matrixyl — Relax the Muscle vs Build the Collagen | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of Argireline (acetyl hexapeptide-8) and Matrixyl (palmitoyl pentapeptide-4) — the two best-known cosmetic peptides, working on opposite problems: Argireline dampens muscle-contraction (expression lines), Matrixyl signals fibroblasts to make collagen. Cited.',
+    keywords: [
+      'argireline vs matrixyl',
+      'cosmetic peptide comparison',
+      'topical botox peptide',
+      'matrixyl collagen',
+      'anti-wrinkle peptide',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Cosmetic Peptides', href: '/catalog/category/cosmetic' },
+    headline: 'relax the muscle versus build the collagen',
+    intro: [
+      'Argireline and Matrixyl are the two most recognizable peptides in skincare, and they are often grouped as interchangeable “anti-wrinkle” ingredients — but they address different causes of a wrinkle. Argireline works on the muscle side (dynamic expression lines); Matrixyl works on the structural side (collagen). Understanding which is which is the whole comparison.',
+    ],
+    atAGlance: [
+      { dim: 'INCI / identity', a: 'Acetyl Hexapeptide-8 (Ac-EEMQRR-NH2)', b: 'Palmitoyl Pentapeptide-4 (Pal-KTTKS)' },
+      { dim: 'Mechanism', a: 'Mimics SNAP-25; interferes with SNARE-driven muscle-contraction signaling', b: 'Matrikine — mimics a procollagen-I fragment to stimulate collagen synthesis' },
+      { dim: 'Targets', a: 'Dynamic expression lines (muscle movement)', b: 'Structural aging (collagen loss)' },
+      { dim: 'Analogy', a: '“Topical Botox”', b: '“Topical collagen signal”' },
+      { dim: 'Evidence', a: 'Modest, surface-level; marketing outruns data', b: '12-week split-face RCT (Robinson et al., 2005)' },
+      { dim: 'Contains copper?', a: 'No', b: 'No (contrast with GHK-Cu / AHK-Cu)' },
+      { dim: 'Use', a: 'Topical cosmetic ingredient', b: 'Topical cosmetic ingredient' },
+      { dim: 'Molecular weight', a: '887.0 Da', b: '802.0 Da' },
+    ],
+    proseSections: [
+      {
+        title: 'Two different causes of a wrinkle',
+        paragraphs: [
+          'Argireline (acetyl hexapeptide-8) launched the “neurocosmetic” idea — borrowing the logic of botulinum toxin without the toxin. Its acetylated six-residue sequence mimics the N-terminus of SNAP-25, one of the SNARE proteins a nerve terminal uses to release the signal that tells a facial muscle to contract. By competing in that machinery, it is proposed to blunt the contraction, so repeated expressions crease the skin less. Applied topically, its measured effects are modest and surface-level next to injected Botox — the mechanism is genuine, but the marketing tends to outrun the evidence.',
+          'Matrixyl (palmitoyl pentapeptide-4) works on the other cause of aging skin: lost structure. Its KTTKS core is a fragment the body cleaves from type-I procollagen during collagen assembly, and it functions as a “matrikine” — a feedback signal telling fibroblasts to keep making matrix. A palmitic-acid chain helps it penetrate the skin barrier. It is one of the better-evidenced cosmetic peptides, with a 12-week split-face randomized trial (Robinson et al., 2005) reporting improvements in wrinkle depth and roughness. So the two are complementary, not competing: Argireline aims to relax the muscle that folds the skin; Matrixyl aims to rebuild the collagen that fills it. Neither, notably, is a copper peptide like GHK-Cu.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'These target different mechanisms of skin aging and are best understood as complementary. Argireline addresses dynamic expression lines by dampening the muscle-contraction signal (the “topical Botox” concept), with modest, surface-level effects. Matrixyl addresses structural aging by signaling fibroblasts to synthesize collagen, and it is among the better-evidenced cosmetic peptides. Both are topical cosmetic ingredients, not FDA-approved drugs, and both are copper-free — a contrast with GHK-Cu and AHK-Cu. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between Argireline and Matrixyl?', a: 'Argireline (acetyl hexapeptide-8) mimics SNAP-25 to reduce the muscle contractions behind expression lines — a “topical Botox” concept. Matrixyl (palmitoyl pentapeptide-4) is a matrikine that signals fibroblasts to make collagen. Argireline works on the muscle side of a wrinkle; Matrixyl works on the structural, collagen side.' },
+      { q: 'Can they be used together?', a: 'Yes — because they act on different mechanisms (muscle-contraction signaling vs collagen synthesis), they are commonly combined in cosmetic formulations rather than treated as alternatives.' },
+      { q: 'Which has better evidence?', a: 'Matrixyl has the stronger cosmetic-trial record, including a 12-week split-face randomized controlled trial (Robinson et al., 2005). Argireline’s mechanism is real but its topical effects are modest and less well substantiated than the marketing suggests.' },
+      { q: 'Are they copper peptides?', a: 'No. Unlike GHK-Cu and AHK-Cu, neither Argireline nor Matrixyl contains copper — they work by signaling, not metal delivery. Both are cosmetic ingredients, not FDA-approved drugs. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['skin-hair'],
+    about: [
+      { name: 'Argireline', alternateName: 'Acetyl Hexapeptide-8' },
+      { name: 'Matrixyl', alternateName: 'Palmitoyl Pentapeptide-4' },
+    ],
+  },
+  {
+    slug: 'nad-vs-5-amino-1mq',
+    aSlug: 'nad-plus',
+    bSlug: '5-amino-1mq',
+    aName: 'NAD+',
+    bName: '5-Amino-1MQ',
+    aPill: 'Redox cofactor · direct supply',
+    bPill: 'NNMT inhibitor · small molecule',
+    metaTitle:
+      'NAD+ vs 5-Amino-1MQ — Supply the Cofactor or Inhibit the Enzyme | AmericanPeptide.com',
+    metaDescription:
+      'Research comparison of NAD+ and 5-Amino-1MQ — two longevity-metabolic small molecules (neither is a peptide). One supplies the NAD+ cofactor directly; the other inhibits NNMT, the enzyme that depletes NAD+ precursors and methyl donors. Cited.',
+    keywords: [
+      'NAD+ vs 5-amino-1MQ',
+      'NNMT inhibitor',
+      'NAD longevity',
+      'NAD precursor vs NNMT',
+      'metabolic aging compound',
+    ],
+    updated: '2026-09-01',
+    breadcrumb: { label: 'Longevity Peptides', href: '/longevity-peptides' },
+    headline: 'supply the cofactor versus stop the enzyme that wastes it',
+    intro: [
+      'NAD+ and 5-Amino-1MQ both show up under the longevity-and-metabolism banner, and neither is actually a peptide — both are small molecules catalogued here for their metabolic relevance. They approach the same theme, cellular NAD+, from opposite directions: one is the cofactor itself, the other blocks an enzyme that drains its precursors.',
+    ],
+    atAGlance: [
+      { dim: 'What it is', a: 'A coenzyme (dinucleotide) — not a peptide', b: 'A small-molecule enzyme inhibitor — not a peptide' },
+      { dim: 'Strategy', a: 'Supply the NAD+ cofactor directly', b: 'Inhibit NNMT to preserve NAD+ / methyl-donor pools' },
+      { dim: 'Direct target', a: 'Serves as substrate/cofactor for sirtuins, PARPs, redox enzymes', b: 'Nicotinamide N-methyltransferase (NNMT)' },
+      { dim: 'Research focus', a: 'Mitochondrial energy, sirtuin signaling, DNA repair, aging', b: 'Adipose-tissue metabolism, sarcopenia (muscle aging)' },
+      { dim: 'Rationale', a: 'NAD+ declines with age — restore it', b: 'NNMT wastes nicotinamide and SAM — block it upstream' },
+      { dim: 'Evidence stage', a: 'Research reagent / investigational therapeutic', b: 'Preclinical' },
+      { dim: 'FDA approval', a: 'None', b: 'None' },
+    ],
+    proseSections: [
+      {
+        title: 'Direct supply versus upstream preservation',
+        paragraphs: [
+          'NAD+ (nicotinamide adenine dinucleotide) is the workhorse cofactor at the center of the aging conversation. Every cell uses it to carry electrons through energy metabolism and to power two enzyme families that matter for longevity — sirtuins, which depend on it to regulate stress resistance and gene expression, and PARPs, which consume it during DNA repair. Cellular NAD+ falls with age, and the direct strategy is simply to restore it, either as NAD+ itself or through its precursors.',
+          '5-Amino-1MQ comes at the same pool from upstream. It selectively inhibits nicotinamide N-methyltransferase (NNMT), an enzyme that methylates nicotinamide — using up both nicotinamide (a NAD+ salvage precursor) and SAM (the cell’s main methyl donor). By blocking NNMT, 5-Amino-1MQ is studied in preclinical work to preserve those NAD+ and methyl-donor pools, with the metabolic readouts appearing in adipose tissue and aging muscle. So the contrast is clean: NAD+ is direct replacement of the cofactor; 5-Amino-1MQ is an attempt to stop the leak that depletes it. Both are small molecules — not peptides — grouped in this catalog for their metabolic-longevity relevance, and neither is FDA-approved.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Two approaches to the same target, cellular NAD+, at different points in the pathway. NAD+ supplies the cofactor directly and sits at the heart of mitochondrial, sirtuin, and DNA-repair biology; 5-Amino-1MQ works upstream, inhibiting the NNMT enzyme that consumes NAD+ precursors and methyl donors, with a preclinical focus on fat and muscle. Neither is a peptide, and neither is FDA-approved — NAD+ is used as a research reagent and studied therapeutically, while 5-Amino-1MQ remains preclinical. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between NAD+ and 5-Amino-1MQ?', a: 'NAD+ is the coenzyme itself, supplied directly to support energy metabolism, sirtuins, and DNA repair. 5-Amino-1MQ is a small-molecule inhibitor of the enzyme NNMT, studied to preserve NAD+ and methyl-donor (SAM) pools upstream rather than supplying NAD+ directly. Neither is a peptide.' },
+      { q: 'How are they related?', a: 'Both center on cellular NAD+. NAD+ replaces the cofactor directly; 5-Amino-1MQ blocks NNMT, an enzyme that consumes nicotinamide (a NAD+ precursor) and SAM, so inhibiting it is studied as a way to preserve those pools.' },
+      { q: 'Are these peptides?', a: 'No. NAD+ is a dinucleotide coenzyme and 5-Amino-1MQ is a small-molecule enzyme inhibitor. Both are catalogued alongside peptides for their metabolic and longevity relevance, but neither is a peptide.' },
+      { q: 'Are they approved?', a: 'No. NAD+ is used as a research reagent and studied as an investigational therapeutic; 5-Amino-1MQ is a preclinical research compound. Neither is FDA-approved. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['longevity-aging'],
+    about: [
+      { name: 'NAD+', alternateName: 'Nicotinamide Adenine Dinucleotide' },
+      { name: '5-Amino-1MQ' },
+    ],
+  },
 ]
 
 export const COMPARISON_BY_SLUG: Record<string, Comparison> = Object.fromEntries(
