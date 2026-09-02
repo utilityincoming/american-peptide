@@ -11,6 +11,8 @@ import {
   Zap,
 } from 'lucide-react'
 import SourcingCard from '@/components/SourcingCard'
+import HeadToHeadGrid from '@/components/HeadToHeadGrid'
+import CompoundingStatus from '@/components/CompoundingStatus'
 import { getVendorsForPeptide } from '@/lib/vendors'
 
 const SITE = 'https://americanpeptide.com'
@@ -88,8 +90,8 @@ const AGONISTS = [
     targets: 'GIP/GLP-1R/GcgR',
     class: 'Triple-agonist',
     fda: false,
-    weightLoss: '~24%',
-    trial: 'Phase 2 (NEJM 2023)',
+    weightLoss: '~28%',
+    trial: 'TRIUMPH-1 (Phase 3)',
     halfLife: '~168 h',
     accent: '#F472B6',
     highlight: false,
@@ -107,6 +109,68 @@ const AGONISTS = [
     accent: '#FB923C',
     highlight: false,
   },
+  {
+    slug: 'cagrisema',
+    name: 'CagriSema',
+    brands: 'Cagrilintide + semaglutide',
+    targets: 'Amylin + GLP-1R',
+    class: 'Fixed-dose combination',
+    fda: false,
+    weightLoss: '~20%',
+    trial: 'REDEFINE 1',
+    halfLife: '~168 h',
+    accent: '#FB923C',
+    highlight: false,
+  },
+  {
+    slug: 'survodutide',
+    name: 'Survodutide',
+    brands: 'BI 456906',
+    targets: 'GcgR/GLP-1R',
+    class: 'Dual-agonist',
+    fda: false,
+    weightLoss: 'MASH-led',
+    trial: 'Phase 2 MASH (NEJM 2024)',
+    halfLife: '~168 h',
+    accent: '#F472B6',
+    highlight: false,
+  },
+  {
+    slug: 'mazdutide',
+    name: 'Mazdutide',
+    brands: 'IBI362 · LY3305677',
+    targets: 'GcgR/GLP-1R',
+    class: 'Dual-agonist',
+    fda: false,
+    weightLoss: '~15%',
+    trial: 'GLORY-1',
+    halfLife: '~168 h',
+    accent: '#818CF8',
+    highlight: false,
+  },
+  {
+    slug: 'liraglutide',
+    name: 'Liraglutide',
+    brands: 'Victoza · Saxenda',
+    targets: 'GLP-1R',
+    class: 'Mono-agonist',
+    fda: true,
+    weightLoss: '~6%',
+    trial: 'STEP 8',
+    halfLife: '~13 h',
+    accent: '#2DD4A8',
+    highlight: false,
+  },
+]
+
+// TRIUMPH-1 (Phase 3, n=2,339, 80 weeks) as reported under both pre-declared
+// estimands. Kept as one table so the two columns can never drift apart — the
+// mistake this section exists to teach readers to spot.
+const ESTIMAND_ROWS = [
+  { arm: 'Retatrutide 12 mg', efficacy: '−28.3%', regimen: '−25.0%' },
+  { arm: 'Retatrutide 9 mg', efficacy: '−25.9%', regimen: '−23.7%' },
+  { arm: 'Retatrutide 4 mg', efficacy: '−19.0%', regimen: '−17.6%' },
+  { arm: 'Placebo', efficacy: '−2.2%', regimen: '−3.9%' },
 ]
 
 const FAQS = [
@@ -133,6 +197,18 @@ const FAQS = [
   {
     q: 'Where can I track GLP-1 clinical trials in real time?',
     a: 'The ClinicalPulse tool on this platform searches ClinicalTrials.gov in real time for trials involving GLP-1 agonists, amylin analogs, and related metabolic peptides. Filter by phase, recruiting status, and compound name to track the latest completed and active studies.',
+  },
+  {
+    q: 'Why do two sources quote different weight-loss numbers for the same trial?',
+    a: 'Because modern obesity trials report more than one estimand — the pre-declared rule for how to count participants who stop the drug or start something else. In retatrutide’s Phase 3 TRIUMPH-1 trial, the 12 mg arm reduced mean body weight by 28.3% under the efficacy estimand and 25.0% under the treatment-regimen estimand, over 80 weeks in 2,339 adults. The efficacy estimand describes people who stayed on treatment as assigned; the treatment-regimen estimand keeps everyone randomised regardless of what they did next. Both are legitimate. A figure quoted without saying which one it is cannot be compared to anything.',
+  },
+  {
+    q: 'Has retatrutide reported Phase 3 results?',
+    a: 'Yes. TRIUMPH-1 randomised 2,339 adults with obesity, or overweight with a weight-related comorbidity and without diabetes, to once-weekly retatrutide at 4 mg, 9 mg or 12 mg or to placebo over 80 weeks. Mean body-weight reduction at 12 mg was 28.3% under the efficacy estimand against 2.2% for placebo. A subset with a baseline BMI of 35 or above continued to 104 weeks and reached about 30%. Retatrutide remains investigational and is not FDA-approved.',
+  },
+  {
+    q: 'How does CagriSema compare with tirzepatide head-to-head?',
+    a: 'REDEFINE 4 is the direct comparison — an open-label randomised trial of 809 adults with obesity and comorbidities over 84 weeks. CagriSema reduced mean body weight by 23.0% against 25.5% for tirzepatide, and did not meet its primary endpoint of non-inferiority. Under the treatment-regimen estimand the figures were 20.2% and 23.6%. CagriSema is not FDA-approved; Novo Nordisk submitted a New Drug Application in December 2025.',
   },
   {
     q: 'What is the incretin axis?',
@@ -221,7 +297,7 @@ export default function GLP1Page() {
         <div className="relative mx-auto max-w-4xl">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Activity className="h-3 w-3" />
-            Research reference · 4 compounds
+            Research reference · 8 compounds
           </div>
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             GLP-1 &amp; Incretin Peptide
@@ -415,23 +491,103 @@ export default function GLP1Page() {
                 pivotal trials; individual responses vary. Not a basis for
                 clinical decisions.
               </p>
-              <div className="mt-5 flex flex-wrap gap-3">
+            </section>
+
+            {/* How to read the headline number */}
+            <section>
+              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+                How to read a weight-loss number
+              </h2>
+              <p className="mb-5 text-xs text-ink/30">
+                The same trial reports more than one figure, and the gap between
+                them is not a rounding error
+              </p>
+              <div className="space-y-4 text-sm leading-relaxed text-ink/65">
+                <p>
+                  Every percentage in the table above is a mean from a specific
+                  trial under a specific estimand — the pre-declared rule for
+                  what counts as an outcome when participants stop taking the
+                  drug, miss doses, or start something else. Modern obesity
+                  trials report at least two, and the difference between them is
+                  usually three to four percentage points.
+                </p>
+                <p>
+                  Retatrutide&rsquo;s Phase 3 TRIUMPH-1 trial is the clearest
+                  worked example. Across 2,339 adults with obesity or overweight
+                  without diabetes, randomised to 4 mg, 9 mg, 12 mg, or placebo
+                  over 80 weeks, the two estimands report the same study
+                  differently.
+                </p>
+              </div>
+
+              <div className="mt-5 overflow-x-auto">
+                <table className="w-full min-w-[420px] text-sm">
+                  <thead>
+                    <tr className="border-b border-ink/[0.06] text-left text-xs text-ink/35">
+                      <th className="pb-3 pr-4 font-medium">
+                        TRIUMPH-1, 80 weeks
+                      </th>
+                      <th className="pb-3 pr-4 font-medium">Efficacy estimand</th>
+                      <th className="pb-3 font-medium">Treatment-regimen estimand</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-ink/[0.04]">
+                    {ESTIMAND_ROWS.map((row) => (
+                      <tr key={row.arm} className="hover:bg-ink/[0.02]">
+                        <td className="py-3 pr-4 text-xs font-medium text-ink/50">
+                          {row.arm}
+                        </td>
+                        <td className="py-3 pr-4 text-sm font-semibold tabular-nums text-ink/80">
+                          {row.efficacy}
+                        </td>
+                        <td className="py-3 text-sm tabular-nums text-ink/60">
+                          {row.regimen}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mt-5 space-y-4 text-sm leading-relaxed text-ink/65">
+                <p>
+                  The efficacy estimand answers what happens to people who stay
+                  on the drug as assigned. The treatment-regimen estimand keeps
+                  everyone who was randomised, whatever they went on to do. The
+                  first number is the pharmacology; the second is closer to what
+                  a population actually experiences. Neither is dishonest, and a
+                  headline that quotes one without saying which is.
+                </p>
+                <p>
+                  This is why cross-trial comparison is so slippery. Two
+                  compounds can look separated by four points purely because one
+                  press release quoted its efficacy estimand and the other did
+                  not. Where a real head-to-head exists, it settles the question
+                  properly: in REDEFINE 4, an open-label trial of 809 adults over
+                  84 weeks, CagriSema reached 23.0% against tirzepatide&rsquo;s
+                  25.5%, and missed its non-inferiority endpoint. That is a
+                  different kind of evidence from two separate trials placed side
+                  by side.
+                </p>
                 <Link
-                  href="/compare/semaglutide-vs-tirzepatide"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                  href="/methodology"
+                  className="group inline-flex items-center gap-1.5 text-xs font-medium text-accent"
                 >
-                  Semaglutide vs Tirzepatide
-                  <ArrowRight className="h-3 w-3" />
-                </Link>
-                <Link
-                  href="/compare/retatrutide-vs-tirzepatide"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
-                >
-                  Retatrutide vs Tirzepatide
-                  <ArrowRight className="h-3 w-3" />
+                  How we tier the evidence behind these claims
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </div>
             </section>
+
+            <CompoundingStatus
+              slugs={['semaglutide', 'tirzepatide', 'liraglutide', 'retatrutide']}
+              intro="The incretin agonists reached the compounding question by a different road than the research peptides. These are approved drugs, so the bulks list never applied to them. What applied instead is the rule against compounding an essentially-identical copy of a commercially available product — a rule suspended while a drug is in shortage, and reinstated when the shortage ends. That is what closed the compounded-GLP-1 era in 2025, and it is why a compounded version is not simply a cheaper equivalent."
+            />
+
+            <HeadToHeadGrid
+              slugs={AGONISTS.map((a) => a.slug)}
+              blurb="Every side-by-side page covering a compound on this hub"
+            />
 
             {/* Synthesis Complexity */}
             <section>

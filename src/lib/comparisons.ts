@@ -2401,3 +2401,15 @@ export const COMPARISON_BY_SLUG: Record<string, Comparison> = Object.fromEntries
 export function getComparison(slug: string): Comparison | undefined {
   return COMPARISON_BY_SLUG[slug]
 }
+
+/**
+ * Every comparison that involves at least one of `slugs`, in catalog order.
+ * Feeds the cluster hubs' head-to-head grids (/glp-1, /bpc-157, /gh-peptides)
+ * so a new entry here surfaces on its hub without touching the hub.
+ */
+export function comparisonsFor(slugs: readonly string[]): Comparison[] {
+  const set = new Set(slugs)
+  return COMPARISONS.filter(
+    (c) => (c.aSlug !== undefined && set.has(c.aSlug)) || (c.bSlug !== undefined && set.has(c.bSlug)),
+  )
+}

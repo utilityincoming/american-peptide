@@ -3,6 +3,9 @@ import Link from 'next/link'
 import { AlertCircle, ArrowRight, ChevronRight, TrendingUp, Zap } from 'lucide-react'
 import SourcingCard from '@/components/SourcingCard'
 
+import HeadToHeadGrid from '@/components/HeadToHeadGrid'
+import CompoundingStatus from '@/components/CompoundingStatus'
+
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
@@ -123,6 +126,40 @@ const COMPOUNDS = [
     color: '#818CF8',
     note: 'More potent than ipamorelin but less selective. Distinctive CD36-mediated cardioprotective thread in preclinical literature, independent of GH release.',
   },
+  {
+    slug: 'ghrp-2',
+    name: 'GHRP-2',
+    aliases: 'Pralmorelin',
+    class: 'GHRP (ghrelin-axis)',
+    halfLife: '~1–2 h',
+    release: 'Pulsatile',
+    fda: false,
+    fdaNote: 'Approved in Japan (diagnostic)',
+    color: '#818CF8',
+    note: 'Engineered from GHRP-6 for greater potency per dose, with markedly less of the acute hunger. Marketed in Japan as a single-injection test of pituitary GH reserve.',
+  },
+  {
+    slug: 'ghrp-6',
+    name: 'GHRP-6',
+    aliases: '—',
+    class: 'GHRP (ghrelin-axis)',
+    halfLife: '~1 h',
+    release: 'Pulsatile',
+    fda: false,
+    color: '#A78BFA',
+    note: 'The probe compound whose target hunt led to cloning GHS-R1a in 1996 and identifying ghrelin in 1999. The least selective of the family, and the reference when the appetite effect is the point.',
+  },
+  {
+    slug: 'mk-677',
+    name: 'MK-677',
+    aliases: 'Ibutamoren',
+    class: 'Non-peptide secretagogue',
+    halfLife: '~24 h',
+    release: 'Sustained',
+    fda: false,
+    color: '#FB923C',
+    note: 'Not a peptide — an orally active small molecule at the same ghrelin receptor. Catalogued here for the shared mechanism: sustained GH and IGF-1 elevation, and a blunted pulse.',
+  },
 ]
 
 const FAQS = [
@@ -149,6 +186,14 @@ const FAQS = [
   {
     q: 'Is tesamorelin FDA-approved?',
     a: 'Yes — tesamorelin (Egrifta) is the only currently FDA-approved GH-axis peptide in this catalog. It is approved for reduction of excess visceral abdominal fat in people with HIV-associated lipodystrophy. Other uses described here are research contexts, not approved indications.',
+  },
+  {
+    q: 'Can a compounding pharmacy legally prepare ipamorelin or CJC-1295?',
+    a: 'Not under section 503A. FDA recommended against including ipamorelin on the 503A bulks list and its advisory committee voted against it on October 29, 2024. The same happened for CJC-1295, in every salt and free-base form with and without DAC, on December 4, 2024. The stated concerns were insufficient human safety data, questions about unintended endocrine effects, and a lack of reproducible efficacy outside small or open-label studies. Ibutamoren, GHRP-2 and GHRP-6 remain on the Category 2 list of substances FDA considers to present significant safety risks.',
+  },
+  {
+    q: 'Were GH peptides affected by the 2026 peptide reclassification?',
+    a: 'Largely no, and this is the most common point of confusion. The substances removed from Category 2 in April 2026 and reviewed by the advisory committee that July were tissue-repair, longevity and neuropeptide compounds — BPC-157, TB-500, KPV, MOTS-c, semax, epitalon and others. The GH-axis peptides had already been reviewed and declined in late 2024. The two events are often reported as one trend; they are not.',
   },
   {
     q: 'How do GH secretagogues differ from injecting growth hormone directly?',
@@ -203,7 +248,7 @@ export default function GHPeptidesPage() {
         <div className="relative mx-auto max-w-4xl">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <TrendingUp className="h-3 w-3" />
-            GH axis · 2 receptor classes · 6 compounds
+            GH axis · 2 receptor classes · 9 compounds
           </div>
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             Growth Hormone
@@ -318,6 +363,25 @@ export default function GHPeptidesPage() {
                 </Link>
               </div>
             </section>
+
+            <CompoundingStatus
+              slugs={[
+                'tesamorelin',
+                'sermorelin',
+                'ipamorelin',
+                'cjc-1295-no-dac',
+                'cjc-1295-with-dac',
+                'ghrp-2',
+                'ghrp-6',
+                'mk-677',
+              ]}
+              intro="The GH-axis peptides are the instructive counterexample to the healing peptides. While BPC-157 and TB-500 were moving off the safety-risk list in 2026, this class went the other way: FDA recommended against 503A inclusion for ipamorelin and CJC-1295, and its advisory committee agreed in late 2024. Ibutamoren, GHRP-2 and GHRP-6 remain on the Category 2 list. Anyone who has read that peptides were broadly deregulated has read about a different set of molecules."
+            />
+
+            <HeadToHeadGrid
+              slugs={COMPOUNDS.map((c) => c.slug)}
+              blurb="Side-by-side pages covering the compounds on this hub"
+            />
 
             {/* FAQ */}
             <section>
