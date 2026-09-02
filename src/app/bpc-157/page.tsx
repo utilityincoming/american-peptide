@@ -11,6 +11,9 @@ import {
 } from 'lucide-react'
 import SourcingCard from '@/components/SourcingCard'
 
+import HeadToHeadGrid from '@/components/HeadToHeadGrid'
+import CompoundingStatus from '@/components/CompoundingStatus'
+
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
@@ -163,6 +166,14 @@ const FAQS = [
   {
     q: 'Why does synthesis quality matter for BPC-157?',
     a: 'At only 15 residues, BPC-157 is inexpensive to synthesize, which makes it easy to produce low-quality or adulterated material. The low cost is precisely why a batch-specific certificate of analysis (COA) — with identity confirmation by mass spectrometry and purity by HPLC — is essential for any research-grade supply.',
+  },
+  {
+    q: 'Did the FDA approve BPC-157 in 2026?',
+    a: 'No. Two separate things happened, and neither is approval. In April 2026 FDA removed BPC-157 from Category 2, the list of bulk substances it had identified as presenting significant safety risks. In July 2026 the Pharmacy Compounding Advisory Committee voted 8 to 6, with one abstention, to recommend adding it to the 503A bulks list. That vote is not binding on FDA. Lawful compounding would still require FDA to place the substance on the bulks list through notice-and-comment rulemaking, which had not happened as of September 2026. Drug approval is a different process again, and BPC-157 has not entered it.',
+  },
+  {
+    q: 'Are there completed human clinical trials of BPC-157?',
+    a: 'No published, peer-reviewed randomised controlled trial has reported efficacy for any indication in humans. Early-phase safety work in inflammatory bowel disease has been referenced for years but is not available as a completed randomised trial with published results. The evidence base remains overwhelmingly preclinical, and the regulatory movement in 2026 did not change that — an advisory committee recommendation reflects a judgment about compounding access, not new efficacy data.',
   },
   {
     q: 'What does the evidence base for BPC-157 look like overall?',
@@ -464,6 +475,16 @@ export default function BPC157Page() {
                 </Link>
               </div>
             </section>
+
+            <CompoundingStatus
+              slugs={['bpc-157', 'tb-500', 'kpv', 'ghk-cu']}
+              intro="The regulatory position of these peptides changed materially in 2026, and it changed in a direction most summaries overstate. BPC-157 spent nearly three years on the list of bulk substances FDA considers a significant safety risk. It came off that list in April 2026, and an FDA advisory committee narrowly recommended it for compounding that July. Neither step makes it a legal compounded preparation today, and neither makes it an approved drug."
+            />
+
+            <HeadToHeadGrid
+              slugs={['bpc-157', 'tb-500', 'ghk-cu']}
+              blurb="Side-by-side pages covering BPC-157 and the peptides it is most often confused with"
+            />
 
             {/* FAQ */}
             <section>

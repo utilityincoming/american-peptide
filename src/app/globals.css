@@ -20,6 +20,7 @@
   --accent-blue: #60A5FA;
   --accent-purple: #A78BFA;
   --accent-amber: #F5B544; /* evidence-tier accent (vendor-reported / community) */
+  --accent-red: #F87171;   /* restrictive regulatory status (Category 2, declined) */
   --viz: #0B1220;          /* immersive viz "stage" — stays dark in both themes */
 
   --background: var(--surface);
@@ -36,6 +37,7 @@ html.light {
   --accent-blue: #2563EB;
   --accent-purple: #7C3AED;
   --accent-amber: #B45309; /* darker amber for legible text on light */
+  --accent-red: #B91C1C;   /* darker red for legible text on light */
 }
 
 @theme inline {
@@ -50,6 +52,7 @@ html.light {
   --color-accent-blue: var(--accent-blue);
   --color-accent-purple: var(--accent-purple);
   --color-accent-amber: var(--accent-amber);
+  --color-accent-red: var(--accent-red);
   --color-viz: var(--viz);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
