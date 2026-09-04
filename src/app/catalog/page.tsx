@@ -18,9 +18,11 @@ import {
   PEPTIDES,
   LISTED_PEPTIDES,
   CATEGORIES,
+  SYNTHESIS_DIFFICULTY_LABEL,
   type Peptide,
   type PeptideCategory,
   type SyntheticFeature,
+  type SynthesisDifficulty,
 } from '@/lib/peptides'
 import WaitlistForm from '@/components/WaitlistForm'
 import OfflineReference from '@/components/OfflineReference'
@@ -38,10 +40,13 @@ const FEATURES: SyntheticFeature[] = (() => {
   return [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([f]) => f)
 })()
 
+const DIFFICULTIES: SynthesisDifficulty[] = ['standard', 'moderate', 'demanding']
+
 export default function CatalogPage() {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState<PeptideCategory | null>(null)
   const [feature, setFeature] = useState<SyntheticFeature | null>(null)
+  const [difficulty, setDifficulty] = useState<SynthesisDifficulty | null>(null)
   const [selected, setSelected] = useState<string[]>([])
 
   useEffect(() => {
@@ -61,25 +66,43 @@ export default function CatalogPage() {
     }
   }, [])
 
-  // Deep-link support: arrive from a detail-page chip via ?synthesis=<feature>.
+  // Deep-link support: arrive from a chip via ?synthesis=<feature> and/or
+  // ?difficulty=<grade> (synthesis page counts, compare badges, detail chips).
   useEffect(() => {
     try {
-      const f = new URLSearchParams(window.location.search).get('synthesis')
+      const params = new URLSearchParams(window.location.search)
+      const f = params.get('synthesis')
       if (f && FEATURES.includes(f as SyntheticFeature)) {
         setFeature(f as SyntheticFeature)
+      }
+      const d = params.get('difficulty')
+      if (d && DIFFICULTIES.includes(d as SynthesisDifficulty)) {
+        setDifficulty(d as SynthesisDifficulty)
       }
     } catch {
       /* ignore */
     }
   }, [])
 
-  // Keep the URL in sync so the active facet is shareable and survives reload.
+  // Keep the URL in sync so the active facets are shareable and survive reload.
   const selectFeature = useCallback((f: SyntheticFeature | null) => {
     setFeature(f)
     try {
       const url = new URL(window.location.href)
       if (f) url.searchParams.set('synthesis', f)
       else url.searchParams.delete('synthesis')
+      window.history.replaceState(null, '', url)
+    } catch {
+      /* ignore */
+    }
+  }, [])
+
+  const selectDifficulty = useCallback((d: SynthesisDifficulty | null) => {
+    setDifficulty(d)
+    try {
+      const url = new URL(window.location.href)
+      if (d) url.searchParams.set('difficulty', d)
+      else url.searchParams.delete('difficulty')
       window.history.replaceState(null, '', url)
     } catch {
       /* ignore */
@@ -112,13 +135,14 @@ export default function CatalogPage() {
     return source.filter((p) => {
       if (active && !p.categories.includes(active)) return false
       if (feature && !(p.syntheticFeatures ?? []).includes(feature)) return false
+      if (difficulty && p.synthesisDifficulty !== difficulty) return false
       if (!q) return true
       const hay = [p.name, p.shortDescription, ...(p.aliases ?? [])]
         .join(' ')
         .toLowerCase()
       return hay.includes(q)
     })
-  }, [query, active, feature])
+  }, [query, active, feature, difficulty])
 
   const atCap = selected.length >= MAX_COMPARE
 
@@ -214,14 +238,27 @@ export default function CatalogPage() {
             ))}
           </div>
 
-          {/* Synthetic-feature chips — browse by what makes a sequence hard to make */}
+          {/* Synthesis facet — difficulty grade + what makes a sequence hard to make */}
           <div className="flex flex-wrap items-center gap-1.5">
             <span className="mr-0.5 inline-flex items-center gap-1 text-[10.5px] font-semibold uppercase tracking-wider text-ink/35">
               <FlaskConical className="h-3 w-3" />
               Synthesis
             </span>
+            {DIFFICULTIES.map((d) => (
+              <Chip
+                key={d}
+                active={difficulty === d}
+                onClick={() => selectDifficulty(difficulty === d ? null : d)}
+              >
+                {SYNTHESIS_DIFFICULTY_LABEL[d]}
+              </Chip>
+            ))}
+            <span
+              aria-hidden
+              className="mx-1 h-4 w-px shrink-0 self-center bg-ink/10"
+            />
             <Chip active={feature === null} onClick={() => selectFeature(null)}>
-              Any
+              Any feature
             </Chip>
             {FEATURES.map((f) => (
               <Chip
@@ -245,14 +282,16 @@ export default function CatalogPage() {
             <span>
               {filtered.length} result{filtered.length === 1 ? '' : 's'}
               {active ? ` in ${CATEGORIES.find((c) => c.id === active)?.label}` : ''}
+              {difficulty ? ` · ${SYNTHESIS_DIFFICULTY_LABEL[difficulty]} synthesis` : ''}
               {feature ? ` with ${feature}` : ''}
             </span>
-            {(query || active || feature) && (
+            {(query || active || feature || difficulty) && (
               <button
                 onClick={() => {
                   setQuery('')
                   setActive(null)
                   selectFeature(null)
+                  selectDifficulty(null)
                 }}
                 className="text-accent/80 transition-colors hover:text-accent"
               >
