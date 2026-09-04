@@ -269,12 +269,13 @@ const ROWS: Row[] = [
     label: 'Synthesis difficulty',
     render: (p) =>
       p.synthesisDifficulty ? (
-        <span
-          className="inline-flex items-center rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent"
-          title="Relative difficulty of synthesizing and purifying to a genuine spec"
+        <Link
+          href={`/catalog?difficulty=${p.synthesisDifficulty}`}
+          title="Browse peptides by this synthesis difficulty"
+          className="inline-flex items-center rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent transition-colors hover:border-[#2DD4A8]/45"
         >
           {SYNTHESIS_DIFFICULTY_LABEL[p.synthesisDifficulty]}
-        </span>
+        </Link>
       ) : (
         <Dash />
       ),
