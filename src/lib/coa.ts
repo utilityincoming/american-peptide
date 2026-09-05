@@ -10,7 +10,7 @@
 // Pure functions, rule-based: no LLM, no network, no credits. The explanations
 // ARE the product — COA literacy for researchers who reconstitute and inject.
 
-import { PEPTIDES, type Peptide } from './peptides'
+import { PEPTIDES, type Peptide, type SyntheticFeature } from './peptides'
 import { getPubchemVerification } from './verification'
 
 export type FieldStatus = 'good' | 'warn' | 'missing' | 'info'
@@ -40,10 +40,30 @@ export interface CatalogCheck {
   note: string
 }
 
+/**
+ * A peptide-specific analytical check implied by a synthetic feature. Mass spec
+ * confirms the target mass but not, say, correct disulfide pairing or the
+ * acyl:des-acyl ratio — so these are the tests that actually matter for THIS
+ * molecule. Advisory and educational: they do not change the transparency score.
+ */
+export interface FeatureCheck {
+  feature: SyntheticFeature
+  label: string
+  /** Why this test matters for this peptide, in plain English. */
+  whatToCheck: string
+  /** Whether the COA text appears to mention the relevant test. */
+  mentioned: boolean
+  status: 'good' | 'warn'
+  /** Concrete ask when not mentioned. */
+  action: string
+}
+
 export interface CoaReport {
   detectedPeptide: { slug: string; name: string; verifiedInCatalog: boolean } | null
   fields: CoaField[]
   catalogChecks: CatalogCheck[]
+  /** Peptide-specific tests implied by the molecule's synthetic features. */
+  featureChecks: FeatureCheck[]
   redFlags: string[]
   missing: string[]
   /** A ready-to-send sentence asking the supplier for what's missing. */
@@ -231,6 +251,116 @@ function buildCatalogChecks(text: string, peptide: Peptide): CatalogCheck[] {
   return checks
 }
 
+// ── Peptide-specific checks from synthetic features ───────────────────────────
+// Each mapped feature implies an analytical test a mass number alone can't cover.
+// `keywords` are lowercase substrings that suggest the COA addresses the test.
+
+interface FeatureGuidance {
+  label: string
+  whatToCheck: string
+  keywords: string[]
+  action: string
+}
+
+const FEATURE_COA_GUIDANCE: Partial<Record<SyntheticFeature, FeatureGuidance>> = {
+  'Disulfide bridge': {
+    label: 'Disulfide bond verification',
+    whatToCheck:
+      'This peptide has a disulfide bond, so mass spec confirms the mass but not that the bond formed correctly — a scrambled or open (reduced) form shares the same mass. A thorough COA shows the disulfide is set (reduced vs non-reduced HPLC, an Ellman/free-thiol result, or peptide mapping).',
+    keywords: ['disulfide', 'reduced', 'non-reduced', 'nonreduced', 'peptide map', 'ellman', 'free thiol'],
+    action: 'confirmation the disulfide bond is correctly formed (e.g. reduced/non-reduced HPLC or a free-thiol result)',
+  },
+  'Multiple disulfides': {
+    label: 'Disulfide connectivity',
+    whatToCheck:
+      'With more than one disulfide, the mass is identical whether the bonds pair correctly or mis-pair (scramble). Only peptide mapping or reduced/non-reduced analysis shows the connectivity is right — a plain mass and purity number cannot.',
+    keywords: ['disulfide', 'reduced', 'non-reduced', 'nonreduced', 'peptide map', 'connectivity', 'free thiol'],
+    action: 'disulfide-connectivity evidence (peptide mapping or reduced/non-reduced analysis)',
+  },
+  'Fatty-acid acylation': {
+    label: 'Acylation (acyl vs des-acyl)',
+    whatToCheck:
+      'The fatty-acid chain is essential to activity, and the des-acyl form is a common, inactive impurity. A good COA reports the acyl-to-des-acyl ratio or a des-acyl limit — not just the total mass.',
+    keywords: ['acyl', 'des-acyl', 'desacyl', 'free fatty acid', 'palmitoyl', 'octanoyl', 'myristoyl'],
+    action: 'the acyl-to-des-acyl ratio (or a des-acyl impurity limit)',
+  },
+  'C-terminal amide': {
+    label: 'C-terminal amidation',
+    whatToCheck:
+      'The active form is amidated at the C-terminus; the des-amido impurity is only ~1 Da heavier and easy to miss. Look for explicit confirmation of the amide or a des-amido limit.',
+    keywords: ['amide', 'amidation', 'amidated', 'des-amido', 'desamido', 'des-amide'],
+    action: 'confirmation of C-terminal amidation (or a des-amido impurity limit)',
+  },
+  'N-terminal acetylation': {
+    label: 'N-terminal acetylation',
+    whatToCheck:
+      'The active form is N-acetylated; a des-acetyl impurity changes activity. Confirm the acetyl group is present.',
+    keywords: ['acetyl', 'acetylation', 'acetylated', 'des-acetyl'],
+    action: 'confirmation of N-terminal acetylation',
+  },
+  'Cyclic / lactam': {
+    label: 'Cyclization / ring closure',
+    whatToCheck:
+      'This is a cyclic (lactam) peptide; the linear, uncyclized precursor is an impurity with only a small mass difference. A thorough COA confirms ring closure.',
+    keywords: ['cyclic', 'cyclization', 'cyclisation', 'lactam', 'linear', 'ring clos'],
+    action: 'confirmation of cyclization / ring closure (and a linear-precursor limit)',
+  },
+  'D-amino acid': {
+    label: 'Chiral / diastereomer purity',
+    whatToCheck:
+      'This peptide contains D-amino acids; epimerization to the L-form gives a diastereomer with the same mass. A thorough COA addresses chiral purity or diastereomer content, which mass spec cannot resolve.',
+    keywords: ['chiral', 'epimer', 'diastereomer', 'd-amino', 'optical rotation', 'stereo'],
+    action: 'chiral/diastereomer purity (D-amino-acid epimers share the same mass)',
+  },
+  'Copper complex': {
+    label: 'Copper content / stoichiometry',
+    whatToCheck:
+      'The active species is a copper complex, so copper content and the 1:1 stoichiometry are identity-defining tests beyond the peptide itself. Look for a copper assay (e.g. ICP).',
+    keywords: ['copper', 'cu(ii)', 'cu2+', 'cu ii', 'icp', 'metal content', 'copper content'],
+    action: 'the copper content and stoichiometry (e.g. by ICP)',
+  },
+  Glycosylated: {
+    label: 'Glycosylation & potency',
+    whatToCheck:
+      'As a glycoprotein, the glycan profile affects identity and activity. A meaningful COA goes beyond peptide purity to glycan analysis and a potency/bioassay.',
+    keywords: ['glyco', 'glycan', 'sialic', 'potency', 'bioassay', 'sec', 'aggregat'],
+    action: 'glycan-profile and potency/bioassay data',
+  },
+  'Recombinant protein': {
+    label: 'Biologic release testing',
+    whatToCheck:
+      'This is a recombinant protein, not a synthetic peptide — expect host-cell-protein, residual DNA, aggregation (SEC), and potency/bioassay data rather than solid-phase-synthesis metrics.',
+    keywords: ['host cell', 'hcp', 'residual dna', 'sec', 'aggregat', 'bioassay', 'potency', 'endotoxin'],
+    action: 'biologic release data (host-cell protein, residual DNA, SEC aggregation, potency)',
+  },
+  'Monoclonal antibody': {
+    label: 'Antibody release testing',
+    whatToCheck:
+      'This is a monoclonal antibody — a COA should cover aggregation (SEC), charge variants, glycosylation, host-cell protein, and potency, not peptide-synthesis fields.',
+    keywords: ['sec', 'aggregat', 'charge variant', 'cief', 'icief', 'host cell', 'hcp', 'potency', 'glyco'],
+    action: 'antibody release data (SEC aggregation, charge variants, glycosylation, potency)',
+  },
+}
+
+function buildFeatureChecks(text: string, peptide: Peptide): FeatureCheck[] {
+  const lower = text.toLowerCase()
+  const out: FeatureCheck[] = []
+  for (const feature of peptide.syntheticFeatures ?? []) {
+    const g = FEATURE_COA_GUIDANCE[feature]
+    if (!g) continue
+    const mentioned = g.keywords.some((k) => lower.includes(k))
+    out.push({
+      feature,
+      label: g.label,
+      whatToCheck: g.whatToCheck,
+      mentioned,
+      status: mentioned ? 'good' : 'warn',
+      action: g.action,
+    })
+  }
+  return out
+}
+
 // ── The transparency checklist ────────────────────────────────────────────────
 
 export function analyzeCoa(rawText: string): CoaReport {
@@ -370,6 +500,7 @@ export function analyzeCoa(rawText: string): CoaReport {
   for (const f of fields) if (f.status !== 'good') f.action = ACTIONS[f.key]
 
   const catalogChecks = peptide ? buildCatalogChecks(text, peptide) : []
+  const featureChecks = peptide ? buildFeatureChecks(text, peptide) : []
 
   // ── Score ──
   const max = fields.reduce((n, f) => n + f.weight, 0)
@@ -393,11 +524,17 @@ export function analyzeCoa(rawText: string): CoaReport {
   const missing = fields.filter((f) => !f.found).map((f) => f.label)
 
   const asks = fields.filter((f) => f.status === 'missing' || f.status === 'warn')
-  const supplierRequest = asks.length
+  const featureAsks = featureChecks.filter((f) => f.status === 'warn')
+  let supplierRequest = asks.length
     ? `Your certificate of analysis${peptide ? ` for ${peptide.name}` : ''} is missing or incomplete on: ${asks
         .map((f) => f.label)
         .join(', ')}. To complete it, please provide ${asks.map((f) => f.action).join('; ')}.`
-    : 'This COA covers the core transparency fields — no additional items needed.'
+    : `This COA covers the core transparency fields${peptide ? ` for ${peptide.name}` : ''} — no additional generic items needed.`
+  if (featureAsks.length) {
+    supplierRequest += ` Because ${peptide?.name ?? 'this peptide'} is ${featureAsks
+      .map((f) => f.label.toLowerCase())
+      .join(', ')}-relevant, also request ${featureAsks.map((f) => f.action).join('; ')}.`
+  }
 
   const summary =
     grade === 'A'
@@ -420,6 +557,7 @@ export function analyzeCoa(rawText: string): CoaReport {
       : null,
     fields,
     catalogChecks,
+    featureChecks,
     redFlags,
     missing,
     supplierRequest,
