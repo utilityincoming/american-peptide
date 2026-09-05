@@ -3,7 +3,6 @@ import { ArrowRight, ArrowUpRight, Building2, Check, Info, ShieldCheck } from 'l
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
 import SpotlightComparison from '@/components/SpotlightComparison'
 import {
-  getSpotlightVendor,
   getVendorsForPeptide,
   hasSourcingPage,
   trustScore,
@@ -51,11 +50,12 @@ export default function SourcingCard({
   const vendors = topVendorsFor(slugs)
   if (vendors.length === 0) return null
 
-  // A paid featured partner takes the slot on the slugs it covers — and says so
-  // in the eyebrow. The tier pill and signal list below stay the vendor's own,
-  // so buying the position never dresses it up as the trust-ranked winner.
-  const featured = slugs.map((s) => getSpotlightVendor(s)).find(Boolean)
-  const best = featured ?? vendors[0]
+  // The hero slot goes to the honest trust-ranked winner — a paid featured
+  // partner is NOT pinned here. It still surfaces in its ranked place via the
+  // "compare all sources" list below, so the position is disclosed without the
+  // sidebar dressing an ad up as the top pick.
+  const featured = false
+  const best = vendors[0]
   const tier = VENDOR_TIERS.find((t) => t.id === vendorTier(best))!
   const t = best.trust
   const signals: string[] = []

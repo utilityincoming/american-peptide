@@ -43,8 +43,6 @@ import {
   trustScore,
   vendorHref,
   vendorsByTier,
-  vendorTier,
-  VENDOR_TIERS,
   type Vendor,
 } from '@/lib/vendors'
 
@@ -930,15 +928,15 @@ function ReferenceCompoundPanel({ peptide }: { peptide: Peptide }) {
 }
 
 function MarketplacePanel({ vendors, slug }: { vendors: Vendor[]; slug: string }) {
-  // A paid featured partner is pinned above the tiers and pulled out of them, so
-  // it appears once and is never mistaken for the trust-ranked winner. Everything
-  // below it stays ordered purely by transparency signals.
+  // A paid featured partner is NOT pulled out or pinned above the tiers — it
+  // ranks in its honest tier like any other vendor, carrying only a quiet inline
+  // "Featured partner · paid" badge so the placement stays disclosed without
+  // dominating the panel. The trust-ranked order is never disturbed.
   const featured = getSpotlightVendor(slug)
-  const ranked = featured ? vendors.filter((v) => v.id !== featured.id) : vendors
 
   const CAP = 8
-  const shown = ranked.slice(0, CAP)
-  const hidden = ranked.length - shown.length
+  const shown = vendors.slice(0, CAP)
+  const hidden = vendors.length - shown.length
   // Group the already trust-ranked list into tiers; each tier keeps trust order.
   const groups = vendorsByTier(shown)
 
@@ -950,21 +948,9 @@ function MarketplacePanel({ vendors, slug }: { vendors: Vendor[]; slug: string }
         </div>
         <h3 className="text-sm font-semibold">Where to source</h3>
         <span className="ml-auto text-[10px] uppercase tracking-wider text-ink/35">
-          {featured ? 'Featured, then ranked by trust' : 'Ranked by trust'}
+          Ranked by trust
         </span>
       </div>
-
-      {featured && (
-        <div className="mb-6 rounded-xl border border-amber-400/20 bg-amber-400/[0.04] p-4">
-          <VendorCard
-            vendor={featured}
-            slug={slug}
-            isFirst
-            badge="featured"
-            tierLabel={VENDOR_TIERS.find((t) => t.id === vendorTier(featured))!.label}
-          />
-        </div>
-      )}
 
       <div className="space-y-6">
         {groups.map((group, gi) => (
@@ -985,7 +971,13 @@ function MarketplacePanel({ vendors, slug }: { vendors: Vendor[]; slug: string }
                   vendor={v}
                   slug={slug}
                   isFirst={j === 0}
-                  badge={gi === 0 && j === 0 ? 'best' : undefined}
+                  badge={
+                    featured?.id === v.id
+                      ? 'featured'
+                      : gi === 0 && j === 0
+                        ? 'best'
+                        : undefined
+                  }
                 />
               ))}
             </div>
@@ -1009,7 +1001,6 @@ function VendorCard({
   slug,
   isFirst,
   badge,
-  tierLabel,
 }: {
   vendor: Vendor
   /** The compound being viewed — routes the outbound to its product deep link. */
@@ -1017,8 +1008,6 @@ function VendorCard({
   isFirst: boolean
   /** 'best' = top of the trust ranking. 'featured' = paid placement, disclosed as such. */
   badge?: 'best' | 'featured'
-  /** Shown only for the featured card, which sits outside the tier groups. */
-  tierLabel?: string
 }) {
   const score = trustScore(vendor)
   const t = vendor.trust
@@ -1051,11 +1040,6 @@ function VendorCard({
           )}
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
-          {tierLabel && (
-            <span className="rounded-full border border-ink/15 px-2 py-0.5 text-[10px] font-medium text-ink/55">
-              {tierLabel}
-            </span>
-          )}
           <span className="rounded-full border border-ink/15 px-2 py-0.5 text-[10px] font-semibold text-ink/70">
             {score}/100
           </span>

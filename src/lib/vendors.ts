@@ -62,8 +62,9 @@ export interface VendorTrust {
    *
    * Both current vendors legitimately leave this unset, for OPPOSITE reasons, and
    * neither is a gap to be filled in later:
-   *   - amino-club tests per batch, so the only meaningful date is the one on the
-   *     buyer's own lot certificate. A single site-wide date would misdescribe it.
+   *   - amino-club — our lead partner — tests per batch, so the only meaningful
+   *     date is the one on the buyer's own lot certificate. A single site-wide
+   *     date would misdescribe it.
    *   - absim-peptides publishes one static COA image per product and states no
    *     purity figure at all, so there is no dated claim for a date to qualify.
    * A CMS upload timestamp is not a COA issue date — don't substitute one.
@@ -324,70 +325,11 @@ export function trustSignals(
 //
 export const VENDORS: Vendor[] = [
   {
-    id: 'biolongevity-labs',
-    name: 'BioLongevity Labs',
-    url: 'https://biolongevitylabs.com',
-    blurb:
-      'US-manufactured research peptides with a public, per-lot COA database — every product searchable by its own report number, tested by independent labs at 99% stated purity.',
-    // Read off their public COA database (/all-coas/), which lists the exact
-    // products they stock — a stronger source than marketing copy, since each
-    // entry is backed by a report. Only single-compound vials that map to a
-    // catalog entry are listed. DELIBERATELY EXCLUDED: their blends (GLOW,
-    // KLOW, Regeno), BioStrips (a different delivery format), and the modified
-    // analogs N-Acetyl Semax/Selank Amidate and PEG-MGF — a reader clicking
-    // "Semax" should not land on a different molecule. Their catalog also runs
-    // well beyond ours (Klotho, FLGR242, ARA-290, PNC-27, VIP, FOXO4-DRI and
-    // most of the Khavinson bioregulator range); those simply have no monograph
-    // here yet.
-    peptides: [
-      'bpc-157', 'tb-500', 'ghk-cu', 'kpv', 'ipamorelin', 'tesamorelin',
-      'thymosin-alpha-1', 'mots-c', 'nad-plus', '5-amino-1mq', 'epitalon',
-      'pt-141', 'dsip', 'll-37', 'melanotan-1', 'kisspeptin-10', 'oxytocin',
-      'cagrilintide', 'pinealon', 'bronchogen', 'cardiogen', 'pancragen',
-      'vesugen', 'vilon',
-    ],
-    shipsTo: ['us'],
-    trust: {
-      // Every flag below is a claim they publish themselves (homepage + the
-      // /all-coas/ database + /shipping-and-payments/). Not independently
-      // confirmed by us — but the COA database is externally checkable, which
-      // is what separates this from self-report.
-      coaOnFile: true, // public COA database, searchable per product
-      thirdPartyTested: true, // "three independent, certified laboratories", HPLC + LC-MS
-      perBatchTesting: true, // "Every batch undergoes independent testing… No exceptions" — the DB shows multiple distinct report numbers per product
-      purityPct: 99, // "99% purity research peptides" via solid-phase synthesis
-      // reshipPolicy FALSE: /shipping-and-payments/ promises a replacement only
-      // when an order "is shipped incorrectly or the items received are not the
-      // items ordered". That is a fulfillment-error remedy, not the lost- or
-      // stolen-package guarantee this flag means. They state no such policy.
-      reshipPolicy: false,
-      // refundPolicy FALSE, and stated plainly by them: "Due to regulations
-      // regarding the sale of our products, returns are prohibited." The 10-day
-      // return window on their site covers SUPPLEMENTS, a separate product line
-      // on a separate storefront — it does not apply to research peptides.
-      refundPolicy: false,
-    },
-    affiliate: {
-      trackedPath: '/go/biolongevity-labs',
-      url: 'https://go.biolongevitylabs.com/aff_c?offer_id=1&aff_id=2788',
-      // Partner-supplied deep links only. Everything else in `peptides` routes
-      // to the homepage link above until they provide a url_id for it.
-      productUrls: {
-        'bpc-157': 'https://go.biolongevitylabs.com/aff_c?offer_id=1&aff_id=2788&url_id=85',
-        'ghk-cu': 'https://go.biolongevitylabs.com/aff_c?offer_id=1&aff_id=2788&url_id=112',
-        'tb-500': 'https://go.biolongevitylabs.com/aff_c?offer_id=1&aff_id=2788&url_id=100',
-      },
-      active: true,
-    },
-    notes:
-      'Returns are prohibited on research peptides and no lost-package guarantee is published, so the recourse if an order goes wrong is thinner than the lab documentation suggests — pay by a method that gives you a chargeback. Match the COA report number in their public database to the lot on your vial before use.',
-  },
-  {
     id: 'amino-club',
     name: 'Amino Club',
     url: 'https://aminoclub.com',
     blurb:
-      'US research-peptide distributor; every batch ships a lot-matched third-party COA (MZ Biolabs / Janoshik) at ≥99% HPLC purity.',
+      'Our lead sourcing partner: a US research-peptide distributor where every batch ships a lot-matched third-party COA (MZ Biolabs / Janoshik) at ≥99% HPLC purity, backed by free reship on loss and a 60-day money-back guarantee.',
     peptides: 'all',
     shipsTo: ['us'],
     trust: {
