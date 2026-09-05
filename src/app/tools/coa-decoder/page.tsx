@@ -36,6 +36,26 @@ Acetate Content: 7.4 %
 Storage: -20 C, protected from light
 Test Methods: RP-HPLC, ESI-MS, Karl Fischer titration`
 
+// A disulfide peptide (oxytocin) — a strong COA on the generic fields, yet it
+// never verifies the disulfide bond or the C-terminal amide, so it showcases the
+// peptide-specific "tests that matter" section flagging those gaps.
+const SAMPLE_COA_DISULFIDE = `CERTIFICATE OF ANALYSIS
+
+Product: Oxytocin (acetate)
+Lot No.: AP-260714
+Date of Manufacture: 2026-07-14
+Retest Date: 2028-07-14
+Appearance: White lyophilized powder
+
+Purity (RP-HPLC): 98.4 %
+Identity (ESI-MS): Observed mass 1007.4; conforms
+Net Peptide Content: 84.6 %
+Water Content (Karl Fischer): 4.8 %
+Acetate Content: 8.1 %
+
+Storage: -20 C, protected from light
+Test Methods: RP-HPLC, ESI-MS, Karl Fischer titration`
+
 const STATUS_STYLES: Record<FieldStatus, { icon: typeof CheckCircle2; color: string }> = {
   good: { icon: CheckCircle2, color: 'text-accent' },
   warn: { icon: AlertTriangle, color: 'text-amber-400' },
@@ -255,6 +275,12 @@ export default function CoaDecoderPage() {
                 className="rounded-xl border border-ink/10 px-4 py-2.5 text-sm font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
               >
                 Load sample
+              </button>
+              <button
+                onClick={() => setText(SAMPLE_COA_DISULFIDE)}
+                className="rounded-xl border border-ink/10 px-4 py-2.5 text-sm font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
+              >
+                Disulfide sample
               </button>
               {(text || report) && (
                 <button
