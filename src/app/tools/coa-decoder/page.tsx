@@ -9,6 +9,7 @@ import {
   ChevronDown,
   Copy,
   FileSearch,
+  FlaskConical,
   Info,
   Lock,
   MinusCircle,
@@ -31,6 +32,26 @@ Identity (ESI-MS): Observed mass 1419.5; conforms
 Net Peptide Content: 82.3 %
 Water Content (Karl Fischer): 5.1 %
 Acetate Content: 7.4 %
+
+Storage: -20 C, protected from light
+Test Methods: RP-HPLC, ESI-MS, Karl Fischer titration`
+
+// A disulfide peptide (oxytocin) — a strong COA on the generic fields, yet it
+// never verifies the disulfide bond or the C-terminal amide, so it showcases the
+// peptide-specific "tests that matter" section flagging those gaps.
+const SAMPLE_COA_DISULFIDE = `CERTIFICATE OF ANALYSIS
+
+Product: Oxytocin (acetate)
+Lot No.: AP-260714
+Date of Manufacture: 2026-07-14
+Retest Date: 2028-07-14
+Appearance: White lyophilized powder
+
+Purity (RP-HPLC): 98.4 %
+Identity (ESI-MS): Observed mass 1007.4; conforms
+Net Peptide Content: 84.6 %
+Water Content (Karl Fischer): 4.8 %
+Acetate Content: 8.1 %
 
 Storage: -20 C, protected from light
 Test Methods: RP-HPLC, ESI-MS, Karl Fischer titration`
@@ -86,6 +107,11 @@ function reportToText(r: CoaReport): string {
   if (r.catalogChecks.length) {
     lines.push('', 'Identity cross-check vs verified reference:')
     for (const c of r.catalogChecks) lines.push(`  ${c.label}: COA ${c.claimed} vs ${c.reference} — ${c.verdict}`)
+  }
+  if (r.featureChecks.length) {
+    lines.push('', 'Tests that matter for this peptide:')
+    for (const c of r.featureChecks)
+      lines.push(`  [${c.mentioned ? 'x' : ' '}] ${c.label}${c.mentioned ? '' : ' — not mentioned on this COA'}`)
   }
   if (r.redFlags.length) {
     lines.push('', 'Red flags:')
@@ -250,6 +276,12 @@ export default function CoaDecoderPage() {
               >
                 Load sample
               </button>
+              <button
+                onClick={() => setText(SAMPLE_COA_DISULFIDE)}
+                className="rounded-xl border border-ink/10 px-4 py-2.5 text-sm font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
+              >
+                Disulfide sample
+              </button>
               {(text || report) && (
                 <button
                   onClick={() => {
@@ -384,6 +416,67 @@ export default function CoaDecoderPage() {
                       reference.
                     </p>
                   )}
+                </div>
+              )}
+
+              {/* Peptide-specific tests from synthetic features */}
+              {report.featureChecks.length > 0 && (
+                <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6">
+                  <div className="mb-1.5 flex items-center gap-2">
+                    <FlaskConical className="h-4 w-4 text-accent" />
+                    <h2 className="text-sm font-semibold">
+                      Tests that matter for this peptide
+                    </h2>
+                  </div>
+                  <p className="mb-4 text-xs leading-relaxed text-ink/45">
+                    Mass spec confirms the target mass, but this molecule&apos;s
+                    structure calls for checks a mass number can&apos;t cover. We
+                    flag whether the COA appears to address each.
+                  </p>
+                  <div className="space-y-3">
+                    {report.featureChecks.map((c) => {
+                      const Icon = c.mentioned ? CheckCircle2 : AlertTriangle
+                      const color = c.mentioned ? 'text-accent' : 'text-amber-400'
+                      return (
+                        <div
+                          key={c.feature}
+                          className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4"
+                        >
+                          <div className="flex items-start gap-3">
+                            <Icon className={'mt-0.5 h-4 w-4 shrink-0 ' + color} />
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-baseline justify-between gap-3">
+                                <span className="text-sm font-semibold text-ink/85">
+                                  {c.label}
+                                </span>
+                                <span
+                                  className={
+                                    'shrink-0 text-[10px] font-semibold uppercase tracking-wider ' +
+                                    color
+                                  }
+                                >
+                                  {c.mentioned ? 'addressed' : 'not mentioned'}
+                                </span>
+                              </div>
+                              <p className="mt-1.5 text-xs leading-relaxed text-ink/45">
+                                {c.whatToCheck}
+                              </p>
+                              {!c.mentioned && (
+                                <p className="mt-1 text-[11px] text-ink/35">
+                                  Ask the supplier for {c.action}.
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                  <p className="mt-4 text-[11px] leading-relaxed text-ink/30">
+                    A keyword read of the pasted text, not lab verification — a
+                    COA may cover a test under wording we don&apos;t recognize.
+                    Use this to know what to look for and ask about.
+                  </p>
                 </div>
               )}
 
