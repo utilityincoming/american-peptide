@@ -304,9 +304,12 @@ export default function SynthesisPage() {
                       <FlaskConical className="h-3 w-3" />
                       {SYNTHESIS_DIFFICULTY_LABEL[difficulty]}
                     </span>
-                    <span className="text-[11px] tabular-nums text-ink/35">
-                      {peptides.length}
-                    </span>
+                    <Link
+                      href={`/catalog?difficulty=${difficulty}`}
+                      className="text-[11px] tabular-nums text-ink/40 transition-colors hover:text-accent"
+                    >
+                      {peptides.length} →
+                    </Link>
                   </div>
                   <ul className="flex flex-wrap gap-1.5">
                     {shown.map((p) => (
@@ -322,7 +325,7 @@ export default function SynthesisPage() {
                   </ul>
                   {rest > 0 && (
                     <Link
-                      href="/catalog"
+                      href={`/catalog?difficulty=${difficulty}`}
                       className="mt-3 inline-block text-[11px] text-accent/70 transition-colors hover:text-accent"
                     >
                       +{rest} more in the catalog →
