@@ -786,6 +786,9 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     cas: '1818415-56-3',
+    // Parent hormone relaxin-2 (H2). B7-33 is a synthetic single-chain analog of
+    // the relaxin-2 B-chain, not itself a UniProt entry.
+    uniprotId: 'P04090',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -1390,6 +1393,9 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     cas: '946870-92-4',
+    // Parent protein IGF-1. LR3 is a synthetic 83-aa analog (13-aa N-terminal
+    // extension + Arg3) that is not itself a UniProt entry.
+    uniprotId: 'P05019',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     storage:
       'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and minimize freeze–thaw — a folded, disulfide-bonded protein.',
@@ -1485,6 +1491,11 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No. It is a research compound, not FDA-approved, and is prohibited in sport. This page is a research and educational reference.',
       },
     ],
+    sequence: 'YQPPSTNKNTKSQRRKGSTFEERK',
+    // C-terminal E-domain peptide of the IGF-1Ec splice isoform (UniProt P05019-4,
+    // the exon-5 frameshift tail). Average mass of the unmodified free-acid 24-mer.
+    molecularWeight: 2868.2,
+    uniprotId: 'P05019',
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     storage:
       'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and use within weeks; minimize freeze–thaw.',
