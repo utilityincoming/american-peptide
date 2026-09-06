@@ -15,7 +15,6 @@ import {
   type PeptideCategory,
 } from '@/lib/peptides'
 import { getCategoryContent } from '@/lib/category-content'
-import WaitlistForm from '@/components/WaitlistForm'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -205,14 +204,6 @@ export default async function CategoryPage({ params }: RouteParams) {
                 ))}
               </div>
             </div>
-
-            {/* Waitlist */}
-            <WaitlistForm
-              source={`category:${meta.id}`}
-              variant="compact"
-              heading={`Track new ${meta.label.toLowerCase()} listings`}
-              description="One email when the first vetted suppliers list in this category. No other mail."
-            />
 
             {/* FAQ */}
             {content?.faqs && content.faqs.length > 0 && (

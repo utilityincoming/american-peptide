@@ -497,7 +497,7 @@ export const GLOSSARY: GlossaryTerm[] = [
     category: 'identifiers',
     short: 'A supplier document reporting a compound’s identity and purity.',
     definition:
-      'A Certificate of Analysis (COA) is a document from a supplier reporting the results of analytical testing — typically identity (e.g. mass spectrometry) and purity (e.g. HPLC) — for a specific batch. COAs are central to the transparency goals of a research-peptide marketplace.',
+      'A Certificate of Analysis (COA) is a document from a supplier reporting the results of analytical testing — typically identity (e.g. mass spectrometry) and purity (e.g. HPLC) — for a specific batch. COAs are central to transparency in the research-peptide market.',
     aliases: ['certificate of analysis'],
     relatedTerms: ['pubchem-cid'],
   },

@@ -28,10 +28,10 @@ research-framed and openly licensed (CC BY 4.0) so it stays useful wherever it t
 AmericanPeptide.com treats the domain as a **trust and authority asset** and builds a
 research layer on top of a structured data layer:
 
-- **Peptide catalog** — 56 compounds with mechanisms, key research, storage/handling,
-  synthesis notes, molecular data, and per-compound FAQs. The schema is forward-compatible
-  with a future marketplace (suppliers, COAs, transparent pricing) but ships as a reference,
-  with no fabricated supplier or price data.
+- **Peptide catalog** — research peptides with mechanisms, key research, storage/handling,
+  synthesis notes, molecular data, and per-compound FAQs. Ships as a research reference,
+  with no fabricated supplier or price data; sourcing lives in the separate
+  trust-ranked vendor directory.
 - **Peptide Agent** — a Claude research agent that thinks adaptively and grounds claims in
   live scientific sources rather than model memory.
 - **Remote MCP server** — connect the whole catalog + grounding tools into Claude, ChatGPT,
@@ -86,7 +86,7 @@ pointing home.
 - **AI:** Anthropic Claude via raw `fetch` (no SDK); grounding tools; static system prompts sent as cached blocks
 - **MCP:** `mcp-handler` (Streamable HTTP)
 - **Storage:** Upstash Redis (REST) for rate limiting, API keys & usage metering — with in-memory fallback for local dev
-- **Email:** Resend (waitlist) · **Analytics:** Vercel Analytics + Speed Insights, optional GA4
+- **Analytics:** Vercel Analytics + Speed Insights, optional GA4
 - **Docs/PDF:** `react-markdown` + `remark-gfm` · `pdfjs-dist`
 
 ## Quick start
@@ -108,7 +108,7 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000).
 
 > The site runs with **zero config** for browsing and the bench tools. The Peptide Agent
-> needs `ANTHROPIC_API_KEY`; everything else (Redis, Resend, GA) is optional and degrades
+> needs `ANTHROPIC_API_KEY`; everything else (Redis, GA) is optional and degrades
 > gracefully in local dev.
 
 ## Environment variables
@@ -121,7 +121,6 @@ Full documentation lives in [`.env.example`](.env.example). Summary:
 | `UPSTASH_REDIS_REST_URL` / `_TOKEN` | Prod-recommended | Durable rate limiting, API keys & usage metering |
 | `ADMIN_SECRET` | Prod (admin) | Protects `GET /api/admin/usage`; falls back to `CRON_SECRET` |
 | `CRON_SECRET` | Prod (jobs) | Authorizes scheduled jobs, e.g. `/api/jobs/fact-qa` |
-| `RESEND_API_KEY`, `RESEND_AUDIENCE_ID`, `RESEND_FROM`, … | Optional | Waitlist email; without it, signups are logged and still succeed |
 | `NEXT_PUBLIC_GA_ID` | Optional | GA4 measurement ID (production only) |
 | `AGENT_MODEL` / `AGENT_EFFORT` / `AGENT_DEBUG` | Optional | Override agent model, reasoning effort, and debug logging |
 | `NEXT_PUBLIC_PLATFORM`, `ANDROID_PACKAGE_NAME`, `ANDROID_SHA` | Optional | Android TWA / Play Store build (`=android` gates affiliate links) |
