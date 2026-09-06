@@ -880,6 +880,14 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     sequence: 'AHK',
+    // AHK-Cu is the copper(II) complex of Ala-His-Lys. Represented as the neutral
+    // complex C15H24CuN6O4 (~415.9 Da), matching how GHK-Cu is handled here (the
+    // bare tripeptide is ~354 Da — not used). PubChem indexes AHK-Cu as the
+    // monohydrochloride: CID 168431292, C15H24ClCuN6O4-, 451.4 Da.
+    molecularWeight: 415.9,
+    molecularFormula: 'C15H24CuN6O4',
+    cas: '682809-81-0',
+    pubchemCid: 168431292,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     storage:
       'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and use within weeks; copper complexes are light- and oxidation-sensitive.',
@@ -1522,7 +1530,14 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No — it is a research compound, not FDA-approved. This page is a research and educational reference.',
       },
     ],
-    sequence: 'YADAIFTQSYRKVLAQLSARKLLQDIMSR',
+    sequence: 'YADAIFTQSYRKVLAQLSARKLLQDILSR',
+    // Modified GRF(1-29): D-Ala2, Gln8, Ala15, Leu27 vs native GHRH(1-29); C-terminal amide.
+    molecularWeight: 3367.9,
+    molecularFormula: 'C152H252N44O42',
+    // PubChem CID 56841945 — the bare 29-mer amide (no DAC). Auto-enrichment
+    // matched the ambiguous name "CJC-1295" to the DAC conjugate (CID 91971820,
+    // 3647.2 Da); these inline values pin the correct no-DAC molecule.
+    pubchemCid: 56841945,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
@@ -1564,6 +1579,12 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No — it is a research compound. This page is a research and educational reference.',
       },
     ],
+    molecularWeight: 3647.2,
+    molecularFormula: 'C165H269N47O46',
+    // PubChem CID 91971820 — modified GRF(1-29) carrying the maleimidopropionyl
+    // Drug Affinity Complex on a Lys residue. The bare no-DAC 29-mer amide is a
+    // different molecule (CID 56841945, ~3367.9 Da) — see cjc-1295-no-dac.
+    pubchemCid: 91971820,
     market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
