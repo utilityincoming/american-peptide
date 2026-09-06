@@ -737,7 +737,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
               )
             })()}
 
-            {/* Marketplace panel — live trust-ranked vendors, else status */}
+            {/* Sources panel — live trust-ranked vendors, else status */}
             {(() => {
               const vendors = getVendorsForPeptide(peptide.slug)
               // No vendors means two different things. On the Play build it's
@@ -745,13 +745,13 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
               // peptide market doesn't supply. Same emptiness, opposite reasons.
               if (!vendors.length)
                 return IS_APP_BUILD ? (
-                  <MarketplaceComingSoon />
+                  <ReferenceEdition />
                 ) : (
                   <ReferenceCompoundPanel peptide={peptide} />
                 )
               return (
                 <div className="space-y-2">
-                  <MarketplacePanel vendors={vendors} slug={peptide.slug} />
+                  <SourcesPanel vendors={vendors} slug={peptide.slug} />
                   {/* Deep link to the tiered sourcing aggregator — only where it
                       exists, gated by the same rule /sources generates from. */}
                   {hasSourcingPage(peptide.slug) && (
@@ -863,11 +863,8 @@ function Row({
 // every outbound vendor link. Its copy points the reader to the web, so it must
 // never render ON the web — a compound with no vendors there is a different
 // situation entirely, handled by ReferenceCompoundPanel below. The trust-ranked
-// affiliate directory is the CURRENT sourcing layer. A first-party escrow /
-// COA-custody marketplace remains a TABLED future direction (a good idea, not
-// yet built) — deliberately not teased here so we don't promise a product that
-// isn't live. This platform never sells peptides.
-function MarketplaceComingSoon() {
+// affiliate directory is the sourcing layer; this platform never sells peptides.
+function ReferenceEdition() {
   return (
     <div className="overflow-hidden rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-5">
       <div className="mb-2 flex items-center gap-2">
@@ -927,7 +924,7 @@ function ReferenceCompoundPanel({ peptide }: { peptide: Peptide }) {
   )
 }
 
-function MarketplacePanel({ vendors, slug }: { vendors: Vendor[]; slug: string }) {
+function SourcesPanel({ vendors, slug }: { vendors: Vendor[]; slug: string }) {
   // A paid featured partner is NOT pulled out or pinned above the tiers — it
   // ranks in its honest tier like any other vendor, carrying only a quiet inline
   // "Featured partner · paid" badge so the placement stays disclosed without

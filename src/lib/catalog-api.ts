@@ -1,8 +1,6 @@
 // Shared serialization + headers for the open catalog API (/api/catalog).
 //
-// Exposes a clean, public reference shape of each peptide. Deliberately omits
-// the internal `market` stub (forward-looking, not real data) so the open
-// dataset never ships placeholder values.
+// Exposes a clean, public reference shape of each peptide.
 
 import { PEPTIDES, getCategoryLabel, type Peptide } from './peptides'
 import {

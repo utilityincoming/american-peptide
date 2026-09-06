@@ -756,7 +756,7 @@ export default function GLP1Page() {
                   slugs={['semaglutide', 'tirzepatide', 'retatrutide', 'cagrilintide']}
                 />
               ) : (
-                <MarketplaceComingSoon />
+                <ReferenceEdition />
               )
             })()}
 
@@ -828,10 +828,9 @@ export default function GLP1Page() {
 
 // Fallback on the Play (TWA) build, where the vendor helpers return nothing and
 // no affiliate UI is rendered. Mirrors the catalog detail page's "Reference
-// edition" fallback: this build is reference-only, and we deliberately do NOT
-// tease a marketplace product that isn't live — sourcing on the web is the
+// edition" fallback: this build is reference-only. Sourcing on the web is the
 // trust-ranked vendor directory, not a first-party store.
-function MarketplaceComingSoon() {
+function ReferenceEdition() {
   return (
     <div className="rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] p-5">
       <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]/10">

@@ -35,12 +35,12 @@ function topVendorsFor(slugs: string[]): Vendor[] {
  * Sidebar "where to source" card for the SEO class-landing pages.
  *
  * Propagates the GLP-1 hub's trust-gated pattern: instead of a static
- * "marketplace coming soon" placeholder, it surfaces the single highest-trust
- * vendor that carries the page's compounds — ranked by the same transparency
- * signals as the catalog directory (never by commission) — with an FTC
- * disclosure and a link to the full ranked list. On the reference-only Play
- * build (or when no known source exists) it renders nothing, because the
- * trust-ranked directory IS the buying layer; there is no separate marketplace.
+ * "coming soon" placeholder, it surfaces the single highest-trust vendor that
+ * carries the page's compounds — ranked by the same transparency signals as the
+ * catalog directory (never by commission) — with an FTC disclosure and a link
+ * to the full ranked list. On the reference-only Play build (or when no known
+ * source exists) it renders nothing, because the trust-ranked directory IS the
+ * sourcing layer; this platform never sells peptides itself.
  */
 export default function SourcingCard({
   slugs,

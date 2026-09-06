@@ -1,9 +1,8 @@
 // Catalog data for AmericanPeptide.com
 //
-// Schema is intentionally forward-compatible with a future marketplace
-// (suppliers, COAs, transparent pricing). Marketplace fields are scaffolded
-// but the catalog ships as a research reference only — no live supplier or
-// price data is fabricated.
+// The catalog is a research reference — mechanism, sequence, structure, and the
+// research areas each peptide is studied for. No supplier or price data is
+// fabricated; sourcing lives in the separate trust-ranked vendor directory.
 
 export type PeptideCategory =
   | 'metabolic'
@@ -69,14 +68,6 @@ export const CATEGORIES: CategoryMeta[] = [
   { id: 'peptide-hormone', label: 'Peptide Hormones',  blurb: 'How hormone sequences become manufacturable synthetic drugs — analog engineering, disulfides, acylation, and why purity is hard.' },
 ]
 
-export interface MarketStub {
-  // Forward-looking marketplace fields. All values represent intent only —
-  // no live supplier listings exist yet. Surfaced in UI as "coming soon".
-  trackedSuppliers: number
-  trackedVariants: number
-  certificatesOnFile: number
-}
-
 export interface Peptide {
   slug: string
   name: string
@@ -99,7 +90,6 @@ export interface Peptide {
   pubchemCid?: number
   uniprotId?: string
   fdaApproved?: boolean
-  market?: MarketStub
   /** Storage guidance — lyophilized + reconstituted stability, temperature. */
   storage?: string
   /** Handling notes — reconstitution, light/heat/moisture sensitivity. */
@@ -197,7 +187,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 4113.6,
     cas: '910463-68-2',
     fdaApproved: true,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     synthesisNotes:
       'Beyond its 31-residue chain, semaglutide carries a fatty-diacid side chain on a linker — extra synthetic steps that each add cost and another opportunity for impurities to form. Genuine material is purified to a defined spec and documented on a certificate of analysis, never judged by appearance.',
     storage:
@@ -251,7 +240,6 @@ const SEED_PEPTIDES: Peptide[] = [
     cas: '204656-20-2',
     pubchemCid: 16134956,
     fdaApproved: true,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'tirzepatide',
@@ -295,7 +283,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 4813.5,
     cas: '2023788-19-2',
     fdaApproved: true,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     synthesisNotes:
       'At 39 residues with a fatty-acid chain and a dual-receptor design, tirzepatide is a long, demanding synthesis — more coupling cycles mean more deletion and truncation impurities for purification to remove. Its length is exactly why a credible purity figure and an actual chromatogram matter here.',
     storage:
@@ -343,7 +330,6 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     molecularWeight: 4731.5,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'survodutide',
@@ -390,7 +376,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C192H289N47O61',
     cas: '2805997-46-8',
     pubchemCid: 171378821,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'mazdutide',
@@ -437,7 +422,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C207H317N45O65',
     cas: '2259884-03-0',
     pubchemCid: 167312357,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'cagrilintide',
@@ -481,7 +465,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C194H312N54O59S2',
     cas: '1415456-99-3',
     pubchemCid: 171397054,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'cagrisema',
@@ -526,7 +509,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     synthesisNotes:
       'CagriSema is a co-formulation, not a synthesized molecule: it is manufactured by making its two component peptides — cagrilintide and semaglutide — separately, each to its own spec and certificate of analysis, and combining them at fixed doses. Its quality therefore rests on the identity and purity of two peptides at once, described on their individual monographs.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'insulin',
@@ -591,7 +573,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'As a folded protein it is sensitive to heat, freezing, and agitation, which can cause aggregation (visible as clumping or frosting) and loss of potency. Aggregated insulin should never be used.',
     synthesisNotes:
       'Recombinant human insulin is expressed in E. coli or yeast — historically as separate A and B chains or as proinsulin — then folded, disulfide-paired, and (for the proinsulin route) enzymatically processed to remove C-peptide. Release testing is protein-specific: identity by peptide mapping and mass spectrometry, correct disulfide connectivity, potency by bioassay, plus host-cell-protein and endotoxin limits. This is biologic manufacturing, not peptide synthesis.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'glucagon',
@@ -647,7 +628,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'Reconstituted glucagon should be used promptly — it can aggregate/fibrillate in solution. Emergency products are designed for immediate single use.',
     synthesisNotes:
       'Glucagon is a 29-residue peptide produced by chemical synthesis or recombinant expression. It is prone to aggregation and fibrillation in aqueous solution, which is why traditional products are lyophilized and reconstituted at the point of use, and why newer formulations engineered for ready-to-use stability were a meaningful advance.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'bpc-157',
@@ -690,7 +670,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     molecularWeight: 1419.5,
     sequence: 'GEPPPGKPADDAGLV',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     synthesisNotes:
       'At 15 residues BPC-157 is a comparatively short synthesis, which makes it cheap to produce — and cheap to fake. The short, low-cost sequence is exactly why the market is flooded with under-characterized material; a batch-specific certificate of analysis is the only way to tell real from filler.',
     storage:
@@ -738,7 +717,6 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     sequence: 'LKKTETQ',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     storage:
       'Lyophilized: store frozen and protected from light for long-term stability. Reconstituted: refrigerate at 2–8 °C and use within weeks.',
     handling:
@@ -786,7 +764,6 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     cas: '1818415-56-3',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'ghk-cu',
@@ -834,7 +811,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 401.9,
     molecularFormula: 'C14H22CuN6O4',
     cas: '49557-75-7',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     storage:
       'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and use within weeks; copper complexes are light- and oxidation-sensitive.',
     handling:
@@ -880,7 +856,6 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     sequence: 'AHK',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     storage:
       'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and use within weeks; copper complexes are light- and oxidation-sensitive.',
     handling:
@@ -929,7 +904,6 @@ const SEED_PEPTIDES: Peptide[] = [
     sequence: 'KTTKS',
     molecularWeight: 802.0,
     cas: '214047-00-4',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     storage:
       'Store the lyophilized peptide frozen and protected from light; in cosmetic formulation, follow the product’s stability guidance.',
     handling:
@@ -981,7 +955,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C35H62N14O11S',
     cas: '616204-22-9',
     pubchemCid: 71587772,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'snap-8',
@@ -1029,7 +1002,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C41H70N16O16S',
     cas: '868844-74-0',
     pubchemCid: 76283482,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'epo',
@@ -1091,7 +1063,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'A glycosylated protein sensitive to heat, freezing, and agitation, which can aggregate it and reduce potency. Aggregated protein is also an immunogenicity concern — historically linked to rare pure red-cell aplasia from anti-EPO antibodies.',
     synthesisNotes:
       'EPO is produced recombinantly in mammalian (CHO) cell culture so that its essential N- and O-linked glycosylation is human-like; its ~30–34 kDa mass is approximate and varies with glycosylation, so it has no single molecular formula. Characterization is glycoprotein-grade — glycan/isoform profiling, identity by mass spectrometry and peptide mapping, and cell-based potency — far beyond an HPLC purity figure.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'ara-290',
@@ -1139,7 +1110,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C51H84N16O21',
     cas: '1208243-50-8',
     pubchemCid: 91810664,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'teriparatide',
@@ -1194,7 +1164,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'A peptide in aqueous solution — kept cold, not frozen or shaken. Pen devices deliver fixed daily doses to maintain the pulsatile exposure the mechanism depends on.',
     synthesisNotes:
       'Teriparatide is recombinant human PTH(1-34), expressed in E. coli and purified to a defined 34-residue peptide. Because it is the minimal active fragment rather than the full 84-residue hormone, it can be manufactured and characterized more like a long synthetic/recombinant peptide than a large folded protein — identity by mass spectrometry and peptide mapping, with potency confirmed functionally.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'somatropin',
@@ -1276,7 +1245,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'As a folded biologic it is sensitive to heat, freeze–thaw, vigorous shaking, and surface adsorption, any of which can unfold or aggregate it and destroy potency without changing appearance. Aggregated protein is also a potential immunogenicity concern, which is why protein therapeutics carry a tighter cold chain than small peptides.',
     synthesisNotes:
       'Somatropin is not made by solid-phase peptide synthesis. It is expressed recombinantly — historically in E. coli (often as inclusion bodies requiring refolding) and in mammalian cell lines — then purified by multi-step chromatography and verified for correct folding and disulfide pairing. Identity and potency rest on protein-specific methods (peptide mapping, mass spectrometry, bioassay/cell-based potency, host-cell-protein and endotoxin testing), not an HPLC purity percentage alone. This is the defining difference between a complex biologic hormone and the short synthetic peptides in the rest of this catalog.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'igf-1',
@@ -1340,7 +1308,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'A folded disulfide-bonded protein, sensitive to heat, freeze–thaw, and agitation. Because of its insulin-like activity, hypoglycemia is a specific handling/clinical concern.',
     synthesisNotes:
       'Recombinant IGF-1 is expressed (classically in E. coli), refolded to its native three-disulfide structure, and purified by chromatography. Release testing is protein-grade — peptide mapping, mass spectrometry, correct disulfide pairing, cell-based potency, host-cell-protein and endotoxin limits — not an HPLC purity figure alone.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'igf-1-lr3',
@@ -1382,7 +1349,6 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     cas: '946870-92-4',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     storage:
       'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and minimize freeze–thaw — a folded, disulfide-bonded protein.',
     handling:
@@ -1432,7 +1398,6 @@ const SEED_PEPTIDES: Peptide[] = [
     sequence: 'TLCGAELVDALQFVCGDRGFYFNKPTGYGSSSRRAPQTGIVDECCFRSCDLRRLEMYCAPLKPAKSA',
     molecularWeight: 7371.5,
     cas: '112603-35-7',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     storage:
       'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and minimize freeze–thaw — a folded, disulfide-bonded protein.',
     handling:
@@ -1477,7 +1442,6 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No. It is a research compound, not FDA-approved, and is prohibited in sport. This page is a research and educational reference.',
       },
     ],
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
     storage:
       'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and use within weeks; minimize freeze–thaw.',
     handling:
@@ -1523,7 +1487,6 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     sequence: 'YADAIFTQSYRKVLAQLSARKLLQDIMSR',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'cjc-1295-with-dac',
@@ -1564,7 +1527,6 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No — it is a research compound. This page is a research and educational reference.',
       },
     ],
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'ipamorelin',
@@ -1607,7 +1569,6 @@ const SEED_PEPTIDES: Peptide[] = [
     sequence: 'Aib-His-D-2-Nal-D-Phe-Lys-NH2',
     molecularWeight: 711.9,
     cas: '170851-70-4',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'tesamorelin',
@@ -1651,7 +1612,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 5135.9,
     cas: '218949-48-5',
     fdaApproved: true,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'sermorelin',
@@ -1695,7 +1655,6 @@ const SEED_PEPTIDES: Peptide[] = [
     sequence: 'YADAIFTNSYRKVLGQLSARKLLQDIMSR',
     molecularWeight: 3358,
     cas: '86168-78-7',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'hexarelin',
@@ -1737,7 +1696,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'His-D-2-MeTrp-Ala-Trp-D-Phe-Lys-NH2',
     cas: '140703-51-1',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'ghrp-2',
@@ -1784,7 +1742,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C45H55N9O6',
     cas: '158861-67-7',
     pubchemCid: 6918245,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'ghrp-6',
@@ -1835,7 +1792,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C46H56N12O6',
     cas: '87616-84-0',
     pubchemCid: 4345065,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'mk-677',
@@ -1881,7 +1837,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C27H36N4O5S',
     cas: '159634-47-6',
     pubchemCid: 178024,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'myostatin',
@@ -1942,7 +1897,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'A disulfide-linked dimeric protein sensitive to heat, repeated freeze–thaw, and agitation, any of which can disrupt the dimer and reduce activity.',
     synthesisNotes:
       'Myostatin is a processed, disulfide-linked dimer of the TGF-β superfamily — not a solid-phase synthetic peptide. Its mature monomer is ~12.4 kDa and the active form is a ~25 kDa dimer; because it is produced and processed in cells (and is studied as a target rather than supplied as a drug), it has no single small-molecule formula. Most therapeutics in this space are antibodies or engineered receptor traps, which are biologic-grade products in their own right.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'follistatin',
@@ -2003,7 +1957,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'A glycosylated protein sensitive to heat, freeze–thaw, and agitation, which can aggregate it and reduce activity.',
     synthesisNotes:
       'Follistatin is a secreted glycoprotein (isoforms ~31–38 kDa with glycosylation), produced recombinantly in eukaryotic cells rather than by solid-phase synthesis; its mass varies with isoform and glycosylation, so it has no single molecular formula. Much of the credible therapeutic work uses follistatin gene delivery, characterized as a gene-therapy product, with the expressed protein verified by glycoprotein-grade analytics.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'apitegromab',
@@ -2051,7 +2004,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'A large folded, glycosylated antibody — sensitive to freezing, heat, and agitation, which can aggregate it. Aggregation is an immunogenicity concern.',
     synthesisNotes:
       'Apitegromab is a recombinant monoclonal antibody (~150 kDa) produced in mammalian cell culture — the most complex biologic class in this catalog, far removed from solid-phase peptide synthesis. Characterization is antibody-grade: glycan and charge-variant profiling, identity by mass spectrometry, and target-binding/cell-based potency, with host-cell-protein and endotoxin limits.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'trevogrumab',
@@ -2098,7 +2050,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'A large glycosylated antibody sensitive to freezing, heat, and agitation, which can cause aggregation.',
     synthesisNotes:
       'Trevogrumab is a recombinant monoclonal antibody (~150 kDa) made in mammalian cell culture, characterized with antibody-grade analytics (glycan/charge-variant profiling, mass spectrometry, binding/potency bioassay) — not a synthetic peptide.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'emugrobart',
@@ -2146,7 +2097,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'A large glycosylated antibody sensitive to freezing, heat, and agitation, which can cause aggregation.',
     synthesisNotes:
       'Emugrobart is a humanized IgG1 monoclonal antibody (~150 kDa) produced in mammalian cell culture, engineered for pH-dependent recycling. Characterization is antibody-grade (glycan/charge-variant profiling, mass spectrometry, binding/potency bioassay) — not a synthetic peptide.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'garetosmab',
@@ -2193,7 +2143,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'A large glycosylated antibody sensitive to freezing, heat, and agitation, which can cause aggregation.',
     synthesisNotes:
       'Garetosmab is a recombinant monoclonal antibody (~150 kDa) produced in mammalian cell culture, characterized with antibody-grade analytics (glycan/charge-variant profiling, mass spectrometry, binding/potency bioassay) — not a synthetic peptide.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'bimagrumab',
@@ -2245,7 +2194,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'A large glycosylated antibody sensitive to freezing, heat, and agitation, which can cause aggregation.',
     synthesisNotes:
       'Bimagrumab is a fully human recombinant monoclonal antibody (~150 kDa) produced in mammalian cell culture, characterized with antibody-grade analytics (glycan/charge-variant profiling, mass spectrometry, receptor-binding/cell-based potency) — not a synthetic peptide.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'mots-c',
@@ -2287,7 +2235,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'MRWQEMGYIFYPRKLR',
     molecularWeight: 2174.6,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'humanin',
@@ -2335,7 +2282,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C119H204N34O32S2',
     cas: '330936-69-1',
     pubchemCid: 16131438,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'ss-31',
@@ -2378,7 +2324,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'D-Arg-Dmt-Lys-Phe-NH2',
     cas: '736992-21-5',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'epitalon',
@@ -2422,7 +2367,6 @@ const SEED_PEPTIDES: Peptide[] = [
     sequence: 'AEDG',
     molecularWeight: 390.4,
     cas: '307297-39-8',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'endoluten',
@@ -2465,7 +2409,6 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No — it is a research compound, not FDA-approved, and its evidence base is concentrated in one research tradition. This page is a research and educational reference.',
       },
     ],
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'foxo4-dri',
@@ -2511,7 +2454,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 5358.2,
     molecularFormula: 'C228H388N86O64',
     cas: '2460055-10-9',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'thymalin',
@@ -2552,7 +2494,6 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     cas: '86402-19-7',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'thymogen',
@@ -2598,7 +2539,6 @@ const SEED_PEPTIDES: Peptide[] = [
     sequence: 'Glu-Trp',
     molecularWeight: 333.34,
     molecularFormula: 'C16H19N3O5',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'vilon',
@@ -2636,7 +2576,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'KE',
     molecularWeight: 275.3,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'vesugen',
@@ -2673,7 +2612,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'KED',
     molecularWeight: 390.4,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'pinealon',
@@ -2711,7 +2649,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'EDR',
     molecularWeight: 418.4,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'bronchogen',
@@ -2748,7 +2685,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'ADEL',
     molecularWeight: 446.5,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'cardiogen',
@@ -2785,7 +2721,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'AEDR',
     molecularWeight: 489.5,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'pancragen',
@@ -2822,7 +2757,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'KEDW',
     molecularWeight: 576.6,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'testagen',
@@ -2861,7 +2795,6 @@ const SEED_PEPTIDES: Peptide[] = [
     sequence: 'KEDG',
     molecularWeight: 447.4,
     molecularFormula: 'C17H29N5O9',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'prostamax',
@@ -2901,7 +2834,6 @@ const SEED_PEPTIDES: Peptide[] = [
     sequence: 'KEDP',
     molecularWeight: 487.5,
     molecularFormula: 'C20H33N5O9',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'vladonix',
@@ -2943,7 +2875,6 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No — it is a research compound / supplement, not FDA-approved, with evidence concentrated in one research tradition. This page is a research and educational reference.',
       },
     ],
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'ventfort',
@@ -2985,7 +2916,6 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No — it is a research compound / supplement, not FDA-approved. This page is a research and educational reference.',
       },
     ],
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'chelohart',
@@ -3027,7 +2957,6 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No — it is a research compound / supplement, not FDA-approved. This page is a research and educational reference.',
       },
     ],
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'semax',
@@ -3069,7 +2998,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'MEHFPGP',
     cas: '80714-61-0',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'selank',
@@ -3111,7 +3039,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     sequence: 'TKPRPGP',
     cas: '129954-34-3',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'dsip',
@@ -3155,7 +3082,6 @@ const SEED_PEPTIDES: Peptide[] = [
     sequence: 'WAGGDASGE',
     molecularWeight: 848.8,
     cas: '62568-57-4',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'cerebrolysin',
@@ -3200,7 +3126,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     synthesisNotes:
       'Cerebrolysin is not synthesized but manufactured from purified porcine brain protein by controlled enzymatic hydrolysis, then standardized — its potency is defined by peptide-nitrogen content and a consistent low-molecular-weight profile, not by a single sequence or purity number. Because it is a biological mixture, quality rests on batch-to-batch reproducibility, species-source control, and freedom from larger proteins, closer to a biologic than to a synthetic peptide.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'dihexa',
@@ -3247,7 +3172,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C27H44N4O5',
     cas: '1401708-83-5',
     pubchemCid: 129010512,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'melanotan-2',
@@ -3289,7 +3213,6 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     cas: '121062-08-6',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'melanotan-1',
@@ -3331,7 +3254,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 1646.8,
     pubchemCid: 16197727,
     fdaApproved: true,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'pt-141',
@@ -3374,7 +3296,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     cas: '189691-06-3',
     fdaApproved: true,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'kisspeptin-10',
@@ -3415,7 +3336,6 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     sequence: 'YNWNSFGLRF-NH2',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'gonadorelin',
@@ -3471,7 +3391,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C55H75N17O13',
     cas: '33515-09-2',
     pubchemCid: 638793,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'hcg',
@@ -3530,7 +3449,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'A glycosylated heterodimer sensitive to heat, freezing, and agitation, any of which can dissociate the subunits or aggregate the protein and reduce potency.',
     synthesisNotes:
       'hCG is either purified from the urine of pregnant women or, as choriogonadotropin alfa, produced recombinantly in mammalian (CHO) cells so that the essential glycosylation is human-like. Its molecular weight (~36–40 kDa) is approximate and varies with glycosylation, so it is not represented by a single molecular formula. Characterization includes subunit identity, glycan profiling, and bioassay potency — glycoprotein-grade analytics well beyond an HPLC purity number.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'oxytocin',
@@ -3585,7 +3503,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'A small disulfide-bridged peptide; protect from heat and prolonged storage in solution to preserve potency.',
     synthesisNotes:
       'Oxytocin is a 9-residue cyclic peptide with a single intramolecular disulfide bond, made by solid-phase peptide synthesis — fittingly, since its 1953 chemical synthesis was the historical proof that peptide hormones could be built in the lab at all. Its small size and defined structure make it straightforward to characterize by mass spectrometry and HPLC, unlike the large folded biologics elsewhere in this catalog.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'fsh',
@@ -3644,7 +3561,6 @@ const SEED_PEPTIDES: Peptide[] = [
       'A glycosylated heterodimer sensitive to heat, freezing, and agitation, which can dissociate the subunits or aggregate the protein and reduce potency.',
     synthesisNotes:
       'Recombinant follitropin is produced in mammalian (CHO) cells so its essential glycosylation is human-like; its ~30 kDa mass is approximate and varies with glycosylation, so it has no single molecular formula. Characterization is glycoprotein-grade — subunit identity, glycan/isoform profiling, and bioassay potency — well beyond an HPLC purity number.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'thymosin-alpha-1',
@@ -3688,7 +3604,6 @@ const SEED_PEPTIDES: Peptide[] = [
     sequence: 'SDAAVDTSSEITTKDLKEKKEVVEEAEN',
     molecularWeight: 3108.3,
     cas: '62304-98-7',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'll-37',
@@ -3731,7 +3646,6 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     molecularWeight: 4493.3,
     cas: '154947-66-7',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'kpv',
@@ -3775,7 +3689,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 342.4,
     molecularFormula: 'C16H30N4O4',
     pubchemCid: 125672,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'hgh-fragment-176-191',
@@ -3822,7 +3735,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 1799.1,
     molecularFormula: 'C78H123N23O22S2',
     cas: '66004-57-7',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'aod-9604',
@@ -3862,7 +3774,6 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No — it is not FDA-approved as a therapeutic. This page is a research and educational reference.',
       },
     ],
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'adipotide',
@@ -3910,7 +3821,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C111H206N36O28S2',
     cas: '859216-15-2',
     pubchemCid: 163360068,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: '5-amino-1mq',
@@ -3951,7 +3861,6 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     cas: '209783-80-2',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'nad-plus',
@@ -3995,7 +3904,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 663.4,
     cas: '53-84-9',
     pubchemCid: 5893,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'glutathione',
@@ -4043,7 +3951,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C10H17N3O6S',
     cas: '70-18-8',
     pubchemCid: 124886,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'vasopressin',
@@ -4093,7 +4000,6 @@ const SEED_PEPTIDES: Peptide[] = [
     fdaApproved: true,
     synthesisNotes:
       'A nonapeptide built by solid-phase synthesis and then oxidatively folded to close its single 1–6 disulfide, with a C-terminal amide. The synthetically interesting object is the analog: desmopressin (dDAVP) re-engineers the hormone with a deaminated position 1 and a D-arginine at position 8 — a stereochemical substitution that resists aminopeptidase cleavage, strips out the V1a pressor activity, and extends the half-life. It is a compact lesson in how D-amino acids and end-group edits convert a labile hormone into a dosable drug. Identity and disulfide connectivity are the key release tests.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'somatostatin',
@@ -4142,7 +4048,6 @@ const SEED_PEPTIDES: Peptide[] = [
     cas: '38916-34-6',
     synthesisNotes:
       'A cyclic 14-mer requiring regioselective formation of the 3–14 disulfide after chain assembly. The native peptide is rarely the product worth making — its minutes-long half-life makes it impractical — so the synthetic target is octreotide: the 14-mer distilled to a protease-resistant 8-residue cyclic analog incorporating D-Phe and D-Trp and a reduced C-terminal threoninol. Those D-residue couplings and the controlled disulfide cyclization are the hard steps, and they are exactly what stretch the half-life from minutes to hours. A defining case of pharmacophore minimization in peptide drug design.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'calcitonin',
@@ -4192,7 +4097,6 @@ const SEED_PEPTIDES: Peptide[] = [
     fdaApproved: true,
     synthesisNotes:
       'A 32-residue chain with an N-terminal 1–7 disulfide ring and a C-terminal amide — long by solid-phase standards and prone to on-resin aggregation, so it demands careful coupling, pseudoproline/backbone-protection strategy, and a controlled oxidation step to set the disulfide cleanly. Notably the manufacturing target is the salmon sequence, not the human one, because it binds the human receptor far more potently: a case where pharmacology, not species, dictates what you synthesize. Purity is dominated by deletion sequences and disulfide isomers.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'amylin',
@@ -4241,7 +4145,6 @@ const SEED_PEPTIDES: Peptide[] = [
     cas: '122384-88-7',
     synthesisNotes:
       'A 37-residue, 2–7-disulfide, C-terminal-amide peptide and one of the hardest sequences in this class to make: native human amylin is intrinsically amyloidogenic, so it aggregates on the resin and in solution. The therapeutic pramlintide is the design answer — three proline substitutions (Ala25, Ser28, Ser29 → Pro) that break the β-sheet stacking, simultaneously making the peptide synthesizable, soluble, and shelf-stable. It is the catalog’s clearest example of engineering *against* aggregation to obtain a manufacturable peptide; the longer-acting analog cagrilintide (profiled separately) extends the same logic.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'acth',
@@ -4291,7 +4194,6 @@ const SEED_PEPTIDES: Peptide[] = [
     fdaApproved: true,
     synthesisNotes:
       'A 39-residue hormone whose full biological activity lives in the N-terminal 1–24 segment — so the synthetic agent cosyntropin (tetracosactide) is simply that 24-mer. Truncating to the essential pharmacophore makes it markedly shorter and cheaper to build by solid-phase synthesis, avoids the difficult C-terminal residues, and lowers immunogenicity versus the whole hormone. A textbook "synthesize only the part that matters" decision in peptide drug design.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'secretin',
@@ -4339,7 +4241,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 3039.4,
     synthesisNotes:
       'A 27-residue C-terminal-amide peptide of the secretin/glucagon/VIP family, made by solid-phase synthesis with a terminal amidation step. The meaningful modern change is provenance rather than chemistry: the clinical agent (synthetic human secretin, ChiRhoStim) replaced earlier porcine material extracted from animal tissue. That shift — from variable animal extract to a defined, sequence-verified synthetic product with a certificate of analysis — is the core quality story for older hormone peptides and exactly the transparency this catalog tracks.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'vip',
@@ -4387,7 +4288,6 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C147H237N43O43S',
     cas: '37221-79-7',
     pubchemCid: 53314964,
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
   {
     slug: 'ghrelin',
@@ -4436,7 +4336,6 @@ const SEED_PEPTIDES: Peptide[] = [
     cas: '304853-26-7',
     synthesisNotes:
       'The standout synthetic challenge in this class: activity requires an O-octanoyl ester on the Ser3 hydroxyl — the only such acylation among human hormones (installed biologically by ghrelin O-acyltransferase, GOAT). Standard solid-phase synthesis assembles the 28-mer, but installing and preserving the acid- and base-labile octanoyl ester demands orthogonal side-chain protection and a deliberately mild final deprotection/cleavage, since the unmodified by-product (des-acyl ghrelin) is inactive. The acylation is the purity-defining step, and acyl-vs-des-acyl ratio is the assay that matters most.',
-    market: { trackedSuppliers: 0, trackedVariants: 0, certificatesOnFile: 0 },
   },
 ]
 
