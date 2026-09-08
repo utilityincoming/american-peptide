@@ -11,6 +11,7 @@ const LINKS = [
   { href: '/compounds', label: 'Compounds' },
   { href: '/tools/calculator-beta', label: 'Peptide Calculator Beta' },
   { href: '/developers', label: 'Developers / API' },
+  { href: '/press', label: 'Press' },
 ]
 
 export default function Footer() {
