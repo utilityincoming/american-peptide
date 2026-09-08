@@ -70,8 +70,7 @@ export default function PrivacyPage() {
               </Bullet>
               <Bullet>
                 We only collect personal details (like your email) when you
-                choose to give them to us — for example, joining a waitlist or
-                contacting us.
+                choose to give them to us — for example, when you contact us.
               </Bullet>
               <Bullet>
                 The app is intended for adults (18+). It is a research and
@@ -101,11 +100,9 @@ export default function PrivacyPage() {
               information into the assistant.
             </p>
             <p className="mb-3">
-              <SubHead>Information you provide.</SubHead> If you join a waitlist,
-              submit the contact form, or otherwise reach out, we collect what
-              you send us — typically your email address and your message — so we
-              can respond and, where applicable, add you to the list you
-              requested.
+              <SubHead>Information you provide.</SubHead> If you submit the
+              contact form or otherwise reach out, we collect what you send us —
+              typically your email address and your message — so we can respond.
             </p>
             <p>
               <SubHead>Local device storage.</SubHead> The app and site may store

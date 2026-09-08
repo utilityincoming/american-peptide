@@ -476,19 +476,19 @@ export default function PeptideForgePage() {
               <div className="min-w-0">
                 <h2 className="flex items-center gap-2 text-base font-semibold">
                   <FlaskConical className="h-4 w-4 text-accent" />
-                  Forge it for real
+                  From the sandbox to the real thing
                 </h2>
                 <p className="mt-1 max-w-md text-sm text-ink/55">
                   {seq.length >= 2
-                    ? `Custom synthesis of your ${stats.length}-mer (~${stats.mass.toFixed(0)} Da) launches with the marketplace. Join the waitlist to request a quote.`
-                    : 'Build a sequence, then request a custom-synthesis quote. Synthesis launches with the marketplace.'}
+                    ? `Your ${stats.length}-mer (~${stats.mass.toFixed(0)} Da) is a learning estimate. Browse the catalog for fully characterized peptides — chemistry, research context, and independently trust-ranked sources.`
+                    : 'Build a sequence to see its mass and properties, then browse the catalog for fully characterized peptides and where to source them.'}
                 </p>
               </div>
               <Link
                 href="/catalog"
                 className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#2DD4A8] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
               >
-                Request synthesis
+                Browse the catalog
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

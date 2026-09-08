@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   // the root openGraph above) — no per-page duplication needed.
   twitter: {
     card: 'summary_large_image',
-    site: '@americanpeptide',
+    site: '@USPeptide',
   },
   // Site-wide crawling defaults: index/follow, and let Google show large image
   // previews and full-length snippets so monographs and tools can win rich

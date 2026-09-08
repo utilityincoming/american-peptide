@@ -10,7 +10,6 @@ import {
   LayoutGrid,
   Plus,
   Search,
-  ShieldCheck,
   Sparkles,
   X,
 } from 'lucide-react'
@@ -24,7 +23,6 @@ import {
   type SyntheticFeature,
   type SynthesisDifficulty,
 } from '@/lib/peptides'
-import WaitlistForm from '@/components/WaitlistForm'
 import OfflineReference from '@/components/OfflineReference'
 
 const MAX_COMPARE = 4
@@ -274,7 +272,13 @@ export default function CatalogPage() {
       </section>
 
       {/* ── Grid ── */}
-      <section className="px-6 py-12 md:px-10">
+      <section
+        className={
+          selected.length > 0
+            ? 'px-6 pb-28 pt-12 md:px-10'
+            : 'px-6 py-12 md:px-10'
+        }
+      >
         <div className="mx-auto max-w-6xl">
           <OfflineReference />
 
@@ -334,55 +338,6 @@ export default function CatalogPage() {
               })}
             </div>
           )}
-        </div>
-      </section>
-
-      {/* ── Marketplace waitlist (moved to bottom — marketplace not yet open) ── */}
-      <section
-        className={
-          selected.length > 0
-            ? 'border-t border-ink/[0.06] px-6 pb-28 pt-14 md:px-10'
-            : 'border-t border-ink/[0.06] px-6 py-14 md:px-10'
-        }
-      >
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-6 text-center">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-ink/[0.10] bg-ink/[0.03] px-3 py-1 text-[11px] font-medium text-ink/45">
-              <Sparkles className="h-3 w-3 text-accent/70" />
-              Marketplace · Not yet open
-            </div>
-            <h2 className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
-              Be first when the marketplace opens
-            </h2>
-            <p className="mx-auto max-w-xl text-sm leading-relaxed text-ink/45">
-              The catalog is a research reference today. Vetted suppliers,
-              third-party COAs, and transparent per-mg pricing are on the way —
-              join the waitlist for early access.
-            </p>
-          </div>
-
-          {/* What's coming */}
-          <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <TrustItem
-              Icon={ShieldCheck}
-              title="Supplier vetting"
-              body="Future suppliers undergo identity, COA, and dispute-resolution checks before listing."
-            />
-            <TrustItem
-              Icon={FlaskConical}
-              title="COA repository"
-              body="Each variant will link to third-party certificates of analysis on file."
-            />
-            <TrustItem
-              Icon={Sparkles}
-              title="Transparent pricing"
-              body="Per-mg pricing across suppliers, refreshed continuously — no DMs required."
-            />
-          </div>
-
-          <div className="mx-auto max-w-2xl">
-            <WaitlistForm source="catalog-footer" variant="full" />
-          </div>
         </div>
       </section>
 
@@ -602,28 +557,6 @@ function Chip({
     >
       {children}
     </button>
-  )
-}
-
-function TrustItem({
-  Icon,
-  title,
-  body,
-}: {
-  Icon: typeof ShieldCheck
-  title: string
-  body: string
-}) {
-  return (
-    <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.025] p-4">
-      <div className="mb-2 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.08] text-accent">
-          <Icon className="h-3.5 w-3.5" strokeWidth={1.75} />
-        </div>
-        <h3 className="text-sm font-semibold">{title}</h3>
-      </div>
-      <p className="text-xs leading-relaxed text-ink/45">{body}</p>
-    </div>
   )
 }
 

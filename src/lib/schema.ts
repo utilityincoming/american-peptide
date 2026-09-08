@@ -45,7 +45,7 @@ function organizationNode() {
     // Add every profile you actually control — GitHub, LinkedIn, Crunchbase,
     // Wikidata — as they go live. sameAs is how an answer engine reconciles
     // this site with a known entity in its graph.
-    sameAs: ['https://x.com/americanpeptide', 'https://twitter.com/americanpeptide'],
+    sameAs: ['https://x.com/USPeptide'],
   }
 }
 
