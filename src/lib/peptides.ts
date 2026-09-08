@@ -293,43 +293,68 @@ const SEED_PEPTIDES: Peptide[] = [
   {
     slug: 'retatrutide',
     name: 'Retatrutide',
-    aliases: ['LY3437943'],
+    aliases: ['LY3437943', 'Triple G', 'GGG agonist', 'GIP/GLP-1/glucagon triple agonist'],
     categories: ['metabolic'],
-    shortDescription: 'Investigational triple agonist (GIP / GLP-1 / glucagon) in late-stage trials.',
+    shortDescription:
+      'Investigational once-weekly triple agonist (GIP / GLP-1 / glucagon) — the molecule some in the research community nickname "GLP-3" — with the largest weight reductions reported for any incretin-class agent.',
     description:
-      'Retatrutide is an Eli Lilly–developed triple agonist targeting GIP, GLP-1, and glucagon receptors. Phase 2 trials reported ~24% mean weight reduction at 48 weeks at the highest dose.',
-    mechanism: 'GIP + GLP-1 (insulinotropic, satiety) plus glucagon (energy expenditure, lipolysis).',
-    researchAreas: ['Obesity', 'Type 2 diabetes', 'MASH'],
+      'Retatrutide is an Eli Lilly–developed triple agonist targeting GIP, GLP-1, and glucagon receptors. Phase 2 trials reported ~24% mean weight reduction at 48 weeks at the highest dose (NEJM 2023), and the first Phase 3 readout (TRIUMPH-4, December 2025) reported 28.7% mean weight loss at 68 weeks — approaching the range long associated with bariatric surgery. It remains investigational and is not FDA-approved.',
+    mechanism:
+      'Triple receptor agonism — GIP + GLP-1 (insulinotropic, satiety, slowed gastric emptying) plus glucagon (energy expenditure, lipolysis, hepatic-fat mobilization) — from a single acylated ~39-residue peptide dosed once weekly.',
+    researchAreas: ['Obesity', 'Type 2 diabetes', 'MASH', 'Knee osteoarthritis'],
     background: [
-      'Retatrutide (development code LY3437943) is an investigational single peptide that activates three receptors — GIP, GLP-1, and glucagon. Adding glucagon-receptor agonism to the incretin pair is studied as a way to increase energy expenditure and lipolysis on top of the insulinotropic and satiety effects of GIP and GLP-1.',
-      'Developed by Eli Lilly, it remains investigational and has not been approved. Phase 2 results reported notably large mean weight reductions at the highest doses over roughly a year, placing it among the most closely watched "triple agonist" candidates in late-stage metabolic research.',
+      'Retatrutide (development code LY3437943) is an investigational single peptide that activates three receptors — GIP, GLP-1, and glucagon. It is sometimes informally called "GLP-3" or a "Triple G" agonist in research and community discussions, though it has no such official designation; the nickname simply reflects the three incretin/glucagon-family receptors one molecule engages. Adding glucagon-receptor agonism to the incretin pair is studied as a way to increase energy expenditure and lipolysis on top of the insulinotropic and satiety effects of GIP and GLP-1 — the receptor logic that separates it from single agonists (semaglutide) and dual agonists (tirzepatide, survodutide, mazdutide).',
+      'Developed by Eli Lilly, retatrutide has produced the largest weight reductions reported for any incretin-class agent. The Phase 2 obesity trial (Jastreboff et al., NEJM 2023, PMID 37366315) reported dose-dependent mean reductions up to −24.2% at 48 weeks at the 12 mg dose, versus −2.1% on placebo — with weight curves that had not plateaued at study end. The Phase 2 type-2-diabetes trial (Rosenstock et al., Lancet 2023, PMID 37385280) reported deep HbA1c reductions alongside up to ~17% weight loss at 36 weeks. A liver-fat sub-study in participants with MASLD (PMID 38858523) reported relative liver-fat reductions exceeding 80% at the two highest doses — the largest such reduction reported for any drug class candidate at the time.',
+      'The Phase 3 TRIUMPH program began reporting in December 2025: TRIUMPH-4 (obesity with knee osteoarthritis, NCT05931367) reported mean weight loss of 28.7% (about 71 lbs) at 68 weeks at the 12 mg dose, with substantial improvement in osteoarthritis pain scores. Lilly has stated that results across the broader TRIUMPH program — including obesity without osteoarthritis and obstructive sleep apnea — are expected through 2026. Retatrutide remains investigational everywhere: no regulator has approved it, and all data comes from clinical research.',
     ],
     keyResearch: [
-      'Triple agonism — combines GIP/GLP-1 (insulin, satiety) with glucagon (energy expenditure, lipolysis).',
-      'Weight reduction — Phase 2 trials reported among the largest mean reductions seen for an investigational agent.',
-      'Type 2 diabetes — studied for glycemic endpoints alongside weight.',
-      'MASH / hepatic fat — examined as a metabolic-liver-disease endpoint.',
-      'Investigational status — not approved; under continued clinical evaluation.',
+      'Triple agonism — combines GIP/GLP-1 (insulin, satiety) with glucagon (energy expenditure, lipolysis) in one molecule — the design behind the informal "GLP-3" label.',
+      'Weight reduction — Phase 2 reported −24.2% mean at 48 weeks (12 mg, NEJM 2023); Phase 3 TRIUMPH-4 reported −28.7% mean at 68 weeks (December 2025 topline), the largest figures in the class.',
+      'Type 2 diabetes — Phase 2 (Lancet 2023) reported substantial HbA1c and weight reductions versus both placebo and dulaglutide comparator arms.',
+      'MASH / hepatic fat — Phase 2a MASLD sub-study reported >80% mean relative liver-fat reduction at higher doses, among the largest reported for any investigational agent.',
+      'Knee osteoarthritis — TRIUMPH-4 reported large improvements in WOMAC pain and function alongside weight loss, a distinctive endpoint for the class.',
+      'Investigational status — not approved anywhere; under continued Phase 3 evaluation across the TRIUMPH program.',
     ],
     faqs: [
       {
         q: 'What is retatrutide?',
-        a: 'Retatrutide is an investigational triple agonist targeting the GIP, GLP-1, and glucagon receptors, studied in late-stage trials for obesity and type 2 diabetes.',
+        a: 'Retatrutide (LY3437943) is an investigational Eli Lilly triple agonist of the GIP, GLP-1, and glucagon receptors, in late-stage trials for obesity, type 2 diabetes, and MASH. Phase 2 reported ~24% mean weight reduction at 48 weeks; the first Phase 3 readout reported 28.7% at 68 weeks.',
       },
       {
-        q: 'How does a triple agonist differ from dual or single agonists?',
-        a: 'It adds glucagon-receptor activation — studied for increased energy expenditure and fat breakdown — to the insulinotropic and satiety effects of GIP and GLP-1.',
+        q: 'What is GLP-3, and is retatrutide the same thing?',
+        a: '"GLP-3" is an informal nickname, not an official name — there is no receptor called GLP-3. The community coined it for triple agonists that engage three targets: GIP, GLP-1, and glucagon receptors. Retatrutide (LY3437943) is the most advanced molecule in this class, which is why "GLP-3" in search results and forums almost always refers to retatrutide.',
       },
       {
-        q: 'Is retatrutide approved?',
-        a: 'No. It is investigational and has not received FDA approval; all data comes from clinical research.',
+        q: 'How much weight loss does retatrutide cause in trials?',
+        a: 'Phase 2 (NEJM 2023): a dose-dependent mean of −8.7% (1 mg) to −24.2% (12 mg) at 48 weeks, versus −2.1% placebo. Phase 3 TRIUMPH-4 (December 2025 topline): −26.4% (9 mg) to −28.7% (12 mg) at 68 weeks. These are population means from trials, not predictions for any individual.',
+      },
+      {
+        q: 'How does a triple agonist differ from semaglutide or tirzepatide?',
+        a: 'Semaglutide activates GLP-1 alone; tirzepatide activates GIP + GLP-1. Retatrutide adds a third target — the glucagon receptor — studied for increased energy expenditure and fat mobilization, including from the liver. That added arm is the proposed basis for its larger reported weight reductions.',
+      },
+      {
+        q: 'What are the side effects of retatrutide?',
+        a: 'In published trials the most common adverse events were gastrointestinal — nausea, vomiting, diarrhea, and constipation — mostly during dose escalation and mostly mild to moderate, similar in character to the broader incretin class. Glucagon-receptor agonism is also studied for its effects on heart rate. Full Phase 3 safety data is still being characterized; this page is a research reference, not medical advice.',
+      },
+      {
+        q: 'When will retatrutide be FDA-approved?',
+        a: 'It is not approved anywhere, and no approval date has been announced. The TRIUMPH Phase 3 program began reporting results in December 2025, with further readouts expected through 2026; any regulatory submission would follow completed Phase 3 data. Any retatrutide sold today is outside any approved or regulated channel.',
+      },
+      {
+        q: 'Is retatrutide a peptide?',
+        a: 'Yes — a single ~39-residue synthetic peptide (~4,731.5 Da, C221H342N46O68) built by solid-phase synthesis, with Aib substitutions and a fatty-diacid side chain on a lysine that binds albumin to give a once-weekly half-life.',
       },
       {
         q: 'Who develops retatrutide?',
-        a: 'Eli Lilly. This page is a research and educational reference, not medical advice or an offer for sale.',
+        a: 'Eli Lilly, which created it as LY3437943. This page is a research and educational reference, not medical advice or an offer for sale.',
       },
     ],
     molecularWeight: 4731.5,
+    molecularFormula: 'C221H342N46O68',
+    storage:
+      'Lyophilized: keep frozen and shielded from light. Reconstituted: store at 2–8 °C and use within weeks — like the rest of the acylated incretin class, the fatty-acid tail does not protect against slow degradation in solution.',
+    handling:
+      'Swirl gently to dissolve rather than shaking; protect from heat and light and minimize freeze–thaw cycles.',
   },
   {
     slug: 'survodutide',
