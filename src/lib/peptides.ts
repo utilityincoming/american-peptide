@@ -472,38 +472,53 @@ const SEED_PEPTIDES: Peptide[] = [
     slug: 'cagrilintide',
     name: 'Cagrilintide',
     categories: ['metabolic'],
-    shortDescription: 'Long-acting amylin analog studied alongside semaglutide as CagriSema.',
+    shortDescription:
+      'Long-acting amylin analog — Novo Nordisk’s answer to GLP-1 from a second satiety pathway, studied alone and as half of CagriSema. Phase 3 monotherapy reported ~11.8% mean weight loss.',
     description:
-      'Cagrilintide is a 37-amino-acid acylated amylin analog with affinity at all five amylin receptor subtypes. Investigated by Novo Nordisk both as monotherapy and in combination with semaglutide (CagriSema).',
-    mechanism: 'Amylin and calcitonin receptor agonism → satiety, slowed gastric emptying.',
-    researchAreas: ['Obesity', 'Combination metabolic therapy'],
+      'Cagrilintide is a 37-amino-acid acylated analog of amylin — the satiety hormone co-secreted with insulin — engineered for once-weekly dosing. Developed by Novo Nordisk, it reported ~11.8% mean weight reduction over 68 weeks as Phase 3 monotherapy, and pairs with semaglutide in the fixed combination CagriSema, where Phase 3 REDEFINE-1 reported 20.4%–22.7% mean weight reduction. It is investigational; Novo filed CagriSema with the FDA in December 2025.',
+    mechanism:
+      'Amylin and calcitonin receptor agonism (distinct from the GLP-1 receptor) → central satiety signaling, slowed gastric emptying, reduced food intake — a complementary appetite pathway to GLP-1.',
+    researchAreas: ['Obesity', 'Combination metabolic therapy', 'Type 2 diabetes'],
     background: [
-      'Cagrilintide is a long-acting, acylated analog of amylin — the pancreatic hormone co-secreted with insulin that signals satiety and slows gastric emptying. It binds across the amylin and calcitonin receptor subtypes and carries a fatty-acid chain that supports once-weekly dosing.',
-      'Developed by Novo Nordisk, it is investigational and studied both on its own and in a fixed combination with semaglutide known as CagriSema, where the amylin and GLP-1 pathways are paired for additive weight effect.',
+      'Cagrilintide is a long-acting, acylated analog of amylin — the 37-residue pancreatic hormone co-secreted with insulin after meals that signals satiety to the hindbrain and slows gastric emptying. Where GLP-1 agonists work through the GLP-1 receptor, cagrilintide works through amylin and calcitonin receptor complexes — a genuinely separate appetite pathway, which is precisely what makes it interesting as a combination partner. A fatty-acid chain extends its half-life for once-weekly dosing, and the native amylin tendency to aggregate into amyloid fibrils has been engineered out.',
+      'As monotherapy it has moved through the clinic quickly. The Phase 2 dose-ranging trial (Lau et al., Lancet 2021, PMID 34798060) reported dose-dependent weight reductions up to ~10.8% at 26 weeks at the 4.5 mg dose — exceeding the liraglutide 3.0 mg comparator arm. In September 2025 Novo Nordisk reported Phase 3 monotherapy results: ~11.8% mean weight reduction over 68 weeks versus ~2.3% on placebo.',
+      'Its main role, though, is as one half of CagriSema — the fixed once-weekly combination with semaglutide that pairs the amylin and GLP-1 pathways. The Phase 3 REDEFINE program (NEJM 2025) reported 20.4%–22.7% mean weight reduction at 68 weeks, and Novo Nordisk filed CagriSema for FDA approval in December 2025, with a decision expected in 2026. Cagrilintide itself remains investigational everywhere.',
     ],
     keyResearch: [
-      'Satiety signaling — amylin-receptor agonism studied for appetite suppression and slowed gastric emptying.',
-      'Combination therapy — investigated with semaglutide (CagriSema) for additive weight reduction.',
-      'Obesity endpoints — Phase 2 trials reported meaningful mean weight loss alone and in combination.',
-      'Half-life engineering — acylation supports a once-weekly profile.',
-      'Investigational status — not FDA-approved.',
+      'Amylin pathway — agonism at amylin/calcitonin receptor complexes, a satiety system distinct from GLP-1 — the mechanistic basis for combining the two.',
+      'Monotherapy weight reduction — Phase 2 (Lancet 2021) reported up to ~10.8% at 26 weeks; Phase 3 (reported 2025) reported ~11.8% mean over 68 weeks versus ~2.3% placebo.',
+      'Combination therapy — with semaglutide as CagriSema, Phase 3 REDEFINE-1 reported 20.4%–22.7% mean weight reduction at 68 weeks (NEJM 2025).',
+      'Half-life engineering — acylation supports a once-weekly profile; fibril-forming aggregation of native amylin is engineered out.',
+      'Regulatory status — investigational; the CagriSema combination was filed with the FDA in December 2025, decision anticipated in 2026.',
     ],
     faqs: [
       {
         q: 'What is cagrilintide?',
-        a: 'Cagrilintide is an investigational long-acting amylin analog studied for weight management, both alone and combined with semaglutide (CagriSema).',
+        a: 'Cagrilintide is an investigational long-acting amylin analog from Novo Nordisk, dosed once weekly. As Phase 3 monotherapy it reported ~11.8% mean weight reduction over 68 weeks; it is better known as the amylin half of the combination CagriSema (with semaglutide).',
+      },
+      {
+        q: 'How much weight do people lose on cagrilintide alone?',
+        a: 'Phase 2 (Lancet 2021): up to ~10.8% mean at 26 weeks at the highest dose. Phase 3 monotherapy results reported in 2025: ~11.8% mean over 68 weeks versus ~2.3% on placebo. Trial population means, not individual predictions.',
       },
       {
         q: 'What is CagriSema?',
-        a: 'CagriSema is the investigational fixed combination of cagrilintide (amylin) and semaglutide (GLP-1), pairing two appetite pathways for additive effect.',
+        a: 'CagriSema is the investigational fixed once-weekly combination of cagrilintide (amylin) and semaglutide (GLP-1) — two complementary satiety pathways in one injection. Phase 3 reported 20.4%–22.7% mean weight reduction at 68 weeks; it was filed with the FDA in December 2025.',
       },
       {
         q: 'How does amylin differ from GLP-1?',
-        a: 'Both promote satiety, but amylin acts through amylin and calcitonin receptors while GLP-1 acts through the GLP-1 receptor; combining them is studied for complementary effects.',
+        a: 'Both are gut/pancreatic satiety hormones, but they act on different receptors: amylin works through amylin and calcitonin receptor complexes in the hindbrain, while GLP-1 acts through the GLP-1 receptor. Because the pathways are distinct, engaging both is additive — the rationale for CagriSema.',
+      },
+      {
+        q: 'What are the side effects of cagrilintide?',
+        a: 'In trials the most common adverse events were gastrointestinal — nausea, vomiting, constipation — mostly mild to moderate and concentrated during dose escalation, broadly similar to the GLP-1 class. This page is a research reference, not medical advice.',
       },
       {
         q: 'Is cagrilintide approved?',
-        a: 'No — it is investigational. This page is a research and educational reference.',
+        a: 'No — it is investigational everywhere. The CagriSema combination (cagrilintide + semaglutide) was filed with the FDA in December 2025 with a decision expected in 2026; standalone cagrilintide has no announced filing.',
+      },
+      {
+        q: 'Is cagrilintide a peptide?',
+        a: 'Yes — a 37-residue analog of human amylin (~4,409 Da, C194H312N54O59S2) carrying a fatty-acid chain for albumin binding and sequence edits that prevent the amyloid-fibril aggregation native amylin is known for.',
       },
     ],
     molecularWeight: 4409.2,
@@ -517,39 +532,48 @@ const SEED_PEPTIDES: Peptide[] = [
     aliases: ['Cagrilintide/semaglutide', 'cagrilintide + semaglutide'],
     categories: ['metabolic'],
     shortDescription:
-      'Novo Nordisk’s investigational fixed combination of cagrilintide (amylin) and semaglutide (GLP-1) — two appetite pathways in one weekly injection.',
+      'Novo Nordisk’s fixed once-weekly combination of cagrilintide (amylin) + semaglutide (GLP-1) — 20.4%–22.7% mean weight loss in Phase 3, filed with the FDA in December 2025.',
     description:
-      'CagriSema is not a single molecule but a fixed-dose combination of two peptides already in this catalog: cagrilintide, a long-acting amylin analog, and semaglutide, the GLP-1 agonist. Novo Nordisk pairs the amylin and GLP-1 satiety pathways in one once-weekly injection, betting that two complementary appetite mechanisms together drive more weight loss than either alone. It is investigational and in Phase 3.',
+      'CagriSema is not a single molecule but a fixed-dose combination of two peptides already in this catalog: cagrilintide, a long-acting amylin analog, and semaglutide, the GLP-1 agonist. Novo Nordisk pairs two distinct satiety pathways in one once-weekly injection. The Phase 3 REDEFINE program reported 20.4%–22.7% mean weight reduction at 68 weeks (NEJM 2025), and Novo filed for FDA approval in December 2025, with a decision expected in 2026.',
     mechanism:
-      'Co-agonism across two pathways: semaglutide activates the GLP-1 receptor while cagrilintide activates amylin and calcitonin receptors — complementary routes to satiety and slowed gastric emptying.',
-    researchAreas: ['Obesity', 'Type 2 diabetes', 'Combination metabolic therapy'],
+      'Co-agonism across two complementary satiety systems: semaglutide activates the GLP-1 receptor while cagrilintide activates amylin and calcitonin receptor complexes — additive appetite suppression and slowed gastric emptying from one weekly injection.',
+    researchAreas: ['Obesity', 'Type 2 diabetes', 'Combination metabolic therapy', 'Cardiovascular outcomes'],
     background: [
-      'CagriSema is a combination product, and that is the whole point of it. Rather than engineer a single peptide that hits several receptors — the multi-agonist route taken by tirzepatide and retatrutide — Novo Nordisk co-formulates two of its existing peptides: the amylin analog cagrilintide and the GLP-1 agonist semaglutide. Both suppress appetite, but through different receptor systems, so combining them is studied for additive weight effect from a single weekly injection.',
-      'Because it is a co-formulation, CagriSema has no molecular formula or sequence of its own — its properties are those of its two components, each documented on its own monograph here. It is investigational, studied in the Phase 3 REDEFINE program, where it produced large mean weight reductions in the low-to-mid twenties percent; the results were strong in absolute terms even as they were scrutinized against very high market expectations. It is not FDA-approved.',
+      'CagriSema is a combination product, and that is the whole point of it. Rather than engineer a single peptide that hits several receptors — the multi-agonist route taken by tirzepatide and retatrutide — Novo Nordisk co-formulates two of its existing peptides: the amylin analog cagrilintide and the GLP-1 agonist semaglutide. Both suppress appetite, but through different receptor systems (amylin/calcitonin complexes versus the GLP-1 receptor), so combining them is studied for additive weight effect from a single weekly injection.',
+      'The Phase 3 REDEFINE program delivered the largest data package ever assembled for a combination obesity therapy. REDEFINE-1 (Garvey et al., NEJM 2025, NCT05567796) reported 20.4% mean weight reduction at 68 weeks regardless of adherence — 22.7% among participants who stayed on treatment — versus 3.0% on placebo, with 40.4% of adherent participants losing ≥25% of body weight and 23.1% losing ≥30%. REDEFINE-2 (NEJM 2025), in adults with overweight/obesity and type 2 diabetes, reported −13.7% versus −3.4% placebo. REDEFINE-3, a cardiovascular-outcomes trial, is ongoing.',
+      'Because it is a co-formulation, CagriSema has no molecular formula or sequence of its own — its properties are those of its two components, each documented on its own monograph here. Novo Nordisk submitted the FDA application in December 2025 — the first once-weekly GLP-1/amylin combination to reach filing — with a decision anticipated in 2026. It is not yet approved anywhere.',
     ],
     keyResearch: [
       'Two-pathway combination — pairs semaglutide (GLP-1) with cagrilintide (amylin) to engage two distinct satiety systems in one weekly injection.',
+      'REDEFINE-1 (NEJM 2025) — 20.4% mean weight reduction at 68 weeks (22.7% with treatment adherence) versus 3.0% placebo; ~40% of adherent participants lost ≥25%, and ~23% lost ≥30%.',
+      'REDEFINE-2 (NEJM 2025) — −13.7% versus −3.4% placebo in adults with type 2 diabetes; half of participants with obesity crossed below the obesity BMI threshold in REDEFINE-1.',
       'Not a single molecule — a fixed-dose co-formulation; its chemistry is that of its two component peptides, each catalogued separately here.',
-      'Weight reduction — the Phase 3 REDEFINE program reported large mean reductions in the low-to-mid twenties percent.',
-      'Combination rationale — an alternative to single multi-agonist peptides, reached by combining two proven components.',
-      'Investigational — a Novo Nordisk candidate; not FDA-approved.',
+      'Regulatory status — filed with the FDA in December 2025 (first GLP-1/amylin combination filing); decision expected 2026. Cardiovascular-outcomes trial (REDEFINE-3) ongoing.',
     ],
     faqs: [
       {
         q: 'What is CagriSema?',
-        a: 'CagriSema is Novo Nordisk’s investigational fixed combination of two peptides — cagrilintide (an amylin analog) and semaglutide (a GLP-1 agonist) — given as one once-weekly injection for weight management.',
+        a: 'CagriSema is Novo Nordisk’s fixed once-weekly combination of two peptides — cagrilintide (an amylin analog) and semaglutide (a GLP-1 agonist) — for weight management. Phase 3 reported 20.4%–22.7% mean weight reduction at 68 weeks; it was filed with the FDA in December 2025.',
+      },
+      {
+        q: 'How much weight do people lose on CagriSema?',
+        a: 'REDEFINE-1 (NEJM 2025): 20.4% mean at 68 weeks regardless of adherence, 22.7% among those who stayed on treatment, versus 3.0% placebo. About 40% of adherent participants lost ≥25% of body weight and 23% lost ≥30%. REDEFINE-2 (with type 2 diabetes): 13.7% versus 3.4%. Trial means, not individual predictions.',
       },
       {
         q: 'Is CagriSema a single peptide?',
-        a: 'No — it is a co-formulation of two separate peptides (cagrilintide and semaglutide), each with its own monograph here, so it has no single molecular formula.',
+        a: 'No — it is a co-formulation of two separate peptides (cagrilintide and semaglutide), each with its own monograph here, so it has no single molecular formula or sequence.',
       },
       {
-        q: 'How does it compare with tirzepatide?',
-        a: 'Tirzepatide is one molecule hitting two receptors (GIP + GLP-1); CagriSema instead combines two molecules (amylin + GLP-1). Both aim for additive metabolic effect by different means.',
+        q: 'How does CagriSema compare with tirzepatide and retatrutide?',
+        a: 'Tirzepatide is one molecule hitting two receptors (GIP + GLP-1, ~22.5% mean weight loss in SURMOUNT-1); retatrutide is one molecule hitting three (adds glucagon, ~28.7% in its first Phase 3 readout). CagriSema reaches a similar range by combining two molecules (GLP-1 + amylin) instead. None of these trials is head-to-head.',
       },
       {
-        q: 'Is CagriSema approved?',
-        a: 'No — it is investigational and in Phase 3. This page is a research and educational reference, not medical advice.',
+        q: 'What are the side effects of CagriSema?',
+        a: 'In REDEFINE trials the most common adverse events were gastrointestinal — nausea, vomiting, diarrhea, constipation — mostly during dose escalation and mostly mild to moderate, consistent with both component classes. This page is a research reference, not medical advice.',
+      },
+      {
+        q: 'When will CagriSema be approved?',
+        a: 'Novo Nordisk filed the FDA application in December 2025 — the first once-weekly GLP-1/amylin combination to reach filing — with a decision anticipated in 2026. It is not approved anywhere today; anything sold as CagriSema now is outside any regulated channel.',
       },
     ],
     synthesisNotes:
