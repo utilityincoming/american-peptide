@@ -51,7 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/melanocortin', priority: 0.7 },
     { path: '/developers', priority: 0.7 },
     // ── Company / info ────────────────────────────────────
-    // /press is discoverable here (and via a single footer link) rather than
+    // /press is discoverable here (sitemap only, no footer link) rather than
     // through many internal links — an informational media kit that doesn't
     // need PageRank funneled to it, just to be crawlable.
     { path: '/press', priority: 0.5 },
