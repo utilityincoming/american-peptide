@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, Dna, BarChart3, FlaskConical, Search, Sparkles, Telescope } from 'lucide-react'
+import { ArrowRight, Dna, BarChart3, FlaskConical, Search, Sparkles, Syringe, Telescope } from 'lucide-react'
 import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES } from '@/lib/peptides'
 import { STATIC_FAQS, faqPageJsonLd } from '@/lib/faqs'
 import FaqAccordion from '@/components/FaqAccordion'
@@ -161,30 +161,40 @@ export default function HomePage() {
                 <Link
                   key={label}
                   href={href}
-                  className="group flex flex-col items-center gap-1.5 rounded-xl border border-white/[0.07] bg-white/[0.025] px-2 py-3 text-center transition-all hover:border-[#2DD4A8]/30 hover:bg-white/[0.04]"
+                  className="group flex flex-col items-center gap-1.5 rounded-xl border border-ink/[0.08] bg-ink/[0.02] px-2 py-3 text-center transition-all hover:border-[#2DD4A8]/30 hover:bg-ink/[0.04]"
                 >
                   <Icon className="h-4 w-4 text-[#2DD4A8]/70 transition-colors group-hover:text-[#2DD4A8]" strokeWidth={1.75} />
-                  <span className="text-[11px] font-semibold text-white/80">{label}</span>
-                  <span className="text-[10px] leading-tight text-white/35">{desc}</span>
+                  <span className="text-[11px] font-semibold text-ink/80">{label}</span>
+                  <span className="text-[10px] leading-tight text-ink/40">{desc}</span>
                 </Link>
               ))}
             </div>
 
-            {/* CTAs — lead with the Peptide Agent */}
-            <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
+            {/* CTAs — the Agent leads; the calculator is the bench tool people
+                come back to, so it sits right beside it as a prominent secondary. */}
+            <div className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
               <Link
                 href="/research"
-                className="group inline-flex items-center gap-2 rounded-xl bg-[#2DD4A8] px-8 py-3.5 text-[15px] font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(45,212,168,0)] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_40px_rgba(45,212,168,0.35)]"
+                className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#2DD4A8] px-6 py-3.5 text-[15px] font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(45,212,168,0)] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_40px_rgba(45,212,168,0.35)]"
               >
                 <Sparkles className="h-4 w-4" />
                 Ask the Peptide Agent
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
+                href="/tools/reconstitution-calculator"
+                className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.07] px-6 py-3.5 text-[15px] font-semibold text-accent transition-all hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/[0.12]"
+              >
+                <Syringe className="h-4 w-4" />
+                Open the calculator
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+              <Link
                 href="/catalog"
-                className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-8 py-3.5 text-[15px] font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
+                className="group inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-2 py-3.5 text-[15px] font-medium text-ink/55 transition-colors hover:text-ink"
               >
                 Browse the catalog
+                <ArrowRight className="h-4 w-4 text-ink/30 transition-all group-hover:translate-x-0.5 group-hover:text-accent" />
               </Link>
             </div>
 
@@ -232,6 +242,114 @@ export default function HomePage() {
               <div className="mt-1 text-xs text-ink/50 md:text-sm">{label}</div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── Reconstitution Calculator Spotlight ──
+          The bench tool people reach for daily. It gets its own real estate
+          right below the hero, with a live worked example that deep-links into
+          the exact configuration it shows. */}
+      <section className="relative z-10 mx-auto max-w-6xl px-6 pb-12 md:px-10">
+        <div className="relative overflow-hidden rounded-3xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] via-[#2DD4A8]/[0.03] to-transparent p-8 md:p-12">
+          {/* Subtle dot pattern */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-40"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+              backgroundSize: '24px 24px',
+            }}
+          />
+          {/* Glow */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-[#2DD4A8] opacity-[0.08] blur-[120px]"
+          />
+
+          <div className="relative grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
+            {/* Left — copy + CTA */}
+            <div>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.10] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
+                <Syringe className="h-3 w-3" />
+                Bench tool · Works offline
+              </div>
+
+              <h2 className="mb-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-[40px]">
+                Every dose, down to the
+                <br />
+                <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+                  tick mark.
+                </span>
+              </h2>
+
+              <p className="mb-6 max-w-md text-[15px] leading-relaxed text-ink/55">
+                Enter the vial size, your target dose, and the bacteriostatic water
+                you&apos;re adding. Concentration, syringe units, and doses per vial
+                update as you type — then it draws the fill on a U-100 barrel so you
+                read it straight off the syringe.
+              </p>
+
+              {/* What you get */}
+              <div className="mb-7 flex flex-wrap gap-2">
+                {['Live U-100 syringe', 'Doses per vial', 'Shareable link', 'Installs offline'].map(
+                  (f) => (
+                    <span
+                      key={f}
+                      className="rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1 text-[11px] text-ink/60"
+                    >
+                      {f}
+                    </span>
+                  ),
+                )}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+                <Link
+                  href="/tools/reconstitution-calculator"
+                  className="group inline-flex items-center gap-2 rounded-xl bg-[#2DD4A8] px-6 py-3 text-sm font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(45,212,168,0)] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_40px_rgba(45,212,168,0.35)]"
+                >
+                  <Syringe className="h-4 w-4" />
+                  Open the calculator
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </Link>
+                <Link
+                  href="/tools/calculator-beta"
+                  className="text-xs text-ink/45 underline decoration-ink/20 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent/50"
+                >
+                  or try the beta — GLP-1 pen mode &amp; reverse-dose solver
+                </Link>
+              </div>
+            </div>
+
+            {/* Right — live worked example, deep-linked into the tool */}
+            <Link
+              href="/tools/reconstitution-calculator?vial=5&dose=250&water=2"
+              aria-label="Open this worked example in the reconstitution calculator: 5 mg vial, 2 mL bacteriostatic water, 250 mcg dose"
+              className="group relative block rounded-2xl border border-ink/[0.08] bg-panel p-5 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.35)] transition-all hover:-translate-y-0.5 hover:border-[#2DD4A8]/30 md:p-6"
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink/40">
+                  Worked example
+                </span>
+                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-accent opacity-0 transition-opacity group-hover:opacity-100">
+                  Open <ArrowRight className="h-3 w-3" />
+                </span>
+              </div>
+
+              <p className="mb-4 font-mono text-[11px] text-ink/50">
+                5&thinsp;mg vial · 2&thinsp;mL BAC water · 250&thinsp;mcg dose
+              </p>
+
+              <ReconPreviewSyringe />
+
+              <div className="mt-4 grid grid-cols-3 gap-2">
+                <PreviewTile value="10" unit="syringe units" />
+                <PreviewTile value="20" unit="doses / vial" />
+                <PreviewTile value="250" unit="mcg / 0.1 mL" />
+              </div>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -589,5 +707,134 @@ function HeroMolecule() {
         </g>
       </svg>
     </div>
+  )
+}
+
+// ── Calculator spotlight preview ──────────────────────────────────────────
+// A static mirror of the tool's result cards, using the worked example
+// 5 mg vial · 2 mL BAC water · 250 mcg dose → 10 units, 20 doses, 250 mcg/0.1 mL.
+function PreviewTile({ value, unit }: { value: string; unit: string }) {
+  return (
+    <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-2 py-2.5 text-center">
+      <p className="font-mono text-xl font-semibold leading-none tabular-nums text-accent">
+        {value}
+      </p>
+      <p className="mt-1 text-[9px] leading-tight text-ink/45">{unit}</p>
+    </div>
+  )
+}
+
+// Compact U-100 syringe drawn on a 0–20 unit scale (a zoomed view of the tool's
+// full 0–100 barrel) filled to 10 units — the payoff of the worked example.
+function ReconPreviewSyringe() {
+  const MAX = 20
+  const units = 10
+  const BX = 44 // barrel origin x
+  const BW = 250 // barrel width
+  const BY = 22 // barrel origin y
+  const BH = 24 // barrel height
+  const fillW = (units / MAX) * BW
+  const majors = [0, 5, 10, 15, 20]
+  const minors = Array.from({ length: MAX + 1 }, (_, i) => i).filter((i) => i % 5 !== 0)
+  const grey = 'rgba(120,130,150,'
+
+  return (
+    <svg
+      viewBox="0 0 350 74"
+      className="h-auto w-full"
+      role="img"
+      aria-label={`U-100 insulin syringe filled to ${units} units`}
+    >
+      {/* Plunger */}
+      <rect x="6" y="26" width="14" height="16" rx="2" fill={`${grey}0.55)`} />
+      <rect x="20" y="29" width="24" height="10" rx="1.5" fill={`${grey}0.4)`} />
+
+      {/* Barrel */}
+      <rect
+        x={BX}
+        y={BY}
+        width={BW}
+        height={BH}
+        rx="2"
+        fill="var(--panel)"
+        stroke={`${grey}0.35)`}
+        strokeWidth="1"
+      />
+
+      {/* Fill + caliper line */}
+      <rect x={BX} y={BY} width={fillW} height={BH} rx="2" fill="#2DD4A8" fillOpacity="0.28" />
+      <line
+        x1={BX + fillW}
+        y1={BY - 3}
+        x2={BX + fillW}
+        y2={BY + BH + 3}
+        stroke="#2DD4A8"
+        strokeWidth="1.5"
+      />
+
+      {/* Minor ticks */}
+      {minors.map((t) => {
+        const x = BX + (t / MAX) * BW
+        return (
+          <line key={`min-${t}`} x1={x} y1={BY} x2={x} y2={BY + 4} stroke={`${grey}0.35)`} strokeWidth="0.5" />
+        )
+      })}
+
+      {/* Major ticks + labels */}
+      {majors.map((t) => {
+        const x = BX + (t / MAX) * BW
+        return (
+          <g key={`maj-${t}`}>
+            <line x1={x} y1={BY} x2={x} y2={BY + 7} stroke={`${grey}0.6)`} strokeWidth="1" />
+            <text
+              x={x}
+              y={BY - 4}
+              textAnchor="middle"
+              className="fill-ink/40"
+              style={{ fontSize: '8px', fontFamily: 'monospace' }}
+            >
+              {t}
+            </text>
+          </g>
+        )
+      })}
+
+      {/* Needle hub + needle */}
+      <polygon
+        points={`${BX + BW},${BY} ${BX + BW + 12},${BY + 5} ${BX + BW + 12},${BY + BH - 5} ${BX + BW},${BY + BH}`}
+        fill={`${grey}0.5)`}
+      />
+      <line
+        x1={BX + BW + 12}
+        y1={BY + BH / 2}
+        x2={BX + BW + 52}
+        y2={BY + BH / 2}
+        stroke={`${grey}0.5)`}
+        strokeWidth="1.5"
+      />
+
+      {/* Dose label */}
+      <rect
+        x={BX + fillW - 20}
+        y={BY + BH + 6}
+        width="40"
+        height="15"
+        rx="3"
+        fill="#2DD4A8"
+        fillOpacity="0.15"
+        stroke="#2DD4A8"
+        strokeOpacity="0.4"
+        strokeWidth="0.75"
+      />
+      <text
+        x={BX + fillW}
+        y={BY + BH + 16}
+        textAnchor="middle"
+        className="fill-[#2DD4A8]"
+        style={{ fontSize: '9px', fontFamily: 'monospace', fontWeight: 600 }}
+      >
+        10 u
+      </text>
+    </svg>
   )
 }
