@@ -420,6 +420,18 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     notes:
       'Gonadorelin is the native GnRH decapeptide: an N-terminal pyroglutamate, a C-terminal glycinamide, and otherwise standard residues. Solid-phase assembly is routine, but the pyroglutamate terminus and the C-terminal amide are the two features that must be formed correctly, and the internal Ser/Tyr residues make byproduct control the main purity task.',
   },
+  leuprolide: {
+    difficulty: 'moderate',
+    features: ['D-amino acid', 'C-terminal amide'],
+    notes:
+      'Leuprolide is a GnRH nonapeptide analog: an N-terminal pyroglutamate, a D-leucine at position 6, and a C-terminal ethylamide in place of the native glycinamide. Solid-phase assembly is short and routine; the D-residue and the ethylamide cap are the features that must be installed correctly, and Trp/Ser byproduct control sets the purity.',
+  },
+  triptorelin: {
+    difficulty: 'moderate',
+    features: ['D-amino acid', 'C-terminal amide'],
+    notes:
+      'Triptorelin is the native GnRH decapeptide with a single D-tryptophan at position 6 and the C-terminal glycinamide retained. The two oxidation-sensitive tryptophans (positions 3 and 6) and the pyroglutamate terminus are the features to watch; assembly is otherwise a routine short solid-phase synthesis.',
+  },
   hcg: { difficulty: 'demanding', features: ['Recombinant protein', 'Glycosylated', 'Multiple disulfides'] },
   oxytocin: { difficulty: 'moderate', features: ['Disulfide bridge', 'C-terminal amide'] },
   fsh: { difficulty: 'demanding', features: ['Recombinant protein', 'Glycosylated', 'Multiple disulfides'] },
@@ -437,6 +449,12 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
   somatostatin: { difficulty: 'moderate', features: ['Disulfide bridge'] },
   calcitonin: { difficulty: 'demanding', features: ['Disulfide bridge', 'C-terminal amide'] },
   amylin: { difficulty: 'demanding', features: ['Disulfide bridge', 'C-terminal amide'] },
+  pramlintide: {
+    difficulty: 'demanding',
+    features: ['Disulfide bridge', 'C-terminal amide'],
+    notes:
+      'Pramlintide is amylin re-engineered for manufacturability: the 2–7-disulfide, C-terminally amidated 37-mer with Ala25/Ser28/Ser29 → Pro. The three prolines deliberately break the β-sheet stacking that makes native amylin aggregate on the resin, so pramlintide is markedly easier to make and purify than amylin itself, though the disulfide and C-terminal amide still set the quality bar.',
+  },
   acth: { difficulty: 'demanding', features: [] },
   secretin: { difficulty: 'moderate', features: ['C-terminal amide'] },
   vip: {

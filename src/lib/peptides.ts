@@ -809,6 +809,9 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     cas: '1818415-56-3',
+    // Parent hormone relaxin-2 (H2). B7-33 is a synthetic single-chain analog of
+    // the relaxin-2 B-chain, not itself a UniProt entry.
+    uniprotId: 'P04090',
   },
   {
     slug: 'ghk-cu',
@@ -901,6 +904,14 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     sequence: 'AHK',
+    // AHK-Cu is the copper(II) complex of Ala-His-Lys. Represented as the neutral
+    // complex C15H24CuN6O4 (~415.9 Da), matching how GHK-Cu is handled here (the
+    // bare tripeptide is ~354 Da — not used). PubChem indexes AHK-Cu as the
+    // monohydrochloride: CID 168431292, C15H24ClCuN6O4-, 451.4 Da.
+    molecularWeight: 415.9,
+    molecularFormula: 'C15H24CuN6O4',
+    cas: '682809-81-0',
+    pubchemCid: 168431292,
     storage:
       'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and use within weeks; copper complexes are light- and oxidation-sensitive.',
     handling:
@@ -1394,6 +1405,9 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     cas: '946870-92-4',
+    // Parent protein IGF-1. LR3 is a synthetic 83-aa analog (13-aa N-terminal
+    // extension + Arg3) that is not itself a UniProt entry.
+    uniprotId: 'P05019',
     storage:
       'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and minimize freeze–thaw — a folded, disulfide-bonded protein.',
     handling:
@@ -1487,6 +1501,11 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No. It is a research compound, not FDA-approved, and is prohibited in sport. This page is a research and educational reference.',
       },
     ],
+    sequence: 'YQPPSTNKNTKSQRRKGSTFEERK',
+    // C-terminal E-domain peptide of the IGF-1Ec splice isoform (UniProt P05019-4,
+    // the exon-5 frameshift tail). Average mass of the unmodified free-acid 24-mer.
+    molecularWeight: 2868.2,
+    uniprotId: 'P05019',
     storage:
       'Lyophilized: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and use within weeks; minimize freeze–thaw.',
     handling:
@@ -1531,7 +1550,14 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No — it is a research compound, not FDA-approved. This page is a research and educational reference.',
       },
     ],
-    sequence: 'YADAIFTQSYRKVLAQLSARKLLQDIMSR',
+    sequence: 'YADAIFTQSYRKVLAQLSARKLLQDILSR',
+    // Modified GRF(1-29): D-Ala2, Gln8, Ala15, Leu27 vs native GHRH(1-29); C-terminal amide.
+    molecularWeight: 3367.9,
+    molecularFormula: 'C152H252N44O42',
+    // PubChem CID 56841945 — the bare 29-mer amide (no DAC). Auto-enrichment
+    // matched the ambiguous name "CJC-1295" to the DAC conjugate (CID 91971820,
+    // 3647.2 Da); these inline values pin the correct no-DAC molecule.
+    pubchemCid: 56841945,
   },
   {
     slug: 'cjc-1295-with-dac',
@@ -1572,6 +1598,12 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No — it is a research compound. This page is a research and educational reference.',
       },
     ],
+    molecularWeight: 3647.2,
+    molecularFormula: 'C165H269N47O46',
+    // PubChem CID 91971820 — modified GRF(1-29) carrying the maleimidopropionyl
+    // Drug Affinity Complex on a Lys residue. The bare no-DAC 29-mer amide is a
+    // different molecule (CID 56841945, ~3367.9 Da) — see cjc-1295-no-dac.
+    pubchemCid: 91971820,
   },
   {
     slug: 'ipamorelin',
@@ -3438,6 +3470,106 @@ const SEED_PEPTIDES: Peptide[] = [
     pubchemCid: 638793,
   },
   {
+    slug: 'leuprolide',
+    name: 'Leuprolide',
+    aliases: ['Leuprorelin', 'Lupron', 'Eligard', 'Leuprolide acetate'],
+    categories: ['reproductive', 'peptide-hormone'],
+    fdaApproved: true,
+    shortDescription:
+      'The long-acting GnRH agonist — a nonapeptide that first flares, then shuts the reproductive axis down; the workhorse of hormone-suppression medicine.',
+    description:
+      'Leuprolide (Lupron) is a synthetic GnRH agonist and the most widely used member of its class. Two changes to the native decapeptide — a D-leucine at position 6 and a C-terminal ethylamide replacing the terminal glycinamide — make it far more potent and degradation-resistant than gonadorelin. Given continuously as depot injections or implants, it exploits GnRH’s central paradox: sustained receptor stimulation first causes a transient hormone flare, then desensitizes the pituitary and suppresses LH, FSH, and the downstream sex steroids.',
+    mechanism:
+      'GnRH-receptor agonism. Continuous (non-pulsatile) exposure downregulates the receptor after an initial flare, suppressing LH / FSH and the gonadal steroids they drive.',
+    researchAreas: ['Prostate cancer', 'Endometriosis', 'Central precocious puberty', 'Fertility (IVF)', 'Gender-affirming care'],
+    background: [
+      'Leuprolide is the drug that made GnRH’s paradox therapeutically useful. Native GnRH must be pulsed to stimulate the pituitary; delivered continuously it does the opposite, and leuprolide is engineered to deliver exactly that steady, high-affinity signal. A D-leucine at position 6 blocks the enzymatic cleavage that clears native GnRH in minutes, and the C-terminal ethylamide raises receptor affinity — together extending its action from minutes to weeks or months in depot form.',
+      'The result is controlled, reversible chemical castration. After a brief initial flare of LH and testosterone (or estrogen), the pituitary receptor desensitizes and sex-steroid output collapses. That single effect underlies a broad set of uses: advanced prostate cancer, endometriosis and uterine fibroids, central precocious puberty, IVF protocols, and gender-affirming hormone suppression.',
+      'Leuprolide is the long-acting counterpart to gonadorelin already in this catalog: the native hormone shows the axis can be switched on or off by rhythm, while leuprolide is the manufactured, degradation-resistant analog built to hold it off. It is delivered almost entirely as sustained-release depots and implants, since its purpose depends on continuous exposure.',
+    ],
+    keyResearch: [
+      'GnRH-agonist workhorse — a D-Leu6, C-terminal-ethylamide nonapeptide analog of GnRH, far more potent and stable than the native hormone.',
+      'Flare-then-suppress — continuous exposure causes a transient hormone flare, then desensitizes the pituitary and suppresses LH, FSH, and sex steroids.',
+      'Broad approved uses — prostate cancer, endometriosis, uterine fibroids, central precocious puberty, IVF, and gender-affirming care.',
+      'Depot delivery — formulated as long-acting injections and implants because the therapeutic effect requires sustained, non-pulsatile signaling.',
+      'Contrast with gonadorelin — same receptor, opposite intent: gonadorelin (pulsatile) switches the axis on; leuprolide (continuous) shuts it down.',
+    ],
+    faqs: [
+      {
+        q: 'What is leuprolide?',
+        a: 'Leuprolide (Lupron, Eligard) is a synthetic, long-acting GnRH agonist used to suppress the reproductive hormone axis — a nonapeptide analog of GnRH with a D-leucine and a C-terminal ethylamide.',
+      },
+      {
+        q: 'Why does it suppress hormones if it is an agonist?',
+        a: 'Because the GnRH receptor responds to rhythm. Continuous stimulation, after a brief initial flare, desensitizes the receptor, so LH, FSH, and sex steroids fall — the opposite of the pulsatile signal that stimulates them.',
+      },
+      {
+        q: 'How is it different from gonadorelin?',
+        a: 'Gonadorelin is native GnRH, cleared in minutes and used in pulses to stimulate the axis. Leuprolide is a degradation-resistant analog given continuously (as depots) to shut it down.',
+      },
+      {
+        q: 'Is leuprolide FDA-approved?',
+        a: 'Yes — it is approved for several conditions including prostate cancer, endometriosis, and central precocious puberty. This page is a research and educational reference, not medical advice.',
+      },
+    ],
+    sequence: 'pGlu-His-Trp-Ser-Tyr-D-Leu-Leu-Arg-Pro-NHEt',
+    molecularWeight: 1209.4,
+    molecularFormula: 'C59H84N16O12',
+    cas: '53714-56-0',
+    pubchemCid: 657181,
+    uniprotId: 'P01148', // parent hormone GnRH (GNRH1); leuprolide is the D-Leu6 / C-terminal-ethylamide analog
+  },
+  {
+    slug: 'triptorelin',
+    name: 'Triptorelin',
+    aliases: ['Trelstar', 'Decapeptyl', 'Triptorelin pamoate'],
+    categories: ['reproductive', 'peptide-hormone'],
+    fdaApproved: true,
+    shortDescription:
+      'A GnRH-agonist decapeptide — the single D-tryptophan swap that turns native GnRH into a long-acting, axis-suppressing drug.',
+    description:
+      'Triptorelin (Trelstar, Decapeptyl) is a synthetic GnRH agonist that differs from the native decapeptide by one change: a D-tryptophan at position 6. That single substitution resists the enzymatic cleavage that clears native GnRH within minutes, giving a potent, long-acting agonist. Like others in its class it first flares, then desensitizes the pituitary — suppressing LH, FSH, and the sex steroids downstream — and is delivered as sustained-release depots for prostate cancer, endometriosis, and central precocious puberty.',
+    mechanism:
+      'GnRH-receptor agonism. After an initial gonadotropin flare, continuous exposure desensitizes the receptor and suppresses LH / FSH and gonadal steroid production.',
+    researchAreas: ['Prostate cancer', 'Endometriosis', 'Central precocious puberty', 'Fertility (IVF)'],
+    background: [
+      'Triptorelin is the minimalist member of the GnRH-agonist class: where leuprolide makes two modifications to native GnRH, triptorelin makes one — replacing the glycine at position 6 with D-tryptophan. Native GnRH is cleaved at the Gly6–Leu7 bond within minutes; the D-amino acid at that position blocks the cleavage, converting a fleeting hormone into a depot drug that acts for weeks to months.',
+      'Functionally it behaves like the rest of its class. Continuous exposure produces a brief flare of LH and sex steroids, then downregulates the pituitary GnRH receptor and drives gonadotropins — and testosterone or estrogen — to castrate levels. It is used for advanced prostate cancer, endometriosis, and central precocious puberty, delivered almost entirely as long-acting pamoate depots.',
+      'Alongside gonadorelin (native GnRH) and leuprolide (the two-substitution analog), triptorelin rounds out the axis-suppression story this catalog tells: the same receptor, reached by progressively more stabilized analogs, each trading the native hormone’s pulsatile subtlety for durable, continuous suppression.',
+    ],
+    keyResearch: [
+      'Single-substitution GnRH agonist — native GnRH with Gly6 → D-Trp, blocking the enzymatic cleavage that clears the native hormone.',
+      'Flare-then-suppress — like the class, an initial gonadotropin flare gives way to receptor desensitization and sustained suppression of LH, FSH, and sex steroids.',
+      'Approved uses — advanced prostate cancer, endometriosis, and central precocious puberty; also used in assisted-reproduction protocols.',
+      'Depot delivery — formulated as long-acting pamoate injections because continuous exposure is what produces suppression.',
+      'Class context — the one-change analog beside leuprolide (two changes) and gonadorelin (native GnRH).',
+    ],
+    faqs: [
+      {
+        q: 'What is triptorelin?',
+        a: 'Triptorelin (Trelstar, Decapeptyl) is a long-acting GnRH agonist — native GnRH with a single D-tryptophan substitution at position 6 — used to suppress the reproductive hormone axis.',
+      },
+      {
+        q: 'How does it differ from leuprolide?',
+        a: 'Both are GnRH agonists that suppress the axis by continuous stimulation. Triptorelin makes a single change to native GnRH (D-Trp6); leuprolide makes two (D-Leu6 plus a C-terminal ethylamide).',
+      },
+      {
+        q: 'What is it used for?',
+        a: 'Advanced prostate cancer, endometriosis, and central precocious puberty, plus assisted-reproduction protocols — delivered as long-acting depot injections.',
+      },
+      {
+        q: 'Is triptorelin FDA-approved?',
+        a: 'Yes — it is approved in the US (Trelstar) and widely elsewhere (Decapeptyl). This page is a research and educational reference, not medical advice.',
+      },
+    ],
+    sequence: 'pGlu-His-Trp-Ser-Tyr-D-Trp-Leu-Arg-Pro-Gly-NH2',
+    molecularWeight: 1311.4,
+    molecularFormula: 'C64H82N18O13',
+    cas: '57773-63-4',
+    pubchemCid: 25074470,
+    uniprotId: 'P01148', // parent hormone GnRH (GNRH1); triptorelin is the D-Trp6 analog
+  },
+  {
     slug: 'hcg',
     name: 'HCG',
     aliases: [
@@ -4190,6 +4322,56 @@ const SEED_PEPTIDES: Peptide[] = [
     cas: '122384-88-7',
     synthesisNotes:
       'A 37-residue, 2–7-disulfide, C-terminal-amide peptide and one of the hardest sequences in this class to make: native human amylin is intrinsically amyloidogenic, so it aggregates on the resin and in solution. The therapeutic pramlintide is the design answer — three proline substitutions (Ala25, Ser28, Ser29 → Pro) that break the β-sheet stacking, simultaneously making the peptide synthesizable, soluble, and shelf-stable. It is the catalog’s clearest example of engineering *against* aggregation to obtain a manufacturable peptide; the longer-acting analog cagrilintide (profiled separately) extends the same logic.',
+  },
+  {
+    slug: 'pramlintide',
+    name: 'Pramlintide',
+    aliases: ['Symlin', 'AC-137', 'Tripro-amylin', 'Amylin analog'],
+    categories: ['metabolic', 'peptide-hormone'],
+    fdaApproved: true,
+    shortDescription:
+      'The stabilized amylin analog — three prolines that stop native amylin from aggregating, turning the beta cell’s second satiety hormone into an injectable diabetes drug.',
+    description:
+      'Pramlintide (Symlin) is a synthetic analog of amylin, the hormone co-secreted with insulin from the pancreatic beta cell. Native human amylin is too aggregation-prone to formulate, so pramlintide substitutes proline at positions 25, 28 and 29 — swaps that block the β-sheet stacking without losing receptor activity. The result is the first approved amylin-receptor agonist: a mealtime add-on to insulin in type 1 and type 2 diabetes that slows gastric emptying, suppresses glucagon, and curbs appetite.',
+    mechanism:
+      'Amylin-receptor agonism (a calcitonin-receptor core complexed with RAMP subunits). Slows gastric emptying, suppresses postprandial glucagon, and acts centrally to reduce food intake — complementing, not duplicating, injected insulin.',
+    researchAreas: ['Type 1 diabetes', 'Type 2 diabetes', 'Obesity', 'Satiety signaling', 'Peptide hormones'],
+    background: [
+      'Amylin is insulin’s co-secreted partner, but native human amylin cannot be bottled: it misfolds into the islet amyloid found in type 2 diabetes, aggregating on the resin and in solution. Pramlintide is the engineering answer — three proline substitutions (Ala25, Ser28, Ser29 → Pro) that break the amyloid-forming β-sheet while preserving amylin’s biology, giving a soluble, shelf-stable analog.',
+      'Approved in 2005 as Symlin, pramlintide is given before meals alongside insulin in type 1 and type 2 diabetes, where it blunts post-meal glucose spikes and modestly aids weight control — the parts of glucose regulation insulin alone handles poorly.',
+      'Pramlintide is the proof of concept for the whole amylin class. Its short duration made it a three-times-daily injection, which limited uptake, but it validated the amylin receptor as a satiety target — the opening that longer-acting analogs such as cagrilintide (profiled separately) now exploit at the front of obesity drug development.',
+    ],
+    keyResearch: [
+      'First approved amylin analog — the proline-substituted, soluble form of human amylin (Symlin, 2005), used with mealtime insulin in type 1 and type 2 diabetes.',
+      'Anti-aggregation design — Ala25/Ser28/Ser29 → Pro break the β-sheet stacking that makes native amylin amyloidogenic and un-formulable.',
+      'Glucose control — slows gastric emptying and suppresses postprandial glucagon, blunting post-meal spikes that insulin alone controls poorly.',
+      'Weight — modest weight loss in trials; it validated amylin-receptor agonism as a satiety mechanism now central to the obesity pipeline.',
+      'Class opener — its short half-life drove development of long-acting analogs (cagrilintide) that pair with GLP-1 drugs for larger effects.',
+    ],
+    faqs: [
+      {
+        q: 'What is pramlintide?',
+        a: 'Pramlintide (Symlin) is a synthetic amylin analog with three proline substitutions that prevent the aggregation of native human amylin, making it stable enough to inject as a mealtime add-on to insulin.',
+      },
+      {
+        q: 'How does it differ from amylin?',
+        a: 'It is human amylin with Ala25, Ser28 and Ser29 each replaced by proline — changes that block amyloid formation while keeping amylin-receptor activity.',
+      },
+      {
+        q: 'How does it relate to cagrilintide?',
+        a: 'Both are amylin-receptor agonists. Pramlintide is the short-acting, approved diabetes drug; cagrilintide is a long-acting analog developed for obesity, often paired with a GLP-1 agonist.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance.',
+      },
+    ],
+    sequence: 'KCNTATCATQRLANFLVHSSNNFGPILPPTNVGSNTY (2–7 disulfide, C-terminal amide)',
+    molecularWeight: 3949.4,
+    molecularFormula: 'C171H267N51O53S2',
+    cas: '151126-32-8',
+    pubchemCid: 70691388,
+    uniprotId: 'P10997', // parent hormone amylin (IAPP); pramlintide is the Pro25/28/29 analog
   },
   {
     slug: 'acth',
