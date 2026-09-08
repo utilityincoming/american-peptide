@@ -150,41 +150,61 @@ const SEED_PEPTIDES: Peptide[] = [
     name: 'Semaglutide',
     aliases: ['Ozempic', 'Wegovy', 'Rybelsus'],
     categories: ['metabolic'],
-    shortDescription: 'Long-acting GLP-1 receptor agonist for glycemic control and weight management.',
+    shortDescription:
+      'The once-weekly GLP-1 receptor agonist behind Ozempic, Wegovy, and Rybelsus — FDA-approved for type 2 diabetes, chronic weight management, cardiovascular risk reduction, and MASH.',
     description:
-      'Semaglutide is a 31-amino-acid GLP-1 receptor agonist engineered for once-weekly dosing via fatty-acid acylation and amino-acid substitutions that resist DPP-4 degradation. Approved by the FDA for type 2 diabetes (2017) and chronic weight management (2021).',
-    mechanism: 'GLP-1 receptor agonism → glucose-dependent insulin secretion, slowed gastric emptying, central appetite suppression.',
+      'Semaglutide is a 31-amino-acid GLP-1 receptor agonist engineered for once-weekly dosing via fatty-acid acylation and amino-acid substitutions that resist DPP-4 degradation. It is FDA-approved for type 2 diabetes (Ozempic, 2017; oral Rybelsus, 2019), chronic weight management (Wegovy, 2021), cardiovascular risk reduction in adults with obesity and established heart disease (2024), and — as of August 2025 — metabolic dysfunction-associated steatohepatitis (MASH) with moderate-to-advanced fibrosis. The STEP-1 obesity trial reported ~14.9% mean weight reduction at 68 weeks.',
+    mechanism:
+      'GLP-1 receptor agonism → glucose-dependent insulin secretion, glucagon suppression, slowed gastric emptying, and central appetite suppression.',
     researchAreas: ['Type 2 diabetes', 'Obesity', 'MASH', 'Cardiovascular risk reduction'],
     background: [
-      'Semaglutide is a glucagon-like peptide-1 (GLP-1) receptor agonist built on the backbone of human GLP-1. Two engineering changes define it: a C18 fatty-diacid chain attached through a linker that promotes reversible binding to albumin, and amino-acid substitutions that resist degradation by the enzyme DPP-4. Together these extend its half-life to roughly a week, enabling once-weekly administration.',
-      'It reached the market first for type 2 diabetes (Ozempic, 2017; oral Rybelsus, 2019) and then for chronic weight management (Wegovy, 2021). Large cardiovascular-outcome and weight-management trials have made it one of the most studied metabolic peptides of the past decade, and its template — acylation plus DPP-4 resistance — now informs the broader incretin class.',
+      'Semaglutide is a glucagon-like peptide-1 (GLP-1) receptor agonist built on the backbone of human GLP-1. Two engineering changes define it: a C18 fatty-diacid chain attached through a linker that promotes reversible binding to albumin, and amino-acid substitutions that resist degradation by the enzyme DPP-4. Together these extend its half-life to roughly a week, enabling once-weekly administration. An oral formulation (Rybelsus) co-formulates the peptide with the absorption enhancer SNAC to protect it through the stomach.',
+      'Its pivotal data anchor the modern incretin era. The STEP-1 trial (Wilding et al., NEJM 2021, PMID 33567185) reported −14.9% mean body-weight change at 68 weeks on the 2.4 mg dose versus −2.4% on placebo — roughly 70% of participants lost at least 10% of body weight. The SELECT cardiovascular-outcomes trial reported a 20% reduction in major adverse cardiovascular events in adults with overweight or obesity and established cardiovascular disease but without diabetes, leading to a dedicated CV indication in 2024; the SOUL trial (McGuire et al., NEJM 2025, PMID 40162642) then showed the oral formulation cuts MACE by 14% in high-risk type 2 diabetes.',
+      'The liver program is the most recent expansion. The ESSENCE Phase 3 trial (Sanyal et al., NEJM 2025, PMID 40305708) reported resolution of steatohepatitis without worsening of fibrosis in 62.9% of participants on semaglutide 2.4 mg versus 34.3% on placebo at 72 weeks, and in August 2025 the FDA granted accelerated approval of Wegovy for noncirrhotic MASH with moderate-to-advanced fibrosis. Semaglutide’s acylation-plus-DPP-4-resistance template now informs the entire incretin class — dual agonists like tirzepatide and triple agonists like retatrutide are its molecular descendants.',
     ],
     keyResearch: [
-      'Glycemic control — studied for glucose-dependent insulin secretion and glucagon suppression in type 2 diabetes.',
-      'Weight management — chronic-weight-management trials reported substantial mean body-weight reduction versus placebo.',
-      'Cardiovascular outcomes — investigated for reduction of major adverse cardiovascular events in at-risk populations.',
-      'MASH / hepatic fat — examined as an endpoint in metabolic liver-disease research.',
-      'Half-life engineering — fatty-acid acylation and DPP-4-resistant substitutions are the basis of its once-weekly profile.',
+      'Weight management — STEP-1 (NEJM 2021) reported −14.9% mean weight reduction at 68 weeks (2.4 mg) versus −2.4% placebo; ~70% of participants lost ≥10% of body weight.',
+      'Cardiovascular outcomes — SELECT reported a 20% MACE reduction in obesity with established CVD (no diabetes); SOUL (NEJM 2025) reported a 14% MACE reduction for oral semaglutide in high-risk type 2 diabetes.',
+      'MASH — ESSENCE Phase 3 (NEJM 2025) reported 62.9% steatohepatitis resolution versus 34.3% placebo; FDA accelerated approval for MASH followed in August 2025.',
+      'Glycemic control — the original approved use: glucose-dependent insulin secretion and glucagon suppression in type 2 diabetes (SUSTAIN program).',
+      'Half-life engineering — fatty-acid acylation and DPP-4-resistant substitutions extend the half-life to ~1 week; the oral form adds the SNAC absorption enhancer.',
     ],
     faqs: [
       {
         q: 'What is semaglutide?',
-        a: 'Semaglutide is a long-acting GLP-1 receptor agonist approved for type 2 diabetes and chronic weight management. It is marketed as Ozempic, Wegovy, and Rybelsus.',
+        a: 'Semaglutide is a long-acting GLP-1 receptor agonist FDA-approved for type 2 diabetes (Ozempic, Rybelsus), chronic weight management (Wegovy), cardiovascular risk reduction in obesity with established heart disease, and — since August 2025 — MASH with moderate-to-advanced fibrosis.',
       },
       {
-        q: 'How does semaglutide promote weight loss?',
-        a: 'In studies it slows gastric emptying and acts on appetite centers in the brain while enhancing glucose-dependent insulin release, which together reduce caloric intake.',
-      },
-      {
-        q: 'Why is it dosed once weekly?',
-        a: 'Fatty-acid acylation promotes reversible binding to albumin and amino-acid substitutions resist DPP-4 breakdown, extending its half-life to about a week.',
+        q: 'How much weight do people lose on semaglutide?',
+        a: 'In the pivotal STEP-1 trial (NEJM 2021), adults on semaglutide 2.4 mg lost a mean of 14.9% of body weight at 68 weeks versus 2.4% on placebo; about 70% lost at least 10%, and about half lost at least 15%. These are trial population means, not individual predictions.',
       },
       {
         q: 'What is the difference between Ozempic, Wegovy, and Rybelsus?',
-        a: 'All three are semaglutide. Ozempic and oral Rybelsus are approved for type 2 diabetes; Wegovy is approved for chronic weight management. This page is a research reference, not medical advice.',
+        a: 'All three are semaglutide. Ozempic (weekly injection) and Rybelsus (daily oral tablet) are approved for type 2 diabetes; Wegovy (weekly injection, higher 2.4 mg dose) is approved for chronic weight management, cardiovascular risk reduction, and MASH. This page is a research reference, not medical advice.',
+      },
+      {
+        q: 'Is semaglutide approved for fatty liver (MASH)?',
+        a: 'Yes — in August 2025 the FDA granted accelerated approval of Wegovy for adults with noncirrhotic MASH and moderate-to-advanced liver fibrosis, based on the ESSENCE Phase 3 trial (62.9% steatohepatitis resolution versus 34.3% placebo at 72 weeks).',
+      },
+      {
+        q: 'What are the side effects of semaglutide?',
+        a: 'The most common adverse events in trials are gastrointestinal — nausea, vomiting, diarrhea, and constipation — usually during dose escalation. The label carries a boxed warning about thyroid C-cell tumors seen in rodent studies. This page is a research reference, not medical advice.',
+      },
+      {
+        q: 'Why is semaglutide dosed once weekly?',
+        a: 'A fatty-diacid side chain lets it bind reversibly to albumin, and amino-acid substitutions resist breakdown by the enzyme DPP-4 — together stretching GLP-1’s natural minutes-long half-life to about one week.',
+      },
+      {
+        q: 'How does semaglutide compare to tirzepatide and retatrutide?',
+        a: 'Semaglutide activates GLP-1 alone; tirzepatide adds GIP (dual agonist, ~22.5% mean weight loss in SURMOUNT-1) and retatrutide adds both GIP and glucagon (triple agonist, ~28.7% in the first Phase 3 readout). Cross-trial comparisons are not head-to-head; semaglutide remains the most extensively studied and broadly approved of the three.',
+      },
+      {
+        q: 'Is semaglutide a peptide?',
+        a: 'Yes — a 31-residue analog of human GLP-1 (~4,113.6 Da) built by solid-phase synthesis, with a C18 fatty-diacid chain on a linker attached to a lysine. The oral Rybelsus form co-formulates the same peptide with the SNAC absorption enhancer.',
       },
     ],
     molecularWeight: 4113.6,
+    molecularFormula: 'C187H291N45O59',
     cas: '910463-68-2',
     fdaApproved: true,
     synthesisNotes:
