@@ -17,7 +17,7 @@
     "@vercel/speed-insights": "^2.0.0",
     "lucide-react": "^1.14.0",
     "mcp-handler": "^1.1.0",
-    "next": "15.5.18",
+    "next": "^15.5.25",
     "pdfjs-dist": "^6.0.227",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -33,7 +33,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.5.18",
+    "eslint-config-next": "^15.5.25",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
