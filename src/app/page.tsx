@@ -6,13 +6,30 @@ import { STATIC_FAQS, faqPageJsonLd } from '@/lib/faqs'
 import FaqAccordion from '@/components/FaqAccordion'
 import DynamicFaqs from '@/components/DynamicFaqs'
 
-// Self-referencing canonical for the home page. Title, description, and the
-// OpenGraph/Twitter cards are inherited from the root layout's metadata; this
-// only pins the canonical URL (and its og:url), which the layout can't set
-// per-route.
+// Home-page metadata. The root layout's title is a generic "AI-Powered Peptide
+// Research"; here we override it with an intent-matched title/description that
+// front-loads the brand and the US-made angle the domain already earns
+// impressions for (brand + "american peptide company" + "made in the USA"
+// queries), so the home page competes for the click on those, not just on a
+// generic phrase.
+//
+// Note: Next does NOT deep-merge openGraph — a route that sets `openGraph`
+// replaces the layout's object wholesale (verified: pages with a custom
+// openGraph drop the layout's og:site_name / og:type). So we repeat type and
+// siteName here to keep the home page's social card complete and self-contained.
 export const metadata: Metadata = {
+  title: 'American Peptide — The Cited US Peptide Reference',
+  description:
+    'A cited, chemistry-grade peptide reference: the sourcing standard for US-made peptides, an open catalog, a dosing calculator, and a citation-backed research agent.',
   alternates: { canonical: '/' },
-  openGraph: { url: '/' },
+  openGraph: {
+    type: 'website',
+    siteName: 'AmericanPeptide.com',
+    url: '/',
+    title: 'American Peptide — The Cited US Peptide Reference',
+    description:
+      'The cited, chemistry-grade peptide reference — US sourcing standard, open catalog, dosing calculator, and a citation-backed research agent.',
+  },
 }
 
 const SPOTLIGHT_SLUGS = [
@@ -538,7 +555,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-[#2DD4A8]/15 bg-gradient-to-br from-[#2DD4A8]/[0.06] via-transparent to-transparent p-8 md:p-10">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
             <FlaskConical className="h-3 w-3" />
-            The sourcing standard
+            The US sourcing standard
           </div>
           <h2 className="mb-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-4xl">
             Every source,{' '}
@@ -547,16 +564,16 @@ export default function HomePage() {
             </span>
           </h2>
           <p className="mb-6 max-w-2xl text-[15px] leading-relaxed text-ink/55 md:text-base">
-            The labs worth knowing show their work - sequences traced, testing
-            published, put in the open. The sourcing standard brings them together
-            and ranks them on exactly that, so the community built on this science
-            finds its sources by signal alone.
+            The American labs worth knowing show their work — sequences traced,
+            testing published, out in the open. The US sourcing standard brings
+            them together and ranks them on exactly that, so the community built
+            on this science finds its sources by signal alone.
           </p>
           <Link
             href="/us-peptides"
             className="group inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-[#5EEBC8]"
           >
-            Explore the sourcing standard
+            Explore the US sourcing standard
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>

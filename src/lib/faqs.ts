@@ -39,6 +39,13 @@ export const STATIC_FAQS: Faq[] = [
     cta: { label: 'More about us', href: '/about' },
   },
   {
+    id: 'made-in-usa',
+    question: 'Are research peptides made in the USA?',
+    answer:
+      'Yes — a growing number of labs synthesize and independently test their research peptides in the United States. Because "American-made" is a claim worth grounding, our US sourcing standard scores each supplier on the lab evidence it publishes, so you can find strong US sources by their work rather than their marketing.',
+    cta: { label: 'See the US sourcing standard', href: '/us-peptides' },
+  },
+  {
     id: 'buy-peptides',
     question: 'Can I buy peptides here?',
     answer:
