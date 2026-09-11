@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { faqPageJsonLd } from '@/lib/faqs'
+import { RECON_FAQS } from './faqs'
 
 const SITE = 'https://americanpeptide.com'
 const url = `${SITE}/tools/reconstitution-calculator`
@@ -59,6 +61,13 @@ export default function ReconstitutionCalculatorLayout({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {/* FAQPage structured data for the on-page Reconstitution FAQ. Server-
+          rendered here so it's in the initial HTML; the visible accordion in
+          page.tsx renders the same RECON_FAQS. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd(RECON_FAQS)) }}
       />
       {children}
     </>
