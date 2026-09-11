@@ -58,6 +58,17 @@ function webSiteNode() {
     inLanguage: 'en-US',
     publisher: { '@id': ORG_ID },
     license: LICENSE_URL,
+    // Natural-language site search via the Peptide Agent (/research?q=…). Makes
+    // the WebSite entity eligible for a sitelinks searchbox and tells answer
+    // engines the site accepts a query — which is literally what it does.
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE}/research?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   }
 }
 
