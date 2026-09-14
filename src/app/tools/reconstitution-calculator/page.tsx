@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { Syringe, AlertTriangle, ArrowRight, Link2, Check } from 'lucide-react'
 import OfflineStatus from '@/components/OfflineStatus'
+import FaqAccordion from '@/components/FaqAccordion'
+import { RECON_FAQS } from './faqs'
 
 const VIAL_PRESETS = [1, 2, 5, 10, 15, 20, 30, 50]
 const DOSE_PRESETS = [100, 250, 500, 1000, 2000, 2500, 5000]
@@ -321,6 +323,15 @@ export default function ReconstitutionCalculatorPage() {
               </span>
             </li>
           </ul>
+        </section>
+
+        {/* ── FAQ ── long-tail question capture; FAQPage JSON-LD ships from
+            layout.tsx off the same RECON_FAQS, so the two never drift. */}
+        <section className="mb-10">
+          <h2 className="mb-4 text-xl font-semibold tracking-tight">
+            Reconstitution FAQ
+          </h2>
+          <FaqAccordion items={RECON_FAQS} />
         </section>
 
       </main>
