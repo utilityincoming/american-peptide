@@ -18,6 +18,7 @@ import {
   RECON_PRESET_GROUPS,
   type ReconPreset,
 } from '@/lib/reconstitution-presets'
+import { reconstitute, solveWaterForDraw } from '@/lib/reconstitution'
 
 const VIAL_PRESETS_MG = [2, 5, 10, 15, 20, 30, 50]
 const DOSE_PRESETS_MCG = [100, 250, 500, 750, 1000, 1500, 2000]
@@ -129,26 +130,14 @@ export default function CalculatorBetaPage() {
 
     // Forward: user types the water/fill. Reverse: solve water for a target draw.
     const water = reverse
-      ? dose > 0
-        ? (vialAmount * (draw * 0.01)) / dose
-        : 0
+      ? solveWaterForDraw(vialAmount, dose, draw)
       : parsePositive(waterMl)
 
-    const concentrationPerMl = water > 0 ? vialAmount / water : 0
-    const concentrationPerTick = concentrationPerMl / 10
-    const volumePerInjectionMl =
-      concentrationPerMl > 0 ? dose / concentrationPerMl : 0
-    const unitsPerInjection = volumePerInjectionMl * 100
-    const dosesPerVial = dose > 0 ? Math.floor(vialAmount / dose) : 0
     return {
       dose,
       vialAmount,
       water,
-      concentrationPerMl,
-      concentrationPerTick,
-      volumePerInjectionMl,
-      unitsPerInjection,
-      dosesPerVial,
+      ...reconstitute({ vialAmount, dose, waterMl: water }),
     }
   }, [isIu, reverse, vialMg, vialIu, doseValue, waterMl, drawUnits])
 

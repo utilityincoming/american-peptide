@@ -7,6 +7,9 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "enrich": "node scripts/enrich-peptides.mjs",
     "eval": "node scripts/eval-agent.mjs",
     "gsc": "node scripts/gsc-report.mjs"
@@ -35,6 +38,7 @@
     "eslint": "^9",
     "eslint-config-next": "^15.5.25",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.7"
   }
 }
