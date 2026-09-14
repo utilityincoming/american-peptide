@@ -2073,15 +2073,15 @@ const SEED_PEPTIDES: Peptide[] = [
       'Binds pro-myostatin and latent myostatin, blocking the proteolytic activation that releases mature, active myostatin. Lowering active myostatin disinhibits muscle growth via the ActRIIB/Smad pathway.',
     researchAreas: ['Spinal muscular atrophy', 'Muscle preservation', 'GLP-1 muscle preservation', 'Body composition'],
     background: [
-      'Apitegromab’s lead program is in spinal muscular atrophy (SMA), where it is added on top of SMN-targeted therapy to build motor-relevant muscle. The same mechanism underlies its forward-looking metabolic use: in the Phase 2 EMBRAZE study, adding apitegromab to tirzepatide preserved lean mass during weight loss compared with tirzepatide alone, and its precursor-selectivity was framed as a potential tolerability advantage over broader myostatin/activin blockers.',
-      'As a biologic it sits a full step beyond the protein hormones elsewhere in this catalog: it is an antibody (~150 kDa), produced in mammalian cells, designed to deplete a specific target. It is investigational — not an approved drug — and is included here as the antibody arm of the myostatin axis that myostatin and follistatin introduce.',
+      'Apitegromab’s lead program is in spinal muscular atrophy (SMA), where it is added on top of SMN-targeted therapy to build motor-relevant muscle. That application is close to a regulatory answer: after a September 2025 Complete Response Letter tied to a routine inspection at a third-party (Novo Nordisk) manufacturing facility — not to the drug’s efficacy or safety — Scholar Rock resubmitted the application, and the FDA set a decision date of September 30, 2026.',
+      'The same mechanism drives its forward-looking metabolic use. In the Phase 2 EMBRAZE trial (published in Nature Medicine, 2026), tirzepatide alone lost about 30% of its weight as lean mass; adding apitegromab preserved an additional 1.9 kg (~4.2 lb), or 54.9% of the lean mass that would otherwise have been lost, and was generally well tolerated — its precursor-selectivity framed as a potential tolerability advantage over broader myostatin/activin blockers. As a biologic it sits a full step beyond the protein hormones elsewhere in this catalog: an antibody (~150 kDa), produced in mammalian cells, designed to deplete a specific target. It is included here as the antibody arm of the myostatin axis that myostatin and follistatin introduce.',
     ],
     keyResearch: [
       'Precursor-selective — binds pro/latent myostatin rather than mature myostatin or GDF11/activins, the basis of its selectivity claim.',
-      'SMA — the lead clinical program, building muscle on top of SMN-directed therapy.',
-      'GLP-1 muscle preservation — Phase 2 EMBRAZE preserved lean mass when added to tirzepatide.',
+      'GLP-1 muscle preservation — Phase 2 EMBRAZE (Nature Medicine, 2026): preserved 54.9% (~1.9 kg) of the lean mass otherwise lost when added to tirzepatide.',
+      'SMA — the lead clinical program; after a 2025 facility-related Complete Response Letter, resubmitted with an FDA decision date of Sept 30, 2026.',
       'Antibody biologic — a ~150 kDa monoclonal antibody, the far end of the biologic spectrum from synthetic peptides.',
-      'Investigational — not FDA-approved.',
+      'Investigational — not yet FDA-approved.',
     ],
     faqs: [
       {
@@ -2093,8 +2093,12 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'Apitegromab targets pro- and latent (inactive) myostatin before it is activated, rather than the mature protein — a selectivity intended to avoid hitting related factors and improve tolerability.',
       },
       {
+        q: 'How much muscle did apitegromab preserve in the obesity trial?',
+        a: 'In the Phase 2 EMBRAZE trial (Nature Medicine, 2026), participants on tirzepatide alone lost about 30% of their weight as lean mass. Adding apitegromab preserved an additional 1.9 kg (~4.2 lb) — 54.9% of the lean mass that would otherwise have been lost — and was generally well tolerated.',
+      },
+      {
         q: 'Is this medical advice?',
-        a: 'No — this is a research and educational reference. Apitegromab is an investigational antibody, not an approved drug.',
+        a: 'No — this is a research and educational reference. Apitegromab is an investigational antibody; its SMA application is under FDA review (decision date Sept 30, 2026) and it is not approved for any use.',
       },
     ],
     molecularWeight: 150000,
@@ -2119,12 +2123,12 @@ const SEED_PEPTIDES: Peptide[] = [
       'Binds and neutralizes mature myostatin (GDF-8), removing its brake on muscle growth via the ActRIIB/Smad pathway. Used to offset the lean-mass loss that accompanies large GLP-1-driven weight loss.',
     researchAreas: ['Obesity', 'Muscle preservation', 'GLP-1 muscle preservation', 'Body composition'],
     background: [
-      'Trevogrumab is the clearest worked example of the muscle-preservation thesis. In trial data, semaglutide alone reduced both fat (~−15.7%) and lean mass (~−6.5%); adding trevogrumab roughly halved the lean-mass loss (to ~−3.3 to −3.8%) while increasing fat loss (up to ~−19.1%). The triple combination of semaglutide + trevogrumab + garetosmab (an anti-activin-A antibody) produced the most favorable body-composition profile of all — heavy fat loss with minimal lean loss — and is being tested in the COURAGE program expected to read out in late 2026.',
+      'Trevogrumab is the clearest worked example of the muscle-preservation thesis. Interim results from the Phase 2 COURAGE trial — presented at EASD in 2026 — found that roughly 35% of the weight lost on semaglutide alone was lean mass, and that adding trevogrumab preserved an estimated 50–80% of that otherwise-lost lean tissue while shifting more of the loss onto fat. The triple combination of semaglutide + trevogrumab + garetosmab (an anti-activin-A antibody) went furthest, preserving about 80.9% of the lean mass semaglutide alone would have cost — the most favorable body-composition profile of the arms — though the triplet came with a substantially higher rate of tolerability-driven discontinuations, the honest trade-off in the data.',
       'It is a monoclonal antibody (~150 kDa) and an investigational agent. Its inclusion rounds out the myostatin axis with a mature-myostatin neutralizer, complementing apitegromab’s precursor-selective approach.',
     ],
     keyResearch: [
-      'GLP-1 muscle preservation — roughly halved semaglutide-associated lean-mass loss while deepening fat loss in trial data.',
-      'Triple combination — semaglutide + trevogrumab + garetosmab gave the best body-composition profile; COURAGE trial expected to complete late 2026.',
+      'GLP-1 muscle preservation — Phase 2 COURAGE: ~35% of semaglutide weight loss was lean mass; adding trevogrumab preserved an estimated 50–80% of it while deepening fat loss.',
+      'Triple combination — semaglutide + trevogrumab + garetosmab gave the best body-composition profile (~80.9% of otherwise-lost lean mass preserved), but with more tolerability-driven discontinuations.',
       'Mature-myostatin neutralizer — binds active myostatin, complementing precursor-selective antibodies.',
       'Sarcopenia origins — earlier studied for age-related muscle loss before the obesity pivot.',
       'Investigational — not FDA-approved.',
@@ -2136,7 +2140,7 @@ const SEED_PEPTIDES: Peptide[] = [
       },
       {
         q: 'What does adding it to semaglutide do?',
-        a: 'In trial data it roughly halved the lean-mass loss seen with semaglutide alone while increasing fat loss — the core "quality of weight loss" idea.',
+        a: 'In the Phase 2 COURAGE trial, about 35% of semaglutide-alone weight loss was lean mass; adding trevogrumab preserved an estimated 50–80% of that lean tissue while shifting more of the loss onto fat — the core "quality of weight loss" idea.',
       },
       {
         q: 'Is this medical advice?',
@@ -2202,30 +2206,34 @@ const SEED_PEPTIDES: Peptide[] = [
   {
     slug: 'garetosmab',
     name: 'Garetosmab',
-    aliases: ['REGN2477'],
+    aliases: ['REGN2477', 'Pasatru', 'garetosmab-grts'],
     categories: ['growth-hormone', 'metabolic'],
     shortDescription:
-      'An anti-activin-A antibody (Regeneron) — closest to approval of the axis (FOP), and a partner in obesity muscle-preservation combinations.',
+      'An anti-activin-A antibody (Regeneron) — the first drug on the whole activin/myostatin axis to reach FDA approval (as Pasatru, for the rare bone disease FOP), and the activin-A leg of obesity muscle-preservation combinations.',
     description:
-      'Garetosmab is a monoclonal antibody from Regeneron that neutralizes activin A — a TGF-β-superfamily ligand that, like myostatin, signals through the activin type II receptors. Blocking activin A widens the axis beyond myostatin alone, and garetosmab plays two roles in this catalog: it is the most clinically advanced agent here, and it is the third leg of the triple obesity combination.',
+      'Garetosmab is a monoclonal antibody from Regeneron that neutralizes activin A — a TGF-β-superfamily ligand that, like myostatin, signals through the activin type II receptors. Blocking activin A widens the axis beyond myostatin alone, and garetosmab plays two roles in this catalog: in August 2026 it became the first agent on the entire activin/ActRII axis to win FDA approval (as Pasatru, for fibrodysplasia ossificans progressiva), and it is the third leg of the triple obesity combination.',
     mechanism:
       'Binds and neutralizes activin A, blocking its signaling through ActRII. In bone disease this prevents activin-A-driven abnormal ossification; in the metabolic setting, adding activin-A blockade to myostatin blockade and incretin therapy further shifts body composition toward fat loss with preserved muscle.',
     researchAreas: ['Fibrodysplasia ossificans progressiva', 'Obesity', 'Body composition', 'Muscle preservation'],
     background: [
-      'Garetosmab’s lead indication is fibrodysplasia ossificans progressiva (FOP) — an ultra-rare disease in which soft tissue turns to bone, driven by activin A. Its Phase 3 OPTIMA trial was positive (roughly 90–94% reduction in new heterotopic bone lesions), and its FDA Biologics License Application was accepted for Priority Review with a decision target around August 2026 — making it the closest-to-approval molecule on this axis, albeit for a rare bone disease rather than obesity.',
-      'Its metabolic role is as the activin-A arm of the semaglutide + trevogrumab + garetosmab triple combination, which produced the best body-composition profile in early data. As an anti-activin-A antibody (~150 kDa), it illustrates that the "myostatin axis" is really a broader activin/ActRII network with multiple blockable nodes.',
+      'Garetosmab’s lead indication is fibrodysplasia ossificans progressiva (FOP) — an ultra-rare disease in which soft tissue turns to bone, driven by activin A. Its Phase 3 OPTIMA trial was positive (roughly 90–94% reduction in new heterotopic bone lesions), and on August 19, 2026 the FDA approved it as Pasatru (garetosmab-grts) — the first and only approved FOP therapy shown to reduce both new bone lesions and flare-ups, and the first drug of the activin/myostatin axis to reach the market at all.',
+      'That approval is for a rare bone disease, not for obesity; its metabolic use remains investigational. In that setting garetosmab is the activin-A arm of the semaglutide + trevogrumab + garetosmab triple combination, which produced the best body-composition profile in the Phase 2 COURAGE trial — preserving roughly 80% of the lean mass that semaglutide alone would have cost, though the triplet carried more tolerability-driven discontinuations. As an anti-activin-A antibody (~150 kDa), it illustrates that the "myostatin axis" is really a broader activin/ActRII network with multiple blockable nodes.',
     ],
     keyResearch: [
       'FOP — positive Phase 3 OPTIMA (~90–94% reduction in new abnormal bone lesions); the lead indication.',
-      'Regulatory status — BLA accepted for FDA Priority Review (target decision ~Aug 2026), the most advanced agent on this axis.',
+      'FDA-approved — cleared as Pasatru (garetosmab-grts) on Aug 19, 2026 for FOP; the first agent on the activin/myostatin axis to reach approval.',
       'Anti-activin A — widens muscle/fat modulation beyond myostatin by blocking a related ActRII ligand.',
-      'Triple combination — the activin-A leg of semaglutide + trevogrumab + garetosmab for body composition.',
-      'Investigational in obesity — its metabolic use is not approved.',
+      'Triple combination — the activin-A leg of semaglutide + trevogrumab + garetosmab; the COURAGE triplet preserved ~80% of otherwise-lost lean mass.',
+      'Investigational in obesity — the FOP approval does not cover metabolic or muscle-preservation use.',
     ],
     faqs: [
       {
         q: 'What is garetosmab?',
-        a: 'A Regeneron monoclonal antibody that neutralizes activin A. Its lead use is the rare bone disease FOP, and it is also a component of an obesity triple-combination aimed at preserving muscle.',
+        a: 'A Regeneron monoclonal antibody that neutralizes activin A. It is FDA-approved as Pasatru (garetosmab-grts) for the rare bone disease FOP, and it is also studied as a component of an obesity triple-combination aimed at preserving muscle.',
+      },
+      {
+        q: 'Is garetosmab FDA-approved?',
+        a: 'Yes — for fibrodysplasia ossificans progressiva (FOP). The FDA approved it as Pasatru on August 19, 2026, making it the first drug of the activin/myostatin axis to reach the market. Its use in obesity or muscle preservation is investigational and not approved.',
       },
       {
         q: 'Why does an FOP drug appear alongside obesity compounds?',
@@ -2233,11 +2241,11 @@ const SEED_PEPTIDES: Peptide[] = [
       },
       {
         q: 'Is this medical advice?',
-        a: 'No — this is a research and educational reference. Garetosmab’s obesity use is investigational; its FOP application was under FDA review.',
+        a: 'No — this is a research and educational reference. Garetosmab is FDA-approved for FOP only; its obesity and muscle-preservation uses are investigational.',
       },
     ],
     molecularWeight: 150000,
-    fdaApproved: false,
+    fdaApproved: true,
     storage:
       'Stored refrigerated (2–8 °C), protected from light and freezing, not shaken; investigational handling per trial protocol.',
     handling:
@@ -2260,14 +2268,14 @@ const SEED_PEPTIDES: Peptide[] = [
     researchAreas: ['Obesity', 'Type 2 diabetes', 'Muscle wasting', 'Body composition'],
     background: [
       'Bimagrumab’s history maps the whole field. It was developed (as BYM338, Novartis) for muscle-wasting conditions — sporadic inclusion body myositis (where its pivotal trial failed), sarcopenia, and COPD-related wasting — before a notable Phase 2 in type 2 diabetes showed it cut fat mass substantially while adding lean mass. That fat-down/muscle-up profile made it a centerpiece of the obesity muscle-preservation thesis: Versanis advanced it, and Eli Lilly acquired Versanis for roughly $2 billion in 2023 to pair it with tirzepatide.',
-      'The honest update is that the path has not been smooth: a combination Phase 2 with semaglutide showed weight loss with preserved/added lean mass, but Lilly subsequently terminated a mid-stage obesity study pairing bimagrumab with its own incretin therapy. As the receptor-level blocker of the axis, bimagrumab is the broadest-acting and the most-watched — and a reminder that even the most mechanistically compelling agent has to clear real trials. It is investigational for these uses.',
+      'The honest update is that the path has not been smooth. Phase 2 data (2025) were striking: bimagrumab + semaglutide reached ~22.1% weight loss with about 92.8% of it from fat, versus ~15.7% weight loss and 71.8% fat for semaglutide alone, and bimagrumab monotherapy produced ~10.8% weight loss essentially entirely from fat. Yet in September 2025 Lilly terminated its Phase 2b study of bimagrumab + tirzepatide in type 2 diabetes, citing portfolio prioritization rather than a safety signal, while a separate Phase 2 in non-diabetic obesity continued toward a 2026 readout. As the receptor-level blocker of the axis, bimagrumab is the broadest-acting and the most-watched — and a reminder that even the most mechanistically compelling agent has to clear real trials. It is investigational for these uses.',
     ],
     keyResearch: [
       'Receptor-level blockade — targets ActRIIA/B, blocking myostatin and activin signaling together (broadest mechanism on the axis).',
-      'Fat down, muscle up — Phase 2 in type 2 diabetes reduced fat mass while increasing lean mass, an unusual profile.',
-      'GLP-1 combination — bimagrumab + semaglutide preserved/added lean mass alongside weight loss in Phase 2.',
-      'Commercial bet and setback — Lilly acquired Versanis (~$2B, 2023) but later terminated a mid-stage obesity combination study.',
+      'Fat down, muscle up — bimagrumab monotherapy produced ~10.8% weight loss essentially all from fat; combined with semaglutide, ~22.1% weight loss with ~92.8% from fat (vs 71.8% for semaglutide alone).',
+      'Commercial bet and setback — Lilly acquired Versanis (~$2B, 2023) but in Sept 2025 terminated its bimagrumab + tirzepatide Phase 2b in type 2 diabetes; a non-diabetic obesity study continued.',
       'Muscle-wasting origins — earlier developed for inclusion body myositis (pivotal trial failed), sarcopenia, and COPD.',
+      'Investigational — not FDA-approved for obesity or muscle preservation.',
     ],
     faqs: [
       {

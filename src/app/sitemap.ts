@@ -22,6 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/bpc-157', priority: 0.9 },
     // ── GH Axis cluster ───────────────────────────────────
     { path: '/gh-peptides', priority: 0.9 },
+    // ── Muscle preservation / body-composition cluster ────
+    { path: '/muscle-preservation', priority: 0.9 },
     // ── Comparisons index ─────────────────────────────────
     { path: '/compare', priority: 0.8 },
     // ── Longevity cluster ─────────────────────────────────
