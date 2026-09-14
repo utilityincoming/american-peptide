@@ -53,6 +53,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/melanocortin', priority: 0.7 },
     { path: '/developers', priority: 0.7 },
     // ── Company / info ────────────────────────────────────
+    // /about is the E-E-A-T identity page — indexable, so it belongs in the
+    // sitemap and in the footer. /privacy and /about/contact are deliberately
+    // NOT here: compliance pages reachable from every page (footer) but not
+    // ranking targets (see src/lib/internal-links.ts).
+    { path: '/about', priority: 0.4 },
     // /press is discoverable here (sitemap only, no footer link) rather than
     // through many internal links — an informational media kit that doesn't
     // need PageRank funneled to it, just to be crawlable.
