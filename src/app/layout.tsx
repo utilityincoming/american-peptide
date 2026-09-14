@@ -53,6 +53,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
+    // US-English audience — reinforces the site's country/locale targeting.
+    locale: 'en_US',
     siteName: 'AmericanPeptide.com',
     title: 'AmericanPeptide.com — AI-Powered Peptide Research',
     description:
@@ -105,7 +107,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-US" suppressHydrationWarning>
       <head>
         {/* Default chrome color (dark); the script below flips it to match the
             applied theme before paint. */}
