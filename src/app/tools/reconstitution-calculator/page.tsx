@@ -6,6 +6,7 @@ import { Syringe, AlertTriangle, ArrowRight, Link2, Check } from 'lucide-react'
 import OfflineStatus from '@/components/OfflineStatus'
 import FaqAccordion from '@/components/FaqAccordion'
 import { RECON_FAQS } from './faqs'
+import { reconstitute } from '@/lib/reconstitution'
 
 const VIAL_PRESETS = [1, 2, 5, 10, 15, 20, 30, 50]
 const DOSE_PRESETS = [100, 250, 500, 1000, 2000, 2500, 5000]
@@ -81,21 +82,12 @@ export default function ReconstitutionCalculatorPage() {
     const dose = parsePositive(doseMcg)
     const water = parsePositive(waterMl)
     const vialMcg = vial * 1000
-    const concentrationPerMl = water > 0 ? vialMcg / water : 0
-    const concentrationPerTick = concentrationPerMl / 10
-    const volumePerInjectionMl = concentrationPerMl > 0 ? dose / concentrationPerMl : 0
-    const unitsPerInjection = volumePerInjectionMl * 100
-    const dosesPerVial = dose > 0 ? Math.floor(vialMcg / dose) : 0
     return {
       vial,
       dose,
       water,
       vialMcg,
-      concentrationPerMl,
-      concentrationPerTick,
-      volumePerInjectionMl,
-      unitsPerInjection,
-      dosesPerVial,
+      ...reconstitute({ vialAmount: vialMcg, dose, waterMl: water }),
     }
   }, [vialMg, doseMcg, waterMl])
 

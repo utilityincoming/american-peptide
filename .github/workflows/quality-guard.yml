@@ -2,7 +2,8 @@ name: Quality guard
 
 # Prevents the "broken commit silently freezes production" failure: a build
 # that fails typecheck/lint/compile can't be deployed, so catch it in CI before
-# it reaches main. Also crawls the built site for broken internal links (the
+# it reaches main. Also runs the unit test suite (calculators, COA decoder,
+# vendor trust scoring) and crawls the built site for broken internal links (the
 # kind a route refactor introduces). next build runs both ESLint and TypeScript
 # checking, so it is the real deploy gate; the explicit tsc step just fails
 # faster with clearer errors.
@@ -35,7 +36,11 @@ jobs:
 
       # Fast, clear type errors before the full build (build re-checks anyway).
       - name: Typecheck
-        run: node node_modules/typescript/bin/tsc --noEmit
+        run: npm run typecheck
+
+      # Unit tests: reconstitution/blend math, COA decoder, vendor trust scoring.
+      - name: Test
+        run: npm run test
 
       # The deploy gate: next build runs ESLint + type-checking + compile.
       - name: Build
