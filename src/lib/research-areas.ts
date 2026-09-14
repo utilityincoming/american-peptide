@@ -243,6 +243,39 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     ],
   },
   {
+    slug: 'muscle-lean-mass',
+    label: 'Muscle Preservation & Lean Mass',
+    tagline: 'The activin/myostatin axis studied to preserve muscle during GLP-1 weight loss.',
+    metaTitle: 'Muscle Preservation & Lean Mass Peptides — Research Guide | AmericanPeptide.com',
+    metaDescription:
+      'Research reference for the activin/myostatin axis — myostatin, follistatin, and the antibodies (apitegromab, trevogrumab, garetosmab, bimagrumab) studied to preserve lean mass during GLP-1 weight loss.',
+    updated: '2026-09-13',
+    intro: [
+      'The GLP-1 era created a new research question: not just how much weight comes off, but what kind. Across trials, roughly a quarter to 40% of the weight lost on semaglutide and tirzepatide is lean mass rather than fat — a concern about the *quality* of weight loss as these drugs scale to tens of millions of people. This area collects the compounds studied to keep the muscle while the fat goes.',
+      'Almost all of them act on a single control system: the activin/myostatin axis. Myostatin and activin A are TGF-β-superfamily brakes on muscle growth that signal through the activin type II receptors (ActRII) and the Smad2/3 pathway; follistatin is the body’s natural antagonist. The therapeutic strategy is to release that brake — with ligand-neutralizing antibodies (trevogrumab against myostatin, garetosmab against activin A), a precursor-selective antibody (apitegromab), or a receptor blocker (bimagrumab) — usually on top of an incretin drug. The clinical readouts converge: in the Phase 2 COURAGE and EMBRAZE trials, adding these agents preserved roughly half to 80% of the lean mass that a GLP-1 drug alone would have cost. None is yet approved for muscle preservation, though garetosmab (Pasatru) reached FDA approval in August 2026 for the rare bone disease FOP — the first drug of the axis to reach the market.',
+    ],
+    matchers: ['muscle preservation', 'muscle wasting', 'sarcopenia', 'cachexia', 'muscle building'],
+    relatedCategories: ['growth-hormone', 'metabolic'],
+    faqs: [
+      {
+        q: 'Do GLP-1 drugs cause muscle loss?',
+        a: 'Some lean-mass loss accompanies the large weight loss they produce. Trial body-composition substudies put lean tissue at roughly a quarter to 40% of the total weight lost on semaglutide and tirzepatide — broadly similar to the muscle lost in diet-based weight loss, but at a much larger scale of use. This is a research reference, not medical advice.',
+      },
+      {
+        q: 'What peptides or drugs are studied to preserve muscle during weight loss?',
+        a: 'The leading strategy targets the activin/myostatin axis: antibodies against myostatin (trevogrumab, apitegromab) or activin A (garetosmab), and the receptor blocker bimagrumab, usually added on top of a GLP-1 drug. Myostatin and follistatin are the underlying biology; follistatin gene therapy is a separate, earlier-stage approach.',
+      },
+      {
+        q: 'How well do they work?',
+        a: 'In the Phase 2 COURAGE trial, adding trevogrumab to semaglutide preserved an estimated 50–80% of the lean mass otherwise lost, and the trevogrumab + garetosmab triplet preserved about 80.9% (with more tolerability-driven dropouts). In EMBRAZE, apitegromab preserved 54.9% of the lean mass otherwise lost on tirzepatide. These are Phase 2 results, not approvals.',
+      },
+      {
+        q: 'Are any of these approved?',
+        a: 'Not for muscle preservation. Garetosmab (Pasatru) was FDA-approved in August 2026 for the rare bone disease FOP — the first agent of the axis to reach the market — and apitegromab is under FDA review for spinal muscular atrophy. Their obesity and muscle-preservation uses remain investigational. The pathway is also banned in sport.',
+      },
+    ],
+  },
+  {
     slug: 'skin-hair',
     label: 'Skin & Hair',
     tagline: 'Peptides studied for skin aging, pigmentation, and hair follicle biology.',

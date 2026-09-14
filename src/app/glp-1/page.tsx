@@ -704,6 +704,11 @@ export default function GLP1Page() {
               <div className="space-y-2">
                 {[
                   {
+                    href: '/muscle-preservation',
+                    label: 'Muscle Preservation',
+                    sub: 'The muscle question in GLP-1 weight loss',
+                  },
+                  {
                     href: '/research-areas/weight-loss',
                     label: 'Weight Loss & Metabolic Health',
                     sub: 'Research area guide',
