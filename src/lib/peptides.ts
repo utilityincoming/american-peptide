@@ -3068,6 +3068,334 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
   },
   {
+    slug: 'cerluten',
+    name: 'Cerluten',
+    aliases: ['A-1 brain peptide', 'neuronal peptide complex'],
+    categories: ['cognitive', 'bioregulator'],
+    shortDescription:
+      'A natural brain / CNS peptide complex (Cytomax A-1) — the extract-based counterpart to Pinealon, targeting neuronal tissue.',
+    description:
+      'Cerluten is a natural peptide complex extracted from cerebral-cortex and neuronal tissue (peptide complex A-1), part of the Russian Cytomax / Revilab bioregulator line. It is the extract-based neuronal counterpart to the synthetic tripeptide Pinealon (Glu-Asp-Arg), marketed within the Khavinson tradition for central-nervous-system and cognitive support.',
+    mechanism:
+      'Proposed tissue-selective (bioregulator) modulation of neuronal gene expression, in the same lineage as the synthetic brain peptide Pinealon.',
+    researchAreas: ['Cognition', 'Neuroprotection', 'Peptide bioregulators'],
+    background: [
+      'Cerluten is the brain-directed natural bioregulator of the Cytomax / Revilab line, extracted from neuronal tissue. It pairs with Pinealon, the synthetic Glu-Asp-Arg tripeptide already catalogued: Cerluten is the natural neuronal extract, Pinealon the defined synthetic short peptide modeled on the same tissue.',
+      'As a tissue extract it is a standardized polypeptide fraction with no single molecular formula or sequence. Its neurological claims come from the same concentrated research tradition as the rest of the series, with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Neuronal bioregulator — a natural brain peptide extract (complex A-1), the extract counterpart to synthetic Pinealon.',
+      'CNS / cognition focus — marketed for neuronal recovery and cognitive support within Khavinson protocols.',
+      'A tissue extract — a polypeptide fraction with no single formula or sequence.',
+      'Evidence quality — concentrated in one research tradition; preliminary. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Cerluten?',
+        a: 'Cerluten is a natural brain / CNS peptide complex (Cytomax A-1), marketed for neuronal and cognitive support — the extract-based counterpart to the synthetic peptide Pinealon.',
+      },
+      {
+        q: 'How does it relate to Pinealon?',
+        a: 'Cerluten is the natural neuronal extract; Pinealon is the defined synthetic tripeptide (Glu-Asp-Arg) modeled on the same tissue.',
+      },
+      {
+        q: 'Does it have a molecular formula?',
+        a: 'No — it is a tissue extract (a polypeptide fraction), so it has no single sequence or molecular formula.',
+      },
+      {
+        q: 'Is Cerluten approved?',
+        a: 'No — it is a research compound / supplement, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+  },
+  {
+    slug: 'suprefort',
+    name: 'Suprefort',
+    aliases: ['A-7 pancreas peptide', 'pancreatic peptide complex'],
+    categories: ['bioregulator', 'metabolic'],
+    shortDescription:
+      'A natural pancreas peptide complex (Cytomax A-7) — the extract-based counterpart to Pancragen, targeting pancreatic tissue.',
+    description:
+      'Suprefort is a natural peptide complex extracted from pancreatic tissue (peptide complex A-7), part of the Russian Cytomax / Revilab bioregulator line. It is the extract-based pancreatic counterpart to the synthetic peptide Pancragen, marketed within the Khavinson tradition for carbohydrate-metabolism and pancreatic support.',
+    mechanism:
+      'Proposed tissue-selective (bioregulator) modulation of pancreatic gene expression, in the same lineage as the synthetic pancreas peptide Pancragen.',
+    researchAreas: ['Carbohydrate metabolism', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Suprefort is the pancreas-directed natural bioregulator of the Cytomax / Revilab line. It pairs with Pancragen, the synthetic pancreatic short peptide already catalogued: Suprefort is the natural pancreatic extract, Pancragen the defined synthetic peptide modeled on the same tissue.',
+      'As a tissue extract it is a standardized polypeptide fraction with no single molecular formula or sequence. Its metabolic claims — supporting carbohydrate metabolism and pancreatic function — come from the same concentrated research tradition as the rest of the series, with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Pancreatic bioregulator — a natural pancreas peptide extract (complex A-7), the extract counterpart to synthetic Pancragen.',
+      'Metabolic focus — marketed for carbohydrate metabolism and pancreatic support within Khavinson protocols.',
+      'A tissue extract — a polypeptide fraction with no single formula or sequence.',
+      'Evidence quality — concentrated in one research tradition; preliminary. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Suprefort?',
+        a: 'Suprefort is a natural pancreas peptide complex (Cytomax A-7), marketed for metabolic and pancreatic support — the extract-based counterpart to the synthetic peptide Pancragen.',
+      },
+      {
+        q: 'How does it relate to Pancragen?',
+        a: 'Suprefort is the natural pancreatic extract; Pancragen is the defined synthetic peptide modeled on the same tissue.',
+      },
+      {
+        q: 'Does it have a molecular formula?',
+        a: 'No — it is a tissue extract (a polypeptide fraction), so it has no single sequence or molecular formula.',
+      },
+      {
+        q: 'Is Suprefort approved?',
+        a: 'No — it is a research compound / supplement, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+  },
+  {
+    slug: 'taxorest',
+    name: 'Taxorest',
+    aliases: ['A-17 bronchi peptide', 'respiratory peptide complex'],
+    categories: ['immune', 'bioregulator'],
+    shortDescription:
+      'A natural bronchial peptide complex (Cytomax A-17) — the extract-based counterpart to Bronchogen, targeting respiratory tissue.',
+    description:
+      'Taxorest is a natural peptide complex extracted from bronchial tissue (peptide complex A-17), part of the Russian Cytomax / Revilab bioregulator line. It is the extract-based respiratory counterpart to the synthetic tetrapeptide Bronchogen (Ala-Glu-Asp-Pro), marketed within the Khavinson tradition for bronchial and respiratory support.',
+    mechanism:
+      'Proposed tissue-selective (bioregulator) modulation of bronchial-epithelium gene expression, in the same lineage as the synthetic bronchi peptide Bronchogen.',
+    researchAreas: ['Respiratory health', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Taxorest is the bronchi-directed natural bioregulator of the Cytomax / Revilab line. It pairs with Bronchogen, the synthetic Ala-Glu-Asp-Pro tetrapeptide already catalogued: Taxorest is the natural bronchial extract, Bronchogen the defined synthetic short peptide modeled on the same tissue.',
+      'As a tissue extract it is a standardized polypeptide fraction with no single molecular formula or sequence. Its respiratory claims come from the same concentrated research tradition as the rest of the series, with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Respiratory bioregulator — a natural bronchial peptide extract (complex A-17), the extract counterpart to synthetic Bronchogen.',
+      'Bronchial focus — marketed for respiratory-tract support within Khavinson protocols.',
+      'A tissue extract — a polypeptide fraction with no single formula or sequence.',
+      'Evidence quality — concentrated in one research tradition; preliminary. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Taxorest?',
+        a: 'Taxorest is a natural bronchial peptide complex (Cytomax A-17), marketed for respiratory support — the extract-based counterpart to the synthetic peptide Bronchogen.',
+      },
+      {
+        q: 'How does it relate to Bronchogen?',
+        a: 'Taxorest is the natural bronchial extract; Bronchogen is the defined synthetic tetrapeptide (Ala-Glu-Asp-Pro) modeled on the same tissue.',
+      },
+      {
+        q: 'Does it have a molecular formula?',
+        a: 'No — it is a tissue extract (a polypeptide fraction), so it has no single sequence or molecular formula.',
+      },
+      {
+        q: 'Is Taxorest approved?',
+        a: 'No — it is a research compound / supplement, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+  },
+  {
+    slug: 'testoluten',
+    name: 'Testoluten',
+    aliases: ['A-12 testis peptide', 'testicular peptide complex'],
+    categories: ['reproductive', 'bioregulator'],
+    shortDescription:
+      'A natural testis peptide complex (Cytomax A-12) — the extract-based counterpart to Testagen, targeting testicular tissue.',
+    description:
+      'Testoluten is a natural peptide complex extracted from testicular tissue (peptide complex A-12), part of the Russian Cytomax / Revilab bioregulator line. It is the extract-based testicular counterpart to the synthetic peptide Testagen, marketed within the Khavinson tradition for male reproductive support.',
+    mechanism:
+      'Proposed tissue-selective (bioregulator) modulation of testicular gene expression, in the same lineage as the synthetic testis peptide Testagen.',
+    researchAreas: ['Male reproductive health', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Testoluten is the testis-directed natural bioregulator of the Cytomax / Revilab line. It pairs with Testagen, the synthetic testicular short peptide already catalogued: Testoluten is the natural testicular extract, Testagen the defined synthetic peptide modeled on the same tissue.',
+      'As a tissue extract it is a standardized polypeptide fraction with no single molecular formula or sequence. Its reproductive claims come from the same concentrated research tradition as the rest of the series, with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Testicular bioregulator — a natural testis peptide extract (complex A-12), the extract counterpart to synthetic Testagen.',
+      'Male-reproductive focus — marketed for testicular-function support within Khavinson protocols.',
+      'A tissue extract — a polypeptide fraction with no single formula or sequence.',
+      'Evidence quality — concentrated in one research tradition; preliminary. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Testoluten?',
+        a: 'Testoluten is a natural testis peptide complex (Cytomax A-12), marketed for male reproductive support — the extract-based counterpart to the synthetic peptide Testagen.',
+      },
+      {
+        q: 'How does it relate to Testagen?',
+        a: 'Testoluten is the natural testicular extract; Testagen is the defined synthetic peptide modeled on the same tissue.',
+      },
+      {
+        q: 'Does it have a molecular formula?',
+        a: 'No — it is a tissue extract (a polypeptide fraction), so it has no single sequence or molecular formula.',
+      },
+      {
+        q: 'Is Testoluten approved?',
+        a: 'No — it is a research compound / supplement, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+  },
+  {
+    slug: 'sigumir',
+    name: 'Sigumir',
+    aliases: ['A-4 cartilage peptide', 'cartilage / bone peptide complex'],
+    categories: ['bioregulator', 'healing-repair'],
+    shortDescription:
+      'A natural cartilage and bone peptide complex (Cytomax A-4) from the Khavinson bioregulator line, marketed for joint and connective-tissue support.',
+    description:
+      'Sigumir is a natural peptide complex extracted from cartilage and bone tissue (peptide complex A-4), part of the Russian Cytomax / Revilab bioregulator line. It is marketed within the Khavinson tradition for joint, cartilage, and connective-tissue support, with no defined synthetic short-peptide counterpart in the catalog.',
+    mechanism:
+      'Proposed tissue-selective (bioregulator) modulation of chondrocyte / osteoblast gene expression, in the Cytomax extract tradition.',
+    researchAreas: ['Joint & cartilage health', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Sigumir is the cartilage- and bone-directed natural bioregulator of the Cytomax / Revilab line, extracted from connective tissue. Unlike the thymic, vascular, or cardiac entries, it has no defined synthetic Cytogen counterpart in this catalog — the extract is the only form marketed within the tradition.',
+      'As a tissue extract it is a standardized polypeptide fraction with no single molecular formula or sequence. Its joint and connective-tissue claims come from the same concentrated research tradition as the rest of the series, with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Connective-tissue bioregulator — a natural cartilage and bone peptide extract (complex A-4).',
+      'Joint / cartilage focus — marketed for chondrocyte and osteoblast support within Khavinson protocols.',
+      'A tissue extract — a polypeptide fraction with no single formula or sequence.',
+      'Evidence quality — concentrated in one research tradition; preliminary. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Sigumir?',
+        a: 'Sigumir is a natural cartilage and bone peptide complex (Cytomax A-4), marketed for joint and connective-tissue support within the Khavinson bioregulator tradition.',
+      },
+      {
+        q: 'Does it have a synthetic counterpart?',
+        a: 'No — unlike the thymic, vascular, or cardiac Cytomaxes, Sigumir has no defined synthetic Cytogen peptide in this catalog; the tissue extract is the only marketed form.',
+      },
+      {
+        q: 'Does it have a molecular formula?',
+        a: 'No — it is a tissue extract (a polypeptide fraction), so it has no single sequence or molecular formula.',
+      },
+      {
+        q: 'Is Sigumir approved?',
+        a: 'No — it is a research compound / supplement, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+  },
+  {
+    slug: 'gotratix',
+    name: 'Gotratix',
+    aliases: ['A-11 muscle peptide', 'skeletal-muscle peptide complex'],
+    categories: ['bioregulator', 'healing-repair'],
+    shortDescription:
+      'A natural skeletal-muscle peptide complex (Cytomax A-11) from the Khavinson bioregulator line, marketed for muscle-tissue support.',
+    description:
+      'Gotratix is a natural peptide complex extracted from skeletal-muscle tissue (peptide complex A-11), part of the Russian Cytomax / Revilab bioregulator line. It is marketed within the Khavinson tradition for muscle-tissue recovery and support, with no defined synthetic short-peptide counterpart in the catalog.',
+    mechanism:
+      'Proposed tissue-selective (bioregulator) modulation of myocyte gene expression, in the Cytomax extract tradition.',
+    researchAreas: ['Muscle tissue support', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Gotratix is the skeletal-muscle-directed natural bioregulator of the Cytomax / Revilab line, extracted from muscle tissue. It has no defined synthetic Cytogen counterpart in this catalog — the extract is the only form marketed within the tradition. It sits conceptually alongside the muscle-preservation axis, though it is a bioregulator preparation rather than a myostatin- or activin-targeted agent.',
+      'As a tissue extract it is a standardized polypeptide fraction with no single molecular formula or sequence. Its muscle claims come from the same concentrated research tradition as the rest of the series, with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Muscle bioregulator — a natural skeletal-muscle peptide extract (complex A-11).',
+      'Myocyte focus — marketed for muscle-tissue recovery and support within Khavinson protocols.',
+      'A tissue extract — a polypeptide fraction with no single formula or sequence.',
+      'Evidence quality — concentrated in one research tradition; preliminary. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Gotratix?',
+        a: 'Gotratix is a natural skeletal-muscle peptide complex (Cytomax A-11), marketed for muscle-tissue support within the Khavinson bioregulator tradition.',
+      },
+      {
+        q: 'Is it related to the myostatin / activin muscle peptides?',
+        a: 'Not directly — Gotratix is a bioregulator tissue extract, a different mechanism class from the myostatin- and activin-targeted agents on the muscle-preservation axis.',
+      },
+      {
+        q: 'Does it have a molecular formula?',
+        a: 'No — it is a tissue extract (a polypeptide fraction), so it has no single sequence or molecular formula.',
+      },
+      {
+        q: 'Is Gotratix approved?',
+        a: 'No — it is a research compound / supplement, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+  },
+  {
+    slug: 'svetinorm',
+    name: 'Svetinorm',
+    aliases: ['A-2 liver peptide', 'hepatic peptide complex'],
+    categories: ['bioregulator', 'longevity'],
+    shortDescription:
+      'A natural liver peptide complex (Cytomax A-2) from the Khavinson bioregulator line, marketed for hepatic support.',
+    description:
+      'Svetinorm is a natural peptide complex extracted from liver tissue (peptide complex A-2), part of the Russian Cytomax / Revilab bioregulator line. It is marketed within the Khavinson tradition for hepatic and detoxification support, with no defined synthetic short-peptide counterpart in the catalog.',
+    mechanism:
+      'Proposed tissue-selective (bioregulator) modulation of hepatocyte gene expression, in the Cytomax extract tradition.',
+    researchAreas: ['Hepatic health', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Svetinorm is the liver-directed natural bioregulator of the Cytomax / Revilab line, extracted from hepatic tissue. It has no defined synthetic Cytogen counterpart in this catalog — the extract is the only form marketed within the tradition.',
+      'As a tissue extract it is a standardized polypeptide fraction with no single molecular formula or sequence. Its hepatic claims come from the same concentrated research tradition as the rest of the series, with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Hepatic bioregulator — a natural liver peptide extract (complex A-2).',
+      'Hepatocyte focus — marketed for liver-function and detoxification support within Khavinson protocols.',
+      'A tissue extract — a polypeptide fraction with no single formula or sequence.',
+      'Evidence quality — concentrated in one research tradition; preliminary. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Svetinorm?',
+        a: 'Svetinorm is a natural liver peptide complex (Cytomax A-2), marketed for hepatic support within the Khavinson bioregulator tradition.',
+      },
+      {
+        q: 'Does it have a synthetic counterpart?',
+        a: 'No — Svetinorm has no defined synthetic Cytogen peptide in this catalog; the tissue extract is the only marketed form.',
+      },
+      {
+        q: 'Does it have a molecular formula?',
+        a: 'No — it is a tissue extract (a polypeptide fraction), so it has no single sequence or molecular formula.',
+      },
+      {
+        q: 'Is Svetinorm approved?',
+        a: 'No — it is a research compound / supplement, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+  },
+  {
+    slug: 'visoluten',
+    name: 'Visoluten',
+    aliases: ['A-5 retina peptide', 'retinal peptide complex'],
+    categories: ['bioregulator', 'longevity'],
+    shortDescription:
+      'A natural retina peptide complex (Cytomax A-5) from the Khavinson bioregulator line, marketed for eye and retinal support.',
+    description:
+      'Visoluten is a natural peptide complex extracted from retinal tissue (peptide complex A-5), part of the Russian Cytomax / Revilab bioregulator line. It is marketed within the Khavinson tradition for eye and retinal support, with no defined synthetic short-peptide counterpart in the catalog.',
+    mechanism:
+      'Proposed tissue-selective (bioregulator) modulation of retinal-cell gene expression, in the Cytomax extract tradition.',
+    researchAreas: ['Eye & retinal health', 'Aging biology', 'Peptide bioregulators'],
+    background: [
+      'Visoluten is the retina-directed natural bioregulator of the Cytomax / Revilab line, extracted from retinal tissue. It has no defined synthetic Cytogen counterpart in this catalog — the extract is the only form marketed within the tradition.',
+      'As a tissue extract it is a standardized polypeptide fraction with no single molecular formula or sequence. Its retinal claims come from the same concentrated research tradition as the rest of the series, with limited independent replication, and it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Retinal bioregulator — a natural retina peptide extract (complex A-5).',
+      'Ophthalmic focus — marketed for retinal-cell and eye support within Khavinson protocols.',
+      'A tissue extract — a polypeptide fraction with no single formula or sequence.',
+      'Evidence quality — concentrated in one research tradition; preliminary. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Visoluten?',
+        a: 'Visoluten is a natural retina peptide complex (Cytomax A-5), marketed for eye and retinal support within the Khavinson bioregulator tradition.',
+      },
+      {
+        q: 'Does it have a synthetic counterpart?',
+        a: 'No — Visoluten has no defined synthetic Cytogen peptide in this catalog; the tissue extract is the only marketed form.',
+      },
+      {
+        q: 'Does it have a molecular formula?',
+        a: 'No — it is a tissue extract (a polypeptide fraction), so it has no single sequence or molecular formula.',
+      },
+      {
+        q: 'Is Visoluten approved?',
+        a: 'No — it is a research compound / supplement, not FDA-approved. This page is a research and educational reference.',
+      },
+    ],
+  },
+  {
     slug: 'semax',
     name: 'Semax',
     categories: ['cognitive'],
