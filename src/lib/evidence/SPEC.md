@@ -1,23 +1,24 @@
 # The Validation Tier Schema — "the Standard"
 
 **Version 0.1.1** · Status: draft (proposed) · Supersedes 0.1.0
-Canonical spec for the claim-level evidence tiering shared by **AmericanPeptide.com**
-and **peptidehormone.com**.
+Canonical spec for the claim-level evidence tiering on **AmericanPeptide.com** —
+"the Standard".
 
 This is the document the `§`-numbered references in `src/lib/evidence/types.ts`
-(both repos) point at. The code is the source of truth for behaviour; this doc is
-the source of truth for *intent*. Where they disagree, the code has a bug or this
-doc is stale — file it either way.
+point at. The code is the source of truth for behaviour; this doc is the source of
+truth for *intent*. Where they disagree, the code has a bug or this doc is stale —
+file it either way.
 
 ---
 
 ## §0. Why this exists
 
-Both properties publish numbers — a molecular weight, a rodent half-life, a
+AmericanPeptide publishes numbers — a molecular weight, a rodent half-life, a
 vendor's stated purity, a dose people report using. Left bare, those numbers all
 *look* equally authoritative. They are not. The Standard attaches, to **every
 factual claim on the page**, a record of where the number came from and what it
-does not license. Nothing ships as a bare number.
+does not license. Nothing ships as a bare number. This is the trust layer the
+site's positioning rests on — a research/authority asset, not a store.
 
 The unit of tiering is the **claim**, never the compound. A molecule is never
 "tier 3." Its molecular weight is `reference`; its rodent half-life is
@@ -153,16 +154,16 @@ number sits above a weaker one even when the weaker number is larger. Where a
 finer within-tier order is needed (e.g. a vendor `trustScore`), that score is the
 **secondary** sort key, never a competing top-level ranking.
 
-Render hue by `TIER_HUE` (§2); the hue is *data* shared across both properties,
-while the Tailwind classes that paint each hue are property-specific
-(`components/evidence/tierStyles.ts`).
+Render hue by `TIER_HUE` (§2); the hue is *data*, while the Tailwind classes that
+paint each hue live in `components/evidence/tierStyles.ts` (where the "teal" hue
+maps to the site's `--accent` and "amber" to the theme-aware `--accent-amber`).
 
 ---
 
 ## §7. Bridges — mapping existing trust surfaces onto claim tiers
 
 The Standard does not invent parallel scores; it **re-expresses** the trust
-signals each property already computes as claim tiers.
+signals the site already computes as claim tiers.
 
 **Sourcing bridge** (`from-vendors.ts`). A vendor's transparency band
 (`lib/vendors.ts` → `documented | claimed | unvetted`) is a *vendor-level* trust
@@ -243,14 +244,16 @@ a thing to be ashamed of.
 ## Adoption
 
 The v0.1.1 behaviours (§4 two-axis windows, §8 `scope` field + guard) are
-**already implemented** in `src/lib/evidence/`. Ratifying this doc means bumping
-the stamped constant and mirroring it to peptidehormone:
+**already implemented** in `src/lib/evidence/`. Ratifying this doc means one
+change:
 
-- `src/lib/evidence/types.ts` — `SCHEMA_VERSION = '0.1.1'` (this repo).
-- `peptidehormone/src/lib/evidence/types.ts` — same bump, and port the §4/§8
-  changes if not yet mirrored (keep the two schemas byte-identical except for
-  property-specific comments and `tierStyles.ts`).
+- `src/lib/evidence/types.ts` — bump `SCHEMA_VERSION` from `'0.1.0'` to `'0.1.1'`.
 
 Because `scope` is optional and unset behaves as before, no existing claim data
 needs migration. The bump only changes the `schema_version` stamped on **new**
 provenance records.
+
+> Portability note: this schema originated as a shared standard and is
+> structurally identical to the evidence lib on a sibling property. That lineage
+> is history, not a coupling — this spec governs AmericanPeptide alone, and AP is
+> free to evolve it independently.
