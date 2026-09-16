@@ -347,6 +347,54 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     notes:
       'Chelohart is a natural cardiac-muscle peptide extract (complex A-14), a fractionated polypeptide preparation rather than a synthesized peptide. Consistency and characterization of the extract, not coupling chemistry, determine its quality.',
   },
+  cerluten: {
+    difficulty: 'moderate',
+    features: ['Tissue extract'],
+    notes:
+      'Cerluten is a natural brain / neuronal peptide extract (complex A-1), a fractionated polypeptide preparation rather than a synthesized peptide. As with the other Cytomax extracts, consistency and characterization of the fraction are the quality challenge.',
+  },
+  suprefort: {
+    difficulty: 'moderate',
+    features: ['Tissue extract'],
+    notes:
+      'Suprefort is a natural pancreas peptide extract (complex A-7), a fractionated polypeptide preparation rather than a synthesized peptide. Batch-to-batch consistency and characterization, not coupling chemistry, are the quality challenge.',
+  },
+  taxorest: {
+    difficulty: 'moderate',
+    features: ['Tissue extract'],
+    notes:
+      'Taxorest is a natural bronchial peptide extract (complex A-17), a fractionated polypeptide preparation rather than a synthesized peptide. Consistency and characterization of the extract determine its quality.',
+  },
+  testoluten: {
+    difficulty: 'moderate',
+    features: ['Tissue extract'],
+    notes:
+      'Testoluten is a natural testis peptide extract (complex A-12), a fractionated polypeptide preparation rather than a synthesized peptide. Consistency and characterization of the fraction are the quality challenge.',
+  },
+  sigumir: {
+    difficulty: 'moderate',
+    features: ['Tissue extract'],
+    notes:
+      'Sigumir is a natural cartilage and bone peptide extract (complex A-4), a fractionated polypeptide preparation rather than a synthesized peptide. Consistency and characterization of the extract, not coupling chemistry, determine its quality.',
+  },
+  gotratix: {
+    difficulty: 'moderate',
+    features: ['Tissue extract'],
+    notes:
+      'Gotratix is a natural skeletal-muscle peptide extract (complex A-11), a fractionated polypeptide preparation rather than a synthesized peptide. Consistency and characterization of the fraction are the quality challenge.',
+  },
+  svetinorm: {
+    difficulty: 'moderate',
+    features: ['Tissue extract'],
+    notes:
+      'Svetinorm is a natural liver peptide extract (complex A-2), a fractionated polypeptide preparation rather than a synthesized peptide. Consistency and characterization of the extract determine its quality.',
+  },
+  visoluten: {
+    difficulty: 'moderate',
+    features: ['Tissue extract'],
+    notes:
+      'Visoluten is a natural retina peptide extract (complex A-5), a fractionated polypeptide preparation rather than a synthesized peptide. Consistency and characterization of the fraction are the quality challenge.',
+  },
 
   // ── Cognitive ──
   semax: {
