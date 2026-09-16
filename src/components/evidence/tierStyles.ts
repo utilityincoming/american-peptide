@@ -1,9 +1,8 @@
 import type { TierHue } from '@/lib/evidence/types'
 
-// Presentational only: maps the shared §6 hue grouping to AmericanPeptide's
-// Tailwind v4 tokens. Theme-aware — ink and accent flip between light and dark,
-// so the badges stay legible in both. Kept out of lib/evidence so the schema
-// stays styling-free and portable to peptidehormone (whose accent is periwinkle).
+// Presentational only: maps the §6 hue grouping to AmericanPeptide's Tailwind v4
+// tokens. Theme-aware — ink and accent flip between light and dark, so the badges
+// stay legible in both. Kept out of lib/evidence so the schema stays styling-free.
 export interface HueClasses {
   text: string
   fill: string

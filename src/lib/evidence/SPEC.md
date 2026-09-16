@@ -253,7 +253,6 @@ Because `scope` is optional and unset behaves as before, no existing claim data
 needs migration. The bump only changes the `schema_version` stamped on **new**
 provenance records.
 
-> Portability note: this schema originated as a shared standard and is
-> structurally identical to the evidence lib on a sibling property. That lineage
-> is history, not a coupling — this spec governs AmericanPeptide alone, and AP is
-> free to evolve it independently.
+> This spec governs AmericanPeptide alone. The schema is deliberately
+> styling-free and self-contained, so it can be evolved here without reference to
+> anything outside this repo.
