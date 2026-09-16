@@ -1,13 +1,9 @@
-// lib/evidence — the Validation Tier Schema, v0.1.0
+// lib/evidence — the Validation Tier Schema ("the Standard"), v0.1.0
 // ---------------------------------------------------------------------------
-// A shared evidence-tiering standard for AmericanPeptide.com and
-// peptidehormone.com. Every factual claim rendered on either property carries a
-// tier, a scope note, and a provenance record. Nothing ships as a bare number.
-//
-// This module MIRRORS peptidehormone's src/lib/evidence/types.ts — same schema,
-// same weights, same helpers. Keep the two in sync. Only the comments below and
-// the presentational token mapping in components/evidence/tierStyles.ts are
-// property-specific.
+// AmericanPeptide.com's claim-level evidence-tiering standard. Every factual
+// claim rendered on the site carries a tier, a scope note, and a provenance
+// record. Nothing ships as a bare number. The written spec is ./SPEC.md, which
+// this file's `§`-numbered references point at.
 //
 // CORE PRINCIPLE — tier the CLAIM, not the compound. A molecule is never
 // "tier 3": its molecular weight is `reference`, its rodent half-life is
@@ -143,10 +139,10 @@ export function scopeNoteRequired(tier: Tier): boolean {
 }
 
 // ── Palette grouping (§6) ────────────────────────────────────────────────────
-// Hue is DATA (shared across both properties); the Tailwind classes that render
-// each hue live in components/evidence/tierStyles.ts. Never red — a low tier is a
-// disclosure, not an error. On AmericanPeptide the "teal" hue maps to the brand
-// --accent; "amber" to a theme-aware --accent-amber added for this scale.
+// Hue is DATA; the Tailwind classes that render each hue live in
+// components/evidence/tierStyles.ts. Never red — a low tier is a disclosure, not
+// an error. The "teal" hue maps to the brand --accent; "amber" to a theme-aware
+// --accent-amber added for this scale.
 export type TierHue = 'teal' | 'slate' | 'amber'
 export const TIER_HUE: Record<Tier, TierHue> = {
   reference: 'teal',
