@@ -403,6 +403,39 @@ export const VENDORS: Vendor[] = [
     notes:
       'Checkout requires an account; returns are accepted within 7 days with photos.',
   },
+  {
+    id: 'paramount-peptides',
+    name: 'Paramount Peptides',
+    url: 'https://paramountpeptides.com',
+    blurb:
+      'US research-peptide supplier — "Real Science. Real Standards." — with independent third-party HPLC testing on every batch, ≥99% purity, and COAs searchable by product or batch number.',
+    // Broad research-peptide catalog (GLP-forward: GLP-1/2/3 analogues, blends,
+    // oral tablets, reconstitution solutions, the regulator series). 'all' is the
+    // bounded shorthand — see the note below the data block; peptide-hormone and
+    // non-peptide routes are excluded automatically.
+    peptides: 'all',
+    shipsTo: ['us'],
+    trust: {
+      // Set only from Paramount's own published claims (homepage + searchable
+      // test-results / guarantee copy). Not independently confirmed.
+      coaOnFile: true, // COAs "searchable by product or batch number"
+      thirdPartyTested: true, // "Every batch undergoes independent third-party testing" (lab unnamed — see notes)
+      perBatchTesting: true, // per-batch, COAs keyed to the batch number
+      purityPct: 99, // "≥99% purity by HPLC"
+      reshipPolicy: false, // no reship/lost-package guarantee stated
+      refundPolicy: true, // guarantee: a failing independent HPLC refunds the order + shipping (and the test fee)
+    },
+    affiliate: {
+      trackedPath: '/go/paramount-peptides',
+      url: 'https://paramountpeptides.com/?ref=AMERICANPEPTIDE',
+      // Same string works as the referral param and a checkout code, so publish
+      // it: a reader still carries it in if the referral doesn't stick.
+      code: 'AMERICANPEPTIDE',
+      active: true,
+    },
+    notes:
+      'Ships FedEx 2Day to the US and Puerto Rico only. Independent testing is stated but the lab is not named on the public pages; verify the COA for your batch number before use.',
+  },
 ]
 
 // ── What "all" actually means ─────────────────────────────────────────────────
