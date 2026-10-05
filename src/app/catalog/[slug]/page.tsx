@@ -29,7 +29,8 @@ import { getAreasForPeptide } from '@/lib/research-areas'
 import { IS_APP_BUILD } from '@/lib/platform'
 import { getPubchemVerification } from '@/lib/verification'
 import { molecularWeightClaim, molecularFormulaClaim } from '@/lib/evidence'
-import { TierBadge } from '@/components/evidence'
+import { catalogClaims, isLoadBearing, reconPresetFor, reconPresetClaims } from '@/lib/evidence/from-catalog'
+import { TierBadge, EvidenceFloor } from '@/components/evidence'
 import { getLatestResearch } from '@/lib/freshness'
 import AgentPrompt from '@/components/AgentPrompt'
 import PeptideStory from '@/components/PeptideStory'
@@ -312,6 +313,15 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
           <p className="max-w-3xl text-base leading-relaxed text-ink/65 md:text-lg">
             {peptide.shortDescription}
           </p>
+          {/* Page-level evidence rollup (the Standard §3): the LOWEST tier among
+              the monograph's load-bearing figures, so a reader calibrates before
+              scrolling. Identity claims are excluded; a page with no empirical
+              figure shows no floor rather than borrowing one from its chemistry. */}
+          <EvidenceFloor
+            claims={catalogClaims(peptide)}
+            loadBearing={isLoadBearing}
+            className="mt-5"
+          />
           <LastUpdated
             date={latest.fetchedAt}
             label="Research refreshed"
@@ -692,6 +702,68 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 )}
               </dl>
             </div>
+
+            {/* Reference figures — the calculator's preset for this compound,
+                each number carrying its claim tier. These are curated conventions
+                (community tier, §9), stamped with the presets' curation date. */}
+            {(() => {
+              const preset = reconPresetFor(peptide.slug)
+              if (!preset) return null
+              const [amount, vial, water] = reconPresetClaims(preset)
+              const href = `/tools/reconstitution-calculator?vial=${preset.vialMg}&dose=${preset.doseMcg}&water=${preset.waterMl}`
+              const fmtAmount = (mcg: number) =>
+                mcg >= 1000 ? `${(mcg / 1000).toLocaleString()} mg` : `${mcg.toLocaleString()} mcg`
+              return (
+                <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
+                  <h3 className="mb-1 text-xs font-semibold uppercase tracking-wider text-ink/40">
+                    Reference figures
+                  </h3>
+                  <p className="mb-4 text-[11px] leading-relaxed text-ink/40">
+                    Calculation reference points, not dosing recommendations. Tiered
+                    by provenance under the Validation Tier Schema.
+                  </p>
+                  <dl className="space-y-3 text-sm">
+                    <Row
+                      label="Reference amount"
+                      value={
+                        <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
+                          {fmtAmount(amount.value)}
+                          <TierBadge claim={amount} showDate />
+                        </span>
+                      }
+                    />
+                    <Row
+                      label="Common vial strength"
+                      value={
+                        <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
+                          {`${vial.value} mg`}
+                          <TierBadge claim={vial} showDate />
+                        </span>
+                      }
+                    />
+                    <Row
+                      label="Typical reconstitution volume"
+                      value={
+                        <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
+                          {`${water.value} mL`}
+                          <TierBadge claim={water} showDate />
+                        </span>
+                      }
+                    />
+                  </dl>
+                  {preset.note && (
+                    <p className="mt-3 text-[11px] leading-relaxed text-ink/45">{preset.note}</p>
+                  )}
+                  <Link
+                    href={href}
+                    className="group mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-accent"
+                  >
+                    Open in the reconstitution calculator
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                </div>
+              )
+            })()}
 
             {/* Verified-provenance panel — shown only for entries confirmed
                 against a PubChem record by the fact-QA pass. */}

@@ -34,6 +34,14 @@ export interface ReconPreset {
   note?: string
 }
 
+/**
+ * Date of the last curation pass over RECON_PRESETS. Evidence-tier badges on the
+ * catalog stamp preset-derived figures with this date (Validation Tier Schema
+ * §3 requires a retrieval date on every claim). Bump it whenever the figures
+ * below are reviewed or changed.
+ */
+export const RECON_PRESETS_CURATED_AT = '2026-08-17'
+
 export const RECON_PRESETS: ReconPreset[] = [
   // ── Metabolic ─────────────────────────────────────────────
   { slug: 'semaglutide',  name: 'Semaglutide',  group: 'Metabolic', vialMg: 5,  waterMl: 2, doseMcg: 250 },
