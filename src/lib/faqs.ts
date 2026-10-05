@@ -35,7 +35,7 @@ export const STATIC_FAQS: Faq[] = [
     id: 'what-is',
     question: 'What is AmericanPeptide.com?',
     answer:
-      'AmericanPeptide.com is an AI-assisted research platform and open reference for peptide science. It pairs a citation-backed research assistant — the Peptide Agent — with an open catalog of research peptides, hands-on calculators, and synthesis guides, all grounded in public datasets like PubChem, UniProt, PubMed, and ClinicalTrials.gov.',
+      'AmericanPeptide.com is an AI-assisted research platform and open reference for peptide science. It pairs a citation-backed research assistant — the Peptide Agent — with an open catalog of research peptides, hands-on calculators, and synthesis guides, all grounded in four public datasets, and only these four: PubChem, PubMed, ClinicalTrials.gov, and UniProt.',
     cta: { label: 'More about us', href: '/about' },
   },
   {
