@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { Search, ExternalLink, Activity, Users } from 'lucide-react'
+import { Skeleton } from '@/components/Skeleton'
 
 interface Trial {
   nctId: string
@@ -146,7 +147,21 @@ export default function TrialsPage() {
 
         {/* ── States ── */}
         {status === 'loading' && trials.length === 0 && (
-          <div className="py-16 text-center text-sm text-ink/30">Loading trials…</div>
+          <div role="status" aria-label="Loading trials…" className="space-y-3">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div
+                key={i}
+                className="rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-5"
+              >
+                <div className="flex items-center gap-2">
+                  <Skeleton className="h-5 w-16" />
+                  <Skeleton className="h-5 w-24" />
+                </div>
+                <Skeleton className="mt-3 h-4 w-3/4" />
+                <Skeleton className="mt-2 h-3 w-1/2" />
+              </div>
+            ))}
+          </div>
         )}
 
         {status === 'error' && (

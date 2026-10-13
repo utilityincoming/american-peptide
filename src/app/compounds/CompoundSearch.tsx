@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Search, ExternalLink } from 'lucide-react'
+import { Skeleton, SkeletonMolecule } from '@/components/Skeleton'
 
 interface Compound {
   cid: number
@@ -90,6 +91,18 @@ export default function CompoundSearch() {
       </div>
 
       {/* ── States ── */}
+      {status === 'loading' && (
+        <div
+          role="status"
+          aria-label="Searching PubChem…"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {Array.from({ length: 6 }).map((_, i) => (
+            <CompoundCardSkeleton key={i} />
+          ))}
+        </div>
+      )}
+
       {status === 'idle' && (
         <div className="py-16 text-center text-sm text-ink/30">
           Type a compound name to search PubChem&apos;s 100M+ chemical records.
@@ -119,6 +132,23 @@ export default function CompoundSearch() {
           ))}
         </div>
       )}
+    </div>
+  )
+}
+
+// Mirrors CompoundCard's shape so results swap in without layout shift.
+function CompoundCardSkeleton() {
+  return (
+    <div className="flex flex-col overflow-hidden rounded-2xl border border-ink/[0.06] bg-ink/[0.025]">
+      <div className="flex h-48 items-center justify-center border-b border-ink/[0.06] bg-ink/[0.03] p-4">
+        <SkeletonMolecule className="h-12 w-12" />
+      </div>
+      <div className="flex flex-col gap-2.5 p-4">
+        <Skeleton className="h-4 w-2/3" />
+        <Skeleton className="h-3 w-2/5" />
+        <Skeleton className="mt-1 h-3 w-5/6" />
+        <Skeleton className="h-3 w-1/2" />
+      </div>
     </div>
   )
 }
