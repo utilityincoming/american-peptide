@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Menu, Sparkles, X } from 'lucide-react'
 import CommandPalette from './CommandPalette'
 import ThemeToggle from './ThemeToggle'
+import { BrandMark } from './BrandMark'
 
 // The Peptide Agent leads as a prominent, standalone CTA. The rest are plain
 // top-level categories; their deep links surface as the in-page SectionNav.
@@ -45,23 +46,7 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-ink/[0.06] bg-surface/85 backdrop-blur supports-[backdrop-filter]:bg-surface/70">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
-        <Link href="/" className="flex items-center gap-2.5 text-ink transition-opacity hover:opacity-90">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              className="h-4 w-4 text-[#0B1220]"
-              aria-hidden
-            >
-              <path d="M4 5c4.5 0 7.5 4 7.5 7S15.5 19 20 19" />
-              <path d="M20 5c-4.5 0-7.5 4-7.5 7S8.5 19 4 19" />
-            </svg>
-          </div>
-          <span className="text-[14px] font-semibold tracking-tight">AmericanPeptide</span>
-        </Link>
+        <BrandMark />
 
         <div className="flex items-center gap-2">
           <nav className="hidden items-center gap-1.5 md:flex">
