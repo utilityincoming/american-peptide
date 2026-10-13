@@ -106,6 +106,10 @@ const steps = [
   },
 ]
 
+// Section vertical rhythm: content sections use `pb-24` as the standard beat.
+// Exceptions are deliberate — the hero leads with `pt-12 md:pt-20 pb-20`, the
+// paired promo cards sit tight (`pb-12` then `pb-24`), and the last section
+// before the footer takes one larger `pb-32` break. Keep new sections on `pb-24`.
 export default function HomePage() {
   return (
     <div className="home relative min-h-screen overflow-hidden bg-surface text-ink">
@@ -442,7 +446,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Feature Cards ── */}
-      <section id="features" className="relative z-10 mx-auto max-w-6xl px-6 pb-32 md:px-10">
+      <section id="features" className="relative z-10 mx-auto max-w-6xl px-6 pb-24 md:px-10">
         <div className="mb-10 text-center">
           <h2 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
             Research Modules
@@ -519,7 +523,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Sourcing Standard ── */}
-      <section className="relative z-10 mx-auto max-w-6xl px-6 pb-32 md:px-10">
+      <section className="relative z-10 mx-auto max-w-6xl px-6 pb-24 md:px-10">
         <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-accent/15 bg-gradient-to-br from-[#2DD4A8]/[0.06] via-transparent to-transparent p-8 md:p-10">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
             <FlaskConical className="h-3 w-3" />
