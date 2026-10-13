@@ -239,7 +239,7 @@ export default function HomePage() {
         </Link>
 
         {/* Sourcing line — every catalog entry is cited, not asserted */}
-        <p className="mt-4 text-center text-xs tracking-wide text-ink/25 italic">
+        <p className="mt-4 text-center text-xs tracking-wide text-ink/60 italic">
           Every sequence traced to its source — not asserted, cited.
         </p>
 
@@ -387,7 +387,7 @@ export default function HomePage() {
                   Open Catalog
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
-                <span className="text-xs text-ink/35">
+                <span className="text-xs text-ink/55">
                   {LISTED_PEPTIDES.filter((p) => p.fdaApproved).length} FDA-approved · {LISTED_PEPTIDES.filter((p) => p.sequence).length} with full sequence
                 </span>
               </div>

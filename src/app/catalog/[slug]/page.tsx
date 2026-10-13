@@ -876,7 +876,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                   </li>
                 ))}
               </ul>
-              <p className="mt-3 text-[10px] leading-relaxed text-ink/30">
+              <p className="mt-3 text-[10px] leading-relaxed text-ink/60">
                 Links open external databases. AmericanPeptide does not endorse
                 specific results.
               </p>

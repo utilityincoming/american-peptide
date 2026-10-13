@@ -263,7 +263,7 @@ export default function GHPeptidesPage() {
             synergistically. This page covers the two classes, their compounds, and why
             the combination approach is studied.
           </p>
-          <p className="mt-3 text-xs text-ink/30">Research reference only. Not medical advice or dosing guidance.</p>
+          <p className="mt-3 text-xs text-ink/60">Research reference only. Not medical advice or dosing guidance.</p>
         </div>
       </section>
 

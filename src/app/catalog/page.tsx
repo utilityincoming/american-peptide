@@ -419,7 +419,7 @@ function PeptideCard({
               {peptide.name}
             </h3>
             {peptide.aliases?.[0] && (
-              <p className="mt-0.5 truncate text-xs text-ink/35">
+              <p className="mt-0.5 truncate text-xs text-ink/55">
                 aka {peptide.aliases.join(', ')}
               </p>
             )}
@@ -564,7 +564,7 @@ function EmptyState() {
   return (
     <div className="rounded-2xl border border-dashed border-ink/[0.08] bg-ink/[0.015] px-6 py-16 text-center">
       <p className="text-sm text-ink/50">No peptides match those filters.</p>
-      <p className="mt-1 text-xs text-ink/30">
+      <p className="mt-1 text-xs text-ink/60">
         Try a broader search or reset the category filter.
       </p>
     </div>

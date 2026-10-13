@@ -154,7 +154,7 @@ export default function CognitivePeptidesPage() {
             through BDNF/NGF induction, GABAergic modulation, and circadian pathways.
             Most evidence is preclinical; Semax and Selank have clinical use in Russia.
           </p>
-          <p className="mt-3 text-xs text-ink/30">Research reference only. Not medical advice.</p>
+          <p className="mt-3 text-xs text-ink/60">Research reference only. Not medical advice.</p>
         </div>
       </section>
 
