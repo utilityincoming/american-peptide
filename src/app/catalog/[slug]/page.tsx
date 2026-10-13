@@ -37,6 +37,7 @@ import PeptideStory from '@/components/PeptideStory'
 import WatchButton from '@/components/WatchButton'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
 import LastUpdated from '@/components/LastUpdated'
+import SequenceGlyph from '@/components/SequenceGlyph'
 import {
   getSpotlightVendor,
   getVendorsForPeptide,
@@ -336,6 +337,18 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
         <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[1fr_320px]">
           {/* Main column */}
           <div className="space-y-8">
+            {peptide.sequence && (
+              <Block title="Primary structure">
+                <div className="rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-5">
+                  <SequenceGlyph sequence={peptide.sequence} />
+                  <p className="mt-3 font-mono text-[11px] text-ink/40">
+                    {peptide.sequence.replace(/[^A-Za-z]/g, '').length} residues · single-letter
+                    amino-acid sequence
+                  </p>
+                </div>
+              </Block>
+            )}
+
             <Block title="Overview">
               <p className="text-sm leading-relaxed text-ink/65">
                 {peptide.description}

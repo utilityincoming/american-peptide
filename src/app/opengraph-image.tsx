@@ -1,11 +1,12 @@
 import { ImageResponse } from 'next/og'
-import { ogImage, OG_SIZE, OG_CONTENT_TYPE } from '@/lib/og'
+import { ogImage, loadOgFonts, OG_SIZE, OG_CONTENT_TYPE } from '@/lib/og'
 
 export const alt = 'AmericanPeptide.com — AI-powered peptide research'
 export const size = OG_SIZE
 export const contentType = OG_CONTENT_TYPE
 
-export default function Image() {
+export default async function Image() {
+  const fonts = await loadOgFonts()
   return new ImageResponse(
     ogImage({
       eyebrow: 'AI-powered peptide research',
@@ -13,6 +14,6 @@ export default function Image() {
       subtitle:
         'A research-grade catalog cross-referenced against PubChem, with sourcing ranked by transparency — never commission.',
     }),
-    { ...size },
+    { ...size, fonts },
   )
 }
