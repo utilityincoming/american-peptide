@@ -5,6 +5,7 @@ import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES } from '@/lib/peptides'
 import { STATIC_FAQS, faqPageJsonLd } from '@/lib/faqs'
 import FaqAccordion from '@/components/FaqAccordion'
 import DynamicFaqs from '@/components/DynamicFaqs'
+import { DotField, Glow } from '@/components/Backdrop'
 
 // Home-page metadata. The root layout's title is a generic "AI-Powered Peptide
 // Research"; here we override it with an intent-matched title/description that
@@ -111,16 +112,9 @@ export default function HomePage() {
 
       {/* ── Background layer ── */}
       <div aria-hidden className="pointer-events-none absolute inset-0 select-none">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.12) 1px, transparent 1px)',
-            backgroundSize: '28px 28px',
-          }}
-        />
-        <div className="absolute -top-32 left-1/3 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-[#2DD4A8] opacity-[0.08] blur-[140px]" />
-        <div className="absolute top-2/3 right-1/4 h-96 w-96 rounded-full bg-[#2DD4A8] opacity-[0.04] blur-[100px]" />
+        <DotField size={28} intensity={0.12} />
+        <Glow className="-top-32 left-1/3 h-[500px] w-[500px] -translate-x-1/2" intensity={0.08} blur={140} />
+        <Glow className="top-2/3 right-1/4 h-96 w-96" intensity={0.04} blur={100} />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface/60" />
       </div>
 
@@ -268,21 +262,8 @@ export default function HomePage() {
           the exact configuration it shows. */}
       <section className="relative z-10 mx-auto max-w-6xl px-6 pb-12 md:px-10">
         <div className="relative overflow-hidden rounded-3xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] via-[#2DD4A8]/[0.03] to-transparent p-8 md:p-12">
-          {/* Subtle dot pattern */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-40"
-            style={{
-              backgroundImage:
-                'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
-              backgroundSize: '24px 24px',
-            }}
-          />
-          {/* Glow */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-[#2DD4A8] opacity-[0.08] blur-[120px]"
-          />
+          <DotField size={24} className="opacity-40" />
+          <Glow className="-bottom-32 -left-32 h-80 w-80" intensity={0.08} />
 
           <div className="relative grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
             {/* Left — copy + CTA */}
@@ -376,21 +357,8 @@ export default function HomePage() {
           href="/catalog"
           className="group relative block overflow-hidden rounded-3xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] via-[#2DD4A8]/[0.03] to-transparent p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#2DD4A8]/35 hover:shadow-[0_24px_80px_-16px_rgba(45,212,168,0.14)] md:p-12"
         >
-          {/* Subtle dot pattern */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-40"
-            style={{
-              backgroundImage:
-                'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
-              backgroundSize: '24px 24px',
-            }}
-          />
-          {/* Glow */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-[#2DD4A8] opacity-[0.08] blur-[120px] transition-opacity duration-500 group-hover:opacity-[0.14]"
-          />
+          <DotField size={24} className="opacity-40" />
+          <Glow className="-right-32 -top-32 h-80 w-80 opacity-[0.08] transition-opacity duration-500 group-hover:opacity-[0.14]" />
 
           <div className="relative grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
             {/* Left column */}
