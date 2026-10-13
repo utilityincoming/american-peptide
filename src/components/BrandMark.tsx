@@ -1,11 +1,11 @@
 import Link from 'next/link'
 
 // ── Canonical brand mark ───────────────────────────────────────────────────
-// ONE glyph for the whole brand. The two interlocking arcs read as a peptide
-// double-strand; this is the same geometry baked into /public/favicon.svg and
-// the PWA icons, so header, tab, home-screen, and share surfaces all show the
-// same mark. If the glyph path changes here, regenerate the raster icons:
-//   node scripts/generate-icons.mjs
+// ONE glyph for the whole brand: a three-residue peptide molecule, echoing the
+// hero molecule. This is the same geometry baked into /public/favicon.svg and
+// the PWA icons, so header, tab, home-screen, and footer all show the same
+// mark. If the glyph changes here, mirror it in favicon.svg and regenerate the
+// raster icons: node scripts/generate-icons.mjs
 //
 // The glyph is palette-agnostic (uses currentColor) so callers set the color
 // via text-*; the default lockup is dark-glyph-on-teal-chip, matching the
@@ -13,17 +13,18 @@ import Link from 'next/link'
 
 export function BrandGlyph({ className }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      className={className}
-      aria-hidden
-    >
-      <path d="M4 5c4.5 0 7.5 4 7.5 7S15.5 19 20 19" />
-      <path d="M20 5c-4.5 0-7.5 4-7.5 7S8.5 19 4 19" />
+    <svg viewBox="0 0 32 32" fill="currentColor" className={className} aria-hidden>
+      <polyline
+        points="9,21 16,11 23,21"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="9" cy="21" r="4.1" />
+      <circle cx="16" cy="11" r="4.6" />
+      <circle cx="23" cy="21" r="4.1" />
     </svg>
   )
 }
