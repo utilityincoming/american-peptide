@@ -89,7 +89,7 @@ export default function VendorsIndexPage() {
           }}
         />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <ShieldCheck className="h-3 w-3" />
             Independent reviews{vendors.length > 0 ? ` · ${vendors.length} scored` : ''}
           </div>
@@ -112,8 +112,8 @@ export default function VendorsIndexPage() {
 
       <div className="mx-auto max-w-4xl px-6 py-12 md:px-10">
         {vendors.length === 0 ? (
-          <div className="rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] p-6">
-            <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]/10">
+          <div className="rounded-xl border border-accent/20 bg-accent/[0.05] p-6">
+            <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
               <FlaskConical className="h-4 w-4 text-accent" />
             </div>
             <p className="mb-1 text-sm font-semibold text-accent">Reference edition</p>
@@ -148,7 +148,7 @@ export default function VendorsIndexPage() {
                   <Link
                     key={v.id}
                     href={`/vendors/${v.id}`}
-                    className="group flex flex-col gap-4 rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-5 transition-all hover:-translate-y-0.5 hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04] sm:flex-row sm:items-center"
+                    className="group flex flex-col gap-4 rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-5 transition-all hover:-translate-y-0.5 hover:border-accent/25 hover:bg-ink/[0.04] sm:flex-row sm:items-center"
                   >
                     <div
                       className="flex h-14 w-16 shrink-0 flex-col items-center justify-center rounded-xl"
@@ -162,7 +162,7 @@ export default function VendorsIndexPage() {
                         <p className="text-base font-semibold text-ink/90 transition-colors group-hover:text-ink">
                           {v.name}
                         </p>
-                        <span className="rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 text-[10px] font-medium text-accent">
+                        <span className="rounded-full border border-accent/25 bg-accent/[0.08] px-2 py-0.5 text-[10px] font-medium text-accent">
                           {tierMeta.label}
                         </span>
                         {featured && (
@@ -203,7 +203,7 @@ export default function VendorsIndexPage() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
                 >
                   {l.icon}
                   {l.label}

@@ -177,7 +177,7 @@ function EmptyState({ count }: { count: number }) {
         </p>
         <Link
           href="/catalog"
-          className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-4 py-2 text-sm font-medium text-accent transition-colors hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/20"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-colors hover:border-accent/50 hover:bg-accent/20"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Back to catalog
@@ -210,7 +210,7 @@ const ROWS: Row[] = [
           <Link
             key={c}
             href={`/catalog/category/${c}`}
-            className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+            className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-ink/55 transition-colors hover:border-accent/30 hover:text-accent"
           >
             {CATEGORIES.find((cm) => cm.id === c)?.label ?? c}
           </Link>
@@ -222,7 +222,7 @@ const ROWS: Row[] = [
     label: 'FDA approved',
     render: (p) =>
       p.fdaApproved ? (
-        <span className="inline-flex items-center gap-1 rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent">
+        <span className="inline-flex items-center gap-1 rounded-md border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent">
           <Check className="h-3 w-3" />
           Approved
         </span>
@@ -272,7 +272,7 @@ const ROWS: Row[] = [
         <Link
           href={`/catalog?difficulty=${p.synthesisDifficulty}`}
           title="Browse peptides by this synthesis difficulty"
-          className="inline-flex items-center rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent transition-colors hover:border-[#2DD4A8]/45"
+          className="inline-flex items-center rounded-md border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent transition-colors hover:border-accent/45"
         >
           {SYNTHESIS_DIFFICULTY_LABEL[p.synthesisDifficulty]}
         </Link>
@@ -290,7 +290,7 @@ const ROWS: Row[] = [
               key={f}
               href={`/catalog?synthesis=${encodeURIComponent(f)}`}
               title={`Browse peptides with: ${f}`}
-              className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-1.5 py-0.5 text-[10.5px] font-medium text-ink/60 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+              className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-1.5 py-0.5 text-[10.5px] font-medium text-ink/60 transition-colors hover:border-accent/30 hover:text-accent"
             >
               {f}
             </Link>
@@ -409,7 +409,7 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
                             {p.name}
                           </span>
                           {p.fdaApproved && (
-                            <span className="shrink-0 rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-accent">
+                            <span className="shrink-0 rounded border border-accent/25 bg-accent/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-accent">
                               FDA
                             </span>
                           )}
@@ -478,7 +478,7 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
                     ...peptides.slice(0, MAX_COMPARE - 1).map((pp) => pp.slug),
                     p.slug,
                   ].join(',')}`}
-                  className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                  className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-accent/30 hover:text-accent"
                 >
                   + {p.name}
                 </Link>

@@ -176,7 +176,7 @@ const TONE: Record<
 > = {
   approved: {
     label: 'Approved',
-    className: 'bg-[#2DD4A8]/12 text-accent',
+    className: 'bg-accent/12 text-accent',
     Icon: CheckCircle2,
   },
   review: {
@@ -293,7 +293,7 @@ export default function MusclePreservationPage() {
           }}
         />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Dumbbell className="h-3 w-3" />
             The muscle-preservation frontier · activin/myostatin axis
           </div>
@@ -684,7 +684,7 @@ export default function MusclePreservationPage() {
               ))}
             </div>
 
-            <div className="rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.04] p-5">
+            <div className="rounded-xl border border-accent/20 bg-accent/[0.04] p-5">
               <p className="mb-1.5 flex items-center gap-1.5 text-sm font-semibold text-ink/85">
                 <Zap className="h-4 w-4 text-accent" />
                 Ask the Peptide Agent

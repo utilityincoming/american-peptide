@@ -246,7 +246,7 @@ export default function GHPeptidesPage() {
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-40"
           style={{ backgroundImage: 'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <TrendingUp className="h-3 w-3" />
             GH axis · 2 receptor classes · 9 compounds
           </div>
@@ -263,7 +263,7 @@ export default function GHPeptidesPage() {
             synergistically. This page covers the two classes, their compounds, and why
             the combination approach is studied.
           </p>
-          <p className="mt-3 text-xs text-ink/30">Research reference only. Not medical advice or dosing guidance.</p>
+          <p className="mt-3 text-xs text-ink/60">Research reference only. Not medical advice or dosing guidance.</p>
         </div>
       </section>
 
@@ -324,7 +324,7 @@ export default function GHPeptidesPage() {
                         <span className="rounded-full bg-ink/[0.06] px-2 py-0.5 text-ink/40">t½ {c.halfLife}</span>
                         <span className="rounded-full bg-ink/[0.06] px-2 py-0.5 text-ink/40">{c.release}</span>
                         {c.fda && (
-                          <span className="rounded-full bg-[#2DD4A8]/10 px-2 py-0.5 font-medium text-accent">
+                          <span className="rounded-full bg-accent/10 px-2 py-0.5 font-medium text-accent">
                             {c.fdaNote ?? 'FDA approved'}
                           </span>
                         )}

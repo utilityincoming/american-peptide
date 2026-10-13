@@ -115,7 +115,7 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
               {categoryMeta.label}
             </span>
             {term.abbr && term.abbr !== term.term && (
-              <span className="rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-accent">
+              <span className="rounded-md border border-accent/25 bg-accent/[0.08] px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-accent">
                 {term.abbr}
               </span>
             )}
@@ -146,7 +146,7 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
                   <Link
                     key={r.slug}
                     href={`/glossary/${r.slug}`}
-                    className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                    className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-accent/30 hover:text-accent"
                   >
                     {r.term}
                   </Link>
@@ -166,7 +166,7 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
                   <Link
                     key={a.slug}
                     href={`/research-areas/${a.slug}`}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-accent/30 hover:text-accent"
                   >
                     <FlaskConical className="h-3 w-3 text-accent/70" />
                     {a.label}
@@ -187,7 +187,7 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
                   <Link
                     key={p.slug}
                     href={`/catalog/${p.slug}`}
-                    className="group flex items-center justify-between gap-2 rounded-xl border border-ink/[0.07] bg-ink/[0.025] p-3 transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+                    className="group flex items-center justify-between gap-2 rounded-xl border border-ink/[0.07] bg-ink/[0.025] p-3 transition-colors hover:border-accent/25 hover:bg-ink/[0.04]"
                   >
                     <span className="truncate text-sm font-medium">{p.name}</span>
                     <ArrowRight className="h-3.5 w-3.5 shrink-0 text-accent/70 transition-transform group-hover:translate-x-0.5" />

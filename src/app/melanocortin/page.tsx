@@ -192,7 +192,7 @@ const PIPELINE: PipelineEntry[] = [
 ]
 
 const MATURITY = {
-  approved:   { label: 'Approved',        dot: 'bg-[#2DD4A8]',    badge: 'bg-[#2DD4A8]/10 text-accent border-[#2DD4A8]/20',      ring: 'border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.03]' },
+  approved:   { label: 'Approved',        dot: 'bg-[#2DD4A8]',    badge: 'bg-accent/10 text-accent border-accent/20',      ring: 'border-accent/20 bg-accent/[0.03]' },
   clinical:   { label: 'Clinical Trials', dot: 'bg-amber-400',    badge: 'bg-amber-500/10 text-amber-400 border-amber-500/20',       ring: 'border-amber-500/15 bg-amber-500/[0.02]'  },
   preclinical:{ label: 'Preclinical',     dot: 'bg-ink/20',     badge: 'bg-ink/[0.04] text-ink/35 border-ink/10',            ring: 'border-ink/[0.07] bg-ink/[0.015]'     },
 }
@@ -234,7 +234,7 @@ function Tag({ label, accent = false }: { label: string; accent?: boolean }) {
   return (
     <span
       className={`rounded-md px-2.5 py-1 text-[11px] font-medium ${
-        accent ? 'bg-[#2DD4A8]/10 text-accent' : 'bg-ink/[0.05] text-ink/50'
+        accent ? 'bg-accent/10 text-accent' : 'bg-ink/[0.05] text-ink/50'
       }`}
     >
       {label}
@@ -444,13 +444,13 @@ function ToolCard({
       href={href}
       className={`group flex flex-col rounded-2xl border p-6 transition-all duration-200 ${
         accent
-          ? 'border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.05] hover:border-[#2DD4A8]/40 hover:bg-[#2DD4A8]/[0.08]'
+          ? 'border-accent/25 bg-accent/[0.05] hover:border-accent/40 hover:bg-accent/[0.08]'
           : 'border-ink/[0.07] bg-ink/[0.025] hover:border-ink/[0.12] hover:bg-ink/[0.035]'
       }`}
     >
       <div
         className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl ${
-          accent ? 'bg-[#2DD4A8]/15 text-accent' : 'bg-ink/[0.06] text-ink/50'
+          accent ? 'bg-accent/15 text-accent' : 'bg-ink/[0.06] text-ink/50'
         }`}
       >
         {icon}
@@ -505,7 +505,7 @@ export default function MelanocortinPage() {
 
         {/* ── Hero ── */}
         <section className="mb-20 max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.07] px-3.5 py-1.5 text-xs font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/[0.07] px-3.5 py-1.5 text-xs font-medium text-accent">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2DD4A8] opacity-75" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2DD4A8]" />
@@ -664,7 +664,7 @@ export default function MelanocortinPage() {
                   <span
                     className={`inline-flex rounded-lg px-3 py-1 text-xs font-semibold ${
                       item.status === 'active'
-                        ? 'bg-[#2DD4A8]/10 text-accent'
+                        ? 'bg-accent/10 text-accent'
                         : 'bg-amber-500/10 text-amber-400'
                     }`}
                   >

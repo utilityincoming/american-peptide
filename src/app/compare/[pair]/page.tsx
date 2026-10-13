@@ -283,7 +283,7 @@ export default async function ComparePage({ params }: RouteParams) {
 
             {/* Verdict */}
             {c.verdict && (
-              <section className="rounded-2xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-6">
+              <section className="rounded-2xl border border-accent/15 bg-accent/[0.04] p-6">
                 <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-accent/80">{c.verdict.title}</h2>
                 <div className="space-y-3 text-sm leading-relaxed text-ink/70">
                   {c.verdict.paragraphs.map((p, i) => (

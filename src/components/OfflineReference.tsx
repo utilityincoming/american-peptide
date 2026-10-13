@@ -135,7 +135,7 @@ export default function OfflineReference() {
   return (
     <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-start gap-3">
-        <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.08] text-accent">
+        <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-accent/20 bg-accent/[0.08] text-accent">
           {online ? (
             <CloudDownload className="h-4 w-4" strokeWidth={1.75} />
           ) : (
@@ -165,7 +165,7 @@ export default function OfflineReference() {
             type="button"
             onClick={download}
             disabled={!online}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.06] px-4 py-2 text-xs font-medium text-accent transition-colors hover:bg-[#2DD4A8]/[0.12] disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-accent/25 bg-accent/[0.06] px-4 py-2 text-xs font-medium text-accent transition-colors hover:bg-accent/[0.12] disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Check className="h-3.5 w-3.5" />
             Saved · Update

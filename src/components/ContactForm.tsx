@@ -63,7 +63,7 @@ export default function ContactForm() {
               className={
                 'inline-flex cursor-pointer items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors ' +
                 (topic === t.value
-                  ? 'border-[#2DD4A8]/40 bg-[#2DD4A8]/15 text-accent'
+                  ? 'border-accent/40 bg-accent/15 text-accent'
                   : 'border-ink/[0.08] bg-ink/[0.02] text-ink/55 hover:border-ink/15 hover:text-ink')
               }
             >
@@ -95,7 +95,7 @@ export default function ContactForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Dr. Ada Lovelace"
-            className="w-full rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-3 py-2.5 text-sm text-ink placeholder:text-ink/30 focus:border-[#2DD4A8]/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
+            className="w-full rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-3 py-2.5 text-sm text-ink placeholder:text-ink/30 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
           />
         </div>
         <div>
@@ -116,7 +116,7 @@ export default function ContactForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@lab.org"
-              className="w-full rounded-xl border border-ink/[0.08] bg-ink/[0.03] py-2.5 pl-9 pr-3 text-sm text-ink placeholder:text-ink/30 focus:border-[#2DD4A8]/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
+              className="w-full rounded-xl border border-ink/[0.08] bg-ink/[0.03] py-2.5 pl-9 pr-3 text-sm text-ink placeholder:text-ink/30 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
             />
           </div>
         </div>
@@ -136,7 +136,7 @@ export default function ContactForm() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Tell us what the Agent got wrong, the peptide we're missing, or what you'd like to build with the data…"
-          className="w-full resize-y rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-3 py-2.5 text-sm leading-relaxed text-ink placeholder:text-ink/30 focus:border-[#2DD4A8]/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
+          className="w-full resize-y rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-3 py-2.5 text-sm leading-relaxed text-ink placeholder:text-ink/30 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
         />
       </div>
 

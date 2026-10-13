@@ -123,7 +123,7 @@ export default function SourcesIndexPage() {
           }}
         />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Layers className="h-3 w-3" />
             The sourcing index · ranked by evidence tier
           </div>
@@ -170,7 +170,7 @@ export default function SourcesIndexPage() {
                 <Link
                   key={peptide.slug}
                   href={`/sources/${peptide.slug}`}
-                  className="group flex flex-col justify-between gap-3 rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-4 transition-colors hover:border-[#2DD4A8]/30"
+                  className="group flex flex-col justify-between gap-3 rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-4 transition-colors hover:border-accent/30"
                 >
                   <div>
                     <div className="flex items-start justify-between gap-3">
@@ -224,7 +224,7 @@ export default function SourcesIndexPage() {
             <Link
               key={l.href}
               href={l.href}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
             >
               {l.label}
               <ArrowRight className="h-3 w-3" />

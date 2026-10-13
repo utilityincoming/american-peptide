@@ -190,7 +190,7 @@ export default function LongevityPage() {
             mitochondrial signaling (MOTS-c, SS-31), NAD⁺ economy (NAD⁺, 5-amino-1MQ),
             and pineal biology (Epitalon). Unrelated mechanisms grouped by shared research context.
           </p>
-          <p className="mt-3 text-xs text-ink/30">Research reference only. Not medical advice.</p>
+          <p className="mt-3 text-xs text-ink/60">Research reference only. Not medical advice.</p>
         </div>
       </section>
 

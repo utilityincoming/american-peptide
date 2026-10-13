@@ -256,7 +256,7 @@ export default function BPC157Page() {
         />
         <div className="relative mx-auto max-w-4xl">
           <div className="mb-2 flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-medium text-accent">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent/[0.08] px-3 py-1 text-[11px] font-medium text-accent">
               <FlaskConical className="h-3 w-3" />
               Healing &amp; Repair · 15 residues
             </span>

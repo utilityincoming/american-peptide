@@ -531,7 +531,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
               </div>
 
               <div className="mb-4 flex items-start gap-4">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#2DD4A8]/12 text-accent">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/12 text-accent">
                   <Icon className="h-5 w-5" strokeWidth={1.75} />
                 </span>
                 <div className="min-w-0">
@@ -567,7 +567,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
                   </div>
                 )}
                 {s.americanStandard && (
-                  <div className="rounded-xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] px-4 py-3 sm:col-span-2">
+                  <div className="rounded-xl border border-accent/15 bg-accent/[0.04] px-4 py-3 sm:col-span-2">
                     <p className="mb-1 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-accent/80">
                       <Flag className="h-3 w-3" />
                       The American standard

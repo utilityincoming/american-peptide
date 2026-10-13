@@ -66,8 +66,8 @@ function Segmented<T extends string>({
             onClick={() => onChange(active ? undefined : o.value)}
             className={`rounded-lg border px-3 py-1.5 text-xs transition-colors ${
               active
-                ? 'border-[#2DD4A8]/40 bg-[#2DD4A8]/[0.12] text-accent'
-                : 'border-ink/[0.08] bg-ink/[0.02] text-ink/55 hover:border-[#2DD4A8]/25 hover:text-ink/80'
+                ? 'border-accent/40 bg-accent/[0.12] text-accent'
+                : 'border-ink/[0.08] bg-ink/[0.02] text-ink/55 hover:border-accent/25 hover:text-ink/80'
             }`}
           >
             {o.label}
@@ -153,7 +153,7 @@ export default function ProfilePanel() {
         <SlidersHorizontal className="h-3.5 w-3.5" />
         <span className="hidden sm:inline">Profile</span>
         {activeCount > 0 && (
-          <span className="rounded-full bg-[#2DD4A8]/[0.15] px-1.5 text-[10px] font-semibold text-accent">
+          <span className="rounded-full bg-accent/[0.15] px-1.5 text-[10px] font-semibold text-accent">
             {activeCount}
           </span>
         )}
@@ -220,7 +220,7 @@ export default function ProfilePanel() {
                   setProfile((p) => ({ ...p, focusAreas: parseList(e.target.value) }))
                 }}
                 placeholder="weight loss, healing, longevity…"
-                className="w-full rounded-lg border border-ink/[0.08] bg-ink/[0.02] px-3 py-2 text-xs text-ink placeholder:text-ink/25 focus:border-[#2DD4A8]/40 focus:outline-none"
+                className="w-full rounded-lg border border-ink/[0.08] bg-ink/[0.02] px-3 py-2 text-xs text-ink placeholder:text-ink/25 focus:border-accent/40 focus:outline-none"
               />
             </div>
 
@@ -235,7 +235,7 @@ export default function ProfilePanel() {
                   setProfile((p) => ({ ...p, compounds: parseList(e.target.value) }))
                 }}
                 placeholder="semaglutide, BPC-157…"
-                className="w-full rounded-lg border border-ink/[0.08] bg-ink/[0.02] px-3 py-2 text-xs text-ink placeholder:text-ink/25 focus:border-[#2DD4A8]/40 focus:outline-none"
+                className="w-full rounded-lg border border-ink/[0.08] bg-ink/[0.02] px-3 py-2 text-xs text-ink placeholder:text-ink/25 focus:border-accent/40 focus:outline-none"
               />
               <p className="mt-1 text-[10px] text-ink/30">
                 Comma-separated. Unrecognized names are ignored.

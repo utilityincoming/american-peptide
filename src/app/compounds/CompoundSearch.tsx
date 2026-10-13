@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Search, ExternalLink } from 'lucide-react'
+import { Skeleton, SkeletonMolecule } from '@/components/Skeleton'
 
 interface Compound {
   cid: number
@@ -71,7 +72,7 @@ export default function CompoundSearch() {
     <div>
       {/* ── Search bar ── */}
       <div className="mb-8">
-        <div className="flex items-center gap-3 rounded-2xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-3 transition-colors focus-within:border-[#2DD4A8]/25">
+        <div className="flex items-center gap-3 rounded-2xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-3 transition-colors focus-within:border-accent/25">
           <Search className="h-4 w-4 flex-shrink-0 text-ink/30" />
           <input
             type="text"
@@ -81,7 +82,7 @@ export default function CompoundSearch() {
             className="flex-1 bg-transparent text-sm text-ink placeholder-ink/20 outline-none"
           />
           {status === 'loading' && (
-            <div className="h-4 w-4 animate-spin rounded-full border-2 border-[#2DD4A8]/30 border-t-[#2DD4A8]" />
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-accent/30 border-t-[#2DD4A8]" />
           )}
         </div>
         <p className="mt-2 ml-1 text-[10px] text-ink/20">
@@ -90,6 +91,18 @@ export default function CompoundSearch() {
       </div>
 
       {/* ── States ── */}
+      {status === 'loading' && (
+        <div
+          role="status"
+          aria-label="Searching PubChem…"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {Array.from({ length: 6 }).map((_, i) => (
+            <CompoundCardSkeleton key={i} />
+          ))}
+        </div>
+      )}
+
       {status === 'idle' && (
         <div className="py-16 text-center text-sm text-ink/30">
           Type a compound name to search PubChem&apos;s 100M+ chemical records.
@@ -123,11 +136,28 @@ export default function CompoundSearch() {
   )
 }
 
+// Mirrors CompoundCard's shape so results swap in without layout shift.
+function CompoundCardSkeleton() {
+  return (
+    <div className="flex flex-col overflow-hidden rounded-2xl border border-ink/[0.06] bg-ink/[0.025]">
+      <div className="flex h-48 items-center justify-center border-b border-ink/[0.06] bg-ink/[0.03] p-4">
+        <SkeletonMolecule className="h-12 w-12" />
+      </div>
+      <div className="flex flex-col gap-2.5 p-4">
+        <Skeleton className="h-4 w-2/3" />
+        <Skeleton className="h-3 w-2/5" />
+        <Skeleton className="mt-1 h-3 w-5/6" />
+        <Skeleton className="h-3 w-1/2" />
+      </div>
+    </div>
+  )
+}
+
 function CompoundCard({ compound }: { compound: Compound }) {
   const [imgError, setImgError] = useState(false)
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-ink/[0.06] bg-ink/[0.025] transition-colors hover:border-[#2DD4A8]/20">
+    <div className="flex flex-col overflow-hidden rounded-2xl border border-ink/[0.06] bg-ink/[0.025] transition-colors hover:border-accent/20">
       <div className="flex h-48 items-center justify-center border-b border-ink/[0.06] bg-ink/[0.03] p-4">
         {imgError ? (
           <span className="text-xs text-ink/30">Structure unavailable</span>
@@ -170,7 +200,7 @@ function CompoundCard({ compound }: { compound: Compound }) {
           href={`https://pubchem.ncbi.nlm.nih.gov/compound/${compound.cid}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-1 flex items-center justify-center gap-1.5 rounded-lg border border-ink/[0.06] py-2 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/25 hover:bg-[#2DD4A8]/[0.05] hover:text-accent"
+          className="mt-1 flex items-center justify-center gap-1.5 rounded-lg border border-ink/[0.06] py-2 text-xs text-ink/55 transition-colors hover:border-accent/25 hover:bg-accent/[0.05] hover:text-accent"
         >
           View on PubChem
           <ExternalLink className="h-3 w-3" />

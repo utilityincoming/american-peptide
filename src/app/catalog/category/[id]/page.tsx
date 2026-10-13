@@ -151,7 +151,7 @@ export default async function CategoryPage({ params }: RouteParams) {
           }}
         />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Layers className="h-3 w-3" />
             Catalog category · {peptides.length} entr
             {peptides.length === 1 ? 'y' : 'ies'}
@@ -263,7 +263,7 @@ export default async function CategoryPage({ params }: RouteParams) {
                   <Link
                     key={c.id}
                     href={`/catalog/category/${c.id}`}
-                    className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                    className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-accent/30 hover:text-accent"
                   >
                     {c.label}
                   </Link>
@@ -292,12 +292,12 @@ function CategoryPeptideCard({ peptide }: { peptide: Peptide }) {
   return (
     <Link
       href={`/catalog/${peptide.slug}`}
-      className="group flex flex-col rounded-xl border border-ink/[0.07] bg-ink/[0.025] p-4 transition-all hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+      className="group flex flex-col rounded-xl border border-ink/[0.07] bg-ink/[0.025] p-4 transition-all hover:border-accent/25 hover:bg-ink/[0.04]"
     >
       <div className="mb-1.5 flex items-center justify-between gap-2">
         <h3 className="truncate text-sm font-semibold">{peptide.name}</h3>
         {peptide.fdaApproved && (
-          <span className="shrink-0 rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-accent">
+          <span className="shrink-0 rounded border border-accent/25 bg-accent/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-accent">
             FDA
           </span>
         )}

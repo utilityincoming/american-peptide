@@ -57,8 +57,8 @@ export default function SiteHeader() {
               className={
                 'inline-flex items-center gap-1.5 rounded-lg border px-3.5 py-1.5 text-sm font-medium transition-all ' +
                 (agentActive
-                  ? 'border-[#2DD4A8]/50 bg-[#2DD4A8]/20 text-accent'
-                  : 'border-[#2DD4A8]/30 bg-[#2DD4A8]/10 text-accent hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/20')
+                  ? 'border-accent/50 bg-accent/20 text-accent'
+                  : 'border-accent/30 bg-accent/10 text-accent hover:border-accent/50 hover:bg-accent/20')
               }
             >
               <Sparkles className="h-4 w-4" />
@@ -107,7 +107,7 @@ export default function SiteHeader() {
             <Link
               href="/research"
               aria-current={agentActive ? 'page' : undefined}
-              className="mb-1 flex items-center gap-2 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-2 text-sm font-medium text-accent"
+              className="mb-1 flex items-center gap-2 rounded-lg border border-accent/30 bg-accent/10 px-3 py-2 text-sm font-medium text-accent"
             >
               <Sparkles className="h-4 w-4" />
               Peptide Agent
@@ -121,7 +121,7 @@ export default function SiteHeader() {
                   aria-current={active ? 'page' : undefined}
                   className={
                     active
-                      ? 'rounded-lg bg-[#2DD4A8]/[0.08] px-3 py-2 text-sm font-medium text-accent'
+                      ? 'rounded-lg bg-accent/[0.08] px-3 py-2 text-sm font-medium text-accent'
                       : 'rounded-lg px-3 py-2 text-sm text-ink/70 transition-colors hover:bg-ink/[0.04] hover:text-ink'
                   }
                 >

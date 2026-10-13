@@ -48,7 +48,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <p className="text-xs text-ink/30">© 2026 AmericanPeptide.com</p>
+        <p className="text-xs text-ink/55">© 2026 AmericanPeptide.com</p>
       </div>
     </footer>
   )
