@@ -111,14 +111,14 @@ export default function OfflineStatus() {
         <button
           type="button"
           onClick={onInstall}
-          className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/35 bg-[#2DD4A8]/[0.10] px-3 py-1 text-[11px] font-semibold text-accent transition-colors hover:border-[#2DD4A8]/55 hover:bg-[#2DD4A8]/[0.18]"
+          className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-accent/35 bg-accent/[0.10] px-3 py-1 text-[11px] font-semibold text-accent transition-colors hover:border-accent/55 hover:bg-accent/[0.18]"
         >
           <Download className="h-3 w-3" />
           Install for offline use
         </button>
       )}
       {installed && (
-        <span className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.06] px-2.5 py-1 text-[11px] font-medium text-accent/85">
+        <span className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent/[0.06] px-2.5 py-1 text-[11px] font-medium text-accent/85">
           <CheckCircle2 className="h-3 w-3" />
           Installed
         </span>
@@ -160,7 +160,7 @@ function StatusPill({
   }
   // ready
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2.5 py-1 text-[11px] font-medium text-accent">
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent/[0.08] px-2.5 py-1 text-[11px] font-medium text-accent">
       <CheckCircle2 className="h-3 w-3" />
       {online ? 'Available offline' : 'Running offline'}
     </span>

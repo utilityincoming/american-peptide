@@ -22,9 +22,9 @@ export default function PeptideStory({ peptide }: { peptide: Peptide }) {
   const story = buildPeptideStory(peptide)
 
   return (
-    <div className="rounded-2xl border border-[#2DD4A8]/15 bg-gradient-to-br from-[#2DD4A8]/[0.05] to-transparent p-6 md:p-7">
+    <div className="rounded-2xl border border-accent/15 bg-gradient-to-br from-[#2DD4A8]/[0.05] to-transparent p-6 md:p-7">
       <div className="mb-3 flex items-center gap-2.5">
-        <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
+        <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
           <Sparkles className="h-4 w-4" strokeWidth={1.75} />
         </span>
         <h2 className="text-sm font-semibold tracking-tight">
@@ -39,7 +39,7 @@ export default function PeptideStory({ peptide }: { peptide: Peptide }) {
           const Icon = ICONS[beat.icon] ?? Cpu
           return (
             <li key={i} className="relative">
-              <span className="absolute -left-[2.05rem] flex h-7 w-7 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-surface text-accent">
+              <span className="absolute -left-[2.05rem] flex h-7 w-7 items-center justify-center rounded-lg border border-accent/25 bg-surface text-accent">
                 <Icon className="h-3.5 w-3.5" strokeWidth={1.75} />
               </span>
               <Link

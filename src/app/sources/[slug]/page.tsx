@@ -137,7 +137,7 @@ export default async function SourcesPage({
           }}
         />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Layers className="h-3 w-3" />
             Where to source · ranked by evidence tier
           </div>
@@ -259,7 +259,7 @@ export default async function SourcesPage({
                 <Link
                   key={p.slug}
                   href={`/sources/${p.slug}`}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
                 >
                   {p.name}
                   <ArrowRight className="h-3 w-3" />
@@ -280,7 +280,7 @@ export default async function SourcesPage({
             <Link
               key={l.href}
               href={l.href}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
             >
               {l.label}
               <ArrowRight className="h-3 w-3" />

@@ -136,7 +136,7 @@ export default function DevelopersPage() {
           }}
         />
         <div className="relative mx-auto max-w-5xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Database className="h-3 w-3" />
             Open data · CC BY 4.0
           </div>
@@ -184,7 +184,7 @@ export default function DevelopersPage() {
                 key={title}
                 className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5"
               >
-                <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
+                <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-accent/20 bg-accent/10 text-accent">
                   <Icon className="h-4 w-4" strokeWidth={1.75} />
                 </div>
                 <h3 className="mb-1.5 text-sm font-semibold">{title}</h3>
@@ -208,7 +208,7 @@ export default function DevelopersPage() {
                   }
                 >
                   <div className="flex items-center gap-3">
-                    <span className="rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 font-mono text-[10px] font-semibold text-accent">
+                    <span className="rounded border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 font-mono text-[10px] font-semibold text-accent">
                       {e.method}
                     </span>
                     <code className="font-mono text-sm text-ink/85">

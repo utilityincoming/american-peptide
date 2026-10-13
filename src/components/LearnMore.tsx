@@ -48,7 +48,7 @@ export default function LearnMore({
           <Link
             key={c.href}
             href={c.href}
-            className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.12)]"
+            className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.12)]"
           >
             <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl border border-ink/[0.08] bg-ink/[0.03] text-accent">
               <c.Icon className="h-5 w-5" strokeWidth={1.75} />

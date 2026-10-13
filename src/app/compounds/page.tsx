@@ -106,7 +106,7 @@ export default function CompoundsPage() {
           }}
         />
         <div className="relative mx-auto max-w-6xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <FlaskConical className="h-3 w-3" />
             Peptide reference &amp; compound lookup
           </div>
@@ -127,14 +127,14 @@ export default function CompoundsPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/catalog"
-              className="inline-flex items-center gap-2 rounded-xl border border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.08] px-5 py-2.5 text-sm font-medium text-accent transition-colors hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/[0.12]"
+              className="inline-flex items-center gap-2 rounded-xl border border-accent/30 bg-accent/[0.08] px-5 py-2.5 text-sm font-medium text-accent transition-colors hover:border-accent/50 hover:bg-accent/[0.12]"
             >
               <Layers className="h-4 w-4" />
               Browse the full catalog
             </Link>
             <a
               href="#pubchem-search"
-              className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-ink"
+              className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-accent/30 hover:text-ink"
             >
               <Database className="h-4 w-4 text-accent" />
               Search PubChem
@@ -148,15 +148,15 @@ export default function CompoundsPage() {
         <div className="mb-12 grid gap-4 sm:grid-cols-2">
           <Link
             href="/compounds/builder"
-            className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-5 transition-all hover:border-[#2DD4A8]/35 hover:shadow-[0_8px_40px_rgba(45,212,168,0.08)]"
+            className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-accent/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-5 transition-all hover:border-accent/35 hover:shadow-[0_8px_40px_rgba(45,212,168,0.08)]"
           >
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
               <Dna className="h-5 w-5" strokeWidth={1.75} />
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
                 <h2 className="text-sm font-semibold text-ink">PeptideForge</h2>
-                <span className="rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
+                <span className="rounded-full border border-accent/25 bg-accent/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
                   Builder
                 </span>
               </div>
@@ -170,7 +170,7 @@ export default function CompoundsPage() {
 
           <Link
             href="/tools/design-lab"
-            className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-5 transition-all hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+            className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-5 transition-all hover:border-accent/25 hover:bg-ink/[0.04]"
           >
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-ink/[0.10] bg-ink/[0.04] text-accent">
               <FlaskConical className="h-5 w-5" strokeWidth={1.75} />
@@ -300,7 +300,7 @@ function MonographCard({ peptide }: { peptide: Peptide }) {
   return (
     <Link
       href={`/catalog/${peptide.slug}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)]"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2DD4A8]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
@@ -316,7 +316,7 @@ function MonographCard({ peptide }: { peptide: Peptide }) {
           )}
         </div>
         {peptide.fdaApproved && (
-          <span className="shrink-0 rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
+          <span className="shrink-0 rounded-md border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
             FDA
           </span>
         )}

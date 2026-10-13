@@ -134,7 +134,7 @@ export default function ResearchAreasPage() {
             <Link
               key={area.slug}
               href={`/research-areas/${area.slug}`}
-              className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.12)]"
+              className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.12)]"
             >
               <div className="mb-3 flex items-center justify-between">
                 <span className="inline-flex items-center gap-1.5 text-[11px] text-ink/40">
@@ -187,7 +187,7 @@ export default function ResearchAreasPage() {
           </p>
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
-              <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
+              <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-accent/25 bg-accent/10 text-accent">
                 <Route className="h-4.5 w-4.5" strokeWidth={1.75} />
               </span>
               <h3 className="mb-1.5 text-sm font-semibold text-ink/90">
@@ -201,7 +201,7 @@ export default function ResearchAreasPage() {
               </p>
             </div>
             <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
-              <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
+              <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-accent/25 bg-accent/10 text-accent">
                 <Layers className="h-4.5 w-4.5" strokeWidth={1.75} />
               </span>
               <h3 className="mb-1.5 text-sm font-semibold text-ink/90">
@@ -218,7 +218,7 @@ export default function ResearchAreasPage() {
               </p>
             </div>
             <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
-              <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
+              <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-accent/25 bg-accent/10 text-accent">
                 <BookOpenCheck className="h-4.5 w-4.5" strokeWidth={1.75} />
               </span>
               <h3 className="mb-1.5 text-sm font-semibold text-ink/90">
@@ -244,9 +244,9 @@ export default function ResearchAreasPage() {
         {/* Clinical trials — the pipeline behind the research areas */}
         <Link
           href="/trials"
-          className="group mx-auto mt-14 flex max-w-5xl items-center gap-4 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all hover:-translate-y-0.5 hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+          className="group mx-auto mt-14 flex max-w-5xl items-center gap-4 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all hover:-translate-y-0.5 hover:border-accent/25 hover:bg-ink/[0.04]"
         >
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
             <Activity className="h-5 w-5" strokeWidth={1.75} />
           </span>
           <div className="min-w-0 flex-1">

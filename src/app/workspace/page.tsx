@@ -174,7 +174,7 @@ export default function WorkspacePage() {
                             {wp?.name ?? slug}
                           </Link>
                           {newCount > 0 && (
-                            <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.10] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
+                            <span className="rounded-full border border-accent/30 bg-accent/[0.10] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
                               {newCount} new
                             </span>
                           )}

@@ -84,7 +84,7 @@ export default function TrialsPage() {
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Page identity ── */}
       <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
+        <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-accent/15">
           <Activity className="h-4 w-4 text-accent" strokeWidth={1.75} />
         </div>
         <div>
@@ -98,7 +98,7 @@ export default function TrialsPage() {
       <main className="mx-auto max-w-5xl px-4 py-8 md:px-6">
         {/* ── Search bar ── */}
         <form onSubmit={handleSubmit} className="mb-5">
-          <div className="flex items-center gap-3 rounded-2xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-3 transition-colors focus-within:border-[#2DD4A8]/25">
+          <div className="flex items-center gap-3 rounded-2xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-3 transition-colors focus-within:border-accent/25">
             <Search className="h-4 w-4 flex-shrink-0 text-ink/30" />
             <input
               type="text"
@@ -108,7 +108,7 @@ export default function TrialsPage() {
               className="flex-1 bg-transparent text-sm text-ink placeholder-ink/20 outline-none"
             />
             {status === 'loading' && (
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-[#2DD4A8]/30 border-t-[#2DD4A8]" />
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-accent/30 border-t-[#2DD4A8]" />
             )}
             <button
               type="submit"
@@ -127,7 +127,7 @@ export default function TrialsPage() {
               onClick={() => setFilter(f.id)}
               className={`rounded-full border px-3 py-1 text-xs transition-colors ${
                 filter === f.id
-                  ? 'border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.08] text-accent'
+                  ? 'border-accent/30 bg-accent/[0.08] text-accent'
                   : 'border-ink/[0.08] bg-ink/[0.02] text-ink/50 hover:border-ink/[0.15] hover:text-ink/80'
               }`}
             >
@@ -209,7 +209,7 @@ function StatusBadge({ status }: { status: string }) {
 
 function TrialCard({ trial }: { trial: Trial }) {
   return (
-    <div className="rounded-2xl border border-ink/[0.06] bg-ink/[0.025] p-5 transition-colors hover:border-[#2DD4A8]/20">
+    <div className="rounded-2xl border border-ink/[0.06] bg-ink/[0.025] p-5 transition-colors hover:border-accent/20">
       <div className="mb-2 flex flex-wrap items-center gap-2">
         <a
           href={`https://clinicaltrials.gov/study/${trial.nctId}`}

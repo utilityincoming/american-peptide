@@ -124,7 +124,7 @@ export default function HomePage() {
           {/* Left — copy */}
           <div className="text-center lg:text-left">
             {/* Status badge */}
-            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-4 py-1.5 text-xs font-medium text-accent">
+            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.08] px-4 py-1.5 text-xs font-medium text-accent">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2DD4A8] opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2DD4A8]" />
@@ -172,9 +172,9 @@ export default function HomePage() {
                 <Link
                   key={label}
                   href={href}
-                  className="group flex flex-col items-center gap-1.5 rounded-xl border border-ink/[0.08] bg-ink/[0.02] px-2 py-3 text-center transition-all hover:border-[#2DD4A8]/30 hover:bg-ink/[0.04]"
+                  className="group flex flex-col items-center gap-1.5 rounded-xl border border-ink/[0.08] bg-ink/[0.02] px-2 py-3 text-center transition-all hover:border-accent/30 hover:bg-ink/[0.04]"
                 >
-                  <Icon className="h-4 w-4 text-[#2DD4A8]/70 transition-colors group-hover:text-[#2DD4A8]" strokeWidth={1.75} />
+                  <Icon className="h-4 w-4 text-accent/70 transition-colors group-hover:text-accent" strokeWidth={1.75} />
                   <span className="text-[11px] font-semibold text-ink/80">{label}</span>
                   <span className="text-[10px] leading-tight text-ink/40">{desc}</span>
                 </Link>
@@ -194,7 +194,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/tools/reconstitution-calculator"
-                className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.07] px-6 py-3.5 text-[15px] font-semibold text-accent transition-all hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/[0.12]"
+                className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-accent/30 bg-accent/[0.07] px-6 py-3.5 text-[15px] font-semibold text-accent transition-all hover:border-accent/50 hover:bg-accent/[0.12]"
               >
                 <Syringe className="h-4 w-4" />
                 Open the calculator
@@ -230,7 +230,7 @@ export default function HomePage() {
         {/* Real catalog example — links to the entry so the spec is verifiable */}
         <Link
           href="/catalog/bpc-157"
-          className="group mx-auto mt-14 flex max-w-xl items-center justify-center gap-x-2 gap-y-1 overflow-hidden rounded-xl border border-ink/[0.06] bg-ink/[0.025] px-5 py-3.5 text-center font-mono text-xs transition-colors hover:border-[#2DD4A8]/25 md:text-sm"
+          className="group mx-auto mt-14 flex max-w-xl items-center justify-center gap-x-2 gap-y-1 overflow-hidden rounded-xl border border-ink/[0.06] bg-ink/[0.025] px-5 py-3.5 text-center font-mono text-xs transition-colors hover:border-accent/25 md:text-sm"
         >
           <span className="text-ink/30">BPC-157 · </span>
           <span className="text-accent/80">GEPPPGKPADDAGLV</span>
@@ -261,14 +261,14 @@ export default function HomePage() {
           right below the hero, with a live worked example that deep-links into
           the exact configuration it shows. */}
       <section className="relative z-10 mx-auto max-w-6xl px-6 pb-12 md:px-10">
-        <div className="relative overflow-hidden rounded-3xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] via-[#2DD4A8]/[0.03] to-transparent p-8 md:p-12">
+        <div className="relative overflow-hidden rounded-3xl border border-accent/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] via-[#2DD4A8]/[0.03] to-transparent p-8 md:p-12">
           <DotField size={24} className="opacity-40" />
           <Glow className="-bottom-32 -left-32 h-80 w-80" intensity={0.08} />
 
           <div className="relative grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
             {/* Left — copy + CTA */}
             <div>
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.10] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/[0.10] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
                 <Syringe className="h-3 w-3" />
                 Bench tool · Works offline
               </div>
@@ -324,7 +324,7 @@ export default function HomePage() {
             <Link
               href="/tools/reconstitution-calculator?vial=5&dose=250&water=2"
               aria-label="Open this worked example in the reconstitution calculator: 5 mg vial, 2 mL bacteriostatic water, 250 mcg dose"
-              className="group relative block rounded-2xl border border-ink/[0.08] bg-panel p-5 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.35)] transition-all hover:-translate-y-0.5 hover:border-[#2DD4A8]/30 md:p-6"
+              className="group relative block rounded-2xl border border-ink/[0.08] bg-panel p-5 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.35)] transition-all hover:-translate-y-0.5 hover:border-accent/30 md:p-6"
             >
               <div className="mb-4 flex items-center justify-between">
                 <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink/40">
@@ -355,7 +355,7 @@ export default function HomePage() {
       <section className="relative z-10 mx-auto max-w-6xl px-6 pb-24 md:px-10">
         <Link
           href="/catalog"
-          className="group relative block overflow-hidden rounded-3xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] via-[#2DD4A8]/[0.03] to-transparent p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#2DD4A8]/35 hover:shadow-[0_24px_80px_-16px_rgba(45,212,168,0.14)] md:p-12"
+          className="group relative block overflow-hidden rounded-3xl border border-accent/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] via-[#2DD4A8]/[0.03] to-transparent p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-[0_24px_80px_-16px_rgba(45,212,168,0.14)] md:p-12"
         >
           <DotField size={24} className="opacity-40" />
           <Glow className="-right-32 -top-32 h-80 w-80 opacity-[0.08] transition-opacity duration-500 group-hover:opacity-[0.14]" />
@@ -363,7 +363,7 @@ export default function HomePage() {
           <div className="relative grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
             {/* Left column */}
             <div>
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.10] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/[0.10] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
                 <Sparkles className="h-3 w-3" />
                 Now live
               </div>
@@ -405,11 +405,11 @@ export default function HomePage() {
                   return (
                     <span
                       key={slug}
-                      className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1.5 text-xs text-ink/70 transition-colors group-hover:border-[#2DD4A8]/20 group-hover:bg-ink/[0.05]"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1.5 text-xs text-ink/70 transition-colors group-hover:border-accent/20 group-hover:bg-ink/[0.05]"
                     >
                       {p.name}
                       {p.fdaApproved && (
-                        <span className="rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-accent">
+                        <span className="rounded border border-accent/25 bg-accent/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-accent">
                           FDA
                         </span>
                       )}
@@ -457,13 +457,13 @@ export default function HomePage() {
             <Link
               key={name}
               href={href}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-8 shadow-[0_1px_0_rgba(255,255,255,0.04)_inset] transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/30 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)]"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-8 shadow-[0_1px_0_rgba(255,255,255,0.04)_inset] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)]"
             >
               {/* Top accent line revealed on hover */}
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2DD4A8]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
               {/* Icon */}
-              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
+              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
                 <Icon className="h-5 w-5" strokeWidth={1.75} />
               </div>
 
@@ -504,7 +504,7 @@ export default function HomePage() {
               className="relative rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-ink/[0.12] hover:bg-ink/[0.03]"
             >
               <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.08] text-accent">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-accent/20 bg-accent/[0.08] text-accent">
                   <Icon className="h-4 w-4" strokeWidth={1.75} />
                 </div>
                 <span className="font-mono text-[11px] text-ink/30">
@@ -520,8 +520,8 @@ export default function HomePage() {
 
       {/* ── Sourcing Standard ── */}
       <section className="relative z-10 mx-auto max-w-6xl px-6 pb-32 md:px-10">
-        <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-[#2DD4A8]/15 bg-gradient-to-br from-[#2DD4A8]/[0.06] via-transparent to-transparent p-8 md:p-10">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
+        <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-accent/15 bg-gradient-to-br from-[#2DD4A8]/[0.06] via-transparent to-transparent p-8 md:p-10">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
             <FlaskConical className="h-3 w-3" />
             The US sourcing standard
           </div>
@@ -565,7 +565,7 @@ export default function HomePage() {
         <DynamicFaqs />
 
         {/* The "dynamic" path: anything not curated above routes to the Agent. */}
-        <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent px-6 py-5 text-center sm:flex-row sm:text-left">
+        <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border border-accent/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent px-6 py-5 text-center sm:flex-row sm:text-left">
           <p className="text-sm text-ink/65">
             Have a question that isn&apos;t here? Ask the Peptide Agent for a
             citation-backed answer.

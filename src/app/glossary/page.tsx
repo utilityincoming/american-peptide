@@ -109,7 +109,7 @@ export default function GlossaryPage() {
                   <Link
                     key={t.slug}
                     href={`/glossary/${t.slug}`}
-                    className="group flex flex-col rounded-xl border border-ink/[0.07] bg-ink/[0.025] p-4 transition-all hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+                    className="group flex flex-col rounded-xl border border-ink/[0.07] bg-ink/[0.025] p-4 transition-all hover:border-accent/25 hover:bg-ink/[0.04]"
                   >
                     <div className="mb-1 flex items-center gap-2">
                       <h3 className="text-sm font-semibold">{t.term}</h3>
@@ -148,7 +148,7 @@ export default function GlossaryPage() {
           </p>
           <Link
             href="/catalog"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-4 py-2 text-sm font-medium text-accent transition-colors hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/20"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-colors hover:border-accent/50 hover:bg-accent/20"
           >
             Browse the catalog
             <ArrowRight className="h-3.5 w-3.5" />

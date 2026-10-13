@@ -184,7 +184,7 @@ export default function EvidenceHierarchyPage() {
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-30"
           style={{ backgroundImage: 'radial-gradient(circle, rgba(45,212,168,0.08) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
         <div className="relative mx-auto max-w-3xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             Learning guide · evidence quality
           </div>
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">

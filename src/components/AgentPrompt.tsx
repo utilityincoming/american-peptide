@@ -50,11 +50,11 @@ export default function AgentPrompt({
   return (
     <section
       className={
-        'overflow-hidden rounded-3xl border border-[#2DD4A8]/25 bg-gradient-to-br from-[#2DD4A8]/[0.10] via-[#2DD4A8]/[0.04] to-transparent p-6 md:p-8 ' +
+        'overflow-hidden rounded-3xl border border-accent/25 bg-gradient-to-br from-[#2DD4A8]/[0.10] via-[#2DD4A8]/[0.04] to-transparent p-6 md:p-8 ' +
         className
       }
     >
-      <div className="mb-1 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-accent">
+      <div className="mb-1 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-accent">
         <Sparkles className="h-3.5 w-3.5" />
         Peptide Agent
       </div>
@@ -74,7 +74,7 @@ export default function AgentPrompt({
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Ask about a peptide, mechanism, or indication…"
-          className="flex-1 rounded-xl border border-ink/[0.10] bg-surface/60 px-4 py-3 text-sm text-ink placeholder:text-ink/30 focus:border-[#2DD4A8]/40 focus:outline-none"
+          className="flex-1 rounded-xl border border-ink/[0.10] bg-surface/60 px-4 py-3 text-sm text-ink placeholder:text-ink/30 focus:border-accent/40 focus:outline-none"
         />
         <button
           type="submit"
@@ -92,7 +92,7 @@ export default function AgentPrompt({
             key={ex}
             type="button"
             onClick={() => ask(ex)}
-            className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1.5 text-left text-xs text-ink/50 transition-colors hover:border-[#2DD4A8]/30 hover:text-ink/80"
+            className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1.5 text-left text-xs text-ink/50 transition-colors hover:border-accent/30 hover:text-ink/80"
           >
             {ex}
           </button>

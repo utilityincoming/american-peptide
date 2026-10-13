@@ -295,7 +295,7 @@ export default function GLP1Page() {
           }}
         />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Activity className="h-3 w-3" />
             Research reference · 8 compounds
           </div>
@@ -468,7 +468,7 @@ export default function GLP1Page() {
                         </td>
                         <td className="py-3 pr-4">
                           {a.fda ? (
-                            <span className="rounded-full bg-[#2DD4A8]/10 px-2 py-0.5 text-[10px] font-medium text-accent">
+                            <span className="rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent">
                               Approved
                             </span>
                           ) : (
@@ -786,7 +786,7 @@ export default function GLP1Page() {
               return (
                 <div className="space-y-3">
                   <div className="px-1">
-                    <p className="text-[10px] font-semibold uppercase tracking-wider text-[#2DD4A8]">
+                    <p className="text-[10px] font-semibold uppercase tracking-wider text-accent">
                       The muscle-preservation frontier
                     </p>
                     <h3 className="mt-1 text-sm font-semibold text-ink/90">
@@ -837,8 +837,8 @@ export default function GLP1Page() {
 // trust-ranked vendor directory, not a first-party store.
 function ReferenceEdition() {
   return (
-    <div className="rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] p-5">
-      <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]/10">
+    <div className="rounded-xl border border-accent/20 bg-accent/[0.05] p-5">
+      <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
         <FlaskConical className="h-4 w-4 text-accent" />
       </div>
       <p className="mb-1 text-sm font-semibold text-accent">

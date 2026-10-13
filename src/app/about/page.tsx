@@ -102,7 +102,7 @@ export default function AboutPage() {
           }}
         />
         <div className="relative mx-auto max-w-5xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <ShieldCheck className="h-3 w-3" />
             The trust layer for peptide research
           </div>
@@ -185,9 +185,9 @@ export default function AboutPage() {
                 <Link
                   key={label}
                   href={href}
-                  className="group rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+                  className="group rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-colors hover:border-accent/25 hover:bg-ink/[0.04]"
                 >
-                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
+                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-accent/20 bg-accent/10 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
                   </div>
                   <h3 className="mb-1.5 flex items-center gap-1 text-sm font-semibold">
@@ -211,7 +211,7 @@ export default function AboutPage() {
                   key={title}
                   className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5"
                 >
-                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
+                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-accent/20 bg-accent/10 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
                   </div>
                   <h3 className="mb-1.5 text-sm font-semibold">{title}</h3>
@@ -239,7 +239,7 @@ export default function AboutPage() {
                 href={TELEGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col justify-between rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-6 transition-colors hover:border-[#2DD4A8]/40"
+                className="group flex flex-col justify-between rounded-2xl border border-accent/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-6 transition-colors hover:border-accent/40"
               >
                 <div>
                   <div className="mb-3 flex items-center gap-3">
@@ -249,7 +249,7 @@ export default function AboutPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <h3 className="text-sm font-semibold">Telegram group</h3>
-                        <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
+                        <span className="rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
                           Live
                         </span>
                       </div>
@@ -276,7 +276,7 @@ export default function AboutPage() {
                 href="https://x.com/USPeptide"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col justify-between rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-6 transition-colors hover:border-[#2DD4A8]/40"
+                className="group flex flex-col justify-between rounded-2xl border border-accent/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-6 transition-colors hover:border-accent/40"
               >
                 <div>
                   <div className="mb-3 flex items-center gap-3">
@@ -293,7 +293,7 @@ export default function AboutPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <h3 className="text-sm font-semibold">X</h3>
-                        <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
+                        <span className="rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
                           Live
                         </span>
                       </div>

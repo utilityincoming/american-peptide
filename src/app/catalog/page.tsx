@@ -158,7 +158,7 @@ export default function CatalogPage() {
           }}
         />
         <div className="relative mx-auto max-w-6xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Sparkles className="h-3 w-3" />
             Peptide research reference
           </div>
@@ -180,14 +180,14 @@ export default function CatalogPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/catalog/compare"
-              className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-ink"
+              className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-accent/30 hover:text-ink"
             >
               <GitCompareArrows className="h-4 w-4 text-accent" />
               Compare side-by-side
             </Link>
             <Link
               href="/workspace"
-              className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-ink"
+              className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-accent/30 hover:text-ink"
             >
               <LayoutGrid className="h-4 w-4 text-accent" />
               Research Workspace
@@ -207,7 +207,7 @@ export default function CatalogPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search peptides, aliases, or research areas…"
-              className="w-full rounded-xl border border-ink/[0.07] bg-ink/[0.03] py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/30 focus:border-[#2DD4A8]/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
+              className="w-full rounded-xl border border-ink/[0.07] bg-ink/[0.03] py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/30 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
             />
             {query && (
               <button
@@ -307,7 +307,7 @@ export default function CatalogPage() {
           {active && (
             <Link
               href={`/catalog/category/${active}`}
-              className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] px-4 py-3 transition-colors hover:border-[#2DD4A8]/30 hover:bg-[#2DD4A8]/[0.07]"
+              className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-accent/15 bg-accent/[0.04] px-4 py-3 transition-colors hover:border-accent/30 hover:bg-accent/[0.07]"
             >
               <span className="text-sm text-ink/65">
                 Read the full{' '}
@@ -366,8 +366,8 @@ function PeptideCard({
       className={
         'group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)] ' +
         (selected
-          ? 'border-[#2DD4A8]/55 bg-[#2DD4A8]/[0.05]'
-          : 'border-ink/[0.07] hover:border-[#2DD4A8]/25')
+          ? 'border-accent/55 bg-accent/[0.05]'
+          : 'border-ink/[0.07] hover:border-accent/25')
       }
     >
       <Link
@@ -391,10 +391,10 @@ function PeptideCard({
         className={
           'absolute right-3 top-3 z-20 inline-flex h-7 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors ' +
           (selected
-            ? 'border-[#2DD4A8]/45 bg-[#2DD4A8]/15 text-accent'
+            ? 'border-accent/45 bg-accent/15 text-accent'
             : disableAdd
             ? 'cursor-not-allowed border-ink/[0.06] bg-ink/[0.02] text-ink/25'
-            : 'border-ink/[0.10] bg-ink/[0.04] text-ink/55 hover:border-[#2DD4A8]/40 hover:text-accent')
+            : 'border-ink/[0.10] bg-ink/[0.04] text-ink/55 hover:border-accent/40 hover:text-accent')
         }
       >
         {selected ? (
@@ -425,7 +425,7 @@ function PeptideCard({
             )}
           </div>
           {peptide.fdaApproved && (
-            <span className="shrink-0 rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
+            <span className="shrink-0 rounded-md border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
               FDA
             </span>
           )}
@@ -551,7 +551,7 @@ function Chip({
       onClick={onClick}
       className={
         active
-          ? 'rounded-full border border-[#2DD4A8]/40 bg-[#2DD4A8]/15 px-3 py-1 text-xs font-medium text-accent transition-colors'
+          ? 'rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-xs font-medium text-accent transition-colors'
           : 'rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-ink/15 hover:text-ink'
       }
     >

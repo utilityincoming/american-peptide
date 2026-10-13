@@ -143,7 +143,7 @@ export default function PressPage() {
             </span>
           </div>
 
-          <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+          <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.08] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2DD4A8] opacity-75" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2DD4A8]" />
@@ -438,7 +438,7 @@ export default function PressPage() {
               },
             ].map(({ Icon, title, body }) => (
               <div key={title} className="rounded-2xl border border-ink/[0.07] bg-panel p-6">
-                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] text-accent">
+                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-accent/25 bg-accent/[0.08] text-accent">
                   <Icon className="h-[18px] w-[18px]" strokeWidth={1.9} />
                 </div>
                 <h3 className="text-[1.05rem] font-semibold">{title}</h3>
