@@ -112,7 +112,7 @@ export default function CompatibilityGuidePage() {
         <div className="relative mx-auto max-w-5xl">
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             Peptide compatibility{' '}
-            <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
               &amp; stability
             </span>
           </h1>
@@ -141,7 +141,7 @@ export default function CompatibilityGuidePage() {
                 key={title}
                 className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5"
               >
-                <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#2DD4A8]/12 text-accent">
+                <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-accent/12 text-accent">
                   <Icon className="h-4 w-4" strokeWidth={1.75} />
                 </span>
                 <h3 className="mb-1 text-sm font-semibold tracking-tight">{title}</h3>
@@ -214,7 +214,7 @@ export default function CompatibilityGuidePage() {
       {/* ── Why blending multiplies risk ── */}
       <section className="border-t border-ink/[0.06] px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
-          <div className="rounded-2xl border border-[#2DD4A8]/15 bg-gradient-to-br from-[#2DD4A8]/[0.06] to-transparent p-7 md:p-9">
+          <div className="rounded-2xl border border-accent/15 bg-gradient-to-br from-[#5BA88C]/[0.06] to-transparent p-7 md:p-9">
             <h2 className="mb-3 max-w-2xl text-2xl font-bold tracking-tight md:text-3xl">
               Why combining un-characterized peptides multiplies risk
             </h2>
@@ -258,7 +258,7 @@ export default function CompatibilityGuidePage() {
           <div className="flex flex-col gap-4 sm:flex-row">
             <Link
               href="/tools/blend-calculator"
-              className="group flex flex-1 items-center justify-between rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+              className="group flex flex-1 items-center justify-between rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all hover:border-accent/25 hover:bg-ink/[0.04]"
             >
               <div className="flex items-center gap-3">
                 <FlaskConical className="h-5 w-5 text-accent" strokeWidth={1.75} />

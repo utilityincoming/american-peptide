@@ -64,7 +64,7 @@ export default function CompareIndexPage() {
         <div className="relative mx-auto max-w-5xl">
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             Head-to-head{' '}
-            <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
               peptide comparisons
             </span>
           </h1>
@@ -82,10 +82,10 @@ export default function CompareIndexPage() {
             <Link
               key={c.slug}
               href={`/compare/${c.slug}`}
-              className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.12)]"
+              className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.12)]"
             >
               <div className="mb-3 flex flex-wrap items-center gap-2 text-sm font-semibold">
-                <span style={{ color: '#2DD4A8' }}>{c.aName}</span>
+                <span style={{ color: '#5BA88C' }}>{c.aName}</span>
                 <span className="text-ink/25">vs</span>
                 <span style={{ color: '#818CF8' }}>{c.bName}</span>
               </div>

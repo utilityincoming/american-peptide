@@ -415,7 +415,7 @@ export default function CommandPalette() {
                             className={
                               'flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors ' +
                               (active
-                                ? 'bg-[#2DD4A8]/[0.10] text-ink'
+                                ? 'bg-accent/[0.10] text-ink'
                                 : 'text-ink/80 hover:bg-ink/[0.04]')
                             }
                           >

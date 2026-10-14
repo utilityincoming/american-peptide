@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { IS_APP_BUILD } from '@/lib/platform'
+import { BrandMark } from './BrandMark'
 
 // /sources is deliberately NOT listed here. The sourcing index earns a footer
 // slot only once it shows it helps readers; until then it stays reachable the
@@ -19,6 +20,8 @@ export default function Footer() {
   return (
     <footer className="border-t border-ink/[0.06] bg-surface px-6 py-10 md:px-10">
       <div className="mx-auto max-w-6xl space-y-5">
+        <BrandMark />
+
         <nav className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink/45">
           {LINKS.map((l) => (
             <Link
@@ -45,7 +48,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <p className="text-xs text-ink/30">© 2026 AmericanPeptide.com</p>
+        <p className="text-xs text-ink/55">© 2026 AmericanPeptide.com</p>
       </div>
     </footer>
   )

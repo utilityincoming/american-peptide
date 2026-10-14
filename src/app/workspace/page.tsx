@@ -137,7 +137,7 @@ export default function WorkspacePage() {
               <div className="flex flex-wrap justify-center gap-3">
                 <Link
                   href="/catalog"
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-[#2DD4A8] px-5 py-2.5 text-sm font-semibold text-[#0B1220] hover:bg-[#34ddb0]"
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0B1220] hover:bg-[#34ddb0]"
                 >
                   Browse the catalog <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -174,7 +174,7 @@ export default function WorkspacePage() {
                             {wp?.name ?? slug}
                           </Link>
                           {newCount > 0 && (
-                            <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.10] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
+                            <span className="rounded-full border border-accent/30 bg-accent/[0.10] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
                               {newCount} new
                             </span>
                           )}

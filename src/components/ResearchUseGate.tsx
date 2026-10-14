@@ -64,7 +64,7 @@ export default function ResearchUseGate() {
       <div className="absolute inset-0 bg-surface-deep/80 backdrop-blur-sm" />
 
       <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-ink/[0.08] bg-panel p-6 shadow-[0_30px_80px_rgba(0,0,0,0.5)] md:p-7">
-        <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
+        <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
           <FlaskConical className="h-5 w-5" strokeWidth={1.75} />
         </div>
 
@@ -97,7 +97,7 @@ export default function ResearchUseGate() {
           ref={buttonRef}
           type="button"
           onClick={acknowledge}
-          className="mt-6 w-full rounded-xl bg-[#2DD4A8] px-5 py-3 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4A8]/60"
+          className="mt-6 w-full rounded-xl bg-[#5BA88C] px-5 py-3 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5BA88C]/60"
         >
           I understand
         </button>

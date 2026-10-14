@@ -37,6 +37,7 @@ import PeptideStory from '@/components/PeptideStory'
 import WatchButton from '@/components/WatchButton'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
 import LastUpdated from '@/components/LastUpdated'
+import SequenceGlyph from '@/components/SequenceGlyph'
 import {
   getSpotlightVendor,
   getVendorsForPeptide,
@@ -290,13 +291,13 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
               <Link
                 key={cat}
                 href={`/catalog/category/${cat}`}
-                className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-2 py-0.5 text-[10px] uppercase tracking-wider text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-2 py-0.5 text-[10px] uppercase tracking-wider text-ink/55 transition-colors hover:border-accent/30 hover:text-accent"
               >
                 {CATEGORIES.find((c) => c.id === cat)?.label ?? cat}
               </Link>
             ))}
             {peptide.fdaApproved && (
-              <span className="rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
+              <span className="rounded-md border border-accent/25 bg-accent/[0.08] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
                 FDA Approved
               </span>
             )}
@@ -336,6 +337,18 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
         <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[1fr_320px]">
           {/* Main column */}
           <div className="space-y-8">
+            {peptide.sequence && (
+              <Block title="Primary structure">
+                <div className="rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-5">
+                  <SequenceGlyph sequence={peptide.sequence} />
+                  <p className="mt-3 font-mono text-[11px] text-ink/40">
+                    {peptide.sequence.replace(/[^A-Za-z]/g, '').length} residues · single-letter
+                    amino-acid sequence
+                  </p>
+                </div>
+              </Block>
+            )}
+
             <Block title="Overview">
               <p className="text-sm leading-relaxed text-ink/65">
                 {peptide.description}
@@ -382,9 +395,9 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
             <PeptideStory peptide={peptide} />
 
             {/* Handling, storage & why purity is hard — universal consumer-hardening callout */}
-            <div className="rounded-2xl border border-[#2DD4A8]/15 bg-gradient-to-br from-[#2DD4A8]/[0.05] to-transparent p-6">
+            <div className="rounded-2xl border border-accent/15 bg-gradient-to-br from-[#5BA88C]/[0.05] to-transparent p-6">
               <div className="mb-3 flex items-center gap-2.5">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
                   <Factory className="h-4 w-4" strokeWidth={1.75} />
                 </span>
                 <h2 className="text-sm font-semibold tracking-tight">
@@ -402,7 +415,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 <div className="mt-4 flex flex-wrap items-center gap-1.5">
                   {peptide.synthesisDifficulty && (
                     <span
-                      className="inline-flex items-center gap-1.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 px-2.5 py-1 text-[11px] font-medium text-accent"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent/10 px-2.5 py-1 text-[11px] font-medium text-accent"
                       title="Relative difficulty of synthesizing and purifying to a genuine spec"
                     >
                       <FlaskConical className="h-3 w-3" />
@@ -414,7 +427,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                       key={f}
                       href={`/catalog?synthesis=${encodeURIComponent(f)}`}
                       title={`Browse peptides with: ${f}`}
-                      className="inline-flex items-center rounded-full border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1 text-[11px] font-medium text-ink/60 transition-colors hover:border-[#2DD4A8]/30 hover:bg-[#2DD4A8]/[0.06] hover:text-accent"
+                      className="inline-flex items-center rounded-full border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1 text-[11px] font-medium text-ink/60 transition-colors hover:border-accent/30 hover:bg-accent/[0.06] hover:text-accent"
                     >
                       {f}
                     </Link>
@@ -492,7 +505,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                     <Link
                       key={a.slug}
                       href={`/research-areas/${a.slug}`}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/60 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/60 transition-colors hover:border-accent/30 hover:text-accent"
                     >
                       <FlaskConical className="h-3 w-3 text-accent/70" />
                       {a.label}
@@ -525,7 +538,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                               href={t.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="group block rounded-lg border border-ink/[0.06] bg-ink/[0.02] px-3 py-2.5 transition-colors hover:border-[#2DD4A8]/30"
+                              className="group block rounded-lg border border-ink/[0.06] bg-ink/[0.02] px-3 py-2.5 transition-colors hover:border-accent/30"
                             >
                               <span className="block text-sm leading-snug text-ink/75 group-hover:text-ink/90">
                                 {t.title}
@@ -552,7 +565,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                               href={a.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="group block rounded-lg border border-ink/[0.06] bg-ink/[0.02] px-3 py-2.5 transition-colors hover:border-[#2DD4A8]/30"
+                              className="group block rounded-lg border border-ink/[0.06] bg-ink/[0.02] px-3 py-2.5 transition-colors hover:border-accent/30"
                             >
                               <span className="block text-sm leading-snug text-ink/75 group-hover:text-ink/90">
                                 {a.title}
@@ -771,7 +784,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
               const v = getPubchemVerification(peptide.slug)
               if (!v) return null
               return (
-                <div className="rounded-2xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.05] p-5">
+                <div className="rounded-2xl border border-accent/25 bg-accent/[0.05] p-5">
                   <div className="mb-2 flex items-center gap-2">
                     <ShieldCheck className="h-4 w-4 text-accent" strokeWidth={2} />
                     <h3 className="text-sm font-semibold text-accent">Chemistry verified</h3>
@@ -829,7 +842,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                   {hasSourcingPage(peptide.slug) && (
                     <Link
                       href={`/sources/${peptide.slug}`}
-                      className="flex items-center justify-between gap-2 rounded-2xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.05] px-5 py-3.5 text-sm font-medium text-accent transition-colors hover:bg-[#2DD4A8]/[0.09]"
+                      className="flex items-center justify-between gap-2 rounded-2xl border border-accent/25 bg-accent/[0.05] px-5 py-3.5 text-sm font-medium text-accent transition-colors hover:bg-accent/[0.09]"
                     >
                       <span className="inline-flex items-center gap-2">
                         <Layers className="h-4 w-4" strokeWidth={2} />
@@ -863,7 +876,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                   </li>
                 ))}
               </ul>
-              <p className="mt-3 text-[10px] leading-relaxed text-ink/30">
+              <p className="mt-3 text-[10px] leading-relaxed text-ink/60">
                 Links open external databases. AmericanPeptide does not endorse
                 specific results.
               </p>
@@ -1010,9 +1023,9 @@ function SourcesPanel({ vendors, slug }: { vendors: Vendor[]; slug: string }) {
   const groups = vendorsByTier(shown)
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-5">
+    <div className="overflow-hidden rounded-2xl border border-accent/15 bg-accent/[0.04] p-5">
       <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] text-accent">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-accent/25 bg-accent/[0.08] text-accent">
           <Building2 className="h-3.5 w-3.5" strokeWidth={1.75} />
         </div>
         <h3 className="text-sm font-semibold">Where to source</h3>
@@ -1098,7 +1111,7 @@ function VendorCard({
         <div className="flex items-center gap-2">
           <span className="text-sm font-semibold">{vendor.name}</span>
           {badge === 'best' && (
-            <span className="rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-accent">
+            <span className="rounded-full border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-accent">
               Best trust
             </span>
           )}
@@ -1146,7 +1159,7 @@ function VendorCard({
         href={vendorHref(vendor, slug)}
         target="_blank"
         rel="sponsored nofollow noopener"
-        className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/15 px-3 py-2 text-xs font-medium text-accent transition-colors hover:bg-[#2DD4A8]/25"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-accent/30 bg-accent/15 px-3 py-2 text-xs font-medium text-accent transition-colors hover:bg-accent/25"
       >
         Visit {vendor.name}
         <ArrowUpRight className="h-3.5 w-3.5" />
@@ -1187,7 +1200,7 @@ function RelatedCard({ peptide }: { peptide: Peptide }) {
   return (
     <Link
       href={`/catalog/${peptide.slug}`}
-      className="group flex flex-col rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4 transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+      className="group flex flex-col rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4 transition-colors hover:border-accent/25 hover:bg-ink/[0.04]"
     >
       <h4 className="mb-1.5 text-sm font-semibold">{peptide.name}</h4>
       <p className="mb-3 line-clamp-2 flex-1 text-xs leading-relaxed text-ink/50">

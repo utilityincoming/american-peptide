@@ -44,7 +44,7 @@ const RECEPTOR_CLASSES = [
   {
     label: 'GHRH analogs',
     receptor: 'GHRHR (pituitary)',
-    color: '#2DD4A8',
+    color: '#5BA88C',
     how: 'Mimic the hypothalamic signal that prompts pituitary somatotrophs to synthesize and release GH. DPP-4-resistant substitutions extend stability from the native ~7-minute half-life. The DAC addition to CJC-1295 further extends to ~7 days via albumin binding.',
     members: ['Sermorelin (GHRH 1–29)', 'CJC-1295 no DAC (Mod GRF 1-29)', 'CJC-1295 with DAC', 'Tesamorelin (FDA-approved)'],
   },
@@ -67,7 +67,7 @@ const COMPOUNDS = [
     release: 'Pulsatile',
     fda: true,
     fdaNote: 'Discontinued (1990)',
-    color: '#2DD4A8',
+    color: '#5BA88C',
     note: 'Shortest active GHRH fragment; historically the first GHRH analog FDA-approved (pediatric GH deficiency), later discontinued commercially.',
   },
   {
@@ -78,7 +78,7 @@ const COMPOUNDS = [
     halfLife: '~30 min',
     release: 'Pulsatile',
     fda: false,
-    color: '#2DD4A8',
+    color: '#5BA88C',
     note: 'Four DPP-4-resistant substitutions extend stability vs sermorelin. The preferred pairing with ipamorelin for pulsatile GH research.',
   },
   {
@@ -89,7 +89,7 @@ const COMPOUNDS = [
     halfLife: '~6–8 days',
     release: 'Sustained',
     fda: false,
-    color: '#2DD4A8',
+    color: '#5BA88C',
     note: 'Albumin-binding DAC moiety extends half-life to ~a week. Studied for sustained IGF-1 elevation; blunts natural GH pulsatility.',
   },
   {
@@ -101,7 +101,7 @@ const COMPOUNDS = [
     release: 'Pulsatile',
     fda: true,
     fdaNote: 'Approved (2010, Egrifta)',
-    color: '#34D399',
+    color: '#6FBF9A',
     note: 'Only currently FDA-approved GH-axis peptide. Approved for HIV-associated visceral lipodystrophy. Also studied for cognition and hepatic fat.',
   },
   {
@@ -246,14 +246,14 @@ export default function GHPeptidesPage() {
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-40"
           style={{ backgroundImage: 'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <TrendingUp className="h-3 w-3" />
             GH axis · 2 receptor classes · 9 compounds
           </div>
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             Growth Hormone
             <br />
-            <span className="bg-gradient-to-r from-[#2DD4A8] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
               Secretagogue Research
             </span>
           </h1>
@@ -263,7 +263,7 @@ export default function GHPeptidesPage() {
             synergistically. This page covers the two classes, their compounds, and why
             the combination approach is studied.
           </p>
-          <p className="mt-3 text-xs text-ink/30">Research reference only. Not medical advice or dosing guidance.</p>
+          <p className="mt-3 text-xs text-ink/60">Research reference only. Not medical advice or dosing guidance.</p>
         </div>
       </section>
 
@@ -324,7 +324,7 @@ export default function GHPeptidesPage() {
                         <span className="rounded-full bg-ink/[0.06] px-2 py-0.5 text-ink/40">t½ {c.halfLife}</span>
                         <span className="rounded-full bg-ink/[0.06] px-2 py-0.5 text-ink/40">{c.release}</span>
                         {c.fda && (
-                          <span className="rounded-full bg-[#2DD4A8]/10 px-2 py-0.5 font-medium text-accent">
+                          <span className="rounded-full bg-accent/10 px-2 py-0.5 font-medium text-accent">
                             {c.fdaNote ?? 'FDA approved'}
                           </span>
                         )}

@@ -53,8 +53,8 @@ const BP_FULL = `AmericanPeptide.com is an independent, AI-assisted research pla
 // ── The Standard: derived from the live TRUST_WEIGHTS so the bar always sums
 //    to whatever the rubric actually is. ─────────────────────────────────────
 const STANDARD = [
-  { key: 'reshipPolicy', label: 'Reship policy', color: '#2DD4A8', note: 'stands behind a lost or seized order.' },
-  { key: 'refundPolicy', label: 'Refund policy', color: '#5EEBC8', note: 'a stated, honored return path.' },
+  { key: 'reshipPolicy', label: 'Reship policy', color: '#5BA88C', note: 'stands behind a lost or seized order.' },
+  { key: 'refundPolicy', label: 'Refund policy', color: '#93D4BA', note: 'a stated, honored return path.' },
   { key: 'thirdPartyTested', label: 'Third-party tested', color: '#60A5FA', note: 'an outside lab, not the seller.' },
   { key: 'coaOnFile', label: 'COA on file', color: '#818CF8', note: 'a certificate the buyer can actually see.' },
   { key: 'perBatchTesting', label: 'Per-batch testing', color: '#A78BFA', note: 'every lot, not one sample once.' },
@@ -133,7 +133,7 @@ export default function PressPage() {
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-[#2DD4A8] opacity-[0.08] blur-[120px]"
+          className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-[#5BA88C] opacity-[0.08] blur-[120px]"
         />
         <div className="relative mx-auto max-w-5xl">
           <div className="mb-6 flex items-center gap-3">
@@ -143,17 +143,17 @@ export default function PressPage() {
             </span>
           </div>
 
-          <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+          <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.08] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
             <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2DD4A8] opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2DD4A8]" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5BA88C] opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#5BA88C]" />
             </span>
             Media kit · Updated September 2026
           </div>
 
           <h1 className="max-w-[16ch] text-4xl font-bold leading-[1.03] tracking-tight md:text-6xl">
             The trust layer for{' '}
-            <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
               peptide research.
             </span>
           </h1>
@@ -438,7 +438,7 @@ export default function PressPage() {
               },
             ].map(({ Icon, title, body }) => (
               <div key={title} className="rounded-2xl border border-ink/[0.07] bg-panel p-6">
-                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] text-accent">
+                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-accent/25 bg-accent/[0.08] text-accent">
                   <Icon className="h-[18px] w-[18px]" strokeWidth={1.9} />
                 </div>
                 <h3 className="text-[1.05rem] font-semibold">{title}</h3>
@@ -589,8 +589,8 @@ export default function PressPage() {
               <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
                 <HexSwatch name="Navy surface" hex="#0B1220" />
                 <HexSwatch name="Deep well" hex="#040810" />
-                <HexSwatch name="Teal accent" hex="#2DD4A8" />
-                <HexSwatch name="Teal light" hex="#5EEBC8" />
+                <HexSwatch name="Teal accent" hex="#5BA88C" />
+                <HexSwatch name="Teal light" hex="#93D4BA" />
                 <HexSwatch name="Indigo" hex="#818CF8" />
                 <HexSwatch name="Blue" hex="#60A5FA" />
                 <HexSwatch name="Purple" hex="#A78BFA" />
@@ -677,7 +677,7 @@ export default function PressPage() {
           <div className="relative overflow-hidden rounded-3xl border border-ink/10 bg-panel p-8 md:p-10">
             <div
               aria-hidden
-              className="pointer-events-none absolute -left-16 -top-16 h-72 w-72 rounded-full bg-[#2DD4A8] opacity-[0.08] blur-[110px]"
+              className="pointer-events-none absolute -left-16 -top-16 h-72 w-72 rounded-full bg-[#5BA88C] opacity-[0.08] blur-[110px]"
             />
             <div className="relative">
               <Eyebrow>Contact</Eyebrow>

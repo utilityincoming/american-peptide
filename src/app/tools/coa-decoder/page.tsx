@@ -64,7 +64,7 @@ const STATUS_STYLES: Record<FieldStatus, { icon: typeof CheckCircle2; color: str
 }
 
 function gradeColor(grade: string): string {
-  if (grade === 'A' || grade === 'B') return 'text-accent border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.08]'
+  if (grade === 'A' || grade === 'B') return 'text-accent border-accent/30 bg-accent/[0.08]'
   if (grade === 'C') return 'text-amber-400 border-amber-400/30 bg-amber-400/[0.08]'
   return 'text-red-400 border-red-400/30 bg-red-400/[0.08]'
 }
@@ -205,7 +205,7 @@ export default function CoaDecoderPage() {
         <div className="mx-auto max-w-4xl">
           <h1 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
             Decode &{' '}
-            <span className="bg-gradient-to-r from-[#2DD4A8] to-[#5EEBC8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] to-[#93D4BA] bg-clip-text text-transparent">
               grade a COA
             </span>
           </h1>
@@ -239,7 +239,7 @@ export default function CoaDecoderPage() {
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Paste your Certificate of Analysis text here — or drop a PDF / click Upload."
                 rows={10}
-                className="w-full resize-y rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-4 font-mono text-sm text-ink/85 placeholder:text-ink/25 focus:border-[#2DD4A8]/40 focus:outline-none"
+                className="w-full resize-y rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-4 font-mono text-sm text-ink/85 placeholder:text-ink/25 focus:border-accent/40 focus:outline-none"
               />
               {fileBusy && (
                 <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-surface/70 text-sm text-ink/70">
@@ -258,7 +258,7 @@ export default function CoaDecoderPage() {
               <button
                 onClick={analyze}
                 disabled={loading || text.trim().length < 20}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-[#2DD4A8] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0] disabled:cursor-not-allowed disabled:opacity-40"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0] disabled:cursor-not-allowed disabled:opacity-40"
               >
                 <FileSearch className="h-4 w-4" />
                 {loading ? 'Analyzing…' : 'Analyze COA'}
@@ -344,7 +344,7 @@ export default function CoaDecoderPage() {
                     </div>
                     <div className="h-2 overflow-hidden rounded-full bg-ink/[0.06]">
                       <div
-                        className="h-full rounded-full bg-gradient-to-r from-[#2DD4A8] to-[#5EEBC8]"
+                        className="h-full rounded-full bg-gradient-to-r from-[#5BA88C] to-[#93D4BA]"
                         style={{ width: `${report.score.percent}%` }}
                       />
                     </div>
@@ -500,7 +500,7 @@ export default function CoaDecoderPage() {
 
               {/* Supplier request — operationalize the gaps */}
               {report.missing.length > 0 && (
-                <div className="rounded-2xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] p-6">
+                <div className="rounded-2xl border border-accent/20 bg-accent/[0.05] p-6">
                   <div className="mb-2.5 flex items-center gap-2">
                     <Send className="h-4 w-4 text-accent" />
                     <h2 className="text-sm font-semibold">Ask your supplier</h2>
@@ -508,7 +508,7 @@ export default function CoaDecoderPage() {
                   <p className="mb-3 text-sm leading-relaxed text-ink/65">{report.supplierRequest}</p>
                   <button
                     onClick={() => copy('supplier', report.supplierRequest)}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1.5 text-xs font-medium text-accent transition-colors hover:bg-[#2DD4A8]/[0.14]"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-accent/25 bg-accent/[0.08] px-3 py-1.5 text-xs font-medium text-accent transition-colors hover:bg-accent/[0.14]"
                   >
                     {copied === 'supplier' ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
                     {copied === 'supplier' ? 'Copied' : 'Copy supplier request'}

@@ -81,7 +81,7 @@ const DRUGS: Drug[] = [
     approvedYear: 2020,
     expandedIndications: 'Bardet-Biedl syndrome, Alström syndrome',
     route: 'Daily subcutaneous injection',
-    accent: '#2DD4A8',
+    accent: '#5BA88C',
   },
   {
     id: 'bremelanotide',
@@ -192,7 +192,7 @@ const PIPELINE: PipelineEntry[] = [
 ]
 
 const MATURITY = {
-  approved:   { label: 'Approved',        dot: 'bg-[#2DD4A8]',    badge: 'bg-[#2DD4A8]/10 text-accent border-[#2DD4A8]/20',      ring: 'border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.03]' },
+  approved:   { label: 'Approved',        dot: 'bg-[#5BA88C]',    badge: 'bg-accent/10 text-accent border-accent/20',      ring: 'border-accent/20 bg-accent/[0.03]' },
   clinical:   { label: 'Clinical Trials', dot: 'bg-amber-400',    badge: 'bg-amber-500/10 text-amber-400 border-amber-500/20',       ring: 'border-amber-500/15 bg-amber-500/[0.02]'  },
   preclinical:{ label: 'Preclinical',     dot: 'bg-ink/20',     badge: 'bg-ink/[0.04] text-ink/35 border-ink/10',            ring: 'border-ink/[0.07] bg-ink/[0.015]'     },
 }
@@ -234,7 +234,7 @@ function Tag({ label, accent = false }: { label: string; accent?: boolean }) {
   return (
     <span
       className={`rounded-md px-2.5 py-1 text-[11px] font-medium ${
-        accent ? 'bg-[#2DD4A8]/10 text-accent' : 'bg-ink/[0.05] text-ink/50'
+        accent ? 'bg-accent/10 text-accent' : 'bg-ink/[0.05] text-ink/50'
       }`}
     >
       {label}
@@ -444,13 +444,13 @@ function ToolCard({
       href={href}
       className={`group flex flex-col rounded-2xl border p-6 transition-all duration-200 ${
         accent
-          ? 'border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.05] hover:border-[#2DD4A8]/40 hover:bg-[#2DD4A8]/[0.08]'
+          ? 'border-accent/25 bg-accent/[0.05] hover:border-accent/40 hover:bg-accent/[0.08]'
           : 'border-ink/[0.07] bg-ink/[0.025] hover:border-ink/[0.12] hover:bg-ink/[0.035]'
       }`}
     >
       <div
         className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl ${
-          accent ? 'bg-[#2DD4A8]/15 text-accent' : 'bg-ink/[0.06] text-ink/50'
+          accent ? 'bg-accent/15 text-accent' : 'bg-ink/[0.06] text-ink/50'
         }`}
       >
         {icon}
@@ -485,7 +485,7 @@ export default function MelanocortinPage() {
             backgroundSize: '28px 28px',
           }}
         />
-        <div className="absolute -top-40 right-1/3 h-[450px] w-[450px] rounded-full bg-[#2DD4A8] opacity-[0.06] blur-[130px]" />
+        <div className="absolute -top-40 right-1/3 h-[450px] w-[450px] rounded-full bg-[#5BA88C] opacity-[0.06] blur-[130px]" />
         <div className="absolute top-1/2 left-1/4 h-80 w-80 rounded-full bg-purple-500 opacity-[0.03] blur-[100px]" />
         <div className="absolute bottom-0 right-1/2 h-96 w-96 rounded-full bg-amber-500 opacity-[0.025] blur-[120px]" />
       </div>
@@ -505,17 +505,17 @@ export default function MelanocortinPage() {
 
         {/* ── Hero ── */}
         <section className="mb-20 max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.07] px-3.5 py-1.5 text-xs font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/[0.07] px-3.5 py-1.5 text-xs font-medium text-accent">
             <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2DD4A8] opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2DD4A8]" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5BA88C] opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#5BA88C]" />
             </span>
             Therapeutic Class Review · Melanocortin System
           </div>
           <h1 className="mb-5 text-4xl font-bold leading-tight tracking-tight md:text-6xl">
             Melanocortin Agonist
             <br />
-            <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#818cf8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#818cf8] bg-clip-text text-transparent">
               Research Hub
             </span>
           </h1>
@@ -610,8 +610,8 @@ export default function MelanocortinPage() {
                   <Radar
                     name="Setmelanotide"
                     dataKey="Setmelanotide"
-                    stroke="#2DD4A8"
-                    fill="#2DD4A8"
+                    stroke="#5BA88C"
+                    fill="#5BA88C"
                     fillOpacity={0.13}
                     strokeWidth={2}
                   />
@@ -664,7 +664,7 @@ export default function MelanocortinPage() {
                   <span
                     className={`inline-flex rounded-lg px-3 py-1 text-xs font-semibold ${
                       item.status === 'active'
-                        ? 'bg-[#2DD4A8]/10 text-accent'
+                        ? 'bg-accent/10 text-accent'
                         : 'bg-amber-500/10 text-amber-400'
                     }`}
                   >
@@ -697,7 +697,7 @@ export default function MelanocortinPage() {
             title="Where to Source"
             subtitle="Trust-ranked vendors for PT-141, melanotan-1, and related melanocortin research peptides — ranked by purity documentation, not commission"
           />
-          <SourcingCard slugs={['pt-141', 'melanotan-1']} accent="#2DD4A8" />
+          <SourcingCard slugs={['pt-141', 'melanotan-1']} accent="#5BA88C" />
         </section>
 
         {/* ── Research Tools ── */}

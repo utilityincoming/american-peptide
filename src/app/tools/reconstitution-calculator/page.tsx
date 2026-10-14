@@ -103,7 +103,7 @@ export default function ReconstitutionCalculatorPage() {
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Page identity ── */}
       <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
+        <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-accent/15">
           <Syringe className="h-4 w-4 text-accent" strokeWidth={1.75} />
         </div>
         <span className="text-sm font-medium">Reconstitution Calculator</span>
@@ -116,7 +116,7 @@ export default function ReconstitutionCalculatorPage() {
         {/* ── Beta calculator link ── */}
         <Link
           href="/tools/calculator-beta"
-          className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-4 py-2.5 text-xs transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+          className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-4 py-2.5 text-xs transition-colors hover:border-accent/25 hover:bg-ink/[0.04]"
         >
           <span className="text-ink/55">
             <span className="font-semibold text-accent">New ·</span> Try the
@@ -294,14 +294,14 @@ export default function ReconstitutionCalculatorPage() {
           <h2 className="mb-4 text-xl font-semibold tracking-tight">Storage Guidelines</h2>
           <ul className="space-y-2.5 text-sm leading-relaxed text-ink/65">
             <li className="flex gap-2">
-              <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#2DD4A8]/60" />
+              <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent/60" />
               <span>
                 <span className="font-medium text-ink/85">Unreconstituted:</span> room
                 temperature or refrigerated, away from light.
               </span>
             </li>
             <li className="flex gap-2">
-              <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#2DD4A8]/60" />
+              <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent/60" />
               <span>
                 <span className="font-medium text-ink/85">Reconstituted:</span> refrigerated
                 at 2–8°C, use within 4–6 weeks.
@@ -368,8 +368,8 @@ function CopyLinkButton() {
       aria-label="Copy a shareable link to this configuration"
       className={`inline-flex flex-shrink-0 items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] font-medium transition-colors ${
         copied
-          ? 'border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.08] text-accent'
-          : 'border-ink/[0.1] bg-ink/[0.02] text-ink/55 hover:border-[#2DD4A8]/25 hover:text-ink/85'
+          ? 'border-accent/30 bg-accent/[0.08] text-accent'
+          : 'border-ink/[0.1] bg-ink/[0.02] text-ink/55 hover:border-accent/25 hover:text-ink/85'
       }`}
     >
       {copied ? (
@@ -418,7 +418,7 @@ function NumberField({
               onClick={() => onPreset(n)}
               className={`rounded-full border px-2.5 py-0.5 text-[11px] transition-colors ${
                 String(n) === value
-                  ? 'border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.08] text-accent'
+                  ? 'border-accent/30 bg-accent/[0.08] text-accent'
                   : 'border-ink/[0.08] bg-ink/[0.02] text-ink/55 hover:border-ink/[0.15] hover:text-ink/85'
               }`}
             >
@@ -434,7 +434,7 @@ function NumberField({
         step="any"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-2.5 font-mono text-base text-ink outline-none transition-colors focus:border-[#2DD4A8]/40"
+        className="w-full rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-2.5 font-mono text-base text-ink outline-none transition-colors focus:border-accent/40"
       />
       {hint && <p className="mt-1 text-[10px] text-ink/30">{hint}</p>}
     </div>
@@ -456,7 +456,7 @@ function ResultCard({
     <div
       className={`rounded-2xl border p-4 ${
         highlight
-          ? 'border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.04]'
+          ? 'border-accent/25 bg-accent/[0.04]'
           : 'border-ink/[0.07] bg-ink/[0.025]'
       }`}
     >
@@ -523,7 +523,7 @@ function SyringeDiagram({ units }: { units: number }) {
           width={fillW}
           height={BARREL_H}
           rx="2"
-          fill="#2DD4A8"
+          fill="#5BA88C"
           fillOpacity="0.28"
         />
       )}
@@ -533,7 +533,7 @@ function SyringeDiagram({ units }: { units: number }) {
           y1={BARREL_Y - 2}
           x2={BARREL_X + fillW}
           y2={BARREL_Y + BARREL_H + 2}
-          stroke="#2DD4A8"
+          stroke="#5BA88C"
           strokeWidth="1.5"
         />
       )}
@@ -604,9 +604,9 @@ function SyringeDiagram({ units }: { units: number }) {
             width="48"
             height="18"
             rx="3"
-            fill="#2DD4A8"
+            fill="#5BA88C"
             fillOpacity="0.15"
-            stroke="#2DD4A8"
+            stroke="#5BA88C"
             strokeOpacity="0.4"
             strokeWidth="0.75"
           />
@@ -614,7 +614,7 @@ function SyringeDiagram({ units }: { units: number }) {
             x={Math.max(BARREL_X + 24, Math.min(labelX, BARREL_X + BARREL_W - 24))}
             y={BARREL_Y + BARREL_H + 21}
             textAnchor="middle"
-            className="fill-[#2DD4A8]"
+            className="fill-[#5BA88C]"
             style={{ fontSize: '11px', fontFamily: 'monospace', fontWeight: 600 }}
           >
             {clamped.toFixed(1)} u
@@ -660,7 +660,7 @@ function ReferenceTable({
                     key={w}
                     className={`px-3 py-2.5 text-right font-mono tabular-nums ${
                       isCurrent
-                        ? 'bg-[#2DD4A8]/[0.1] font-semibold text-accent'
+                        ? 'bg-accent/[0.1] font-semibold text-accent'
                         : 'text-ink/65'
                     }`}
                   >
@@ -678,7 +678,7 @@ function ReferenceTable({
 
 function Step({ n }: { n: number }) {
   return (
-    <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] font-mono text-[11px] font-semibold text-accent">
+    <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-accent/25 bg-accent/[0.08] font-mono text-[11px] font-semibold text-accent">
       {n}
     </span>
   )

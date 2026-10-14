@@ -78,7 +78,7 @@ export async function generateMetadata({
   }
 }
 
-const A = '#2DD4A8'
+const A = '#5BA88C'
 
 export default async function VendorReviewPage({
   params,
@@ -179,7 +179,7 @@ export default async function VendorReviewPage({
         <div className="relative mx-auto grid max-w-4xl gap-8 md:grid-cols-[1fr_auto] md:items-center">
           <div>
             <div className="mb-5 flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+              <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
                 <ShieldCheck className="h-3 w-3" />
                 Independent review
               </span>
@@ -214,7 +214,7 @@ export default async function VendorReviewPage({
               <span className="text-lg font-medium text-ink/40">/100</span>
             </div>
             <p className="mt-1 text-[11px] uppercase tracking-wider text-ink/40">The Standard</p>
-            <span className="mt-3 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-medium text-accent">
+            <span className="mt-3 rounded-full border border-accent/25 bg-accent/[0.08] px-3 py-1 text-[11px] font-medium text-accent">
               {tierMeta.label}
             </span>
           </div>
@@ -223,7 +223,7 @@ export default async function VendorReviewPage({
 
       <div className="mx-auto max-w-4xl space-y-12 px-6 py-12 md:px-10">
         {/* Verdict */}
-        <section className="rounded-2xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-6">
+        <section className="rounded-2xl border border-accent/15 bg-accent/[0.04] p-6">
           <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-accent/80">
             The verdict
           </h2>
@@ -352,7 +352,7 @@ export default async function VendorReviewPage({
             href={href}
             target="_blank"
             rel="sponsored nofollow noopener"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-[#2DD4A8] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
           >
             Go to {v.name}
             <ArrowUpRight className="h-4 w-4" />
@@ -393,7 +393,7 @@ export default async function VendorReviewPage({
                   <Link
                     key={slug}
                     href={`/catalog/${slug}`}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
                   >
                     {hasSourcingPage(slug) && <span className="text-accent">·</span>}
                     {p.name}
@@ -436,7 +436,7 @@ export default async function VendorReviewPage({
             <Link
               key={l.href}
               href={l.href}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
             >
               {l.label}
               <ArrowRight className="h-3 w-3" />
@@ -471,7 +471,7 @@ function VendorRow({ v }: { v: Vendor }) {
   return (
     <Link
       href={`/vendors/${v.id}`}
-      className="group flex items-center gap-4 rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-4 transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+      className="group flex items-center gap-4 rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-4 transition-colors hover:border-accent/25 hover:bg-ink/[0.04]"
     >
       <div
         className="flex h-11 w-14 shrink-0 flex-col items-center justify-center rounded-lg"

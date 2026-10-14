@@ -41,7 +41,7 @@ const FLAG_DOT: Record<FlagLevel, string> = {
 }
 
 const SCORE_CHIP: Record<string, string> = {
-  straightforward: 'border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.10] text-accent',
+  straightforward: 'border-accent/30 bg-accent/[0.10] text-accent',
   moderate: 'border-amber-500/30 bg-amber-500/[0.10] text-amber-400',
   challenging: 'border-red-500/30 bg-red-500/[0.10] text-red-400',
 }
@@ -312,7 +312,7 @@ export default function DesignLabPage() {
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Page identity ── */}
       <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
+        <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-accent/15">
           <Dna className="h-4 w-4 text-accent" strokeWidth={1.75} />
         </div>
         <span className="text-sm font-medium">Design Lab</span>
@@ -362,7 +362,7 @@ export default function DesignLabPage() {
               <button
                 type="button"
                 onClick={randomize}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] px-2.5 py-1.5 text-xs text-ink/60 transition-colors hover:border-[#2DD4A8]/25 hover:text-accent"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] px-2.5 py-1.5 text-xs text-ink/60 transition-colors hover:border-accent/25 hover:text-accent"
               >
                 <Shuffle className="h-3.5 w-3.5" />
                 Random
@@ -384,7 +384,7 @@ export default function DesignLabPage() {
             onChange={(e) => setSeq(sanitizeSequence(e.target.value))}
             placeholder="Type or paste single-letter codes, e.g. GEPPPGKPADDAGLV"
             spellCheck={false}
-            className="w-full rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-3 font-mono text-base tracking-wider text-ink placeholder:text-ink/25 outline-none transition-colors focus:border-[#2DD4A8]/40"
+            className="w-full rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-3 font-mono text-base tracking-wider text-ink placeholder:text-ink/25 outline-none transition-colors focus:border-accent/40"
           />
 
           {/* Catalog presets */}
@@ -396,7 +396,7 @@ export default function DesignLabPage() {
                 const hit = PRESETS.find((p) => p.slug === e.target.value)
                 if (hit) setSeq(hit.seq)
               }}
-              className="rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1.5 text-xs text-ink/70 outline-none focus:border-[#2DD4A8]/40"
+              className="rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1.5 text-xs text-ink/70 outline-none focus:border-accent/40"
             >
               <option value="" className="bg-panel">
                 Select a peptide… ({PRESETS.length})
@@ -445,7 +445,7 @@ export default function DesignLabPage() {
             step={0.1}
             value={ph}
             onChange={(e) => setPh(parseFloat(e.target.value))}
-            className="w-full accent-[#2DD4A8]"
+            className="w-full accent-[#5BA88C]"
           />
           <div className="mt-1 flex justify-between text-[10px] text-ink/30">
             <span>0 · acidic</span>
@@ -571,7 +571,7 @@ export default function DesignLabPage() {
               type="button"
               onClick={analyze}
               disabled={analyzing || codes.length < 2}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-1.5 text-xs font-medium text-accent transition-colors hover:bg-[#2DD4A8]/20 disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs font-medium text-accent transition-colors hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {analyzing ? (
                 <>
@@ -616,7 +616,7 @@ export default function DesignLabPage() {
               type="button"
               onClick={predictStructure}
               disabled={folding || codes.length < 2}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-1.5 text-xs font-medium text-accent transition-colors hover:bg-[#2DD4A8]/20 disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs font-medium text-accent transition-colors hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {folding ? (
                 <>
@@ -684,7 +684,7 @@ export default function DesignLabPage() {
               type="button"
               onClick={save}
               disabled={!seq}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.10] bg-ink/[0.04] px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent disabled:cursor-not-allowed disabled:opacity-30"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.10] bg-ink/[0.04] px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent disabled:cursor-not-allowed disabled:opacity-30"
             >
               <Save className="h-3.5 w-3.5" />
               Save design
@@ -693,7 +693,7 @@ export default function DesignLabPage() {
               type="button"
               onClick={share}
               disabled={!seq}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-3 py-1.5 text-xs font-medium text-accent transition-colors hover:bg-[#2DD4A8]/20 disabled:cursor-not-allowed disabled:opacity-30"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs font-medium text-accent transition-colors hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-30"
             >
               {copied ? <Check className="h-3.5 w-3.5" /> : <Share2 className="h-3.5 w-3.5" />}
               {copied ? 'Copied!' : 'Share link'}
@@ -746,7 +746,7 @@ export default function DesignLabPage() {
                   className={
                     'rounded-lg border px-2.5 py-1.5 text-[11px] ' +
                     (i === 1
-                      ? 'border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.08] font-medium text-accent'
+                      ? 'border-accent/30 bg-accent/[0.08] font-medium text-accent'
                       : 'border-ink/[0.07] bg-ink/[0.02] text-ink/55')
                   }
                 >
@@ -767,7 +767,7 @@ export default function DesignLabPage() {
                 href={t.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center justify-between gap-3 rounded-xl border border-ink/[0.06] bg-ink/[0.02] px-4 py-3 transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+                className="group flex items-center justify-between gap-3 rounded-xl border border-ink/[0.06] bg-ink/[0.02] px-4 py-3 transition-colors hover:border-accent/25 hover:bg-ink/[0.04]"
               >
                 <div>
                   <p className="text-sm font-medium text-ink/85">{t.name}</p>
@@ -810,7 +810,7 @@ function StatCard({
     <div
       className={`rounded-2xl border p-4 ${
         highlight
-          ? 'border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.04]'
+          ? 'border-accent/25 bg-accent/[0.04]'
           : 'border-ink/[0.07] bg-ink/[0.025]'
       }`}
     >
