@@ -75,7 +75,7 @@ export default function GlossaryPage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />

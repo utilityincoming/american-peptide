@@ -244,7 +244,7 @@ export default function GHPeptidesPage() {
 
       <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-40"
-          style={{ backgroundImage: 'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
+          style={{ backgroundImage: 'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
         <div className="relative mx-auto max-w-4xl">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <TrendingUp className="h-3 w-3" />

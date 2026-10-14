@@ -6,6 +6,7 @@ import { STATIC_FAQS, faqPageJsonLd } from '@/lib/faqs'
 import FaqAccordion from '@/components/FaqAccordion'
 import DynamicFaqs from '@/components/DynamicFaqs'
 import { DotField, Glow } from '@/components/Backdrop'
+import ContourDivider from '@/components/ContourDivider'
 
 // Home-page metadata. The root layout's title is a generic "AI-Powered Peptide
 // Research"; here we override it with an intent-matched title/description that
@@ -190,7 +191,7 @@ export default function HomePage() {
             <div className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
               <Link
                 href="/research"
-                className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#5BA88C] px-6 py-3.5 text-[15px] font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(45,212,168,0)] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_40px_rgba(45,212,168,0.35)]"
+                className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#5BA88C] px-6 py-3.5 text-[15px] font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(91,168,140,0)] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_40px_rgba(91,168,140,0.35)]"
               >
                 <Sparkles className="h-4 w-4" />
                 Ask the Peptide Agent
@@ -260,6 +261,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <ContourDivider className="mx-auto max-w-6xl px-6 py-2 md:px-10" />
+
       {/* ── Reconstitution Calculator Spotlight ──
           The bench tool people reach for daily. It gets its own real estate
           right below the hero, with a live worked example that deep-links into
@@ -309,7 +312,7 @@ export default function HomePage() {
               <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
                 <Link
                   href="/tools/reconstitution-calculator"
-                  className="group inline-flex items-center gap-2 rounded-xl bg-[#5BA88C] px-6 py-3 text-sm font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(45,212,168,0)] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_40px_rgba(45,212,168,0.35)]"
+                  className="group inline-flex items-center gap-2 rounded-xl bg-[#5BA88C] px-6 py-3 text-sm font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(91,168,140,0)] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_40px_rgba(91,168,140,0.35)]"
                 >
                   <Syringe className="h-4 w-4" />
                   Open the calculator
@@ -359,7 +362,7 @@ export default function HomePage() {
       <section className="relative z-10 mx-auto max-w-6xl px-6 pb-24 md:px-10">
         <Link
           href="/catalog"
-          className="group relative block overflow-hidden rounded-3xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] via-[#5BA88C]/[0.03] to-transparent p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-[0_24px_80px_-16px_rgba(45,212,168,0.14)] md:p-12"
+          className="group relative block overflow-hidden rounded-3xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] via-[#5BA88C]/[0.03] to-transparent p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-[0_24px_80px_-16px_rgba(91,168,140,0.14)] md:p-12"
         >
           <DotField size={24} className="opacity-40" />
           <Glow className="-right-32 -top-32 h-80 w-80 opacity-[0.08] transition-opacity duration-500 group-hover:opacity-[0.14]" />
@@ -387,7 +390,7 @@ export default function HomePage() {
               </p>
 
               <div className="flex flex-wrap items-center gap-4">
-                <span className="inline-flex items-center gap-2 rounded-xl bg-[#5BA88C] px-6 py-3 text-sm font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(45,212,168,0)] transition-all group-hover:bg-[#34ddb0] group-hover:shadow-[0_0_40px_rgba(45,212,168,0.35)]">
+                <span className="inline-flex items-center gap-2 rounded-xl bg-[#5BA88C] px-6 py-3 text-sm font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(91,168,140,0)] transition-all group-hover:bg-[#34ddb0] group-hover:shadow-[0_0_40px_rgba(91,168,140,0.35)]">
                   Open Catalog
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
@@ -461,7 +464,7 @@ export default function HomePage() {
             <Link
               key={name}
               href={href}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-8 shadow-[0_1px_0_rgba(255,255,255,0.04)_inset] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)]"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-8 shadow-[0_1px_0_rgba(255,255,255,0.04)_inset] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.14)]"
             >
               {/* Top accent line revealed on hover */}
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#5BA88C]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -642,7 +645,7 @@ function HeroMolecule() {
             cy="248"
             r="158"
             fill="none"
-            stroke="rgba(45,212,168,0.16)"
+            stroke="rgba(91,168,140,0.16)"
             strokeWidth="1"
             strokeDasharray="3 9"
           />
@@ -661,7 +664,7 @@ function HeroMolecule() {
                 y1={s.y1}
                 x2={s.x2}
                 y2={s.y2}
-                stroke="rgba(45,212,168,0.35)"
+                stroke="rgba(91,168,140,0.35)"
                 strokeWidth="2.5"
                 strokeLinecap="round"
               />
@@ -673,7 +676,7 @@ function HeroMolecule() {
           <polyline
             points={nodes.map((n) => `${n.x},${n.y}`).join(' ')}
             fill="none"
-            stroke="rgba(45,212,168,0.55)"
+            stroke="rgba(91,168,140,0.55)"
             strokeWidth="3.5"
             strokeLinecap="round"
             strokeLinejoin="round"

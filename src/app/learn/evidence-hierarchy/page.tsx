@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, ChevronRight } from 'lucide-react'
+import { EvidenceLegend } from '@/components/evidence'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -182,7 +183,7 @@ export default function EvidenceHierarchyPage() {
 
       <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-14 md:px-10">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-30"
-          style={{ backgroundImage: 'radial-gradient(circle, rgba(45,212,168,0.08) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
+          style={{ backgroundImage: 'radial-gradient(circle, rgba(91,168,140,0.08) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
         <div className="relative mx-auto max-w-3xl">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             Learning guide · evidence quality
@@ -334,6 +335,10 @@ export default function EvidenceHierarchyPage() {
                   <ChevronRight className="h-3.5 w-3.5 text-ink/20 group-hover:text-ink/50" />
                 </Link>
               ))}
+            </div>
+
+            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+              <EvidenceLegend />
             </div>
 
             <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">

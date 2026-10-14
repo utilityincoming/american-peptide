@@ -101,7 +101,7 @@ export default function CompoundsPage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -148,7 +148,7 @@ export default function CompoundsPage() {
         <div className="mb-12 grid gap-4 sm:grid-cols-2">
           <Link
             href="/compounds/builder"
-            className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] to-transparent p-5 transition-all hover:border-accent/35 hover:shadow-[0_8px_40px_rgba(45,212,168,0.08)]"
+            className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] to-transparent p-5 transition-all hover:border-accent/35 hover:shadow-[0_8px_40px_rgba(91,168,140,0.08)]"
           >
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
               <Dna className="h-5 w-5" strokeWidth={1.75} />
@@ -300,7 +300,7 @@ function MonographCard({ peptide }: { peptide: Peptide }) {
   return (
     <Link
       href={`/catalog/${peptide.slug}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.14)]"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#5BA88C]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 

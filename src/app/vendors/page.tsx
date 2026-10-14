@@ -84,7 +84,7 @@ export default function VendorsIndexPage() {
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
-            backgroundImage: 'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -152,7 +152,7 @@ export default function VendorsIndexPage() {
                   >
                     <div
                       className="flex h-14 w-16 shrink-0 flex-col items-center justify-center rounded-xl"
-                      style={{ backgroundColor: 'rgba(45,212,168,0.10)' }}
+                      style={{ backgroundColor: 'rgba(91,168,140,0.10)' }}
                     >
                       <span className="text-2xl font-bold text-accent">{score}</span>
                       <span className="text-[8px] uppercase tracking-wide text-ink/35">/100</span>
