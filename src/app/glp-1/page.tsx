@@ -851,7 +851,7 @@ function ReferenceEdition() {
       </p>
       <Link
         href="/catalog"
-        className="flex items-center justify-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+        className="flex items-center justify-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
       >
         Browse catalog
         <ArrowRight className="h-4 w-4" />

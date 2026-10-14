@@ -175,7 +175,7 @@ export default function OfflineReference() {
             type="button"
             onClick={download}
             disabled={!online}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-4 py-2 text-xs font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0] disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-4 py-2 text-xs font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A] disabled:cursor-not-allowed disabled:opacity-50"
             title={!online ? 'Reconnect to download' : undefined}
           >
             <CloudDownload className="h-3.5 w-3.5" />

@@ -79,7 +79,7 @@ export default function AgentPrompt({
         <button
           type="submit"
           disabled={!q.trim()}
-          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-3 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0] disabled:cursor-not-allowed disabled:opacity-40"
+          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-3 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A] disabled:cursor-not-allowed disabled:opacity-40"
         >
           Ask Peptide Agent
           <ArrowRight className="h-4 w-4" />

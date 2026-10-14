@@ -113,7 +113,7 @@ export default function TrialsPage() {
             )}
             <button
               type="submit"
-              className="rounded-lg bg-[#5BA88C] px-3 py-1 text-xs font-medium text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+              className="rounded-lg bg-[#5BA88C] px-3 py-1 text-xs font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
             >
               Search
             </button>

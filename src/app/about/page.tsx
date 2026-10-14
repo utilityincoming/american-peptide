@@ -243,7 +243,7 @@ export default function AboutPage() {
               >
                 <div>
                   <div className="mb-3 flex items-center gap-3">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#5BA88C] text-[#0B1220]">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#5BA88C] text-[#0E1512]">
                       <Send className="h-5 w-5" strokeWidth={2} />
                     </div>
                     <div>
@@ -280,7 +280,7 @@ export default function AboutPage() {
               >
                 <div>
                   <div className="mb-3 flex items-center gap-3">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#5BA88C] text-[#0B1220]">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#5BA88C] text-[#0E1512]">
                       <svg
                         viewBox="0 0 24 24"
                         fill="currentColor"
@@ -329,7 +329,7 @@ export default function AboutPage() {
               </div>
               <Link
                 href="/about/contact"
-                className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
               >
                 Get in touch
                 <ArrowRight className="h-4 w-4" />

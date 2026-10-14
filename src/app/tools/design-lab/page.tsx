@@ -289,7 +289,7 @@ export default function DesignLabPage() {
       // Keep the molecular stage dark in both themes (matches the synthesis
       // visuals); read the token so it tracks any future palette change.
       const vizBg =
-        getComputedStyle(document.documentElement).getPropertyValue('--viz').trim() || '#0B1220'
+        getComputedStyle(document.documentElement).getPropertyValue('--viz').trim() || '#0E1512'
       const viewer = mol.createViewer(el, { backgroundColor: vizBg })
       viewer.addModel(data.pdb, 'pdb')
       viewer.setStyle(

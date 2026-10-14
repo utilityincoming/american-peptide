@@ -26,7 +26,7 @@ export default function ThemeToggle() {
     // Keep the mobile browser-chrome color in sync with the applied theme.
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', next === 'light' ? '#F7F9FB' : '#0B1220')
+      ?.setAttribute('content', next === 'light' ? '#F7F9FB' : '#0E1512')
     try {
       localStorage.setItem('theme', next)
     } catch {

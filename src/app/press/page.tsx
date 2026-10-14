@@ -577,7 +577,7 @@ export default function PressPage() {
               <p className="mt-4 text-[13px] leading-relaxed text-ink/60">
                 A peptide backbone with two side chains - the residue-and-bond motif that runs through
                 the site&apos;s hero and figures. Set the wordmark in Space Grotesk; keep the mark in
-                teal on a dark ground, or in ink on light. Give it clear space equal to one node.
+                verdigris on a dark ground, or in ink on light. Give it clear space equal to one node.
               </p>
             </div>
 
@@ -587,14 +587,14 @@ export default function PressPage() {
                 Color · click to copy
               </span>
               <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
-                <HexSwatch name="Navy surface" hex="#0B1220" />
-                <HexSwatch name="Deep well" hex="#040810" />
-                <HexSwatch name="Teal accent" hex="#5BA88C" />
-                <HexSwatch name="Teal light" hex="#93D4BA" />
+                <HexSwatch name="Basalt surface" hex="#0E1512" />
+                <HexSwatch name="Deep well" hex="#070B09" />
+                <HexSwatch name="Verdigris accent" hex="#5BA88C" />
+                <HexSwatch name="Verdigris light" hex="#93D4BA" />
                 <HexSwatch name="Indigo" hex="#818CF8" />
                 <HexSwatch name="Blue" hex="#60A5FA" />
                 <HexSwatch name="Purple" hex="#A78BFA" />
-                <HexSwatch name="Amber" hex="#F5B544" />
+                <HexSwatch name="Amber" hex="#E0A23D" />
               </div>
             </div>
 

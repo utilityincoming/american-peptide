@@ -472,7 +472,7 @@ export default function MadeInUsaPage() {
                                     href={vendorHref(v)}
                                     target="_blank"
                                     rel="sponsored nofollow noopener"
-                                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-4 py-2 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+                                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-4 py-2 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
                                   >
                                     Visit {v.name}
                                     <ArrowUpRight className="h-4 w-4" />
@@ -581,7 +581,7 @@ export default function MadeInUsaPage() {
             {!IS_APP_BUILD && (
               <div className="rounded-xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.07] to-transparent p-5">
                 <div className="mb-3 flex items-center gap-3">
-                  <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#5BA88C] text-[#0B1220]">
+                  <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#5BA88C] text-[#0E1512]">
                     <Send className="h-4 w-4" strokeWidth={2} />
                   </div>
                   <div>
@@ -602,7 +602,7 @@ export default function MadeInUsaPage() {
                   href={COMMUNITY_PATH}
                   target="_blank"
                   rel="nofollow noopener"
-                  className="flex items-center justify-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+                  className="flex items-center justify-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
                 >
                   Join the group
                   <ArrowRight className="h-4 w-4" />
@@ -695,7 +695,7 @@ function ReferenceEdition() {
       </p>
       <Link
         href="/catalog"
-        className="flex items-center justify-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+        className="flex items-center justify-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
       >
         Browse catalog
         <ArrowRight className="h-4 w-4" />

@@ -154,7 +154,7 @@ export default function DevelopersPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/catalog"
-              className="inline-flex items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
             >
               Browse the catalog
               <ArrowRight className="h-4 w-4" />

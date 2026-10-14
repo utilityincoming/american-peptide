@@ -191,7 +191,7 @@ export default function HomePage() {
             <div className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
               <Link
                 href="/research"
-                className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#5BA88C] px-6 py-3.5 text-[15px] font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(91,168,140,0)] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_40px_rgba(91,168,140,0.35)]"
+                className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#5BA88C] px-6 py-3.5 text-[15px] font-semibold text-[#0E1512] shadow-[0_0_0px_rgba(91,168,140,0)] transition-all hover:bg-[#6FBF9A] hover:shadow-[0_0_40px_rgba(91,168,140,0.35)]"
               >
                 <Sparkles className="h-4 w-4" />
                 Ask the Peptide Agent
@@ -312,7 +312,7 @@ export default function HomePage() {
               <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
                 <Link
                   href="/tools/reconstitution-calculator"
-                  className="group inline-flex items-center gap-2 rounded-xl bg-[#5BA88C] px-6 py-3 text-sm font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(91,168,140,0)] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_40px_rgba(91,168,140,0.35)]"
+                  className="group inline-flex items-center gap-2 rounded-xl bg-[#5BA88C] px-6 py-3 text-sm font-semibold text-[#0E1512] shadow-[0_0_0px_rgba(91,168,140,0)] transition-all hover:bg-[#6FBF9A] hover:shadow-[0_0_40px_rgba(91,168,140,0.35)]"
                 >
                   <Syringe className="h-4 w-4" />
                   Open the calculator
@@ -390,7 +390,7 @@ export default function HomePage() {
               </p>
 
               <div className="flex flex-wrap items-center gap-4">
-                <span className="inline-flex items-center gap-2 rounded-xl bg-[#5BA88C] px-6 py-3 text-sm font-semibold text-[#0B1220] shadow-[0_0_0px_rgba(91,168,140,0)] transition-all group-hover:bg-[#34ddb0] group-hover:shadow-[0_0_40px_rgba(91,168,140,0.35)]">
+                <span className="inline-flex items-center gap-2 rounded-xl bg-[#5BA88C] px-6 py-3 text-sm font-semibold text-[#0E1512] shadow-[0_0_0px_rgba(91,168,140,0)] transition-all group-hover:bg-[#6FBF9A] group-hover:shadow-[0_0_40px_rgba(91,168,140,0.35)]">
                   Open Catalog
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
@@ -579,7 +579,7 @@ export default function HomePage() {
           </p>
           <Link
             href="/research"
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
           >
             <Sparkles className="h-4 w-4" />
             Ask the Agent
