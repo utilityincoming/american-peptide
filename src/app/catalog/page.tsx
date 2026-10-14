@@ -153,7 +153,7 @@ export default function CatalogPage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -364,7 +364,7 @@ function PeptideCard({
   return (
     <div
       className={
-        'group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)] ' +
+        'group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.14)] ' +
         (selected
           ? 'border-accent/55 bg-accent/[0.05]'
           : 'border-ink/[0.07] hover:border-accent/25')

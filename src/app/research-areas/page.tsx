@@ -90,7 +90,7 @@ export default function ResearchAreasPage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -134,7 +134,7 @@ export default function ResearchAreasPage() {
             <Link
               key={area.slug}
               href={`/research-areas/${area.slug}`}
-              className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.12)]"
+              className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.12)]"
             >
               <div className="mb-3 flex items-center justify-between">
                 <span className="inline-flex items-center gap-1.5 text-[11px] text-ink/40">

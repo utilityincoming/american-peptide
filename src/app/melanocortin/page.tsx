@@ -481,7 +481,7 @@ export default function MelanocortinPage() {
           className="absolute inset-0 opacity-[0.08]"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.18) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(91,168,140,0.18) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />

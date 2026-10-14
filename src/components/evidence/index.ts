@@ -1,4 +1,5 @@
 export { default as TierBadge } from './TierBadge'
 export { default as EvidenceFloor } from './EvidenceFloor'
+export { default as EvidenceLegend } from './EvidenceLegend'
 export { HUE_CLASSES, formatRetrieved } from './tierStyles'
 export type { HueClasses } from './tierStyles'

@@ -172,7 +172,7 @@ export default async function VendorReviewPage({
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-30"
           style={{
-            backgroundImage: 'radial-gradient(circle, rgba(45,212,168,0.08) 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, rgba(91,168,140,0.08) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />

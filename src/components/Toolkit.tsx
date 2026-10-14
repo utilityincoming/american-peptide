@@ -87,7 +87,7 @@ export default function Toolkit({
           <Link
             key={t.href}
             href={t.href}
-            className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-gradient-to-br from-[#5BA88C]/[0.06] to-transparent p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.18)]"
+            className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-gradient-to-br from-[#5BA88C]/[0.06] to-transparent p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.18)]"
           >
             <div className="mb-3 flex items-center justify-between">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
