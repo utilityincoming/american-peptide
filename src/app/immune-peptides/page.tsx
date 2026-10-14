@@ -140,7 +140,7 @@ const compounds = [
     slug: 'thymosin-beta-4',
     name: 'Thymosin β4',
     axis: 'Immune–Repair Bridge',
-    axisColor: '#34D399',
+    axisColor: '#6FBF9A',
     receptor: 'G-actin (sequestration), ILK',
     pathway: 'Actin dynamics, Ac-SDKP → anti-inflammatory',
     chainLength: '43 aa',
@@ -417,9 +417,9 @@ export default function ImmunePeptidesPage() {
 
       {/* ── Thymosin β4 bridge callout ── */}
       <section className="mx-auto max-w-5xl px-6 pb-16 md:px-10">
-        <div className="rounded-2xl border border-[#34D399]/20 bg-[#34D399]/[0.04] p-6 md:p-8">
+        <div className="rounded-2xl border border-[#6FBF9A]/20 bg-[#6FBF9A]/[0.04] p-6 md:p-8">
           <div className="mb-4 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#34D399]/25 bg-[#34D399]/10 text-accent">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#6FBF9A]/25 bg-[#6FBF9A]/10 text-accent">
               <Activity className="h-5 w-5" strokeWidth={1.75} />
             </div>
             <div>
@@ -454,7 +454,7 @@ export default function ImmunePeptidesPage() {
                 desc: 'Residues 17–23 (LKKTETQ) — retains actin-binding activity, easier to synthesize',
               },
             ].map(({ label, desc }) => (
-              <div key={label} className="rounded-xl border border-[#34D399]/15 bg-[#34D399]/[0.04] p-4">
+              <div key={label} className="rounded-xl border border-[#6FBF9A]/15 bg-[#6FBF9A]/[0.04] p-4">
                 <p className="mb-1.5 text-xs font-semibold text-accent">{label}</p>
                 <p className="text-xs leading-relaxed text-ink/50">{desc}</p>
               </div>
@@ -464,7 +464,7 @@ export default function ImmunePeptidesPage() {
           <div className="mt-4 flex gap-3">
             <Link
               href="/catalog/thymosin-beta-4"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[#34D399]/20 px-3 py-1.5 text-xs font-medium text-accent/80 transition-colors hover:border-[#34D399]/40 hover:text-accent"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-[#6FBF9A]/20 px-3 py-1.5 text-xs font-medium text-accent/80 transition-colors hover:border-[#6FBF9A]/40 hover:text-accent"
             >
               Thymosin β4 catalog entry <ArrowRight className="h-3 w-3" />
             </Link>
@@ -528,7 +528,7 @@ export default function ImmunePeptidesPage() {
                 {
                   name: 'Thymosin β4',
                   axis: 'Repair bridge',
-                  axisColor: '#34D399',
+                  axisColor: '#6FBF9A',
                   evidence: 'Phase 1/2 (wound healing)',
                   evidenceColor: 'text-blue-400',
                   human: 'Phase 1/2 wound-healing trials',
@@ -537,7 +537,7 @@ export default function ImmunePeptidesPage() {
                 {
                   name: 'TB-500 (Tβ4 fragment)',
                   axis: 'Repair bridge',
-                  axisColor: '#34D399',
+                  axisColor: '#6FBF9A',
                   evidence: 'Preclinical',
                   evidenceColor: 'text-amber-400',
                   human: 'None',

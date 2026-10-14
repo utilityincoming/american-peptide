@@ -112,7 +112,7 @@ export default function CompoundsPage() {
           </div>
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             Every peptide, one lookup —{' '}
-            <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
               verified first.
             </span>
           </h1>
@@ -148,7 +148,7 @@ export default function CompoundsPage() {
         <div className="mb-12 grid gap-4 sm:grid-cols-2">
           <Link
             href="/compounds/builder"
-            className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-accent/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-5 transition-all hover:border-accent/35 hover:shadow-[0_8px_40px_rgba(45,212,168,0.08)]"
+            className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] to-transparent p-5 transition-all hover:border-accent/35 hover:shadow-[0_8px_40px_rgba(45,212,168,0.08)]"
           >
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
               <Dna className="h-5 w-5" strokeWidth={1.75} />
@@ -205,7 +205,7 @@ export default function CompoundsPage() {
             </div>
             <Link
               href="/catalog"
-              className="hidden shrink-0 items-center gap-1 text-sm font-medium text-accent transition-colors hover:text-[#5EEBC8] sm:inline-flex"
+              className="hidden shrink-0 items-center gap-1 text-sm font-medium text-accent transition-colors hover:text-[#93D4BA] sm:inline-flex"
             >
               All {LISTED_PEPTIDES.length}
               <ArrowRight className="h-3.5 w-3.5" />
@@ -302,7 +302,7 @@ function MonographCard({ peptide }: { peptide: Peptide }) {
       href={`/catalog/${peptide.slug}`}
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)]"
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2DD4A8]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#5BA88C]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       <div className="mb-3 flex items-start justify-between gap-3">
         <div className="min-w-0">

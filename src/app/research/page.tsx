@@ -363,7 +363,7 @@ export default function ResearchPage() {
               onClick={() => sendMessage(input)}
               disabled={!input.trim() || loading}
               aria-label="Send message"
-              className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-[#2DD4A8] text-[#0B1220] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_20px_rgba(45,212,168,0.3)] disabled:cursor-not-allowed disabled:opacity-25"
+              className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-[#5BA88C] text-[#0B1220] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_20px_rgba(45,212,168,0.3)] disabled:cursor-not-allowed disabled:opacity-25"
             >
               <Send className="h-3.5 w-3.5" />
             </button>

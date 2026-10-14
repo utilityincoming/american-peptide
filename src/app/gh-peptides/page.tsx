@@ -44,7 +44,7 @@ const RECEPTOR_CLASSES = [
   {
     label: 'GHRH analogs',
     receptor: 'GHRHR (pituitary)',
-    color: '#2DD4A8',
+    color: '#5BA88C',
     how: 'Mimic the hypothalamic signal that prompts pituitary somatotrophs to synthesize and release GH. DPP-4-resistant substitutions extend stability from the native ~7-minute half-life. The DAC addition to CJC-1295 further extends to ~7 days via albumin binding.',
     members: ['Sermorelin (GHRH 1–29)', 'CJC-1295 no DAC (Mod GRF 1-29)', 'CJC-1295 with DAC', 'Tesamorelin (FDA-approved)'],
   },
@@ -67,7 +67,7 @@ const COMPOUNDS = [
     release: 'Pulsatile',
     fda: true,
     fdaNote: 'Discontinued (1990)',
-    color: '#2DD4A8',
+    color: '#5BA88C',
     note: 'Shortest active GHRH fragment; historically the first GHRH analog FDA-approved (pediatric GH deficiency), later discontinued commercially.',
   },
   {
@@ -78,7 +78,7 @@ const COMPOUNDS = [
     halfLife: '~30 min',
     release: 'Pulsatile',
     fda: false,
-    color: '#2DD4A8',
+    color: '#5BA88C',
     note: 'Four DPP-4-resistant substitutions extend stability vs sermorelin. The preferred pairing with ipamorelin for pulsatile GH research.',
   },
   {
@@ -89,7 +89,7 @@ const COMPOUNDS = [
     halfLife: '~6–8 days',
     release: 'Sustained',
     fda: false,
-    color: '#2DD4A8',
+    color: '#5BA88C',
     note: 'Albumin-binding DAC moiety extends half-life to ~a week. Studied for sustained IGF-1 elevation; blunts natural GH pulsatility.',
   },
   {
@@ -101,7 +101,7 @@ const COMPOUNDS = [
     release: 'Pulsatile',
     fda: true,
     fdaNote: 'Approved (2010, Egrifta)',
-    color: '#34D399',
+    color: '#6FBF9A',
     note: 'Only currently FDA-approved GH-axis peptide. Approved for HIV-associated visceral lipodystrophy. Also studied for cognition and hepatic fat.',
   },
   {
@@ -253,7 +253,7 @@ export default function GHPeptidesPage() {
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             Growth Hormone
             <br />
-            <span className="bg-gradient-to-r from-[#2DD4A8] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
               Secretagogue Research
             </span>
           </h1>

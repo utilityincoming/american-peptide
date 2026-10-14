@@ -108,7 +108,7 @@ export default function AboutPage() {
           </div>
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             Peptide science, made{' '}
-            <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
               legible and honest
             </span>
           </h1>
@@ -239,11 +239,11 @@ export default function AboutPage() {
                 href={TELEGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col justify-between rounded-2xl border border-accent/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-6 transition-colors hover:border-accent/40"
+                className="group flex flex-col justify-between rounded-2xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] to-transparent p-6 transition-colors hover:border-accent/40"
               >
                 <div>
                   <div className="mb-3 flex items-center gap-3">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#2DD4A8] text-[#0B1220]">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#5BA88C] text-[#0B1220]">
                       <Send className="h-5 w-5" strokeWidth={2} />
                     </div>
                     <div>
@@ -276,11 +276,11 @@ export default function AboutPage() {
                 href="https://x.com/USPeptide"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col justify-between rounded-2xl border border-accent/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-6 transition-colors hover:border-accent/40"
+                className="group flex flex-col justify-between rounded-2xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] to-transparent p-6 transition-colors hover:border-accent/40"
               >
                 <div>
                   <div className="mb-3 flex items-center gap-3">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#2DD4A8] text-[#0B1220]">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#5BA88C] text-[#0B1220]">
                       <svg
                         viewBox="0 0 24 24"
                         fill="currentColor"
@@ -329,7 +329,7 @@ export default function AboutPage() {
               </div>
               <Link
                 href="/about/contact"
-                className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#2DD4A8] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
               >
                 Get in touch
                 <ArrowRight className="h-4 w-4" />

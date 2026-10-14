@@ -97,7 +97,7 @@ export default function ResearchUseGate() {
           ref={buttonRef}
           type="button"
           onClick={acknowledge}
-          className="mt-6 w-full rounded-xl bg-[#2DD4A8] px-5 py-3 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4A8]/60"
+          className="mt-6 w-full rounded-xl bg-[#5BA88C] px-5 py-3 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5BA88C]/60"
         >
           I understand
         </button>

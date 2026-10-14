@@ -45,12 +45,12 @@ favicon:
 
 | Surface | Mark | Colors |
 |---|---|---|
-| Header (`SiteHeader.tsx`) | Teal rounded square + white double-arc "helix" strokes, wordmark `AmericanPeptide` (one word) | accent `#2DD4A8`, ink `#0B1220` |
+| Header (`SiteHeader.tsx`) | Teal rounded square + white double-arc "helix" strokes, wordmark `AmericanPeptide` (one word) | accent `#5BA88C`, ink `#0B1220` |
 | Favicon (`public/favicon.svg`) | Navy gradient square + `AP` letterform + decorative chains | **`#00d4aa` / `#00e5b0` / `#0d1b2a`** — a *different* teal and navy |
-| OG image (`src/lib/og.tsx`) | Three/four colored dots + wordmark `American Peptide` (two-tone, spaced) | `#2DD4A8` + `#818CF8` + `#60A5FA` + `#A78BFA` |
+| OG image (`src/lib/og.tsx`) | Three/four colored dots + wordmark `American Peptide` (two-tone, spaced) | `#5BA88C` + `#818CF8` + `#60A5FA` + `#A78BFA` |
 
 Three logos means the brand has no single recognizable asset. The favicon's
-palette (`#00d4aa`, navy `#0d1b2a`) doesn't match the site's tokens (`#2DD4A8`,
+palette (`#00d4aa`, navy `#0d1b2a`) doesn't match the site's tokens (`#5BA88C`,
 surface `#0B1220`), so the browser-tab color reads subtly "off."
 
 **Next steps**
@@ -165,9 +165,9 @@ Smaller, lower-risk refinements. Grouped so they can be picked off individually.
   "hero" moments.
 
 **Color & accents**
-- Many teal values are hard-coded hex (`#2DD4A8`, `#5EEBC8`, `#34ddb0`) instead
+- Many teal values are hard-coded hex (`#5BA88C`, `#93D4BA`, `#34ddb0`) instead
   of the `--accent` token, so light mode and any future palette tweak won't
-  reach them. Sweep literal `#2DD4A8`/gradient stops toward tokens where the
+  reach them. Sweep literal `#5BA88C`/gradient stops toward tokens where the
   element should follow the theme. (Intentional exceptions: the `--viz` stage
   and OG images, which stay dark by design.)
 - The category accent palette (indigo/blue/purple/amber) is defined but

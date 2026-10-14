@@ -29,7 +29,7 @@ const ICONS: Record<string, LucideIcon> = {
   Truck,
 }
 
-const TEAL = '#2DD4A8'
+const TEAL = '#5BA88C'
 const FAINT = 'rgba(255,255,255,0.12)'
 
 /**
@@ -500,7 +500,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
                   }
                   aria-label={`Go to step ${s.num}: ${s.title}`}
                   className={`h-1.5 flex-1 rounded-full transition-colors ${
-                    i === active ? 'bg-[#2DD4A8]' : 'bg-ink/10 hover:bg-ink/25'
+                    i === active ? 'bg-[#5BA88C]' : 'bg-ink/10 hover:bg-ink/25'
                   }`}
                 />
               ))}

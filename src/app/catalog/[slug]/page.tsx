@@ -395,7 +395,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
             <PeptideStory peptide={peptide} />
 
             {/* Handling, storage & why purity is hard — universal consumer-hardening callout */}
-            <div className="rounded-2xl border border-accent/15 bg-gradient-to-br from-[#2DD4A8]/[0.05] to-transparent p-6">
+            <div className="rounded-2xl border border-accent/15 bg-gradient-to-br from-[#5BA88C]/[0.05] to-transparent p-6">
               <div className="mb-3 flex items-center gap-2.5">
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
                   <Factory className="h-4 w-4" strokeWidth={1.75} />

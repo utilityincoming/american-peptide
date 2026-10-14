@@ -165,7 +165,7 @@ export default function CatalogPage() {
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             The peptide reference catalog,
             <br />
-            <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
               built for research transparency.
             </span>
           </h1>
@@ -207,7 +207,7 @@ export default function CatalogPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search peptides, aliases, or research areas…"
-              className="w-full rounded-xl border border-ink/[0.07] bg-ink/[0.03] py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/30 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
+              className="w-full rounded-xl border border-ink/[0.07] bg-ink/[0.03] py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/30 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#5BA88C]/40"
             />
             {query && (
               <button
@@ -411,7 +411,7 @@ function PeptideCard({
       </button>
 
       <div className="pointer-events-none relative z-10 flex h-full flex-col">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#2DD4A8]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#5BA88C]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
         <div className="mb-3 flex items-start justify-between gap-3 pr-24">
           <div className="min-w-0">
@@ -517,7 +517,7 @@ function CompareBar({
           {canCompare ? (
             <Link
               href={`/catalog/compare?ids=${selected.join(',')}`}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-[#2DD4A8] px-4 py-1.5 text-xs font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-4 py-1.5 text-xs font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
             >
               Compare
               <ArrowRight className="h-3.5 w-3.5" />
