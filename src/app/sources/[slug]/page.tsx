@@ -144,7 +144,7 @@ export default async function SourcesPage({
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             {peptide.name} sources,
             <br />
-            <span className="bg-gradient-to-r from-[#2DD4A8] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
               tiered by what backs the claim
             </span>
           </h1>

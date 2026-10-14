@@ -44,7 +44,7 @@ const LEVELS = [
   {
     level: '2',
     label: 'In vivo — rodent models',
-    color: '#34D399',
+    color: '#6FBF9A',
     strength: 'Moderate (preclinical)',
     what: 'Studies in living animals — usually rats or mice, often using disease models (surgically created tendon injuries, chemically induced colitis, diet-induced obesity).',
     tells: 'A compound can produce measurable effects in a mammalian biological system, with real pharmacokinetics and immune responses.',
@@ -84,7 +84,7 @@ const LEVELS = [
   {
     level: '6',
     label: 'FDA approval + post-market (Phase 4)',
-    color: '#2DD4A8',
+    color: '#5BA88C',
     strength: 'Strongest (for approved indication only)',
     what: 'Regulatory approval means the Phase 3 evidence met the FDA standard for safety and efficacy for a specific indication. Post-approval surveillance continues.',
     tells: 'The compound is reliably beneficial for the approved indication in the studied population. Real-world use data accumulates after approval.',
@@ -190,7 +190,7 @@ export default function EvidenceHierarchyPage() {
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             How to read
             <br />
-            <span className="bg-gradient-to-r from-[#2DD4A8] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
               peptide research
             </span>
           </h1>
@@ -275,9 +275,9 @@ export default function EvidenceHierarchyPage() {
                   </thead>
                   <tbody className="divide-y divide-ink/[0.04]">
                     {[
-                      { compounds: 'Semaglutide, Tirzepatide', level: 'Phase 3 + FDA approved', color: '#2DD4A8', note: 'Multiple large RCTs; head-to-head data' },
-                      { compounds: 'Tesamorelin', level: 'Phase 3 + FDA approved', color: '#2DD4A8', note: 'Approved for specific HIV-related indication only' },
-                      { compounds: 'PT-141 (Bremelanotide)', level: 'Phase 3 + FDA approved', color: '#2DD4A8', note: 'Approved for HSDD in premenopausal women' },
+                      { compounds: 'Semaglutide, Tirzepatide', level: 'Phase 3 + FDA approved', color: '#5BA88C', note: 'Multiple large RCTs; head-to-head data' },
+                      { compounds: 'Tesamorelin', level: 'Phase 3 + FDA approved', color: '#5BA88C', note: 'Approved for specific HIV-related indication only' },
+                      { compounds: 'PT-141 (Bremelanotide)', level: 'Phase 3 + FDA approved', color: '#5BA88C', note: 'Approved for HSDD in premenopausal women' },
                       { compounds: 'SS-31 / Elamipretide', level: 'Phase 2–3 (investigational)', color: '#FB923C', note: 'Clinical trials in mitochondrial disease; not approved' },
                       { compounds: 'Retatrutide', level: 'Phase 2', color: '#FBBF24', note: 'Phase 2 weight-loss data; Phase 3 ongoing' },
                       { compounds: 'Cagrilintide, CJC-1295', level: 'Phase 1–2', color: '#FBBF24', note: 'Human PK/PD data; limited efficacy trials' },

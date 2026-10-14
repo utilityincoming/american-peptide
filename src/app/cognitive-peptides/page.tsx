@@ -42,7 +42,7 @@ const COMPOUNDS = [
     mechanism: 'BDNF / NGF upregulation; melanocortin signaling without HPA activation',
     areas: ['Ischemic stroke recovery', 'Cognition', 'Neuroprotection'],
     evidence: 'Clinical (Russia) / Preclinical (global)',
-    color: '#2DD4A8',
+    color: '#5BA88C',
     note: 'Used clinically in Russia for stroke and cognitive disorders. Key distinguishing feature: derived from ACTH but does not activate the HPA stress axis. The most studied nootropic peptide in this cluster.',
   },
   {
@@ -145,7 +145,7 @@ export default function CognitivePeptidesPage() {
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             Cognitive &amp; Nootropic
             <br />
-            <span className="bg-gradient-to-r from-[#818CF8] to-[#2DD4A8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#818CF8] to-[#5BA88C] bg-clip-text text-transparent">
               Peptide Research
             </span>
           </h1>
@@ -210,7 +210,7 @@ export default function CognitivePeptidesPage() {
               <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">Related research areas</h2>
               <div className="grid gap-3 sm:grid-cols-3">
                 {[
-                  { href: '/research-areas/cognition-neuroprotection', label: 'Cognition & Neuroprotection', color: '#2DD4A8' },
+                  { href: '/research-areas/cognition-neuroprotection', label: 'Cognition & Neuroprotection', color: '#5BA88C' },
                   { href: '/research-areas/anxiety-mood', label: 'Anxiety, Mood & Stress', color: '#818CF8' },
                   { href: '/research-areas/sleep-circadian', label: 'Sleep & Circadian Rhythm', color: '#FB923C' },
                 ].map((ra) => (

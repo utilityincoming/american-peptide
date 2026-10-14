@@ -298,7 +298,7 @@ export default function PeptideForgePage() {
             </div>
             <div className="h-2 overflow-hidden rounded-full bg-ink/[0.06]">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-[#2DD4A8] to-[#5EEBC8] transition-all duration-500"
+                className="h-full rounded-full bg-gradient-to-r from-[#5BA88C] to-[#93D4BA] transition-all duration-500"
                 style={{ width: `${pct}%` }}
               />
             </div>
@@ -471,7 +471,7 @@ export default function PeptideForgePage() {
           </div>
 
           {/* Synthesis CTA */}
-          <div className="overflow-hidden rounded-2xl border border-accent/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-5 md:p-6">
+          <div className="overflow-hidden rounded-2xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] to-transparent p-5 md:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="min-w-0">
                 <h2 className="flex items-center gap-2 text-base font-semibold">
@@ -486,7 +486,7 @@ export default function PeptideForgePage() {
               </div>
               <Link
                 href="/catalog"
-                className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#2DD4A8] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
               >
                 Browse the catalog
                 <ArrowRight className="h-4 w-4" />
@@ -534,7 +534,7 @@ export default function PeptideForgePage() {
                       className={
                         'mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border ' +
                         (done
-                          ? 'border-accent bg-[#2DD4A8] text-[#0B1220]'
+                          ? 'border-accent bg-[#5BA88C] text-[#0B1220]'
                           : 'border-ink/20')
                       }
                     >

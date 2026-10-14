@@ -11,7 +11,7 @@ import AgentPrompt from '@/components/AgentPrompt'
 import LastUpdated from '@/components/LastUpdated'
 
 const SITE = 'https://americanpeptide.com'
-const A = '#2DD4A8'
+const A = '#5BA88C'
 const B = '#818CF8'
 
 interface RouteParams {

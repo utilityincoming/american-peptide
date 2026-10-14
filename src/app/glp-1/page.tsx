@@ -67,7 +67,7 @@ const AGONISTS = [
     weightLoss: '~15%',
     trial: 'STEP-1',
     halfLife: '~168 h',
-    accent: '#2DD4A8',
+    accent: '#5BA88C',
     highlight: false,
   },
   {
@@ -158,7 +158,7 @@ const AGONISTS = [
     weightLoss: '~6%',
     trial: 'STEP 8',
     halfLife: '~13 h',
-    accent: '#2DD4A8',
+    accent: '#5BA88C',
     highlight: false,
   },
 ]
@@ -302,7 +302,7 @@ export default function GLP1Page() {
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             GLP-1 &amp; Incretin Peptide
             <br />
-            <span className="bg-gradient-to-r from-[#2DD4A8] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
               Research Guide
             </span>
           </h1>
@@ -369,7 +369,7 @@ export default function GLP1Page() {
                   {
                     label: 'Mono-agonism',
                     icon: <Zap className="h-4 w-4" />,
-                    color: '#2DD4A8',
+                    color: '#5BA88C',
                     drugs: 'Semaglutide, liraglutide',
                     desc: 'GLP-1R only. Benchmark for glucose control, satiety, and weight reduction.',
                   },
@@ -851,7 +851,7 @@ function ReferenceEdition() {
       </p>
       <Link
         href="/catalog"
-        className="flex items-center justify-center gap-2 rounded-lg bg-[#2DD4A8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+        className="flex items-center justify-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
       >
         Browse catalog
         <ArrowRight className="h-4 w-4" />

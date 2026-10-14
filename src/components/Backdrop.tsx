@@ -45,7 +45,7 @@ export function Glow({ className = '', intensity, blur = 120 }: GlowProps) {
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute rounded-full bg-[#2DD4A8] ${className}`}
+      className={`pointer-events-none absolute rounded-full bg-[#5BA88C] ${className}`}
       style={{ ...(intensity !== undefined && { opacity: intensity }), filter: `blur(${blur}px)` }}
     />
   )

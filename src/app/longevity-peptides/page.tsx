@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 const AXES = [
   {
     label: 'Mitochondrial signaling',
-    color: '#2DD4A8',
+    color: '#5BA88C',
     desc: 'Peptides encoded by or targeted at mitochondria — regulating energy metabolism as retrograde signals from the organelle to the cell.',
     peptides: ['MOTS-c (mitochondria-derived, AMPK)', 'SS-31 / elamipretide (cardiolipin stabilization)'],
   },
@@ -62,7 +62,7 @@ const COMPOUNDS = [
     axis: 'Mitochondrial signaling',
     mechanism: 'AMPK activation; folate–methionine cycle modulation',
     evidence: 'Preclinical',
-    color: '#2DD4A8',
+    color: '#5BA88C',
     note: 'Unique: encoded in mitochondrial DNA (12S rRNA region) rather than the nuclear genome. AMPK activation proposed as a retrograde stress signal from mitochondrion to cell. Declines with age.',
   },
   {
@@ -71,7 +71,7 @@ const COMPOUNDS = [
     axis: 'Mitochondrial signaling',
     mechanism: 'Cardiolipin binding; ETC efficiency',
     evidence: 'Clinical trials',
-    color: '#2DD4A8',
+    color: '#5BA88C',
     note: 'Most clinically advanced compound in this cluster. Tetrapeptide that concentrates in the inner mitochondrial membrane and binds cardiolipin. Trials in primary mitochondrial myopathy, Barth syndrome, and heart failure. Not FDA-approved.',
   },
   {

@@ -70,6 +70,7 @@ html.light {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-space-grotesk);
+  --font-serif: var(--font-spectral); /* "Survey" heading face — document of record */
 }
 
 html {
@@ -93,11 +94,13 @@ html.theme-ready body * {
   }
 }
 
-/* Display typeface for headings — rolled out site-wide. Utility classes like
-   `tracking-[...]` still override letter-spacing where set (higher specificity). */
+/* Heading typeface — the "Survey" serif (Spectral), rolled out site-wide for a
+   document-of-record authority. Falls back to the display sans, then system
+   serif. Utility classes like `tracking-[...]` still override letter-spacing
+   where set (higher specificity). */
 :is(h1, h2, h3) {
-  font-family: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
-  letter-spacing: -0.02em;
+  font-family: var(--font-spectral), var(--font-space-grotesk), Georgia, serif;
+  letter-spacing: -0.01em;
 }
 
 /* ── Hero molecular visual ── */

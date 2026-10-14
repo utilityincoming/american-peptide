@@ -82,7 +82,7 @@ export default function CompoundSearch() {
             className="flex-1 bg-transparent text-sm text-ink placeholder-ink/20 outline-none"
           />
           {status === 'loading' && (
-            <div className="h-4 w-4 animate-spin rounded-full border-2 border-accent/30 border-t-[#2DD4A8]" />
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-accent/30 border-t-[#5BA88C]" />
           )}
         </div>
         <p className="mt-2 ml-1 text-[10px] text-ink/20">

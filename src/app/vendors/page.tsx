@@ -95,7 +95,7 @@ export default function VendorsIndexPage() {
           </div>
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             Peptide vendor{' '}
-            <span className="bg-gradient-to-r from-[#2DD4A8] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
               reviews
             </span>
           </h1>
@@ -124,7 +124,7 @@ export default function VendorsIndexPage() {
             </p>
             <Link
               href="/catalog"
-              className="inline-flex items-center gap-2 rounded-lg bg-[#2DD4A8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
             >
               Browse catalog
               <ArrowRight className="h-4 w-4" />
