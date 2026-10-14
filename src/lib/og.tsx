@@ -128,14 +128,14 @@ function BrandChip() {
         <polyline
           points="9,21 16,11 23,21"
           fill="none"
-          stroke="#0B1220"
+          stroke="#0E1512"
           strokeWidth={3}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <circle cx="9" cy="21" r="4.1" fill="#0B1220" />
-        <circle cx="16" cy="11" r="4.6" fill="#0B1220" />
-        <circle cx="23" cy="21" r="4.1" fill="#0B1220" />
+        <circle cx="9" cy="21" r="4.1" fill="#0E1512" />
+        <circle cx="16" cy="11" r="4.6" fill="#0E1512" />
+        <circle cx="23" cy="21" r="4.1" fill="#0E1512" />
       </svg>
     </div>
   )
@@ -194,7 +194,7 @@ export function ogImage({
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: '72px',
-        backgroundColor: '#0B1220',
+        backgroundColor: '#0E1512',
         backgroundImage: `radial-gradient(900px 520px at 88% -12%, ${rgba(accent, 0.2)}, transparent), radial-gradient(760px 520px at -8% 118%, ${rgba(accent, 0.12)}, transparent)`,
         color: '#ffffff',
         fontFamily: '"Space Grotesk", sans-serif',
