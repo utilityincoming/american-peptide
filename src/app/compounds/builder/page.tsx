@@ -486,7 +486,7 @@ export default function PeptideForgePage() {
               </div>
               <Link
                 href="/catalog"
-                className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
               >
                 Browse the catalog
                 <ArrowRight className="h-4 w-4" />
@@ -534,7 +534,7 @@ export default function PeptideForgePage() {
                       className={
                         'mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border ' +
                         (done
-                          ? 'border-accent bg-[#5BA88C] text-[#0B1220]'
+                          ? 'border-accent bg-[#5BA88C] text-[#0E1512]'
                           : 'border-ink/20')
                       }
                     >

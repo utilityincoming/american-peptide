@@ -37,7 +37,7 @@ export function BrandChip({ className }: { className?: string }) {
         'flex items-center justify-center rounded-lg bg-[#5BA88C] ' + (className ?? 'h-8 w-8')
       }
     >
-      <BrandGlyph className="h-1/2 w-1/2 text-[#0B1220]" />
+      <BrandGlyph className="h-1/2 w-1/2 text-[#0E1512]" />
     </div>
   )
 }

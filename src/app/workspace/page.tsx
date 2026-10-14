@@ -137,7 +137,7 @@ export default function WorkspacePage() {
               <div className="flex flex-wrap justify-center gap-3">
                 <Link
                   href="/catalog"
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0B1220] hover:bg-[#34ddb0]"
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] hover:bg-[#6FBF9A]"
                 >
                   Browse the catalog <ArrowRight className="h-4 w-4" />
                 </Link>

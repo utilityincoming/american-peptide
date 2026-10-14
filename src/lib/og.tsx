@@ -32,7 +32,7 @@ const CATEGORY_ACCENT: Record<string, string> = {
   cosmetic: '#F0ABFC',
   reproductive: '#F472B6',
   immune: '#6FBF9A',
-  mitochondrial: '#F5B544',
+  mitochondrial: '#E0A23D',
   bioregulator: '#38BDF8',
   'peptide-hormone': '#5BA88C',
 }

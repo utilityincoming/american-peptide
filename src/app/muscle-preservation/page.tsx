@@ -356,7 +356,7 @@ export default function MusclePreservationPage() {
                 </p>
                 <div className="flex h-8 w-full overflow-hidden rounded-lg">
                   <div
-                    className="flex items-center justify-center text-[11px] font-medium text-[#0B1220]"
+                    className="flex items-center justify-center text-[11px] font-medium text-[#0E1512]"
                     style={{ width: '68%', backgroundColor: '#5BA88C' }}
                   >
                     ~60–75% fat
@@ -431,7 +431,7 @@ export default function MusclePreservationPage() {
                   <polygon points="606,143 598,139 598,147" fill="currentColor" fillOpacity="0.3" />
                   <rect x="608" y="116" width="132" height="54" rx="9" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeOpacity="0.14" />
                   <text x="674" y="139" textAnchor="middle" fontSize="11.5" fill="currentColor" fillOpacity="0.55" fontWeight="600">Muscle growth</text>
-                  <text x="674" y="156" textAnchor="middle" fontSize="11" fill="#F87171" fillOpacity="0.9">◀ braked</text>
+                  <text x="674" y="156" textAnchor="middle" fontSize="11" fill="#D97070" fillOpacity="0.9">◀ braked</text>
 
                   {/* follistatin — natural antagonist sequestering the ligand */}
                   <path d="M200 108 C 214 124, 238 118, 260 114" fill="none" stroke="#6FBF9A" strokeOpacity="0.55" strokeWidth="2" strokeDasharray="4 3" />
@@ -441,15 +441,15 @@ export default function MusclePreservationPage() {
                   {/* intervention markers — numbers map to the cards below */}
                   {/* ② precursor */}
                   <circle cx="174" cy="143" r="9.5" fill="#5BA88C" />
-                  <text x="174" y="147" textAnchor="middle" fontSize="11" fontWeight="700" fill="#0B1220">2</text>
+                  <text x="174" y="147" textAnchor="middle" fontSize="11" fontWeight="700" fill="#0E1512">2</text>
 
                   {/* ① ligand */}
                   <circle cx="356" cy="143" r="9.5" fill="#818CF8" />
-                  <text x="356" y="147" textAnchor="middle" fontSize="11" fontWeight="700" fill="#0B1220">1</text>
+                  <text x="356" y="147" textAnchor="middle" fontSize="11" fontWeight="700" fill="#0E1512">1</text>
 
                   {/* ③ receptor */}
                   <circle cx="382" cy="100" r="9.5" fill="#FB923C" />
-                  <text x="382" y="104" textAnchor="middle" fontSize="11" fontWeight="700" fill="#0B1220">3</text>
+                  <text x="382" y="104" textAnchor="middle" fontSize="11" fontWeight="700" fill="#0E1512">3</text>
 
                   {/* the payoff line */}
                   <text x="380" y="248" textAnchor="middle" fontSize="12" fill="#5BA88C" fontWeight="600">
@@ -478,7 +478,7 @@ export default function MusclePreservationPage() {
                   >
                     <div className="mb-2 flex items-center gap-2">
                       <span
-                        className="flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-bold text-[#0B1220]"
+                        className="flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-bold text-[#0E1512]"
                         style={{ backgroundColor: c.color }}
                       >
                         {c.n}

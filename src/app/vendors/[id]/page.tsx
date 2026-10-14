@@ -352,7 +352,7 @@ export default async function VendorReviewPage({
             href={href}
             target="_blank"
             rel="sponsored nofollow noopener"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
           >
             Go to {v.name}
             <ArrowUpRight className="h-4 w-4" />

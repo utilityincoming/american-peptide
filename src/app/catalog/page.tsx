@@ -517,7 +517,7 @@ function CompareBar({
           {canCompare ? (
             <Link
               href={`/catalog/compare?ids=${selected.join(',')}`}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-4 py-1.5 text-xs font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-4 py-1.5 text-xs font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
             >
               Compare
               <ArrowRight className="h-3.5 w-3.5" />
