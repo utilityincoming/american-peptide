@@ -84,13 +84,13 @@ export default function TrialsPage() {
   return (
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Page identity ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-accent/15">
           <Activity className="h-4 w-4 text-accent" strokeWidth={1.75} />
         </div>
         <div>
           <span className="text-sm font-medium">Clinical Trials</span>
-          <span className="ml-2 hidden text-xs text-ink/30 sm:inline">
+          <span className="ml-2 hidden text-xs text-ink/55 sm:inline">
             ClinicalTrials.gov
           </span>
         </div>
@@ -99,8 +99,8 @@ export default function TrialsPage() {
       <main className="mx-auto max-w-5xl px-4 py-8 md:px-6">
         {/* ── Search bar ── */}
         <form onSubmit={handleSubmit} className="mb-5">
-          <div className="flex items-center gap-3 rounded-2xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-3 transition-colors focus-within:border-accent/25">
-            <Search className="h-4 w-4 flex-shrink-0 text-ink/30" />
+          <div className="flex items-center gap-3 rounded-2xl border border-hairline bg-fill px-4 py-3 transition-colors focus-within:border-accent/25">
+            <Search className="h-4 w-4 flex-shrink-0 text-ink/55" />
             <input
               type="text"
               value={query}
@@ -129,7 +129,7 @@ export default function TrialsPage() {
               className={`rounded-full border px-3 py-1 text-xs transition-colors ${
                 filter === f.id
                   ? 'border-accent/30 bg-accent/[0.08] text-accent'
-                  : 'border-ink/[0.08] bg-ink/[0.02] text-ink/50 hover:border-ink/[0.15] hover:text-ink/80'
+                  : 'border-hairline bg-fill text-ink/50 hover:border-hairline-strong hover:text-ink/80'
               }`}
             >
               {f.label}
@@ -139,7 +139,7 @@ export default function TrialsPage() {
 
         {/* ── Counts ── */}
         {status === 'success' && (
-          <p className="mb-5 text-xs text-ink/40">
+          <p className="mb-5 text-xs text-ink/55">
             Showing {filtered.length} of {trials.length} loaded
             {totalCount > trials.length && ` · ${totalCount.toLocaleString()} total matches on ClinicalTrials.gov`}
           </p>
@@ -151,7 +151,7 @@ export default function TrialsPage() {
             {Array.from({ length: 5 }).map((_, i) => (
               <div
                 key={i}
-                className="rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-5"
+                className="rounded-2xl border border-hairline bg-fill p-5"
               >
                 <div className="flex items-center gap-2">
                   <Skeleton className="h-5 w-16" />
@@ -172,9 +172,9 @@ export default function TrialsPage() {
         )}
 
         {status === 'success' && filtered.length === 0 && (
-          <div className="rounded-2xl border border-ink/[0.06] bg-ink/[0.02] py-16 text-center">
+          <div className="rounded-2xl border border-hairline bg-fill py-16 text-center">
             <p className="text-sm text-ink/55">No trials match this filter</p>
-            <p className="mt-1 text-xs text-ink/30">
+            <p className="mt-1 text-xs text-ink/55">
               Try a different filter or search term.
             </p>
           </div>
@@ -199,7 +199,7 @@ function PhaseBadge({ phase }: { phase: string }) {
     'Phase 3': 'border-emerald-400/25 bg-emerald-400/[0.08] text-emerald-300',
   }
   const cls =
-    styles[phase] ?? 'border-ink/[0.08] bg-ink/[0.04] text-ink/55'
+    styles[phase] ?? 'border-hairline bg-fill-strong text-ink/55'
   return (
     <span className={`rounded-md border px-2 py-0.5 text-[10px] font-medium ${cls}`}>
       {phase}
@@ -210,10 +210,10 @@ function PhaseBadge({ phase }: { phase: string }) {
 function StatusBadge({ status }: { status: string }) {
   const styles: Record<string, string> = {
     RECRUITING: 'border-emerald-400/25 bg-emerald-400/[0.08] text-emerald-300',
-    COMPLETED: 'border-ink/[0.1] bg-ink/[0.05] text-ink/55',
+    COMPLETED: 'border-hairline-strong bg-fill-strong text-ink/55',
     ACTIVE_NOT_RECRUITING: 'border-amber-400/25 bg-amber-400/[0.08] text-amber-300',
   }
-  const cls = styles[status] ?? 'border-ink/[0.08] bg-ink/[0.03] text-ink/45'
+  const cls = styles[status] ?? 'border-hairline bg-fill text-ink/55'
   const label = status.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase())
   return (
     <span className={`rounded-md border px-2 py-0.5 text-[10px] font-medium ${cls}`}>
@@ -224,7 +224,7 @@ function StatusBadge({ status }: { status: string }) {
 
 function TrialCard({ trial }: { trial: Trial }) {
   return (
-    <div className="rounded-2xl border border-ink/[0.06] bg-ink/[0.025] p-5 transition-colors hover:border-accent/20">
+    <div className="rounded-2xl border border-hairline bg-fill p-5 transition-colors hover:border-accent/20">
       <div className="mb-2 flex flex-wrap items-center gap-2">
         <a
           href={`https://clinicaltrials.gov/study/${trial.nctId}`}
@@ -243,18 +243,18 @@ function TrialCard({ trial }: { trial: Trial }) {
 
       <h3 className="mb-3 text-sm leading-snug text-ink/85">{trial.title}</h3>
 
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-ink/45">
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-ink/55">
         {trial.sponsor && (
           <span>
-            <span className="text-ink/30">Sponsor:</span>{' '}
+            <span className="text-ink/55">Sponsor:</span>{' '}
             <span className="text-ink/65">{trial.sponsor}</span>
           </span>
         )}
         {trial.enrollment !== null && (
           <span className="flex items-center gap-1">
-            <Users className="h-3 w-3 text-ink/30" />
+            <Users className="h-3 w-3 text-ink/55" />
             <span className="text-ink/65">{trial.enrollment.toLocaleString()}</span>
-            <span className="text-ink/30">enrolled</span>
+            <span className="text-ink/55">enrolled</span>
           </span>
         )}
       </div>

@@ -196,7 +196,7 @@ const TONE: Record<
   },
   stopped: {
     label: 'Halted',
-    className: 'bg-ink/[0.06] text-ink/45',
+    className: 'bg-fill-strong text-ink/55',
     Icon: Ban,
   },
 }
@@ -275,14 +275,14 @@ export default function MusclePreservationPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <Link href="/" className="text-sm text-ink/35 transition-colors hover:text-ink">Home</Link>
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
+        <Link href="/" className="text-sm text-ink/55 transition-colors hover:text-ink">Home</Link>
         <span className="text-ink/20">/</span>
         <span className="truncate text-sm font-medium">Muscle Preservation</span>
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-40"
@@ -311,10 +311,10 @@ export default function MusclePreservationPage() {
             keep the muscle: the activin/myostatin axis, and the antibodies
             being tested on top of the incretins.
           </p>
-          <p className="mt-3 text-xs text-ink/30">
+          <p className="mt-3 text-xs text-ink/55">
             Research reference only. Not medical advice, dosing guidance, or an offer for sale.
           </p>
-          <LastUpdated date={UPDATED} className="mt-4 text-[11px] text-ink/35" />
+          <LastUpdated date={UPDATED} className="mt-4 text-[11px] text-ink/55" />
         </div>
       </section>
 
@@ -324,7 +324,7 @@ export default function MusclePreservationPage() {
 
             {/* ── The problem ── */}
             <section>
-              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 The quality-of-weight-loss problem
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-ink/65">
@@ -350,8 +350,8 @@ export default function MusclePreservationPage() {
               </div>
 
               {/* fat vs lean split — a simple, honest visual */}
-              <div className="mt-6 rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
-                <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-ink/40">
+              <div className="mt-6 rounded-xl border border-hairline bg-fill p-5">
+                <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-ink/55">
                   A typical GLP-1 weight-loss split
                 </p>
                 <div className="flex h-8 w-full overflow-hidden rounded-lg">
@@ -368,7 +368,7 @@ export default function MusclePreservationPage() {
                     ~25–40% lean
                   </div>
                 </div>
-                <p className="mt-3 text-xs leading-relaxed text-ink/40">
+                <p className="mt-3 text-xs leading-relaxed text-ink/55">
                   Proportions vary by drug, dose, and study — tirzepatide’s
                   SURMOUNT-1 DXA substudy put lean mass near the low end (~25%),
                   while some semaglutide substudies land higher. The goal of the
@@ -379,15 +379,15 @@ export default function MusclePreservationPage() {
 
             {/* ── The axis — SVG figure ── */}
             <section>
-              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 One control system: the activin/myostatin axis
               </h2>
-              <p className="mb-6 text-xs text-ink/30">
+              <p className="mb-6 text-xs text-ink/55">
                 Nearly every muscle-preservation agent acts somewhere along this
                 single signaling path — the body’s brake on muscle growth
               </p>
 
-              <figure className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+              <figure className="rounded-xl border border-hairline bg-fill p-5">
                 <svg
                   viewBox="0 0 760 272"
                   className="h-auto w-full text-ink"
@@ -457,7 +457,7 @@ export default function MusclePreservationPage() {
                   </text>
                 </svg>
               </figure>
-              <figcaption className="mt-2 text-[11px] leading-relaxed text-ink/35">
+              <figcaption className="mt-2 text-[11px] leading-relaxed text-ink/55">
                 Myostatin and activin A are TGF-β-family brakes on muscle; they
                 converge on the ActRII receptor and Smad2/3. Each numbered point
                 is where a drug class intervenes — detailed below.
@@ -466,14 +466,14 @@ export default function MusclePreservationPage() {
 
             {/* ── The four intervention classes ── */}
             <section>
-              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 Four ways to release the brake
               </h2>
               <div className="grid gap-5 sm:grid-cols-2">
                 {CLASSES.map((c) => (
                   <div
                     key={c.label}
-                    className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-5"
+                    className="rounded-xl border border-hairline bg-fill p-5"
                     style={{ borderTopColor: c.color, borderTopWidth: 2 }}
                   >
                     <div className="mb-2 flex items-center gap-2">
@@ -490,7 +490,7 @@ export default function MusclePreservationPage() {
                     <p className="mb-4 text-xs leading-relaxed text-ink/55">{c.how}</p>
                     <ul className="space-y-1">
                       {c.members.map((m) => (
-                        <li key={m} className="flex gap-2 text-xs text-ink/45">
+                        <li key={m} className="flex gap-2 text-xs text-ink/55">
                           <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-ink/25" />
                           {m}
                         </li>
@@ -503,10 +503,10 @@ export default function MusclePreservationPage() {
 
             {/* ── The evidence — converging readouts ── */}
             <section>
-              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 What the trials show
               </h2>
-              <p className="mb-6 text-xs text-ink/30">
+              <p className="mb-6 text-xs text-ink/55">
                 Four independent Phase 2 programs, one direction: keep the muscle, shift the loss onto fat
               </p>
               <div className="space-y-4">
@@ -514,19 +514,19 @@ export default function MusclePreservationPage() {
                   <Link
                     key={r.agent}
                     href={`/catalog/${r.slug}`}
-                    className="group flex flex-col gap-1.5 rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5 transition-colors hover:border-ink/[0.12] hover:bg-ink/[0.04]"
+                    className="group flex flex-col gap-1.5 rounded-xl border border-hairline bg-fill p-5 transition-colors hover:border-hairline-strong hover:bg-fill-strong"
                   >
                     <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                       <p className="text-sm font-semibold transition-colors group-hover:text-accent" style={{ color: r.color }}>
                         {r.agent}
                       </p>
-                      <span className="text-[11px] text-ink/35">{r.trial}</span>
+                      <span className="text-[11px] text-ink/55">{r.trial}</span>
                     </div>
                     <p className="text-xs leading-relaxed text-ink/60">{r.finding}</p>
                   </Link>
                 ))}
               </div>
-              <div className="mt-4 flex gap-2 rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4">
+              <div className="mt-4 flex gap-2 rounded-xl border border-hairline bg-fill p-4">
                 <TrendingDown className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" />
                 <p className="text-xs leading-relaxed text-ink/55">
                   <strong className="text-ink/70">The through-line:</strong> in
@@ -541,7 +541,7 @@ export default function MusclePreservationPage() {
 
             {/* ── The pipeline ── */}
             <section>
-              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 The pipeline — honestly
               </h2>
               <div className="space-y-4">
@@ -551,14 +551,14 @@ export default function MusclePreservationPage() {
                     <Link
                       key={p.slug}
                       href={`/catalog/${p.slug}`}
-                      className="group flex flex-col gap-2 rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5 transition-colors hover:border-ink/[0.12] hover:bg-ink/[0.04]"
+                      className="group flex flex-col gap-2 rounded-xl border border-hairline bg-fill p-5 transition-colors hover:border-hairline-strong hover:bg-fill-strong"
                     >
                       <div className="flex flex-wrap items-start justify-between gap-2">
                         <div>
                           <p className="text-sm font-semibold text-ink/90 transition-colors group-hover:text-accent">
                             {p.name}
                           </p>
-                          <p className="text-xs text-ink/35">
+                          <p className="text-xs text-ink/55">
                             {p.target} · {p.sponsor}
                           </p>
                         </div>
@@ -576,7 +576,7 @@ export default function MusclePreservationPage() {
 
             {/* ── The honest state / what's accessible ── */}
             <section>
-              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 Where this actually stands
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-ink/65">
@@ -606,12 +606,12 @@ export default function MusclePreservationPage() {
 
             {/* ── FAQ ── */}
             <section>
-              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 Frequently asked questions
               </h2>
               <div className="space-y-5">
                 {FAQS.map((f) => (
-                  <div key={f.q} className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5">
+                  <div key={f.q} className="rounded-xl border border-hairline bg-fill p-5">
                     <p className="mb-2 text-sm font-semibold text-ink/90">{f.q}</p>
                     <p className="text-sm leading-relaxed text-ink/55">{f.a}</p>
                   </div>
@@ -621,7 +621,7 @@ export default function MusclePreservationPage() {
 
             <section className="flex gap-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5">
               <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400/70" />
-              <p className="text-xs leading-relaxed text-ink/45">
+              <p className="text-xs leading-relaxed text-ink/55">
                 <strong className="text-ink/60">Research reference only.</strong>{' '}
                 Except for garetosmab (approved for FOP only), none of the agents
                 on this page are FDA-approved, and none is approved to preserve
@@ -633,8 +633,8 @@ export default function MusclePreservationPage() {
 
           {/* ── Aside ── */}
           <aside className="space-y-6 lg:sticky lg:top-6 lg:self-start">
-            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
-              <p className="mb-4 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <div className="rounded-xl border border-hairline bg-fill p-5">
+              <p className="mb-4 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 <ShieldCheck className="h-3.5 w-3.5 text-accent/70" />
                 The axis in the catalog
               </p>
@@ -650,19 +650,19 @@ export default function MusclePreservationPage() {
                 <Link
                   key={e.slug}
                   href={`/catalog/${e.slug}`}
-                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-ink/[0.04]"
+                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-fill-strong"
                 >
                   <div>
                     <p className="text-sm font-medium text-ink/80 transition-colors group-hover:text-accent">{e.name}</p>
-                    <p className="text-xs text-ink/30">{e.sub}</p>
+                    <p className="text-xs text-ink/55">{e.sub}</p>
                   </div>
                   <ChevronRight className="h-3.5 w-3.5 text-ink/20 group-hover:text-accent" />
                 </Link>
               ))}
             </div>
 
-            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">Related</p>
+            <div className="rounded-xl border border-hairline bg-fill p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">Related</p>
               {[
                 { href: '/glp-1', label: 'GLP-1 & Metabolic', sub: 'The weight-loss hub' },
                 { href: '/research-areas/muscle-lean-mass', label: 'Muscle & Lean Mass', sub: 'Research-area guide' },
@@ -673,11 +673,11 @@ export default function MusclePreservationPage() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-ink/[0.04]"
+                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-fill-strong"
                 >
                   <div>
                     <p className="text-sm font-medium text-ink/70 transition-colors group-hover:text-ink">{l.label}</p>
-                    <p className="text-xs text-ink/30">{l.sub}</p>
+                    <p className="text-xs text-ink/55">{l.sub}</p>
                   </div>
                   <ChevronRight className="h-3.5 w-3.5 text-ink/20 group-hover:text-ink/50" />
                 </Link>

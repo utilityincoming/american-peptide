@@ -58,7 +58,7 @@ export default function SectionNav() {
   const active = activeHref(pathname, section.tabs)
 
   return (
-    <div className="border-b border-ink/[0.05] bg-surface/60">
+    <div className="border-b border-hairline bg-surface/60">
       <nav className="mx-auto flex max-w-7xl items-center gap-1 overflow-x-auto px-4 py-2 md:px-6">
         {section.tabs.map((t) => {
           const isActive = t.href === active
@@ -71,7 +71,7 @@ export default function SectionNav() {
                 'whitespace-nowrap rounded-full px-3 py-1 text-[13px] transition-colors ' +
                 (isActive
                   ? 'bg-accent/[0.12] font-medium text-accent'
-                  : 'text-ink/50 hover:bg-ink/[0.04] hover:text-ink/80')
+                  : 'text-ink/50 hover:bg-fill-strong hover:text-ink/80')
               }
             >
               {t.label}

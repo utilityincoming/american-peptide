@@ -311,7 +311,7 @@ export default function DesignLabPage() {
   return (
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Page identity ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-accent/15">
           <Dna className="h-4 w-4 text-accent" strokeWidth={1.75} />
         </div>
@@ -353,7 +353,7 @@ export default function DesignLabPage() {
         </div>
 
         {/* ── Sequence input ── */}
-        <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
               Sequence
@@ -362,7 +362,7 @@ export default function DesignLabPage() {
               <button
                 type="button"
                 onClick={randomize}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] px-2.5 py-1.5 text-xs text-ink/60 transition-colors hover:border-accent/25 hover:text-accent"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-hairline px-2.5 py-1.5 text-xs text-ink/60 transition-colors hover:border-accent/25 hover:text-accent"
               >
                 <Shuffle className="h-3.5 w-3.5" />
                 Random
@@ -370,7 +370,7 @@ export default function DesignLabPage() {
               <button
                 type="button"
                 onClick={clear}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] px-2.5 py-1.5 text-xs text-ink/60 transition-colors hover:border-red-400/30 hover:text-red-400/80"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-hairline px-2.5 py-1.5 text-xs text-ink/60 transition-colors hover:border-red-400/30 hover:text-red-400/80"
               >
                 <Trash2 className="h-3.5 w-3.5" />
                 Clear
@@ -384,19 +384,19 @@ export default function DesignLabPage() {
             onChange={(e) => setSeq(sanitizeSequence(e.target.value))}
             placeholder="Type or paste single-letter codes, e.g. GEPPPGKPADDAGLV"
             spellCheck={false}
-            className="w-full rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-3 font-mono text-base tracking-wider text-ink placeholder:text-ink/25 outline-none transition-colors focus:border-accent/40"
+            className="w-full rounded-xl border border-hairline bg-fill px-4 py-3 font-mono text-base tracking-wider text-ink placeholder:text-ink/25 outline-none transition-colors focus:border-accent/40"
           />
 
           {/* Catalog presets */}
           <div className="mt-3 flex flex-wrap items-center gap-2">
-            <span className="text-[11px] text-ink/35">Load from catalog:</span>
+            <span className="text-[11px] text-ink/55">Load from catalog:</span>
             <select
               value=""
               onChange={(e) => {
                 const hit = PRESETS.find((p) => p.slug === e.target.value)
                 if (hit) setSeq(hit.seq)
               }}
-              className="rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1.5 text-xs text-ink/70 outline-none focus:border-accent/40"
+              className="rounded-lg border border-hairline bg-fill px-2.5 py-1.5 text-xs text-ink/70 outline-none focus:border-accent/40"
             >
               <option value="" className="bg-panel">
                 Select a peptide… ({PRESETS.length})
@@ -431,7 +431,7 @@ export default function DesignLabPage() {
         </section>
 
         {/* ── pH slider ── */}
-        <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <div className="mb-2 flex items-center justify-between">
             <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
               pH environment
@@ -447,7 +447,7 @@ export default function DesignLabPage() {
             onChange={(e) => setPh(parseFloat(e.target.value))}
             className="w-full accent-[#5BA88C]"
           />
-          <div className="mt-1 flex justify-between text-[10px] text-ink/30">
+          <div className="mt-1 flex justify-between text-[10px] text-ink/55">
             <span>0 · acidic</span>
             <span>7.4 · physiological</span>
             <span>14 · basic</span>
@@ -489,11 +489,11 @@ export default function DesignLabPage() {
         </section>
 
         {/* ── Composition + sequence ── */}
-        <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
             Composition
           </h2>
-          <div className="mb-3 flex h-2.5 w-full overflow-hidden rounded-full bg-ink/[0.05]">
+          <div className="mb-3 flex h-2.5 w-full overflow-hidden rounded-full bg-fill-strong">
             {AA_CATEGORIES.map((cat) => {
               const n = stats.counts[cat.id]
               const pct = stats.length ? (n / stats.length) * 100 : 0
@@ -517,14 +517,14 @@ export default function DesignLabPage() {
             ))}
           </div>
           {stats.length > 0 && (
-            <p className="mt-4 break-words font-mono text-xs text-ink/45">
+            <p className="mt-4 break-words font-mono text-xs text-ink/55">
               {toThreeLetter(codes)}
             </p>
           )}
         </section>
 
         {/* ── Synthesis difficulty ── */}
-        <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <div className="mb-3 flex items-center justify-between gap-3">
             <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
               Synthesis difficulty
@@ -536,7 +536,7 @@ export default function DesignLabPage() {
             </span>
           </div>
           {difficulty.flags.length === 0 ? (
-            <p className="text-sm text-ink/45">
+            <p className="text-sm text-ink/55">
               No major synthesis liabilities flagged for this sequence.
             </p>
           ) : (
@@ -552,7 +552,7 @@ export default function DesignLabPage() {
               ))}
             </ul>
           )}
-          <p className="mt-3 text-[10px] leading-relaxed text-ink/30">
+          <p className="mt-3 text-[10px] leading-relaxed text-ink/55">
             Heuristic estimate from sequence — see the{' '}
             <Link href="/synthesis" className="text-accent/70 hover:text-accent">
               synthesis guide
@@ -562,7 +562,7 @@ export default function DesignLabPage() {
         </section>
 
         {/* ── AI analysis ── */}
-        <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <div className="mb-3 flex items-center justify-between gap-3">
             <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
               AI design analysis
@@ -597,7 +597,7 @@ export default function DesignLabPage() {
             </div>
           ) : (
             !analyzing && (
-              <p className="text-sm leading-relaxed text-ink/45">
+              <p className="text-sm leading-relaxed text-ink/55">
                 Get a research-framed read on this sequence — charge &amp;
                 solubility, stability &amp; synthesis liabilities, and similar
                 known peptides. Not medical, dosing, or administration advice.
@@ -607,7 +607,7 @@ export default function DesignLabPage() {
         </section>
 
         {/* ── 3D structure ── */}
-        <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <div className="mb-3 flex items-center justify-between gap-3">
             <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
               3D structure
@@ -636,7 +636,7 @@ export default function DesignLabPage() {
             <p className="mb-2 text-xs leading-relaxed text-amber-400/75">{foldError}</p>
           )}
 
-          <div className="relative h-[420px] w-full overflow-hidden rounded-xl border border-ink/[0.07] bg-surface">
+          <div className="relative h-[420px] w-full overflow-hidden rounded-xl border border-hairline bg-surface">
             <div ref={viewerRef} className="absolute inset-0" />
             {!hasStructure && (
               <div className="pointer-events-none absolute inset-0 grid place-items-center px-6 text-center">
@@ -648,7 +648,7 @@ export default function DesignLabPage() {
                     </span>
                   </div>
                 ) : (
-                  <div className="text-ink/35">
+                  <div className="text-ink/55">
                     <Atom className="mx-auto mb-2 h-6 w-6 text-accent/50" />
                     <p className="text-xs">Predict a 3D structure for this sequence.</p>
                   </div>
@@ -658,11 +658,11 @@ export default function DesignLabPage() {
           </div>
 
           {hasStructure && (
-            <p className="mt-2 text-[11px] text-ink/40">
+            <p className="mt-2 text-[11px] text-ink/55">
               Drag to rotate · scroll to zoom · colored N→C (spectrum).
             </p>
           )}
-          <p className="mt-2 text-[10px] leading-relaxed text-ink/30">
+          <p className="mt-2 text-[10px] leading-relaxed text-ink/55">
             Structure predicted with{' '}
             <a
               href="https://esmatlas.com/"
@@ -678,13 +678,13 @@ export default function DesignLabPage() {
         </section>
 
         {/* ── Save / share ── */}
-        <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"
               onClick={save}
               disabled={!seq}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.10] bg-ink/[0.04] px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent disabled:cursor-not-allowed disabled:opacity-30"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-hairline-strong bg-fill-strong px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent disabled:cursor-not-allowed disabled:opacity-30"
             >
               <Save className="h-3.5 w-3.5" />
               Save design
@@ -702,14 +702,14 @@ export default function DesignLabPage() {
 
           {saved.length > 0 && (
             <div className="mt-4">
-              <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-ink/35">
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-ink/55">
                 My saved designs
               </p>
               <div className="flex flex-wrap gap-2">
                 {saved.map((s) => (
                   <span
                     key={s.ts}
-                    className="inline-flex items-center gap-1 rounded-md border border-ink/[0.08] bg-ink/[0.03] py-1 pl-2 pr-1 text-[11px]"
+                    className="inline-flex items-center gap-1 rounded-md border border-hairline bg-fill py-1 pl-2 pr-1 text-[11px]"
                   >
                     <button
                       type="button"
@@ -723,7 +723,7 @@ export default function DesignLabPage() {
                       type="button"
                       onClick={() => removeSaved(s.seq)}
                       aria-label="Delete"
-                      className="rounded p-0.5 text-ink/35 hover:bg-ink/[0.08] hover:text-ink"
+                      className="rounded p-0.5 text-ink/55 hover:bg-fill-strong hover:text-ink"
                     >
                       <Trash2 className="h-3 w-3" />
                     </button>
@@ -735,7 +735,7 @@ export default function DesignLabPage() {
         </section>
 
         {/* ── Research pipeline + tools ── */}
-        <section className="mb-10 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-10 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
             From design to bench
           </h2>
@@ -747,7 +747,7 @@ export default function DesignLabPage() {
                     'rounded-lg border px-2.5 py-1.5 text-[11px] ' +
                     (i === 1
                       ? 'border-accent/30 bg-accent/[0.08] font-medium text-accent'
-                      : 'border-ink/[0.07] bg-ink/[0.02] text-ink/55')
+                      : 'border-hairline bg-fill text-ink/55')
                   }
                 >
                   {step}
@@ -767,17 +767,17 @@ export default function DesignLabPage() {
                 href={t.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center justify-between gap-3 rounded-xl border border-ink/[0.06] bg-ink/[0.02] px-4 py-3 transition-colors hover:border-accent/25 hover:bg-ink/[0.04]"
+                className="group flex items-center justify-between gap-3 rounded-xl border border-hairline bg-fill px-4 py-3 transition-colors hover:border-accent/25 hover:bg-fill-strong"
               >
                 <div>
                   <p className="text-sm font-medium text-ink/85">{t.name}</p>
-                  <p className="text-[12px] text-ink/45">{t.desc}</p>
+                  <p className="text-[12px] text-ink/55">{t.desc}</p>
                 </div>
                 <ExternalLink className="h-3.5 w-3.5 shrink-0 text-accent/70 transition-colors group-hover:text-accent" />
               </a>
             ))}
           </div>
-          <p className="mt-3 text-[10px] text-ink/30">
+          <p className="mt-3 text-[10px] text-ink/55">
             External research tools open in a new tab. AmericanPeptide is not
             affiliated with and does not endorse these services.
           </p>
@@ -811,10 +811,10 @@ function StatCard({
       className={`rounded-2xl border p-4 ${
         highlight
           ? 'border-accent/25 bg-accent/[0.04]'
-          : 'border-ink/[0.07] bg-ink/[0.025]'
+          : 'border-hairline bg-fill'
       }`}
     >
-      <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-ink/40">
+      <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-ink/55">
         {label}
       </p>
       <p
@@ -824,7 +824,7 @@ function StatCard({
       >
         {value}
       </p>
-      <p className="mt-0.5 text-[11px] text-ink/40">{unit}</p>
+      <p className="mt-0.5 text-[11px] text-ink/55">{unit}</p>
     </div>
   )
 }

@@ -95,7 +95,7 @@ export default function CompoundsPage() {
       />
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -134,7 +134,7 @@ export default function CompoundsPage() {
             </Link>
             <a
               href="#pubchem-search"
-              className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-accent/30 hover:text-ink"
+              className="inline-flex items-center gap-2 rounded-xl border border-hairline-strong px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-accent/30 hover:text-ink"
             >
               <Database className="h-4 w-4 text-accent" />
               Search PubChem
@@ -170,15 +170,15 @@ export default function CompoundsPage() {
 
           <Link
             href="/tools/design-lab"
-            className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-5 transition-all hover:border-accent/25 hover:bg-ink/[0.04]"
+            className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-hairline bg-fill p-5 transition-all hover:border-accent/25 hover:bg-fill-strong"
           >
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-ink/[0.10] bg-ink/[0.04] text-accent">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-hairline-strong bg-fill-strong text-accent">
               <FlaskConical className="h-5 w-5" strokeWidth={1.75} />
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
                 <h2 className="text-sm font-semibold text-ink">Design Lab</h2>
-                <span className="rounded-full border border-ink/[0.12] bg-ink/[0.04] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-ink/50">
+                <span className="rounded-full border border-hairline-strong bg-fill-strong px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-ink/50">
                   Beta
                 </span>
               </div>
@@ -235,7 +235,7 @@ export default function CompoundsPage() {
             {grouped.map(({ cat, items }) => (
               <div
                 key={cat.id}
-                className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5"
+                className="rounded-2xl border border-hairline bg-fill p-5"
               >
                 <div className="mb-3 flex items-baseline justify-between gap-2">
                   <Link
@@ -244,7 +244,7 @@ export default function CompoundsPage() {
                   >
                     {cat.label}
                   </Link>
-                  <span className="text-[11px] text-ink/30">
+                  <span className="text-[11px] text-ink/55">
                     {items.length}
                   </span>
                 </div>
@@ -268,7 +268,7 @@ export default function CompoundsPage() {
         {/* ── PubChem live search ── */}
         <section id="pubchem-search" className="scroll-mt-6">
           <div className="mb-5">
-            <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-ink/[0.10] bg-ink/[0.03] px-3 py-1 text-[11px] font-medium text-ink/45">
+            <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-hairline-strong bg-fill px-3 py-1 text-[11px] font-medium text-ink/55">
               <Database className="h-3 w-3 text-accent/70" />
               Beyond the catalog
             </div>
@@ -286,7 +286,7 @@ export default function CompoundsPage() {
         </section>
 
         {/* ── Research-use note ── */}
-        <p className="mt-14 border-t border-ink/[0.06] pt-6 text-xs leading-relaxed text-ink/30">
+        <p className="mt-14 border-t border-hairline pt-6 text-xs leading-relaxed text-ink/55">
           For research and educational reference only. Entries describe the
           scientific literature and are not medical advice, dosing guidance, or
           an offer to sell any compound.
@@ -300,7 +300,7 @@ function MonographCard({ peptide }: { peptide: Peptide }) {
   return (
     <Link
       href={`/catalog/${peptide.slug}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.14)]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-hairline bg-fill p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-fill-strong hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.14)]"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#5BA88C]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
@@ -310,7 +310,7 @@ function MonographCard({ peptide }: { peptide: Peptide }) {
             {peptide.name}
           </h3>
           {peptide.aliases?.[0] && (
-            <p className="mt-0.5 truncate text-xs text-ink/35">
+            <p className="mt-0.5 truncate text-xs text-ink/55">
               aka {peptide.aliases.join(', ')}
             </p>
           )}
@@ -330,14 +330,14 @@ function MonographCard({ peptide }: { peptide: Peptide }) {
         {peptide.categories.slice(0, 3).map((cat) => (
           <span
             key={cat}
-            className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-2 py-0.5 text-[10px] text-ink/50"
+            className="rounded-md border border-hairline bg-fill px-2 py-0.5 text-[10px] text-ink/50"
           >
             {CATEGORIES.find((c) => c.id === cat)?.label ?? cat}
           </span>
         ))}
       </div>
 
-      <div className="mt-4 flex items-center justify-between border-t border-ink/[0.06] pt-3 text-[11px] text-ink/30">
+      <div className="mt-4 flex items-center justify-between border-t border-hairline pt-3 text-[11px] text-ink/55">
         <span>
           {peptide.molecularWeight
             ? `${peptide.molecularWeight.toLocaleString()} Da`

@@ -26,7 +26,7 @@ export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <span className="flex items-center gap-1.5 text-sm font-medium">
           <Lock className="h-4 w-4 text-accent" />
           Privacy Policy
@@ -34,12 +34,12 @@ export default function PrivacyPage() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="border-b border-ink/[0.06] px-6 py-12 md:px-10">
+      <section className="border-b border-hairline px-6 py-12 md:px-10">
         <div className="mx-auto max-w-3xl">
           <h1 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
             Privacy Policy
           </h1>
-          <p className="text-sm text-ink/45">Last updated: {LAST_UPDATED}</p>
+          <p className="text-sm text-ink/55">Last updated: {LAST_UPDATED}</p>
           <p className="mt-5 text-sm leading-relaxed text-ink/65 md:text-[15px]">
             This policy explains what information AmericanPeptide.com
             (&ldquo;we&rdquo;, &ldquo;us&rdquo;) collects when you use our

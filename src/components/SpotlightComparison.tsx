@@ -103,28 +103,28 @@ export default function SpotlightComparison({
       )}
 
       {/* Honest, attribute-by-attribute contrast vs a generic vendor. */}
-      <div className="overflow-hidden rounded-lg border border-ink/10">
-        <div className="grid grid-cols-[1fr_auto] gap-x-3 border-b border-ink/10 bg-ink/[0.03] px-3 py-1.5 text-[9px] font-semibold uppercase tracking-wider text-ink/45">
+      <div className="overflow-hidden rounded-lg border border-hairline-strong">
+        <div className="grid grid-cols-[1fr_auto] gap-x-3 border-b border-hairline-strong bg-fill px-3 py-1.5 text-[9px] font-semibold uppercase tracking-wider text-ink/55">
           <span>{vendor.name}</span>
           <span className="text-right">vs. typical vendor</span>
         </div>
-        <ul className="divide-y divide-ink/[0.06]">
+        <ul className="divide-y divide-hairline">
           {rows.map((r) => (
             <li key={r.label} className="grid grid-cols-[1fr_auto] items-start gap-x-3 px-3 py-2">
               <div className="min-w-0">
-                <p className="text-[10px] font-semibold uppercase tracking-wide text-ink/40">
+                <p className="text-[10px] font-semibold uppercase tracking-wide text-ink/55">
                   {r.label}
                 </p>
                 <p className="mt-0.5 flex items-start gap-1.5 text-xs leading-snug text-ink/75">
                   {r.kind === 'win' ? (
                     <Check className="mt-0.5 h-3 w-3 shrink-0" style={{ color: accent }} strokeWidth={2.5} />
                   ) : (
-                    <Minus className="mt-0.5 h-3 w-3 shrink-0 text-ink/40" strokeWidth={2.5} />
+                    <Minus className="mt-0.5 h-3 w-3 shrink-0 text-ink/55" strokeWidth={2.5} />
                   )}
                   {r.partner}
                 </p>
               </div>
-              <p className="pt-[15px] text-right text-[11px] leading-snug text-ink/40">
+              <p className="pt-[15px] text-right text-[11px] leading-snug text-ink/55">
                 {r.typical}
               </p>
             </li>
@@ -135,7 +135,7 @@ export default function SpotlightComparison({
       {/* Transactional fine print: de-emphasized but fully accessible. */}
       {vendor.notes && (
         <details className="group mt-2">
-          <summary className="flex cursor-pointer list-none items-center gap-1 text-[11px] font-medium text-ink/45 transition-colors hover:text-ink/70">
+          <summary className="flex cursor-pointer list-none items-center gap-1 text-[11px] font-medium text-ink/55 transition-colors hover:text-ink/70">
             <ChevronDown className="h-3 w-3 transition-transform group-open:rotate-180" />
             The fine print
           </summary>

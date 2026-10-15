@@ -25,7 +25,7 @@ const TONE: Record<string, { dot: string; pill: string }> = {
   },
   neutral: {
     dot: 'bg-ink/25',
-    pill: 'border-ink/[0.08] bg-ink/[0.03] text-ink/50',
+    pill: 'border-hairline bg-fill text-ink/50',
   },
 }
 
@@ -54,17 +54,17 @@ export default function CompoundingStatus({
 
   return (
     <section className={className}>
-      <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+      <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
         Compounding status under 503A
       </h2>
-      <p className="mb-5 text-xs text-ink/30">
+      <p className="mb-5 text-xs text-ink/55">
         Whether a licensed compounding pharmacy may legally prepare these
         substances — a separate question from FDA drug approval
       </p>
 
       <p className="mb-6 text-sm leading-relaxed text-ink/65">{intro}</p>
 
-      <div className="divide-y divide-ink/[0.05] rounded-xl border border-ink/[0.07] bg-ink/[0.02]">
+      <div className="divide-y divide-hairline rounded-xl border border-hairline bg-fill">
         {entries.map((e) => {
           const style = STATUS_STYLES[e.status]
           const tone = TONE[style.tone]
@@ -90,7 +90,7 @@ export default function CompoundingStatus({
                   href={e.source.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-1 text-[11px] text-ink/35 transition-colors hover:text-accent"
+                  className="group inline-flex items-center gap-1 text-[11px] text-ink/55 transition-colors hover:text-accent"
                 >
                   {e.source.label}
                   <ArrowUpRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
@@ -101,9 +101,9 @@ export default function CompoundingStatus({
         })}
       </div>
 
-      <div className="mt-4 flex items-start gap-2.5 rounded-lg border border-ink/[0.07] bg-ink/[0.02] px-4 py-3">
-        <Scale className="mt-0.5 h-3.5 w-3.5 shrink-0 text-ink/30" />
-        <p className="text-xs leading-relaxed text-ink/45">
+      <div className="mt-4 flex items-start gap-2.5 rounded-lg border border-hairline bg-fill px-4 py-3">
+        <Scale className="mt-0.5 h-3.5 w-3.5 shrink-0 text-ink/55" />
+        <p className="text-xs leading-relaxed text-ink/55">
           None of these statuses is FDA approval, and none establishes efficacy,
           dosing, or a benefit-risk profile. Legal 503A compounding requires FDA
           to place a substance on the bulks list through notice-and-comment
@@ -115,7 +115,7 @@ export default function CompoundingStatus({
       <LastUpdated
         date={REGULATORY_REVIEWED}
         label="Regulatory status reviewed"
-        className="mt-3 text-[11px] text-ink/30"
+        className="mt-3 text-[11px] text-ink/55"
       />
     </section>
   )

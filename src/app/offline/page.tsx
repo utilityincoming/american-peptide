@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function OfflinePage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-surface px-6 text-center text-ink">
-      <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-ink/[0.08] bg-ink/[0.03] text-ink/60">
+      <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-hairline bg-fill text-ink/60">
         <WifiOff className="h-6 w-6" strokeWidth={1.75} />
       </div>
       <h1 className="mb-2 text-2xl font-bold tracking-tight">You’re offline</h1>
@@ -27,7 +27,7 @@ export default function OfflinePage() {
       <div className="grid w-full max-w-md gap-3 sm:grid-cols-2">
         <Link
           href="/tools/reconstitution-calculator"
-          className="group flex items-center gap-3 rounded-xl border border-ink/[0.08] bg-ink/[0.025] p-4 text-left transition-colors hover:border-accent/25 hover:bg-ink/[0.04]"
+          className="group flex items-center gap-3 rounded-xl border border-hairline bg-fill p-4 text-left transition-colors hover:border-accent/25 hover:bg-fill-strong"
         >
           <Calculator className="h-5 w-5 shrink-0 text-accent" strokeWidth={1.75} />
           <span className="flex-1 text-sm font-medium">Calculator</span>
@@ -35,7 +35,7 @@ export default function OfflinePage() {
         </Link>
         <Link
           href="/catalog"
-          className="group flex items-center gap-3 rounded-xl border border-ink/[0.08] bg-ink/[0.025] p-4 text-left transition-colors hover:border-accent/25 hover:bg-ink/[0.04]"
+          className="group flex items-center gap-3 rounded-xl border border-hairline bg-fill p-4 text-left transition-colors hover:border-accent/25 hover:bg-fill-strong"
         >
           <BookText className="h-5 w-5 shrink-0 text-accent" strokeWidth={1.75} />
           <span className="flex-1 text-sm font-medium">Catalog</span>
@@ -43,7 +43,7 @@ export default function OfflinePage() {
         </Link>
       </div>
 
-      <p className="mt-8 text-[11px] text-ink/30">
+      <p className="mt-8 text-[11px] text-ink/55">
         Reconnect to load anything not yet saved.
       </p>
     </div>

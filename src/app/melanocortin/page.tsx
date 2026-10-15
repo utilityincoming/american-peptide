@@ -194,7 +194,7 @@ const PIPELINE: PipelineEntry[] = [
 const MATURITY = {
   approved:   { label: 'Approved',        dot: 'bg-[#5BA88C]',    badge: 'bg-accent/10 text-accent border-accent/20',      ring: 'border-accent/20 bg-accent/[0.03]' },
   clinical:   { label: 'Clinical Trials', dot: 'bg-amber-400',    badge: 'bg-amber-500/10 text-amber-400 border-amber-500/20',       ring: 'border-amber-500/15 bg-amber-500/[0.02]'  },
-  preclinical:{ label: 'Preclinical',     dot: 'bg-ink/20',     badge: 'bg-ink/[0.04] text-ink/35 border-ink/10',            ring: 'border-ink/[0.07] bg-ink/[0.015]'     },
+  preclinical:{ label: 'Preclinical',     dot: 'bg-ink/20',     badge: 'bg-fill-strong text-ink/55 border-hairline-strong',            ring: 'border-hairline bg-fill'     },
 }
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -214,7 +214,7 @@ function SectionHeader({
         {eyebrow}
       </p>
       <h2 className="mb-2 text-2xl font-bold tracking-tight text-ink md:text-3xl">{title}</h2>
-      <p className="max-w-2xl text-sm text-ink/40 md:text-base">{subtitle}</p>
+      <p className="max-w-2xl text-sm text-ink/55 md:text-base">{subtitle}</p>
     </div>
   )
 }
@@ -234,7 +234,7 @@ function Tag({ label, accent = false }: { label: string; accent?: boolean }) {
   return (
     <span
       className={`rounded-md px-2.5 py-1 text-[11px] font-medium ${
-        accent ? 'bg-accent/10 text-accent' : 'bg-ink/[0.05] text-ink/50'
+        accent ? 'bg-accent/10 text-accent' : 'bg-fill-strong text-ink/50'
       }`}
     >
       {label}
@@ -277,7 +277,7 @@ function DrugCard({ drug }: { drug: Drug }) {
                 FDA {drug.approvedYear}
               </span>
             </div>
-            <p className="text-sm text-ink/35">{drug.brand}</p>
+            <p className="text-sm text-ink/55">{drug.brand}</p>
           </div>
           <div
             className="flex-shrink-0 rounded-lg border px-3 py-1 text-xs font-semibold"
@@ -299,7 +299,7 @@ function DrugCard({ drug }: { drug: Drug }) {
 
         {/* Expanded detail panel */}
         {open && (
-          <div className="mb-4 space-y-3 rounded-xl border border-ink/[0.06] bg-ink/[0.025] p-4">
+          <div className="mb-4 space-y-3 rounded-xl border border-hairline bg-fill p-4">
             <DetailRow label="Sponsor" value={drug.sponsor} />
             <DetailRow label="Target" value={drug.targetFull} />
             <DetailRow label="Structure" value={drug.structure} />
@@ -325,7 +325,7 @@ function DrugCard({ drug }: { drug: Drug }) {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setOpen(!open)}
-            className="flex items-center gap-1.5 rounded-lg border border-ink/10 px-3 py-1.5 text-xs font-medium text-ink/50 transition-colors hover:border-ink/20 hover:text-ink"
+            className="flex items-center gap-1.5 rounded-lg border border-hairline-strong px-3 py-1.5 text-xs font-medium text-ink/50 transition-colors hover:border-ink/20 hover:text-ink"
           >
             {open ? (
               <>
@@ -389,7 +389,7 @@ function ReceptorCard({ receptor }: { receptor: Receptor }) {
                 ? 'text-accent'
                 : receptor.maturity === 'clinical'
                   ? 'text-amber-400'
-                  : 'text-ink/30'
+                  : 'text-ink/55'
             }`}
           >
             {receptor.keyAgonist}
@@ -411,7 +411,7 @@ function RadarTooltip({
 }) {
   if (!active || !payload?.length) return null
   return (
-    <div className="rounded-xl border border-ink/10 bg-panel p-3 text-xs shadow-xl">
+    <div className="rounded-xl border border-hairline-strong bg-panel p-3 text-xs shadow-xl">
       <p className="mb-2 font-semibold text-ink">{label}</p>
       {payload.map((p) => (
         <div key={p.name} className="flex items-center gap-2 py-0.5">
@@ -445,21 +445,21 @@ function ToolCard({
       className={`group flex flex-col rounded-2xl border p-6 transition-all duration-200 ${
         accent
           ? 'border-accent/25 bg-accent/[0.05] hover:border-accent/40 hover:bg-accent/[0.08]'
-          : 'border-ink/[0.07] bg-ink/[0.025] hover:border-ink/[0.12] hover:bg-ink/[0.035]'
+          : 'border-hairline bg-fill hover:border-hairline-strong hover:bg-fill'
       }`}
     >
       <div
         className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl ${
-          accent ? 'bg-accent/15 text-accent' : 'bg-ink/[0.06] text-ink/50'
+          accent ? 'bg-accent/15 text-accent' : 'bg-fill-strong text-ink/50'
         }`}
       >
         {icon}
       </div>
       <h3 className="mb-1.5 font-semibold text-ink">{title}</h3>
-      <p className="mb-4 flex-1 text-sm leading-relaxed text-ink/45">{description}</p>
+      <p className="mb-4 flex-1 text-sm leading-relaxed text-ink/55">{description}</p>
       <div
         className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${
-          accent ? 'text-accent' : 'text-ink/40 group-hover:text-ink/70'
+          accent ? 'text-accent' : 'text-ink/55 group-hover:text-ink/70'
         }`}
       >
         {cta}
@@ -491,7 +491,7 @@ export default function MelanocortinPage() {
       </div>
 
       {/* ── Page identity / metadata ── */}
-      <nav className="relative z-10 flex items-center justify-between border-b border-ink/[0.06] px-6 py-4 md:px-10">
+      <nav className="relative z-10 flex items-center justify-between border-b border-hairline px-6 py-4 md:px-10">
         <span className="text-sm font-medium text-ink/70">
           Melanocortin Research Hub
         </span>
@@ -534,10 +534,10 @@ export default function MelanocortinPage() {
             ].map(({ value, label }) => (
               <div
                 key={label}
-                className="flex items-center gap-2.5 rounded-xl border border-ink/[0.07] bg-ink/[0.03] px-4 py-2.5"
+                className="flex items-center gap-2.5 rounded-xl border border-hairline bg-fill px-4 py-2.5"
               >
                 <span className="text-xl font-bold text-accent">{value}</span>
-                <span className="text-sm text-ink/40">{label}</span>
+                <span className="text-sm text-ink/55">{label}</span>
               </div>
             ))}
           </div>
@@ -569,7 +569,7 @@ export default function MelanocortinPage() {
           <div className="mb-5 flex flex-wrap items-center gap-5">
             {(Object.entries(MATURITY) as [keyof typeof MATURITY, (typeof MATURITY)[keyof typeof MATURITY]][]).map(
               ([key, cfg]) => (
-                <div key={key} className="flex items-center gap-1.5 text-xs text-ink/40">
+                <div key={key} className="flex items-center gap-1.5 text-xs text-ink/55">
                   <div className={`h-2 w-2 rounded-full ${cfg.dot}`} />
                   {cfg.label}
                 </div>
@@ -585,12 +585,12 @@ export default function MelanocortinPage() {
           </div>
 
           {/* Radar chart */}
-          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 md:p-8">
+          <div className="rounded-2xl border border-hairline bg-fill p-6 md:p-8">
             <div className="mb-1">
               <h3 className="text-base font-semibold text-ink">
                 Receptor Binding Selectivity Profiles
               </h3>
-              <p className="mt-1 text-xs text-ink/35">
+              <p className="mt-1 text-xs text-ink/55">
                 Relative binding activity across MC1R–MC5R for each FDA-approved agonist
               </p>
             </div>
@@ -657,7 +657,7 @@ export default function MelanocortinPage() {
             {PIPELINE.map((item, idx) => (
               <div
                 key={idx}
-                className="flex flex-col gap-4 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6 transition-colors hover:border-ink/[0.11] hover:bg-ink/[0.03] sm:flex-row sm:items-start"
+                className="flex flex-col gap-4 rounded-2xl border border-hairline bg-fill p-6 transition-colors hover:border-hairline-strong hover:bg-fill sm:flex-row sm:items-start"
               >
                 {/* Status badge */}
                 <div className="flex-shrink-0 pt-0.5">
@@ -676,7 +676,7 @@ export default function MelanocortinPage() {
                 <div className="min-w-0 flex-1">
                   <div className="mb-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
                     <h4 className="text-base font-semibold text-ink">{item.name}</h4>
-                    <span className="text-sm text-ink/35">{item.sponsor}</span>
+                    <span className="text-sm text-ink/55">{item.sponsor}</span>
                   </div>
                   <p className="mb-3 text-sm text-ink/55">{item.indication}</p>
                   <div className="flex flex-wrap gap-2">
@@ -735,9 +735,9 @@ export default function MelanocortinPage() {
       </div>
 
       {/* ── Footer ── */}
-      <footer className="relative z-10 border-t border-ink/[0.06] px-6 py-10 md:px-10">
+      <footer className="relative z-10 border-t border-hairline px-6 py-10 md:px-10">
         <div className="mx-auto max-w-7xl space-y-5">
-          <div className="flex flex-col gap-2 text-xs text-ink/30 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-2 text-xs text-ink/55 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <Link href="/" className="transition-colors hover:text-ink/60">
                 AmericanPeptide.com

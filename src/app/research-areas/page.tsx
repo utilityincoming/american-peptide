@@ -76,7 +76,7 @@ export default function ResearchAreasPage() {
       />
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <span className="flex items-center gap-1.5 text-sm font-medium">
           <Compass className="h-4 w-4 text-accent" />
           Research areas
@@ -84,7 +84,7 @@ export default function ResearchAreasPage() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -107,7 +107,7 @@ export default function ResearchAreasPage() {
             use case. Each area covers the underlying biology, the peptide
             classes involved, and links to every matching catalog entry.
           </p>
-          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] text-ink/45">
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] text-ink/55">
             <span className="inline-flex items-center gap-1.5">
               <Compass className="h-3.5 w-3.5 text-accent/70" />
               {areas.length} research areas
@@ -134,10 +134,10 @@ export default function ResearchAreasPage() {
             <Link
               key={area.slug}
               href={`/research-areas/${area.slug}`}
-              className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.12)]"
+              className="group flex flex-col rounded-2xl border border-hairline bg-fill p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-fill-strong hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.12)]"
             >
               <div className="mb-3 flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 text-[11px] text-ink/40">
+                <span className="inline-flex items-center gap-1.5 text-[11px] text-ink/55">
                   <FlaskConical className="h-3.5 w-3.5 text-accent/70" />
                   {count} peptide{count === 1 ? '' : 's'}
                 </span>
@@ -153,13 +153,13 @@ export default function ResearchAreasPage() {
                   {preview.map((p) => (
                     <span
                       key={p.slug}
-                      className="rounded-full border border-ink/[0.07] bg-ink/[0.03] px-2 py-0.5 text-[10.5px] text-ink/45"
+                      className="rounded-full border border-hairline bg-fill px-2 py-0.5 text-[10.5px] text-ink/55"
                     >
                       {p.name}
                     </span>
                   ))}
                   {count > preview.length && (
-                    <span className="rounded-full px-1 py-0.5 text-[10.5px] text-ink/35">
+                    <span className="rounded-full px-1 py-0.5 text-[10.5px] text-ink/55">
                       +{count - preview.length} more
                     </span>
                   )}
@@ -186,7 +186,7 @@ export default function ResearchAreasPage() {
             guides are built for that direction of travel.
           </p>
           <div className="grid gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
+            <div className="rounded-2xl border border-hairline bg-fill p-5">
               <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-accent/25 bg-accent/10 text-accent">
                 <Route className="h-4.5 w-4.5" strokeWidth={1.75} />
               </span>
@@ -200,7 +200,7 @@ export default function ResearchAreasPage() {
                 grouping rather than the other way around.
               </p>
             </div>
-            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
+            <div className="rounded-2xl border border-hairline bg-fill p-5">
               <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-accent/25 bg-accent/10 text-accent">
                 <Layers className="h-4.5 w-4.5" strokeWidth={1.75} />
               </span>
@@ -217,7 +217,7 @@ export default function ResearchAreasPage() {
                 step, and back.
               </p>
             </div>
-            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
+            <div className="rounded-2xl border border-hairline bg-fill p-5">
               <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg border border-accent/25 bg-accent/10 text-accent">
                 <BookOpenCheck className="h-4.5 w-4.5" strokeWidth={1.75} />
               </span>
@@ -244,7 +244,7 @@ export default function ResearchAreasPage() {
         {/* Clinical trials — the pipeline behind the research areas */}
         <Link
           href="/trials"
-          className="group mx-auto mt-14 flex max-w-5xl items-center gap-4 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all hover:-translate-y-0.5 hover:border-accent/25 hover:bg-ink/[0.04]"
+          className="group mx-auto mt-14 flex max-w-5xl items-center gap-4 rounded-2xl border border-hairline bg-fill p-5 transition-all hover:-translate-y-0.5 hover:border-accent/25 hover:bg-fill-strong"
         >
           <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
             <Activity className="h-5 w-5" strokeWidth={1.75} />

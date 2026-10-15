@@ -37,10 +37,10 @@ export default function EvidenceContext({
     .slice(0, 6)
 
   return (
-    <section className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6">
+    <section className="rounded-2xl border border-hairline bg-fill p-6">
       <div className="mb-4 flex items-center gap-2">
         <GraduationCap className="h-4 w-4 text-accent" strokeWidth={1.75} />
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-ink/40">
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-ink/55">
           Understand the evidence
         </h2>
       </div>
@@ -67,7 +67,7 @@ export default function EvidenceContext({
       {/* Scoped key terms */}
       {terms.length > 0 && (
         <div className="mt-4">
-          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink/35">
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-ink/55">
             Key terms
           </p>
           <div className="flex flex-wrap gap-1.5">
@@ -76,7 +76,7 @@ export default function EvidenceContext({
                 key={t.slug}
                 href={`/glossary/${t.slug}`}
                 title={t.short}
-                className="inline-flex items-center rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1 text-xs text-ink/65 transition-colors hover:border-accent/25 hover:text-accent"
+                className="inline-flex items-center rounded-lg border border-hairline bg-fill px-2.5 py-1 text-xs text-ink/65 transition-colors hover:border-accent/25 hover:text-accent"
               >
                 {t.abbr ?? t.term}
               </Link>
@@ -86,7 +86,7 @@ export default function EvidenceContext({
       )}
 
       {/* Cross-links back into the learn cluster */}
-      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-ink/[0.06] pt-4 text-[13px]">
+      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-hairline pt-4 text-[13px]">
         {[
           { href: '/learn', label: 'Learn hub' },
           { href: '/glossary', label: 'Glossary' },

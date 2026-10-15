@@ -61,7 +61,7 @@ export function BrandMark({
       <BrandChip className={chipClassName} />
       {showWordmark && (
         <span className="text-[14px] font-semibold tracking-tight">
-          American<span className="text-ink/45">Peptide</span>
+          American<span className="text-ink/55">Peptide</span>
         </span>
       )}
     </>

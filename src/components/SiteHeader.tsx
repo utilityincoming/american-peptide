@@ -44,7 +44,7 @@ export default function SiteHeader() {
   }, [open])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-ink/[0.06] bg-surface/85 backdrop-blur supports-[backdrop-filter]:bg-surface/70">
+    <header className="sticky top-0 z-40 border-b border-hairline bg-surface/85 backdrop-blur supports-[backdrop-filter]:bg-surface/70">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
         <BrandMark />
 
@@ -75,7 +75,7 @@ export default function SiteHeader() {
                   className={
                     active
                       ? 'rounded-lg px-3 py-1.5 text-sm font-medium text-accent'
-                      : 'rounded-lg px-3 py-1.5 text-sm text-ink/65 transition-colors hover:bg-ink/[0.04] hover:text-ink'
+                      : 'rounded-lg px-3 py-1.5 text-sm text-ink/65 transition-colors hover:bg-fill-strong hover:text-ink'
                   }
                 >
                   {link.label}
@@ -94,7 +94,7 @@ export default function SiteHeader() {
             aria-controls="site-mobile-nav"
             aria-label={open ? 'Close menu' : 'Open menu'}
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-ink/[0.08] bg-ink/[0.02] text-ink/75 transition-colors hover:bg-ink/[0.06] hover:text-ink md:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-fill text-ink/75 transition-colors hover:bg-fill-strong hover:text-ink md:hidden"
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -102,7 +102,7 @@ export default function SiteHeader() {
       </div>
 
       {open && (
-        <div id="site-mobile-nav" className="border-t border-ink/[0.06] bg-surface/95 backdrop-blur md:hidden">
+        <div id="site-mobile-nav" className="border-t border-hairline bg-surface/95 backdrop-blur md:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
             <Link
               href="/research"
@@ -122,7 +122,7 @@ export default function SiteHeader() {
                   className={
                     active
                       ? 'rounded-lg bg-accent/[0.08] px-3 py-2 text-sm font-medium text-accent'
-                      : 'rounded-lg px-3 py-2 text-sm text-ink/70 transition-colors hover:bg-ink/[0.04] hover:text-ink'
+                      : 'rounded-lg px-3 py-2 text-sm text-ink/70 transition-colors hover:bg-fill-strong hover:text-ink'
                   }
                 >
                   {link.label}

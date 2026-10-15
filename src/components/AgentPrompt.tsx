@@ -74,7 +74,7 @@ export default function AgentPrompt({
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Ask about a peptide, mechanism, or indication…"
-          className="flex-1 rounded-xl border border-ink/[0.10] bg-surface/60 px-4 py-3 text-sm text-ink placeholder:text-ink/30 focus:border-accent/40 focus:outline-none"
+          className="flex-1 rounded-xl border border-hairline-strong bg-surface/60 px-4 py-3 text-sm text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none"
         />
         <button
           type="submit"
@@ -92,7 +92,7 @@ export default function AgentPrompt({
             key={ex}
             type="button"
             onClick={() => ask(ex)}
-            className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1.5 text-left text-xs text-ink/50 transition-colors hover:border-accent/30 hover:text-ink/80"
+            className="rounded-full border border-hairline bg-fill px-3 py-1.5 text-left text-xs text-ink/50 transition-colors hover:border-accent/30 hover:text-ink/80"
           >
             {ex}
           </button>

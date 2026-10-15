@@ -36,13 +36,13 @@ export default function EvidenceFloor({
 
   return (
     <span
-      className={`inline-flex flex-wrap items-center gap-x-2.5 gap-y-1 rounded-full border border-ink/[0.08] bg-ink/[0.03] px-3 py-1 ${className}`}
+      className={`inline-flex flex-wrap items-center gap-x-2.5 gap-y-1 rounded-full border border-hairline bg-fill px-3 py-1 ${className}`}
     >
-      <span className="text-[11px] uppercase tracking-wide text-ink/45">Evidence floor</span>
+      <span className="text-[11px] uppercase tracking-wide text-ink/55">Evidence floor</span>
       <span className={`text-xs font-semibold ${hue.text}`}>{TIERS[floor.floor].label}</span>
 
       {showDistribution && present.length > 0 && (
-        <span className="flex items-center gap-2 border-l border-ink/10 pl-2.5">
+        <span className="flex items-center gap-2 border-l border-hairline-strong pl-2.5">
           {present.map((t) => (
             <span
               key={t}
@@ -53,7 +53,7 @@ export default function EvidenceFloor({
             >
               <span className={`h-1.5 w-1.5 rounded-full ${HUE_CLASSES[TIER_HUE[t]].dot}`} />
               {TIERS[t].short}
-              <span className="text-ink/35">{floor.distribution[t]}</span>
+              <span className="text-ink/55">{floor.distribution[t]}</span>
             </span>
           ))}
         </span>

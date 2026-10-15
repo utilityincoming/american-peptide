@@ -25,19 +25,19 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Breadcrumb (nested under About) ── */}
-      <header className="flex items-center gap-1.5 border-b border-ink/[0.06] px-4 py-3 text-sm md:px-6">
+      <header className="flex items-center gap-1.5 border-b border-hairline px-4 py-3 text-sm md:px-6">
         <Link
           href="/about"
           className="text-ink/50 transition-colors hover:text-ink"
         >
           About
         </Link>
-        <ChevronRight className="h-3.5 w-3.5 text-ink/30" />
+        <ChevronRight className="h-3.5 w-3.5 text-ink/55" />
         <span className="font-medium text-ink">Contact</span>
       </header>
 
       {/* ── Hero ── */}
-      <section className="border-b border-ink/[0.06] px-6 py-12 md:px-10">
+      <section className="border-b border-hairline px-6 py-12 md:px-10">
         <div className="mx-auto max-w-5xl">
           <h1 className="mb-3 text-3xl font-bold leading-[1.1] tracking-tight md:text-4xl">
             Get in touch

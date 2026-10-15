@@ -70,8 +70,8 @@ export default function VendorsIndexPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
 
       {/* Breadcrumb */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <Link href="/" className="text-sm text-ink/35 transition-colors hover:text-ink">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
+        <Link href="/" className="text-sm text-ink/55 transition-colors hover:text-ink">
           Home
         </Link>
         <span className="text-ink/20">/</span>
@@ -79,7 +79,7 @@ export default function VendorsIndexPage() {
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-40"
@@ -104,7 +104,7 @@ export default function VendorsIndexPage() {
             on the same 100-point Standard as the rest of the site, from the lab
             evidence and policies they actually publish. Never ranked by commission.
           </p>
-          <p className="mt-3 text-xs text-ink/30">
+          <p className="mt-3 text-xs text-ink/55">
             Research reference only. AmericanPeptide does not sell peptides.
           </p>
         </div>
@@ -148,14 +148,14 @@ export default function VendorsIndexPage() {
                   <Link
                     key={v.id}
                     href={`/vendors/${v.id}`}
-                    className="group flex flex-col gap-4 rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-5 transition-all hover:-translate-y-0.5 hover:border-accent/25 hover:bg-ink/[0.04] sm:flex-row sm:items-center"
+                    className="group flex flex-col gap-4 rounded-2xl border border-hairline bg-fill p-5 transition-all hover:-translate-y-0.5 hover:border-accent/25 hover:bg-fill-strong sm:flex-row sm:items-center"
                   >
                     <div
                       className="flex h-14 w-16 shrink-0 flex-col items-center justify-center rounded-xl"
                       style={{ backgroundColor: 'rgba(91,168,140,0.10)' }}
                     >
                       <span className="text-2xl font-bold text-accent">{score}</span>
-                      <span className="text-[8px] uppercase tracking-wide text-ink/35">/100</span>
+                      <span className="text-[8px] uppercase tracking-wide text-ink/55">/100</span>
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="mb-1 flex flex-wrap items-center gap-2">
@@ -174,7 +174,7 @@ export default function VendorsIndexPage() {
                       <p className="mb-2 line-clamp-2 text-[13px] leading-relaxed text-ink/55">
                         {v.blurb}
                       </p>
-                      <div className="flex flex-wrap items-center gap-2 text-[10px] text-ink/40">
+                      <div className="flex flex-wrap items-center gap-2 text-[10px] text-ink/55">
                         <span className="inline-flex items-center gap-1">
                           <Truck className="h-2.5 w-2.5" /> {shipsToLabel(v)}
                         </span>
@@ -203,7 +203,7 @@ export default function VendorsIndexPage() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
                 >
                   {l.icon}
                   {l.label}

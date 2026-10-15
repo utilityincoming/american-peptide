@@ -49,7 +49,7 @@ export default function ContourDivider({ label, className = '' }: ContourDivider
       </svg>
 
       {label && (
-        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-surface px-3 font-mono text-[11px] uppercase tracking-[0.16em] text-ink/45">
+        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-surface px-3 font-mono text-[11px] uppercase tracking-[0.16em] text-ink/55">
           {label}
         </span>
       )}

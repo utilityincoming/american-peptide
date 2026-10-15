@@ -177,11 +177,11 @@ export default function HomePage() {
                 <Link
                   key={label}
                   href={href}
-                  className="group flex flex-col items-center gap-1.5 rounded-xl border border-ink/[0.08] bg-ink/[0.02] px-2 py-3 text-center transition-all hover:border-accent/30 hover:bg-ink/[0.04]"
+                  className="group flex flex-col items-center gap-1.5 rounded-xl border border-hairline bg-fill px-2 py-3 text-center transition-all hover:border-accent/30 hover:bg-fill-strong"
                 >
                   <Icon className="h-4 w-4 text-accent/70 transition-colors group-hover:text-accent" strokeWidth={1.75} />
                   <span className="text-[11px] font-semibold text-ink/80">{label}</span>
-                  <span className="text-[10px] leading-tight text-ink/40">{desc}</span>
+                  <span className="text-[10px] leading-tight text-ink/55">{desc}</span>
                 </Link>
               ))}
             </div>
@@ -210,12 +210,12 @@ export default function HomePage() {
                 className="group inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-2 py-3.5 text-[15px] font-medium text-ink/55 transition-colors hover:text-ink"
               >
                 Browse the catalog
-                <ArrowRight className="h-4 w-4 text-ink/30 transition-all group-hover:translate-x-0.5 group-hover:text-accent" />
+                <ArrowRight className="h-4 w-4 text-ink/55 transition-all group-hover:translate-x-0.5 group-hover:text-accent" />
               </Link>
             </div>
 
             {/* Starter prompt — deep-links into the Agent and auto-asks on load */}
-            <p className="mt-5 text-center text-xs text-ink/40 lg:text-left">
+            <p className="mt-5 text-center text-xs text-ink/55 lg:text-left">
               Try:{' '}
               <Link
                 href={`/research?q=${encodeURIComponent('What GLP-1 analogs are in Phase 3 trials?')}`}
@@ -235,11 +235,11 @@ export default function HomePage() {
         {/* Real catalog example — links to the entry so the spec is verifiable */}
         <Link
           href="/catalog/bpc-157"
-          className="group mx-auto mt-14 flex max-w-xl items-center justify-center gap-x-2 gap-y-1 overflow-hidden rounded-xl border border-ink/[0.06] bg-ink/[0.025] px-5 py-3.5 text-center font-mono text-xs transition-colors hover:border-accent/25 md:text-sm"
+          className="group mx-auto mt-14 flex max-w-xl items-center justify-center gap-x-2 gap-y-1 overflow-hidden rounded-xl border border-hairline bg-fill px-5 py-3.5 text-center font-mono text-xs transition-colors hover:border-accent/25 md:text-sm"
         >
-          <span className="text-ink/30">BPC-157 · </span>
+          <span className="text-ink/55">BPC-157 · </span>
           <span className="text-accent/80">GEPPPGKPADDAGLV</span>
-          <span className="text-ink/30"> · 15 residues</span>
+          <span className="text-ink/55"> · 15 residues</span>
           <ArrowRight className="h-3.5 w-3.5 text-ink/25 transition-all group-hover:translate-x-0.5 group-hover:text-accent" />
         </Link>
 
@@ -249,7 +249,7 @@ export default function HomePage() {
         </p>
 
         {/* Stats row */}
-        <div className="mt-12 grid grid-cols-3 gap-4 border-t border-ink/[0.07] pt-10">
+        <div className="mt-12 grid grid-cols-3 gap-4 border-t border-hairline pt-10">
           {stats.map(({ value, label }) => (
             <div key={label} className="text-center">
               <div className="font-display text-3xl font-bold tracking-tight text-accent md:text-4xl">
@@ -301,7 +301,7 @@ export default function HomePage() {
                   (f) => (
                     <span
                       key={f}
-                      className="rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1 text-[11px] text-ink/60"
+                      className="rounded-lg border border-hairline bg-fill px-2.5 py-1 text-[11px] text-ink/60"
                     >
                       {f}
                     </span>
@@ -320,7 +320,7 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/tools/calculator-beta"
-                  className="text-xs text-ink/45 underline decoration-ink/20 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent/50"
+                  className="text-xs text-ink/55 underline decoration-ink/20 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent/50"
                 >
                   or try the beta — GLP-1 pen mode &amp; reverse-dose solver
                 </Link>
@@ -331,10 +331,10 @@ export default function HomePage() {
             <Link
               href="/tools/reconstitution-calculator?vial=5&dose=250&water=2"
               aria-label="Open this worked example in the reconstitution calculator: 5 mg vial, 2 mL bacteriostatic water, 250 mcg dose"
-              className="group relative block rounded-2xl border border-ink/[0.08] bg-panel p-5 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.35)] transition-all hover:-translate-y-0.5 hover:border-accent/30 md:p-6"
+              className="group relative block rounded-2xl border border-hairline bg-panel p-5 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.35)] transition-all hover:-translate-y-0.5 hover:border-accent/30 md:p-6"
             >
               <div className="mb-4 flex items-center justify-between">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink/40">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink/55">
                   Worked example
                 </span>
                 <span className="inline-flex items-center gap-1 text-[11px] font-medium text-accent opacity-0 transition-opacity group-hover:opacity-100">
@@ -402,7 +402,7 @@ export default function HomePage() {
 
             {/* Right column — peptide preview chips */}
             <div className="relative">
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/35">
+              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/55">
                 Featured entries
               </p>
               <div className="flex flex-wrap gap-2">
@@ -412,7 +412,7 @@ export default function HomePage() {
                   return (
                     <span
                       key={slug}
-                      className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1.5 text-xs text-ink/70 transition-colors group-hover:border-accent/20 group-hover:bg-ink/[0.05]"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-2.5 py-1.5 text-xs text-ink/70 transition-colors group-hover:border-accent/20 group-hover:bg-fill-strong"
                     >
                       {p.name}
                       {p.fdaApproved && (
@@ -423,20 +423,20 @@ export default function HomePage() {
                     </span>
                   )
                 })}
-                <span className="inline-flex items-center rounded-lg border border-dashed border-ink/[0.12] bg-transparent px-2.5 py-1.5 text-xs text-ink/40">
+                <span className="inline-flex items-center rounded-lg border border-dashed border-hairline-strong bg-transparent px-2.5 py-1.5 text-xs text-ink/55">
                   +{LISTED_PEPTIDES.length - SPOTLIGHT_SLUGS.length} more
                 </span>
               </div>
 
-              <div className="mt-5 border-t border-ink/[0.06] pt-4">
-                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/35">
+              <div className="mt-5 border-t border-hairline pt-4">
+                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/55">
                   Categories
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {CATEGORIES.map((c) => (
                     <span
                       key={c.id}
-                      className="rounded-md border border-ink/[0.06] bg-ink/[0.02] px-2 py-0.5 text-[10px] text-ink/50"
+                      className="rounded-md border border-hairline bg-fill px-2 py-0.5 text-[10px] text-ink/50"
                     >
                       {c.label}
                     </span>
@@ -464,7 +464,7 @@ export default function HomePage() {
             <Link
               key={name}
               href={href}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-8 shadow-[0_1px_0_rgba(255,255,255,0.04)_inset] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.14)]"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-hairline bg-fill p-8 shadow-[0_1px_0_rgba(255,255,255,0.04)_inset] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-fill-strong hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.14)]"
             >
               {/* Top accent line revealed on hover */}
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#5BA88C]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -508,18 +508,18 @@ export default function HomePage() {
           {steps.map(({ Icon, name, description }, idx) => (
             <div
               key={name}
-              className="relative rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-ink/[0.12] hover:bg-ink/[0.03]"
+              className="relative rounded-2xl border border-hairline bg-fill p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-hairline-strong hover:bg-fill"
             >
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-accent/20 bg-accent/[0.08] text-accent">
                   <Icon className="h-4 w-4" strokeWidth={1.75} />
                 </div>
-                <span className="font-mono text-[11px] text-ink/30">
+                <span className="font-mono text-[11px] text-ink/55">
                   Step {idx + 1}
                 </span>
               </div>
               <h3 className="mb-2 text-base font-semibold">{name}</h3>
-              <p className="text-sm leading-relaxed text-ink/45">{description}</p>
+              <p className="text-sm leading-relaxed text-ink/55">{description}</p>
             </div>
           ))}
         </div>
@@ -707,11 +707,11 @@ function HeroMolecule() {
 // 5 mg vial · 2 mL BAC water · 250 mcg dose → 10 units, 20 doses, 250 mcg/0.1 mL.
 function PreviewTile({ value, unit }: { value: string; unit: string }) {
   return (
-    <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-2 py-2.5 text-center">
+    <div className="rounded-xl border border-hairline bg-fill px-2 py-2.5 text-center">
       <p className="font-mono text-xl font-semibold leading-none tabular-nums text-accent">
         {value}
       </p>
-      <p className="mt-1 text-[9px] leading-tight text-ink/45">{unit}</p>
+      <p className="mt-1 text-[9px] leading-tight text-ink/55">{unit}</p>
     </div>
   )
 }

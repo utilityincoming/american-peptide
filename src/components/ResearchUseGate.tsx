@@ -63,7 +63,7 @@ export default function ResearchUseGate() {
     >
       <div className="absolute inset-0 bg-surface-deep/80 backdrop-blur-sm" />
 
-      <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-ink/[0.08] bg-panel p-6 shadow-[0_30px_80px_rgba(0,0,0,0.5)] md:p-7">
+      <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-hairline bg-panel p-6 shadow-[0_30px_80px_rgba(0,0,0,0.5)] md:p-7">
         <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
           <FlaskConical className="h-5 w-5" strokeWidth={1.75} />
         </div>

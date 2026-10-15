@@ -44,14 +44,14 @@ export default function CompareIndexPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
       />
 
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <span className="flex items-center gap-1.5 text-sm font-medium">
           <GitCompare className="h-4 w-4 text-accent" />
           Comparisons
         </span>
       </header>
 
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -82,7 +82,7 @@ export default function CompareIndexPage() {
             <Link
               key={c.slug}
               href={`/compare/${c.slug}`}
-              className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.12)]"
+              className="group flex flex-col rounded-2xl border border-hairline bg-fill p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-fill-strong hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.12)]"
             >
               <div className="mb-3 flex flex-wrap items-center gap-2 text-sm font-semibold">
                 <span style={{ color: '#5BA88C' }}>{c.aName}</span>

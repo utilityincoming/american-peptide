@@ -27,7 +27,7 @@ export default function SourceComparison({ slug }: { slug: string }) {
   const vendors = getVendorsForPeptide(slug)
   if (vendors.length === 0) {
     return (
-      <p className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5 text-sm text-ink/55">
+      <p className="rounded-xl border border-hairline bg-fill p-5 text-sm text-ink/55">
         No trust-ranked sources are on file for this compound yet.
       </p>
     )
@@ -48,11 +48,11 @@ export default function SourceComparison({ slug }: { slug: string }) {
             <div className="mb-1.5 flex flex-wrap items-center gap-2.5">
               <TierBadge tier={claimTier} />
               <h3 className="text-sm font-semibold text-ink/85">{band.label}</h3>
-              <span className="text-xs text-ink/35">
+              <span className="text-xs text-ink/55">
                 {bandVendors.length} source{bandVendors.length === 1 ? '' : 's'}
               </span>
             </div>
-            <p className="mb-3 text-xs leading-relaxed text-ink/45">{band.blurb}</p>
+            <p className="mb-3 text-xs leading-relaxed text-ink/55">{band.blurb}</p>
 
             <div className="space-y-3">
               {bandVendors.map((v) => {
@@ -71,7 +71,7 @@ export default function SourceComparison({ slug }: { slug: string }) {
                 return (
                   <div
                     key={v.id}
-                    className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-4"
+                    className="rounded-xl border border-hairline bg-fill p-4"
                   >
                     <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
                       <div className="min-w-0">
@@ -83,24 +83,24 @@ export default function SourceComparison({ slug }: { slug: string }) {
                             </span>
                           )}
                         </div>
-                        <p className="mt-0.5 text-xs leading-relaxed text-ink/45">{v.blurb}</p>
+                        <p className="mt-0.5 text-xs leading-relaxed text-ink/55">{v.blurb}</p>
                       </div>
                       <div className="shrink-0 text-right">
                         <span
-                          className="block text-[11px] tabular-nums text-ink/40"
+                          className="block text-[11px] tabular-nums text-ink/55"
                           title="Transparency score — the within-tier sort key"
                         >
                           {trustScore(v)}/100
                         </span>
                         {ships && (
-                          <span className="mt-0.5 block text-[10px] text-ink/35">{ships}</span>
+                          <span className="mt-0.5 block text-[10px] text-ink/55">{ships}</span>
                         )}
                       </div>
                     </div>
 
                     {/* The purity claim, tiered by the vendor's transparency band */}
-                    <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 border-t border-ink/[0.06] pt-3">
-                      <span className="text-[11px] uppercase tracking-wide text-ink/40">
+                    <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 border-t border-hairline pt-3">
+                      <span className="text-[11px] uppercase tracking-wide text-ink/55">
                         Listed purity
                       </span>
                       <span className="text-sm font-medium text-ink/85">
@@ -113,7 +113,7 @@ export default function SourceComparison({ slug }: { slug: string }) {
                           // BY DESIGN — the date that matters is the one on your
                           // lot's certificate. Flagging that as "undated" would
                           // read as a deficiency when it's the stronger practice.
-                          <span className="inline-flex items-center gap-1 text-[11px] text-ink/45">
+                          <span className="inline-flex items-center gap-1 text-[11px] text-ink/55">
                             <Info className="h-3 w-3 shrink-0" strokeWidth={2} />
                             Dated per lot — match the report number on your vial&rsquo;s COA
                           </span>
@@ -133,7 +133,7 @@ export default function SourceComparison({ slug }: { slug: string }) {
                         {signals.map((s) => (
                           <span
                             key={s}
-                            className="inline-flex items-center gap-1 rounded-full border border-ink/[0.08] bg-ink/[0.02] px-2 py-0.5 text-[11px] text-ink/60"
+                            className="inline-flex items-center gap-1 rounded-full border border-hairline bg-fill px-2 py-0.5 text-[11px] text-ink/60"
                           >
                             <Check className="h-3 w-3 text-accent" strokeWidth={2.5} />
                             {s}
@@ -143,7 +143,7 @@ export default function SourceComparison({ slug }: { slug: string }) {
                     )}
 
                     {v.notes && (
-                      <p className="mt-2.5 flex items-start gap-1.5 text-[11px] leading-relaxed text-ink/40">
+                      <p className="mt-2.5 flex items-start gap-1.5 text-[11px] leading-relaxed text-ink/55">
                         <Info className="mt-0.5 h-3 w-3 shrink-0" strokeWidth={2} />
                         <span>{v.notes}</span>
                       </p>
@@ -154,7 +154,7 @@ export default function SourceComparison({ slug }: { slug: string }) {
                         href={vendorHref(v, slug)}
                         target="_blank"
                         rel="sponsored nofollow noopener"
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.10] bg-ink/[0.04] px-3 py-1.5 text-xs font-medium text-ink/80 transition-colors hover:border-accent/40 hover:text-accent"
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-hairline-strong bg-fill-strong px-3 py-1.5 text-xs font-medium text-ink/80 transition-colors hover:border-accent/40 hover:text-accent"
                       >
                         Visit {v.name}
                         <ArrowUpRight className="h-3.5 w-3.5" />
@@ -174,7 +174,7 @@ export default function SourceComparison({ slug }: { slug: string }) {
                         </span>
                       )}
                       {affiliate && (
-                        <span className="text-[10px] uppercase tracking-wide text-ink/35">
+                        <span className="text-[10px] uppercase tracking-wide text-ink/55">
                           Affiliate link
                         </span>
                       )}

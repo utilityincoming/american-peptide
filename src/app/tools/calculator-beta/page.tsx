@@ -240,7 +240,7 @@ export default function CalculatorBetaPage() {
   return (
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Page identity ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-accent/15">
           <Syringe className="h-4 w-4 text-accent" strokeWidth={1.75} />
         </div>
@@ -291,13 +291,13 @@ export default function CalculatorBetaPage() {
           <div className="mt-4 flex flex-wrap gap-3 text-xs">
             <Link
               href="/tools/blend-calculator"
-              className="rounded-lg border border-ink/[0.08] px-3 py-2 text-ink/60 transition-colors hover:border-accent/25 hover:text-accent"
+              className="rounded-lg border border-hairline px-3 py-2 text-ink/60 transition-colors hover:border-accent/25 hover:text-accent"
             >
               Blend calculator (beta) →
             </Link>
             <Link
               href="/learn/compatibility"
-              className="rounded-lg border border-ink/[0.08] px-3 py-2 text-ink/60 transition-colors hover:border-accent/25 hover:text-accent"
+              className="rounded-lg border border-hairline px-3 py-2 text-ink/60 transition-colors hover:border-accent/25 hover:text-accent"
             >
               Compatibility &amp; stability guide →
             </Link>
@@ -305,7 +305,7 @@ export default function CalculatorBetaPage() {
         </div>
 
         {/* ── Inputs ── */}
-        <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <div className="mb-4 flex flex-col gap-3">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
@@ -313,7 +313,7 @@ export default function CalculatorBetaPage() {
               </h2>
               {/* Mode toggle — a pen's fill volume is fixed, so there's no reverse solve. */}
               {!isPen && (
-                <div className="inline-flex rounded-xl border border-ink/[0.08] bg-ink/[0.02] p-0.5 text-xs">
+                <div className="inline-flex rounded-xl border border-hairline bg-fill p-0.5 text-xs">
                   <Toggle active={mode === 'forward'} onClick={() => setMode('forward')}>
                     Solve for draw volume
                   </Toggle>
@@ -326,7 +326,7 @@ export default function CalculatorBetaPage() {
 
             <div className="flex flex-wrap items-center gap-3">
               {/* Measurement toggle */}
-              <div className="inline-flex self-start rounded-xl border border-ink/[0.08] bg-ink/[0.02] p-0.5 text-xs">
+              <div className="inline-flex self-start rounded-xl border border-hairline bg-fill p-0.5 text-xs">
                 <Toggle active={!isIu} onClick={() => selectMeasurement('mcg')}>
                   mcg · peptides
                 </Toggle>
@@ -337,7 +337,7 @@ export default function CalculatorBetaPage() {
 
               {/* Form toggle — vials are reconstituted; GLP-1 pens ship pre-filled. */}
               {!isIu && (
-                <div className="inline-flex self-start rounded-xl border border-ink/[0.08] bg-ink/[0.02] p-0.5 text-xs">
+                <div className="inline-flex self-start rounded-xl border border-hairline bg-fill p-0.5 text-xs">
                   <Toggle active={!isPen} onClick={() => selectForm('vial')}>
                     Vial · reconstitute
                   </Toggle>
@@ -349,7 +349,7 @@ export default function CalculatorBetaPage() {
             </div>
           </div>
 
-          <p className="mb-5 text-xs leading-relaxed text-ink/40">
+          <p className="mb-5 text-xs leading-relaxed text-ink/55">
             {isPen
               ? 'Enter the pen size and its fill volume — get the per-dose draw and how many doses the pen holds. A pen ships pre-mixed, so there is no water to add.'
               : reverse
@@ -363,7 +363,7 @@ export default function CalculatorBetaPage() {
             <div className="mb-6">
               <label className="mb-1.5 block text-xs font-medium text-ink/55">
                 Load a peptide{' '}
-                <span className="text-ink/30">
+                <span className="text-ink/55">
                   (autofills vial, water &amp; a reference amount)
                 </span>
               </label>
@@ -387,7 +387,7 @@ export default function CalculatorBetaPage() {
                   </Link>
                 </div>
               )}
-              <p className="mt-1.5 text-[10px] leading-relaxed text-ink/30">
+              <p className="mt-1.5 text-[10px] leading-relaxed text-ink/55">
                 Preset vial sizes and volumes reflect how these compounds are commonly supplied
                 and dissolved for laboratory research. Amounts are calculation reference points
                 only — not dosing guidance or medical advice. Adjust any field freely.
@@ -523,21 +523,21 @@ export default function CalculatorBetaPage() {
         </section>
 
         {/* ── Syringe diagram ── */}
-        <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
               U-100 Insulin Syringe
             </h2>
-            <span className="font-mono text-xs text-ink/40">
+            <span className="font-mono text-xs text-ink/55">
               {fmt(calc.unitsPerInjection, 1)} units · {fmt(calc.volumePerInjectionMl, 3)} mL
             </span>
           </div>
           <SyringeDiagram units={calc.unitsPerInjection} />
-          <p className="mt-3 text-center text-[11px] text-ink/35">
+          <p className="mt-3 text-center text-[11px] text-ink/55">
             Each tick = 1 unit (0.01 mL). Major labeled marks every 10 units (0.1 mL).
           </p>
           {isPen && (
-            <p className="mt-1 text-center text-[11px] text-ink/35">
+            <p className="mt-1 text-center text-[11px] text-ink/55">
               Shown as a draw into a U-100 syringe. Dialing the pen directly uses
               its own click scale — check the device insert.
             </p>
@@ -545,7 +545,7 @@ export default function CalculatorBetaPage() {
         </section>
 
         {/* ── Quick converters ── */}
-        <section className="mb-10 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-10 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
             Quick Converters
           </h2>
@@ -563,11 +563,11 @@ export default function CalculatorBetaPage() {
 
         {/* ── Reference table (mcg vial mode only) ── */}
         {!isIu && !isPen && (
-          <section className="mb-10 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+          <section className="mb-10 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
             <h2 className="mb-1 text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
               Quick Reference
             </h2>
-            <p className="mb-4 text-xs text-ink/40">
+            <p className="mb-4 text-xs text-ink/55">
               Concentration in mcg per 0.1 mL by vial size and water volume. Your current
               selection is highlighted.
             </p>
@@ -580,7 +580,7 @@ export default function CalculatorBetaPage() {
 
         {/* ── Pen usage note (pen mode) ── */}
         {isPen && (
-          <section className="mb-10 rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-5 md:p-6">
+          <section className="mb-10 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
             <h2 className="mb-4 text-xl font-semibold tracking-tight">
               Using a Pre-Filled Pen
             </h2>
@@ -615,7 +615,7 @@ export default function CalculatorBetaPage() {
 
         {/* ── Educational content ── */}
         {!isPen && (
-        <section className="mb-10 rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-5 md:p-6">
+        <section className="mb-10 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <h2 className="mb-4 text-xl font-semibold tracking-tight">
             How to Reconstitute Peptides
           </h2>
@@ -658,7 +658,7 @@ export default function CalculatorBetaPage() {
         </section>
         )}
 
-        <section className="mb-10 rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-5 md:p-6">
+        <section className="mb-10 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <h2 className="mb-4 text-xl font-semibold tracking-tight">Storage Guidelines</h2>
           <ul className="space-y-2.5 text-sm leading-relaxed text-ink/65">
             <li className="flex gap-2">
@@ -750,8 +750,8 @@ function PeptidePicker({
 
   return (
     <div className="relative">
-      <div className="flex items-center gap-2 rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-3 transition-colors focus-within:border-accent/40">
-        <Search className="h-4 w-4 flex-shrink-0 text-ink/35" strokeWidth={1.75} />
+      <div className="flex items-center gap-2 rounded-xl border border-hairline bg-fill px-3 transition-colors focus-within:border-accent/40">
+        <Search className="h-4 w-4 flex-shrink-0 text-ink/55" strokeWidth={1.75} />
         <input
           ref={inputRef}
           type="text"
@@ -771,7 +771,7 @@ function PeptidePicker({
               choose(flat[0])
             }
           }}
-          className="w-full bg-transparent py-2.5 text-base text-ink outline-none placeholder:text-ink/35"
+          className="w-full bg-transparent py-2.5 text-base text-ink outline-none placeholder:text-ink/55"
         />
         {(loaded || query) && (
           <button
@@ -782,7 +782,7 @@ function PeptidePicker({
               onClear()
               inputRef.current?.focus()
             }}
-            className="flex-shrink-0 rounded-md p-1 text-ink/35 transition-colors hover:bg-ink/[0.06] hover:text-ink/70"
+            className="flex-shrink-0 rounded-md p-1 text-ink/55 transition-colors hover:bg-fill-strong hover:text-ink/70"
           >
             <X className="h-3.5 w-3.5" />
           </button>
@@ -799,13 +799,13 @@ function PeptidePicker({
             className="fixed inset-0 z-10 cursor-default"
             onClick={() => setOpen(false)}
           />
-          <div className="absolute left-0 right-0 top-[calc(100%+4px)] z-20 max-h-72 overflow-y-auto rounded-xl border border-ink/[0.1] bg-[var(--panel,#0f1729)] p-1 shadow-xl shadow-black/30">
+          <div className="absolute left-0 right-0 top-[calc(100%+4px)] z-20 max-h-72 overflow-y-auto rounded-xl border border-hairline-strong bg-[var(--panel,#0f1729)] p-1 shadow-xl shadow-black/30">
             {flat.length === 0 ? (
-              <p className="px-3 py-4 text-center text-xs text-ink/40">No peptides match “{query}”.</p>
+              <p className="px-3 py-4 text-center text-xs text-ink/55">No peptides match “{query}”.</p>
             ) : (
               groups.map((g) => (
                 <div key={g.group} className="mb-1 last:mb-0">
-                  <p className="px-2.5 pb-0.5 pt-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-ink/35">
+                  <p className="px-2.5 pb-0.5 pt-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-ink/55">
                     {g.group}
                   </p>
                   {g.items.map((p) => (
@@ -816,7 +816,7 @@ function PeptidePicker({
                       className="flex w-full items-center justify-between gap-3 rounded-lg px-2.5 py-2 text-left text-sm text-ink/80 transition-colors hover:bg-accent/[0.08] hover:text-ink"
                     >
                       <span className="font-medium">{p.name}</span>
-                      <span className="flex-shrink-0 font-mono text-[11px] text-ink/40">
+                      <span className="flex-shrink-0 font-mono text-[11px] text-ink/55">
                         {p.vialMg}mg · {p.waterMl}mL
                       </span>
                     </button>
@@ -853,7 +853,7 @@ function NumberField({
   return (
     <div>
       <label className="mb-1.5 block text-xs font-medium text-ink/55">
-        {label} <span className="text-ink/30">({unit})</span>
+        {label} <span className="text-ink/55">({unit})</span>
       </label>
       {presets && presetLabel && onPreset && (
         <div className="mb-2 flex flex-wrap gap-1.5">
@@ -865,7 +865,7 @@ function NumberField({
               className={`rounded-full border px-2.5 py-0.5 text-[11px] transition-colors ${
                 String(n) === value
                   ? 'border-accent/30 bg-accent/[0.08] text-accent'
-                  : 'border-ink/[0.08] bg-ink/[0.02] text-ink/55 hover:border-ink/[0.15] hover:text-ink/85'
+                  : 'border-hairline bg-fill text-ink/55 hover:border-hairline-strong hover:text-ink/85'
               }`}
             >
               {presetLabel(n)}
@@ -880,9 +880,9 @@ function NumberField({
         step="any"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-2.5 font-mono text-base text-ink outline-none transition-colors focus:border-accent/40"
+        className="w-full rounded-xl border border-hairline bg-fill px-4 py-2.5 font-mono text-base text-ink outline-none transition-colors focus:border-accent/40"
       />
-      {hint && <p className="mt-1 text-[10px] text-ink/30">{hint}</p>}
+      {hint && <p className="mt-1 text-[10px] text-ink/55">{hint}</p>}
     </div>
   )
 }
@@ -903,10 +903,10 @@ function ResultCard({
       className={`rounded-2xl border p-4 ${
         highlight
           ? 'border-accent/25 bg-accent/[0.04]'
-          : 'border-ink/[0.07] bg-ink/[0.025]'
+          : 'border-hairline bg-fill'
       }`}
     >
-      <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-ink/40">
+      <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-ink/55">
         {label}
       </p>
       <p
@@ -916,7 +916,7 @@ function ResultCard({
       >
         {value}
       </p>
-      <p className="mt-0.5 text-[11px] text-ink/40">{unit}</p>
+      <p className="mt-0.5 text-[11px] text-ink/55">{unit}</p>
     </div>
   )
 }
@@ -950,13 +950,13 @@ function Converter({
   }
 
   return (
-    <div className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-3">
+    <div className="rounded-xl border border-hairline bg-fill p-3">
       <div className="flex items-center gap-2">
         <ConvInput unit={leftUnit} value={left} onChange={onLeft} />
-        <ArrowRightLeft className="h-3.5 w-3.5 shrink-0 text-ink/30" />
+        <ArrowRightLeft className="h-3.5 w-3.5 shrink-0 text-ink/55" />
         <ConvInput unit={rightUnit} value={right} onChange={onRight} />
       </div>
-      {note && <p className="mt-2 text-[10px] text-ink/30">{note}</p>}
+      {note && <p className="mt-2 text-[10px] text-ink/55">{note}</p>}
     </div>
   )
 }
@@ -971,7 +971,7 @@ function ConvInput({
   onChange: (v: string) => void
 }) {
   return (
-    <label className="flex min-w-0 flex-1 items-center gap-1 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-2 py-1.5 focus-within:border-accent/40">
+    <label className="flex min-w-0 flex-1 items-center gap-1 rounded-lg border border-hairline bg-fill px-2 py-1.5 focus-within:border-accent/40">
       <input
         type="number"
         inputMode="decimal"
@@ -982,7 +982,7 @@ function ConvInput({
         placeholder="0"
         className="w-full min-w-0 bg-transparent font-mono text-sm text-ink placeholder:text-ink/25 outline-none"
       />
-      <span className="shrink-0 text-[10px] text-ink/35">{unit}</span>
+      <span className="shrink-0 text-[10px] text-ink/55">{unit}</span>
     </label>
   )
 }
@@ -1145,10 +1145,10 @@ function ReferenceTable({
   currentWater: number
 }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-ink/[0.07]">
+    <div className="overflow-x-auto rounded-xl border border-hairline">
       <table className="w-full border-collapse text-xs">
         <thead>
-          <tr className="bg-ink/[0.04]">
+          <tr className="bg-fill-strong">
             <th className="px-3 py-2.5 text-left font-medium text-ink/55">Vial \ Water</th>
             {REF_WATERS.map((w) => (
               <th
@@ -1162,7 +1162,7 @@ function ReferenceTable({
         </thead>
         <tbody>
           {REF_VIALS.map((v) => (
-            <tr key={v} className="border-t border-ink/[0.05]">
+            <tr key={v} className="border-t border-hairline">
               <td className="px-3 py-2.5 font-mono text-ink/65">{v} mg</td>
               {REF_WATERS.map((w) => {
                 const conc = (v * 100) / w

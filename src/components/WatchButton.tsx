@@ -25,7 +25,7 @@ export default function WatchButton({ slug }: { slug: string }) {
           'inline-flex items-center gap-1.5 rounded-xl border px-4 py-2 text-sm font-medium transition-colors ' +
           (watched
             ? 'border-accent/40 bg-accent/[0.10] text-accent'
-            : 'border-ink/12 text-ink/70 hover:border-ink/25 hover:text-ink')
+            : 'border-hairline-strong text-ink/70 hover:border-ink/25 hover:text-ink')
         }
         style={{ opacity: ready ? 1 : 0.6 }}
       >
@@ -33,7 +33,7 @@ export default function WatchButton({ slug }: { slug: string }) {
         {watched ? 'In your workspace' : 'Add to workspace'}
       </button>
       {watched && ready && (
-        <Link href="/workspace" className="text-xs text-ink/45 underline-offset-2 hover:text-accent hover:underline">
+        <Link href="/workspace" className="text-xs text-ink/55 underline-offset-2 hover:text-accent hover:underline">
           View workspace →
         </Link>
       )}

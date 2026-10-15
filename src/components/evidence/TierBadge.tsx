@@ -75,7 +75,7 @@ export default function TierBadge({
       {dateVisible && retrievedAt && (
         <time
           dateTime={retrievedAt}
-          className={`text-[10px] tabular-nums ${stale ? 'text-accent-amber' : 'text-ink/40'}`}
+          className={`text-[10px] tabular-nums ${stale ? 'text-accent-amber' : 'text-ink/55'}`}
         >
           {formatRetrieved(retrievedAt)}
         </time>
@@ -88,7 +88,7 @@ export default function TierBadge({
       )}
 
       {expandOnMobile && (
-        <span className="basis-full text-[11px] leading-4 text-ink/45 sm:hidden">
+        <span className="basis-full text-[11px] leading-4 text-ink/55 sm:hidden">
           {scopeNote}
         </span>
       )}

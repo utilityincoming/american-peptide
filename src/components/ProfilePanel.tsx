@@ -67,7 +67,7 @@ function Segmented<T extends string>({
             className={`rounded-lg border px-3 py-1.5 text-xs transition-colors ${
               active
                 ? 'border-accent/40 bg-accent/[0.12] text-accent'
-                : 'border-ink/[0.08] bg-ink/[0.02] text-ink/55 hover:border-accent/25 hover:text-ink/80'
+                : 'border-hairline bg-fill text-ink/55 hover:border-accent/25 hover:text-ink/80'
             }`}
           >
             {o.label}
@@ -147,7 +147,7 @@ export default function ProfilePanel() {
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-ink/35 transition-colors hover:bg-ink/[0.05] hover:text-ink"
+        className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-ink/55 transition-colors hover:bg-fill-strong hover:text-ink"
         aria-label="Reader profile"
       >
         <SlidersHorizontal className="h-3.5 w-3.5" />
@@ -160,24 +160,24 @@ export default function ProfilePanel() {
       </button>
 
       {open && (
-        <div className="absolute right-0 z-20 mt-2 w-80 rounded-2xl border border-ink/[0.08] bg-surface p-5 shadow-xl shadow-black/20">
+        <div className="absolute right-0 z-20 mt-2 w-80 rounded-2xl border border-hairline bg-surface p-5 shadow-xl shadow-black/20">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-sm font-semibold text-ink">Reader profile</h3>
             <button
               onClick={() => setOpen(false)}
-              className="rounded-md p-1 text-ink/35 hover:bg-ink/[0.05] hover:text-ink"
+              className="rounded-md p-1 text-ink/55 hover:bg-fill-strong hover:text-ink"
               aria-label="Close"
             >
               <X className="h-4 w-4" />
             </button>
           </div>
-          <p className="mb-4 text-[11px] leading-relaxed text-ink/40">
+          <p className="mb-4 text-[11px] leading-relaxed text-ink/55">
             Tunes how the Agent answers. Stored only in this browser.
           </p>
 
           <div className="space-y-4">
             <div>
-              <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-ink/40">
+              <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-ink/55">
                 Audience
               </label>
               <Segmented
@@ -188,7 +188,7 @@ export default function ProfilePanel() {
             </div>
 
             <div>
-              <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-ink/40">
+              <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-ink/55">
                 Answer depth
               </label>
               <Segmented
@@ -199,7 +199,7 @@ export default function ProfilePanel() {
             </div>
 
             <div>
-              <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-ink/40">
+              <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-ink/55">
                 Units
               </label>
               <Segmented
@@ -210,7 +210,7 @@ export default function ProfilePanel() {
             </div>
 
             <div>
-              <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-ink/40">
+              <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-ink/55">
                 Research focus
               </label>
               <input
@@ -220,12 +220,12 @@ export default function ProfilePanel() {
                   setProfile((p) => ({ ...p, focusAreas: parseList(e.target.value) }))
                 }}
                 placeholder="weight loss, healing, longevity…"
-                className="w-full rounded-lg border border-ink/[0.08] bg-ink/[0.02] px-3 py-2 text-xs text-ink placeholder:text-ink/25 focus:border-accent/40 focus:outline-none"
+                className="w-full rounded-lg border border-hairline bg-fill px-3 py-2 text-xs text-ink placeholder:text-ink/25 focus:border-accent/40 focus:outline-none"
               />
             </div>
 
             <div>
-              <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-ink/40">
+              <label className="mb-1.5 block text-[11px] font-semibold uppercase tracking-wider text-ink/55">
                 Following compounds
               </label>
               <input
@@ -235,9 +235,9 @@ export default function ProfilePanel() {
                   setProfile((p) => ({ ...p, compounds: parseList(e.target.value) }))
                 }}
                 placeholder="semaglutide, BPC-157…"
-                className="w-full rounded-lg border border-ink/[0.08] bg-ink/[0.02] px-3 py-2 text-xs text-ink placeholder:text-ink/25 focus:border-accent/40 focus:outline-none"
+                className="w-full rounded-lg border border-hairline bg-fill px-3 py-2 text-xs text-ink placeholder:text-ink/25 focus:border-accent/40 focus:outline-none"
               />
-              <p className="mt-1 text-[10px] text-ink/30">
+              <p className="mt-1 text-[10px] text-ink/55">
                 Comma-separated. Unrecognized names are ignored.
               </p>
             </div>
@@ -250,7 +250,7 @@ export default function ProfilePanel() {
                 setFocusInput('')
                 setCompoundsInput('')
               }}
-              className="mt-4 w-full rounded-lg border border-ink/[0.08] py-2 text-xs text-ink/45 transition-colors hover:border-ink/20 hover:text-ink/70"
+              className="mt-4 w-full rounded-lg border border-hairline py-2 text-xs text-ink/55 transition-colors hover:border-ink/20 hover:text-ink/70"
             >
               Clear profile
             </button>

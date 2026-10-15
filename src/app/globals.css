@@ -31,6 +31,14 @@
   --accent-amber: #E0A23D; /* evidence-tier accent (vendor-reported / community) */
   --accent-red: #D97070;   /* restrictive regulatory status (Category 2, declined) */
   --viz: #0E1512;          /* immersive viz "stage" — stays dark in both themes */
+  /* Chrome tokens — hairlines/dividers + subtle fills. Defined per theme so the
+     same utility (border-hairline, bg-fill) reads correctly in both modes: a
+     white wash on dark, a warm-ink wash on light (pitched stronger so it doesn't
+     vanish on the near-white surface). They carry their own alpha — use without a modifier. */
+  --hairline: rgba(255, 255, 255, 0.07);        /* default border + divider */
+  --hairline-strong: rgba(255, 255, 255, 0.12); /* emphasis border */
+  --fill: rgba(255, 255, 255, 0.025);           /* subtle panel/control fill */
+  --fill-strong: rgba(255, 255, 255, 0.05);     /* hover/active fill */
 
   --background: var(--surface);
   --foreground: var(--ink);
@@ -49,6 +57,12 @@ html.light {
   --accent-purple: #7C3AED;
   --accent-amber: #9A6412; /* darker amber for legible text on light */
   --accent-red: #B14A3F;   /* darker clay-red for legible text on light */
+  /* Warm-ink washes, pitched stronger than the dark theme's white ones so
+     borders and fills stay visible on the near-white survey-paper surface. */
+  --hairline: rgba(28, 38, 34, 0.12);
+  --hairline-strong: rgba(28, 38, 34, 0.22);
+  --fill: rgba(28, 38, 34, 0.04);
+  --fill-strong: rgba(28, 38, 34, 0.07);
 }
 
 @theme inline {
@@ -67,6 +81,10 @@ html.light {
   --color-accent-amber: var(--accent-amber);
   --color-accent-red: var(--accent-red);
   --color-viz: var(--viz);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-fill: var(--fill);
+  --color-fill-strong: var(--fill-strong);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-space-grotesk);

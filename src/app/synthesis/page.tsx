@@ -128,7 +128,7 @@ export default function SynthesisPage() {
       />
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <span className="flex items-center gap-1.5 text-sm font-medium">
           <Factory className="h-4 w-4 text-accent" />
           Synthesis
@@ -136,7 +136,7 @@ export default function SynthesisPage() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -164,9 +164,9 @@ export default function SynthesisPage() {
       </section>
 
       {/* ── Pipeline rail (visual) ── */}
-      <section className="border-b border-ink/[0.06] px-6 py-8 md:px-10">
+      <section className="border-b border-hairline px-6 py-8 md:px-10">
         <div className="mx-auto max-w-5xl">
-          <p className="mb-4 text-[11px] font-semibold uppercase tracking-wider text-ink/35">
+          <p className="mb-4 text-[11px] font-semibold uppercase tracking-wider text-ink/55">
             The pipeline, end to end
           </p>
           <ol className="flex gap-2 overflow-x-auto pb-2">
@@ -176,7 +176,7 @@ export default function SynthesisPage() {
                 <li key={s.slug} className="flex items-center gap-2">
                   <a
                     href={`#${s.slug}`}
-                    className="group flex w-28 shrink-0 flex-col items-center gap-2 rounded-xl border border-ink/[0.07] bg-ink/[0.025] px-2 py-3 text-center transition-all hover:border-accent/25 hover:bg-ink/[0.04]"
+                    className="group flex w-28 shrink-0 flex-col items-center gap-2 rounded-xl border border-hairline bg-fill px-2 py-3 text-center transition-all hover:border-accent/25 hover:bg-fill-strong"
                   >
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/12 text-accent">
                       <Icon className="h-4 w-4" strokeWidth={1.75} />
@@ -199,7 +199,7 @@ export default function SynthesisPage() {
       <SynthesisWalk stages={STAGES} />
 
       {/* ── Economics ── */}
-      <section className="border-t border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-t border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
             What it actually costs
@@ -216,7 +216,7 @@ export default function SynthesisPage() {
               return (
                 <div
                   key={item.label}
-                  className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5"
+                  className="rounded-2xl border border-hairline bg-fill p-5"
                 >
                   <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-accent/12 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
@@ -235,7 +235,7 @@ export default function SynthesisPage() {
       </section>
 
       {/* ── Cold chain ── */}
-      <section className="border-t border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-t border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
             The cold chain
@@ -252,7 +252,7 @@ export default function SynthesisPage() {
               return (
                 <div
                   key={item.label}
-                  className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5"
+                  className="rounded-2xl border border-hairline bg-fill p-5"
                 >
                   <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-accent/12 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
@@ -271,7 +271,7 @@ export default function SynthesisPage() {
       </section>
 
       {/* ── Catalog through the synthesis lens ── */}
-      <section className="border-t border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-t border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
             See it in the catalog
@@ -291,14 +291,14 @@ export default function SynthesisPage() {
               return (
                 <div
                   key={difficulty}
-                  className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5"
+                  className="rounded-2xl border border-hairline bg-fill p-5"
                 >
                   <div className="mb-3 flex items-center justify-between">
                     <span
                       className={
                         difficulty === 'demanding'
                           ? 'inline-flex items-center gap-1.5 rounded-md border border-accent/25 bg-accent/[0.08] px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent'
-                          : 'inline-flex items-center gap-1.5 rounded-md border border-ink/[0.08] bg-ink/[0.03] px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-ink/55'
+                          : 'inline-flex items-center gap-1.5 rounded-md border border-hairline bg-fill px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-ink/55'
                       }
                     >
                       <FlaskConical className="h-3 w-3" />
@@ -306,7 +306,7 @@ export default function SynthesisPage() {
                     </span>
                     <Link
                       href={`/catalog?difficulty=${difficulty}`}
-                      className="text-[11px] tabular-nums text-ink/40 transition-colors hover:text-accent"
+                      className="text-[11px] tabular-nums text-ink/55 transition-colors hover:text-accent"
                     >
                       {peptides.length} →
                     </Link>
@@ -316,7 +316,7 @@ export default function SynthesisPage() {
                       <li key={p.slug}>
                         <Link
                           href={`/catalog/${p.slug}`}
-                          className="inline-flex rounded-md border border-ink/[0.07] bg-ink/[0.02] px-2 py-1 text-[12px] text-ink/65 transition-colors hover:border-accent/30 hover:text-accent"
+                          className="inline-flex rounded-md border border-hairline bg-fill px-2 py-1 text-[12px] text-ink/65 transition-colors hover:border-accent/30 hover:text-accent"
                         >
                           {p.name}
                         </Link>
@@ -336,8 +336,8 @@ export default function SynthesisPage() {
             })}
           </div>
 
-          <div className="mt-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.015] p-5">
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-ink/35">
+          <div className="mt-6 rounded-2xl border border-hairline bg-fill p-5">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-ink/55">
               Browse by what makes it hard to make
             </p>
             <div className="flex flex-wrap gap-1.5">
@@ -345,10 +345,10 @@ export default function SynthesisPage() {
                 <Link
                   key={feature}
                   href={`/catalog?synthesis=${encodeURIComponent(feature)}`}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/60 transition-colors hover:border-accent/30 hover:text-accent"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-fill px-3 py-1 text-xs text-ink/60 transition-colors hover:border-accent/30 hover:text-accent"
                 >
                   {feature}
-                  <span className="tabular-nums text-ink/35">{count}</span>
+                  <span className="tabular-nums text-ink/55">{count}</span>
                 </Link>
               ))}
             </div>
@@ -357,7 +357,7 @@ export default function SynthesisPage() {
       </section>
 
       {/* ── Provenance / American standard ── */}
-      <section className="border-t border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-t border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <div className="rounded-2xl border border-accent/15 bg-gradient-to-br from-[#5BA88C]/[0.06] to-transparent p-7 md:p-9">
             <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
@@ -394,15 +394,15 @@ export default function SynthesisPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="border-t border-ink/[0.06] px-6 py-12 md:px-10">
+      <section className="border-t border-hairline px-6 py-12 md:px-10">
         <div className="mx-auto flex max-w-5xl flex-col gap-4 sm:flex-row">
           <Link
             href="/catalog"
-            className="group flex flex-1 items-center justify-between rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all hover:border-accent/25 hover:bg-ink/[0.04]"
+            className="group flex flex-1 items-center justify-between rounded-2xl border border-hairline bg-fill p-5 transition-all hover:border-accent/25 hover:bg-fill-strong"
           >
             <div>
               <h3 className="text-sm font-semibold">Browse the catalog</h3>
-              <p className="mt-0.5 text-[12.5px] text-ink/45">
+              <p className="mt-0.5 text-[12.5px] text-ink/55">
                 Apply what you&apos;ve learned to specific research peptides.
               </p>
             </div>
@@ -410,11 +410,11 @@ export default function SynthesisPage() {
           </Link>
           <Link
             href="/glossary"
-            className="group flex flex-1 items-center justify-between rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all hover:border-accent/25 hover:bg-ink/[0.04]"
+            className="group flex flex-1 items-center justify-between rounded-2xl border border-hairline bg-fill p-5 transition-all hover:border-accent/25 hover:bg-fill-strong"
           >
             <div>
               <h3 className="text-sm font-semibold">Read the glossary</h3>
-              <p className="mt-0.5 text-[12.5px] text-ink/45">
+              <p className="mt-0.5 text-[12.5px] text-ink/55">
                 COA, HPLC, lyophilization, endotoxin — the terms in plain
                 English.
               </p>

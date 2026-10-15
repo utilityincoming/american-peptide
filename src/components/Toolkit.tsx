@@ -87,7 +87,7 @@ export default function Toolkit({
           <Link
             key={t.href}
             href={t.href}
-            className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-gradient-to-br from-[#5BA88C]/[0.06] to-transparent p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.18)]"
+            className="group flex flex-col rounded-2xl border border-hairline bg-gradient-to-br from-[#5BA88C]/[0.06] to-transparent p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.18)]"
           >
             <div className="mb-3 flex items-center justify-between">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
@@ -101,7 +101,7 @@ export default function Toolkit({
             </div>
             <div className="flex items-center gap-1.5">
               <h3 className="text-sm font-semibold text-ink/90">{t.name}</h3>
-              <ArrowUpRight className="h-3.5 w-3.5 text-ink/30 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />
+              <ArrowUpRight className="h-3.5 w-3.5 text-ink/55 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />
             </div>
             <p className="mt-1 text-[13px] leading-relaxed text-ink/50">{t.desc}</p>
           </Link>

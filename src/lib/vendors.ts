@@ -409,11 +409,10 @@ export const VENDORS: Vendor[] = [
     url: 'https://paramountpeptides.com',
     blurb:
       'US research-peptide supplier — "Real Science. Real Standards." — with independent third-party HPLC testing on every batch, ≥99% purity, and COAs searchable by product or batch number.',
-    // Broad research-peptide catalog (GLP-forward: GLP-1/2/3 analogues, blends,
-    // oral tablets, reconstitution solutions, the regulator series). 'all' is the
-    // bounded shorthand — see the note below the data block; peptide-hormone and
-    // non-peptide routes are excluded automatically.
-    peptides: 'all',
+    // GLP-only shelf: the public storefront/collection lists just the incretin
+    // analogues under coded names (GLP-1 S / GLP-2 T / GLP-3 R), plus a blend
+    // that's out. Scoped to exactly what they publish — never 'all'.
+    peptides: ['semaglutide', 'tirzepatide', 'retatrutide'],
     shipsTo: ['us'],
     trust: {
       // Set only from Paramount's own published claims (homepage + searchable

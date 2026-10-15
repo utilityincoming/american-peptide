@@ -126,8 +126,8 @@ export default function MethodologyPage() {
       />
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <Link href="/" className="text-sm text-ink/35 transition-colors hover:text-ink">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
+        <Link href="/" className="text-sm text-ink/55 transition-colors hover:text-ink">
           Home
         </Link>
         <span className="text-ink/20">/</span>
@@ -135,7 +135,7 @@ export default function MethodologyPage() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-40"
@@ -173,7 +173,7 @@ export default function MethodologyPage() {
           {PILLARS.map((p) => (
             <div
               key={p.label}
-              className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-5"
+              className="rounded-xl border border-hairline bg-fill p-5"
               style={{ borderTopColor: p.color, borderTopWidth: 2 }}
             >
               <div
@@ -186,7 +186,7 @@ export default function MethodologyPage() {
                 {p.label}
               </p>
               <p className="mb-3 text-xs leading-relaxed text-ink/55">{p.desc}</p>
-              <p className="text-[11px] font-medium text-ink/40">{p.stat}</p>
+              <p className="text-[11px] font-medium text-ink/55">{p.stat}</p>
             </div>
           ))}
         </section>
@@ -194,7 +194,7 @@ export default function MethodologyPage() {
         <div className="space-y-16">
           {/* ── 1. Chemistry verification ── */}
           <section>
-            <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
               <BadgeCheck className="h-3.5 w-3.5 text-accent" />
               Chemistry, cross-referenced against PubChem
             </h2>
@@ -240,7 +240,7 @@ export default function MethodologyPage() {
 
           {/* ── 2. Source ranking ── */}
           <section>
-            <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
               <Scale className="h-3.5 w-3.5 text-accent-indigo" />
               Sources ranked by transparency, never commission
             </h2>
@@ -260,24 +260,24 @@ export default function MethodologyPage() {
             </div>
 
             {/* Weight table */}
-            <div className="mt-6 overflow-hidden rounded-xl border border-ink/[0.07]">
+            <div className="mt-6 overflow-hidden rounded-xl border border-hairline">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-ink/[0.06] bg-ink/[0.02] text-left text-xs text-ink/40">
+                  <tr className="border-b border-hairline bg-fill text-left text-xs text-ink/55">
                     <th className="px-4 py-2.5 font-medium">Transparency signal</th>
                     <th className="px-4 py-2.5 text-right font-medium">Weight</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-ink/[0.04]">
+                <tbody className="divide-y divide-hairline">
                   {WEIGHTS.map(([key, weight]) => (
-                    <tr key={key} className="hover:bg-ink/[0.02]">
+                    <tr key={key} className="hover:bg-fill">
                       <td className="px-4 py-2.5 text-ink/70">{WEIGHT_LABELS[key]}</td>
                       <td className="px-4 py-2.5 text-right font-mono text-xs font-semibold text-ink/80">
                         +{weight}
                       </td>
                     </tr>
                   ))}
-                  <tr className="bg-ink/[0.02] text-ink/50">
+                  <tr className="bg-fill text-ink/50">
                     <td className="px-4 py-2.5 text-xs font-medium uppercase tracking-wider">
                       Commission / payment
                     </td>
@@ -290,14 +290,14 @@ export default function MethodologyPage() {
             </div>
 
             {/* Tiers */}
-            <p className="mt-8 mb-3 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <p className="mt-8 mb-3 text-xs font-semibold uppercase tracking-wider text-ink/55">
               The three tiers a score files into
             </p>
             <div className="space-y-3">
               {VENDOR_TIERS.map((tier) => (
                 <div
                   key={tier.id}
-                  className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4"
+                  className="rounded-xl border border-hairline bg-fill p-4"
                 >
                   <p className="mb-1 text-sm font-semibold text-ink/85">{tier.label}</p>
                   <p className="text-xs leading-relaxed text-ink/50">{tier.blurb}</p>
@@ -311,7 +311,7 @@ export default function MethodologyPage() {
               moves a score. {ACTIVE_VENDOR_COUNT} vendor
               {ACTIVE_VENDOR_COUNT === 1 ? '' : 's'} currently carry a disclosed
               affiliate relationship; each is marked, each outbound link uses{' '}
-              <code className="rounded bg-ink/[0.06] px-1 py-0.5 font-mono text-[11px] text-ink/70">
+              <code className="rounded bg-fill-strong px-1 py-0.5 font-mono text-[11px] text-ink/70">
                 rel=&quot;sponsored nofollow&quot;
               </code>
               , and the score is computed the same way whether we earn a
@@ -342,7 +342,7 @@ export default function MethodologyPage() {
 
           {/* ── Claim-tier provenance scale ── */}
           <section>
-            <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
               <Layers className="h-3.5 w-3.5 text-accent" />
               One scale under all of it: how every claim is tiered
             </h2>
@@ -364,7 +364,7 @@ export default function MethodologyPage() {
 
           {/* ── 3. What we don't do ── */}
           <section>
-            <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
               <Ban className="h-3.5 w-3.5 text-ink/50" />
               What we refuse to do
             </h2>
@@ -389,7 +389,7 @@ export default function MethodologyPage() {
               ].map((item) => (
                 <li
                   key={item.h}
-                  className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4"
+                  className="rounded-xl border border-hairline bg-fill p-4"
                 >
                   <p className="mb-1 text-sm font-semibold text-ink/85">{item.h}</p>
                   <p className="text-xs leading-relaxed text-ink/55">{item.b}</p>
@@ -401,7 +401,7 @@ export default function MethodologyPage() {
           {/* ── Disclaimer ── */}
           <section className="flex gap-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5">
             <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400/70" />
-            <div className="text-xs leading-relaxed text-ink/45">
+            <div className="text-xs leading-relaxed text-ink/55">
               <strong className="text-ink/60">Research reference only.</strong>{' '}
               AmericanPeptide.com is an AI-assisted computational research
               platform, not a medical device or clinical decision-support system.
@@ -420,7 +420,7 @@ export default function MethodologyPage() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
               >
                 {l.label}
                 <ArrowUpRight className="h-3 w-3" />
@@ -435,9 +435,9 @@ export default function MethodologyPage() {
 
 function Stat({ value, label }: { value: string; label: string }) {
   return (
-    <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-4">
+    <div className="rounded-xl border border-hairline bg-fill p-4">
       <p className="text-2xl font-bold tracking-tight text-ink/90">{value}</p>
-      <p className="mt-1 text-[11px] leading-tight text-ink/40">{label}</p>
+      <p className="mt-1 text-[11px] leading-tight text-ink/55">{label}</p>
     </div>
   )
 }
@@ -492,7 +492,7 @@ function ClaimTierScale() {
   ]
 
   return (
-    <div className="mt-6 space-y-6 rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-6">
+    <div className="mt-6 space-y-6 rounded-xl border border-hairline bg-fill p-6">
       {/* Legend — six provenance tiers, strongest first */}
       <ul className="space-y-3">
         {TIER_ORDER.map((tier) => (
@@ -512,8 +512,8 @@ function ClaimTierScale() {
 
       {/* A real reference-tier claim from the verification manifest */}
       {mwClaim && (
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-ink/[0.06] pt-5">
-          <span className="text-[11px] uppercase tracking-wide text-ink/40">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-hairline pt-5">
+          <span className="text-[11px] uppercase tracking-wide text-ink/55">
             Reference tier, for real
           </span>
           <span className="text-sm font-medium text-ink/80">
@@ -532,28 +532,28 @@ function ClaimTierScale() {
       )}
 
       {/* Vendor bands → claim tiers, and the computed page floor */}
-      <div className="flex flex-col gap-5 border-t border-ink/[0.06] pt-5 sm:flex-row sm:items-start sm:justify-between">
+      <div className="flex flex-col gap-5 border-t border-hairline pt-5 sm:flex-row sm:items-start sm:justify-between">
         <div className="space-y-2">
-          <p className="text-[11px] uppercase tracking-wide text-ink/40">
+          <p className="text-[11px] uppercase tracking-wide text-ink/55">
             Vendor bands map onto the scale
           </p>
           <ul className="space-y-1.5">
             {VENDOR_TIERS.map((v) => (
               <li key={v.id} className="flex items-center gap-2 text-[13px] text-ink/60">
                 <span className="w-40 shrink-0">{v.label}</span>
-                <span className="text-ink/30">→</span>
+                <span className="text-ink/55">→</span>
                 <TierBadge tier={VENDOR_TIER_TO_CLAIM[v.id]} />
               </li>
             ))}
           </ul>
         </div>
         <div className="space-y-2">
-          <p className="text-[11px] uppercase tracking-wide text-ink/40">A sourcing page&rsquo;s floor</p>
+          <p className="text-[11px] uppercase tracking-wide text-ink/55">A sourcing page&rsquo;s floor</p>
           <EvidenceFloor claims={floorClaims} />
         </div>
       </div>
 
-      <p className="border-t border-ink/[0.06] pt-4 text-xs leading-5 text-ink/40">
+      <p className="border-t border-hairline pt-4 text-xs leading-5 text-ink/55">
         The floor is the weakest load-bearing claim on a page: a compound with
         PubChem-grade chemistry but only vendor-reported purity floors at{' '}
         <em>vendor-reported</em>. That reconciliation is live for GHK-Cu — see the{' '}
