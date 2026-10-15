@@ -165,13 +165,13 @@ export default function LongevityPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <Link href="/" className="text-sm text-ink/35 hover:text-ink transition-colors">Home</Link>
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
+        <Link href="/" className="text-sm text-ink/55 hover:text-ink transition-colors">Home</Link>
         <span className="text-ink/20">/</span>
         <span className="text-sm font-medium truncate">Longevity Peptides</span>
       </header>
 
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-40"
           style={{ backgroundImage: 'radial-gradient(circle, rgba(45,212,168,0.08) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
         <div className="relative mx-auto max-w-4xl">
@@ -190,7 +190,7 @@ export default function LongevityPage() {
             mitochondrial signaling (MOTS-c, SS-31), NAD⁺ economy (NAD⁺, 5-amino-1MQ),
             and pineal biology (Epitalon). Unrelated mechanisms grouped by shared research context.
           </p>
-          <p className="mt-3 text-xs text-ink/30">Research reference only. Not medical advice.</p>
+          <p className="mt-3 text-xs text-ink/55">Research reference only. Not medical advice.</p>
         </div>
       </section>
 
@@ -199,17 +199,17 @@ export default function LongevityPage() {
           <div className="space-y-16">
 
             <section>
-              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">Three mechanistic axes</h2>
-              <p className="mb-6 text-xs text-ink/30">These compounds share a research context but have unrelated receptor targets</p>
+              <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/55">Three mechanistic axes</h2>
+              <p className="mb-6 text-xs text-ink/55">These compounds share a research context but have unrelated receptor targets</p>
               <div className="grid gap-4 sm:grid-cols-3">
                 {AXES.map((a) => (
-                  <div key={a.label} className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-5"
+                  <div key={a.label} className="rounded-xl border border-hairline bg-fill p-5"
                     style={{ borderTopColor: a.color, borderTopWidth: 2 }}>
                     <p className="mb-2 text-sm font-semibold" style={{ color: a.color }}>{a.label}</p>
                     <p className="mb-4 text-xs leading-relaxed text-ink/50">{a.desc}</p>
                     <ul className="space-y-1">
                       {a.peptides.map((p) => (
-                        <li key={p} className="flex gap-2 text-xs text-ink/40">
+                        <li key={p} className="flex gap-2 text-xs text-ink/55">
                           <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full" style={{ backgroundColor: a.color + '80' }} />{p}
                         </li>
                       ))}
@@ -220,32 +220,32 @@ export default function LongevityPage() {
             </section>
 
             <section>
-              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/40">Compound profiles</h2>
+              <h2 className="mb-5 text-xs font-semibold uppercase tracking-wider text-ink/55">Compound profiles</h2>
               <div className="space-y-4">
                 {COMPOUNDS.map((c) => (
                   <Link key={c.slug} href={`/catalog/${c.slug}`}
-                    className="group flex flex-col gap-2 rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5 transition-colors hover:border-ink/[0.12] hover:bg-ink/[0.04]">
+                    className="group flex flex-col gap-2 rounded-xl border border-hairline bg-fill p-5 transition-colors hover:border-hairline-strong hover:bg-fill-strong">
                     <div className="flex flex-wrap items-start justify-between gap-2">
                       <div>
                         <p className="text-sm font-semibold group-hover:text-accent transition-colors" style={{ color: c.color }}>{c.name}</p>
-                        <p className="text-xs text-ink/30">{c.axis}</p>
+                        <p className="text-xs text-ink/55">{c.axis}</p>
                       </div>
                       <div className="flex flex-wrap gap-2 text-[10px]">
-                        <span className="rounded-full bg-ink/[0.06] px-2 py-0.5 text-ink/40">{c.evidence}</span>
+                        <span className="rounded-full bg-fill-strong px-2 py-0.5 text-ink/55">{c.evidence}</span>
                       </div>
                     </div>
-                    <p className="text-xs font-medium text-ink/40">Mechanism: <span className="text-ink/55 font-normal">{c.mechanism}</span></p>
-                    <p className="text-xs leading-relaxed text-ink/45">{c.note}</p>
+                    <p className="text-xs font-medium text-ink/55">Mechanism: <span className="text-ink/55 font-normal">{c.mechanism}</span></p>
+                    <p className="text-xs leading-relaxed text-ink/55">{c.note}</p>
                   </Link>
                 ))}
               </div>
             </section>
 
             <section>
-              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-ink/40">Frequently asked questions</h2>
+              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-ink/55">Frequently asked questions</h2>
               <div className="space-y-5">
                 {FAQS.map((f) => (
-                  <div key={f.q} className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5">
+                  <div key={f.q} className="rounded-xl border border-hairline bg-fill p-5">
                     <p className="mb-2 text-sm font-semibold text-ink/90">{f.q}</p>
                     <p className="text-sm leading-relaxed text-ink/55">{f.a}</p>
                   </div>
@@ -255,7 +255,7 @@ export default function LongevityPage() {
 
             <section className="flex gap-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5">
               <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400/70" />
-              <p className="text-xs leading-relaxed text-ink/45">
+              <p className="text-xs leading-relaxed text-ink/55">
                 <strong className="text-ink/60">Research reference only.</strong> None of these compounds are FDA-approved for anti-aging indications.
                 Evidence quality varies — SS-31 has clinical-trial data; Epitalon has concentrated preclinical data with limited independent replication.
                 Nothing here constitutes medical advice.
@@ -264,22 +264,22 @@ export default function LongevityPage() {
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-6 lg:self-start">
-            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">Catalog entries</p>
+            <div className="rounded-xl border border-hairline bg-fill p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">Catalog entries</p>
               {COMPOUNDS.map((c) => (
                 <Link key={c.slug} href={`/catalog/${c.slug}`}
-                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-ink/[0.04]">
+                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-fill-strong">
                   <div>
                     <p className="text-sm font-medium group-hover:text-accent transition-colors" style={{ color: c.color }}>{c.name}</p>
-                    <p className="text-xs text-ink/30">{c.axis}</p>
+                    <p className="text-xs text-ink/55">{c.axis}</p>
                   </div>
                   <ChevronRight className="h-3.5 w-3.5 text-ink/20 group-hover:text-accent" />
                 </Link>
               ))}
             </div>
 
-            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">Related</p>
+            <div className="rounded-xl border border-hairline bg-fill p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">Related</p>
               {[
                 { href: '/research-areas/longevity-aging', label: 'Longevity & Aging', sub: 'Research area guide' },
                 { href: '/research-areas/mitochondrial', label: 'Mitochondrial & Bioenergetics', sub: 'Research area guide' },
@@ -288,10 +288,10 @@ export default function LongevityPage() {
                 { href: '/learn/evidence-hierarchy', label: 'Reading the evidence', sub: 'Trial quality guide' },
               ].map((l) => (
                 <Link key={l.href} href={l.href}
-                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-ink/[0.04]">
+                  className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-fill-strong">
                   <div>
                     <p className="text-sm font-medium text-ink/70 group-hover:text-ink">{l.label}</p>
-                    <p className="text-xs text-ink/30">{l.sub}</p>
+                    <p className="text-xs text-ink/55">{l.sub}</p>
                   </div>
                   <ChevronRight className="h-3.5 w-3.5 text-ink/20 group-hover:text-ink/50" />
                 </Link>

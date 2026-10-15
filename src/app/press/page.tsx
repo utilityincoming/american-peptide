@@ -114,7 +114,7 @@ export default function PressPage() {
   return (
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 text-sm md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 text-sm md:px-6">
         <span className="flex items-center gap-1.5 font-medium">
           <Newspaper className="h-4 w-4 text-accent" />
           Press &amp; Media Kit
@@ -122,7 +122,7 @@ export default function PressPage() {
       </header>
 
       {/* ── Masthead / hero ── */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -139,7 +139,7 @@ export default function PressPage() {
           <div className="mb-6 flex items-center gap-3">
             <PeptideMark className="h-8 w-8 text-accent" />
             <span className="font-display text-lg font-bold tracking-tight">
-              AmericanPeptide<span className="font-medium text-ink/40">.com</span>
+              AmericanPeptide<span className="font-medium text-ink/55">.com</span>
             </span>
           </div>
 
@@ -164,7 +164,7 @@ export default function PressPage() {
             Research-grade, not medical. <span className="text-ink">Every source, in the open.</span>
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-ink/40">
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-ink/55">
             <span>Independent reference &amp; AI agent</span>
             <span>
               <span className="text-accent">{catalogCount}</span> peptides ·{' '}
@@ -179,7 +179,7 @@ export default function PressPage() {
       </section>
 
       {/* ── Positioning ── */}
-      <section className="border-b border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-b border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <Eyebrow>Positioning</Eyebrow>
           <h2 className="mt-4 max-w-3xl text-2xl font-bold tracking-tight md:text-3xl">
@@ -203,7 +203,7 @@ export default function PressPage() {
       </section>
 
       {/* ── Boilerplate ── */}
-      <section className="border-b border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-b border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <Eyebrow>Boilerplate</Eyebrow>
           <h2 className="mt-4 text-2xl font-bold tracking-tight md:text-3xl">Copy-ready descriptions.</h2>
@@ -217,9 +217,9 @@ export default function PressPage() {
               { len: 'Short · ~55 words', text: BP_SHORT, muted: false },
               { len: 'Full · ~110 words', text: BP_FULL, muted: true },
             ].map((bp) => (
-              <div key={bp.len} className="rounded-2xl border border-ink/[0.07] bg-panel p-5 md:p-6">
+              <div key={bp.len} className="rounded-2xl border border-hairline bg-panel p-5 md:p-6">
                 <div className="mb-3 flex items-center justify-between gap-3">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/40">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/55">
                     {bp.len}
                   </span>
                   <CopyButton text={bp.text} />
@@ -234,7 +234,7 @@ export default function PressPage() {
       </section>
 
       {/* ── Fact sheet ── */}
-      <section className="border-b border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-b border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <Eyebrow>At a glance</Eyebrow>
           <h2 className="mt-4 text-2xl font-bold tracking-tight md:text-3xl">The fact sheet.</h2>
@@ -245,7 +245,7 @@ export default function PressPage() {
 
           <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {stats.map((s) => (
-              <div key={s.label} className="rounded-xl border border-ink/[0.07] bg-panel p-5">
+              <div key={s.label} className="rounded-xl border border-hairline bg-panel p-5">
                 <div className="font-display text-3xl font-bold leading-none tracking-tight text-accent md:text-4xl">
                   {s.value}
                 </div>
@@ -254,7 +254,7 @@ export default function PressPage() {
             ))}
           </div>
 
-          <dl className="mt-4 overflow-hidden rounded-2xl border border-ink/[0.07] bg-panel">
+          <dl className="mt-4 overflow-hidden rounded-2xl border border-hairline bg-panel">
             {[
               {
                 t: 'Type',
@@ -313,9 +313,9 @@ export default function PressPage() {
             ].map((f) => (
               <div
                 key={f.t}
-                className="grid gap-1 border-t border-ink/[0.06] px-5 py-4 first:border-t-0 sm:grid-cols-[170px_1fr] sm:gap-4"
+                className="grid gap-1 border-t border-hairline px-5 py-4 first:border-t-0 sm:grid-cols-[170px_1fr] sm:gap-4"
               >
-                <dt className="font-mono text-[11px] uppercase tracking-[0.1em] text-ink/40 sm:pt-0.5">
+                <dt className="font-mono text-[11px] uppercase tracking-[0.1em] text-ink/55 sm:pt-0.5">
                   {f.t}
                 </dt>
                 <dd className="text-sm text-ink">{f.d}</dd>
@@ -326,7 +326,7 @@ export default function PressPage() {
       </section>
 
       {/* ── Remit ── */}
-      <section className="border-b border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-b border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <Eyebrow>The remit</Eyebrow>
           <h2 className="mt-4 text-2xl font-bold tracking-tight md:text-3xl">
@@ -337,7 +337,7 @@ export default function PressPage() {
           </p>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2">
-            <div className="rounded-2xl border border-ink/[0.07] bg-panel p-6">
+            <div className="rounded-2xl border border-hairline bg-panel p-6">
               <h3 className="flex items-center gap-2 text-base font-semibold">
                 <ShieldCheck className="h-4 w-4 text-accent" strokeWidth={1.9} />
                 What it is
@@ -357,7 +357,7 @@ export default function PressPage() {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-dashed border-ink/[0.12] p-6">
+            <div className="rounded-2xl border border-dashed border-hairline-strong p-6">
               <h3 className="text-base font-semibold">What it isn&apos;t</h3>
               <ul className="mt-4 space-y-3">
                 {[
@@ -378,7 +378,7 @@ export default function PressPage() {
       </section>
 
       {/* ── Differentiators ── */}
-      <section className="border-b border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-b border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <Eyebrow>Why it&apos;s different</Eyebrow>
           <h2 className="mt-4 max-w-3xl text-2xl font-bold tracking-tight md:text-3xl">
@@ -437,7 +437,7 @@ export default function PressPage() {
                 ),
               },
             ].map(({ Icon, title, body }) => (
-              <div key={title} className="rounded-2xl border border-ink/[0.07] bg-panel p-6">
+              <div key={title} className="rounded-2xl border border-hairline bg-panel p-6">
                 <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] text-accent">
                   <Icon className="h-[18px] w-[18px]" strokeWidth={1.9} />
                 </div>
@@ -450,7 +450,7 @@ export default function PressPage() {
       </section>
 
       {/* ── The Standard ── */}
-      <section className="border-b border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-b border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <Eyebrow>The Standard</Eyebrow>
           <h2 className="mt-4 text-2xl font-bold tracking-tight md:text-3xl">
@@ -461,9 +461,9 @@ export default function PressPage() {
             Points come from what a lab publishes, never from what it pays.
           </p>
 
-          <div className="mt-8 rounded-2xl border border-ink/[0.07] bg-panel p-6 md:p-7">
+          <div className="mt-8 rounded-2xl border border-hairline bg-panel p-6 md:p-7">
             <div className="mb-5 flex flex-wrap items-baseline justify-between gap-3">
-              <span className="font-mono text-xs uppercase tracking-[0.12em] text-ink/40">
+              <span className="font-mono text-xs uppercase tracking-[0.12em] text-ink/55">
                 Trust score composition
               </span>
               <span className="font-display text-lg font-bold">
@@ -472,7 +472,7 @@ export default function PressPage() {
             </div>
 
             <div
-              className="flex h-12 w-full overflow-hidden rounded-lg border border-ink/10"
+              className="flex h-12 w-full overflow-hidden rounded-lg border border-hairline-strong"
               role="img"
               aria-label={`Trust score composition: ${STANDARD.map((s) => `${s.label} ${TRUST_WEIGHTS[s.key]}`).join(', ')}`}
             >
@@ -499,7 +499,7 @@ export default function PressPage() {
               ))}
             </div>
 
-            <div className="mt-6 flex items-start gap-3 border-t border-ink/[0.06] pt-5">
+            <div className="mt-6 flex items-start gap-3 border-t border-hairline pt-5">
               <span className="shrink-0 rounded-full border border-amber-500/40 bg-amber-500/[0.08] px-2.5 py-1 font-mono text-[11px] tracking-wide text-accent-amber">
                 Commission +0
               </span>
@@ -517,7 +517,7 @@ export default function PressPage() {
       </section>
 
       {/* ── Audience ── */}
-      <section className="border-b border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-b border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <Eyebrow>Audience</Eyebrow>
           <h2 className="mt-4 text-2xl font-bold tracking-tight md:text-3xl">Who it&apos;s for.</h2>
@@ -541,7 +541,7 @@ export default function PressPage() {
                 b: 'Writers covering the GLP-1 era and the fast-moving peptide market who need an honest, non-promotional reference to cite.',
               },
             ].map((a) => (
-              <div key={a.h} className="rounded-2xl border border-ink/[0.07] bg-panel p-5">
+              <div key={a.h} className="rounded-2xl border border-hairline bg-panel p-5">
                 <h3 className="text-[0.98rem] font-semibold">{a.h}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-ink/60">{a.b}</p>
               </div>
@@ -551,7 +551,7 @@ export default function PressPage() {
       </section>
 
       {/* ── Brand assets ── */}
-      <section className="border-b border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-b border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <Eyebrow>Brand assets</Eyebrow>
           <h2 className="mt-4 text-2xl font-bold tracking-tight md:text-3xl">
@@ -564,14 +564,14 @@ export default function PressPage() {
 
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
             {/* Mark + wordmark */}
-            <div className="rounded-2xl border border-ink/[0.07] bg-panel p-6">
-              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/40">
+            <div className="rounded-2xl border border-hairline bg-panel p-6">
+              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/55">
                 Mark &amp; wordmark
               </span>
-              <div className="mt-4 flex items-center gap-4 border-b border-ink/[0.06] pb-5">
+              <div className="mt-4 flex items-center gap-4 border-b border-hairline pb-5">
                 <PeptideMark className="h-10 w-10 text-accent" />
                 <span className="font-display text-xl font-bold tracking-tight">
-                  AmericanPeptide<span className="font-medium text-ink/40">.com</span>
+                  AmericanPeptide<span className="font-medium text-ink/55">.com</span>
                 </span>
               </div>
               <p className="mt-4 text-[13px] leading-relaxed text-ink/60">
@@ -582,8 +582,8 @@ export default function PressPage() {
             </div>
 
             {/* Palette */}
-            <div className="rounded-2xl border border-ink/[0.07] bg-panel p-6">
-              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/40">
+            <div className="rounded-2xl border border-hairline bg-panel p-6">
+              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/55">
                 Color · click to copy
               </span>
               <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
@@ -599,13 +599,13 @@ export default function PressPage() {
             </div>
 
             {/* Type */}
-            <div className="rounded-2xl border border-ink/[0.07] bg-panel p-6 lg:col-span-2">
-              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/40">
+            <div className="rounded-2xl border border-hairline bg-panel p-6 lg:col-span-2">
+              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/55">
                 Typography
               </span>
               <div className="mt-4 space-y-5">
                 <div>
-                  <div className="flex justify-between font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink/40">
+                  <div className="flex justify-between font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink/55">
                     <span>Display — Space Grotesk</span>
                     <span>600 / 700 · -0.02em</span>
                   </div>
@@ -613,8 +613,8 @@ export default function PressPage() {
                     Made legible and honest.
                   </div>
                 </div>
-                <div className="border-t border-ink/[0.06] pt-5">
-                  <div className="flex justify-between font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink/40">
+                <div className="border-t border-hairline pt-5">
+                  <div className="flex justify-between font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink/55">
                     <span>Body — Geist</span>
                     <span>400 / 500</span>
                   </div>
@@ -623,8 +623,8 @@ export default function PressPage() {
                     literature and marketing copy, written for an audience that already knows the field.
                   </p>
                 </div>
-                <div className="border-t border-ink/[0.06] pt-5">
-                  <div className="flex justify-between font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink/40">
+                <div className="border-t border-hairline pt-5">
+                  <div className="flex justify-between font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink/55">
                     <span>Data — Geist Mono</span>
                     <span>sequences · identifiers · figures</span>
                   </div>
@@ -639,7 +639,7 @@ export default function PressPage() {
       </section>
 
       {/* ── Voice ── */}
-      <section className="border-b border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-b border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <Eyebrow>Voice &amp; messaging</Eyebrow>
           <h2 className="mt-4 text-2xl font-bold tracking-tight md:text-3xl">
@@ -674,7 +674,7 @@ export default function PressPage() {
       {/* ── Contact ── */}
       <section className="px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
-          <div className="relative overflow-hidden rounded-3xl border border-ink/10 bg-panel p-8 md:p-10">
+          <div className="relative overflow-hidden rounded-3xl border border-hairline-strong bg-panel p-8 md:p-10">
             <div
               aria-hidden
               className="pointer-events-none absolute -left-16 -top-16 h-72 w-72 rounded-full bg-[#2DD4A8] opacity-[0.08] blur-[110px]"
@@ -697,9 +697,9 @@ export default function PressPage() {
                 ].map((c) => (
                   <div
                     key={c.k}
-                    className="grid items-baseline gap-1 border-t border-ink/[0.06] py-3 sm:grid-cols-[130px_1fr]"
+                    className="grid items-baseline gap-1 border-t border-hairline py-3 sm:grid-cols-[130px_1fr]"
                   >
-                    <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-ink/40">
+                    <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-ink/55">
                       {c.k}
                     </span>
                     {c.ext ? (

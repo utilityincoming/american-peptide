@@ -128,10 +128,10 @@ export default async function CategoryPage({ params }: RouteParams) {
       )}
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <Link
           href="/catalog"
-          className="text-sm text-ink/35 transition-colors hover:text-ink"
+          className="text-sm text-ink/55 transition-colors hover:text-ink"
         >
           Catalog
         </Link>
@@ -140,7 +140,7 @@ export default async function CategoryPage({ params }: RouteParams) {
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -177,7 +177,7 @@ export default async function CategoryPage({ params }: RouteParams) {
             {/* How this class works */}
             {content?.howItWorks && content.howItWorks.length > 0 && (
               <div>
-                <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
+                <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
                   How this class works
                 </h2>
                 <div className="space-y-4">
@@ -195,7 +195,7 @@ export default async function CategoryPage({ params }: RouteParams) {
 
             {/* Peptides in this category */}
             <div>
-              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 {meta.label} peptides in the catalog
               </h2>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -208,7 +208,7 @@ export default async function CategoryPage({ params }: RouteParams) {
             {/* FAQ */}
             {content?.faqs && content.faqs.length > 0 && (
               <div>
-                <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+                <h2 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
                   <HelpCircle className="h-3.5 w-3.5" />
                   Frequently asked questions
                 </h2>
@@ -216,7 +216,7 @@ export default async function CategoryPage({ params }: RouteParams) {
                   {content.faqs.map((f) => (
                     <div
                       key={f.q}
-                      className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5"
+                      className="rounded-xl border border-hairline bg-fill p-5"
                     >
                       <h3 className="mb-2 text-sm font-semibold text-ink/85">
                         {f.q}
@@ -235,8 +235,8 @@ export default async function CategoryPage({ params }: RouteParams) {
           <aside className="space-y-6">
             {content?.researchThemes &&
               content.researchThemes.length > 0 && (
-                <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
-                  <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
+                <div className="rounded-2xl border border-hairline bg-fill p-5">
+                  <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
                     Research themes
                   </h3>
                   <ul className="space-y-2.5">
@@ -254,8 +254,8 @@ export default async function CategoryPage({ params }: RouteParams) {
               )}
 
             {/* Other categories */}
-            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
-              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <div className="rounded-2xl border border-hairline bg-fill p-5">
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 Browse other categories
               </h3>
               <div className="flex flex-wrap gap-1.5">
@@ -263,7 +263,7 @@ export default async function CategoryPage({ params }: RouteParams) {
                   <Link
                     key={c.id}
                     href={`/catalog/category/${c.id}`}
-                    className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                    className="rounded-full border border-hairline bg-fill px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
                   >
                     {c.label}
                   </Link>
@@ -292,7 +292,7 @@ function CategoryPeptideCard({ peptide }: { peptide: Peptide }) {
   return (
     <Link
       href={`/catalog/${peptide.slug}`}
-      className="group flex flex-col rounded-xl border border-ink/[0.07] bg-ink/[0.025] p-4 transition-all hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+      className="group flex flex-col rounded-xl border border-hairline bg-fill p-4 transition-all hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
     >
       <div className="mb-1.5 flex items-center justify-between gap-2">
         <h3 className="truncate text-sm font-semibold">{peptide.name}</h3>

@@ -61,7 +61,7 @@ export default function GlossaryPage() {
       />
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <span className="flex items-center gap-1.5 text-sm font-medium">
           <BookText className="h-4 w-4 text-accent" />
           Glossary
@@ -69,7 +69,7 @@ export default function GlossaryPage() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -100,7 +100,7 @@ export default function GlossaryPage() {
         <div className="mx-auto max-w-5xl space-y-12">
           {groups.map(({ meta, terms }) => (
             <div key={meta.id}>
-              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 {meta.label}
                 <span className="ml-2 text-ink/25">{terms.length}</span>
               </h2>
@@ -109,12 +109,12 @@ export default function GlossaryPage() {
                   <Link
                     key={t.slug}
                     href={`/glossary/${t.slug}`}
-                    className="group flex flex-col rounded-xl border border-ink/[0.07] bg-ink/[0.025] p-4 transition-all hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+                    className="group flex flex-col rounded-xl border border-hairline bg-fill p-4 transition-all hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
                   >
                     <div className="mb-1 flex items-center gap-2">
                       <h3 className="text-sm font-semibold">{t.term}</h3>
                       {t.abbr && t.abbr !== t.term && (
-                        <span className="rounded border border-ink/[0.08] bg-ink/[0.03] px-1.5 py-px font-mono text-[9px] text-ink/45">
+                        <span className="rounded border border-hairline bg-fill px-1.5 py-px font-mono text-[9px] text-ink/55">
                           {t.abbr}
                         </span>
                       )}
@@ -141,9 +141,9 @@ export default function GlossaryPage() {
         </div>
       </section>
 
-      <section className="border-t border-ink/[0.06] px-6 py-10 md:px-10">
+      <section className="border-t border-hairline px-6 py-10 md:px-10">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3">
-          <p className="text-sm text-ink/45">
+          <p className="text-sm text-ink/55">
             Looking for compounds instead of definitions?
           </p>
           <Link

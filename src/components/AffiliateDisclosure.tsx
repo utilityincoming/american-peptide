@@ -10,7 +10,7 @@ export default function AffiliateDisclosure({
   className?: string
 }) {
   return (
-    <p className={`text-[10px] leading-relaxed text-ink/35 ${className}`}>
+    <p className={`text-[10px] leading-relaxed text-ink/55 ${className}`}>
       <span className="font-semibold text-ink/50">Affiliate disclosure.</span>{' '}
       AmericanPeptide does not sell peptides. This is an independent third-party
       vendor, and we may earn a commission if you register or buy through this

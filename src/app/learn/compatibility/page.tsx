@@ -90,8 +90,8 @@ export default function CompatibilityGuidePage() {
       />
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <Link href="/learn" className="text-sm text-ink/35 transition-colors hover:text-ink">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
+        <Link href="/learn" className="text-sm text-ink/55 transition-colors hover:text-ink">
           Learn
         </Link>
         <span className="text-ink/20">/</span>
@@ -99,7 +99,7 @@ export default function CompatibilityGuidePage() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -139,7 +139,7 @@ export default function CompatibilityGuidePage() {
             {FACTORS.map(({ Icon, title, body }) => (
               <div
                 key={title}
-                className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5"
+                className="rounded-2xl border border-hairline bg-fill p-5"
               >
                 <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#2DD4A8]/12 text-accent">
                   <Icon className="h-4 w-4" strokeWidth={1.75} />
@@ -153,7 +153,7 @@ export default function CompatibilityGuidePage() {
       </section>
 
       {/* ── Degradation pathways ── */}
-      <section className="border-t border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-t border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
             How peptides degrade
@@ -166,7 +166,7 @@ export default function CompatibilityGuidePage() {
             {DEGRADATION.map(([term, desc]) => (
               <div
                 key={term}
-                className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] px-4 py-3"
+                className="rounded-xl border border-hairline bg-fill px-4 py-3"
               >
                 <p className="mb-0.5 text-sm font-semibold text-ink/85">{term}</p>
                 <p className="text-[12.5px] leading-relaxed text-ink/50">{desc}</p>
@@ -177,7 +177,7 @@ export default function CompatibilityGuidePage() {
       </section>
 
       {/* ── Handling principles ── */}
-      <section className="border-t border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-t border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-6 text-2xl font-bold tracking-tight md:text-3xl">
             Handling principles
@@ -212,7 +212,7 @@ export default function CompatibilityGuidePage() {
       </section>
 
       {/* ── Why blending multiplies risk ── */}
-      <section className="border-t border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="border-t border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
           <div className="rounded-2xl border border-[#2DD4A8]/15 bg-gradient-to-br from-[#2DD4A8]/[0.06] to-transparent p-7 md:p-9">
             <h2 className="mb-3 max-w-2xl text-2xl font-bold tracking-tight md:text-3xl">
@@ -243,7 +243,7 @@ export default function CompatibilityGuidePage() {
       </section>
 
       {/* ── Tools ── */}
-      <section className="border-t border-ink/[0.06] px-6 py-12 md:px-10">
+      <section className="border-t border-hairline px-6 py-12 md:px-10">
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-lg font-semibold tracking-tight">
             Related tools{' '}
@@ -251,20 +251,20 @@ export default function CompatibilityGuidePage() {
               Beta
             </span>
           </h2>
-          <p className="mb-5 text-xs text-ink/40">
+          <p className="mb-5 text-xs text-ink/55">
             Experimental, research-use tools. Considerations only — not
             administration or dosing guidance.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row">
             <Link
               href="/tools/blend-calculator"
-              className="group flex flex-1 items-center justify-between rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-all hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+              className="group flex flex-1 items-center justify-between rounded-2xl border border-hairline bg-fill p-5 transition-all hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
             >
               <div className="flex items-center gap-3">
                 <FlaskConical className="h-5 w-5 text-accent" strokeWidth={1.75} />
                 <div>
                   <h3 className="text-sm font-semibold">Blend calculator</h3>
-                  <p className="mt-0.5 text-[12.5px] text-ink/45">
+                  <p className="mt-0.5 text-[12.5px] text-ink/55">
                     Doses, draw volume, and per-dose delivery for a blend.
                   </p>
                 </div>

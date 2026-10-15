@@ -147,7 +147,7 @@ export default function CatalogPage() {
   return (
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -180,14 +180,14 @@ export default function CatalogPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/catalog/compare"
-              className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-ink"
+              className="inline-flex items-center gap-2 rounded-xl border border-hairline-strong px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-ink"
             >
               <GitCompareArrows className="h-4 w-4 text-accent" />
               Compare side-by-side
             </Link>
             <Link
               href="/workspace"
-              className="inline-flex items-center gap-2 rounded-xl border border-ink/10 px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-ink"
+              className="inline-flex items-center gap-2 rounded-xl border border-hairline-strong px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-ink"
             >
               <LayoutGrid className="h-4 w-4 text-accent" />
               Research Workspace
@@ -197,23 +197,23 @@ export default function CatalogPage() {
       </section>
 
       {/* ── Filters ── */}
-      <section className="sticky top-0 z-30 border-b border-ink/[0.06] bg-surface/85 px-6 py-4 backdrop-blur md:px-10">
+      <section className="sticky top-0 z-30 border-b border-hairline bg-surface/85 px-6 py-4 backdrop-blur md:px-10">
         <div className="mx-auto max-w-6xl space-y-3">
           {/* Search */}
           <div className="relative">
-            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/30" />
+            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/55" />
             <input
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search peptides, aliases, or research areas…"
-              className="w-full rounded-xl border border-ink/[0.07] bg-ink/[0.03] py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/30 focus:border-[#2DD4A8]/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
+              className="w-full rounded-xl border border-hairline bg-fill py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/55 focus:border-[#2DD4A8]/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
             />
             {query && (
               <button
                 onClick={() => setQuery('')}
                 aria-label="Clear search"
-                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-ink/40 transition-colors hover:bg-ink/5 hover:text-ink"
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-ink/55 transition-colors hover:bg-ink/5 hover:text-ink"
               >
                 <X className="h-3.5 w-3.5" />
               </button>
@@ -238,7 +238,7 @@ export default function CatalogPage() {
 
           {/* Synthesis facet — difficulty grade + what makes a sequence hard to make */}
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="mr-0.5 inline-flex items-center gap-1 text-[10.5px] font-semibold uppercase tracking-wider text-ink/35">
+            <span className="mr-0.5 inline-flex items-center gap-1 text-[10.5px] font-semibold uppercase tracking-wider text-ink/55">
               <FlaskConical className="h-3 w-3" />
               Synthesis
             </span>
@@ -282,7 +282,7 @@ export default function CatalogPage() {
         <div className="mx-auto max-w-6xl">
           <OfflineReference />
 
-          <div className="mb-5 flex items-center justify-between text-xs text-ink/40">
+          <div className="mb-5 flex items-center justify-between text-xs text-ink/55">
             <span>
               {filtered.length} result{filtered.length === 1 ? '' : 's'}
               {active ? ` in ${CATEGORIES.find((c) => c.id === active)?.label}` : ''}
@@ -364,10 +364,10 @@ function PeptideCard({
   return (
     <div
       className={
-        'group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-ink/[0.025] p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)] ' +
+        'group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-fill p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-fill-strong hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.14)] ' +
         (selected
           ? 'border-[#2DD4A8]/55 bg-[#2DD4A8]/[0.05]'
-          : 'border-ink/[0.07] hover:border-[#2DD4A8]/25')
+          : 'border-hairline hover:border-[#2DD4A8]/25')
       }
     >
       <Link
@@ -393,8 +393,8 @@ function PeptideCard({
           (selected
             ? 'border-[#2DD4A8]/45 bg-[#2DD4A8]/15 text-accent'
             : disableAdd
-            ? 'cursor-not-allowed border-ink/[0.06] bg-ink/[0.02] text-ink/25'
-            : 'border-ink/[0.10] bg-ink/[0.04] text-ink/55 hover:border-[#2DD4A8]/40 hover:text-accent')
+            ? 'cursor-not-allowed border-hairline bg-fill text-ink/25'
+            : 'border-hairline-strong bg-fill-strong text-ink/55 hover:border-[#2DD4A8]/40 hover:text-accent')
         }
       >
         {selected ? (
@@ -419,7 +419,7 @@ function PeptideCard({
               {peptide.name}
             </h3>
             {peptide.aliases?.[0] && (
-              <p className="mt-0.5 truncate text-xs text-ink/35">
+              <p className="mt-0.5 truncate text-xs text-ink/55">
                 aka {peptide.aliases.join(', ')}
               </p>
             )}
@@ -439,14 +439,14 @@ function PeptideCard({
           {peptide.categories.slice(0, 3).map((cat) => (
             <span
               key={cat}
-              className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-2 py-0.5 text-[10px] text-ink/50"
+              className="rounded-md border border-hairline bg-fill px-2 py-0.5 text-[10px] text-ink/50"
             >
               {CATEGORIES.find((c) => c.id === cat)?.label ?? cat}
             </span>
           ))}
         </div>
 
-        <div className="mt-4 flex items-center justify-between border-t border-ink/[0.06] pt-3 text-[11px] text-ink/30">
+        <div className="mt-4 flex items-center justify-between border-t border-hairline pt-3 text-[11px] text-ink/55">
           <span>
             {peptide.molecularWeight
               ? `${peptide.molecularWeight.toLocaleString()} Da`
@@ -478,7 +478,7 @@ function CompareBar({
     .filter((p): p is Peptide => Boolean(p))
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ink/[0.08] bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/85">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-hairline bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/85">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3 md:px-10">
         <div className="flex items-center gap-2 text-xs text-ink/55">
           <GitCompareArrows className="h-4 w-4 text-accent" />
@@ -491,14 +491,14 @@ function CompareBar({
           {peptides.map((p) => (
             <span
               key={p.slug}
-              className="inline-flex items-center gap-1 rounded-md border border-ink/[0.10] bg-ink/[0.04] py-0.5 pl-2 pr-1 text-[11px] text-ink/75"
+              className="inline-flex items-center gap-1 rounded-md border border-hairline-strong bg-fill-strong py-0.5 pl-2 pr-1 text-[11px] text-ink/75"
             >
               {p.name}
               <button
                 type="button"
                 onClick={() => onRemove(p.slug)}
                 aria-label={`Remove ${p.name}`}
-                className="rounded p-0.5 text-ink/40 transition-colors hover:bg-ink/[0.08] hover:text-ink"
+                className="rounded p-0.5 text-ink/55 transition-colors hover:bg-fill-strong hover:text-ink"
               >
                 <X className="h-3 w-3" />
               </button>
@@ -510,7 +510,7 @@ function CompareBar({
           <button
             type="button"
             onClick={onClear}
-            className="rounded-lg px-3 py-1.5 text-xs text-ink/50 transition-colors hover:bg-ink/[0.04] hover:text-ink"
+            className="rounded-lg px-3 py-1.5 text-xs text-ink/50 transition-colors hover:bg-fill-strong hover:text-ink"
           >
             Clear
           </button>
@@ -525,7 +525,7 @@ function CompareBar({
           ) : (
             <span
               aria-disabled
-              className="cursor-not-allowed rounded-lg border border-ink/[0.08] bg-ink/[0.02] px-4 py-1.5 text-xs font-medium text-ink/35"
+              className="cursor-not-allowed rounded-lg border border-hairline bg-fill px-4 py-1.5 text-xs font-medium text-ink/55"
               title="Select at least 2 peptides to compare"
             >
               Compare
@@ -552,7 +552,7 @@ function Chip({
       className={
         active
           ? 'rounded-full border border-[#2DD4A8]/40 bg-[#2DD4A8]/15 px-3 py-1 text-xs font-medium text-accent transition-colors'
-          : 'rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-ink/15 hover:text-ink'
+          : 'rounded-full border border-hairline bg-fill px-3 py-1 text-xs text-ink/55 transition-colors hover:border-hairline-strong hover:text-ink'
       }
     >
       {children}
@@ -562,9 +562,9 @@ function Chip({
 
 function EmptyState() {
   return (
-    <div className="rounded-2xl border border-dashed border-ink/[0.08] bg-ink/[0.015] px-6 py-16 text-center">
+    <div className="rounded-2xl border border-dashed border-hairline bg-fill px-6 py-16 text-center">
       <p className="text-sm text-ink/50">No peptides match those filters.</p>
-      <p className="mt-1 text-xs text-ink/30">
+      <p className="mt-1 text-xs text-ink/55">
         Try a broader search or reset the category filter.
       </p>
     </div>

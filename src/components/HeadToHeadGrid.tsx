@@ -27,23 +27,23 @@ export default function HeadToHeadGrid({
 
   return (
     <section className={className}>
-      <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+      <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
         {title}
       </h2>
-      {blurb ? <p className="mb-5 text-xs text-ink/30">{blurb}</p> : null}
+      {blurb ? <p className="mb-5 text-xs text-ink/55">{blurb}</p> : null}
 
       <div className="grid gap-2.5 sm:grid-cols-2">
         {comparisons.map((c) => (
           <Link
             key={c.slug}
             href={`/compare/${c.slug}`}
-            className="group flex items-start justify-between gap-3 rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-4 py-3.5 transition-colors hover:border-accent/30 hover:bg-ink/[0.04]"
+            className="group flex items-start justify-between gap-3 rounded-xl border border-hairline bg-fill px-4 py-3.5 transition-colors hover:border-accent/30 hover:bg-fill-strong"
           >
             <div className="min-w-0">
               <p className="text-sm font-medium text-ink/80 transition-colors group-hover:text-accent">
                 {c.aName} vs {c.bName}
               </p>
-              <p className="mt-0.5 text-xs leading-relaxed text-ink/40">
+              <p className="mt-0.5 text-xs leading-relaxed text-ink/55">
                 {c.headline}
               </p>
             </div>

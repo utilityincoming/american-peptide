@@ -133,7 +133,7 @@ export default function OfflineReference() {
   const total = buildReferenceUrls().length
 
   return (
-    <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-hairline bg-fill px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-start gap-3">
         <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.08] text-accent">
           {online ? (
@@ -156,7 +156,7 @@ export default function OfflineReference() {
 
       <div className="shrink-0">
         {status === 'saving' ? (
-          <span className="inline-flex items-center gap-2 rounded-lg border border-ink/[0.08] px-4 py-2 text-xs font-medium text-ink/55">
+          <span className="inline-flex items-center gap-2 rounded-lg border border-hairline px-4 py-2 text-xs font-medium text-ink/55">
             <Loader2 className="h-3.5 w-3.5 animate-spin" />
             Saving…
           </span>

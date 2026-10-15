@@ -22,6 +22,14 @@
   --accent-amber: #F5B544; /* evidence-tier accent (vendor-reported / community) */
   --accent-red: #F87171;   /* restrictive regulatory status (Category 2, declined) */
   --viz: #0B1220;          /* immersive viz "stage" — stays dark in both themes */
+  /* Chrome tokens — hairlines/dividers + subtle fills. Defined per theme so the
+     same utility (border-hairline, bg-fill) reads correctly in both modes: a
+     white wash on dark, a navy wash on light (pitched stronger so it doesn't
+     vanish on near-white). They carry their own alpha — use without a modifier. */
+  --hairline: rgba(255, 255, 255, 0.07);        /* default border + divider */
+  --hairline-strong: rgba(255, 255, 255, 0.12); /* emphasis border */
+  --fill: rgba(255, 255, 255, 0.025);           /* subtle panel/control fill */
+  --fill-strong: rgba(255, 255, 255, 0.05);     /* hover/active fill */
 
   --background: var(--surface);
   --foreground: var(--ink);
@@ -32,12 +40,18 @@ html.light {
   --surface: #F7F9FB;
   --surface-deep: #ECF1F6;
   --panel: #FFFFFF;
-  --accent: #0E9C82;       /* darker teal for legible text on light */
+  --accent: #097A63;       /* darker teal — AA 4.5:1+ as link/text on light surfaces */
   --accent-indigo: #4F46E5;
   --accent-blue: #2563EB;
   --accent-purple: #7C3AED;
   --accent-amber: #B45309; /* darker amber for legible text on light */
   --accent-red: #B91C1C;   /* darker red for legible text on light */
+  /* Navy washes, pitched stronger than the dark theme's white ones so borders
+     and fills stay visible on the near-white surface. */
+  --hairline: rgba(11, 18, 32, 0.12);
+  --hairline-strong: rgba(11, 18, 32, 0.22);
+  --fill: rgba(11, 18, 32, 0.04);
+  --fill-strong: rgba(11, 18, 32, 0.07);
 }
 
 @theme inline {
@@ -54,6 +68,10 @@ html.light {
   --color-accent-amber: var(--accent-amber);
   --color-accent-red: var(--accent-red);
   --color-viz: var(--viz);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-fill: var(--fill);
+  --color-fill-strong: var(--fill-strong);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-space-grotesk);

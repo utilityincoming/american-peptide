@@ -136,7 +136,7 @@ function StatusPill({
 }) {
   if (cacheState === 'unsupported') {
     return (
-      <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.08] bg-ink/[0.02] px-2.5 py-1 text-[11px] text-ink/45">
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-fill px-2.5 py-1 text-[11px] text-ink/55">
         <CloudOff className="h-3 w-3" />
         Offline mode unsupported on this browser
       </span>
@@ -144,7 +144,7 @@ function StatusPill({
   }
   if (cacheState === 'registering') {
     return (
-      <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1 text-[11px] text-ink/55">
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-fill px-2.5 py-1 text-[11px] text-ink/55">
         <Loader2 className="h-3 w-3 animate-spin" />
         Caching for offline use…
       </span>

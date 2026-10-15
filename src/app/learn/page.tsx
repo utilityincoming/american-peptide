@@ -105,7 +105,7 @@ export default function LearnPage() {
       />
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <span className="flex items-center gap-1.5 text-sm font-medium">
           <GraduationCap className="h-4 w-4 text-accent" />
           Learn
@@ -113,7 +113,7 @@ export default function LearnPage() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -146,7 +146,7 @@ export default function LearnPage() {
             <Link
               key={href}
               href={href}
-              className="group flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04] hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.12)]"
+              className="group flex flex-col rounded-2xl border border-hairline bg-fill p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#2DD4A8]/25 hover:bg-fill-strong hover:shadow-[0_18px_50px_-12px_rgba(45,212,168,0.12)]"
             >
               <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
                 <Icon className="h-5 w-5" strokeWidth={1.75} />
@@ -155,7 +155,7 @@ export default function LearnPage() {
                 <h2 className="text-base font-semibold tracking-tight">
                   {label}
                 </h2>
-                <span className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-2 py-0.5 text-[10px] text-ink/40">
+                <span className="rounded-full border border-hairline bg-fill px-2 py-0.5 text-[10px] text-ink/55">
                   {meta}
                 </span>
               </div>

@@ -83,7 +83,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <span className="flex items-center gap-1.5 text-sm font-medium">
           <Info className="h-4 w-4 text-accent" />
           About
@@ -91,7 +91,7 @@ export default function AboutPage() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"
@@ -128,7 +128,7 @@ export default function AboutPage() {
           {/* ── Story / mission ── */}
           <div className="grid gap-8 md:grid-cols-[1.4fr_1fr]">
             <div className="space-y-4">
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-ink/55">
                 Why we exist
               </h2>
               <p className="text-sm leading-relaxed text-ink/65 md:text-[15px]">
@@ -154,7 +154,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6">
+            <div className="rounded-2xl border border-hairline bg-fill p-6">
               <h3 className="mb-4 text-sm font-semibold text-ink">
                 What we&apos;re not
               </h3>
@@ -177,7 +177,7 @@ export default function AboutPage() {
 
           {/* ── What we build (pillars) ── */}
           <div>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
               What we build
             </h2>
             <div className="grid gap-4 sm:grid-cols-3">
@@ -185,7 +185,7 @@ export default function AboutPage() {
                 <Link
                   key={label}
                   href={href}
-                  className="group rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+                  className="group rounded-2xl border border-hairline bg-fill p-5 transition-colors hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
                 >
                   <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
@@ -202,14 +202,14 @@ export default function AboutPage() {
 
           {/* ── Principles ── */}
           <div>
-            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
               Our principles
             </h2>
             <div className="grid gap-4 sm:grid-cols-2">
               {principles.map(({ Icon, title, body }) => (
                 <div
                   key={title}
-                  className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5"
+                  className="rounded-2xl border border-hairline bg-fill p-5"
                 >
                   <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
@@ -223,7 +223,7 @@ export default function AboutPage() {
 
           {/* ── Community & feedback ── */}
           <div>
-            <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <h2 className="mb-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
               Community &amp; feedback
             </h2>
             <p className="mb-4 max-w-2xl text-sm leading-relaxed text-ink/55">
@@ -253,7 +253,7 @@ export default function AboutPage() {
                           Live
                         </span>
                       </div>
-                      <p className="text-xs text-ink/45">
+                      <p className="text-xs text-ink/55">
                         Peptide Agent feedback · invite-only
                       </p>
                     </div>
@@ -297,7 +297,7 @@ export default function AboutPage() {
                           Live
                         </span>
                       </div>
-                      <p className="text-xs text-ink/45">@USPeptide</p>
+                      <p className="text-xs text-ink/55">@USPeptide</p>
                     </div>
                   </div>
                   <p className="text-sm leading-relaxed text-ink/60">
@@ -314,7 +314,7 @@ export default function AboutPage() {
           </div>
 
           {/* ── Contact (nested subsection → /about/contact) ── */}
-          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6 md:p-8">
+          <div className="rounded-2xl border border-hairline bg-fill p-6 md:p-8">
             <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
               <div className="max-w-xl">
                 <div className="mb-2 flex items-center gap-2">

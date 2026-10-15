@@ -105,12 +105,12 @@ export default function SourcingCard({
           </p>
           <p className="truncate text-sm font-semibold text-ink/90">{best.name}</p>
         </div>
-        <span className="shrink-0 rounded-full border border-ink/15 px-2 py-0.5 text-[10px] font-semibold text-ink/70">
+        <span className="shrink-0 rounded-full border border-hairline-strong px-2 py-0.5 text-[10px] font-semibold text-ink/70">
           {trustScore(best)}/100
         </span>
       </div>
 
-      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-ink/[0.03] px-2 py-0.5 text-[10px] font-medium text-ink/55">
+      <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-hairline-strong bg-fill px-2 py-0.5 text-[10px] font-medium text-ink/55">
         <ShieldCheck className="h-3 w-3" style={{ color: accent }} />
         {tier.label}
       </div>
@@ -164,7 +164,7 @@ export default function SourcingCard({
             at checkout.
           </p>
         ) : (
-          <p className="mt-2 text-center text-[11px] text-ink/45">
+          <p className="mt-2 text-center text-[11px] text-ink/55">
             Referral code{' '}
             <span className="font-mono font-semibold text-ink/70">
               {best.affiliate.code}

@@ -469,7 +469,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
       {/* ── Sticky animated visual (desktop) ── */}
       <div className="hidden lg:block">
         <div className="sticky top-24">
-          <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-ink/[0.07] bg-viz">
+          <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-hairline bg-viz">
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-50"
@@ -489,7 +489,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
               <span className="font-mono text-[11px] text-accent/70">
                 Step {activeStage.num} / {stages.length}
               </span>
-              <span className="text-[11px] text-ink/40">{activeStage.title.split(' (')[0]}</span>
+              <span className="text-[11px] text-ink/55">{activeStage.title.split(' (')[0]}</span>
             </div>
             <div className="flex gap-1.5">
               {stages.map((s, i) => (
@@ -521,10 +521,10 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
               ref={(el) => {
                 sectionRefs.current[i] = el
               }}
-              className="scroll-mt-24 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6 md:p-7"
+              className="scroll-mt-24 rounded-2xl border border-hairline bg-fill p-6 md:p-7"
             >
               {/* Inline visual — mobile only */}
-              <div className="mb-5 aspect-[5/3] w-full overflow-hidden rounded-xl border border-ink/[0.06] bg-viz lg:hidden">
+              <div className="mb-5 aspect-[5/3] w-full overflow-hidden rounded-xl border border-hairline bg-viz lg:hidden">
                 <div className="mx-auto h-full max-w-[260px]">
                   <StageVisual slug={s.slug} />
                 </div>
@@ -539,7 +539,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
                     Step {s.num} / {stages.length}
                   </span>
                   <h2 className="text-lg font-semibold tracking-tight">{s.title}</h2>
-                  <p className="mt-0.5 text-[13px] leading-relaxed text-ink/45">{s.summary}</p>
+                  <p className="mt-0.5 text-[13px] leading-relaxed text-ink/55">{s.summary}</p>
                 </div>
               </div>
 
@@ -551,7 +551,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
 
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 {s.cost && (
-                  <div className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] px-4 py-3">
+                  <div className="rounded-xl border border-hairline bg-fill px-4 py-3">
                     <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-amber-400/70">
                       What it costs
                     </p>
@@ -559,7 +559,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
                   </div>
                 )}
                 {s.risk && (
-                  <div className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] px-4 py-3">
+                  <div className="rounded-xl border border-hairline bg-fill px-4 py-3">
                     <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-red-400/70">
                       Where purity is lost
                     </p>

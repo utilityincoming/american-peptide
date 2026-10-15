@@ -31,7 +31,7 @@ export function CopyButton({ text, label = 'Copy' }: { text: string; label?: str
       className={`inline-flex shrink-0 items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
         done
           ? 'border-[#2DD4A8] bg-[#2DD4A8] text-[#0B1220]'
-          : 'border-ink/15 text-ink/60 hover:border-accent hover:text-ink'
+          : 'border-hairline-strong text-ink/60 hover:border-accent hover:text-ink'
       }`}
     >
       {done ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
@@ -58,12 +58,12 @@ export function HexSwatch({ name, hex }: { name: string; hex: string }) {
       type="button"
       onClick={copy}
       aria-label={`Copy ${name} ${hex}`}
-      className="group overflow-hidden rounded-xl border border-ink/[0.08] bg-surface-deep text-left transition-colors hover:border-accent"
+      className="group overflow-hidden rounded-xl border border-hairline bg-surface-deep text-left transition-colors hover:border-accent"
     >
       <span className="block h-12 w-full" style={{ background: hex }} />
       <span className="flex items-center justify-between gap-2 px-3 py-2">
         <span className="text-xs text-ink/80">{name}</span>
-        <span className={`font-mono text-[11px] uppercase ${done ? 'text-accent' : 'text-ink/40'}`}>
+        <span className={`font-mono text-[11px] uppercase ${done ? 'text-accent' : 'text-ink/55'}`}>
           {done ? 'Copied' : hex}
         </span>
       </span>

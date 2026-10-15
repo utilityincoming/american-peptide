@@ -23,7 +23,7 @@ export default function FaqAccordion({
   )
 
   return (
-    <div className="divide-y divide-ink/[0.06] overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.02]">
+    <div className="divide-y divide-hairline overflow-hidden rounded-2xl border border-hairline bg-fill">
       {items.map((f) => {
         const isOpen = openId === f.id
         return (
@@ -35,7 +35,7 @@ export default function FaqAccordion({
                 aria-expanded={isOpen}
                 aria-controls={`faq-panel-${f.id}`}
                 onClick={() => setOpenId(isOpen ? null : f.id)}
-                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-ink/[0.02] focus:outline-none focus-visible:bg-ink/[0.03]"
+                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-fill focus:outline-none focus-visible:bg-fill"
               >
                 <span
                   className={

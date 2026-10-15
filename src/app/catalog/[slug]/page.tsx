@@ -270,10 +270,10 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
       )}
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <Link
           href="/catalog"
-          className="text-sm text-ink/35 transition-colors hover:text-ink"
+          className="text-sm text-ink/55 transition-colors hover:text-ink"
         >
           Catalog
         </Link>
@@ -282,14 +282,14 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
       </header>
 
       {/* ── Title block ── */}
-      <section className="border-b border-ink/[0.06] px-6 py-12 md:px-10">
+      <section className="border-b border-hairline px-6 py-12 md:px-10">
         <div className="mx-auto max-w-5xl">
           <div className="mb-4 flex flex-wrap items-center gap-2">
             {peptide.categories.map((cat) => (
               <Link
                 key={cat}
                 href={`/catalog/category/${cat}`}
-                className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-2 py-0.5 text-[10px] uppercase tracking-wider text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                className="rounded-md border border-hairline bg-fill px-2 py-0.5 text-[10px] uppercase tracking-wider text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
               >
                 {CATEGORIES.find((c) => c.id === cat)?.label ?? cat}
               </Link>
@@ -305,7 +305,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
             {peptide.name}
           </h1>
           {peptide.aliases && peptide.aliases.length > 0 && (
-            <p className="mb-5 text-sm text-ink/45">
+            <p className="mb-5 text-sm text-ink/55">
               Also known as {peptide.aliases.join(' · ')}
             </p>
           )}
@@ -315,7 +315,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
           <LastUpdated
             date={latest.fetchedAt}
             label="Research refreshed"
-            className="mt-4 text-[11px] text-ink/35"
+            className="mt-4 text-[11px] text-ink/55"
           />
           <WatchButton slug={peptide.slug} />
         </div>
@@ -404,7 +404,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                       key={f}
                       href={`/catalog?synthesis=${encodeURIComponent(f)}`}
                       title={`Browse peptides with: ${f}`}
-                      className="inline-flex items-center rounded-full border border-ink/[0.08] bg-ink/[0.03] px-2.5 py-1 text-[11px] font-medium text-ink/60 transition-colors hover:border-[#2DD4A8]/30 hover:bg-[#2DD4A8]/[0.06] hover:text-accent"
+                      className="inline-flex items-center rounded-full border border-hairline bg-fill px-2.5 py-1 text-[11px] font-medium text-ink/60 transition-colors hover:border-[#2DD4A8]/30 hover:bg-[#2DD4A8]/[0.06] hover:text-accent"
                     >
                       {f}
                     </Link>
@@ -415,7 +415,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
               {(peptide.storage || peptide.handling) && (
                 <dl className="mt-4 grid gap-3 sm:grid-cols-2">
                   {peptide.storage && (
-                    <div className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] px-4 py-3">
+                    <div className="rounded-xl border border-hairline bg-fill px-4 py-3">
                       <dt className="mb-1 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-accent/80">
                         <Snowflake className="h-3 w-3" />
                         Storage
@@ -426,7 +426,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                     </div>
                   )}
                   {peptide.handling && (
-                    <div className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] px-4 py-3">
+                    <div className="rounded-xl border border-hairline bg-fill px-4 py-3">
                       <dt className="mb-1 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-accent/80">
                         <Droplets className="h-3 w-3" />
                         Handling
@@ -439,7 +439,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 </dl>
               )}
 
-              <div className="mt-4 rounded-xl border border-ink/[0.06] bg-ink/[0.02] px-4 py-3">
+              <div className="mt-4 rounded-xl border border-hairline bg-fill px-4 py-3">
                 <p className="text-[12.5px] leading-relaxed text-ink/55">
                   <span className="font-semibold text-ink/75">
                     Don&apos;t judge a vial by its cake.
@@ -465,7 +465,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                   {peptide.researchAreas.map((area) => (
                     <li
                       key={area}
-                      className="flex items-center gap-2 rounded-lg border border-ink/[0.06] bg-ink/[0.02] px-3 py-2 text-sm text-ink/65"
+                      className="flex items-center gap-2 rounded-lg border border-hairline bg-fill px-3 py-2 text-sm text-ink/65"
                     >
                       <FlaskConical className="h-3.5 w-3.5 text-accent/70" />
                       {area}
@@ -482,7 +482,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                     <Link
                       key={a.slug}
                       href={`/research-areas/${a.slug}`}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/60 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-fill px-3 py-1 text-xs text-ink/60 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
                     >
                       <FlaskConical className="h-3 w-3 text-accent/70" />
                       {a.label}
@@ -494,7 +494,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
 
             {(latest.trials.length > 0 || latest.articles.length > 0) && (
               <Block title="Latest research">
-                <p className="mb-4 text-xs leading-relaxed text-ink/40">
+                <p className="mb-4 text-xs leading-relaxed text-ink/55">
                   Recent clinical trials and publications mentioning{' '}
                   <span className="text-ink/60">{latest.query}</span>, pulled
                   automatically from ClinicalTrials.gov and PubMed and refreshed
@@ -504,7 +504,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 <div className="grid gap-6 md:grid-cols-2">
                   {latest.trials.length > 0 && (
                     <div>
-                      <h3 className="mb-2.5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-ink/45">
+                      <h3 className="mb-2.5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-ink/55">
                         <FlaskConical className="h-3.5 w-3.5 text-accent/70" />
                         Recent trials
                       </h3>
@@ -515,12 +515,12 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                               href={t.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="group block rounded-lg border border-ink/[0.06] bg-ink/[0.02] px-3 py-2.5 transition-colors hover:border-[#2DD4A8]/30"
+                              className="group block rounded-lg border border-hairline bg-fill px-3 py-2.5 transition-colors hover:border-[#2DD4A8]/30"
                             >
                               <span className="block text-sm leading-snug text-ink/75 group-hover:text-ink/90">
                                 {t.title}
                               </span>
-                              <span className="mt-1 block text-[11px] text-ink/40">
+                              <span className="mt-1 block text-[11px] text-ink/55">
                                 {[t.status, t.phase, t.nctId].filter(Boolean).join(' · ')}
                               </span>
                             </a>
@@ -531,7 +531,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                   )}
                   {latest.articles.length > 0 && (
                     <div>
-                      <h3 className="mb-2.5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-ink/45">
+                      <h3 className="mb-2.5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider text-ink/55">
                         <Newspaper className="h-3.5 w-3.5 text-accent/70" />
                         Recent publications
                       </h3>
@@ -542,12 +542,12 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                               href={a.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="group block rounded-lg border border-ink/[0.06] bg-ink/[0.02] px-3 py-2.5 transition-colors hover:border-[#2DD4A8]/30"
+                              className="group block rounded-lg border border-hairline bg-fill px-3 py-2.5 transition-colors hover:border-[#2DD4A8]/30"
                             >
                               <span className="block text-sm leading-snug text-ink/75 group-hover:text-ink/90">
                                 {a.title}
                               </span>
-                              <span className="mt-1 block text-[11px] text-ink/40">
+                              <span className="mt-1 block text-[11px] text-ink/55">
                                 {[a.journal, a.date, `PMID ${a.pmid}`].filter(Boolean).join(' · ')}
                               </span>
                             </a>
@@ -562,7 +562,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
 
             {peptide.faqs && peptide.faqs.length > 0 && (
               <div>
-                <h2 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+                <h2 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
                   <HelpCircle className="h-3.5 w-3.5" />
                   Frequently asked questions
                 </h2>
@@ -570,11 +570,11 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                   {peptide.faqs.map((f) => (
                     <details
                       key={f.q}
-                      className="group rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5 [&_summary::-webkit-details-marker]:hidden"
+                      className="group rounded-xl border border-hairline bg-fill p-5 [&_summary::-webkit-details-marker]:hidden"
                     >
                       <summary className="flex cursor-pointer items-center justify-between gap-3 text-sm font-semibold text-ink/85">
                         {f.q}
-                        <span className="text-ink/30 transition-transform group-open:rotate-45">
+                        <span className="text-ink/55 transition-transform group-open:rotate-45">
                           +
                         </span>
                       </summary>
@@ -612,8 +612,8 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
           {/* Sidebar */}
           <aside className="space-y-6">
             {/* Identity panel */}
-            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
-              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <div className="rounded-2xl border border-hairline bg-fill p-5">
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 Identity
               </h3>
               <dl className="space-y-3 text-sm">
@@ -771,8 +771,8 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
             })()}
 
             {/* Further reading — generated authoritative sources */}
-            <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5">
-              <h3 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <div className="rounded-2xl border border-hairline bg-fill p-5">
+              <h3 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 <BookOpen className="h-3.5 w-3.5" />
                 Further reading
               </h3>
@@ -791,7 +791,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                   </li>
                 ))}
               </ul>
-              <p className="mt-3 text-[10px] leading-relaxed text-ink/30">
+              <p className="mt-3 text-[10px] leading-relaxed text-ink/55">
                 Links open external databases. AmericanPeptide does not endorse
                 specific results.
               </p>
@@ -824,7 +824,7 @@ function Block({
 }) {
   return (
     <div>
-      <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/40">
+      <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/55">
         {title}
       </h2>
       {children}
@@ -843,7 +843,7 @@ function Row({
 }) {
   return (
     <div className="flex flex-col gap-0.5">
-      <dt className="text-[10px] uppercase tracking-wider text-ink/35">
+      <dt className="text-[10px] uppercase tracking-wider text-ink/55">
         {label}
       </dt>
       <dd
@@ -866,9 +866,9 @@ function Row({
 // affiliate directory is the sourcing layer; this platform never sells peptides.
 function ReferenceEdition() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-5">
+    <div className="overflow-hidden rounded-2xl border border-hairline bg-fill p-5">
       <div className="mb-2 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-ink/10 bg-ink/[0.04] text-ink/50">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-hairline-strong bg-fill-strong text-ink/50">
           <BookOpen className="h-3.5 w-3.5" strokeWidth={1.75} />
         </div>
         <h3 className="text-sm font-semibold">Reference edition</h3>
@@ -898,9 +898,9 @@ function ReferenceCompoundPanel({ peptide }: { peptide: Peptide }) {
       : null
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-5">
+    <div className="overflow-hidden rounded-2xl border border-hairline bg-fill p-5">
       <div className="mb-2 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-ink/10 bg-ink/[0.04] text-ink/50">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-hairline-strong bg-fill-strong text-ink/50">
           <BookOpen className="h-3.5 w-3.5" strokeWidth={1.75} />
         </div>
         <h3 className="text-sm font-semibold">Reference entry — no sources listed</h3>
@@ -944,7 +944,7 @@ function SourcesPanel({ vendors, slug }: { vendors: Vendor[]; slug: string }) {
           <Building2 className="h-3.5 w-3.5" strokeWidth={1.75} />
         </div>
         <h3 className="text-sm font-semibold">Where to source</h3>
-        <span className="ml-auto text-[10px] uppercase tracking-wider text-ink/35">
+        <span className="ml-auto text-[10px] uppercase tracking-wider text-ink/55">
           Ranked by trust
         </span>
       </div>
@@ -956,9 +956,9 @@ function SourcesPanel({ vendors, slug }: { vendors: Vendor[]; slug: string }) {
               <h4 className="text-[11px] font-semibold uppercase tracking-wider text-accent/80">
                 {group.tier.label}
               </h4>
-              <span className="text-[10px] text-ink/35">{group.vendors.length}</span>
+              <span className="text-[10px] text-ink/55">{group.vendors.length}</span>
             </div>
-            <p className="mb-3 text-[11px] leading-relaxed text-ink/40">
+            <p className="mb-3 text-[11px] leading-relaxed text-ink/55">
               {group.tier.blurb}
             </p>
             <div className="space-y-4">
@@ -983,7 +983,7 @@ function SourcesPanel({ vendors, slug }: { vendors: Vendor[]; slug: string }) {
       </div>
 
       {hidden > 0 && (
-        <p className="mt-3 text-[11px] text-ink/40">
+        <p className="mt-3 text-[11px] text-ink/55">
           +{hidden} more vendor{hidden > 1 ? 's' : ''} not shown.
         </p>
       )}
@@ -1021,7 +1021,7 @@ function VendorCard({
   ]
 
   return (
-    <div className={isFirst ? '' : 'border-t border-ink/[0.07] pt-4'}>
+    <div className={isFirst ? '' : 'border-t border-hairline pt-4'}>
       <div className="mb-1 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <span className="text-sm font-semibold">{vendor.name}</span>
@@ -1037,7 +1037,7 @@ function VendorCard({
           )}
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
-          <span className="rounded-full border border-ink/15 px-2 py-0.5 text-[10px] font-semibold text-ink/70">
+          <span className="rounded-full border border-hairline-strong px-2 py-0.5 text-[10px] font-semibold text-ink/70">
             {score}/100
           </span>
         </div>
@@ -1063,9 +1063,9 @@ function VendorCard({
             {s.ok ? (
               <Check className="mt-0.5 h-3 w-3 shrink-0 text-accent" strokeWidth={2.5} />
             ) : (
-              <HelpCircle className="mt-0.5 h-3 w-3 shrink-0 text-ink/30" />
+              <HelpCircle className="mt-0.5 h-3 w-3 shrink-0 text-ink/55" />
             )}
-            <span className={s.ok ? 'text-ink/70' : 'text-ink/40'}>{s.label}</span>
+            <span className={s.ok ? 'text-ink/70' : 'text-ink/55'}>{s.label}</span>
           </li>
         ))}
       </ul>
@@ -1093,7 +1093,7 @@ function VendorCard({
             at checkout.
           </p>
         ) : (
-          <p className="mt-2 text-center text-[11px] text-ink/45">
+          <p className="mt-2 text-center text-[11px] text-ink/55">
             Referral code{' '}
             <span className="font-mono font-semibold text-ink/70">
               {vendor.affiliate.code}
@@ -1115,7 +1115,7 @@ function RelatedCard({ peptide }: { peptide: Peptide }) {
   return (
     <Link
       href={`/catalog/${peptide.slug}`}
-      className="group flex flex-col rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4 transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+      className="group flex flex-col rounded-xl border border-hairline bg-fill p-4 transition-colors hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
     >
       <h4 className="mb-1.5 text-sm font-semibold">{peptide.name}</h4>
       <p className="mb-3 line-clamp-2 flex-1 text-xs leading-relaxed text-ink/50">

@@ -154,12 +154,12 @@ export default async function VendorReviewPage({
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
 
       {/* Breadcrumb */}
-      <header className="flex flex-wrap items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <Link href="/" className="text-sm text-ink/35 transition-colors hover:text-ink">
+      <header className="flex flex-wrap items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
+        <Link href="/" className="text-sm text-ink/55 transition-colors hover:text-ink">
           Home
         </Link>
         <span className="text-ink/20">/</span>
-        <Link href="/vendors" className="text-sm text-ink/35 transition-colors hover:text-ink">
+        <Link href="/vendors" className="text-sm text-ink/55 transition-colors hover:text-ink">
           Vendor reviews
         </Link>
         <span className="text-ink/20">/</span>
@@ -167,7 +167,7 @@ export default async function VendorReviewPage({
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-14 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-30"
@@ -195,12 +195,12 @@ export default async function VendorReviewPage({
             <p className="max-w-xl text-sm leading-relaxed text-ink/55 md:text-base">
               {v.blurb}
             </p>
-            <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px] text-ink/45">
-              <span className="inline-flex items-center gap-1 rounded-full border border-ink/10 px-2.5 py-0.5">
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px] text-ink/55">
+              <span className="inline-flex items-center gap-1 rounded-full border border-hairline-strong px-2.5 py-0.5">
                 <Truck className="h-3 w-3" /> {shipsToLabel(v)}
               </span>
               {v.trust.purityPct && (
-                <span className="inline-flex items-center gap-1 rounded-full border border-ink/10 px-2.5 py-0.5">
+                <span className="inline-flex items-center gap-1 rounded-full border border-hairline-strong px-2.5 py-0.5">
                   <FlaskConical className="h-3 w-3" /> ≥{v.trust.purityPct}% stated purity
                 </span>
               )}
@@ -208,12 +208,12 @@ export default async function VendorReviewPage({
           </div>
 
           {/* Score badge */}
-          <div className="flex shrink-0 flex-col items-center rounded-2xl border border-ink/[0.08] bg-ink/[0.03] px-8 py-6">
+          <div className="flex shrink-0 flex-col items-center rounded-2xl border border-hairline bg-fill px-8 py-6">
             <div className="flex items-baseline gap-0.5">
               <span className="text-5xl font-bold text-accent">{score}</span>
-              <span className="text-lg font-medium text-ink/40">/100</span>
+              <span className="text-lg font-medium text-ink/55">/100</span>
             </div>
-            <p className="mt-1 text-[11px] uppercase tracking-wider text-ink/40">The Standard</p>
+            <p className="mt-1 text-[11px] uppercase tracking-wider text-ink/55">The Standard</p>
             <span className="mt-3 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-medium text-accent">
               {tierMeta.label}
             </span>
@@ -246,7 +246,7 @@ export default async function VendorReviewPage({
               </h2>
             </div>
             <p className="text-sm leading-relaxed text-ink/65">{v.spotlightNote}</p>
-            <p className="mt-3 text-[11px] leading-relaxed text-ink/40">
+            <p className="mt-3 text-[11px] leading-relaxed text-ink/55">
               This is a paid placement. It buys position, not a better score — the{' '}
               {score}/100 above is earned from published evidence exactly like every
               other vendor&rsquo;s, and it never moves the ranking on{' '}
@@ -260,7 +260,7 @@ export default async function VendorReviewPage({
 
         {/* Scorecard */}
         <section>
-          <h2 className="mb-1 text-xs font-semibold uppercase tracking-wider text-ink/40">
+          <h2 className="mb-1 text-xs font-semibold uppercase tracking-wider text-ink/55">
             How the {score}/100 breaks down
           </h2>
           <p className="mb-5 text-sm leading-relaxed text-ink/55">
@@ -274,7 +274,7 @@ export default async function VendorReviewPage({
           </p>
 
           {/* Segmented bar: earned segments colored, missing ones faint */}
-          <div className="mb-6 flex h-3.5 w-full overflow-hidden rounded-full border border-ink/10">
+          <div className="mb-6 flex h-3.5 w-full overflow-hidden rounded-full border border-hairline-strong">
             {signals.map((s) => (
               <div
                 key={s.key}
@@ -293,7 +293,7 @@ export default async function VendorReviewPage({
             {signals.map((s) => (
               <div
                 key={s.key}
-                className="flex items-start gap-3 rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4"
+                className="flex items-start gap-3 rounded-xl border border-hairline bg-fill p-4"
                 style={s.earned ? undefined : { opacity: 0.6 }}
               >
                 <div
@@ -310,11 +310,11 @@ export default async function VendorReviewPage({
                     {s.earned ? (
                       <Check className="h-3.5 w-3.5 text-accent" strokeWidth={2.5} />
                     ) : (
-                      <Minus className="h-3.5 w-3.5 text-ink/30" strokeWidth={2.5} />
+                      <Minus className="h-3.5 w-3.5 text-ink/55" strokeWidth={2.5} />
                     )}
                     {s.label}
                     {!s.earned && (
-                      <span className="text-[10px] font-normal uppercase tracking-wide text-ink/35">
+                      <span className="text-[10px] font-normal uppercase tracking-wide text-ink/55">
                         · not published
                       </span>
                     )}
@@ -342,9 +342,9 @@ export default async function VendorReviewPage({
         )}
 
         {/* CTA */}
-        <section className="rounded-2xl border border-ink/[0.08] bg-ink/[0.03] p-6 text-center">
+        <section className="rounded-2xl border border-hairline bg-fill p-6 text-center">
           <p className="mb-1 text-sm font-semibold text-ink/85">Visit {v.name}</p>
-          <p className="mx-auto mb-4 max-w-md text-xs leading-relaxed text-ink/45">
+          <p className="mx-auto mb-4 max-w-md text-xs leading-relaxed text-ink/55">
             You leave AmericanPeptide for the vendor&rsquo;s own site. Always request
             and match the third-party COA for your specific lot before any use.
           </p>
@@ -364,7 +364,7 @@ export default async function VendorReviewPage({
 
         {/* What they carry */}
         <section>
-          <h2 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+          <h2 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
             <Package className="h-3.5 w-3.5 text-accent" />
             What {v.name} carries
           </h2>
@@ -393,7 +393,7 @@ export default async function VendorReviewPage({
                   <Link
                     key={slug}
                     href={`/catalog/${slug}`}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
                   >
                     {hasSourcingPage(slug) && <span className="text-accent">·</span>}
                     {p.name}
@@ -407,7 +407,7 @@ export default async function VendorReviewPage({
         {/* Compare / other reviews */}
         {others.length > 0 && (
           <section>
-            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/55">
               Compare with other vendors
             </h2>
             <div className="space-y-3">
@@ -436,7 +436,7 @@ export default async function VendorReviewPage({
             <Link
               key={l.href}
               href={l.href}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
             >
               {l.label}
               <ArrowRight className="h-3 w-3" />
@@ -445,7 +445,7 @@ export default async function VendorReviewPage({
         </section>
 
         {/* Disclaimer */}
-        <section className="rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5 text-xs leading-relaxed text-ink/45">
+        <section className="rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5 text-xs leading-relaxed text-ink/55">
           <strong className="text-ink/60">Research reference only.</strong>{' '}
           AmericanPeptide.com is not a store, a manufacturer, or a medical provider.
           This review scores an independent third-party vendor on the transparency
@@ -471,20 +471,20 @@ function VendorRow({ v }: { v: Vendor }) {
   return (
     <Link
       href={`/vendors/${v.id}`}
-      className="group flex items-center gap-4 rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-4 transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+      className="group flex items-center gap-4 rounded-xl border border-hairline bg-fill p-4 transition-colors hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
     >
       <div
         className="flex h-11 w-14 shrink-0 flex-col items-center justify-center rounded-lg"
         style={{ backgroundColor: `${A}12` }}
       >
         <span className="text-lg font-bold text-accent">{score}</span>
-        <span className="text-[8px] uppercase tracking-wide text-ink/35">/100</span>
+        <span className="text-[8px] uppercase tracking-wide text-ink/55">/100</span>
       </div>
       <div className="min-w-0 flex-1">
         <p className="text-sm font-semibold text-ink/85 transition-colors group-hover:text-ink">
           {v.name}
         </p>
-        <p className="truncate text-xs text-ink/45">{tierMeta.label}</p>
+        <p className="truncate text-xs text-ink/55">{tierMeta.label}</p>
       </div>
       <ArrowRight className="h-4 w-4 shrink-0 text-ink/25 transition-all group-hover:translate-x-0.5 group-hover:text-accent" />
     </Link>

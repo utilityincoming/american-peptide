@@ -34,7 +34,7 @@ export default function PeptideStory({ peptide }: { peptide: Peptide }) {
 
       <p className="mb-6 text-sm leading-relaxed text-ink/65">{story.intro}</p>
 
-      <ol className="relative space-y-5 border-l border-ink/[0.08] pl-6">
+      <ol className="relative space-y-5 border-l border-hairline pl-6">
         {story.beats.map((beat, i) => {
           const Icon = ICONS[beat.icon] ?? Cpu
           return (

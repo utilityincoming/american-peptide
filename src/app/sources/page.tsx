@@ -103,8 +103,8 @@ export default function SourcesIndexPage() {
       />
 
       {/* Breadcrumb */}
-      <header className="flex flex-wrap items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <Link href="/" className="text-sm text-ink/35 transition-colors hover:text-ink">
+      <header className="flex flex-wrap items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
+        <Link href="/" className="text-sm text-ink/55 transition-colors hover:text-ink">
           Home
         </Link>
         <span className="text-ink/20">/</span>
@@ -112,7 +112,7 @@ export default function SourcesIndexPage() {
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-14 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-30"
@@ -146,7 +146,7 @@ export default function SourcesIndexPage() {
             </Link>
             .
           </p>
-          <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-ink/[0.08] bg-ink/[0.03] px-3 py-1 text-[11px] text-ink/50">
+          <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-hairline bg-fill px-3 py-1 text-[11px] text-ink/50">
             <ShieldCheck className="h-3 w-3 text-accent" />
             {entries.length} compound{entries.length === 1 ? '' : 's'} with a
             ranked field of sources
@@ -158,11 +158,11 @@ export default function SourcesIndexPage() {
         {sections.map(({ id, label, blurb, items }) => (
           <section key={id}>
             <div className="mb-4">
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-ink/55">
                 {label}
               </h2>
               {blurb && (
-                <p className="mt-1 text-xs leading-relaxed text-ink/35">{blurb}</p>
+                <p className="mt-1 text-xs leading-relaxed text-ink/55">{blurb}</p>
               )}
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -170,18 +170,18 @@ export default function SourcesIndexPage() {
                 <Link
                   key={peptide.slug}
                   href={`/sources/${peptide.slug}`}
-                  className="group flex flex-col justify-between gap-3 rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-4 transition-colors hover:border-[#2DD4A8]/30"
+                  className="group flex flex-col justify-between gap-3 rounded-xl border border-hairline bg-fill p-4 transition-colors hover:border-[#2DD4A8]/30"
                 >
                   <div>
                     <div className="flex items-start justify-between gap-3">
                       <span className="text-sm font-semibold text-ink/85 transition-colors group-hover:text-accent">
                         {peptide.name}
                       </span>
-                      <span className="shrink-0 text-[11px] tabular-nums text-ink/35">
+                      <span className="shrink-0 text-[11px] tabular-nums text-ink/55">
                         {vendorCount} sources
                       </span>
                     </div>
-                    <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-ink/45">
+                    <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-ink/55">
                       {peptide.shortDescription}
                     </p>
                   </div>
@@ -193,7 +193,7 @@ export default function SourcesIndexPage() {
         ))}
 
         {/* Why the list is this length — the gate, stated rather than hidden */}
-        <section className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5 text-xs leading-relaxed text-ink/45">
+        <section className="rounded-xl border border-hairline bg-fill p-5 text-xs leading-relaxed text-ink/55">
           <strong className="text-ink/65">Why some compounds aren&rsquo;t here.</strong>{' '}
           A sourcing page earns its place only where there is a real field to
           rank — a compound at least {SOURCING_PAGE_MIN_VENDORS} tracked vendors
@@ -205,7 +205,7 @@ export default function SourcesIndexPage() {
         </section>
 
         {/* Disclaimer — mirrors the slug pages */}
-        <section className="rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5 text-xs leading-relaxed text-ink/45">
+        <section className="rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5 text-xs leading-relaxed text-ink/55">
           <strong className="text-ink/60">Research reference only.</strong> Purity
           tiers reflect each vendor&rsquo;s own published transparency signals unless
           an independent COA is on file, and are not certification. Always request
@@ -224,7 +224,7 @@ export default function SourcesIndexPage() {
             <Link
               key={l.href}
               href={l.href}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
             >
               {l.label}
               <ArrowRight className="h-3 w-3" />

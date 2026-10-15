@@ -110,14 +110,14 @@ export default async function SourcesPage({
       />
 
       {/* Breadcrumb */}
-      <header className="flex flex-wrap items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <Link href="/" className="text-sm text-ink/35 transition-colors hover:text-ink">
+      <header className="flex flex-wrap items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
+        <Link href="/" className="text-sm text-ink/55 transition-colors hover:text-ink">
           Home
         </Link>
         <span className="text-ink/20">/</span>
         <Link
           href={`/catalog/${slug}`}
-          className="text-sm text-ink/35 transition-colors hover:text-ink"
+          className="text-sm text-ink/55 transition-colors hover:text-ink"
         >
           {peptide.name}
         </Link>
@@ -126,7 +126,7 @@ export default async function SourcesPage({
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-14 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-14 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-30"
@@ -170,17 +170,17 @@ export default async function SourcesPage({
       <div className="mx-auto max-w-4xl space-y-12 px-6 py-12 md:px-10">
         {/* Verified chemistry — reference tier (real data) */}
         {verification && identityClaims.length > 0 && (
-          <section className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
+          <section className="rounded-xl border border-hairline bg-fill p-5">
             <div className="mb-4 flex items-center gap-2">
               <BadgeCheck className="h-3.5 w-3.5 text-accent" />
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-ink/55">
                 Verified chemistry · reference tier
               </h2>
             </div>
             <div className="flex flex-wrap gap-x-10 gap-y-4">
               {identityClaims.map((c) => (
                 <div key={c.field}>
-                  <p className="text-[11px] uppercase tracking-wide text-ink/40">
+                  <p className="text-[11px] uppercase tracking-wide text-ink/55">
                     {c.field === 'molecular_weight' ? 'Molecular weight' : 'Molecular formula'}
                   </p>
                   <div className="mt-1 flex items-center gap-2">
@@ -193,7 +193,7 @@ export default async function SourcesPage({
                 </div>
               ))}
               <div>
-                <p className="text-[11px] uppercase tracking-wide text-ink/40">PubChem</p>
+                <p className="text-[11px] uppercase tracking-wide text-ink/55">PubChem</p>
                 <a
                   href={`https://pubchem.ncbi.nlm.nih.gov/compound/${verification.cid}`}
                   target="_blank"
@@ -205,7 +205,7 @@ export default async function SourcesPage({
               </div>
             </div>
             {verification.molecularWeight != null && (
-              <p className="mt-4 border-t border-ink/[0.06] pt-3 text-[11px] leading-relaxed text-ink/45">
+              <p className="mt-4 border-t border-hairline pt-3 text-[11px] leading-relaxed text-ink/55">
                 Reading a COA: an independent mass-spec should land on ≈
                 {verification.molecularWeight} Da
                 {verification.molecularFormula ? ` (${verification.molecularFormula})` : ''}. A
@@ -223,7 +223,7 @@ export default async function SourcesPage({
         {/* The ranked comparison */}
         <section>
           <div className="mb-5">
-            <h2 className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <h2 className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
               <Layers className="h-3.5 w-3.5 text-accent" />
               Every source, in tier order
             </h2>
@@ -240,7 +240,7 @@ export default async function SourcesPage({
         </section>
 
         {/* Disclaimer */}
-        <section className="rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5 text-xs leading-relaxed text-ink/45">
+        <section className="rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5 text-xs leading-relaxed text-ink/55">
           <strong className="text-ink/60">Research reference only.</strong> Purity
           tiers reflect each vendor&rsquo;s own published transparency signals unless
           an independent COA is on file, and are not certification. Always request
@@ -251,7 +251,7 @@ export default async function SourcesPage({
         {/* Sibling sourcing pages — discovery + internal linking */}
         {alsoSourceable.length > 0 && (
           <section>
-            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/55">
               Related compounds you can source
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -259,7 +259,7 @@ export default async function SourcesPage({
                 <Link
                   key={p.slug}
                   href={`/sources/${p.slug}`}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
                 >
                   {p.name}
                   <ArrowRight className="h-3 w-3" />
@@ -280,7 +280,7 @@ export default async function SourcesPage({
             <Link
               key={l.href}
               href={l.href}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
             >
               {l.label}
               <ArrowRight className="h-3 w-3" />

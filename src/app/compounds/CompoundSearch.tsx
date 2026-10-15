@@ -71,8 +71,8 @@ export default function CompoundSearch() {
     <div>
       {/* ── Search bar ── */}
       <div className="mb-8">
-        <div className="flex items-center gap-3 rounded-2xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-3 transition-colors focus-within:border-[#2DD4A8]/25">
-          <Search className="h-4 w-4 flex-shrink-0 text-ink/30" />
+        <div className="flex items-center gap-3 rounded-2xl border border-hairline bg-fill px-4 py-3 transition-colors focus-within:border-[#2DD4A8]/25">
+          <Search className="h-4 w-4 flex-shrink-0 text-ink/55" />
           <input
             type="text"
             value={query}
@@ -91,15 +91,15 @@ export default function CompoundSearch() {
 
       {/* ── States ── */}
       {status === 'idle' && (
-        <div className="py-16 text-center text-sm text-ink/30">
+        <div className="py-16 text-center text-sm text-ink/55">
           Type a compound name to search PubChem&apos;s 100M+ chemical records.
         </div>
       )}
 
       {status === 'empty' && (
-        <div className="rounded-2xl border border-ink/[0.06] bg-ink/[0.02] py-16 text-center">
+        <div className="rounded-2xl border border-hairline bg-fill py-16 text-center">
           <p className="text-sm text-ink/55">No compound found</p>
-          <p className="mt-1 text-xs text-ink/30">
+          <p className="mt-1 text-xs text-ink/55">
             Try a different name, IUPAC identifier, or common synonym.
           </p>
         </div>
@@ -127,10 +127,10 @@ function CompoundCard({ compound }: { compound: Compound }) {
   const [imgError, setImgError] = useState(false)
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-ink/[0.06] bg-ink/[0.025] transition-colors hover:border-[#2DD4A8]/20">
-      <div className="flex h-48 items-center justify-center border-b border-ink/[0.06] bg-ink/[0.03] p-4">
+    <div className="flex flex-col overflow-hidden rounded-2xl border border-hairline bg-fill transition-colors hover:border-[#2DD4A8]/20">
+      <div className="flex h-48 items-center justify-center border-b border-hairline bg-fill p-4">
         {imgError ? (
-          <span className="text-xs text-ink/30">Structure unavailable</span>
+          <span className="text-xs text-ink/55">Structure unavailable</span>
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -148,19 +148,19 @@ function CompoundCard({ compound }: { compound: Compound }) {
           <h3 className="line-clamp-2 text-sm font-medium leading-snug text-ink/90">
             {compound.name}
           </h3>
-          <p className="mt-0.5 font-mono text-[11px] text-ink/35">CID {compound.cid}</p>
+          <p className="mt-0.5 font-mono text-[11px] text-ink/55">CID {compound.cid}</p>
         </div>
 
         <div className="flex-1 space-y-1.5 text-xs">
           {compound.molecularFormula && (
             <div className="flex justify-between gap-2">
-              <span className="text-ink/40">Formula</span>
+              <span className="text-ink/55">Formula</span>
               <span className="font-mono text-accent/90">{compound.molecularFormula}</span>
             </div>
           )}
           {compound.molecularWeight && (
             <div className="flex justify-between gap-2">
-              <span className="text-ink/40">MW</span>
+              <span className="text-ink/55">MW</span>
               <span className="font-mono text-ink/70">{compound.molecularWeight} g/mol</span>
             </div>
           )}
@@ -170,7 +170,7 @@ function CompoundCard({ compound }: { compound: Compound }) {
           href={`https://pubchem.ncbi.nlm.nih.gov/compound/${compound.cid}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-1 flex items-center justify-center gap-1.5 rounded-lg border border-ink/[0.06] py-2 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/25 hover:bg-[#2DD4A8]/[0.05] hover:text-accent"
+          className="mt-1 flex items-center justify-center gap-1.5 rounded-lg border border-hairline py-2 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/25 hover:bg-[#2DD4A8]/[0.05] hover:text-accent"
         >
           View on PubChem
           <ExternalLink className="h-3 w-3" />

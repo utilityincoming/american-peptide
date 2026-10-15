@@ -121,10 +121,10 @@ export default async function ComparePage({ searchParams }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
 
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <Link
           href="/catalog"
-          className="text-sm text-ink/35 transition-colors hover:text-ink"
+          className="text-sm text-ink/55 transition-colors hover:text-ink"
         >
           Catalog
         </Link>
@@ -132,7 +132,7 @@ export default async function ComparePage({ searchParams }: Props) {
         <span className="truncate text-sm font-medium">Compare</span>
       </header>
 
-      <section className="border-b border-ink/[0.06] px-6 py-10 md:px-10">
+      <section className="border-b border-hairline px-6 py-10 md:px-10">
         <div className="mx-auto max-w-6xl">
           <h1 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
             Compare peptides
@@ -164,13 +164,13 @@ export default async function ComparePage({ searchParams }: Props) {
 function EmptyState({ count }: { count: number }) {
   return (
     <section className="px-6 py-16 md:px-10">
-      <div className="mx-auto max-w-2xl rounded-2xl border border-dashed border-ink/[0.10] bg-ink/[0.015] px-6 py-12 text-center">
+      <div className="mx-auto max-w-2xl rounded-2xl border border-dashed border-hairline-strong bg-fill px-6 py-12 text-center">
         <p className="mb-2 text-sm text-ink/70">
           {count === 0
             ? 'No peptides selected for comparison yet.'
             : 'Select at least one more peptide to compare.'}
         </p>
-        <p className="mb-6 text-xs text-ink/40">
+        <p className="mb-6 text-xs text-ink/55">
           On the catalog page, tap{' '}
           <span className="font-medium text-ink/65">+ Compare</span> on any
           peptide card to add it.
@@ -210,7 +210,7 @@ const ROWS: Row[] = [
           <Link
             key={c}
             href={`/catalog/category/${c}`}
-            className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+            className="rounded-md border border-hairline bg-fill px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
           >
             {CATEGORIES.find((cm) => cm.id === c)?.label ?? c}
           </Link>
@@ -227,7 +227,7 @@ const ROWS: Row[] = [
           Approved
         </span>
       ) : (
-        <span className="text-[11px] uppercase tracking-wider text-ink/35">
+        <span className="text-[11px] uppercase tracking-wider text-ink/55">
           Investigational
         </span>
       ),
@@ -258,7 +258,7 @@ const ROWS: Row[] = [
     label: 'Sequence',
     render: (p) =>
       p.sequence ? (
-        <code className="block max-h-40 overflow-y-auto whitespace-pre-wrap break-all rounded-md border border-ink/[0.06] bg-black/30 px-2 py-1.5 font-mono text-[11px] leading-relaxed text-accent">
+        <code className="block max-h-40 overflow-y-auto whitespace-pre-wrap break-all rounded-md border border-hairline bg-black/30 px-2 py-1.5 font-mono text-[11px] leading-relaxed text-accent">
           {p.sequence}
         </code>
       ) : (
@@ -290,14 +290,14 @@ const ROWS: Row[] = [
               key={f}
               href={`/catalog?synthesis=${encodeURIComponent(f)}`}
               title={`Browse peptides with: ${f}`}
-              className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-1.5 py-0.5 text-[10.5px] font-medium text-ink/60 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+              className="rounded-md border border-hairline bg-fill px-1.5 py-0.5 text-[10.5px] font-medium text-ink/60 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
             >
               {f}
             </Link>
           ))}
         </div>
       ) : (
-        <span className="text-[11px] text-ink/35">No notable modifications</span>
+        <span className="text-[11px] text-ink/55">No notable modifications</span>
       ),
   },
   {
@@ -384,13 +384,13 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
     <>
       <section className="px-6 py-10 md:px-10">
         <div className="mx-auto max-w-6xl">
-          <div className="overflow-x-auto rounded-2xl border border-ink/[0.07] bg-ink/[0.015]">
+          <div className="overflow-x-auto rounded-2xl border border-hairline bg-fill">
             <table className="w-full min-w-[720px] border-collapse text-left align-top">
               <thead>
-                <tr className="border-b border-ink/[0.08] bg-ink/[0.025]">
+                <tr className="border-b border-hairline bg-fill">
                   <th
                     scope="col"
-                    className="sticky left-0 z-10 w-44 min-w-[10rem] border-r border-ink/[0.06] bg-ink/[0.025] px-4 py-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/45"
+                    className="sticky left-0 z-10 w-44 min-w-[10rem] border-r border-hairline bg-fill px-4 py-4 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/55"
                   >
                     Attribute
                   </th>
@@ -398,7 +398,7 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
                     <th
                       key={p.slug}
                       scope="col"
-                      className="min-w-[14rem] border-l border-ink/[0.06] px-4 py-4 align-top"
+                      className="min-w-[14rem] border-l border-hairline px-4 py-4 align-top"
                     >
                       <Link
                         href={`/catalog/${p.slug}`}
@@ -414,7 +414,7 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
                             </span>
                           )}
                         </div>
-                        <p className="line-clamp-2 text-[11px] leading-snug text-ink/45">
+                        <p className="line-clamp-2 text-[11px] leading-snug text-ink/55">
                           {p.shortDescription}
                         </p>
                         <span className="mt-2 inline-flex items-center gap-1 text-[11px] text-accent/70 hover:text-accent">
@@ -432,20 +432,20 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
                     key={row.label}
                     className={
                       ri % 2 === 0
-                        ? 'border-b border-ink/[0.05]'
-                        : 'border-b border-ink/[0.05] bg-ink/[0.012]'
+                        ? 'border-b border-hairline'
+                        : 'border-b border-hairline bg-fill'
                     }
                   >
                     <th
                       scope="row"
-                      className="sticky left-0 z-10 w-44 min-w-[10rem] border-r border-ink/[0.06] bg-surface px-4 py-4 text-left text-[11px] font-medium uppercase tracking-wider text-ink/45"
+                      className="sticky left-0 z-10 w-44 min-w-[10rem] border-r border-hairline bg-surface px-4 py-4 text-left text-[11px] font-medium uppercase tracking-wider text-ink/55"
                     >
                       {row.label}
                     </th>
                     {peptides.map((p) => (
                       <td
                         key={p.slug}
-                        className="min-w-[14rem] border-l border-ink/[0.06] px-4 py-4 align-top text-sm"
+                        className="min-w-[14rem] border-l border-hairline px-4 py-4 align-top text-sm"
                       >
                         {row.render(p)}
                       </td>
@@ -456,7 +456,7 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
             </table>
           </div>
 
-          <p className="mt-4 text-[11px] text-ink/35">
+          <p className="mt-4 text-[11px] text-ink/55">
             Empty fields indicate the attribute is not catalogued for that
             peptide. Data is reference-only; independent validation required
             before experimental use.
@@ -465,9 +465,9 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
       </section>
 
       {otherSlugs.length > 0 && (
-        <section className="border-t border-ink/[0.06] px-6 py-10 md:px-10">
+        <section className="border-t border-hairline px-6 py-10 md:px-10">
           <div className="mx-auto max-w-6xl">
-            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/45">
+            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/55">
               Swap in another peptide
             </h2>
             <div className="flex flex-wrap gap-1.5">
@@ -478,7 +478,7 @@ function ComparisonGrid({ peptides }: { peptides: Peptide[] }) {
                     ...peptides.slice(0, MAX_COMPARE - 1).map((pp) => pp.slug),
                     p.slug,
                   ].join(',')}`}
-                  className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                  className="rounded-full border border-hairline bg-fill px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
                 >
                   + {p.name}
                 </Link>

@@ -19,7 +19,7 @@ export const HUE_CLASSES: Record<TierHue, HueClasses> = {
   },
   slate: {
     text: 'text-ink/75',
-    fill: 'bg-ink/[0.06]',
+    fill: 'bg-fill-strong',
     border: 'border-ink/20',
     dot: 'bg-ink/55',
   },

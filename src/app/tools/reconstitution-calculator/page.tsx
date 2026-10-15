@@ -102,7 +102,7 @@ export default function ReconstitutionCalculatorPage() {
   return (
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Page identity ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
           <Syringe className="h-4 w-4 text-accent" strokeWidth={1.75} />
         </div>
@@ -116,7 +116,7 @@ export default function ReconstitutionCalculatorPage() {
         {/* ── Beta calculator link ── */}
         <Link
           href="/tools/calculator-beta"
-          className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-4 py-2.5 text-xs transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+          className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-hairline bg-fill px-4 py-2.5 text-xs transition-colors hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
         >
           <span className="text-ink/55">
             <span className="font-semibold text-accent">New ·</span> Try the
@@ -138,7 +138,7 @@ export default function ReconstitutionCalculatorPage() {
         </div>
 
         {/* ── Inputs ── */}
-        <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <div className="mb-5 flex items-center justify-between gap-3">
             <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
               Inputs
@@ -147,7 +147,7 @@ export default function ReconstitutionCalculatorPage() {
           </div>
 
           {/* ── Research-use disclaimer ── */}
-          <p className="mb-6 text-[10px] leading-relaxed text-ink/30">
+          <p className="mb-6 text-[10px] leading-relaxed text-ink/55">
             Preset vial sizes and volumes reflect how these compounds are commonly supplied and
             dissolved for laboratory research. Amounts are calculation reference points only — not
             dosing guidance or medical advice. Adjust any field freely.
@@ -220,27 +220,27 @@ export default function ReconstitutionCalculatorPage() {
         </section>
 
         {/* ── Syringe diagram ── */}
-        <section className="mb-6 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
               U-100 Insulin Syringe
             </h2>
-            <span className="font-mono text-xs text-ink/40">
+            <span className="font-mono text-xs text-ink/55">
               {fmt(calc.unitsPerInjection, 1)} units · {fmt(calc.volumePerInjectionMl, 3)} mL
             </span>
           </div>
           <SyringeDiagram units={calc.unitsPerInjection} />
-          <p className="mt-3 text-center text-[11px] text-ink/35">
+          <p className="mt-3 text-center text-[11px] text-ink/55">
             Each tick = 1 unit (0.01 mL). Major labeled marks every 10 units (0.1 mL).
           </p>
         </section>
 
         {/* ── Reference table ── */}
-        <section className="mb-10 rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-5 md:p-6">
+        <section className="mb-10 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <h2 className="mb-1 text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
             Quick Reference
           </h2>
-          <p className="mb-4 text-xs text-ink/40">
+          <p className="mb-4 text-xs text-ink/55">
             Concentration in mcg per 0.1 mL by vial size and water volume. Your current
             selection is highlighted.
           </p>
@@ -248,7 +248,7 @@ export default function ReconstitutionCalculatorPage() {
         </section>
 
         {/* ── Educational content ── */}
-        <section className="mb-10 rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-5 md:p-6">
+        <section className="mb-10 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <h2 className="mb-4 text-xl font-semibold tracking-tight">
             How to Reconstitute Peptides
           </h2>
@@ -290,7 +290,7 @@ export default function ReconstitutionCalculatorPage() {
           </ol>
         </section>
 
-        <section className="mb-10 rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-5 md:p-6">
+        <section className="mb-10 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <h2 className="mb-4 text-xl font-semibold tracking-tight">Storage Guidelines</h2>
           <ul className="space-y-2.5 text-sm leading-relaxed text-ink/65">
             <li className="flex gap-2">
@@ -369,7 +369,7 @@ function CopyLinkButton() {
       className={`inline-flex flex-shrink-0 items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] font-medium transition-colors ${
         copied
           ? 'border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.08] text-accent'
-          : 'border-ink/[0.1] bg-ink/[0.02] text-ink/55 hover:border-[#2DD4A8]/25 hover:text-ink/85'
+          : 'border-hairline-strong bg-fill text-ink/55 hover:border-[#2DD4A8]/25 hover:text-ink/85'
       }`}
     >
       {copied ? (
@@ -407,7 +407,7 @@ function NumberField({
   return (
     <div>
       <label className="mb-1.5 block text-xs font-medium text-ink/55">
-        {label} <span className="text-ink/30">({unit})</span>
+        {label} <span className="text-ink/55">({unit})</span>
       </label>
       {presets && presetLabel && onPreset && (
         <div className="mb-2 flex flex-wrap gap-1.5">
@@ -419,7 +419,7 @@ function NumberField({
               className={`rounded-full border px-2.5 py-0.5 text-[11px] transition-colors ${
                 String(n) === value
                   ? 'border-[#2DD4A8]/30 bg-[#2DD4A8]/[0.08] text-accent'
-                  : 'border-ink/[0.08] bg-ink/[0.02] text-ink/55 hover:border-ink/[0.15] hover:text-ink/85'
+                  : 'border-hairline bg-fill text-ink/55 hover:border-hairline-strong hover:text-ink/85'
               }`}
             >
               {presetLabel(n)}
@@ -434,9 +434,9 @@ function NumberField({
         step="any"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-2.5 font-mono text-base text-ink outline-none transition-colors focus:border-[#2DD4A8]/40"
+        className="w-full rounded-xl border border-hairline bg-fill px-4 py-2.5 font-mono text-base text-ink outline-none transition-colors focus:border-[#2DD4A8]/40"
       />
-      {hint && <p className="mt-1 text-[10px] text-ink/30">{hint}</p>}
+      {hint && <p className="mt-1 text-[10px] text-ink/55">{hint}</p>}
     </div>
   )
 }
@@ -457,10 +457,10 @@ function ResultCard({
       className={`rounded-2xl border p-4 ${
         highlight
           ? 'border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.04]'
-          : 'border-ink/[0.07] bg-ink/[0.025]'
+          : 'border-hairline bg-fill'
       }`}
     >
-      <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-ink/40">
+      <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-ink/55">
         {label}
       </p>
       <p
@@ -470,7 +470,7 @@ function ResultCard({
       >
         {value}
       </p>
-      <p className="mt-0.5 text-[11px] text-ink/40">{unit}</p>
+      <p className="mt-0.5 text-[11px] text-ink/55">{unit}</p>
     </div>
   )
 }
@@ -633,10 +633,10 @@ function ReferenceTable({
   currentWater: number
 }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-ink/[0.07]">
+    <div className="overflow-x-auto rounded-xl border border-hairline">
       <table className="w-full border-collapse text-xs">
         <thead>
-          <tr className="bg-ink/[0.04]">
+          <tr className="bg-fill-strong">
             <th className="px-3 py-2.5 text-left font-medium text-ink/55">Vial \ Water</th>
             {REF_WATERS.map((w) => (
               <th
@@ -650,7 +650,7 @@ function ReferenceTable({
         </thead>
         <tbody>
           {REF_VIALS.map((v) => (
-            <tr key={v} className="border-t border-ink/[0.05]">
+            <tr key={v} className="border-t border-hairline">
               <td className="px-3 py-2.5 font-mono text-ink/65">{v} mg</td>
               {REF_WATERS.map((w) => {
                 const conc = (v * 100) / w

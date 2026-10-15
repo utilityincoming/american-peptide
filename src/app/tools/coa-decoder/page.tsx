@@ -59,8 +59,8 @@ Test Methods: RP-HPLC, ESI-MS, Karl Fischer titration`
 const STATUS_STYLES: Record<FieldStatus, { icon: typeof CheckCircle2; color: string }> = {
   good: { icon: CheckCircle2, color: 'text-accent' },
   warn: { icon: AlertTriangle, color: 'text-amber-400' },
-  missing: { icon: MinusCircle, color: 'text-ink/30' },
-  info: { icon: Info, color: 'text-ink/45' },
+  missing: { icon: MinusCircle, color: 'text-ink/55' },
+  info: { icon: Info, color: 'text-ink/55' },
 }
 
 function gradeColor(grade: string): string {
@@ -189,8 +189,8 @@ export default function CoaDecoderPage() {
   return (
     <div className="min-h-screen bg-surface text-ink">
       {/* Breadcrumb */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <Link href="/tools/reconstitution-calculator" className="text-sm text-ink/40 hover:text-ink/70">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
+        <Link href="/tools/reconstitution-calculator" className="text-sm text-ink/55 hover:text-ink/70">
           Tools
         </Link>
         <span className="text-ink/20">/</span>
@@ -201,7 +201,7 @@ export default function CoaDecoderPage() {
       </header>
 
       {/* Hero */}
-      <section className="border-b border-ink/[0.06] px-6 py-12 md:px-10">
+      <section className="border-b border-hairline px-6 py-12 md:px-10">
         <div className="mx-auto max-w-4xl">
           <h1 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
             Decode &{' '}
@@ -215,7 +215,7 @@ export default function CoaDecoderPage() {
             plain English, scored against a transparency checklist, and, when we
             recognize the peptide, cross-checked against verified chemistry.
           </p>
-          <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-ink/40">
+          <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-ink/55">
             <Lock className="h-3.5 w-3.5 text-accent/70" />
             Analyzed on demand and never stored or logged.
           </p>
@@ -239,7 +239,7 @@ export default function CoaDecoderPage() {
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Paste your Certificate of Analysis text here — or drop a PDF / click Upload."
                 rows={10}
-                className="w-full resize-y rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-4 font-mono text-sm text-ink/85 placeholder:text-ink/25 focus:border-[#2DD4A8]/40 focus:outline-none"
+                className="w-full resize-y rounded-2xl border border-hairline bg-fill p-4 font-mono text-sm text-ink/85 placeholder:text-ink/25 focus:border-[#2DD4A8]/40 focus:outline-none"
               />
               {fileBusy && (
                 <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-surface/70 text-sm text-ink/70">
@@ -265,20 +265,20 @@ export default function CoaDecoderPage() {
               </button>
               <button
                 onClick={() => fileRef.current?.click()}
-                className="inline-flex items-center gap-1.5 rounded-xl border border-ink/10 px-4 py-2.5 text-sm font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-hairline-strong px-4 py-2.5 text-sm font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
               >
                 <Upload className="h-4 w-4" />
                 Upload PDF
               </button>
               <button
                 onClick={() => setText(SAMPLE_COA)}
-                className="rounded-xl border border-ink/10 px-4 py-2.5 text-sm font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
+                className="rounded-xl border border-hairline-strong px-4 py-2.5 text-sm font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
               >
                 Load sample
               </button>
               <button
                 onClick={() => setText(SAMPLE_COA_DISULFIDE)}
-                className="rounded-xl border border-ink/10 px-4 py-2.5 text-sm font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
+                className="rounded-xl border border-hairline-strong px-4 py-2.5 text-sm font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
               >
                 Disulfide sample
               </button>
@@ -289,7 +289,7 @@ export default function CoaDecoderPage() {
                     setReport(null)
                     setError(null)
                   }}
-                  className="rounded-xl px-4 py-2.5 text-sm font-medium text-ink/40 transition-colors hover:text-ink/70"
+                  className="rounded-xl px-4 py-2.5 text-sm font-medium text-ink/55 transition-colors hover:text-ink/70"
                 >
                   Clear
                 </button>
@@ -297,12 +297,12 @@ export default function CoaDecoderPage() {
             </div>
             {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
 
-            <details className="group mt-4 rounded-xl border border-ink/[0.06] bg-ink/[0.02] [&_summary::-webkit-details-marker]:hidden">
+            <details className="group mt-4 rounded-xl border border-hairline bg-fill [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex cursor-pointer items-center justify-between gap-3 px-4 py-3 text-xs font-medium text-ink/50 hover:text-ink/75">
                 How this grade is calculated
                 <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" />
               </summary>
-              <div className="border-t border-ink/[0.06] px-4 py-3 text-xs leading-relaxed text-ink/45">
+              <div className="border-t border-hairline px-4 py-3 text-xs leading-relaxed text-ink/55">
                 <p className="mb-2.5">
                   Each transparency item present on the COA earns its weight; the score is the sum over the
                   maximum. Grades: A ≥85% · B ≥70% · C ≥55% · D ≥40% · F below.
@@ -311,7 +311,7 @@ export default function CoaDecoderPage() {
                   {RUBRIC.map((r) => (
                     <li key={r.label} className="flex items-center justify-between gap-2 font-mono text-[11px]">
                       <span>{r.label}</span>
-                      <span className="text-ink/30">×{r.weight}</span>
+                      <span className="text-ink/55">×{r.weight}</span>
                     </li>
                   ))}
                 </ul>
@@ -323,7 +323,7 @@ export default function CoaDecoderPage() {
           {report && (
             <div className="space-y-6">
               {/* Score */}
-              <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6">
+              <div className="rounded-2xl border border-hairline bg-fill p-6">
                 <div className="flex items-center gap-5">
                   <div
                     className={
@@ -342,7 +342,7 @@ export default function CoaDecoderPage() {
                         {report.score.points}/{report.score.max} · {report.score.percent}%
                       </span>
                     </div>
-                    <div className="h-2 overflow-hidden rounded-full bg-ink/[0.06]">
+                    <div className="h-2 overflow-hidden rounded-full bg-fill-strong">
                       <div
                         className="h-full rounded-full bg-gradient-to-r from-[#2DD4A8] to-[#5EEBC8]"
                         style={{ width: `${report.score.percent}%` }}
@@ -351,10 +351,10 @@ export default function CoaDecoderPage() {
                     <p className="mt-2.5 text-sm leading-relaxed text-ink/55">{report.score.summary}</p>
                   </div>
                 </div>
-                <div className="mt-4 border-t border-ink/[0.06] pt-4">
+                <div className="mt-4 border-t border-hairline pt-4">
                   <button
                     onClick={() => copy('report', reportToText(report))}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-ink/10 px-3 py-1.5 text-xs font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-hairline-strong px-3 py-1.5 text-xs font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
                   >
                     {copied === 'report' ? <Check className="h-3.5 w-3.5 text-accent" /> : <Copy className="h-3.5 w-3.5" />}
                     {copied === 'report' ? 'Copied' : 'Copy full report'}
@@ -364,7 +364,7 @@ export default function CoaDecoderPage() {
 
               {/* Detected peptide + catalog cross-check */}
               {report.detectedPeptide && (
-                <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6">
+                <div className="rounded-2xl border border-hairline bg-fill p-6">
                   <div className="mb-3 flex items-center gap-2">
                     <ShieldCheck className="h-4 w-4 text-accent" />
                     <h2 className="text-sm font-semibold">
@@ -387,9 +387,9 @@ export default function CoaDecoderPage() {
                       {report.catalogChecks.map((c) => (
                         <div
                           key={c.field}
-                          className="flex flex-col gap-1 rounded-lg border border-ink/[0.06] bg-ink/[0.02] px-3 py-2.5 sm:flex-row sm:items-baseline sm:gap-3"
+                          className="flex flex-col gap-1 rounded-lg border border-hairline bg-fill px-3 py-2.5 sm:flex-row sm:items-baseline sm:gap-3"
                         >
-                          <span className="w-36 shrink-0 text-xs font-medium text-ink/45">{c.label}</span>
+                          <span className="w-36 shrink-0 text-xs font-medium text-ink/55">{c.label}</span>
                           <span className="flex-1 text-sm text-ink/70">
                             COA: <span className="font-mono">{c.claimed}</span> · Reference:{' '}
                             <span className="font-mono">{c.reference}</span>
@@ -400,18 +400,18 @@ export default function CoaDecoderPage() {
                                   ? 'text-accent'
                                   : c.verdict === 'mismatch'
                                     ? 'text-red-400'
-                                    : 'text-ink/40')
+                                    : 'text-ink/55')
                               }
                             >
                               {c.verdict}
                             </span>
-                            <span className="mt-0.5 block text-xs text-ink/40">{c.note}</span>
+                            <span className="mt-0.5 block text-xs text-ink/55">{c.note}</span>
                           </span>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <p className="text-sm text-ink/45">
+                    <p className="text-sm text-ink/55">
                       No molecular weight / formula / sequence found on the COA to cross-check against the
                       reference.
                     </p>
@@ -421,14 +421,14 @@ export default function CoaDecoderPage() {
 
               {/* Peptide-specific tests from synthetic features */}
               {report.featureChecks.length > 0 && (
-                <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.025] p-6">
+                <div className="rounded-2xl border border-hairline bg-fill p-6">
                   <div className="mb-1.5 flex items-center gap-2">
                     <FlaskConical className="h-4 w-4 text-accent" />
                     <h2 className="text-sm font-semibold">
                       Tests that matter for this peptide
                     </h2>
                   </div>
-                  <p className="mb-4 text-xs leading-relaxed text-ink/45">
+                  <p className="mb-4 text-xs leading-relaxed text-ink/55">
                     Mass spec confirms the target mass, but this molecule&apos;s
                     structure calls for checks a mass number can&apos;t cover. We
                     flag whether the COA appears to address each.
@@ -440,7 +440,7 @@ export default function CoaDecoderPage() {
                       return (
                         <div
                           key={c.feature}
-                          className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4"
+                          className="rounded-xl border border-hairline bg-fill p-4"
                         >
                           <div className="flex items-start gap-3">
                             <Icon className={'mt-0.5 h-4 w-4 shrink-0 ' + color} />
@@ -458,11 +458,11 @@ export default function CoaDecoderPage() {
                                   {c.mentioned ? 'addressed' : 'not mentioned'}
                                 </span>
                               </div>
-                              <p className="mt-1.5 text-xs leading-relaxed text-ink/45">
+                              <p className="mt-1.5 text-xs leading-relaxed text-ink/55">
                                 {c.whatToCheck}
                               </p>
                               {!c.mentioned && (
-                                <p className="mt-1 text-[11px] text-ink/35">
+                                <p className="mt-1 text-[11px] text-ink/55">
                                   Ask the supplier for {c.action}.
                                 </p>
                               )}
@@ -472,7 +472,7 @@ export default function CoaDecoderPage() {
                       )
                     })}
                   </div>
-                  <p className="mt-4 text-[11px] leading-relaxed text-ink/30">
+                  <p className="mt-4 text-[11px] leading-relaxed text-ink/55">
                     A keyword read of the pasted text, not lab verification — a
                     COA may cover a test under wording we don&apos;t recognize.
                     Use this to know what to look for and ask about.
@@ -518,7 +518,7 @@ export default function CoaDecoderPage() {
 
               {/* Checklist */}
               <div>
-                <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
+                <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
                   Transparency checklist
                 </h2>
                 <div className="space-y-3">
@@ -527,7 +527,7 @@ export default function CoaDecoderPage() {
                     return (
                       <div
                         key={f.key}
-                        className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4"
+                        className="rounded-xl border border-hairline bg-fill p-4"
                       >
                         <div className="flex items-start gap-3">
                           <Icon className={'mt-0.5 h-4 w-4 shrink-0 ' + color} />
@@ -538,12 +538,12 @@ export default function CoaDecoderPage() {
                                 <span className="shrink-0 font-mono text-xs text-ink/55">{f.value}</span>
                               )}
                             </div>
-                            <p className="mt-1.5 text-xs leading-relaxed text-ink/45">{f.explanation}</p>
+                            <p className="mt-1.5 text-xs leading-relaxed text-ink/55">{f.explanation}</p>
                             {f.note && (
                               <p className={'mt-1.5 text-xs leading-relaxed ' + color}>{f.note}</p>
                             )}
                             {f.action && (
-                              <p className="mt-1 text-[11px] text-ink/35">
+                              <p className="mt-1 text-[11px] text-ink/55">
                                 Ask the supplier for {f.action}.
                               </p>
                             )}
@@ -555,7 +555,7 @@ export default function CoaDecoderPage() {
                 </div>
               </div>
 
-              <p className="text-xs leading-relaxed text-ink/30">
+              <p className="text-xs leading-relaxed text-ink/55">
                 This is a research and educational literacy tool, not lab verification, medical advice, or a
                 guarantee of product quality. It reads the text you paste; it cannot detect a falsified COA.
                 Always confirm critical material with independent third-party testing.

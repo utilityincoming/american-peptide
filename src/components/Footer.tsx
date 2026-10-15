@@ -17,9 +17,9 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-ink/[0.06] bg-surface px-6 py-10 md:px-10">
+    <footer className="border-t border-hairline bg-surface px-6 py-10 md:px-10">
       <div className="mx-auto max-w-6xl space-y-5">
-        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink/45">
+        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink/55">
           {LINKS.map((l) => (
             <Link
               key={l.href}
@@ -45,7 +45,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <p className="text-xs text-ink/30">© 2026 AmericanPeptide.com</p>
+        <p className="text-xs text-ink/55">© 2026 AmericanPeptide.com</p>
       </div>
     </footer>
   )

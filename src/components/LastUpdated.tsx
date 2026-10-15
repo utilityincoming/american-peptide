@@ -7,7 +7,7 @@
 export default function LastUpdated({
   date,
   label = 'Last updated',
-  className = 'text-[11px] text-ink/40',
+  className = 'text-[11px] text-ink/55',
 }: {
   date?: string | null
   label?: string

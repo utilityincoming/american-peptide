@@ -196,8 +196,8 @@ export default function MadeInUsaPage() {
       />
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
-        <Link href="/" className="text-sm text-ink/35 transition-colors hover:text-ink">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
+        <Link href="/" className="text-sm text-ink/55 transition-colors hover:text-ink">
           Home
         </Link>
         <span className="text-ink/20">/</span>
@@ -205,7 +205,7 @@ export default function MadeInUsaPage() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-ink/[0.06] px-6 py-16 md:px-10">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-40"
@@ -233,7 +233,7 @@ export default function MadeInUsaPage() {
             scored every US supplier we list against it, on the lab evidence they
             publish, never on commission.
           </p>
-          <p className="mt-3 text-xs text-ink/30">
+          <p className="mt-3 text-xs text-ink/55">
             Research reference only. Not medical advice, dosing guidance, or an
             offer for sale.
           </p>
@@ -246,7 +246,7 @@ export default function MadeInUsaPage() {
           <div className="space-y-16">
             {/* Why domestic */}
             <section>
-              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 Why domestic sourcing
               </h2>
               <div className="grid gap-4 sm:grid-cols-3">
@@ -272,7 +272,7 @@ export default function MadeInUsaPage() {
                 ].map((c) => (
                   <div
                     key={c.title}
-                    className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-5"
+                    className="rounded-xl border border-hairline bg-fill p-5"
                     style={{ borderTopColor: c.color, borderTopWidth: 2 }}
                   >
                     <div
@@ -288,7 +288,7 @@ export default function MadeInUsaPage() {
                   </div>
                 ))}
               </div>
-              <p className="mt-3 text-xs text-ink/30">
+              <p className="mt-3 text-xs text-ink/55">
                 Practical sourcing considerations for researchers — not legal
                 advice. Follow the regulations that apply where you are.
               </p>
@@ -296,7 +296,7 @@ export default function MadeInUsaPage() {
 
             {/* The Standard */}
             <section>
-              <h2 className="mb-1 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-1 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 The Standard
               </h2>
               <p className="mb-6 text-sm leading-relaxed text-ink/55">
@@ -306,7 +306,7 @@ export default function MadeInUsaPage() {
               </p>
 
               {/* Segmented rubric bar — widths are the point weights */}
-              <div className="mb-2 flex h-3.5 w-full overflow-hidden rounded-full border border-ink/10">
+              <div className="mb-2 flex h-3.5 w-full overflow-hidden rounded-full border border-hairline-strong">
                 {STANDARD.map((s) => (
                   <div
                     key={s.key}
@@ -315,7 +315,7 @@ export default function MadeInUsaPage() {
                   />
                 ))}
               </div>
-              <div className="mb-6 flex justify-between text-[10px] font-medium text-ink/30">
+              <div className="mb-6 flex justify-between text-[10px] font-medium text-ink/55">
                 <span>0</span>
                 <span>100 points</span>
               </div>
@@ -324,7 +324,7 @@ export default function MadeInUsaPage() {
                 {STANDARD.map((s) => (
                   <div
                     key={s.key}
-                    className="flex items-start gap-3 rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4"
+                    className="flex items-start gap-3 rounded-xl border border-hairline bg-fill p-4"
                   >
                     <div
                       className="mt-0.5 flex h-7 w-11 shrink-0 items-center justify-center rounded-md text-xs font-bold"
@@ -345,7 +345,7 @@ export default function MadeInUsaPage() {
                 {VENDOR_TIERS.map((tier) => (
                   <div
                     key={tier.id}
-                    className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-4"
+                    className="rounded-xl border border-hairline bg-fill p-4"
                   >
                     <p className="mb-1 text-sm font-semibold text-ink/85">{tier.label}</p>
                     <p className="text-xs leading-relaxed text-ink/50">{tier.blurb}</p>
@@ -356,14 +356,14 @@ export default function MadeInUsaPage() {
               <div className="mt-5 flex flex-wrap gap-3">
                 <Link
                   href="/tools/coa-decoder"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
                 >
                   Decode a COA
                   <ArrowRight className="h-3 w-3" />
                 </Link>
                 <Link
                   href="/methodology"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-ink/[0.08] bg-ink/[0.03] px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
                 >
                   How we build the reference
                   <ArrowRight className="h-3 w-3" />
@@ -373,7 +373,7 @@ export default function MadeInUsaPage() {
 
             {/* The Directory */}
             <section>
-              <h2 className="mb-1 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-1 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 The directory — {count > 0 ? `${count} US suppliers, scored` : 'US suppliers'}
               </h2>
               <p className="mb-5 text-sm leading-relaxed text-ink/55">
@@ -386,14 +386,14 @@ export default function MadeInUsaPage() {
                 <ReferenceEdition />
               ) : (
                 <>
-                  <AffiliateDisclosure className="mb-6 rounded-lg border border-ink/[0.06] bg-ink/[0.02] p-3 !text-[11px]" />
+                  <AffiliateDisclosure className="mb-6 rounded-lg border border-hairline bg-fill p-3 !text-[11px]" />
                   <div className="space-y-10">
                     {grouped.map(({ tier, vendors: tierVendors }) => (
                       <div key={tier.id}>
                         <div className="mb-3 flex items-center gap-2">
                           <ShieldCheck className="h-3.5 w-3.5 text-accent" />
                           <p className="text-sm font-semibold text-ink/85">{tier.label}</p>
-                          <span className="text-xs text-ink/35">· {tier.blurb}</span>
+                          <span className="text-xs text-ink/55">· {tier.blurb}</span>
                         </div>
                         <div className="space-y-4">
                           {tierVendors.map((v) => {
@@ -408,7 +408,7 @@ export default function MadeInUsaPage() {
                             return (
                               <div
                                 key={v.id}
-                                className="rounded-xl border border-ink/[0.08] bg-ink/[0.02] p-5"
+                                className="rounded-xl border border-hairline bg-fill p-5"
                               >
                                 <div className="mb-2 flex items-start justify-between gap-3">
                                   <div className="min-w-0">
@@ -419,14 +419,14 @@ export default function MadeInUsaPage() {
                                       {v.shipsTo.map((r) => (
                                         <span
                                           key={r}
-                                          className="rounded-full border border-ink/10 px-2 py-0.5 text-[10px] font-medium text-ink/45"
+                                          className="rounded-full border border-hairline-strong px-2 py-0.5 text-[10px] font-medium text-ink/55"
                                         >
                                           Ships {REGION_LABEL[r] ?? r}
                                         </span>
                                       ))}
                                     </div>
                                   </div>
-                                  <span className="shrink-0 rounded-full border border-ink/15 px-2.5 py-0.5 text-xs font-semibold text-ink/70">
+                                  <span className="shrink-0 rounded-full border border-hairline-strong px-2.5 py-0.5 text-xs font-semibold text-ink/70">
                                     {trustScore(v)}/100
                                   </span>
                                 </div>
@@ -503,8 +503,8 @@ export default function MadeInUsaPage() {
                     ))}
                   </div>
 
-                  <p className="mt-6 flex items-start gap-2 rounded-lg border border-ink/[0.06] bg-ink/[0.02] p-3 text-[11px] leading-relaxed text-ink/45">
-                    <Scale className="mt-0.5 h-3.5 w-3.5 shrink-0 text-ink/35" />
+                  <p className="mt-6 flex items-start gap-2 rounded-lg border border-hairline bg-fill p-3 text-[11px] leading-relaxed text-ink/55">
+                    <Scale className="mt-0.5 h-3.5 w-3.5 shrink-0 text-ink/55" />
                     <span>
                       Trust flags are set only from a supplier&rsquo;s own published
                       claims and independently verifiable third-party report
@@ -518,14 +518,14 @@ export default function MadeInUsaPage() {
 
             {/* FAQ */}
             <section>
-              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-6 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 Frequently asked questions
               </h2>
               <div className="space-y-6">
                 {FAQS.map((faq) => (
                   <div
                     key={faq.q}
-                    className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5"
+                    className="rounded-xl border border-hairline bg-fill p-5"
                   >
                     <p className="mb-2 text-sm font-semibold text-ink/90">{faq.q}</p>
                     <p className="text-sm leading-relaxed text-ink/55">{faq.a}</p>
@@ -537,7 +537,7 @@ export default function MadeInUsaPage() {
             {/* Disclaimer */}
             <section className="flex gap-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5">
               <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400/70" />
-              <div className="text-xs leading-relaxed text-ink/45">
+              <div className="text-xs leading-relaxed text-ink/55">
                 <strong className="text-ink/60">Research reference only.</strong>{' '}
                 AmericanPeptide.com is not a store, a manufacturer, or a medical
                 provider. Supplier listings are independent third parties scored
@@ -553,8 +553,8 @@ export default function MadeInUsaPage() {
           {/* ── Sidebar ── */}
           <aside className="space-y-6 lg:sticky lg:top-6 lg:self-start">
             {/* Scoring summary */}
-            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <div className="rounded-xl border border-hairline bg-fill p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 How the score works
               </p>
               <div className="space-y-2.5">
@@ -565,10 +565,10 @@ export default function MadeInUsaPage() {
                       style={{ backgroundColor: s.color }}
                     />
                     <span className="flex-1 text-xs text-ink/60">{s.label}</span>
-                    <span className="text-xs font-semibold text-ink/45">{s.pts}</span>
+                    <span className="text-xs font-semibold text-ink/55">{s.pts}</span>
                   </div>
                 ))}
-                <div className="mt-1 flex items-center gap-2.5 border-t border-ink/[0.06] pt-2.5">
+                <div className="mt-1 flex items-center gap-2.5 border-t border-hairline pt-2.5">
                   <span className="h-2.5 w-2.5 shrink-0" />
                   <span className="flex-1 text-xs font-semibold text-ink/70">Total</span>
                   <span className="text-xs font-bold text-accent">100</span>
@@ -591,7 +591,7 @@ export default function MadeInUsaPage() {
                         Open
                       </span>
                     </div>
-                    <p className="text-xs text-ink/40">Telegram · researchers</p>
+                    <p className="text-xs text-ink/55">Telegram · researchers</p>
                   </div>
                 </div>
                 <p className="mb-4 text-xs leading-relaxed text-ink/55">
@@ -611,8 +611,8 @@ export default function MadeInUsaPage() {
             )}
 
             {/* Related */}
-            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/40">
+            <div className="rounded-xl border border-hairline bg-fill p-5">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 Verify before you source
               </p>
               <div className="space-y-2">
@@ -641,13 +641,13 @@ export default function MadeInUsaPage() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-ink/[0.04]"
+                    className="group flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors hover:bg-fill-strong"
                   >
                     <div>
                       <p className="text-sm font-medium text-ink/70 transition-colors group-hover:text-ink">
                         {link.label}
                       </p>
-                      <p className="text-xs text-ink/30">{link.sub}</p>
+                      <p className="text-xs text-ink/55">{link.sub}</p>
                     </div>
                     <ChevronRight className="h-3.5 w-3.5 text-ink/20 transition-colors group-hover:text-ink/50" />
                   </Link>
@@ -656,16 +656,16 @@ export default function MadeInUsaPage() {
             </div>
 
             {/* Agent CTA */}
-            <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.03] p-5">
+            <div className="rounded-xl border border-hairline bg-fill p-5">
               <p className="mb-1 text-sm font-semibold text-ink/80">Ask the Peptide Agent</p>
-              <p className="mb-4 text-xs leading-relaxed text-ink/40">
+              <p className="mb-4 text-xs leading-relaxed text-ink/55">
                 Citation-backed answers on purity, COAs, and how to read a
                 supplier&rsquo;s testing — grounded in PubChem, PubMed, and
                 ClinicalTrials.gov.
               </p>
               <Link
                 href="/research"
-                className="flex items-center justify-center gap-2 rounded-lg border border-ink/[0.10] bg-ink/[0.04] px-4 py-2.5 text-sm font-medium text-ink/70 transition-colors hover:border-ink/20 hover:text-ink"
+                className="flex items-center justify-center gap-2 rounded-lg border border-hairline-strong bg-fill-strong px-4 py-2.5 text-sm font-medium text-ink/70 transition-colors hover:border-ink/20 hover:text-ink"
               >
                 Open Peptide Agent
                 <ArrowRight className="h-4 w-4" />
@@ -688,7 +688,7 @@ function ReferenceEdition() {
         <FlaskConical className="h-4 w-4 text-accent" />
       </div>
       <p className="mb-1 text-sm font-semibold text-accent">Reference edition</p>
-      <p className="mb-4 text-xs leading-relaxed text-ink/45">
+      <p className="mb-4 text-xs leading-relaxed text-ink/55">
         This edition is a research reference only — no supplier listings or
         pricing. AmericanPeptide never sells peptides; the trust-ranked directory
         is available on the web.

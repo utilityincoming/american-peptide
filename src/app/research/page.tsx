@@ -60,7 +60,7 @@ const md: Components = {
     <h3 className="mb-2 mt-3 text-sm font-semibold text-ink/90 first:mt-0">{children}</h3>
   ),
   pre: ({ children }) => (
-    <pre className="mb-3 overflow-x-auto rounded-lg border border-ink/[0.07] bg-surface p-4 last:mb-0">
+    <pre className="mb-3 overflow-x-auto rounded-lg border border-hairline bg-surface p-4 last:mb-0">
       {children}
     </pre>
   ),
@@ -74,7 +74,7 @@ const md: Components = {
       )
     }
     return (
-      <code className="rounded bg-ink/[0.08] px-1.5 py-0.5 font-mono text-xs text-accent">
+      <code className="rounded bg-fill-strong px-1.5 py-0.5 font-mono text-xs text-accent">
         {children}
       </code>
     )
@@ -85,17 +85,17 @@ const md: Components = {
     </blockquote>
   ),
   table: ({ children }) => (
-    <div className="mb-3 overflow-x-auto rounded-lg border border-ink/[0.07] last:mb-0">
+    <div className="mb-3 overflow-x-auto rounded-lg border border-hairline last:mb-0">
       <table className="w-full border-collapse text-xs">{children}</table>
     </div>
   ),
   th: ({ children }) => (
-    <th className="border-b border-ink/[0.07] bg-ink/[0.04] px-4 py-2.5 text-left font-semibold text-ink/80">
+    <th className="border-b border-hairline bg-fill-strong px-4 py-2.5 text-left font-semibold text-ink/80">
       {children}
     </th>
   ),
   td: ({ children }) => (
-    <td className="border-b border-ink/[0.04] px-4 py-2.5 text-ink/55 last:border-b-0">
+    <td className="border-b border-hairline px-4 py-2.5 text-ink/55 last:border-b-0">
       {children}
     </td>
   ),
@@ -109,7 +109,7 @@ const md: Components = {
       {children}
     </a>
   ),
-  hr: () => <hr className="my-4 border-ink/[0.07]" />,
+  hr: () => <hr className="my-4 border-hairline" />,
 }
 
 function TypingIndicator() {
@@ -254,12 +254,12 @@ export default function ResearchPage() {
     <div className="flex h-screen flex-col bg-surface text-ink">
 
       {/* ── Page identity ── */}
-      <header className="flex flex-shrink-0 items-center justify-between border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex flex-shrink-0 items-center justify-between border-b border-hairline px-4 py-3 md:px-6">
         <div className="flex items-center gap-2">
           <AgentAvatar />
           <div>
             <span className="text-sm font-medium">Peptide Agent</span>
-            <span className="ml-2 hidden text-xs text-ink/30 sm:inline">
+            <span className="ml-2 hidden text-xs text-ink/55 sm:inline">
               ap-research-1
             </span>
           </div>
@@ -272,7 +272,7 @@ export default function ResearchPage() {
               setMessages([WELCOME])
               setInput('')
             }}
-            className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-ink/35 transition-colors hover:bg-ink/[0.05] hover:text-ink"
+            className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-ink/55 transition-colors hover:bg-fill-strong hover:text-ink"
           >
             <SquarePen className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">New chat</span>
@@ -299,7 +299,7 @@ export default function ResearchPage() {
                 className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm ${
                   msg.role === 'user'
                     ? 'rounded-tr-sm bg-[#2DD4A8]/[0.12] text-ink/90'
-                    : 'rounded-tl-sm border border-ink/[0.06] bg-ink/[0.025] text-ink/65'
+                    : 'rounded-tl-sm border border-hairline bg-fill text-ink/65'
                 }`}
               >
                 {msg.role === 'user' ? (
@@ -320,7 +320,7 @@ export default function ResearchPage() {
                 <button
                   key={s}
                   onClick={() => sendMessage(s)}
-                  className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-3 text-left text-xs text-ink/40 transition-all hover:border-[#2DD4A8]/20 hover:bg-ink/[0.04] hover:text-ink/70"
+                  className="rounded-xl border border-hairline bg-fill p-3 text-left text-xs text-ink/55 transition-all hover:border-[#2DD4A8]/20 hover:bg-fill-strong hover:text-ink/70"
                 >
                   {s}
                 </button>
@@ -334,7 +334,7 @@ export default function ResearchPage() {
               <div className="mt-0.5">
                 <AgentAvatar />
               </div>
-              <div className="rounded-2xl rounded-tl-sm border border-ink/[0.06] bg-ink/[0.025] px-4 py-3">
+              <div className="rounded-2xl rounded-tl-sm border border-hairline bg-fill px-4 py-3">
                 <TypingIndicator />
               </div>
             </div>
@@ -345,9 +345,9 @@ export default function ResearchPage() {
       </main>
 
       {/* ── Input bar ── */}
-      <div className="flex-shrink-0 border-t border-ink/[0.06] px-4 py-4 md:px-6">
+      <div className="flex-shrink-0 border-t border-hairline px-4 py-4 md:px-6">
         <div className="mx-auto max-w-3xl">
-          <div className="flex items-end gap-3 rounded-2xl border border-ink/[0.08] bg-ink/[0.03] px-4 py-3 transition-colors focus-within:border-[#2DD4A8]/25">
+          <div className="flex items-end gap-3 rounded-2xl border border-hairline bg-fill px-4 py-3 transition-colors focus-within:border-[#2DD4A8]/25">
             <textarea
               ref={textareaRef}
               value={input}

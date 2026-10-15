@@ -87,10 +87,10 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
       />
 
       {/* ── Breadcrumb ── */}
-      <header className="flex items-center gap-2 border-b border-ink/[0.06] px-4 py-3 md:px-6">
+      <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <Link
           href="/glossary"
-          className="flex items-center gap-1.5 text-sm text-ink/35 transition-colors hover:text-ink"
+          className="flex items-center gap-1.5 text-sm text-ink/55 transition-colors hover:text-ink"
         >
           <BookText className="h-4 w-4" />
           Glossary
@@ -104,14 +104,14 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
         <div className="mx-auto max-w-3xl">
           <Link
             href="/glossary"
-            className="mb-6 inline-flex items-center gap-1.5 text-xs text-ink/40 transition-colors hover:text-ink"
+            className="mb-6 inline-flex items-center gap-1.5 text-xs text-ink/55 transition-colors hover:text-ink"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             All terms
           </Link>
 
           <div className="mb-3 flex flex-wrap items-center gap-2">
-            <span className="rounded-md border border-ink/[0.07] bg-ink/[0.03] px-2 py-0.5 text-[10px] uppercase tracking-wider text-ink/50">
+            <span className="rounded-md border border-hairline bg-fill px-2 py-0.5 text-[10px] uppercase tracking-wider text-ink/50">
               {categoryMeta.label}
             </span>
             {term.abbr && term.abbr !== term.term && (
@@ -126,7 +126,7 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
           </h1>
 
           {term.aliases && term.aliases.length > 0 && (
-            <p className="mb-5 text-sm text-ink/45">
+            <p className="mb-5 text-sm text-ink/55">
               Also called {term.aliases.join(' · ')}
             </p>
           )}
@@ -138,7 +138,7 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
           {/* Related glossary terms */}
           {relatedTerms.length > 0 && (
             <div className="mt-10">
-              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 Related terms
               </h2>
               <div className="flex flex-wrap gap-1.5">
@@ -146,7 +146,7 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
                   <Link
                     key={r.slug}
                     href={`/glossary/${r.slug}`}
-                    className="rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                    className="rounded-full border border-hairline bg-fill px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
                   >
                     {r.term}
                   </Link>
@@ -158,7 +158,7 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
           {/* Cross-links into research areas */}
           {relatedAreas.length > 0 && (
             <div className="mt-8">
-              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 Research guides
               </h2>
               <div className="flex flex-wrap gap-1.5">
@@ -166,7 +166,7 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
                   <Link
                     key={a.slug}
                     href={`/research-areas/${a.slug}`}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-ink/[0.08] bg-ink/[0.02] px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-fill px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
                   >
                     <FlaskConical className="h-3 w-3 text-accent/70" />
                     {a.label}
@@ -179,7 +179,7 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
           {/* Cross-links into catalog peptides */}
           {relatedPeptides.length > 0 && (
             <div className="mt-8">
-              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/40">
+              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/55">
                 Related peptides
               </h2>
               <div className="grid gap-3 sm:grid-cols-2">
@@ -187,7 +187,7 @@ export default async function GlossaryTermPage({ params }: RouteParams) {
                   <Link
                     key={p.slug}
                     href={`/catalog/${p.slug}`}
-                    className="group flex items-center justify-between gap-2 rounded-xl border border-ink/[0.07] bg-ink/[0.025] p-3 transition-colors hover:border-[#2DD4A8]/25 hover:bg-ink/[0.04]"
+                    className="group flex items-center justify-between gap-2 rounded-xl border border-hairline bg-fill p-3 transition-colors hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
                   >
                     <span className="truncate text-sm font-medium">{p.name}</span>
                     <ArrowRight className="h-3.5 w-3.5 shrink-0 text-accent/70 transition-transform group-hover:translate-x-0.5" />
