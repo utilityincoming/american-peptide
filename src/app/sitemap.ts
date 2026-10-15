@@ -34,6 +34,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/immune-peptides', priority: 0.8 },
     // ── Catalog & Learning ────────────────────────────────
     { path: '/catalog', priority: 0.8 },
+    // The side-by-side comparator (no `?ids=`) is a real landing surface with a
+    // self-canonical; it was indexable but undeclared, so search found it before
+    // the sitemap did. Declared here so discovery and the sitemap agree.
+    { path: '/catalog/compare', priority: 0.5 },
     { path: '/learn', priority: 0.8 },
     { path: '/learn/compatibility', priority: 0.8 },
     { path: '/learn/evidence-hierarchy', priority: 0.8 },
@@ -53,13 +57,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/melanocortin', priority: 0.7 },
     { path: '/developers', priority: 0.7 },
     // ── Company / info ────────────────────────────────────
+    // Trust pages carried by the brand itself, not by the research clusters.
+    // They were indexable from day one but only loosely linked (contact ← about
+    // alone, privacy orphaned entirely), so search picked them up ahead of the
+    // sitemap. Declared here — and now linked site-wide from the footer — so the
+    // index stops running ahead of what the site actually advertises. They
+    // change rarely, so they carry an honest changeFrequency rather than the
+    // cluster default.
+    { path: '/about', priority: 0.5, changeFrequency: 'monthly' },
+    { path: '/about/contact', priority: 0.4, changeFrequency: 'monthly' },
+    { path: '/privacy', priority: 0.3, changeFrequency: 'yearly' },
     // /press is discoverable here (sitemap only, no footer link) rather than
     // through many internal links — an informational media kit that doesn't
     // need PageRank funneled to it, just to be crawlable.
     { path: '/press', priority: 0.5 },
-  ].map(({ path, priority }) => ({
+  ].map(({ path, priority, changeFrequency = 'weekly' }) => ({
     url: `${SITE}${path}`,
-    changeFrequency: 'weekly' as const,
+    changeFrequency: changeFrequency as
+      | 'weekly'
+      | 'monthly'
+      | 'yearly',
     priority,
   }))
 
@@ -73,6 +90,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE}/research-areas/${a.slug}`,
     changeFrequency: 'monthly' as const,
     priority: 0.7,
+    // Same editorial-review date that drives the page's visible stamp + JSON-LD
+    // dateModified, so the sitemap's lastmod never claims a freshness the page
+    // can't back up. Omitted when unreviewed rather than faked to build time.
+    ...(a.updated ? { lastModified: new Date(a.updated) } : {}),
   }))
 
   const glossaryRoutes = GLOSSARY.map((t) => ({
@@ -100,6 +121,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE}/compare/${c.slug}`,
     changeFrequency: 'monthly' as const,
     priority: 0.8,
+    // lastmod mirrors the comparison's editorial-review date (the same `updated`
+    // that feeds freshnessProps + the LastUpdated stamp on the page). A reviewed
+    // comparison advertises a trustworthy recrawl signal; an unreviewed one
+    // simply omits it instead of inventing one.
+    ...(c.updated ? { lastModified: new Date(c.updated) } : {}),
   }))
 
   // One review page per directory-listed vendor. vendorsRanked() returns [] on
