@@ -171,10 +171,21 @@ export default function PrivacyPage() {
               </Bullet>
             </ul>
             <p className="mt-3">
-              Reference content in the app is drawn from public scientific
-              databases (including PubChem, UniProt, PubMed, and
-              ClinicalTrials.gov). Querying that reference data does not send
-              your personal information to those sources.
+              Reference content in the app is drawn from four public scientific
+              databases, and only these four: PubChem, PubMed, and
+              ClinicalTrials.gov (U.S. government databases operated by the
+              National Library of Medicine at the National Institutes of
+              Health), and UniProt (operated by the UniProt Consortium).
+              Querying that reference data does not send your personal
+              information to those sources.
+            </p>
+            <p className="mt-3">
+              AmericanPeptide.com is an independent, privately developed
+              reference tool. It is not affiliated with, endorsed by, or acting
+              on behalf of the National Institutes of Health, the National
+              Library of Medicine, the National Center for Biotechnology
+              Information, or any other government agency. Government databases
+              are cited only as sources of publicly available data.
             </p>
           </Block>
 

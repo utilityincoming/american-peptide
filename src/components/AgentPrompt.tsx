@@ -50,11 +50,11 @@ export default function AgentPrompt({
   return (
     <section
       className={
-        'overflow-hidden rounded-3xl border border-[#2DD4A8]/25 bg-gradient-to-br from-[#2DD4A8]/[0.10] via-[#2DD4A8]/[0.04] to-transparent p-6 md:p-8 ' +
+        'overflow-hidden rounded-3xl border border-accent/25 bg-gradient-to-br from-[#5BA88C]/[0.10] via-[#5BA88C]/[0.04] to-transparent p-6 md:p-8 ' +
         className
       }
     >
-      <div className="mb-1 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-accent">
+      <div className="mb-1 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-accent">
         <Sparkles className="h-3.5 w-3.5" />
         Peptide Agent
       </div>
@@ -74,12 +74,12 @@ export default function AgentPrompt({
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Ask about a peptide, mechanism, or indication…"
-          className="flex-1 rounded-xl border border-hairline-strong bg-surface/60 px-4 py-3 text-sm text-ink placeholder:text-ink/55 focus:border-[#2DD4A8]/40 focus:outline-none"
+          className="flex-1 rounded-xl border border-hairline-strong bg-surface/60 px-4 py-3 text-sm text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none"
         />
         <button
           type="submit"
           disabled={!q.trim()}
-          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#2DD4A8] px-5 py-3 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0] disabled:cursor-not-allowed disabled:opacity-40"
+          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-3 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A] disabled:cursor-not-allowed disabled:opacity-40"
         >
           Ask Peptide Agent
           <ArrowRight className="h-4 w-4" />
@@ -92,7 +92,7 @@ export default function AgentPrompt({
             key={ex}
             type="button"
             onClick={() => ask(ex)}
-            className="rounded-full border border-hairline bg-fill px-3 py-1.5 text-left text-xs text-ink/50 transition-colors hover:border-[#2DD4A8]/30 hover:text-ink/80"
+            className="rounded-full border border-hairline bg-fill px-3 py-1.5 text-left text-xs text-ink/50 transition-colors hover:border-accent/30 hover:text-ink/80"
           >
             {ex}
           </button>

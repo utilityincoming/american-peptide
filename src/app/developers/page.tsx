@@ -131,18 +131,18 @@ export default function DevelopersPage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
         <div className="relative mx-auto max-w-5xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Database className="h-3 w-3" />
             Open data · CC BY 4.0
           </div>
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             The open peptide{' '}
-            <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
               catalog API
             </span>
           </h1>
@@ -154,7 +154,7 @@ export default function DevelopersPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/catalog"
-              className="inline-flex items-center gap-1.5 rounded-xl bg-[#2DD4A8] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
             >
               Browse the catalog
               <ArrowRight className="h-4 w-4" />
@@ -184,7 +184,7 @@ export default function DevelopersPage() {
                 key={title}
                 className="rounded-2xl border border-hairline bg-fill p-5"
               >
-                <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
+                <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-accent/20 bg-accent/10 text-accent">
                   <Icon className="h-4 w-4" strokeWidth={1.75} />
                 </div>
                 <h3 className="mb-1.5 text-sm font-semibold">{title}</h3>
@@ -208,7 +208,7 @@ export default function DevelopersPage() {
                   }
                 >
                   <div className="flex items-center gap-3">
-                    <span className="rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1.5 py-0.5 font-mono text-[10px] font-semibold text-accent">
+                    <span className="rounded border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 font-mono text-[10px] font-semibold text-accent">
                       {e.method}
                     </span>
                     <code className="font-mono text-sm text-ink/85">

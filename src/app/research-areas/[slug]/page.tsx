@@ -123,12 +123,12 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Layers className="h-3 w-3" />
             Research area · {peptides.length} peptide
             {peptides.length === 1 ? '' : 's'}
@@ -227,7 +227,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
                     <Link
                       key={cat}
                       href={`/catalog/category/${cat}`}
-                      className="rounded-full border border-hairline bg-fill px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                      className="rounded-full border border-hairline bg-fill px-3 py-1 text-xs text-ink/55 transition-colors hover:border-accent/30 hover:text-accent"
                     >
                       {CATEGORIES.find((c) => c.id === cat)?.label ?? cat}
                     </Link>
@@ -246,7 +246,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
                   <Link
                     key={a.slug}
                     href={`/research-areas/${a.slug}`}
-                    className="rounded-full border border-hairline bg-fill px-3 py-1 text-xs text-ink/55 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                    className="rounded-full border border-hairline bg-fill px-3 py-1 text-xs text-ink/55 transition-colors hover:border-accent/30 hover:text-accent"
                   >
                     {a.label}
                   </Link>
@@ -301,12 +301,12 @@ function AreaPeptideCard({ peptide }: { peptide: Peptide }) {
   return (
     <Link
       href={`/catalog/${peptide.slug}`}
-      className="group flex flex-col rounded-xl border border-hairline bg-fill p-4 transition-all hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
+      className="group flex flex-col rounded-xl border border-hairline bg-fill p-4 transition-all hover:border-accent/25 hover:bg-fill-strong"
     >
       <div className="mb-1.5 flex items-center justify-between gap-2">
         <h3 className="truncate text-sm font-semibold">{peptide.name}</h3>
         {peptide.fdaApproved && (
-          <span className="shrink-0 rounded border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-accent">
+          <span className="shrink-0 rounded border border-accent/25 bg-accent/[0.08] px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-accent">
             FDA
           </span>
         )}

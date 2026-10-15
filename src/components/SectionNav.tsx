@@ -70,7 +70,7 @@ export default function SectionNav() {
               className={
                 'whitespace-nowrap rounded-full px-3 py-1 text-[13px] transition-colors ' +
                 (isActive
-                  ? 'bg-[#2DD4A8]/[0.12] font-medium text-accent'
+                  ? 'bg-accent/[0.12] font-medium text-accent'
                   : 'text-ink/50 hover:bg-fill-strong hover:text-ink/80')
               }
             >

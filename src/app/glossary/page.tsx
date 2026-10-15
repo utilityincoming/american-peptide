@@ -75,14 +75,14 @@ export default function GlossaryPage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
         <div className="relative mx-auto max-w-5xl">
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             Peptide research{' '}
-            <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
               glossary
             </span>
           </h1>
@@ -109,7 +109,7 @@ export default function GlossaryPage() {
                   <Link
                     key={t.slug}
                     href={`/glossary/${t.slug}`}
-                    className="group flex flex-col rounded-xl border border-hairline bg-fill p-4 transition-all hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
+                    className="group flex flex-col rounded-xl border border-hairline bg-fill p-4 transition-all hover:border-accent/25 hover:bg-fill-strong"
                   >
                     <div className="mb-1 flex items-center gap-2">
                       <h3 className="text-sm font-semibold">{t.term}</h3>
@@ -148,7 +148,7 @@ export default function GlossaryPage() {
           </p>
           <Link
             href="/catalog"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-4 py-2 text-sm font-medium text-accent transition-colors hover:border-[#2DD4A8]/50 hover:bg-[#2DD4A8]/20"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-colors hover:border-accent/50 hover:bg-accent/20"
           >
             Browse the catalog
             <ArrowRight className="h-3.5 w-3.5" />

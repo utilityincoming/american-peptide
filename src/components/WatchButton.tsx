@@ -24,7 +24,7 @@ export default function WatchButton({ slug }: { slug: string }) {
         className={
           'inline-flex items-center gap-1.5 rounded-xl border px-4 py-2 text-sm font-medium transition-colors ' +
           (watched
-            ? 'border-[#2DD4A8]/40 bg-[#2DD4A8]/[0.10] text-accent'
+            ? 'border-accent/40 bg-accent/[0.10] text-accent'
             : 'border-hairline-strong text-ink/70 hover:border-ink/25 hover:text-ink')
         }
         style={{ opacity: ready ? 1 : 0.6 }}

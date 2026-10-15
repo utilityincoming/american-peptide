@@ -27,7 +27,7 @@ export default function OfflinePage() {
       <div className="grid w-full max-w-md gap-3 sm:grid-cols-2">
         <Link
           href="/tools/reconstitution-calculator"
-          className="group flex items-center gap-3 rounded-xl border border-hairline bg-fill p-4 text-left transition-colors hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
+          className="group flex items-center gap-3 rounded-xl border border-hairline bg-fill p-4 text-left transition-colors hover:border-accent/25 hover:bg-fill-strong"
         >
           <Calculator className="h-5 w-5 shrink-0 text-accent" strokeWidth={1.75} />
           <span className="flex-1 text-sm font-medium">Calculator</span>
@@ -35,7 +35,7 @@ export default function OfflinePage() {
         </Link>
         <Link
           href="/catalog"
-          className="group flex items-center gap-3 rounded-xl border border-hairline bg-fill p-4 text-left transition-colors hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
+          className="group flex items-center gap-3 rounded-xl border border-hairline bg-fill p-4 text-left transition-colors hover:border-accent/25 hover:bg-fill-strong"
         >
           <BookText className="h-5 w-5 shrink-0 text-accent" strokeWidth={1.75} />
           <span className="flex-1 text-sm font-medium">Catalog</span>

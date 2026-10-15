@@ -44,7 +44,7 @@ function topVendorsFor(slugs: string[]): Vendor[] {
  */
 export default function SourcingCard({
   slugs,
-  accent = '#2DD4A8',
+  accent = '#5BA88C',
   className = '',
 }: SourcingCardProps) {
   const vendors = topVendorsFor(slugs)
@@ -144,7 +144,7 @@ export default function SourcingCard({
         href={vendorHref(best)}
         target="_blank"
         rel="sponsored nofollow noopener"
-        className="flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+        className="flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
         style={{ backgroundColor: accent }}
       >
         Visit {best.name}

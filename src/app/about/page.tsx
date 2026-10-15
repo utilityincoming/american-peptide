@@ -97,18 +97,18 @@ export default function AboutPage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
         <div className="relative mx-auto max-w-5xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <ShieldCheck className="h-3 w-3" />
             The trust layer for peptide research
           </div>
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             Peptide science, made{' '}
-            <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
               legible and honest
             </span>
           </h1>
@@ -185,9 +185,9 @@ export default function AboutPage() {
                 <Link
                   key={label}
                   href={href}
-                  className="group rounded-2xl border border-hairline bg-fill p-5 transition-colors hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
+                  className="group rounded-2xl border border-hairline bg-fill p-5 transition-colors hover:border-accent/25 hover:bg-fill-strong"
                 >
-                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
+                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-accent/20 bg-accent/10 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
                   </div>
                   <h3 className="mb-1.5 flex items-center gap-1 text-sm font-semibold">
@@ -211,7 +211,7 @@ export default function AboutPage() {
                   key={title}
                   className="rounded-2xl border border-hairline bg-fill p-5"
                 >
-                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[#2DD4A8]/20 bg-[#2DD4A8]/10 text-accent">
+                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-accent/20 bg-accent/10 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
                   </div>
                   <h3 className="mb-1.5 text-sm font-semibold">{title}</h3>
@@ -239,17 +239,17 @@ export default function AboutPage() {
                 href={TELEGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col justify-between rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-6 transition-colors hover:border-[#2DD4A8]/40"
+                className="group flex flex-col justify-between rounded-2xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] to-transparent p-6 transition-colors hover:border-accent/40"
               >
                 <div>
                   <div className="mb-3 flex items-center gap-3">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#2DD4A8] text-[#0B1220]">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#5BA88C] text-[#0E1512]">
                       <Send className="h-5 w-5" strokeWidth={2} />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
                         <h3 className="text-sm font-semibold">Telegram group</h3>
-                        <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
+                        <span className="rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
                           Live
                         </span>
                       </div>
@@ -276,11 +276,11 @@ export default function AboutPage() {
                 href="https://x.com/USPeptide"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col justify-between rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-6 transition-colors hover:border-[#2DD4A8]/40"
+                className="group flex flex-col justify-between rounded-2xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] to-transparent p-6 transition-colors hover:border-accent/40"
               >
                 <div>
                   <div className="mb-3 flex items-center gap-3">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#2DD4A8] text-[#0B1220]">
+                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#5BA88C] text-[#0E1512]">
                       <svg
                         viewBox="0 0 24 24"
                         fill="currentColor"
@@ -293,7 +293,7 @@ export default function AboutPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <h3 className="text-sm font-semibold">X</h3>
-                        <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
+                        <span className="rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
                           Live
                         </span>
                       </div>
@@ -329,7 +329,7 @@ export default function AboutPage() {
               </div>
               <Link
                 href="/about/contact"
-                className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#2DD4A8] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
               >
                 Get in touch
                 <ArrowRight className="h-4 w-4" />

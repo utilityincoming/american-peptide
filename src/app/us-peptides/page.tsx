@@ -72,7 +72,7 @@ const STANDARD = [
     pts: TRUST_WEIGHTS.coaOnFile,
     label: 'COA on file',
     body: 'A certificate of analysis you can actually pull for the product — the paperwork, not a promise.',
-    color: '#2DD4A8',
+    color: '#5BA88C',
   },
   {
     key: 'independent',
@@ -211,19 +211,19 @@ export default function MadeInUsaPage() {
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <ShieldCheck className="h-3 w-3" />
             The sourcing standard{count > 0 ? ` · ${count} US suppliers scored` : ''}
           </div>
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             American-Made,
             <br />
-            <span className="bg-gradient-to-r from-[#2DD4A8] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
               Independently Verified
             </span>
           </h1>
@@ -253,7 +253,7 @@ export default function MadeInUsaPage() {
                 {[
                   {
                     icon: <Building2 className="h-4 w-4" />,
-                    color: '#2DD4A8',
+                    color: '#5BA88C',
                     title: 'One jurisdiction',
                     body: 'A domestic parcel stays inside a single set of rules — no customs interception lottery, no ambiguous re-import status on the way to your bench.',
                   },
@@ -356,14 +356,14 @@ export default function MadeInUsaPage() {
               <div className="mt-5 flex flex-wrap gap-3">
                 <Link
                   href="/tools/coa-decoder"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
                 >
                   Decode a COA
                   <ArrowRight className="h-3 w-3" />
                 </Link>
                 <Link
                   href="/methodology"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
                 >
                   How we build the reference
                   <ArrowRight className="h-3 w-3" />
@@ -472,7 +472,7 @@ export default function MadeInUsaPage() {
                                     href={vendorHref(v)}
                                     target="_blank"
                                     rel="sponsored nofollow noopener"
-                                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#2DD4A8] px-4 py-2 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+                                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-4 py-2 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
                                   >
                                     Visit {v.name}
                                     <ArrowUpRight className="h-4 w-4" />
@@ -579,15 +579,15 @@ export default function MadeInUsaPage() {
             {/* The American Peptide community - a place to help and be helped, not
                 a vendor endorsement. Gated off the Play build with the buying layer. */}
             {!IS_APP_BUILD && (
-              <div className="rounded-xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.07] to-transparent p-5">
+              <div className="rounded-xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.07] to-transparent p-5">
                 <div className="mb-3 flex items-center gap-3">
-                  <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#2DD4A8] text-[#0B1220]">
+                  <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#5BA88C] text-[#0E1512]">
                     <Send className="h-4 w-4" strokeWidth={2} />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
                       <p className="text-sm font-semibold text-ink/85">The community</p>
-                      <span className="rounded-full border border-[#2DD4A8]/30 bg-[#2DD4A8]/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
+                      <span className="rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
                         Open
                       </span>
                     </div>
@@ -602,7 +602,7 @@ export default function MadeInUsaPage() {
                   href={COMMUNITY_PATH}
                   target="_blank"
                   rel="nofollow noopener"
-                  className="flex items-center justify-center gap-2 rounded-lg bg-[#2DD4A8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+                  className="flex items-center justify-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
                 >
                   Join the group
                   <ArrowRight className="h-4 w-4" />
@@ -683,8 +683,8 @@ export default function MadeInUsaPage() {
 // pure education and stays; only the directory swaps to this.
 function ReferenceEdition() {
   return (
-    <div className="rounded-xl border border-[#2DD4A8]/20 bg-[#2DD4A8]/[0.05] p-5">
-      <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]/10">
+    <div className="rounded-xl border border-accent/20 bg-accent/[0.05] p-5">
+      <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
         <FlaskConical className="h-4 w-4 text-accent" />
       </div>
       <p className="mb-1 text-sm font-semibold text-accent">Reference edition</p>
@@ -695,7 +695,7 @@ function ReferenceEdition() {
       </p>
       <Link
         href="/catalog"
-        className="flex items-center justify-center gap-2 rounded-lg bg-[#2DD4A8] px-4 py-2.5 text-sm font-semibold text-[#0B1220] transition-opacity hover:opacity-90"
+        className="flex items-center justify-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
       >
         Browse catalog
         <ArrowRight className="h-4 w-4" />

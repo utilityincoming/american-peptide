@@ -265,13 +265,13 @@ export default function PeptideForgePage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
         <div className="relative mx-auto flex max-w-5xl flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3 py-1 text-[11px] font-medium text-accent">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3 py-1 text-[11px] font-medium text-accent">
               <Sparkles className="h-3 w-3" />
               PeptideForge · Build & score your own peptide
             </div>
@@ -298,7 +298,7 @@ export default function PeptideForgePage() {
             </div>
             <div className="h-2 overflow-hidden rounded-full bg-fill-strong">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-[#2DD4A8] to-[#5EEBC8] transition-all duration-500"
+                className="h-full rounded-full bg-gradient-to-r from-[#5BA88C] to-[#93D4BA] transition-all duration-500"
                 style={{ width: `${pct}%` }}
               />
             </div>
@@ -314,8 +314,8 @@ export default function PeptideForgePage() {
       {/* ── Challenge completion flash ── */}
       {flash && (
         <div className="pointer-events-none fixed inset-x-0 top-20 z-50 flex justify-center px-4">
-          <div className="pointer-events-auto flex items-center gap-3 rounded-xl border border-[#2DD4A8]/30 bg-panel px-4 py-3 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#2DD4A8]/15">
+          <div className="pointer-events-auto flex items-center gap-3 rounded-xl border border-accent/30 bg-panel px-4 py-3 shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent/15">
               <Award className="h-5 w-5 text-accent" />
             </div>
             <div>
@@ -471,7 +471,7 @@ export default function PeptideForgePage() {
           </div>
 
           {/* Synthesis CTA */}
-          <div className="overflow-hidden rounded-2xl border border-[#2DD4A8]/20 bg-gradient-to-br from-[#2DD4A8]/[0.08] to-transparent p-5 md:p-6">
+          <div className="overflow-hidden rounded-2xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] to-transparent p-5 md:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="min-w-0">
                 <h2 className="flex items-center gap-2 text-base font-semibold">
@@ -486,7 +486,7 @@ export default function PeptideForgePage() {
               </div>
               <Link
                 href="/catalog"
-                className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#2DD4A8] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0]"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
               >
                 Browse the catalog
                 <ArrowRight className="h-4 w-4" />
@@ -526,7 +526,7 @@ export default function PeptideForgePage() {
                     className={
                       'flex items-start gap-2.5 rounded-xl border px-3 py-2.5 transition-colors ' +
                       (done
-                        ? 'border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.06]'
+                        ? 'border-accent/25 bg-accent/[0.06]'
                         : 'border-hairline bg-fill')
                     }
                   >
@@ -534,7 +534,7 @@ export default function PeptideForgePage() {
                       className={
                         'mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border ' +
                         (done
-                          ? 'border-[#2DD4A8] bg-[#2DD4A8] text-[#0B1220]'
+                          ? 'border-accent bg-[#5BA88C] text-[#0E1512]'
                           : 'border-ink/20')
                       }
                     >

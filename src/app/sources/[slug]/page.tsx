@@ -132,19 +132,19 @@ export default async function SourcesPage({
           className="pointer-events-none absolute inset-0 opacity-30"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.08) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(91,168,140,0.08) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
         <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
             <Layers className="h-3 w-3" />
             Where to source · ranked by evidence tier
           </div>
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             {peptide.name} sources,
             <br />
-            <span className="bg-gradient-to-r from-[#2DD4A8] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
               tiered by what backs the claim
             </span>
           </h1>
@@ -259,7 +259,7 @@ export default async function SourcesPage({
                 <Link
                   key={p.slug}
                   href={`/sources/${p.slug}`}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-1.5 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
                 >
                   {p.name}
                   <ArrowRight className="h-3 w-3" />
@@ -280,7 +280,7 @@ export default async function SourcesPage({
             <Link
               key={l.href}
               href={l.href}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
             >
               {l.label}
               <ArrowRight className="h-3 w-3" />

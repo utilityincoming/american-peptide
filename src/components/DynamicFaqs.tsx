@@ -47,7 +47,7 @@ export default function DynamicFaqs() {
           <Link
             key={q.text}
             href={`/research?q=${encodeURIComponent(q.text)}`}
-            className="group flex items-center justify-between gap-3 rounded-xl border border-hairline bg-fill px-4 py-3 text-sm text-ink/70 transition-colors hover:border-[#2DD4A8]/25 hover:bg-fill-strong hover:text-ink"
+            className="group flex items-center justify-between gap-3 rounded-xl border border-hairline bg-fill px-4 py-3 text-sm text-ink/70 transition-colors hover:border-accent/25 hover:bg-fill-strong hover:text-ink"
           >
             <span>{q.text}</span>
             <ArrowRight className="h-4 w-4 shrink-0 text-accent opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />

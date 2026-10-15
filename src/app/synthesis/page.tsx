@@ -142,14 +142,14 @@ export default function SynthesisPage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(45,212,168,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
         <div className="relative mx-auto max-w-5xl">
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             How a pure peptide is{' '}
-            <span className="bg-gradient-to-r from-[#2DD4A8] via-[#5EEBC8] to-[#2DD4A8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
               actually made
             </span>
           </h1>
@@ -176,9 +176,9 @@ export default function SynthesisPage() {
                 <li key={s.slug} className="flex items-center gap-2">
                   <a
                     href={`#${s.slug}`}
-                    className="group flex w-28 shrink-0 flex-col items-center gap-2 rounded-xl border border-hairline bg-fill px-2 py-3 text-center transition-all hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
+                    className="group flex w-28 shrink-0 flex-col items-center gap-2 rounded-xl border border-hairline bg-fill px-2 py-3 text-center transition-all hover:border-accent/25 hover:bg-fill-strong"
                   >
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#2DD4A8]/12 text-accent">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/12 text-accent">
                       <Icon className="h-4 w-4" strokeWidth={1.75} />
                     </span>
                     <span className="text-[10px] font-medium leading-tight text-ink/60 group-hover:text-ink/85">
@@ -218,7 +218,7 @@ export default function SynthesisPage() {
                   key={item.label}
                   className="rounded-2xl border border-hairline bg-fill p-5"
                 >
-                  <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#2DD4A8]/12 text-accent">
+                  <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-accent/12 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
                   </span>
                   <h3 className="mb-1 text-sm font-semibold tracking-tight">
@@ -254,7 +254,7 @@ export default function SynthesisPage() {
                   key={item.label}
                   className="rounded-2xl border border-hairline bg-fill p-5"
                 >
-                  <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#2DD4A8]/12 text-accent">
+                  <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-accent/12 text-accent">
                     <Icon className="h-4 w-4" strokeWidth={1.75} />
                   </span>
                   <h3 className="mb-1 text-sm font-semibold tracking-tight">
@@ -297,7 +297,7 @@ export default function SynthesisPage() {
                     <span
                       className={
                         difficulty === 'demanding'
-                          ? 'inline-flex items-center gap-1.5 rounded-md border border-[#2DD4A8]/25 bg-[#2DD4A8]/[0.08] px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent'
+                          ? 'inline-flex items-center gap-1.5 rounded-md border border-accent/25 bg-accent/[0.08] px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-accent'
                           : 'inline-flex items-center gap-1.5 rounded-md border border-hairline bg-fill px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-ink/55'
                       }
                     >
@@ -316,7 +316,7 @@ export default function SynthesisPage() {
                       <li key={p.slug}>
                         <Link
                           href={`/catalog/${p.slug}`}
-                          className="inline-flex rounded-md border border-hairline bg-fill px-2 py-1 text-[12px] text-ink/65 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                          className="inline-flex rounded-md border border-hairline bg-fill px-2 py-1 text-[12px] text-ink/65 transition-colors hover:border-accent/30 hover:text-accent"
                         >
                           {p.name}
                         </Link>
@@ -345,7 +345,7 @@ export default function SynthesisPage() {
                 <Link
                   key={feature}
                   href={`/catalog?synthesis=${encodeURIComponent(feature)}`}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-fill px-3 py-1 text-xs text-ink/60 transition-colors hover:border-[#2DD4A8]/30 hover:text-accent"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-fill px-3 py-1 text-xs text-ink/60 transition-colors hover:border-accent/30 hover:text-accent"
                 >
                   {feature}
                   <span className="tabular-nums text-ink/55">{count}</span>
@@ -359,8 +359,8 @@ export default function SynthesisPage() {
       {/* ── Provenance / American standard ── */}
       <section className="border-t border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
-          <div className="rounded-2xl border border-[#2DD4A8]/15 bg-gradient-to-br from-[#2DD4A8]/[0.06] to-transparent p-7 md:p-9">
-            <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[#2DD4A8]/25 bg-[#2DD4A8]/10 text-accent">
+          <div className="rounded-2xl border border-accent/15 bg-gradient-to-br from-[#5BA88C]/[0.06] to-transparent p-7 md:p-9">
+            <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
               <Flag className="h-5 w-5" strokeWidth={1.75} />
             </span>
             <h2 className="mb-3 max-w-2xl text-2xl font-bold tracking-tight md:text-3xl">
@@ -398,7 +398,7 @@ export default function SynthesisPage() {
         <div className="mx-auto flex max-w-5xl flex-col gap-4 sm:flex-row">
           <Link
             href="/catalog"
-            className="group flex flex-1 items-center justify-between rounded-2xl border border-hairline bg-fill p-5 transition-all hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
+            className="group flex flex-1 items-center justify-between rounded-2xl border border-hairline bg-fill p-5 transition-all hover:border-accent/25 hover:bg-fill-strong"
           >
             <div>
               <h3 className="text-sm font-semibold">Browse the catalog</h3>
@@ -410,7 +410,7 @@ export default function SynthesisPage() {
           </Link>
           <Link
             href="/glossary"
-            className="group flex flex-1 items-center justify-between rounded-2xl border border-hairline bg-fill p-5 transition-all hover:border-[#2DD4A8]/25 hover:bg-fill-strong"
+            className="group flex flex-1 items-center justify-between rounded-2xl border border-hairline bg-fill p-5 transition-all hover:border-accent/25 hover:bg-fill-strong"
           >
             <div>
               <h3 className="text-sm font-semibold">Read the glossary</h3>

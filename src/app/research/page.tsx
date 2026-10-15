@@ -80,7 +80,7 @@ const md: Components = {
     )
   },
   blockquote: ({ children }) => (
-    <blockquote className="mb-3 border-l-2 border-[#2DD4A8]/30 pl-4 text-ink/55 last:mb-0">
+    <blockquote className="mb-3 border-l-2 border-accent/30 pl-4 text-ink/55 last:mb-0">
       {children}
     </blockquote>
   ),
@@ -118,7 +118,7 @@ function TypingIndicator() {
       {[0, 140, 280].map((delay) => (
         <div
           key={delay}
-          className="h-2 w-2 animate-bounce rounded-full bg-[#2DD4A8]/50"
+          className="h-2 w-2 animate-bounce rounded-full bg-accent/50"
           style={{ animationDelay: `${delay}ms` }}
         />
       ))}
@@ -128,7 +128,7 @@ function TypingIndicator() {
 
 function AgentAvatar() {
   return (
-    <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-[#2DD4A8]/15">
+    <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-accent/15">
       <Dna className="h-4 w-4 text-accent" strokeWidth={1.75} />
     </div>
   )
@@ -298,7 +298,7 @@ export default function ResearchPage() {
               <div
                 className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm ${
                   msg.role === 'user'
-                    ? 'rounded-tr-sm bg-[#2DD4A8]/[0.12] text-ink/90'
+                    ? 'rounded-tr-sm bg-accent/[0.12] text-ink/90'
                     : 'rounded-tl-sm border border-hairline bg-fill text-ink/65'
                 }`}
               >
@@ -320,7 +320,7 @@ export default function ResearchPage() {
                 <button
                   key={s}
                   onClick={() => sendMessage(s)}
-                  className="rounded-xl border border-hairline bg-fill p-3 text-left text-xs text-ink/55 transition-all hover:border-[#2DD4A8]/20 hover:bg-fill-strong hover:text-ink/70"
+                  className="rounded-xl border border-hairline bg-fill p-3 text-left text-xs text-ink/55 transition-all hover:border-accent/20 hover:bg-fill-strong hover:text-ink/70"
                 >
                   {s}
                 </button>
@@ -347,7 +347,7 @@ export default function ResearchPage() {
       {/* ── Input bar ── */}
       <div className="flex-shrink-0 border-t border-hairline px-4 py-4 md:px-6">
         <div className="mx-auto max-w-3xl">
-          <div className="flex items-end gap-3 rounded-2xl border border-hairline bg-fill px-4 py-3 transition-colors focus-within:border-[#2DD4A8]/25">
+          <div className="flex items-end gap-3 rounded-2xl border border-hairline bg-fill px-4 py-3 transition-colors focus-within:border-accent/25">
             <textarea
               ref={textareaRef}
               value={input}
@@ -363,7 +363,7 @@ export default function ResearchPage() {
               onClick={() => sendMessage(input)}
               disabled={!input.trim() || loading}
               aria-label="Send message"
-              className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-[#2DD4A8] text-[#0B1220] transition-all hover:bg-[#34ddb0] hover:shadow-[0_0_20px_rgba(45,212,168,0.3)] disabled:cursor-not-allowed disabled:opacity-25"
+              className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-[#5BA88C] text-[#0E1512] transition-all hover:bg-[#6FBF9A] hover:shadow-[0_0_20px_rgba(91,168,140,0.3)] disabled:cursor-not-allowed disabled:opacity-25"
             >
               <Send className="h-3.5 w-3.5" />
             </button>

@@ -48,7 +48,7 @@ export default function EvidenceContext({
       {/* Evidence-hierarchy primer */}
       <Link
         href="/learn/evidence-hierarchy"
-        className="group flex items-start gap-3 rounded-xl border border-[#2DD4A8]/15 bg-[#2DD4A8]/[0.04] p-4 transition-colors hover:border-[#2DD4A8]/30 hover:bg-[#2DD4A8]/[0.07]"
+        className="group flex items-start gap-3 rounded-xl border border-accent/15 bg-accent/[0.04] p-4 transition-colors hover:border-accent/30 hover:bg-accent/[0.07]"
       >
         <Scale className="mt-0.5 h-4 w-4 shrink-0 text-accent" strokeWidth={1.75} />
         <div className="flex-1">
@@ -76,7 +76,7 @@ export default function EvidenceContext({
                 key={t.slug}
                 href={`/glossary/${t.slug}`}
                 title={t.short}
-                className="inline-flex items-center rounded-lg border border-hairline bg-fill px-2.5 py-1 text-xs text-ink/65 transition-colors hover:border-[#2DD4A8]/25 hover:text-accent"
+                className="inline-flex items-center rounded-lg border border-hairline bg-fill px-2.5 py-1 text-xs text-ink/65 transition-colors hover:border-accent/25 hover:text-accent"
               >
                 {t.abbr ?? t.term}
               </Link>

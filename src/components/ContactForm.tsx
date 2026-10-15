@@ -63,7 +63,7 @@ export default function ContactForm() {
               className={
                 'inline-flex cursor-pointer items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors ' +
                 (topic === t.value
-                  ? 'border-[#2DD4A8]/40 bg-[#2DD4A8]/15 text-accent'
+                  ? 'border-accent/40 bg-accent/15 text-accent'
                   : 'border-hairline bg-fill text-ink/55 hover:border-hairline-strong hover:text-ink')
               }
             >
@@ -95,7 +95,7 @@ export default function ContactForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Dr. Ada Lovelace"
-            className="w-full rounded-xl border border-hairline bg-fill px-3 py-2.5 text-sm text-ink placeholder:text-ink/55 focus:border-[#2DD4A8]/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
+            className="w-full rounded-xl border border-hairline bg-fill px-3 py-2.5 text-sm text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#5BA88C]/40"
           />
         </div>
         <div>
@@ -116,7 +116,7 @@ export default function ContactForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@lab.org"
-              className="w-full rounded-xl border border-hairline bg-fill py-2.5 pl-9 pr-3 text-sm text-ink placeholder:text-ink/55 focus:border-[#2DD4A8]/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
+              className="w-full rounded-xl border border-hairline bg-fill py-2.5 pl-9 pr-3 text-sm text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#5BA88C]/40"
             />
           </div>
         </div>
@@ -136,7 +136,7 @@ export default function ContactForm() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Tell us what the Agent got wrong, the peptide we're missing, or what you'd like to build with the data…"
-          className="w-full resize-y rounded-xl border border-hairline bg-fill px-3 py-2.5 text-sm leading-relaxed text-ink placeholder:text-ink/55 focus:border-[#2DD4A8]/40 focus:outline-none focus:ring-1 focus:ring-[#2DD4A8]/40"
+          className="w-full resize-y rounded-xl border border-hairline bg-fill px-3 py-2.5 text-sm leading-relaxed text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#5BA88C]/40"
         />
       </div>
 
@@ -148,7 +148,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={!canSend}
-          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#2DD4A8] px-5 py-2.5 text-sm font-semibold text-[#0B1220] transition-colors hover:bg-[#34ddb0] disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A] disabled:cursor-not-allowed disabled:opacity-50"
         >
           Send message
           <ArrowRight className="h-4 w-4" />

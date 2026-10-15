@@ -35,7 +35,7 @@ cannot differ inside one project. Use ONE of these:
 2. Set its Environment Variables (Production):
    ```
    NEXT_PUBLIC_PLATFORM = android
-   ANDROID_PACKAGE_NAME = com.americanpeptide.twa
+   ANDROID_PACKAGE_NAME = com.americanpeptide.calculator
    ANDROID_SHA256_FINGERPRINTS =        (leave empty for now — filled in Step 4)
    ```
 3. Add the domain `app.americanpeptide.com` to THIS project (move it here if it
@@ -96,7 +96,7 @@ Initialize FROM the app deployment's manifest (not www):
 bubblewrap init --manifest https://app.americanpeptide.com/manifest.json
 ```
 Answer the prompts:
-- **Application ID / package name:** `com.americanpeptide.twa`
+- **Application ID / package name:** `com.americanpeptide.calculator`
   (must match `ANDROID_PACKAGE_NAME` in Step 1).
 - **App name:** American Peptide   ·   **Launcher name:** American Peptide
 - **Display mode:** standalone   ·   **Orientation:** default (or portrait)
@@ -140,7 +140,7 @@ the TWA shows a browser address bar (a visible failure).
    ```
    Then run Google's checker:
    https://developers.google.com/digital-asset-links/tools/generator
-   (source = https://app.americanpeptide.com, package = com.americanpeptide.twa).
+   (source = https://app.americanpeptide.com, package = com.americanpeptide.calculator).
 
 > Order note: you'll do 4.1 before upload, then come back for 4.2 after the first
 > upload exists. The address bar disappears once both fingerprints are live and
@@ -234,7 +234,7 @@ sale of regulated goods**. Response playbook:
 
 | Thing | Value |
 |---|---|
-| Package name | `com.americanpeptide.twa` |
+| Package name | `com.americanpeptide.calculator` |
 | App deployment | `https://app.americanpeptide.com` (NEXT_PUBLIC_PLATFORM=android) |
 | Manifest for Bubblewrap | `https://app.americanpeptide.com/manifest.json` |
 | Asset links | `https://app.americanpeptide.com/.well-known/assetlinks.json` |
