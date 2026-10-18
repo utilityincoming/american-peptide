@@ -9,7 +9,9 @@ import {
   interactionCheck,
   getPk,
   pkWithHalfLife,
+  PK_RECORDS,
 } from '@/lib/pharmacokinetics'
+import { PEPTIDES } from '@/lib/peptides'
 
 // Single-compartment first-order elimination. Values below are derived from
 // first principles:
@@ -108,5 +110,21 @@ describe('data integrity', () => {
   })
   it('keeps BPC-157 half-life null (no established human figure)', () => {
     expect(getPk('bpc-157')?.halfLifeHours).toBeNull()
+  })
+  it('has no duplicate slugs', () => {
+    const slugs = PK_RECORDS.map((r) => r.slug)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+describe('catalog coverage', () => {
+  it('has a PK record for every catalog compound', () => {
+    const missing = PEPTIDES.filter((p) => !getPk(p.slug)).map((p) => p.slug)
+    expect(missing).toEqual([])
+  })
+  it('has no PK record for a slug that is not in the catalog', () => {
+    const slugs = new Set(PEPTIDES.map((p) => p.slug))
+    const orphans = PK_RECORDS.filter((r) => !slugs.has(r.slug)).map((r) => r.slug)
+    expect(orphans).toEqual([])
   })
 })
