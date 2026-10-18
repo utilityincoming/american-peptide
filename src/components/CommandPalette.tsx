@@ -154,6 +154,14 @@ const PAGES: CommandItem[] = [
     keywords: 'coa certificate of analysis purity hplc mass spec peptide content endotoxin quality grade transparency',
   },
   {
+    id: 'page-tracker',
+    kind: 'page',
+    label: 'Protocol Tracker (Beta)',
+    subtitle: 'Private local-first log, protocols & vial stock',
+    href: '/tools/tracker',
+    keywords: 'tracker protocol log logbook plan stock vial dose cost per dose private local offline bench record beta',
+  },
+  {
     id: 'page-workspace',
     kind: 'page',
     label: 'Workspace',

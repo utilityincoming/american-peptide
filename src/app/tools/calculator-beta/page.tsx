@@ -19,6 +19,7 @@ import {
   type ReconPreset,
 } from '@/lib/reconstitution-presets'
 import { reconstitute, solveWaterForDraw } from '@/lib/reconstitution'
+import PkCalculators from '@/components/PkCalculators'
 
 const VIAL_PRESETS_MG = [2, 5, 10, 15, 20, 30, 50]
 const DOSE_PRESETS_MCG = [100, 250, 500, 750, 1000, 1500, 2000]
@@ -683,6 +684,10 @@ export default function CalculatorBetaPage() {
               </span>
             </li>
           </ul>
+        </section>
+
+        <section className="mb-10">
+          <PkCalculators />
         </section>
       </main>
     </div>

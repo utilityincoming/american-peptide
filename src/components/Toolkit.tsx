@@ -5,6 +5,7 @@ import {
   Calculator,
   Dna,
   FileSearch,
+  NotebookPen,
   Search,
   Sparkles,
   type LucideIcon,
@@ -49,6 +50,13 @@ const TOOLS: Tool[] = [
     name: 'COA Decoder',
     desc: 'Paste a certificate of analysis; grade its transparency and spot red flags.',
     Icon: FileSearch,
+  },
+  {
+    href: '/tools/tracker',
+    name: 'Protocol Tracker',
+    desc: 'Private, local-first logbook — log, plan & track vials with live cost-per-dose.',
+    Icon: NotebookPen,
+    badge: 'Beta',
   },
   {
     href: '/tools/reconstitution-calculator',
