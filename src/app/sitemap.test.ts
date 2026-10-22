@@ -37,6 +37,7 @@ describe('sitemap', () => {
       '/tools/blend-calculator',
       '/tools/design-lab',
       '/tools/calculator-beta',
+      '/tools/tracker',
     ]
     for (const path of forbidden) {
       expect(urlSet.has(`${SITE}${path}`)).toBe(false)
