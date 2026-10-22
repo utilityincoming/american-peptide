@@ -51,6 +51,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/trials', priority: 0.8 },
     { path: '/tools/reconstitution-calculator', priority: 0.8 },
     { path: '/tools/coa-decoder', priority: 0.8 },
+    // /tools/tracker is intentionally omitted — a private, local-first beta
+    // logbook marked noindex (same reasoning as /workspace), so it must not be
+    // advertised for crawling.
     // /workspace is intentionally omitted — it's a private, per-browser page
     // marked noindex, so it must not be advertised for crawling.
     // ── Specialized hubs ──────────────────────────────────
