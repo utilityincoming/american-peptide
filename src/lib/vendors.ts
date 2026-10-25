@@ -408,11 +408,32 @@ export const VENDORS: Vendor[] = [
     name: 'Paramount Peptides',
     url: 'https://paramountpeptides.com',
     blurb:
-      'US research-peptide supplier — "Real Science. Real Standards." — with independent third-party HPLC testing on every batch, ≥99% purity, and COAs searchable by product or batch number.',
-    // GLP-only shelf: the public storefront/collection lists just the incretin
-    // analogues under coded names (GLP-1 S / GLP-2 T / GLP-3 R), plus a blend
-    // that's out. Scoped to exactly what they publish — never 'all'.
-    peptides: ['semaglutide', 'tirzepatide', 'retatrutide'],
+      'US research-peptide supplier — "Real Science. Real Standards." — stocking a broad catalog across the recovery, GH-axis, nootropic, and longevity classes, with independent third-party HPLC testing on every batch, ≥99% purity, and COAs searchable by product or batch number.',
+    // Scoped to the single compounds Paramount's public storefront actually
+    // lists (the "shop all peptides" collection), never 'all'. The three incretin
+    // analogues sell under coded names (GLP-1 S / GLP-2 T / GLP-3 R). Their blends
+    // and bundles (Wolverine / GLOW / KLOW / tri-compound tablets) and compounds
+    // outside our catalog (SLU-PP-332, tesofensine, α-Klotho, the Regulator
+    // Series, etc.) are deliberately not mapped — no slug to point them at.
+    peptides: [
+      // GLP-1 / incretin (coded GLP-1 S / GLP-2 T / GLP-3 R)
+      'semaglutide', 'tirzepatide', 'retatrutide', 'cagrilintide',
+      // recovery / healing
+      'bpc-157', 'tb-500', 'ghk-cu', 'kpv', 'll-37',
+      // GH-axis secretagogues / GHRH
+      'cjc-1295-no-dac', 'cjc-1295-with-dac', 'ipamorelin', 'tesamorelin',
+      'sermorelin', 'hexarelin', 'ghrp-2', 'mk-677', 'mgf',
+      // growth factors / muscle
+      'igf-1-lr3', 'follistatin',
+      // metabolic / longevity
+      '5-amino-1mq', 'aod-9604', 'nad-plus', 'mots-c', 'foxo4-dri',
+      // nootropic / neuro
+      'semax', 'selank', 'dsip', 'dihexa', 'oxytocin', 'vip',
+      // bioregulators (Khavinson peptides)
+      'epitalon', 'cardiogen', 'thymogen', 'thymalin', 'thymosin-alpha-1',
+      // hormone / sexual health
+      'pt-141', 'melanotan-2', 'kisspeptin-10', 'gonadorelin',
+    ],
     shipsTo: ['us'],
     trust: {
       // Set only from Paramount's own published claims (homepage + searchable
