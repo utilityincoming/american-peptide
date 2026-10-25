@@ -358,13 +358,16 @@ export const VENDORS: Vendor[] = [
     url: 'https://absimpeptides.com',
     blurb:
       'US research-peptide supplier publishing a certificate of analysis on every product listing; cGMP-compliant manufacturing, free US shipping over $200.',
-    // Scoped to the products ABSIM actually lists (25 SKUs) that exist in our
-    // catalog. They notably do NOT carry semaglutide, tirzepatide, or
-    // retatrutide.
+    // Scoped to the single compounds on ABSIM's live /shop that exist in our
+    // catalog (19). Their seven multi-compound blends — ASP-3P, ASP-2P, KLOW,
+    // GLOW, BPC-157+TB-500, CJC/Ipamorelin, Tesamorelin/Ipamorelin — have no
+    // single catalog slug to point at, so they're deliberately not mapped. They
+    // notably do NOT carry semaglutide, tirzepatide, or retatrutide.
     peptides: [
       'bpc-157', 'tb-500', 'ghk-cu', 'ipamorelin', 'cjc-1295-no-dac',
       'tesamorelin', 'sermorelin', 'mots-c', 'ss-31', 'nad-plus',
       'aod-9604', 'epitalon', 'semax', 'selank', 'dsip', 'pt-141', 'kpv',
+      'thymosin-alpha-1', 'ara-290',
     ],
     shipsTo: ['us'],
     trust: {
@@ -382,6 +385,32 @@ export const VENDORS: Vendor[] = [
     affiliate: {
       trackedPath: '/go/absim-peptides',
       url: 'https://absimpeptides.com/?ref=americanpeptide',
+      // Per-compound deep links: each is a REAL product URL read off ABSIM's live
+      // /shop (not guessed), carrying the same ?ref= the homepage link does, so a
+      // reader clicking from a monograph lands on the matching product page with
+      // the referral intact. Only single compounds that exist in our catalog are
+      // here; the blends have no single slug and fall back to the homepage link.
+      productUrls: {
+        'bpc-157': 'https://absimpeptides.com/product/bpc-157/?ref=americanpeptide',
+        'tb-500': 'https://absimpeptides.com/product/tb-500-10mg/?ref=americanpeptide',
+        'ghk-cu': 'https://absimpeptides.com/product/ghk-cu-100mg-10-vials-kit/?ref=americanpeptide',
+        'ipamorelin': 'https://absimpeptides.com/product/ipamorelin-10mg/?ref=americanpeptide',
+        'cjc-1295-no-dac': 'https://absimpeptides.com/product/cjc-1295-no-dac-10mg/?ref=americanpeptide',
+        'tesamorelin': 'https://absimpeptides.com/product/tesamorelin-10mg/?ref=americanpeptide',
+        'sermorelin': 'https://absimpeptides.com/product/sermorelin-10mg/?ref=americanpeptide',
+        'mots-c': 'https://absimpeptides.com/product/mots-c/?ref=americanpeptide',
+        'ss-31': 'https://absimpeptides.com/product/ss-31-10mg/?ref=americanpeptide',
+        'nad-plus': 'https://absimpeptides.com/product/nad-500mg/?ref=americanpeptide',
+        'aod-9604': 'https://absimpeptides.com/product/aod-5mg/?ref=americanpeptide',
+        'epitalon': 'https://absimpeptides.com/product/epitalon-10mg/?ref=americanpeptide',
+        'semax': 'https://absimpeptides.com/product/semax-10mg/?ref=americanpeptide',
+        'selank': 'https://absimpeptides.com/product/n-acetyl-selank-amidate-10mg/?ref=americanpeptide',
+        'dsip': 'https://absimpeptides.com/product/dsip-5mg/?ref=americanpeptide',
+        'pt-141': 'https://absimpeptides.com/product/pt-141-10mg/?ref=americanpeptide',
+        'kpv': 'https://absimpeptides.com/product/kpv-30mg/?ref=americanpeptide',
+        'thymosin-alpha-1': 'https://absimpeptides.com/product/thymosin-alpha-1/?ref=americanpeptide',
+        'ara-290': 'https://absimpeptides.com/product/ara-290-10mg/?ref=americanpeptide',
+      },
       // Works both ways per the partner: the link carries the discount, and the
       // same string is a live coupon at checkout. Publishing the code as well as
       // the link means a reader still gets the 20% if the referral doesn't stick.
@@ -399,6 +428,7 @@ export const VENDORS: Vendor[] = [
       'bpc-157', 'tb-500', 'ipamorelin', 'cjc-1295-no-dac', 'tesamorelin',
       'sermorelin', 'ghk-cu', 'mots-c', 'aod-9604', 'nad-plus', 'pt-141',
       'ss-31', 'epitalon', 'semax', 'selank', 'dsip', 'kpv',
+      'thymosin-alpha-1', 'ara-290',
     ],
     notes:
       'Checkout requires an account; returns are accepted within 7 days with photos.',
