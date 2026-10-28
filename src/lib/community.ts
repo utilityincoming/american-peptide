@@ -9,10 +9,19 @@
 //
 // `community` is a reserved referral id: no vendor uses it, so it shares the same
 // go:clk:v:<id> counter namespace without colliding.
+import { goUrl } from './redirect-origin'
+
 export const COMMUNITY_REF_ID = 'community'
 
-/** The tracked internal path readers actually click. */
+/** The tracked internal /go path (the route key the chokepoint resolves). */
 export const COMMUNITY_PATH = `/go/${COMMUNITY_REF_ID}`
+
+/**
+ * The href readers actually click — the same chokepoint, rendered on the
+ * outbound-redirect host (americanpeptide.net) when configured, else same-origin.
+ * Use this for anchors; COMMUNITY_PATH stays relative for route/id comparisons.
+ */
+export const COMMUNITY_HREF = goUrl(COMMUNITY_PATH)
 
 /** The real Telegram invite the chokepoint 302s to. Kept server-side. */
 export const COMMUNITY_URL = 'https://t.me/+n5ymMHicPbNlNzcx'
