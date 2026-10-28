@@ -6,7 +6,7 @@ const SITE = 'https://americanpeptide.com'
 const url = `${SITE}/tools/reconstitution-calculator`
 
 export const metadata: Metadata = {
-  title: 'Peptide Reconstitution Calculator — AmericanPeptide.com',
+  title: 'Peptide Reconstitution Calculator',
   description:
     'Free peptide reconstitution calculator. Calculate bacteriostatic water volume, concentration per injection, and dosing from vial size and desired dose. Essential tool for peptide researchers.',
   alternates: { canonical: url },

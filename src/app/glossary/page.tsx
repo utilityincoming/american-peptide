@@ -6,7 +6,7 @@ import { GLOSSARY, glossaryByCategory } from '@/lib/glossary'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Peptide Glossary — Terms & Definitions | AmericanPeptide.com',
+  title: 'Peptide Glossary — Terms & Definitions',
   description:
     'Plain-language definitions of peptide research terms — reconstitution, GLP-1, GRAVY, half-life, GHRH, COA, and more. A reference glossary covering dosing, chemistry, mechanisms, identifiers, and regulatory concepts.',
   alternates: { canonical: `${SITE}/glossary` },

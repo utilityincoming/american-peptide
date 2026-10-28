@@ -7,7 +7,7 @@ const SITE = 'https://americanpeptide.com'
 // read as thin content. Keep it for users, but noindex it (follow:true so it
 // still passes link equity to the catalog/tools it links out to).
 export const metadata: Metadata = {
-  title: 'PeptideForge — Interactive Peptide Builder | AmericanPeptide.com',
+  title: 'PeptideForge — Interactive Peptide Builder',
   description:
     'Build a peptide residue by residue and watch its chemistry update live — an interactive learning tool with challenges and XP.',
   alternates: { canonical: `${SITE}/compounds/builder` },

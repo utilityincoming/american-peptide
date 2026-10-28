@@ -48,7 +48,7 @@ export async function generateMetadata({
 
   const title =
     r.content?.metaTitle ??
-    `${r.meta.label} Peptides — Catalog | AmericanPeptide.com`
+    `${r.meta.label} Peptides — Catalog`
   const description = r.content?.metaDescription ?? r.meta.blurb
 
   return {

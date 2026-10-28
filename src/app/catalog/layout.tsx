@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Peptide Catalog — 100+ Research Compounds | AmericanPeptide.com',
+  title: 'Peptide Catalog — 100+ Research Compounds',
   description:
     'Browse 100+ research peptides — GLP-1 agonists, healing peptides, nootropics, longevity compounds, and more. Filter by category, indication, and FDA status. Free open reference.',
   alternates: { canonical: `${SITE}/catalog` },

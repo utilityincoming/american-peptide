@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Protocol Tracker (Beta) — AmericanPeptide.com',
+  title: 'Protocol Tracker (Beta)',
   description:
     'A private, local-first bench logbook — record what a research protocol consisted of, plan its cadence, and track vials from sealed to empty with a live cost-per-dose. All data stays in your browser.',
   alternates: { canonical: `${SITE}/tools/tracker` },

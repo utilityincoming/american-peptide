@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'COA Decoder — Read & Grade a Peptide Certificate of Analysis | AmericanPeptide.com',
+  title: 'COA Decoder — Read & Grade a Peptide COA',
   description:
     'Paste a peptide Certificate of Analysis and get every field explained — HPLC purity, mass-spec identity, endotoxin — plus a transparency grade. Free.',
   alternates: { canonical: `${SITE}/tools/coa-decoder` },

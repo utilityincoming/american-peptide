@@ -9,7 +9,7 @@ const SITE = 'https://americanpeptide.com'
 const LAST_UPDATED = 'June 21, 2026'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | AmericanPeptide.com',
+  title: 'Privacy Policy',
   description:
     'How AmericanPeptide.com collects, uses, and protects information across the website and Android app — analytics, the research assistant, and the data we deliberately do not collect.',
   alternates: { canonical: `${SITE}/privacy` },
