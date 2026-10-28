@@ -17,7 +17,7 @@ import CompoundingStatus from '@/components/CompoundingStatus'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'BPC-157 Research — Mechanism, Evidence & Synthesis',
+  title: 'BPC-157 — Mechanism, Evidence & Synthesis',
   description:
     'Comprehensive research reference for BPC-157 (Body Protective Compound 157) — proposed VEGFR2/nitric-oxide/growth-factor mechanisms, preclinical evidence summary, synthesis quality context, and comparison with TB-500.',
   alternates: { canonical: `${SITE}/bpc-157` },

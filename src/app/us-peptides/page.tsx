@@ -30,7 +30,7 @@ const SITE = 'https://americanpeptide.com'
 const PATH = '/us-peptides'
 
 export const metadata: Metadata = {
-  title: 'US-Made Research Peptides — The Sourcing Standard',
+  title: 'US-Made Peptides — The Sourcing Standard',
   description:
     'Are research peptides made in the USA? A transparent 100-point standard scoring every US supplier on third-party COAs and testing — never commission.',
   alternates: { canonical: `${SITE}${PATH}` },

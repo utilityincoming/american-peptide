@@ -34,7 +34,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'weight-loss',
     label: 'Weight Loss & Metabolic Health',
     tagline: 'Incretin and metabolic peptides studied for glycemic control and fat loss.',
-    metaTitle: 'Weight Loss & Metabolic Peptides — Research Guide',
+    metaTitle: 'Weight Loss & Metabolic Peptides',
     metaDescription:
       'Research reference for metabolic peptides studied in obesity, type 2 diabetes, and MASH — GLP-1/GIP/glucagon agonists, amylin analogs, and adipose-targeting compounds.',
     intro: [
@@ -71,7 +71,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'wound-healing',
     label: 'Wound Healing & Tissue Repair',
     tagline: 'Regenerative peptides studied for soft-tissue, tendon, and vascular repair.',
-    metaTitle: 'Wound Healing & Tissue Repair Peptides — Research Guide',
+    metaTitle: 'Wound Healing & Tissue Repair Peptides',
     metaDescription:
       'Research reference for regenerative peptides studied in wound healing, tendinopathy, and tissue repair — angiogenesis, cytoprotection, and extracellular-matrix remodeling.',
     intro: [
@@ -106,7 +106,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'cognition-neuroprotection',
     label: 'Cognition & Neuroprotection',
     tagline: 'Nootropic and neurotrophic peptides studied for cognition and recovery.',
-    metaTitle: 'Cognition & Neuroprotection Peptides — Research Guide',
+    metaTitle: 'Cognition & Neuroprotection Peptides',
     metaDescription:
       'Research reference for nootropic and neuroprotective peptides studied in cognition, stroke recovery, and neurodegeneration — neurotrophic signaling and synaptic modulation.',
     intro: [
@@ -134,7 +134,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'anxiety-mood',
     label: 'Anxiety, Mood & Stress',
     tagline: 'Regulatory peptides studied for anxiolysis and stress-axis modulation.',
-    metaTitle: 'Anxiety, Mood & Stress Peptides — Research Guide',
+    metaTitle: 'Anxiety, Mood & Stress Peptides',
     metaDescription:
       'Research reference for peptides studied in anxiety, mood, and stress physiology — anxiolytic signaling without the sedation profile of classic GABAergic medications.',
     intro: [
@@ -162,7 +162,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'sleep-circadian',
     label: 'Sleep & Circadian Rhythm',
     tagline: 'Peptides studied for sleep architecture and circadian regulation.',
-    metaTitle: 'Sleep & Circadian Peptides — Research Guide',
+    metaTitle: 'Sleep & Circadian Peptides',
     metaDescription:
       'Research reference for peptides studied in sleep biology and circadian regulation — pineal signaling, sleep architecture, and stress-axis interactions.',
     intro: [
@@ -190,7 +190,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'longevity-aging',
     label: 'Longevity & Aging',
     tagline: 'Peptides studied across the aging axis — senescence, NAD+, and resilience.',
-    metaTitle: 'Longevity & Aging Peptides — Research Guide',
+    metaTitle: 'Longevity & Aging Peptides',
     metaDescription:
       'Research reference for peptides studied in aging biology — telomere and senescence pathways, NAD+ metabolism, mitochondrial function, and healthspan endpoints.',
     intro: [
@@ -218,7 +218,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'growth-hormone-axis',
     label: 'Growth Hormone & Body Composition',
     tagline: 'Secretagogues studied for GH release, IGF-1, and body composition.',
-    metaTitle: 'Growth Hormone & Body Composition Peptides — Research Guide',
+    metaTitle: 'Growth Hormone & Body Composition Peptides',
     metaDescription:
       'Research reference for growth-hormone secretagogues — GHRH analogs and GHRPs studied for pulsatile GH release, IGF-1 elevation, and body-composition endpoints.',
     intro: [
@@ -246,7 +246,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'muscle-lean-mass',
     label: 'Muscle Preservation & Lean Mass',
     tagline: 'The activin/myostatin axis studied to preserve muscle during GLP-1 weight loss.',
-    metaTitle: 'Muscle Preservation & Lean Mass Peptides — Research Guide',
+    metaTitle: 'Muscle Preservation & Lean Mass Peptides',
     metaDescription:
       'Research reference for the activin/myostatin axis — myostatin, follistatin, and the antibodies (apitegromab, trevogrumab, garetosmab, bimagrumab) studied to preserve lean mass during GLP-1 weight loss.',
     updated: '2026-09-13',
@@ -279,7 +279,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'skin-hair',
     label: 'Skin & Hair',
     tagline: 'Peptides studied for skin aging, pigmentation, and hair follicle biology.',
-    metaTitle: 'Skin & Hair Peptides — Research Guide',
+    metaTitle: 'Skin & Hair Peptides',
     metaDescription:
       'Research reference for cosmetic peptides studied in skin aging, pigmentation, photoprotection, and hair follicle biology — collagen signaling and melanocortin pathways.',
     intro: [
@@ -307,7 +307,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'sexual-reproductive',
     label: 'Sexual & Reproductive Health',
     tagline: 'Peptides studied across the HPG axis and CNS sexual-response pathways.',
-    metaTitle: 'Sexual & Reproductive Health Peptides — Research Guide',
+    metaTitle: 'Sexual & Reproductive Health Peptides',
     metaDescription:
       'Research reference for peptides studied in sexual and reproductive health — melanocortin and kisspeptin signaling, HSDD, and hypothalamic–pituitary–gonadal regulation.',
     intro: [
@@ -335,7 +335,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'immune-inflammation',
     label: 'Immune & Inflammation',
     tagline: 'Thymic and host-defense peptides studied for immune modulation.',
-    metaTitle: 'Immune & Inflammation Peptides — Research Guide',
+    metaTitle: 'Immune & Inflammation Peptides',
     metaDescription:
       'Research reference for immunomodulatory peptides studied in inflammation, innate immunity, and infection — thymic peptides, antimicrobial peptides, and anti-inflammatory fragments.',
     intro: [
@@ -372,7 +372,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'mitochondrial',
     label: 'Mitochondrial & Bioenergetics',
     tagline: 'Mitochondria-targeted peptides studied for bioenergetics and cardiolipin.',
-    metaTitle: 'Mitochondrial & Bioenergetic Peptides — Research Guide',
+    metaTitle: 'Mitochondrial & Bioenergetic Peptides',
     metaDescription:
       'Research reference for mitochondria-targeted peptides studied in bioenergetics, cardiolipin stabilization, and mitochondrial myopathy — exercise physiology and heart failure models.',
     intro: [
@@ -400,7 +400,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'bioregulators',
     label: 'Peptide Bioregulators',
     tagline: 'Short, tissue-specific peptides proposed to regulate gene expression — the Khavinson series.',
-    metaTitle: 'Peptide Bioregulators — Khavinson Short Peptides Research Guide',
+    metaTitle: 'Peptide Bioregulators — Khavinson Peptides',
     metaDescription:
       'Research reference for short peptide bioregulators — the Khavinson Cytomax/Cytogen series. Tissue-specific di-, tri-, and tetrapeptides, the gene-regulatory hypothesis, and an honest read of the evidence.',
     intro: [
@@ -432,7 +432,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'peptide-hormones',
     label: 'Peptide Hormone Synthesis',
     tagline: 'How hormone sequences are turned into pure, stable, manufacturable synthetic drugs.',
-    metaTitle: 'Peptide Hormone Synthesis & Analog Engineering — Research Guide',
+    metaTitle: 'Peptide Hormone Synthesis & Analogs',
     metaDescription:
       'A synthesis-focused reference on the hormone peptides — disulfide formation, acylation, anti-aggregation design, and the analog engineering behind octreotide, pramlintide, desmopressin, and cosyntropin.',
     intro: [
