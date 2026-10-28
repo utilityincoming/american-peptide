@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   // Pages that need a standalone title (home) use `title: { absolute }`;
   // og/twitter titles are separate objects and intentionally omit the suffix.
   title: {
-    template: '%s | AmericanPeptide.com',
+    template: '%s — AmericanPeptide',
     default: 'AmericanPeptide.com — AI-Powered Peptide Research',
   },
   description:

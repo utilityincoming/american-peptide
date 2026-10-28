@@ -6,7 +6,7 @@ import SourcingCard from '@/components/SourcingCard'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Cognitive & Nootropic Peptides — Research Guide',
+  title: 'Cognitive & Nootropic Peptides',
   description:
     'Research reference for cognitive and nootropic peptides — Semax (BDNF/NGF induction), Selank (anxiolytic, GABAergic), DSIP (sleep/circadian). Mechanisms, evidence quality, and BBB considerations.',
   alternates: { canonical: `${SITE}/cognitive-peptides` },

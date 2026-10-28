@@ -6,7 +6,7 @@ import { COMPARISONS } from '@/lib/comparisons'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Peptide Comparisons — Head-to-Head Research Guides',
+  title: 'Peptide Comparisons — Head-to-Head',
   description:
     'Side-by-side research comparisons of peptides — mechanism, clinical-trial evidence, and key differences, each cross-referenced to verified PubChem chemistry.',
   alternates: { canonical: `${SITE}/compare` },

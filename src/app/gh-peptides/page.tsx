@@ -9,7 +9,7 @@ import CompoundingStatus from '@/components/CompoundingStatus'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Growth Hormone Peptides — GHRH Analogs & GHRPs',
+  title: 'Growth Hormone Peptides — GHRH & GHRPs',
   description:
     'Research reference for growth hormone secretagogues — CJC-1295, ipamorelin, sermorelin, tesamorelin, hexarelin. GHRH vs GHRP mechanism, pulsatile vs sustained release, and the synergy rationale.',
   alternates: { canonical: `${SITE}/gh-peptides` },
