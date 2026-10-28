@@ -52,7 +52,7 @@ const breadcrumbLd = {
 }
 
 export const metadata: Metadata = {
-  title: 'Peptide Clinical Trials — ClinicalPulse | AmericanPeptide.com',
+  title: 'Peptide Clinical Trials — ClinicalPulse',
   description:
     'Search active and completed clinical trials for research peptides — semaglutide, tirzepatide, retatrutide, BPC-157, and more. Filter by phase, status, and indication. Powered by ClinicalTrials.gov.',
   alternates: { canonical: `${SITE}/trials` },

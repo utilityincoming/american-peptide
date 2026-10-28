@@ -20,7 +20,9 @@ import ContourDivider from '@/components/ContourDivider'
 // openGraph drop the layout's og:site_name / og:type). So we repeat type and
 // siteName here to keep the home page's social card complete and self-contained.
 export const metadata: Metadata = {
-  title: 'American Peptide — The Cited US Peptide Reference',
+  // Standalone title: the home page keeps its own brand treatment rather than
+  // the "<page> | AmericanPeptide.com" template from the root layout.
+  title: { absolute: 'American Peptide — The Cited US Peptide Reference' },
   description:
     'A cited, chemistry-grade peptide reference: the sourcing standard for US-made peptides, an open catalog, a dosing calculator, and a citation-backed research agent.',
   alternates: { canonical: '/' },

@@ -13,8 +13,7 @@ import CompoundSearch from './CompoundSearch'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title:
-    'Peptides & Compounds — Verified Monographs + PubChem Lookup | AmericanPeptide.com',
+  title: 'Peptide Monographs & PubChem Lookup',
   description:
     'Look up any peptide or compound. Browse verified research monographs — mechanism, sequence, structure, molecular weight, and research context — or search PubChem’s full chemical database by name, formula, or synonym.',
   alternates: { canonical: `${SITE}/compounds` },

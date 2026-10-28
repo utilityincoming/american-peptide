@@ -78,7 +78,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'GLP-1R · FDA approved',
     bPill: 'GIP/GLP-1R · FDA approved',
     metaTitle:
-      'Semaglutide vs Tirzepatide — Mechanism, Trials & Clinical Differences | AmericanPeptide.com',
+      'Semaglutide vs Tirzepatide — Mechanism & Trial Data',
     metaDescription:
       'Research comparison of semaglutide (Ozempic/Wegovy) and tirzepatide (Mounjaro/Zepbound) — mechanism differences (GLP-1R mono vs GIP/GLP-1R dual agonism), head-to-head trial data, synthesis complexity, and the case for retatrutide.',
     keywords: [
@@ -183,7 +183,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'GHRH analog · GHRHR',
     bPill: 'GHRP · GHS-R1a',
     metaTitle:
-      'CJC-1295 vs Ipamorelin — Mechanism, Synergy & Key Differences | AmericanPeptide.com',
+      'CJC-1295 vs Ipamorelin — Mechanism, Synergy & Key Differences',
     metaDescription:
       'Research comparison of CJC-1295 (no DAC / with DAC) and ipamorelin — receptor differences (GHRHR vs GHS-R1a), why they are studied together, pulsatile vs sustained release, and compound profiles.',
     keywords: [
@@ -252,7 +252,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Pentadecapeptide · tissue repair',
     bPill: 'Tβ4 fragment · cell migration',
     metaTitle:
-      'BPC-157 vs TB-500 — Mechanism, Repair Pathways & Key Differences | AmericanPeptide.com',
+      'BPC-157 vs TB-500 — Mechanism, Repair Pathways & Key Differences',
     metaDescription:
       'Research comparison of BPC-157 and TB-500 — distinct repair mechanisms (angiogenesis/cytoprotection vs actin regulation and cell migration), origins, evidence base, and why they are often studied together.',
     keywords: [
@@ -337,7 +337,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Triple agonist · investigational',
     bPill: 'Dual agonist · FDA approved',
     metaTitle:
-      'Retatrutide vs Tirzepatide — Triple vs Dual Agonist, Trials & Differences | AmericanPeptide.com',
+      'Retatrutide vs Tirzepatide — Triple vs Dual Agonist',
     metaDescription:
       'Research comparison of retatrutide (GIP/GLP-1/glucagon triple agonist) and tirzepatide (GIP/GLP-1 dual agonist) — what the glucagon arm adds, trial weight-loss data, and approval status.',
     keywords: [
@@ -419,7 +419,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'GHRH analog · extended half-life',
     bPill: 'GHRH(1-29) · short-acting',
     metaTitle:
-      'CJC-1295 vs Sermorelin — GHRH Analogs & Half-Life Compared | AmericanPeptide.com',
+      'CJC-1295 vs Sermorelin — GHRH Analogs & Half-Life Compared',
     metaDescription:
       'Both are GHRH analogs that prompt natural GH release. Sermorelin is the short-acting GHRH(1-29) fragment; CJC-1295 with DAC binds albumin for a multi-day half-life. A cited research comparison.',
     keywords: [
@@ -481,7 +481,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'GHRP · selective',
     bPill: 'GHRP · potent',
     metaTitle:
-      'Ipamorelin vs Hexarelin — Selectivity vs Potency | AmericanPeptide.com',
+      'Ipamorelin vs Hexarelin — Selectivity vs Potency',
     metaDescription:
       'Both are GHRPs acting on the ghrelin receptor. Ipamorelin releases GH cleanly without raising cortisol or prolactin; hexarelin is more potent but less selective. A cited research comparison.',
     keywords: [
@@ -542,7 +542,7 @@ export const COMPARISONS: Comparison[] = [
     bName: 'Selank',
     aPill: 'ACTH(4-10) analog · nootropic',
     bPill: 'Tuftsin analog · anxiolytic',
-    metaTitle: 'Semax vs Selank — Focus vs Calm | AmericanPeptide.com',
+    metaTitle: 'Semax vs Selank — Focus vs Calm',
     metaDescription:
       'Semax (an ACTH(4-10) analog) is studied for cognition and BDNF; Selank (a tuftsin analog) for anxiety via GABA / serotonin. A cited research comparison of the two Russian neuropeptides.',
     keywords: [
@@ -603,7 +603,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Melanocortin agonist · MC3R/MC4R',
     bPill: 'KISS1R / GPR54 · GnRH axis',
     metaTitle:
-      'PT-141 vs Kisspeptin — Central Arousal vs the GnRH Axis | AmericanPeptide.com',
+      'PT-141 vs Kisspeptin — Central Arousal vs the GnRH Axis',
     metaDescription:
       'PT-141 (bremelanotide) acts on brain melanocortin receptors for acute arousal; kisspeptin drives the upstream GnRH hormone axis. A cited research comparison of two approaches to sexual function.',
     keywords: [
@@ -662,7 +662,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Non-selective MC1–5R agonist',
     bPill: 'MC1R-selective · FDA-approved',
     metaTitle:
-      'Melanotan I vs Melanotan II — MC1R Selectivity & Safety | AmericanPeptide.com',
+      'Melanotan I vs Melanotan II — MC1R Selectivity & Safety',
     metaDescription:
       'Afamelanotide (Melanotan I) is MC1R-selective and FDA-approved; Melanotan II is non-selective and activates MC4R, driving side effects. A cited melanocortin research comparison.',
     keywords: [
@@ -721,7 +721,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Copper tripeptide · skin',
     bPill: 'Copper tripeptide · hair',
     metaTitle:
-      'GHK-Cu vs AHK-Cu — Copper Peptides for Skin vs Hair (vs Matrixyl) | AmericanPeptide.com',
+      'GHK-Cu vs AHK-Cu — Copper Peptides for Skin vs Hair (vs Matrixyl)',
     metaDescription:
       'GHK-Cu and AHK-Cu share copper-binding chemistry but target different tissue — skin remodeling vs the hair follicle. How they compare, and where the non-copper peptide Matrixyl fits. Cited.',
     keywords: [
@@ -781,7 +781,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Long-acting IGF-1 analog · systemic',
     bPill: 'IGF-1 splice variant · local',
     metaTitle:
-      'IGF-1 LR3 vs MGF — Hypertrophy vs Satellite-Cell Activation | AmericanPeptide.com',
+      'IGF-1 LR3 vs MGF — Hypertrophy vs Satellite-Cell Activation',
     metaDescription:
       'IGF-1 LR3 is a long-acting systemic IGF-1 analog studied for hypertrophy; MGF is a local IGF-1 splice variant studied for satellite-cell activation. A cited research comparison.',
     keywords: [
@@ -841,7 +841,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Pineal tetrapeptide · telomeres',
     bPill: 'Mitochondrial peptide · metabolism',
     metaTitle:
-      'Epitalon vs MOTS-c — Telomere vs Mitochondrial Longevity | AmericanPeptide.com',
+      'Epitalon vs MOTS-c — Telomere vs Mitochondrial Longevity',
     metaDescription:
       'Two longevity peptides, two mechanisms: Epitalon is studied for telomerase upregulation, MOTS-c for mitochondrial and metabolic regulation. A cited research comparison.',
     keywords: [
@@ -900,7 +900,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'GLP-1R · once-weekly · FDA approved',
     bPill: 'GLP-1R · once-daily · FDA approved',
     metaTitle:
-      'Semaglutide vs Liraglutide — Weekly vs Daily GLP-1, Trials & Differences | AmericanPeptide.com',
+      'Semaglutide vs Liraglutide — Weekly vs Daily GLP-1, Trials & Differences',
     metaDescription:
       'Research comparison of semaglutide (Ozempic/Wegovy) and liraglutide (Victoza/Saxenda) — the same acylated GLP-1 template at once-weekly vs once-daily dosing, head-to-head STEP 8 and SUSTAIN 10 data, and why the successor outperforms.',
     keywords: [
@@ -974,7 +974,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Triple agonist · investigational',
     bPill: 'GLP-1R · FDA approved',
     metaTitle:
-      'Retatrutide vs Semaglutide — Triple Agonist vs GLP-1, Weight-Loss Data | AmericanPeptide.com',
+      'Retatrutide vs Semaglutide — Triple Agonist vs GLP-1, Weight-Loss Data',
     metaDescription:
       'Research comparison of retatrutide (GIP/GLP-1/glucagon triple agonist) and semaglutide (GLP-1 mono-agonist) — what two extra receptors add, the ~24% vs ~15% weight-loss figures, and why this is a cross-trial, not head-to-head, comparison.',
     keywords: [
@@ -1058,7 +1058,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Oral ghrelin mimetic · non-peptide',
     bPill: 'Selective GHRP · pentapeptide',
     metaTitle:
-      'MK-677 vs Ipamorelin — Oral vs Injectable Ghrelin-Receptor GH Secretagogues | AmericanPeptide.com',
+      'MK-677 vs Ipamorelin — Oral vs Injectable GH Secretagogues',
     metaDescription:
       'Research comparison of MK-677 (ibutamoren) and ipamorelin — the same ghrelin receptor, two very different tools: an oral non-peptide with ~24-hour action vs a selective injectable pentapeptide that acts in short pulses. Cited.',
     keywords: [
@@ -1123,7 +1123,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'GHRH(1-44) · FDA approved',
     bPill: 'GHRH(1-29) analog · research',
     metaTitle:
-      'Tesamorelin vs CJC-1295 — The Approved GHRH Analog vs the Research One | AmericanPeptide.com',
+      'Tesamorelin vs CJC-1295 — The Approved GHRH Analog vs the Research One',
     metaDescription:
       'Research comparison of tesamorelin (Egrifta, the only FDA-approved GHRH analog) and CJC-1295 — full-length GHRH(1-44) with Phase 3 visceral-fat data vs a modified GHRH(1-29) research compound, with or without DAC. Cited.',
     keywords: [
@@ -1187,7 +1187,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'MC4R-preferential · FDA approved',
     bPill: 'Non-selective MC1–5R · unapproved',
     metaTitle:
-      'PT-141 vs Melanotan II — The Libido Metabolite vs the Tanning Peptide | AmericanPeptide.com',
+      'PT-141 vs Melanotan II — The Libido Metabolite vs the Tanning Peptide',
     metaDescription:
       'Research comparison of PT-141 (bremelanotide) and Melanotan II — how the FDA-approved MC4R agonist for desire was literally derived from the non-selective tanning peptide, and what a single C-terminal change did to selectivity. Cited.',
     keywords: [
@@ -1249,7 +1249,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Gastric pentadecapeptide · systemic repair',
     bPill: 'Copper tripeptide · skin & ECM',
     metaTitle:
-      'BPC-157 vs GHK-Cu — Systemic Tissue Repair vs Copper-Peptide Skin Remodeling | AmericanPeptide.com',
+      'BPC-157 vs GHK-Cu — Tissue Repair vs Skin Remodeling',
     metaDescription:
       'Research comparison of BPC-157 and GHK-Cu — two of the most-searched “repair” peptides that work through different mechanisms (angiogenesis/NO vs copper delivery and ECM remodeling) on different tissue. Cited, research-grade.',
     keywords: [
@@ -1338,7 +1338,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Amylin + GLP-1 · investigational',
     bPill: 'GIP/GLP-1R · FDA approved',
     metaTitle:
-      'CagriSema vs Tirzepatide — Combination vs Single-Molecule, Trial Data | AmericanPeptide.com',
+      'CagriSema vs Tirzepatide — Combination vs Single-Molecule, Trial Data',
     metaDescription:
       'Research comparison of CagriSema (cagrilintide + semaglutide) and tirzepatide (Zepbound) — two ways to exceed semaglutide: co-formulating two peptides vs one dual-receptor molecule. REDEFINE 1 vs SURMOUNT-1 data, cross-trial. Cited.',
     keywords: [
@@ -1405,7 +1405,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Amylin + GLP-1 · investigational',
     bPill: 'Triple agonist · investigational',
     metaTitle:
-      'CagriSema vs Retatrutide — Novo’s Combo vs Lilly’s Triple Agonist | AmericanPeptide.com',
+      'CagriSema vs Retatrutide — Novo’s Combo vs Lilly’s Triple Agonist',
     metaDescription:
       'Research comparison of CagriSema (cagrilintide + semaglutide) and retatrutide (GIP/GLP-1/glucagon triple agonist) — the two leading next-generation obesity candidates, reached by opposite strategies. ~20% vs ~24%, cross-trial. Cited.',
     keywords: [
@@ -1490,7 +1490,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Glucagon/GLP-1 · investigational',
     bPill: 'GIP/GLP-1/glucagon · investigational',
     metaTitle:
-      'Survodutide vs Retatrutide — Glucagon Dual vs Triple Agonist, MASH & Obesity | AmericanPeptide.com',
+      'Survodutide vs Retatrutide — Dual vs Triple Agonist',
     metaDescription:
       'Research comparison of survodutide (glucagon/GLP-1 dual, MASH Breakthrough) and retatrutide (GIP/GLP-1/glucagon triple) — both lean on the glucagon arm for energy expenditure and liver fat. What adding GIP changes, and the NEJM MASH data. Cited.',
     keywords: [
@@ -1558,7 +1558,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Glucagon/GLP-1 · approved in China',
     bPill: 'GIP/GLP-1R · FDA approved',
     metaTitle:
-      'Mazdutide vs Tirzepatide — Glucagon vs GIP as the Partner to GLP-1 | AmericanPeptide.com',
+      'Mazdutide vs Tirzepatide — Glucagon vs GIP as the Partner to GLP-1',
     metaDescription:
       'Research comparison of mazdutide (glucagon/GLP-1 dual, approved in China) and tirzepatide (GIP/GLP-1 dual, FDA-approved) — same “dual agonist” class, different second receptor, different geography of approval. GLORY-1 vs SURMOUNT-1. Cited.',
     keywords: [
@@ -1624,7 +1624,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'GHRP · potent · Japan-approved dx',
     bPill: 'GHRP · the original · appetite',
     metaTitle:
-      'GHRP-2 vs GHRP-6 — Potency vs Appetite, the Two Classic GHRPs | AmericanPeptide.com',
+      'GHRP-2 vs GHRP-6 — Potency vs Appetite, the Two Classic GHRPs',
     metaDescription:
       'Research comparison of GHRP-2 (pralmorelin) and GHRP-6 — both hexapeptide ghrelin-receptor GH secretagogues, but GHRP-2 is the more potent, less-hunger successor while GHRP-6 is the original that led to the discovery of ghrelin. Cited.',
     keywords: [
@@ -1688,7 +1688,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Angiotensin IV–derived · HGF/c-Met',
     bPill: 'ACTH(4-10) analog · BDNF',
     metaTitle:
-      'Dihexa vs Semax — Synaptogenesis vs Neurotrophic Induction | AmericanPeptide.com',
+      'Dihexa vs Semax — Synaptogenesis vs Neurotrophic Induction',
     metaDescription:
       'Research comparison of dihexa and Semax — two very different nootropic peptides: dihexa is a potent angiotensin-IV–derived synaptogenic compound (HGF/c-Met) with little human data, while Semax is an ACTH(4-10) analog with decades of Russian clinical use. Cited.',
     keywords: [
@@ -1749,7 +1749,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Porcine neurotrophic mixture · approved abroad',
     bPill: 'ACTH(4-10) peptide · Russia',
     metaTitle:
-      'Cerebrolysin vs Semax — A Neurotrophic Mixture vs a Single Neuropeptide | AmericanPeptide.com',
+      'Cerebrolysin vs Semax — A Neurotrophic Mixture vs a Single Neuropeptide',
     metaDescription:
       'Research comparison of Cerebrolysin and Semax — both neuroprotective and used clinically outside the US for stroke, but Cerebrolysin is an injectable porcine-brain peptide mixture that mimics neurotrophic factors, while Semax is a single intranasal ACTH(4-10) peptide that induces them. Cited.',
     keywords: [
@@ -1811,7 +1811,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Glucagon/GLP-1 · MASH · investigational',
     bPill: 'Glucagon/GLP-1 · approved in China',
     metaTitle:
-      'Survodutide vs Mazdutide — Two Glucagon/GLP-1 Dual Agonists Compared | AmericanPeptide.com',
+      'Survodutide vs Mazdutide — Two Glucagon/GLP-1 Dual Agonists Compared',
     metaDescription:
       'Research comparison of survodutide (BI 456906) and mazdutide (IBI362) — the two leading glucagon/GLP-1 dual agonists. Same receptor pair, different molecular origins (engineered vs oxyntomodulin-based) and different status (MASH Breakthrough vs China-approved). Cited.',
     keywords: [
@@ -1878,7 +1878,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Selective GHRP · clean',
     bPill: 'Potent GHRP · Japan-approved dx',
     metaTitle:
-      'Ipamorelin vs GHRP-2 — Selectivity vs Potency in GH Secretagogues | AmericanPeptide.com',
+      'Ipamorelin vs GHRP-2 — Selectivity vs Potency in GH Secretagogues',
     metaDescription:
       'Research comparison of ipamorelin and GHRP-2 (pralmorelin) — both ghrelin-receptor GH secretagogues, but ipamorelin releases GH cleanly with minimal cortisol or prolactin, while GHRP-2 is more potent, mildly appetite-raising, and an approved diagnostic in Japan. Cited.',
     keywords: [
@@ -1941,7 +1941,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'GHRH(1-44) · FDA approved',
     bPill: 'GHRH(1-29) · approved 1990, discontinued',
     metaTitle:
-      'Tesamorelin vs Sermorelin — The Two GHRH Analogs That Reached FDA Approval | AmericanPeptide.com',
+      'Tesamorelin vs Sermorelin — The FDA-Approved GHRH Analogs',
     metaDescription:
       'Research comparison of tesamorelin (Egrifta) and sermorelin (Geref) — the full-length GHRH(1-44) analog still on the market vs the GHRH(1-29) fragment approved in 1990 and later discontinued. Both prompt the body’s own GH. Cited.',
     keywords: [
@@ -2003,7 +2003,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'SNAP-25 mimic · expression lines',
     bPill: 'Matrikine · collagen synthesis',
     metaTitle:
-      'Argireline vs Matrixyl — Relax the Muscle vs Build the Collagen | AmericanPeptide.com',
+      'Argireline vs Matrixyl — Relax the Muscle vs Build the Collagen',
     metaDescription:
       'Research comparison of Argireline (acetyl hexapeptide-8) and Matrixyl (palmitoyl pentapeptide-4) — the two best-known cosmetic peptides, working on opposite problems: Argireline dampens muscle-contraction (expression lines), Matrixyl signals fibroblasts to make collagen. Cited.',
     keywords: [
@@ -2065,7 +2065,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Redox cofactor · direct supply',
     bPill: 'NNMT inhibitor · small molecule',
     metaTitle:
-      'NAD+ vs 5-Amino-1MQ — Supply the Cofactor or Inhibit the Enzyme | AmericanPeptide.com',
+      'NAD+ vs 5-Amino-1MQ — Supply the Cofactor or Inhibit the Enzyme',
     metaDescription:
       'Research comparison of NAD+ and 5-Amino-1MQ — two longevity-metabolic small molecules (neither is a peptide). One supplies the NAD+ cofactor directly; the other inhibits NNMT, the enzyme that depletes NAD+ precursors and methyl donors. Cited.',
     keywords: [
@@ -2126,7 +2126,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'SNAP-25 mimic · octapeptide',
     bPill: 'SNAP-25 mimic · hexapeptide',
     metaTitle:
-      'SNAP-8 vs Argireline — Is the Longer Peptide Actually Stronger? | AmericanPeptide.com',
+      'SNAP-8 vs Argireline — Is the Longer Peptide Actually Stronger?',
     metaDescription:
       'Research comparison of SNAP-8 (acetyl octapeptide-3) and Argireline (acetyl hexapeptide-8) — the same “topical Botox” SNARE mechanism in an eight- vs six-residue peptide. SNAP-8 is marketed as more potent, but the comparative evidence is thin. Cited.',
     keywords: [
@@ -2188,7 +2188,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Tβ4 fragment · cell migration',
     bPill: 'Copper tripeptide · ECM',
     metaTitle:
-      'TB-500 vs GHK-Cu — Cell-Migration Repair vs Copper/ECM Remodeling | AmericanPeptide.com',
+      'TB-500 vs GHK-Cu — Cell-Migration Repair vs Copper/ECM Remodeling',
     metaDescription:
       'Research comparison of TB-500 (a thymosin β4 fragment) and GHK-Cu (a copper tripeptide) — two “repair” peptides with different mechanisms: actin-driven cell migration vs copper delivery and extracellular-matrix remodeling. Cited.',
     keywords: [
@@ -2277,7 +2277,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'LH-mimic glycoprotein · FDA approved',
     bPill: 'GnRH decapeptide · upstream',
     metaTitle:
-      'HCG vs Gonadorelin — Downstream LH-Mimic vs Upstream GnRH | AmericanPeptide.com',
+      'HCG vs Gonadorelin — Downstream LH-Mimic vs Upstream GnRH',
     metaDescription:
       'Research comparison of hCG and gonadorelin (GnRH) — two ways to drive the reproductive axis: hCG mimics luteinizing hormone directly at the gonad, while gonadorelin acts upstream on the pituitary. Where each sits on the HPG axis, and why delivery pattern matters. Cited.',
     keywords: [
@@ -2339,7 +2339,7 @@ export const COMPARISONS: Comparison[] = [
     aPill: 'Tripeptide antioxidant',
     bPill: 'Redox cofactor (not a peptide)',
     metaTitle:
-      'Glutathione vs NAD+ — Antioxidant Buffer vs Metabolic Cofactor | AmericanPeptide.com',
+      'Glutathione vs NAD+ — Antioxidant Buffer vs Metabolic Cofactor',
     metaDescription:
       'Research comparison of glutathione and NAD+ — two “longevity” injectables that are both about redox but do different jobs: glutathione is a tripeptide antioxidant that neutralizes damage, while NAD+ is a coenzyme that powers energy metabolism and repair signaling. Cited.',
     keywords: [

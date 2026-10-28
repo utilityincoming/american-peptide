@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Peptide Agent — AI-Powered Peptide Research | AmericanPeptide.com',
+  title: 'Peptide Agent — AI-Powered Peptide Research',
   description:
     'Ask the Peptide Agent about peptide mechanisms, synthesis, clinical evidence, and compound profiles — citation-backed answers sourced from PubMed, PubChem, and ClinicalTrials.gov.',
   alternates: { canonical: `${SITE}/research` },

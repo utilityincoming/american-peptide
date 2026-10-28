@@ -11,7 +11,7 @@ import { EvidenceFloor } from '@/components/evidence'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Peptide Sources by Evidence Tier | AmericanPeptide.com',
+  title: 'Peptide Sources by Evidence Tier',
   description:
     'Every compound with a ranked sourcing page, ordered by the provenance tier of each vendor purity claim — a third-party COA outranks a vendor-reported number. A trust layer over the sourcing market, not a store.',
   alternates: { canonical: `${SITE}/sources` },

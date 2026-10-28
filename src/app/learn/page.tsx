@@ -51,7 +51,7 @@ const RESOURCES = [
 ] as const
 
 export const metadata: Metadata = {
-  title: 'Learn — Peptide Science, Synthesis & Terminology | AmericanPeptide.com',
+  title: 'Peptide Science, Synthesis & Terminology',
   description:
     'Start here to understand research peptides: how they’re manufactured, what they’re studied for, and the terminology that lets you read a certificate of analysis with confidence.',
   alternates: { canonical: `${SITE}/learn` },

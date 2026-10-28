@@ -14,7 +14,7 @@ const SITE = 'https://americanpeptide.com'
 const PATH = '/vendors'
 
 export const metadata: Metadata = {
-  title: 'Peptide Vendor Reviews — Scored on the Standard | AmericanPeptide.com',
+  title: 'Peptide Vendor Reviews — Scored on the Standard',
   description:
     'Independent reviews of research-peptide vendors, each scored 0–100 on published transparency signals — third-party COAs, per-batch testing, purity, and policies. Ranked on evidence, never on commission.',
   alternates: { canonical: `${SITE}${PATH}` },

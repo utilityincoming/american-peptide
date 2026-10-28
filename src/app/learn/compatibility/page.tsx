@@ -13,7 +13,7 @@ import {
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Peptide Compatibility & Stability — Mixing, Degradation & Handling | AmericanPeptide.com',
+  title: 'Peptide Compatibility & Stability Guide',
   description:
     'The chemistry of peptide stability — how peptides degrade, what decides whether they combine, and why blending un-characterized peptides multiplies risk.',
   alternates: { canonical: `${SITE}/learn/compatibility` },
