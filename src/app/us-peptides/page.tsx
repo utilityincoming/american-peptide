@@ -24,7 +24,7 @@ import {
   VENDOR_TIERS,
 } from '@/lib/vendors'
 import { IS_APP_BUILD } from '@/lib/platform'
-import { COMMUNITY_PATH } from '@/lib/community'
+import { COMMUNITY_HREF } from '@/lib/community'
 
 const SITE = 'https://americanpeptide.com'
 const PATH = '/us-peptides'
@@ -598,7 +598,7 @@ export default function MadeInUsaPage() {
                   room is for.
                 </p>
                 <a
-                  href={COMMUNITY_PATH}
+                  href={COMMUNITY_HREF}
                   target="_blank"
                   rel="nofollow noopener"
                   className="flex items-center justify-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"

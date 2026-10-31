@@ -18,6 +18,7 @@
 // is a separate lever with its own rules — see Vendor.spotlight.
 
 import { IS_APP_BUILD } from '@/lib/platform'
+import { goUrl } from '@/lib/redirect-origin'
 import { getPeptideBySlug, type SyntheticFeature } from '@/lib/peptides'
 
 /** Region codes a vendor ships to (ISO-ish, plus 'global'). */
@@ -598,9 +599,13 @@ export function getVendor(id: string): Vendor | undefined {
  */
 export function vendorHref(v: Vendor, slug?: string): string {
   if (v.affiliate?.active && v.affiliate.trackedPath) {
-    return slug && v.affiliate.productUrls?.[slug]
-      ? `${v.affiliate.trackedPath}?p=${encodeURIComponent(slug)}`
-      : v.affiliate.trackedPath
+    const path =
+      slug && v.affiliate.productUrls?.[slug]
+        ? `${v.affiliate.trackedPath}?p=${encodeURIComponent(slug)}`
+        : v.affiliate.trackedPath
+    // Render the chokepoint on the outbound-redirect host when one is configured
+    // (americanpeptide.net), else same-origin. See lib/redirect-origin.
+    return goUrl(path)
   }
   return v.url
 }
