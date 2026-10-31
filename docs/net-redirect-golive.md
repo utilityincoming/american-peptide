@@ -89,6 +89,40 @@ rendered anchors point at; the middleware keeps `.net` serving nothing but `/go`
 
 ---
 
+## Post-launch: referral-click monitoring
+
+The `/go` chokepoint records aggregate, no-PII click counts (per vendor, per
+vendor×product, and the community link) via Upstash Redis, readable at
+`GET /api/admin/referrals?months=<1..13>`.
+
+**Two prerequisites before any counts can be read:**
+
+1. **A reachable Upstash Redis.** Counts write through `src/lib/kv.ts`. If the
+   `UPSTASH_REDIS_REST_*` vars are unset or the database is archived/deleted,
+   writes fail silently (the redirect is unaffected — best-effort `after()` +
+   try/catch) and nothing accumulates. Restore or recreate the database and set
+   `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` in Production.
+2. **`ADMIN_SECRET` set in Production.** The endpoint returns `503` until
+   `ADMIN_SECRET` (or `CRON_SECRET`) is set. Generate one with
+   `openssl rand -hex 32`. Read the endpoint with
+   `Authorization: Bearer <secret>`.
+
+**Reading it once (manual):**
+
+```bash
+curl -sS -H "Authorization: Bearer $ADMIN_SECRET" \
+  "https://americanpeptide.com/api/admin/referrals?months=3"
+```
+
+**Recurring monitor (a few days after launch):** a daily Claude Code Routine can
+fetch the endpoint, diff against the prior day's snapshot, and report per-vendor
+/ per-product deltas. Keep the secret OUT of the Routine prompt — have it read
+`$ADMIN_SECRET` (fallback `$CRON_SECRET`) from the cloud environment's variables,
+and make it no-op quietly (one-line "still blocked") on `503` or
+`"persistent": false`. Delete the Routine once the monitoring window is done.
+
+---
+
 ## Rollback
 
 Instant and total, no code revert needed:
