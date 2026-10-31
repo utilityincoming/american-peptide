@@ -97,7 +97,7 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
 
   const url = `${SITE}/catalog/${peptide.slug}`
   return {
-    title: `${peptide.name} — AmericanPeptide.com Catalog`,
+    title: `${peptide.name} — Sequence & Mechanism`,
     description: peptide.shortDescription,
     alternates: {
       canonical: url,

@@ -9,7 +9,7 @@ import AgentPrompt from '@/components/AgentPrompt'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Peptide Research Areas — Indication Guide | AmericanPeptide.com',
+  title: 'Peptide Research Areas — Indication Guide',
   description:
     'Browse research peptides by what they’re studied for — weight loss, wound healing, cognition, longevity, growth hormone, immune modulation, and more. Mechanism, references, and catalog entries for each indication.',
   alternates: { canonical: `${SITE}/research-areas` },

@@ -49,7 +49,7 @@ const WEIGHTS = (
 ).sort((a, b) => b[1] - a[1])
 
 export const metadata: Metadata = {
-  title: 'The Standard — How AmericanPeptide Verifies | AmericanPeptide.com',
+  title: 'How We Verify Peptide Data — The Standard',
   description:
     'How AmericanPeptide verifies: catalog chemistry checked against PubChem, sources ranked by transparency and never commission, every page research-grade.',
   alternates: { canonical: `${SITE}/methodology` },

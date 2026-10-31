@@ -22,7 +22,7 @@ const SITE = 'https://americanpeptide.com'
 const TELEGRAM_URL = 'https://t.me/+17FKLWux_OQyOGEx'
 
 export const metadata: Metadata = {
-  title: 'About — Building the Trust Layer for Peptide Research | AmericanPeptide.com',
+  title: 'About — The Peptide Research Trust Layer',
   description:
     'AmericanPeptide.com is an AI-assisted research platform and open reference for peptide science. Learn who we are, the principles behind the Peptide Agent and open catalog, and how to reach us.',
   alternates: { canonical: `${SITE}/about` },

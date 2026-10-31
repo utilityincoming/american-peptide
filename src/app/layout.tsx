@@ -37,7 +37,14 @@ const spectral = Spectral({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://americanpeptide.com'),
-  title: 'AmericanPeptide.com — AI-Powered Peptide Research',
+  // Brand suffix lives here once. Child pages set only the descriptive part
+  // in their `title` string and Next.js appends " | AmericanPeptide.com".
+  // Pages that need a standalone title (home) use `title: { absolute }`;
+  // og/twitter titles are separate objects and intentionally omit the suffix.
+  title: {
+    template: '%s | AmericanPeptide',
+    default: 'AmericanPeptide.com — AI-Powered Peptide Research',
+  },
   description:
     'An AI-assisted research platform and open reference for peptide science — explore how peptides are designed, synthesized, purified, and proven, with the Peptide Agent, an open catalog, and hands-on tools.',
   manifest: '/manifest.json',

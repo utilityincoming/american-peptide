@@ -20,8 +20,7 @@ const SITE = 'https://americanpeptide.com'
 const UPDATED = '2026-09-13'
 
 export const metadata: Metadata = {
-  title:
-    'Muscle Preservation on GLP-1s — The Activin/Myostatin Axis | AmericanPeptide.com',
+  title: 'Muscle Preservation — The Myostatin Axis',
   description:
     'Research reference for preserving lean mass during GLP-1 weight loss: why ~25–40% of the weight lost is muscle, the activin/myostatin axis, and the antibodies (apitegromab, trevogrumab, garetosmab, bimagrumab) studied to keep it.',
   alternates: { canonical: `${SITE}/muscle-preservation` },

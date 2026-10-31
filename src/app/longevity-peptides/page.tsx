@@ -6,7 +6,7 @@ import SourcingCard from '@/components/SourcingCard'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Longevity & Mitochondrial Peptides — Research Guide | AmericanPeptide.com',
+  title: 'Longevity & Mitochondrial Peptides',
   description:
     'Research reference for longevity and mitochondrial peptides — MOTS-c, SS-31 (elamipretide), Epitalon, NAD+, and 5-amino-1MQ. Mechanisms spanning mitochondrial signaling, AMPK, cardiolipin, and NAD+ biology.',
   alternates: { canonical: `${SITE}/longevity-peptides` },

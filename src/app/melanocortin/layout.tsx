@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Melanocortin Agonist Research Hub | AmericanPeptide.com',
+  title: 'Melanocortin Agonist Research Hub',
   description:
     'Deep-dive reference for melanocortin receptor agonists — FDA-approved drugs (bremelanotide, setmelanotide, afamelanotide), MC1R–MC5R receptor biology, and the investigational pipeline.',
   alternates: { canonical: `${SITE}/melanocortin` },

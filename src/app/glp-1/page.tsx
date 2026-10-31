@@ -18,8 +18,7 @@ import { getVendorsForPeptide } from '@/lib/vendors'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title:
-    'GLP-1 Peptides — Semaglutide, Tirzepatide & Incretin Agonist Research | AmericanPeptide.com',
+  title: 'GLP-1 Peptides — Semaglutide & Tirzepatide',
   description:
     'Research reference for GLP-1 receptor agonists — semaglutide (Ozempic/Wegovy), tirzepatide (Mounjaro/Zepbound), retatrutide, and the incretin biology.',
   alternates: { canonical: `${SITE}/glp-1` },

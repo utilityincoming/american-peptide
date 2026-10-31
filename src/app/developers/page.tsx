@@ -6,7 +6,7 @@ import { PEPTIDES } from '@/lib/peptides'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Developers — Open Peptide Catalog API | AmericanPeptide.com',
+  title: 'Peptide Catalog API — For Developers',
   description:
     'Free, open peptide reference data via a simple JSON API. Query the AmericanPeptide catalog by category, research area, or slug — PubChem-enriched chemistry, sequences, and identifiers under CC BY 4.0.',
   alternates: { canonical: `${SITE}/developers` },

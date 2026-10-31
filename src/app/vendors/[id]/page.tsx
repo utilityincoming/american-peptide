@@ -52,7 +52,7 @@ export async function generateMetadata({
   const score = trustScore(v)
   const path = `/vendors/${v.id}`
   return {
-    title: `${v.name} Review — Trust Score ${score}/100, COAs & Shipping | AmericanPeptide.com`,
+    title: `${v.name} Review — Trust Score ${score}/100`,
     description: `An independent review of ${v.name}, scored ${score}/100 on our transparency Standard — third-party COAs, per-batch testing, purity, and shipping and refund policies. Ranked on published evidence, never on commission.`,
     alternates: { canonical: `${SITE}${path}` },
     keywords: [

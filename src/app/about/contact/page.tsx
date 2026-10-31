@@ -8,7 +8,7 @@ const SITE = 'https://americanpeptide.com'
 const TELEGRAM_URL = 'https://t.me/+17FKLWux_OQyOGEx'
 
 export const metadata: Metadata = {
-  title: 'Contact — AmericanPeptide.com',
+  title: 'Contact',
   description:
     'Reach the AmericanPeptide.com team: Peptide Agent feedback, catalog corrections, data and API questions, partnership and supplier inquiries, or press.',
   alternates: { canonical: `${SITE}/about/contact` },

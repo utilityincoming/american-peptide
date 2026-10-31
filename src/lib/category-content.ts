@@ -37,7 +37,7 @@ export const CATEGORY_CONTENT: Partial<
   Record<PeptideCategory, CategoryContent>
 > = {
   metabolic: {
-    metaTitle: 'Metabolic Peptides — Mechanisms & Research | AmericanPeptide',
+    metaTitle: 'Metabolic Peptides — Mechanisms & Research',
     metaDescription:
       'A research reference on metabolic peptides — GLP-1, GIP, glucagon, and amylin receptor agonists. Mechanisms, incretin biology, and the compounds under active study.',
     heading: 'Metabolic Peptides',
@@ -79,7 +79,7 @@ export const CATEGORY_CONTENT: Partial<
   },
 
   'healing-repair': {
-    metaTitle: 'Healing & Repair Peptides — Mechanisms & Research | AmericanPeptide',
+    metaTitle: 'Healing & Repair Peptides — Mechanisms',
     metaDescription:
       'A research reference on tissue-repair peptides — BPC-157, TB-500, GHK-Cu and related compounds. Angiogenesis, cell migration, and ECM remodeling mechanisms.',
     heading: 'Healing & Repair Peptides',
@@ -121,7 +121,7 @@ export const CATEGORY_CONTENT: Partial<
   },
 
   'growth-hormone': {
-    metaTitle: 'Growth Hormone Peptides — GHRH & GHRP Research | AmericanPeptide',
+    metaTitle: 'Growth Hormone Peptides — GHRH & GHRP',
     metaDescription:
       'A research reference on growth-hormone peptides — GHRH analogs and ghrelin-receptor secretagogues. Pulsatile GH release, half-life engineering, and the compounds under study.',
     heading: 'Growth Hormone Peptides',
@@ -163,7 +163,7 @@ export const CATEGORY_CONTENT: Partial<
   },
 
   longevity: {
-    metaTitle: 'Longevity Peptides — Mitochondrial & NAD+ Research | AmericanPeptide',
+    metaTitle: 'Longevity Peptides — Mitochondrial & NAD+',
     metaDescription:
       'A research reference on longevity peptides — mitochondrial bioenergetics, the NAD+ axis, and telomere biology. Mechanisms and the compounds under active study.',
     heading: 'Longevity Peptides',
@@ -205,7 +205,7 @@ export const CATEGORY_CONTENT: Partial<
   },
 
   reproductive: {
-    metaTitle: 'Reproductive Peptides — Melanocortin & HPG-Axis Research | AmericanPeptide',
+    metaTitle: 'Reproductive Peptides — Melanocortin & HPG',
     metaDescription:
       'A research reference on reproductive peptides — central melanocortin agonists and kisspeptin/HPG-axis signaling. Mechanisms and the compounds under study.',
     heading: 'Reproductive Peptides',
@@ -247,7 +247,7 @@ export const CATEGORY_CONTENT: Partial<
   },
 
   cognitive: {
-    metaTitle: 'Cognitive Peptides — Neurotrophic & Neuromodulatory Research | AmericanPeptide',
+    metaTitle: 'Cognitive Peptides — Neurotrophic',
     metaDescription:
       'A research reference on cognitive peptides — neurotrophic, anxiolytic, and sleep-architecture mechanisms. Semax, Selank, DSIP, and the science under study.',
     heading: 'Cognitive Peptides',
@@ -289,7 +289,7 @@ export const CATEGORY_CONTENT: Partial<
   },
 
   immune: {
-    metaTitle: 'Immune Peptides — Immunomodulation Research | AmericanPeptide',
+    metaTitle: 'Immune Peptides — Immunomodulation',
     metaDescription:
       'A research reference on immune peptides — thymic immunopotentiators, cathelicidin antimicrobials, and anti-inflammatory fragments. Mechanisms and compounds under study.',
     heading: 'Immune Peptides',
@@ -331,7 +331,7 @@ export const CATEGORY_CONTENT: Partial<
   },
 
   cosmetic: {
-    metaTitle: 'Cosmetic Peptides — Dermal & Pigmentary Research | AmericanPeptide',
+    metaTitle: 'Cosmetic Peptides — Dermal & Pigmentary',
     metaDescription:
       'A research reference on cosmetic peptides — dermal matrix remodeling and melanocortin pigmentation. GHK-Cu, Melanotan II, and the mechanisms under study.',
     heading: 'Cosmetic Peptides',
@@ -373,7 +373,7 @@ export const CATEGORY_CONTENT: Partial<
   },
 
   mitochondrial: {
-    metaTitle: 'Mitochondrial Peptides — Bioenergetics Research | AmericanPeptide',
+    metaTitle: 'Mitochondrial Peptides — Bioenergetics',
     metaDescription:
       'A research reference on mitochondrial peptides — mitochondrial-derived signaling, cristae integrity, and the redox cofactor economy. MOTS-c, SS-31, NAD+.',
     heading: 'Mitochondrial Peptides',
@@ -414,7 +414,7 @@ export const CATEGORY_CONTENT: Partial<
     ],
   },
   bioregulator: {
-    metaTitle: 'Peptide Bioregulators — Khavinson Short Peptides | AmericanPeptide',
+    metaTitle: 'Peptide Bioregulators — Khavinson Peptides',
     metaDescription:
       'A research reference on short peptide bioregulators — the Khavinson Cytomax/Cytogen series. Tissue-specific di-, tri-, and tetrapeptides, the gene-regulatory hypothesis, and an honest read of the evidence.',
     heading: 'Peptide Bioregulators',
@@ -455,7 +455,7 @@ export const CATEGORY_CONTENT: Partial<
     ],
   },
   'peptide-hormone': {
-    metaTitle: 'Peptide Hormones — Synthesis & Analog Engineering | AmericanPeptide',
+    metaTitle: 'Peptide Hormones — Synthesis & Analogs',
     metaDescription:
       'How hormone sequences become manufacturable synthetic drugs: the analog engineering and synthesis behind somatostatin→octreotide, amylin→pramlintide, vasopressin→desmopressin, ACTH→cosyntropin, plus ghrelin’s unique acylation and calcitonin’s disulfide chemistry.',
     heading: 'Peptide Hormones',

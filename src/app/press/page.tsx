@@ -28,7 +28,7 @@ const glossaryCount = GLOSSARY.length
 const areaCount = RESEARCH_AREAS.length
 
 export const metadata: Metadata = {
-  title: 'Press & Media Kit — AmericanPeptide.com',
+  title: 'Press & Media Kit',
   description:
     'Press-ready boilerplate, a fact sheet, the trust Standard, and brand assets for AmericanPeptide.com — the independent, research-grade reference and AI agent for peptide science.',
   alternates: { canonical: `${SITE}/press` },

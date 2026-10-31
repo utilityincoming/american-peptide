@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, BookText, Calculator, WifiOff } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Offline — AmericanPeptide.com',
+  title: 'Offline',
   description: 'You are offline.',
   robots: { index: false, follow: false },
 }

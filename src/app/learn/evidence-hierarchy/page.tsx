@@ -6,7 +6,7 @@ import { EvidenceLegend } from '@/components/evidence'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'How to Read Peptide Research — Evidence Hierarchy Guide | AmericanPeptide.com',
+  title: 'Peptide Evidence Hierarchy Guide',
   description:
     'A researcher\'s guide to evaluating peptide evidence — the difference between cell culture, animal models, Phase 1–3 trials, and approved drugs. Why "studies show" needs context.',
   alternates: { canonical: `${SITE}/learn/evidence-hierarchy` },

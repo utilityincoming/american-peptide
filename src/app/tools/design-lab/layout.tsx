@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'Peptide Design Lab (Beta) — AmericanPeptide.com',
+  title: 'Peptide Design Lab (Beta)',
   description:
     'Experimental, research-use peptide design lab: build or load a sequence and get live molecular weight, pH-dependent net charge, isoelectric point, GRAVY, and 280 nm extinction coefficient.',
   alternates: { canonical: `${SITE}/tools/design-lab` },
