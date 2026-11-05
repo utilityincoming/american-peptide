@@ -343,7 +343,7 @@ export default async function VendorReviewPage({
 
         {/* CTA */}
         <section className="rounded-2xl border border-hairline bg-fill p-6 text-center">
-          <p className="mb-1 text-sm font-semibold text-ink/85">Visit {v.name}</p>
+          <p className="mb-1 text-sm font-semibold text-ink/85">Shop {v.name}</p>
           <p className="mx-auto mb-4 max-w-md text-xs leading-relaxed text-ink/55">
             You leave AmericanPeptide for the vendor&rsquo;s own site. Always request
             and match the third-party COA for your specific lot before any use.
@@ -354,7 +354,7 @@ export default async function VendorReviewPage({
             rel="sponsored nofollow noopener"
             className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
           >
-            Go to {v.name}
+            Shop {v.name}
             <ArrowUpRight className="h-4 w-4" />
           </a>
           {affiliate && (

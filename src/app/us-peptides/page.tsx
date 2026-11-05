@@ -473,7 +473,7 @@ export default function MadeInUsaPage() {
                                     rel="sponsored nofollow noopener"
                                     className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-4 py-2 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
                                   >
-                                    Visit {v.name}
+                                    Shop {v.name}
                                     <ArrowUpRight className="h-4 w-4" />
                                   </a>
                                   <Link
