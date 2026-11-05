@@ -1161,7 +1161,7 @@ function VendorCard({
         rel="sponsored nofollow noopener"
         className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-accent/30 bg-accent/15 px-3 py-2 text-xs font-medium text-accent transition-colors hover:bg-accent/25"
       >
-        Visit {vendor.name}
+        Shop {vendor.name}
         <ArrowUpRight className="h-3.5 w-3.5" />
       </a>
 

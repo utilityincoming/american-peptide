@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight, Building2, Check, Info, ShieldCheck } from 'l
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
 import SpotlightComparison from '@/components/SpotlightComparison'
 import {
+  getSpotlightVendor,
   getVendorsForPeptide,
   hasSourcingPage,
   trustScore,
@@ -50,12 +51,21 @@ export default function SourcingCard({
   const vendors = topVendorsFor(slugs)
   if (vendors.length === 0) return null
 
-  // The hero slot goes to the honest trust-ranked winner — a paid featured
-  // partner is NOT pinned here. It still surfaces in its ranked place via the
-  // "compare all sources" list below, so the position is disclosed without the
-  // sidebar dressing an ad up as the top pick.
-  const featured = false
   const best = vendors[0]
+
+  // A paid featured partner for any of this page's slugs, if one is booked AND
+  // eligible (canSpotlight gates on an active affiliate + a non-'unvetted' tier).
+  // The hero slot still goes to the honest trust-ranked winner — the spotlight is
+  // NEVER pinned as the top pick. Instead it surfaces as a SEPARATE, labeled
+  // "Featured partner · paid" callout below the hero (see the block near the end),
+  // so a real negotiated offer reaches the sidebar without an ad masquerading as
+  // "best trust". `featured` is true ONLY in the one case where the trust hero
+  // genuinely IS that spotlight vendor — the only case SpotlightComparison's
+  // paid-partner claims (chargeback cover, US card rails, negotiated discount)
+  // are accurate for. Otherwise the hero renders as a pure trust card.
+  const spotlightSlug = slugs.find((s) => getSpotlightVendor(s))
+  const spotlight = spotlightSlug ? getSpotlightVendor(spotlightSlug) : undefined
+  const featured = Boolean(spotlight && spotlight.id === best.id)
   const tier = VENDOR_TIERS.find((t) => t.id === vendorTier(best))!
   const t = best.trust
   const signals: string[] = []
@@ -180,6 +190,41 @@ export default function SourcingCard({
           Compare all {linkedVendorCount} vetted sources
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
+      )}
+
+      {/* Separate, disclosed paid-partner callout. Renders ONLY when a genuine
+          spotlight vendor exists for this page, carries a real offer, and is NOT
+          already the trust hero above (the `featured` case already shows it via
+          SpotlightComparison). This is how a negotiated offer reaches the sidebar
+          where the honest trust winner has none to show — labeled "paid", never
+          dressed as "best trust". Links through the same /go chokepoint. */}
+      {!featured && spotlight && spotlight.affiliate?.offer && (
+        <div className="mt-4 rounded-lg border border-amber-400/30 bg-amber-400/[0.08] p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-amber-300/90">
+            Featured partner · paid
+          </p>
+          <p className="mt-1 text-sm font-semibold text-amber-200">
+            {spotlight.affiliate.offer}
+          </p>
+          <a
+            href={vendorHref(spotlight)}
+            target="_blank"
+            rel="sponsored nofollow noopener"
+            className="mt-2 flex items-center justify-center gap-1.5 rounded-lg border border-amber-400/40 px-3 py-1.5 text-xs font-semibold text-amber-200 transition-colors hover:bg-amber-400/10"
+          >
+            Shop {spotlight.name}
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
+          {spotlight.affiliate.code && (
+            <p className="mt-1.5 text-center text-[11px] leading-relaxed text-amber-200/70">
+              Discount applies automatically — or enter{' '}
+              <span className="font-mono font-semibold text-amber-100">
+                {spotlight.affiliate.code}
+              </span>{' '}
+              at checkout.
+            </p>
+          )}
+        </div>
       )}
 
       {/* Non-featured: caveats render inline. Featured: the SpotlightComparison

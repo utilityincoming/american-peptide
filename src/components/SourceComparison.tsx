@@ -156,7 +156,7 @@ export default function SourceComparison({ slug }: { slug: string }) {
                         rel="sponsored nofollow noopener"
                         className="inline-flex items-center gap-1.5 rounded-lg border border-hairline-strong bg-fill-strong px-3 py-1.5 text-xs font-medium text-ink/80 transition-colors hover:border-accent/40 hover:text-accent"
                       >
-                        Visit {v.name}
+                        Shop {v.name}
                         <ArrowUpRight className="h-3.5 w-3.5" />
                       </a>
                       {affiliate && v.affiliate?.offer && (
