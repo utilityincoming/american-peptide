@@ -19,6 +19,12 @@ Next.js 15 + TypeScript + Tailwind CSS + App Router.
   the same system content as one uncached string. Structured routes
   (/api/analyze-peptide, /api/jobs/fact-qa) stay on Claude.
 
+- Spend safeguards: /api/chat and /api/analyze-peptide only serve same-origin
+  browsers and go through src/lib/agent-quota.ts — 5 free uses per visitor per
+  UTC day (HTTP 402 when spent), a per-IP cap, and a site-wide daily run ceiling
+  that degrades to reference content. Usage is metered there and exposed at
+  GET /api/admin/usage. Automation (npm run eval) sends `x-agent-key`.
+
 ## Architecture
 - src/app/ — pages and API routes
 - src/components/ — reusable React components
