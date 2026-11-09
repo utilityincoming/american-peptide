@@ -100,6 +100,17 @@ export default function PrivacyPage() {
               information into the assistant.
             </p>
             <p className="mb-3">
+              <SubHead>Free-use allowance.</SubHead> The research assistant and
+              AI sequence analysis include a limited number of free uses per
+              day. To count them and to prevent automated abuse, we set one
+              anonymous first-party cookie (<code>ap_vid</code>, a random
+              identifier that is not linked to your identity) and keep
+              short-lived usage counters keyed to that identifier and to a
+              one-way hash of your network address. We do not store your raw IP
+              address for this purpose, and we do not use the cookie for
+              advertising or cross-site tracking.
+            </p>
+            <p className="mb-3">
               <SubHead>Information you provide.</SubHead> If you submit the
               contact form or otherwise reach out, we collect what you send us —
               typically your email address and your message — so we can respond.

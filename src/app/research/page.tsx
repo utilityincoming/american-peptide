@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { Send, Dna, SquarePen } from 'lucide-react'
+import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import type { Components } from 'react-markdown'
@@ -138,6 +139,9 @@ export default function ResearchPage() {
   const [messages, setMessages] = useState<Message[]>([WELCOME])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  // Free daily allowance, as reported by the server (null until known / when off).
+  const [quota, setQuota] = useState<{ limit: number; remaining: number } | null>(null)
+  const [limitReached, setLimitReached] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   // Session page context, set once from the ?ctx=kind:slug deep-link param
@@ -152,7 +156,7 @@ export default function ResearchPage() {
   const sendMessage = useCallback(
     async (text: string) => {
       const trimmed = text.trim()
-      if (!trimmed || loading) return
+      if (!trimmed || loading || limitReached) return
 
       const userMsg: Message = { role: 'user', content: trimmed }
       const next = [...messages, userMsg]
@@ -192,6 +196,17 @@ export default function ResearchPage() {
         })
 
         const data = await res.json()
+        if (data.quota && typeof data.quota.remaining === 'number') {
+          setQuota({ limit: data.quota.limit, remaining: data.quota.remaining })
+        }
+        if (res.status === 402) {
+          // Out of free questions: put the unsent question back in the box and
+          // show the limit notice instead of an error bubble.
+          setMessages(messages)
+          setInput(trimmed)
+          setLimitReached(true)
+          return
+        }
         if (!res.ok) throw new Error(data.error || 'Request failed')
 
         setMessages((prev) => [...prev, { role: 'assistant', content: data.content }])
@@ -207,7 +222,7 @@ export default function ResearchPage() {
         setLoading(false)
       }
     },
-    [messages, loading],
+    [messages, loading, limitReached],
   )
 
   // Deep link: /research?q=... auto-asks the question once on load, so prompt
@@ -231,8 +246,38 @@ export default function ResearchPage() {
     }
 
     const q = params.get('q')
-    if (q && q.trim()) sendMessage(q)
+    if (q && q.trim()) {
+      // Each ask is a paid model run, so only a real visitor's browser auto-asks.
+      // An automated/headless client that renders this page gets the question
+      // prefilled instead (the server refuses crawlers as well).
+      const automated =
+        navigator.webdriver || /bot|crawl|spider|headless|lighthouse|preview/i.test(navigator.userAgent)
+      if (automated) setInput(q)
+      else sendMessage(q)
+    }
   }, [sendMessage])
+
+  // Load the remaining free allowance for the counter under the input.
+  useEffect(() => {
+    let cancelled = false
+    const load = async () => {
+      try {
+        const res = await fetch('/api/chat')
+        if (!res.ok) return
+        const data = await res.json()
+        if (!cancelled && data.enabled && typeof data.remaining === 'number') {
+          setQuota({ limit: data.limit, remaining: data.remaining })
+          if (data.remaining <= 0) setLimitReached(true)
+        }
+      } catch {
+        // counter is informational — the server enforces the limit regardless
+      }
+    }
+    load()
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -347,6 +392,25 @@ export default function ResearchPage() {
       {/* ── Input bar ── */}
       <div className="flex-shrink-0 border-t border-hairline px-4 py-4 md:px-6">
         <div className="mx-auto max-w-3xl">
+          {limitReached && (
+            <div
+              role="status"
+              className="mb-3 rounded-2xl border border-accent/20 bg-accent/[0.06] px-4 py-3 text-sm text-ink/70"
+            >
+              <p className="font-medium text-ink/90">
+                You&rsquo;ve used today&rsquo;s {quota?.limit ?? 5} free questions.
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-ink/55">
+                Every answer runs live lookups against PubChem, ClinicalTrials.gov, PubMed and UniProt, so the
+                agent has a daily free allowance. It resets at midnight UTC. In the meantime the{' '}
+                <Link href="/catalog" className="text-accent underline-offset-2 hover:underline">catalog</Link>,{' '}
+                <Link href="/research-areas" className="text-accent underline-offset-2 hover:underline">research-area guides</Link>{' '}
+                and{' '}
+                <Link href="/trials" className="text-accent underline-offset-2 hover:underline">clinical trials dashboard</Link>{' '}
+                are open without limit.
+              </p>
+            </div>
+          )}
           <div className="flex items-end gap-3 rounded-2xl border border-hairline bg-fill px-4 py-3 transition-colors focus-within:border-accent/25">
             <textarea
               ref={textareaRef}
@@ -361,7 +425,7 @@ export default function ResearchPage() {
             />
             <button
               onClick={() => sendMessage(input)}
-              disabled={!input.trim() || loading}
+              disabled={!input.trim() || loading || limitReached}
               aria-label="Send message"
               className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-[#5BA88C] text-[#0E1512] transition-all hover:bg-[#6FBF9A] hover:shadow-[0_0_20px_rgba(91,168,140,0.3)] disabled:cursor-not-allowed disabled:opacity-25"
             >
@@ -369,6 +433,11 @@ export default function ResearchPage() {
             </button>
           </div>
           <p className="mt-2 text-center text-[10px] text-ink/20">
+            {quota && !limitReached && (
+              <span className="text-ink/45">
+                {quota.remaining} of {quota.limit} free questions left today ·{' '}
+              </span>
+            )}
             Shift + Enter for new line · AI outputs are computational hypotheses requiring experimental validation
           </p>
         </div>

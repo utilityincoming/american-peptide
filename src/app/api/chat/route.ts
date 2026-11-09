@@ -8,6 +8,15 @@ import { logAgentQuestion } from '@/lib/agent-faqs'
 import { sanitizeAgentLinks, sanitizeUngroundedIdentifiers } from '@/lib/agent-output'
 import { catalogFactsDigest, personalizationDigest } from '@/lib/agent-context'
 import { runVeniceAgent } from '@/lib/providers/venice'
+import {
+  reserveRun,
+  peekQuota,
+  meter,
+  isOwnerBypass,
+  isSameOriginBrowser,
+  isLikelyBot,
+  type QuotaStatus,
+} from '@/lib/agent-quota'
 
 // ── Hardening knobs ──────────────────────────────────────────────────────────
 const EFFORT = process.env.AGENT_EFFORT ?? 'medium' // low | medium | high | max
@@ -105,7 +114,16 @@ type Msg = { role: 'user' | 'assistant'; content: unknown }
 interface AnthResult {
   ok: boolean
   status: number
-  data?: { content: unknown[]; stop_reason?: string }
+  data?: {
+    content: unknown[]
+    stop_reason?: string
+    usage?: {
+      input_tokens?: number
+      output_tokens?: number
+      cache_creation_input_tokens?: number
+      cache_read_input_tokens?: number
+    }
+  }
   errorText?: string
 }
 
@@ -210,21 +228,6 @@ function extractText(content: unknown[]): string {
     .trim()
 }
 
-// Reject cross-origin browser requests. This endpoint exists only for the
-// site's own UI and bills the Anthropic API, so a third-party page must not be
-// able to spend the budget. A same-origin fetch sends an Origin whose host
-// equals Host; a cross-origin one differs. Requests with no Origin (non-browser
-// clients) are left to the IP rate limiter rather than blocked here.
-function crossOriginBlocked(request: Request): boolean {
-  const origin = request.headers.get('origin')
-  if (!origin) return false
-  try {
-    return new URL(origin).host !== request.headers.get('host')
-  } catch {
-    return true // malformed Origin header
-  }
-}
-
 function lastUserText(msgs: Msg[]): string {
   const u = [...msgs].reverse().find((m) => m.role === 'user')
   return typeof u?.content === 'string' ? u.content : ''
@@ -241,12 +244,24 @@ async function runAnthropicAgent(
   cleaned: Msg[],
   systemSuffix: SystemBlock[],
   groundingOn: boolean,
-): Promise<{ text: string; stop?: string; upstreamError: boolean; toolText: string }> {
+): Promise<{
+  text: string
+  stop?: string
+  upstreamError: boolean
+  toolText: string
+  usage: { input: number; output: number }
+}> {
   const messages: Msg[] = [...cleaned]
   let finalText = ''
   let lastStop: string | undefined
   // Accumulate tool outputs across rounds — the grounded-identifier allow-set.
   const toolTexts: string[] = []
+  // Tokens billed across every round (cache reads/writes counted as input).
+  const usage = { input: 0, output: 0 }
+  const addUsage = (u: NonNullable<AnthResult['data']>['usage']) => {
+    usage.input += (u?.input_tokens ?? 0) + (u?.cache_creation_input_tokens ?? 0) + (u?.cache_read_input_tokens ?? 0)
+    usage.output += u?.output_tokens ?? 0
+  }
 
   for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
     const result = await callAnthropic(apiKey, messages, { systemSuffix, disableTools: !groundingOn })
@@ -255,10 +270,11 @@ async function runAnthropicAgent(
       // Every model in the failover chain failed (HTTP or transport-level). Report
       // it as an upstream error; the route decides whether to degrade to reference.
       console.error(`[chat] anthropic upstream error ${result.status}: ${result.errorText?.slice(0, 500)}`)
-      return { text: '', stop: lastStop, upstreamError: true, toolText: toolTexts.join('\n') }
+      return { text: '', stop: lastStop, upstreamError: true, toolText: toolTexts.join('\n'), usage }
     }
 
     const { content, stop_reason } = result.data
+    addUsage(result.data.usage)
     lastStop = stop_reason
     // Append the full assistant turn (preserves thinking + tool_use blocks,
     // which the API requires when continuing a tool-use exchange).
@@ -294,12 +310,13 @@ async function runAnthropicAgent(
       disableTools: !groundingOn,
     })
     if (forced.ok && forced.data) {
+      addUsage(forced.data.usage)
       lastStop = forced.data.stop_reason
       finalText = extractText(forced.data.content)
     }
   }
 
-  return { text: finalText, stop: lastStop, upstreamError: false, toolText: toolTexts.join('\n') }
+  return { text: finalText, stop: lastStop, upstreamError: false, toolText: toolTexts.join('\n'), usage }
 }
 
 export async function POST(request: NextRequest) {
@@ -317,15 +334,27 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  // Same-origin gate: block cross-origin browser callers from spending the budget.
-  if (crossOriginBlocked(request)) {
-    return Response.json({ error: 'Cross-origin requests are not allowed.' }, { status: 403 })
+  // Caller screening. This endpoint exists only for the site's own UI and bills
+  // the model providers, so only a same-origin browser may call it: a third-party
+  // page, a script with no Origin, or a self-identified crawler is refused before
+  // any work. The eval script / owner authenticates with x-agent-key instead.
+  const bypass = isOwnerBypass(request)
+  if (!bypass) {
+    if (!isSameOriginBrowser(request)) {
+      void meter('chat', { 'denied:origin': 1 })
+      return Response.json({ error: 'This endpoint is only available from the site itself.' }, { status: 403 })
+    }
+    if (isLikelyBot(request.headers.get('user-agent'))) {
+      void meter('chat', { 'denied:bot': 1 })
+      return Response.json({ error: 'Automated clients are not permitted.' }, { status: 403 })
+    }
   }
 
-  // Per-IP rate limit before any work. The agentic loop can fan out to several
+  // Per-IP burst limit before any work. The agentic loop can fan out to several
   // model calls + external lookups per request, so cap chat tightly: 12/min.
   const rl = await rateLimit(clientKey(request, 'chat'), { limit: 12, windowSec: 60 })
   if (!rl.ok) {
+    void meter('chat', { 'denied:ratelimit': 1 })
     return tooManyRequests(rl, 'Too many requests. Please wait a moment and try again.')
   }
 
@@ -407,6 +436,28 @@ export async function POST(request: NextRequest) {
     .filter(Boolean)
     .join('\n\n')
 
+  // ── Free allowance + site-wide spend ceiling ──
+  // Reserve one model run only now that the request is known to be valid. Out of
+  // free uses → 402. Ceiling hit or counter store down → no model is called; the
+  // answer comes from our own published reference content instead.
+  const run = await reserveRun(request, 'chat')
+  const cookieHeaders: Record<string, string> = run.setCookie ? { 'Set-Cookie': run.setCookie } : {}
+  const respond = (body: Record<string, unknown>, quota: QuotaStatus | null, status = 200) =>
+    Response.json({ ...body, ...(quota ? { quota } : {}) }, { status, headers: cookieHeaders })
+
+  if (!run.allowed && run.reason === 'quota') {
+    return respond(
+      {
+        error: `You've used today's ${run.quota?.limit ?? ''} free questions. Your allowance resets at midnight UTC.`,
+        code: 'quota_exhausted',
+      },
+      run.quota,
+      402,
+    )
+  }
+  const modelsAllowed = run.allowed
+  const quota = run.quota
+
   let finalText = ''
   let lastStop: string | undefined
   let provider: 'venice' | 'anthropic' | 'reference' = 'reference'
@@ -417,8 +468,9 @@ export async function POST(request: NextRequest) {
 
   // Primary: Venice. Grounding tools are honored unless the caller turned
   // grounding off (the eval's A/B baseline), matching the Anthropic path.
-  if (veniceKey) {
+  if (modelsAllowed && veniceKey) {
     const v = await runVeniceAgent(veniceSystem, cleaned, { disableTools: !groundingOn })
+    void meter('chat', { 'tokens_in:venice': v.usage.input, 'tokens_out:venice': v.usage.output })
     if (v.ok && v.text) {
       finalText = v.text
       provider = 'venice'
@@ -430,9 +482,10 @@ export async function POST(request: NextRequest) {
   }
 
   // Backup: the Anthropic failover chain + full agentic loop.
-  if (!finalText && anthropicKey) {
+  if (modelsAllowed && !finalText && anthropicKey) {
     if (DEBUG) console.log('[chat] falling back to anthropic backup')
     const a = await runAnthropicAgent(anthropicKey, cleaned, systemSuffix, groundingOn)
+    void meter('chat', { 'tokens_in:anthropic': a.usage.input, 'tokens_out:anthropic': a.usage.output })
     lastStop = a.stop
     if (a.text) {
       finalText = a.text
@@ -448,6 +501,34 @@ export async function POST(request: NextRequest) {
     if (DEBUG) console.log(`[chat] no model text; lastStop=${lastStop} upstreamError=${hadUpstreamError}`)
     const query = lastUserText(cleaned)
     const reference = retrievalFallback(query)
+    // No model answered, so this request doesn't cost the visitor a free use.
+    if (run.allowed) await run.refund()
+    void meter('chat', { 'provider:reference': 1 })
+
+    if (!modelsAllowed) {
+      // Site-wide daily ceiling reached (or the counter store is down): the model
+      // was never called. Serve the matching reference entry if there is one.
+      if (reference) {
+        return respond(
+          {
+            role: 'assistant',
+            content: `The research agent has reached its capacity for today, but here's the relevant entry from the AmericanPeptide.com reference:\n\n${reference}`,
+            degraded: true,
+            provider: 'reference',
+          },
+          quota,
+        )
+      }
+      return respond(
+        {
+          error:
+            'The research agent has reached its capacity for today. The catalog, research-area guides, and clinical trials dashboard are still available — please try the agent again tomorrow.',
+          code: 'capacity',
+        },
+        quota,
+        503,
+      )
+    }
 
     if (lastStop === 'refusal') {
       // Only the Anthropic backup can emit a policy refusal; Venice does not.
@@ -458,15 +539,19 @@ export async function POST(request: NextRequest) {
       // Every configured provider failed at the transport/HTTP layer. Degrade to
       // reference content if it matches the question rather than surfacing a 502.
       if (reference) {
-        return Response.json({
-          role: 'assistant',
-          content: `The research model is briefly unavailable, but here's the relevant entry from the AmericanPeptide.com reference:\n\n${reference}`,
-          degraded: true,
-        })
+        return respond(
+          {
+            role: 'assistant',
+            content: `The research model is briefly unavailable, but here's the relevant entry from the AmericanPeptide.com reference:\n\n${reference}`,
+            degraded: true,
+          },
+          quota && { ...quota, remaining: Math.min(quota.limit, quota.remaining + 1) },
+        )
       }
-      return Response.json(
+      return respond(
         { error: 'The model service is temporarily unavailable. Please try again.' },
-        { status: 502 },
+        quota && { ...quota, remaining: Math.min(quota.limit, quota.remaining + 1) },
+        502,
       )
     } else {
       finalText = reference
@@ -500,10 +585,28 @@ export async function POST(request: NextRequest) {
   const safe = sanitizeAgentLinks(finalText)
   if (DEBUG && safe.stripped) console.log(`[chat] stripped ${safe.stripped} fabricated link(s)`)
 
-  return Response.json({
-    role: 'assistant',
-    content: safe.text,
-    provider,
-    ...(lastStop === 'refusal' ? { stop: 'refusal' } : {}),
-  })
+  if (provider !== 'reference') void meter('chat', { answered: 1, [`provider:${provider}`]: 1 })
+
+  return respond(
+    {
+      role: 'assistant',
+      content: safe.text,
+      provider,
+      ...(lastStop === 'refusal' ? { stop: 'refusal' } : {}),
+    },
+    // A reference-floor answer was refunded above; report the allowance as such.
+    quota && provider === 'reference'
+      ? { ...quota, remaining: Math.min(quota.limit, quota.remaining + 1) }
+      : quota,
+  )
+}
+
+// GET /api/chat — the caller's remaining free allowance, without consuming any.
+// The research UI reads this on load to show "N free questions left today".
+export async function GET(request: NextRequest) {
+  const quota = await peekQuota(request, 'chat')
+  return Response.json(
+    { enabled: quota !== null, ...(quota ?? {}) },
+    { headers: { 'Cache-Control': 'private, no-store' } },
+  )
 }

@@ -22,6 +22,10 @@ export interface Kv {
   incrWithExpiry(key: string, exSec: number): Promise<number>
   /** INCR with no expiry — a durable, all-time counter. */
   incr(key: string): Promise<number>
+  /** INCRBY (may be negative, e.g. to refund a reservation); sets a TTL on first write. */
+  incrBy(key: string, by: number, exSec: number): Promise<number>
+  /** HINCRBY one field of a hash; sets a TTL on the hash on first write. */
+  hincrby(key: string, field: string, by: number, exSec: number): Promise<number>
   hset(key: string, obj: Record<string, string>): Promise<void>
   hgetall(key: string): Promise<Record<string, string> | null>
   sadd(key: string, member: string): Promise<void>
@@ -79,6 +83,20 @@ const upstashKv: Kv = {
   },
   async incr(key) {
     return Number(await upstash(['INCR', key])) || 0
+  },
+  async incrBy(key, by, exSec) {
+    const [count] = await upstashPipeline([
+      ['INCRBY', key, by],
+      ['EXPIRE', key, exSec, 'NX'],
+    ])
+    return Number(count) || 0
+  },
+  async hincrby(key, field, by, exSec) {
+    const [count] = await upstashPipeline([
+      ['HINCRBY', key, field, by],
+      ['EXPIRE', key, exSec, 'NX'],
+    ])
+    return Number(count) || 0
   },
   async hset(key, obj) {
     const flat: (string | number)[] = ['HSET', key]
@@ -154,6 +172,20 @@ const memoryKv: Kv = {
     const current = live(e) ? Number(e!.value) || 0 : 0
     const next = current + 1
     strings.set(key, { value: String(next), exp: live(e) ? e!.exp : null })
+    return next
+  },
+  async incrBy(key, by, exSec) {
+    const e = strings.get(key)
+    const next = (live(e) ? Number(e!.value) || 0 : 0) + by
+    const exp = live(e) ? e!.exp : Date.now() + exSec * 1000
+    strings.set(key, { value: String(next), exp })
+    return next
+  },
+  async hincrby(key, field, by) {
+    const h = hashes.get(key) ?? new Map<string, string>()
+    const next = (Number(h.get(field)) || 0) + by
+    h.set(field, String(next))
+    hashes.set(key, h)
     return next
   },
   async hset(key, obj) {

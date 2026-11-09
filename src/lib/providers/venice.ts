@@ -49,6 +49,7 @@ type OaiMessage =
   | { role: 'tool'; tool_call_id: string; content: string }
 
 interface OaiResponse {
+  usage?: { prompt_tokens?: number; completion_tokens?: number }
   choices?: { finish_reason?: string; message?: { content?: string | null; tool_calls?: ToolCall[] } }[]
 }
 
@@ -62,6 +63,8 @@ export interface VeniceResult {
    *  identifier guardrail knows which NCT/CID/PMID/accession were actually
    *  looked up (vs confabulated by the model). */
   toolText?: string
+  /** Tokens billed across every round of this run (for spend metering). */
+  usage: { input: number; output: number }
 }
 
 interface VeniceOpts {
@@ -86,7 +89,8 @@ export async function runVeniceAgent(
   opts: VeniceOpts = {},
 ): Promise<VeniceResult> {
   const apiKey = process.env.VENICE_API_KEY
-  if (!apiKey) return { ok: false, status: 500, errorText: 'VENICE_API_KEY not configured' }
+  const usage = { input: 0, output: 0 }
+  if (!apiKey) return { ok: false, status: 500, errorText: 'VENICE_API_KEY not configured', usage }
 
   const useTools = TOOLS_ENABLED && !opts.disableTools
   const messages: OaiMessage[] = [
@@ -127,18 +131,20 @@ export async function runVeniceAgent(
     } catch (err) {
       // Network error / client-side timeout — no HTTP response. status 0 tells
       // the route this was a transport failure so it can fall over to Anthropic.
-      return { ok: false, status: 0, errorText: err instanceof Error ? err.message : 'network error' }
+      return { ok: false, status: 0, errorText: err instanceof Error ? err.message : 'network error', usage }
     }
 
     const raw = await res.text()
-    if (!res.ok) return { ok: false, status: res.status, errorText: raw }
+    if (!res.ok) return { ok: false, status: res.status, errorText: raw, usage }
 
     let data: OaiResponse
     try {
       data = JSON.parse(raw) as OaiResponse
     } catch {
-      return { ok: false, status: 502, errorText: 'Malformed upstream response' }
+      return { ok: false, status: 502, errorText: 'Malformed upstream response', usage }
     }
+    usage.input += data.usage?.prompt_tokens ?? 0
+    usage.output += data.usage?.completion_tokens ?? 0
 
     const choice = data.choices?.[0]
     const msg = choice?.message
@@ -165,9 +171,9 @@ export async function runVeniceAgent(
     }
 
     const text = typeof msg?.content === 'string' ? msg.content.trim() : ''
-    return { ok: true, status: res.status, text, stop: finish, toolText: toolTexts.join('\n') }
+    return { ok: true, status: res.status, text, stop: finish, toolText: toolTexts.join('\n'), usage }
   }
 
   // Ran out of tool rounds without a text answer.
-  return { ok: false, status: 504, errorText: 'exhausted tool rounds' }
+  return { ok: false, status: 504, errorText: 'exhausted tool rounds', usage }
 }
