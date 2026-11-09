@@ -17,6 +17,7 @@ import {
   isLikelyBot,
   type QuotaStatus,
 } from '@/lib/agent-quota'
+import { passSalesEnabled, PASS_PRICE_LABEL, PASS_DAYS } from '@/lib/agent-pass'
 
 // ── Hardening knobs ──────────────────────────────────────────────────────────
 const EFFORT = process.env.AGENT_EFFORT ?? 'medium' // low | medium | high | max
@@ -443,12 +444,16 @@ export async function POST(request: NextRequest) {
   const run = await reserveRun(request, 'chat')
   const cookieHeaders: Record<string, string> = run.setCookie ? { 'Set-Cookie': run.setCookie } : {}
   const respond = (body: Record<string, unknown>, quota: QuotaStatus | null, status = 200) =>
-    Response.json({ ...body, ...(quota ? { quota } : {}) }, { status, headers: cookieHeaders })
+    Response.json(
+      { ...body, ...(quota ? { quota } : {}), ...(run.pass ? { pass: run.pass } : {}) },
+      { status, headers: cookieHeaders },
+    )
 
   if (!run.allowed && run.reason === 'quota') {
     return respond(
       {
-        error: `You've used today's ${run.quota?.limit ?? ''} free questions. Your allowance resets at midnight UTC.`,
+        error: `You've used this week's ${run.quota?.limit ?? ''} free Peptide Agent searches. A Research Pass (${PASS_PRICE_LABEL} for ${PASS_DAYS} days) removes the limit, or your free searches reset Monday 00:00 UTC.`,
+        offer: { available: passSalesEnabled, price: PASS_PRICE_LABEL, days: PASS_DAYS, checkoutUrl: '/research/pass' },
         code: 'quota_exhausted',
       },
       run.quota,
@@ -602,7 +607,7 @@ export async function POST(request: NextRequest) {
 }
 
 // GET /api/chat — the caller's remaining free allowance, without consuming any.
-// The research UI reads this on load to show "N free questions left today".
+// (The research UI reads the fuller GET /api/pass, which adds pass + offer.)
 export async function GET(request: NextRequest) {
   const quota = await peekQuota(request, 'chat')
   return Response.json(
