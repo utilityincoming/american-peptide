@@ -141,6 +141,9 @@ export default function ResearchPage() {
   const [loading, setLoading] = useState(false)
   // Free daily allowance, as reported by the server (null until known / when off).
   const [quota, setQuota] = useState<{ limit: number; remaining: number } | null>(null)
+  // Paid Research Pass (no weekly limit) and the offer shown when the limit is hit.
+  const [pass, setPass] = useState<{ expiresAt: string } | null>(null)
+  const [offer, setOffer] = useState<{ available: boolean; price: string; days: number } | null>(null)
   const [limitReached, setLimitReached] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -199,6 +202,7 @@ export default function ResearchPage() {
         if (data.quota && typeof data.quota.remaining === 'number') {
           setQuota({ limit: data.quota.limit, remaining: data.quota.remaining })
         }
+        if (data.offer) setOffer(data.offer)
         if (res.status === 402) {
           // Out of free questions: put the unsent question back in the box and
           // show the limit notice instead of an error bubble.
@@ -257,15 +261,21 @@ export default function ResearchPage() {
     }
   }, [sendMessage])
 
-  // Load the remaining free allowance for the counter under the input.
+  // Load pass status + the remaining free weekly searches for the counter.
   useEffect(() => {
     let cancelled = false
     const load = async () => {
       try {
-        const res = await fetch('/api/chat')
+        const res = await fetch('/api/pass')
         if (!res.ok) return
         const data = await res.json()
-        if (!cancelled && data.enabled && typeof data.remaining === 'number') {
+        if (cancelled) return
+        if (data.offer) setOffer(data.offer)
+        if (data.pass) {
+          setPass(data.pass)
+          return
+        }
+        if (data.enabled && typeof data.remaining === 'number') {
           setQuota({ limit: data.limit, remaining: data.remaining })
           if (data.remaining <= 0) setLimitReached(true)
         }
@@ -398,11 +408,25 @@ export default function ResearchPage() {
               className="mb-3 rounded-2xl border border-accent/20 bg-accent/[0.06] px-4 py-3 text-sm text-ink/70"
             >
               <p className="font-medium text-ink/90">
-                You&rsquo;ve used today&rsquo;s {quota?.limit ?? 5} free questions.
+                You&rsquo;ve used this week&rsquo;s {quota?.limit ?? 5} free Peptide Agent searches.
               </p>
-              <p className="mt-1 text-xs leading-relaxed text-ink/55">
-                Every answer runs live lookups against PubChem, ClinicalTrials.gov, PubMed and UniProt, so the
-                agent has a daily free allowance. It resets at midnight UTC. In the meantime the{' '}
+              {offer?.available && (
+                <p className="mt-2">
+                  <Link
+                    href="/research/pass"
+                    className="inline-block rounded-xl bg-[#5BA88C] px-4 py-2 text-xs font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
+                  >
+                    Get unlimited searches — {offer.price} for {offer.days} days
+                  </Link>
+                </p>
+              )}
+              <p className="mt-2 text-xs leading-relaxed text-ink/55">
+                Every answer runs live lookups against PubChem, ClinicalTrials.gov, PubMed and UniProt, which is
+                what a Research Pass pays for. Your free searches reset Monday 00:00 UTC.{' '}
+                <Link href="/research/pass" className="text-accent underline-offset-2 hover:underline">
+                  Have an access code?
+                </Link>{' '}
+                In the meantime the{' '}
                 <Link href="/catalog" className="text-accent underline-offset-2 hover:underline">catalog</Link>,{' '}
                 <Link href="/research-areas" className="text-accent underline-offset-2 hover:underline">research-area guides</Link>{' '}
                 and{' '}
@@ -433,9 +457,10 @@ export default function ResearchPage() {
             </button>
           </div>
           <p className="mt-2 text-center text-[10px] text-ink/20">
-            {quota && !limitReached && (
+            {pass && <span className="text-ink/45">Research Pass active — no weekly limit ·{' '}</span>}
+            {!pass && quota && !limitReached && (
               <span className="text-ink/45">
-                {quota.remaining} of {quota.limit} free questions left today ·{' '}
+                {quota.remaining} of {quota.limit} free searches left this week ·{' '}
               </span>
             )}
             Shift + Enter for new line · AI outputs are computational hypotheses requiring experimental validation

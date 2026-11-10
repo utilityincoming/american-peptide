@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     return Response.json({ error: 'A sequence of at least 2 residues is required.' }, { status: 400 })
   }
 
-  // Daily free allowance (separate from the chat agent's) + the shared site-wide
+  // Weekly free allowance (separate from the chat agent's; a Research Pass lifts both) + the shared site-wide
   // spend ceiling. Reserved only once the input is known to be valid.
   const run = await reserveRun(request, 'analyze')
   const headers: Record<string, string> = run.setCookie ? { 'Set-Cookie': run.setCookie } : {}
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
     return run.reason === 'quota'
       ? Response.json(
           {
-            error: `You've used today's ${run.quota?.limit ?? ''} free AI analyses. Your allowance resets at midnight UTC.`,
+            error: `You've used this week's ${run.quota?.limit ?? ''} free AI analyses. A Research Pass at /research/pass removes the limit, or they reset Monday 00:00 UTC.`,
             code: 'quota_exhausted',
             quota: run.quota,
           },

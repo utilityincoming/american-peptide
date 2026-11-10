@@ -1,17 +1,20 @@
-// Free-use quota, spend ceiling, and metering for the model-backed routes
+// Free weekly allowance, paid pass, spend ceiling, and metering for the model-backed routes
 // (/api/chat, /api/analyze-peptide).
 //
-// Three layers, all counted per UTC day in the shared KV store (Upstash):
-//   1. Visitor allowance — AGENT_FREE_DAILY (default 5) uses per visitor. A
-//      visitor is an anonymous first-party cookie (ap_vid); no account needed.
-//   2. Per-IP cap — AGENT_IP_DAILY_MAX (default 3x the allowance). Cookies are
+// Layers:
+//   1. Visitor allowance — AGENT_FREE_WEEKLY (default 5) uses per visitor per
+//      UTC week (resets Monday 00:00 UTC). A visitor is an anonymous first-party
+//      cookie (ap_vid); no account needed.
+//   2. Per-IP cap — AGENT_IP_WEEKLY_MAX (default 3x the allowance). Cookies are
 //      trivially cleared, so this is the bound that actually holds against a
 //      client that discards them; it is looser than the allowance so several
 //      people behind one shared address (office, mobile carrier NAT) each still
 //      get their own allowance.
-//   3. Global ceiling — AGENT_DAILY_CEILING model runs per day across ALL
-//      visitors and both routes. The owner's hard stop: once hit, routes serve
-//      model-free content instead of spending.
+//   3. Global ceiling — AGENT_DAILY_CEILING free model runs per UTC DAY across
+//      all visitors and both routes. The owner's hard stop on unpaid spend:
+//      once hit, routes serve model-free content instead of spending.
+//   4. Research Pass (src/lib/agent-pass.ts) — a paying visitor skips 1-3 and
+//      is bounded only by a per-pass daily fair-use guard.
 //
 // Counters are reserved up front (INCR, then compare) so concurrent requests
 // can't overshoot, and the visitor/IP reservation is refunded when no model
@@ -25,21 +28,23 @@
 import crypto from 'node:crypto'
 import { kv } from './kv'
 import { utcDate } from './api-keys'
+import { passFromRequest, PASS_DAILY_MAX } from './agent-pass'
 
 function envInt(name: string, fallback: number): number {
   const n = Number(process.env[name])
   return Number.isFinite(n) && n >= 0 && process.env[name]?.trim() ? Math.floor(n) : fallback
 }
 
-export const FREE_DAILY = envInt('AGENT_FREE_DAILY', 5)
-export const IP_DAILY_MAX = Math.max(FREE_DAILY, envInt('AGENT_IP_DAILY_MAX', FREE_DAILY * 3))
+export const FREE_WEEKLY = envInt('AGENT_FREE_WEEKLY', 5)
+export const IP_WEEKLY_MAX = Math.max(FREE_WEEKLY, envInt('AGENT_IP_WEEKLY_MAX', FREE_WEEKLY * 3))
 export const GLOBAL_DAILY_CEILING = envInt('AGENT_DAILY_CEILING', 300)
-/** AGENT_QUOTA=off disables the visitor/IP allowance (the ceiling still applies). */
+/** AGENT_QUOTA=off disables the weekly visitor/IP allowance (the ceiling still applies). */
 const ALLOWANCE_ENABLED = process.env.AGENT_QUOTA !== 'off'
 
 export type QuotaScope = 'chat' | 'analyze'
 
 const COUNTER_TTL_SEC = 60 * 60 * 48 // daily counters live ~2 days
+const WEEK_TTL_SEC = 60 * 60 * 24 * 8 // weekly counters outlive their week by a day
 const METER_TTL_SEC = 60 * 60 * 24 * 60 // 60 days of metering history
 const COOKIE = 'ap_vid'
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365
@@ -126,31 +131,45 @@ export function isLikelyBot(userAgent: string | null): boolean {
 // ── Quota ─────────────────────────────────────────────────────────────────────
 
 export interface QuotaStatus {
-  /** Free uses per visitor per UTC day. */
+  /** Free uses per visitor per UTC week. */
   limit: number
   remaining: number
-  /** ISO time the allowance resets (next midnight UTC). */
+  period: 'week'
+  /** ISO time the allowance resets (next Monday 00:00 UTC). */
   resetsAt: string
 }
 
-function resetsAt(): string {
-  const d = new Date()
-  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1)).toISOString()
+/** Monday (UTC) of the week containing `now`, as a Date at 00:00 UTC. */
+function weekStart(now = new Date()): Date {
+  const sinceMonday = (now.getUTCDay() + 6) % 7
+  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - sinceMonday))
+}
+
+/** Stable id for the current allowance window, e.g. "2026-11-09" (its Monday). */
+export function weekId(now = new Date()): string {
+  return weekStart(now).toISOString().slice(0, 10)
+}
+
+export function weekResetsAt(now = new Date()): string {
+  return new Date(weekStart(now).getTime() + 7 * 86_400_000).toISOString()
 }
 
 function status(visitorCount: number, ipCount: number): QuotaStatus {
-  const remaining = Math.max(0, Math.min(FREE_DAILY - visitorCount, IP_DAILY_MAX - ipCount))
-  return { limit: FREE_DAILY, remaining, resetsAt: resetsAt() }
+  const remaining = Math.max(0, Math.min(FREE_WEEKLY - visitorCount, IP_WEEKLY_MAX - ipCount))
+  return { limit: FREE_WEEKLY, remaining, period: 'week', resetsAt: weekResetsAt() }
 }
 
-const visitorKey = (scope: QuotaScope, id: string, date: string) => `quota:${scope}:v:${id}:${date}`
-const ipKey = (scope: QuotaScope, ipHash: string, date: string) => `quota:${scope}:ip:${ipHash}:${date}`
+const visitorKey = (scope: QuotaScope, id: string, week: string) => `quota:${scope}:v:${id}:w${week}`
+const ipKey = (scope: QuotaScope, ipHash: string, week: string) => `quota:${scope}:ip:${ipHash}:w${week}`
+const passDayKey = (passId: string, date: string) => `quota:pass:${passId}:${date}`
 const globalKey = (date: string) => `quota:global:${date}`
 
 export type Reservation =
   | {
       allowed: true
-      quota: QuotaStatus | null // null for an owner-bypass call (no allowance applies)
+      quota: QuotaStatus | null // null when no allowance applies (owner bypass, pass)
+      /** Set when the run is covered by a paid Research Pass. */
+      pass: { expiresAt: string } | null
       /** Give the visitor their use back (no model answer was produced). */
       refund: () => Promise<void>
       /** Set-Cookie value when a new visitor id was issued, else null. */
@@ -162,6 +181,7 @@ export type Reservation =
        *  unavailable = the counter store errored (fail closed). */
       reason: 'quota' | 'ceiling' | 'unavailable'
       quota: QuotaStatus | null
+      pass: { expiresAt: string } | null
       setCookie: string | null
     }
 
@@ -183,28 +203,43 @@ export async function reserveRun(req: Request, scope: QuotaScope): Promise<Reser
 
     if (bypass) {
       await kv.incrBy(globalKey(date), 1, COUNTER_TTL_SEC)
-      return { allowed: true, quota: null, refund: async () => {}, setCookie: null }
+      return { allowed: true, quota: null, pass: null, refund: async () => {}, setCookie: null }
     }
 
-    const vKey = visitorKey(scope, visitor, date)
-    const iKey = ipKey(scope, ipHash, date)
+    // Paid Research Pass: no weekly allowance and not counted against the free
+    // ceiling — only a per-pass daily fair-use guard against a shared code.
+    const pass = await passFromRequest(req)
+    if (pass) {
+      const used = await kv.incrBy(passDayKey(pass.id, date), 1, COUNTER_TTL_SEC)
+      const passInfo = { expiresAt: pass.expiresAt }
+      if (used > PASS_DAILY_MAX) {
+        void meter(scope, { 'denied:pass_fair_use': 1 })
+        return { allowed: false, reason: 'ceiling', quota: null, pass: passInfo, setCookie: null }
+      }
+      void meter(scope, { pass: 1 })
+      return { allowed: true, quota: null, pass: passInfo, refund: async () => {}, setCookie: null }
+    }
+
+    const week = weekId()
+    const vKey = visitorKey(scope, visitor, week)
+    const iKey = ipKey(scope, ipHash, week)
     const counted = ALLOWANCE_ENABLED
     const [vCount, iCount, gCount] = await Promise.all([
-      counted ? kv.incrBy(vKey, 1, COUNTER_TTL_SEC) : 0,
-      counted ? kv.incrBy(iKey, 1, COUNTER_TTL_SEC) : 0,
+      counted ? kv.incrBy(vKey, 1, WEEK_TTL_SEC) : 0,
+      counted ? kv.incrBy(iKey, 1, WEEK_TTL_SEC) : 0,
       kv.incrBy(globalKey(date), 1, COUNTER_TTL_SEC),
     ])
 
     const refundVisitor = async () => {
       if (!counted) return
       try {
-        await Promise.all([kv.incrBy(vKey, -1, COUNTER_TTL_SEC), kv.incrBy(iKey, -1, COUNTER_TTL_SEC)])
+        await Promise.all([kv.incrBy(vKey, -1, WEEK_TTL_SEC), kv.incrBy(iKey, -1, WEEK_TTL_SEC)])
       } catch {
         /* a lost refund costs the visitor one use; never fail the request on it */
       }
     }
 
-    const overAllowance = counted && (vCount > FREE_DAILY || iCount > IP_DAILY_MAX)
+    const overAllowance = counted && (vCount > FREE_WEEKLY || iCount > IP_WEEKLY_MAX)
     const overCeiling = gCount > GLOBAL_DAILY_CEILING
     if (overAllowance || overCeiling) {
       // Nothing was spent: release every counter this attempt took.
@@ -220,6 +255,7 @@ export async function reserveRun(req: Request, scope: QuotaScope): Promise<Reser
         allowed: false,
         reason,
         quota: counted ? status(vCount - 1, iCount - 1) : null,
+        pass: null,
         setCookie,
       }
     }
@@ -227,6 +263,7 @@ export async function reserveRun(req: Request, scope: QuotaScope): Promise<Reser
     return {
       allowed: true,
       quota: counted ? status(vCount, iCount) : null,
+      pass: null,
       refund: async () => {
         await refundVisitor()
         void meter(scope, { refunded: 1 })
@@ -235,19 +272,19 @@ export async function reserveRun(req: Request, scope: QuotaScope): Promise<Reser
     }
   } catch (err) {
     console.error(`[quota] counter store unavailable; failing closed: ${err instanceof Error ? err.message : err}`)
-    return { allowed: false, reason: 'unavailable', quota: null, setCookie: null }
+    return { allowed: false, reason: 'unavailable', quota: null, pass: null, setCookie: null }
   }
 }
 
-/** Read the caller's remaining allowance without consuming any. */
+/** Read the caller's remaining free allowance without consuming any. */
 export async function peekQuota(req: Request, scope: QuotaScope): Promise<QuotaStatus | null> {
   if (!ALLOWANCE_ENABLED) return null
-  const date = utcDate()
+  const week = weekId()
   const visitor = readVisitorId(req)
   try {
     const [v, i] = await Promise.all([
-      visitor ? kv.get(visitorKey(scope, visitor, date)) : null,
-      kv.get(ipKey(scope, hashIp(clientIp(req)), date)),
+      visitor ? kv.get(visitorKey(scope, visitor, week)) : null,
+      kv.get(ipKey(scope, hashIp(clientIp(req)), week)),
     ])
     return status(Number(v) || 0, Number(i) || 0)
   } catch {
@@ -284,7 +321,7 @@ export async function meter(
 
 export interface MeterDay {
   date: string
-  /** Model runs counted against the site-wide ceiling (both routes). */
+  /** Free model runs counted against the site-wide daily ceiling (both routes). */
   ceilingUsed: number
   routes: Record<QuotaScope, { counters: Record<string, number>; distinctCallers: number; topCallers: { ipHash: string; requests: number }[] }>
 }

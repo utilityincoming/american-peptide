@@ -7,8 +7,8 @@ import {
   hashIp,
   isLikelyBot,
   isSameOriginBrowser,
-  FREE_DAILY,
-  IP_DAILY_MAX,
+  FREE_WEEKLY,
+  IP_WEEKLY_MAX,
 } from './agent-quota'
 
 // Runs against the in-memory KV backend (no Upstash env in tests).
@@ -36,14 +36,14 @@ describe('reserveRun', () => {
     ip = freshIp()
   })
 
-  it('gives a visitor exactly FREE_DAILY uses, then denies with reason quota', async () => {
+  it('gives a visitor exactly FREE_WEEKLY uses, then denies with reason quota', async () => {
     const first = await reserveRun(req(ip), 'chat')
     expect(first.allowed).toBe(true)
-    expect(first.quota?.remaining).toBe(FREE_DAILY - 1)
+    expect(first.quota?.remaining).toBe(FREE_WEEKLY - 1)
     const cookie = cookieOf(first.setCookie)
     expect(cookie).toMatch(/^ap_vid=[a-f0-9]{32}$/)
 
-    for (let i = 1; i < FREE_DAILY; i++) {
+    for (let i = 1; i < FREE_WEEKLY; i++) {
       const r = await reserveRun(req(ip, cookie), 'chat')
       expect(r.allowed).toBe(true)
       expect(r.setCookie).toBeNull()
@@ -57,23 +57,23 @@ describe('reserveRun', () => {
     expect((await peekQuota(req(ip, cookie), 'chat'))?.remaining).toBe(0)
   })
 
-  it('caps a client that discards its cookie at IP_DAILY_MAX', async () => {
+  it('caps a client that discards its cookie at IP_WEEKLY_MAX', async () => {
     let allowed = 0
-    for (let i = 0; i < IP_DAILY_MAX + 5; i++) {
+    for (let i = 0; i < IP_WEEKLY_MAX + 5; i++) {
       if ((await reserveRun(req(ip), 'chat')).allowed) allowed++
     }
-    expect(allowed).toBe(IP_DAILY_MAX)
+    expect(allowed).toBe(IP_WEEKLY_MAX)
   })
 
   it('lets a second visitor on the same IP have their own allowance', async () => {
     const a = await reserveRun(req(ip), 'chat')
     const cookieA = cookieOf(a.setCookie)
-    for (let i = 1; i < FREE_DAILY; i++) await reserveRun(req(ip, cookieA), 'chat')
+    for (let i = 1; i < FREE_WEEKLY; i++) await reserveRun(req(ip, cookieA), 'chat')
     expect((await reserveRun(req(ip, cookieA), 'chat')).allowed).toBe(false)
 
     const b = await reserveRun(req(ip), 'chat')
     expect(b.allowed).toBe(true)
-    expect(b.quota?.remaining).toBe(FREE_DAILY - 1)
+    expect(b.quota?.remaining).toBe(FREE_WEEKLY - 1)
   })
 
   it('refund returns the use', async () => {
@@ -81,13 +81,13 @@ describe('reserveRun', () => {
     const cookie = cookieOf(r.setCookie)
     if (!r.allowed) throw new Error('expected allowed')
     await r.refund()
-    expect((await peekQuota(req(ip, cookie), 'chat'))?.remaining).toBe(FREE_DAILY)
+    expect((await peekQuota(req(ip, cookie), 'chat'))?.remaining).toBe(FREE_WEEKLY)
   })
 
   it('keeps chat and analyze allowances separate', async () => {
     const r = await reserveRun(req(ip), 'chat')
     const cookie = cookieOf(r.setCookie)
-    expect((await peekQuota(req(ip, cookie), 'analyze'))?.remaining).toBe(FREE_DAILY)
+    expect((await peekQuota(req(ip, cookie), 'analyze'))?.remaining).toBe(FREE_WEEKLY)
   })
 
   it('meters requests and denials', async () => {
