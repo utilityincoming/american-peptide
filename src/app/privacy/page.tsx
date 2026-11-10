@@ -93,8 +93,10 @@ export default function PrivacyPage() {
             <p className="mb-3">
               <SubHead>Research assistant content.</SubHead> When you submit a
               question to the research assistant, the text of your message is
-              sent to our server and to a third-party AI provider (Anthropic,
-              which operates Claude) so that a response can be generated. We use
+              sent to our server and to a third-party AI provider so that a
+              response can be generated. Depending on availability, that
+              provider is Venice AI, xAI (which operates Grok), or Anthropic
+              (which operates Claude). We use
               this content to produce your answer and to operate and improve the
               feature. Please do not enter personal, confidential, or sensitive
               information into the assistant.
@@ -182,8 +184,9 @@ export default function PrivacyPage() {
                 analytics, and performance insights).
               </Bullet>
               <Bullet>
-                <strong>AI processing:</strong> Anthropic, to generate research
-                assistant responses from the text you submit.
+                <strong>AI processing:</strong> Venice AI, xAI, and Anthropic,
+                to generate research assistant responses from the text you
+                submit.
               </Bullet>
               <Bullet>
                 <strong>Legal:</strong> when required by law, or to protect the

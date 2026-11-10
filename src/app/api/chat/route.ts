@@ -8,6 +8,7 @@ import { logAgentQuestion } from '@/lib/agent-faqs'
 import { sanitizeAgentLinks, sanitizeUngroundedIdentifiers } from '@/lib/agent-output'
 import { catalogFactsDigest, personalizationDigest } from '@/lib/agent-context'
 import { runVeniceAgent } from '@/lib/providers/venice'
+import { runGrokAgent } from '@/lib/providers/grok'
 import {
   reserveRun,
   peekQuota,
@@ -321,15 +322,17 @@ async function runAnthropicAgent(
 }
 
 export async function POST(request: NextRequest) {
-  // Provider keys. Venice is the primary (uncensored) agent; Anthropic is the
-  // reasoning backup. At least one must be configured for the route to work.
+  // Provider keys, in ladder (cost) order: Venice is the primary (uncensored,
+  // cheapest) agent, Grok the mid-priced failover, Anthropic the reasoning
+  // backup. At least one must be configured for the route to work.
   const veniceKey = process.env.VENICE_API_KEY
+  const grokKey = process.env.XAI_API_KEY
   const anthropicKey = process.env.ANTHROPIC_API_KEY
-  if (!veniceKey && !anthropicKey) {
+  if (!veniceKey && !grokKey && !anthropicKey) {
     return Response.json(
       {
         error:
-          'No model provider configured. Set VENICE_API_KEY (primary) or ANTHROPIC_API_KEY (backup) in .env.local.',
+          'No model provider configured. Set VENICE_API_KEY (primary), XAI_API_KEY (failover) or ANTHROPIC_API_KEY (backup) in .env.local.',
       },
       { status: 500 },
     )
@@ -425,14 +428,16 @@ export async function POST(request: NextRequest) {
       `[chat] grounding=${groundingOn ? 'on' : 'off'} facts=${facts ? 'yes' : 'no'} personalization=${personalization ? 'yes' : 'no'}`,
     )
 
-  // ── Provider ladder: Venice (uncensored) primary → Anthropic backup → floor ──
+  // ── Provider ladder, ordered by cost per search ──
+  //   Venice (uncensored, cheapest) → Grok → Anthropic (most expensive) → floor
   // Venice answers first so the dosing/protocol research questions Claude's policy
-  // layer refuses still get a substantive, grounded answer. The Anthropic failover
-  // chain is the reasoning backup when Venice errors out or returns nothing; our
+  // layer refuses still get a substantive, grounded answer. Grok is the next
+  // cheapest, so an outage degrades to it before reaching the Anthropic chain;
+  // each rung runs only if the one before errored or returned nothing. Our
   // published reference content is the final, model-free floor.
   //
-  // Venice has no cached-block concept, so its system prompt is the same content
-  // rendered as one string: instruction prompt + site index + per-request suffix.
+  // Venice and Grok have no cached-block concept, so their system prompt is the
+  // same content as one string: instruction prompt + site index + per-request suffix.
   const veniceSystem = [SYSTEM_PROMPT, SITE_INDEX, ...systemSuffix.map((b) => b.text)]
     .filter(Boolean)
     .join('\n\n')
@@ -465,7 +470,7 @@ export async function POST(request: NextRequest) {
 
   let finalText = ''
   let lastStop: string | undefined
-  let provider: 'venice' | 'anthropic' | 'reference' = 'reference'
+  let provider: 'venice' | 'grok' | 'anthropic' | 'reference' = 'reference'
   let hadUpstreamError = false
   // Concatenated grounding-tool output from whichever provider produced the
   // answer — the allow-set for the identifier guardrail below.
@@ -483,6 +488,23 @@ export async function POST(request: NextRequest) {
     } else {
       hadUpstreamError = hadUpstreamError || !v.ok
       console.warn(`[chat] venice primary unavailable (${v.status}): ${v.errorText?.slice(0, 300)}`)
+    }
+  }
+
+  // Failover: xAI Grok, cheapest Grok model first. Sits ahead of Anthropic
+  // because it costs less per search; same system string and tools as Venice.
+  if (modelsAllowed && !finalText && grokKey) {
+    if (DEBUG) console.log('[chat] falling back to grok')
+    const g = await runGrokAgent(veniceSystem, cleaned, { disableTools: !groundingOn })
+    void meter('chat', { 'tokens_in:grok': g.usage.input, 'tokens_out:grok': g.usage.output })
+    if (g.ok && g.text) {
+      finalText = g.text
+      provider = 'grok'
+      groundedToolText = g.toolText ?? ''
+      if (DEBUG) console.log(`[chat] answered by grok model ${g.model}`)
+    } else {
+      hadUpstreamError = hadUpstreamError || !g.ok
+      console.warn(`[chat] grok failover unavailable (${g.status}): ${g.errorText?.slice(0, 300)}`)
     }
   }
 
