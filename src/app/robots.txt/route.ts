@@ -19,8 +19,13 @@ const REDIRECT_HOST = 'americanpeptide.net'
 // Served per-request: the body depends on the Host header.
 export const dynamic = 'force-dynamic'
 
+// /research?q=… auto-asks the agent on load (a paid model run), so crawlers are
+// kept off the parameterized form; the bare /research page stays crawlable.
 const CANONICAL_ROBOTS = `User-agent: *
 Allow: /
+Disallow: /research?
+Disallow: /api/chat
+Disallow: /api/analyze-peptide
 
 Sitemap: ${CANONICAL_ORIGIN}/sitemap.xml
 

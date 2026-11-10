@@ -100,6 +100,26 @@ export default function PrivacyPage() {
               information into the assistant.
             </p>
             <p className="mb-3">
+              <SubHead>Free-use allowance.</SubHead> The research assistant and
+              AI sequence analysis include a limited number of free uses per
+              week. To count them and to prevent automated abuse, we set one
+              anonymous first-party cookie (<code>ap_vid</code>, a random
+              identifier that is not linked to your identity) and keep
+              short-lived usage counters keyed to that identifier and to a
+              one-way hash of your network address. We do not store your raw IP
+              address for this purpose, and we do not use the cookie for
+              advertising or cross-site tracking.
+            </p>
+            <p className="mb-3">
+              <SubHead>Research Pass purchases.</SubHead> If you buy a Research
+              Pass, payment is processed by Stripe on Stripe&rsquo;s own
+              checkout page; we never receive or store your card details. We
+              keep a one-way hash of your access code with its expiry date and
+              the Stripe checkout reference, and store the access code in a
+              first-party cookie (<code>ap_pass</code>) on your device so the
+              pass stays active. We do not create an account for you.
+            </p>
+            <p className="mb-3">
               <SubHead>Information you provide.</SubHead> If you submit the
               contact form or otherwise reach out, we collect what you send us —
               typically your email address and your message — so we can respond.

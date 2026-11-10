@@ -19,6 +19,15 @@ Next.js 15 + TypeScript + Tailwind CSS + App Router.
   the same system content as one uncached string. Structured routes
   (/api/analyze-peptide, /api/jobs/fact-qa) stay on Claude.
 
+- Spend safeguards: /api/chat and /api/analyze-peptide only serve same-origin
+  browsers and go through src/lib/agent-quota.ts — 5 free uses per visitor per
+  UTC week (HTTP 402 when spent), a per-IP cap, and a site-wide daily ceiling on
+  free runs that degrades to reference content. The paid Research Pass ($29.99
+  for 30 days, no weekly limit) lives in src/lib/agent-pass.ts: Stripe Checkout
+  by raw fetch, no accounts — a verified payment becomes an access code held in
+  the ap_pass cookie (/research/pass, /api/pass/*). Usage is metered there and exposed at
+  GET /api/admin/usage. Automation (npm run eval) sends `x-agent-key`.
+
 ## Architecture
 - src/app/ — pages and API routes
 - src/components/ — reusable React components

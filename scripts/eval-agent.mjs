@@ -43,6 +43,8 @@ const INTERNAL_HOST = 'americanpeptide.com'
 
 // ── Talk to the agent ─────────────────────────────────────────────────────────
 
+const BYPASS_KEY = process.env.AGENT_BYPASS_KEY || process.env.ADMIN_SECRET || ''
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 // Ask the agent. `grounding:false` runs the no-tools baseline (the route omits
@@ -55,7 +57,13 @@ async function askAgent(question, { grounding = true } = {}) {
   for (let attempt = 0; attempt < 4; attempt++) {
     const res = await fetch(`${baseUrl}/api/chat`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      // /api/chat only serves same-origin browsers; automation authenticates with
+      // the owner bypass key (AGENT_BYPASS_KEY, falling back to ADMIN_SECRET),
+      // which also exempts the eval from the per-visitor free allowance.
+      headers: {
+        'Content-Type': 'application/json',
+        ...(BYPASS_KEY ? { 'x-agent-key': BYPASS_KEY } : {}),
+      },
       body: JSON.stringify(body),
     })
     if (res.status === 429) {

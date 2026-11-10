@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server'
 import { rateLimit, clientKey, tooManyRequests } from '@/lib/rate-limit'
 import { MODELS, shouldFailover } from '@/lib/models'
+import { reserveRun, meter, isOwnerBypass, isSameOriginBrowser, isLikelyBot } from '@/lib/agent-quota'
 
 // Research-use AI analysis of a designed peptide sequence. Mirrors the fetch
 // pattern in /api/chat (no SDK dependency). Returns markdown text.
@@ -19,6 +20,18 @@ export async function POST(request: NextRequest) {
       { error: 'AI analysis is not configured (missing ANTHROPIC_API_KEY).' },
       { status: 500 },
     )
+  }
+
+  // Same caller screening as /api/chat: site UI only, no scripts or crawlers.
+  if (!isOwnerBypass(request)) {
+    if (!isSameOriginBrowser(request)) {
+      void meter('analyze', { 'denied:origin': 1 })
+      return Response.json({ error: 'This endpoint is only available from the site itself.' }, { status: 403 })
+    }
+    if (isLikelyBot(request.headers.get('user-agent'))) {
+      void meter('analyze', { 'denied:bot': 1 })
+      return Response.json({ error: 'Automated clients are not permitted.' }, { status: 403 })
+    }
   }
 
   // Per-IP rate limit — one model call per request, so a looser cap than chat.
@@ -40,6 +53,26 @@ export async function POST(request: NextRequest) {
     .slice(0, MAX_SEQUENCE_LEN)
   if (sequence.length < 2) {
     return Response.json({ error: 'A sequence of at least 2 residues is required.' }, { status: 400 })
+  }
+
+  // Weekly free allowance (separate from the chat agent's; a Research Pass lifts both) + the shared site-wide
+  // spend ceiling. Reserved only once the input is known to be valid.
+  const run = await reserveRun(request, 'analyze')
+  const headers: Record<string, string> = run.setCookie ? { 'Set-Cookie': run.setCookie } : {}
+  if (!run.allowed) {
+    return run.reason === 'quota'
+      ? Response.json(
+          {
+            error: `You've used this week's ${run.quota?.limit ?? ''} free AI analyses. A Research Pass at /research/pass removes the limit, or they reset Monday 00:00 UTC.`,
+            code: 'quota_exhausted',
+            quota: run.quota,
+          },
+          { status: 402, headers },
+        )
+      : Response.json(
+          { error: 'AI analysis has reached its capacity for today. Please try again tomorrow.', code: 'capacity' },
+          { status: 503, headers },
+        )
   }
 
   const propLines = body.properties
@@ -104,10 +137,20 @@ Rules:
         ? data.content.find((b: { type?: string }) => b?.type === 'text')
         : null
       const content = textBlock?.text || 'No analysis generated.'
-      return Response.json({ content })
+      void meter('analyze', {
+        answered: 1,
+        'tokens_in:anthropic':
+          (data.usage?.input_tokens ?? 0) +
+          (data.usage?.cache_creation_input_tokens ?? 0) +
+          (data.usage?.cache_read_input_tokens ?? 0),
+        'tokens_out:anthropic': data.usage?.output_tokens ?? 0,
+      })
+      return Response.json({ content, ...(run.quota ? { quota: run.quota } : {}) }, { headers })
     }
-    return Response.json({ error: 'AI analysis service returned an error.' }, { status: 502 })
+    await run.refund()
+    return Response.json({ error: 'AI analysis service returned an error.' }, { status: 502, headers })
   } catch (err) {
+    await run.refund()
     return Response.json(
       { error: err instanceof Error ? err.message : 'Analysis request failed.' },
       { status: 500 },

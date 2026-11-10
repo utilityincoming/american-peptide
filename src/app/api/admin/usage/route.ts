@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getUsage, TIERS } from '@/lib/api-keys'
 import { kv } from '@/lib/kv'
+import { readMetering, FREE_WEEKLY, IP_WEEKLY_MAX, GLOBAL_DAILY_CEILING } from '@/lib/agent-quota'
+import { passSalesEnabled, PASS_PRICE_CENTS, PASS_DAYS, PASS_DAILY_MAX } from '@/lib/agent-pass'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -43,6 +45,24 @@ export async function GET(req: NextRequest) {
 
   const anonymous = await getUsage('anonymous')
 
+  // Model-backed routes (/api/chat, /api/analyze-peptide): per-day outcomes,
+  // provider mix, tokens, and heaviest callers. ?days=N (default 7, max 30).
+  const days = Math.min(Math.max(Number(req.nextUrl.searchParams.get('days')) || 7, 1), 30)
+  const agent = {
+    limits: {
+      freePerVisitorPerWeek: FREE_WEEKLY,
+      maxPerIpPerWeek: IP_WEEKLY_MAX,
+      siteWideFreeRunsPerDay: GLOBAL_DAILY_CEILING,
+    },
+    pass: {
+      salesEnabled: passSalesEnabled,
+      priceCents: PASS_PRICE_CENTS,
+      days: PASS_DAYS,
+      fairUsePerDay: PASS_DAILY_MAX,
+    },
+    days: await readMetering(days),
+  }
+
   return NextResponse.json({
     generated: new Date().toISOString(),
     persistent: kv.persistent,
@@ -50,5 +70,6 @@ export async function GET(req: NextRequest) {
     keyCount: keys.length,
     anonymous,
     keys,
+    agent,
   })
 }
