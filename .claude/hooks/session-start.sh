@@ -11,6 +11,21 @@ fi
 
 cd "$CLAUDE_PROJECT_DIR"
 
-# `npm install` (not `ci`) so the post-hook container cache is reused on resume
-# and a warm node_modules short-circuits quickly.
-npm install --no-audit --no-fund
+# `npm ci` (not `install`): it installs exactly what package-lock.json says and
+# never rewrites it. `npm install` re-serializes the lockfile with whatever npm
+# the container ships, which left every session with a spurious uncommitted
+# package-lock.json diff (an older npm dropping the "libc" fields).
+#
+# `npm ci` always reinstalls from scratch, so skip it when node_modules was
+# already installed from this exact lockfile — that keeps a resumed session,
+# where the container cache still holds node_modules, fast.
+stamp="node_modules/.package-lock.sha256"
+lock_hash="$(sha256sum package-lock.json | cut -d' ' -f1)"
+
+if [ -f "$stamp" ] && [ "$(cat "$stamp")" = "$lock_hash" ]; then
+  echo "dependencies up to date (package-lock.json unchanged)"
+  exit 0
+fi
+
+npm ci --no-audit --no-fund
+echo "$lock_hash" > "$stamp"
