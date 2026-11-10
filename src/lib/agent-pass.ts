@@ -150,13 +150,21 @@ async function stripe(path: string, form?: Record<string, string>): Promise<{ ok
 export async function createCheckout(origin: string): Promise<string | null> {
   if (!passSalesEnabled) return null
   const { ok, status, data } = await stripe('/v1/checkout/sessions', {
+    ui_mode: 'hosted_page',
     mode: 'payment',
+    billing_address_collection: 'auto',
+    'phone_number_collection[enabled]': 'false',
+    'automatic_tax[enabled]': 'false',
+    allow_promotion_codes: 'false',
+    submit_type: 'auto',
+    'saved_payment_method_options[payment_method_save]': 'enabled',
+    integration_identifier: 'hosted_mobile_app_0001',
+    origin_context: 'mobile_app',
     'line_items[0][quantity]': '1',
     'line_items[0][price_data][currency]': 'usd',
     'line_items[0][price_data][unit_amount]': String(PASS_PRICE_CENTS),
     'line_items[0][price_data][product_data][name]': `AmericanPeptide.com Research Pass — ${PASS_DAYS} days`,
     'line_items[0][price_data][product_data][description]': `${PASS_DAYS} days of Peptide Agent research searches without the weekly limit. One-time payment, does not renew. Research and educational use only — not medical advice.`,
-    'metadata[product]': PASS_PRODUCT_TAG,
     success_url: `${origin}/research/pass?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/research/pass`,
   })
