@@ -10,13 +10,15 @@ Next.js 15 + TypeScript + Tailwind CSS + App Router.
 - Styling: Tailwind CSS
 - Charts: Recharts
 - Icons: Lucide React
-- AI: two-tier provider ladder on /api/chat — Venice AI (uncensored, primary) →
-  Anthropic Claude (claude-opus-4-8, reasoning backup) → published reference floor.
-  Both are raw fetch (no SDK). Venice speaks OpenAI's wire format; the translation
-  lives in src/lib/providers/venice.ts. Grounding tools (PubChem/ClinicalTrials/
-  PubMed/UniProt, src/lib/agent-tools.ts) are provider-neutral and shared by both.
-  The Anthropic path uses adaptive thinking + cached system blocks; Venice sends
-  the same system content as one uncached string. Structured routes
+- AI: provider ladder on /api/chat, ordered by cost per search — Venice AI
+  (uncensored, primary) → xAI Grok (GROK_MODELS, cheapest model first) →
+  Anthropic Claude (claude-opus-4-8, reasoning backup) → published reference
+  floor. All raw fetch (no SDK). Venice and Grok speak OpenAI's wire format; the
+  shared translation + agent loop is src/lib/providers/openai-compat.ts, with thin
+  wrappers in venice.ts and grok.ts. Grounding tools (PubChem/ClinicalTrials/
+  PubMed/UniProt, src/lib/agent-tools.ts) are provider-neutral and shared by all.
+  The Anthropic path uses adaptive thinking + cached system blocks; Venice and
+  Grok get the same system content as one uncached string. Structured routes
   (/api/analyze-peptide, /api/jobs/fact-qa) stay on Claude.
 
 - Spend safeguards: /api/chat and /api/analyze-peptide only serve same-origin
