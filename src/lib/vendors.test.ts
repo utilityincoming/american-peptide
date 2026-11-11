@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   VENDORS,
+  getVendorsForPeptide,
   TRUST_WEIGHTS,
   trustScore,
   vendorTier,
@@ -147,4 +148,37 @@ describe('coveredByBroadCatalog', () => {
     expect(coveredByBroadCatalog('teriparatide')).toBe(false) // peptide-hormone class
     expect(coveredByBroadCatalog('this-slug-does-not-exist')).toBe(true)
   })
+})
+
+describe('affiliate deep links (live VENDORS data)', () => {
+  // A deep link is only worth having if it lands somewhere real AND still pays:
+  // the right catalog page, a compound the vendor is listed for, the vendor's own
+  // host, and the same referral query the homepage link carries.
+  const linked = VENDORS.flatMap((v) =>
+    Object.entries(v.affiliate?.productUrls ?? {}).map(([slug, url]) => ({ v, slug, url })),
+  )
+
+  it('deep-links the incretins (highest-intent traffic) at both partners that stock them', () => {
+    expect(linked.length).toBeGreaterThan(0)
+    for (const id of ['amino-club', 'paramount-peptides']) {
+      const v = VENDORS.find((x) => x.id === id)!
+      expect(Object.keys(v.affiliate?.productUrls ?? {})).toEqual(
+        expect.arrayContaining(['semaglutide', 'tirzepatide', 'retatrutide']),
+      )
+    }
+  })
+
+  it.each(linked.map((l) => [l.v.id, l.slug, l] as const))(
+    '%s → %s is a catalog slug the vendor carries, on its host, referral intact',
+    (_id, slug, { v, url }) => {
+      expect(getVendorsForPeptide(slug).map((x) => x.id)).toContain(v.id)
+
+      const dest = new URL(url)
+      const home = new URL(v.affiliate!.url!)
+      expect(dest.protocol).toBe('https:')
+      expect(dest.hostname.replace(/^www\./, '')).toBe(home.hostname.replace(/^www\./, ''))
+      expect(dest.pathname).not.toBe('/')
+      expect(dest.search).toBe(home.search)
+    },
+  )
 })
