@@ -347,6 +347,50 @@ export const VENDORS: Vendor[] = [
     affiliate: {
       trackedPath: '/go/amino-club',
       url: 'https://aminoclub.com?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+      // Per-compound deep links: each is a REAL product URL read off Amino Club's
+      // own published listing (sitemap.xml + llms.txt, 2026-11-11), not guessed,
+      // carrying the same utm_source/code query the homepage link does — their
+      // age gate round-trips that query intact, exactly as it does for the
+      // homepage. The path spellings are theirs ("tesamorlin", "epithalon"). The
+      // incretins sell under coded names: GLP-1 (SM) / GLP-2 (TR) / GLP-3 (RT,
+      // "also known as LY3437943"). Single-compound vials only. Deliberately
+      // unmapped, so they fall back to the homepage link: cjc-1295-no-dac (sold
+      // only as a CJC/Ipamorelin blend), kisspeptin-10 (their "Kisspeptin" page
+      // doesn't say which fragment), ss-31 (not listed), the mists/blends, and
+      // igf-1-lr3 / vip — listed there, but outside what 'all' covers (see below),
+      // so this vendor never renders on those pages and a link would be dead data.
+      productUrls: {
+        'semaglutide': 'https://www.aminoclub.com/us/products/glp-1?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'tirzepatide': 'https://www.aminoclub.com/us/products/glp-2?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'retatrutide': 'https://www.aminoclub.com/us/products/glp-3?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'cagrilintide': 'https://www.aminoclub.com/us/products/cagrilintide?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'bpc-157': 'https://www.aminoclub.com/us/products/bpc-157?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'tb-500': 'https://www.aminoclub.com/us/products/tb-500?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'ghk-cu': 'https://www.aminoclub.com/us/products/ghk-cu?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'kpv': 'https://www.aminoclub.com/us/products/kpv?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'll-37': 'https://www.aminoclub.com/us/products/ll-37?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'sermorelin': 'https://www.aminoclub.com/us/products/sermorelin?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'ipamorelin': 'https://www.aminoclub.com/us/products/ipamorelin?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'tesamorelin': 'https://www.aminoclub.com/us/products/tesamorlin?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'mots-c': 'https://www.aminoclub.com/us/products/mots-c?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'nad-plus': 'https://www.aminoclub.com/us/products/nad-plus?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'aod-9604': 'https://www.aminoclub.com/us/products/aod-9604?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        '5-amino-1mq': 'https://www.aminoclub.com/us/products/5-amino-1mq?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'epitalon': 'https://www.aminoclub.com/us/products/epithalon?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'pinealon': 'https://www.aminoclub.com/us/products/pinealon?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'glutathione': 'https://www.aminoclub.com/us/products/glutathione?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'selank': 'https://www.aminoclub.com/us/products/selank?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'semax': 'https://www.aminoclub.com/us/products/semax?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'dsip': 'https://www.aminoclub.com/us/products/dsip?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'dihexa': 'https://www.aminoclub.com/us/products/dihexa?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'pt-141': 'https://www.aminoclub.com/us/products/pt-141?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'melanotan-1': 'https://www.aminoclub.com/us/products/melanotan-i?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'melanotan-2': 'https://www.aminoclub.com/us/products/melanotan-ii?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'thymosin-alpha-1': 'https://www.aminoclub.com/us/products/thymosin-alpha-1?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'ara-290': 'https://www.aminoclub.com/us/products/ara-290?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'snap-8': 'https://www.aminoclub.com/us/products/snap-8?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+        'ahk-cu': 'https://www.aminoclub.com/us/products/ahk-cu?utm_source=affiliate_marketing&code=AMERICANPEPTIDE',
+      },
       code: 'AMERICANPEPTIDE',
       active: true,
     },
@@ -479,6 +523,17 @@ export const VENDORS: Vendor[] = [
     affiliate: {
       trackedPath: '/go/paramount-peptides',
       url: 'https://paramountpeptides.com/?ref=AMERICANPEPTIDE',
+      // Deep links for the three incretins — our highest-intent traffic. REAL
+      // product URLs from Paramount's own product sitemap (2026-11-11), each
+      // identity-checked against the CAS number printed on the page (910463-68-2 /
+      // 2023788-19-2 / 2381089-83-2), since the storefront only shows the coded
+      // names. Other compounds come in several sizes/forms with no canonical
+      // page, so they stay on the homepage link until Paramount names one.
+      productUrls: {
+        'semaglutide': 'https://paramountpeptides.com/product/glp-1-s/?ref=AMERICANPEPTIDE',
+        'tirzepatide': 'https://paramountpeptides.com/product/glp-2-t/?ref=AMERICANPEPTIDE',
+        'retatrutide': 'https://paramountpeptides.com/product/glp-3-r/?ref=AMERICANPEPTIDE',
+      },
       // Same string works as the referral param and a checkout code, so publish
       // it: a reader still carries it in if the referral doesn't stick.
       code: 'AMERICANPEPTIDE',
