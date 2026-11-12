@@ -382,45 +382,61 @@ const SEED_PEPTIDES: Peptide[] = [
     aliases: ['BI 456906'],
     categories: ['metabolic'],
     shortDescription:
-      'Investigational glucagon / GLP-1 dual agonist from Boehringer Ingelheim — Phase 3 for obesity and MASH.',
+      'Investigational once-weekly glucagon / GLP-1 dual agonist from Boehringer Ingelheim and Zealand Pharma — up to 16.6% mean weight loss in Phase 3 SYNCHRONIZE-1, with a Phase 3 MASH program still running.',
     description:
-      'Survodutide (BI 456906) is an investigational once-weekly peptide that activates both the glucagon and GLP-1 receptors. Adding glucagon-receptor agonism to GLP-1 is studied as a way to raise energy expenditure and target liver fat on top of GLP-1’s appetite and glycemic effects. Developed by Boehringer Ingelheim with Zealand Pharma, it is in Phase 3 for obesity and holds FDA Breakthrough Therapy designation for metabolic dysfunction-associated steatohepatitis (MASH).',
+      'Survodutide (BI 456906) is an investigational once-weekly peptide that activates both the glucagon and GLP-1 receptors. Adding glucagon-receptor agonism to GLP-1 is studied as a way to raise energy expenditure and clear liver fat on top of GLP-1’s appetite and glycemic effects. Its Phase 3 SYNCHRONIZE obesity program read out in 2026 — up to 16.6% mean weight reduction at 76 weeks without diabetes, 13.1% with type 2 diabetes, and a cardiovascular-outcomes trial that met its safety endpoint. It holds FDA Breakthrough Therapy designation for MASH, where two Phase 3 trials (LIVERAGE) are ongoing. It is not approved anywhere.',
     mechanism:
-      'Dual agonism at the glucagon and GLP-1 receptors — GLP-1 for insulinotropic and satiety effects, glucagon for increased energy expenditure and hepatic-fat reduction.',
-    researchAreas: ['Obesity', 'MASH', 'Type 2 diabetes'],
+      'Dual agonism at the glucagon and GLP-1 receptors — GLP-1 for insulinotropic and satiety effects, glucagon for increased energy expenditure and hepatic-fat reduction. The molecule is weighted toward GLP-1 so that the insulin response offsets glucagon’s tendency to raise blood glucose.',
+    researchAreas: ['Obesity', 'MASH', 'Type 2 diabetes', 'Cardiovascular safety'],
     background: [
-      'Survodutide belongs to the glucagon/GLP-1 "dual agonist" branch of the incretin family — the two-receptor design that sits between single GLP-1 agonists like semaglutide and triple agonists like retatrutide. The glucagon arm is the point of interest: rather than only suppressing appetite and stimulating insulin, glucagon-receptor activation is studied for increasing energy expenditure and, notably, mobilizing fat from the liver.',
-      'Developed by Boehringer Ingelheim together with Zealand Pharma, it is dosed once weekly and remains investigational. Its most distinctive program is in liver disease: it received FDA Breakthrough Therapy designation for MASH (metabolic dysfunction-associated steatohepatitis) and is in Phase 3 trials there, alongside Phase 3 obesity trials where it has reported double-digit mean weight reductions. It is not FDA-approved.',
+      'Survodutide belongs to the glucagon/GLP-1 "dual agonist" branch of the incretin family — the two-receptor design that sits between single GLP-1 agonists like semaglutide and triple agonists like retatrutide. The glucagon arm is the point of interest: rather than only suppressing appetite and stimulating insulin, glucagon-receptor activation is studied for increasing energy expenditure and, notably, mobilizing fat from the liver, where glucagon receptors are dense. It is a glucagon-derived, acylated peptide that originated at Zealand Pharma and is licensed to Boehringer Ingelheim, which runs global development.',
+      'The liver data are what first set it apart. In the Phase 2 MASH trial (Sanyal et al., NEJM 2024), 293 adults with biopsy-confirmed MASH and F1–F3 fibrosis were treated for 48 weeks: improvement in MASH without worsening of fibrosis was reported in 47%, 62% and 43% of the 2.4 mg, 4.8 mg and 6.0 mg groups versus 14% on placebo. That result earned FDA Breakthrough Therapy designation and entry to the EMA’s PRIME scheme, and it underpins two Phase 3 trials — LIVERAGE (MASH with F2–F3 fibrosis) and LIVERAGE-Cirrhosis (compensated cirrhosis) — neither of which has reported.',
+      'The obesity program reported in 2026. SYNCHRONIZE-1 (obesity or overweight without diabetes) reported up to 16.6% mean weight reduction at 76 weeks versus 3.2% on placebo under the efficacy estimand, with about 85% of treated participants losing at least 5% against about 39% on placebo. SYNCHRONIZE-2 (NEJM 2026), in adults who also had type 2 diabetes, reported 13.1% versus 3.1% at the 6 mg dose (9.8% versus 3.9% under the treatment-regimen estimand) with HbA1c falling 0.8–0.9 percentage points. Those figures sit below the tirzepatide and retatrutide Phase 3 readouts — none of these trials is head-to-head.',
+      'SYNCHRONIZE-CVOT (Lancet 2026, presented at AHA in November 2026) enrolled 5,530 adults and made survodutide the first glucagon/GLP-1 dual agonist with a completed cardiovascular-outcomes trial. It was non-inferior to placebo for major adverse cardiovascular events (three-point MACE hazard ratio 0.84, 95% CI 0.60–1.18) — which establishes that it did not raise cardiovascular risk, not that it lowers it. Tolerability is the open question: roughly one in five participants on the 3.6 mg and 6 mg doses stopped treatment for gastrointestinal adverse events. Boehringer Ingelheim has said it is preparing obesity submissions, reported as targeted for 2027.',
     ],
     keyResearch: [
-      'Glucagon / GLP-1 dual agonism — pairs GLP-1’s appetite and glycemic effects with glucagon-driven energy expenditure and hepatic-fat mobilization.',
-      'MASH — holds FDA Breakthrough Therapy designation for metabolic dysfunction-associated steatohepatitis, its most distinctive Phase 3 program.',
-      'Obesity — Phase 3 trials reported substantial double-digit mean weight reduction over ~76 weeks.',
-      'Once-weekly — acylated for a long half-life, like the rest of the modern incretin class.',
-      'Investigational — developed by Boehringer Ingelheim / Zealand Pharma; not FDA-approved.',
+      'Obesity, Phase 3 — SYNCHRONIZE-1 reported up to 16.6% mean weight reduction at 76 weeks versus 3.2% placebo (efficacy estimand); ~85% versus ~39% lost at least 5%.',
+      'Obesity with type 2 diabetes — SYNCHRONIZE-2 (NEJM 2026) reported 13.1% versus 3.1% at 6 mg (efficacy estimand; 9.8% versus 3.9% treatment-regimen), with HbA1c down 0.8–0.9 points versus 0.2.',
+      'Cardiovascular safety — SYNCHRONIZE-CVOT (Lancet 2026, n=5,530) met non-inferiority for MACE (three-point MACE HR 0.84, 95% CI 0.60–1.18); safety shown, benefit not established.',
+      'MASH — Phase 2 (NEJM 2024) reported MASH improvement without worsening fibrosis in up to 62% versus 14% placebo at 48 weeks; FDA Breakthrough Therapy designation; Phase 3 LIVERAGE trials ongoing.',
+      'Tolerability — about 19–21% of participants in the cardiovascular trial discontinued for gastrointestinal adverse events, higher than typically reported for the approved incretins.',
+      'Status — investigational; developed by Boehringer Ingelheim under licence from Zealand Pharma. No regulatory filing had been announced as of November 2026.',
     ],
     faqs: [
       {
         q: 'What is survodutide?',
-        a: 'Survodutide (BI 456906) is an investigational once-weekly glucagon / GLP-1 dual receptor agonist from Boehringer Ingelheim, studied for obesity and MASH (fatty liver disease).',
+        a: 'Survodutide (BI 456906) is an investigational once-weekly glucagon / GLP-1 dual receptor agonist from Boehringer Ingelheim and Zealand Pharma, studied for obesity and MASH (fatty liver disease). It is not approved anywhere.',
       },
       {
-        q: 'How does it differ from semaglutide or tirzepatide?',
-        a: 'Semaglutide targets GLP-1 alone and tirzepatide targets GIP + GLP-1; survodutide instead pairs GLP-1 with glucagon-receptor activation, studied for extra energy expenditure and liver-fat reduction.',
+        q: 'How much weight do people lose on survodutide?',
+        a: 'In Phase 3, SYNCHRONIZE-1 (no diabetes) reported up to 16.6% mean weight reduction at 76 weeks versus 3.2% on placebo, and SYNCHRONIZE-2 (with type 2 diabetes) reported 13.1% versus 3.1%. Both are efficacy-estimand figures — the treatment-regimen figures are lower (9.8% versus 3.9% in SYNCHRONIZE-2). Trial population means, not individual predictions.',
+      },
+      {
+        q: 'How does it differ from semaglutide, tirzepatide and retatrutide?',
+        a: 'Semaglutide targets GLP-1 alone and tirzepatide targets GIP + GLP-1; survodutide instead pairs GLP-1 with glucagon-receptor activation, studied for extra energy expenditure and liver-fat reduction. Retatrutide uses all three receptors. Survodutide’s Phase 3 weight figures are lower than tirzepatide’s or retatrutide’s, but the trials were not head-to-head.',
       },
       {
         q: 'What is it studied for in the liver?',
-        a: 'It has FDA Breakthrough Therapy designation for MASH (metabolic dysfunction-associated steatohepatitis) and is in Phase 3 trials for it — the glucagon arm is of particular interest for hepatic fat.',
+        a: 'MASH (metabolic dysfunction-associated steatohepatitis). A Phase 2 trial (NEJM 2024) reported MASH improvement without worsening fibrosis in up to 62% of participants versus 14% on placebo. It has FDA Breakthrough Therapy designation, and the Phase 3 LIVERAGE and LIVERAGE-Cirrhosis trials are ongoing.',
+      },
+      {
+        q: 'Is survodutide safe for the heart?',
+        a: 'SYNCHRONIZE-CVOT (Lancet 2026) followed 5,530 adults and found survodutide non-inferior to placebo for major adverse cardiovascular events. That shows it did not increase cardiovascular risk; the confidence interval crossed 1, so a cardiovascular benefit has not been demonstrated.',
+      },
+      {
+        q: 'What are the side effects of survodutide?',
+        a: 'Mostly gastrointestinal — nausea, vomiting, diarrhea and constipation, concentrated in dose escalation. In the cardiovascular-outcomes trial about 19–21% of participants on active doses stopped treatment for gastrointestinal events, a higher discontinuation rate than the approved incretins usually report. This page is a research reference, not medical advice.',
       },
       {
         q: 'Is survodutide approved?',
-        a: 'No — it is investigational and not FDA-approved. This page is a research and educational reference.',
+        a: 'No — it is investigational and not approved by the FDA or any other regulator. Boehringer Ingelheim has said it is preparing obesity submissions following the SYNCHRONIZE program. Anything sold as survodutide today is outside any regulated channel.',
       },
     ],
     molecularWeight: 4232,
     molecularFormula: 'C192H289N47O61',
     cas: '2805997-46-8',
     pubchemCid: 171378821,
+    fdaApproved: false,
   },
   {
     slug: 'mazdutide',
@@ -428,45 +444,61 @@ const SEED_PEPTIDES: Peptide[] = [
     aliases: ['IBI362', 'LY3305677'],
     categories: ['metabolic'],
     shortDescription:
-      'A glucagon / GLP-1 dual agonist (oxyntomodulin-based) approved in China for weight management and diabetes — not yet FDA-approved.',
+      'A once-weekly glucagon / GLP-1 dual agonist (oxyntomodulin-based) approved in China for weight management and type 2 diabetes — the first of its class on any market. Not FDA-approved.',
     description:
-      'Mazdutide is a once-weekly glucagon / GLP-1 dual receptor agonist based on mammalian oxyntomodulin, the natural gut hormone that activates both receptors. Licensed by Innovent Biologics from Eli Lilly for China, it became the first GCG/GLP-1 dual agonist to reach the market when China’s NMPA approved it in 2025 — first for chronic weight management, then for type 2 diabetes. It is not FDA-approved; Eli Lilly retains rights outside China, where it remains investigational.',
+      'Mazdutide is a once-weekly glucagon / GLP-1 dual receptor agonist based on mammalian oxyntomodulin, the natural gut hormone that activates both receptors. Licensed by Innovent Biologics from Eli Lilly for China, it became the first GCG/GLP-1 dual agonist to reach the market when China’s NMPA approved it in 2025 — for chronic weight management in June, then for type 2 diabetes in September. Phase 3 GLORY-1 reported ~14.8% mean weight reduction at 6 mg over 48 weeks, and the 9 mg GLORY-2 trial (JAMA 2026) pushed that higher. Its evidence base is almost entirely in Chinese adults; it is not FDA-approved.',
     mechanism:
-      'Dual agonism at the glucagon and GLP-1 receptors, modeled on oxyntomodulin — combining GLP-1 satiety and insulin effects with glucagon-driven energy expenditure.',
-    researchAreas: ['Obesity', 'Type 2 diabetes', 'MASH'],
+      'Dual agonism at the glucagon and GLP-1 receptors, modeled on oxyntomodulin — combining GLP-1 satiety and insulin effects with glucagon-driven energy expenditure and hepatic-fat mobilization.',
+    researchAreas: ['Obesity', 'Type 2 diabetes', 'MASH', 'Serum uric acid'],
     background: [
       'Mazdutide is built on oxyntomodulin, a naturally occurring gut hormone that — unusually — activates both the GLP-1 and glucagon receptors on its own. Engineering that dual activity into a stabilized, acylated, once-weekly peptide gives mazdutide the same glucagon/GLP-1 profile as survodutide, reached from a different molecular starting point.',
-      'Its development is notable for geography. Eli Lilly created the molecule (LY3305677) and licensed Chinese rights to Innovent Biologics (as IBI362) in 2019. In 2025 China’s NMPA approved it — first for long-term weight management, then for glycemic control in type 2 diabetes — making it the first glucagon/GLP-1 dual agonist approved anywhere. Late-stage Chinese trials (the GLORY program) reported weight reductions around 20% at higher doses. It is not FDA-approved, and outside China it remains investigational.',
+      'Its development is notable for geography. Eli Lilly created the molecule (LY3305677) and licensed Chinese rights to Innovent Biologics (as IBI362) in 2019. The Phase 3 GLORY-1 trial (Ji et al., NEJM 2025) randomized 610 Chinese adults with overweight or obesity and reported mean weight change at 48 weeks of −12.0% at 4 mg and −14.8% at 6 mg versus −0.5% on placebo under the efficacy estimand (−11.0% and −14.0% versus +0.3% under the treatment-policy estimand). On that basis China’s NMPA approved it in June 2025 for long-term weight management — the first glucagon/GLP-1 dual agonist approved anywhere — and in September 2025 for glycemic control in type 2 diabetes, supported by the DREAMS program.',
+      'The 2026 data extended both indications. GLORY-2 (JAMA 2026) tested a higher 9 mg dose in 462 Chinese adults with obesity for 60 weeks and reported mean weight reduction of roughly 17–19% depending on the estimand, against about 3% on placebo. DREAMS-3, presented at ADA 2026, was an open-label head-to-head in 329 Chinese adults with type 2 diabetes and obesity: 48% on mazdutide 6 mg reached both HbA1c below 7.0% and at least 10% weight loss at 32 weeks, versus 21% on semaglutide 1 mg — a diabetes-dose comparator, not the 2.4 mg obesity dose.',
+      'Two caveats frame all of it. The pivotal trials enrolled Chinese adults at lower baseline body-mass index than Western obesity trials, so percentages are not directly comparable to STEP or SURMOUNT. And outside China the drug remains investigational: Eli Lilly retains ex-China rights and no FDA filing has been announced. A recurring secondary finding — reductions in serum uric acid alongside lipids and liver fat — is attributed to the glucagon arm and is being studied in its own right.',
     ],
     keyResearch: [
-      'Oxyntomodulin-based dual agonism — activates both glucagon and GLP-1 receptors, modeled on the natural dual-acting gut hormone.',
-      'First-in-class approval (China) — China’s NMPA approved it in 2025 for weight management and then type 2 diabetes; the first GCG/GLP-1 dual agonist to market.',
-      'Weight reduction — late-stage Chinese trials (GLORY) reported ~20% mean weight loss at higher doses.',
-      'Developed by Lilly / Innovent — Innovent holds Chinese rights; Lilly retains rights elsewhere.',
-      'Not FDA-approved — approved in China only; investigational elsewhere.',
+      'First-in-class approval (China) — NMPA approved mazdutide in June 2025 for chronic weight management and September 2025 for type 2 diabetes; the first GCG/GLP-1 dual agonist on any market.',
+      'GLORY-1 (NEJM 2025, n=610, 48 weeks) — −14.8% at 6 mg and −12.0% at 4 mg versus −0.5% placebo (efficacy estimand); −14.0% and −11.0% versus +0.3% under treatment-policy.',
+      'GLORY-2 (JAMA 2026, n=462, 60 weeks) — the 9 mg dose reported roughly 17–19% mean weight reduction depending on the estimand, versus about 3% on placebo.',
+      'DREAMS-3 (ADA 2026, open-label, n=329) — 48% on mazdutide 6 mg reached HbA1c <7.0% plus ≥10% weight loss at 32 weeks versus 21% on semaglutide 1 mg.',
+      'Oxyntomodulin-based dual agonism — activates both glucagon and GLP-1 receptors; trials also report lower serum uric acid, triglycerides and liver fat.',
+      'Not FDA-approved — approved in China only; Innovent holds Chinese rights and Lilly retains rights elsewhere, where it is investigational.',
     ],
     faqs: [
       {
         q: 'What is mazdutide?',
-        a: 'Mazdutide is a once-weekly glucagon / GLP-1 dual receptor agonist based on oxyntomodulin, approved in China for weight management and type 2 diabetes and developed by Eli Lilly and Innovent.',
+        a: 'Mazdutide is a once-weekly glucagon / GLP-1 dual receptor agonist based on oxyntomodulin, approved in China for weight management and type 2 diabetes and developed by Eli Lilly and Innovent Biologics.',
+      },
+      {
+        q: 'How much weight do people lose on mazdutide?',
+        a: 'GLORY-1 (NEJM 2025) reported −14.8% at 6 mg and −12.0% at 4 mg versus −0.5% on placebo at 48 weeks (efficacy estimand). GLORY-2 (JAMA 2026) reported roughly 17–19% at 9 mg over 60 weeks, depending on the estimand. Both trials enrolled Chinese adults; these are population means, not individual predictions.',
       },
       {
         q: 'Is mazdutide FDA-approved?',
-        a: 'No. It was approved in China (2025) for weight management and diabetes, but it is not FDA-approved; outside China it remains investigational. This page is a research and educational reference.',
+        a: 'No. China’s NMPA approved it in 2025 for weight management and type 2 diabetes, but it is not FDA-approved and no US filing has been announced; outside China it remains investigational. This page is a research and educational reference.',
+      },
+      {
+        q: 'Did mazdutide beat semaglutide?',
+        a: 'In DREAMS-3, an open-label trial in 329 Chinese adults with type 2 diabetes and obesity, 48% on mazdutide 6 mg reached both HbA1c <7.0% and ≥10% weight loss at 32 weeks versus 21% on semaglutide 1 mg. The comparator was the 1 mg diabetes dose rather than the 2.4 mg obesity dose, and the trial was not blinded.',
       },
       {
         q: 'How is it different from survodutide?',
-        a: 'Both are glucagon / GLP-1 dual agonists, but mazdutide is based on the natural dual-acting hormone oxyntomodulin, while survodutide is a separate engineered peptide; they come from different developers.',
+        a: 'Both are glucagon / GLP-1 dual agonists, but mazdutide is based on the natural dual-acting hormone oxyntomodulin, while survodutide is a separately engineered glucagon-derived peptide. Mazdutide is approved in China; survodutide is not approved anywhere but has a global Phase 3 program and a MASH Breakthrough designation.',
       },
       {
         q: 'What does the glucagon component add?',
-        a: 'Glucagon-receptor activation is studied for increasing energy expenditure and reducing liver fat, complementing GLP-1’s appetite and glucose effects.',
+        a: 'Glucagon-receptor activation is studied for increasing energy expenditure and reducing liver fat, complementing GLP-1’s appetite and glucose effects. Mazdutide trials also report falls in serum uric acid and triglycerides.',
+      },
+      {
+        q: 'What are the side effects of mazdutide?',
+        a: 'In trials the most common adverse events were gastrointestinal — nausea, diarrhea and vomiting — mostly mild to moderate and concentrated during dose escalation, in line with the incretin class. Small increases in heart rate have also been reported. This page is a research reference, not medical advice.',
       },
     ],
     molecularWeight: 4476,
     molecularFormula: 'C207H317N45O65',
     cas: '2259884-03-0',
     pubchemCid: 167312357,
+    fdaApproved: false,
   },
   {
     slug: 'cagrilintide',
@@ -482,14 +514,15 @@ const SEED_PEPTIDES: Peptide[] = [
     background: [
       'Cagrilintide is a long-acting, acylated analog of amylin — the 37-residue pancreatic hormone co-secreted with insulin after meals that signals satiety to the hindbrain and slows gastric emptying. Where GLP-1 agonists work through the GLP-1 receptor, cagrilintide works through amylin and calcitonin receptor complexes — a genuinely separate appetite pathway, which is precisely what makes it interesting as a combination partner. A fatty-acid chain extends its half-life for once-weekly dosing, and the native amylin tendency to aggregate into amyloid fibrils has been engineered out.',
       'As monotherapy it has moved through the clinic quickly. The Phase 2 dose-ranging trial (Lau et al., Lancet 2021, PMID 34798060) reported dose-dependent weight reductions up to ~10.8% at 26 weeks at the 4.5 mg dose — exceeding the liraglutide 3.0 mg comparator arm. In September 2025 Novo Nordisk reported Phase 3 monotherapy results: ~11.8% mean weight reduction over 68 weeks versus ~2.3% on placebo.',
-      'Its main role, though, is as one half of CagriSema — the fixed once-weekly combination with semaglutide that pairs the amylin and GLP-1 pathways. The Phase 3 REDEFINE program (NEJM 2025) reported 20.4%–22.7% mean weight reduction at 68 weeks, and Novo Nordisk filed CagriSema for FDA approval in December 2025, with a decision expected in 2026. Cagrilintide itself remains investigational everywhere.',
+      'Its main role, though, is as one half of CagriSema — the fixed once-weekly combination with semaglutide that pairs the amylin and GLP-1 pathways. The Phase 3 REDEFINE program (NEJM 2025) reported 20.4%–22.7% mean weight reduction at 68 weeks, and Novo Nordisk filed CagriSema for FDA approval in December 2025, guiding to a decision in the fourth quarter of 2026. In the open-label REDEFINE 4 head-to-head (2026), CagriSema reduced weight by 23.0% against 25.5% for tirzepatide and did not meet non-inferiority. Cagrilintide itself remains investigational everywhere; other long-acting amylin agonists — petrelintide and eloralintide — are now in late-stage development alongside it.',
     ],
     keyResearch: [
       'Amylin pathway — agonism at amylin/calcitonin receptor complexes, a satiety system distinct from GLP-1 — the mechanistic basis for combining the two.',
       'Monotherapy weight reduction — Phase 2 (Lancet 2021) reported up to ~10.8% at 26 weeks; Phase 3 (reported 2025) reported ~11.8% mean over 68 weeks versus ~2.3% placebo.',
       'Combination therapy — with semaglutide as CagriSema, Phase 3 REDEFINE-1 reported 20.4%–22.7% mean weight reduction at 68 weeks (NEJM 2025).',
       'Half-life engineering — acylation supports a once-weekly profile; fibril-forming aggregation of native amylin is engineered out.',
-      'Regulatory status — investigational; the CagriSema combination was filed with the FDA in December 2025, decision anticipated in 2026.',
+      'Head-to-head — in REDEFINE 4 (2026, open-label, n=809, 84 weeks) CagriSema reduced weight by 23.0% versus 25.5% for tirzepatide and missed non-inferiority.',
+      'Regulatory status — investigational; the CagriSema combination was filed with the FDA in December 2025, with Novo Nordisk guiding to a decision in Q4 2026.',
     ],
     faqs: [
       {
@@ -540,15 +573,16 @@ const SEED_PEPTIDES: Peptide[] = [
     researchAreas: ['Obesity', 'Type 2 diabetes', 'Combination metabolic therapy', 'Cardiovascular outcomes'],
     background: [
       'CagriSema is a combination product, and that is the whole point of it. Rather than engineer a single peptide that hits several receptors — the multi-agonist route taken by tirzepatide and retatrutide — Novo Nordisk co-formulates two of its existing peptides: the amylin analog cagrilintide and the GLP-1 agonist semaglutide. Both suppress appetite, but through different receptor systems (amylin/calcitonin complexes versus the GLP-1 receptor), so combining them is studied for additive weight effect from a single weekly injection.',
-      'The Phase 3 REDEFINE program delivered the largest data package ever assembled for a combination obesity therapy. REDEFINE-1 (Garvey et al., NEJM 2025, NCT05567796) reported 20.4% mean weight reduction at 68 weeks regardless of adherence — 22.7% among participants who stayed on treatment — versus 3.0% on placebo, with 40.4% of adherent participants losing ≥25% of body weight and 23.1% losing ≥30%. REDEFINE-2 (NEJM 2025), in adults with overweight/obesity and type 2 diabetes, reported −13.7% versus −3.4% placebo. REDEFINE-3, a cardiovascular-outcomes trial, is ongoing.',
-      'Because it is a co-formulation, CagriSema has no molecular formula or sequence of its own — its properties are those of its two components, each documented on its own monograph here. Novo Nordisk submitted the FDA application in December 2025 — the first once-weekly GLP-1/amylin combination to reach filing — with a decision anticipated in 2026. It is not yet approved anywhere.',
+      'The Phase 3 REDEFINE program delivered the largest data package ever assembled for a combination obesity therapy. REDEFINE-1 (Garvey et al., NEJM 2025, NCT05567796) reported 20.4% mean weight reduction at 68 weeks regardless of adherence — 22.7% among participants who stayed on treatment — versus 3.0% on placebo, with 40.4% of adherent participants losing ≥25% of body weight and 23.1% losing ≥30%. REDEFINE-2 (NEJM 2025), in adults with overweight/obesity and type 2 diabetes, reported −13.7% versus −3.4% placebo. REDEFINE-3, a cardiovascular-outcomes trial, is ongoing. REDEFINE 4 (2026) then tested it directly against tirzepatide in an open-label trial of 809 adults over 84 weeks: CagriSema reduced mean body weight by 23.0% against 25.5% for tirzepatide (20.2% versus 23.6% under the treatment-regimen estimand) and did not meet its primary endpoint of non-inferiority.',
+      'Because it is a co-formulation, CagriSema has no molecular formula or sequence of its own — its properties are those of its two components, each documented on its own monograph here. Novo Nordisk submitted the FDA application in December 2025 — the first once-weekly GLP-1/amylin combination to reach filing — with Novo Nordisk guiding to a decision in the fourth quarter of 2026. It was not approved anywhere as of this page’s last review in November 2026. Novo’s single-molecule successor, amycretin, pursues the same two pathways in one peptide.',
     ],
     keyResearch: [
       'Two-pathway combination — pairs semaglutide (GLP-1) with cagrilintide (amylin) to engage two distinct satiety systems in one weekly injection.',
       'REDEFINE-1 (NEJM 2025) — 20.4% mean weight reduction at 68 weeks (22.7% with treatment adherence) versus 3.0% placebo; ~40% of adherent participants lost ≥25%, and ~23% lost ≥30%.',
       'REDEFINE-2 (NEJM 2025) — −13.7% versus −3.4% placebo in adults with type 2 diabetes; half of participants with obesity crossed below the obesity BMI threshold in REDEFINE-1.',
       'Not a single molecule — a fixed-dose co-formulation; its chemistry is that of its two component peptides, each catalogued separately here.',
-      'Regulatory status — filed with the FDA in December 2025 (first GLP-1/amylin combination filing); decision expected 2026. Cardiovascular-outcomes trial (REDEFINE-3) ongoing.',
+      'REDEFINE 4 (2026, open-label, n=809, 84 weeks) — 23.0% versus 25.5% for tirzepatide (20.2% versus 23.6% treatment-regimen); non-inferiority not met.',
+      'Regulatory status — filed with the FDA in December 2025 (first GLP-1/amylin combination filing); decision guided for Q4 2026. Cardiovascular-outcomes trial (REDEFINE-3) ongoing.',
     ],
     faqs: [
       {
@@ -565,7 +599,7 @@ const SEED_PEPTIDES: Peptide[] = [
       },
       {
         q: 'How does CagriSema compare with tirzepatide and retatrutide?',
-        a: 'Tirzepatide is one molecule hitting two receptors (GIP + GLP-1, ~22.5% mean weight loss in SURMOUNT-1); retatrutide is one molecule hitting three (adds glucagon, ~28.7% in its first Phase 3 readout). CagriSema reaches a similar range by combining two molecules (GLP-1 + amylin) instead. None of these trials is head-to-head.',
+        a: 'Tirzepatide is one molecule hitting two receptors (GIP + GLP-1, ~22.5% mean weight loss in SURMOUNT-1); retatrutide is one molecule hitting three (adds glucagon, ~28.7% in its first Phase 3 readout). CagriSema reaches a similar range by combining two molecules (GLP-1 + amylin) instead. The one direct comparison, REDEFINE 4 (2026), reported 23.0% for CagriSema against 25.5% for tirzepatide and did not show non-inferiority; there is no head-to-head against retatrutide.',
       },
       {
         q: 'What are the side effects of CagriSema?',
@@ -573,11 +607,441 @@ const SEED_PEPTIDES: Peptide[] = [
       },
       {
         q: 'When will CagriSema be approved?',
-        a: 'Novo Nordisk filed the FDA application in December 2025 — the first once-weekly GLP-1/amylin combination to reach filing — with a decision anticipated in 2026. It is not approved anywhere today; anything sold as CagriSema now is outside any regulated channel.',
+        a: 'Novo Nordisk filed the FDA application in December 2025 — the first once-weekly GLP-1/amylin combination to reach filing — with a decision guided for the fourth quarter of 2026. It had not been approved as of November 2026; anything sold as CagriSema outside an approved product is outside any regulated channel.',
       },
     ],
     synthesisNotes:
       'CagriSema is a co-formulation, not a synthesized molecule: it is manufactured by making its two component peptides — cagrilintide and semaglutide — separately, each to its own spec and certificate of analysis, and combining them at fixed doses. Its quality therefore rests on the identity and purity of two peptides at once, described on their individual monographs.',
+  },
+  {
+    slug: 'orforglipron',
+    name: 'Orforglipron',
+    aliases: ['Foundayo', 'LY3502970', 'OWL833'],
+    categories: ['metabolic'],
+    shortDescription:
+      'The first small-molecule (non-peptide) GLP-1 receptor agonist to reach approval — a once-daily pill with no food or water restrictions, FDA-approved as Foundayo for chronic weight management in April 2026.',
+    description:
+      'Orforglipron is not a peptide. It is a small organic molecule (~883 Da) that activates the same GLP-1 receptor as semaglutide, which is why it belongs in this reference: it is the non-peptide answer to the problems peptides create — injection, cold chain, and complex synthesis. Discovered by Chugai and developed by Eli Lilly, it is taken once daily by mouth without the fasting rules oral semaglutide requires. The FDA approved it as Foundayo for chronic weight management on April 1, 2026, on Phase 3 ATTAIN-1 data showing 12.4% mean weight reduction at 72 weeks on the highest dose versus 0.9% on placebo.',
+    mechanism:
+      'Non-peptide agonist of the GLP-1 receptor that binds within the transmembrane domain rather than at the peptide-binding site. Signaling is biased toward G-protein / cAMP activation with little β-arrestin recruitment. Downstream effects match the class: glucose-dependent insulin secretion, slowed gastric emptying, reduced appetite.',
+    researchAreas: ['Obesity', 'Type 2 diabetes', 'Oral incretin therapy', 'Weight maintenance'],
+    background: [
+      'Every other GLP-1 agonist in this catalog is a peptide — a chain of amino acids that the gut digests, which is why they are injected (or, for oral semaglutide, co-formulated with an absorption enhancer and taken fasting with a sip of water). Orforglipron takes a different route entirely: it is a conventional small molecule, made by organic synthesis rather than peptide synthesis, that happens to switch on the GLP-1 receptor. It survives digestion, is absorbed like an ordinary tablet, and has a half-life of roughly 29–49 hours, supporting once-daily dosing at any time of day.',
+      'It was discovered at Chugai Pharmaceutical (as OWL833) and licensed to Eli Lilly in 2018. The Phase 3 program ran on two tracks. ATTAIN-1 (Wharton et al., NEJM 2025) randomized 3,127 adults with obesity or overweight and reported mean weight change at 72 weeks of −12.4% on the 36 mg dose versus −0.9% on placebo. ACHIEVE-1 (Rosenstock et al., NEJM 2025), in early type 2 diabetes, reported HbA1c reductions of 1.3–1.6 percentage points at 40 weeks. Those weight figures are below injectable semaglutide 2.4 mg and well below tirzepatide — the case for orforglipron is convenience and manufacturing scale, not peak efficacy.',
+      'The FDA approved orforglipron as Foundayo on April 1, 2026 for chronic weight management in adults with obesity, or overweight with a weight-related condition — the first new molecular entity cleared under the Commissioner’s National Priority Voucher pilot, after an unusually short review. The label carries the class boxed warning about thyroid C-cell tumors. A type 2 diabetes indication was being pursued separately on the ACHIEVE program; check the current label before relying on its status.',
+    ],
+    keyResearch: [
+      'Non-peptide GLP-1 agonism — a small molecule that activates the GLP-1 receptor from within the transmembrane domain, with G-protein-biased signaling.',
+      'ATTAIN-1 (NEJM 2025, n=3,127, 72 weeks) — −12.4% mean weight change at 36 mg versus −0.9% placebo; basis for the obesity approval.',
+      'ACHIEVE-1 (NEJM 2025, 40 weeks) — HbA1c reduced by 1.3–1.6 percentage points in early type 2 diabetes versus ~0.1 on placebo.',
+      'Oral without restrictions — once daily, no fasting or water rules; unlike oral semaglutide, which needs the SNAC absorption enhancer and an empty stomach.',
+      'Regulatory — FDA-approved as Foundayo on April 1, 2026 for chronic weight management, under the National Priority Voucher pilot.',
+    ],
+    faqs: [
+      {
+        q: 'What is orforglipron?',
+        a: 'Orforglipron (Foundayo) is a once-daily oral GLP-1 receptor agonist from Eli Lilly. Unlike semaglutide or tirzepatide it is a small molecule, not a peptide. The FDA approved it for chronic weight management in April 2026.',
+      },
+      {
+        q: 'Is orforglipron a peptide?',
+        a: 'No. It is a small organic molecule (C48H48F2N10O5, about 883 Da) that activates the GLP-1 receptor. It is included in this peptide reference because it is the direct non-peptide counterpart to the GLP-1 peptides — same receptor, entirely different chemistry.',
+      },
+      {
+        q: 'How much weight do people lose on orforglipron?',
+        a: 'In ATTAIN-1 (NEJM 2025), adults on the highest dose lost a mean of 12.4% of body weight at 72 weeks versus 0.9% on placebo. That is less than injectable semaglutide 2.4 mg (~14.9% in STEP-1) or tirzepatide (~22.5% in SURMOUNT-1); the trials were not head-to-head. Population means, not individual predictions.',
+      },
+      {
+        q: 'How is it different from oral semaglutide (Rybelsus)?',
+        a: 'Oral semaglutide is a peptide co-formulated with the absorption enhancer SNAC and must be taken on an empty stomach with a small amount of water. Orforglipron is a small molecule absorbed like an ordinary tablet, with no food or water restrictions.',
+      },
+      {
+        q: 'What are the side effects of orforglipron?',
+        a: 'The same pattern as the injectable class — nausea, vomiting, diarrhea and constipation, mostly during dose escalation. The label carries the class boxed warning about thyroid C-cell tumors seen in rodents and advises against combining it with other GLP-1 therapies. This page is a research reference, not medical advice.',
+      },
+      {
+        q: 'Why does a small-molecule GLP-1 matter?',
+        a: 'Peptide GLP-1 drugs need long solid-phase or recombinant synthesis, fatty-acid acylation, sterile injectable manufacturing and cold storage. A small molecule is made by conventional chemical synthesis and pressed into room-temperature tablets — far easier to scale.',
+      },
+    ],
+    molecularWeight: 883,
+    molecularFormula: 'C48H48F2N10O5',
+    cas: '2212020-52-3',
+    pubchemCid: 137319706,
+    fdaApproved: true,
+    storage:
+      'An oral tablet stored at controlled room temperature in its original packaging — no refrigeration or reconstitution, unlike the injectable peptide agonists.',
+    handling:
+      'Not a lyophilized peptide: there is no vial, diluent, or reconstitution step. As a reference standard it is handled as a conventional small-molecule solid, protected from moisture.',
+  },
+  {
+    slug: 'dulaglutide',
+    name: 'Dulaglutide',
+    aliases: ['Trulicity', 'LY2189265'],
+    categories: ['metabolic', 'peptide-hormone'],
+    shortDescription:
+      'Once-weekly GLP-1 receptor agonist built as an Fc-fusion protein (Trulicity) — FDA-approved for type 2 diabetes since 2014, with cardiovascular-outcomes data from REWIND.',
+    description:
+      'Dulaglutide solves the half-life problem a different way from semaglutide. Instead of attaching a fatty acid to a synthetic peptide, it fuses two copies of a DPP-4-resistant GLP-1 analog to a modified human IgG4 Fc fragment, producing a ~59.7 kDa recombinant protein with a half-life of about five days. Eli Lilly’s Trulicity was approved by the FDA in September 2014 for type 2 diabetes; the REWIND trial (Lancet 2019) later showed a 12% reduction in major adverse cardiovascular events, extending the label to cardiovascular risk reduction.',
+    mechanism:
+      'GLP-1 receptor agonism → glucose-dependent insulin secretion, glucagon suppression, slowed gastric emptying and reduced appetite. The Fc domain enlarges the molecule beyond renal filtration and recycles it through the neonatal Fc receptor, extending exposure to once-weekly.',
+    researchAreas: ['Type 2 diabetes', 'Cardiovascular risk reduction', 'Pediatric type 2 diabetes', 'Obesity'],
+    background: [
+      'Native GLP-1 lasts about two minutes in circulation — cleaved by DPP-4 and cleared by the kidney. The incretin field found three engineering answers. Liraglutide and semaglutide attach a fatty acid so the peptide rides on albumin. Albiglutide fused GLP-1 to albumin directly. Dulaglutide fuses it to an antibody fragment: each of its two identical chains is a GLP-1(7–37) analog with substitutions that block DPP-4 cleavage, joined by a short peptide linker to a modified IgG4 Fc domain engineered to minimize immune effector function.',
+      'That makes it a biologic rather than a synthetic peptide — expressed in mammalian cell culture, glycosylated, and far too large for solid-phase synthesis. The AWARD Phase 3 program established its glycemic efficacy at 0.75 mg and 1.5 mg weekly, and AWARD-11 added 3.0 mg and 4.5 mg doses (approved 2020). Weight loss is modest by current standards — a few kilograms on average — which is why it is positioned as a diabetes drug and has no obesity indication.',
+      'Its landmark is REWIND (Gerstein et al., Lancet 2019): 9,901 adults with type 2 diabetes followed for a median 5.4 years, most of them without established cardiovascular disease. Dulaglutide reduced major adverse cardiovascular events by 12% (hazard ratio 0.88, 95% CI 0.79–0.99), supporting an indication that covers primary as well as secondary prevention. It is also approved for type 2 diabetes in patients aged 10 and older. Dulaglutide now serves as the active comparator the newer agents are measured against — including tirzepatide’s cardiovascular-outcomes trial, SURPASS-CVOT.',
+    ],
+    keyResearch: [
+      'Fc-fusion half-life extension — two GLP-1 analog chains fused to a modified IgG4 Fc; ~59.7 kDa, half-life ~5 days, once-weekly dosing.',
+      'Cardiovascular outcomes — REWIND (Lancet 2019, n=9,901, median 5.4 years) reported a 12% MACE reduction (HR 0.88), largely in a primary-prevention population.',
+      'Glycemic control — the AWARD program supports doses from 0.75 mg to 4.5 mg weekly in type 2 diabetes.',
+      'Pediatric use — approved for type 2 diabetes from age 10 (AWARD-PEDS).',
+      'Benchmark comparator — the reference arm in later incretin trials, including tirzepatide’s SURPASS-CVOT.',
+    ],
+    faqs: [
+      {
+        q: 'What is dulaglutide?',
+        a: 'Dulaglutide (Trulicity) is a once-weekly GLP-1 receptor agonist from Eli Lilly, FDA-approved since 2014 for type 2 diabetes and for reducing cardiovascular risk in adults with type 2 diabetes.',
+      },
+      {
+        q: 'How is dulaglutide different from semaglutide?',
+        a: 'Both are once-weekly GLP-1 agonists, but they are built differently. Semaglutide is a ~4.1 kDa synthetic peptide carrying a fatty-acid chain that binds albumin. Dulaglutide is a ~59.7 kDa recombinant protein — two GLP-1 analog chains fused to an antibody Fc fragment. Semaglutide produces substantially more weight loss and has an obesity indication; dulaglutide does not.',
+      },
+      {
+        q: 'Is dulaglutide a peptide?',
+        a: 'It is a fusion protein rather than a synthetic peptide: the GLP-1-like portion is a peptide sequence, but it is expressed as part of a larger Fc-fusion in mammalian cells and cannot be made by solid-phase synthesis.',
+      },
+      {
+        q: 'Does dulaglutide cause weight loss?',
+        a: 'Modestly — trials report average losses of a few kilograms, increasing with dose. It is not approved for weight management.',
+      },
+      {
+        q: 'What did the REWIND trial show?',
+        a: 'In 9,901 adults with type 2 diabetes followed for a median 5.4 years, dulaglutide reduced major adverse cardiovascular events by 12% versus placebo (HR 0.88, 95% CI 0.79–0.99). Most participants had risk factors rather than established cardiovascular disease.',
+      },
+      {
+        q: 'What are the side effects of dulaglutide?',
+        a: 'Mainly gastrointestinal — nausea, diarrhea, vomiting and reduced appetite. The label carries the class boxed warning about thyroid C-cell tumors seen in rodent studies. This page is a research reference, not medical advice.',
+      },
+    ],
+    molecularWeight: 59700,
+    cas: '923950-08-7',
+    fdaApproved: true,
+    storage:
+      'Supplied as a ready-to-use solution in a single-dose pen, stored refrigerated at 2–8 °C and protected from light; do not freeze.',
+    handling:
+      'A glycosylated fusion protein, not a lyophilized peptide — there is no reconstitution step. Sensitive to freezing, heat and agitation, which can cause aggregation.',
+  },
+  {
+    slug: 'exenatide',
+    name: 'Exenatide',
+    aliases: ['Byetta', 'Bydureon', 'Exendin-4', 'AC2993'],
+    categories: ['metabolic', 'peptide-hormone'],
+    shortDescription:
+      'The first GLP-1 receptor agonist ever approved (Byetta, 2005) — synthetic exendin-4, a 39-residue peptide first isolated from Gila monster venom.',
+    description:
+      'Exenatide is where the GLP-1 drug class began. It is the synthetic form of exendin-4, a 39-amino-acid peptide discovered in the venom of the Gila monster (Heloderma suspectum) that activates the human GLP-1 receptor but resists the enzyme that destroys native GLP-1 in minutes. The FDA approved it as twice-daily Byetta in April 2005 for type 2 diabetes, and as once-weekly Bydureon — the same peptide in slow-release microspheres — in 2012. It has since been overtaken by longer-acting agents, but every later GLP-1 drug descends from its proof of concept.',
+    mechanism:
+      'GLP-1 receptor agonism → glucose-dependent insulin secretion, glucagon suppression, slowed gastric emptying, increased satiety. A glycine at position 2 (where GLP-1 has alanine) blocks DPP-4 cleavage.',
+    researchAreas: ['Type 2 diabetes', 'Cardiovascular outcomes', 'Parkinson’s disease', 'Peptide drug delivery'],
+    background: [
+      'In 1992 the endocrinologist John Eng, screening lizard venoms for bioactive peptides, isolated exendin-4 from the Gila monster. It shares only about half its sequence with human GLP-1, yet it binds and activates the same receptor — and because its second residue is glycine rather than alanine, the enzyme DPP-4 cannot clip it. A two-minute hormone became a peptide with a half-life of about 2.4 hours.',
+      'Amylin Pharmaceuticals and Eli Lilly developed the synthetic peptide as exenatide. Byetta (twice daily before meals) was approved in 2005 as the first GLP-1 receptor agonist, with modest weight loss noted from the start. The next step was a delivery solution rather than a new molecule: Bydureon encapsulates the unmodified peptide in biodegradable poly(lactide-co-glycolide) microspheres that release it over weeks, allowing once-weekly dosing without acylation or fusion — a formulation approach none of the later blockbusters took.',
+      'Its outcomes record is mixed, and worth stating plainly. EXSCEL (Holman et al., NEJM 2017) followed 14,752 adults with type 2 diabetes: weekly exenatide was non-inferior to placebo for major cardiovascular events (hazard ratio 0.91, 95% CI 0.83–1.00) but narrowly missed superiority. Interest in GLP-1 agonists for neurodegeneration began with small exenatide trials in Parkinson’s disease, but the Phase 3 Exenatide-PD3 trial (Lancet 2025) found no benefit over 96 weeks. Exenatide is a 39-residue linear peptide with no acylation, which makes it one of the more tractable incretins to synthesize.',
+    ],
+    keyResearch: [
+      'First in class — approved April 2005 (Byetta) as the first GLP-1 receptor agonist; the proof of concept for the entire incretin drug class.',
+      'Natural-product origin — synthetic exendin-4 from Gila monster venom; ~53% sequence identity with human GLP-1, with a Gly2 that confers DPP-4 resistance.',
+      'Extended release by formulation — Bydureon uses PLGA microspheres for once-weekly dosing of the unmodified peptide (approved 2012).',
+      'Cardiovascular outcomes — EXSCEL (NEJM 2017, n=14,752) showed non-inferiority (HR 0.91) but not superiority for MACE.',
+      'Parkinson’s disease — early signals were not confirmed: the Phase 3 Exenatide-PD3 trial (Lancet 2025) reported no benefit at 96 weeks.',
+    ],
+    faqs: [
+      {
+        q: 'What is exenatide?',
+        a: 'Exenatide is a 39-amino-acid GLP-1 receptor agonist — the synthetic version of exendin-4 — FDA-approved for type 2 diabetes as twice-daily Byetta (2005) and once-weekly Bydureon (2012). It was the first drug in the GLP-1 class.',
+      },
+      {
+        q: 'Does exenatide really come from Gila monster venom?',
+        a: 'The peptide it copies does. Exendin-4 was isolated from Gila monster venom in 1992. The drug itself is made by chemical peptide synthesis, not extracted from lizards.',
+      },
+      {
+        q: 'How is exenatide different from semaglutide?',
+        a: 'Exenatide is based on a lizard peptide, has a half-life of about 2.4 hours, and reaches weekly dosing only through a slow-release microsphere formulation. Semaglutide is based on human GLP-1 and is acylated so the molecule itself lasts about a week. Semaglutide produces much larger weight and HbA1c reductions.',
+      },
+      {
+        q: 'Does exenatide cause weight loss?',
+        a: 'Modestly — typically a few kilograms in diabetes trials. It has no weight-management indication.',
+      },
+      {
+        q: 'Does exenatide help Parkinson’s disease?',
+        a: 'Small early trials suggested a possible effect, but the Phase 3 Exenatide-PD3 trial (Lancet 2025) found no benefit over placebo across 96 weeks. It is not approved for any neurological use.',
+      },
+      {
+        q: 'What are the side effects of exenatide?',
+        a: 'Nausea is the most common, along with vomiting and diarrhea; the weekly formulation can cause injection-site nodules. Bydureon carries the class boxed warning about thyroid C-cell tumors. This page is a research reference, not medical advice.',
+      },
+    ],
+    molecularWeight: 4186.6,
+    molecularFormula: 'C184H282N50O60S',
+    sequence: 'HGEGTFTSDLSKQMEEEAVRLFIEWLKNGGPSSGAPPPS',
+    cas: '141758-74-9',
+    pubchemCid: 45588096,
+    fdaApproved: true,
+    storage:
+      'Lyophilized reference material: store frozen and protected from light. Reconstituted: refrigerate at 2–8 °C and use promptly. The methionine at position 14 is prone to oxidation.',
+    handling:
+      'Reconstitute gently — swirl rather than shake. Minimize air exposure and freeze–thaw cycles to limit methionine oxidation.',
+  },
+  {
+    slug: 'amycretin',
+    name: 'Amycretin',
+    aliases: ['Zenagamtide'],
+    categories: ['metabolic'],
+    shortDescription:
+      'Novo Nordisk’s single-molecule GLP-1 + amylin receptor agonist (INN zenagamtide) — CagriSema’s two pathways in one peptide, in Phase 3 as a weekly injection with an oral form in development.',
+    description:
+      'Amycretin, now carrying the international name zenagamtide, is an investigational unimolecular agonist of both the GLP-1 and amylin receptors. Where CagriSema reaches those two satiety pathways by co-formulating two peptides, amycretin does it with one — and is being developed in both subcutaneous and oral forms. An early subcutaneous study (Lancet 2025) reported 24.3% mean weight reduction at 36 weeks on the highest dose. Novo Nordisk began the Phase 3 AMAZE obesity program in early 2026. It is not approved anywhere.',
+    mechanism:
+      'One peptide with agonist activity at both the GLP-1 receptor and amylin receptors — GLP-1-mediated insulin secretion and appetite suppression combined with amylin-mediated hindbrain satiety and slowed gastric emptying.',
+    researchAreas: ['Obesity', 'Type 2 diabetes', 'Oral incretin therapy', 'Combination satiety pathways'],
+    background: [
+      'The GLP-1 and amylin pathways suppress appetite through different receptors in different parts of the brain, and engaging both is additive — the premise of CagriSema. Amycretin is Novo Nordisk’s attempt to put both activities into a single molecule, which simplifies manufacturing and dosing ratios and, critically, makes an oral version feasible in a way a two-peptide combination is not.',
+      'The early data drew attention because of how fast the weight came off. A Phase 1b/2a trial of the once-weekly subcutaneous form (Lancet 2025) reported estimated mean weight reduction of 24.3% at 36 weeks on the top dose, with no plateau at the end of treatment. A Phase 1 trial of the once-daily oral form reported about 13% at just 12 weeks. Both were small, short studies in which participants were titrated quickly, and gastrointestinal adverse events were common — the figures are signals, not Phase 3 estimates.',
+      'Phase 3 began in 2026: the AMAZE program opened its first obesity trial in February, followed by a weight-maintenance study, with the subcutaneous form leading. In type 2 diabetes, a Phase 2 trial presented at ADA 2026 reported significant HbA1c reductions with up to 14.6% weight loss. No Phase 3 efficacy data exist yet, and primary completion of the lead obesity trial is not expected for several years.',
+    ],
+    keyResearch: [
+      'Unimolecular GLP-1 + amylin agonism — one peptide engaging both satiety pathways, versus CagriSema’s two-peptide co-formulation.',
+      'Subcutaneous Phase 1b/2a (Lancet 2025) — 24.3% estimated mean weight reduction at 36 weeks on the highest weekly dose; no plateau observed.',
+      'Oral form — a once-daily tablet reported ~13% mean weight reduction at 12 weeks in Phase 1.',
+      'Type 2 diabetes — Phase 2 data (ADA 2026) reported significant HbA1c reductions with up to 14.6% weight loss.',
+      'Status — Phase 3 AMAZE program began in early 2026; investigational, no Phase 3 results yet.',
+    ],
+    faqs: [
+      {
+        q: 'What is amycretin?',
+        a: 'Amycretin (INN zenagamtide) is an investigational Novo Nordisk peptide that activates both the GLP-1 and amylin receptors in a single molecule. It is in Phase 3 for obesity as a once-weekly injection, with an oral version also in development.',
+      },
+      {
+        q: 'Is zenagamtide the same as amycretin?',
+        a: 'Yes. Zenagamtide is the international nonproprietary name assigned to the compound previously known by its development name, amycretin.',
+      },
+      {
+        q: 'How is amycretin different from CagriSema?',
+        a: 'Both combine GLP-1 and amylin activity. CagriSema is two separate peptides — semaglutide and cagrilintide — in one injection. Amycretin is a single peptide with both activities, which also allows an oral formulation.',
+      },
+      {
+        q: 'How much weight do people lose on amycretin?',
+        a: 'An early subcutaneous trial (Lancet 2025) reported 24.3% mean weight reduction at 36 weeks on the top dose, and an oral Phase 1 trial about 13% at 12 weeks. These were small early-phase studies; Phase 3 results are not yet available.',
+      },
+      {
+        q: 'Is amycretin approved?',
+        a: 'No. It is investigational everywhere, with Phase 3 trials that began in 2026. Anything sold as amycretin today is outside any regulated channel. This page is a research reference, not medical advice.',
+      },
+    ],
+    fdaApproved: false,
+  },
+  {
+    slug: 'maritide',
+    name: 'MariTide',
+    aliases: ['Maridebart cafraglutide', 'AMG 133'],
+    categories: ['metabolic'],
+    shortDescription:
+      'Amgen’s once-monthly antibody–peptide conjugate — a GIP-receptor-blocking antibody carrying two GLP-1 agonist peptides. Phase 2 reported up to ~20% weight loss at 52 weeks; Phase 3 MARITIME is running.',
+    description:
+      'MariTide (maridebart cafraglutide) is an investigational bispecific molecule that does something no other incretin drug does: it blocks the GIP receptor while activating the GLP-1 receptor. Structurally it is a monoclonal antibody against the GIP receptor with two GLP-1 analog peptides chemically attached, and the antibody scaffold gives it a half-life long enough for monthly — possibly less frequent — dosing. The Phase 2 trial (NEJM 2025) reported up to ~20% mean weight reduction at 52 weeks without a plateau. Amgen’s Phase 3 MARITIME program is ongoing; it is not approved.',
+    mechanism:
+      'Antagonism of the GIP receptor by the antibody domain combined with GLP-1 receptor agonism by two conjugated peptide arms. The antibody’s FcRn recycling extends exposure to weeks.',
+    researchAreas: ['Obesity', 'Type 2 diabetes', 'Long-interval dosing', 'Weight maintenance'],
+    background: [
+      'MariTide sits at the center of an unresolved question in incretin biology. Tirzepatide activates the GIP receptor and produces more weight loss than GLP-1 alone; MariTide blocks the same receptor and also produces large weight loss. Human genetics motivated Amgen’s choice — variants that reduce GIP-receptor function are associated with lower body-mass index — and one proposed reconciliation is that sustained agonism desensitizes the receptor, so both approaches end up reducing GIP signaling. The question is not settled.',
+      'It is an antibody–peptide conjugate: a fully human monoclonal antibody that binds and blocks the GIP receptor, with two GLP-1 analog peptides joined to it through linkers. At roughly 150 kDa it is produced in mammalian cell culture and then conjugated — manufacturing closer to an antibody–drug conjugate than to a synthetic peptide.',
+      'In the Phase 2 trial (Jastreboff et al., NEJM 2025), adults with obesity and without diabetes lost up to about 20% of body weight at 52 weeks on monthly dosing, with weight still falling at the end of treatment; those with type 2 diabetes lost up to about 17%. Early dose escalation was marked by frequent nausea and vomiting, which the Phase 3 program addresses with slower titration. The Phase 3 MARITIME trials are enrolling across obesity, type 2 diabetes and related conditions, with first data expected in 2027; no regulatory filing has been made.',
+    ],
+    keyResearch: [
+      'GIP-receptor antagonism plus GLP-1 agonism — the opposite GIP strategy to tirzepatide, motivated by human genetic data.',
+      'Antibody–peptide conjugate — a GIPR-blocking monoclonal antibody carrying two GLP-1 analog peptides; ~150 kDa.',
+      'Phase 2 (NEJM 2025, 52 weeks) — up to ~20% mean weight reduction in obesity without diabetes and ~17% with type 2 diabetes, without a plateau.',
+      'Monthly dosing — antibody pharmacokinetics support once-monthly injection; less frequent maintenance schedules are under study.',
+      'Status — Phase 3 MARITIME program ongoing, first data expected 2027; investigational.',
+    ],
+    faqs: [
+      {
+        q: 'What is MariTide?',
+        a: 'MariTide (maridebart cafraglutide, AMG 133) is Amgen’s investigational once-monthly obesity drug — an antibody that blocks the GIP receptor, linked to two peptides that activate the GLP-1 receptor.',
+      },
+      {
+        q: 'Is MariTide a peptide?',
+        a: 'Partly. It is an antibody–peptide conjugate: a ~150 kDa monoclonal antibody with two GLP-1 analog peptides attached. It cannot be made by peptide synthesis alone.',
+      },
+      {
+        q: 'How can blocking GIP and activating GIP both cause weight loss?',
+        a: 'This is genuinely unresolved. Tirzepatide activates the GIP receptor; MariTide blocks it; both reduce weight. One hypothesis is that chronic agonism desensitizes the receptor so that both strategies lower GIP signaling over time. Human genetic data linking reduced GIP-receptor function to lower BMI motivated the antagonist approach.',
+      },
+      {
+        q: 'How much weight do people lose on MariTide?',
+        a: 'The Phase 2 trial (NEJM 2025) reported up to about 20% mean weight reduction at 52 weeks in adults with obesity without diabetes, and about 17% in those with type 2 diabetes. Phase 3 results are not yet available. Population means, not individual predictions.',
+      },
+      {
+        q: 'Is MariTide approved?',
+        a: 'No. It is investigational, in the Phase 3 MARITIME program, and no regulatory filing has been made. This page is a research reference, not medical advice.',
+      },
+    ],
+    molecularWeight: 150000,
+    fdaApproved: false,
+    storage:
+      'Stored refrigerated (2–8 °C), protected from light and freezing, not shaken; investigational handling per trial protocol.',
+    handling:
+      'A large antibody conjugate sensitive to freezing, heat and agitation, which can cause aggregation.',
+  },
+  {
+    slug: 'petrelintide',
+    name: 'Petrelintide',
+    aliases: ['ZP8396'],
+    categories: ['metabolic'],
+    shortDescription:
+      'Zealand Pharma and Roche’s once-weekly amylin analog — positioned as a better-tolerated alternative to GLP-1. Phase 2 ZUPREME-1 reported up to 10.7% weight loss at 42 weeks.',
+    description:
+      'Petrelintide is an investigational long-acting amylin analog designed for once-weekly dosing and — unlike native amylin — chemical and physical stability at neutral pH, which permits co-formulation with other peptides. Developed by Zealand Pharma and partnered with Roche in 2025, it is aimed at weight loss with fewer gastrointestinal side effects than the GLP-1 class. The Phase 2 ZUPREME-1 trial reported up to 10.7% mean weight reduction at 42 weeks versus 1.7% on placebo, with discontinuation for adverse events no higher than placebo. It is not approved.',
+    mechanism:
+      'Agonism at amylin and calcitonin receptors → hindbrain satiety signaling and slowed gastric emptying. A pathway distinct from GLP-1, studied for restoring leptin sensitivity and reducing food intake through increased fullness rather than nausea.',
+    researchAreas: ['Obesity', 'Type 2 diabetes', 'Amylin pathway', 'Combination metabolic therapy'],
+    background: [
+      'Amylin is the satiety hormone co-secreted with insulin. The native peptide is short-lived and aggregates into amyloid fibrils, which is why the first amylin drug, pramlintide, needs injections with every meal. Petrelintide is a second-generation answer: an acylated analog with a half-life of about ten days and no tendency to fibrillate at neutral pH — the property that lets it be mixed in one solution with a GLP-1 or GIP/GLP-1 agonist.',
+      'Zealand Pharma’s thesis is tolerability. If amylin agonism can deliver meaningful weight loss with less nausea and vomiting than the incretins, it has a role both as a standalone option for people who cannot stay on GLP-1 therapy and as a combination partner. In March 2025 Roche entered a co-development and co-commercialization agreement for the molecule, including combination with its own GIP/GLP-1 agonist CT-388.',
+      'The Phase 2 ZUPREME-1 trial, reported in 2026, enrolled about 490 adults with obesity or overweight and met its primary endpoint at week 28; at week 42 mean weight reduction reached 10.7% on the top dose versus 1.7% on placebo. Nausea was reported by 19.6% of participants on petrelintide versus 6.2% on placebo, and discontinuation for adverse events was 4.8% versus 4.9%. The weight effect is smaller than the leading incretins — or than Lilly’s amylin agonist eloralintide in its own Phase 2 — so the program’s case rests on the tolerability profile. Phase 3 monotherapy trials were slated to start in the second half of 2026.',
+    ],
+    keyResearch: [
+      'Long-acting amylin analog — once-weekly, ~10-day half-life, engineered against the fibril formation of native amylin.',
+      'Neutral-pH stability — allows co-formulation with GLP-1-class peptides in a single solution.',
+      'ZUPREME-1 (Phase 2, 2026) — up to 10.7% mean weight reduction at 42 weeks versus 1.7% placebo.',
+      'Tolerability — nausea 19.6% versus 6.2% placebo; discontinuation for adverse events 4.8% versus 4.9%.',
+      'Status — partnered with Roche (2025); Phase 3 program slated to begin in the second half of 2026; investigational.',
+    ],
+    faqs: [
+      {
+        q: 'What is petrelintide?',
+        a: 'Petrelintide (ZP8396) is an investigational once-weekly amylin analog from Zealand Pharma, co-developed with Roche, studied for weight management as a monotherapy and in combination with incretin agonists.',
+      },
+      {
+        q: 'How is petrelintide different from GLP-1 drugs?',
+        a: 'It works through amylin and calcitonin receptors rather than the GLP-1 receptor. The weight loss reported so far is smaller than semaglutide or tirzepatide, but Phase 2 discontinuation for adverse events matched placebo — tolerability is the intended advantage.',
+      },
+      {
+        q: 'How does it compare with cagrilintide and eloralintide?',
+        a: 'All three are long-acting amylin-pathway agonists. Cagrilintide (Novo Nordisk) is the amylin half of CagriSema; eloralintide (Eli Lilly) reported larger Phase 2 weight loss; petrelintide (Zealand/Roche) emphasizes tolerability and co-formulation. They have not been compared head-to-head.',
+      },
+      {
+        q: 'How much weight do people lose on petrelintide?',
+        a: 'In the Phase 2 ZUPREME-1 trial, up to 10.7% mean weight reduction at 42 weeks versus 1.7% on placebo. Population means from a Phase 2 trial, not individual predictions.',
+      },
+      {
+        q: 'Is petrelintide approved?',
+        a: 'No — it is investigational and has not completed Phase 3. This page is a research reference, not medical advice.',
+      },
+    ],
+    molecularWeight: 4192,
+    molecularFormula: 'C185H305N49O61',
+    pubchemCid: 172915807,
+    fdaApproved: false,
+  },
+  {
+    slug: 'eloralintide',
+    name: 'Eloralintide',
+    aliases: ['LY3841136'],
+    categories: ['metabolic'],
+    shortDescription:
+      'Eli Lilly’s once-weekly selective amylin receptor agonist — Phase 2 reported up to 20.1% weight loss at 48 weeks; Phase 3 ENLIGHTEN began in 2026.',
+    description:
+      'Eloralintide is an investigational once-weekly agonist selective for the amylin receptor, developed by Eli Lilly as a non-incretin obesity therapy and as a partner for tirzepatide. Its Phase 2 trial, reported in November 2025, showed up to 20.1% mean weight reduction at 48 weeks versus 0.4% on placebo — the largest effect reported for an amylin agonist alone. The Phase 3 ENLIGHTEN program began in February 2026, and a tirzepatide combination is advancing separately. It is not approved.',
+    mechanism:
+      'Selective agonism at amylin receptors (calcitonin receptor paired with RAMPs), with less activity at the calcitonin receptor alone → hindbrain satiety signaling and slowed gastric emptying, independent of the GLP-1 receptor.',
+    researchAreas: ['Obesity', 'Type 2 diabetes', 'Amylin pathway', 'Combination metabolic therapy'],
+    background: [
+      'Amylin receptors are not single proteins: they are the calcitonin receptor combined with one of three accessory proteins (RAMPs). First-generation long-acting analogs such as cagrilintide activate both the amylin receptors and the bare calcitonin receptor. Eloralintide was designed to favor the amylin receptors — a selectivity Lilly proposes may improve tolerability, though that has not been tested head-to-head.',
+      'The Phase 2 dose-ranging trial in adults with obesity or overweight, reported in November 2025, showed mean weight reductions from roughly 9% up to 20.1% at 48 weeks across doses, versus 0.4% on placebo. That moved amylin agonism from "combination partner" to a plausible standalone therapy, with weight loss in the range of injectable semaglutide.',
+      'Lilly opened the Phase 3 ENLIGHTEN program in February 2026, including a trial in obesity without diabetes and one in people with persistent obesity despite a weekly incretin. In September 2026 the company reported a Phase 2b study of eloralintide with tirzepatide ("EloraTZP") in which the highest dose produced 23.3% mean weight reduction at 48 weeks in adults with obesity and type 2 diabetes — a population in which weight loss is usually harder — with more gastrointestinal events in the combination arms. Phase 3 for the combination was planned for late 2026.',
+    ],
+    keyResearch: [
+      'Selective amylin receptor agonism — designed to favor amylin receptors over the calcitonin receptor alone.',
+      'Phase 2 monotherapy (reported November 2025) — up to 20.1% mean weight reduction at 48 weeks versus 0.4% placebo.',
+      'Combination with tirzepatide — a Phase 2b study (reported September 2026) showed 23.3% mean weight reduction at the highest dose in adults with obesity and type 2 diabetes.',
+      'Phase 3 — the ENLIGHTEN program began in February 2026, including a trial in people already on incretin therapy.',
+      'Status — investigational; no Phase 3 results yet.',
+    ],
+    faqs: [
+      {
+        q: 'What is eloralintide?',
+        a: 'Eloralintide (LY3841136) is an investigational once-weekly selective amylin receptor agonist from Eli Lilly, studied for obesity alone and in combination with tirzepatide.',
+      },
+      {
+        q: 'How much weight do people lose on eloralintide?',
+        a: 'The Phase 2 trial reported up to 20.1% mean weight reduction at 48 weeks versus 0.4% on placebo. Phase 3 results are not yet available. Population means, not individual predictions.',
+      },
+      {
+        q: 'Is eloralintide a GLP-1 drug?',
+        a: 'No. It acts on amylin receptors, a separate satiety pathway. It is grouped with the GLP-1 agents because it targets the same condition and is being developed as a partner for them.',
+      },
+      {
+        q: 'How is it different from cagrilintide?',
+        a: 'Both are long-acting amylin-pathway agonists. Cagrilintide activates amylin and calcitonin receptors and is mainly developed with semaglutide as CagriSema; eloralintide is designed to be more selective for amylin receptors and reported larger monotherapy weight loss in Phase 2. No head-to-head trial exists.',
+      },
+      {
+        q: 'Is eloralintide approved?',
+        a: 'No — it is investigational, with Phase 3 trials that began in 2026. This page is a research reference, not medical advice.',
+      },
+    ],
+    molecularWeight: 4526,
+    molecularFormula: 'C201H319N49O65S2',
+    pubchemCid: 175663130,
+    fdaApproved: false,
+  },
+  {
+    slug: 'pemvidutide',
+    name: 'Pemvidutide',
+    aliases: ['ALT-801'],
+    categories: ['metabolic'],
+    shortDescription:
+      'Altimmune’s once-weekly balanced glucagon / GLP-1 dual agonist — developed liver-first, with a Phase 3 MASH trial (PERFORMA) that began in 2026.',
+    description:
+      'Pemvidutide is an investigational once-weekly peptide that activates the glucagon and GLP-1 receptors in roughly equal measure — a more glucagon-weighted balance than survodutide or mazdutide. Altimmune is developing it primarily for MASH rather than obesity. The Phase 2b IMPACT trial reported MASH resolution without worsening of fibrosis in 52–59% of treated participants at 24 weeks versus 19% on placebo, an effect sustained to 48 weeks, and the Phase 3 PERFORMA trial began in August 2026. It holds FDA Fast Track and Breakthrough Therapy designations for MASH and is not approved.',
+    mechanism:
+      'Balanced (approximately 1:1) agonism at the glucagon and GLP-1 receptors. The glucagon arm drives hepatic fat oxidation and energy expenditure; the GLP-1 arm supplies appetite and glycemic effects. A proprietary glycolipid side chain slows absorption to blunt peak concentrations.',
+    researchAreas: ['MASH', 'Obesity', 'Alcohol use disorder', 'Alcohol-associated liver disease'],
+    background: [
+      'Glucagon/GLP-1 dual agonists differ in how much glucagon activity they carry. Survodutide and mazdutide lean toward GLP-1; pemvidutide is closer to an even split. More glucagon means more direct action on the liver — the organ richest in glucagon receptors — which is the rationale for developing it as a liver drug first.',
+      'It also takes a distinct approach to tolerability. Instead of a conventional fatty-acid chain, the peptide carries a glycolipid surfactant-like moiety (Altimmune’s EuPort domain) intended to slow entry into the bloodstream and flatten the concentration peak, with the aim of allowing dosing without a long titration.',
+      'In the Phase 2 MOMENTUM obesity trial, the 2.4 mg dose produced 15.6% mean weight reduction at 48 weeks. In the Phase 2b IMPACT trial in biopsy-confirmed MASH, 59.1% and 52.1% of participants on 1.2 mg and 1.8 mg achieved MASH resolution without worsening of fibrosis at 24 weeks versus 19.1% on placebo; fibrosis improvement did not reach statistical significance at that early timepoint. The 48-week data reported in December 2025 showed the effect was sustained, with adverse-event discontinuations below 2%. The global Phase 3 PERFORMA trial began enrolling in August 2026, testing 1.8 mg and 2.4 mg on biopsy endpoints, with a 52-week readout expected in 2029. Mid-stage trials in alcohol use disorder and alcohol-associated liver disease are also running.',
+    ],
+    keyResearch: [
+      'Balanced glucagon / GLP-1 agonism — roughly 1:1, more glucagon-weighted than survodutide or mazdutide, for direct hepatic effect.',
+      'IMPACT (Phase 2b MASH) — MASH resolution without worsening fibrosis in 59.1% (1.2 mg) and 52.1% (1.8 mg) versus 19.1% placebo at 24 weeks; sustained at 48 weeks.',
+      'Fibrosis — improvement did not reach statistical significance at 24 weeks; the Phase 3 trial tests it on biopsy at 52 weeks.',
+      'MOMENTUM (Phase 2 obesity) — 15.6% mean weight reduction at 48 weeks on 2.4 mg.',
+      'Status — Phase 3 PERFORMA (MASH) began August 2026, readout expected 2029; FDA Fast Track and Breakthrough Therapy designations; investigational.',
+    ],
+    faqs: [
+      {
+        q: 'What is pemvidutide?',
+        a: 'Pemvidutide (ALT-801) is an investigational once-weekly glucagon / GLP-1 dual receptor agonist from Altimmune, developed mainly for MASH (fatty liver disease with inflammation) and also studied in obesity and alcohol-related conditions.',
+      },
+      {
+        q: 'How is pemvidutide different from survodutide and mazdutide?',
+        a: 'All three activate the glucagon and GLP-1 receptors, but pemvidutide is closer to a 1:1 balance, giving it relatively more glucagon activity. It also uses a glycolipid side chain to slow absorption. Its lead indication is MASH rather than obesity.',
+      },
+      {
+        q: 'What did the MASH trial show?',
+        a: 'In the Phase 2b IMPACT trial, 52–59% of participants on pemvidutide achieved MASH resolution without worsening of fibrosis at 24 weeks versus 19% on placebo, sustained through 48 weeks. Improvement in fibrosis itself was not statistically significant at 24 weeks.',
+      },
+      {
+        q: 'Does pemvidutide cause weight loss?',
+        a: 'Yes — the Phase 2 MOMENTUM trial reported 15.6% mean weight reduction at 48 weeks on the 2.4 mg dose. Obesity is not currently its lead development program.',
+      },
+      {
+        q: 'Is pemvidutide approved?',
+        a: 'No. It is investigational; the Phase 3 PERFORMA trial in MASH began in August 2026 with a readout expected in 2029. This page is a research reference, not medical advice.',
+      },
+    ],
+    fdaApproved: false,
   },
   {
     slug: 'insulin',

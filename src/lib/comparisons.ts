@@ -1500,7 +1500,7 @@ export const COMPARISONS: Comparison[] = [
       'BI 456906 vs LY3437943',
       'glucagon agonist obesity liver',
     ],
-    updated: '2026-09-01',
+    updated: '2026-11-12',
     breadcrumb: { label: 'GLP-1 Peptides', href: '/glp-1' },
     headline: 'the glucagon dual versus the triple agonist',
     intro: [
@@ -1529,7 +1529,7 @@ export const COMPARISONS: Comparison[] = [
     trials: [
       { name: 'Survodutide MASH Phase 2', arm: 'Survodutide 4.8 mg', n: '293', duration: '48 wk', endpoint: 'MASH improvement, no worsening fibrosis', result: '62% vs 14% (placebo)', note: 'NEJM 2024; fibrosis improvement up to ~52% vs ~26%' },
       { name: 'Retatrutide Phase 2', arm: 'Retatrutide 12 mg', n: '338', duration: '48 wk', endpoint: 'Mean body-weight change', result: '~24% vs ~2% (placebo)', note: 'Jastreboff et al., NEJM 2023; highest-dose arm' },
-      { name: 'Phase 3 programs', arm: 'SYNCHRONIZE (survodutide) · TRIUMPH (retatrutide)', duration: 'Ongoing', endpoint: 'Confirmatory obesity/metabolic', result: 'Reporting — neither FDA-approved', note: 'No head-to-head between them has been run' },
+      { name: 'SYNCHRONIZE-1', arm: 'Survodutide (up to 6 mg)', duration: '76 wk', endpoint: 'Mean body-weight change (obesity, no diabetes)', result: 'Up to −16.6% vs −3.2% (placebo)', note: 'Phase 3, efficacy estimand; reported 2026. Neither drug is FDA-approved and no head-to-head between them has been run' },
     ],
     verdict: {
       title: 'What the evidence supports',
