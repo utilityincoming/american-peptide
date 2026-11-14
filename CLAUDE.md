@@ -2,10 +2,10 @@
 
 ## Project Overview
 AI-powered peptide drug discovery research platform.
-Next.js 15 + TypeScript + Tailwind CSS + App Router.
+Next.js 16 + TypeScript + Tailwind CSS + App Router.
 
 ## Tech Stack
-- Framework: Next.js 15 with App Router
+- Framework: Next.js 16 with App Router
 - Language: TypeScript (strict mode)
 - Styling: Tailwind CSS
 - Charts: Recharts
