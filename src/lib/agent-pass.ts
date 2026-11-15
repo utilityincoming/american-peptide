@@ -39,7 +39,6 @@ export const PASS_DAILY_MAX = envInt('AGENT_PASS_DAILY_MAX', 200)
 export const passSalesEnabled = Boolean(STRIPE_KEY)
 
 export const PASS_PRICE_LABEL = `$${(PASS_PRICE_CENTS / 100).toFixed(2)}`
-export const PASS_PRODUCT_TAG = 'agent_pass'
 
 const COOKIE = 'ap_pass'
 const CODE_RE = /^APP-[A-Z2-7]{4}-[A-Z2-7]{4}-[A-Z2-7]{4}-[A-Z2-7]{4}$/
@@ -179,9 +178,37 @@ export type ClaimResult =
   | { ok: true; code: string; expiresAt: string }
   | { ok: false; reason: 'unpaid' | 'invalid' | 'expired' | 'unavailable' }
 
+interface RetrievedSession {
+  id?: string
+  mode?: string
+  currency?: string
+  payment_status?: string
+  created?: number
+  amount_total?: number | null
+  success_url?: string | null
+}
+
+/**
+ * Checkout Studio does not send `metadata`, so a Research Pass session is
+ * recognized by the shape `createCheckout` actually creates: a one-time USD
+ * charge for this price that returns to `/research/pass`.
+ */
+function isResearchPassSession(sessionId: string, s: RetrievedSession): boolean {
+  if (s.id !== sessionId || s.mode !== 'payment' || s.currency !== 'usd') return false
+  if (s.amount_total !== PASS_PRICE_CENTS) return false
+  if (typeof s.success_url !== 'string') return false
+  try {
+    const url = new URL(s.success_url)
+    const sid = url.searchParams.get('session_id')
+    return url.pathname === '/research/pass' && (sid === '{CHECKOUT_SESSION_ID}' || sid === sessionId)
+  } catch {
+    return false
+  }
+}
+
 /**
  * Exchange a Checkout Session id for the pass it paid for. Verifies with Stripe
- * that the session is ours, is for the pass, and is paid. Idempotent.
+ * that the session is the Research Pass checkout and that it is paid. Idempotent.
  */
 export async function claimSession(sessionId: string): Promise<ClaimResult> {
   if (!passSalesEnabled) return { ok: false, reason: 'unavailable' }
@@ -196,14 +223,8 @@ export async function claimSession(sessionId: string): Promise<ClaimResult> {
   if (res.status === 404) return { ok: false, reason: 'invalid' }
   if (!res.ok) return { ok: false, reason: 'unavailable' }
 
-  const s = res.data as {
-    id?: string
-    payment_status?: string
-    created?: number
-    amount_total?: number
-    metadata?: { product?: string }
-  }
-  if (s.id !== sessionId || s.metadata?.product !== PASS_PRODUCT_TAG) return { ok: false, reason: 'invalid' }
+  const s = res.data as RetrievedSession
+  if (!isResearchPassSession(sessionId, s)) return { ok: false, reason: 'invalid' }
   if (s.payment_status !== 'paid') return { ok: false, reason: 'unpaid' }
 
   // The term runs from the purchase, not from whenever the page is (re)loaded.
