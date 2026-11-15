@@ -56,7 +56,6 @@ Session create call.
 | automatic_tax.enabled | `false` |
 | allow_promotion_codes | `false` |
 | submit_type | `auto` |
-| saved_payment_method_options.payment_method_save | `enabled` |
 | integration_identifier | `hosted_mobile_app_0001` |
 | origin_context | `mobile_app` |
 
@@ -69,6 +68,14 @@ Notes:
 - **`payment_method_collection`** (`always`) was **not** sent: Field Intents
   include it, but it applies only when `mode` is `subscription`. This product
   is `payment` (one-time).
+- **`saved_payment_method_options.payment_method_save`** (`enabled`) was
+  removed. Stripe returns `saved_payment_method_options requires a customer`
+  unless the session also has a Customer, and this pass does not create one.
+  That 400 is what made `/api/pass/checkout` answer 502 “Could not start
+  checkout.”
+- Every Stripe call sends `Stripe-Version: 2026-09-30.endive`. Without it, an
+  account whose default version is older than `2026-03-25.dahlia` rejects
+  `ui_mode=hosted_page`.
 
 ---
 

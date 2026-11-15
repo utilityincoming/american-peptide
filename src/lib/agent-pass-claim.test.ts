@@ -53,6 +53,7 @@ describe('Research Pass checkout claim', () => {
     expect(url).toBe('https://checkout.stripe.com/c/pay/cs_test')
 
     const init = fetchMock.mock.calls[0][1]
+    expect(new Headers(init?.headers).get('Stripe-Version')).toBe('2026-09-30.endive')
     expect(init?.body).toEqual(expect.any(String))
     const params = new URLSearchParams(String(init?.body))
     expect(params.get('ui_mode')).toBe('hosted_page')
@@ -62,7 +63,7 @@ describe('Research Pass checkout claim', () => {
     expect(params.get('automatic_tax[enabled]')).toBe('false')
     expect(params.get('allow_promotion_codes')).toBe('false')
     expect(params.get('submit_type')).toBe('auto')
-    expect(params.get('saved_payment_method_options[payment_method_save]')).toBe('enabled')
+    expect(params.get('saved_payment_method_options[payment_method_save]')).toBeNull()
     expect(params.get('integration_identifier')).toBe('hosted_mobile_app_0001')
     expect(params.get('origin_context')).toBe('mobile_app')
     expect(params.get('payment_method_collection')).toBeNull()
