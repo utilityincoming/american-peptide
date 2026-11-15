@@ -22,6 +22,8 @@ import { kv } from './kv'
 
 const STRIPE_KEY = process.env.STRIPE_SECRET_KEY?.trim() || ''
 const STRIPE_BASE = (process.env.STRIPE_API_BASE?.trim() || 'https://api.stripe.com').replace(/\/$/, '')
+// Account defaults from before 2026-03-25.dahlia reject ui_mode=hosted_page.
+const STRIPE_VERSION = '2026-09-30.endive'
 
 function envInt(name: string, fallback: number): number {
   const raw = process.env[name]?.trim()
@@ -126,11 +128,19 @@ export function passCookie(code: string, expiresAt: string): string {
 
 // ── Stripe (raw fetch) ────────────────────────────────────────────────────────
 
+function stripeErrorDetail(data: Record<string, unknown>): string {
+  const err = data.error
+  if (!err || typeof err !== 'object') return ''
+  const e = err as { type?: unknown; code?: unknown; param?: unknown; message?: unknown }
+  return [e.type, e.code, e.param, e.message].filter((part) => typeof part === 'string' && part).join(' ')
+}
+
 async function stripe(path: string, form?: Record<string, string>): Promise<{ ok: boolean; status: number; data: Record<string, unknown> }> {
   const res = await fetch(`${STRIPE_BASE}${path}`, {
     method: form ? 'POST' : 'GET',
     headers: {
       Authorization: `Bearer ${STRIPE_KEY}`,
+      'Stripe-Version': STRIPE_VERSION,
       ...(form ? { 'Content-Type': 'application/x-www-form-urlencoded' } : {}),
     },
     ...(form ? { body: new URLSearchParams(form).toString() } : {}),
@@ -156,7 +166,8 @@ export async function createCheckout(origin: string): Promise<string | null> {
     'automatic_tax[enabled]': 'false',
     allow_promotion_codes: 'false',
     submit_type: 'auto',
-    'saved_payment_method_options[payment_method_save]': 'enabled',
+    // Omit saved_payment_method_options. Stripe rejects payment_method_save
+    // unless the session has a Customer, and this pass has no customer.
     integration_identifier: 'hosted_mobile_app_0001',
     origin_context: 'mobile_app',
     'line_items[0][quantity]': '1',
@@ -168,7 +179,8 @@ export async function createCheckout(origin: string): Promise<string | null> {
     cancel_url: `${origin}/research/pass`,
   })
   if (!ok || typeof data.url !== 'string') {
-    console.error(`[pass] stripe checkout create failed (${status})`)
+    const detail = stripeErrorDetail(data)
+    console.error(`[pass] stripe checkout create failed (${status})${detail ? ` ${detail}` : ''}`)
     return null
   }
   return data.url
