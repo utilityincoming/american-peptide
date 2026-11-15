@@ -177,7 +177,7 @@ export async function createCheckout(origin: string): Promise<string | null> {
     'line_items[0][price_data][currency]': 'usd',
     'line_items[0][price_data][unit_amount]': String(PASS_PRICE_CENTS),
     'line_items[0][price_data][product_data][name]': `AmericanPeptide.com Research Pass — ${PASS_DAYS} days`,
-    'line_items[0][price_data][product_data][description]': `${PASS_DAYS} days of Peptide Agent research searches without the weekly limit. One-time payment, does not renew. Research and educational use only — not medical advice.`,
+    'line_items[0][price_data][product_data][description]': `${PASS_DAYS} days of Peptide Agent research searches without the daily limit. One-time payment, does not renew. Research and educational use only — not medical advice.`,
     success_url: `${origin}/research/pass?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/research/pass`,
   })
