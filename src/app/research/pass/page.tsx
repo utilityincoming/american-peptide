@@ -114,7 +114,7 @@ export default function ResearchPassPage() {
   }
 
   const offer = status?.offer
-  const price = offer?.price ?? '$29.99'
+  const price = offer?.price ?? '$15'
   const days = offer?.days ?? 30
   const freeLimit = status?.limit ?? 5
   const active = status?.pass ?? null
@@ -130,7 +130,7 @@ export default function ResearchPassPage() {
           Unlimited Peptide Agent searches
         </h1>
         <p className="mt-4 text-sm leading-relaxed text-ink/65">
-          Everyone gets <strong className="text-ink/90">{freeLimit} free Peptide Agent searches every week</strong>.
+          Everyone gets <strong className="text-ink/90">{freeLimit} free Peptide Agent searches every day</strong>.
           A Research Pass removes the limit for {days} days for a one-time{' '}
           <strong className="text-ink/90">{price}</strong>.
         </p>
@@ -177,7 +177,7 @@ export default function ResearchPassPage() {
           <div className="mt-6 rounded-2xl border border-hairline bg-fill p-5 text-sm">
             <p className="font-medium text-ink/90">Research Pass active</p>
             <p className="mt-1 text-xs text-ink/60">
-              No weekly limit until {fmtDate(active.expiresAt)}. The pass does not renew automatically.
+              No daily limit until {fmtDate(active.expiresAt)}. The pass does not renew automatically.
             </p>
             <Link
               href="/research"
@@ -197,7 +197,7 @@ export default function ResearchPassPage() {
             </div>
             <ul className="mt-4 space-y-2 text-sm text-ink/70">
               {[
-                `No weekly limit on Peptide Agent searches for ${days} days`,
+                `No daily limit on Peptide Agent searches for ${days} days`,
                 'Cited answers grounded in PubChem, ClinicalTrials.gov, PubMed and UniProt',
                 'Also covers AI sequence analysis in the Design Lab',
                 'No account needed, and it does not renew — nothing to cancel',
@@ -210,7 +210,7 @@ export default function ResearchPassPage() {
             </ul>
             {offer && !offer.available ? (
               <p className="mt-5 text-sm text-ink/55">
-                The Research Pass isn&rsquo;t on sale yet. Your {freeLimit} free weekly searches still apply.
+                The Research Pass isn&rsquo;t on sale yet. Your {freeLimit} free daily searches still apply.
               </p>
             ) : (
               <button

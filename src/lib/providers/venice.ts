@@ -11,9 +11,11 @@ import { runOpenAiCompatAgent, type OaiAgentResult, type OaiAgentOpts } from './
 // in without a code change; default to Venice's public v1 endpoint.
 const BASE_URL = (process.env.VENICE_BASE_URL?.trim() || 'https://api.venice.ai/api/v1').replace(/\/$/, '')
 const VENICE_URL = `${BASE_URL}/chat/completions`
-// Override with VENICE_MODEL. venice-uncensored-1-2 supports function calling;
-// if you switch to a model that does not, set VENICE_TOOLS=off (see below).
-const MODEL = process.env.VENICE_MODEL?.trim() || 'qwen-3-8-27b'
+// Override with VENICE_MODEL. Default is Qwen 3.6 Plus Uncensored (function
+// calling + 1M context). If you switch to a model that does not call tools,
+// set VENICE_TOOLS=off. Avoid venice-uncensored-1-2: it narrates tool use as
+// prose instead of emitting tool_calls, which silently drops grounding.
+const MODEL = process.env.VENICE_MODEL?.trim() || 'qwen-3-6-plus'
 const TOOLS_ENABLED = process.env.VENICE_TOOLS !== 'off'
 // Reasoning ("thinking") models emit a separate reasoning stream that shares the
 // max_tokens budget — a verbose chain can starve the visible answer to empty

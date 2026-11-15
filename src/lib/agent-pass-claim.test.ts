@@ -11,7 +11,7 @@ function paidSession(overrides: Record<string, unknown> = {}) {
     id: SESSION,
     mode: 'payment',
     currency: 'usd',
-    amount_total: 2999,
+    amount_total: 1500,
     payment_status: 'paid',
     created: Math.floor(Date.now() / 1000),
     success_url: `${ORIGIN}/research/pass?session_id={CHECKOUT_SESSION_ID}`,
@@ -23,7 +23,7 @@ describe('Research Pass checkout claim', () => {
   beforeEach(() => {
     vi.resetModules()
     vi.stubEnv('STRIPE_SECRET_KEY', 'sk_test_claim')
-    vi.stubEnv('AGENT_PASS_PRICE_CENTS', '2999')
+    vi.stubEnv('AGENT_PASS_PRICE_CENTS', '1500')
     vi.stubEnv('AGENT_PASS_DAYS', '30')
     vi.stubEnv('UPSTASH_REDIS_REST_URL', '')
     vi.stubEnv('UPSTASH_REDIS_REST_TOKEN', '')
@@ -70,7 +70,7 @@ describe('Research Pass checkout claim', () => {
     expect(params.get('success_url')).toBe(`${ORIGIN}/research/pass?session_id={CHECKOUT_SESSION_ID}`)
     expect(params.get('cancel_url')).toBe(`${ORIGIN}/research/pass`)
     expect(params.get('line_items[0][price_data][currency]')).toBe('usd')
-    expect(params.get('line_items[0][price_data][unit_amount]')).toBe('2999')
+    expect(params.get('line_items[0][price_data][unit_amount]')).toBe('1500')
     expect(params.get('line_items[0][quantity]')).toBe('1')
   })
 
@@ -81,6 +81,11 @@ describe('Research Pass checkout claim', () => {
     if (!result.ok) return
     expect(result.code).toMatch(/^APP-[A-Z2-7]{4}-[A-Z2-7]{4}-[A-Z2-7]{4}-[A-Z2-7]{4}$/)
     expect((await lookupPass(result.code))?.expiresAt).toBe(result.expiresAt)
+  })
+
+  it('still claims a session paid at the previous $29.99 price', async () => {
+    const { claimSession } = await load(paidSession({ amount_total: 2999 }))
+    expect((await claimSession(SESSION)).ok).toBe(true)
   })
 
   it('accepts the success URL after Stripe substitutes the session id', async () => {
