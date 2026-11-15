@@ -950,48 +950,57 @@ const SEED_PEPTIDES: Peptide[] = [
     aliases: ['LY3841136'],
     categories: ['metabolic'],
     shortDescription:
-      'Eli Lilly’s once-weekly selective amylin receptor agonist — Phase 2 reported up to 20.1% weight loss at 48 weeks; Phase 3 ENLIGHTEN began in 2026.',
+      'Eli Lilly’s once-weekly selective amylin receptor agonist — Phase 2 reported up to 20.1% weight loss at 48 weeks; the tirzepatide combination EloraTZP reached 23.3% in type 2 diabetes.',
     description:
-      'Eloralintide is an investigational once-weekly agonist selective for the amylin receptor, developed by Eli Lilly as a non-incretin obesity therapy and as a partner for tirzepatide. Its Phase 2 trial, reported in November 2025, showed up to 20.1% mean weight reduction at 48 weeks versus 0.4% on placebo — the largest effect reported for an amylin agonist alone. The Phase 3 ENLIGHTEN program began in February 2026, and a tirzepatide combination is advancing separately. It is not approved.',
+      'Eloralintide (LY3841136, CAS 2883634-40-8) is an investigational once-weekly agonist selective for the amylin-1 receptor, developed by Eli Lilly as a non-incretin obesity therapy and as a partner for tirzepatide. In adults with obesity without diabetes, Phase 2 (Billings et al., Lancet 2025, PMID 41207310, NCT06230523) reported up to 20.1% mean weight reduction at 48 weeks versus 0.4% on placebo. In adults with obesity and type 2 diabetes, the Phase 2b combination with tirzepatide (EloraTZP, NCT06603571) reached 23.3% at the highest dose. The Phase 3 ENLIGHTEN program is ongoing. It is not approved.',
     mechanism:
-      'Selective agonism at amylin receptors (calcitonin receptor paired with RAMPs), with less activity at the calcitonin receptor alone → hindbrain satiety signaling and slowed gastric emptying, independent of the GLP-1 receptor.',
+      'Selective agonism at the human amylin-1 receptor (calcitonin receptor plus RAMP1). In cAMP assays it is about 12-fold more potent at AMY1R (EC50 23.9 pM) than at the calcitonin receptor alone (291 pM) and about 11-fold more potent than at AMY3R (254 pM) → hindbrain satiety signaling and slowed gastric emptying, independent of the GLP-1 receptor.',
     researchAreas: ['Obesity', 'Type 2 diabetes', 'Amylin pathway', 'Combination metabolic therapy'],
     background: [
-      'Amylin receptors are not single proteins: they are the calcitonin receptor combined with one of three accessory proteins (RAMPs). First-generation long-acting analogs such as cagrilintide activate both the amylin receptors and the bare calcitonin receptor. Eloralintide was designed to favor the amylin receptors — a selectivity Lilly proposes may improve tolerability, though that has not been tested head-to-head.',
-      'The Phase 2 dose-ranging trial in adults with obesity or overweight, reported in November 2025, showed mean weight reductions from roughly 9% up to 20.1% at 48 weeks across doses, versus 0.4% on placebo. That moved amylin agonism from "combination partner" to a plausible standalone therapy, with weight loss in the range of injectable semaglutide.',
-      'Lilly opened the Phase 3 ENLIGHTEN program in February 2026, including a trial in obesity without diabetes and one in people with persistent obesity despite a weekly incretin. In September 2026 the company reported a Phase 2b study of eloralintide with tirzepatide ("EloraTZP") in which the highest dose produced 23.3% mean weight reduction at 48 weeks in adults with obesity and type 2 diabetes — a population in which weight loss is usually harder — with more gastrointestinal events in the combination arms. Phase 3 for the combination was planned for late 2026.',
+      'Eloralintide is a 37-residue, C-terminally amidated analog of human amylin. The native 2–7 disulfide is replaced by a methylene thioacetal, which Lilly reports improves chemical stability. Three non-coded residues sit at positions 11 (ornithine), 15 (α-methyl-phenylalanine) and 22 (N-methyl-asparagine). Lysine 26 carries two γ-glutamate residues and a C20 fatty diacid so the peptide binds albumin; the human half-life after a single subcutaneous dose was 12.9–15.3 days (Briere et al., Molecular Metabolism 2025, PMID 41109426, NCT05295940), which is the basis for once-weekly dosing.',
+      'In the same discovery paper, eloralintide preferred human AMY1R over the bare calcitonin receptor and over AMY3R. Cagrilintide, by contrast, activates those receptors with similar potency. In diet-induced obese rats, repeated dosing lowered body weight mainly by fat-mass loss (about 12.3% at the top dose over 13 days) and produced less conditioned taste avoidance than cagrilintide. A single human dose of 4 mg or 12 mg cut weight 2.5% and 4.4% at four weeks, versus a 0.6% gain on placebo, with gastrointestinal events in 2 of 36 treated participants.',
+      'The 48-week Phase 2 monotherapy trial (Billings et al., Lancet 2025, NCT06230523) randomized 263 adults with obesity or overweight and at least one weight-related comorbidity, without type 2 diabetes (mean weight 109.1 kg, BMI 39.1). Efficacy-estimand mean weight change was −9.5% at 1 mg, −12.4% at 3 mg, −17.6% at 6 mg, −20.1% at 9 mg, −19.9% on a 6-to-9 mg escalation and −16.4% on a 3-to-6-to-9 mg escalation, versus −0.4% on placebo. The Lancet abstract rounds the same arms to −9%, −12%, −18%, −20%, −20% and −16%. Nausea was 11%, 13%, 64%, 33%, 54% and 25% across those arms versus 14% on placebo; fatigue was 0%, 13%, 29%, 43%, 46% and 21% versus 12%. Slower escalation lowered both the gastrointestinal rate and, at the top step-up, some of the weight loss.',
+      'In adults who also had type 2 diabetes, weight loss was smaller. The 48-week Phase 2b trial of eloralintide alone or with tirzepatide (EloraTZP, NCT06603571; Lilly, 30 September 2026, presented at EASD) enrolled 367 adults (mean weight 105.4 kg, baseline A1C 8.1%). Eloralintide alone reached −8.2% (3 mg), −12.3% (6 mg) and −11.1% (9 mg) versus −3.0% on placebo and −14.8% on tirzepatide 15 mg. The combinations were −13.2% (3 mg + tirzepatide 5 mg), −19.4% (6 + 5 mg), −19.9% (6 + 10 mg) and −23.3% (9 + 15 mg). A1C fell 2.9% at the highest combination versus 2.4% on tirzepatide 15 mg and up to 1.4% on eloralintide alone. Discontinuation for adverse events was 10.8–27.0% on the combinations, 0–10.8% on eloralintide, 2.9% on tirzepatide and 16.7% on placebo. Phase 3 for EloraTZP was planned for the fourth quarter of 2026. The monotherapy Phase 3 ENLIGHTEN program began in February 2026; no Phase 3 results have been reported.',
     ],
     keyResearch: [
-      'Selective amylin receptor agonism — designed to favor amylin receptors over the calcitonin receptor alone.',
-      'Phase 2 monotherapy (reported November 2025) — up to 20.1% mean weight reduction at 48 weeks versus 0.4% placebo.',
-      'Combination with tirzepatide — a Phase 2b study (reported September 2026) showed 23.3% mean weight reduction at the highest dose in adults with obesity and type 2 diabetes.',
-      'Phase 3 — the ENLIGHTEN program began in February 2026, including a trial in people already on incretin therapy.',
-      'Status — investigational; no Phase 3 results yet.',
+      'Structure — 37-residue C-terminal amide; Cys2–Cys7 methylene thioacetal instead of a disulfide; ornithine, α-methyl-Phe and N-methyl-Asn; Lys26 acylated with γ-Glu-γ-Glu-C20 diacid (CAS 2883634-40-8).',
+      'Selectivity — human AMY1R EC50 23.9 pM versus 291 pM at the calcitonin receptor and 254 pM at AMY3R (Briere et al., Mol Metab 2025, PMID 41109426).',
+      'Pharmacokinetics — single-dose half-life 12.9–15.3 days (NCT05295940), supporting once-weekly injection.',
+      'Phase 2 monotherapy without diabetes (Billings et al., Lancet 2025, PMID 41207310, NCT06230523) — efficacy estimand −9.5% to −20.1% at 48 weeks versus −0.4% placebo; nausea up to 64% and fatigue up to 46% on the higher fixed doses.',
+      'Phase 2b in type 2 diabetes (NCT06603571, reported 30 September 2026) — eloralintide alone up to −12.3%; EloraTZP up to −23.3% and −2.9% A1C at eloralintide 9 mg plus tirzepatide 15 mg, versus −14.8% and −2.4% A1C on tirzepatide 15 mg.',
+      'Status — investigational. Phase 3 ENLIGHTEN (monotherapy) began February 2026; Phase 3 for EloraTZP was planned for Q4 2026. No Phase 3 results yet.',
     ],
     faqs: [
       {
         q: 'What is eloralintide?',
-        a: 'Eloralintide (LY3841136) is an investigational once-weekly selective amylin receptor agonist from Eli Lilly, studied for obesity alone and in combination with tirzepatide.',
+        a: 'Eloralintide (LY3841136, CAS 2883634-40-8) is an investigational once-weekly selective amylin-1 receptor agonist from Eli Lilly. It is a 37-residue amylin analog with a thioacetal in place of the native disulfide and a C20 fatty diacid for albumin binding, studied alone and with tirzepatide (EloraTZP).',
       },
       {
         q: 'How much weight do people lose on eloralintide?',
-        a: 'The Phase 2 trial reported up to 20.1% mean weight reduction at 48 weeks versus 0.4% on placebo. Phase 3 results are not yet available. Population means, not individual predictions.',
+        a: 'In adults with obesity without diabetes (Phase 2, Lancet 2025, NCT06230523), efficacy-estimand mean weight change at 48 weeks was −9.5% (1 mg), −12.4% (3 mg), −17.6% (6 mg) and −20.1% (9 mg), versus −0.4% on placebo. Step-up arms were −19.9% (6 to 9 mg) and −16.4% (3 to 9 mg). In a separate Phase 2b trial in adults who also had type 2 diabetes, eloralintide alone reached −12.3% and the highest tirzepatide combination reached −23.3%. Population means, not individual predictions. Phase 3 results are not yet available.',
+      },
+      {
+        q: 'What are the side effects of eloralintide?',
+        a: 'In the Phase 2 monotherapy trial the most common adverse events were nausea and fatigue, and both rose with dose: nausea 11% to 64% and fatigue 0% to 46% across arms, versus 14% and 12% on placebo. Slower dose escalation reduced those rates. In the diabetes combination trial, discontinuation for adverse events was higher on eloralintide plus tirzepatide (10.8–27%) than on either drug alone. This page is a research reference, not medical advice.',
       },
       {
         q: 'Is eloralintide a GLP-1 drug?',
-        a: 'No. It acts on amylin receptors, a separate satiety pathway. It is grouped with the GLP-1 agents because it targets the same condition and is being developed as a partner for them.',
+        a: 'No. It acts on amylin receptors, a separate satiety pathway. EloraTZP pairs it with tirzepatide, which does activate the GIP and GLP-1 receptors. The two are given as separate weekly injections in the Phase 2b trial.',
       },
       {
         q: 'How is it different from cagrilintide?',
-        a: 'Both are long-acting amylin-pathway agonists. Cagrilintide activates amylin and calcitonin receptors and is mainly developed with semaglutide as CagriSema; eloralintide is designed to be more selective for amylin receptors and reported larger monotherapy weight loss in Phase 2. No head-to-head trial exists.',
+        a: 'Both are long-acting acylated amylin analogs. Cagrilintide activates amylin and calcitonin receptors with similar potency and is developed with semaglutide as CagriSema. Eloralintide is about 12-fold more potent at the human amylin-1 receptor than at the calcitonin receptor, replaces the disulfide with a thioacetal, and reported larger monotherapy weight loss in its own Phase 2 (up to 20.1% at 48 weeks) than cagrilintide’s Phase 3 monotherapy (~11.8% at 68 weeks). Those trials are not head-to-head.',
       },
       {
         q: 'Is eloralintide approved?',
-        a: 'No — it is investigational, with Phase 3 trials that began in 2026. This page is a research reference, not medical advice.',
+        a: 'No. Phase 3 monotherapy trials (ENLIGHTEN) began in 2026, and Phase 3 for the tirzepatide combination was planned for late 2026. This page is a research reference, not medical advice.',
       },
     ],
+    sequence:
+      'γ-Glu-[Cys-Asn-Thr-Ala-Thr-Cys]-Ala-Thr-Gly-Orn-Leu-Ala-Glu-(α-Me)Phe-Leu-Val-Arg-Ser-Ser-Asn-(N-Me)Asn-Phe-Gly-Pro-Lys(γ-Glu-γ-Glu-C20 diacid)-Leu-Pro-Pro-Thr-Glu-Val-Gly-Ser-Asn-Thr-Tyr-NH2',
     molecularWeight: 4526,
     molecularFormula: 'C201H319N49O65S2',
+    cas: '2883634-40-8',
     pubchemCid: 175663130,
     fdaApproved: false,
   },
