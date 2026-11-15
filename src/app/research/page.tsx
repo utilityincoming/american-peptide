@@ -29,6 +29,12 @@ I'm your AI assistant for peptide research. I can help you:
 What would you like to research today?`,
 }
 
+const PENDING_QUESTION = 'ap_pending_question'
+
+function freeSearchWord(n: number): string {
+  return n === 1 ? 'search' : 'searches'
+}
+
 const SUGGESTIONS = [
   'Best peptide for tanning',
   'Best peptide for skin anti-aging',
@@ -141,10 +147,12 @@ export default function ResearchPage() {
   const [loading, setLoading] = useState(false)
   // Free daily allowance, as reported by the server (null until known / when off).
   const [quota, setQuota] = useState<{ limit: number; remaining: number } | null>(null)
-  // Paid Research Pass (no weekly limit) and the offer shown when the limit is hit.
+  // Paid Research Pass (no daily limit) and the checkout offer shown when the limit is hit.
   const [pass, setPass] = useState<{ expiresAt: string } | null>(null)
   const [offer, setOffer] = useState<{ available: boolean; price: string; days: number } | null>(null)
   const [limitReached, setLimitReached] = useState(false)
+  const [checkingOut, setCheckingOut] = useState(false)
+  const [checkoutError, setCheckoutError] = useState<string | null>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   // Session page context, set once from the ?ctx=kind:slug deep-link param
@@ -205,12 +213,14 @@ export default function ResearchPage() {
         if (data.offer) setOffer(data.offer)
         if (res.status === 402) {
           // Out of free questions: put the unsent question back in the box and
-          // show the limit notice instead of an error bubble.
+          // show checkout instead of an error bubble.
           setMessages(messages)
           setInput(trimmed)
+          sessionStorage.setItem(PENDING_QUESTION, trimmed)
           setLimitReached(true)
           return
         }
+        sessionStorage.removeItem(PENDING_QUESTION)
         if (!res.ok) throw new Error(data.error || 'Request failed')
 
         setMessages((prev) => [...prev, { role: 'assistant', content: data.content }])
@@ -249,6 +259,14 @@ export default function ResearchPage() {
       }
     }
 
+    const pending = sessionStorage.getItem(PENDING_QUESTION)
+    if (params.get('resume') === '1' && pending?.trim()) {
+      sessionStorage.removeItem(PENDING_QUESTION)
+      sendMessage(pending.trim())
+      return
+    }
+    if (pending?.trim()) setInput(pending.trim())
+
     const q = params.get('q')
     if (q && q.trim()) {
       // Each ask is a paid model run, so only a real visitor's browser auto-asks.
@@ -261,7 +279,7 @@ export default function ResearchPage() {
     }
   }, [sendMessage])
 
-  // Load pass status + the remaining free weekly searches for the counter.
+  // Load pass status + the remaining free daily searches for the counter.
   useEffect(() => {
     let cancelled = false
     const load = async () => {
@@ -288,6 +306,30 @@ export default function ResearchPage() {
       cancelled = true
     }
   }, [])
+
+  const startCheckout = async () => {
+    if (checkingOut || !offer?.available) return
+    const pending = input.trim()
+    if (pending) sessionStorage.setItem(PENDING_QUESTION, pending)
+    setCheckingOut(true)
+    setCheckoutError(null)
+    try {
+      const res = await fetch('/api/pass/checkout', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: '{}',
+      })
+      const data = await res.json()
+      if (res.ok && typeof data.url === 'string') {
+        window.location.assign(data.url)
+        return
+      }
+      setCheckoutError(typeof data.error === 'string' ? data.error : 'Could not start checkout. Please try again.')
+    } catch {
+      setCheckoutError('Could not start checkout. Please try again.')
+    }
+    setCheckingOut(false)
+  }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -405,33 +447,41 @@ export default function ResearchPage() {
           {limitReached && (
             <div
               role="status"
-              className="mb-3 rounded-2xl border border-accent/20 bg-accent/[0.06] px-4 py-3 text-sm text-ink/70"
+              className="mb-3 rounded-2xl border border-accent/25 bg-accent/[0.07] px-4 py-4 text-sm text-ink/75"
             >
-              <p className="font-medium text-ink/90">
-                You&rsquo;ve used today&rsquo;s {quota?.limit ?? 5} free Peptide Agent searches.
+              <p className="font-medium text-ink/95">
+                You&rsquo;ve used today&rsquo;s {quota?.limit ?? 5} free {freeSearchWord(quota?.limit ?? 5)}.
               </p>
-              {offer?.available && (
-                <p className="mt-2">
-                  <Link
-                    href="/research/pass"
-                    className="inline-block rounded-xl bg-[#5BA88C] px-4 py-2 text-xs font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
+              {offer?.available ? (
+                <>
+                  <p className="mt-1 text-xs leading-relaxed text-ink/60">
+                    A Research Pass is {offer.price} once, for {offer.days} days, with no daily limit.
+                    {input.trim() ? ' Your question is saved and continues after checkout.' : ''}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={startCheckout}
+                    disabled={checkingOut}
+                    className="mt-3 rounded-xl bg-[#5BA88C] px-4 py-2.5 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A] disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    Get unlimited searches — {offer.price} for {offer.days} days
-                  </Link>
-                </p>
+                    {checkingOut ? 'Opening secure checkout…' : `Continue to checkout — ${offer.price}`}
+                  </button>
+                  {checkoutError && (
+                    <p role="alert" className="mt-2 text-xs text-red-400">{checkoutError}</p>
+                  )}
+                </>
+              ) : (
+                <p className="mt-1 text-xs text-ink/55">Free searches reset at 00:00 UTC.</p>
               )}
-              <p className="mt-2 text-xs leading-relaxed text-ink/55">
-                Every answer runs live lookups against PubChem, ClinicalTrials.gov, PubMed and UniProt, which is
-                what a Research Pass pays for. Your free searches reset at 00:00 UTC.{' '}
+              <p className="mt-3 text-xs leading-relaxed text-ink/45">
                 <Link href="/research/pass" className="text-accent underline-offset-2 hover:underline">
                   Have an access code?
-                </Link>{' '}
-                In the meantime the{' '}
-                <Link href="/catalog" className="text-accent underline-offset-2 hover:underline">catalog</Link>,{' '}
-                <Link href="/research-areas" className="text-accent underline-offset-2 hover:underline">research-area guides</Link>{' '}
-                and{' '}
-                <Link href="/trials" className="text-accent underline-offset-2 hover:underline">clinical trials dashboard</Link>{' '}
-                are open without limit.
+                </Link>
+                {offer?.available ? ' Free searches reset at 00:00 UTC.' : ''} The{' '}
+                <Link href="/catalog" className="underline-offset-2 hover:underline">catalog</Link>
+                {' '}and{' '}
+                <Link href="/trials" className="underline-offset-2 hover:underline">trials</Link>
+                {' '}stay open.
               </p>
             </div>
           )}
@@ -460,7 +510,16 @@ export default function ResearchPage() {
             {pass && <span className="text-ink/45">Research Pass active — no daily limit ·{' '}</span>}
             {!pass && quota && !limitReached && (
               <span className="text-ink/45">
-                {quota.remaining} of {quota.limit} free searches left today ·{' '}
+                {quota.remaining} of {quota.limit} free {freeSearchWord(quota.limit)} left today
+                {quota.remaining <= 1 && offer?.available ? (
+                  <>
+                    {' · '}
+                    <Link href="/research/pass" className="text-accent underline-offset-2 hover:underline">
+                      Research Pass {offer.price}
+                    </Link>
+                  </>
+                ) : null}
+                {' · '}
               </span>
             )}
             Shift + Enter for new line · AI outputs are computational hypotheses requiring experimental validation

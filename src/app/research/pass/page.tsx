@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { Check, Copy, Dna, KeyRound } from 'lucide-react'
 
+const PENDING_QUESTION = 'ap_pending_question'
+
 interface PassStatus {
   enabled: boolean
   pass: { expiresAt: string } | null
@@ -40,11 +42,14 @@ export default function ResearchPassPage() {
   const [code, setCode] = useState('')
   const [redeeming, setRedeeming] = useState(false)
   const [redeemError, setRedeemError] = useState<string | null>(null)
+  const [pendingQuestion, setPendingQuestion] = useState<string | null>(null)
   const started = useRef(false)
 
   useEffect(() => {
     if (started.current) return
     started.current = true
+    const saved = sessionStorage.getItem(PENDING_QUESTION)
+    if (saved?.trim()) setPendingQuestion(saved.trim())
 
     const loadStatus = async () => {
       try {
@@ -162,6 +167,7 @@ export default function ResearchPassPage() {
                 {issuedCode}
               </code>
               <button
+                type="button"
                 onClick={copyCode}
                 className="flex items-center gap-1.5 rounded-lg border border-hairline px-3 py-2 text-xs text-ink/70 transition-colors hover:bg-fill-strong hover:text-ink"
               >
@@ -169,6 +175,19 @@ export default function ResearchPassPage() {
                 {copied ? 'Copied' : 'Copy code'}
               </button>
             </div>
+            <div className="mt-4">
+              <Link
+                href={pendingQuestion ? '/research?resume=1' : '/research'}
+                className="inline-block rounded-xl bg-[#5BA88C] px-4 py-2.5 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
+              >
+                {pendingQuestion ? 'Continue your search' : 'Open the Peptide Agent'}
+              </Link>
+            </div>
+            {pendingQuestion && (
+              <p className="mt-3 text-xs leading-relaxed text-ink/55">
+                Your question is saved and will be asked when you continue.
+              </p>
+            )}
           </div>
         )}
 
@@ -179,12 +198,14 @@ export default function ResearchPassPage() {
             <p className="mt-1 text-xs text-ink/60">
               No daily limit until {fmtDate(active.expiresAt)}. The pass does not renew automatically.
             </p>
-            <Link
-              href="/research"
-              className="mt-4 inline-block rounded-xl bg-[#5BA88C] px-4 py-2 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
-            >
-              Open the Peptide Agent
-            </Link>
+            {!issuedCode && (
+              <Link
+                href={pendingQuestion ? '/research?resume=1' : '/research'}
+                className="mt-4 inline-block rounded-xl bg-[#5BA88C] px-4 py-2 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
+              >
+                {pendingQuestion ? 'Continue your search' : 'Open the Peptide Agent'}
+              </Link>
+            )}
           </div>
         )}
 
@@ -224,6 +245,14 @@ export default function ResearchPassPage() {
             {buyError && (
               <p role="alert" className="mt-3 text-xs text-red-400">
                 {buyError}
+              </p>
+            )}
+            {pendingQuestion && (
+              <p className="mt-4 text-xs leading-relaxed text-ink/55">
+                Your question is saved.{' '}
+                <Link href="/research" className="text-accent underline-offset-2 hover:underline">
+                  Back to the Peptide Agent
+                </Link>
               </p>
             )}
             <p className="mt-4 text-xs leading-relaxed text-ink/45">
