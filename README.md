@@ -4,14 +4,14 @@
 
 **An AI-grounded research reference for peptides — a trust layer, not a store.**
 
-Browse a curated catalog of 56 research peptides, ask a Claude-powered agent that
-grounds every answer in PubChem, ClinicalTrials.gov, PubMed & UniProt, decode a
-Certificate of Analysis, and run bench calculators offline. All content is
-research-framed and openly licensed (CC BY 4.0) so it stays useful wherever it travels.
+Browse a curated catalog of research peptides, ask an agent that grounds every
+answer in PubChem, ClinicalTrials.gov, PubMed & UniProt, decode a Certificate of
+Analysis, and run bench calculators offline. All content is research-framed and
+openly licensed (CC BY 4.0) so it stays useful wherever it travels.
 
 [Live site](https://americanpeptide.com) · [Research agent](https://americanpeptide.com/research) · [Remote MCP](https://americanpeptide.com/api/mcp) · [Developers](https://americanpeptide.com/developers)
 
-![Next.js](https://img.shields.io/badge/Next.js-15.5-000?logo=next.js) ![React](https://img.shields.io/badge/React-19-149eca?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?logo=tailwindcss) ![License: CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-lightgrey)
+![Next.js](https://img.shields.io/badge/Next.js-16.4-000?logo=next.js) ![React](https://img.shields.io/badge/React-19.3-149eca?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?logo=tailwindcss) ![License: CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-lightgrey)
 
 </div>
 
@@ -32,8 +32,10 @@ research layer on top of a structured data layer:
   synthesis notes, molecular data, and per-compound FAQs. Ships as a research reference,
   with no fabricated supplier or price data; sourcing lives in the separate
   trust-ranked vendor directory.
-- **Peptide Agent** — a Claude research agent that thinks adaptively and grounds claims in
-  live scientific sources rather than model memory.
+- **Peptide Agent** — a research agent with a cost-ordered provider ladder (Venice AI,
+  then xAI Grok, then Anthropic Claude) that grounds claims in live scientific sources
+  rather than model memory. Free visitors get 5 searches per UTC day; a $15 Research
+  Pass covers 30 days without that daily allowance.
 - **Remote MCP server** — connect the whole catalog + grounding tools into Claude, ChatGPT,
   Cursor, or any MCP client.
 - **Bench tools** — reconstitution & blend calculators, a COA decoder, and a design lab,
@@ -44,7 +46,7 @@ research layer on top of a structured data layer:
 | Area | Highlights |
 |---|---|
 | **Catalog** | `/catalog` with category & comparison views, `/catalog/[slug]` profiles, side-by-side `/compare/[pair]`, glossary, research areas, and synthesis walkthroughs. |
-| **Peptide Agent** (`/research`) | Anthropic Claude with adaptive extended thinking, a grounding toolset, streamed responses, and multi-model failover. Cited answers with canonical links. |
+| **Peptide Agent** (`/research`) | Venice → Grok → Claude, ordered by cost, with grounding tools, streamed responses, and failover. Cited answers with canonical links. Five free searches per UTC day; Research Pass at `/research/pass`. |
 | **Reconstitution calculator** | Vial/dose/water solver on a U-100 syringe with a live diagram, doses-per-vial, a reference matrix, **peptide-aware autofill presets**, mg-scale presets, and shareable URLs. Works offline. |
 | **COA decoder** (`/tools/coa-decoder`) | Parses a Certificate of Analysis (incl. PDF via `pdfjs-dist`) and explains what the numbers mean. |
 | **Design lab & blend calculator** | Compound/blend builders under `/tools` and `/compounds`. |
@@ -63,9 +65,10 @@ scientific APIs and cite them — so answers are anchored to primary data:
 | `search_clinical_trials` | [ClinicalTrials.gov v2](https://clinicaltrials.gov/) — trial status & endpoints |
 | `search_pubmed` | [PubMed E-utilities](https://www.ncbi.nlm.nih.gov/pmc/tools/developers/) — literature |
 
-Model selection and an ordered multi-model failover chain live in `src/lib/models.ts`, so a
-single upstream outage doesn't take the agent down. The active model is configurable at
-runtime via the `AGENT_MODEL` environment variable.
+The chat route tries providers in cost order (Venice, then Grok, then Claude) in
+`src/app/api/chat`. Claude's own model chain and retry rules live in `src/lib/models.ts`.
+The Anthropic primary is configurable at runtime via `AGENT_MODEL`. Structured routes
+(`/api/analyze-peptide`, `/api/jobs/fact-qa`) stay on Claude.
 
 ## Remote MCP server
 
@@ -81,9 +84,9 @@ pointing home.
 
 ## Tech stack
 
-- **Framework:** Next.js 15.5 (App Router, Turbopack) · React 19 · TypeScript (strict)
+- **Framework:** Next.js 16.4 (App Router, Turbopack) · React 19.3 · TypeScript (strict)
 - **Styling:** Tailwind CSS v4 · Lucide icons · Recharts
-- **AI:** Anthropic Claude via raw `fetch` (no SDK); grounding tools; static system prompts sent as cached blocks
+- **AI:** Venice, xAI Grok, and Anthropic Claude via raw `fetch` (no SDK); grounding tools shared across providers
 - **MCP:** `mcp-handler` (Streamable HTTP)
 - **Storage:** Upstash Redis (REST) for rate limiting, API keys & usage metering — with in-memory fallback for local dev
 - **Analytics:** Vercel Analytics + Speed Insights, optional GA4
@@ -145,12 +148,14 @@ src/
 │   ├── tools/            # reconstitution / blend / calculator-beta / coa-decoder / design-lab
 │   ├── research/         # Peptide Agent surface
 │   ├── developers/       # Public API + MCP docs
-│   └── api/              # chat, catalog, coa, pubchem, trials, keys, mcp ([transport]), jobs …
+│   └── api/              # chat, catalog, coa, pubchem, trials, keys, mcp, jobs …
 ├── components/           # SiteHeader, ResearchUseGate, CommandPalette, calculators, forms …
 └── lib/                  # Data + logic
-    ├── peptides.ts       # The 56-compound catalog (+ peptides.pubchem.json cache)
+    ├── peptides.ts       # The research-peptide catalog (+ peptides.pubchem.json cache)
     ├── agent-tools.ts    # Grounding tool definitions + executors
     ├── models.ts         # Claude model selection & failover
+    ├── agent-pass.ts     # Research Pass checkout, claim, and cookie
+    ├── agent-quota.ts    # Free daily allowance, IP cap, and site-wide ceiling
     ├── reconstitution-presets.ts
     ├── research-areas.ts · comparisons.ts · glossary.ts · synthesis.ts
     └── kv.ts · rate-limit.ts · api-keys.ts · api-auth.ts   # infra

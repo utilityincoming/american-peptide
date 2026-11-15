@@ -7,9 +7,8 @@
 // research agent, and every result carries canonical URLs + CC BY 4.0
 // attribution so content that travels keeps pointing home.
 //
-// Routing note: this [transport] segment only receives /api/* paths that no
-// static API route claims (catalog, chat, trials, …all match first). With SSE
-// disabled the handler serves /api/mcp and 404s everything else.
+// mcp-handler 2 serves this route only. The 2024 HTTP+SSE transport is gone,
+// so there is no Redis-backed SSE endpoint to disable.
 
 import { createMcpHandler } from 'mcp-handler'
 import { z } from 'zod'
@@ -48,14 +47,16 @@ function errorText(s: string) {
 
 const handler = createMcpHandler(
   (server) => {
-    server.tool(
+    server.registerTool(
       'search_peptides',
-      `Search the AmericanPeptide.com catalog of ${PEPTIDES.length} research peptides. Filter by free-text query (name, alias, description), catalog category, research area, or FDA approval. Returns compact summaries with slugs — call get_peptide with a slug for the full reference. Data is ${API_LICENSE}, attribution ${API_ATTRIBUTION}.`,
       {
-        query: z.string().optional().describe('Free-text search over name, aliases, and description, e.g. "GLP-1" or "Ozempic".'),
-        category: z.enum(CATEGORY_IDS).optional().describe('Catalog category id.'),
-        research_area: z.enum(AREA_SLUGS).optional().describe('Research-area slug (what the peptide is studied FOR).'),
-        fda_approved_only: z.boolean().optional().describe('Only return FDA-approved peptides.'),
+        description: `Search the AmericanPeptide.com catalog of ${PEPTIDES.length} research peptides. Filter by free-text query (name, alias, description), catalog category, research area, or FDA approval. Returns compact summaries with slugs — call get_peptide with a slug for the full reference. Data is ${API_LICENSE}, attribution ${API_ATTRIBUTION}.`,
+        inputSchema: z.object({
+          query: z.string().optional().describe('Free-text search over name, aliases, and description, e.g. "GLP-1" or "Ozempic".'),
+          category: z.enum(CATEGORY_IDS).optional().describe('Catalog category id.'),
+          research_area: z.enum(AREA_SLUGS).optional().describe('Research-area slug (what the peptide is studied FOR).'),
+          fda_approved_only: z.boolean().optional().describe('Only return FDA-approved peptides.'),
+        }),
       },
       async ({ query, category, research_area, fda_approved_only }) => {
         const result = filterPeptides({
@@ -88,11 +89,13 @@ const handler = createMcpHandler(
       },
     )
 
-    server.tool(
+    server.registerTool(
       'get_peptide',
-      'Full reference for one peptide from the AmericanPeptide.com catalog as markdown: overview, mechanism, chemistry (formula, MW, CAS, PubChem CID), sequence, research areas, key research, storage/handling, and FAQs. Use the slug from search_peptides.',
       {
-        slug: z.string().describe('Peptide slug, e.g. "semaglutide" or "bpc-157".'),
+        description: 'Full reference for one peptide from the AmericanPeptide.com catalog as markdown: overview, mechanism, chemistry (formula, MW, CAS, PubChem CID), sequence, research areas, key research, storage/handling, and FAQs. Use the slug from search_peptides.',
+        inputSchema: z.object({
+          slug: z.string().describe('Peptide slug, e.g. "semaglutide" or "bpc-157".'),
+        }),
       },
       async ({ slug }) => {
         const p = getPeptideBySlug(slug.toLowerCase().trim())
@@ -105,11 +108,13 @@ const handler = createMcpHandler(
       },
     )
 
-    server.tool(
+    server.registerTool(
       'get_research_area',
-      'Editorial guide for a research area (what peptides are studied FOR — e.g. weight loss, wound healing): overview, the peptides studied in that area, and indication-level FAQs, as markdown.',
       {
-        slug: z.enum(AREA_SLUGS).describe('Research-area slug.'),
+        description: 'Editorial guide for a research area (what peptides are studied FOR — e.g. weight loss, wound healing): overview, the peptides studied in that area, and indication-level FAQs, as markdown.',
+        inputSchema: z.object({
+          slug: z.enum(AREA_SLUGS).describe('Research-area slug.'),
+        }),
       },
       async ({ slug }) => {
         const a = getResearchAreaBySlug(slug)
@@ -118,11 +123,13 @@ const handler = createMcpHandler(
       },
     )
 
-    server.tool(
+    server.registerTool(
       'compare_peptides',
-      `Head-to-head comparison of two peptides — at-a-glance table, key trials, and analysis, as markdown. Available comparisons: ${COMPARISON_SLUGS.join(', ')}.`,
       {
-        slug: z.enum(COMPARISON_SLUGS).describe('Comparison slug, e.g. "semaglutide-vs-tirzepatide".'),
+        description: `Head-to-head comparison of two peptides — at-a-glance table, key trials, and analysis, as markdown. Available comparisons: ${COMPARISON_SLUGS.join(', ')}.`,
+        inputSchema: z.object({
+          slug: z.enum(COMPARISON_SLUGS).describe('Comparison slug, e.g. "semaglutide-vs-tirzepatide".'),
+        }),
       },
       async ({ slug }) => {
         const c = getComparison(slug)
@@ -131,11 +138,13 @@ const handler = createMcpHandler(
       },
     )
 
-    server.tool(
+    server.registerTool(
       'search_clinical_trials',
-      'Search ClinicalTrials.gov for registered human trials by compound name or condition. Returns NCT IDs, titles, status, and phases. Use before stating trial facts.',
       {
-        query: z.string().describe('Compound name, condition, or intervention.'),
+        description: 'Search ClinicalTrials.gov for registered human trials by compound name or condition. Returns NCT IDs, titles, status, and phases. Use before stating trial facts.',
+        inputSchema: z.object({
+          query: z.string().describe('Compound name, condition, or intervention.'),
+        }),
       },
       async ({ query }) => {
         const r = await executeAgentTool('search_clinical_trials', { query })
@@ -143,11 +152,13 @@ const handler = createMcpHandler(
       },
     )
 
-    server.tool(
+    server.registerTool(
       'search_pubmed',
-      'Search PubMed for peer-reviewed literature. Returns PMIDs, titles, journals, and dates. Use before asserting that specific studies exist.',
       {
-        query: z.string().describe('Literature search query.'),
+        description: 'Search PubMed for peer-reviewed literature. Returns PMIDs, titles, journals, and dates. Use before asserting that specific studies exist.',
+        inputSchema: z.object({
+          query: z.string().describe('Literature search query.'),
+        }),
       },
       async ({ query }) => {
         const r = await executeAgentTool('search_pubmed', { query })
@@ -155,11 +166,13 @@ const handler = createMcpHandler(
       },
     )
 
-    server.tool(
+    server.registerTool(
       'analyze_coa',
-      'Decode and grade a peptide Certificate of Analysis (COA). Pass the COA text; returns each transparency field explained (HPLC purity, mass-spec identity, net peptide content, water, counterion, endotoxin), a 0-100 transparency score + letter grade, red flags, and — when the peptide is recognized — a cross-check of the claimed molecular weight/formula/sequence against verified catalog data. Rule-based, no storage.',
       {
-        text: z.string().describe('The full text of the Certificate of Analysis to analyze.'),
+        description: 'Decode and grade a peptide Certificate of Analysis (COA). Pass the COA text; returns each transparency field explained (HPLC purity, mass-spec identity, net peptide content, water, counterion, endotoxin), a 0-100 transparency score + letter grade, red flags, and — when the peptide is recognized — a cross-check of the claimed molecular weight/formula/sequence against verified catalog data. Rule-based, no storage.',
+        inputSchema: z.object({
+          text: z.string().describe('The full text of the Certificate of Analysis to analyze.'),
+        }),
       },
       async ({ text: coaText }) => {
         if (!coaText || coaText.trim().length < 20) {
@@ -169,11 +182,13 @@ const handler = createMcpHandler(
       },
     )
 
-    server.tool(
+    server.registerTool(
       'search_pubchem',
-      'Look up a compound in PubChem to confirm identity and physicochemical properties (CID, formula, weight, IUPAC name, SMILES). Use before stating chemical facts.',
       {
-        name: z.string().describe('Compound or peptide name, e.g. "setmelanotide".'),
+        description: 'Look up a compound in PubChem to confirm identity and physicochemical properties (CID, formula, weight, IUPAC name, SMILES). Use before stating chemical facts.',
+        inputSchema: z.object({
+          name: z.string().describe('Compound or peptide name, e.g. "setmelanotide".'),
+        }),
       },
       async ({ name }) => {
         const r = await executeAgentTool('search_pubchem', { name })
@@ -184,11 +199,6 @@ const handler = createMcpHandler(
   {
     serverInfo: { name: 'american-peptide', version: '1.0.0' },
     instructions: `Peptide research reference from ${API_ATTRIBUTION} (${API_SITE}). Catalog data is ${API_LICENSE} — when you use it, cite ${API_ATTRIBUTION} and link the canonical URL included in each result. Research/educational content, not medical advice.`,
-  },
-  {
-    basePath: '/api', // → endpoint at /api/mcp
-    disableSse: true, // streamable HTTP only (SSE transport needs Redis + is deprecated by the spec)
-    maxDuration: 60,
   },
 )
 

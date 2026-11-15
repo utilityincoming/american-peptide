@@ -30,7 +30,7 @@ session `createCheckout` creates:
 
 - `mode` is `payment`
 - `currency` is `usd`
-- `amount_total` equals `AGENT_PASS_PRICE_CENTS` (default 2999)
+- `amount_total` is a price the pass has sold at (`PASS_SOLD_PRICES_CENTS`: the live `AGENT_PASS_PRICE_CENTS`, default 1500, plus the previous 2999 so a reprice does not strand an earlier buyer)
 - `success_url` path is `/research/pass` and its `session_id` is this session
   or the `{CHECKOUT_SESSION_ID}` template
 - `payment_status` is `paid`
@@ -89,7 +89,7 @@ Already documented in [`.env.example`](.env.example). Required for sales:
 |----------|---------|
 | `STRIPE_SECRET_KEY` | Restricted key with Checkout Sessions write+read. Use `sk_test_…` on preview; `sk_live_…` in production. Sales stay off until this is set. |
 | `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | Durable pass storage + metering across serverless instances. |
-| `AGENT_PASS_PRICE_CENTS` | Optional; default `2999` ($29.99). |
+| `AGENT_PASS_PRICE_CENTS` | Optional; default `1500` ($15.00). |
 | `AGENT_PASS_DAYS` | Optional; default `30`. |
 | `AGENT_PASS_DAILY_MAX` | Optional fair-use cap per pass per UTC day; default `200`. |
 
@@ -117,8 +117,8 @@ No new routes or files were added for Checkout itself. Existing surface:
 4. Client `POST`s `/api/pass/claim` with that Session id; server re-fetches the
    Session from Stripe, verifies payment, grants a deterministic access code,
    and sets the `ap_pass` HttpOnly cookie.
-5. `/api/chat` / `/api/analyze-peptide` treat a valid pass as unlimited weekly
-   use (still bound by `AGENT_PASS_DAILY_MAX`).
+5. `/api/chat` / `/api/analyze-peptide` treat a valid pass as skipping the free
+   daily allowance (still bound by `AGENT_PASS_DAILY_MAX`).
 
 There is still **no webhook**. The success page grants the pass only after
 Stripe confirms the session is paid. A signed webhook is required before
@@ -132,7 +132,7 @@ or dispute revokes it. See Next steps.
 2. `npm run dev` → open `/research/pass` → start Checkout.
 3. Pay with Stripe test card `4242 4242 4242 4242`, any future expiry, any CVC.
 4. Confirm redirect back with `session_id`, access code shown, cookie set, and
-   agent searches no longer hit the weekly free limit.
+   agent searches no longer hit the daily free allowance.
 5. Decline / cancel path should return to `/research/pass` without granting a
    pass.
 
@@ -148,7 +148,7 @@ happens on that page after the server re-checks the session with Stripe.
    (`rk_test_…`, Checkout Sessions write + read) and Upstash for durable
    passes. `npm run dev` → `/research/pass` → pay with `4242 4242 4242 4242`.
    Confirm the access code, the `ap_pass` cookie, and that agent searches skip
-   the weekly free limit. Cancel must not grant a pass.
+   the daily free allowance. Cancel must not grant a pass.
 2. **Production secrets.** Put the live restricted key and Upstash URL/token
    in the production secret store (on Vercel, a sensitive environment
    variable). Run one live purchase, then refund it from the Dashboard and
