@@ -21,21 +21,22 @@ No `sample_only` placeholders remain. The existing real values were preserved:
 | cancel_url | `` `${origin}/research/pass` `` | Kept — real cancel/return page. |
 | line_items | Inline `price_data` (USD, `AGENT_PASS_PRICE_CENTS`, product name/description) | Kept — real product, not a `price_...` placeholder. |
 
-### Critical follow-up (fulfillment)
+### Fulfillment identity
 
-Checkout Studio Field Intents do not include `metadata`, so
-`metadata[product]=agent_pass` was **removed** from the Session create call.
-[`claimSession`](src/lib/agent-pass.ts) still requires
-`metadata.product === 'agent_pass'` before granting a Research Pass.
+Checkout Studio Field Intents do not include `metadata`, so the Session create
+call does not send `metadata[product]`. [`claimSession`](src/lib/agent-pass.ts)
+treats a retrieved session as a Research Pass only when all of these match the
+session `createCheckout` creates:
 
-**Before going live**, either:
+- `mode` is `payment`
+- `currency` is `usd`
+- `amount_total` equals `AGENT_PASS_PRICE_CENTS` (default 2999)
+- `success_url` path is `/research/pass` and its `session_id` is this session
+  or the `{CHECKOUT_SESSION_ID}` template
+- `payment_status` is `paid`
 
-1. Re-add `'metadata[product]': PASS_PRODUCT_TAG` to the Session create call, or
-2. Update `claimSession` to identify paid Research Pass sessions another way
-   (e.g. amount/product match, or a Stripe Price ID).
-
-Until one of those is done, Checkout can succeed and the buyer still cannot
-claim an access code.
+A paid session for any other product is rejected. Do not re-add `metadata` to
+the Session create call unless you also change this check.
 
 ---
 
@@ -112,13 +113,15 @@ No new routes or files were added for Checkout itself. Existing surface:
 5. `/api/chat` / `/api/analyze-peptide` treat a valid pass as unlimited weekly
    use (still bound by `AGENT_PASS_DAILY_MAX`).
 
-There is still **no webhook**; refund/chargeback revocation is manual until one
-is added.
+There is still **no webhook**. The success page grants the pass only after
+Stripe confirms the session is paid. A signed webhook is required before
+launch so a buyer who never returns is still granted a pass, and so a refund
+or dispute revokes it. See Next steps.
 
 ### Testing
 
-1. Set `STRIPE_SECRET_KEY=sk_test_…` in `.env.local` (and Upstash for durable
-   passes).
+1. Set `STRIPE_SECRET_KEY` to a test restricted key (`rk_test_…`, Checkout
+   Sessions write + read) in `.env.local` (and Upstash for durable passes).
 2. `npm run dev` → open `/research/pass` → start Checkout.
 3. Pay with Stripe test card `4242 4242 4242 4242`, any future expiry, any CVC.
 4. Confirm redirect back with `session_id`, access code shown, cookie set, and
@@ -130,19 +133,38 @@ More test cards: https://docs.stripe.com/testing
 
 ### Next steps
 
-1. **Restore fulfillment identity** (`metadata[product]` or equivalent) so
-   `claimSession` works — see Critical follow-up above.
-2. Set production `STRIPE_SECRET_KEY` + Upstash; run one live test purchase.
-3. Optionally switch inline `price_data` to a Dashboard Price ID if you want
-   catalog-managed pricing.
-4. Add a Stripe webhook to revoke `pass:<hash>` on refund/dispute.
-5. Optional: receipt email / lost-code recovery UX.
+Do these in order. Step 3 is required before launch: a buyer who pays and never
+lands back on `/research/pass` does not get a pass today, because granting
+happens on that page after the server re-checks the session with Stripe.
+
+1. **Test mode purchase.** Set `STRIPE_SECRET_KEY` to a test restricted key
+   (`rk_test_…`, Checkout Sessions write + read) and Upstash for durable
+   passes. `npm run dev` → `/research/pass` → pay with `4242 4242 4242 4242`.
+   Confirm the access code, the `ap_pass` cookie, and that agent searches skip
+   the weekly free limit. Cancel must not grant a pass.
+2. **Production secrets.** Put the live restricted key and Upstash URL/token
+   in the production secret store (on Vercel, a sensitive environment
+   variable). Run one live purchase, then refund it from the Dashboard and
+   delete the `pass:<hash>` key until step 3 revokes it automatically.
+3. **Webhook fulfillment (required before launch).** Add a signed webhook
+   endpoint for `checkout.session.completed` and
+   `checkout.session.async_payment_succeeded`. Grant the pass only when
+   `payment_status` is not `unpaid`. Also handle
+   `checkout.session.async_payment_failed`, refunds, and disputes by deleting
+   `pass:<hash>`. Verify the `Stripe-Signature` header with
+   `STRIPE_WEBHOOK_SECRET`. Keep the success-page claim so the buyer still
+   sees the same access code immediately — `claimSession` is idempotent.
+4. **Optional:** switch inline `price_data` to a Dashboard Price ID, and add
+   a receipt email / lost-code recovery path. The code is deterministic from
+   the Checkout Session id, so a verified session can always re-issue it.
 
 ### Resources
 
 - https://support.stripe.com
 - https://docs.stripe.com/mcp
 - https://docs.stripe.com/payments/checkout
+- https://docs.stripe.com/checkout/fulfillment
+- https://docs.stripe.com/webhooks
 - https://docs.stripe.com/testing
 - https://dashboard.stripe.com/apikeys
 - https://dashboard.stripe.com/prices
