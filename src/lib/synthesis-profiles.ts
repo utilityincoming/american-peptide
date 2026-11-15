@@ -37,6 +37,12 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     notes:
       'A ~39-residue triple (GIP/GLP-1/glucagon) agonist built by solid-phase synthesis with Aib substitutions and a fatty-diacid chain on a side-chain lysine that binds albumin for once-weekly dosing. The acylation step and the sterically hindered Aib couplings are the hard parts, and the long sequence makes deletion-sequence control the dominant purity problem.',
   },
+  eloralintide: {
+    difficulty: 'demanding',
+    features: ['Fatty-acid acylation', 'Albumin-binding linker', 'Unnatural residue', 'C-terminal amide'],
+    notes:
+      'A 37-residue amylin analog (LY3841136). The native 2–7 disulfide is replaced by a methylene thioacetal, three non-coded residues (ornithine, α-methyl-phenylalanine, N-methyl-asparagine) are built in, and Lys26 is acylated with a γ-Glu-γ-Glu-C20 diacid for albumin binding. The thioacetal, the unnatural residues and the diacid acylation over an aggregation-prone amylin backbone are what make a clean batch hard.',
+  },
   cagrilintide: {
     difficulty: 'demanding',
     features: ['Fatty-acid acylation', 'Disulfide bridge', 'C-terminal amide'],
