@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getUsage, TIERS } from '@/lib/api-keys'
 import { kv } from '@/lib/kv'
-import { readMetering, FREE_WEEKLY, IP_WEEKLY_MAX, GLOBAL_DAILY_CEILING } from '@/lib/agent-quota'
+import { readMetering, FREE_DAILY, IP_DAILY_MAX, GLOBAL_DAILY_CEILING } from '@/lib/agent-quota'
 import { passSalesEnabled, PASS_PRICE_CENTS, PASS_DAYS, PASS_DAILY_MAX } from '@/lib/agent-pass'
 
 export const runtime = 'nodejs'
@@ -50,8 +50,8 @@ export async function GET(req: NextRequest) {
   const days = Math.min(Math.max(Number(req.nextUrl.searchParams.get('days')) || 7, 1), 30)
   const agent = {
     limits: {
-      freePerVisitorPerWeek: FREE_WEEKLY,
-      maxPerIpPerWeek: IP_WEEKLY_MAX,
+      freePerVisitorPerDay: FREE_DAILY,
+      maxPerIpPerDay: IP_DAILY_MAX,
       siteWideFreeRunsPerDay: GLOBAL_DAILY_CEILING,
     },
     pass: {

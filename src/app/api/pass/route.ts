@@ -17,7 +17,7 @@ export const dynamic = 'force-dynamic'
 const NO_STORE = { 'Cache-Control': 'private, no-store' }
 
 // GET /api/pass — what the research UI needs to render the offer: the caller's
-// remaining free weekly searches, whether a Research Pass is active, and the
+// remaining free daily searches, whether a Research Pass is active, and the
 // paid option's price/term. Consumes nothing.
 export async function GET(request: NextRequest) {
   let pass = null
