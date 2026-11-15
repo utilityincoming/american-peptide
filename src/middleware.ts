@@ -11,21 +11,34 @@ import { NextResponse, type NextRequest } from 'next/server'
 // or on Vercel preview hosts, so this is a no-op everywhere until .net is
 // attached to this project and its links are activated (see lib/redirect-origin).
 //
+// app.americanpeptide.com is RETIRED: it was the original Vercel project's
+// domain and still serves a stale build there. It is treated identically to
+// .net's redirect behavior (but without the /go carve-out, which it never
+// served) so any old link 308s to the canonical page on americanpeptide.com.
+//
 // Stays middleware, not proxy. Next 16 proxy is Node-only; this host split
 // wants the Edge runtime, which middleware still provides.
-const REDIRECT_HOST = 'americanpeptide.net'
+const REDIRECT_HOSTS = ['americanpeptide.net', 'app.americanpeptide.com']
 const CANONICAL_ORIGIN = 'https://americanpeptide.com'
 
 export function middleware(req: NextRequest) {
   const host = (req.headers.get('host') ?? '').toLowerCase().split(':')[0]
-  const onRedirectHost = host === REDIRECT_HOST || host === `www.${REDIRECT_HOST}`
+  const onRedirectHost = REDIRECT_HOSTS.some(
+    (h) => host === h || host === `www.${h}`,
+  )
   if (!onRedirectHost) return NextResponse.next()
 
   const { pathname, search } = req.nextUrl
 
   // The one thing .net exists to serve: let the /go chokepoint run (it 302s out
   // to the vendor and records the no-PII referral click, same as on .com).
-  if (pathname === '/go' || pathname.startsWith('/go/')) return NextResponse.next()
+  // app.americanpeptide.com never served /go, so it redirects there too.
+  if (
+    (host === REDIRECT_HOSTS[0] || host === `www.${REDIRECT_HOSTS[0]}`) &&
+    (pathname === '/go' || pathname.startsWith('/go/'))
+  ) {
+    return NextResponse.next()
+  }
 
   // Everything else consolidates to the canonical domain, preserving the path
   // and query so a stray deep link still lands where it should on .com.

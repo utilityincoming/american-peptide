@@ -408,7 +408,7 @@ export default function ResearchPage() {
               className="mb-3 rounded-2xl border border-accent/20 bg-accent/[0.06] px-4 py-3 text-sm text-ink/70"
             >
               <p className="font-medium text-ink/90">
-                You&rsquo;ve used this week&rsquo;s {quota?.limit ?? 5} free Peptide Agent searches.
+                You&rsquo;ve used today&rsquo;s {quota?.limit ?? 5} free Peptide Agent searches.
               </p>
               {offer?.available && (
                 <p className="mt-2">
@@ -422,7 +422,7 @@ export default function ResearchPage() {
               )}
               <p className="mt-2 text-xs leading-relaxed text-ink/55">
                 Every answer runs live lookups against PubChem, ClinicalTrials.gov, PubMed and UniProt, which is
-                what a Research Pass pays for. Your free searches reset Monday 00:00 UTC.{' '}
+                what a Research Pass pays for. Your free searches reset at 00:00 UTC.{' '}
                 <Link href="/research/pass" className="text-accent underline-offset-2 hover:underline">
                   Have an access code?
                 </Link>{' '}
@@ -457,10 +457,10 @@ export default function ResearchPage() {
             </button>
           </div>
           <p className="mt-2 text-center text-[10px] text-ink/20">
-            {pass && <span className="text-ink/45">Research Pass active — no weekly limit ·{' '}</span>}
+            {pass && <span className="text-ink/45">Research Pass active — no daily limit ·{' '}</span>}
             {!pass && quota && !limitReached && (
               <span className="text-ink/45">
-                {quota.remaining} of {quota.limit} free searches left this week ·{' '}
+                {quota.remaining} of {quota.limit} free searches left today ·{' '}
               </span>
             )}
             Shift + Enter for new line · AI outputs are computational hypotheses requiring experimental validation

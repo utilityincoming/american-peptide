@@ -1,7 +1,7 @@
 // Research Pass — the paid tier for the Peptide Agent.
 //
-// One payment (AGENT_PASS_PRICE_CENTS, default $29.99) buys AGENT_PASS_DAYS
-// (default 30) of use without the weekly free allowance. No accounts: a paid
+// One payment (AGENT_PASS_PRICE_CENTS, default $15) buys AGENT_PASS_DAYS
+// (default 30) of use without the daily free allowance. No accounts: a paid
 // Stripe Checkout Session is exchanged for an ACCESS CODE, held in an HttpOnly
 // cookie on the buying device and redeemable on any other device.
 //
@@ -31,8 +31,11 @@ function envInt(name: string, fallback: number): number {
   return raw && Number.isFinite(n) && n > 0 ? Math.floor(n) : fallback
 }
 
-export const PASS_PRICE_CENTS = envInt('AGENT_PASS_PRICE_CENTS', 2999)
+export const PASS_PRICE_CENTS = envInt('AGENT_PASS_PRICE_CENTS', 1500)
 export const PASS_DAYS = envInt('AGENT_PASS_DAYS', 30)
+/** Every price the pass has sold at. claimSession matches amount against this
+ *  set so a reprice does not strand a buyer who paid the previous price. */
+const PASS_SOLD_PRICES_CENTS = new Set([PASS_PRICE_CENTS, 1500, 2999])
 /** Fair-use guard per pass per UTC day, so one shared/leaked code can't run up
  *  an unbounded bill. Far above any individual's real use. */
 export const PASS_DAILY_MAX = envInt('AGENT_PASS_DAILY_MAX', 200)
@@ -203,11 +206,11 @@ interface RetrievedSession {
 /**
  * Checkout Studio does not send `metadata`, so a Research Pass session is
  * recognized by the shape `createCheckout` actually creates: a one-time USD
- * charge for this price that returns to `/research/pass`.
+ * charge at a price the pass has sold at, returning to `/research/pass`.
  */
 function isResearchPassSession(sessionId: string, s: RetrievedSession): boolean {
   if (s.id !== sessionId || s.mode !== 'payment' || s.currency !== 'usd') return false
-  if (s.amount_total !== PASS_PRICE_CENTS) return false
+  if (typeof s.amount_total !== 'number' || !PASS_SOLD_PRICES_CENTS.has(s.amount_total)) return false
   if (typeof s.success_url !== 'string') return false
   try {
     const url = new URL(s.success_url)

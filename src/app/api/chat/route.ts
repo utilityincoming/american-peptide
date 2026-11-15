@@ -457,7 +457,7 @@ export async function POST(request: NextRequest) {
   if (!run.allowed && run.reason === 'quota') {
     return respond(
       {
-        error: `You've used this week's ${run.quota?.limit ?? ''} free Peptide Agent searches. A Research Pass (${PASS_PRICE_LABEL} for ${PASS_DAYS} days) removes the limit, or your free searches reset Monday 00:00 UTC.`,
+        error: `You've used today's ${run.quota?.limit ?? ''} free Peptide Agent searches. A Research Pass (${PASS_PRICE_LABEL} for ${PASS_DAYS} days) removes the limit, or your free searches reset at 00:00 UTC.`,
         offer: { available: passSalesEnabled, price: PASS_PRICE_LABEL, days: PASS_DAYS, checkoutUrl: '/research/pass' },
         code: 'quota_exhausted',
       },

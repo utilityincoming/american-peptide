@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest'
 import { codeForSession, normalizeCode, grantPass, lookupPass, passCookie, readPassCode } from './agent-pass'
-import { reserveRun, weekId, weekResetsAt, FREE_WEEKLY } from './agent-quota'
+import { reserveRun, dayId, dayResetsAt, FREE_DAILY } from './agent-quota'
 
 // Runs against the in-memory KV backend (no Upstash / Stripe env in tests).
 
 describe('access codes', () => {
   it('derives a stable, well-formed code per checkout session', () => {
     const a = codeForSession('cs_test_aaaaaaaaaaaa', 'sk_test_x')
-    expect(a).toMatch(/^APP-[A-Z2-7]{4}-[A-Z2-7]{4}-[A-Z2-7]{4}-[A-Z2-7]{4}$/)
+    expect(a).toMatch(/^APP-([A-Z2-7]{4}-){3}[A-Z2-7]{4}$/)
     expect(codeForSession('cs_test_aaaaaaaaaaaa', 'sk_test_x')).toBe(a)
     expect(codeForSession('cs_test_bbbbbbbbbbbb', 'sk_test_x')).not.toBe(a)
     expect(codeForSession('cs_test_aaaaaaaaaaaa', 'sk_test_y')).not.toBe(a)
@@ -45,8 +45,8 @@ describe('pass records', () => {
   })
 })
 
-describe('pass holders skip the weekly allowance', () => {
-  it('allows well past FREE_WEEKLY and reports the pass, not a quota', async () => {
+describe('pass holders skip the daily allowance', () => {
+  it('allows well past FREE_DAILY and reports the pass, not a quota', async () => {
     const code = codeForSession('cs_test_gggggggggggg', 'k')
     await grantPass(code, Date.now() + 86_400_000, 'cs_test_gggggggggggg')
     const mk = () =>
@@ -54,7 +54,7 @@ describe('pass holders skip the weekly allowance', () => {
         method: 'POST',
         headers: { 'x-forwarded-for': '198.51.100.200', cookie: `ap_pass=${code}` },
       })
-    for (let i = 0; i < FREE_WEEKLY * 4; i++) {
+    for (let i = 0; i < FREE_DAILY * 4; i++) {
       const r = await reserveRun(mk(), 'chat')
       expect(r.allowed).toBe(true)
       expect(r.quota).toBeNull()
@@ -63,13 +63,13 @@ describe('pass holders skip the weekly allowance', () => {
   })
 })
 
-describe('weekly window', () => {
-  it('runs Monday 00:00 UTC to the next Monday', () => {
-    const wed = new Date('2026-11-11T15:30:00Z')
-    expect(weekId(wed)).toBe('2026-11-09')
-    expect(weekResetsAt(wed)).toBe('2026-11-16T00:00:00.000Z')
-    // Sunday night still belongs to the week that began the previous Monday.
-    expect(weekId(new Date('2026-11-15T23:59:59Z'))).toBe('2026-11-09')
-    expect(weekId(new Date('2026-11-16T00:00:00Z'))).toBe('2026-11-16')
+describe('daily window', () => {
+  it('runs midnight-to-midnight UTC and rolls at the boundary', () => {
+    const noon = new Date('2026-11-15T12:30:00Z')
+    expect(dayId(noon)).toBe('2026-11-15')
+    expect(dayResetsAt(noon)).toBe('2026-11-16T00:00:00.000Z')
+    // Late night still belongs to its own UTC day; the boundary is exact.
+    expect(dayId(new Date('2026-11-15T23:59:59Z'))).toBe('2026-11-15')
+    expect(dayId(new Date('2026-11-16T00:00:00Z'))).toBe('2026-11-16')
   })
 })

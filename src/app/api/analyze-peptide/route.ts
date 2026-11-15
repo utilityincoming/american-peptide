@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
     return run.reason === 'quota'
       ? Response.json(
           {
-            error: `You've used this week's ${run.quota?.limit ?? ''} free AI analyses. A Research Pass at /research/pass removes the limit, or they reset Monday 00:00 UTC.`,
+            error: `You've used today's ${run.quota?.limit ?? ''} free AI analyses. A Research Pass at /research/pass removes the limit, or they reset at 00:00 UTC.`,
             code: 'quota_exhausted',
             quota: run.quota,
           },
