@@ -10,6 +10,9 @@ import { NextResponse, type NextRequest } from 'next/server'
 // SAFE TO SHIP BEFORE DNS: the host check never matches on americanpeptide.com
 // or on Vercel preview hosts, so this is a no-op everywhere until .net is
 // attached to this project and its links are activated (see lib/redirect-origin).
+//
+// Stays middleware, not proxy. Next 16 proxy is Node-only; this host split
+// wants the Edge runtime, which middleware still provides.
 const REDIRECT_HOST = 'americanpeptide.net'
 const CANONICAL_ORIGIN = 'https://americanpeptide.com'
 

@@ -49,6 +49,14 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
+  // Next 16 prerenders this catalog with one worker per CPU. On a full
+  // machine that stampede blows the 60s static-generation timeout even
+  // though the upstream calls themselves return in well under a second.
+  staticPageGenerationTimeout: 180,
+  experimental: {
+    cpus: 4,
+    staticGenerationMaxConcurrency: 2,
+  },
   // Pin the workspace root to this project. A stray package-lock.json in a
   // parent directory otherwise makes Next infer the wrong root, which can
   // mis-trace files for serverless/standalone bundling on deploy.
@@ -84,15 +92,6 @@ const nextConfig: NextConfig = {
       {
         source: '/(.*)',
         headers: securityHeaders,
-      },
-      {
-        source: '/_next/static/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
       },
       {
         source: '/manifest.json',

@@ -4,9 +4,8 @@ name: Quality guard
 # that fails typecheck/lint/compile can't be deployed, so catch it in CI before
 # it reaches main. Also runs the unit test suite (calculators, COA decoder,
 # vendor trust scoring) and crawls the built site for broken internal links (the
-# kind a route refactor introduces). next build runs both ESLint and TypeScript
-# checking, so it is the real deploy gate; the explicit tsc step just fails
-# faster with clearer errors.
+# kind a route refactor introduces). Next 16 no longer lints during `next build`,
+# so lint is its own step. The explicit tsc step fails faster with clearer errors.
 
 on:
   push:
@@ -42,7 +41,10 @@ jobs:
       - name: Test
         run: npm run test
 
-      # The deploy gate: next build runs ESLint + type-checking + compile.
+      # Next 16 dropped lint-during-build. Keep the gate explicit.
+      - name: Lint
+        run: npm run lint
+
       - name: Build
         run: npm run build
 
