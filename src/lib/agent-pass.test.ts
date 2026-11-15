@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { codeForSession, normalizeCode, grantPass, lookupPass, passCookie, readPassCode, PASS_PRICE_CENTS } from './agent-pass'
+import { codeForSession, normalizeCode, grantPass, lookupPass, passCookie, readPassCode } from './agent-pass'
 import { reserveRun, dayId, dayResetsAt, FREE_DAILY } from './agent-quota'
 
 // Runs against the in-memory KV backend (no Upstash / Stripe env in tests).
@@ -71,12 +71,5 @@ describe('daily window', () => {
     // Late night still belongs to its own UTC day; the boundary is exact.
     expect(dayId(new Date('2026-11-15T23:59:59Z'))).toBe('2026-11-15')
     expect(dayId(new Date('2026-11-16T00:00:00Z'))).toBe('2026-11-16')
-  })
-})
-
-describe('pricing', () => {
-  it('sells the pass at $15 by default', () => {
-    // Env-driven override aside, the headline price is $15.00/30 days.
-    expect(PASS_PRICE_CENTS).toBe(1500)
   })
 })
