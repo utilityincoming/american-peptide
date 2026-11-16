@@ -1,128 +1,94 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useReducer, useRef, useState } from 'react'
 import Link from 'next/link'
 import { Check, Copy, Dna, KeyRound } from 'lucide-react'
-
-const PENDING_QUESTION = 'ap_pending_question'
-
-interface PassStatus {
-  enabled: boolean
-  pass: { expiresAt: string } | null
-  limit?: number
-  remaining?: number
-  offer: { available: boolean; price: string; days: number }
-}
+import { PENDING_QUESTION_KEY, initialPassPage, passPagePanels, passPageReducer } from '@/lib/pass-flow'
+import { claimPass, fetchPassSummary, redeemCode, requestCheckoutUrl } from '@/lib/pass-client'
 
 const fmtDate = (iso: string) =>
   new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
 
-async function postJson(url: string, body: unknown): Promise<{ ok: boolean; data: Record<string, unknown> }> {
-  try {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(body),
-    })
-    const data = await res.json()
-    return { ok: res.ok, data }
-  } catch {
-    return { ok: false, data: { error: 'Network error. Please check your connection and try again.' } }
-  }
-}
-
 export default function ResearchPassPage() {
-  const [status, setStatus] = useState<PassStatus | null>(null)
-  const [claiming, setClaiming] = useState(false)
-  const [issuedCode, setIssuedCode] = useState<string | null>(null)
-  const [copied, setCopied] = useState(false)
-  const [buying, setBuying] = useState(false)
-  const [buyError, setBuyError] = useState<string | null>(null)
-  const [claimError, setClaimError] = useState<string | null>(null)
+  // Every panel below is derived from this one state — see src/lib/pass-flow.ts.
+  const [state, dispatch] = useReducer(passPageReducer, initialPassPage)
   const [code, setCode] = useState('')
-  const [redeeming, setRedeeming] = useState(false)
-  const [redeemError, setRedeemError] = useState<string | null>(null)
   const [pendingQuestion, setPendingQuestion] = useState<string | null>(null)
   const started = useRef(false)
+  const sessionId = useRef<string | null>(null)
+
+  const loadSummary = useCallback(async () => {
+    const summary = await fetchPassSummary()
+    dispatch(summary ? { type: 'summary_loaded', summary } : { type: 'summary_failed' })
+  }, [])
+
+  // Returning from Stripe: confirm the payment server-side and activate. The
+  // summary is read afterwards so it reflects the cookie the claim just set.
+  const confirmPayment = useCallback(async () => {
+    if (!sessionId.current) return
+    dispatch({ type: 'claim_started' })
+    const result = await claimPass(sessionId.current)
+    dispatch(
+      result.ok
+        ? { type: 'claim_succeeded', code: result.code }
+        : { type: 'claim_failed', error: result.error, retryable: result.retryable },
+    )
+    await loadSummary()
+  }, [loadSummary])
 
   useEffect(() => {
     if (started.current) return
     started.current = true
-    const saved = sessionStorage.getItem(PENDING_QUESTION)
+    const saved = sessionStorage.getItem(PENDING_QUESTION_KEY)
     if (saved?.trim()) setPendingQuestion(saved.trim())
 
-    const loadStatus = async () => {
-      try {
-        const res = await fetch('/api/pass')
-        if (res.ok) setStatus(await res.json())
-      } catch {
-        // leave status null — the page still renders the redeem form
-      }
-    }
+    sessionId.current = new URLSearchParams(window.location.search).get('session_id')
+    if (sessionId.current) confirmPayment()
+    else loadSummary()
+  }, [confirmPayment, loadSummary])
 
-    const run = async () => {
-      // Returning from Stripe: confirm the payment server-side and activate.
-      const sessionId = new URLSearchParams(window.location.search).get('session_id')
-      if (sessionId) {
-        setClaiming(true)
-        const { ok, data } = await postJson('/api/pass/claim', { sessionId })
-        if (ok && typeof data.code === 'string') setIssuedCode(data.code)
-        else setClaimError(typeof data.error === 'string' ? data.error : 'Could not confirm the payment.')
-        setClaiming(false)
-      }
-      await loadStatus()
-    }
-    run()
-  }, [])
+  const panels = passPagePanels(state)
+  const { issued, activePass: active } = panels
+  const buying = state.checkout.status === 'starting'
+  const redeeming = state.redeem.status === 'checking'
 
   const buy = async () => {
-    if (buying) return
-    setBuying(true)
-    setBuyError(null)
-    const { ok, data } = await postJson('/api/pass/checkout', {})
-    if (ok && typeof data.url === 'string') {
-      window.location.assign(data.url)
-      return
-    }
-    setBuyError(typeof data.error === 'string' ? data.error : 'Could not start checkout.')
-    setBuying(false)
+    if (!panels.canBuy) return
+    dispatch({ type: 'checkout_started' })
+    const result = await requestCheckoutUrl()
+    if (result.ok) window.location.assign(result.url)
+    else dispatch({ type: 'checkout_failed', error: result.error })
   }
 
   const redeem = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!code.trim() || redeeming) return
-    setRedeeming(true)
-    setRedeemError(null)
-    const { ok, data } = await postJson('/api/pass', { code })
-    if (ok) {
+    dispatch({ type: 'redeem_started' })
+    const result = await redeemCode(code)
+    if (result.ok) {
       setCode('')
-      try {
-        const res = await fetch('/api/pass')
-        if (res.ok) setStatus(await res.json())
-      } catch {
-        // status refresh is cosmetic; the cookie is already set
-      }
+      dispatch({ type: 'redeem_succeeded' })
+      // The cookie is already set; this refresh only updates what is shown.
+      await loadSummary()
     } else {
-      setRedeemError(typeof data.error === 'string' ? data.error : "That code isn't valid.")
+      dispatch({ type: 'redeem_failed', error: result.error })
     }
-    setRedeeming(false)
   }
 
   const copyCode = async () => {
-    if (!issuedCode) return
+    if (!issued) return
     try {
-      await navigator.clipboard.writeText(issuedCode)
-      setCopied(true)
+      await navigator.clipboard.writeText(issued.code)
+      dispatch({ type: 'code_copied' })
+      setTimeout(() => dispatch({ type: 'copy_reset' }), 2000)
     } catch {
       // clipboard unavailable — the code is on screen to copy by hand
     }
   }
 
-  const offer = status?.offer
-  const price = offer?.price ?? '$15'
-  const days = offer?.days ?? 30
-  const freeLimit = status?.limit ?? 5
-  const active = status?.pass ?? null
+  const price = panels.terms?.price ?? '$15'
+  const days = panels.terms?.days ?? 30
+  const freeLimit = panels.freeLimit ?? 5
 
   return (
     <div className="min-h-screen bg-surface text-ink">
@@ -141,17 +107,31 @@ export default function ResearchPassPage() {
         </p>
 
         {/* ── Just purchased ── */}
-        {claiming && (
+        {panels.confirming && (
           <div role="status" className="mt-8 rounded-2xl border border-hairline bg-fill p-5 text-sm text-ink/65">
             Confirming your payment…
           </div>
         )}
-        {claimError && (
+        {panels.claimError && (
           <div role="alert" className="mt-8 rounded-2xl border border-red-400/30 bg-red-400/[0.06] p-5 text-sm text-ink/80">
-            {claimError}
+            <p>{panels.claimError.error}</p>
+            {panels.claimError.retryable && (
+              <>
+                <button
+                  type="button"
+                  onClick={confirmPayment}
+                  className="mt-4 rounded-xl bg-[#5BA88C] px-4 py-2 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
+                >
+                  Check again
+                </button>
+                <p className="mt-3 text-xs leading-relaxed text-ink/55">
+                  There&rsquo;s no need to pay again &mdash; a completed payment is confirmed here.
+                </p>
+              </>
+            )}
           </div>
         )}
-        {issuedCode && (
+        {issued && (
           <div className="mt-8 rounded-2xl border border-accent/25 bg-accent/[0.06] p-5">
             <p className="flex items-center gap-2 text-sm font-medium text-ink/90">
               <Check className="h-4 w-4 text-accent" />
@@ -164,7 +144,7 @@ export default function ResearchPassPage() {
             </p>
             <div className="mt-3 flex flex-wrap items-center gap-3">
               <code className="rounded-lg border border-hairline bg-surface px-3 py-2 font-mono text-base tracking-wider text-ink">
-                {issuedCode}
+                {issued.code}
               </code>
               <button
                 type="button"
@@ -172,7 +152,7 @@ export default function ResearchPassPage() {
                 className="flex items-center gap-1.5 rounded-lg border border-hairline px-3 py-2 text-xs text-ink/70 transition-colors hover:bg-fill-strong hover:text-ink"
               >
                 <Copy className="h-3.5 w-3.5" />
-                {copied ? 'Copied' : 'Copy code'}
+                {issued.copied ? 'Copied' : 'Copy code'}
               </button>
             </div>
             <div className="mt-4">
@@ -198,7 +178,7 @@ export default function ResearchPassPage() {
             <p className="mt-1 text-xs text-ink/60">
               No daily limit until {fmtDate(active.expiresAt)}. The pass does not renew automatically.
             </p>
-            {!issuedCode && (
+            {!issued && (
               <Link
                 href={pendingQuestion ? '/research?resume=1' : '/research'}
                 className="mt-4 inline-block rounded-xl bg-[#5BA88C] px-4 py-2 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
@@ -210,7 +190,7 @@ export default function ResearchPassPage() {
         )}
 
         {/* ── Offer ── */}
-        {!active && !claiming && !issuedCode && (
+        {panels.offer !== 'hidden' && (
           <div className="mt-8 rounded-2xl border border-hairline bg-fill p-6">
             <div className="flex items-baseline gap-2">
               <span className="text-3xl font-semibold">{price}</span>
@@ -229,22 +209,22 @@ export default function ResearchPassPage() {
                 </li>
               ))}
             </ul>
-            {offer && !offer.available ? (
+            {panels.offer === 'not_on_sale' ? (
               <p className="mt-5 text-sm text-ink/55">
                 The Research Pass isn&rsquo;t on sale yet. Your {freeLimit} free daily searches still apply.
               </p>
             ) : (
               <button
                 onClick={buy}
-                disabled={buying || !offer}
+                disabled={!panels.canBuy}
                 className="mt-5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {buying ? 'Opening secure checkout…' : `Get the Research Pass — ${price}`}
               </button>
             )}
-            {buyError && (
+            {state.checkout.status === 'failed' && (
               <p role="alert" className="mt-3 text-xs text-red-400">
-                {buyError}
+                {state.checkout.error}
               </p>
             )}
             {pendingQuestion && (
@@ -263,7 +243,7 @@ export default function ResearchPassPage() {
         )}
 
         {/* ── Redeem a code ── */}
-        {!active && (
+        {panels.showRedeem && (
           <form onSubmit={redeem} className="mt-6 rounded-2xl border border-hairline p-5">
             <label htmlFor="pass-code" className="flex items-center gap-2 text-sm font-medium text-ink/85">
               <KeyRound className="h-4 w-4 text-ink/55" />
@@ -287,9 +267,9 @@ export default function ResearchPassPage() {
                 {redeeming ? 'Checking…' : 'Unlock'}
               </button>
             </div>
-            {redeemError && (
+            {state.redeem.status === 'failed' && (
               <p role="alert" className="mt-2 text-xs text-red-400">
-                {redeemError}
+                {state.redeem.error}
               </p>
             )}
           </form>

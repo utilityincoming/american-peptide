@@ -1,12 +1,21 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect, useCallback, useReducer } from 'react'
 import { Send, Dna, SquarePen } from 'lucide-react'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import type { Components } from 'react-markdown'
 import ProfilePanel from '@/components/ProfilePanel'
+import {
+  PENDING_QUESTION_KEY,
+  agentAccessReducer,
+  canAsk,
+  canStartCheckout,
+  initialAgentAccess,
+  parseChatReplyMeta,
+} from '@/lib/pass-flow'
+import { fetchPassSummary, requestCheckoutUrl } from '@/lib/pass-client'
 
 type Role = 'user' | 'assistant'
 
@@ -28,8 +37,6 @@ I'm your AI assistant for peptide research. I can help you:
 
 What would you like to research today?`,
 }
-
-const PENDING_QUESTION = 'ap_pending_question'
 
 function freeSearchWord(n: number): string {
   return n === 1 ? 'search' : 'searches'
@@ -145,14 +152,12 @@ export default function ResearchPage() {
   const [messages, setMessages] = useState<Message[]>([WELCOME])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  // Free daily allowance, as reported by the server (null until known / when off).
-  const [quota, setQuota] = useState<{ limit: number; remaining: number } | null>(null)
-  // Paid Research Pass (no daily limit) and the checkout offer shown when the limit is hit.
-  const [pass, setPass] = useState<{ expiresAt: string } | null>(null)
-  const [offer, setOffer] = useState<{ available: boolean; price: string; days: number } | null>(null)
-  const [limitReached, setLimitReached] = useState(false)
-  const [checkingOut, setCheckingOut] = useState(false)
-  const [checkoutError, setCheckoutError] = useState<string | null>(null)
+  // Free allowance / Research Pass / checkout, as one explicit state machine
+  // (src/lib/pass-flow.ts). The server is the authority; this mirrors its reports.
+  const [agent, dispatch] = useReducer(agentAccessReducer, initialAgentAccess)
+  const { access, offer, checkout } = agent
+  const limitReached = !canAsk(agent)
+  const checkingOut = checkout.status === 'starting'
   const bottomRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   // Session page context, set once from the ?ctx=kind:slug deep-link param
@@ -207,20 +212,16 @@ export default function ResearchPage() {
         })
 
         const data = await res.json()
-        if (data.quota && typeof data.quota.remaining === 'number') {
-          setQuota({ limit: data.quota.limit, remaining: data.quota.remaining })
-        }
-        if (data.offer) setOffer(data.offer)
+        dispatch({ type: 'reply_received', reply: parseChatReplyMeta(res.status, data) })
         if (res.status === 402) {
           // Out of free questions: put the unsent question back in the box and
           // show checkout instead of an error bubble.
           setMessages(messages)
           setInput(trimmed)
-          sessionStorage.setItem(PENDING_QUESTION, trimmed)
-          setLimitReached(true)
+          sessionStorage.setItem(PENDING_QUESTION_KEY, trimmed)
           return
         }
-        sessionStorage.removeItem(PENDING_QUESTION)
+        sessionStorage.removeItem(PENDING_QUESTION_KEY)
         if (!res.ok) throw new Error(data.error || 'Request failed')
 
         setMessages((prev) => [...prev, { role: 'assistant', content: data.content }])
@@ -259,9 +260,9 @@ export default function ResearchPage() {
       }
     }
 
-    const pending = sessionStorage.getItem(PENDING_QUESTION)
+    const pending = sessionStorage.getItem(PENDING_QUESTION_KEY)
     if (params.get('resume') === '1' && pending?.trim()) {
-      sessionStorage.removeItem(PENDING_QUESTION)
+      sessionStorage.removeItem(PENDING_QUESTION_KEY)
       sendMessage(pending.trim())
       return
     }
@@ -283,23 +284,9 @@ export default function ResearchPage() {
   useEffect(() => {
     let cancelled = false
     const load = async () => {
-      try {
-        const res = await fetch('/api/pass')
-        if (!res.ok) return
-        const data = await res.json()
-        if (cancelled) return
-        if (data.offer) setOffer(data.offer)
-        if (data.pass) {
-          setPass(data.pass)
-          return
-        }
-        if (data.enabled && typeof data.remaining === 'number') {
-          setQuota({ limit: data.limit, remaining: data.remaining })
-          if (data.remaining <= 0) setLimitReached(true)
-        }
-      } catch {
-        // counter is informational — the server enforces the limit regardless
-      }
+      // The counter is informational — the server enforces the limit regardless.
+      const summary = await fetchPassSummary()
+      if (summary && !cancelled) dispatch({ type: 'summary_loaded', summary })
     }
     load()
     return () => {
@@ -308,27 +295,13 @@ export default function ResearchPage() {
   }, [])
 
   const startCheckout = async () => {
-    if (checkingOut || !offer?.available) return
+    if (!canStartCheckout(agent)) return
     const pending = input.trim()
-    if (pending) sessionStorage.setItem(PENDING_QUESTION, pending)
-    setCheckingOut(true)
-    setCheckoutError(null)
-    try {
-      const res = await fetch('/api/pass/checkout', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: '{}',
-      })
-      const data = await res.json()
-      if (res.ok && typeof data.url === 'string') {
-        window.location.assign(data.url)
-        return
-      }
-      setCheckoutError(typeof data.error === 'string' ? data.error : 'Could not start checkout. Please try again.')
-    } catch {
-      setCheckoutError('Could not start checkout. Please try again.')
-    }
-    setCheckingOut(false)
+    if (pending) sessionStorage.setItem(PENDING_QUESTION_KEY, pending)
+    dispatch({ type: 'checkout_started' })
+    const result = await requestCheckoutUrl()
+    if (result.ok) window.location.assign(result.url)
+    else dispatch({ type: 'checkout_failed', error: result.error })
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -444,13 +417,13 @@ export default function ResearchPage() {
       {/* ── Input bar ── */}
       <div className="flex-shrink-0 border-t border-hairline px-4 py-4 md:px-6">
         <div className="mx-auto max-w-3xl">
-          {limitReached && (
+          {access.status === 'exhausted' && (
             <div
               role="status"
               className="mb-3 rounded-2xl border border-accent/25 bg-accent/[0.07] px-4 py-4 text-sm text-ink/75"
             >
               <p className="font-medium text-ink/95">
-                You&rsquo;ve used today&rsquo;s {quota?.limit ?? 5} free {freeSearchWord(quota?.limit ?? 5)}.
+                You&rsquo;ve used today&rsquo;s {access.limit} free {freeSearchWord(access.limit)}.
               </p>
               {offer?.available ? (
                 <>
@@ -466,8 +439,8 @@ export default function ResearchPage() {
                   >
                     {checkingOut ? 'Opening secure checkout…' : `Continue to checkout — ${offer.price}`}
                   </button>
-                  {checkoutError && (
-                    <p role="alert" className="mt-2 text-xs text-red-400">{checkoutError}</p>
+                  {checkout.status === 'failed' && (
+                    <p role="alert" className="mt-2 text-xs text-red-400">{checkout.error}</p>
                   )}
                 </>
               ) : (
@@ -507,11 +480,13 @@ export default function ResearchPage() {
             </button>
           </div>
           <p className="mt-2 text-center text-[10px] text-ink/20">
-            {pass && <span className="text-ink/45">Research Pass active — no daily limit ·{' '}</span>}
-            {!pass && quota && !limitReached && (
+            {access.status === 'pass' && (
+              <span className="text-ink/45">Research Pass active — no daily limit ·{' '}</span>
+            )}
+            {access.status === 'free' && (
               <span className="text-ink/45">
-                {quota.remaining} of {quota.limit} free {freeSearchWord(quota.limit)} left today
-                {quota.remaining <= 1 && offer?.available ? (
+                {access.remaining} of {access.limit} free {freeSearchWord(access.limit)} left today
+                {access.remaining <= 1 && offer?.available ? (
                   <>
                     {' · '}
                     <Link href="/research/pass" className="text-accent underline-offset-2 hover:underline">
