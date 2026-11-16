@@ -34,7 +34,12 @@ export async function POST(request: NextRequest) {
 
   const result = await claimSession(sessionId)
   if (!result.ok) {
-    return Response.json({ error: MESSAGES[result.reason] }, { status: STATUS[result.reason] })
+    // `code` is the machine-readable reason; the page uses it to tell a payment
+    // that may still land (unpaid, unavailable) from one that never will.
+    return Response.json(
+      { error: MESSAGES[result.reason], code: result.reason },
+      { status: STATUS[result.reason] },
+    )
   }
   void meter('chat', { 'pass:claimed': 1 })
   return Response.json(

@@ -40,6 +40,15 @@ Next.js 16 + TypeScript + Tailwind CSS + App Router.
 - Server components by default, 'use client' only when needed
 - async/await, never .then() chains
 - Environment variables in .env.local, never hardcoded
+- State machines are explicit. A flow with more than two interdependent flags
+  (loading/error/result, multi-step, anything involving payment) is a pure
+  reducer over a discriminated union in src/lib/*-flow.ts, with the transition
+  diagram in the file header, selectors for what the page renders, and a
+  *.test.ts. Components hold it in useReducer and only dispatch events; fetches
+  live in a sibling *-client.ts and never throw. Reference: src/lib/pass-flow.ts
+  (Research Pass + agent access, used by /research and /research/pass).
+- API errors carry a machine-readable `code` next to the human `error`
+  (e.g. quota_exhausted, capacity, unpaid, invalid, expired, unavailable).
 
 ## External APIs (all free, no keys required)
 - PubChem: https://pubchem.ncbi.nlm.nih.gov/rest/pug/

@@ -103,6 +103,7 @@ No new routes or files were added for Checkout itself. Existing surface:
 | Path | Role |
 |------|------|
 | `src/lib/agent-pass.ts` | Session create + claim + access-code cookie |
+| `src/lib/pass-flow.ts` / `pass-client.ts` | Client state machine for buy / claim / redeem, and its fetch calls |
 | `src/app/api/pass/checkout/route.ts` | `POST` → redirects/returns hosted Checkout URL |
 | `src/app/api/pass/claim/route.ts` | Verifies Session with Stripe, grants pass |
 | `src/app/research/pass/page.tsx` | Buy / success / redeem UI |
