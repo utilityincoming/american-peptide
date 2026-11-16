@@ -154,7 +154,11 @@ describe('affiliate deep links (live VENDORS data)', () => {
   // A deep link is only worth having if it lands somewhere real AND still pays:
   // the right catalog page, a compound the vendor is listed for, the vendor's own
   // host, and the same referral query the homepage link carries.
-  const linked = VENDORS.flatMap((v) =>
+  // Only deep links that can actually render are held to the "lands somewhere real
+  // AND still pays" invariant: a de-listed vendor (directoryListed: false) is absent
+  // from getVendorsForPeptide by design, so its dormant-but-valid deep links are not
+  // in scope here. The raw-map checks below still cover every vendor's data.
+  const linked = VENDORS.filter((v) => v.directoryListed !== false).flatMap((v) =>
     Object.entries(v.affiliate?.productUrls ?? {}).map(([slug, url]) => ({ v, slug, url })),
   )
 

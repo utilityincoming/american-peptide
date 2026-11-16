@@ -484,6 +484,15 @@ export const VENDORS: Vendor[] = [
     url: 'https://paramountpeptides.com',
     blurb:
       'US research-peptide supplier — "Real Science. Real Standards." — stocking a broad catalog across the recovery, GH-axis, nootropic, and longevity classes, with independent third-party HPLC testing on every batch, ≥99% purity, and COAs searchable by product or batch number.',
+    // De-listed from the user-facing sourcing layer (2026-11-16): referral
+    // performance lagged the two featured partners, so Paramount no longer renders
+    // in catalog "where to source" tiles, peptide-specific rankings, or the vendor
+    // directory, and its /vendors/paramount-peptides review page drops out of the
+    // statically-built set. The entry, trust data, and deep links are kept intact
+    // (not deleted) so the relationship is one flag away from being restored. The
+    // /go/paramount-peptides redirect stays armed (affiliate.active below), so any
+    // pre-existing external link still earns — it simply isn't promoted on-site.
+    directoryListed: false,
     // Scoped to the single compounds Paramount's public storefront actually
     // lists (the "shop all peptides" collection), never 'all'. The three incretin
     // analogues sell under coded names (GLP-1 S / GLP-2 T / GLP-3 R). Their blends
