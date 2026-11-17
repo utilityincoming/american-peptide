@@ -3,6 +3,7 @@ import { getUsage, TIERS } from '@/lib/api-keys'
 import { kv } from '@/lib/kv'
 import { readMetering, FREE_DAILY, IP_DAILY_MAX, GLOBAL_DAILY_CEILING } from '@/lib/agent-quota'
 import { passSalesEnabled, PASS_PRICE_CENTS, PASS_DAYS, PASS_DAILY_MAX } from '@/lib/agent-pass'
+import { getAgentBacklog } from '@/lib/agent-backlog'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -71,5 +72,7 @@ export async function GET(req: NextRequest) {
     anonymous,
     keys,
     agent,
+    // Questions asked often enough to be a catalog or grounding gap.
+    backlog: await getAgentBacklog(),
   })
 }

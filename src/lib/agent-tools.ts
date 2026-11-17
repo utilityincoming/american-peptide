@@ -4,6 +4,12 @@
 // so a slow or oversized upstream response cannot stall the request or blow up
 // model context / cost.
 
+import {
+  computeCoaGrade,
+  computePharmacokinetics,
+  computeReconstitution,
+  computeVendorRank,
+} from '@/lib/agent-compute'
 import { pubchemFetch } from '@/lib/pubchem-fetch'
 
 export interface AgentTool {
@@ -70,6 +76,60 @@ export const AGENT_TOOLS: AgentTool[] = [
         },
       },
       required: ['query'],
+    },
+  },
+  {
+    name: 'reconstitute_vial',
+    description:
+      'Compute reconstitution dilution for a peptide vial: concentration, U-100 syringe units, and whole doses. Call this whenever the user gives a vial mass, a dose, and a volume of bacteriostatic water and wants the draw. Pass numbers only — do not calculate the draw yourself.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        vial_mg: { type: 'number', description: 'Peptide mass in the vial, in milligrams.' },
+        dose_mcg: { type: 'number', description: 'Target amount per draw, in micrograms.' },
+        water_ml: { type: 'number', description: 'Bacteriostatic water added, in milliliters.' },
+      },
+      required: ['vial_mg', 'dose_mcg', 'water_ml'],
+    },
+  },
+  {
+    name: 'peptide_half_life',
+    description:
+      'Look up the site half-life table for a catalog peptide and the derived steady-state and clearance times. Call this before stating a half-life, dosing interval, accumulation, or time-to-steady-state. If the tool says no half-life is stored, say so — do not recall one.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string', description: 'Catalog peptide name, e.g. "semaglutide".' },
+        interval_hours: {
+          type: 'number',
+          description: 'Optional repeat-dose interval in hours, to compute accumulation.',
+        },
+      },
+      required: ['name'],
+    },
+  },
+  {
+    name: 'rank_vendors',
+    description:
+      'Rank directory vendors for a catalog peptide by the site trust score (COA, third-party testing, reship, refund). Call this when the user asks where to source a compound or which vendor ranks higher. Quote only vendors and scores this tool returns.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string', description: 'Catalog peptide name.' },
+      },
+      required: ['name'],
+    },
+  },
+  {
+    name: 'grade_coa',
+    description:
+      'Grade a pasted certificate of analysis against the site transparency checklist and cross-check claimed chemistry with the catalog. Call this when the user pastes COA text and asks if it is complete, what is missing, or whether the mass matches.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        text: { type: 'string', description: 'The certificate text the user pasted.' },
+      },
+      required: ['text'],
     },
   },
 ]
@@ -246,6 +306,18 @@ export async function executeAgentTool(
         break
       case 'search_uniprot':
         out = await searchUniprot(String(input.query ?? ''))
+        break
+      case 'reconstitute_vial':
+        out = computeReconstitution(input)
+        break
+      case 'peptide_half_life':
+        out = computePharmacokinetics(input)
+        break
+      case 'rank_vendors':
+        out = computeVendorRank(input)
+        break
+      case 'grade_coa':
+        out = computeCoaGrade(input)
         break
       default:
         return { content: `Unknown tool: ${name}`, isError: true }
