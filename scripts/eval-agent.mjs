@@ -16,7 +16,10 @@
 //        --judge   also run the LLM judge (needs ANTHROPIC_API_KEY in env)
 //        --json    print machine-readable JSON instead of the markdown report
 //
-// Exit code is non-zero if any case fails — wire into CI to gate prompt edits.
+// Exit code is non-zero if any case fails — wire into CI to gate prompt edits
+// and provider-ladder changes. Compute-tool cases (reconstitute-5mg,
+// semaglutide-half-life, semaglutide-sources) must keep matching
+// src/lib/agent-compute.test.ts, which is the offline pin for the same numbers.
 
 import { GOLDEN } from './eval/golden.mjs'
 

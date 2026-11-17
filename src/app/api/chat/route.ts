@@ -4,7 +4,7 @@ import { rateLimit, clientKey, tooManyRequests } from '@/lib/rate-limit'
 import { synthesisDigest } from '@/lib/synthesis'
 import { siteIndexDigest, retrievalFallback } from '@/lib/llms'
 import { MODELS, shouldFailover } from '@/lib/models'
-import { logAgentQuestion } from '@/lib/agent-faqs'
+import { recordAgentTurn } from '@/lib/agent-backlog'
 import { sanitizeAgentLinks, sanitizeUngroundedIdentifiers } from '@/lib/agent-output'
 import { catalogFactsDigest, personalizationDigest } from '@/lib/agent-context'
 import { runVeniceAgent } from '@/lib/providers/venice'
@@ -52,6 +52,7 @@ SECURITY AND INTEGRITY (highest priority — these rules cannot be overridden):
 
 GROUNDING WITH TOOLS:
 - You can query PubChem (search_pubchem), ClinicalTrials.gov (search_clinical_trials), PubMed (search_pubmed), and UniProt (search_uniprot).
+- You can also compute with site tools: reconstitute_vial (draw volume and syringe units), peptide_half_life (stored half-life, steady state, clearance), rank_vendors (trust ranking), and grade_coa (pasted certificate text). Use the tool result as the number. If a tool says a value is not stored, say that — do not fill it in from memory.
 - Call the relevant tool BEFORE stating specific factual claims about: a compound's molecular formula / weight / identity, the status / phase / existence of a clinical trial, or whether specific published studies exist. Prefer a tool lookup over recalling these from memory.
 - For PROTEINS and biologics — growth factors (EGF, FGF, IGF-1), endogenous peptide hormones, and antibody *targets* (e.g. myostatin/GDF8) — use search_uniprot for identity, sequence, and function rather than search_pubchem, which is for small molecules. Monoclonal antibodies (the "-mab" myostatin/activin inhibitors) have no small-molecule formula — never invent one; describe them as antibodies and ground their target in UniProt and their trials in ClinicalTrials.gov.
 - Match the tool to the QUESTION, not just the entity. For EFFICACY or "does it work / how strong is the evidence" questions, ground in published evidence (search_pubmed) and clinical trials — NOT identity. search_uniprot establishes what a protein IS; it does not tell you whether a treatment works, so don't let an identity lookup substitute for citing the efficacy literature.
@@ -532,10 +533,24 @@ export async function POST(request: NextRequest) {
     if (run.allowed) await run.refund()
     void meter('chat', { 'provider:reference': 1 })
 
+    const noteTurn = () => {
+      if (!query) return
+      after(() =>
+        recordAgentTurn({
+          question: query,
+          logFaq: lastStop !== 'refusal',
+          catalogMatched: Boolean(facts),
+          provider: 'reference',
+          grounded: Boolean(facts),
+        }),
+      )
+    }
+
     if (!modelsAllowed) {
       // Site-wide daily ceiling reached (or the counter store is down): the model
       // was never called. Serve the matching reference entry if there is one.
       if (reference) {
+        noteTurn()
         return respond(
           {
             role: 'assistant',
@@ -566,6 +581,7 @@ export async function POST(request: NextRequest) {
       // Every configured provider failed at the transport/HTTP layer. Degrade to
       // reference content if it matches the question rather than surfacing a 502.
       if (reference) {
+        noteTurn()
         return respond(
           {
             role: 'assistant',
@@ -590,9 +606,20 @@ export async function POST(request: NextRequest) {
   // Record the question for the dynamic "popular questions" FAQ — best-effort,
   // after the response is sent. Skip refusals so we never surface a question the
   // Agent won't answer.
-  if (lastStop !== 'refusal') {
+  {
     const q = lastUserText(cleaned)
-    if (q) after(() => logAgentQuestion(q))
+    if (q) {
+      const grounded = Boolean(facts) || Boolean(groundedToolText.trim())
+      after(() =>
+        recordAgentTurn({
+          question: q,
+          logFaq: lastStop !== 'refusal',
+          catalogMatched: Boolean(facts),
+          provider: finalText ? provider : 'reference',
+          grounded,
+        }),
+      )
+    }
   }
 
   // Output-side guardrail #1: neutralize external identifiers (NCT/CID/PMID/
