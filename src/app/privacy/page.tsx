@@ -83,12 +83,12 @@ export default function PrivacyPage() {
           <Block title="Information we collect">
             <p className="mb-3">
               <SubHead>Usage and performance analytics.</SubHead> We use Vercel
-              Analytics and Vercel Speed Insights to measure aggregate traffic
-              and page performance. This includes information such as pages
-              visited, referring site, approximate region, device and browser
-              type, and performance timings. These analytics are designed to be
-              privacy-friendly and are used in aggregate; we do not use them to
-              build advertising profiles.
+              Analytics, Vercel Speed Insights, and Ahrefs Web Analytics to
+              measure aggregate traffic and page performance. This includes
+              information such as pages visited, referring site, approximate
+              region, device and browser type, and performance timings. These
+              analytics are used in aggregate; we do not use them to build
+              advertising profiles.
             </p>
             <p className="mb-3">
               <SubHead>Research assistant content.</SubHead> When you submit a
@@ -181,7 +181,7 @@ export default function PrivacyPage() {
             <ul className="space-y-2">
               <Bullet>
                 <strong>Hosting &amp; analytics:</strong> Vercel (hosting,
-                analytics, and performance insights).
+                analytics, and performance insights) and Ahrefs (web analytics).
               </Bullet>
               <Bullet>
                 <strong>AI processing:</strong> Venice AI, xAI, and Anthropic,
