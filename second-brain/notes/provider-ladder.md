@@ -25,7 +25,7 @@ Each rung runs only if the previous one errored or returned nothing
 (`!finalText`). The whole ladder is gated by `modelsAllowed` (free allowance
 reserved + site-wide daily ceiling not hit); otherwise it skips to the floor.
 The reference floor **refunds the visitor's free use** — a request no model
-answered doesn't cost a search.
+answered doesn't cost a search (details: `reference-floor-refund.md`).
 
 ## Resolved
 - 2026-11-18 — #187 ("close the agent gap between usage, tools, and model
