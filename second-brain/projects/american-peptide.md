@@ -18,9 +18,10 @@ Core platform is live and iterating. Recent merged work:
 
 ## Next step
 _(Decide the next priority — candidates below are placeholders, not commitments.)_
-- Confirm the provider ladder (Venice → Grok → Claude → reference floor) is
-  behaving under the new usage/tools/model wiring from #187.
 - Keep monographs filling (cf. #181 eloralintide).
+
+_(Resolved 2026-11-18: provider-ladder fallthrough confirmed unchanged by #187 —
+see `../notes/provider-ladder.md` and `../decisions.md`.)_
 
 ## Architecture quick-ref
 - Provider ladder + agent loop: `src/lib/providers/openai-compat.ts`
