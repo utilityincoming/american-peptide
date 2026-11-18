@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Space_Grotesk, Spectral } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import Script from 'next/script'
 import './globals.css'
 import Footer from '@/components/Footer'
 import SiteHeader from '@/components/SiteHeader'
@@ -129,6 +130,11 @@ export default function RootLayout({
         {/* Site-wide entity graph: the Organization + the WebSite it publishes,
             linked by @id and referenced from every page's structured data. */}
         <JsonLd data={siteGraphJsonLd()} />
+        <Script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="+EVPxf544kFD7R+vw7EIjQ"
+          strategy="beforeInteractive"
+        />
         {/* No-flash theme: apply the stored/OS preference before first paint,
             so light-mode users never see a dark flash. Default is dark. Also
             syncs the mobile browser-chrome color to the resolved theme. */}

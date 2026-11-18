@@ -12,6 +12,8 @@ import path from 'node:path'
 //   server-side in /api/*; the client only calls same-origin routes (connect-src 'self').
 // - Google Analytics (@next/third-parties) loads gtag.js from www.googletagmanager.com
 //   and beacons to *.google-analytics.com / *.analytics.google.com.
+// - Ahrefs Web Analytics loads analytics.js from analytics.ahrefs.com and
+//   beacons back to the same origin.
 // - No iframes, remote images, blobs, or workers are used.
 const csp = [
   "default-src 'self'",
@@ -20,11 +22,11 @@ const csp = [
   "frame-ancestors 'none'",
   "frame-src 'none'",
   "form-action 'self'",
-  "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://www.googletagmanager.com",
+  "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://www.googletagmanager.com https://analytics.ahrefs.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com",
+  "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://analytics.ahrefs.com",
   "media-src 'self'",
   "manifest-src 'self'",
   "worker-src 'self'",
