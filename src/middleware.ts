@@ -20,15 +20,27 @@ import { NextResponse, type NextRequest } from 'next/server'
 // wants the Edge runtime, which middleware still provides.
 const REDIRECT_HOSTS = ['americanpeptide.net', 'app.americanpeptide.com']
 const CANONICAL_ORIGIN = 'https://americanpeptide.com'
+const CANONICAL_HOST = 'americanpeptide.com'
 
 export function middleware(req: NextRequest) {
   const host = (req.headers.get('host') ?? '').toLowerCase().split(':')[0]
+  const { pathname, search } = req.nextUrl
+
+  // www → apex. The site canonicalizes on the bare apex (every canonical tag,
+  // metadataBase, and the sitemap all use https://americanpeptide.com with no
+  // www), but www.americanpeptide.com otherwise serves the full site byte-for-
+  // byte. Google was indexing the www variant and picking it as canonical over
+  // our declared apex ("Duplicate, Google chose different canonical than user"
+  // in Search Console). A 308 collapses the two hostnames into one, preserving
+  // path + query and the request method.
+  if (host === `www.${CANONICAL_HOST}`) {
+    return NextResponse.redirect(`${CANONICAL_ORIGIN}${pathname}${search}`, 308)
+  }
+
   const onRedirectHost = REDIRECT_HOSTS.some(
     (h) => host === h || host === `www.${h}`,
   )
   if (!onRedirectHost) return NextResponse.next()
-
-  const { pathname, search } = req.nextUrl
 
   // The one thing .net exists to serve: let the /go chokepoint run (it 302s out
   // to the vendor and records the no-PII referral click, same as on .com).
