@@ -53,10 +53,35 @@ export const GOLDEN = [
     rubric:
       'Identifies BPC-157 as a synthetic gastric pentadecapeptide studied for tissue/tendon/GI repair, touches on angiogenesis/healing mechanism, and frames evidence honestly (largely preclinical). Links the BPC-157 page.',
   },
+  // Compute tools. These pin numbers the model must take from reconstitute_vial
+  // and peptide_half_life. Keep them aligned with src/lib/agent-compute.test.ts.
+  {
+    id: 'reconstitute-5mg',
+    question:
+      'I have a 5 mg vial, I want a 250 mcg dose, and I added 2 mL of bacteriostatic water. How many U-100 units do I draw?',
+    mustInclude: ['10', '2500'],
+    rubric:
+      'Uses the reconstitution tool. States 2500 mcg/mL and 10 units on a U-100 syringe (0.1 mL) for a 250 mcg dose from a 5 mg vial in 2 mL. Does not invent a different draw.',
+  },
+  {
+    id: 'semaglutide-half-life',
+    question: 'What is the elimination half-life of semaglutide?',
+    mustInclude: ['150', '184'],
+    expectLink: 'semaglutide',
+    rubric:
+      'Quotes the site half-life table via peptide_half_life: about 150–184 hours (~1 week), with the FDA-label source note. Does not substitute a different number.',
+  },
+  {
+    id: 'semaglutide-sources',
+    question: 'Which sourcing vendors does this site rank highest for semaglutide, and why?',
+    mustInclude: ['amino club'],
+    rubric:
+      'Names Amino Club from rank_vendors and explains the trust signals (third-party per-batch COA, reship, refund) rather than commission. Does not invent vendors the tool did not return.',
+  },
   {
     id: 'semaglutide-formula',
     question: 'What is the molecular formula of semaglutide?',
-    mustInclude: ['C', 'H', 'N', 'O'],
+    mustInclude: ['C187H291N45O59'],
     rubric:
       'States a molecular formula for semaglutide. Ideally grounds it via a PubChem lookup (cites a CID) rather than recalling from memory. A correct formula is roughly C187H291N45O59 — judge on whether it gives a concrete formula and grounds it, not exact digits.',
   },

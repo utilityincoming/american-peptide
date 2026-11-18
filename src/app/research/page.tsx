@@ -16,6 +16,7 @@ import {
   parseChatReplyMeta,
 } from '@/lib/pass-flow'
 import { fetchPassSummary, requestCheckoutUrl } from '@/lib/pass-client'
+import { getWatchlist } from '@/lib/workspace'
 
 type Role = 'user' | 'assistant'
 
@@ -191,14 +192,21 @@ export default function ResearchPage() {
       // Assemble per-request context: page (from the deep-link param) + an
       // optional reader profile from localStorage (forward-compatible with a
       // future settings UI). The server re-validates every field.
-      const context: { page?: { kind: string; slug: string }; profile?: unknown } = {}
+      const context: { page?: { kind: string; slug: string }; profile?: Record<string, unknown> } = {}
       if (pageCtx.current) context.page = pageCtx.current
       try {
+        const profile: Record<string, unknown> = {}
         const raw = localStorage.getItem('ap_profile')
         if (raw) {
-          const profile = JSON.parse(raw)
-          if (profile && typeof profile === 'object') context.profile = profile
+          const parsed = JSON.parse(raw)
+          if (parsed && typeof parsed === 'object') Object.assign(profile, parsed)
         }
+        const watched = getWatchlist()
+        if (watched.length) {
+          const existing = Array.isArray(profile.compounds) ? profile.compounds : []
+          profile.compounds = [...existing, ...watched]
+        }
+        if (Object.keys(profile).length) context.profile = profile
       } catch {
         // malformed/absent profile — send without it
       }
