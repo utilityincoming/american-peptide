@@ -2392,6 +2392,122 @@ export const COMPARISONS: Comparison[] = [
       { name: 'NAD+', alternateName: 'Nicotinamide Adenine Dinucleotide' },
     ],
   },
+  {
+    slug: 'klow-vs-glow',
+    aSlug: 'klow',
+    bSlug: 'glow',
+    aName: 'KLOW',
+    bName: 'GLOW',
+    aPill: 'Four-peptide blend · + KPV',
+    bPill: 'Three-peptide blend · skin & repair',
+    metaTitle: 'KLOW vs GLOW — Which Repair Blend Differs How',
+    metaDescription:
+      'Research comparison of the KLOW and GLOW peptide blends. Both combine GHK-Cu, BPC-157, and TB-500; KLOW adds the anti-inflammatory tripeptide KPV. Composition is vendor-defined and neither blend is studied as a mixture. Cited.',
+    keywords: [
+      'KLOW vs GLOW',
+      'KLOW GLOW difference',
+      'peptide blend comparison',
+      'GHK-Cu BPC-157 TB-500 blend',
+      'KPV blend',
+    ],
+    updated: '2026-11-19',
+    breadcrumb: { label: 'Healing & Repair', href: '/catalog/category/healing-repair' },
+    headline: 'the same three-peptide base, with or without KPV',
+    intro: [
+      'KLOW and GLOW are marketed repair-and-skin blends that share a common base — GHK-Cu, BPC-157, and TB-500. The practical difference is one component: KLOW adds KPV, the anti-inflammatory C-terminal tripeptide of α-MSH, making it a four-peptide stack versus GLOW’s three.',
+      'Both are physical mixtures, not single molecules, and neither has been studied as a blend. Their composition and ratios are vendor-defined and not standardized, so this comparison is about what the stacks are designed to cover, not about proven combined effects. Every component is a research compound profiled on its own page.',
+    ],
+    atAGlance: [
+      { dim: 'What it is', a: 'A four-peptide physical blend', b: 'A three-peptide physical blend' },
+      { dim: 'Shared base', a: 'GHK-Cu + BPC-157 + TB-500', b: 'GHK-Cu + BPC-157 + TB-500' },
+      { dim: 'Added component', a: 'KPV (anti-inflammatory tripeptide)', b: 'None — base three only' },
+      { dim: 'Design intent', a: 'Angiogenesis, migration, skin/matrix, and inflammation', b: 'Angiogenesis, migration, and skin/matrix' },
+      { dim: 'Composition', a: 'Vendor-defined, not standardized', b: 'Vendor-defined, not standardized' },
+      { dim: 'Studied as a blend', a: 'No — per-component evidence only', b: 'No — per-component evidence only' },
+      { dim: 'FDA approval', a: 'None', b: 'None' },
+    ],
+    proseSections: [
+      {
+        title: 'One component apart',
+        paragraphs: [
+          'GLOW pairs the copper tripeptide GHK-Cu — studied for collagen synthesis and extracellular-matrix remodeling — with the two most-referenced repair peptides, BPC-157 (angiogenesis and growth-factor signaling) and TB-500 (actin-driven cell migration). The idea is to cover skin and soft-tissue repair in a single vial.',
+          'KLOW is generally the same three peptides plus KPV. KPV is the C-terminal fragment of α-MSH that retains anti-inflammatory activity — associated with NF-κB-pathway inhibition — without the pigmentary effect. Adding it is meant to bring an inflammation-dampening element alongside the repair and skin peptides. Whether that fourth component changes real-world results is untested: like GLOW, KLOW has no controlled study as a mixture, and the more peptides share one solution, the more its stability and net effect depart from anything characterized.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'GLOW and KLOW share the same GHK-Cu / BPC-157 / TB-500 base; KLOW adds KPV to bring an anti-inflammatory component into the stack. That single difference is the whole comparison. Neither is a single molecule, neither is studied as a blend, and both have vendor-defined, non-standardized compositions — so the honest read is that KLOW is GLOW plus KPV, with all the same uncertainties and one more component’s worth of them. For the underlying science, see each component’s monograph. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between KLOW and GLOW?', a: 'Both blends share GHK-Cu, BPC-157, and TB-500. KLOW adds a fourth component, KPV, an anti-inflammatory tripeptide. GLOW is the three-peptide version; KLOW is the four-peptide version.' },
+      { q: 'Are these studied as blends?', a: 'No. The individual components are studied, mostly in preclinical work, but neither KLOW nor GLOW has been tested as a mixture in controlled research.' },
+      { q: 'Is the composition standardized?', a: 'No — the exact components and ratios are defined by the vendor and are not standardized across suppliers, so treat any stated formula as vendor-specific.' },
+      { q: 'Are they approved?', a: 'No. None of the components is FDA-approved, and neither blend is either. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['wound-healing', 'skin-hair'],
+    about: [{ name: 'KLOW' }, { name: 'GLOW' }],
+  },
+  {
+    slug: 'slu-pp-332-vs-5-amino-1mq',
+    aSlug: 'slu-pp-332',
+    bSlug: '5-amino-1mq',
+    aName: 'SLU-PP-332',
+    bName: '5-Amino-1MQ',
+    aPill: 'Pan-ERR agonist · exercise mimetic',
+    bPill: 'NNMT inhibitor · small molecule',
+    metaTitle: 'SLU-PP-332 vs 5-Amino-1MQ — Two Metabolic Small Molecules',
+    metaDescription:
+      'Research comparison of SLU-PP-332 and 5-Amino-1MQ — two metabolic small molecules (neither is a peptide). One is a pan-ERR agonist studied as an exercise mimetic; the other inhibits NNMT to preserve NAD+ and methyl-donor pools. Both preclinical. Cited.',
+    keywords: [
+      'SLU-PP-332 vs 5-amino-1MQ',
+      'exercise mimetic',
+      'ERR agonist',
+      'NNMT inhibitor',
+      'metabolic small molecule',
+    ],
+    updated: '2026-11-19',
+    breadcrumb: { label: 'Metabolic', href: '/catalog/category/metabolic' },
+    headline: 'turn on the oxidative program versus stop the enzyme that wastes NAD+',
+    intro: [
+      'SLU-PP-332 and 5-Amino-1MQ both appear under the metabolic banner, and neither is a peptide — both are synthetic small molecules catalogued here for their metabolic relevance. They pursue fat loss and metabolic health by entirely different mechanisms: one activates a transcriptional program for oxidative metabolism, the other blocks an enzyme that depletes NAD+ precursors.',
+      'Both are preclinical, with the published data in rodents and no human trials. This comparison contrasts their mechanisms and research framing, not proven outcomes.',
+    ],
+    atAGlance: [
+      { dim: 'What it is', a: 'A pan-ERR agonist — not a peptide', b: 'An NNMT inhibitor — not a peptide' },
+      { dim: 'Strategy', a: 'Activate the PGC-1α/ERR oxidative program', b: 'Inhibit NNMT to preserve NAD+ / methyl-donor pools' },
+      { dim: 'Direct target', a: 'Estrogen-related receptors ERRα/β/γ', b: 'Nicotinamide N-methyltransferase (NNMT)' },
+      { dim: 'Framing', a: '“Exercise mimetic” — mitochondrial biogenesis, fat oxidation', b: 'Adipose metabolism, sarcopenia (muscle aging)' },
+      { dim: 'Reported effect', a: 'More oxidative muscle fiber, higher energy expenditure, less fat (mice)', b: 'Preserved NAD+/SAM pools, metabolic readouts in fat and muscle (mice)' },
+      { dim: 'Evidence stage', a: 'Preclinical', b: 'Preclinical' },
+      { dim: 'FDA approval', a: 'None', b: 'None' },
+    ],
+    proseSections: [
+      {
+        title: 'Switch on the program versus stop the leak',
+        paragraphs: [
+          'SLU-PP-332 is a direct agonist of the estrogen-related receptors (ERRα/β/γ), the orphan nuclear receptors downstream of PGC-1α that govern mitochondrial biogenesis and fat oxidation. Activating them pharmacologically reproduces part of the transcriptional response to endurance exercise — the basis for calling it an “exercise mimetic.” In mice it increased oxidative muscle fiber and energy expenditure and reduced diet-induced obesity without changes in food intake.',
+          '5-Amino-1MQ works on a different lever entirely. It inhibits nicotinamide N-methyltransferase (NNMT), an enzyme that methylates nicotinamide — consuming both a NAD+ salvage precursor and SAM, the cell’s main methyl donor. Blocking NNMT is studied to preserve those pools, with preclinical metabolic effects in adipose tissue and aging muscle. So the contrast is between switching on an oxidative transcriptional program (SLU-PP-332) and preventing the depletion of a metabolic cofactor (5-Amino-1MQ). Both are small molecules, not peptides, and both are preclinical with no human data.',
+        ],
+      },
+    ],
+    verdict: {
+      title: 'What the comparison comes down to',
+      paragraphs: [
+        'Two metabolic small molecules, two mechanisms. SLU-PP-332 activates the ERR/PGC-1α oxidative program and is framed as an exercise mimetic; 5-Amino-1MQ inhibits NNMT to protect NAD+ and methyl-donor pools, with a focus on fat and muscle. Neither is a peptide, both are preclinical with rodent-only data, and neither is FDA-approved. This page is a research and educational reference.',
+      ],
+    },
+    faqs: [
+      { q: 'What is the difference between SLU-PP-332 and 5-Amino-1MQ?', a: 'SLU-PP-332 is a pan-ERR agonist that activates the PGC-1α/ERR program for mitochondrial biogenesis and fat oxidation — an “exercise mimetic.” 5-Amino-1MQ is an NNMT inhibitor studied to preserve NAD+ and methyl-donor pools. Different targets, different mechanisms.' },
+      { q: 'Are these peptides?', a: 'No. Both are synthetic small molecules catalogued alongside peptides for their metabolic relevance; neither is a peptide.' },
+      { q: 'Is there human data?', a: 'No. The published work for both is in rodents; there are no human clinical trials or safety data.' },
+      { q: 'Are they approved?', a: 'No — both are preclinical research compounds and neither is FDA-approved. This page is a research and educational reference.' },
+    ],
+    relatedAreas: ['mitochondrial', 'weight-loss'],
+    about: [{ name: 'SLU-PP-332' }, { name: '5-Amino-1MQ' }],
+  },
 ]
 
 export const COMPARISON_BY_SLUG: Record<string, Comparison> = Object.fromEntries(
