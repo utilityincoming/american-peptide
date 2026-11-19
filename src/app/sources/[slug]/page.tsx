@@ -132,7 +132,7 @@ export default async function SourcesPage({
           className="pointer-events-none absolute inset-0 opacity-30"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(91,168,140,0.08) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(126,224,181,0.08) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -144,7 +144,7 @@ export default async function SourcesPage({
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             {peptide.name} sources,
             <br />
-            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7EE0B5] to-[#818CF8] bg-clip-text text-transparent">
               tiered by what backs the claim
             </span>
           </h1>

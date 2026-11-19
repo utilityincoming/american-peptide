@@ -71,7 +71,7 @@ const STANDARD = [
     pts: TRUST_WEIGHTS.coaOnFile,
     label: 'COA on file',
     body: 'A certificate of analysis you can actually pull for the product — the paperwork, not a promise.',
-    color: '#5BA88C',
+    color: '#7EE0B5',
   },
   {
     key: 'independent',
@@ -210,7 +210,7 @@ export default function MadeInUsaPage() {
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(126,224,181,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -222,7 +222,7 @@ export default function MadeInUsaPage() {
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             American-Made,
             <br />
-            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7EE0B5] to-[#818CF8] bg-clip-text text-transparent">
               Independently Verified
             </span>
           </h1>
@@ -252,7 +252,7 @@ export default function MadeInUsaPage() {
                 {[
                   {
                     icon: <Building2 className="h-4 w-4" />,
-                    color: '#5BA88C',
+                    color: '#7EE0B5',
                     title: 'One jurisdiction',
                     body: 'A domestic parcel stays inside a single set of rules — no customs interception lottery, no ambiguous re-import status on the way to your bench.',
                   },
@@ -471,7 +471,7 @@ export default function MadeInUsaPage() {
                                     href={vendorHref(v)}
                                     target="_blank"
                                     rel="sponsored nofollow noopener"
-                                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-4 py-2 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
+                                    className="inline-flex items-center gap-1.5 rounded-lg bg-[#7EE0B5] px-4 py-2 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
                                   >
                                     Shop {v.name}
                                     <ArrowUpRight className="h-4 w-4" />
@@ -578,9 +578,9 @@ export default function MadeInUsaPage() {
             {/* The American Peptide community - a place to help and be helped, not
                 a vendor endorsement. Gated off the Play build with the buying layer. */}
             {!IS_APP_BUILD && (
-              <div className="rounded-xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.07] to-transparent p-5">
+              <div className="rounded-xl border border-accent/20 bg-gradient-to-br from-[#7EE0B5]/[0.07] to-transparent p-5">
                 <div className="mb-3 flex items-center gap-3">
-                  <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#5BA88C] text-[#0E1512]">
+                  <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#7EE0B5] text-[#0E1512]">
                     <Send className="h-4 w-4" strokeWidth={2} />
                   </div>
                   <div>
@@ -601,7 +601,7 @@ export default function MadeInUsaPage() {
                   href={COMMUNITY_HREF}
                   target="_blank"
                   rel="nofollow noopener"
-                  className="flex items-center justify-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
+                  className="flex items-center justify-center gap-2 rounded-lg bg-[#7EE0B5] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
                 >
                   Join the group
                   <ArrowRight className="h-4 w-4" />
@@ -694,7 +694,7 @@ function ReferenceEdition() {
       </p>
       <Link
         href="/catalog"
-        className="flex items-center justify-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
+        className="flex items-center justify-center gap-2 rounded-lg bg-[#7EE0B5] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
       >
         Browse catalog
         <ArrowRight className="h-4 w-4" />

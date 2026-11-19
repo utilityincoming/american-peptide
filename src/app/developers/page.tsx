@@ -131,7 +131,7 @@ export default function DevelopersPage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(126,224,181,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -142,7 +142,7 @@ export default function DevelopersPage() {
           </div>
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             The open peptide{' '}
-            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
               catalog API
             </span>
           </h1>
@@ -154,7 +154,7 @@ export default function DevelopersPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/catalog"
-              className="inline-flex items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#7EE0B5] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#A6F0CC]"
             >
               Browse the catalog
               <ArrowRight className="h-4 w-4" />

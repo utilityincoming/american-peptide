@@ -45,7 +45,7 @@ function topVendorsFor(slugs: string[]): Vendor[] {
  */
 export default function SourcingCard({
   slugs,
-  accent = '#5BA88C',
+  accent = '#7EE0B5',
   className = '',
 }: SourcingCardProps) {
   const vendors = topVendorsFor(slugs)

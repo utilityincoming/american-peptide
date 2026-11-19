@@ -309,7 +309,7 @@ function LogTab({ entries, onChange }: { entries: LogEntry[]; onChange: () => vo
         <button
           onClick={add}
           disabled={!label.trim() || parsePositive(dose) <= 0}
-          className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[#5BA88C] px-4 py-2 text-sm font-semibold text-[#0E1512] hover:bg-[#6FBF9A] disabled:opacity-40"
+          className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[#7EE0B5] px-4 py-2 text-sm font-semibold text-[#0E1512] hover:bg-[#A6F0CC] disabled:opacity-40"
         >
           <Plus className="h-4 w-4" /> Add entry
         </button>
@@ -409,7 +409,7 @@ function ProtocolsTab({ protocols, onChange }: { protocols: Protocol[]; onChange
         <button
           onClick={add}
           disabled={!label.trim() || parsePositive(dose) <= 0}
-          className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[#5BA88C] px-4 py-2 text-sm font-semibold text-[#0E1512] hover:bg-[#6FBF9A] disabled:opacity-40"
+          className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[#7EE0B5] px-4 py-2 text-sm font-semibold text-[#0E1512] hover:bg-[#A6F0CC] disabled:opacity-40"
         >
           <Plus className="h-4 w-4" /> Add protocol
         </button>
@@ -515,7 +515,7 @@ function StockTab({ vials, onChange }: { vials: Vial[]; onChange: () => void }) 
         <button
           onClick={add}
           disabled={!label.trim() || parsePositive(mg) <= 0}
-          className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[#5BA88C] px-4 py-2 text-sm font-semibold text-[#0E1512] hover:bg-[#6FBF9A] disabled:opacity-40"
+          className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[#7EE0B5] px-4 py-2 text-sm font-semibold text-[#0E1512] hover:bg-[#A6F0CC] disabled:opacity-40"
         >
           <Plus className="h-4 w-4" /> Add vial
         </button>

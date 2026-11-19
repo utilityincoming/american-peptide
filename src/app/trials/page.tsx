@@ -109,11 +109,11 @@ export default function TrialsPage() {
               className="flex-1 bg-transparent text-sm text-ink placeholder-ink/20 outline-none"
             />
             {status === 'loading' && (
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-accent/30 border-t-[#5BA88C]" />
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-accent/30 border-t-[#7EE0B5]" />
             )}
             <button
               type="submit"
-              className="rounded-lg bg-[#5BA88C] px-3 py-1 text-xs font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
+              className="rounded-lg bg-[#7EE0B5] px-3 py-1 text-xs font-medium text-[#0E1512] transition-colors hover:bg-[#A6F0CC]"
             >
               Search
             </button>

@@ -54,7 +54,7 @@ const MECHANISMS = [
     label: 'VEGFR2 upregulation',
     desc: 'Proposed to upregulate vascular endothelial growth factor receptor 2 (VEGFR2), promoting new-vessel formation and tissue vascularisation in wound models.',
     icon: <Zap className="h-4 w-4" />,
-    color: '#5BA88C',
+    color: '#7EE0B5',
   },
   {
     label: 'Nitric oxide (NO) pathway',
@@ -249,7 +249,7 @@ export default function BPC157Page() {
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(126,224,181,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -266,7 +266,7 @@ export default function BPC157Page() {
           </div>
           <h1 className="mb-4 mt-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             BPC-157
-            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7EE0B5] to-[#818CF8] bg-clip-text text-transparent">
               {' '}Research Guide
             </span>
           </h1>
@@ -525,7 +525,7 @@ export default function BPC157Page() {
                 Catalog entries
               </p>
               {[
-                { slug: 'bpc-157', label: 'BPC-157', sub: '15 AA · VEGFR2 / NO', color: '#5BA88C' },
+                { slug: 'bpc-157', label: 'BPC-157', sub: '15 AA · VEGFR2 / NO', color: '#7EE0B5' },
                 { slug: 'tb-500', label: 'TB-500', sub: '7 AA · Actin / cytoskeletal', color: '#818CF8' },
                 { slug: 'ghk-cu', label: 'GHK-Cu', sub: 'Tripeptide · ECM remodeling', color: '#FB923C' },
               ].map((item) => (

@@ -270,7 +270,7 @@ export const TRUST_RUBRIC: TrustRubricRow[] = [
     label: 'COA on file',
     body: 'A certificate of analysis you can actually pull for the product — the paperwork, not a promise.',
     pts: TRUST_WEIGHTS.coaOnFile,
-    color: '#5BA88C',
+    color: '#7EE0B5',
   },
   {
     key: 'perBatchTesting',

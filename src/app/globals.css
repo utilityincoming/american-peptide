@@ -2,11 +2,12 @@
 
 /* ── Theme tokens ──────────────────────────────────────────────────────────
    The UI is built on a neutral "ink" (foreground/overlay) over a "surface"
-   (page background). The brand accent is an oxidized-copper / verdigris green
-   — the "Survey" direction: America read as a surveyed continent (patina,
-   map paper, mineral strata) rather than a flag. Tokens are CSS variables so a
-   single class swap on <html> flips the whole palette. Opacity modifiers
-   (e.g. text-ink/40, border-ink/[0.06]) keep working via Tailwind's color-mix.
+   (page background). The brand accent is a clear leaf green — bright enough
+   to read as text on the dark surface and as a label on filled buttons, with
+   the survey-paper light theme using a deeper green that still clears body
+   text contrast. Tokens are CSS variables so a single class swap on <html>
+   flips the whole palette. Opacity modifiers (e.g. text-ink/40,
+   border-ink/[0.06]) keep working via Tailwind's color-mix.
 
    Two brand accents (terracotta, ocean) join the primary for cartographic
    accents; the category accents (amber/red) stay reserved for their semantic
@@ -16,11 +17,11 @@
    Default (no class) = dark, the established brand look. `html.light` opts in
    to light mode — the no-flash script in layout.tsx sets it before paint. */
 :root {
-  --ink: #ffffff;          /* foreground + light overlays (borders, panels) */
-  --surface: #0E1512;      /* page background — deep basalt */
-  --surface-deep: #070B09; /* deepest background (footers, code wells) */
-  --panel: #16201C;        /* raised solid panels */
-  --accent: #5BA88C;       /* copper-verdigris brand accent, text/link color */
+  --ink: #F4F8F6;          /* soft white — easier on long reads than pure white */
+  --surface: #121C18;      /* page background — lifted basalt so green separates */
+  --surface-deep: #0A100E; /* deepest background (footers, code wells) */
+  --panel: #1A2822;        /* raised solid panels */
+  --accent: #7EE0B5;       /* leaf green — text, links, and filled controls */
   --accent-terra: #C97B4A; /* terracotta / canyon-clay brand accent */
   --accent-ocean: #4A90B8; /* two-oceans map blue, brand accent */
   /* Category accents — bright on dark; darkened in light for text contrast.
@@ -30,7 +31,7 @@
   --accent-purple: #A78BFA;
   --accent-amber: #E0A23D; /* evidence-tier accent (vendor-reported / community) */
   --accent-red: #D97070;   /* restrictive regulatory status (Category 2, declined) */
-  --viz: #0E1512;          /* immersive viz "stage" — stays dark in both themes */
+  --viz: #121C18;          /* immersive viz "stage" — stays dark in both themes */
   /* Chrome tokens — hairlines/dividers + subtle fills. Defined per theme so the
      same utility (border-hairline, bg-fill) reads correctly in both modes: a
      white wash on dark, a warm-ink wash on light (pitched stronger so it doesn't
@@ -49,7 +50,7 @@ html.light {
   --surface: #F6F3EC;      /* warm "survey paper" — easier on long reads than clinical white */
   --surface-deep: #ECE6D8;
   --panel: #FFFFFF;
-  --accent: #2F7A62;       /* darker verdigris for legible text on light */
+  --accent: #0F6B44;       /* deeper leaf green — body-text contrast on survey paper */
   --accent-terra: #A85A2C; /* darker terracotta for legible text on light */
   --accent-ocean: #2E6A8E; /* darker ocean for legible text on light */
   --accent-indigo: #4F46E5;

@@ -133,8 +133,8 @@ export default function HomePage() {
             {/* Status badge */}
             <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.08] px-4 py-1.5 text-xs font-medium text-accent">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5BA88C] opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#5BA88C]" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#7EE0B5] opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#7EE0B5]" />
               </span>
               Cited reference · Chemistry-grade · Works offline
             </div>
@@ -143,7 +143,7 @@ export default function HomePage() {
             <h1 className="mb-6 text-5xl font-bold leading-[1.04] tracking-tight md:text-6xl">
               <span className="text-ink">The only peptide app</span>
               <br />
-              <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
                 you can actually trust
               </span>
             </h1>
@@ -193,7 +193,7 @@ export default function HomePage() {
             <div className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
               <Link
                 href="/research"
-                className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#5BA88C] px-6 py-3.5 text-[15px] font-semibold text-[#0E1512] shadow-[0_0_0px_rgba(91,168,140,0)] transition-all hover:bg-[#6FBF9A] hover:shadow-[0_0_40px_rgba(91,168,140,0.35)]"
+                className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#7EE0B5] px-6 py-3.5 text-[15px] font-semibold text-[#0E1512] shadow-[0_0_0px_rgba(126,224,181,0)] transition-all hover:bg-[#A6F0CC] hover:shadow-[0_0_40px_rgba(126,224,181,0.35)]"
               >
                 <Sparkles className="h-4 w-4" />
                 Ask the Peptide Agent
@@ -270,7 +270,7 @@ export default function HomePage() {
           right below the hero, with a live worked example that deep-links into
           the exact configuration it shows. */}
       <section className="relative z-10 mx-auto max-w-6xl px-6 pb-12 md:px-10">
-        <div className="relative overflow-hidden rounded-3xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] via-[#5BA88C]/[0.03] to-transparent p-8 md:p-12">
+        <div className="relative overflow-hidden rounded-3xl border border-accent/20 bg-gradient-to-br from-[#7EE0B5]/[0.08] via-[#7EE0B5]/[0.03] to-transparent p-8 md:p-12">
           <DotField size={24} className="opacity-40" />
           <Glow className="-bottom-32 -left-32 h-80 w-80" intensity={0.08} />
 
@@ -285,7 +285,7 @@ export default function HomePage() {
               <h2 className="mb-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-[40px]">
                 Every dose, down to the
                 <br />
-                <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
                   tick mark.
                 </span>
               </h2>
@@ -314,7 +314,7 @@ export default function HomePage() {
               <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
                 <Link
                   href="/tools/reconstitution-calculator"
-                  className="group inline-flex items-center gap-2 rounded-xl bg-[#5BA88C] px-6 py-3 text-sm font-semibold text-[#0E1512] shadow-[0_0_0px_rgba(91,168,140,0)] transition-all hover:bg-[#6FBF9A] hover:shadow-[0_0_40px_rgba(91,168,140,0.35)]"
+                  className="group inline-flex items-center gap-2 rounded-xl bg-[#7EE0B5] px-6 py-3 text-sm font-semibold text-[#0E1512] shadow-[0_0_0px_rgba(126,224,181,0)] transition-all hover:bg-[#A6F0CC] hover:shadow-[0_0_40px_rgba(126,224,181,0.35)]"
                 >
                   <Syringe className="h-4 w-4" />
                   Open the calculator
@@ -364,7 +364,7 @@ export default function HomePage() {
       <section className="relative z-10 mx-auto max-w-6xl px-6 pb-24 md:px-10">
         <Link
           href="/catalog"
-          className="group relative block overflow-hidden rounded-3xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] via-[#5BA88C]/[0.03] to-transparent p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-[0_24px_80px_-16px_rgba(91,168,140,0.14)] md:p-12"
+          className="group relative block overflow-hidden rounded-3xl border border-accent/20 bg-gradient-to-br from-[#7EE0B5]/[0.08] via-[#7EE0B5]/[0.03] to-transparent p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-[0_24px_80px_-16px_rgba(126,224,181,0.14)] md:p-12"
         >
           <DotField size={24} className="opacity-40" />
           <Glow className="-right-32 -top-32 h-80 w-80 opacity-[0.08] transition-opacity duration-500 group-hover:opacity-[0.14]" />
@@ -380,7 +380,7 @@ export default function HomePage() {
               <h2 className="mb-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-[40px]">
                 The peptide reference
                 <br />
-                <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
                   catalog is live.
                 </span>
               </h2>
@@ -392,7 +392,7 @@ export default function HomePage() {
               </p>
 
               <div className="flex flex-wrap items-center gap-4">
-                <span className="inline-flex items-center gap-2 rounded-xl bg-[#5BA88C] px-6 py-3 text-sm font-semibold text-[#0E1512] shadow-[0_0_0px_rgba(91,168,140,0)] transition-all group-hover:bg-[#6FBF9A] group-hover:shadow-[0_0_40px_rgba(91,168,140,0.35)]">
+                <span className="inline-flex items-center gap-2 rounded-xl bg-[#7EE0B5] px-6 py-3 text-sm font-semibold text-[#0E1512] shadow-[0_0_0px_rgba(126,224,181,0)] transition-all group-hover:bg-[#A6F0CC] group-hover:shadow-[0_0_40px_rgba(126,224,181,0.35)]">
                   Open Catalog
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
@@ -466,10 +466,10 @@ export default function HomePage() {
             <Link
               key={name}
               href={href}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-hairline bg-fill p-8 shadow-[0_1px_0_rgba(255,255,255,0.04)_inset] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-fill-strong hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.14)]"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-hairline bg-fill p-8 shadow-[0_1px_0_rgba(255,255,255,0.04)_inset] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-fill-strong hover:shadow-[0_18px_50px_-12px_rgba(126,224,181,0.14)]"
             >
               {/* Top accent line revealed on hover */}
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#5BA88C]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#7EE0B5]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
               {/* Icon */}
               <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
@@ -529,14 +529,14 @@ export default function HomePage() {
 
       {/* ── Sourcing Standard ── */}
       <section className="relative z-10 mx-auto max-w-6xl px-6 pb-24 md:px-10">
-        <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-accent/15 bg-gradient-to-br from-[#5BA88C]/[0.06] via-transparent to-transparent p-8 md:p-10">
+        <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-accent/15 bg-gradient-to-br from-[#7EE0B5]/[0.06] via-transparent to-transparent p-8 md:p-10">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
             <FlaskConical className="h-3 w-3" />
             The US sourcing standard
           </div>
           <h2 className="mb-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-4xl">
             Every source,{' '}
-            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
               in the open.
             </span>
           </h2>
@@ -548,7 +548,7 @@ export default function HomePage() {
           </p>
           <Link
             href="/us-peptides"
-            className="group inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-[#93D4BA]"
+            className="group inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-[#D2FBE6]"
           >
             Explore the US sourcing standard
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -574,14 +574,14 @@ export default function HomePage() {
         <DynamicFaqs />
 
         {/* The "dynamic" path: anything not curated above routes to the Agent. */}
-        <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border border-accent/20 bg-gradient-to-br from-[#5BA88C]/[0.08] to-transparent px-6 py-5 text-center sm:flex-row sm:text-left">
+        <div className="mt-6 flex flex-col items-center justify-between gap-4 rounded-2xl border border-accent/20 bg-gradient-to-br from-[#7EE0B5]/[0.08] to-transparent px-6 py-5 text-center sm:flex-row sm:text-left">
           <p className="text-sm text-ink/65">
             Have a question that isn&apos;t here? Ask the Peptide Agent for a
             citation-backed answer.
           </p>
           <Link
             href="/research"
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#7EE0B5] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#A6F0CC]"
           >
             <Sparkles className="h-4 w-4" />
             Ask the Agent
@@ -626,14 +626,14 @@ function HeroMolecule() {
       >
         <defs>
           <radialGradient id="hm-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#5BA88C" stopOpacity="0.28" />
-            <stop offset="60%" stopColor="#5BA88C" stopOpacity="0.06" />
-            <stop offset="100%" stopColor="#5BA88C" stopOpacity="0" />
+            <stop offset="0%" stopColor="#7EE0B5" stopOpacity="0.28" />
+            <stop offset="60%" stopColor="#7EE0B5" stopOpacity="0.06" />
+            <stop offset="100%" stopColor="#7EE0B5" stopOpacity="0" />
           </radialGradient>
           <radialGradient id="hm-node" cx="34%" cy="28%" r="78%">
-            <stop offset="0%" stopColor="#8ef3da" />
-            <stop offset="55%" stopColor="#5BA88C" />
-            <stop offset="100%" stopColor="#0f7a63" />
+            <stop offset="0%" stopColor="#E4FFF3" />
+            <stop offset="55%" stopColor="#7EE0B5" />
+            <stop offset="100%" stopColor="#14966A" />
           </radialGradient>
         </defs>
 
@@ -647,13 +647,13 @@ function HeroMolecule() {
             cy="248"
             r="158"
             fill="none"
-            stroke="rgba(91,168,140,0.16)"
+            stroke="rgba(126,224,181,0.16)"
             strokeWidth="1"
             strokeDasharray="3 9"
           />
-          <circle cx="210" cy="90" r="4" fill="#5BA88C" fillOpacity="0.6" />
-          <circle cx="368" cy="248" r="3" fill="#93D4BA" fillOpacity="0.5" />
-          <circle cx="120" cy="372" r="3.5" fill="#5BA88C" fillOpacity="0.45" />
+          <circle cx="210" cy="90" r="4" fill="#7EE0B5" fillOpacity="0.6" />
+          <circle cx="368" cy="248" r="3" fill="#D2FBE6" fillOpacity="0.5" />
+          <circle cx="120" cy="372" r="3.5" fill="#7EE0B5" fillOpacity="0.45" />
         </g>
 
         {/* Peptide chain */}
@@ -666,11 +666,11 @@ function HeroMolecule() {
                 y1={s.y1}
                 x2={s.x2}
                 y2={s.y2}
-                stroke="rgba(91,168,140,0.35)"
+                stroke="rgba(126,224,181,0.35)"
                 strokeWidth="2.5"
                 strokeLinecap="round"
               />
-              <circle cx={s.x2} cy={s.y2} r="6" fill="#5BA88C" fillOpacity="0.55" />
+              <circle cx={s.x2} cy={s.y2} r="6" fill="#7EE0B5" fillOpacity="0.55" />
             </g>
           ))}
 
@@ -678,7 +678,7 @@ function HeroMolecule() {
           <polyline
             points={nodes.map((n) => `${n.x},${n.y}`).join(' ')}
             fill="none"
-            stroke="rgba(91,168,140,0.55)"
+            stroke="rgba(126,224,181,0.55)"
             strokeWidth="3.5"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -756,13 +756,13 @@ function ReconPreviewSyringe() {
       />
 
       {/* Fill + caliper line */}
-      <rect x={BX} y={BY} width={fillW} height={BH} rx="2" fill="#5BA88C" fillOpacity="0.28" />
+      <rect x={BX} y={BY} width={fillW} height={BH} rx="2" fill="#7EE0B5" fillOpacity="0.28" />
       <line
         x1={BX + fillW}
         y1={BY - 3}
         x2={BX + fillW}
         y2={BY + BH + 3}
-        stroke="#5BA88C"
+        stroke="#7EE0B5"
         strokeWidth="1.5"
       />
 
@@ -814,9 +814,9 @@ function ReconPreviewSyringe() {
         width="40"
         height="15"
         rx="3"
-        fill="#5BA88C"
+        fill="#7EE0B5"
         fillOpacity="0.15"
-        stroke="#5BA88C"
+        stroke="#7EE0B5"
         strokeOpacity="0.4"
         strokeWidth="0.75"
       />
@@ -824,7 +824,7 @@ function ReconPreviewSyringe() {
         x={BX + fillW}
         y={BY + BH + 16}
         textAnchor="middle"
-        className="fill-[#5BA88C]"
+        className="fill-[#7EE0B5]"
         style={{ fontSize: '9px', fontFamily: 'monospace', fontWeight: 600 }}
       >
         10 u

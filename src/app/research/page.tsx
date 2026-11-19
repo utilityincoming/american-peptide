@@ -443,7 +443,7 @@ export default function ResearchPage() {
                     type="button"
                     onClick={startCheckout}
                     disabled={checkingOut}
-                    className="mt-3 rounded-xl bg-[#5BA88C] px-4 py-2.5 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A] disabled:cursor-not-allowed disabled:opacity-50"
+                    className="mt-3 rounded-xl bg-[#7EE0B5] px-4 py-2.5 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#A6F0CC] disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {checkingOut ? 'Opening secure checkout…' : `Continue to checkout — ${offer.price}`}
                   </button>
@@ -482,7 +482,7 @@ export default function ResearchPage() {
               onClick={() => sendMessage(input)}
               disabled={!input.trim() || loading || limitReached}
               aria-label="Send message"
-              className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-[#5BA88C] text-[#0E1512] transition-all hover:bg-[#6FBF9A] hover:shadow-[0_0_20px_rgba(91,168,140,0.3)] disabled:cursor-not-allowed disabled:opacity-25"
+              className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-[#7EE0B5] text-[#0E1512] transition-all hover:bg-[#A6F0CC] hover:shadow-[0_0_20px_rgba(126,224,181,0.3)] disabled:cursor-not-allowed disabled:opacity-25"
             >
               <Send className="h-3.5 w-3.5" />
             </button>

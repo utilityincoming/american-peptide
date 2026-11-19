@@ -29,7 +29,7 @@ const ICONS: Record<string, LucideIcon> = {
   Truck,
 }
 
-const TEAL = '#5BA88C'
+const TEAL = '#7EE0B5'
 const FAINT = 'rgba(255,255,255,0.12)'
 
 /**
@@ -81,9 +81,9 @@ function StageVisual({ slug }: { slug: string }) {
         <Svg label="Peptide chain assembled on resin">
           <defs>
             <radialGradient id={`spps-node-${uid}`} cx="34%" cy="28%" r="80%">
-              <stop offset="0%" stopColor="#8ef3da" />
+              <stop offset="0%" stopColor="#E4FFF3" />
               <stop offset="55%" stopColor={TEAL} />
-              <stop offset="100%" stopColor="#0f7a63" />
+              <stop offset="100%" stopColor="#14966A" />
             </radialGradient>
           </defs>
           {/* resin bead */}
@@ -113,7 +113,7 @@ function StageVisual({ slug }: { slug: string }) {
           {/* coupling frontier climbing the chain */}
           <g className="sw-rise">
             <circle cx="160" cy="262" r="18" fill="none" stroke={TEAL} strokeWidth="2" opacity="0.7" />
-            <circle cx="160" cy="262" r="6" fill="#8ef3da" />
+            <circle cx="160" cy="262" r="6" fill="#E4FFF3" />
           </g>
           <text x="160" y="34" fontSize="11" fill="rgba(255,255,255,0.45)" fontFamily="monospace" textAnchor="middle">
             + one residue per cycle
@@ -198,7 +198,7 @@ function StageVisual({ slug }: { slug: string }) {
           {/* detector sweep */}
           <g className="sw-scan">
             <line x1="50" y1="58" x2="50" y2="252" stroke={`${TEAL}cc`} strokeWidth="2" />
-            <circle cx="50" cy="58" r="3.5" fill="#8ef3da" />
+            <circle cx="50" cy="58" r="3.5" fill="#E4FFF3" />
           </g>
           <text x="196" y="84" fontSize="11" fill={TEAL} fontFamily="monospace" textAnchor="middle">
             ≥ 98%
@@ -474,7 +474,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-50"
               style={{
-                backgroundImage: 'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
+                backgroundImage: 'radial-gradient(circle, rgba(126,224,181,0.10) 1px, transparent 1px)',
                 backgroundSize: '24px 24px',
               }}
             />
@@ -500,7 +500,7 @@ export default function SynthesisWalk({ stages }: { stages: SynthesisStage[] }) 
                   }
                   aria-label={`Go to step ${s.num}: ${s.title}`}
                   className={`h-1.5 flex-1 rounded-full transition-colors ${
-                    i === active ? 'bg-[#5BA88C]' : 'bg-ink/10 hover:bg-ink/25'
+                    i === active ? 'bg-[#7EE0B5]' : 'bg-ink/10 hover:bg-ink/25'
                   }`}
                 />
               ))}

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 const AXES = [
   {
     label: 'Mitochondrial signaling',
-    color: '#5BA88C',
+    color: '#7EE0B5',
     desc: 'Peptides encoded by or targeted at mitochondria — regulating energy metabolism as retrograde signals from the organelle to the cell.',
     peptides: ['MOTS-c (mitochondria-derived, AMPK)', 'SS-31 / elamipretide (cardiolipin stabilization)'],
   },
@@ -62,7 +62,7 @@ const COMPOUNDS = [
     axis: 'Mitochondrial signaling',
     mechanism: 'AMPK activation; folate–methionine cycle modulation',
     evidence: 'Preclinical',
-    color: '#5BA88C',
+    color: '#7EE0B5',
     note: 'Unique: encoded in mitochondrial DNA (12S rRNA region) rather than the nuclear genome. AMPK activation proposed as a retrograde stress signal from mitochondrion to cell. Declines with age.',
   },
   {
@@ -71,7 +71,7 @@ const COMPOUNDS = [
     axis: 'Mitochondrial signaling',
     mechanism: 'Cardiolipin binding; ETC efficiency',
     evidence: 'Clinical trials',
-    color: '#5BA88C',
+    color: '#7EE0B5',
     note: 'Most clinically advanced compound in this cluster. Tetrapeptide that concentrates in the inner mitochondrial membrane and binds cardiolipin. Trials in primary mitochondrial myopathy, Barth syndrome, and heart failure. Not FDA-approved.',
   },
   {
@@ -173,7 +173,7 @@ export default function LongevityPage() {
 
       <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-40"
-          style={{ backgroundImage: 'radial-gradient(circle, rgba(91,168,140,0.08) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
+          style={{ backgroundImage: 'radial-gradient(circle, rgba(126,224,181,0.08) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
         <div className="relative mx-auto max-w-4xl">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#818CF8]/25 bg-[#818CF8]/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent-indigo">
             Longevity &amp; Mitochondrial · 3 research axes · 5 compounds

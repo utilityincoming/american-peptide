@@ -261,7 +261,7 @@ function InteractionLab() {
         <button
           onClick={add}
           disabled={!pick}
-          className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-3 py-2 text-sm font-semibold text-[#0E1512] hover:bg-[#6FBF9A] disabled:opacity-40"
+          className="inline-flex items-center gap-1.5 rounded-lg bg-[#7EE0B5] px-3 py-2 text-sm font-semibold text-[#0E1512] hover:bg-[#A6F0CC] disabled:opacity-40"
         >
           <Plus className="h-4 w-4" /> Add
         </button>

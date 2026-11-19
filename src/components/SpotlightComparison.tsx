@@ -83,7 +83,7 @@ function testingRow(v: Vendor): Row {
 
 export default function SpotlightComparison({
   vendor,
-  accent = '#5BA88C',
+  accent = '#7EE0B5',
   className = '',
 }: {
   vendor: Vendor

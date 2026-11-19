@@ -78,7 +78,7 @@ export async function generateMetadata({
   }
 }
 
-const A = '#5BA88C'
+const A = '#7EE0B5'
 
 export default async function VendorReviewPage({
   params,
@@ -172,7 +172,7 @@ export default async function VendorReviewPage({
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-30"
           style={{
-            backgroundImage: 'radial-gradient(circle, rgba(91,168,140,0.08) 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, rgba(126,224,181,0.08) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -352,7 +352,7 @@ export default async function VendorReviewPage({
             href={href}
             target="_blank"
             rel="sponsored nofollow noopener"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-[#7EE0B5] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
           >
             Shop {v.name}
             <ArrowUpRight className="h-4 w-4" />
