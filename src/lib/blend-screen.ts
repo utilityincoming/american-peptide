@@ -10,7 +10,7 @@
 // chains, disulfides, and other modifications the single-letter sequence
 // cannot see, so a clear flag is a hypothesis, not a formulation study.
 
-import { PEPTIDES, type Peptide } from '@/lib/peptides'
+import { PEPTIDES, getComponents, type Peptide } from '@/lib/peptides'
 import { gravy } from '@/lib/amino-acids'
 import {
   catalogCodes,
@@ -174,6 +174,11 @@ function resolve(member: BlendMember, pH: number): Resolved {
   }
 }
 
+// A blend has no single sequence to score, so screen the chemistry of each
+// component it mixes instead of leaving one unresolved "no sequence" row. Any
+// catalog entry with a `components` list expands here; CagriSema is kept as an
+// explicit case because its monograph deliberately stays out of the components
+// cross-link graph (see peptides.test.ts) yet still names its two peptides.
 function expandMembers(members: BlendMember[]): BlendMember[] {
   const out: BlendMember[] = []
   for (const member of members) {
@@ -181,9 +186,16 @@ function expandMembers(members: BlendMember[]): BlendMember[] {
     if (peptide?.slug === 'cagrisema') {
       out.push({ slug: 'cagrilintide', name: 'Cagrilintide (in CagriSema)' })
       out.push({ slug: 'semaglutide', name: 'Semaglutide (in CagriSema)' })
-    } else {
-      out.push(member)
+      continue
     }
+    const components = peptide ? getComponents(peptide) : []
+    if (peptide && components.length > 0) {
+      for (const c of components) {
+        out.push({ slug: c.slug, name: `${c.name} (in ${peptide.name})` })
+      }
+      continue
+    }
+    out.push(member)
   }
   return out
 }
