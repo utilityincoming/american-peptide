@@ -518,4 +518,5 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
       'VIP is a 28-residue C-terminally amidated neuropeptide of the secretin/glucagon family, made by solid-phase synthesis. The length drives deletion-sequence accumulation and the sequence is aggregation-prone, so coupling efficiency, the C-terminal amidation, and preparative-HPLC purification together define the quality picture.',
   },
   ghrelin: { difficulty: 'demanding', features: ['Fatty-acid acylation'] },
+  apelin: { difficulty: 'moderate', features: [] },
 }

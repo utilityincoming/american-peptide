@@ -5397,6 +5397,68 @@ const SEED_PEPTIDES: Peptide[] = [
     synthesisNotes:
       'The standout synthetic challenge in this class: activity requires an O-octanoyl ester on the Ser3 hydroxyl — the only such acylation among human hormones (installed biologically by ghrelin O-acyltransferase, GOAT). Standard solid-phase synthesis assembles the 28-mer, but installing and preserving the acid- and base-labile octanoyl ester demands orthogonal side-chain protection and a deliberately mild final deprotection/cleavage, since the unmodified by-product (des-acyl ghrelin) is inactive. The acylation is the purity-defining step, and acyl-vs-des-acyl ratio is the assay that matters most.',
   },
+  {
+    slug: 'apelin',
+    name: 'Apelin',
+    aliases: ['Apelin-13', '[Pyr1]apelin-13', 'APJ ligand'],
+    categories: ['peptide-hormone', 'metabolic'],
+    shortDescription:
+      'The endogenous ligand of the apelin receptor — a short C-terminal fragment studied as a vasodilator and inotrope, and as a metabolic signal.',
+    description:
+      'Apelin is the peptide ligand of the apelin receptor (APLNR, formerly the orphan receptor APJ). The gene APLN encodes a 77-residue prepropeptide that is cut to several active fragments — apelin-36, apelin-17, and apelin-13 — all sharing the same C-terminus. Apelin-13 (QRPRLSHKGPMPF) is the fragment used as a defined research peptide; in plasma its N-terminal glutamine usually cyclizes to pyroglutamate, giving [Pyr1]apelin-13, the predominant circulating form. It is not an approved medicine.',
+    mechanism:
+      'Agonist at the class A GPCR APLNR. Coupling through Gi/o lowers cAMP; the receptor also engages Gq and β-arrestin. In endothelium this raises nitric oxide and dilates resistance vessels; in cardiomyocytes it is a positive inotrope. ACE2 removes the C-terminal phenylalanine, and the resulting des-Phe peptide is a weaker agonist.',
+    researchAreas: [
+      'Heart failure',
+      'Vasodilation',
+      'Insulin sensitivity',
+      'Fluid homeostasis',
+      'Peptide hormones',
+    ],
+    background: [
+      'Apelin was isolated in 1998 by Tatemoto and colleagues from bovine stomach extracts as the endogenous ligand of APJ, a receptor O’Dowd’s group had cloned in 1993 because it resembles the angiotensin AT1 receptor. Angiotensin does not bind it. The human precursor (UniProt Q9ULZ1) is 77 residues; proteolytic processing releases apelin-36, apelin-17, and apelin-13, and the N-terminal glutamine of apelin-13 cyclizes spontaneously to pyroglutamate. That pyroglutamyl species, [Pyr1]apelin-13, is the form measured in human plasma and the one used in most human infusion studies.',
+      'The cardiovascular findings are what brought the peptide back into active drug research. In healthy volunteers and in patients with chronic heart failure, intravenous [Pyr1]apelin-13 increased cardiac output while lowering peripheral resistance (Japp et al., Circulation 2010). The same receptor also has a second endogenous ligand, elabela (gene APELA, also called toddler), required for embryonic heart development. A separate biochemical link keeps the pathway in the literature: ACE2, the enzyme that converts angiotensin II, also clips the C-terminal phenylalanine from apelin and thereby weakens it.',
+      'Outside the heart, apelin is studied in energy metabolism and fluid balance. Preclinical and small human studies report improved insulin sensitivity, and the receptor is expressed in hypothalamic circuits that regulate drinking and blood pressure. Native fragments last only minutes in plasma, so the molecules now in development are stabilized peptide analogs and small-molecule agonists rather than apelin-13 itself. None is FDA-approved.',
+    ],
+    keyResearch: [
+      'Endogenous APLNR agonist — isolated in 1998 as the ligand of the orphan receptor APJ; the bioactive species are C-terminal fragments of a 77-residue precursor.',
+      'Human hemodynamics — infused [Pyr1]apelin-13 raised cardiac output and lowered peripheral vascular resistance in healthy volunteers and in chronic heart failure (Japp et al., Circulation 2010).',
+      'ACE2 substrate — ACE2 removes the C-terminal Phe; the des-Phe product is a weaker agonist, tying apelin to the same enzyme that processes angiotensin II.',
+      'Second ligand — elabela (APELA) also activates APLNR and is required for heart development.',
+      'Metabolic and fluid effects — studied for insulin sensitivity and for hypothalamic control of drinking; not an approved medicine, and the native fragments clear in minutes.',
+    ],
+    faqs: [
+      {
+        q: 'What is apelin?',
+        a: 'Apelin is the peptide hormone that activates the apelin receptor (APLNR, formerly APJ). The research material is usually the 13-residue C-terminal fragment, apelin-13, or its pyroglutamate form, [Pyr1]apelin-13.',
+      },
+      {
+        q: 'What is the difference between apelin-13 and [Pyr1]apelin-13?',
+        a: 'Apelin-13 begins with glutamine (QRPRLSHKGPMPF, CAS 217082-58-1, 1550.8 Da). That glutamine cyclizes to pyroglutamate, losing ammonia, to give [Pyr1]apelin-13 (CAS 217082-60-5, 1533.8 Da). The pyroglutamate form is the predominant species in human plasma.',
+      },
+      {
+        q: 'What is apelin studied for?',
+        a: 'Cardiovascular physiology (vasodilation and increased cardiac output), insulin sensitivity, and fluid balance. A second ligand of the same receptor, elabela, is studied in heart development. No apelin product is FDA-approved.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance.',
+      },
+    ],
+    sequence: 'QRPRLSHKGPMPF (apelin-13; N-terminal Gln cyclizes to pyroglutamate in [Pyr1]apelin-13)',
+    molecularWeight: 1550.8,
+    molecularFormula: 'C69H111N23O16S',
+    cas: '217082-58-1',
+    pubchemCid: 25078060,
+    uniprotId: 'Q9ULZ1',
+    fdaApproved: false,
+    storage:
+      'Lyophilized: store frozen, dry, and protected from light. The methionine is oxidation-sensitive, so limit air exposure once the vial is opened. Reconstituted solutions are short-lived; refrigerate at 2–8 °C and do not store them for later use.',
+    handling:
+      'Reconstitute gently. Distinguish the intended species before weighing: apelin-13 (free N-terminal glutamine) and [Pyr1]apelin-13 (pyroglutamate) differ by one ammonia and are not interchangeable on a certificate of analysis. Protect from oxidants; methionine sulfoxide is the characteristic impurity.',
+    synthesisNotes:
+      'Apelin-13 is a 13-residue solid-phase synthesis with a free C-terminal acid — routine chain assembly, with two identity problems that define the batch. The N-terminal glutamine cyclizes to pyroglutamate on its own, so a specification has to state whether the product is apelin-13 (CAS 217082-58-1, C69H111N23O16S, 1550.8 Da) or [Pyr1]apelin-13 (CAS 217082-60-5, C69H108N22O16S, 1533.8 Da). Methionine oxidation is the other impurity to quantify; the C-terminal phenylalanine must stay intact, because loss of that residue is the ACE2 inactivation product and it weakens receptor activity.',
+  },
 ]
 
 export const PEPTIDES: Peptide[] = SEED_PEPTIDES.map(enrich)
