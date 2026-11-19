@@ -265,7 +265,8 @@ export default function CompatibilityGuidePage() {
                 <div>
                   <h3 className="text-sm font-semibold">Blend calculator</h3>
                   <p className="mt-0.5 text-[12.5px] text-ink/55">
-                    Doses, draw volume, and per-dose delivery for a blend.
+                    Dilution math, plus charge, pI, GRAVY, cysteine, and
+                    labeled syringe-incompatibility flags.
                   </p>
                 </div>
               </div>
