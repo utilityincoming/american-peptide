@@ -119,6 +119,32 @@ describe('screenBlend', () => {
     expect(extract.flags.some((f) => f.code === 'no-sequence')).toBe(false)
   })
 
+  it('expands any catalog blend into its components and screens each one', () => {
+    const glow = screenBlend([{ slug: 'glow' }], 5.7)
+    // GLOW is ghk-cu + bpc-157 + tb-500: three scored rows, no leftover blend.
+    expect(glow.peptides.map((p) => p.slug)).toEqual([
+      'ghk-cu',
+      'bpc-157',
+      'tb-500',
+    ])
+    expect(glow.peptides.every((p) => p.hasSequence)).toBe(true)
+    expect(glow.peptides[0].name).toBe('GHK-Cu (in GLOW)')
+    // No "no sequence on file" flag for the blend itself.
+    expect(glow.flags.some((f) => f.code === 'no-sequence')).toBe(false)
+
+    // A blend resolved by name expands the same way.
+    const byName = screenBlend([{ name: 'bpc-157-tb-500' }], 5.7)
+    expect(byName.peptides.map((p) => p.slug)).toEqual(['bpc-157', 'tb-500'])
+
+    // The copper component still drives the copper–thiol pairing when a
+    // cysteine-bearing peptide shares the blend.
+    const cjc = screenBlend([{ slug: 'cjc-1295-ipamorelin' }], 5.7)
+    expect(cjc.peptides.map((p) => p.slug)).toEqual([
+      'cjc-1295-no-dac',
+      'ipamorelin',
+    ])
+  })
+
   it('does not invent an opposite-charge flag for two copies of one basic peptide', () => {
     const screen = screenBlend(
       [{ slug: 'glucagon' }, { slug: 'glucagon' }],
