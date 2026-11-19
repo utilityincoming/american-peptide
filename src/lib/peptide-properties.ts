@@ -25,32 +25,56 @@ function countOf(codes: string[], code: string): number {
   return n
 }
 
+/**
+ * Modifications the single-letter string cannot carry. Omitted fields mean a
+ * free N-terminus, a free C-terminus, and every Lys and Cys titratable.
+ */
+export interface ChargeMods {
+  /** N-acetyl, N-hexenoyl, or another acyl block. Removes the N-terminal amine. */
+  acetylN?: boolean
+  /** C-terminal amide. Removes the C-terminal carboxyl. */
+  amideC?: boolean
+  /** Pyroglutamate. The N-terminus is cyclized and that residue is not a Glu. */
+  pyroGluN?: boolean
+  /** Lysines whose side chain is acylated and no longer cationic. */
+  blockedLysines?: number
+  /** Cysteines tied up in disulfides. They are not titratable thiols. */
+  disulfideCysteines?: number
+}
+
 /** Net charge of the peptide at a given pH (Henderson–Hasselbalch). */
-export function chargeAtPH(codes: string[], pH: number): number {
+export function chargeAtPH(
+  codes: string[],
+  pH: number,
+  mods: ChargeMods = {},
+): number {
   if (codes.length === 0) return 0
   // Fraction protonated (positive groups) / deprotonated (negative groups).
   const pos = (pka: number) => 1 / (1 + Math.pow(10, pH - pka))
   const neg = (pka: number) => -1 / (1 + Math.pow(10, pka - pH))
 
-  let charge = pos(PKA.nTerm) + neg(PKA.cTerm)
-  charge += countOf(codes, 'K') * pos(PKA.K)
+  const nBlocked = mods.acetylN || mods.pyroGluN
+  let charge = (nBlocked ? 0 : pos(PKA.nTerm)) + (mods.amideC ? 0 : neg(PKA.cTerm))
+  const lys = Math.max(0, countOf(codes, 'K') - (mods.blockedLysines ?? 0))
+  const cys = Math.max(0, countOf(codes, 'C') - (mods.disulfideCysteines ?? 0))
+  charge += lys * pos(PKA.K)
   charge += countOf(codes, 'R') * pos(PKA.R)
   charge += countOf(codes, 'H') * pos(PKA.H)
   charge += countOf(codes, 'D') * neg(PKA.D)
   charge += countOf(codes, 'E') * neg(PKA.E)
-  charge += countOf(codes, 'C') * neg(PKA.C)
+  charge += cys * neg(PKA.C)
   charge += countOf(codes, 'Y') * neg(PKA.Y)
   return charge
 }
 
 /** Isoelectric point — pH where net charge ≈ 0 (bisection). */
-export function isoelectricPoint(codes: string[]): number {
+export function isoelectricPoint(codes: string[], mods: ChargeMods = {}): number {
   if (codes.length === 0) return 0
   let lo = 0
   let hi = 14
   for (let i = 0; i < 100; i++) {
     const mid = (lo + hi) / 2
-    const c = chargeAtPH(codes, mid)
+    const c = chargeAtPH(codes, mid, mods)
     // Charge decreases as pH rises; move toward the zero crossing.
     if (c > 0) lo = mid
     else hi = mid
@@ -83,14 +107,75 @@ export function a280Point1pct(epsilon: number, massDa: number): number {
 /** Valid single-letter codes for the 20 standard amino acids. */
 export const STANDARD_AA = 'ACDEFGHIKLMNPQRSTVWY'
 
+const THREE_TO_ONE: Record<string, string> = {
+  ala: 'A', arg: 'R', asn: 'N', asp: 'D', cys: 'C', glu: 'E', gln: 'Q', gly: 'G',
+  his: 'H', ile: 'I', leu: 'L', lys: 'K', met: 'M', phe: 'F', pro: 'P', ser: 'S',
+  thr: 'T', trp: 'W', tyr: 'Y', val: 'V',
+  aib: 'A', nle: 'L', nal: 'F', '2nal': 'F', metrp: 'W', '2metrp': 'W', dmt: 'Y',
+  pglu: 'Q', pyroglu: 'Q',
+}
+
+export interface ParsedChain {
+  codes: string[]
+  acetylN: boolean
+  amideC: boolean
+  pyroGluN: boolean
+  /** Even cysteines named as a disulfide in the sequence note. */
+  disulfideCysteines: number
+}
+
 /**
- * Single-letter codes for a catalog sequence. Notes in parentheses and a
- * trailing amide marker (`-NH2`) are not residues. Three-letter strings such
- * as `Ac-Glu-…` are left to `sanitizeSequence`, which only keeps A–Y letters.
+ * Single-letter codes plus the end groups and disulfides written on a catalog
+ * sequence. Parenthetical notes are not residues. A chain label ("A chain:")
+ * is not a residue. Three-letter strings (`Ac-Glu-…`) map residue names
+ * instead of harvesting every A–Y letter out of the words.
  */
+export function parseCatalogChain(raw: string): ParsedChain {
+  const acetylN = /n-acetyl|\bn-hexenoyl\b|^ac-/i.test(raw)
+  const amideC = /c-terminal amide|-NH2\b|-NHEt\b/i.test(raw)
+  const pyroGluN = /^pGlu-/i.test(raw.trim())
+  const head =
+    raw
+      .split(' (')[0]
+      ?.trim()
+      .replace(/-NH2$/i, '')
+      .replace(/-NHEt$/i, '') ?? ''
+  const codes = parseChainBody(head)
+  const cys = codes.filter((c) => c === 'C').length
+  const disulfideCysteines =
+    /disulfide/i.test(raw) && cys >= 2 ? cys - (cys % 2) : 0
+  return { codes, acetylN, amideC, pyroGluN, disulfideCysteines }
+}
+
+function parseChainBody(head: string): string[] {
+  const tokens = head.split('-').map((t) => t.trim()).filter(Boolean)
+  const named = tokens.some((t) => threeLetterKey(t) in THREE_TO_ONE)
+  if (named) {
+    const codes: string[] = []
+    for (const token of tokens) {
+      const key = threeLetterKey(token)
+      const one = THREE_TO_ONE[key]
+      if (one) codes.push(one)
+    }
+    return codes
+  }
+  // Case-sensitive runs. "A chain:" contributes a one-letter label, which is
+  // dropped; the chain itself is a run of two or more letters.
+  const runs = head.match(/[A-Z]{2,}/g) ?? []
+  return runs.join('').split('').filter((c) => STANDARD_AA.includes(c))
+}
+
+function threeLetterKey(token: string): string {
+  return token
+    .replace(/^D-/i, '')
+    .replace(/^L-/i, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '')
+}
+
+/** Single-letter codes for a catalog sequence. See `parseCatalogChain`. */
 export function catalogCodes(raw: string): string[] {
-  const chain = raw.split(/ \(|-NH/i)[0] ?? ''
-  return sanitizeSequence(chain).split('')
+  return parseCatalogChain(raw).codes
 }
 
 /** Strip a raw string down to valid uppercase single-letter codes. */
