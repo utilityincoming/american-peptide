@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/glp-1', priority: 0.9 },
     // ── Healing & Repair cluster ──────────────────────────
     { path: '/bpc-157', priority: 0.9 },
+    { path: '/thymosin-beta-4', priority: 0.9 },
     // ── GH Axis cluster ───────────────────────────────────
     { path: '/gh-peptides', priority: 0.9 },
     // ── Muscle preservation / body-composition cluster ────

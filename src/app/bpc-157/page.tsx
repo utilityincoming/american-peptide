@@ -552,6 +552,7 @@ export default function BPC157Page() {
                 Related resources
               </p>
               {[
+                { href: '/thymosin-beta-4', label: 'Thymosin β4', sub: 'Parent protein of TB-500' },
                 { href: '/compare/bpc-157-vs-tb-500', label: 'BPC-157 vs TB-500', sub: 'Head-to-head comparison' },
                 { href: '/research-areas/wound-healing', label: 'Wound Healing & Tissue Repair', sub: 'Research area guide' },
                 { href: '/catalog/category/healing-repair', label: 'Healing & Repair peptides', sub: 'Full category' },

@@ -96,6 +96,10 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
 
   // ── Healing & repair ──
   'bpc-157': { difficulty: 'standard', features: [] },
+  'thymosin-beta-4': {
+    difficulty: 'moderate',
+    features: ['N-terminal acetylation'],
+  },
   'tb-500': {
     difficulty: 'moderate',
     features: ['N-terminal acetylation'],

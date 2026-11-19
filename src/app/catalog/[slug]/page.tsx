@@ -38,6 +38,7 @@ import WatchButton from '@/components/WatchButton'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
 import LastUpdated from '@/components/LastUpdated'
 import SequenceGlyph from '@/components/SequenceGlyph'
+import ThymosinBeta4Figure from '@/components/ThymosinBeta4Figure'
 import {
   getSpotlightVendor,
   getVendorsForPeptide,
@@ -337,6 +338,14 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
         <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[1fr_320px]">
           {/* Main column */}
           <div className="space-y-8">
+            {(peptide.slug === 'thymosin-beta-4' || peptide.slug === 'tb-500') && (
+              <Block title="How the chain is used">
+                <div className="rounded-2xl border border-hairline bg-fill p-4 text-ink">
+                  <ThymosinBeta4Figure />
+                </div>
+              </Block>
+            )}
+
             {peptide.sequence && (
               <Block title="Primary structure">
                 <div className="rounded-2xl border border-hairline bg-fill p-5">

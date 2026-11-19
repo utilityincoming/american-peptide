@@ -1224,14 +1224,16 @@ const SEED_PEPTIDES: Peptide[] = [
     name: 'TB-500',
     aliases: ['Thymosin Beta-4 fragment'],
     categories: ['healing-repair'],
-    shortDescription: 'Synthetic fragment of thymosin β4 studied for cell migration and tissue repair.',
+    shortDescription:
+      'The seven-residue actin motif of thymosin β4 (LKKTETQ) — the fragment sold as a stand-in for the full 43-residue protein.',
     description:
-      'TB-500 corresponds to the active actin-binding region of thymosin β4. Preclinical studies report effects on endothelial cell migration, angiogenesis, and wound healing.',
-    mechanism: 'G-actin sequestration; modulation of cell migration and angiogenesis.',
+      'TB-500 is residues 17–23 of thymosin β4, the LKKTETQ motif that contacts G-actin. It is studied as a shorter, easier-to-make piece of the parent protein’s cell-migration activity. Most of the wound, cardiac, and dermal literature was done with full-length thymosin β4, so results on the fragment should be read as a subset of that record.',
+    mechanism:
+      'Reproduces the actin-binding motif of thymosin β4. It does not carry the N-terminal Ac-SDKP fragment, so the anti-fibrotic NF-κB story belongs to the parent protein, not to this heptapeptide.',
     researchAreas: ['Wound healing', 'Cardiac repair models', 'Hair growth'],
     background: [
-      'TB-500 is a synthetic peptide corresponding to the actin-binding region of thymosin β4, a naturally occurring protein involved in cell migration and tissue repair. By sequestering G-actin, thymosin β4 influences cytoskeletal dynamics, and TB-500 is studied as a fragment that reproduces part of this activity.',
-      'As with BPC-157, the evidence for TB-500 is largely preclinical and it is not FDA-approved; it is also a prohibited substance in regulated sport. Research interest centers on endothelial cell migration, angiogenesis, and wound healing, with cardiac and dermal repair among the contexts studied.',
+      'TB-500 is not a nickname for thymosin β4. It is the heptapeptide LKKTETQ, residues 17–23, the stretch that sits on monomeric actin. Full-length thymosin β4 is 43 residues, N-terminally acetylated, and also releases Ac-SDKP — a tetrapeptide with its own anti-fibrotic literature. Buying or citing “TB-500” and meaning the whole protein mixes two molecules.',
+      'The fragment is preclinical, not FDA-approved, and prohibited in sport. Endothelial migration, wound closure, and cardiac models are the usual contexts, and a large share of those papers dosed thymosin β4 itself.',
     ],
     keyResearch: [
       'Actin regulation — corresponds to the actin-binding motif of thymosin β4; promotes G-actin sequestration and the polymerization / depolymerization cycle that mobilizes cells to injury sites.',
@@ -1247,7 +1249,7 @@ const SEED_PEPTIDES: Peptide[] = [
       },
       {
         q: 'How is TB-500 related to thymosin β4?',
-        a: 'TB-500 corresponds to the active actin-binding fragment of the larger thymosin β4 protein, reproducing part of its cytoskeletal activity.',
+        a: 'TB-500 is residues 17–23 (LKKTETQ), the actin-binding motif. Thymosin β4 is the 43-residue parent. The fragment does not include Ac-SDKP, the N-terminal tetrapeptide tied to the anti-fibrotic literature.',
       },
       {
         q: 'Is TB-500 approved or allowed in sport?',
@@ -1263,6 +1265,58 @@ const SEED_PEPTIDES: Peptide[] = [
       'Lyophilized: store frozen and protected from light for long-term stability. Reconstituted: refrigerate at 2–8 °C and use within weeks.',
     handling:
       'Reconstitute gently and avoid shaking; protect from heat, light, and repeated freeze–thaw.',
+  },
+  {
+    slug: 'thymosin-beta-4',
+    name: 'Thymosin β4',
+    aliases: ['Tβ4', 'TMSB4X', 'thymosin beta-4'],
+    categories: ['healing-repair', 'immune'],
+    shortDescription:
+      'A 43-residue actin buffer. It holds G-actin so cells can move, and its first four residues become the anti-fibrotic peptide Ac-SDKP.',
+    description:
+      'Thymosin β4 is the main G-actin sequestering peptide in platelets and most other cells. One molecule binds one actin monomer and keeps it out of filaments until the cell needs to crawl, close a wound, or build a vessel. A second, chemically separate activity sits at the N-terminus: prolyl oligopeptidase clips off Ac-SDKP, a tetrapeptide studied for NF-κB and fibrosis. The research peptide TB-500 is only residues 17–23.',
+    mechanism:
+      '1:1 sequestration of G-actin through the LKKTETQ motif (residues 17–23), which sets the monomer pool available for filament assembly. Separately, N-terminal cleavage yields Ac-SDKP, studied as an inhibitor of NF-κB-linked inflammatory and fibrotic signaling.',
+    researchAreas: ['Wound closure', 'Cardiac repair models', 'Corneal repair', 'Fibrosis (Ac-SDKP)'],
+    background: [
+      'Thymosin β4 was isolated from thymus extract and later found in far higher amounts in platelets. The protein is short — 43 residues, N-acetylated, no disulfides — and its job in the cell is bookkeeping: it is the largest buffer of monomeric actin. When a cell needs to move, that buffer is the supply of subunits for new filament.',
+      'The healing literature treats two molecules as one. Full-length Tβ4 is what most rodent wound, corneal, and myocardial papers actually dosed. Ac-SDKP is the clipped N-terminus and has its own cardiac and renal fibrosis papers. TB-500 is a synthetic heptapeptide of the actin motif and does not carry Ac-SDKP. Phase 1 and Phase 2 wound studies exist for Tβ4; it is not FDA-approved.',
+    ],
+    keyResearch: [
+      'Actin buffer — binds G-actin about 1:1 through residues 17–23 (LKKTETQ) and is the dominant sequestering peptide in platelets.',
+      'Two products, two literatures — the intact chain is the migration story; Ac-SDKP (residues 1–4) is the anti-fibrotic story. They should not be cited as the same result.',
+      'Wound and cornea — dermal and corneal models report faster re-epithelialization; early human wound trials exist and remain small.',
+      'Heart — myocardial injury models and a separate Ac-SDKP fibrosis literature. Neither is an approved cardiac therapy.',
+      'TB-500 is the motif only — residues 17–23. Papers that dosed the 43-mer do not automatically transfer to the fragment.',
+    ],
+    faqs: [
+      {
+        q: 'What does thymosin β4 do?',
+        a: 'It binds monomeric actin and holds a pool of subunits the cell can polymerize when it needs to move. That is the core of the wound-closure and angiogenesis research.',
+      },
+      {
+        q: 'How is it different from TB-500?',
+        a: 'TB-500 is residues 17–23, the actin-binding motif LKKTETQ. Thymosin β4 is the full 43-residue chain and also the source of Ac-SDKP. The fragment does not include that tetrapeptide.',
+      },
+      {
+        q: 'How is it different from thymosin α1?',
+        a: 'They share a name and little else. Thymosin α1 is a 28-residue thymic peptide studied for T-cell responses. Thymosin β4 is an actin buffer studied for cell migration and repair.',
+      },
+      {
+        q: 'Is thymosin β4 FDA-approved?',
+        a: 'No. Published work includes preclinical models and early wound trials. This page is a research reference.',
+      },
+    ],
+    sequence: 'SDKPDMAEIEKFDKSKLKKTETQEKNPLPSKETIEQEKQAGES',
+    uniprotId: 'P62328',
+    cas: '77591-33-4',
+    molecularWeight: 4963.5,
+    synthesisNotes:
+      'Forty-three linear residues, N-terminally acetylated, no disulfides and no unnatural amino acids. Length is the problem: each extra cycle adds deletion sequences that preparative HPLC has to clear. Lots sold as “TB-500” are often this full chain or the heptapeptide — the certificate should state which sequence was made.',
+    storage:
+      'Lyophilized: frozen, dry, and protected from light. Reconstituted: 2–8 °C and used within weeks.',
+    handling:
+      'Reconstitute without vigorous shaking. The N-acetyl group is part of the endogenous molecule; a non-acetylated lot is a different substance.',
   },
   {
     slug: 'b7-33',

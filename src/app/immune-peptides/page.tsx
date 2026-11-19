@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Shield, Zap, Activity, AlertTriangle } from 'lucide-react'
 import SourcingCard from '@/components/SourcingCard'
+import ThymosinBeta4Figure from '@/components/ThymosinBeta4Figure'
 
 const SITE = 'https://americanpeptide.com'
 const url = `${SITE}/immune-peptides`
@@ -430,13 +431,14 @@ export default function ImmunePeptidesPage() {
           </div>
 
           <p className="mb-4 text-sm leading-relaxed text-ink/60">
-            Despite sharing the &ldquo;thymosin&rdquo; name, thymosin β4 (Tβ4) is{' '}
-            <strong className="text-ink/80">mechanistically unrelated</strong> to thymosin α1.
-            Where thymosin α1 acts on immune-cell differentiation via TLR signaling, Tβ4 works
-            by sequestering G-actin monomers — regulating cytoskeletal dynamics, wound healing,
-            and angiogenesis. Its anti-inflammatory effects are largely mediated by the Ac-SDKP
-            fragment, which inhibits NF-κB activation.
+            The shared name is a historical accident. Thymosin α1 talks to dendritic cells and
+            T cells. Thymosin β4 holds a pool of G-actin so a cell can build filament and move.
+            The anti-fibrotic papers are mostly about Ac-SDKP, the four residues clipped from
+            the front of Tβ4, not about the actin motif sold as TB-500.
           </p>
+          <div className="mb-5 rounded-xl border border-[#A6F0CC]/15 bg-surface/40 p-3 text-ink">
+            <ThymosinBeta4Figure />
+          </div>
 
           <div className="grid gap-4 md:grid-cols-3">
             {[
@@ -462,10 +464,16 @@ export default function ImmunePeptidesPage() {
 
           <div className="mt-4 flex gap-3">
             <Link
-              href="/catalog/thymosin-beta-4"
+              href="/thymosin-beta-4"
               className="inline-flex items-center gap-1.5 rounded-lg border border-[#A6F0CC]/20 px-3 py-1.5 text-xs font-medium text-accent/80 transition-colors hover:border-[#A6F0CC]/40 hover:text-accent"
             >
-              Thymosin β4 catalog entry <ArrowRight className="h-3 w-3" />
+              Thymosin β4 guide <ArrowRight className="h-3 w-3" />
+            </Link>
+            <Link
+              href="/catalog/thymosin-beta-4"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-hairline px-3 py-1.5 text-xs font-medium text-ink/55 transition-colors hover:text-ink/70"
+            >
+              Catalog entry
             </Link>
             <Link
               href="/bpc-157"
