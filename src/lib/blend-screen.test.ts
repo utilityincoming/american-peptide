@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { screenBlend } from '@/lib/blend-screen'
+import { getPeptideBySlug } from '@/lib/peptides'
+import { catalogCodes } from '@/lib/peptide-properties'
 
 describe('screenBlend', () => {
   it('flags the labeled pramlintide–insulin syringe incompatibility', () => {
@@ -25,7 +27,7 @@ describe('screenBlend', () => {
     )
     const pram = screen.peptides.find((p) => p.slug === 'pramlintide')
     expect(pram?.hasSequence).toBe(true)
-    expect(pram?.cysteines).toBeGreaterThan(0)
+    expect(pram?.cysteines).toBe(2)
     expect(screen.flags.some((f) => f.code === 'cysteine')).toBe(true)
   })
 
@@ -58,6 +60,63 @@ describe('screenBlend', () => {
       'no-shake',
       'separate-syringes',
     ])
+  })
+
+  it('scores published backbones and splits CagriSema into its two peptides', () => {
+    const sema = screenBlend([{ slug: 'semaglutide' }], 5.7)
+    const row = sema.peptides[0]
+    expect(row.hasSequence).toBe(true)
+    expect(row.gravy).not.toBeNull()
+    expect(row.charge).not.toBeNull()
+    expect(sema.flags.some((f) => f.code === 'acylation')).toBe(true)
+    expect(sema.flags.some((f) => f.code === 'unnatural')).toBe(true)
+
+    const lengths = screenBlend(
+      [
+        { slug: 'tirzepatide' },
+        { slug: 'tesamorelin' },
+        { slug: 'igf-1-lr3' },
+        { slug: 'll-37' },
+        { slug: 'aod-9604' },
+        { slug: 'melanotan-1' },
+        { slug: 'pt-141' },
+      ],
+      5.7,
+    )
+    const bySlug = Object.fromEntries(
+      lengths.peptides.map((p) => [p.slug, p]),
+    )
+    expect(bySlug['aod-9604'].cysteines).toBe(2)
+    expect(bySlug['igf-1-lr3'].cysteines).toBe(6)
+    expect(bySlug['ll-37'].hasSequence).toBe(true)
+    expect(bySlug['tesamorelin'].hasSequence).toBe(true)
+    expect(bySlug['melanotan-1'].hasSequence).toBe(true)
+    expect(bySlug['pt-141'].hasSequence).toBe(true)
+    expect(bySlug['tirzepatide'].hasSequence).toBe(true)
+    const len = (slug: string) =>
+      catalogCodes(getPeptideBySlug(slug)?.sequence ?? '').length
+    expect(len('semaglutide')).toBe(31)
+    expect(len('tirzepatide')).toBe(39)
+    expect(len('tesamorelin')).toBe(44)
+    expect(len('igf-1-lr3')).toBe(83)
+    expect(len('ll-37')).toBe(37)
+    expect(len('aod-9604')).toBe(16)
+    expect(len('melanotan-1')).toBe(13)
+    expect(len('pt-141')).toBe(7)
+    expect(len('cjc-1295-with-dac')).toBe(29)
+
+    const combo = screenBlend([{ slug: 'cagrisema' }], 5.7)
+    expect(combo.peptides.map((p) => p.slug)).toEqual([
+      'cagrilintide',
+      'semaglutide',
+    ])
+    expect(combo.flags.some((f) => f.code === 'no-sequence' && f.title.startsWith('Cagrilintide'))).toBe(
+      true,
+    )
+
+    const extract = screenBlend([{ slug: 'thymalin' }], 5.7)
+    expect(extract.flags.some((f) => f.code === 'mixture')).toBe(true)
+    expect(extract.flags.some((f) => f.code === 'no-sequence')).toBe(false)
   })
 
   it('does not invent an opposite-charge flag for two copies of one basic peptide', () => {
