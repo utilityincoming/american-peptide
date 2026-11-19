@@ -538,4 +538,60 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     difficulty: 'demanding',
     features: ['Recombinant protein', 'Albumin-binding linker'],
   },
+
+  // ── Peptaura-gap additions ──
+  dermorphin: {
+    difficulty: 'moderate',
+    features: ['D-amino acid', 'C-terminal amide'],
+    notes:
+      'A heptapeptide amide whose defining synthetic feature is a D-alanine at position 2 — built by solid-phase synthesis with an Fmoc-D-Ala building block and a C-terminal amide from Rink-amide resin. The D-residue is what resists peptidases; over a seven-residue chain, deletion-sequence removal sets the purity, and identity work must confirm the D-configuration rather than assume the all-L sequence.',
+  },
+  'pe-22-28': {
+    difficulty: 'standard',
+    features: [],
+    notes:
+      'A short linear heptapeptide, straightforward to make by solid-phase synthesis. Purity is governed by removing deletion sequences over a short chain; the harder question is identity — a 7-mer is easy to synthesize and easy to mislabel, so mass spectrometry against the stated sequence is the meaningful check.',
+  },
+  'pnc-27': {
+    difficulty: 'demanding',
+    features: [],
+    notes:
+      'A ~32-residue chimeric peptide joining a p53 fragment to a membrane-penetrating sequence. The long, partly hydrophobic chain is aggregation-prone on the resin, so solid-phase synthesis of the full length is hard and deletion-sequence control dominates purity. A genuine spec needs mass spectrometry of the full construct, not just the p53 portion.',
+  },
+  cortagen: {
+    difficulty: 'standard',
+    features: [],
+    notes:
+      'A linear tetrapeptide (Ala-Glu-Asp-Pro) — trivial to synthesize by solid-phase methods. Making it is easy; the real question is identity, because a 4-mer is cheap to produce under any label. A certificate should show mass spectrometry and HPLC assay confirming the exact sequence and purity.',
+  },
+  thymulin: {
+    difficulty: 'moderate',
+    features: [],
+    notes:
+      'A nonapeptide with an N-terminal pyroglutamate (a cyclized glutamine), made by solid-phase synthesis. The subtlety is that thymulin’s activity depends on coordinating a zinc ion, not on covalent structure alone — so a certificate of analysis for the peptide confirms the sequence and purity but not whether the active zinc-bound form is present. Pyroglutamate formation at the N-terminus is the notable synthetic detail.',
+  },
+  ghk: {
+    difficulty: 'standard',
+    features: [],
+    notes:
+      'A simple tripeptide (Gly-His-Lys), easy to make by solid-phase synthesis. The purity question that actually matters is copper: GHK is sold either copper-free or pre-complexed as GHK-Cu, and the two are not interchangeable. A meaningful assay states copper content and whether the material is the free peptide or the complex.',
+  },
+  'peg-mgf': {
+    difficulty: 'demanding',
+    features: [],
+    notes:
+      'The MGF backbone is a ~24-residue peptide made by solid-phase synthesis, but the hard, poorly-standardized step is the PEG conjugation — the attachment site and PEG size determine the product, and “PEG-MGF” materials vary widely in how (and whether) the PEG is actually coupled. Identity work has to characterize the conjugate, not just the peptide, which is rarely disclosed on product pages.',
+  },
+  'slu-pp-332': {
+    difficulty: 'standard',
+    features: ['Small molecule'],
+    notes:
+      'Not a peptide — a synthetic small molecule made by conventional organic synthesis. Its purity and identity are an organic-chemistry question answered by HPLC and NMR/mass spectrometry, not by peptide solid-phase synthesis or a peptide-style certificate. Vendor material described with a peptide CoA is a red flag that the wrong analysis was run.',
+  },
+  p21: {
+    difficulty: 'moderate',
+    features: [],
+    notes:
+      'A small peptidergic compound derived from ciliary neurotrophic factor and modified with an adamantane group. Synthesis couples a short peptide to the adamantane moiety, and the identity-critical step is confirming that conjugation — a certificate that characterizes only the peptide portion does not establish that the adamantane-bearing active compound was actually made.',
+  },
 }

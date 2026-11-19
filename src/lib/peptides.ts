@@ -5819,6 +5819,12 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'Why are these two paired?', a: 'Their proposed mechanisms sit at different points of the healing cascade — BPC-157 on angiogenesis and growth factors, TB-500 on actin-driven cell migration — so the pairing aims to cover more of the process.' },
       { q: 'Is it approved?', a: 'No — neither component is FDA-approved. This page is a research and educational reference, not medical advice.' },
     ],
+    synthesisNotes:
+      'This is a physical mixture, not a single molecule. BPC-157 and TB-500 are each synthesized and purified separately, so there is no combined synthesis and no single purity number — a meaningful certificate shows a separate identity and purity assay for each peptide plus the amount of each in the vial. Two peptides sharing one lyophilized cake and one solution also raise stability and compatibility questions a single-peptide product does not.',
+    storage:
+      'Store lyophilized, frozen, and protected from light; once reconstituted, keep refrigerated and use within a short window. A blend is only as stable as its least stable component.',
+    handling:
+      'Handle as two peptides in one vial: reconstitute gently without vortexing, and read any certificate as needing per-component identity and purity data rather than a single blended figure.',
   },
   {
     slug: 'cjc-1295-ipamorelin',
@@ -5848,6 +5854,12 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'Why Ipamorelin specifically?', a: 'Ipamorelin is the most selective GH secretagogue, raising GH with little effect on cortisol or prolactin, which is why it is paired in these blends rather than GHRP-6.' },
       { q: 'Is it approved?', a: 'No — it is a research combination and not FDA-approved. This page is a research and educational reference.' },
     ],
+    synthesisNotes:
+      'A physical mixture, not a single molecule. CJC-1295 (no DAC) and Ipamorelin are synthesized and purified separately, so there is no combined synthesis and no single purity number — a real certificate gives each peptide its own identity and purity assay and states how much of each is present. Co-dissolving two peptides also adds stability questions a single-peptide vial does not have.',
+    storage:
+      'Store lyophilized, frozen, and protected from light; after reconstitution keep refrigerated and use within a short window. The blend is only as stable as its least stable component.',
+    handling:
+      'Reconstitute gently and treat the certificate as needing per-component data — identity, purity, and content for both the GHRH analog and the secretagogue — rather than one blended figure.',
   },
   {
     slug: 'glow',
@@ -5877,6 +5889,12 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'How is it different from KLOW?', a: 'KLOW is generally the same idea with a fourth component (KPV) added; GLOW is the three-peptide version. Vendor formulas vary.' },
       { q: 'Is it approved?', a: 'No — the components are research compounds and the blend is not FDA-approved. This page is a research and educational reference.' },
     ],
+    synthesisNotes:
+      'A physical mixture of three separately made compounds — GHK-Cu (a copper-complexed tripeptide), BPC-157, and TB-500 — so there is no single synthesis or purity number. A meaningful certificate assays each component on its own, states the amount of each, and for the GHK-Cu portion confirms copper content. The more components share a vial, the more the blend’s real-world stability departs from anything characterized.',
+    storage:
+      'Store lyophilized, frozen, and protected from light; after reconstitution keep refrigerated and use quickly. Copper-containing peptides are light- and oxidation-sensitive, so the GHK-Cu component sets much of the handling.',
+    handling:
+      'Reconstitute gently without vortexing and protect from light. Read any certificate as three separate assays plus copper content, not one blended purity figure.',
   },
   {
     slug: 'klow',
@@ -5906,6 +5924,12 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'Is the four-peptide blend studied?', a: 'No controlled study has tested the mixture. Evidence exists only for the individual components, mostly in preclinical work.' },
       { q: 'Is it approved?', a: 'No — none of the components is FDA-approved and the blend is not either. This page is a research and educational reference.' },
     ],
+    synthesisNotes:
+      'A four-component physical mixture — GHK-Cu, BPC-157, TB-500, and KPV — each synthesized and purified separately, so no single synthesis and no single purity number exist. A genuine certificate assays all four on their own, states the amount of each, and confirms copper content for the GHK-Cu portion. With four peptides in one solution, compatibility and stability are largely uncharacterized, and vendor recipes are not standardized.',
+    storage:
+      'Store lyophilized, frozen, and protected from light; after reconstitution keep refrigerated and use quickly. The blend is only as stable as its least stable component, and the copper tripeptide is light- and oxidation-sensitive.',
+    handling:
+      'Reconstitute gently and protect from light. Treat any certificate as four separate assays plus copper content rather than one blended figure, and remember composition is vendor-defined.',
   },
   {
     slug: 'klow-2',
@@ -5934,6 +5958,12 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'How is it different from KLOW?', a: 'It is marketed as a revised version — generally a concentration or ratio change — but there is no standard definition of the difference, and no study of either version as a blend.' },
       { q: 'Is it approved?', a: 'No — it is a research blend and not FDA-approved. This page is a research and educational reference.' },
     ],
+    synthesisNotes:
+      'A vendor revision of the KLOW mixture, so the same caveats apply and then some: the components are made separately, there is no combined synthesis or single purity number, and the “2.0” label is not tied to any published composition. Because the exact contents and ratios are supplier-defined and unverified, a certificate — if one exists — should assay each component individually and state what the vial actually contains.',
+    storage:
+      'Store lyophilized, frozen, and protected from light; after reconstitution keep refrigerated and use quickly. As with KLOW, the least stable component governs the whole blend.',
+    handling:
+      'Reconstitute gently and protect from light. Treat the composition as vendor-defined and unverified, and expect per-component assays rather than a single blended purity figure.',
   },
   {
     slug: 'tesamorelin-ipamorelin',
@@ -5963,6 +5993,12 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'How does it compare to CJC-1295 + Ipamorelin?', a: 'Same two-receptor logic, but the GHRH component here (Tesamorelin) is a clinically approved, trial-backed analog rather than a research GHRH peptide.' },
       { q: 'Is it approved as a blend?', a: 'No — only Tesamorelin as a single agent. This page is a research and educational reference.' },
     ],
+    synthesisNotes:
+      'A physical mixture of two separately made peptides — Tesamorelin (a stabilized 44-residue GHRH analog) and Ipamorelin (a short pentapeptide secretagogue). Tesamorelin is the harder, longer synthesis of the two; the blend has no combined purity number, so a real certificate assays each peptide on its own and states the amount of each. Pooling a long and a short peptide in one solution also raises stability questions a single-peptide vial does not.',
+    storage:
+      'Store lyophilized, frozen, and protected from light; after reconstitution keep refrigerated and use within a short window. The longer GHRH analog is the more fragile component.',
+    handling:
+      'Reconstitute gently without vortexing. Read any certificate as two separate assays — identity, purity, and content for both the GHRH analog and the secretagogue — not one blended figure.',
   },
 
   // ─── Single-molecule additions ──────────────────────────────────────────
@@ -5995,6 +6031,10 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'Is it approved?', a: 'No — it is an early research compound, not FDA-approved. This page is a research and educational reference.' },
     ],
     syntheticFeatures: ['Small molecule'],
+    storage:
+      'As a small molecule rather than a peptide, store per the compound’s own stability — typically cool, dry, and light-protected; reconstitution depends on its solvent, not on peptide practice.',
+    handling:
+      'Handle by organic-chemistry practice: dissolve in the appropriate solvent, and verify identity and purity by HPLC with NMR or mass spectrometry rather than a peptide-style certificate.',
   },
   {
     slug: 'dermorphin',
@@ -6027,6 +6067,10 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 803.9,
     molecularFormula: 'C40H50N8O10',
     syntheticFeatures: ['D-amino acid', 'C-terminal amide'],
+    storage:
+      'Store lyophilized, frozen, and protected from light; keep reconstituted peptide refrigerated and use within a short window. As a potent opioid research reagent, it also warrants controlled, labeled, restricted-access storage.',
+    handling:
+      'Handle as a high-potency compound with appropriate PPE, and verify the D-Ala2 configuration by analysis — an all-L impurity is a different, less stable molecule than dermorphin.',
   },
   {
     slug: 'pnc-27',
@@ -6056,6 +6100,10 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'Is there clinical evidence?', a: 'No — the evidence is cell-culture and animal-model work; its selectivity and mechanism are still under study. There is no clinical trial.' },
       { q: 'Is it approved?', a: 'No. This page is a research and educational reference, not medical advice.' },
     ],
+    storage:
+      'Store lyophilized, frozen, and protected from light; keep reconstituted peptide cold and use quickly. A long, partly hydrophobic peptide is prone to aggregation in solution.',
+    handling:
+      'Reconstitute gently; the hydrophobic membrane-residency segment can make full dissolution difficult, and a certificate should confirm the full-length construct, not just the p53 fragment.',
   },
   {
     slug: 'pe-22-28',
@@ -6085,6 +6133,10 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'Is there human evidence?', a: 'No — the research is in animal models. There is no clinical trial or human safety data.' },
       { q: 'Is it approved?', a: 'No. This page is a research and educational reference, not medical advice.' },
     ],
+    storage:
+      'Store lyophilized, frozen, and protected from light; refrigerate reconstituted peptide and use within a short window. A short peptide in solution degrades faster than its lyophilized form.',
+    handling:
+      'Reconstitute gently without vortexing. With a seven-residue sequence, confirm identity by mass spectrometry — short peptides are easy to make incorrectly and easy to mislabel.',
   },
   {
     slug: 'p21',
@@ -6114,6 +6166,10 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'Is there human evidence?', a: 'No — the published work is in animal models. There is no clinical trial or human safety data.' },
       { q: 'Is it approved?', a: 'No. This page is a research and educational reference, not medical advice.' },
     ],
+    storage:
+      'Store lyophilized, frozen, and protected from light; refrigerate reconstituted material for short-term use. General peptide-storage guidance applies to the peptide portion.',
+    handling:
+      'Reconstitute gently. Confirm the adamantane conjugation by analysis — characterizing only the peptide portion does not establish that the active adamantane-bearing compound is present.',
   },
   {
     slug: 'adamax',
@@ -6143,6 +6199,12 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'Is there good evidence for it?', a: 'No — published evidence is thin. Semax is well studied; Adamax is not, and its marketing claims should be treated with caution.' },
       { q: 'Is it approved?', a: 'No. This page is a research and educational reference, not medical advice.' },
     ],
+    synthesisNotes:
+      'Adamax’s exact structure is not documented in the public literature, so there is no verifiable synthesis route and no published identity standard to check a lot against. That is itself the key point: without a disclosed sequence or modification, a certificate of analysis cannot be meaningfully interpreted, and vendor material should be treated with corresponding caution. For a characterized comparison, see the Semax entry.',
+    storage:
+      'As a presumed short peptide, treat like other nootropic peptides — store lyophilized, frozen, and protected from light, and keep reconstituted material refrigerated for short-term use. Guidance is general because the compound is not well characterized.',
+    handling:
+      'Handle conservatively and verify what you actually have: with no public structure, independent mass spectrometry is the only way to know whether vendor material matches the label.',
   },
   {
     slug: 'cortagen',
@@ -6173,6 +6235,10 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'Is it approved?', a: 'No — it is a research peptide, not FDA-approved. This page is a research and educational reference.' },
     ],
     sequence: 'AEDP',
+    storage:
+      'Store lyophilized, frozen, and protected from light; refrigerate reconstituted peptide for short-term use. A tetrapeptide is physically simple but still degrades in solution over time.',
+    handling:
+      'Reconstitute gently. Because a 4-mer is trivial to produce under any label, the meaningful check is identity — mass spectrometry confirming the exact Ala-Glu-Asp-Pro sequence.',
   },
   {
     slug: 'thymulin',
@@ -6202,6 +6268,12 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'How does it relate to the other thymic peptides?', a: 'It is one of several thymic immune peptides in this catalog, alongside thymalin, thymosin alpha-1, and thymosin β4, each studied as an immune-research tool.' },
       { q: 'Is it approved?', a: 'No — it is a research peptide, not FDA-approved. This page is a research and educational reference.' },
     ],
+    sequence: 'EAKSQGGSN',
+    molecularWeight: 857.9,
+    storage:
+      'Store lyophilized, frozen, and protected from light; keep reconstituted peptide refrigerated for short-term use. Because activity depends on zinc coordination, a correctly stored peptide can still be biologically inactive without zinc.',
+    handling:
+      'Reconstitute gently. Note that a certificate of analysis confirms the nonapeptide’s sequence and purity but not the presence of the active zinc-bound form — the two are separate questions for thymulin.',
   },
   {
     slug: 'hmg',
@@ -6233,6 +6305,12 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     fdaApproved: true,
     syntheticFeatures: ['Glycosylated'],
+    synthesisNotes:
+      'Not a synthetic peptide. HMG is a biologic purified from the urine of postmenopausal women, containing the glycoprotein hormones FSH and LH. There is no solid-phase synthesis — identity and potency are set by bioassay or immunoassay of FSH and LH activity, not by a peptide certificate, and "purity" means removing other urinary proteins. Recombinant FSH is the modern, more defined alternative to the extracted product.',
+    storage:
+      'Supplied and stored as a lyophilized biologic under refrigeration; reconstituted gonadotropin is used promptly. Follow the approved product’s labeling — this is a clinical medicine, not a research reagent.',
+    handling:
+      'Handle as a glycoprotein biologic: heat- and agitation-sensitive, reconstituted gently. Its quality is measured as gonadotropin activity and freedom from other urinary proteins, not as a solid-phase synthesis spec.',
   },
 
   // ─── Variant / related-form additions ───────────────────────────────────
@@ -6264,6 +6342,10 @@ const SEED_PEPTIDES: Peptide[] = [
       { q: 'How is it different from MGF?', a: 'Same signaling peptide and proposed biology — the difference is the pegylation that makes PEG-MGF longer-acting. See the MGF entry for the base science.' },
       { q: 'Is it approved?', a: 'No — it is a research compound, not FDA-approved. This page is a research and educational reference.' },
     ],
+    storage:
+      'Store lyophilized, frozen, and protected from light; keep reconstituted peptide cold and use within a short window. The PEG conjugate is sensitive to the same heat and agitation stresses as the underlying peptide.',
+    handling:
+      'Reconstitute gently without vortexing. Identity work should characterize the PEG conjugate — attachment site and PEG size — not just the MGF peptide backbone.',
   },
   {
     slug: 'ghk',
@@ -6296,6 +6378,10 @@ const SEED_PEPTIDES: Peptide[] = [
     sequence: 'GHK',
     molecularWeight: 340.4,
     molecularFormula: 'C14H24N6O4',
+    storage:
+      'Store lyophilized, frozen, and protected from light; refrigerate reconstituted peptide for short-term use. Copper-free GHK readily picks up available copper, so container and conditions affect which species you end up with.',
+    handling:
+      'Reconstitute gently and protect from light. The key check is whether the material is the free peptide or the GHK-Cu complex — an assay should state copper content.',
   },
 ]
 
