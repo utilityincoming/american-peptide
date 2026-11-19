@@ -2910,44 +2910,52 @@ const SEED_PEPTIDES: Peptide[] = [
   {
     slug: 'epitalon',
     name: 'Epitalon',
-    aliases: ['Epithalon', 'Epithalamin fragment'],
+    aliases: ['Epithalon', 'Epithalone', 'AEDG peptide'],
     categories: ['longevity', 'bioregulator'],
-    shortDescription: 'Synthetic tetrapeptide investigated for telomerase activity and circadian effects.',
+    shortDescription:
+      'Synthetic pineal tetrapeptide (Ala-Glu-Asp-Gly) studied for telomerase activity, circadian regulation, and rodent lifespan endpoints.',
     description:
-      'Epitalon is a synthetic four-amino-acid peptide derived from the pineal peptide epithalamin. Russian-led clinical work has reported effects on melatonin secretion and lifespan endpoints in rodent models.',
-    mechanism: 'Reported telomerase upregulation; pineal-axis modulation.',
-    researchAreas: ['Aging biology', 'Circadian biology', 'Pineal function', 'Peptide bioregulators'],
+      'Epitalon (also spelled epithalon) is the synthetic tetrapeptide Ala-Glu-Asp-Gly, designed from the amino-acid composition of epithalamin, a bovine pineal polypeptide extract. Work from the St. Petersburg bioregulator school reports telomerase induction in human cells, melatonin and circadian effects, and shifts in maximum lifespan in mice. A 2025 cell-line study outside that group reported telomere lengthening in culture; there are still no large independent human trials, and Epitalon is not FDA-approved.',
+    mechanism:
+      'Reported induction of the telomerase catalytic subunit (hTERT) and telomere elongation in normal somatic cells; proposed pineal-axis effects on melatonin and circadian gene expression. In some cancer cell lines, telomere lengthening has been attributed to alternative lengthening of telomeres (ALT) rather than telomerase.',
+    researchAreas: ['Aging biology', 'Telomere biology', 'Circadian biology', 'Pineal function', 'Peptide bioregulators'],
     background: [
-      'Epitalon (epithalon) is a synthetic four-amino-acid peptide modeled on epithalamin, a peptide extract of the pineal gland. It emerged from Russian gerontology research, where the pineal axis is studied as a regulator of aging and circadian rhythm.',
-      'Russian-led studies have reported effects on melatonin secretion, telomerase activity, and lifespan endpoints in animal models. The evidence base is concentrated in that research tradition, independent replication is limited, and Epitalon is not FDA-approved.',
+      'Epitalon is a four-residue peptide, Ala-Glu-Asp-Gly (390.35 Da, C14H22N4O9), with no disulfides, D-amino acids, or other modifications. Vladimir Khavinson’s group at the St. Petersburg Institute of Bioregulation and Gerontology designed it from the amino-acid composition of epithalamin, the natural pineal polypeptide fraction sold in that tradition as Endoluten. Epithalamin is a tissue extract; Epitalon is the defined synthetic sequence meant to stand in for it. In the bioregulator hypothesis these short peptides are proposed to reach the nucleus and influence gene expression, rather than acting as classical receptor ligands. That hypothesis is still debated, and almost all of the original lifespan and clinical literature comes from one research tradition.',
+      'The citation that carries the telomerase claim is Khavinson, Bondarev, and Butyugov (Bulletin of Experimental Biology and Medicine, 2003, PMID 12937682). Added to telomerase-negative human fetal fibroblasts, Epithalon was reported to induce the catalytic subunit, restore enzymatic telomerase activity, and lengthen mean telomeres from 180 to 240 arbitrary units — about 33%. The paper infers that a cell population’s replicative life could be extended; it does not itself show cells carried past the Hayflick limit. Rodent work from the same circle is more modest than the popular summary. In female Swiss-derived SHR mice dosed from three months of age (Anisimov et al., Biogerontology 2003, PMID 14501183), mean lifespan was unchanged, while maximum lifespan rose 12.3% and the lifespan of the last 10% of survivors rose 13.3%; leukemia incidence fell and total spontaneous tumor incidence did not. An earlier CBA-mouse study (Anisimov et al., Mechanisms of Ageing and Development 2001, PMID 11163623) reported a 5.3% increase in mean survival. A Drosophila study from the same group (PMID 11087911) reported longer adult lifespan. None of these animal results has been repeated by a laboratory independent of that tradition.',
+      'The first quantitative telomere study from outside that circle is Al-Dulaimi, Thomas, Matta, and Roberts (Biogerontology 2025, PMID 40908429; Brunel University London). In culture, normal epithelial and fibroblast lines lengthened telomeres with upregulation of hTERT and telomerase activity, while two breast-cancer lines lengthened telomeres through alternative lengthening of telomeres (ALT). A correction later replaced the figures (PMID 41240216). The experiment is in vitro, two-dimensional culture only, and the ALT finding in cancer lines is a reason for caution, not a safety claim. Circadian work in the originating literature reports effects on melatonin and on circadian-rhythm gene expression in models of pineal aging (PMID 32019204; PMID 33280326). There is no large, multi-center human trial. Epitalon is a research compound and is not FDA-approved.',
     ],
     keyResearch: [
-      'Telomerase upregulation — studies report increased expression of the telomerase catalytic subunit and telomere elongation in human somatic cells (Khavinson, Bondarev & Butyugov, 2003).',
-      'Replicative lifespan — the originating study extended human fetal fibroblast lifespan beyond the Hayflick limit without signs of malignant transformation.',
-      'Circadian / pineal function — examined for effects on melatonin secretion via the pineal axis.',
-      'Compared to other longevity peptides — a distinct mechanism: Epitalon targets telomere maintenance, where thymosin α-1 works through immune modulation and MOTS-c through mitochondrial / metabolic regulation.',
-      'Evidence quality — concentrated in a single research tradition (the Khavinson group); large independent Western RCTs are not available.',
+      'Telomerase in somatic cells — Epithalon induced the catalytic subunit, telomerase activity, and ~33% longer mean telomeres in human fetal fibroblasts (Khavinson, Bondarev & Butyugov, Bull Exp Biol Med 2003, PMID 12937682).',
+      'Independent cell-line follow-up — normal human lines lengthened telomeres via hTERT; breast-cancer lines did so via ALT (Al-Dulaimi et al., Biogerontology 2025, PMID 40908429; figures corrected in PMID 41240216). In vitro only.',
+      'Mouse lifespan — in SHR mice, mean lifespan was unchanged; maximum lifespan rose 12.3% and the last decile 13.3%, with less leukemia and no change in total tumor incidence (Anisimov et al., Biogerontology 2003, PMID 14501183).',
+      'Parent extract — the pineal polypeptide epithalamin, not the tetrapeptide, was reported to raise mean lifespan 11–31% in flies, mice, and rats (Anisimov, Mylnikov & Khavinson, Mech Ageing Dev 1998, PMID 9701766). Endoluten is that extract’s catalog counterpart.',
+      'Evidence quality — lifespan data remain single-tradition. The 2025 cell study is the main independent replication, and it is in culture. No large human RCTs. Not FDA-approved.',
     ],
     faqs: [
       {
         q: 'What is Epitalon?',
-        a: 'Epitalon is a synthetic tetrapeptide derived from a pineal extract (epithalamin), studied in aging and circadian research, largely in animal models.',
+        a: 'Epitalon (epithalon) is the synthetic tetrapeptide Ala-Glu-Asp-Gly, designed from the amino-acid composition of epithalamin, a bovine pineal extract. It is the defined counterpart of the natural pineal bioregulator Endoluten.',
       },
       {
-        q: 'What is it studied for?',
-        a: 'Reported effects include telomerase activity, melatonin regulation, and lifespan endpoints, primarily in Russian-led preclinical work.',
+        q: 'Does Epitalon lengthen telomeres?',
+        a: 'A 2003 study from the originating group reported telomerase activity and about 33% longer mean telomeres in human fetal fibroblasts (PMID 12937682). A 2025 study from another laboratory reported telomere lengthening in normal human cell lines via hTERT, and in breast-cancer lines via alternative lengthening of telomeres (PMID 40908429; a figure correction is PMID 41240216). Both are cell-culture results. They have not been confirmed in large human trials.',
       },
       {
-        q: 'How strong is the evidence?',
-        a: 'It is concentrated in a specific research tradition with limited independent replication, so findings should be treated as preliminary.',
+        q: 'Did Epitalon extend lifespan in animals?',
+        a: 'In the main SHR-mouse study (PMID 14501183), mean lifespan did not change. Maximum lifespan rose about 12% and the oldest tenth of the cohort lived about 13% longer. A separate CBA-mouse study reported a 5.3% rise in mean survival (PMID 11163623). These experiments come from one research tradition and have not been independently repeated.',
       },
       {
-        q: 'Is it approved?',
-        a: 'No — it is a research compound. This page is a research and educational reference.',
+        q: 'How is Epitalon different from Endoluten?',
+        a: 'Endoluten is a polypeptide fraction extracted from pineal tissue and has no single sequence. Epitalon is one synthetic four-amino-acid peptide modeled on that extract, so it can be made and assayed as a defined molecule.',
+      },
+      {
+        q: 'Is Epitalon approved?',
+        a: 'No. It is a research compound and is not FDA-approved. This page is a research and educational reference, not medical advice.',
       },
     ],
     sequence: 'AEDG',
-    molecularWeight: 390.4,
+    molecularWeight: 390.35,
+    molecularFormula: 'C14H22N4O9',
     cas: '307297-39-8',
   },
   {

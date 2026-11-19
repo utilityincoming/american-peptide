@@ -868,7 +868,7 @@ export const COMPARISONS: Comparison[] = [
       {
         title: 'Two routes to the same banner',
         paragraphs: [
-          'Epitalon (AEDG), a pineal-derived tetrapeptide developed by Khavinson’s group, is studied for upregulating the telomerase catalytic subunit and extending telomere length — one study extended human fibroblast replicative lifespan beyond the Hayflick limit without malignant transformation. Its longevity rationale is telomere maintenance and the pineal / circadian axis.',
+          'Epitalon (AEDG), a pineal-derived tetrapeptide developed by Khavinson’s group, is studied for upregulating the telomerase catalytic subunit and lengthening telomeres. The 2003 fibroblast study (PMID 12937682) reported telomerase activity and about 33% longer mean telomeres; it did not show cells carried past the Hayflick limit. A 2025 cell-culture study from another laboratory (PMID 40908429) reported telomere lengthening via hTERT in normal lines and via ALT in breast-cancer lines. Its longevity rationale is telomere maintenance and the pineal / circadian axis.',
           'MOTS-c is a mitochondrial-derived peptide studied for metabolic regulation — activating AMPK and acting as an exercise-mimetic signal that improves insulin sensitivity and metabolic flexibility in models. So the two address aging from opposite ends: Epitalon at the replicative / telomere level, MOTS-c at the mitochondrial / metabolic level.',
         ],
       },
