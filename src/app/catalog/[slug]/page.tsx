@@ -22,6 +22,8 @@ import {
   PEPTIDES,
   CATEGORIES,
   getPeptideBySlug,
+  getComponents,
+  getBlendsContaining,
   SYNTHESIS_DIFFICULTY_LABEL,
   type Peptide,
 } from '@/lib/peptides'
@@ -118,10 +120,14 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
   const peptide = getPeptideBySlug(slug)
   if (!peptide) notFound()
 
+  const components = getComponents(peptide)
+  const partOfBlends = getBlendsContaining(peptide.slug)
+
   const related = PEPTIDES.filter(
     (p) =>
       p.slug !== peptide.slug &&
-      p.categories.some((c) => peptide.categories.includes(c)),
+      p.categories.some((c) => peptide.categories.includes(c)) &&
+      !components.some((comp) => comp.slug === p.slug),
   ).slice(0, 3)
 
   const areas = getAreasForPeptide(peptide)
@@ -617,6 +623,38 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                   ))}
                 </div>
               </div>
+            )}
+
+            {components.length > 0 && (
+              <Block title="Components">
+                <p className="mb-3 text-sm leading-relaxed text-ink/60">
+                  {peptide.name} is a blend. Each component is a single
+                  compound with its own catalog monograph — purity, mechanism,
+                  and research are documented per component below.
+                </p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {components.map((c) => (
+                    <RelatedCard key={c.slug} peptide={c} />
+                  ))}
+                </div>
+              </Block>
+            )}
+
+            {partOfBlends.length > 0 && (
+              <Block title="Found in these blends">
+                <div className="flex flex-wrap gap-2">
+                  {partOfBlends.map((b) => (
+                    <Link
+                      key={b.slug}
+                      href={`/catalog/${b.slug}`}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-fill px-3 py-1.5 text-xs font-medium transition-colors hover:border-accent/25 hover:bg-fill-strong"
+                    >
+                      <Layers className="h-3 w-3 text-accent/70" />
+                      {b.name}
+                    </Link>
+                  ))}
+                </div>
+              </Block>
             )}
 
             {related.length > 0 && (

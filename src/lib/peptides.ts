@@ -72,6 +72,13 @@ export interface Peptide {
   slug: string
   name: string
   aliases?: string[]
+  /**
+   * For combination blends only: the catalog slugs of the single-compound
+   * components this product mixes. Drives the "Components" cross-links on the
+   * detail page and the reverse "found in these blends" links on each
+   * component's page. Every slug must resolve to another catalog entry.
+   */
+  components?: string[]
   categories: PeptideCategory[]
   shortDescription: string
   description: string
@@ -5795,6 +5802,7 @@ const SEED_PEPTIDES: Peptide[] = [
     slug: 'bpc-157-tb-500',
     name: 'BPC-157 + TB-500',
     aliases: ['BPC-157/TB-500', 'BPC157 TB500', 'BPC-157 TB-500 blend'],
+    components: ['bpc-157', 'tb-500'],
     categories: ['healing-repair'],
     shortDescription:
       'The two most-studied repair peptides pre-mixed — BPC-157 for angiogenesis and tendon/gut healing, TB-500 for actin-driven cell migration.',
@@ -5830,6 +5838,7 @@ const SEED_PEPTIDES: Peptide[] = [
     slug: 'cjc-1295-ipamorelin',
     name: 'CJC-1295 (no DAC) + Ipamorelin',
     aliases: ['CJC-1295/Ipamorelin', 'Mod GRF 1-29 + Ipamorelin', 'CJC Ipa'],
+    components: ['cjc-1295-no-dac', 'ipamorelin'],
     categories: ['growth-hormone'],
     shortDescription:
       'The classic growth-hormone pairing — a GHRH analog (CJC-1295 no-DAC / Mod GRF 1-29) plus a selective secretagogue (Ipamorelin) that act on two different receptors.',
@@ -5865,6 +5874,7 @@ const SEED_PEPTIDES: Peptide[] = [
     slug: 'glow',
     name: 'GLOW',
     aliases: ['GLOW blend', 'GHK-Cu + BPC-157 + TB-500'],
+    components: ['ghk-cu', 'bpc-157', 'tb-500'],
     categories: ['cosmetic', 'healing-repair'],
     shortDescription:
       'A three-peptide skin-and-recovery blend typically combining GHK-Cu, BPC-157, and TB-500.',
@@ -5900,6 +5910,7 @@ const SEED_PEPTIDES: Peptide[] = [
     slug: 'klow',
     name: 'KLOW',
     aliases: ['KLOW blend', 'GHK-Cu + BPC-157 + TB-500 + KPV'],
+    components: ['ghk-cu', 'bpc-157', 'tb-500', 'kpv'],
     categories: ['healing-repair', 'cosmetic'],
     shortDescription:
       'A four-peptide repair-and-skin blend — the GLOW stack plus the anti-inflammatory tripeptide KPV.',
@@ -5935,6 +5946,7 @@ const SEED_PEPTIDES: Peptide[] = [
     slug: 'klow-2',
     name: 'KLOW 2.0',
     aliases: ['KLOW2.0', 'KLOW v2'],
+    components: ['ghk-cu', 'bpc-157', 'tb-500', 'kpv'],
     categories: ['healing-repair', 'cosmetic'],
     shortDescription:
       'A vendor revision of the KLOW repair-and-skin blend; composition is supplier-defined and not standardized.',
@@ -5969,6 +5981,7 @@ const SEED_PEPTIDES: Peptide[] = [
     slug: 'tesamorelin-ipamorelin',
     name: 'Tesamorelin + Ipamorelin',
     aliases: ['Tesamorelin/Ipamorelin', 'Tesa Ipa'],
+    components: ['tesamorelin', 'ipamorelin'],
     categories: ['growth-hormone'],
     shortDescription:
       'A GH-secretagogue pairing built on an FDA-approved GHRH analog (Tesamorelin) plus a selective secretagogue (Ipamorelin).',
@@ -6401,6 +6414,19 @@ export function getPeptideBySlug(slug: string): Peptide | undefined {
 
 export function getPeptidesByCategory(category: PeptideCategory): Peptide[] {
   return PEPTIDES.filter((p) => p.categories.includes(category))
+}
+
+/** Resolve a blend's `components` slugs to catalog entries, preserving order. */
+export function getComponents(peptide: Peptide): Peptide[] {
+  if (!peptide.components) return []
+  return peptide.components
+    .map((slug) => getPeptideBySlug(slug))
+    .filter((p): p is Peptide => p !== undefined)
+}
+
+/** Blends whose `components` include this slug — the reverse of getComponents. */
+export function getBlendsContaining(slug: string): Peptide[] {
+  return PEPTIDES.filter((p) => p.components?.includes(slug))
 }
 
 export function getCategoryLabel(id: PeptideCategory): string {
