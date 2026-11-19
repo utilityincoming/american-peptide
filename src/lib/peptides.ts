@@ -207,6 +207,10 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularFormula: 'C187H291N45O59',
     cas: '910463-68-2',
     fdaApproved: true,
+    // Backbone only. Aib8 is written as Ala (same charge). Lys26 carries the
+    // C18 diacid and is not a free amine; Arg34 replaces Lys34.
+    sequence:
+      'HAEGTFTSDVSSYLEGQAAKEFIAWLVRGRG (Aib8 as Ala; Lys26 acylated, Arg34)',
     synthesisNotes:
       'Beyond its 31-residue chain, semaglutide carries a fatty-diacid side chain on a linker — extra synthetic steps that each add cost and another opportunity for impurities to form. Genuine material is purified to a defined spec and documented on a certificate of analysis, never judged by appearance.',
     storage:
@@ -260,6 +264,9 @@ const SEED_PEPTIDES: Peptide[] = [
     cas: '204656-20-2',
     pubchemCid: 16134956,
     fdaApproved: true,
+    // Backbone only. Lys26 carries the C16 palmitoyl chain and is not a free amine.
+    sequence:
+      'HAEGTFTSDVSSYLEGQAAKEFIAWLVRGRG (Lys26 palmitoylated, Arg34)',
   },
   {
     slug: 'tirzepatide',
@@ -303,6 +310,9 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 4813.5,
     cas: '2023788-19-2',
     fdaApproved: true,
+    // Backbone only. Aib2 is written as Ala. The C20 diacid is on Lys20.
+    sequence:
+      'YAEGTFTSDYSIYLDKIAQKAFVQWLIAGGPSSGAPPPS (Aib2 as Ala; Lys20 acylated)',
     synthesisNotes:
       'At 39 residues with a fatty-acid chain and a dual-receptor design, tirzepatide is a long, demanding synthesis — more coupling cycles mean more deletion and truncation impurities for purification to remove. Its length is exactly why a credible purity figure and an actual chromatogram matter here.',
     storage:
@@ -1956,6 +1966,9 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     cas: '946870-92-4',
+    // 13-residue extension MFPAMPLSSLFVN plus mature IGF-1 with Glu3→Arg.
+    sequence:
+      'MFPAMPLSSLFVNGPRTLCGAELVDALQFVCGDRGFYFNKPTGYGSSSRRAPQTGIVDECCFRSCDLRRLEMYCAPLKPAKSA',
     // Parent protein IGF-1. LR3 is a synthetic 83-aa analog (13-aa N-terminal
     // extension + Arg3) that is not itself a UniProt entry.
     uniprotId: 'P05019',
@@ -2155,6 +2168,8 @@ const SEED_PEPTIDES: Peptide[] = [
     // Drug Affinity Complex on a Lys residue. The bare no-DAC 29-mer amide is a
     // different molecule (CID 56841945, ~3367.9 Da) — see cjc-1295-no-dac.
     pubchemCid: 91971820,
+    // Same 29-residue backbone as the no-DAC peptide. The maleimide is on a lysine.
+    sequence: 'YADAIFTQSYRKVLAQLSARKLLQDILSR (DAC on a lysine; not in the charge model)',
   },
   {
     slug: 'ipamorelin',
@@ -2240,6 +2255,9 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 5135.9,
     cas: '218949-48-5',
     fdaApproved: true,
+    // Human GHRH(1-44). The N-terminal trans-3-hexenoyl group is not in the letters.
+    sequence:
+      'YADAIFTNSYRKVLGQLSARKLLQDIMSRQQGESNQERGARARL (N-hexenoyl; C-terminal amide)',
   },
   {
     slug: 'sermorelin',
@@ -4247,6 +4265,8 @@ const SEED_PEPTIDES: Peptide[] = [
       },
     ],
     cas: '121062-08-6',
+    // Ac-Nle-cyclo(Asp-His-D-Phe-Arg-Trp-Lys)-NH2. Nle scored as Leu.
+    sequence: 'LDHFRWK (Nle as Leu; lactam Asp–Lys; N-acetyl, C-amide)',
   },
   {
     slug: 'melanotan-1',
@@ -4288,6 +4308,9 @@ const SEED_PEPTIDES: Peptide[] = [
     molecularWeight: 1646.8,
     pubchemCid: 16197727,
     fdaApproved: true,
+    // Ac-Ser-Tyr-Ser-Nle-Glu-His-D-Phe-Arg-Trp-Gly-Lys-Pro-Val-NH2.
+    // Nle scored as Met (neutral).
+    sequence: 'SYSMEHFRWGKPV (Nle4 as Met; N-acetyl, C-amide)',
   },
   {
     slug: 'pt-141',
@@ -4330,6 +4353,8 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     cas: '189691-06-3',
     fdaApproved: true,
+    // Ac-Nle-cyclo(Asp-His-D-Phe-Arg-Trp-Lys)-OH. Nle scored as Leu.
+    sequence: 'LDHFRWK (Nle as Leu; lactam Asp–Lys; N-acetyl)',
   },
   {
     slug: 'kisspeptin-10',
@@ -4780,6 +4805,7 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
     molecularWeight: 4493.3,
     cas: '154947-66-7',
+    sequence: 'LLGDFFRKSKEKIGKEFKRIVQRIKDFLRNLVPRTES',
   },
   {
     slug: 'kpv',
@@ -4908,6 +4934,8 @@ const SEED_PEPTIDES: Peptide[] = [
         a: 'No — it is not FDA-approved as a therapeutic. This page is a research and educational reference.',
       },
     ],
+    // hGH 176–191 with Phe176 replaced by Tyr. One disulfide, Cys–Cys.
+    sequence: 'YLRIVQCRSVEGSCGF (disulfide)',
   },
   {
     slug: 'adipotide',
