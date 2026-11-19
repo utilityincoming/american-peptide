@@ -13,9 +13,9 @@
 import { PEPTIDES, type Peptide } from '@/lib/peptides'
 import { gravy } from '@/lib/amino-acids'
 import {
+  catalogCodes,
   chargeAtPH,
   isoelectricPoint,
-  sanitizeSequence,
 } from '@/lib/peptide-properties'
 
 /** Typical bacteriostatic-water pH. The screen is an estimate at whatever pH the caller passes. */
@@ -127,7 +127,7 @@ function findPeptide(member: BlendMember): Peptide | undefined {
 }
 
 function codesOf(peptide: Peptide): string[] {
-  return sanitizeSequence(peptide.sequence ?? '').split('')
+  return catalogCodes(peptide.sequence ?? '')
 }
 
 function hasCopper(peptide: Peptide): boolean {
@@ -149,7 +149,7 @@ interface Resolved {
 
 function resolve(member: BlendMember, pH: number): Resolved {
   const peptide = findPeptide(member) ?? null
-  const label = peptide?.name || member.name?.trim() || 'Unnamed peptide'
+  const label = member.name?.trim() || peptide?.name || 'Unnamed peptide'
   const codes = peptide ? codesOf(peptide) : []
   const cysteines = codes.filter((c) => c === 'C').length
   if (codes.length === 0) {
@@ -174,25 +174,68 @@ function resolve(member: BlendMember, pH: number): Resolved {
   }
 }
 
+function expandMembers(members: BlendMember[]): BlendMember[] {
+  const out: BlendMember[] = []
+  for (const member of members) {
+    const peptide = findPeptide(member)
+    if (peptide?.slug === 'cagrisema') {
+      out.push({ slug: 'cagrilintide', name: 'Cagrilintide (in CagriSema)' })
+      out.push({ slug: 'semaglutide', name: 'Semaglutide (in CagriSema)' })
+    } else {
+      out.push(member)
+    }
+  }
+  return out
+}
+
 export function screenBlend(members: BlendMember[], pH: number): BlendScreen {
   const buffer = clampPh(pH)
-  const rows = members.map((m) => resolve(m, buffer))
+  const expanded = expandMembers(members)
+  const rows = expanded.map((m) => resolve(m, buffer))
   const flags: ScreenFlag[] = []
   const unresolved: string[] = []
 
   rows.forEach((row, i) => {
     if (!row.peptide) {
-      const typed = members[i]?.name?.trim()
+      const typed = expanded[i]?.name?.trim()
       if (typed) unresolved.push(typed)
       return
     }
-    if (row.codes.length === 0) {
+    const features = row.peptide.syntheticFeatures ?? []
+    const extract = features.includes('Tissue extract')
+    if (extract) {
+      flags.push({
+        level: 'info',
+        code: 'mixture',
+        title: `${row.label} is a mixture, not one sequence`,
+        detail:
+          'A tissue extract has no single chain to score. Charge, pI, and GRAVY do not apply, and a blend cannot be checked against one certificate of analysis.',
+      })
+    } else if (row.codes.length === 0) {
       flags.push({
         level: 'info',
         code: 'no-sequence',
         title: `${row.label}: no sequence on file`,
         detail:
           'Charge, isoelectric point, and GRAVY were skipped. Labeled incompatibilities still apply when the catalog slug matches.',
+      })
+    }
+    if (row.codes.length > 0 && features.includes('Fatty-acid acylation')) {
+      flags.push({
+        level: 'info',
+        code: 'acylation',
+        title: `${row.label}: the fatty-acid lysine is not a free amine`,
+        detail:
+          'The estimate counts that lysine as positively charged. The chain blocks the side chain, so the real net charge is about one unit lower.',
+      })
+    }
+    if (row.codes.length > 0 && features.includes('Unnatural residue')) {
+      flags.push({
+        level: 'info',
+        code: 'unnatural',
+        title: `${row.label}: a nonstandard residue is scored as alanine`,
+        detail:
+          'Aib and similar residues are written as Ala so the charge model can run. That position stays neutral. Mass and shape are not in this estimate.',
       })
     }
     if (FIBRIL_SLUGS.has(row.peptide.slug)) {

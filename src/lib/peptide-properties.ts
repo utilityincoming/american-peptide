@@ -83,6 +83,16 @@ export function a280Point1pct(epsilon: number, massDa: number): number {
 /** Valid single-letter codes for the 20 standard amino acids. */
 export const STANDARD_AA = 'ACDEFGHIKLMNPQRSTVWY'
 
+/**
+ * Single-letter codes for a catalog sequence. Notes in parentheses and a
+ * trailing amide marker (`-NH2`) are not residues. Three-letter strings such
+ * as `Ac-Glu-…` are left to `sanitizeSequence`, which only keeps A–Y letters.
+ */
+export function catalogCodes(raw: string): string[] {
+  const chain = raw.split(/ \(|-NH/i)[0] ?? ''
+  return sanitizeSequence(chain).split('')
+}
+
 /** Strip a raw string down to valid uppercase single-letter codes. */
 export function sanitizeSequence(raw: string): string {
   return raw
