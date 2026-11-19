@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   // the "<page> | AmericanPeptide.com" template from the root layout.
   title: { absolute: 'American Peptide — The Cited US Peptide Reference' },
   description:
-    'A cited, chemistry-grade peptide reference: the sourcing standard for US-made peptides, an open catalog, a dosing calculator, and a citation-backed research agent.',
+    'Research peptides: a cited catalog of US-made peptides, dosing calculators, clinical-trial data, and a citation-backed Peptide Agent. Research use only.',
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     url: '/',
     title: 'American Peptide — The Cited US Peptide Reference',
     description:
-      'The cited, chemistry-grade peptide reference — US sourcing standard, open catalog, dosing calculator, and a citation-backed research agent.',
+      'Research peptides: a cited catalog of US-made peptides, dosing calculators, clinical-trial data, and a citation-backed Peptide Agent. Research use only.',
   },
 }
 
