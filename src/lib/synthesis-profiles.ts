@@ -519,4 +519,13 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
   },
   ghrelin: { difficulty: 'demanding', features: ['Fatty-acid acylation'] },
   apelin: { difficulty: 'moderate', features: [] },
+  elabela: { difficulty: 'demanding', features: ['Disulfide bridge'] },
+  'alpha-klotho': {
+    difficulty: 'demanding',
+    features: ['Recombinant protein', 'Glycosylated'],
+  },
+  flgr242: {
+    difficulty: 'demanding',
+    features: ['Recombinant protein', 'Albumin-binding linker'],
+  },
 }

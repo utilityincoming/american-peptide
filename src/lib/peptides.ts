@@ -5459,6 +5459,181 @@ const SEED_PEPTIDES: Peptide[] = [
     synthesisNotes:
       'Apelin-13 is a 13-residue solid-phase synthesis with a free C-terminal acid — routine chain assembly, with two identity problems that define the batch. The N-terminal glutamine cyclizes to pyroglutamate on its own, so a specification has to state whether the product is apelin-13 (CAS 217082-58-1, C69H111N23O16S, 1550.8 Da) or [Pyr1]apelin-13 (CAS 217082-60-5, C69H108N22O16S, 1533.8 Da). Methionine oxidation is the other impurity to quantify; the C-terminal phenylalanine must stay intact, because loss of that residue is the ACE2 inactivation product and it weakens receptor activity.',
   },
+  {
+    slug: 'elabela',
+    name: 'Elabela',
+    aliases: ['ELABELA', 'Toddler', 'APELA', 'ELA-32'],
+    categories: ['peptide-hormone'],
+    shortDescription:
+      'The second endogenous ligand of the apelin receptor — a disulfide-bridged peptide required for heart development, studied in the adult cardiovascular system.',
+    description:
+      'Elabela (gene APELA, also called toddler) is a peptide hormone that activates the same receptor as apelin, APLNR. The human gene encodes a 54-residue precursor. The defined research peptide is ELA-32, residues 23–54 (QRPVNLTMRRKLRKHNCLQRRCMPLHSRVPFP), with a disulfide between Cys17 and Cys22 of that fragment. Shorter processed forms (ELA-22/21 and ELA-11) are also described. It is not an approved medicine.',
+    mechanism:
+      'Agonist at the class A GPCR APLNR, binding in a pose distinct from apelin. Coupling supports the same cardiovascular outputs studied for apelin — vasodilation and inotropy — and, in the embryo, the cell movements that build the heart. In human embryonic stem cells it has also been studied as a PI3K/AKT signal that supports self-renewal.',
+    researchAreas: [
+      'Heart development',
+      'Cardiovascular physiology',
+      'Preeclampsia',
+      'Peptide hormones',
+    ],
+    background: [
+      'Elabela was found twice, under two names, as the ligand the apelin receptor had been missing in early embryos. Chng and colleagues (Developmental Cell, 2013) named the zebrafish gene elabela and showed it is required before apelin is expressed; Pauli and colleagues (Science, 2014) named the same signal toddler and showed it drives mesendodermal cell movement through the apelin receptor. The human precursor is UniProt P0DMC3. Proteolytic processing releases ELA-32 and shorter C-terminal fragments; ELA-32 is the species sold as a research peptide.',
+      'The developmental phenotype is the reason the peptide is in the literature. Loss of Apela in mice causes low-penetrance embryonic lethality and defects in early mesoderm (Freyer et al., Cell Reports 2017), and a separate mouse study tied ELABELA deficiency to preeclampsia-like disease and cardiovascular malformations (Ho et al., Science 2017). Those are genetic findings about the endogenous hormone, not evidence for administering the peptide.',
+      'In the adult, exogenous ELA-32 is an APLNR agonist in cardiovascular models. Yang and colleagues (Circulation, 2017) reported that elabela/toddler acts in the adult cardiovascular system and that giving the peptide offset a fall in its expression in a pulmonary-arterial-hypertension model. It binds APLNR differently from apelin (Couvineau et al., FASEB Journal 2020). No elabela product is FDA-approved, and the native fragments are research materials, not medicines.',
+    ],
+    keyResearch: [
+      'Second APLNR ligand — identified as elabela (Chng et al., Developmental Cell 2013) and toddler (Pauli et al., Science 2014), required for embryonic cell movement through the apelin receptor before apelin itself is expressed.',
+      'Heart and placenta — Apela loss in mice produces early mesoderm defects (Freyer et al., Cell Reports 2017) and a preeclampsia-like phenotype with cardiovascular malformations (Ho et al., Science 2017).',
+      'Adult cardiovascular agonist — ELA-32 activates APLNR in adult cardiovascular models, including pulmonary arterial hypertension (Yang et al., Circulation 2017), and occupies the receptor differently from apelin.',
+      'Stem-cell signal — ELABELA supports human embryonic stem-cell self-renewal through PI3K/AKT (Ho et al., Cell Stem Cell 2015).',
+      'Defined research form — ELA-32, CAS 1680205-79-1, 32 residues, one disulfide. Shorter processed fragments exist; a certificate of analysis has to name which one was made.',
+    ],
+    faqs: [
+      {
+        q: 'What is elabela?',
+        a: 'Elabela (also called toddler, gene APELA) is the second peptide that activates the apelin receptor. The research material is usually ELA-32, a 32-residue disulfide-bridged fragment of a 54-residue precursor.',
+      },
+      {
+        q: 'How is elabela different from apelin?',
+        a: 'Both agonize APLNR, but they are different genes and different sequences, and they bind the receptor differently. Elabela is the ligand the embryo uses before apelin is expressed. Apelin-13 has no disulfide; ELA-32 has one.',
+      },
+      {
+        q: 'Is elabela a medicine?',
+        a: 'No. The published work is genetic and preclinical. No elabela product is FDA-approved.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference, not dosing guidance.',
+      },
+    ],
+    sequence:
+      'QRPVNLTMRRKLRKHNCLQRRCMPLHSRVPFP (ELA-32; disulfide between the two cysteines)',
+    molecularWeight: 3967.8,
+    molecularFormula: 'C170H289N63O39S4',
+    cas: '1680205-79-1',
+    pubchemCid: 131648248,
+    uniprotId: 'P0DMC3',
+    fdaApproved: false,
+    storage:
+      'Lyophilized: store frozen, dry, and protected from light. Two methionines make the peptide oxidation-sensitive. Reconstituted solutions are short-lived; refrigerate at 2–8 °C and do not store them for later use.',
+    handling:
+      'Reconstitute gently and keep the disulfide reduced-air exposure limited. Confirm the fragment on the certificate of analysis: ELA-32, the shorter ELA-22/21, and ELA-11 are different molecules. Methionine sulfoxide is the characteristic impurity.',
+    synthesisNotes:
+      'ELA-32 is a 32-residue solid-phase synthesis with one intramolecular disulfide (Cys17–Cys22 of the fragment) and a free C-terminal acid. Chain length and the basic run of arginines and lysines make the assembly harder than apelin-13, and the disulfide has to be formed and confirmed as the intramolecular bridge rather than as dimers. The specification also has to name the fragment: the precursor (UniProt P0DMC3) is processed to 32-, 22-/21-, and 11-residue peptides, and those are not interchangeable. Two methionines are oxidation sites.',
+  },
+  {
+    slug: 'alpha-klotho',
+    name: 'α-Klotho',
+    aliases: ['alpha-Klotho', 'Klotho', 'soluble Klotho', 'sKlotho', 'KL'],
+    categories: ['longevity'],
+    shortDescription:
+      'The aging-associated protein whose circulating ectodomain is the FGF23 co-receptor — a recombinant glycoprotein, studied in phosphate balance and kidney disease.',
+    description:
+      'α-Klotho (gene KL) is a type I transmembrane protein. The full chain is 1,012 residues (UniProt Q9UEF7): a short signal, a large extracellular region of two glycosidase-like domains (KL1 and KL2), a single transmembrane span, and a short cytoplasmic tail. Proteases shed the extracellular piece into blood and cerebrospinal fluid; that soluble ectodomain, roughly Glu34–Ser981, is the form supplied as recombinant “soluble klotho.” It is not an approved medicine. It is also not β-klotho, the separate gene (KLB) that pairs with FGF21.',
+    mechanism:
+      'Obligate co-receptor with FGF receptors for fibroblast growth factor 23. The Klotho–FGFR complex lets FGF23 lower phosphate reabsorption in the kidney and suppress vitamin D activation. The shed ectodomain retains co-receptor activity. A weaker, FGF23-independent glycosidase-like activity toward ion-channel and transporter glycans is also reported; the catalytic glutamates of a true family-1 glycosidase are not both present.',
+    researchAreas: [
+      'Aging',
+      'Phosphate metabolism',
+      'FGF23 signaling',
+      'Chronic kidney disease',
+    ],
+    background: [
+      'Kuro-o and colleagues (Nature, 1997) found klotho by accident: mice with a disrupted promoter aged fast — shortened lifespan, arterial calcification, skin atrophy, and osteoporosis — and restoring the gene prevented that picture. The protein those mice lacked is a membrane glycoprotein expressed mainly in the kidney distal tubule and the choroid plexus. The circulating activity is the ectodomain, cut loose by ADAM proteases and related sheddases. A separately spliced isoform contains only KL1 and is a minor species next to the shed two-domain form.',
+      'The function that made the protein tractable is phosphate, not a generic “anti-aging” activity. Membrane and soluble α-klotho both assemble with FGF receptors so that FGF23 can signal (Kurosu et al., and Urakawa et al., Journal of Biological Chemistry 2006). FGF23 then lowers renal phosphate reabsorption. Klotho-deficient and FGF23-deficient mice look alike, which is why the two are read as one axis. In chronic kidney disease that axis is disordered, and recombinant soluble klotho is studied as a way to put the co-receptor back — still investigational.',
+      'The research material is a glycoprotein, not a synthetic peptide. The naked ectodomain polypeptide is about 110 kDa; N-glycosylation pushes the circulating and recombinant protein to about 120–130 kDa on SDS-PAGE, and the mass and charge depend on the cell line that made it (CHO versus HEK). A product labeled only “klotho” can be the full ectodomain or the shorter KL1-only splice form (~65–70 kDa). β-Klotho is a different protein and the co-receptor for FGF21, so an identity test has to say which gene was expressed.',
+    ],
+    keyResearch: [
+      'Aging phenotype — insertional disruption of the mouse gene produced a rapid-aging syndrome, and the gene was named klotho (Kuro-o et al., Nature 1997).',
+      'FGF23 co-receptor — α-klotho converts FGF receptors into a high-affinity receptor for FGF23, coupling the protein to renal phosphate excretion.',
+      'Soluble ectodomain — ADAM shedding releases a circulating form that keeps co-receptor activity; this is the species produced as recombinant soluble klotho (UniProt Q9UEF7, extracellular region).',
+      'Kidney disease — disordered Klotho/FGF23 signaling is studied as a driver of disordered mineral metabolism in chronic kidney disease. Supplementation remains investigational.',
+      'Not β-klotho — KLB is the FGF21 co-receptor. The two proteins are not interchangeable, and a long-acting brand suffix does not turn one into the other.',
+    ],
+    faqs: [
+      {
+        q: 'What is α-klotho?',
+        a: 'α-Klotho is a kidney- and choroid-plexus-enriched transmembrane protein. Its shed extracellular domain circulates and is the co-receptor that lets FGF23 regulate phosphate. Recombinant soluble klotho is that ectodomain, produced in mammalian cells.',
+      },
+      {
+        q: 'How is soluble klotho different from the membrane protein?',
+        a: 'The membrane protein is the full 1,012-residue chain. Soluble klotho is the extracellular piece (about Glu34–Ser981) released by proteases. A minor spliced form contains only the first of the two extracellular domains. Glycosylation puts the two-domain soluble protein near 120–130 kDa.',
+      },
+      {
+        q: 'Is α-klotho the same as β-klotho?',
+        a: 'No. β-Klotho is a separate gene, KLB, and it is the co-receptor for FGF21. α-Klotho pairs with FGF23. A vial marked only “klotho” has not said which one it is.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference. Soluble klotho is investigational and is not an approved medicine.',
+      },
+    ],
+    molecularWeight: 130000,
+    uniprotId: 'Q9UEF7',
+    fdaApproved: false,
+    storage:
+      'Recombinant soluble α-klotho is a research glycoprotein. Store the lyophilized protein frozen, dry, and protected from light. After reconstitution keep it cold and avoid repeated freeze–thaw.',
+    handling:
+      'Handle as a large glycosylated protein: limit agitation and heat, which promote aggregation. Confirm the construct before use — full ectodomain versus the KL1-only splice, and α-klotho versus β-klotho — because the name on a vial is not the specification.',
+    synthesisNotes:
+      'α-Klotho is not a solid-phase peptide. The soluble research material is the extracellular region (UniProt Q9UEF7, approximately residues 34–981) expressed in mammalian cells so it is N-glycosylated. The polypeptide mass is about 110 kDa; the glycosylated protein migrates at about 120–130 kDa, and sialylation — and therefore charge — differs between CHO and HEK production. The KL1-only splice is a different, smaller protein (~65–70 kDa). Identity is the expression construct and the glycan pattern, not a single molecular formula.',
+  },
+  {
+    slug: 'flgr242',
+    name: 'FLGR242',
+    aliases: ['FLGR-242'],
+    categories: ['growth-hormone', 'metabolic'],
+    shortDescription:
+      'A supplier name for a claimed albumin-binding follistatin construct — not a molecule with a published sequence, structure, or study under this name.',
+    description:
+      'FLGR242 is a catalog designation used by research-chemical suppliers, not an international nonproprietary name and not a molecule indexed in the peer-reviewed literature. The supplier that introduced it describes a fragmented, modified form of follistatin-344 fused through a glycine–serine linker to an albumin-binding peptide, states a mass of about 40 kDa, and states that the construct does not bind activin. Those are vendor claims. PubMed, under the names FLGR242 and FLGR-242, has no characterization of the material in the vial. The biology it is sold against is the follistatin–myostatin literature, which is a different body of evidence.',
+    mechanism:
+      'The claimed mechanism is the follistatin mechanism: sequestration of myostatin away from ActRII receptors so Smad2/3 no longer brakes muscle growth, with the additional claims that activin binding has been removed and that an albumin-binding tag extends circulation. None of that selectivity or pharmacokinetics has been published for a molecule called FLGR242. Follistatin itself binds myostatin and activin; separating those two is a real protein-engineering problem, and it has not been shown in print for this designation.',
+    researchAreas: [
+      'Muscle growth',
+      'Myostatin',
+      'GLP-1 muscle preservation',
+      'Body composition',
+    ],
+    background: [
+      'Follistatin is a real secreted glycoprotein (see the follistatin monograph). It binds myostatin and activin and, by taking both ligands out of circulation, disinhibits muscle growth. The credible human and primate data for that idea come from follistatin gene therapy (an FS-344 expression cassette), not from an injected modified protein. Isoforms matter: FS-315, the circulating form, binds activin about tenfold more weakly than the cell-surface form FS-288, which is one reason the gene-therapy constructs were built the way they were.',
+      'FLGR242 is the supplier’s name for what they say is a cut-down FST-344 fused to an albumin-binding sequence. One product specification states the linker-plus-binder as GGSGGSGGSGGRLIEDICLPRWGCLWEDD, a mass near 40 kDa, albumin affinity tighter than 20 nM, and a circulating half-life of about 19 days — the half-life of albumin itself. Each of those figures is a claim on a product page. No pharmacokinetic paper, no binding paper, and no muscle study uses the name. Predicting a fused protein’s human half-life from an albumin-binding tag is an open problem even for constructs that have been published.',
+      'The marketing context is lean mass during GLP-1 weight loss, the same conversation as myostatin antibodies and follistatin. That clinical question is real. A named construct with no public sequence confirmation, no independent binding data, and no animal or human study is not yet part of the answer. Long-acting blockade of this axis also has a published downside that belongs in the same paragraph: turning off myostatin signaling in the adult mouse heart caused hypertrophy and heart failure, and follistatin suppresses FSH. Those findings are about the pathway, not a demonstration that this vial does or does not do those things.',
+    ],
+    keyResearch: [
+      'No paper under this name — searches of the literature return nothing that characterizes FLGR242. Sequence, selectivity, half-life, and muscle effects are supplier statements.',
+      'What is claimed — a modified fragment of follistatin-344, an albumin-binding fusion stated as GGSGGSGGSGGRLIEDICLPRWGCLWEDD, about 40 kDa, and a claim of lost activin binding. Treat the linker as a stated formula, not a verified one.',
+      'The evidence that does exist is about follistatin gene therapy and about myostatin-pathway antibodies, not about this protein. See follistatin, myostatin, and the activin-axis antibodies.',
+      'Selectivity is the hard part — native follistatin binds myostatin and activin (and can touch GDF11 and BMPs). A claim that a fragment has dropped activin binding needs a published binding panel.',
+      'Pathway cautions from other models — cardiac myostatin loss and FSH suppression are published properties of this axis, which is why a long-acting version would need its own safety data.',
+    ],
+    faqs: [
+      {
+        q: 'What is FLGR242?',
+        a: 'A supplier designation for a protein sold as a modified, albumin-binding follistatin. It is not an INN, and no peer-reviewed paper describes a molecule by this name. The stated identity is a fragmented FST-344 fused to an albumin-binding peptide, at about 40 kDa.',
+      },
+      {
+        q: 'Is FLGR242 the same as follistatin-344?',
+        a: 'Not as labeled. Follistatin-344 is a known isoform of the FST gene. FLGR242 is claimed to be a fragment of that isoform plus an albumin-binding tag, with activin binding removed. Until a sequence and a binding study are published, the vial and the gene product should not be treated as the same substance.',
+      },
+      {
+        q: 'Does it spare muscle during GLP-1 treatment?',
+        a: 'There is no published animal or human study of FLGR242. Muscle preservation on incretin drugs is a real research question; the data on it come from other interventions, including myostatin-pathway antibodies and follistatin gene therapy.',
+      },
+      {
+        q: 'Is this medical advice?',
+        a: 'No — this is a research and educational reference. FLGR242 is not an approved drug, and the pathway it is sold against is banned in sport.',
+      },
+    ],
+    molecularWeight: 40000,
+    fdaApproved: false,
+    storage:
+      'Handled as a lyophilized recombinant protein: frozen, dry, and protected from light. The stated mass and fusion architecture are supplier figures, so storage follows the lot’s own certificate rather than a pharmacopeial monograph.',
+    handling:
+      'Treat as a glycosylated or fusion protein that can aggregate with heat, agitation, and freeze–thaw. A certificate of analysis for this designation should be read against the follistatin isoforms: mass near 40 kDa does not by itself identify the construct, the linker, or which ligands it still binds.',
+    synthesisNotes:
+      'There is no published preparation. Suppliers describe a recombinant fusion — a fragment of follistatin-344 joined by a glycine–serine linker to an albumin-binding peptide — rather than a solid-phase peptide. Follistatin is a glycoprotein, so a genuine analogue of it is made in eukaryotic cells, and the mass depends on the fragment boundaries and on glycosylation. The linker sequence and the ~40 kDa figure circulate on product pages only. Identity work for a lot is mass spectrometry against a disclosed construct, plus a ligand-binding panel, neither of which is in the public record under this name.',
+  },
 ]
 
 export const PEPTIDES: Peptide[] = SEED_PEPTIDES.map(enrich)
