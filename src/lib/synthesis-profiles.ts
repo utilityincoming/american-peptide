@@ -377,6 +377,12 @@ export const SYNTHESIS_PROFILES: Record<string, SynthesisProfile> = {
     notes:
       'Testoluten is a natural testis peptide extract (complex A-12), a fractionated polypeptide preparation rather than a synthesized peptide. Consistency and characterization of the fraction are the quality challenge.',
   },
+  cartalax: {
+    difficulty: 'standard',
+    features: [],
+    notes:
+      'Cartalax (Ala-Glu-Asp) is an unmodified tripeptide made by routine solid-phase synthesis. There is no disulfide or oxidation-prone residue. The practical failure mode is identity: the tetrapeptide Ala-Glu-Asp-Leu (the sequence vendors attach to Bronchogen) is a different molecule, and CAS 205640-90-0 is orexin A. Confirm the tripeptide by mass (333.12 Da monoisotopic) and sequence, then control the salt form. The two carboxylic side chains make the free peptide hygroscopic.',
+  },
   sigumir: {
     difficulty: 'moderate',
     features: ['Tissue extract'],
