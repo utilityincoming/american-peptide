@@ -2529,7 +2529,7 @@ const SEED_PEPTIDES: Peptide[] = [
   {
     slug: 'follistatin',
     name: 'Follistatin',
-    aliases: ['FST', 'FS-288', 'FS-315', 'follistatin-344'],
+    aliases: ['FST', 'FS-288', 'FS-315', 'follistatin-344', 'follistatin-334', 'Follistatin 334', 'FS-334'],
     categories: ['growth-hormone', 'metabolic'],
     shortDescription:
       'A natural myostatin and activin antagonist — by neutralizing the muscle brake it is one of the most potent pro-muscle factors studied, and a doping and gene-therapy flashpoint.',
@@ -4999,7 +4999,7 @@ const SEED_PEPTIDES: Peptide[] = [
   {
     slug: 'nad-plus',
     name: 'NAD+',
-    aliases: ['Nicotinamide Adenine Dinucleotide'],
+    aliases: ['Nicotinamide Adenine Dinucleotide', 'NAD+ (buffered)', 'Buffered NAD+'],
     categories: ['mitochondrial', 'longevity'],
     shortDescription: 'Essential redox cofactor central to mitochondrial bioenergetics and sirtuin activity.',
     description:
@@ -5757,6 +5757,517 @@ const SEED_PEPTIDES: Peptide[] = [
       'Treat as a glycosylated or fusion protein that can aggregate with heat, agitation, and freeze–thaw. A certificate of analysis for this designation should be read against the follistatin isoforms: mass near 40 kDa does not by itself identify the construct, the linker, or which ligands it still binds.',
     synthesisNotes:
       'There is no published preparation. Suppliers describe a recombinant fusion — a fragment of follistatin-344 joined by a glycine–serine linker to an albumin-binding peptide — rather than a solid-phase peptide. Follistatin is a glycoprotein, so a genuine analogue of it is made in eukaryotic cells, and the mass depends on the fragment boundaries and on glycosylation. The linker sequence and the ~40 kDa figure circulate on product pages only. Identity work for a lot is mass spectrometry against a disclosed construct, plus a ligand-binding panel, neither of which is in the public record under this name.',
+  },
+
+  // ─── Combination blends ─────────────────────────────────────────────────
+  // Marketed as pre-mixed stacks. Each is a mixture, not a single molecule, so
+  // there is no one sequence, mass, formula, or CAS — the components are
+  // profiled on their own pages, and no blend has combined clinical data.
+  {
+    slug: 'bpc-157-tb-500',
+    name: 'BPC-157 + TB-500',
+    aliases: ['BPC-157/TB-500', 'BPC157 TB500', 'BPC-157 TB-500 blend'],
+    categories: ['healing-repair'],
+    shortDescription:
+      'The two most-studied repair peptides pre-mixed — BPC-157 for angiogenesis and tendon/gut healing, TB-500 for actin-driven cell migration.',
+    description:
+      'A combination of the gastric pentadecapeptide BPC-157 and TB-500 (the synthetic fragment of Thymosin β4). The two are paired on the rationale that they act on different limbs of tissue repair — BPC-157 on angiogenesis, growth-factor expression, and the nitric-oxide system; TB-500 on actin regulation and cell migration — so a blend is proposed to cover more of the healing cascade than either alone. It is a research combination: the peptides are studied individually in preclinical work, and no controlled study has tested the mixture or any fixed ratio in humans.',
+    mechanism:
+      'BPC-157: angiogenesis, VEGFR2/eNOS signaling, growth-factor upregulation. TB-500: G-actin sequestration promoting cell migration and wound closure. Mechanisms are complementary, not additive by any measured synergy.',
+    researchAreas: ['Tendon and ligament repair (preclinical)', 'Soft-tissue healing', 'Angiogenesis'],
+    background: [
+      'BPC-157 and TB-500 are the two peptides most often combined in the recovery literature because their proposed mechanisms sit at different points of the repair cascade. BPC-157 is studied for angiogenesis, tendon-to-bone healing, and gut-lining protection; TB-500 for the actin dynamics that drive cell migration into a wound. The pairing is a hypothesis that covering both ends of the process does more than either peptide alone.',
+      'That hypothesis has not been tested as a blend. The human evidence for each component is itself limited and largely preclinical, and combining two research peptides does not combine their evidence — it compounds the unknowns around purity, stability in a shared vial, and interaction. This is a research reference, not a protocol; neither component is FDA-approved.',
+    ],
+    keyResearch: [
+      'Complementary targets — BPC-157 (angiogenesis) and TB-500 (cell migration) act on different steps of repair, the basis for pairing them.',
+      'No combined trial — the blend itself has not been studied in controlled human research; evidence is per-component and preclinical.',
+      'Co-formulation unknowns — two peptides sharing one solution raise stability and compatibility questions a single-peptide vial does not.',
+      'Not FDA-approved — neither component is an approved therapeutic.',
+    ],
+    faqs: [
+      { q: 'What is the BPC-157 + TB-500 blend?', a: 'A pre-mixed combination of two repair peptides — BPC-157 and TB-500 — paired for their complementary roles in angiogenesis and cell migration. It is a research combination, not an approved therapy.' },
+      { q: 'Is the blend studied as a combination?', a: 'No. Each peptide is studied separately, mostly in preclinical models. No controlled study has tested the mixture or a fixed ratio, so combined effects are unestablished.' },
+      { q: 'Why are these two paired?', a: 'Their proposed mechanisms sit at different points of the healing cascade — BPC-157 on angiogenesis and growth factors, TB-500 on actin-driven cell migration — so the pairing aims to cover more of the process.' },
+      { q: 'Is it approved?', a: 'No — neither component is FDA-approved. This page is a research and educational reference, not medical advice.' },
+    ],
+  },
+  {
+    slug: 'cjc-1295-ipamorelin',
+    name: 'CJC-1295 (no DAC) + Ipamorelin',
+    aliases: ['CJC-1295/Ipamorelin', 'Mod GRF 1-29 + Ipamorelin', 'CJC Ipa'],
+    categories: ['growth-hormone'],
+    shortDescription:
+      'The classic growth-hormone pairing — a GHRH analog (CJC-1295 no-DAC / Mod GRF 1-29) plus a selective secretagogue (Ipamorelin) that act on two different receptors.',
+    description:
+      'A combination of CJC-1295 without DAC (the short-acting GHRH analog also called Mod GRF 1-29) and Ipamorelin, a selective ghrelin-receptor secretagogue. The two are paired because they raise growth hormone through different receptors: CJC-1295 supplies a GHRH signal to the somatotroph, while Ipamorelin acts on the GHS-R to amplify the pulse without the cortisol or prolactin rise of older GHRPs. It is one of the most common GH-secretagogue pairings in the research literature, and a research combination rather than an approved product.',
+    mechanism:
+      'CJC-1295 (no DAC): GHRH-receptor agonism driving GH synthesis and release. Ipamorelin: GHS-R1a agonism amplifying the GH pulse with high selectivity (minimal ACTH/cortisol/prolactin). Dual-receptor stimulation is studied for a larger, more physiologic pulse than either alone.',
+    researchAreas: ['Growth-hormone secretagogue research', 'GH pulse amplification', 'Body-composition models'],
+    background: [
+      'The logic of this pair is that the somatotroph can be pushed from two directions at once. CJC-1295 without DAC provides the GHRH input that tells the pituitary to make and release growth hormone; Ipamorelin acts through the separate ghrelin receptor to sharpen the release pulse. Because the two receptors are distinct, a combined signal is studied for a larger, still-pulsatile GH release than either input gives on its own.',
+      'Ipamorelin was chosen for these pairings specifically because it is selective — it drives GH without the appetite, cortisol, and prolactin effects seen with earlier secretagogues such as GHRP-6. The combination is widely referenced but remains a research construct: it is not an FDA-approved drug, and the component peptides are studied individually.',
+    ],
+    keyResearch: [
+      'Two-receptor design — GHRH (CJC-1295) plus GHS-R (Ipamorelin) stimulation is studied for a larger GH pulse than either pathway alone.',
+      'Selective secretagogue — Ipamorelin amplifies GH with minimal cortisol/prolactin, the reason it is favored over GHRP-6 in these blends.',
+      'Preserved pulsatility — the no-DAC CJC-1295 is short-acting, keeping GH release pulsatile rather than continuously elevated.',
+      'Not FDA-approved — a research combination, not an approved therapeutic.',
+    ],
+    faqs: [
+      { q: 'What is CJC-1295 + Ipamorelin?', a: 'A pairing of a GHRH analog (CJC-1295 without DAC, aka Mod GRF 1-29) and a selective GH secretagogue (Ipamorelin) that raise growth hormone through two different receptors.' },
+      { q: 'Why combine a GHRH analog with a GHRP?', a: 'They act on separate receptors — GHRH and the ghrelin receptor — so the combined signal is studied for a larger, still-pulsatile GH release than either component alone.' },
+      { q: 'Why Ipamorelin specifically?', a: 'Ipamorelin is the most selective GH secretagogue, raising GH with little effect on cortisol or prolactin, which is why it is paired in these blends rather than GHRP-6.' },
+      { q: 'Is it approved?', a: 'No — it is a research combination and not FDA-approved. This page is a research and educational reference.' },
+    ],
+  },
+  {
+    slug: 'glow',
+    name: 'GLOW',
+    aliases: ['GLOW blend', 'GHK-Cu + BPC-157 + TB-500'],
+    categories: ['cosmetic', 'healing-repair'],
+    shortDescription:
+      'A three-peptide skin-and-recovery blend typically combining GHK-Cu, BPC-157, and TB-500.',
+    description:
+      'GLOW is a marketed blend that typically combines the copper tripeptide GHK-Cu with BPC-157 and TB-500 — pairing a skin-and-collagen peptide with the two most-studied tissue-repair peptides. It is positioned around skin quality and recovery. Exact components and ratios are defined by the vendor and are not standardized, and no controlled study has tested the mixture; the components are each research compounds studied individually.',
+    mechanism:
+      'GHK-Cu: copper delivery, collagen and extracellular-matrix gene regulation, antioxidant signaling. BPC-157 and TB-500: angiogenesis and actin-driven cell migration (see their pages). Combined effect is proposed, not measured.',
+    researchAreas: ['Skin and collagen research', 'Soft-tissue repair (preclinical)', 'Cosmetic peptide research'],
+    background: [
+      'GLOW sits at the overlap of the cosmetic and repair literatures: GHK-Cu is studied for collagen synthesis, matrix remodeling, and skin appearance, while BPC-157 and TB-500 are the recovery peptides it is usually bundled with. The name reflects the skin-quality framing, and the blend is marketed as a single convenience vial.',
+      'As with any blend, the combined formulation has no trial behind it, and vendor formulas differ — the GHK-Cu-plus-BPC-157-plus-TB-500 recipe is the common one but not a specification. Treat the composition as vendor-defined. None of the components is FDA-approved, and this is a research reference rather than a cosmetic or medical recommendation.',
+    ],
+    keyResearch: [
+      'Skin + repair overlap — combines a collagen/matrix peptide (GHK-Cu) with two repair peptides (BPC-157, TB-500).',
+      'Vendor-defined recipe — the three-peptide composition is common but not standardized across suppliers.',
+      'No combined study — the blend itself is untested in controlled research; evidence is per-component.',
+      'Not FDA-approved — a research blend, not an approved product.',
+    ],
+    faqs: [
+      { q: 'What is in the GLOW blend?', a: 'It typically combines GHK-Cu, BPC-157, and TB-500, though exact components and ratios are set by the vendor and are not standardized.' },
+      { q: 'What is it marketed for?', a: 'Skin quality and recovery — pairing a collagen/skin peptide (GHK-Cu) with two tissue-repair peptides. These are research framings, not proven outcomes.' },
+      { q: 'How is it different from KLOW?', a: 'KLOW is generally the same idea with a fourth component (KPV) added; GLOW is the three-peptide version. Vendor formulas vary.' },
+      { q: 'Is it approved?', a: 'No — the components are research compounds and the blend is not FDA-approved. This page is a research and educational reference.' },
+    ],
+  },
+  {
+    slug: 'klow',
+    name: 'KLOW',
+    aliases: ['KLOW blend', 'GHK-Cu + BPC-157 + TB-500 + KPV'],
+    categories: ['healing-repair', 'cosmetic'],
+    shortDescription:
+      'A four-peptide repair-and-skin blend — the GLOW stack plus the anti-inflammatory tripeptide KPV.',
+    description:
+      'KLOW is a marketed blend that generally extends the GLOW combination (GHK-Cu, BPC-157, TB-500) with KPV, the anti-inflammatory C-terminal tripeptide of α-MSH. The added KPV supplies an anti-inflammatory component alongside the repair and skin peptides. Composition and ratios are vendor-defined and not standardized; the blend has no combined clinical data, and each component is a research compound profiled on its own page.',
+    mechanism:
+      'Adds KPV (NF-κB-pathway anti-inflammatory signaling) to GHK-Cu (collagen/matrix), BPC-157 (angiogenesis), and TB-500 (cell migration). The four-way combination is a proposed convenience stack, not a studied formulation.',
+    researchAreas: ['Soft-tissue repair (preclinical)', 'Inflammation research', 'Skin and collagen research'],
+    background: [
+      'KLOW is usually described as GLOW with KPV added — four peptides chosen to cover angiogenesis (BPC-157), cell migration (TB-500), skin and collagen (GHK-Cu), and inflammation (KPV) in a single vial. It is one of the more complex pre-mixed research blends on the market.',
+      'The more components a blend has, the more its combined behavior — stability, compatibility in one solution, and net effect — departs from anything that has been studied. No controlled trial has tested KLOW, vendor recipes differ, and none of the four components is FDA-approved. This is a research reference only.',
+    ],
+    keyResearch: [
+      'Four-way stack — adds anti-inflammatory KPV to the GHK-Cu / BPC-157 / TB-500 trio.',
+      'Covers four repair axes — angiogenesis, migration, matrix/skin, and inflammation, by design.',
+      'Vendor-defined, untested as a blend — composition is not standardized and the mixture has no controlled study.',
+      'Not FDA-approved — a research blend, not an approved product.',
+    ],
+    faqs: [
+      { q: 'What is in KLOW?', a: 'Generally GHK-Cu, BPC-157, TB-500, and KPV — the GLOW three-peptide blend plus the anti-inflammatory tripeptide KPV. Exact composition is vendor-defined.' },
+      { q: 'How does it differ from GLOW?', a: 'KLOW adds a fourth component, KPV, to the GLOW stack to bring in an anti-inflammatory element. Vendor formulas vary.' },
+      { q: 'Is the four-peptide blend studied?', a: 'No controlled study has tested the mixture. Evidence exists only for the individual components, mostly in preclinical work.' },
+      { q: 'Is it approved?', a: 'No — none of the components is FDA-approved and the blend is not either. This page is a research and educational reference.' },
+    ],
+  },
+  {
+    slug: 'klow-2',
+    name: 'KLOW 2.0',
+    aliases: ['KLOW2.0', 'KLOW v2'],
+    categories: ['healing-repair', 'cosmetic'],
+    shortDescription:
+      'A vendor revision of the KLOW repair-and-skin blend; composition is supplier-defined and not standardized.',
+    description:
+      'KLOW 2.0 is a vendor-labelled revision of the KLOW blend — the GHK-Cu / BPC-157 / TB-500 / KPV family of repair-and-skin peptides, re-formulated at different concentrations or component balance by the supplier. There is no standard definition of what the “2.0” changes, and the label is not tied to any published formulation or study. It is listed here for search and reference; for the underlying science, see the individual component pages and the KLOW entry.',
+    mechanism:
+      'Same component family as KLOW (GHK-Cu, BPC-157, TB-500, KPV). Any differences in the “2.0” version are concentration or ratio changes defined by the vendor, not a new mechanism.',
+    researchAreas: ['Soft-tissue repair (preclinical)', 'Skin and collagen research', 'Inflammation research'],
+    background: [
+      'The “2.0” designation is a product label, not a specification. It signals a supplier revision of the KLOW blend — typically a change in concentration or component balance — rather than a different set of peptides or any new evidence.',
+      'Because the composition is vendor-defined and unverified against any published formulation, KLOW 2.0 carries all the uncertainty of the original KLOW blend and then some. No controlled study has tested it, and none of its components is FDA-approved. This is a research reference only.',
+    ],
+    keyResearch: [
+      'Vendor revision — a re-formulated KLOW, not a new peptide or a studied composition.',
+      'No standard definition — the “2.0” label is not tied to any published specification.',
+      'Same uncertainties as KLOW — multi-peptide stability and combined effects remain untested.',
+      'Not FDA-approved — a research blend, not an approved product.',
+    ],
+    faqs: [
+      { q: 'What is KLOW 2.0?', a: 'A vendor revision of the KLOW blend (the GHK-Cu / BPC-157 / TB-500 / KPV family), re-formulated at supplier-defined concentrations. The “2.0” label is not a published specification.' },
+      { q: 'How is it different from KLOW?', a: 'It is marketed as a revised version — generally a concentration or ratio change — but there is no standard definition of the difference, and no study of either version as a blend.' },
+      { q: 'Is it approved?', a: 'No — it is a research blend and not FDA-approved. This page is a research and educational reference.' },
+    ],
+  },
+  {
+    slug: 'tesamorelin-ipamorelin',
+    name: 'Tesamorelin + Ipamorelin',
+    aliases: ['Tesamorelin/Ipamorelin', 'Tesa Ipa'],
+    categories: ['growth-hormone'],
+    shortDescription:
+      'A GH-secretagogue pairing built on an FDA-approved GHRH analog (Tesamorelin) plus a selective secretagogue (Ipamorelin).',
+    description:
+      'A combination of Tesamorelin — a stabilized GHRH analog FDA-approved for HIV-associated lipodystrophy — with Ipamorelin, a selective ghrelin-receptor secretagogue. It applies the same two-receptor logic as the CJC-1295 + Ipamorelin pairing, but uses a GHRH analog that has cleared clinical trials and carries an approved indication. The blend itself is a research combination: Tesamorelin is approved as a single agent, not in combination with Ipamorelin, and the mixture has no dedicated trial.',
+    mechanism:
+      'Tesamorelin: GHRH-receptor agonism (stabilized against DPP-4) driving GH synthesis and release, with documented visceral-fat reduction. Ipamorelin: selective GHS-R1a agonism amplifying the GH pulse. Dual-pathway stimulation is studied for a larger pulse than either alone.',
+    researchAreas: ['Growth-hormone secretagogue research', 'Visceral adiposity', 'GH pulse amplification'],
+    background: [
+      'This pairing is the “clinical-grade GHRH” version of the GHRH-plus-secretagogue stack. Tesamorelin is a GHRH analog with real trial data and an FDA approval for reducing visceral fat in HIV lipodystrophy; Ipamorelin adds a selective ghrelin-receptor signal on top. The two receptors are distinct, which is the basis for combining them.',
+      'The approval belongs to Tesamorelin alone. There is no trial of the Tesamorelin + Ipamorelin combination, so the blend inherits Tesamorelin’s evidence only for Tesamorelin, and Ipamorelin remains an unapproved research peptide. This page is a research reference, not a protocol.',
+    ],
+    keyResearch: [
+      'Approved GHRH component — Tesamorelin is FDA-approved (as a single agent) for HIV-associated lipodystrophy, unusual among secretagogue-blend components.',
+      'Two-receptor design — GHRH (Tesamorelin) plus GHS-R (Ipamorelin) stimulation studied for a larger GH pulse.',
+      'Blend is unstudied — the combination itself has no dedicated trial; the approval covers Tesamorelin alone.',
+      'Ipamorelin not approved — the secretagogue component is a research peptide.',
+    ],
+    faqs: [
+      { q: 'What is Tesamorelin + Ipamorelin?', a: 'A pairing of an FDA-approved GHRH analog (Tesamorelin) with a selective GH secretagogue (Ipamorelin), combining two receptor pathways to raise growth hormone.' },
+      { q: 'Is the combination FDA-approved?', a: 'No. Tesamorelin alone is approved for HIV-associated lipodystrophy; the combination with Ipamorelin has not been studied or approved as a blend.' },
+      { q: 'How does it compare to CJC-1295 + Ipamorelin?', a: 'Same two-receptor logic, but the GHRH component here (Tesamorelin) is a clinically approved, trial-backed analog rather than a research GHRH peptide.' },
+      { q: 'Is it approved as a blend?', a: 'No — only Tesamorelin as a single agent. This page is a research and educational reference.' },
+    ],
+  },
+
+  // ─── Single-molecule additions ──────────────────────────────────────────
+  {
+    slug: 'slu-pp-332',
+    name: 'SLU-PP-332',
+    aliases: ['SLU PP 332'],
+    categories: ['metabolic', 'mitochondrial'],
+    shortDescription:
+      'A synthetic small-molecule pan-ERR agonist studied as an “exercise mimetic” — not a peptide.',
+    description:
+      'SLU-PP-332 is a synthetic small molecule — not a peptide — that activates all three estrogen-related receptors (ERRα, ERRβ, ERRγ), the orphan nuclear receptors that control oxidative metabolism and mitochondrial biogenesis. It is studied as an “exercise mimetic”: in preclinical work it increased a type of muscle fiber and oxidative metabolism and reduced fat mass in mice without changes in food intake or activity. It is an early research compound with no human data and no approval.',
+    mechanism:
+      'Pan-ERR (ERRα/β/γ) agonism, upregulating the PGC-1α/ERR transcriptional program for mitochondrial biogenesis, fatty-acid oxidation, and oxidative muscle metabolism.',
+    researchAreas: ['Mitochondrial biogenesis', 'Obesity (preclinical)', 'Exercise mimetic research', 'Oxidative metabolism'],
+    background: [
+      'SLU-PP-332 came out of medicinal-chemistry work (Burris and colleagues) to find a direct agonist of the estrogen-related receptors, which sit downstream of PGC-1α and govern how cells build mitochondria and burn fat. Activating that program pharmacologically is the idea behind an “exercise mimetic” — reproducing some transcriptional effects of endurance exercise without the exercise.',
+      'In mouse studies the compound raised oxidative (fatigue-resistant) muscle fiber content and energy expenditure and reduced fat mass and diet-induced obesity. All of this is preclinical: there is no clinical trial, no safety data in humans, and it is a research chemical rather than a peptide or an approved drug.',
+    ],
+    keyResearch: [
+      'Pan-ERR agonist — directly activates ERRα/β/γ, the receptors downstream of PGC-1α that drive mitochondrial and oxidative metabolism.',
+      'Exercise-mimetic phenotype — increased oxidative muscle fiber and energy expenditure in mice.',
+      'Fat-mass reduction — reduced diet-induced obesity in mice without changes in food intake.',
+      'Small molecule, preclinical — not a peptide; no human data and not FDA-approved.',
+    ],
+    faqs: [
+      { q: 'What is SLU-PP-332?', a: 'A synthetic small-molecule agonist of the estrogen-related receptors (ERRα/β/γ), studied as an exercise mimetic that boosts oxidative metabolism in preclinical models. It is not a peptide.' },
+      { q: 'Why is it called an exercise mimetic?', a: 'It activates the PGC-1α/ERR transcriptional program that endurance exercise normally engages — mitochondrial biogenesis and fat oxidation — pharmacologically rather than through exercise.' },
+      { q: 'Is there human data?', a: 'No. The published work is in mice; there is no clinical trial or human safety data.' },
+      { q: 'Is it approved?', a: 'No — it is an early research compound, not FDA-approved. This page is a research and educational reference.' },
+    ],
+    syntheticFeatures: ['Small molecule'],
+  },
+  {
+    slug: 'dermorphin',
+    name: 'Dermorphin',
+    aliases: ['[D-Ala2]-dermorphin'],
+    categories: ['cognitive'],
+    shortDescription:
+      'A potent, highly selective μ-opioid heptapeptide from amphibian skin — a research tool containing a D-amino acid.',
+    description:
+      'Dermorphin is a naturally occurring heptapeptide first isolated from the skin of South American Phyllomedusa frogs. It is a potent and highly selective agonist at the μ-opioid receptor, several times more potent than morphine by weight in animal assays, and it is notable biochemically for containing a D-amino acid (D-alanine at position 2) — one of the few vertebrate peptides to do so, which is what protects it from rapid enzymatic breakdown. It is used as a pharmacological research tool; it is a controlled-interest opioid compound and is not an approved medicine.',
+    mechanism:
+      'High-affinity, selective μ-opioid-receptor agonism. The D-Ala2 residue and C-terminal amide confer resistance to peptidases, extending activity relative to all-L opioid peptides.',
+    researchAreas: ['Opioid-receptor pharmacology', 'Analgesia research', 'Peptide stability (D-amino acids)'],
+    background: [
+      'Dermorphin is one of the classic examples of a vertebrate peptide that breaks the all-L rule: its second residue is D-alanine, incorporated post-translationally. That single stereochemical change makes the peptide resistant to the enzymes that would otherwise clear an opioid peptide quickly, and it is a textbook case for why D-amino acids matter in peptide design.',
+      'Pharmacologically it is a potent, selective μ-opioid agonist and is studied as a probe of opioid-receptor function and of peptide analgesia. Because it is a strong opioid, it is a research reagent rather than a wellness compound, and it has no approved therapeutic use. This page is a research and educational reference only.',
+    ],
+    keyResearch: [
+      'Selective μ-opioid agonist — potent and highly μ-selective in receptor and analgesia assays.',
+      'Contains a D-amino acid — D-Ala2 is a rare natural D-residue that confers peptidase resistance.',
+      'Research probe — used to study opioid-receptor pharmacology and peptide stability, not as a therapeutic.',
+      'Not approved — a controlled-interest research opioid with no approved medical use.',
+    ],
+    faqs: [
+      { q: 'What is dermorphin?', a: 'A heptapeptide from amphibian skin that is a potent, selective μ-opioid-receptor agonist, used as a research tool. It contains a rare D-amino acid (D-Ala2).' },
+      { q: 'Why does the D-amino acid matter?', a: 'The D-alanine at position 2 resists enzymatic breakdown, which both extends the peptide’s activity and makes it a classic example of D-amino-acid stabilization in peptide design.' },
+      { q: 'Is it used clinically?', a: 'No — it is a potent opioid studied as a research reagent, with no approved therapeutic use.' },
+      { q: 'Is it approved?', a: 'No. This page is a research and educational reference, not medical advice.' },
+    ],
+    molecularWeight: 803.9,
+    molecularFormula: 'C40H50N8O10',
+    syntheticFeatures: ['D-amino acid', 'C-terminal amide'],
+  },
+  {
+    slug: 'pnc-27',
+    name: 'PNC-27',
+    aliases: ['PNC27'],
+    categories: ['longevity'],
+    shortDescription:
+      'A p53-derived membrane-targeting peptide studied for selective necrosis of cancer cells in preclinical models.',
+    description:
+      'PNC-27 is a designed peptide that joins a fragment of the p53 protein (the region that binds HDM-2) to a membrane-residency peptide that anchors it in the cell membrane. In preclinical studies it is reported to induce necrosis selectively in cancer cells — which display HDM-2 at the membrane — while sparing normal cells, by forming membrane pores rather than acting through the classic p53 transcriptional pathway. It is an early anticancer research peptide with no clinical data and no approval.',
+    mechanism:
+      'The p53 (12–26) HDM-2-binding domain, fused to a membrane-penetrating sequence, targets membrane-expressed HDM-2 on cancer cells and induces transmembrane pore formation and necrosis; proposed to spare normal cells that lack membrane HDM-2.',
+    researchAreas: ['Oncology (preclinical)', 'p53/HDM-2 biology', 'Membrane-targeting peptides'],
+    background: [
+      'PNC-27 comes from the idea that the p53–HDM-2 interaction can be turned into a selective cancer-cell toxin. The peptide carries the p53 segment that binds HDM-2, attached to a “membrane-residency” peptide that lodges it in the plasma membrane. Cancer cells that present HDM-2 at their surface are reported to be killed by membrane-pore formation and necrosis, a mechanism distinct from p53’s usual role as a transcription factor.',
+      'The published work is laboratory and preclinical — cultured cancer cells and animal models — and the selectivity and mechanism remain areas of active study and debate. There is no clinical trial and no approval; PNC-27 is a research compound, and this page is a research and educational reference.',
+    ],
+    keyResearch: [
+      'p53-derived design — uses the p53 HDM-2-binding domain fused to a membrane-anchoring peptide.',
+      'Membrane-pore necrosis — reported to kill cancer cells by pore formation, not the p53 transcriptional pathway.',
+      'Proposed selectivity — targets membrane HDM-2 said to be present on cancer but not normal cells (still under study).',
+      'Preclinical only — no clinical data; not FDA-approved.',
+    ],
+    faqs: [
+      { q: 'What is PNC-27?', a: 'A designed peptide combining a p53 fragment with a membrane-targeting sequence, studied for inducing necrosis in cancer cells in preclinical models.' },
+      { q: 'How is it proposed to work?', a: 'By anchoring the p53 HDM-2-binding domain in the cell membrane and targeting membrane-expressed HDM-2 on cancer cells, causing pore formation and necrosis rather than acting through p53 transcription.' },
+      { q: 'Is there clinical evidence?', a: 'No — the evidence is cell-culture and animal-model work; its selectivity and mechanism are still under study. There is no clinical trial.' },
+      { q: 'Is it approved?', a: 'No. This page is a research and educational reference, not medical advice.' },
+    ],
+  },
+  {
+    slug: 'pe-22-28',
+    name: 'PE 22-28',
+    aliases: ['PE22-28', 'spadin analog'],
+    categories: ['cognitive'],
+    shortDescription:
+      'A short spadin-derived peptide that blocks the TREK-1 potassium channel, studied as a fast-acting antidepressant and neuroprotective tool.',
+    description:
+      'PE 22-28 is a seven-residue peptide derived from spadin, the natural fragment of the sortilin propeptide that blocks the TREK-1 (TWIK-related potassium) channel. TREK-1 blockade is studied as a mechanism for rapid antidepressant action and for neuroprotection, and PE 22-28 was developed as a shortened, more stable spadin analog to probe that pathway. It is a preclinical research peptide with no human data and no approval.',
+    mechanism:
+      'Blockade of the TREK-1 background potassium channel, which modulates serotonergic neuron excitability; TREK-1 inhibition is associated with antidepressant-like effects and neuroprotection in animal models.',
+    researchAreas: ['Depression models', 'TREK-1 channel pharmacology', 'Neuroprotection (stroke models)'],
+    background: [
+      'Spadin was identified as an endogenous peptide that blocks TREK-1, a potassium channel whose activity restrains serotonergic signaling. Blocking it produced fast antidepressant-like effects in mice, which made the pathway interesting as an alternative to monoamine-reuptake drugs. PE 22-28 is a short, optimized fragment of spadin designed to keep that TREK-1 activity in a more stable, drug-like peptide.',
+      'Research on PE 22-28 spans antidepressant models and, separately, neuroprotection in ischemic (stroke) models where TREK-1 modulation is relevant. The work is preclinical; there is no clinical trial, no human safety data, and no approval. This page is a research and educational reference.',
+    ],
+    keyResearch: [
+      'TREK-1 blocker — a spadin-derived peptide that inhibits the TREK-1 potassium channel.',
+      'Fast antidepressant mechanism — TREK-1 blockade produces rapid antidepressant-like effects in animal models.',
+      'Neuroprotection — studied in ischemic/stroke models alongside its mood effects.',
+      'Preclinical — no human data; not FDA-approved.',
+    ],
+    faqs: [
+      { q: 'What is PE 22-28?', a: 'A short peptide derived from spadin that blocks the TREK-1 potassium channel, studied as a fast-acting antidepressant and neuroprotective agent in preclinical models.' },
+      { q: 'How does it relate to spadin?', a: 'It is a shortened, stabilized fragment of spadin designed to retain spadin’s TREK-1-blocking activity in a more drug-like peptide.' },
+      { q: 'Is there human evidence?', a: 'No — the research is in animal models. There is no clinical trial or human safety data.' },
+      { q: 'Is it approved?', a: 'No. This page is a research and educational reference, not medical advice.' },
+    ],
+  },
+  {
+    slug: 'p21',
+    name: 'P21 (P021)',
+    aliases: ['P021', 'P-21', 'CNTF-derived peptide'],
+    categories: ['cognitive'],
+    shortDescription:
+      'A CNTF-derived peptidergic compound with an adamantane group, studied as a neurogenic, BDNF-enhancing agent in Alzheimer’s models.',
+    description:
+      'P21 (also written P021) is a small peptidergic compound derived from a biologically active region of ciliary neurotrophic factor (CNTF), modified with an adamantane moiety to improve stability and brain penetration. It is studied for enhancing neurogenesis and BDNF signaling and for reducing tau pathology in preclinical Alzheimer’s-disease and neurodegeneration models. It is a research compound with no clinical data and no approval.',
+    mechanism:
+      'Derived from a CNTF peptide region; reported to antagonize the neurogenesis-inhibitor pathway and increase BDNF and neurotrophic signaling, with downstream reductions in tau hyperphosphorylation in animal models. The adamantane modification supports metabolic stability and CNS exposure.',
+    researchAreas: ['Alzheimer’s disease models', 'Neurogenesis', 'BDNF signaling', 'Tau pathology'],
+    background: [
+      'P021 came from efforts to capture the neurotrophic activity of ciliary neurotrophic factor in a small, stable molecule. By taking an active CNTF-derived peptide and attaching an adamantane group, researchers aimed for a compound that resists breakdown and reaches the brain while promoting new neuron formation and BDNF expression.',
+      'In transgenic and aging rodent models it has been reported to increase neurogenesis, raise BDNF, and lower tau pathology and cognitive deficits. This is preclinical neuroscience research; there is no clinical trial, no human data, and no approval. This page is a research and educational reference.',
+    ],
+    keyResearch: [
+      'CNTF-derived — built from an active region of ciliary neurotrophic factor, with an adamantane modification for stability and brain penetration.',
+      'Neurogenic and BDNF-enhancing — reported to promote neurogenesis and increase BDNF in animal models.',
+      'Tau reduction — associated with reduced tau hyperphosphorylation in Alzheimer’s-model rodents.',
+      'Preclinical — no human data; not FDA-approved.',
+    ],
+    faqs: [
+      { q: 'What is P21 / P021?', a: 'A CNTF-derived peptidergic compound with an adamantane group, studied for enhancing neurogenesis and BDNF signaling and reducing tau pathology in preclinical Alzheimer’s models.' },
+      { q: 'What is it studied for?', a: 'Neurogenesis, BDNF/neurotrophic signaling, and reduction of tau pathology and cognitive deficits in rodent models of neurodegeneration.' },
+      { q: 'Is there human evidence?', a: 'No — the published work is in animal models. There is no clinical trial or human safety data.' },
+      { q: 'Is it approved?', a: 'No. This page is a research and educational reference, not medical advice.' },
+    ],
+  },
+  {
+    slug: 'adamax',
+    name: 'Adamax',
+    aliases: ['Adamax peptide'],
+    categories: ['cognitive'],
+    shortDescription:
+      'A Semax-family nootropic analog marketed for cognitive research; peer-reviewed data are limited.',
+    description:
+      'Adamax is marketed as a nootropic peptide analog in the Semax family — Semax being the ACTH(4–7) / Pro-Gly-Pro-derived heptapeptide studied in Russia for cognitive and neuroprotective effects. Adamax is presented as a modified, adamantane-associated analog intended to extend that activity, but it has little peer-reviewed characterization: its sequence, pharmacology, and effects are not well documented in the public literature. It is a research compound and is not FDA-approved. Published evidence is thin — treat the marketing claims with corresponding caution.',
+    mechanism:
+      'Presented as a Semax-family analog, so proposed to act like Semax on BDNF/neurotrophic and melanocortin-related pathways — but Adamax’s own mechanism is not established in peer-reviewed work.',
+    researchAreas: ['Nootropic research', 'Neuroprotection (claimed)', 'Semax analogs'],
+    background: [
+      'Semax is a well-characterized Russian nootropic derived from a fragment of ACTH; it is studied for cognition, attention, and neuroprotection and is profiled separately in this catalog. Adamax is sold as a next-generation analog in that family, with claims of longer or stronger activity.',
+      'Unlike Semax, Adamax has essentially no independent peer-reviewed literature establishing its structure, pharmacokinetics, or effects. For a research reference the honest position is that it is an obscure, under-documented analog: of interest for completeness and search, but not backed by the kind of evidence Semax has. It is not FDA-approved. This page is a research and educational reference.',
+    ],
+    keyResearch: [
+      'Semax-family analog — marketed as a modified version of the ACTH-derived nootropic Semax.',
+      'Limited documentation — little peer-reviewed data on its sequence, pharmacology, or effects.',
+      'Claims outrun evidence — marketed activity is not established in independent research.',
+      'Not FDA-approved — an under-characterized research compound.',
+    ],
+    faqs: [
+      { q: 'What is Adamax?', a: 'A nootropic peptide marketed as a Semax-family analog. Unlike Semax, it has little peer-reviewed characterization of its structure or effects.' },
+      { q: 'How does it relate to Semax?', a: 'It is presented as a modified analog of Semax, the ACTH(4–7)-derived nootropic, but its own pharmacology is not established in independent research.' },
+      { q: 'Is there good evidence for it?', a: 'No — published evidence is thin. Semax is well studied; Adamax is not, and its marketing claims should be treated with caution.' },
+      { q: 'Is it approved?', a: 'No. This page is a research and educational reference, not medical advice.' },
+    ],
+  },
+  {
+    slug: 'cortagen',
+    name: 'Cortagen',
+    aliases: ['Ala-Glu-Asp-Pro', 'AEDP'],
+    categories: ['bioregulator'],
+    shortDescription:
+      'A Khavinson short peptide bioregulator (Ala-Glu-Asp-Pro) studied for cerebral-cortex and peripheral-nerve regeneration.',
+    description:
+      'Cortagen is one of the Khavinson short-peptide bioregulators — a synthetic tetrapeptide, Ala-Glu-Asp-Pro, developed in Russia and associated with the cerebral cortex and nervous tissue. Like the other bioregulators in this family, it is proposed to act as a tissue-specific, gene-regulatory signal, and it has been studied in Russian research for peripheral-nerve repair and CNS function. It is a research peptide, and its evidence base is largely from one research school and is not FDA-approved.',
+    mechanism:
+      'Proposed tissue-specific gene-regulatory activity (the Khavinson bioregulator hypothesis): short peptides binding DNA/chromatin to modulate expression in cortical and neural tissue. Mechanism is hypothesized more than proven in independent work.',
+    researchAreas: ['Peripheral-nerve regeneration', 'Cerebral-cortex function', 'Peptide bioregulator research'],
+    background: [
+      'Cortagen belongs to the family of short peptide bioregulators developed by Khavinson and colleagues, each linked to a particular tissue — Cortagen to the cerebral cortex and nervous system. The governing idea is that very short peptides act as regulatory signals that normalize gene expression and function in their target tissue, and this catalog profiles several members (Cartalax, Pinealon, Cerluten, and others) on the same premise.',
+      'Research on Cortagen, mainly from Russian groups, has examined peripheral-nerve regeneration and cortical function. As with the family generally, independent replication is limited and the mechanism remains a hypothesis rather than an established pathway. It is a research compound and is not FDA-approved; this page is a research and educational reference.',
+    ],
+    keyResearch: [
+      'Cortex bioregulator — a Khavinson tetrapeptide (Ala-Glu-Asp-Pro) associated with the cerebral cortex and nervous tissue.',
+      'Nerve-regeneration research — studied in peripheral-nerve-repair models.',
+      'Gene-regulatory hypothesis — proposed to act as a tissue-specific regulator, like the rest of the bioregulator family.',
+      'Limited independent evidence — mainly single-school research; not FDA-approved.',
+    ],
+    faqs: [
+      { q: 'What is Cortagen?', a: 'A Khavinson short-peptide bioregulator (Ala-Glu-Asp-Pro) associated with the cerebral cortex and nervous tissue, studied for nerve regeneration and cortical function.' },
+      { q: 'How is it thought to work?', a: 'Through the bioregulator hypothesis — short peptides acting as tissue-specific, gene-regulatory signals. The mechanism is hypothesized more than independently proven.' },
+      { q: 'How strong is the evidence?', a: 'Limited and largely from one research tradition, with little independent replication. Treat it as an early research compound.' },
+      { q: 'Is it approved?', a: 'No — it is a research peptide, not FDA-approved. This page is a research and educational reference.' },
+    ],
+    sequence: 'AEDP',
+  },
+  {
+    slug: 'thymulin',
+    name: 'Thymulin',
+    aliases: ['FTS', 'Serum thymic factor', 'Facteur thymique sérique', 'Zinc-thymulin'],
+    categories: ['immune'],
+    shortDescription:
+      'A zinc-dependent thymic nonapeptide (serum thymic factor) that regulates T-cell differentiation.',
+    description:
+      'Thymulin is a thymic nonapeptide — historically called serum thymic factor (FTS, facteur thymique sérique) — that is biologically active only when bound to zinc. Secreted by thymic epithelial cells, it is involved in T-lymphocyte differentiation and immune regulation, and its activity falls with age and with zinc deficiency. It has been studied as an immunomodulatory and anti-inflammatory research peptide. It is not FDA-approved.',
+    mechanism:
+      'Zinc-dependent nonapeptide hormone of thymic epithelial origin; promotes T-cell differentiation and modulates cytokine signaling. The zinc ion is required to fold the peptide into its active conformation.',
+    researchAreas: ['T-cell differentiation', 'Immunomodulation', 'Neuroimmunology / anti-inflammatory research'],
+    background: [
+      'Thymulin is one of the classic thymic hormones, identified as the zinc-requiring serum thymic factor. Its defining feature is that the peptide itself is inactive until a zinc ion binds and locks it into the right shape — which ties its biological activity directly to zinc status, and is why aging and zinc deficiency, both of which lower active thymulin, are part of its research story.',
+      'It has been studied for its role in maturing T cells and, more recently, for anti-inflammatory and neuroimmune effects in animal models. It sits alongside the other thymic peptides in this catalog (thymalin, thymosin alpha-1, thymosin β4) as a tool for immune research. It is a research compound and is not FDA-approved; this page is a research and educational reference.',
+    ],
+    keyResearch: [
+      'Zinc-dependent activity — the nonapeptide is biologically active only when bound to zinc, tying its function to zinc status.',
+      'T-cell differentiation — a thymic-epithelial hormone involved in maturing T lymphocytes.',
+      'Declines with age — active thymulin falls with thymic involution and zinc deficiency.',
+      'Anti-inflammatory research — studied for immunomodulatory and neuroimmune effects in models; not FDA-approved.',
+    ],
+    faqs: [
+      { q: 'What is thymulin?', a: 'A zinc-dependent thymic nonapeptide (serum thymic factor) secreted by thymic epithelial cells that regulates T-cell differentiation and immune function.' },
+      { q: 'Why does zinc matter for it?', a: 'Thymulin is only active when bound to zinc, which folds it into its functional shape — so its activity tracks zinc status and falls in zinc deficiency.' },
+      { q: 'How does it relate to the other thymic peptides?', a: 'It is one of several thymic immune peptides in this catalog, alongside thymalin, thymosin alpha-1, and thymosin β4, each studied as an immune-research tool.' },
+      { q: 'Is it approved?', a: 'No — it is a research peptide, not FDA-approved. This page is a research and educational reference.' },
+    ],
+  },
+  {
+    slug: 'hmg',
+    name: 'HMG (Menotropin)',
+    aliases: ['Human menopausal gonadotropin', 'Menotropin', 'hMG'],
+    categories: ['reproductive'],
+    shortDescription:
+      'Human menopausal gonadotropin — a purified FSH + LH gonadotropin preparation used clinically for ovulation induction and assisted reproduction.',
+    description:
+      'HMG (human menopausal gonadotropin, menotropin) is a biologic preparation of the gonadotropins FSH and LH, purified from the urine of postmenopausal women, in which both follicle-stimulating and luteinizing-hormone activity are present together. It is a long-established, FDA-approved class of fertility medicine used to stimulate the ovaries for ovulation induction and in assisted-reproduction (IVF) protocols, and to support spermatogenesis in some male-infertility settings. Unlike the synthetic peptides in this catalog, HMG is a glycoprotein-hormone mixture, not a solid-phase peptide.',
+    mechanism:
+      'Combined FSH and LH receptor agonism: FSH drives ovarian follicular growth, LH supports steroidogenesis and, with hCG, final maturation. In men, FSH plus LH activity supports testicular function and sperm production.',
+    researchAreas: ['Ovulation induction', 'Assisted reproduction (IVF)', 'Male hypogonadotropic infertility'],
+    background: [
+      'HMG is one of the oldest gonadotropin therapies, extracted and purified from postmenopausal urine, which is naturally rich in FSH and LH. Its value is that it delivers both activities at once — follicular stimulation and luteinizing support — which is why it has long been used to drive controlled ovarian stimulation in fertility care.',
+      'It is a biologic glycoprotein mixture rather than a defined synthetic peptide, and purified and recombinant gonadotropins (recombinant FSH, for example) are the modern refinements of the same idea. It sits in this catalog alongside the other reproductive-axis entries (hCG, FSH, gonadorelin). HMG is an approved medicine used under clinical supervision; this page is a research and educational reference, not medical advice.',
+    ],
+    keyResearch: [
+      'FSH + LH together — a purified gonadotropin preparation delivering both activities in one product.',
+      'Ovulation induction / IVF — a mainstay of controlled ovarian stimulation in assisted reproduction.',
+      'Urine-derived biologic — purified from postmenopausal urine; a glycoprotein mixture, not a synthetic peptide.',
+      'FDA-approved class — an established fertility medicine, used clinically (unlike most research peptides here).',
+    ],
+    faqs: [
+      { q: 'What is HMG?', a: 'Human menopausal gonadotropin (menotropin) — a purified preparation of FSH and LH from postmenopausal urine, used clinically to stimulate the ovaries for fertility treatment.' },
+      { q: 'How is it different from the peptides in this catalog?', a: 'HMG is a biologic glycoprotein-hormone mixture, not a synthetic solid-phase peptide, and it is an FDA-approved medicine rather than a research compound.' },
+      { q: 'What is it used for?', a: 'Ovulation induction and assisted-reproduction (IVF) protocols, and some male-infertility settings — always under clinical supervision.' },
+      { q: 'Is it approved?', a: 'Yes — menotropins are an approved class of fertility medicine. This page is a research and educational reference, not medical advice.' },
+    ],
+    fdaApproved: true,
+    syntheticFeatures: ['Glycosylated'],
+  },
+
+  // ─── Variant / related-form additions ───────────────────────────────────
+  {
+    slug: 'peg-mgf',
+    name: 'PEG-MGF',
+    aliases: ['Pegylated MGF', 'PEG Mechano Growth Factor', 'PEG-IGF-1Ec'],
+    categories: ['growth-hormone'],
+    shortDescription:
+      'A pegylated form of Mechano Growth Factor (MGF) designed for a longer half-life than the native IGF-1Ec splice peptide.',
+    description:
+      'PEG-MGF is Mechano Growth Factor — the IGF-1Ec splice variant released by mechanically loaded muscle — with a polyethylene-glycol (PEG) chain attached to extend its short half-life. Native MGF is cleared very quickly, so pegylation is used in research settings to keep the peptide in circulation long enough to study its proposed role in activating muscle satellite cells and local repair. It is a research compound, profiled here as the long-acting form of MGF; see the MGF entry for the underlying biology. It is not FDA-approved.',
+    mechanism:
+      'Same MGF signal — satellite-cell activation and local muscle repair via the E-domain of the IGF-1Ec splice variant — with a PEG chain that slows renal clearance and proteolysis to extend circulating half-life.',
+    researchAreas: ['Muscle repair and hypertrophy (preclinical)', 'Satellite-cell activation', 'Peptide half-life engineering'],
+    background: [
+      'MGF is the locally acting splice variant of IGF-1 that muscle produces in response to mechanical load; its distinctive E-domain is thought to activate the satellite cells that repair and grow muscle. Its practical problem as a research tool is speed of clearance — native MGF disappears from circulation almost immediately.',
+      'Pegylation is the standard fix: attaching a PEG chain shields the peptide and slows its removal, giving a longer-lived version for study. PEG-MGF is that long-acting form. The biology it is probing is MGF’s, and the evidence is preclinical; it is not FDA-approved. This page is a research and educational reference.',
+    ],
+    keyResearch: [
+      'Long-acting MGF — pegylation extends the very short half-life of native MGF for research use.',
+      'Satellite-cell signal — carries the same IGF-1Ec E-domain activity proposed to drive local muscle repair.',
+      'Half-life engineering — a textbook use of PEG to stabilize a rapidly cleared peptide.',
+      'Preclinical — not FDA-approved; see the MGF entry for the base biology.',
+    ],
+    faqs: [
+      { q: 'What is PEG-MGF?', a: 'Mechano Growth Factor (the IGF-1Ec splice peptide) with a PEG chain attached to extend its otherwise very short half-life for research use.' },
+      { q: 'Why pegylate MGF?', a: 'Native MGF is cleared almost immediately; the PEG chain slows clearance and proteolysis so the peptide stays in circulation long enough to study.' },
+      { q: 'How is it different from MGF?', a: 'Same signaling peptide and proposed biology — the difference is the pegylation that makes PEG-MGF longer-acting. See the MGF entry for the base science.' },
+      { q: 'Is it approved?', a: 'No — it is a research compound, not FDA-approved. This page is a research and educational reference.' },
+    ],
+  },
+  {
+    slug: 'ghk',
+    name: 'GHK',
+    aliases: ['Gly-His-Lys', 'copper-free GHK', 'GHK tripeptide'],
+    categories: ['cosmetic', 'healing-repair'],
+    shortDescription:
+      'The copper-free human tripeptide Gly-His-Lys — the parent of GHK-Cu, which avidly binds copper to form the active complex.',
+    description:
+      'GHK is the naturally occurring human tripeptide glycyl-L-histidyl-L-lysine (Gly-His-Lys), present in plasma and declining with age. It has a very high affinity for copper(II), and most of its studied biology — collagen and extracellular-matrix synthesis, wound signaling, antioxidant and gene-regulatory effects — is attributed to the copper complex GHK-Cu, profiled separately in this catalog. GHK is listed here as the copper-free parent peptide; in solution it readily picks up available copper to form GHK-Cu. It is a research and cosmetic-ingredient compound and is not an FDA-approved drug.',
+    mechanism:
+      'As the free tripeptide, GHK is a high-affinity copper(II) chelator; the resulting GHK-Cu complex is the form associated with collagen/matrix gene regulation, tissue-remodeling signals, and antioxidant activity.',
+    researchAreas: ['Skin and collagen research', 'Wound healing', 'Copper homeostasis', 'Gene-regulatory peptide research'],
+    background: [
+      'GHK was first isolated from human plasma and noted for its ability to carry copper. The peptide and its copper complex are closely linked in the literature: GHK binds copper so readily that under most conditions the active species studied is GHK-Cu, and the two names are often used loosely for the same system.',
+      'Listing GHK separately matters for precision — the copper-free peptide and the copper complex are not identical, and a product sold as “GHK” versus “GHK-Cu” differs in whether the copper is already coordinated. For the collagen, skin, and gene-regulatory biology, see the GHK-Cu entry. GHK is a research and cosmetic compound, not an FDA-approved therapeutic; this page is a research and educational reference.',
+    ],
+    keyResearch: [
+      'Copper-free parent — the Gly-His-Lys tripeptide that forms GHK-Cu on binding copper(II).',
+      'High copper affinity — readily chelates available copper, so the studied active form is usually the complex.',
+      'Plasma peptide that declines with age — the basis for its interest in skin and repair research.',
+      'See GHK-Cu — most mechanistic and cosmetic evidence is reported for the copper complex; not FDA-approved.',
+    ],
+    faqs: [
+      { q: 'What is GHK?', a: 'The copper-free human tripeptide Gly-His-Lys. It binds copper avidly to form GHK-Cu, the complex that carries most of the studied skin and collagen biology.' },
+      { q: 'How is GHK different from GHK-Cu?', a: 'GHK is the free peptide; GHK-Cu is the same peptide with a copper(II) ion coordinated. GHK readily picks up copper in solution, but the two are not identical forms.' },
+      { q: 'Which form is studied?', a: 'Most mechanistic and cosmetic research reports the copper complex, GHK-Cu — see that entry for collagen, matrix, and antioxidant effects.' },
+      { q: 'Is it approved?', a: 'No — it is a research and cosmetic-ingredient compound, not an FDA-approved drug. This page is a research and educational reference.' },
+    ],
+    sequence: 'GHK',
+    molecularWeight: 340.4,
+    molecularFormula: 'C14H24N6O4',
   },
 ]
 
