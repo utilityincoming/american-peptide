@@ -1,20 +1,22 @@
 # People
 
-One person or company per file. Context you'd want before a conversation.
+One person or company per file. See `.claude/rules/people.md` for the rule.
 
 Template (`people/<name>.md`):
 ```
 # <Name>
-> Who they are, in one line.
-Updated: YYYY-MM-DD
 
-- **Role / org:**
-- **How we connect:**
-- **Links:** (site, profiles)
+## Who
+One or two lines: who they are, role, org.
 
-## History
-- YYYY-MM-DD — what happened / what was discussed.
+## How we met
+The origin of the connection.
 
-## Notes
-- Preferences, context, things to remember.
+## Last contact
+YYYY-MM-DD — what was discussed. Update this every time you edit the card.
+
+## Open threads
+- Anything outstanding / to follow up.
 ```
+
+Never store passwords, card numbers, or ID numbers here.
