@@ -291,6 +291,7 @@ export function llmsIndexMarkdown(): string {
     `- [US sourcing standard](${API_SITE}/us-peptides): how to source US-made research peptides — a transparent 100-point trust standard and every US supplier scored against it on published third-party COAs and independent testing.`,
     `- [GLP-1 & metabolic peptides](${API_SITE}/glp-1): the incretin class — semaglutide, tirzepatide, retatrutide.`,
     `- [BPC-157](${API_SITE}/bpc-157): deep dive on the most-discussed healing peptide.`,
+    `- [Thymosin β4](${API_SITE}/thymosin-beta-4): actin sequestration, Ac-SDKP, and how TB-500 differs.`,
     `- [Growth hormone peptides](${API_SITE}/gh-peptides): GHRH analogs and secretagogues.`,
     `- [Cognitive peptides](${API_SITE}/cognitive-peptides): nootropic and neurotrophic compounds.`,
     `- [Longevity peptides](${API_SITE}/longevity-peptides): aging-axis research compounds.`,
