@@ -81,7 +81,7 @@ const COMPOUNDS = [
     mechanism: 'Reported telomerase upregulation; melatonin / circadian modulation',
     evidence: 'Preclinical (concentrated)',
     color: '#F472B6',
-    note: 'Evidence concentrated in Russian research tradition with limited independent replication. Tetrapeptide from pineal extract (epithalamin). Telomerase-activation claims are preliminary and require independent verification.',
+    note: 'Tetrapeptide (Ala-Glu-Asp-Gly) designed from the pineal extract epithalamin. The 2003 telomerase report is from the originating group; a 2025 cell-culture study replicated telomere lengthening in vitro, including via ALT in cancer lines. Lifespan data remain single-tradition. No large human trials.',
   },
   {
     slug: 'nad-plus',
@@ -122,7 +122,7 @@ const FAQS = [
   },
   {
     q: 'How reliable is the evidence for Epitalon\'s telomere effects?',
-    a: 'The telomerase-activation narrative for Epitalon rests largely on work from a single Russian research group (Khavinson et al.) with limited independent replication. The findings are preclinical or early-phase and have not been confirmed in large, multi-center human trials. This does not rule out the effects — it means the evidence is preliminary and should be held at the appropriate level of confidence.',
+    a: 'The original telomerase report is Khavinson, Bondarev, and Butyugov (2003): telomerase activity and about 33% longer mean telomeres in human fetal fibroblasts. A 2025 study from another laboratory reported telomere lengthening in normal human cell lines via hTERT, and in breast-cancer lines via alternative lengthening of telomeres; that paper later issued a figure correction, and the work is cell culture only. Mouse lifespan results — unchanged mean lifespan, a modest rise in maximum lifespan — still come from one research tradition and have not been independently repeated. There are no large human trials.',
   },
   {
     q: 'Are any longevity peptides FDA-approved?',
