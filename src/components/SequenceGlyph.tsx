@@ -51,7 +51,7 @@ export default function SequenceGlyph({
       <defs>
         <radialGradient id="sg-node" cx="36%" cy="30%" r="78%">
           <stop offset="0%" stopColor="#b6f8e9" />
-          <stop offset="45%" stopColor="#5BA88C" />
+          <stop offset="45%" stopColor="#7EE0B5" />
           <stop offset="100%" stopColor="#0c6f59" />
         </radialGradient>
       </defs>
@@ -60,7 +60,7 @@ export default function SequenceGlyph({
       <polyline
         points={pts.map((p) => `${p.x},${p.y}`).join(' ')}
         fill="none"
-        stroke="#5BA88C"
+        stroke="#7EE0B5"
         strokeOpacity={0.5}
         strokeWidth={Math.max(2, r * 0.3)}
         strokeLinecap="round"

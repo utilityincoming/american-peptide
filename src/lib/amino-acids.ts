@@ -72,11 +72,11 @@ export const AA_CATEGORIES: CategoryMeta[] = [
   {
     id: 'nonpolar',
     label: 'Nonpolar',
-    text: 'text-[#5BA88C]',
-    border: 'border-[#5BA88C]/35',
-    bg: 'bg-[#5BA88C]/[0.10]',
-    solid: 'bg-[#5BA88C]/70',
-    hoverBg: 'hover:bg-[#5BA88C]/[0.10]',
+    text: 'text-[#7EE0B5]',
+    border: 'border-[#7EE0B5]/35',
+    bg: 'bg-[#7EE0B5]/[0.10]',
+    solid: 'bg-[#7EE0B5]/70',
+    hoverBg: 'hover:bg-[#7EE0B5]/[0.10]',
   },
   {
     id: 'polar',

@@ -445,7 +445,7 @@ export default function DesignLabPage() {
             step={0.1}
             value={ph}
             onChange={(e) => setPh(parseFloat(e.target.value))}
-            className="w-full accent-[#5BA88C]"
+            className="w-full accent-[#7EE0B5]"
           />
           <div className="mt-1 flex justify-between text-[10px] text-ink/55">
             <span>0 · acidic</span>

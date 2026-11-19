@@ -66,7 +66,7 @@ const AGONISTS = [
     weightLoss: '~15%',
     trial: 'STEP-1',
     halfLife: '~168 h',
-    accent: '#5BA88C',
+    accent: '#7EE0B5',
     highlight: false,
   },
   {
@@ -157,7 +157,7 @@ const AGONISTS = [
     weightLoss: '~6%',
     trial: 'STEP 8',
     halfLife: '~13 h',
-    accent: '#5BA88C',
+    accent: '#7EE0B5',
     highlight: false,
   },
   {
@@ -170,7 +170,7 @@ const AGONISTS = [
     weightLoss: '~12%',
     trial: 'ATTAIN-1',
     halfLife: '~29–49 h',
-    accent: '#5BA88C',
+    accent: '#7EE0B5',
     highlight: false,
   },
   {
@@ -183,7 +183,7 @@ const AGONISTS = [
     weightLoss: 'Modest',
     trial: 'REWIND',
     halfLife: '~120 h',
-    accent: '#5BA88C',
+    accent: '#7EE0B5',
     highlight: false,
   },
   {
@@ -196,7 +196,7 @@ const AGONISTS = [
     weightLoss: 'Modest',
     trial: 'EXSCEL',
     halfLife: '~2.4 h',
-    accent: '#5BA88C',
+    accent: '#7EE0B5',
     highlight: false,
   },
   {
@@ -393,7 +393,7 @@ export default function GLP1Page() {
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(126,224,181,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -405,7 +405,7 @@ export default function GLP1Page() {
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             GLP-1 &amp; Incretin Peptide
             <br />
-            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7EE0B5] to-[#818CF8] bg-clip-text text-transparent">
               Research Guide
             </span>
           </h1>
@@ -472,7 +472,7 @@ export default function GLP1Page() {
                   {
                     label: 'Mono-agonism',
                     icon: <Zap className="h-4 w-4" />,
-                    color: '#5BA88C',
+                    color: '#7EE0B5',
                     drugs: 'Semaglutide, liraglutide',
                     desc: 'GLP-1R only. Benchmark for glucose control, satiety, and weight reduction.',
                   },
@@ -954,7 +954,7 @@ function ReferenceEdition() {
       </p>
       <Link
         href="/catalog"
-        className="flex items-center justify-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
+        className="flex items-center justify-center gap-2 rounded-lg bg-[#7EE0B5] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
       >
         Browse catalog
         <ArrowRight className="h-4 w-4" />

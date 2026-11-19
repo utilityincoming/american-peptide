@@ -21,7 +21,7 @@ export function DotField({ size = 28, intensity = 0.1, className = '' }: DotFiel
       aria-hidden
       className={`pointer-events-none absolute inset-0 ${className}`}
       style={{
-        backgroundImage: `radial-gradient(circle, rgba(91,168,140,${intensity}) 1px, transparent 1px)`,
+        backgroundImage: `radial-gradient(circle, rgba(126,224,181,${intensity}) 1px, transparent 1px)`,
         backgroundSize: `${size}px ${size}px`,
       }}
     />
@@ -45,7 +45,7 @@ export function Glow({ className = '', intensity, blur = 120 }: GlowProps) {
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute rounded-full bg-[#5BA88C] ${className}`}
+      className={`pointer-events-none absolute rounded-full bg-[#7EE0B5] ${className}`}
       style={{ ...(intensity !== undefined && { opacity: intensity }), filter: `blur(${blur}px)` }}
     />
   )

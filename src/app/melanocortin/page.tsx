@@ -81,7 +81,7 @@ const DRUGS: Drug[] = [
     approvedYear: 2020,
     expandedIndications: 'Bardet-Biedl syndrome, Alström syndrome',
     route: 'Daily subcutaneous injection',
-    accent: '#5BA88C',
+    accent: '#7EE0B5',
   },
   {
     id: 'bremelanotide',
@@ -192,7 +192,7 @@ const PIPELINE: PipelineEntry[] = [
 ]
 
 const MATURITY = {
-  approved:   { label: 'Approved',        dot: 'bg-[#5BA88C]',    badge: 'bg-accent/10 text-accent border-accent/20',      ring: 'border-accent/20 bg-accent/[0.03]' },
+  approved:   { label: 'Approved',        dot: 'bg-[#7EE0B5]',    badge: 'bg-accent/10 text-accent border-accent/20',      ring: 'border-accent/20 bg-accent/[0.03]' },
   clinical:   { label: 'Clinical Trials', dot: 'bg-amber-400',    badge: 'bg-amber-500/10 text-amber-400 border-amber-500/20',       ring: 'border-amber-500/15 bg-amber-500/[0.02]'  },
   preclinical:{ label: 'Preclinical',     dot: 'bg-ink/20',     badge: 'bg-fill-strong text-ink/55 border-hairline-strong',            ring: 'border-hairline bg-fill'     },
 }
@@ -481,11 +481,11 @@ export default function MelanocortinPage() {
           className="absolute inset-0 opacity-[0.08]"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(91,168,140,0.18) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(126,224,181,0.18) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
-        <div className="absolute -top-40 right-1/3 h-[450px] w-[450px] rounded-full bg-[#5BA88C] opacity-[0.06] blur-[130px]" />
+        <div className="absolute -top-40 right-1/3 h-[450px] w-[450px] rounded-full bg-[#7EE0B5] opacity-[0.06] blur-[130px]" />
         <div className="absolute top-1/2 left-1/4 h-80 w-80 rounded-full bg-purple-500 opacity-[0.03] blur-[100px]" />
         <div className="absolute bottom-0 right-1/2 h-96 w-96 rounded-full bg-amber-500 opacity-[0.025] blur-[120px]" />
       </div>
@@ -507,15 +507,15 @@ export default function MelanocortinPage() {
         <section className="mb-20 max-w-4xl">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/[0.07] px-3.5 py-1.5 text-xs font-medium text-accent">
             <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5BA88C] opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#5BA88C]" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#7EE0B5] opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#7EE0B5]" />
             </span>
             Therapeutic Class Review · Melanocortin System
           </div>
           <h1 className="mb-5 text-4xl font-bold leading-tight tracking-tight md:text-6xl">
             Melanocortin Agonist
             <br />
-            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#818cf8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#818cf8] bg-clip-text text-transparent">
               Research Hub
             </span>
           </h1>
@@ -610,8 +610,8 @@ export default function MelanocortinPage() {
                   <Radar
                     name="Setmelanotide"
                     dataKey="Setmelanotide"
-                    stroke="#5BA88C"
-                    fill="#5BA88C"
+                    stroke="#7EE0B5"
+                    fill="#7EE0B5"
                     fillOpacity={0.13}
                     strokeWidth={2}
                   />
@@ -697,7 +697,7 @@ export default function MelanocortinPage() {
             title="Where to Source"
             subtitle="Trust-ranked vendors for PT-141, melanotan-1, and related melanocortin research peptides — ranked by purity documentation, not commission"
           />
-          <SourcingCard slugs={['pt-141', 'melanotan-1']} accent="#5BA88C" />
+          <SourcingCard slugs={['pt-141', 'melanotan-1']} accent="#7EE0B5" />
         </section>
 
         {/* ── Research Tools ── */}

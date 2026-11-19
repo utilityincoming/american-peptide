@@ -142,14 +142,14 @@ export default function SynthesisPage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(126,224,181,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
         <div className="relative mx-auto max-w-5xl">
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             How a pure peptide is{' '}
-            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
               actually made
             </span>
           </h1>
@@ -359,7 +359,7 @@ export default function SynthesisPage() {
       {/* ── Provenance / American standard ── */}
       <section className="border-t border-hairline px-6 py-14 md:px-10">
         <div className="mx-auto max-w-5xl">
-          <div className="rounded-2xl border border-accent/15 bg-gradient-to-br from-[#5BA88C]/[0.06] to-transparent p-7 md:p-9">
+          <div className="rounded-2xl border border-accent/15 bg-gradient-to-br from-[#7EE0B5]/[0.06] to-transparent p-7 md:p-9">
             <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
               <Flag className="h-5 w-5" strokeWidth={1.75} />
             </span>

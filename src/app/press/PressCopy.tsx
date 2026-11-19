@@ -30,7 +30,7 @@ export function CopyButton({ text, label = 'Copy' }: { text: string; label?: str
       aria-label={done ? 'Copied to clipboard' : label}
       className={`inline-flex shrink-0 items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
         done
-          ? 'border-accent bg-[#5BA88C] text-[#0E1512]'
+          ? 'border-accent bg-[#7EE0B5] text-[#0E1512]'
           : 'border-hairline-strong text-ink/60 hover:border-accent hover:text-ink'
       }`}
     >

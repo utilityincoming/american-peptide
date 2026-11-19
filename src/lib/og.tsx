@@ -13,7 +13,7 @@ import { readFile } from 'node:fs/promises'
 export const OG_SIZE = { width: 1200, height: 630 }
 export const OG_CONTENT_TYPE = 'image/png'
 
-const BRAND = '#5BA88C'
+const BRAND = '#7EE0B5'
 
 // Satori's gradient/color parser is strict — use rgba(), never 8-digit hex.
 function rgba(hex: string, a: number): string {
@@ -24,17 +24,17 @@ function rgba(hex: string, a: number): string {
 // Category → accent, so a feed of cards is visually sortable. Mirrors the
 // token accents (teal / indigo / blue / purple / amber) used in the UI.
 const CATEGORY_ACCENT: Record<string, string> = {
-  metabolic: '#5BA88C',
-  'growth-hormone': '#93D4BA',
+  metabolic: '#7EE0B5',
+  'growth-hormone': '#D2FBE6',
   'healing-repair': '#60A5FA',
   cognitive: '#818CF8',
   longevity: '#A78BFA',
   cosmetic: '#F0ABFC',
   reproductive: '#F472B6',
-  immune: '#6FBF9A',
+  immune: '#A6F0CC',
   mitochondrial: '#E0A23D',
   bioregulator: '#38BDF8',
-  'peptide-hormone': '#5BA88C',
+  'peptide-hormone': '#7EE0B5',
 }
 
 export function categoryAccent(category?: string): string {

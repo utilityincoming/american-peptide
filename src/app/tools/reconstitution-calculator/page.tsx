@@ -523,7 +523,7 @@ function SyringeDiagram({ units }: { units: number }) {
           width={fillW}
           height={BARREL_H}
           rx="2"
-          fill="#5BA88C"
+          fill="#7EE0B5"
           fillOpacity="0.28"
         />
       )}
@@ -533,7 +533,7 @@ function SyringeDiagram({ units }: { units: number }) {
           y1={BARREL_Y - 2}
           x2={BARREL_X + fillW}
           y2={BARREL_Y + BARREL_H + 2}
-          stroke="#5BA88C"
+          stroke="#7EE0B5"
           strokeWidth="1.5"
         />
       )}
@@ -604,9 +604,9 @@ function SyringeDiagram({ units }: { units: number }) {
             width="48"
             height="18"
             rx="3"
-            fill="#5BA88C"
+            fill="#7EE0B5"
             fillOpacity="0.15"
-            stroke="#5BA88C"
+            stroke="#7EE0B5"
             strokeOpacity="0.4"
             strokeWidth="0.75"
           />
@@ -614,7 +614,7 @@ function SyringeDiagram({ units }: { units: number }) {
             x={Math.max(BARREL_X + 24, Math.min(labelX, BARREL_X + BARREL_W - 24))}
             y={BARREL_Y + BARREL_H + 21}
             textAnchor="middle"
-            className="fill-[#5BA88C]"
+            className="fill-[#7EE0B5]"
             style={{ fontSize: '11px', fontFamily: 'monospace', fontWeight: 600 }}
           >
             {clamped.toFixed(1)} u

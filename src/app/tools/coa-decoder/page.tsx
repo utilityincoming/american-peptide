@@ -205,7 +205,7 @@ export default function CoaDecoderPage() {
         <div className="mx-auto max-w-4xl">
           <h1 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
             Decode &{' '}
-            <span className="bg-gradient-to-r from-[#5BA88C] to-[#93D4BA] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7EE0B5] to-[#D2FBE6] bg-clip-text text-transparent">
               grade a COA
             </span>
           </h1>
@@ -258,7 +258,7 @@ export default function CoaDecoderPage() {
               <button
                 onClick={analyze}
                 disabled={loading || text.trim().length < 20}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A] disabled:cursor-not-allowed disabled:opacity-40"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#7EE0B5] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#A6F0CC] disabled:cursor-not-allowed disabled:opacity-40"
               >
                 <FileSearch className="h-4 w-4" />
                 {loading ? 'Analyzing…' : 'Analyze COA'}
@@ -344,7 +344,7 @@ export default function CoaDecoderPage() {
                     </div>
                     <div className="h-2 overflow-hidden rounded-full bg-fill-strong">
                       <div
-                        className="h-full rounded-full bg-gradient-to-r from-[#5BA88C] to-[#93D4BA]"
+                        className="h-full rounded-full bg-gradient-to-r from-[#7EE0B5] to-[#D2FBE6]"
                         style={{ width: `${report.score.percent}%` }}
                       />
                     </div>

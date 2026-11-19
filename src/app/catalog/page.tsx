@@ -153,7 +153,7 @@ export default function CatalogPage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(126,224,181,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -165,7 +165,7 @@ export default function CatalogPage() {
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             The peptide reference catalog,
             <br />
-            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
               built for research transparency.
             </span>
           </h1>
@@ -207,7 +207,7 @@ export default function CatalogPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search peptides, aliases, or research areas…"
-              className="w-full rounded-xl border border-hairline bg-fill py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#5BA88C]/40"
+              className="w-full rounded-xl border border-hairline bg-fill py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#7EE0B5]/40"
             />
             {query && (
               <button
@@ -364,7 +364,7 @@ function PeptideCard({
   return (
     <div
       className={
-        'group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-fill p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-fill-strong hover:shadow-[0_18px_50px_-12px_rgba(91,168,140,0.14)] ' +
+        'group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-fill p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-fill-strong hover:shadow-[0_18px_50px_-12px_rgba(126,224,181,0.14)] ' +
         (selected
           ? 'border-accent/55 bg-accent/[0.05]'
           : 'border-hairline hover:border-accent/25')
@@ -411,7 +411,7 @@ function PeptideCard({
       </button>
 
       <div className="pointer-events-none relative z-10 flex h-full flex-col">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#5BA88C]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#7EE0B5]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
         <div className="mb-3 flex items-start justify-between gap-3 pr-24">
           <div className="min-w-0">
@@ -517,7 +517,7 @@ function CompareBar({
           {canCompare ? (
             <Link
               href={`/catalog/compare?ids=${selected.join(',')}`}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-[#5BA88C] px-4 py-1.5 text-xs font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-[#7EE0B5] px-4 py-1.5 text-xs font-semibold text-[#0E1512] transition-colors hover:bg-[#A6F0CC]"
             >
               Compare
               <ArrowRight className="h-3.5 w-3.5" />

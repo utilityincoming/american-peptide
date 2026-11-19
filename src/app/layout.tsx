@@ -126,7 +126,7 @@ export default function RootLayout({
       <head>
         {/* Default chrome color (dark basalt); the script below flips it to
             match the applied theme before paint. */}
-        <meta name="theme-color" content="#0E1512" />
+        <meta name="theme-color" content="#121C18" />
         {/* Site-wide entity graph: the Organization + the WebSite it publishes,
             linked by @id and referenced from every page's structured data. */}
         <JsonLd data={siteGraphJsonLd()} />
@@ -140,7 +140,7 @@ export default function RootLayout({
             syncs the mobile browser-chrome color to the resolved theme. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var s=localStorage.getItem('theme');var m=window.matchMedia('(prefers-color-scheme: light)').matches;var light=(s==='light'||(!s&&m));if(light){document.documentElement.classList.add('light');}var mc=document.querySelector('meta[name="theme-color"]');if(mc){mc.setAttribute('content',light?'#F6F3EC':'#0E1512');}}catch(e){}})();`,
+            __html: `(function(){try{var s=localStorage.getItem('theme');var m=window.matchMedia('(prefers-color-scheme: light)').matches;var light=(s==='light'||(!s&&m));if(light){document.documentElement.classList.add('light');}var mc=document.querySelector('meta[name="theme-color"]');if(mc){mc.setAttribute('content',light?'#F6F3EC':'#121C18');}}catch(e){}})();`,
           }}
         />
         {/* Dev self-heal: a service worker registered by a prior production

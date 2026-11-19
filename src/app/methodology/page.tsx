@@ -73,7 +73,7 @@ export const metadata: Metadata = {
 const PILLARS = [
   {
     icon: <Microscope className="h-4 w-4" />,
-    color: '#5BA88C',
+    color: '#7EE0B5',
     label: 'Chemistry, cross-referenced',
     desc: `Every catalog entry's formula and molecular weight is checked against its PubChem reference record. Only confident matches carry a "verified" badge.`,
     stat: `${VERIFIED_COUNT} / ${CATALOG_COUNT} entries confirmed`,
@@ -141,7 +141,7 @@ export default function MethodologyPage() {
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(126,224,181,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -153,7 +153,7 @@ export default function MethodologyPage() {
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             How we verify,
             <br />
-            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7EE0B5] to-[#818CF8] bg-clip-text text-transparent">
               and what we refuse to fake
             </span>
           </h1>

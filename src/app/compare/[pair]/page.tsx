@@ -11,7 +11,7 @@ import AgentPrompt from '@/components/AgentPrompt'
 import LastUpdated from '@/components/LastUpdated'
 
 const SITE = 'https://americanpeptide.com'
-const A = '#5BA88C'
+const A = '#7EE0B5'
 const B = '#818CF8'
 
 interface RouteParams {
@@ -135,7 +135,7 @@ export default async function ComparePage({ params }: RouteParams) {
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
-            backgroundImage: 'radial-gradient(circle, rgba(91,168,140,0.08) 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, rgba(126,224,181,0.08) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />

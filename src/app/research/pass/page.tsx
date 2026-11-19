@@ -120,7 +120,7 @@ export default function ResearchPassPage() {
                 <button
                   type="button"
                   onClick={confirmPayment}
-                  className="mt-4 rounded-xl bg-[#5BA88C] px-4 py-2 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
+                  className="mt-4 rounded-xl bg-[#7EE0B5] px-4 py-2 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#A6F0CC]"
                 >
                   Check again
                 </button>
@@ -158,7 +158,7 @@ export default function ResearchPassPage() {
             <div className="mt-4">
               <Link
                 href={pendingQuestion ? '/research?resume=1' : '/research'}
-                className="inline-block rounded-xl bg-[#5BA88C] px-4 py-2.5 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
+                className="inline-block rounded-xl bg-[#7EE0B5] px-4 py-2.5 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#A6F0CC]"
               >
                 {pendingQuestion ? 'Continue your search' : 'Open the Peptide Agent'}
               </Link>
@@ -181,7 +181,7 @@ export default function ResearchPassPage() {
             {!issued && (
               <Link
                 href={pendingQuestion ? '/research?resume=1' : '/research'}
-                className="mt-4 inline-block rounded-xl bg-[#5BA88C] px-4 py-2 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A]"
+                className="mt-4 inline-block rounded-xl bg-[#7EE0B5] px-4 py-2 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#A6F0CC]"
               >
                 {pendingQuestion ? 'Continue your search' : 'Open the Peptide Agent'}
               </Link>
@@ -217,7 +217,7 @@ export default function ResearchPassPage() {
               <button
                 onClick={buy}
                 disabled={!panels.canBuy}
-                className="mt-5 rounded-xl bg-[#5BA88C] px-5 py-2.5 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#6FBF9A] disabled:cursor-not-allowed disabled:opacity-50"
+                className="mt-5 rounded-xl bg-[#7EE0B5] px-5 py-2.5 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#A6F0CC] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {buying ? 'Opening secure checkout…' : `Get the Research Pass — ${price}`}
               </button>

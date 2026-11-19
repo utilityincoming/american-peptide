@@ -50,7 +50,7 @@ export default function AgentPrompt({
   return (
     <section
       className={
-        'overflow-hidden rounded-3xl border border-accent/25 bg-gradient-to-br from-[#5BA88C]/[0.10] via-[#5BA88C]/[0.04] to-transparent p-6 md:p-8 ' +
+        'overflow-hidden rounded-3xl border border-accent/25 bg-gradient-to-br from-[#7EE0B5]/[0.10] via-[#7EE0B5]/[0.04] to-transparent p-6 md:p-8 ' +
         className
       }
     >
@@ -79,7 +79,7 @@ export default function AgentPrompt({
         <button
           type="submit"
           disabled={!q.trim()}
-          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#5BA88C] px-5 py-3 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#6FBF9A] disabled:cursor-not-allowed disabled:opacity-40"
+          className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#7EE0B5] px-5 py-3 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#A6F0CC] disabled:cursor-not-allowed disabled:opacity-40"
         >
           Ask Peptide Agent
           <ArrowRight className="h-4 w-4" />

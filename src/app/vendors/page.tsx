@@ -84,7 +84,7 @@ export default function VendorsIndexPage() {
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
-            backgroundImage: 'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(circle, rgba(126,224,181,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
@@ -95,7 +95,7 @@ export default function VendorsIndexPage() {
           </div>
           <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             Peptide vendor{' '}
-            <span className="bg-gradient-to-r from-[#5BA88C] to-[#818CF8] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7EE0B5] to-[#818CF8] bg-clip-text text-transparent">
               reviews
             </span>
           </h1>
@@ -124,7 +124,7 @@ export default function VendorsIndexPage() {
             </p>
             <Link
               href="/catalog"
-              className="inline-flex items-center gap-2 rounded-lg bg-[#5BA88C] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#7EE0B5] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
             >
               Browse catalog
               <ArrowRight className="h-4 w-4" />
@@ -152,7 +152,7 @@ export default function VendorsIndexPage() {
                   >
                     <div
                       className="flex h-14 w-16 shrink-0 flex-col items-center justify-center rounded-xl"
-                      style={{ backgroundColor: 'rgba(91,168,140,0.10)' }}
+                      style={{ backgroundColor: 'rgba(126,224,181,0.10)' }}
                     >
                       <span className="text-2xl font-bold text-accent">{score}</span>
                       <span className="text-[8px] uppercase tracking-wide text-ink/55">/100</span>

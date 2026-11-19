@@ -75,14 +75,14 @@ export default function GlossaryPage() {
           className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              'radial-gradient(circle, rgba(91,168,140,0.10) 1px, transparent 1px)',
+              'radial-gradient(circle, rgba(126,224,181,0.10) 1px, transparent 1px)',
             backgroundSize: '28px 28px',
           }}
         />
         <div className="relative mx-auto max-w-5xl">
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
             Peptide research{' '}
-            <span className="bg-gradient-to-r from-[#5BA88C] via-[#93D4BA] to-[#5BA88C] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
               glossary
             </span>
           </h1>
