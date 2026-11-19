@@ -3,14 +3,29 @@
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { Blend, Plus, Trash2, AlertTriangle } from 'lucide-react'
+import { RECON_PRESET_GROUPS } from '@/lib/reconstitution-presets'
+import {
+  DEFAULT_BUFFER_PH,
+  screenBlend,
+  type ScreenFlag,
+  type ScreenLevel,
+} from '@/lib/blend-screen'
 
 const MAX_PEPTIDES = 10
 const MIN_PEPTIDES = 2
 
 interface Row {
+  /** Catalog slug. Empty until a peptide is picked; chemistry needs it. */
+  slug: string
   name: string
   mass: string // mg in this peptide's vial
   dose: string // desired mcg per injection
+}
+
+const LEVEL_TEXT: Record<ScreenLevel, string> = {
+  warn: 'text-amber-300',
+  caution: 'text-amber-200/80',
+  info: 'text-ink/60',
 }
 
 function parsePositive(s: string): number {
@@ -28,9 +43,10 @@ function fmt(n: number, decimals = 2): string {
 
 export default function BlendCalculatorPage() {
   const [waterMl, setWaterMl] = useState('3')
+  const [bufferPh, setBufferPh] = useState(String(DEFAULT_BUFFER_PH))
   const [rows, setRows] = useState<Row[]>([
-    { name: '', mass: '5', dose: '250' },
-    { name: '', mass: '10', dose: '500' },
+    { slug: '', name: '', mass: '5', dose: '250' },
+    { slug: '', name: '', mass: '10', dose: '500' },
   ])
 
   const setRow = (i: number, patch: Partial<Row>) =>
@@ -40,7 +56,7 @@ export default function BlendCalculatorPage() {
     setRows((prev) =>
       prev.length >= MAX_PEPTIDES
         ? prev
-        : [...prev, { name: '', mass: '', dose: '' }],
+        : [...prev, { slug: '', name: '', mass: '', dose: '' }],
     )
 
   const removeRow = (i: number) =>
@@ -77,6 +93,25 @@ export default function BlendCalculatorPage() {
     return { water, doses, drawMl, units, perPeptide, anyOver, validCount: valid.length }
   }, [waterMl, rows])
 
+  const screen = useMemo(() => {
+    const pH = parseFloat(bufferPh)
+    return screenBlend(
+      rows.map((r) => ({ slug: r.slug || undefined, name: r.name })),
+      Number.isFinite(pH) ? pH : DEFAULT_BUFFER_PH,
+    )
+  }, [rows, bufferPh])
+
+  const pickPreset = (i: number, slug: string) => {
+    const preset = RECON_PRESET_GROUPS.flatMap((g) => g.items).find(
+      (p) => p.slug === slug,
+    )
+    const insulin = slug === 'insulin'
+    setRow(i, {
+      slug,
+      name: preset?.name ?? (insulin ? 'Insulin (human)' : ''),
+    })
+  }
+
   return (
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Page identity ── */}
@@ -98,7 +133,10 @@ export default function BlendCalculatorPage() {
           <p className="max-w-2xl text-sm leading-relaxed text-ink/55 md:text-base">
             Combine multiple peptides into a single vial and see how many doses
             the blend supports, the draw volume per injection, and the actual
-            mass each draw delivers per peptide — versus what you intended.
+            mass each draw delivers. Pick catalog peptides to also see whether
+            the reconstituted solutions are likely to associate: charge at a
+            buffer pH, isoelectric point, hydrophobicity, cysteines, and the
+            few pairs a product label already forbids.
           </p>
         </div>
 
@@ -142,20 +180,41 @@ export default function BlendCalculatorPage() {
             Blend setup
           </h2>
 
-          <div className="mb-5 max-w-xs">
-            <label className="mb-1.5 block text-xs font-medium text-ink/55">
-              Total bacteriostatic water in blend vial{' '}
-              <span className="text-ink/55">(mL)</span>
-            </label>
-            <input
-              type="number"
-              inputMode="decimal"
-              min={0}
-              step="any"
-              value={waterMl}
-              onChange={(e) => setWaterMl(e.target.value)}
-              className="w-full rounded-xl border border-hairline bg-fill px-4 py-2.5 font-mono text-base text-ink outline-none transition-colors focus:border-accent/40"
-            />
+          <div className="mb-5 grid gap-4 sm:grid-cols-2">
+            <div className="max-w-xs">
+              <label className="mb-1.5 block text-xs font-medium text-ink/55">
+                Total bacteriostatic water in blend vial{' '}
+                <span className="text-ink/55">(mL)</span>
+              </label>
+              <input
+                type="number"
+                inputMode="decimal"
+                min={0}
+                step="any"
+                value={waterMl}
+                onChange={(e) => setWaterMl(e.target.value)}
+                className="w-full rounded-xl border border-hairline bg-fill px-4 py-2.5 font-mono text-base text-ink outline-none transition-colors focus:border-accent/40"
+              />
+            </div>
+            <div className="max-w-xs">
+              <label className="mb-1.5 block text-xs font-medium text-ink/55">
+                Buffer pH for the charge screen
+              </label>
+              <input
+                type="number"
+                inputMode="decimal"
+                min={0}
+                max={14}
+                step="0.1"
+                value={bufferPh}
+                onChange={(e) => setBufferPh(e.target.value)}
+                className="w-full rounded-xl border border-hairline bg-fill px-4 py-2.5 font-mono text-base text-ink outline-none transition-colors focus:border-accent/40"
+              />
+              <p className="mt-1.5 text-[11px] leading-relaxed text-ink/40">
+                Bacteriostatic water is often near {DEFAULT_BUFFER_PH}. Charge
+                and pI ignore fatty-acid chains and disulfides.
+              </p>
+            </div>
           </div>
 
           <div className="space-y-3">
@@ -164,13 +223,35 @@ export default function BlendCalculatorPage() {
                 key={i}
                 className="grid grid-cols-1 gap-3 rounded-xl border border-hairline bg-fill p-3 sm:grid-cols-[1fr_auto_auto_auto]"
               >
-                <input
-                  type="text"
-                  value={r.name}
-                  onChange={(e) => setRow(i, { name: e.target.value })}
-                  placeholder={`Peptide ${i + 1} (optional name)`}
-                  className="rounded-lg border border-hairline bg-fill px-3 py-2 text-sm text-ink placeholder:text-ink/25 outline-none focus:border-accent/40"
-                />
+                <div className="flex min-w-0 flex-col gap-2">
+                  <select
+                    value={r.slug}
+                    onChange={(e) => pickPreset(i, e.target.value)}
+                    aria-label={`Catalog peptide ${i + 1}`}
+                    className="rounded-lg border border-hairline bg-fill px-3 py-2 text-sm text-ink outline-none focus:border-accent/40"
+                  >
+                    <option value="">Catalog peptide (for the screen)</option>
+                    {RECON_PRESET_GROUPS.map((g) => (
+                      <optgroup key={g.group} label={g.group}>
+                        {g.items.map((p) => (
+                          <option key={p.slug} value={p.slug}>
+                            {p.name}
+                          </option>
+                        ))}
+                      </optgroup>
+                    ))}
+                    <optgroup label="Reference biologics">
+                      <option value="insulin">Insulin (human)</option>
+                    </optgroup>
+                  </select>
+                  <input
+                    type="text"
+                    value={r.name}
+                    onChange={(e) => setRow(i, { name: e.target.value })}
+                    placeholder="Label (optional)"
+                    className="rounded-lg border border-hairline bg-fill px-3 py-2 text-sm text-ink placeholder:text-ink/25 outline-none focus:border-accent/40"
+                  />
+                </div>
                 <div className="flex items-center gap-2">
                   <input
                     type="number"
@@ -316,6 +397,8 @@ export default function BlendCalculatorPage() {
           )}
         </section>
 
+        <CompatibilityScreen screen={screen} />
+
         {/* ── Cross-links ── */}
         <div className="mb-10 flex flex-wrap gap-3 text-xs">
           <Link
@@ -333,6 +416,112 @@ export default function BlendCalculatorPage() {
         </div>
       </main>
     </div>
+  )
+}
+
+function fmtSigned(n: number | null, digits: number): string {
+  if (n === null || !Number.isFinite(n)) return '—'
+  return n.toLocaleString(undefined, {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  })
+}
+
+function CompatibilityScreen({
+  screen,
+}: {
+  screen: ReturnType<typeof screenBlend>
+}) {
+  const linked = screen.peptides.filter((p) => p.slug)
+  return (
+    <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
+      <h2 className="mb-1 text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
+        After reconstitution
+      </h2>
+      <p className="mb-4 text-xs leading-relaxed text-ink/55">
+        Estimated association risk at pH {fmt(screen.pH, 1)} once each peptide
+        is already in solution. Flags are hypotheses from sequence and from
+        labeled incompatibilities. They are not a mixing procedure.
+      </p>
+
+      {linked.length > 0 && (
+        <div className="mb-4 overflow-x-auto rounded-xl border border-hairline">
+          <table className="w-full border-collapse text-sm">
+            <thead>
+              <tr className="bg-fill-strong text-left">
+                <th className="px-3 py-2.5 font-medium text-ink/55">Peptide</th>
+                <th className="px-3 py-2.5 text-right font-medium text-ink/55">
+                  Charge
+                </th>
+                <th className="px-3 py-2.5 text-right font-medium text-ink/55">
+                  pI
+                </th>
+                <th className="px-3 py-2.5 text-right font-medium text-ink/55">
+                  GRAVY
+                </th>
+                <th className="px-3 py-2.5 text-right font-medium text-ink/55">
+                  Cys
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {screen.peptides.map((p, i) => (
+                <tr key={`${p.slug ?? 'row'}-${i}`} className="border-t border-hairline">
+                  <td className="px-3 py-2.5 text-ink/75">{p.name}</td>
+                  <td className="px-3 py-2.5 text-right font-mono text-ink/70">
+                    {fmtSigned(p.charge, 1)}
+                  </td>
+                  <td className="px-3 py-2.5 text-right font-mono text-ink/70">
+                    {fmtSigned(p.pi, 1)}
+                  </td>
+                  <td className="px-3 py-2.5 text-right font-mono text-ink/70">
+                    {fmtSigned(p.gravy, 2)}
+                  </td>
+                  <td className="px-3 py-2.5 text-right font-mono text-ink/70">
+                    {p.hasSequence ? p.cysteines : '—'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      <ul className="space-y-2">
+        {screen.flags.map((flag, i) => (
+          <FlagRow key={`${flag.code}-${i}`} flag={flag} />
+        ))}
+        {screen.unresolved.map((name) => (
+          <li
+            key={name}
+            className="rounded-xl border border-hairline px-3 py-2 text-xs leading-relaxed text-ink/55"
+          >
+            <span className="font-medium text-ink/75">{name}</span> is not a
+            catalog name, so charge, pI, and GRAVY were skipped.
+          </li>
+        ))}
+        {linked.length === 0 && screen.unresolved.length === 0 && (
+          <li className="text-xs leading-relaxed text-ink/45">
+            Choose a catalog peptide on each row to run the screen.
+          </li>
+        )}
+      </ul>
+
+      <ul className="mt-4 space-y-2 border-t border-hairline pt-4">
+        {screen.notes.map((flag) => (
+          <FlagRow key={flag.code} flag={flag} />
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+function FlagRow({ flag }: { flag: ScreenFlag }) {
+  return (
+    <li className="rounded-xl border border-hairline px-3 py-2 text-xs leading-relaxed">
+      <p className={`font-medium ${LEVEL_TEXT[flag.level]}`}>{flag.title}</p>
+      <p className="mt-0.5 text-ink/50">{flag.detail}</p>
+    </li>
   )
 }
 
