@@ -3713,6 +3713,68 @@ const SEED_PEPTIDES: Peptide[] = [
     ],
   },
   {
+    slug: 'cartalax',
+    name: 'Cartalax',
+    aliases: ['Kartalax', 'Ala-Glu-Asp', 'AED peptide', 'T-31', 'H-Ala-Glu-Asp-OH'],
+    categories: ['bioregulator', 'healing-repair'],
+    shortDescription:
+      'Synthetic cartilage tripeptide (Ala-Glu-Asp) — the defined Cytogen counterpart of the Sigumir cartilage extract, studied only in cell culture.',
+    description:
+      'Cartalax (also spelled Kartalax; laboratory code T-31) is the synthetic tripeptide Ala-Glu-Asp (AED), 333.29 Da. The St. Petersburg bioregulator school presents it as the defined short peptide distilled from a cartilage polypeptide extract. Indexed experiments are in vitro, come from that institute, and have not been independently replicated. There is no registered human trial, and Cartalax is not FDA-approved.',
+    mechanism:
+      'Proposed short-peptide gene regulation in chondrogenic cells. In culture, the originating group reports higher SOX9, aggrecan, type II collagen, and COMP, and a shift in senescence-associated markers. No receptor, no measured nuclear uptake, and no plasma-stability data have been published for AED.',
+    researchAreas: ['Cartilage biology', 'Aging biology', 'Connective tissue', 'Peptide bioregulators'],
+    background: [
+      'Cartalax is three L-amino acids, Ala-Glu-Asp (C12H19N3O8, PubChem CID 87815447, CAS 85806-95-7), with no disulfide, D-amino acid, or other modification. Vladimir Khavinson’s group at the St. Petersburg Institute of Bioregulation and Gerontology assigned it the laboratory code T-31 and the trade name Cartalax, and framed it as the synthetic stand-in for a polypeptide complex isolated from cartilage. Sigumir, already in this catalog, is that extract tradition (Cytomax complex A-4): a mixture with no single sequence. Cartalax is one molecule that can be synthesized and assayed. The bioregulator hypothesis says peptides this short enter the nucleus and bind DNA. For AED that step is unmeasured. An unmodified tripeptide is expected to be cleaved by plasma peptidases within minutes, and no pharmacokinetic study of Cartalax has been published.',
+      'The cartilage-facing papers are two 2023 reports from the same circle. In replicatively aging human mesenchymal stem cells, AED at 200 ng/mL in the medium increased gene expression and protein synthesis of SOX9, aggrecan, type II collagen, and COMP; the parent cartilage polypeptide complex produced a similar marker pattern at 2,000 ng/mL (Myakisheva, Linkova, Diatlova, Polyakova, and Ryzhak, Advances in Gerontology 2023, PMID 37782646). In chondrocytes described as developing an aging-associated secretory phenotype, AED was reported to normalize p16, p21, p53, TNF-α, IL-1α, and Sirt1 (Myakisheva et al., Adv Gerontol 2023, PMID 37356100). Both endpoints are culture markers. Neither paper measured matrix repair, a joint, or a person. A separate Russian-language cell-count experiment from the same authors, outside PubMed, reported more chondrocytes at 200 ng/mL and did not measure cartilage-matrix genes.',
+      'Older indexed work tests AED in other tissues, and several of those papers do not credit AED with the effect. In aging human thymocytes, the geroprotective result was reported for AB-9, not for T-31 (Lin’kova et al. 2011, PMID 22238759). In rat kidney cells, AED and the tripeptide EDL were both reported to raise proliferation and lower p16, p21, and p53 (Khavinson et al. 2014, PMID 25946838); a later cisplatin-injury paper attributed the renal effect to EDL. In rat skin fibroblasts, AED and Epitalon (AEDG) suppressed caspase-dependent apoptosis, and every short peptide in that comparison inhibited MMP-9 (Lin’kova et al. 2016, PMID 27259496). In human periodontal-ligament stem cells, the neuronal-marker increases were credited to KED and to a four-peptide mix, not to AED (Caputi et al. 2019, PMID 30791821). In a human bone-marrow mesenchymal line, AED at nanomolar concentrations was associated with higher NF-κB expression; the TERT difference in that paper was between aging models, not a peptide effect (Ashapkin et al. 2020, PMID 32399807). The group’s own English-language review of peptides and chondrogenic differentiation names nine candidates and does not include AED (Linkova et al. 2023, PMID 37176122).',
+      'Animal and human data are thinner still. In ovariectomized rats, a model of bone loss, both T-31 and a cartilage extract limited the fall in bone mineral density, and the extract was the more effective of the two (Povorozniuk, Khavinson, et al., Adv Gerontol 2007, PMID 18306703). The endpoint is bone, not articular cartilage. The only human figures in circulation are in Russian patent RU2299741 (2007): knee-osteoarthritis patients given intramuscular AED, with less pain and better mobility described in a subset of cases, a saline comparison that is incompletely reported, and no radiographic change. That is a patent example, not a peer-reviewed trial, and it is not registered on ClinicalTrials.gov. A ClinicalTrials.gov query for Cartalax and Ala-Glu-Asp does not return an interventional study of this peptide. No laboratory outside the originating institute has published a replication.',
+      'Research-use vendors sell Cartalax widely as a 20 mg lyophilized vial, usually labeled research use only, often with an HPLC certificate claiming roughly 99% purity. That commercial footprint is larger than the evidence. A recurring labeling error prints the sequence as the tetrapeptide Ala-Glu-Asp-Leu. That four-residue sequence is the one the trade literature attaches to Bronchogen, the respiratory bioregulator (this catalog records Bronchogen as Ala-Asp-Glu-Leu). PubChem’s synonym list for CID 87815447 also includes the string “H-Asp-Glu-Asp-OH”; the IUPAC name on that record is L-alanyl-L-glutamyl-L-aspartic acid, so the sequence is AED. Another CAS sometimes pasted onto vendor pages, 205640-90-0, is orexin A, a 33-residue neuropeptide, not this tripeptide. Cartalax is a research compound. It is not approved by the FDA, the EMA, or a comparable regulator, and nothing on this page is a dosing or treatment recommendation.',
+    ],
+    keyResearch: [
+      'Chondrogenic markers in culture — AED at 200 ng/mL raised SOX9, aggrecan, type II collagen, and COMP in aging human mesenchymal stem cells; the cartilage polypeptide complex needed 2,000 ng/mL for a similar pattern (Myakisheva et al., Adv Gerontol 2023, PMID 37782646).',
+      'Senescence markers in chondrocytes — AED was reported to normalize p16, p21, p53, TNF-α, IL-1α, and Sirt1 (Myakisheva et al. 2023, PMID 37356100). Cell culture only.',
+      'Null or reassigned results — thymocyte geroprotection was AB-9, not T-31 (PMID 22238759); periodontal neuronal markers were KED and a peptide mix (PMID 30791821); a TERT change in bone-marrow MSCs was the aging model, not AED (PMID 32399807).',
+      'Parent extract — Sigumir is the cartilage/bone polypeptide fraction. Linkova et al. 2023 (PMID 37176122) review chondrogenic peptides and do not list AED. The extract, not the tripeptide, is what that school has described as further along in Russian osteoarthritis work.',
+      'Human record — no ClinicalTrials.gov registration. The 2007 patent RU2299741 describes symptom changes in knee osteoarthritis and is not a peer-reviewed trial. Not FDA-approved.',
+    ],
+    faqs: [
+      {
+        q: 'What is Cartalax?',
+        a: 'Cartalax (Kartalax, T-31) is the synthetic tripeptide Ala-Glu-Asp, 333.29 Da (C12H19N3O8, PubChem CID 87815447, CAS 85806-95-7). It is the defined short peptide the Khavinson school pairs with a cartilage extract. Sigumir is that extract in this catalog.',
+      },
+      {
+        q: 'Is Cartalax the same as Ala-Glu-Asp-Leu?',
+        a: 'No. Cartalax is the tripeptide Ala-Glu-Asp (AED). Ala-Glu-Asp-Leu is a tetrapeptide vendors usually attach to Bronchogen. Pages that print AEDL on a Cartalax vial are naming a different sequence.',
+      },
+      {
+        q: 'Does it repair cartilage?',
+        a: 'The published cartilage work measures gene and protein markers in cultured human mesenchymal stem cells (PMID 37782646) and senescence-associated markers in cultured chondrocytes (PMID 37356100). Those are not repaired joints, and no laboratory outside the originating institute has repeated them. There is no registered human trial.',
+      },
+      {
+        q: 'How widely is it sold?',
+        a: 'Research-use shops in the US and UK commonly list it as a 20 mg lyophilized vial, labeled for laboratory use only. That supply is widespread relative to the evidence, which remains preclinical and single-tradition. It is not an approved drug.',
+      },
+      {
+        q: 'How is Cartalax different from Sigumir?',
+        a: 'Sigumir is a polypeptide fraction extracted from cartilage and bone, with no single sequence. Cartalax is one synthetic tripeptide proposed as a defined component of that tradition, so identity and purity can be specified. Findings for the extract do not transfer to the tripeptide.',
+      },
+      {
+        q: 'Is Cartalax approved?',
+        a: 'No. It is a research compound and is not FDA-approved. This page is a research and educational reference, not medical advice.',
+      },
+    ],
+    sequence: 'AED',
+    molecularWeight: 333.29,
+    molecularFormula: 'C12H19N3O8',
+    cas: '85806-95-7',
+    pubchemCid: 87815447,
+    storage:
+      'Lyophilized powder, frozen (about −20 °C), dry, and protected from light. The two acidic side chains make the free peptide hygroscopic; warm it to room temperature before opening so moisture does not condense on the solid.',
+    handling:
+      'Routine solid-phase tripeptide. Identity is the practical risk: confirm Ala-Glu-Asp by mass (monoisotopic mass 333.12 Da) rather than accepting a label that reads Ala-Glu-Asp-Leu or cites CAS 205640-90-0, which is orexin A. No disulfide or oxidation-prone residue.',
+  },
+  {
     slug: 'sigumir',
     name: 'Sigumir',
     aliases: ['A-4 cartilage peptide', 'cartilage / bone peptide complex'],
@@ -3720,12 +3782,12 @@ const SEED_PEPTIDES: Peptide[] = [
     shortDescription:
       'A natural cartilage and bone peptide complex (Cytomax A-4) from the Khavinson bioregulator line, marketed for joint and connective-tissue support.',
     description:
-      'Sigumir is a natural peptide complex extracted from cartilage and bone tissue (peptide complex A-4), part of the Russian Cytomax / Revilab bioregulator line. It is marketed within the Khavinson tradition for joint, cartilage, and connective-tissue support, with no defined synthetic short-peptide counterpart in the catalog.',
+      'Sigumir is a natural peptide complex extracted from cartilage and bone tissue (peptide complex A-4), part of the Russian Cytomax / Revilab bioregulator line. It is marketed within the Khavinson tradition for joint, cartilage, and connective-tissue support. Cartalax (Ala-Glu-Asp) is the defined synthetic tripeptide that tradition pairs with this extract.',
     mechanism:
       'Proposed tissue-selective (bioregulator) modulation of chondrocyte / osteoblast gene expression, in the Cytomax extract tradition.',
     researchAreas: ['Joint & cartilage health', 'Aging biology', 'Peptide bioregulators'],
     background: [
-      'Sigumir is the cartilage- and bone-directed natural bioregulator of the Cytomax / Revilab line, extracted from connective tissue. Unlike the thymic, vascular, or cardiac entries, it has no defined synthetic Cytogen counterpart in this catalog — the extract is the only form marketed within the tradition.',
+      'Sigumir is the cartilage- and bone-directed natural bioregulator of the Cytomax / Revilab line, extracted from connective tissue. Cartalax (Ala-Glu-Asp, T-31) is the defined synthetic tripeptide that school later assigned to this tissue. The extract and the tripeptide are different materials: results reported for one do not establish the other.',
       'As a tissue extract it is a standardized polypeptide fraction with no single molecular formula or sequence. Its joint and connective-tissue claims come from the same concentrated research tradition as the rest of the series, with limited independent replication, and it is not FDA-approved.',
     ],
     keyResearch: [
@@ -3741,7 +3803,7 @@ const SEED_PEPTIDES: Peptide[] = [
       },
       {
         q: 'Does it have a synthetic counterpart?',
-        a: 'No — unlike the thymic, vascular, or cardiac Cytomaxes, Sigumir has no defined synthetic Cytogen peptide in this catalog; the tissue extract is the only marketed form.',
+        a: 'Cartalax (Ala-Glu-Asp) is the defined synthetic tripeptide the same research tradition pairs with cartilage. Sigumir itself remains a tissue extract. The two are catalogued separately because a polypeptide fraction and a single tripeptide are not the same substance.',
       },
       {
         q: 'Does it have a molecular formula?',
