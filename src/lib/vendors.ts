@@ -484,40 +484,45 @@ export const VENDORS: Vendor[] = [
     url: 'https://paramountpeptides.com',
     blurb:
       'US research-peptide supplier — "Real Science. Real Standards." — stocking a broad catalog across the recovery, GH-axis, nootropic, and longevity classes, with independent third-party HPLC testing on every batch, ≥99% purity, and COAs searchable by product or batch number.',
-    // De-listed from the user-facing sourcing layer (2026-11-16): referral
-    // performance lagged the two featured partners, so Paramount no longer renders
-    // in catalog "where to source" tiles, peptide-specific rankings, or the vendor
-    // directory, and its /vendors/paramount-peptides review page drops out of the
-    // statically-built set. The entry, trust data, and deep links are kept intact
-    // (not deleted) so the relationship is one flag away from being restored. The
-    // /go/paramount-peptides redirect stays armed (affiliate.active below), so any
-    // pre-existing external link still earns — it simply isn't promoted on-site.
-    directoryListed: false,
-    // Scoped to the single compounds Paramount's public storefront actually
-    // lists (the "shop all peptides" collection), never 'all'. The three incretin
-    // analogues sell under coded names (GLP-1 S / GLP-2 T / GLP-3 R). Their blends
-    // and bundles (Wolverine / GLOW / KLOW / tri-compound tablets) and compounds
-    // outside our catalog (SLU-PP-332, tesofensine, α-Klotho, the Regulator
-    // Series, etc.) are deliberately not mapped — no slug to point them at.
+    // Re-listed on a LIMITED, ALIGNED basis (2026-11-20). The earlier de-listing
+    // (#185) was a single flag; this restores Paramount to the user-facing sourcing
+    // layer but deliberately does NOT re-surface it across its whole ~40-compound
+    // footprint, where it would simply shadow the two featured partners on the
+    // crowded recovery staples. Instead the `peptides` set below is scoped to where
+    // Paramount is the ALIGNED source: (a) the incretins, our highest-intent traffic,
+    // where Paramount supplies real deep links and is a second documented, deep-linked
+    // option on exactly the GLP-1/2/3 pages ABSIM doesn't stock; and (b) Paramount's
+    // distinctive GH-axis / growth-factor and longevity / Khavinson-bioregulator
+    // catalog, the compounds that set it apart rather than the ones every US vendor
+    // carries. `directoryListed` is left at its default (true) — the scoping, not the
+    // flag, is what keeps the inclusion limited. The full discovered mapping is kept
+    // in the comment below so widening coverage is a one-line edit, never re-research.
+    //
+    // ALIGNED SUBSET — the catalog pages Paramount is promoted on.
+    // Scoped to compounds Paramount's public storefront actually lists (the "shop all
+    // peptides" collection), never 'all'. The three incretin analogues sell under
+    // coded names (GLP-1 S / GLP-2 T / GLP-3 R). Blends/bundles (Wolverine / GLOW /
+    // KLOW / tri-compound tablets) and off-catalog compounds (SLU-PP-332, tesofensine,
+    // α-Klotho, the Regulator Series, etc.) are not mapped — no slug to point them at.
     peptides: [
-      // GLP-1 / incretin (coded GLP-1 S / GLP-2 T / GLP-3 R)
+      // GLP-1 / incretin — real deep links, highest-intent (coded GLP-1 S / 2 T / 3 R)
       'semaglutide', 'tirzepatide', 'retatrutide', 'cagrilintide',
-      // recovery / healing
-      'bpc-157', 'tb-500', 'ghk-cu', 'kpv', 'll-37',
-      // GH-axis secretagogues / GHRH
-      'cjc-1295-no-dac', 'cjc-1295-with-dac', 'ipamorelin', 'tesamorelin',
-      'sermorelin', 'hexarelin', 'ghrp-2', 'mk-677', 'mgf',
-      // growth factors / muscle
-      'igf-1-lr3', 'follistatin',
-      // metabolic / longevity
-      '5-amino-1mq', 'aod-9604', 'nad-plus', 'mots-c', 'foxo4-dri',
-      // nootropic / neuro
-      'semax', 'selank', 'dsip', 'dihexa', 'oxytocin', 'vip',
-      // bioregulators (Khavinson peptides)
-      'epitalon', 'cardiogen', 'thymogen', 'thymalin', 'thymosin-alpha-1',
-      // hormone / sexual health
-      'pt-141', 'melanotan-2', 'kisspeptin-10', 'gonadorelin',
+      // GH-axis / growth factors — Paramount's differentiated strength
+      'tesamorelin', 'ipamorelin', 'igf-1-lr3', 'follistatin',
+      // longevity / metabolic + Khavinson bioregulators — its signature catalog
+      'mots-c', 'foxo4-dri', 'epitalon', 'cardiogen', 'thymogen', 'thymalin',
     ],
+    // FULL DISCOVERED MAPPING (kept for a one-line widening; not currently promoted).
+    // Everything Paramount's storefront lists that maps to a catalog slug:
+    //   incretin:        semaglutide, tirzepatide, retatrutide, cagrilintide
+    //   recovery:        bpc-157, tb-500, ghk-cu, kpv, ll-37
+    //   GH-axis/GHRH:    cjc-1295-no-dac, cjc-1295-with-dac, ipamorelin, tesamorelin,
+    //                    sermorelin, hexarelin, ghrp-2, mk-677, mgf
+    //   growth factors:  igf-1-lr3, follistatin
+    //   metabolic/long.: 5-amino-1mq, aod-9604, nad-plus, mots-c, foxo4-dri
+    //   nootropic/neuro: semax, selank, dsip, dihexa, oxytocin, vip
+    //   bioregulators:   epitalon, cardiogen, thymogen, thymalin, thymosin-alpha-1
+    //   hormone/sexual:  pt-141, melanotan-2, kisspeptin-10, gonadorelin
     shipsTo: ['us'],
     trust: {
       // Set only from Paramount's own published claims (homepage + searchable
@@ -548,6 +553,14 @@ export const VENDORS: Vendor[] = [
       code: 'AMERICANPEPTIDE',
       active: true,
     },
+    spotlightNote:
+      'US supplier with independent per-batch HPLC and a failed-test refund guarantee (order, shipping, and test fee). The featured slot runs only on the incretins, where Paramount supplied CAS-verified deep links — so the placement lands on the exact product, not the storefront.',
+    // PAID placement, gated + labeled — see Vendor.spotlight. Scoped to the three
+    // incretins Paramount deep-links (semaglutide / tirzepatide / retatrutide): the
+    // highest-intent pages and the only ones where the featured card lands on a real
+    // product URL. Paramount's honest documented tier and score (70) render on the
+    // card unchanged — the badge buys prominence on these slugs, never trust rank.
+    spotlight: ['semaglutide', 'tirzepatide', 'retatrutide'],
     notes:
       'Ships FedEx 2Day to the US and Puerto Rico only. Independent testing is stated but the lab is not named on the public pages; verify the COA for your batch number before use.',
   },

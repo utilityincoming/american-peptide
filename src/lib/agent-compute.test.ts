@@ -36,7 +36,11 @@ describe('compute tools', () => {
     const body = JSON.parse(computeVendorRank({ name: 'Wegovy' }))
     expect(body.vendors[0].name).toBe('Amino Club')
     expect(body.vendors[0].trustScore).toBeGreaterThan(0)
-    expect(body.vendors.every((v: { name: string }) => v.name !== 'Paramount Peptides')).toBe(true)
+    // Paramount is re-listed on the incretins (an aligned, deep-linked source) and
+    // ranks below Amino Club on its honest documented-tier score, never above it.
+    const paramount = body.vendors.find((v: { name: string }) => v.name === 'Paramount Peptides')
+    expect(paramount).toBeDefined()
+    expect(paramount.trustScore).toBeLessThan(body.vendors[0].trustScore)
   })
 
   it('grades a pasted COA without calling a model', () => {
