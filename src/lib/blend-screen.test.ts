@@ -1,7 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import { screenBlend } from '@/lib/blend-screen'
 import { getPeptideBySlug } from '@/lib/peptides'
-import { catalogCodes } from '@/lib/peptide-properties'
+import {
+  catalogCodes,
+  chargeAtPH,
+  parseCatalogChain,
+} from '@/lib/peptide-properties'
 
 describe('screenBlend', () => {
   it('flags the labeled pramlintide–insulin syringe incompatibility', () => {
@@ -28,7 +32,10 @@ describe('screenBlend', () => {
     const pram = screen.peptides.find((p) => p.slug === 'pramlintide')
     expect(pram?.hasSequence).toBe(true)
     expect(pram?.cysteines).toBe(2)
-    expect(screen.flags.some((f) => f.code === 'cysteine')).toBe(true)
+    expect(screen.flags.some((f) => f.code === 'disulfide')).toBe(true)
+    expect(screen.flags.some((f) => f.code === 'cysteine' && f.title.includes('Pramlintide'))).toBe(
+      false,
+    )
   })
 
   it('flags opposite net charge and a buffer sitting on the isoelectric point', () => {
@@ -50,7 +57,7 @@ describe('screenBlend', () => {
 
   it('flags copper plus a cysteine peptide, and skips unknown names', () => {
     const screen = screenBlend(
-      [{ slug: 'ghk-cu' }, { name: 'Pramlintide' }, { name: 'not a peptide' }],
+      [{ slug: 'ghk-cu' }, { slug: 'glutathione' }, { name: 'not a peptide' }],
       5.7,
     )
     expect(screen.flags.some((f) => f.code === 'copper-thiol')).toBe(true)
@@ -69,6 +76,8 @@ describe('screenBlend', () => {
     expect(row.gravy).not.toBeNull()
     expect(row.charge).not.toBeNull()
     expect(sema.flags.some((f) => f.code === 'acylation')).toBe(true)
+    const semaChain = parseCatalogChain(getPeptideBySlug('semaglutide')?.sequence ?? '')
+    expect(chargeAtPH(semaChain.codes, 5.7) - (row.charge ?? 0)).toBeCloseTo(1, 2)
     expect(sema.flags.some((f) => f.code === 'unnatural')).toBe(true)
 
     const lengths = screenBlend(
@@ -117,6 +126,48 @@ describe('screenBlend', () => {
     const extract = screenBlend([{ slug: 'thymalin' }], 5.7)
     expect(extract.flags.some((f) => f.code === 'mixture')).toBe(true)
     expect(extract.flags.some((f) => f.code === 'no-sequence')).toBe(false)
+  })
+
+  it('expands any catalog blend into its components and screens each one', () => {
+    const glow = screenBlend([{ slug: 'glow' }], 5.7)
+    // GLOW is ghk-cu + bpc-157 + tb-500: three scored rows, no leftover blend.
+    expect(glow.peptides.map((p) => p.slug)).toEqual([
+      'ghk-cu',
+      'bpc-157',
+      'tb-500',
+    ])
+    expect(glow.peptides.every((p) => p.hasSequence)).toBe(true)
+    expect(glow.peptides[0].name).toBe('GHK-Cu (in GLOW)')
+    // No "no sequence on file" flag for the blend itself.
+    expect(glow.flags.some((f) => f.code === 'no-sequence')).toBe(false)
+
+    // A blend resolved by name expands the same way.
+    const byName = screenBlend([{ name: 'bpc-157-tb-500' }], 5.7)
+    expect(byName.peptides.map((p) => p.slug)).toEqual(['bpc-157', 'tb-500'])
+
+    // The copper component still drives the copper–thiol pairing when a
+    // cysteine-bearing peptide shares the blend.
+    const cjc = screenBlend([{ slug: 'cjc-1295-ipamorelin' }], 5.7)
+    expect(cjc.peptides.map((p) => p.slug)).toEqual([
+      'cjc-1295-no-dac',
+      'ipamorelin',
+    ])
+  })
+
+  it('applies amides, disulfides, and chain labels to the charge', () => {
+    const pram = screenBlend([{ slug: 'pramlintide' }], 5.7).peptides[0]
+    const parsed = parseCatalogChain(getPeptideBySlug('pramlintide')?.sequence ?? '')
+    // A C-terminal amide removes a full negative charge at pH 5.7.
+    expect((pram.charge ?? 0) - chargeAtPH(parsed.codes, 5.7)).toBeCloseTo(1, 1)
+
+    expect(catalogCodes(getPeptideBySlug('insulin')?.sequence ?? '').length).toBe(51)
+    expect(catalogCodes('Ac-Glu-Glu-Met-Gln-Arg-Arg-NH2').join('')).toBe('EEMQRR')
+    expect(catalogCodes('γ-Glu-Cys-Gly').join('')).toBe('ECG')
+
+    const insulin = screenBlend([{ slug: 'insulin' }], 7.4).peptides[0]
+    const bare = chargeAtPH(catalogCodes(getPeptideBySlug('insulin')?.sequence ?? ''), 7.4)
+    // Six disulfide cysteines are partly negative at pH 7.4 when left free.
+    expect((insulin.charge ?? 0) - bare).toBeGreaterThan(0.05)
   })
 
   it('does not invent an opposite-charge flag for two copies of one basic peptide', () => {

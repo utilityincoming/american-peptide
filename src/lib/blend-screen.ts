@@ -5,17 +5,20 @@
 // when they share one solution, and it repeats the few incompatibilities that
 // are written on a product label.
 //
-// Charge and pI use the same Henderson–Hasselbalch model as the Design Lab
-// (peptide-properties.ts). GRAVY is Kyte–Doolittle. Both ignore fatty-acid
-// chains, disulfides, and other modifications the single-letter sequence
-// cannot see, so a clear flag is a hypothesis, not a formulation study.
+// Charge and pI use the Design Lab Henderson–Hasselbalch model, with the end
+// groups, one acylated lysine, and disulfide cysteines taken out of the count
+// when the catalog says so. A fatty diacid's extra carboxyls are still not in
+// the number. GRAVY is Kyte–Doolittle on the backbone. A clear flag is a
+// hypothesis, not a formulation study.
 
-import { PEPTIDES, type Peptide } from '@/lib/peptides'
+import { PEPTIDES, getComponents, type Peptide } from '@/lib/peptides'
 import { gravy } from '@/lib/amino-acids'
 import {
-  catalogCodes,
   chargeAtPH,
   isoelectricPoint,
+  parseCatalogChain,
+  type ChargeMods,
+  type ParsedChain,
 } from '@/lib/peptide-properties'
 
 /** Typical bacteriostatic-water pH. The screen is an estimate at whatever pH the caller passes. */
@@ -126,8 +129,29 @@ function findPeptide(member: BlendMember): Peptide | undefined {
   )
 }
 
-function codesOf(peptide: Peptide): string[] {
-  return catalogCodes(peptide.sequence ?? '')
+function modsFor(peptide: Peptide, parsed: ParsedChain): ChargeMods {
+  const features = peptide.syntheticFeatures ?? []
+  const cys = parsed.codes.filter((c) => c === 'C').length
+  let disulfideCysteines = parsed.disulfideCysteines
+  if (
+    disulfideCysteines === 0 &&
+    cys >= 2 &&
+    (features.includes('Disulfide bridge') ||
+      features.includes('Multiple disulfides'))
+  ) {
+    disulfideCysteines = cys - (cys % 2)
+  }
+  const lys = parsed.codes.filter((c) => c === 'K').length
+  const blockedLysines = features.includes('Fatty-acid acylation')
+    ? Math.min(1, lys)
+    : 0
+  return {
+    acetylN: parsed.acetylN,
+    amideC: parsed.amideC,
+    pyroGluN: parsed.pyroGluN,
+    blockedLysines,
+    disulfideCysteines,
+  }
 }
 
 function hasCopper(peptide: Peptide): boolean {
@@ -145,14 +169,17 @@ interface Resolved {
   pi: number | null
   gravy: number | null
   cysteines: number
+  /** Cysteines not named as a disulfide. Copper and thiol flags use this. */
+  freeCysteines: number
 }
 
 function resolve(member: BlendMember, pH: number): Resolved {
   const peptide = findPeptide(member) ?? null
   const label = member.name?.trim() || peptide?.name || 'Unnamed peptide'
-  const codes = peptide ? codesOf(peptide) : []
+  const parsed = peptide ? parseCatalogChain(peptide.sequence ?? '') : null
+  const codes = parsed?.codes ?? []
   const cysteines = codes.filter((c) => c === 'C').length
-  if (codes.length === 0) {
+  if (!peptide || !parsed || codes.length === 0) {
     return {
       peptide,
       label,
@@ -161,19 +188,28 @@ function resolve(member: BlendMember, pH: number): Resolved {
       pi: null,
       gravy: null,
       cysteines: 0,
+      freeCysteines: 0,
     }
   }
+  const mods = modsFor(peptide, parsed)
+  const freeCysteines = Math.max(0, cysteines - (mods.disulfideCysteines ?? 0))
   return {
     peptide,
     label,
     codes,
-    charge: chargeAtPH(codes, pH),
-    pi: isoelectricPoint(codes),
+    charge: chargeAtPH(codes, pH, mods),
+    pi: isoelectricPoint(codes, mods),
     gravy: gravy(codes),
     cysteines,
+    freeCysteines,
   }
 }
 
+// A blend has no single sequence to score, so screen the chemistry of each
+// component it mixes instead of leaving one unresolved "no sequence" row. Any
+// catalog entry with a `components` list expands here; CagriSema is kept as an
+// explicit case because its monograph deliberately stays out of the components
+// cross-link graph (see peptides.test.ts) yet still names its two peptides.
 function expandMembers(members: BlendMember[]): BlendMember[] {
   const out: BlendMember[] = []
   for (const member of members) {
@@ -181,9 +217,16 @@ function expandMembers(members: BlendMember[]): BlendMember[] {
     if (peptide?.slug === 'cagrisema') {
       out.push({ slug: 'cagrilintide', name: 'Cagrilintide (in CagriSema)' })
       out.push({ slug: 'semaglutide', name: 'Semaglutide (in CagriSema)' })
-    } else {
-      out.push(member)
+      continue
     }
+    const components = peptide ? getComponents(peptide) : []
+    if (peptide && components.length > 0) {
+      for (const c of components) {
+        out.push({ slug: c.slug, name: `${c.name} (in ${peptide.name})` })
+      }
+      continue
+    }
+    out.push(member)
   }
   return out
 }
@@ -226,10 +269,13 @@ export function screenBlend(members: BlendMember[], pH: number): BlendScreen {
         code: 'acylation',
         title: `${row.label}: the fatty-acid lysine is not a free amine`,
         detail:
-          'The estimate counts that lysine as positively charged. The chain blocks the side chain, so the real net charge is about one unit lower.',
+          'This charge already treats one lysine as neutral. The fatty-acid carboxyls are still not subtracted, so the real charge can be one or two units more negative.',
       })
     }
-    if (row.codes.length > 0 && features.includes('Unnatural residue')) {
+    if (
+      row.codes.length > 0 &&
+      /Aib|Nle|as Ala|as Leu|as Met/i.test(row.peptide.sequence ?? '')
+    ) {
       flags.push({
         level: 'info',
         code: 'unnatural',
@@ -263,13 +309,21 @@ export function screenBlend(members: BlendMember[], pH: number): BlendScreen {
         detail: `GRAVY ${row.gravy.toFixed(2)} (Kyte–Doolittle). Hydrophobic sequences self-associate as concentration rises.`,
       })
     }
-    if (row.cysteines > 0) {
+    if (row.freeCysteines > 0) {
       flags.push({
         level: 'caution',
         code: 'cysteine',
-        title: `${row.label} has ${row.cysteines} cysteine${row.cysteines === 1 ? '' : 's'}`,
+        title: `${row.label} has ${row.freeCysteines} free cysteine${row.freeCysteines === 1 ? '' : 's'}`,
         detail:
-          'Thiols oxidize and, when more than one cysteine peptide shares a solution, disulfide bridges can re-pair.',
+          'A free thiol oxidizes, and it can re-pair with a cysteine on another peptide in the same solution.',
+      })
+    } else if (row.cysteines >= 2) {
+      flags.push({
+        level: 'info',
+        code: 'disulfide',
+        title: `${row.label} has ${row.cysteines} cysteines in disulfides`,
+        detail:
+          'Those cysteines are paired, so they are not counted as titratable thiols. A closed bridge does not scramble until it is reduced.',
       })
     }
   })
@@ -310,7 +364,7 @@ export function screenBlend(members: BlendMember[], pH: number): BlendScreen {
             ? b
             : null
         const other = copper === a ? b : copper === b ? a : null
-        if (copper && other && other.cysteines > 0) {
+        if (copper && other && other.freeCysteines > 0) {
           flags.push({
             level: 'caution',
             code: 'copper-thiol',
