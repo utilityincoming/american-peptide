@@ -10,7 +10,7 @@ import {
 } from 'lucide-react'
 import {
   CATEGORIES,
-  getPeptidesByCategory,
+  LISTED_PEPTIDES,
   type Peptide,
   type PeptideCategory,
 } from '@/lib/peptides'
@@ -33,9 +33,9 @@ function resolve(id: string) {
   return {
     meta,
     content: getCategoryContent(cat),
-    // Forward-facing category browse shows only listed entries; unlisted ones
-    // remain in data, sitemap, text search, and their own monograph pages.
-    peptides: getPeptidesByCategory(cat).filter((p) => !p.unlisted),
+    // Forward-facing category browse shows only listed entries, in browse
+    // rank. Unlisted ones remain in data, sitemap, text search, and monographs.
+    peptides: LISTED_PEPTIDES.filter((p) => p.categories.includes(cat)),
   }
 }
 

@@ -1,6 +1,9 @@
 import { describe, it, expect } from 'vitest'
 import {
   PEPTIDES,
+  LISTED_PEPTIDES,
+  BROWSE_SPOTLIGHT,
+  CATEGORIES,
   getPeptideBySlug,
   getComponents,
   getBlendsContaining,
@@ -49,5 +52,25 @@ describe('catalog integrity', () => {
     )
     // A non-component single should appear in no blends.
     expect(getBlendsContaining('semaglutide')).toEqual([])
+  })
+
+  it('ranks the browse catalog with the spotlight first, then category, then name', () => {
+    expect(LISTED_PEPTIDES.slice(0, BROWSE_SPOTLIGHT.length).map((p) => p.slug)).toEqual(
+      [...BROWSE_SPOTLIGHT],
+    )
+    expect(LISTED_PEPTIDES.some((p) => p.unlisted)).toBe(false)
+
+    const rest = LISTED_PEPTIDES.slice(BROWSE_SPOTLIGHT.length)
+    const categoryOrder = CATEGORIES.map((c) => c.id)
+    let lastCat = -1
+    let lastName = ''
+    for (const p of rest) {
+      const cat = categoryOrder.indexOf(p.categories[0])
+      expect(cat).toBeGreaterThanOrEqual(lastCat)
+      if (cat !== lastCat) lastName = ''
+      expect(p.name.localeCompare(lastName)).toBeGreaterThanOrEqual(0)
+      lastCat = cat
+      lastName = p.name
+    }
   })
 })
