@@ -16,6 +16,7 @@ import {
 import {
   PEPTIDES,
   LISTED_PEPTIDES,
+  BROWSE_SPOTLIGHT,
   CATEGORIES,
   SYNTHESIS_DIFFICULTY_LABEL,
   type Peptide,
@@ -45,6 +46,7 @@ export default function CatalogPage() {
   const [active, setActive] = useState<PeptideCategory | null>(null)
   const [feature, setFeature] = useState<SyntheticFeature | null>(null)
   const [difficulty, setDifficulty] = useState<SynthesisDifficulty | null>(null)
+  const [synthesisOpen, setSynthesisOpen] = useState(false)
   const [selected, setSelected] = useState<string[]>([])
 
   useEffect(() => {
@@ -72,10 +74,12 @@ export default function CatalogPage() {
       const f = params.get('synthesis')
       if (f && FEATURES.includes(f as SyntheticFeature)) {
         setFeature(f as SyntheticFeature)
+        setSynthesisOpen(true)
       }
       const d = params.get('difficulty')
       if (d && DIFFICULTIES.includes(d as SynthesisDifficulty)) {
         setDifficulty(d as SynthesisDifficulty)
+        setSynthesisOpen(true)
       }
     } catch {
       /* ignore */
@@ -206,7 +210,7 @@ export default function CatalogPage() {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search peptides, aliases, or research areas…"
+              placeholder="Search name or alias"
               className="w-full rounded-xl border border-hairline bg-fill py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#7EE0B5]/40"
             />
             {query && (
@@ -236,37 +240,54 @@ export default function CatalogPage() {
             ))}
           </div>
 
-          {/* Synthesis facet — difficulty grade + what makes a sequence hard to make */}
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="mr-0.5 inline-flex items-center gap-1 text-[10.5px] font-semibold uppercase tracking-wider text-ink/55">
+          {/* Synthesis facet stays closed until asked. A deep link that
+              already names a grade or feature opens it. */}
+          <div>
+            <button
+              type="button"
+              aria-expanded={synthesisOpen}
+              onClick={() => setSynthesisOpen((open) => !open)}
+              className={
+                'inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider transition-colors ' +
+                (synthesisOpen || difficulty || feature
+                  ? 'border-accent/40 bg-accent/10 text-accent'
+                  : 'border-hairline bg-fill text-ink/55 hover:border-hairline-strong hover:text-ink')
+              }
+            >
               <FlaskConical className="h-3 w-3" />
               Synthesis
-            </span>
-            {DIFFICULTIES.map((d) => (
-              <Chip
-                key={d}
-                active={difficulty === d}
-                onClick={() => selectDifficulty(difficulty === d ? null : d)}
-              >
-                {SYNTHESIS_DIFFICULTY_LABEL[d]}
-              </Chip>
-            ))}
-            <span
-              aria-hidden
-              className="mx-1 h-4 w-px shrink-0 self-center bg-ink/10"
-            />
-            <Chip active={feature === null} onClick={() => selectFeature(null)}>
-              Any feature
-            </Chip>
-            {FEATURES.map((f) => (
-              <Chip
-                key={f}
-                active={feature === f}
-                onClick={() => selectFeature(feature === f ? null : f)}
-              >
-                {f}
-              </Chip>
-            ))}
+              {difficulty ? ` · ${SYNTHESIS_DIFFICULTY_LABEL[difficulty]}` : ''}
+              {feature ? ` · ${feature}` : ''}
+            </button>
+            {synthesisOpen && (
+              <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                {DIFFICULTIES.map((d) => (
+                  <Chip
+                    key={d}
+                    active={difficulty === d}
+                    onClick={() => selectDifficulty(difficulty === d ? null : d)}
+                  >
+                    {SYNTHESIS_DIFFICULTY_LABEL[d]}
+                  </Chip>
+                ))}
+                <span
+                  aria-hidden
+                  className="mx-1 h-4 w-px shrink-0 self-center bg-ink/10"
+                />
+                <Chip active={feature === null} onClick={() => selectFeature(null)}>
+                  Any feature
+                </Chip>
+                {FEATURES.map((f) => (
+                  <Chip
+                    key={f}
+                    active={feature === f}
+                    onClick={() => selectFeature(feature === f ? null : f)}
+                  >
+                    {f}
+                  </Chip>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -284,10 +305,17 @@ export default function CatalogPage() {
 
           <div className="mb-5 flex items-center justify-between text-xs text-ink/55">
             <span>
-              {filtered.length} result{filtered.length === 1 ? '' : 's'}
-              {active ? ` in ${CATEGORIES.find((c) => c.id === active)?.label}` : ''}
-              {difficulty ? ` · ${SYNTHESIS_DIFFICULTY_LABEL[difficulty]} synthesis` : ''}
-              {feature ? ` with ${feature}` : ''}
+              {query || active || feature || difficulty
+                ? `${filtered.length} result${filtered.length === 1 ? '' : 's'}${
+                    active
+                      ? ` in ${CATEGORIES.find((c) => c.id === active)?.label}`
+                      : ''
+                  }${
+                    difficulty
+                      ? ` · ${SYNTHESIS_DIFFICULTY_LABEL[difficulty]} synthesis`
+                      : ''
+                  }${feature ? ` with ${feature}` : ''}`
+                : `${filtered.length} peptide${filtered.length === 1 ? '' : 's'}`}
             </span>
             {(query || active || feature || difficulty) && (
               <button
@@ -323,19 +351,28 @@ export default function CatalogPage() {
           {filtered.length === 0 ? (
             <EmptyState />
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {filtered.map((p) => {
-                const isSelected = selected.includes(p.slug)
-                return (
-                  <PeptideCard
-                    key={p.slug}
-                    peptide={p}
-                    selected={isSelected}
-                    disableAdd={atCap && !isSelected}
-                    onToggle={() => toggleSelected(p.slug)}
-                  />
-                )
-              })}
+            <div className="space-y-10">
+              {groupBrowse(filtered).map((group) => (
+                <div key={group.label}>
+                  <h2 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink/45">
+                    {group.label}
+                  </h2>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {group.items.map((p) => {
+                      const isSelected = selected.includes(p.slug)
+                      return (
+                        <PeptideCard
+                          key={p.slug}
+                          peptide={p}
+                          selected={isSelected}
+                          disableAdd={atCap && !isSelected}
+                          onToggle={() => toggleSelected(p.slug)}
+                        />
+                      )
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
@@ -348,6 +385,21 @@ export default function CatalogPage() {
       />
     </div>
   )
+}
+
+const SPOTLIGHT = new Set<string>(BROWSE_SPOTLIGHT)
+
+function groupBrowse(list: Peptide[]): { label: string; items: Peptide[] }[] {
+  const groups: { label: string; items: Peptide[] }[] = []
+  for (const peptide of list) {
+    const label = SPOTLIGHT.has(peptide.slug)
+      ? 'Commonly studied'
+      : (CATEGORIES.find((c) => c.id === peptide.categories[0])?.label ?? 'Other')
+    const last = groups[groups.length - 1]
+    if (last && last.label === label) last.items.push(peptide)
+    else groups.push({ label, items: [peptide] })
+  }
+  return groups
 }
 
 function PeptideCard({
@@ -413,21 +465,14 @@ function PeptideCard({
       <div className="pointer-events-none relative z-10 flex h-full flex-col">
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#7EE0B5]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-        <div className="mb-3 flex items-start justify-between gap-3 pr-24">
-          <div className="min-w-0">
-            <h3 className="truncate text-base font-semibold tracking-tight">
-              {peptide.name}
-            </h3>
-            {peptide.aliases?.[0] && (
-              <p className="mt-0.5 truncate text-xs text-ink/55">
-                aka {peptide.aliases.join(', ')}
-              </p>
-            )}
-          </div>
-          {peptide.fdaApproved && (
-            <span className="shrink-0 rounded-md border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
-              FDA
-            </span>
+        <div className="mb-3 min-w-0 pr-24">
+          <h3 className="truncate text-base font-semibold tracking-tight">
+            {peptide.name}
+          </h3>
+          {peptide.aliases?.[0] && (
+            <p className="mt-0.5 truncate text-xs text-ink/55">
+              aka {peptide.aliases[0]}
+            </p>
           )}
         </div>
 
@@ -446,11 +491,18 @@ function PeptideCard({
           ))}
         </div>
 
-        <div className="mt-4 flex items-center justify-between border-t border-hairline pt-3 text-[11px] text-ink/55">
-          <span>
-            {peptide.molecularWeight
-              ? `${peptide.molecularWeight.toLocaleString()} Da`
-              : 'Reference entry'}
+        <div className="mt-4 flex items-center justify-between gap-2 border-t border-hairline pt-3 text-[11px] text-ink/55">
+          <span className="inline-flex min-w-0 items-center gap-2">
+            <span className="truncate">
+              {peptide.molecularWeight
+                ? `${peptide.molecularWeight.toLocaleString()} Da`
+                : 'Reference entry'}
+            </span>
+            {peptide.fdaApproved && (
+              <span className="shrink-0 rounded-md border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
+                FDA
+              </span>
+            )}
           </span>
           <span className="flex items-center gap-1 text-accent/70 transition-colors group-hover:text-accent">
             View
