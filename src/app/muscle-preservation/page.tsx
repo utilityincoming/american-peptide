@@ -55,22 +55,6 @@ export const metadata: Metadata = {
 // The four converging Phase 2 readouts — the "quality of weight loss" evidence.
 const READOUTS = [
   {
-    slug: 'trevogrumab',
-    agent: 'Trevogrumab + semaglutide',
-    trial: 'COURAGE · Phase 2 (Regeneron)',
-    finding:
-      '~35% of semaglutide-alone weight loss was lean mass; adding trevogrumab preserved an estimated 50–80% of it while deepening fat loss.',
-    color: '#818CF8',
-  },
-  {
-    slug: 'garetosmab',
-    agent: '+ garetosmab (the triplet)',
-    trial: 'COURAGE · Phase 2 (Regeneron)',
-    finding:
-      'The trevogrumab + garetosmab triplet preserved ~80.9% of the lean mass semaglutide alone would have cost — the best profile, but with more tolerability-driven dropouts.',
-    color: '#7EE0B5',
-  },
-  {
     slug: 'apitegromab',
     agent: 'Apitegromab + tirzepatide',
     trial: 'EMBRAZE · Phase 2 (Scholar Rock)',
@@ -85,6 +69,22 @@ const READOUTS = [
     finding:
       'The combination reached ~22.1% weight loss with ~92.8% of it from fat, versus 71.8% fat for semaglutide alone; bimagrumab alone lost ~10.8% essentially all from fat.',
     color: '#FB923C',
+  },
+  {
+    slug: 'trevogrumab',
+    agent: 'Trevogrumab + semaglutide',
+    trial: 'COURAGE · Phase 2 (Regeneron)',
+    finding:
+      '~35% of semaglutide-alone weight loss was lean mass; adding trevogrumab preserved an estimated 50–80% of it while deepening fat loss.',
+    color: '#818CF8',
+  },
+  {
+    slug: 'garetosmab',
+    agent: '+ garetosmab (the triplet)',
+    trial: 'COURAGE · Phase 2 (Regeneron)',
+    finding:
+      'The trevogrumab + garetosmab triplet preserved ~80.9% of the lean mass semaglutide alone would have cost — the best profile, but with more tolerability-driven dropouts.',
+    color: '#7EE0B5',
   },
 ]
 
@@ -123,15 +123,6 @@ const CLASSES = [
 // The pipeline, honest status included — one card per agent.
 const PIPELINE = [
   {
-    slug: 'garetosmab',
-    name: 'Garetosmab',
-    target: 'Activin A',
-    sponsor: 'Regeneron',
-    status: 'FDA-approved · FOP',
-    tone: 'approved' as const,
-    note: 'Approved as Pasatru in August 2026 for the rare bone disease FOP — the first drug of the entire axis to reach the market. Its obesity and muscle-preservation use is investigational; it is the activin-A leg of the COURAGE triplet.',
-  },
-  {
     slug: 'apitegromab',
     name: 'Apitegromab',
     target: 'Pro/latent myostatin',
@@ -141,15 +132,6 @@ const PIPELINE = [
     note: 'EMBRAZE preserved 54.9% of the lean mass otherwise lost on tirzepatide. Its spinal-muscular-atrophy application, resubmitted after a facility-related CRL, has an FDA decision date of Sept 30, 2026.',
   },
   {
-    slug: 'trevogrumab',
-    name: 'Trevogrumab',
-    target: 'Mature myostatin',
-    sponsor: 'Regeneron',
-    status: 'Phase 2 · obesity',
-    tone: 'clinical' as const,
-    note: 'The COURAGE workhorse — preserved an estimated 50–80% of otherwise-lost lean mass added to semaglutide, and the most-studied muscle-sparing add-on in the incretin era.',
-  },
-  {
     slug: 'bimagrumab',
     name: 'Bimagrumab',
     target: 'ActRII receptor',
@@ -157,6 +139,24 @@ const PIPELINE = [
     status: 'Phase 2 · mixed',
     tone: 'mixed' as const,
     note: 'Fat down and muscle up — an unusual profile that drew a ~$2B acquisition. Lilly ended its tirzepatide combination in type 2 diabetes in 2025 (portfolio priority, not safety); a non-diabetic obesity study continues toward a 2026 readout.',
+  },
+  {
+    slug: 'garetosmab',
+    name: 'Garetosmab',
+    target: 'Activin A',
+    sponsor: 'Regeneron',
+    status: 'FDA-approved · FOP',
+    tone: 'approved' as const,
+    note: 'Approved as Pasatru in August 2026 for the rare bone disease FOP — the first drug of the entire axis to reach the market. Its obesity and muscle-preservation use is investigational; it is the activin-A leg of the COURAGE triplet.',
+  },
+  {
+    slug: 'trevogrumab',
+    name: 'Trevogrumab',
+    target: 'Mature myostatin',
+    sponsor: 'Regeneron',
+    status: 'Phase 2 · obesity',
+    tone: 'clinical' as const,
+    note: 'The COURAGE workhorse — preserved an estimated 50–80% of otherwise-lost lean mass added to semaglutide, and the most-studied muscle-sparing add-on in the incretin era.',
   },
   {
     slug: 'emugrobart',
@@ -641,9 +641,9 @@ export default function MusclePreservationPage() {
                 { slug: 'myostatin', name: 'Myostatin (GDF-8)', sub: 'The brake' },
                 { slug: 'follistatin', name: 'Follistatin', sub: 'Natural antagonist' },
                 { slug: 'apitegromab', name: 'Apitegromab', sub: 'Precursor-selective Ab' },
+                { slug: 'bimagrumab', name: 'Bimagrumab', sub: 'ActRII receptor blocker' },
                 { slug: 'trevogrumab', name: 'Trevogrumab', sub: 'Anti-myostatin Ab' },
                 { slug: 'garetosmab', name: 'Garetosmab', sub: 'Anti-activin-A · approved (FOP)' },
-                { slug: 'bimagrumab', name: 'Bimagrumab', sub: 'ActRII receptor blocker' },
                 { slug: 'emugrobart', name: 'Emugrobart', sub: 'Sweeping anti-myostatin Ab' },
               ].map((e) => (
                 <Link
