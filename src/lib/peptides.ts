@@ -457,6 +457,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'mazdutide',
+    unlisted: true, // kept off catalog browse; monograph, search, and API stay
     name: 'Mazdutide',
     aliases: ['IBI362', 'LY3305677'],
     categories: ['metabolic'],
@@ -632,6 +633,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'orforglipron',
+    unlisted: true, // small molecule; kept off catalog browse
     name: 'Orforglipron',
     aliases: ['Foundayo', 'LY3502970', 'OWL833'],
     categories: ['metabolic'],
@@ -692,6 +694,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'dulaglutide',
+    unlisted: true, // kept off catalog browse; monograph, search, and API stay
     name: 'Dulaglutide',
     aliases: ['Trulicity', 'LY2189265'],
     categories: ['metabolic', 'peptide-hormone'],
@@ -750,6 +753,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'exenatide',
+    unlisted: true, // kept off catalog browse; monograph, search, and API stay
     name: 'Exenatide',
     aliases: ['Byetta', 'Bydureon', 'Exendin-4', 'AC2993'],
     categories: ['metabolic', 'peptide-hormone'],
@@ -912,6 +916,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'petrelintide',
+    unlisted: true, // kept off catalog browse; monograph, search, and API stay
     name: 'Petrelintide',
     aliases: ['ZP8396'],
     categories: ['metabolic'],
@@ -2664,6 +2669,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'trevogrumab',
+    unlisted: true, // antibody; kept off catalog browse
     name: 'Trevogrumab',
     aliases: ['REGN1033'],
     categories: ['growth-hormone', 'metabolic'],
@@ -2757,6 +2763,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'garetosmab',
+    unlisted: true, // antibody; kept off catalog browse
     name: 'Garetosmab',
     aliases: ['REGN2477', 'Pasatru', 'garetosmab-grts'],
     categories: ['growth-hormone', 'metabolic'],
@@ -3039,6 +3046,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'endoluten',
+    unlisted: true, // undefined pineal extract; Epitalon is the listed peptide
     name: 'Endoluten',
     aliases: ['A-3 pineal peptide', 'pineal peptide complex'],
     categories: ['longevity', 'bioregulator'],
@@ -4460,6 +4468,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'leuprolide',
+    unlisted: true, // kept off catalog browse; monograph, search, and API stay
     name: 'Leuprolide',
     aliases: ['Leuprorelin', 'Lupron', 'Eligard', 'Leuprolide acetate'],
     categories: ['reproductive', 'peptide-hormone'],
@@ -5416,6 +5425,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'secretin',
+    unlisted: true, // kept off catalog browse; monograph, search, and API stay
     name: 'Secretin',
     aliases: ['ChiRhoStim', 'human secretin'],
     categories: ['peptide-hormone'],
@@ -6362,6 +6372,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'ghk',
+    unlisted: true, // copper-free parent; GHK-Cu is the listed form
     name: 'GHK',
     aliases: ['Gly-His-Lys', 'copper-free GHK', 'GHK tripeptide'],
     categories: ['cosmetic', 'healing-repair'],

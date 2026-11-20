@@ -126,6 +126,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
   const related = PEPTIDES.filter(
     (p) =>
       p.slug !== peptide.slug &&
+      !p.unlisted &&
       p.categories.some((c) => peptide.categories.includes(c)) &&
       !components.some((comp) => comp.slug === p.slug),
   ).slice(0, 3)
