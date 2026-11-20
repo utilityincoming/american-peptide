@@ -511,6 +511,8 @@ export const VENDORS: Vendor[] = [
       'tesamorelin', 'ipamorelin', 'igf-1-lr3', 'follistatin',
       // longevity / metabolic + Khavinson bioregulators — its signature catalog
       'mots-c', 'foxo4-dri', 'epitalon', 'cardiogen', 'thymogen', 'thymalin',
+      // high-traffic recovery staples — a third documented source on the busiest pages
+      'bpc-157', 'tb-500', 'ghk-cu',
     ],
     // FULL DISCOVERED MAPPING (kept for a one-line widening; not currently promoted).
     // Everything Paramount's storefront lists that maps to a catalog slug:
