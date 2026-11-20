@@ -863,6 +863,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'maritide',
+    unlisted: true, // antibody–peptide conjugate; kept on the GLP-1 page, off the peptide grid
     name: 'MariTide',
     aliases: ['Maridebart cafraglutide', 'AMG 133'],
     categories: ['metabolic'],
@@ -2453,6 +2454,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'mk-677',
+    unlisted: true, // small molecule; kept off catalog browse
     name: 'MK-677',
     aliases: ['Ibutamoren', 'Ibutamoren mesylate', 'MK-0677', 'L-163,191'],
     categories: ['growth-hormone'],
@@ -3514,6 +3516,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'vladonix',
+    unlisted: true, // tissue extract with no single sequence; kept off catalog browse
     name: 'Vladonix',
     aliases: ['A-6 thymus peptide', 'thymus peptide complex'],
     categories: ['immune', 'bioregulator'],
@@ -3555,6 +3558,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'ventfort',
+    unlisted: true, // tissue extract with no single sequence; kept off catalog browse
     name: 'Ventfort',
     aliases: ['A-3 vessel peptide', 'vascular peptide complex'],
     categories: ['bioregulator'],
@@ -3596,6 +3600,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'chelohart',
+    unlisted: true, // tissue extract with no single sequence; kept off catalog browse
     name: 'Chelohart',
     aliases: ['A-14 heart peptide', 'cardiac peptide complex'],
     categories: ['bioregulator'],
@@ -3637,6 +3642,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'cerluten',
+    unlisted: true, // tissue extract with no single sequence; kept off catalog browse
     name: 'Cerluten',
     aliases: ['A-1 brain peptide', 'neuronal peptide complex'],
     categories: ['cognitive', 'bioregulator'],
@@ -3678,6 +3684,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'suprefort',
+    unlisted: true, // tissue extract with no single sequence; kept off catalog browse
     name: 'Suprefort',
     aliases: ['A-7 pancreas peptide', 'pancreatic peptide complex'],
     categories: ['bioregulator', 'metabolic'],
@@ -3719,6 +3726,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'taxorest',
+    unlisted: true, // tissue extract with no single sequence; kept off catalog browse
     name: 'Taxorest',
     aliases: ['A-17 bronchi peptide', 'respiratory peptide complex'],
     categories: ['immune', 'bioregulator'],
@@ -3760,6 +3768,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'testoluten',
+    unlisted: true, // tissue extract with no single sequence; kept off catalog browse
     name: 'Testoluten',
     aliases: ['A-12 testis peptide', 'testicular peptide complex'],
     categories: ['reproductive', 'bioregulator'],
@@ -3863,6 +3872,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'sigumir',
+    unlisted: true, // tissue extract with no single sequence; kept off catalog browse
     name: 'Sigumir',
     aliases: ['A-4 cartilage peptide', 'cartilage / bone peptide complex'],
     categories: ['bioregulator', 'healing-repair'],
@@ -3904,6 +3914,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'gotratix',
+    unlisted: true, // tissue extract with no single sequence; kept off catalog browse
     name: 'Gotratix',
     aliases: ['A-11 muscle peptide', 'skeletal-muscle peptide complex'],
     categories: ['bioregulator', 'healing-repair'],
@@ -3945,6 +3956,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'svetinorm',
+    unlisted: true, // tissue extract with no single sequence; kept off catalog browse
     name: 'Svetinorm',
     aliases: ['A-2 liver peptide', 'hepatic peptide complex'],
     categories: ['bioregulator', 'longevity'],
@@ -3986,6 +3998,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'visoluten',
+    unlisted: true, // tissue extract with no single sequence; kept off catalog browse
     name: 'Visoluten',
     aliases: ['A-5 retina peptide', 'retinal peptide complex'],
     categories: ['bioregulator', 'longevity'],
@@ -4519,6 +4532,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'triptorelin',
+    unlisted: true, // same GnRH-agonist class as leuprolide; kept off catalog browse
     name: 'Triptorelin',
     aliases: ['Trelstar', 'Decapeptyl', 'Triptorelin pamoate'],
     categories: ['reproductive', 'peptide-hormone'],
@@ -5002,6 +5016,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: '5-amino-1mq',
+    unlisted: true, // small molecule; kept off catalog browse
     name: '5-Amino-1MQ',
     categories: ['metabolic', 'longevity'],
     shortDescription: 'Small-molecule NNMT inhibitor (often catalogued alongside peptides).',
@@ -5042,6 +5057,7 @@ const SEED_PEPTIDES: Peptide[] = [
   },
   {
     slug: 'nad-plus',
+    unlisted: true, // cofactor, not a peptide; kept off catalog browse
     name: 'NAD+',
     aliases: ['Nicotinamide Adenine Dinucleotide', 'NAD+ (buffered)', 'Buffered NAD+'],
     categories: ['mitochondrial', 'longevity'],
@@ -6027,6 +6043,7 @@ const SEED_PEPTIDES: Peptide[] = [
   // ─── Single-molecule additions ──────────────────────────────────────────
   {
     slug: 'slu-pp-332',
+    unlisted: true, // small molecule; kept off catalog browse
     name: 'SLU-PP-332',
     aliases: ['SLU PP 332'],
     categories: ['metabolic', 'mitochondrial'],
