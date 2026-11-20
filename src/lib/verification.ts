@@ -84,6 +84,7 @@ export const PUBCHEM_VERIFIED: Record<string, VerificationRecord> = {
   'thymogen': { cid: 100094, molecularFormula: 'C16H19N3O5', molecularWeight: 333.34, checkedAt: '2026-11-19' },
   'thymosin-alpha-1': { cid: 16130571, molecularFormula: 'C129H215N33O55', molecularWeight: 3108.3, checkedAt: '2026-11-19' },
   'thymosin-beta-4': { cid: 45382195, molecularFormula: 'C212H350N56O78S', molecularWeight: 4963, checkedAt: '2026-11-19' },
+  'thymulin': { cid: 71300623, molecularFormula: 'C33H54N12O15', molecularWeight: 858.9, checkedAt: '2026-11-19' },
   'tirzepatide': { cid: 166567236, molecularFormula: 'C225H348N48O68', molecularWeight: 4813, checkedAt: '2026-11-19' },
   'triptorelin': { cid: 25074470, molecularFormula: 'C64H82N18O13', molecularWeight: 1311.4, checkedAt: '2026-11-19' },
   'vasopressin': { cid: 644077, molecularFormula: 'C46H65N15O12S2', molecularWeight: 1084.2, checkedAt: '2026-11-19' },
