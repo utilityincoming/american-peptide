@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Dna, BarChart3, FlaskConical, Search, Sparkles, Syringe, Telescope } from 'lucide-react'
-import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES } from '@/lib/peptides'
+import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES, BROWSE_SPOTLIGHT } from '@/lib/peptides'
 import { STATIC_FAQS, faqPageJsonLd } from '@/lib/faqs'
 import FaqAccordion from '@/components/FaqAccordion'
 import DynamicFaqs from '@/components/DynamicFaqs'
@@ -36,16 +36,7 @@ export const metadata: Metadata = {
   },
 }
 
-const SPOTLIGHT_SLUGS = [
-  'semaglutide',
-  'tirzepatide',
-  'retatrutide',
-  'bpc-157',
-  'pt-141',
-  'ghk-cu',
-  'mots-c',
-  'epitalon',
-] as const
+const SPOTLIGHT_SLUGS = BROWSE_SPOTLIGHT
 
 const features = [
   {

@@ -6412,12 +6412,52 @@ const SEED_PEPTIDES: Peptide[] = [
 export const PEPTIDES: Peptide[] = SEED_PEPTIDES.map(enrich)
 
 /**
+ * Catalog browse rank. These lead every forward-facing grid; everything else
+ * follows CATEGORIES order, then name, so a newly appended seed cannot jump
+ * the first screen just by where it was typed.
+ */
+export const BROWSE_SPOTLIGHT = [
+  'semaglutide',
+  'tirzepatide',
+  'retatrutide',
+  'bpc-157',
+  'pt-141',
+  'ghk-cu',
+  'mots-c',
+  'epitalon',
+] as const
+
+const SPOTLIGHT_RANK = new Map<string, number>(
+  BROWSE_SPOTLIGHT.map((slug, i) => [slug, i]),
+)
+const CATEGORY_RANK = new Map<PeptideCategory, number>(
+  CATEGORIES.map((c, i) => [c.id, i]),
+)
+
+export function compareBrowseRank(a: Peptide, b: Peptide): number {
+  const aSpot = SPOTLIGHT_RANK.get(a.slug)
+  const bSpot = SPOTLIGHT_RANK.get(b.slug)
+  if (aSpot !== undefined || bSpot !== undefined) {
+    if (aSpot === undefined) return 1
+    if (bSpot === undefined) return -1
+    return aSpot - bSpot
+  }
+  const aCat = CATEGORY_RANK.get(a.categories[0]) ?? CATEGORIES.length
+  const bCat = CATEGORY_RANK.get(b.categories[0]) ?? CATEGORIES.length
+  if (aCat !== bCat) return aCat - bCat
+  return a.name.localeCompare(b.name)
+}
+
+/**
  * The curated set shown in forward-facing browse surfaces (catalog grid,
  * category pages, compounds hub, homepage counts). Excludes `unlisted`
  * entries — those remain in PEPTIDES for the sitemap, monograph pages,
- * text search, the API, and llms.txt.
+ * text search, the API, and llms.txt. Order is compareBrowseRank, not
+ * seed order.
  */
-export const LISTED_PEPTIDES: Peptide[] = PEPTIDES.filter((p) => !p.unlisted)
+export const LISTED_PEPTIDES: Peptide[] = PEPTIDES.filter((p) => !p.unlisted).sort(
+  compareBrowseRank,
+)
 
 export function getPeptideBySlug(slug: string): Peptide | undefined {
   return PEPTIDES.find((p) => p.slug === slug)

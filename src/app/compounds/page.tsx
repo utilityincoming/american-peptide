@@ -80,9 +80,7 @@ for (const p of LISTED_PEPTIDES) {
 // ── Full directory: every listed peptide once, grouped under its primary category ──
 const grouped = CATEGORIES.map((c) => ({
   cat: c,
-  items: LISTED_PEPTIDES.filter((p) => p.categories[0] === c.id).sort((a, b) =>
-    a.name.localeCompare(b.name),
-  ),
+  items: LISTED_PEPTIDES.filter((p) => p.categories[0] === c.id),
 })).filter((g) => g.items.length > 0)
 
 export default function CompoundsPage() {
