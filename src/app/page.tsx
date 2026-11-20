@@ -73,8 +73,11 @@ const features = [
   },
 ]
 
+// Lead with an owned metric (our cited catalog) so the row isn't three
+// borrowed public-database counts — the first number should be ours, the
+// scale of the sources we search backs it up.
 const stats = [
-  { value: '37M+', label: 'Biomedical Citations (PubMed)' },
+  { value: `${LISTED_PEPTIDES.length}`, label: 'Cited Catalog Entries' },
   { value: '400K+', label: 'Compounds Searchable via PubChem' },
   { value: '500K+', label: 'Clinical Trials Indexed' },
 ]
@@ -145,8 +148,12 @@ export default function HomePage() {
               catalog, calculators, and trial data ready at the bench, even with no signal.
             </p>
 
-            {/* Capability strip — three tools, named */}
-            <div className="mx-auto mb-10 grid grid-cols-3 gap-2 lg:mx-0 lg:max-w-lg">
+            {/* Capability strip — three tools, named.
+                flex-wrap instead of a fixed 3-col grid: tiles hold a readable
+                min width and reflow to 2-up (then 1-up) on narrow phones rather
+                than squeezing three columns of 10px text. `flex-1` lets a lone
+                wrapped tile stretch to fill its row so there's no orphan gap. */}
+            <div className="mx-auto mb-10 flex flex-wrap gap-2 lg:mx-0 lg:max-w-lg">
               {[
                 {
                   Icon: Dna,
@@ -170,7 +177,7 @@ export default function HomePage() {
                 <Link
                   key={label}
                   href={href}
-                  className="group flex flex-col items-center gap-1.5 rounded-xl border border-hairline bg-fill px-2 py-3 text-center transition-all hover:border-accent/30 hover:bg-fill-strong"
+                  className="group flex flex-1 basis-[28%] min-w-[128px] flex-col items-center gap-1.5 rounded-xl border border-hairline bg-fill px-2 py-3 text-center transition-all hover:border-accent/30 hover:bg-fill-strong"
                 >
                   <Icon className="h-4 w-4 text-accent/70 transition-colors group-hover:text-accent" strokeWidth={1.75} />
                   <span className="text-[11px] font-semibold text-ink/80">{label}</span>
@@ -219,8 +226,12 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Right — molecular visual */}
-          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+          {/* Right — molecular visual.
+              Hidden below `lg` so phones don't pay for a continuously-animated
+              420px SVG (orbit spin + float + pulsing nodes) above the fold —
+              it's purely decorative, and dropping it trims mobile paint/
+              compositing work where LCP and bounce are most sensitive. */}
+          <div className="relative mx-auto hidden w-full max-w-md lg:block lg:max-w-none">
             <HeroMolecule />
           </div>
         </div>
