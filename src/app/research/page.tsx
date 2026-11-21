@@ -17,6 +17,7 @@ import {
 } from '@/lib/pass-flow'
 import { fetchPassSummary, requestCheckoutUrl } from '@/lib/pass-client'
 import { getWatchlist } from '@/lib/workspace'
+import { ensureResearchAck } from '@/lib/research-ack'
 
 type Role = 'user' | 'assistant'
 
@@ -174,6 +175,10 @@ export default function ResearchPage() {
     async (text: string) => {
       const trimmed = text.trim()
       if (!trimmed || loading || limitReached) return
+
+      // Research-use acknowledgment, raised lazily at the first AI action for
+      // viewers who haven't acknowledged yet. Returning/acked users pass through.
+      if (!(await ensureResearchAck())) return
 
       const userMsg: Message = { role: 'user', content: trimmed }
       const next = [...messages, userMsg]
