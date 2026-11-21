@@ -11,6 +11,7 @@
 // `screenshots` entries in public/manifest.json.
 import { spawn } from 'node:child_process'
 import { mkdirSync } from 'node:fs'
+import { createServer } from 'node:net'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { setTimeout as sleep } from 'node:timers/promises'
@@ -21,7 +22,16 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = join(root, 'public', 'screenshots')
 mkdirSync(outDir, { recursive: true })
 
-const PORT = Number(process.env.PORT) || 3110
+// Grab a verified-free ephemeral port, so we never connect to a stale leftover
+// `next start` squatting on a fixed port (which would capture the wrong build).
+const PORT = await new Promise((resolve, reject) => {
+  const srv = createServer()
+  srv.once('error', reject)
+  srv.listen(0, '127.0.0.1', () => {
+    const { port } = srv.address()
+    srv.close(() => resolve(port))
+  })
+})
 const BASE = `http://localhost:${PORT}`
 
 const SHOTS = [
@@ -41,15 +51,22 @@ async function waitForServer(url, tries = 40) {
   throw new Error(`server did not become ready at ${url}`)
 }
 
-// Serve the existing production build on its own port.
+// Serve the existing production build on its own (free) port. Keep stderr so a
+// startup failure is visible instead of silently hanging.
 const server = spawn('npx', ['next', 'start', '-p', String(PORT)], {
   cwd: root,
-  stdio: 'ignore',
+  stdio: ['ignore', 'ignore', 'inherit'],
   env: { ...process.env, PORT: String(PORT) },
+})
+let serverExited = false
+server.on('exit', (code) => {
+  serverExited = true
+  if (code) console.error(`next start exited early with code ${code}`)
 })
 
 let browser
 try {
+  if (serverExited) throw new Error('next start failed to launch')
   await waitForServer(BASE + '/')
   browser = await chromium.launch()
   for (const s of SHOTS) {
@@ -57,7 +74,25 @@ try {
       viewport: { width: s.w, height: s.h },
       deviceScaleFactor: 1,
     })
-    await page.goto(BASE + s.url, { waitUntil: 'networkidle', timeout: 60000 })
+    await page.goto(BASE + s.url, { waitUntil: 'load', timeout: 60000 })
+    // Wait until a real stylesheet has applied — a cold production server can
+    // serve the HTML before its CSS chunk is ready, which would capture an
+    // unstyled page. Then wait for fonts and network idle.
+    await page.waitForFunction(
+      () =>
+        document.styleSheets.length > 0 &&
+        [...document.styleSheets].some((s) => {
+          try {
+            return s.cssRules && s.cssRules.length > 10
+          } catch {
+            return false
+          }
+        }),
+      { timeout: 30000 },
+    )
+    await page.evaluate(() => document.fonts.ready)
+    // NB: no networkidle wait — the ahrefs analytics script keeps a long-lived
+    // connection, so the network never goes idle. CSS + fonts ready is enough.
     // Dismiss the research-use consent modal if it is showing.
     try {
       const btn = page.getByRole('button', { name: /I understand/i })
