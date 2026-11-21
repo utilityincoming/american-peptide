@@ -33,6 +33,7 @@ import {
   type FlagLevel,
 } from '@/lib/peptide-properties'
 import { PEPTIDES } from '@/lib/peptides'
+import { ensureResearchAck } from '@/lib/research-ack'
 
 const FLAG_DOT: Record<FlagLevel, string> = {
   info: 'bg-ink/30',
@@ -218,6 +219,8 @@ export default function DesignLabPage() {
 
   const analyze = async () => {
     if (codes.length < 2) return
+    // Research-use acknowledgment, raised lazily at the first AI analysis.
+    if (!(await ensureResearchAck())) return
     setAnalyzing(true)
     setAnalysisError(null)
     try {
