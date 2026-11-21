@@ -20,6 +20,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { execFileSync } from 'node:child_process'
 import { chromium } from 'playwright'
+import sharp from 'sharp'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const pub = join(root, 'public')
@@ -62,12 +63,13 @@ try {
        ${svg}`,
       { waitUntil: 'networkidle' },
     )
-    await page.screenshot({
-      path: join(pub, name),
+    const buf = await page.screenshot({
       clip: { x: 0, y: 0, width: size, height: size },
       omitBackground: !opaque,
     })
     await page.close()
+    // Lossless re-encode (max zlib) — smaller files, gradients untouched.
+    await sharp(buf).png({ compressionLevel: 9, effort: 10 }).toFile(join(pub, name))
     console.log(`wrote ${name} (${size}×${size}, ${src}${opaque ? ', opaque' : ''})`)
   }
 } finally {

@@ -10,6 +10,10 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "gen:icons": "node scripts/generate-icons.mjs",
+    "gen:splash": "node scripts/generate-ios-splash.mjs",
+    "gen:screenshots": "npm run build && node scripts/generate-screenshots.mjs",
+    "gen:assets": "npm run gen:icons && npm run gen:splash && npm run gen:screenshots",
     "enrich": "node scripts/enrich-peptides.mjs",
     "eval": "node scripts/eval-agent.mjs",
     "gsc": "node scripts/gsc-report.mjs"
@@ -37,6 +41,7 @@
     "@types/react-dom": "^19.3.0",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
+    "playwright": "^1.63.0",
     "tailwindcss": "^4",
     "typescript": "^5.9.3",
     "vitest": "^5.1.0"

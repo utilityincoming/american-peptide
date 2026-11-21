@@ -11,6 +11,7 @@ import { readFileSync, mkdirSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
+import sharp from 'sharp'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const pub = join(root, 'public')
@@ -45,11 +46,12 @@ try {
        <div class="wrap"><div class="mark">${mark}</div></div>`,
       { waitUntil: 'networkidle' },
     )
-    await page.screenshot({
-      path: join(outDir, `apple-splash-${pxW}x${pxH}.png`),
-      clip: { x: 0, y: 0, width: pxW, height: pxH },
-    })
+    const buf = await page.screenshot({ clip: { x: 0, y: 0, width: pxW, height: pxH } })
     await page.close()
+    // Flat dark field + small logo → palette encode is lossless here and tiny.
+    await sharp(buf)
+      .png({ compressionLevel: 9, effort: 10, palette: true })
+      .toFile(join(outDir, `apple-splash-${pxW}x${pxH}.png`))
     console.log(`wrote apple-splash-${pxW}x${pxH}.png  (${d.label})`)
   }
 } finally {
