@@ -10,8 +10,6 @@ import {
   subscribe,
 } from '@/lib/research-ack'
 
-const SESSION_DISMISS_KEY = 'amp-research-ack-dismissed'
-
 const TITLE = 'Research & educational use only'
 
 function DisclaimerBody() {
@@ -56,15 +54,7 @@ export default function ResearchUseGate() {
   // Decide whether to show the ambient banner, and keep it in sync if the
   // acknowledgment is granted elsewhere (e.g. via the modal).
   useEffect(() => {
-    const sync = () => {
-      let dismissed = false
-      try {
-        dismissed = window.sessionStorage.getItem(SESSION_DISMISS_KEY) === '1'
-      } catch {
-        /* ignore */
-      }
-      setShowBanner(!hasAcked() && !dismissed)
-    }
+    const sync = () => setShowBanner(!hasAcked())
     sync()
     return subscribe(sync)
   }, [])
@@ -91,17 +81,10 @@ export default function ResearchUseGate() {
     }
   }, [modal])
 
+  // Both the primary button and the "×" acknowledge permanently: dismissing
+  // the banner is itself an acknowledgment, so it never reappears.
   const acknowledge = useCallback(() => {
     setAcked() // persists + notifies subscribers (banner hides)
-  }, [])
-
-  const dismissBanner = useCallback(() => {
-    try {
-      window.sessionStorage.setItem(SESSION_DISMISS_KEY, '1')
-    } catch {
-      /* ignore */
-    }
-    setShowBanner(false)
   }, [])
 
   const confirmModal = useCallback(() => {
@@ -153,7 +136,7 @@ export default function ResearchUseGate() {
             </div>
             <button
               type="button"
-              onClick={dismissBanner}
+              onClick={acknowledge}
               aria-label="Dismiss notice"
               className="-m-1 shrink-0 rounded-lg p-1 text-ink/40 transition-colors hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7EE0B5]/60"
             >
