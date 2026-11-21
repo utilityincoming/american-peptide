@@ -42,6 +42,29 @@
       "purpose": "maskable"
     }
   ],
+  "screenshots": [
+    {
+      "src": "/screenshots/screenshot-wide-home.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Cited, chemistry-grade peptide reference with an AI research agent"
+    },
+    {
+      "src": "/screenshots/screenshot-narrow-home.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Ask the Peptide Agent, browse the catalog, and dose at the bench"
+    },
+    {
+      "src": "/screenshots/screenshot-narrow-catalog.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Open peptide catalog with cited sequences and chemistry data"
+    }
+  ],
   "shortcuts": [
     {
       "name": "Reconstitution calculator",
