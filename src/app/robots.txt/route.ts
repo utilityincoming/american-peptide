@@ -53,7 +53,11 @@ export function GET(req: Request): Response {
   return new Response(onRedirectHost ? REDIRECT_HOST_ROBOTS : CANONICAL_ROBOTS, {
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
-      'Cache-Control': 'public, max-age=86400',
+      // Short TTL: robots.txt is tiny and rarely changes, but when it does
+      // (e.g. a Content-Signal update) a 24h edge cache means the change is
+      // invisible to crawlers and scanners for a full day. 5 minutes keeps it
+      // effectively cached while letting edits propagate promptly.
+      'Cache-Control': 'public, max-age=300',
     },
   })
 }

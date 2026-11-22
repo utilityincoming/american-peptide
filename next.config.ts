@@ -96,6 +96,23 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
       {
+        // Agent discovery: advertise the markdown/LLM index and the RFC 9727
+        // API catalog as typed links on every response, so an agent that lands
+        // anywhere can find the machine-readable surfaces from headers alone —
+        // no scraping. `rel="alternate"` to /llms.txt mirrors the llmstxt.org
+        // convention; `rel="api-catalog"` is the RFC 9727 relation. (A Link
+        // header on a static asset or JSON response is simply ignored by
+        // clients that don't care.)
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Link',
+            value:
+              '<https://americanpeptide.com/llms.txt>; rel="alternate"; type="text/markdown"; title="LLM-friendly index", <https://americanpeptide.com/.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',
+          },
+        ],
+      },
+      {
         source: '/manifest.json',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=86400' }],
       },
