@@ -16,7 +16,8 @@
     "gen:assets": "npm run gen:icons && npm run gen:splash && npm run gen:screenshots",
     "enrich": "node scripts/enrich-peptides.mjs",
     "eval": "node scripts/eval-agent.mjs",
-    "gsc": "node scripts/gsc-report.mjs"
+    "gsc": "node scripts/gsc-report.mjs",
+    "check:org-drift": "node --experimental-strip-types scripts/check-org-drift.mjs"
   },
   "dependencies": {
     "@next/third-parties": "16.4.6",
