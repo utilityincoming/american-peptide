@@ -22,8 +22,10 @@ export interface Kv {
   incrWithExpiry(key: string, exSec: number): Promise<number>
   /** INCR with no expiry — a durable, all-time counter. */
   incr(key: string): Promise<number>
-  /** INCRBY (may be negative, e.g. to refund a reservation); sets a TTL on first write. */
-  incrBy(key: string, by: number, exSec: number): Promise<number>
+  /** INCRBY (may be negative, e.g. to refund a reservation); sets a TTL on
+   * first write when `exSec` is given, else leaves the key without expiry
+   * (an all-time counter, like `incr`). */
+  incrBy(key: string, by: number, exSec?: number): Promise<number>
   /** HINCRBY one field of a hash; sets a TTL on the hash on first write. */
   hincrby(key: string, field: string, by: number, exSec: number): Promise<number>
   hset(key: string, obj: Record<string, string>): Promise<void>
@@ -85,6 +87,9 @@ const upstashKv: Kv = {
     return Number(await upstash(['INCR', key])) || 0
   },
   async incrBy(key, by, exSec) {
+    if (exSec == null) {
+      return Number(await upstash(['INCRBY', key, by])) || 0
+    }
     const [count] = await upstashPipeline([
       ['INCRBY', key, by],
       ['EXPIRE', key, exSec, 'NX'],
@@ -177,7 +182,7 @@ const memoryKv: Kv = {
   async incrBy(key, by, exSec) {
     const e = strings.get(key)
     const next = (live(e) ? Number(e!.value) || 0 : 0) + by
-    const exp = live(e) ? e!.exp : Date.now() + exSec * 1000
+    const exp = live(e) ? e!.exp : exSec == null ? null : Date.now() + exSec * 1000
     strings.set(key, { value: String(next), exp })
     return next
   },
