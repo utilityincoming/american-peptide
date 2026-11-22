@@ -27,4 +27,35 @@ export const RECON_FAQS: Faq[] = [
       'Yes. The math is the same for any lyophilized peptide supplied by vial weight — semaglutide, tirzepatide, retatrutide, BPC-157, TB-500, and the rest — because reconstitution is just peptide mass divided by the water you add. Enter the vial size in mg and your dose in mcg, and it handles the conversion.',
     cta: { label: 'Browse the peptide catalog', href: '/catalog' },
   },
+  {
+    id: 'bac-vs-sterile-water',
+    question:
+      'What is the difference between bacteriostatic water and sterile water for reconstitution?',
+    answer:
+      'Bacteriostatic water contains about 0.9% benzyl alcohol, a preservative that suppresses bacterial growth so a vial can be entered repeatedly over several weeks. Sterile water has no preservative and is intended for single use — once a vial is opened it offers no protection against contamination. For a multi-dose peptide vial that will be drawn from over time, bacteriostatic water is the volume this calculator assumes.',
+  },
+  {
+    id: 'how-long-reconstituted-lasts',
+    question: 'How long does a reconstituted peptide last in the refrigerator?',
+    answer:
+      'Most reconstituted research peptides are generally cited as stable for roughly 4–6 weeks when stored refrigerated at 2–8°C, protected from light, and mixed with bacteriostatic water. Exact stability is compound-specific and depends on purity, temperature, and handling, so label the vial with the reconstitution date and treat the window as a guideline, not a guarantee. Lyophilized (undissolved) powder lasts far longer — often many months to years — which is why peptides ship as powder and are reconstituted only when needed.',
+  },
+  {
+    id: 'why-not-shake',
+    question: 'Why should I swirl and not shake a peptide vial?',
+    answer:
+      'Peptides are fragile chains of amino acids, and the mechanical shear and foaming from vigorous shaking can denature or degrade them, lowering the amount of intact peptide you actually draw. Add the bacteriostatic water slowly against the inside glass wall rather than onto the powder, then let it dissolve on its own or swirl gently until the solution is clear.',
+  },
+  {
+    id: 'dose-smaller-than-mark',
+    question: 'What if my dose is smaller than the smallest mark on the syringe?',
+    answer:
+      'If a dose lands below one or two units it is hard to measure accurately, which makes each injection inconsistent. The fix is to reconstitute with more bacteriostatic water: a lower concentration spreads the same dose across more syringe units, moving it onto readable tick marks. Raise the water volume in the calculator above and watch the units-per-injection climb until the draw is easy to read.',
+  },
+  {
+    id: 'can-you-freeze',
+    question: 'Can reconstituted peptides be frozen?',
+    answer:
+      'Reconstituted peptide solution should not be frozen — a freeze–thaw cycle forms ice crystals that can break the peptide and damage its activity. Keep the mixed solution refrigerated at 2–8°C. Freezing is generally reserved for long-term storage of the dry lyophilized powder, not the dissolved solution.',
+  },
 ]

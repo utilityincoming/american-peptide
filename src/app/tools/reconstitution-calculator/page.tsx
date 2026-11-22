@@ -247,6 +247,52 @@ export default function ReconstitutionCalculatorPage() {
           <ReferenceTable currentVial={calc.vial} currentWater={calc.water} />
         </section>
 
+        {/* ── Literacy: choosing water volume ── explains the one judgement call
+            the calculator can't make for the reader. Pure prose, no new math. */}
+        <section className="mb-10 rounded-2xl border border-accent/20 bg-accent/[0.03] p-5 md:p-6">
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
+            Choosing your water volume
+          </h2>
+          <p className="mb-3 text-sm leading-relaxed text-ink/65">
+            There is no single &ldquo;correct&rdquo; amount of bacteriostatic water — it is a
+            trade-off you set. The water volume decides the concentration, and the
+            concentration decides how many syringe units your dose becomes. The peptide mass
+            you draw is identical either way; only the ease of measuring it changes.
+          </p>
+          <ul className="space-y-2.5 text-sm leading-relaxed text-ink/65">
+            <li className="flex gap-2">
+              <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent/60" />
+              <span>
+                <span className="font-medium text-ink/85">More water → lower
+                concentration</span> spreads a small dose across more units, so it lands on
+                readable tick marks instead of a sliver below the first line.
+              </span>
+            </li>
+            <li className="flex gap-2">
+              <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent/60" />
+              <span>
+                <span className="font-medium text-ink/85">Less water → higher
+                concentration</span> keeps the injection volume tiny, but a dose can shrink
+                to a few units that are hard to measure precisely.
+              </span>
+            </li>
+            <li className="flex gap-2">
+              <AlertTriangle className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-amber-400/70" />
+              <span>
+                A draw that exceeds <span className="font-medium text-ink/85">100 units
+                (1 mL)</span> will not fit a single U-100 syringe — if the volume-per-injection
+                reads above 1 mL, use less water or split the draw.
+              </span>
+            </li>
+          </ul>
+          <p className="mt-3 text-sm leading-relaxed text-ink/65">
+            A practical target is a draw that lands between roughly 10 and 50 units: large
+            enough to read confidently, small enough to inject comfortably. Adjust the water
+            field above until the <span className="font-medium text-ink/85">volume per
+            injection</span> sits in that range.
+          </p>
+        </section>
+
         {/* ── Educational content ── */}
         <section className="mb-10 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
           <h2 className="mb-4 text-xl font-semibold tracking-tight">
@@ -308,10 +354,35 @@ export default function ReconstitutionCalculatorPage() {
               </span>
             </li>
             <li className="flex gap-2">
+              <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent/60" />
+              <span>
+                <span className="font-medium text-ink/85">Protect from light:</span> keep
+                vials in their box or away from direct light — some peptides are
+                photosensitive.
+              </span>
+            </li>
+            <li className="flex gap-2">
+              <span className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent/60" />
+              <span>
+                <span className="font-medium text-ink/85">Bacteriostatic vs. sterile
+                water:</span> bacteriostatic water contains ~0.9% benzyl alcohol, a
+                preservative that allows repeated entry over weeks; sterile water has no
+                preservative and is single-use.
+              </span>
+            </li>
+            <li className="flex gap-2">
               <AlertTriangle className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-amber-400/70" />
               <span>
                 <span className="font-medium text-ink/85">Never freeze</span> reconstituted
-                peptides.
+                peptides — a freeze–thaw cycle can shear the peptide and destroy activity.
+              </span>
+            </li>
+            <li className="flex gap-2">
+              <AlertTriangle className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-amber-400/70" />
+              <span>
+                <span className="font-medium text-ink/85">Discard if in doubt:</span>
+                cloudiness, visible particles, or discoloration in a previously clear
+                solution are signs of degradation or contamination.
               </span>
             </li>
           </ul>
