@@ -16,9 +16,22 @@ import { NextResponse, type NextRequest } from 'next/server'
 // .net's redirect behavior (but without the /go carve-out, which it never
 // served) so any old link 308s to the canonical page on americanpeptide.com.
 //
+// americanpeptide.org is a DEFENSIVE / CONSOLIDATION host owned by us to protect
+// the brand and support the .com + .net pair. It serves no distinct content:
+// every path 308s to the canonical .com equivalent (no /go carve-out — outbound
+// stays on .net), so .org never builds a duplicate-content index and all of its
+// link equity flows to .com. Same treatment as app.americanpeptide.com.
+//
+// The .app, .bio, and .store variants are owned and parked (no DNS pointed here
+// yet); add them to this list the same way if/when they resolve to this project.
+//
 // Stays middleware, not proxy. Next 16 proxy is Node-only; this host split
 // wants the Edge runtime, which middleware still provides.
-const REDIRECT_HOSTS = ['americanpeptide.net', 'app.americanpeptide.com']
+const REDIRECT_HOSTS = [
+  'americanpeptide.net',
+  'americanpeptide.org',
+  'app.americanpeptide.com',
+]
 const CANONICAL_ORIGIN = 'https://americanpeptide.com'
 const CANONICAL_HOST = 'americanpeptide.com'
 

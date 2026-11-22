@@ -45,4 +45,26 @@ describe('middleware host canonicalization', () => {
     const res = middleware(request('https://americanpeptide.net/go/abc', 'americanpeptide.net'))
     expect(res.headers.get('location')).toBeNull()
   })
+
+  it('308s the .org consolidation host to the apex, preserving path + query', () => {
+    const res = middleware(
+      request('https://americanpeptide.org/catalog/ghk-cu?ref=x', 'americanpeptide.org'),
+    )
+    expect(res.status).toBe(308)
+    expect(res.headers.get('location')).toBe('https://americanpeptide.com/catalog/ghk-cu?ref=x')
+  })
+
+  it('308s www.americanpeptide.org to the apex too', () => {
+    const res = middleware(
+      request('https://www.americanpeptide.org/research', 'www.americanpeptide.org'),
+    )
+    expect(res.status).toBe(308)
+    expect(res.headers.get('location')).toBe('https://americanpeptide.com/research')
+  })
+
+  it('does NOT carve out /go on .org — only .net serves the outbound chokepoint', () => {
+    const res = middleware(request('https://americanpeptide.org/go/abc', 'americanpeptide.org'))
+    expect(res.status).toBe(308)
+    expect(res.headers.get('location')).toBe('https://americanpeptide.com/go/abc')
+  })
 })
