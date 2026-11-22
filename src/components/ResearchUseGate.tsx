@@ -70,14 +70,28 @@ export default function ResearchUseGate() {
     return () => registerPresenter(null)
   }, [])
 
-  // While the modal is open, lock scroll and focus the primary action.
+  // While the modal is open: lock scroll, focus the primary action, close on
+  // Escape (treated as "Not now"), and restore focus to the trigger on close.
   useEffect(() => {
     if (!modal) return
-    const prev = document.body.style.overflow
+    const prevOverflow = document.body.style.overflow
+    const trigger = document.activeElement as HTMLElement | null
     document.body.style.overflow = 'hidden'
     confirmRef.current?.focus()
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        modal.resolve(false)
+        setModal(null)
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+
     return () => {
-      document.body.style.overflow = prev
+      document.body.style.overflow = prevOverflow
+      document.removeEventListener('keydown', onKeyDown)
+      trigger?.focus?.()
     }
   }, [modal])
 
