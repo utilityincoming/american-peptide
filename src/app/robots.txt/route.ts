@@ -26,6 +26,11 @@ Allow: /
 Disallow: /research?
 Disallow: /api/chat
 Disallow: /api/analyze-peptide
+# Content Signals (https://contentsignals.org/): this is an open research
+# platform whose data is CC BY 4.0 and which publishes an AI-agent index at
+# /llms.txt — search indexing, AI inference-time input (RAG/agents), and AI
+# training are all welcome. Attribution is still required under CC BY 4.0.
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 
 Sitemap: ${CANONICAL_ORIGIN}/sitemap.xml
 
