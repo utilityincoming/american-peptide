@@ -1,0 +1,61 @@
+name: org drift check
+
+# Guards the promise americanpeptide.org makes: that its published "reference
+# implementations of the bench math that .com runs" and its open dataset still
+# match this repo. Runs the behavioral-parity + constants + pin + data checks in
+# scripts/check-org-drift.mjs against a fresh checkout of the public .org repo.
+#
+# Hard drift (a reference calculator no longer matches production) fails the job.
+# Soft findings (stale pin, aging dataset) are reported in the job summary.
+#
+# Triggers: PRs that touch the shared math (so a .com change that breaks parity
+# is caught at review time), a weekly schedule (catches .org going stale on its
+# own), and manual dispatch.
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/lib/reconstitution.ts'
+      - 'src/lib/blend-screen.ts'
+      - 'src/lib/pharmacokinetics.ts'
+      - 'src/lib/amino-acids.ts'
+      - 'src/lib/peptide-properties.ts'
+      - 'src/lib/peptides.ts'
+      - 'scripts/check-org-drift.mjs'
+      - '.github/workflows/org-drift.yml'
+  schedule:
+    - cron: '0 7 * * 1' # Mondays 07:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: org-drift-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout americanpeptide.com
+        uses: actions/checkout@v4
+        with:
+          # Full history so the pin-freshness check can resolve
+          # BLEND_SCREEN_COM_COMMIT and diff the blend-screen source since it.
+          fetch-depth: 0
+
+      - name: Checkout americanpeptide.org (public)
+        uses: actions/checkout@v4
+        with:
+          repository: utilityincoming/american-peptide-org
+          path: .org-ref
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check drift (com vs org)
+        run: node --experimental-strip-types scripts/check-org-drift.mjs "$GITHUB_WORKSPACE/.org-ref"
