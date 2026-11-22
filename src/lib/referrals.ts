@@ -14,6 +14,7 @@ import { VENDORS } from './vendors'
 import { COMMUNITY_REF_ID } from './community'
 
 const PREFIX = 'go:clk'
+const BOT_PREFIX = 'go:bot' // filtered non-human clicks (not counted as referrals)
 const CNV_PREFIX = 'go:cnv' // conversion (sale) counters
 const REV_PREFIX = 'go:rev' // revenue counters, in integer minor units (cents)
 // Monthly buckets self-expire after ~13 months — long enough to read a rolling
@@ -26,6 +27,9 @@ const ORDER_TTL_SEC = 60 * 60 * 24 * 400
 const vendorAllKey = (id: string) => `${PREFIX}:v:${id}`
 const vendorMonthKey = (id: string, ym: string) => `${PREFIX}:v:${id}:${ym}`
 const productAllKey = (id: string, slug: string) => `${PREFIX}:vp:${id}:${slug}`
+
+const botAllKey = (id: string) => `${BOT_PREFIX}:v:${id}`
+const botMonthKey = (id: string, ym: string) => `${BOT_PREFIX}:v:${id}:${ym}`
 
 const cnvAllKey = (id: string) => `${CNV_PREFIX}:v:${id}`
 const cnvMonthKey = (id: string, ym: string) => `${CNV_PREFIX}:v:${id}:${ym}`
@@ -65,6 +69,19 @@ export async function recordReferralClick(vendorId: string, slug?: string): Prom
   ]
   if (slug) ops.push(kv.incr(productAllKey(vendorId, slug)))
   await Promise.allSettled(ops)
+}
+
+/**
+ * Record a /go hit classified as non-human (crawler, unfurler, prefetch, probe).
+ * Kept in a parallel namespace so it never inflates the real referral counts but
+ * stays visible in the admin stats (botClicks) — which is how we explain the gap
+ * between our numbers and a partner's reported visits. Best-effort, non-throwing.
+ */
+export async function recordBotClick(vendorId: string): Promise<void> {
+  await Promise.allSettled([
+    kv.incr(botAllKey(vendorId)),
+    kv.incrWithExpiry(botMonthKey(vendorId, utcMonth()), MONTH_TTL_SEC),
+  ])
 }
 
 export type ConversionOutcome = 'recorded' | 'duplicate'
@@ -129,6 +146,9 @@ export interface VendorReferralStats {
   conversionRate: number
   /** Earnings per click in cents (revenueCents / clicks), 0 when no clicks. */
   epcCents: number
+  /** Filtered non-human /go hits (crawlers, unfurlers, prefetch) — not in `allTime`. */
+  botClicks: number
+  botMonths: { month: string; botClicks: number }[]
 }
 
 /**
@@ -148,6 +168,7 @@ export interface ReferralStats {
   totalAllTime: number
   totalConversions: number
   totalRevenueCents: number
+  totalBotClicks: number
   community: CommunityReferralStats
   vendors: VendorReferralStats[]
 }
@@ -165,21 +186,32 @@ export async function getReferralStats(monthsBack = 6): Promise<ReferralStats> {
   const vendors = await Promise.all(
     VENDORS.map(async (v): Promise<VendorReferralStats> => {
       const productSlugs = Object.keys(v.affiliate?.productUrls ?? {})
-      const [allTime, monthVals, productVals, conversions, cnvMonthVals, revenueCents, revMonthVals] =
-        await Promise.all([
-          kv.get(vendorAllKey(v.id)).then(num),
-          Promise.all(months.map((m) => kv.get(vendorMonthKey(v.id, m)).then(num))),
-          Promise.all(
-            productSlugs.map(async (slug) => ({
-              slug,
-              clicks: num(await kv.get(productAllKey(v.id, slug))),
-            })),
-          ),
-          kv.get(cnvAllKey(v.id)).then(num),
-          Promise.all(months.map((m) => kv.get(cnvMonthKey(v.id, m)).then(num))),
-          kv.get(revAllKey(v.id)).then(num),
-          Promise.all(months.map((m) => kv.get(revMonthKey(v.id, m)).then(num))),
-        ])
+      const [
+        allTime,
+        monthVals,
+        productVals,
+        conversions,
+        cnvMonthVals,
+        revenueCents,
+        revMonthVals,
+        botClicks,
+        botMonthVals,
+      ] = await Promise.all([
+        kv.get(vendorAllKey(v.id)).then(num),
+        Promise.all(months.map((m) => kv.get(vendorMonthKey(v.id, m)).then(num))),
+        Promise.all(
+          productSlugs.map(async (slug) => ({
+            slug,
+            clicks: num(await kv.get(productAllKey(v.id, slug))),
+          })),
+        ),
+        kv.get(cnvAllKey(v.id)).then(num),
+        Promise.all(months.map((m) => kv.get(cnvMonthKey(v.id, m)).then(num))),
+        kv.get(revAllKey(v.id)).then(num),
+        Promise.all(months.map((m) => kv.get(revMonthKey(v.id, m)).then(num))),
+        kv.get(botAllKey(v.id)).then(num),
+        Promise.all(months.map((m) => kv.get(botMonthKey(v.id, m)).then(num))),
+      ])
       return {
         id: v.id,
         name: v.name,
@@ -195,6 +227,8 @@ export async function getReferralStats(monthsBack = 6): Promise<ReferralStats> {
         revenueMonths: months.map((month, i) => ({ month, revenueCents: revMonthVals[i] })),
         conversionRate: allTime > 0 ? conversions / allTime : 0,
         epcCents: allTime > 0 ? revenueCents / allTime : 0,
+        botClicks,
+        botMonths: months.map((month, i) => ({ month, botClicks: botMonthVals[i] })),
       }
     }),
   )
@@ -214,6 +248,7 @@ export async function getReferralStats(monthsBack = 6): Promise<ReferralStats> {
     totalAllTime: vendors.reduce((sum, v) => sum + v.allTime, 0),
     totalConversions: vendors.reduce((sum, v) => sum + v.conversions, 0),
     totalRevenueCents: vendors.reduce((sum, v) => sum + v.revenueCents, 0),
+    totalBotClicks: vendors.reduce((sum, v) => sum + v.botClicks, 0),
     community: {
       allTime: communityAllTime,
       months: months.map((month, i) => ({ month, clicks: communityMonthVals[i] })),

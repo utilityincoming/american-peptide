@@ -51,6 +51,12 @@ const COOKIE_MAX_AGE = 60 * 60 * 24 * 365
 // ── Caller identity ───────────────────────────────────────────────────────────
 
 export function clientIp(req: Request): string {
+  // Behind Cloudflare, CF-Connecting-IP is the single trustworthy client address;
+  // x-forwarded-for then carries Cloudflare's edge IPs too, so prefer CF's header
+  // first. Falls back to the first XFF hop, then x-real-ip, for non-CF paths
+  // (direct Vercel, previews, local).
+  const cf = req.headers.get('cf-connecting-ip')
+  if (cf?.trim()) return cf.trim()
   const fwd = req.headers.get('x-forwarded-for')
   return (fwd ? fwd.split(',')[0] : req.headers.get('x-real-ip'))?.trim() || 'unknown'
 }

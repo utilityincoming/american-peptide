@@ -7,7 +7,8 @@
 import { NextResponse, after } from 'next/server'
 import { VENDORS } from '@/lib/vendors'
 import { IS_APP_BUILD } from '@/lib/platform'
-import { recordReferralClick } from '@/lib/referrals'
+import { recordReferralClick, recordBotClick } from '@/lib/referrals'
+import { isNonHumanClick } from '@/lib/bot-detect'
 import { COMMUNITY_REF_ID, COMMUNITY_URL } from '@/lib/community'
 
 export async function GET(
@@ -22,13 +23,19 @@ export async function GET(
 
   const { id } = await params
 
+  // Classify the hit once, from headers only. A non-human hit (crawler, link
+  // unfurler, prefetch, uptime probe) still gets redirected — we only divert its
+  // click OUT of the human referral count and into a separate bot counter, so
+  // our numbers match what a partner actually sees. See lib/bot-detect.
+  const { bot } = isNonHumanClick(req.headers)
+
   // The community (Telegram) is not a vendor, but it rides the same chokepoint
   // so a join click lands in the same no-PII referral counter. No ?p= handling
   // and no vendor lookup - the destination is a fixed constant.
   if (id === COMMUNITY_REF_ID) {
     after(async () => {
       try {
-        await recordReferralClick(COMMUNITY_REF_ID)
+        await (bot ? recordBotClick(COMMUNITY_REF_ID) : recordReferralClick(COMMUNITY_REF_ID))
       } catch {
         /* analytics is a courtesy; never surface a store error to the redirect */
       }
@@ -61,7 +68,9 @@ export async function GET(
   const productSlug = productUrl ? (slug ?? undefined) : undefined
   after(async () => {
     try {
-      await recordReferralClick(vendor.id, productSlug)
+      // A bot's product deep link is not a real intent signal, so bots are
+      // counted only at the vendor level, never per-product.
+      await (bot ? recordBotClick(vendor.id) : recordReferralClick(vendor.id, productSlug))
     } catch {
       /* analytics is a courtesy; never surface a store error to the redirect */
     }
