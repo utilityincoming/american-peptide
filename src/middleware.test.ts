@@ -45,4 +45,13 @@ describe('middleware host canonicalization', () => {
     const res = middleware(request('https://americanpeptide.net/go/abc', 'americanpeptide.net'))
     expect(res.headers.get('location')).toBeNull()
   })
+
+  it('leaves americanpeptide.org untouched — it is a separate live site, not a redirect host', () => {
+    const res = middleware(
+      request('https://americanpeptide.org/standards/evidence-tier/v0.1', 'americanpeptide.org'),
+    )
+    // No match in REDIRECT_HOSTS → NextResponse.next(), no Location. Guards
+    // against anyone re-adding .org and silently 308-ing the standards site.
+    expect(res.headers.get('location')).toBeNull()
+  })
 })
