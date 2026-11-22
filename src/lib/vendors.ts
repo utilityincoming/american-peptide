@@ -550,9 +550,13 @@ export const VENDORS: Vendor[] = [
         'tirzepatide': 'https://paramountpeptides.com/product/glp-2-t/?ref=AMERICANPEPTIDE',
         'retatrutide': 'https://paramountpeptides.com/product/glp-3-r/?ref=AMERICANPEPTIDE',
       },
-      // Same string works as the referral param and a checkout code, so publish
-      // it: a reader still carries it in if the referral doesn't stick.
-      code: 'AMERICANPEPTIDE',
+      // The referral PARAM (?ref=AMERICANPEPTIDE) and the checkout COUPON are
+      // different strings — confirmed against Paramount's affiliate dashboard
+      // (2026-11-22): the link is ?ref=AMERICANPEPTIDE but the coupon a buyer
+      // types is `fv-americanpeptide`. Publish the coupon as the fallback for a
+      // reader whose referral cookie doesn't stick; the ?ref= links above are
+      // unchanged and remain correct for link attribution (30% commission).
+      code: 'fv-americanpeptide',
       active: true,
     },
     spotlightNote:
