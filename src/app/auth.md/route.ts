@@ -60,12 +60,20 @@ Both body fields are optional. The response (HTTP 201) returns the key **once** 
 it is stored only as a hash and cannot be recovered, so save it. Key creation is
 rate-limited to 5 keys per day per IP.
 
-A machine-readable summary of the registration method:
+Agents use the **anonymous** identity model: no identity assertion is required,
+and the only credential is an optional API key claimed from the registration
+endpoint. The complete, self-contained registration flow in machine-readable
+form:
 
 \`\`\`json
 {
   "audience": "autonomous-agents",
   "auth_required": false,
+  "identity_types_supported": ["anonymous"],
+  "anonymous": {
+    "credential_types_supported": ["api_key"],
+    "claim_uri": "${API_SITE}/api/keys"
+  },
   "register_uri": "${API_SITE}/api/keys",
   "registration_methods": [
     {
