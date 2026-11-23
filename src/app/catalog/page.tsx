@@ -2,8 +2,10 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import { sendGAEvent } from '@next/third-parties/google'
 import {
   ArrowRight,
+  ArrowUpRight,
   Check,
   FlaskConical,
   GitCompareArrows,
@@ -25,9 +27,11 @@ import {
   type SynthesisDifficulty,
 } from '@/lib/peptides'
 import OfflineReference from '@/components/OfflineReference'
+import { getVendor, isAffiliate, vendorHref } from '@/lib/vendors'
 
 const MAX_COMPARE = 4
 const STORAGE_KEY = 'amp-catalog-compare-selected'
+const ABSIM = getVendor('absim-peptides')
 
 // Synthetic-feature facet — derived once from the catalog so the chip row stays
 // in sync with the data. Ordered by how many peptides carry each feature.
@@ -197,6 +201,27 @@ export default function CatalogPage() {
               Research Workspace
             </Link>
           </div>
+          {ABSIM && isAffiliate(ABSIM) && (
+            <div className="mt-5 flex flex-col items-start gap-2">
+              <a
+                href={vendorHref(ABSIM)}
+                rel="sponsored nofollow noopener"
+                target="_blank"
+                aria-describedby="absim-catalog-disclosure"
+                onClick={() => sendGAEvent('event', 'affiliate_click', {
+                  vendor: 'absim-peptides',
+                  placement: 'catalog_intro',
+                })}
+                className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-accent/30 bg-accent/[0.08] px-4 py-2 text-sm font-medium text-accent transition-colors hover:bg-accent/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                Browse research compounds at ABSIM
+                <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+              </a>
+              <p id="absim-catalog-disclosure" className="text-xs leading-relaxed text-ink/65">
+                We may earn a commission if you purchase through this link.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 

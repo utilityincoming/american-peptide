@@ -1141,6 +1141,9 @@ function VendorCard({
 }) {
   const score = trustScore(vendor)
   const t = vendor.trust
+  const hasAbsimListing =
+    vendor.id === 'absim-peptides' &&
+    Boolean(vendor.affiliate?.active && vendor.affiliate.productUrls?.[slug])
   const signals: { label: string; ok: boolean }[] = [
     { label: 'Independent third-party testing (HPLC/MS)', ok: t.thirdPartyTested },
     { label: 'Per-batch / lot-level testing', ok: t.perBatchTesting },
@@ -1205,13 +1208,21 @@ function VendorCard({
 
       <a
         href={vendorHref(vendor, slug)}
+        aria-describedby={hasAbsimListing ? 'absim-listing-details' : undefined}
         target="_blank"
         rel="sponsored nofollow noopener"
         className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-accent/30 bg-accent/15 px-3 py-2 text-xs font-medium text-accent transition-colors hover:bg-accent/25"
       >
-        Shop {vendor.name}
+        {hasAbsimListing ? 'View listing at ABSIM' : `Shop ${vendor.name}`}
         <ArrowUpRight className="h-3.5 w-3.5" />
       </a>
+
+      {hasAbsimListing && (
+        <p id="absim-listing-details" className="mt-2 text-xs leading-relaxed text-ink/65">
+          See the Certificate of Analysis tab on the ABSIM listing. We may earn a
+          commission if you purchase through this link.
+        </p>
+      )}
 
       {vendor.affiliate?.code &&
         (badge === 'featured' && vendor.affiliate?.offer ? (

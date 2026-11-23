@@ -59,6 +59,12 @@ jobs:
             sleep 1
           done
 
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Smoke test the catalog
+        run: node scripts/smoke-catalog.mjs
+
       # Crawl internal links only — external link rot is flaky in CI (rate
       # limits, bot blocking) and would make this guard noisy. Fails on any
       # broken internal link.
