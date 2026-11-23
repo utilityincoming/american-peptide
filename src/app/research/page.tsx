@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback, useReducer } from 'react'
-import { Send, Dna, SquarePen } from 'lucide-react'
+import { Send, Dna, SquarePen, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -17,7 +17,7 @@ import {
 } from '@/lib/pass-flow'
 import { fetchPassSummary, requestCheckoutUrl } from '@/lib/pass-client'
 import { getWatchlist } from '@/lib/workspace'
-import { ensureResearchAck } from '@/lib/research-ack'
+import { ensureResearchAck, hasAcked, subscribe as subscribeAck } from '@/lib/research-ack'
 
 type Role = 'user' | 'assistant'
 
@@ -165,6 +165,12 @@ export default function ResearchPage() {
   const checkingOut = checkout.status === 'starting'
   const bottomRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+  // Whether the research-use disclaimer banner is still showing. It is a fixed
+  // overlay at the bottom (src/components/ResearchUseGate.tsx), so the landing
+  // reserves space for it to keep the last prompts from being covered. Defaults
+  // to "acknowledged" so returning visitors (the majority) reserve nothing and
+  // see no layout shift; the effect corrects it after mount for first visits.
+  const [disclaimerShown, setDisclaimerShown] = useState(false)
   // Session page context, set once from the ?ctx=kind:slug deep-link param
   // (e.g. a compound page hands off "compound:semaglutide"). Sent with every
   // request so bare follow-ups resolve to the compound the user came from.
@@ -308,6 +314,14 @@ export default function ResearchPage() {
     return () => {
       cancelled = true
     }
+  }, [])
+
+  // Mirror the research-use acknowledgment so the landing can reserve space for
+  // the banner only while it is visible (it hides permanently once acknowledged).
+  useEffect(() => {
+    const sync = () => setDisclaimerShown(!hasAcked())
+    sync()
+    return subscribeAck(sync)
   }, [])
 
   const startCheckout = async () => {
@@ -488,7 +502,11 @@ export default function ResearchPage() {
       {/* ── Messages ── */}
       <main className="flex-1 overflow-y-auto">
         {isLanding ? (
-          <div className="mx-auto flex min-h-full max-w-2xl flex-col justify-center px-4 py-6 md:px-6">
+          <div
+            className={`mx-auto flex min-h-full max-w-2xl flex-col justify-center px-4 py-6 md:px-6 ${
+              disclaimerShown ? 'pb-32 sm:pb-28' : ''
+            }`}
+          >
             {/* Hero — value proposition */}
             <div className="mb-6 text-center">
               <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent/15">
@@ -535,10 +553,10 @@ export default function ResearchPage() {
                   <button
                     key={s}
                     onClick={() => sendMessage(s)}
-                    className="group flex items-center justify-between gap-2 rounded-xl border border-hairline bg-fill px-3.5 py-2.5 text-left text-sm text-ink/70 transition-all hover:border-accent/25 hover:bg-fill-strong hover:text-ink"
+                    className="group flex items-center gap-2 rounded-xl border border-hairline bg-fill px-3.5 py-2.5 text-left text-sm text-ink/70 transition-all hover:-translate-y-px hover:border-accent/30 hover:bg-fill-strong hover:text-ink hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
                   >
-                    <span>{s}</span>
-                    <Send className="h-3 w-3 flex-shrink-0 text-ink/20 transition-colors group-hover:text-accent" />
+                    <span className="flex-1">{s}</span>
+                    <ArrowRight className="h-3.5 w-3.5 flex-shrink-0 -translate-x-1 text-accent opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
                   </button>
                 ))}
               </div>
