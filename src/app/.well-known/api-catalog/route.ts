@@ -48,6 +48,11 @@ export function GET() {
             title: 'MCP Server Card (SEP-2127) — the MCP server and its tools, for discovery',
             type: 'application/json',
           },
+          {
+            href: `${API_SITE}/.well-known/agent-skills/index.json`,
+            title: 'Agent Skills index — SKILL.md bundles for using this catalog',
+            type: 'application/json',
+          },
         ],
         'service-desc': [
           {
