@@ -44,25 +44,16 @@ function freeSearchWord(n: number): string {
   return n === 1 ? 'search' : 'searches'
 }
 
-const SUGGESTION_GROUPS: { label: string; items: string[] }[] = [
-  {
-    label: 'Popular questions',
-    items: [
-      'Best peptide for tanning',
-      'Best peptide for skin anti-aging',
-      'GHK-Cu for hair growth',
-      'BPC-157 vs TB-500 for healing',
-    ],
-  },
-  {
-    label: 'Sourcing & synthesis',
-    items: [
-      'How is a research peptide actually made?',
-      'Why are pure peptides so expensive to make?',
-      'How to read a peptide COA',
-      'What makes American synthesis different?',
-    ],
-  },
+// Curated starter prompts for the empty landing. Kept to six so the hero,
+// prompts, and input all fit above the fold on a laptop without scrolling;
+// a blend of high-intent consumer questions and sourcing/credibility ones.
+const LANDING_PROMPTS = [
+  'Best peptide for tanning',
+  'Best peptide for skin anti-aging',
+  'GHK-Cu for hair growth',
+  'BPC-157 vs TB-500 for healing',
+  'How is a research peptide actually made?',
+  'What makes American synthesis different?',
 ]
 
 const SOURCES = ['PubMed', 'PubChem', 'ClinicalTrials.gov', 'UniProt']
@@ -384,25 +375,25 @@ export default function ResearchPage() {
       {/* ── Messages ── */}
       <main className="flex-1 overflow-y-auto">
         {isLanding ? (
-          <div className="mx-auto flex min-h-full max-w-2xl flex-col justify-center px-4 py-10 md:px-6">
+          <div className="mx-auto flex min-h-full max-w-2xl flex-col justify-center px-4 py-6 md:px-6">
             {/* Hero — value proposition */}
-            <div className="mb-8 text-center">
-              <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/15">
+            <div className="mb-6 text-center">
+              <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent/15">
                 <Dna className="h-6 w-6 text-accent" strokeWidth={1.75} />
               </div>
-              <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-accent/80">
+              <p className="mb-1.5 text-xs font-medium uppercase tracking-[0.18em] text-accent/80">
                 Peptide Agent
               </p>
               <h1 className="text-balance text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
                 Ask anything about research peptides
               </h1>
-              <p className="mx-auto mt-3 max-w-xl text-pretty text-sm leading-relaxed text-ink/55">
+              <p className="mx-auto mt-2.5 max-w-xl text-pretty text-sm leading-relaxed text-ink/55">
                 Citation-backed answers on mechanisms, synthesis, clinical evidence, and compound
                 profiles — grounded in primary sources, not guesswork.
               </p>
 
               {/* Trust row — the primary sources behind every answer */}
-              <div className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-[11px] text-ink/45">
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-[11px] text-ink/45">
                 <span className="text-ink/35">Grounded in</span>
                 {SOURCES.map((src) => (
                   <span
@@ -414,30 +405,27 @@ export default function ResearchPage() {
                 ))}
               </div>
 
-              <p className="mt-4 text-xs text-ink/40">{freeHint}</p>
+              <p className="mt-3 text-xs text-ink/40">{freeHint}</p>
             </div>
 
-            {/* Guided prompts — grouped for scannability */}
-            <div className="space-y-5">
-              {SUGGESTION_GROUPS.map((group) => (
-                <div key={group.label}>
-                  <p className="mb-2 px-1 text-[11px] font-medium uppercase tracking-wider text-ink/35">
-                    {group.label}
-                  </p>
-                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                    {group.items.map((s) => (
-                      <button
-                        key={s}
-                        onClick={() => sendMessage(s)}
-                        className="group flex items-center justify-between gap-2 rounded-xl border border-hairline bg-fill px-3.5 py-3 text-left text-sm text-ink/70 transition-all hover:border-accent/25 hover:bg-fill-strong hover:text-ink"
-                      >
-                        <span>{s}</span>
-                        <Send className="h-3 w-3 flex-shrink-0 text-ink/20 transition-colors group-hover:text-accent" />
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
+            {/* Guided prompts — one compact grid so hero + prompts + input
+                stay above the fold without scrolling. */}
+            <div>
+              <p className="mb-2 px-1 text-[11px] font-medium uppercase tracking-wider text-ink/35">
+                Try asking
+              </p>
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                {LANDING_PROMPTS.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => sendMessage(s)}
+                    className="group flex items-center justify-between gap-2 rounded-xl border border-hairline bg-fill px-3.5 py-2.5 text-left text-sm text-ink/70 transition-all hover:border-accent/25 hover:bg-fill-strong hover:text-ink"
+                  >
+                    <span>{s}</span>
+                    <Send className="h-3 w-3 flex-shrink-0 text-ink/20 transition-colors group-hover:text-accent" />
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         ) : (
