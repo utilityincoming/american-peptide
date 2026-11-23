@@ -44,16 +44,28 @@ function freeSearchWord(n: number): string {
   return n === 1 ? 'search' : 'searches'
 }
 
-const SUGGESTIONS = [
-  'Best peptide for tanning',
-  'Best peptide for skin anti-aging',
-  'GHK-Cu for hair growth',
-  'BPC-157 vs TB-500 for healing',
-  'How is a research peptide actually made?',
-  'Why are pure peptides so expensive to make?',
-  'How to read a peptide COA',
-  'What makes American synthesis different?',
+const SUGGESTION_GROUPS: { label: string; items: string[] }[] = [
+  {
+    label: 'Popular questions',
+    items: [
+      'Best peptide for tanning',
+      'Best peptide for skin anti-aging',
+      'GHK-Cu for hair growth',
+      'BPC-157 vs TB-500 for healing',
+    ],
+  },
+  {
+    label: 'Sourcing & synthesis',
+    items: [
+      'How is a research peptide actually made?',
+      'Why are pure peptides so expensive to make?',
+      'How to read a peptide COA',
+      'What makes American synthesis different?',
+    ],
+  },
 ]
+
+const SOURCES = ['PubMed', 'PubChem', 'ClinicalTrials.gov', 'UniProt']
 
 const md: Components = {
   p: ({ children }) => <p className="mb-3 last:mb-0 leading-relaxed">{children}</p>,
@@ -331,7 +343,16 @@ export default function ResearchPage() {
     el.style.height = `${Math.min(el.scrollHeight, 160)}px`
   }
 
-  const showSuggestions = messages.length === 1 && !loading
+  // Landing state: nothing asked yet. Show a conversion-focused hero (value
+  // prop + trust signals + guided prompts) instead of a bare chat bubble.
+  const isLanding = messages.length === 1 && !loading
+
+  const freeHint =
+    access.status === 'pass'
+      ? 'Research Pass active — no daily limit'
+      : access.status === 'free'
+        ? `${access.remaining} of ${access.limit} free ${freeSearchWord(access.limit)} left today · no sign-up`
+        : 'Free to try — no sign-up required'
 
   return (
     <div className="flex h-screen flex-col bg-surface text-ink">
@@ -365,6 +386,64 @@ export default function ResearchPage() {
 
       {/* ── Messages ── */}
       <main className="flex-1 overflow-y-auto">
+        {isLanding ? (
+          <div className="mx-auto flex min-h-full max-w-2xl flex-col justify-center px-4 py-10 md:px-6">
+            {/* Hero — value proposition */}
+            <div className="mb-8 text-center">
+              <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/15">
+                <Dna className="h-6 w-6 text-accent" strokeWidth={1.75} />
+              </div>
+              <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-accent/80">
+                Peptide Agent
+              </p>
+              <h1 className="text-balance text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+                Ask anything about research peptides
+              </h1>
+              <p className="mx-auto mt-3 max-w-xl text-pretty text-sm leading-relaxed text-ink/55">
+                Citation-backed answers on mechanisms, synthesis, clinical evidence, and compound
+                profiles — grounded in primary sources, not guesswork.
+              </p>
+
+              {/* Trust row — the primary sources behind every answer */}
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-[11px] text-ink/45">
+                <span className="text-ink/35">Grounded in</span>
+                {SOURCES.map((src) => (
+                  <span
+                    key={src}
+                    className="rounded-full border border-hairline bg-fill px-2.5 py-1 font-medium text-ink/60"
+                  >
+                    {src}
+                  </span>
+                ))}
+              </div>
+
+              <p className="mt-4 text-xs text-ink/40">{freeHint}</p>
+            </div>
+
+            {/* Guided prompts — grouped for scannability */}
+            <div className="space-y-5">
+              {SUGGESTION_GROUPS.map((group) => (
+                <div key={group.label}>
+                  <p className="mb-2 px-1 text-[11px] font-medium uppercase tracking-wider text-ink/35">
+                    {group.label}
+                  </p>
+                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    {group.items.map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => sendMessage(s)}
+                        className="group flex items-center justify-between gap-2 rounded-xl border border-hairline bg-fill px-3.5 py-3 text-left text-sm text-ink/70 transition-all hover:border-accent/25 hover:bg-fill-strong hover:text-ink"
+                      >
+                        <span>{s}</span>
+                        <Send className="h-3 w-3 flex-shrink-0 text-ink/20 transition-colors group-hover:text-accent" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
         <div className="mx-auto max-w-3xl px-4 py-6 md:px-6">
 
           {messages.map((msg, idx) => (
@@ -396,21 +475,6 @@ export default function ResearchPage() {
             </div>
           ))}
 
-          {/* Suggested prompts — shown on first load only */}
-          {showSuggestions && (
-            <div className="mb-5 ml-10 grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {SUGGESTIONS.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => sendMessage(s)}
-                  className="rounded-xl border border-hairline bg-fill p-3 text-left text-xs text-ink/55 transition-all hover:border-accent/20 hover:bg-fill-strong hover:text-ink/70"
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          )}
-
           {/* Typing indicator */}
           {loading && (
             <div className="mb-5 flex gap-3">
@@ -425,6 +489,7 @@ export default function ResearchPage() {
 
           <div ref={bottomRef} />
         </div>
+        )}
       </main>
 
       {/* ── Input bar ── */}
