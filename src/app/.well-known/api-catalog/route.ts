@@ -43,6 +43,11 @@ export function GET() {
             href: `${API_SITE}/api/mcp`,
             title: 'Remote MCP server (Streamable HTTP) — connect from Claude, ChatGPT, or Cursor',
           },
+          {
+            href: `${API_SITE}/.well-known/mcp/server-card.json`,
+            title: 'MCP Server Card (SEP-2127) — the MCP server and its tools, for discovery',
+            type: 'application/json',
+          },
         ],
         'service-doc': [
           {

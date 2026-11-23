@@ -77,6 +77,11 @@ const endpoints = [
     desc: 'Remote MCP server (Streamable HTTP) — connect from Claude, ChatGPT, or Cursor.',
   },
   {
+    method: 'GET',
+    path: '/.well-known/mcp/server-card.json',
+    desc: 'MCP Server Card (SEP-2127) — the MCP server, transport, and tool list for agent discovery.',
+  },
+  {
     method: 'POST',
     path: '/api/keys',
     desc: 'Self-serve a free API key — higher rate + daily limits. Returned once.',
