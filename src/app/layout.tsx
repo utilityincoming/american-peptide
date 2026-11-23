@@ -6,6 +6,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
 import './globals.css'
 import Footer from '@/components/Footer'
+import HideOnAppRoute from '@/components/HideOnAppRoute'
 import SiteHeader from '@/components/SiteHeader'
 import SectionNav from '@/components/SectionNav'
 import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar'
@@ -181,7 +182,9 @@ export default function RootLayout({
         <SiteHeader />
         <SectionNav />
         {children}
-        <Footer />
+        <HideOnAppRoute>
+          <Footer />
+        </HideOnAppRoute>
         <ResearchUseGate />
         <Analytics />
         <SpeedInsights />
