@@ -82,6 +82,11 @@ const endpoints = [
     desc: 'MCP Server Card (SEP-2127) — the MCP server, transport, and tool list for agent discovery.',
   },
   {
+    method: 'GET',
+    path: '/openapi.json',
+    desc: 'OpenAPI 3.1 description of this API — import into Swagger, Postman, or an agent toolchain.',
+  },
+  {
     method: 'POST',
     path: '/api/keys',
     desc: 'Self-serve a free API key — higher rate + daily limits. Returned once.',
