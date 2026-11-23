@@ -49,6 +49,13 @@ export function GET() {
             type: 'application/json',
           },
         ],
+        'service-desc': [
+          {
+            href: `${API_SITE}/openapi.json`,
+            title: `${API_ATTRIBUTION} API — OpenAPI 3.1 description`,
+            type: 'application/openapi+json',
+          },
+        ],
         'service-doc': [
           {
             href: `${API_SITE}/developers`,
