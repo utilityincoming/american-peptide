@@ -345,32 +345,145 @@ export default function ResearchPage() {
         ? `${access.remaining} of ${access.limit} free ${freeSearchWord(access.limit)} left today · no sign-up`
         : 'Free to try — no sign-up required'
 
-  return (
-    <div className="flex h-screen flex-col bg-surface text-ink">
+  // The out-of-free-searches offer. Reused by whichever composer is mounted
+  // (only one is at a time), so the same element reference is safe.
+  const accessOffer =
+    access.status === 'exhausted' ? (
+      <div
+        role="status"
+        className="mb-3 rounded-2xl border border-accent/25 bg-accent/[0.07] px-4 py-4 text-sm text-ink/75"
+      >
+        <p className="font-medium text-ink/95">
+          You&rsquo;ve used today&rsquo;s {access.limit} free {freeSearchWord(access.limit)}.
+        </p>
+        {offer?.available ? (
+          <>
+            <p className="mt-1 text-xs leading-relaxed text-ink/60">
+              A Research Pass is {offer.price} once, for {offer.days} days, with no daily limit.
+              {input.trim() ? ' Your question is saved and continues after checkout.' : ''}
+            </p>
+            <button
+              type="button"
+              onClick={startCheckout}
+              disabled={checkingOut}
+              className="mt-3 rounded-xl bg-[#7EE0B5] px-4 py-2.5 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#A6F0CC] disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {checkingOut ? 'Opening secure checkout…' : `Continue to checkout — ${offer.price}`}
+            </button>
+            {checkout.status === 'failed' && (
+              <p role="alert" className="mt-2 text-xs text-red-400">{checkout.error}</p>
+            )}
+          </>
+        ) : (
+          <p className="mt-1 text-xs text-ink/55">Free searches reset at 00:00 UTC.</p>
+        )}
+        <p className="mt-3 text-xs leading-relaxed text-ink/45">
+          <Link href="/research/pass" className="text-accent underline-offset-2 hover:underline">
+            Have an access code?
+          </Link>
+          {offer?.available ? ' Free searches reset at 00:00 UTC.' : ''} The{' '}
+          <Link href="/catalog" className="underline-offset-2 hover:underline">catalog</Link>
+          {' '}and{' '}
+          <Link href="/trials" className="underline-offset-2 hover:underline">trials</Link>
+          {' '}stay open.
+        </p>
+      </div>
+    ) : null
 
-      {/* ── Page identity ── */}
-      <header className="flex flex-shrink-0 items-center justify-between border-b border-hairline px-4 py-3 md:px-6">
-        <div className="flex items-center gap-2">
-          <AgentAvatar />
-          <div>
-            <span className="text-sm font-medium">Peptide Agent</span>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-1">
-          <ProfilePanel />
+  // One composer, two placements: a prominent `hero` variant that anchors the
+  // empty landing as its primary CTA, and the `docked` bar once a conversation
+  // is underway. Only one is mounted at a time, so the shared textareaRef is
+  // unambiguous.
+  const renderComposer = (variant: 'hero' | 'docked') => {
+    const hero = variant === 'hero'
+    return (
+      <>
+        {accessOffer}
+        <div
+          className={`flex items-end gap-3 rounded-2xl border border-hairline bg-fill px-4 transition-colors focus-within:border-accent/25 ${
+            hero ? 'py-3 shadow-[0_8px_30px_rgba(0,0,0,0.12)]' : 'py-3'
+          }`}
+        >
+          <textarea
+            ref={textareaRef}
+            value={input}
+            onChange={handleTextareaChange}
+            onKeyDown={handleKeyDown}
+            placeholder={
+              hero
+                ? 'Ask about a peptide, a mechanism, or a clinical trial…'
+                : 'Ask about peptide sequences, clinical trials, or literature…'
+            }
+            rows={hero ? 2 : 1}
+            disabled={loading}
+            className={`flex-1 resize-none bg-transparent text-ink placeholder-ink/20 outline-none disabled:opacity-50 ${
+              hero ? 'text-base' : 'text-sm'
+            }`}
+            style={{ maxHeight: '160px' }}
+          />
           <button
-            onClick={() => {
-              setMessages([WELCOME])
-              setInput('')
-            }}
-            className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-ink/55 transition-colors hover:bg-fill-strong hover:text-ink"
+            onClick={() => sendMessage(input)}
+            disabled={!input.trim() || loading || limitReached}
+            aria-label="Send message"
+            className={`flex flex-shrink-0 items-center justify-center rounded-xl bg-[#7EE0B5] text-[#0E1512] transition-all hover:bg-[#A6F0CC] hover:shadow-[0_0_20px_rgba(126,224,181,0.3)] disabled:cursor-not-allowed disabled:opacity-25 ${
+              hero ? 'h-9 w-9' : 'h-8 w-8'
+            }`}
           >
-            <SquarePen className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">New chat</span>
+            <Send className={hero ? 'h-4 w-4' : 'h-3.5 w-3.5'} />
           </button>
         </div>
-      </header>
+        <p className="mt-2 text-center text-[10px] text-ink/20">
+          {!hero && access.status === 'pass' && (
+            <span className="text-ink/45">Research Pass active — no daily limit ·{' '}</span>
+          )}
+          {!hero && access.status === 'free' && (
+            <span className="text-ink/45">
+              {access.remaining} of {access.limit} free {freeSearchWord(access.limit)} left today
+              {access.remaining <= 1 && offer?.available ? (
+                <>
+                  {' · '}
+                  <Link href="/research/pass" className="text-accent underline-offset-2 hover:underline">
+                    Research Pass {offer.price}
+                  </Link>
+                </>
+              ) : null}
+              {' · '}
+            </span>
+          )}
+          Shift + Enter for new line · AI outputs are computational hypotheses requiring experimental validation
+        </p>
+      </>
+    )
+  }
+
+  return (
+    <div className="flex h-[calc(100svh-var(--app-header-h,3.8125rem))] flex-col bg-surface text-ink">
+
+      {/* ── Page identity ── On the landing the hero and the site nav already
+          identify the agent, so the in-app bar is suppressed to avoid a third
+          redundant "Peptide Agent" and to give the hero the full viewport. */}
+      {!isLanding && (
+        <header className="flex flex-shrink-0 items-center justify-between border-b border-hairline px-4 py-3 md:px-6">
+          <div className="flex items-center gap-2">
+            <AgentAvatar />
+            <span className="text-sm font-medium">Peptide Agent</span>
+          </div>
+
+          <div className="flex items-center gap-1">
+            <ProfilePanel />
+            <button
+              onClick={() => {
+                setMessages([WELCOME])
+                setInput('')
+              }}
+              className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-ink/55 transition-colors hover:bg-fill-strong hover:text-ink"
+            >
+              <SquarePen className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">New chat</span>
+            </button>
+          </div>
+        </header>
+      )}
 
       {/* ── Messages ── */}
       <main className="flex-1 overflow-y-auto">
@@ -408,7 +521,10 @@ export default function ResearchPage() {
               <p className="mt-3 text-xs text-ink/40">{freeHint}</p>
             </div>
 
-            {/* Guided prompts — one compact grid so hero + prompts + input
+            {/* Primary CTA — the input leads on the landing. */}
+            <div className="mb-5">{renderComposer('hero')}</div>
+
+            {/* Guided prompts — one compact grid so hero + input + prompts
                 stay above the fold without scrolling. */}
             <div>
               <p className="mb-2 px-1 text-[11px] font-medium uppercase tracking-wider text-ink/35">
@@ -477,93 +593,13 @@ export default function ResearchPage() {
         )}
       </main>
 
-      {/* ── Input bar ── */}
-      <div className="flex-shrink-0 border-t border-hairline px-4 py-4 md:px-6">
-        <div className="mx-auto max-w-3xl">
-          {access.status === 'exhausted' && (
-            <div
-              role="status"
-              className="mb-3 rounded-2xl border border-accent/25 bg-accent/[0.07] px-4 py-4 text-sm text-ink/75"
-            >
-              <p className="font-medium text-ink/95">
-                You&rsquo;ve used today&rsquo;s {access.limit} free {freeSearchWord(access.limit)}.
-              </p>
-              {offer?.available ? (
-                <>
-                  <p className="mt-1 text-xs leading-relaxed text-ink/60">
-                    A Research Pass is {offer.price} once, for {offer.days} days, with no daily limit.
-                    {input.trim() ? ' Your question is saved and continues after checkout.' : ''}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={startCheckout}
-                    disabled={checkingOut}
-                    className="mt-3 rounded-xl bg-[#7EE0B5] px-4 py-2.5 text-sm font-medium text-[#0E1512] transition-colors hover:bg-[#A6F0CC] disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    {checkingOut ? 'Opening secure checkout…' : `Continue to checkout — ${offer.price}`}
-                  </button>
-                  {checkout.status === 'failed' && (
-                    <p role="alert" className="mt-2 text-xs text-red-400">{checkout.error}</p>
-                  )}
-                </>
-              ) : (
-                <p className="mt-1 text-xs text-ink/55">Free searches reset at 00:00 UTC.</p>
-              )}
-              <p className="mt-3 text-xs leading-relaxed text-ink/45">
-                <Link href="/research/pass" className="text-accent underline-offset-2 hover:underline">
-                  Have an access code?
-                </Link>
-                {offer?.available ? ' Free searches reset at 00:00 UTC.' : ''} The{' '}
-                <Link href="/catalog" className="underline-offset-2 hover:underline">catalog</Link>
-                {' '}and{' '}
-                <Link href="/trials" className="underline-offset-2 hover:underline">trials</Link>
-                {' '}stay open.
-              </p>
-            </div>
-          )}
-          <div className="flex items-end gap-3 rounded-2xl border border-hairline bg-fill px-4 py-3 transition-colors focus-within:border-accent/25">
-            <textarea
-              ref={textareaRef}
-              value={input}
-              onChange={handleTextareaChange}
-              onKeyDown={handleKeyDown}
-              placeholder="Ask about peptide sequences, clinical trials, or literature…"
-              rows={1}
-              disabled={loading}
-              className="flex-1 resize-none bg-transparent text-sm text-ink placeholder-ink/20 outline-none disabled:opacity-50"
-              style={{ maxHeight: '160px' }}
-            />
-            <button
-              onClick={() => sendMessage(input)}
-              disabled={!input.trim() || loading || limitReached}
-              aria-label="Send message"
-              className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-[#7EE0B5] text-[#0E1512] transition-all hover:bg-[#A6F0CC] hover:shadow-[0_0_20px_rgba(126,224,181,0.3)] disabled:cursor-not-allowed disabled:opacity-25"
-            >
-              <Send className="h-3.5 w-3.5" />
-            </button>
-          </div>
-          <p className="mt-2 text-center text-[10px] text-ink/20">
-            {access.status === 'pass' && (
-              <span className="text-ink/45">Research Pass active — no daily limit ·{' '}</span>
-            )}
-            {access.status === 'free' && (
-              <span className="text-ink/45">
-                {access.remaining} of {access.limit} free {freeSearchWord(access.limit)} left today
-                {access.remaining <= 1 && offer?.available ? (
-                  <>
-                    {' · '}
-                    <Link href="/research/pass" className="text-accent underline-offset-2 hover:underline">
-                      Research Pass {offer.price}
-                    </Link>
-                  </>
-                ) : null}
-                {' · '}
-              </span>
-            )}
-            Shift + Enter for new line · AI outputs are computational hypotheses requiring experimental validation
-          </p>
+      {/* ── Input bar ── docked once a conversation is underway; on the empty
+          landing the composer leads inside the hero instead. */}
+      {!isLanding && (
+        <div className="flex-shrink-0 border-t border-hairline px-4 py-4 md:px-6">
+          <div className="mx-auto max-w-3xl">{renderComposer('docked')}</div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

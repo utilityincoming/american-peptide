@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, Sparkles, X } from 'lucide-react'
@@ -29,10 +29,26 @@ export default function SiteHeader() {
   const pathname = usePathname() ?? '/'
   const [open, setOpen] = useState(false)
   const agentActive = isActive(pathname, ['/research'])
+  const headerRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     setOpen(false)
   }, [pathname])
+
+  // Publish the live header height as a CSS variable so full-height app views
+  // (e.g. the /research chat shell) can size themselves to the remaining
+  // viewport instead of overflowing by a header's height. Tracks breakpoint
+  // changes and nav wrapping via ResizeObserver.
+  useEffect(() => {
+    const el = headerRef.current
+    if (!el) return
+    const root = document.documentElement
+    const set = () => root.style.setProperty('--app-header-h', `${el.offsetHeight}px`)
+    set()
+    const ro = new ResizeObserver(set)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
 
   useEffect(() => {
     if (!open) return
@@ -44,7 +60,10 @@ export default function SiteHeader() {
   }, [open])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-hairline bg-surface/85 backdrop-blur supports-[backdrop-filter]:bg-surface/70">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-40 border-b border-hairline bg-surface/85 backdrop-blur supports-[backdrop-filter]:bg-surface/70"
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
         <BrandMark />
 

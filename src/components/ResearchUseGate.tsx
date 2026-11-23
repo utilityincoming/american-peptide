@@ -120,34 +120,29 @@ export default function ResearchUseGate() {
           aria-label={TITLE}
           className="fixed inset-x-0 bottom-0 z-[60] px-3 pb-3 sm:px-4 sm:pb-4"
         >
-          <div className="mx-auto flex w-full max-w-3xl items-start gap-3 rounded-2xl border border-hairline bg-panel/95 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-sm sm:p-5">
-            <div className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent sm:inline-flex">
-              <FlaskConical className="h-5 w-5" strokeWidth={1.75} />
+          <div className="mx-auto flex w-full max-w-3xl items-center gap-3 rounded-xl border border-hairline bg-panel/95 p-3 shadow-[0_8px_30px_rgba(0,0,0,0.28)] backdrop-blur-sm sm:gap-3.5 sm:p-3.5">
+            <div className="hidden h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-accent/20 bg-accent/10 text-accent sm:inline-flex">
+              <FlaskConical className="h-4 w-4" strokeWidth={1.75} />
             </div>
-            <div className="min-w-0 flex-1 text-sm leading-relaxed text-ink/60">
-              <p>
-                <span className="font-semibold text-ink">{TITLE}.</span>{' '}
-                AmericanPeptide.com is a computational research &amp; educational
-                reference — <span className="text-ink/80">not a medical device</span>.
-                No medical advice, diagnosis, dosing, or offer to sell. AI output
-                requires independent validation.
-              </p>
-              <div className="mt-3 flex flex-wrap items-center gap-2">
-                <button
-                  type="button"
-                  onClick={acknowledge}
-                  className="rounded-lg bg-[#7EE0B5] px-4 py-2 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#A6F0CC] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7EE0B5]/60"
-                >
-                  I understand
-                </button>
-                <a
-                  href="/methodology"
-                  className="rounded-lg px-3 py-2 text-sm font-medium text-ink/60 underline-offset-4 hover:text-ink hover:underline"
-                >
-                  Learn more
-                </a>
-              </div>
-            </div>
+            <p className="min-w-0 flex-1 text-xs leading-relaxed text-ink/55">
+              <span className="font-semibold text-ink">{TITLE}.</span>{' '}
+              A computational research &amp; educational reference —{' '}
+              <span className="text-ink/80">not a medical device</span>. No medical advice,
+              diagnosis, dosing, or offer to sell; AI output requires independent validation.{' '}
+              <a
+                href="/methodology"
+                className="whitespace-nowrap text-ink/60 underline underline-offset-2 hover:text-ink"
+              >
+                Learn more
+              </a>
+            </p>
+            <button
+              type="button"
+              onClick={acknowledge}
+              className="shrink-0 rounded-lg bg-[#7EE0B5] px-3.5 py-1.5 text-xs font-semibold text-[#0E1512] transition-colors hover:bg-[#A6F0CC] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7EE0B5]/60"
+            >
+              I understand
+            </button>
             <button
               type="button"
               onClick={acknowledge}
