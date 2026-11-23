@@ -4,24 +4,24 @@
   "name": "American Peptide",
   "launcherName": "Am Peptide",
   "display": "standalone",
-  "themeColor": "#0B1220",
+  "themeColor": "#121C18",
   "themeColorDark": "#000000",
   "navigationColor": "#000000",
   "navigationColorDark": "#000000",
   "navigationDividerColor": "#000000",
   "navigationDividerColorDark": "#000000",
-  "backgroundColor": "#0B1220",
+  "backgroundColor": "#121C18",
   "enableNotifications": false,
   "startUrl": "/",
   "iconUrl": "https://app.americanpeptide.com/android-chrome-512x512.png",
-  "maskableIconUrl": "https://app.americanpeptide.com/android-chrome-512x512.png",
+  "maskableIconUrl": "https://app.americanpeptide.com/maskable-512x512.png",
   "splashScreenFadeOutDuration": 300,
   "signingKey": {
     "path": "C:\\Users\\waite\\american-peptide\\twa\\android.keystore",
     "alias": "android"
   },
-  "appVersionName": "1.0.1",
-  "appVersionCode": 2,
+  "appVersionName": "1.0.2",
+  "appVersionCode": 3,
   "shortcuts": [
     {
       "name": "Reconstitution calculator",
@@ -56,5 +56,5 @@
   "fileHandlers": [],
   "launchHandlerClientMode": "",
   "displayOverride": [],
-  "appVersion": "1.0.1"
+  "appVersion": "1.0.2"
 }
