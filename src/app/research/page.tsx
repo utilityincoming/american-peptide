@@ -363,9 +363,6 @@ export default function ResearchPage() {
           <AgentAvatar />
           <div>
             <span className="text-sm font-medium">Peptide Agent</span>
-            <span className="ml-2 hidden text-xs text-ink/55 sm:inline">
-              ap-research-1
-            </span>
           </div>
         </div>
 
