@@ -14,7 +14,7 @@ import {
   formatCents,
   formatPct,
 } from '@/lib/admin-referrals-flow'
-import { fetchReferralStats } from '@/lib/admin-referrals-client'
+import { fetchReferralStats, importConversions } from '@/lib/admin-referrals-client'
 
 const KEY_STORAGE = 'ap_admin_key'
 
@@ -57,6 +57,42 @@ export default function AdminReferralsPage() {
   }
 
   const view = state.status === 'loaded' ? toDashboardView(state.stats) : null
+
+  // "Record a sale" form — feeds the import endpoint for partners who report
+  // sales in their own dashboard (ABSIM, Paramount, Amino Club) rather than via
+  // the S2S postback.
+  const [form, setForm] = useState({ vendor: '', orderId: '', amount: '', product: '' })
+  const [submitting, setSubmitting] = useState(false)
+  const [formMsg, setFormMsg] = useState<{ kind: 'ok' | 'err'; text: string } | null>(null)
+
+  async function submitConversion(e: React.FormEvent) {
+    e.preventDefault()
+    setSubmitting(true)
+    setFormMsg(null)
+    const result = await importConversions(key.trim(), [
+      {
+        vendor: form.vendor,
+        orderId: form.orderId.trim(),
+        amount: form.amount.trim(),
+        product: form.product.trim() || undefined,
+      },
+    ])
+    setSubmitting(false)
+    if (!result.ok) {
+      setFormMsg({ kind: 'err', text: result.message })
+      return
+    }
+    const { recorded, duplicate, invalid } = result.summary
+    if (recorded) {
+      setFormMsg({ kind: 'ok', text: `Recorded sale for order ${form.orderId.trim()}.` })
+      setForm((f) => ({ ...f, orderId: '', amount: '', product: '' }))
+      void load(key, months) // refresh the table
+    } else if (duplicate) {
+      setFormMsg({ kind: 'err', text: 'Already recorded (duplicate order id).' })
+    } else {
+      setFormMsg({ kind: 'err', text: result.firstError ?? `Not recorded (${invalid} invalid).` })
+    }
+  }
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
@@ -178,6 +214,80 @@ export default function AdminReferralsPage() {
             Bot clicks are filtered non-human /go hits (crawlers, unfurlers, prefetch) and are not
             counted as referrals. Generated {new Date(view.generated).toLocaleString()}.
           </p>
+
+          <div className="mt-10 rounded border border-ink/15 p-4">
+            <h2 className="text-sm font-semibold text-ink">Record a sale</h2>
+            <p className="mt-1 text-xs text-ink/55">
+              For partners who report sales in their own dashboard. Idempotent by order id — safe to
+              re-enter.
+            </p>
+            <form className="mt-3 flex flex-wrap items-end gap-3" onSubmit={submitConversion}>
+              <label className="flex flex-col gap-1 text-xs text-ink/60">
+                Vendor
+                <select
+                  required
+                  value={form.vendor}
+                  onChange={(e) => setForm((f) => ({ ...f, vendor: e.target.value }))}
+                  className="rounded border border-ink/20 bg-transparent px-2 py-1.5 text-sm text-ink"
+                >
+                  <option value="">Select…</option>
+                  {view.rows
+                    .filter((r) => r.active)
+                    .map((r) => (
+                      <option key={r.id} value={r.id}>
+                        {r.name}
+                      </option>
+                    ))}
+                </select>
+              </label>
+              <label className="flex flex-col gap-1 text-xs text-ink/60">
+                Order id
+                <input
+                  required
+                  value={form.orderId}
+                  onChange={(e) => setForm((f) => ({ ...f, orderId: e.target.value }))}
+                  className="w-36 rounded border border-ink/20 bg-transparent px-2 py-1.5 font-mono text-sm text-ink"
+                  placeholder="#1234"
+                />
+              </label>
+              <label className="flex flex-col gap-1 text-xs text-ink/60">
+                Amount ($)
+                <input
+                  required
+                  inputMode="decimal"
+                  value={form.amount}
+                  onChange={(e) => setForm((f) => ({ ...f, amount: e.target.value }))}
+                  className="w-24 rounded border border-ink/20 bg-transparent px-2 py-1.5 text-sm text-ink"
+                  placeholder="49.99"
+                />
+              </label>
+              <label className="flex flex-col gap-1 text-xs text-ink/60">
+                Product slug <span className="text-ink/35">(optional)</span>
+                <input
+                  value={form.product}
+                  onChange={(e) => setForm((f) => ({ ...f, product: e.target.value }))}
+                  className="w-40 rounded border border-ink/20 bg-transparent px-2 py-1.5 font-mono text-sm text-ink"
+                  placeholder="semaglutide"
+                />
+              </label>
+              <button
+                type="submit"
+                disabled={submitting}
+                className="rounded bg-ink px-4 py-1.5 text-sm font-medium text-bg disabled:opacity-50"
+              >
+                {submitting ? 'Saving…' : 'Record'}
+              </button>
+            </form>
+            {formMsg && (
+              <p
+                className={`mt-2 text-xs ${
+                  formMsg.kind === 'ok' ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'
+                }`}
+              >
+                {formMsg.text}
+              </p>
+            )}
+          </div>
         </section>
       )}
     </main>
