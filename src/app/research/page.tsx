@@ -157,6 +157,9 @@ export default function ResearchPage() {
   const [messages, setMessages] = useState<Message[]>([WELCOME])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  // Live grounding-progress label while the agent works (e.g. "Searching
+  // PubMed…"), streamed from the server before the answer begins.
+  const [toolStatus, setToolStatus] = useState<string | null>(null)
   // Free allowance / Research Pass / checkout, as one explicit state machine
   // (src/lib/pass-flow.ts). The server is the authority; this mirrors its reports.
   const [agent, dispatch] = useReducer(agentAccessReducer, initialAgentAccess)
@@ -224,23 +227,101 @@ export default function ResearchPage() {
         const res = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ messages: apiMessages, ...(hasContext ? { context } : {}) }),
+          body: JSON.stringify({ messages: apiMessages, stream: true, ...(hasContext ? { context } : {}) }),
         })
 
-        const data = await res.json()
-        dispatch({ type: 'reply_received', reply: parseChatReplyMeta(res.status, data) })
-        if (res.status === 402) {
-          // Out of free questions: put the unsent question back in the box and
-          // show checkout instead of an error bubble.
-          setMessages(messages)
-          setInput(trimmed)
-          sessionStorage.setItem(PENDING_QUESTION_KEY, trimmed)
+        const contentType = res.headers.get('content-type') ?? ''
+
+        // Non-streaming reply: HTTP 402 (free allowance spent) or a pre-flight
+        // error (403/429/400/413/500). Handled exactly as before.
+        if (!contentType.includes('text/event-stream')) {
+          const data = await res.json().catch(() => ({}) as Record<string, unknown>)
+          dispatch({ type: 'reply_received', reply: parseChatReplyMeta(res.status, data) })
+          if (res.status === 402) {
+            setMessages(messages)
+            setInput(trimmed)
+            sessionStorage.setItem(PENDING_QUESTION_KEY, trimmed)
+            return
+          }
+          sessionStorage.removeItem(PENDING_QUESTION_KEY)
+          if (!res.ok || typeof data.content !== 'string') {
+            throw new Error(typeof data.error === 'string' ? data.error : 'Request failed')
+          }
+          setMessages((prev) => [...prev, { role: 'assistant', content: data.content as string }])
           return
         }
-        sessionStorage.removeItem(PENDING_QUESTION_KEY)
-        if (!res.ok) throw new Error(data.error || 'Request failed')
 
-        setMessages((prev) => [...prev, { role: 'assistant', content: data.content }])
+        // Streaming reply (SSE). `tool` events drive the live progress label,
+        // `delta` events carry the already-sanitized answer in render-safe
+        // blocks, and the final `done` event carries the access metadata (or a
+        // terminal error in place of an answer).
+        sessionStorage.removeItem(PENDING_QUESTION_KEY)
+        if (!res.body) throw new Error('Request failed')
+
+        const reader = res.body.getReader()
+        const decoder = new TextDecoder()
+        let buffer = ''
+        let assistantText = ''
+        let started = false
+        let streamError: string | null = null
+
+        const appendBlock = (text: string) => {
+          assistantText = assistantText ? `${assistantText}\n\n${text}` : text
+          if (!started) {
+            started = true
+            setToolStatus(null)
+            setMessages((prev) => [...prev, { role: 'assistant', content: assistantText }])
+          } else {
+            setMessages((prev) => {
+              const copy = prev.slice()
+              copy[copy.length - 1] = { role: 'assistant', content: assistantText }
+              return copy
+            })
+          }
+        }
+
+        const handleEvent = (raw: unknown) => {
+          if (!raw || typeof raw !== 'object') return
+          const e = raw as { t?: string; label?: unknown; text?: unknown; content?: unknown; error?: unknown }
+          if (e.t === 'tool' && typeof e.label === 'string') {
+            if (!started) setToolStatus(e.label)
+          } else if (e.t === 'delta' && typeof e.text === 'string') {
+            appendBlock(e.text)
+          } else if (e.t === 'done') {
+            dispatch({ type: 'reply_received', reply: parseChatReplyMeta(200, e) })
+            if (!started && typeof e.error === 'string') {
+              streamError = e.error
+            } else if (!started && typeof e.content === 'string' && e.content) {
+              // No deltas arrived but the server composed content — render it.
+              appendBlock(e.content)
+            }
+          }
+        }
+
+        // SSE frames are blank-line separated; each `data:` line is one JSON event.
+        for (;;) {
+          const { done, value } = await reader.read()
+          if (done) break
+          buffer += decoder.decode(value, { stream: true })
+          let sep: number
+          while ((sep = buffer.indexOf('\n\n')) !== -1) {
+            const frame = buffer.slice(0, sep)
+            buffer = buffer.slice(sep + 2)
+            for (const line of frame.split('\n')) {
+              const m = /^data:\s?(.*)$/.exec(line)
+              if (!m) continue
+              try {
+                handleEvent(JSON.parse(m[1]))
+              } catch {
+                // ignore a malformed frame
+              }
+            }
+          }
+        }
+
+        if (!started) {
+          throw new Error(streamError ?? 'Something went wrong. Please try again.')
+        }
       } catch (err) {
         setMessages((prev) => [
           ...prev,
@@ -250,6 +331,7 @@ export default function ResearchPage() {
           },
         ])
       } finally {
+        setToolStatus(null)
         setLoading(false)
       }
     },
@@ -576,14 +658,20 @@ export default function ResearchPage() {
             </div>
           ))}
 
-          {/* Typing indicator */}
-          {loading && (
+          {/* Typing indicator — shown until the answer starts streaming in. While
+              the agent grounds the answer, it names the source being queried. */}
+          {loading && messages[messages.length - 1]?.role !== 'assistant' && (
             <div className="mb-5 flex gap-3">
               <div className="mt-0.5">
                 <AgentAvatar />
               </div>
-              <div className="rounded-2xl rounded-tl-sm border border-hairline bg-fill px-4 py-3">
+              <div className="flex items-center gap-2.5 rounded-2xl rounded-tl-sm border border-hairline bg-fill px-4 py-3">
                 <TypingIndicator />
+                {toolStatus && (
+                  <span className="text-xs text-ink/50" aria-live="polite">
+                    {toolStatus}
+                  </span>
+                )}
               </div>
             </div>
           )}
