@@ -2,10 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import Link from 'next/link'
-import { sendGAEvent } from '@next/third-parties/google'
 import {
   ArrowRight,
-  ArrowUpRight,
   Check,
   FlaskConical,
   GitCompareArrows,
@@ -29,11 +27,10 @@ import {
 import { createCatalogMatcher, normalizeCatalogQuery } from '@/lib/catalog-query'
 import CatalogMotif from '@/components/CatalogMotif'
 import OfflineReference from '@/components/OfflineReference'
-import { getVendor, isAffiliate, vendorHref } from '@/lib/vendors'
 
 const MAX_COMPARE = 4
 const STORAGE_KEY = 'amp-catalog-compare-selected'
-const ABSIM = getVendor('absim-peptides')
+const VIEW_MODE_KEY = 'amp-catalog-view-mode'
 
 // Synthetic-feature facet — derived once from the catalog so the chip row stays
 // in sync with the data. Ordered by how many peptides carry each feature.
@@ -101,8 +98,21 @@ export default function CatalogPage() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [selected, setSelected] = useState<string[]>([])
 
+  const updateViewMode = useCallback((mode: 'grid' | 'list') => {
+    setViewMode(mode)
+    try {
+      window.localStorage.setItem(VIEW_MODE_KEY, mode)
+    } catch {
+      /* ignore */
+    }
+  }, [])
+
   useEffect(() => {
     try {
+      const savedMode = window.localStorage.getItem(VIEW_MODE_KEY)
+      if (savedMode === 'grid' || savedMode === 'list') {
+        setViewMode(savedMode)
+      }
       const raw = window.localStorage.getItem(STORAGE_KEY)
       if (!raw) return
       const parsed = JSON.parse(raw)
@@ -427,7 +437,7 @@ export default function CatalogPage() {
                 : `${filtered.length} peptide${filtered.length === 1 ? '' : 's'}`}
             </span>
             <div className="flex items-center gap-3">
-              {(query || active || feature || difficulty) && (
+              {hasFilters && (
                 <button
                   onClick={() =>
                     updateFilters({
@@ -449,7 +459,7 @@ export default function CatalogPage() {
               >
                 <button
                   type="button"
-                  onClick={() => setViewMode('grid')}
+                  onClick={() => updateViewMode('grid')}
                   aria-pressed={viewMode === 'grid'}
                   aria-label="Grid view"
                   className={
@@ -464,7 +474,7 @@ export default function CatalogPage() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setViewMode('list')}
+                  onClick={() => updateViewMode('list')}
                   aria-pressed={viewMode === 'list'}
                   aria-label="Compact list view"
                   className={
