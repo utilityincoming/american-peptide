@@ -57,25 +57,6 @@ try {
       assert(searchBox && searchBox.y >= 0 && searchBox.y + searchBox.height <= viewport.height)
       assert.equal(await page.evaluate(() => window.scrollY), 0)
 
-      const referral = page.getByRole('link', { name: 'Browse research compounds at ABSIM' })
-      const disclosure = page.getByText('We may earn a commission if you purchase through this link.', {
-        exact: true,
-      })
-      await disclosure.waitFor()
-      const button = await referral.boundingBox()
-      assert(button && button.x >= 0 && button.x + button.width <= viewport.width && button.height >= 44)
-
-      const [vendorPage] = await Promise.all([
-        context.waitForEvent('page'),
-        referral.press('Enter'),
-      ])
-      await vendorPage.waitForURL(origin + '/go/absim-peptides')
-      assert.deepEqual(JSON.parse(await vendorPage.locator('body').innerText()), {
-        status: 302,
-        location: 'https://absimpeptides.com/?ref=americanpeptide',
-      })
-      await vendorPage.close()
-
       const searchStart = performance.now()
       await search.fill('no-such-compound')
       await page.getByText('No results for “no-such-compound”', { exact: true }).waitFor()

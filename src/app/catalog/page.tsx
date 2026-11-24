@@ -10,7 +10,10 @@ import {
   FlaskConical,
   GitCompareArrows,
   LayoutGrid,
+  List,
+  Plus,
   Search,
+  Sparkles,
   X,
 } from 'lucide-react'
 import {
@@ -95,6 +98,7 @@ export default function CatalogPage() {
   const difficulty = DIFFICULTIES.find((d) => d === params.get('difficulty')) ?? null
   const [synthesisOverride, setSynthesisOverride] = useState<boolean | null>(null)
   const synthesisOpen = synthesisOverride ?? Boolean(feature || difficulty)
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [selected, setSelected] = useState<string[]>([])
 
   useEffect(() => {
@@ -152,30 +156,177 @@ export default function CatalogPage() {
 
   const hasFilters = Boolean(normalizeCatalogQuery(query) || active || feature || difficulty)
   const atCap = selected.length >= MAX_COMPARE
+  const fdaCount = useMemo(
+    () => PEPTIDES.filter((p) => p.fdaApproved).length,
+    [],
+  )
 
   return (
     <div className="min-h-screen bg-surface text-ink">
-      <section className="border-b border-hairline px-6 py-7 md:px-10 md:py-10">
-        <div className="mx-auto max-w-6xl">
-          <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-            Research peptide catalog
-          </h1>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/65 md:text-base">
-            Search by name, alias, or words in a short description. Search can also find entries outside the browse list.
-          </p>
-          <div className="relative mt-4 max-w-xl">
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-14 md:px-10 md:py-16">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-50"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle, rgba(126,224,181,0.10) 1px, transparent 1px)',
+            backgroundSize: '28px 28px',
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-accent/[0.06] blur-3xl"
+        />
+        <div className="relative mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
+          <div>
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+              <Sparkles className="h-3 w-3" />
+              Peptide research reference
+            </div>
+            <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
+              Research peptide catalog
+            </h1>
+            <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
+              Browse a curated reference of {PEPTIDES.length}+ research peptides. Each entry
+              captures mechanism, sequence, structure, and the research areas it’s
+              studied for — with manufacturing and quality context from the synthesis guide.
+            </p>
+
+            {/* In-section features, surfaced on the page instead of a sub-nav.
+                Compare also works inline — tick peptides below to stack the bar. */}
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/catalog/compare"
+                className="inline-flex items-center gap-2 rounded-xl border border-hairline-strong px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-accent/30 hover:text-ink"
+              >
+                <GitCompareArrows className="h-4 w-4 text-accent" />
+                Compare side-by-side
+              </Link>
+              <Link
+                href="/workspace"
+                className="inline-flex items-center gap-2 rounded-xl border border-hairline-strong px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-accent/30 hover:text-ink"
+              >
+                <LayoutGrid className="h-4 w-4 text-accent" />
+                Research Workspace
+              </Link>
+            </div>
+          </div>
+
+          {/* Decorative molecular-chain graphic + catalog snapshot */}
+          <div className="hidden lg:block">
+            <div className="relative overflow-hidden rounded-2xl border border-hairline bg-fill/80 p-5 backdrop-blur">
+              <svg
+                aria-hidden
+                viewBox="0 0 360 180"
+                className="h-40 w-full"
+                fill="none"
+              >
+                <defs>
+                  <linearGradient id="amp-bond" x1="0" y1="0" x2="360" y2="180" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#7EE0B5" stopOpacity="0.15" />
+                    <stop offset="50%" stopColor="#7EE0B5" stopOpacity="0.65" />
+                    <stop offset="100%" stopColor="#D2FBE6" stopOpacity="0.2" />
+                  </linearGradient>
+                </defs>
+                {/* Backbone wave */}
+                <path
+                  d="M24 120 C 64 40, 110 40, 150 96 C 190 152, 236 152, 276 80 C 300 38, 326 42, 340 64"
+                  stroke="url(#amp-bond)"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+                {/* Secondary hydrogen-bond / disulfide arcs */}
+                <path
+                  d="M68 68 Q 150 18 232 122"
+                  stroke="#7EE0B5"
+                  strokeOpacity="0.22"
+                  strokeWidth="1.25"
+                  strokeDasharray="4 4"
+                />
+                <path
+                  d="M110 56 Q 180 140 276 80"
+                  stroke="#D2FBE6"
+                  strokeOpacity="0.18"
+                  strokeWidth="1.25"
+                  strokeDasharray="3 4"
+                />
+                {/* Residue nodes */}
+                {[
+                  { cx: 24, cy: 120, r: 5, accent: false },
+                  { cx: 68, cy: 68, r: 7, accent: true },
+                  { cx: 110, cy: 56, r: 5, accent: false },
+                  { cx: 150, cy: 96, r: 8, accent: true },
+                  { cx: 192, cy: 136, r: 5, accent: false },
+                  { cx: 232, cy: 122, r: 7, accent: true },
+                  { cx: 276, cy: 80, r: 8, accent: true },
+                  { cx: 316, cy: 48, r: 5, accent: false },
+                  { cx: 340, cy: 64, r: 4, accent: false },
+                ].map((n, i) => (
+                  <g key={i}>
+                    {n.accent && (
+                      <circle
+                        cx={n.cx}
+                        cy={n.cy}
+                        r={n.r + 6}
+                        fill="#7EE0B5"
+                        fillOpacity="0.10"
+                      />
+                    )}
+                    <circle
+                      cx={n.cx}
+                      cy={n.cy}
+                      r={n.r}
+                      fill={n.accent ? '#7EE0B5' : '#0E1512'}
+                      stroke="#7EE0B5"
+                      strokeOpacity={n.accent ? 0.9 : 0.45}
+                      strokeWidth="1.5"
+                    />
+                  </g>
+                ))}
+              </svg>
+              <div className="mt-3 grid grid-cols-3 gap-2 border-t border-hairline pt-3 text-center">
+                <div>
+                  <div className="text-lg font-semibold tracking-tight text-ink">
+                    {PEPTIDES.length}+
+                  </div>
+                  <div className="text-[11px] text-ink/50">Entries</div>
+                </div>
+                <div>
+                  <div className="text-lg font-semibold tracking-tight text-ink">
+                    {CATEGORIES.length}
+                  </div>
+                  <div className="text-[11px] text-ink/50">Research areas</div>
+                </div>
+                <div>
+                  <div className="text-lg font-semibold tracking-tight text-accent">
+                    {fdaCount}
+                  </div>
+                  <div className="text-[11px] text-ink/50">FDA-approved</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Filters ── */}
+      <section className="border-b border-hairline bg-surface/95 px-6 py-4 md:sticky md:top-0 md:z-30 md:px-10">
+        <div className="mx-auto max-w-6xl space-y-3">
+          {/* Search */}
+          <div className="relative">
             <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/55" />
             <input
               type="search"
-              aria-label="Search name or alias"
               value={query}
-              onChange={(e) => updateFilters({ q: e.target.value }, 'replace')}
+              onChange={(e) => updateFilters({ q: e.target.value || null })}
+              aria-label="Search name or alias"
               placeholder="Search name or alias"
               className="w-full rounded-xl border border-hairline bg-fill py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#7EE0B5]/40"
             />
             {query && (
               <button
-                onClick={() => updateFilters({ q: null }, 'replace')}
+                onClick={() => updateFilters({ q: null })}
                 aria-label="Clear search"
                 className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-ink/55 transition-colors hover:bg-ink/5 hover:text-ink"
               >
@@ -184,51 +335,6 @@ export default function CatalogPage() {
             )}
           </div>
 
-          {/* In-section features, surfaced on the page instead of a sub-nav.
-              Compare also works inline — tick peptides below to stack the bar. */}
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Link
-              href="/catalog/compare"
-              className="inline-flex items-center gap-2 rounded-xl border border-hairline-strong px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-accent/30 hover:text-ink"
-            >
-              <GitCompareArrows className="h-4 w-4 text-accent" />
-              Compare side-by-side
-            </Link>
-            <Link
-              href="/workspace"
-              className="inline-flex items-center gap-2 rounded-xl border border-hairline-strong px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-accent/30 hover:text-ink"
-            >
-              <LayoutGrid className="h-4 w-4 text-accent" />
-              Research Workspace
-            </Link>
-          </div>
-          {ABSIM && isAffiliate(ABSIM) && (
-            <div className="mt-4 flex flex-col items-start gap-1">
-              <a
-                href={vendorHref(ABSIM)}
-                rel="sponsored nofollow noopener"
-                target="_blank"
-                aria-describedby="absim-catalog-disclosure"
-                onClick={() => sendGAEvent('event', 'affiliate_click', {
-                  vendor: 'absim-peptides',
-                  placement: 'catalog_intro',
-                })}
-                className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-accent/30 bg-accent/[0.08] px-4 py-2 text-sm font-medium text-accent transition-colors hover:bg-accent/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-              >
-                Browse research compounds at ABSIM
-                <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-              </a>
-              <p id="absim-catalog-disclosure" className="text-xs leading-relaxed text-ink/65">
-                We may earn a commission if you purchase through this link.
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ── Filters ── */}
-      <section className="border-b border-hairline bg-surface/95 px-6 py-4 md:sticky md:top-0 md:z-30 md:px-10">
-        <div className="mx-auto max-w-6xl space-y-3">
           {/* Category chips */}
           <div className="flex flex-wrap gap-1.5">
             <Chip active={active === null} onClick={() => updateFilters({ category: null })}>
@@ -294,9 +400,21 @@ export default function CatalogPage() {
               </div>
             )}
           </div>
-          <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-ink/55">
-            <span role="status">
-              {hasFilters
+        </div>
+      </section>
+
+      {/* ── Grid ── */}
+      <section
+        className={
+          selected.length > 0
+            ? 'px-6 pb-28 pt-12 md:px-10'
+            : 'px-6 py-12 md:px-10'
+        }
+      >
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-3 text-xs text-ink/55">
+            <span>
+              {query || active || feature || difficulty
                 ? `${filtered.length} result${filtered.length === 1 ? '' : 's'}${
                     active
                       ? ` in ${CATEGORIES.find((c) => c.id === active)?.label}`
@@ -308,15 +426,59 @@ export default function CatalogPage() {
                   }${feature ? ` with ${feature}` : ''}`
                 : `${filtered.length} peptide${filtered.length === 1 ? '' : 's'}`}
             </span>
-            {hasFilters && filtered.length > 0 && (
-              <button
-                type="button"
-                onClick={clearFilters}
-                className="text-accent/80 transition-colors hover:text-accent"
+            <div className="flex items-center gap-3">
+              {(query || active || feature || difficulty) && (
+                <button
+                  onClick={() =>
+                    updateFilters({
+                      q: null,
+                      category: null,
+                      synthesis: null,
+                      difficulty: null,
+                    })
+                  }
+                  className="text-accent/80 transition-colors hover:text-accent"
+                >
+                  Clear filters
+                </button>
+              )}
+              <div
+                role="group"
+                aria-label="View mode"
+                className="inline-flex items-center rounded-lg border border-hairline bg-fill p-0.5"
               >
-                Clear filters
-              </button>
-            )}
+                <button
+                  type="button"
+                  onClick={() => setViewMode('grid')}
+                  aria-pressed={viewMode === 'grid'}
+                  aria-label="Grid view"
+                  className={
+                    'inline-flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium transition-colors ' +
+                    (viewMode === 'grid'
+                      ? 'bg-accent/15 text-accent'
+                      : 'text-ink/50 hover:text-ink')
+                  }
+                >
+                  <LayoutGrid className="h-3 w-3" />
+                  Grid
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode('list')}
+                  aria-pressed={viewMode === 'list'}
+                  aria-label="Compact list view"
+                  className={
+                    'inline-flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium transition-colors ' +
+                    (viewMode === 'list'
+                      ? 'bg-accent/15 text-accent'
+                      : 'text-ink/50 hover:text-ink')
+                  }
+                >
+                  <List className="h-3 w-3" />
+                  List
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -352,29 +514,68 @@ export default function CatalogPage() {
             <EmptyState query={query.trim()} onClear={clearFilters} />
           ) : (
             <div className="space-y-10">
-              {groupBrowse(filtered).map((group) => (
-                <div key={group.label}>
-                  <h2 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink/45">
-                    {group.label}
-                  </h2>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {group.items.map((p) => {
-                      const isSelected = selected.includes(p.slug)
-                      return (
-                        <PeptideCard
-                          key={p.slug}
-                          peptide={p}
-                          selected={isSelected}
-                          disableAdd={atCap && !isSelected}
-                          onToggle={() => toggleSelected(p.slug)}
-                        />
-                      )
-                    })}
+              {groupBrowse(filtered).map((group) => {
+                const cat = CATEGORIES.find((c) => c.label === group.label)
+                return (
+                  <div key={group.label}>
+                    <div className="mb-4 flex items-center gap-3">
+                      <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-ink/55">
+                        {group.label}
+                      </h2>
+                      <span className="rounded-full border border-hairline bg-fill px-2 py-0.5 text-[10px] font-medium tabular-nums text-ink/50">
+                        {group.items.length}
+                      </span>
+                      <div className="h-px flex-1 bg-hairline" />
+                      {cat && (
+                        <Link
+                          href={`/catalog/category/${cat.id}`}
+                          className="inline-flex items-center gap-1 text-[11px] font-medium text-accent/75 transition-colors hover:text-accent"
+                        >
+                          Guide
+                          <ArrowRight className="h-3 w-3" />
+                        </Link>
+                      )}
+                    </div>
+                    {viewMode === 'grid' ? (
+                      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        {group.items.map((p) => {
+                          const isSelected = selected.includes(p.slug)
+                          return (
+                            <PeptideCard
+                              key={p.slug}
+                              peptide={p}
+                              selected={isSelected}
+                              disableAdd={atCap && !isSelected}
+                              onToggle={() => toggleSelected(p.slug)}
+                            />
+                          )
+                        })}
+                      </div>
+                    ) : (
+                      <div className="divide-y divide-hairline overflow-hidden rounded-2xl border border-hairline bg-fill">
+                        {group.items.map((p) => {
+                          const isSelected = selected.includes(p.slug)
+                          return (
+                            <PeptideListRow
+                              key={p.slug}
+                              peptide={p}
+                              selected={isSelected}
+                              disableAdd={atCap && !isSelected}
+                              onToggle={() => toggleSelected(p.slug)}
+                            />
+                          )
+                        })}
+                      </div>
+                    )}
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           )}
+
+          <div className="mt-14 border-t border-hairline pt-10">
+            <OfflineReference />
+          </div>
         </div>
       </section>
 
@@ -437,7 +638,6 @@ function PeptideCard({
             <p className="mt-0.5 text-xs text-ink/70">aka {peptide.aliases[0]}</p>
           )}
         </div>
-
         <button
           type="button"
           onClick={onToggle}
@@ -451,18 +651,66 @@ function PeptideCard({
               : `Add ${peptide.name} to comparison`
           }
           className={
-            'relative z-10 inline-flex min-h-8 shrink-0 items-center gap-1 rounded-md border px-2 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ' +
+            'relative z-20 inline-flex h-7 shrink-0 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors ' +
             (selected
               ? 'border-accent/45 bg-accent/15 text-accent'
               : disableAdd
-              ? 'cursor-not-allowed border-hairline bg-fill text-ink/40'
-              : 'border-hairline-strong bg-fill-strong text-ink/75 hover:border-accent/40 hover:text-accent')
+              ? 'cursor-not-allowed border-hairline bg-fill text-ink/25'
+              : 'border-hairline-strong bg-fill-strong text-ink/55 hover:border-accent/40 hover:text-accent')
           }
         >
-          {selected && <Check className="h-3 w-3" aria-hidden="true" />}
-          Compare
+          {selected ? (
+            <>
+              <Check className="h-3 w-3" />
+              Compare
+            </>
+          ) : (
+            <>
+              <Plus className="h-3 w-3" />
+              Compare
+            </>
+          )}
         </button>
       </div>
+
+      <p className="mb-4 line-clamp-3 flex-1 text-[13px] leading-relaxed text-ink/55">
+          {peptide.shortDescription}
+        </p>
+
+        <div className="flex flex-wrap gap-1.5">
+          {peptide.categories.slice(0, 3).map((cat) => (
+            <span
+              key={cat}
+              className="rounded-md border border-hairline bg-fill px-2 py-0.5 text-[10px] text-ink/50"
+            >
+              {CATEGORIES.find((c) => c.id === cat)?.label ?? cat}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-4 flex items-center justify-between gap-2 border-t border-hairline pt-3 text-[11px] text-ink/55">
+          <span className="inline-flex min-w-0 items-center gap-2">
+            <span className="truncate">
+              {peptide.molecularWeight
+                ? `${peptide.molecularWeight.toLocaleString()} Da`
+                : 'Reference entry'}
+            </span>
+            {peptide.fdaApproved && (
+              <span className="shrink-0 rounded-md border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
+                FDA
+              </span>
+            )}
+            {peptide.synthesisDifficulty && (
+              <span className="shrink-0 rounded-md border border-hairline bg-fill px-1.5 py-0.5 text-[9px] font-medium text-ink/50">
+                {SYNTHESIS_DIFFICULTY_LABEL[peptide.synthesisDifficulty]}
+              </span>
+            )}
+          </span>
+          <span className="flex items-center gap-1 text-accent/70 transition-colors group-hover:text-accent">
+            View
+            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+          </span>
+        </div>
 
       {BROWSE_SPOTLIGHT.some((slug) => slug === peptide.slug) && peptide.categories[0] && (
         <CatalogMotif category={peptide.categories[0]} className="block h-auto w-32 text-accent" />
@@ -487,6 +735,97 @@ function PeptideCard({
       <p className="line-clamp-3 text-[13px] leading-relaxed text-ink/75">
         {peptide.shortDescription}
       </p>
+    </div>
+  )
+}
+
+function PeptideListRow({
+  peptide,
+  selected,
+  disableAdd,
+  onToggle,
+}: {
+  peptide: Peptide
+  selected: boolean
+  disableAdd: boolean
+  onToggle: () => void
+}) {
+  return (
+    <div
+      className={
+        'group relative flex items-center gap-4 px-4 py-3 transition-colors hover:bg-fill-strong ' +
+        (selected ? 'bg-accent/[0.05]' : '')
+      }
+    >
+      <Link
+        href={`/catalog/${peptide.slug}`}
+        aria-label={`View ${peptide.name}`}
+        className="absolute inset-0 z-0"
+      />
+      <div className="pointer-events-none relative z-10 flex min-w-0 flex-1 items-center gap-4">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm font-semibold tracking-tight text-ink">
+              {peptide.name}
+            </span>
+            {peptide.fdaApproved && (
+              <span className="shrink-0 rounded-md border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
+                FDA
+              </span>
+            )}
+            {peptide.synthesisDifficulty && (
+              <span className="hidden shrink-0 rounded-md border border-hairline bg-fill px-1.5 py-0.5 text-[9px] font-medium text-ink/50 sm:inline-block">
+                {SYNTHESIS_DIFFICULTY_LABEL[peptide.synthesisDifficulty]}
+              </span>
+            )}
+          </div>
+          {peptide.aliases?.[0] && (
+            <p className="truncate text-[11px] text-ink/50">
+              aka {peptide.aliases[0]}
+            </p>
+          )}
+        </div>
+
+        <span className="hidden shrink-0 text-xs tabular-nums text-ink/55 md:inline-block">
+          {peptide.molecularWeight
+            ? `${peptide.molecularWeight.toLocaleString()} Da`
+            : 'Reference'}
+        </span>
+      </div>
+
+      <button
+        type="button"
+        onClick={onToggle}
+        disabled={disableAdd}
+        aria-pressed={selected}
+        aria-label={
+          selected
+            ? `Remove ${peptide.name} from comparison`
+            : disableAdd
+            ? `Comparison full (max ${MAX_COMPARE})`
+            : `Add ${peptide.name} to comparison`
+        }
+        className={
+          'relative z-20 inline-flex h-7 shrink-0 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors ' +
+          (selected
+            ? 'border-accent/45 bg-accent/15 text-accent'
+            : disableAdd
+            ? 'cursor-not-allowed border-hairline bg-fill text-ink/25'
+            : 'border-hairline-strong bg-fill-strong text-ink/55 hover:border-accent/40 hover:text-accent')
+        }
+      >
+        {selected ? (
+          <>
+            <Check className="h-3 w-3" />
+            Compare
+          </>
+        ) : (
+          <>
+            <Plus className="h-3 w-3" />
+            Compare
+          </>
+        )}
+      </button>
     </div>
   )
 }
@@ -599,9 +938,9 @@ function EmptyState({ query, onClear }: { query: string; onClear: () => void }) 
         type="button"
         onClick={onClear}
         className="mt-3 rounded-lg border border-hairline-strong px-4 py-2 text-sm text-accent hover:bg-fill-strong"
-      >
-        Clear filters
-      </button>
+        >
+        Reset all filters
+        </button>
     </div>
   )
 }
