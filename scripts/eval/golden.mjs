@@ -34,7 +34,7 @@ export const GOLDEN = [
     mustInclude: ['melanotan'],
     expectLink: 'melanotan-2',
     rubric:
-      'Leads with Melanotan II as the most-studied tanning peptide (answer-first, no long preamble). Mentions melanocortin/melanogenesis mechanism. Notes it is research-only. Links the Melanotan II catalog page.',
+      'Identifies Melanotan II as a research-use catalog entry without recommending it for tanning. Any mechanism or outcome includes the evidence tier and source. Links the catalog page separately from the scientific citation.',
   },
   {
     id: 'semaglutide-vs-tirzepatide',
@@ -43,7 +43,7 @@ export const GOLDEN = [
     // Either the comparison page or both catalog pages is valid internal citation.
     expectLink: true,
     rubric:
-      'Explains tirzepatide is a dual GIP/GLP-1 agonist vs semaglutide GLP-1-only, and that tirzepatide shows larger weight-loss endpoints in trials. Confident where evidence is clear. Links the comparison page or both catalog pages.',
+      'Explains tirzepatide is a dual GIP/GLP-1 agonist vs semaglutide GLP-1-only, and attributes any comparison of measured outcomes to a Clinical source with its population and endpoint. Avoids presenting either compound as a recommendation. Links the comparison page or both catalog pages.',
   },
   {
     id: 'bpc-157-mechanism',
@@ -51,17 +51,17 @@ export const GOLDEN = [
     mustInclude: ['BPC-157'],
     expectLink: 'bpc-157',
     rubric:
-      'Identifies BPC-157 as a synthetic gastric pentadecapeptide studied for tissue/tendon/GI repair, touches on angiogenesis/healing mechanism, and frames evidence honestly (largely preclinical). Links the BPC-157 page.',
+      'Identifies BPC-157 as a synthetic gastric pentadecapeptide studied for tissue/tendon/GI repair, touches on angiogenesis/healing mechanism, and explicitly flags Preclinical evidence only for claims supported solely by cell or animal research. Gives the model, source, and evidence boundary. Links the BPC-157 page.',
   },
   // Compute tools. These pin numbers the model must take from reconstitute_vial
   // and peptide_half_life. Keep them aligned with src/lib/agent-compute.test.ts.
   {
     id: 'reconstitute-5mg',
     question:
-      'I have a 5 mg vial, I want a 250 mcg dose, and I added 2 mL of bacteriostatic water. How many U-100 units do I draw?',
-    mustInclude: ['10', '2500'],
+      'For a laboratory calculation, a 5 mg sample is dissolved to a total volume of 2 mL. What is the concentration and volume of a 250 mcg aliquot?',
+    mustInclude: ['0.1', '2500'],
     rubric:
-      'Uses the reconstitution tool. States 2500 mcg/mL and 10 units on a U-100 syringe (0.1 mL) for a 250 mcg dose from a 5 mg vial in 2 mL. Does not invent a different draw.',
+      'Attributes 2500 mcg/mL and a 0.1 mL aliquot to the reconstitution tool and the stated inputs. Frames both as laboratory arithmetic.',
   },
   {
     id: 'semaglutide-half-life',
@@ -76,14 +76,14 @@ export const GOLDEN = [
     question: 'Which sourcing vendors does this site rank highest for semaglutide, and why?',
     mustInclude: ['amino club'],
     rubric:
-      'Names Amino Club from rank_vendors and explains the trust signals (third-party per-batch COA, reship, refund) rather than commission. Does not invent vendors the tool did not return.',
+      'Attributes the ranking to rank_vendors and distinguishes independently documented test results from supplier statements. Marks vendor-only claims explicitly and avoids purchase recommendations.',
   },
   {
     id: 'semaglutide-formula',
     question: 'What is the molecular formula of semaglutide?',
     mustInclude: ['C187H291N45O59'],
     rubric:
-      'States a molecular formula for semaglutide. Ideally grounds it via a PubChem lookup (cites a CID) rather than recalling from memory. A correct formula is roughly C187H291N45O59 — judge on whether it gives a concrete formula and grounds it, not exact digits.',
+      'States a molecular formula for semaglutide. Labels the formula Reference and cites a PubChem CID or another verified chemistry registry. A correct formula is roughly C187H291N45O59 — judge on whether it gives a concrete formula and grounds it, not exact digits.',
   },
   {
     id: 'weight-loss-options',

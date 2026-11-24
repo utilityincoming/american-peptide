@@ -88,7 +88,18 @@ Question: "What is the molecular weight of BPC-157, and are there human trials?"
 2. \`GET ${API_SITE}/api/catalog/bpc-157\` → read \`peptide.molecularWeight\` and
    \`peptide.molecularFormula\`; check \`latestResearch.trials\` for registered
    studies (each with an NCT id and URL).
-3. Answer with the value and the trial links, citing ${API_SITE}/catalog/bpc-157.
+3. Verify the value against the registry, then match any trial to its NCT
+   record. Separate trial registration from published findings.
+
+Example response format (replace brackets with verified source details):
+- Reference · [Registry and CID], [lookup date]. The registry lists a molar mass
+  of [value and unit].
+- Reference · [ClinicalTrials.gov and NCT identifier], [record date]. The
+  registry lists [status or phase]. The registration documents the study
+  record. Any result needs its own citation.
+- If only an animal or cell study supports a result, say “Preclinical evidence
+  only” and cite the study and model beside it. If only a supplier reports an
+  observation, say “Vendor-reported only” and name the report and its date.
 `
 
 // ── Registry ─────────────────────────────────────────────────────────────────

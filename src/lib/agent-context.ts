@@ -193,25 +193,25 @@ export function personalizationDigest(ctx: unknown): string {
   ]
   if (pageLine)
     lines.push(
-      `- Context: the user is ${pageLine}. If their question is bare ("what's the dose?", "is it safe?"), assume it concerns this unless they clearly mean otherwise.`,
+      `- Context: the user is ${pageLine}. If their question is bare ("what is the evidence?", "what class is it?"), assume it concerns this unless they clearly mean otherwise.`,
     )
   if (expertise === 'researcher')
     lines.push(
-      '- Audience: researcher. You may lead with mechanism and primary literature, use technical vocabulary freely, and skip consumer framing.',
+      '- Audience: researcher. Use precise terminology and include relevant primary literature within the evidence-first structure.',
     )
   if (expertise === 'consumer')
     lines.push(
-      '- Audience: general reader. Lead with the plain-language answer and a clear recommendation; keep technical depth in the supporting section.',
+      '- Audience: general reader. Lead with the plain-language answer and its evidence boundary; keep technical depth in the supporting section.',
     )
   if (depth === 'concise')
     lines.push('- Depth: prefers concise answers — aim ~150–250 words unless the question demands more.')
   if (depth === 'deep')
     lines.push(
-      '- Depth: prefers thorough answers — the usual length cap is relaxed; include mechanism, alternatives, and citations by default.',
+      '- Depth: prefers thorough answers — the usual length cap is relaxed; include sourced mechanisms and comparisons when relevant.',
     )
   if (units === 'us')
     lines.push(
-      '- Units: prefers US/imperial where applicable; still give metric (mg, mg/mL) for anything dosing-related, since that is how the literature reports it.',
+      '- Units: prefers US/imperial where applicable; retain the original units alongside conversions for cited measurements.',
     )
   if (units === 'metric') lines.push('- Units: prefers metric (mg, mg/mL, µg).')
   if (focus.length)
