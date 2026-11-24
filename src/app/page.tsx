@@ -7,6 +7,7 @@ import FaqAccordion from '@/components/FaqAccordion'
 import DynamicFaqs from '@/components/DynamicFaqs'
 import { DotField, Glow } from '@/components/Backdrop'
 import ContourDivider from '@/components/ContourDivider'
+import HeroSequence from '@/components/HeroSequence'
 
 // Home-page metadata. The root layout's title is a generic "AI-Powered Peptide
 // Research"; here we override it with an intent-matched title/description that
@@ -226,13 +227,9 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Right — molecular visual.
-              Hidden below `lg` so phones don't pay for a continuously-animated
-              420px SVG (orbit spin + float + pulsing nodes) above the fold —
-              it's purely decorative, and dropping it trims mobile paint/
-              compositing work where LCP and bounce are most sensitive. */}
-          <div className="relative mx-auto hidden w-full max-w-md lg:block lg:max-w-none">
-            <HeroMolecule />
+          {/* Keep the decorative art in the existing desktop hero slot. */}
+          <div className="relative mx-auto hidden aspect-square w-full lg:grid lg:items-center">
+            <HeroSequence />
           </div>
         </div>
 
@@ -597,111 +594,6 @@ export default function HomePage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd()) }}
         />
       </section>
-    </div>
-  )
-}
-
-// ── Animated peptide-chain hero visual (CSS-only motion, respects reduced motion) ──
-function HeroMolecule() {
-  const nodes = [
-    { x: 70, y: 285 },
-    { x: 130, y: 225 },
-    { x: 195, y: 290 },
-    { x: 258, y: 222 },
-    { x: 320, y: 288 },
-    { x: 360, y: 228 },
-  ]
-  const sideChains = [
-    { x1: 130, y1: 225, x2: 130, y2: 180 },
-    { x1: 195, y1: 290, x2: 195, y2: 332 },
-    { x1: 258, y1: 222, x2: 258, y2: 176 },
-    { x1: 320, y1: 288, x2: 320, y2: 330 },
-  ]
-
-  return (
-    <div className="relative aspect-square w-full">
-      <svg
-        viewBox="0 0 420 420"
-        className="h-full w-full"
-        role="img"
-        aria-label="Stylized peptide chain"
-      >
-        <defs>
-          <radialGradient id="hm-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#7EE0B5" stopOpacity="0.28" />
-            <stop offset="60%" stopColor="#7EE0B5" stopOpacity="0.06" />
-            <stop offset="100%" stopColor="#7EE0B5" stopOpacity="0" />
-          </radialGradient>
-          <radialGradient id="hm-node" cx="34%" cy="28%" r="78%">
-            <stop offset="0%" stopColor="#E4FFF3" />
-            <stop offset="55%" stopColor="#7EE0B5" />
-            <stop offset="100%" stopColor="#14966A" />
-          </radialGradient>
-        </defs>
-
-        {/* Soft glow */}
-        <circle cx="210" cy="252" r="180" fill="url(#hm-glow)" />
-
-        {/* Slow orbital ring */}
-        <g className="hero-orbit" style={{ transformOrigin: '210px 248px' }}>
-          <circle
-            cx="210"
-            cy="248"
-            r="158"
-            fill="none"
-            stroke="rgba(126,224,181,0.16)"
-            strokeWidth="1"
-            strokeDasharray="3 9"
-          />
-          <circle cx="210" cy="90" r="4" fill="#7EE0B5" fillOpacity="0.6" />
-          <circle cx="368" cy="248" r="3" fill="#D2FBE6" fillOpacity="0.5" />
-          <circle cx="120" cy="372" r="3.5" fill="#7EE0B5" fillOpacity="0.45" />
-        </g>
-
-        {/* Peptide chain */}
-        <g className="hero-float">
-          {/* Side chains */}
-          {sideChains.map((s, i) => (
-            <g key={`sc-${i}`}>
-              <line
-                x1={s.x1}
-                y1={s.y1}
-                x2={s.x2}
-                y2={s.y2}
-                stroke="rgba(126,224,181,0.35)"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-              />
-              <circle cx={s.x2} cy={s.y2} r="6" fill="#7EE0B5" fillOpacity="0.55" />
-            </g>
-          ))}
-
-          {/* Backbone bonds */}
-          <polyline
-            points={nodes.map((n) => `${n.x},${n.y}`).join(' ')}
-            fill="none"
-            stroke="rgba(126,224,181,0.55)"
-            strokeWidth="3.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-
-          {/* Residue nodes */}
-          {nodes.map((n, i) => (
-            <g key={`n-${i}`} className="hero-node" style={{ animationDelay: `${i * 0.4}s` }}>
-              <circle
-                cx={n.x}
-                cy={n.y}
-                r={i === 0 || i === nodes.length - 1 ? 13 : 16}
-                fill="url(#hm-node)"
-                stroke="rgba(255,255,255,0.18)"
-                strokeWidth="1"
-              />
-              <circle cx={n.x - 5} cy={n.y - 5} r="3" fill="#ffffff" fillOpacity="0.5" />
-            </g>
-          ))}
-        </g>
-      </svg>
     </div>
   )
 }
