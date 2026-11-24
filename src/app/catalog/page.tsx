@@ -10,7 +10,6 @@ import {
   FlaskConical,
   GitCompareArrows,
   LayoutGrid,
-  Plus,
   Search,
   X,
 } from 'lucide-react'
@@ -422,100 +421,73 @@ function PeptideCard({
   return (
     <div
       className={
-        'group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-fill p-5 transition-all duration-300 hover:-translate-y-1 hover:bg-fill-strong hover:shadow-[0_18px_50px_-12px_rgba(126,224,181,0.14)] ' +
+        'relative flex h-full flex-col gap-3 rounded-2xl border bg-fill p-5 transition-colors ' +
         (selected
           ? 'border-accent/55 bg-accent/[0.05]'
-          : 'border-hairline hover:border-accent/25')
+          : 'border-hairline hover:border-accent/25 hover:bg-fill-strong')
       }
     >
-      <Link
-        href={`/catalog/${peptide.slug}`}
-        aria-label={`View ${peptide.name}`}
-        className="absolute inset-0 z-0"
-      />
-
-      <button
-        type="button"
-        onClick={onToggle}
-        disabled={disableAdd}
-        aria-pressed={selected}
-        aria-label={
-          selected
-            ? `Remove ${peptide.name} from comparison`
-            : disableAdd
-            ? `Comparison full (max ${MAX_COMPARE})`
-            : `Add ${peptide.name} to comparison`
-        }
-        className={
-          'absolute right-3 top-3 z-20 inline-flex h-7 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors ' +
-          (selected
-            ? 'border-accent/45 bg-accent/15 text-accent'
-            : disableAdd
-            ? 'cursor-not-allowed border-hairline bg-fill text-ink/25'
-            : 'border-hairline-strong bg-fill-strong text-ink/55 hover:border-accent/40 hover:text-accent')
-        }
-      >
-        {selected ? (
-          <>
-            <Check className="h-3 w-3" />
-            Compare
-          </>
-        ) : (
-          <>
-            <Plus className="h-3 w-3" />
-            Compare
-          </>
-        )}
-      </button>
-
-      <div className="pointer-events-none relative z-10 flex h-full flex-col">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#7EE0B5]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-        <div className="mb-3 min-w-0 pr-24">
-          <h3 className="truncate text-base font-semibold tracking-tight">
-            {peptide.name}
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h3 className="text-base font-semibold tracking-tight">
+            <Link
+              href={`/catalog/${peptide.slug}`}
+              aria-label={`View ${peptide.name}`}
+              className="text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-current after:absolute after:inset-0 after:rounded-2xl after:content-[''] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-accent"
+            >
+              {peptide.name}
+            </Link>
           </h3>
           {peptide.aliases?.[0] && (
-            <p className="mt-0.5 truncate text-xs text-ink/55">
-              aka {peptide.aliases[0]}
-            </p>
+            <p className="mt-0.5 text-xs text-ink/70">aka {peptide.aliases[0]}</p>
           )}
         </div>
 
-        <p className="mb-4 line-clamp-3 flex-1 text-[13px] leading-relaxed text-ink/55">
-          {peptide.shortDescription}
-        </p>
-
-        <div className="flex flex-wrap gap-1.5">
-          {peptide.categories.slice(0, 3).map((cat) => (
-            <span
-              key={cat}
-              className="rounded-md border border-hairline bg-fill px-2 py-0.5 text-[10px] text-ink/50"
-            >
-              {CATEGORIES.find((c) => c.id === cat)?.label ?? cat}
-            </span>
-          ))}
-        </div>
-
-        <div className="mt-4 flex items-center justify-between gap-2 border-t border-hairline pt-3 text-[11px] text-ink/55">
-          <span className="inline-flex min-w-0 items-center gap-2">
-            <span className="truncate">
-              {peptide.molecularWeight
-                ? `${peptide.molecularWeight.toLocaleString()} Da`
-                : 'Reference entry'}
-            </span>
-            {peptide.fdaApproved && (
-              <span className="shrink-0 rounded-md border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
-                FDA
-              </span>
-            )}
-          </span>
-          <span className="flex items-center gap-1 text-accent/70 transition-colors group-hover:text-accent">
-            View
-            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-          </span>
-        </div>
+        <button
+          type="button"
+          onClick={onToggle}
+          disabled={disableAdd}
+          aria-pressed={selected}
+          aria-label={
+            selected
+              ? `Remove ${peptide.name} from comparison`
+              : disableAdd
+              ? `Comparison full (max ${MAX_COMPARE})`
+              : `Add ${peptide.name} to comparison`
+          }
+          className={
+            'relative z-10 inline-flex min-h-8 shrink-0 items-center gap-1 rounded-md border px-2 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ' +
+            (selected
+              ? 'border-accent/45 bg-accent/15 text-accent'
+              : disableAdd
+              ? 'cursor-not-allowed border-hairline bg-fill text-ink/40'
+              : 'border-hairline-strong bg-fill-strong text-ink/75 hover:border-accent/40 hover:text-accent')
+          }
+        >
+          {selected && <Check className="h-3 w-3" aria-hidden="true" />}
+          Compare
+        </button>
       </div>
+
+      <ul className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-hairline pb-3 text-xs text-ink/75">
+        {peptide.categories.slice(0, 3).map((cat) => (
+          <li key={cat}>{CATEGORIES.find((c) => c.id === cat)?.label ?? cat}</li>
+        ))}
+        <li className="font-mono tabular-nums">
+          {peptide.molecularWeight
+            ? `${peptide.molecularWeight.toLocaleString()} Da`
+            : 'Reference entry'}
+        </li>
+        {peptide.fdaApproved && (
+          <li className="rounded-md border border-accent/25 bg-accent/[0.08] px-1.5 py-0.5 text-[10px] font-medium text-accent">
+            FDA approved
+          </li>
+        )}
+      </ul>
+
+      <p className="line-clamp-3 text-[13px] leading-relaxed text-ink/75">
+        {peptide.shortDescription}
+      </p>
     </div>
   )
 }
