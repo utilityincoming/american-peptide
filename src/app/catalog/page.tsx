@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import { sendGAEvent } from '@next/third-parties/google'
 import {
@@ -20,10 +20,10 @@ import {
   CATEGORIES,
   SYNTHESIS_DIFFICULTY_LABEL,
   type Peptide,
-  type PeptideCategory,
   type SyntheticFeature,
   type SynthesisDifficulty,
 } from '@/lib/peptides'
+import { createCatalogMatcher, normalizeCatalogQuery } from '@/lib/catalog-query'
 import CatalogMotif from '@/components/CatalogMotif'
 import OfflineReference from '@/components/OfflineReference'
 import { getVendor, isAffiliate, vendorHref } from '@/lib/vendors'
@@ -44,12 +44,57 @@ const FEATURES: SyntheticFeature[] = (() => {
 
 const DIFFICULTIES: SynthesisDifficulty[] = ['standard', 'moderate', 'demanding']
 
+const matchesBrowseQuery = createCatalogMatcher(false)
+
+const FILTER_CHANGE = 'amp-catalog-filter-change'
+
+function subscribeToFilters(onChange: () => void) {
+  window.addEventListener('popstate', onChange)
+  window.addEventListener(FILTER_CHANGE, onChange)
+  return () => {
+    window.removeEventListener('popstate', onChange)
+    window.removeEventListener(FILTER_CHANGE, onChange)
+  }
+}
+
+function getFilterSearch() {
+  return window.location.search
+}
+
+function getServerFilterSearch() {
+  return ''
+}
+
+function updateFilters(
+  changes: Partial<Record<'q' | 'category' | 'synthesis' | 'difficulty', string | null>>,
+  history: 'push' | 'replace' = 'push',
+) {
+  const url = new URL(window.location.href)
+  for (const [key, value] of Object.entries(changes)) {
+    if (value) url.searchParams.set(key, value)
+    else url.searchParams.delete(key)
+  }
+  if (url.href === window.location.href) return
+
+  if (history === 'push') window.history.pushState(null, '', url)
+  else window.history.replaceState(null, '', url)
+  window.dispatchEvent(new Event(FILTER_CHANGE))
+}
+
 export default function CatalogPage() {
-  const [query, setQuery] = useState('')
-  const [active, setActive] = useState<PeptideCategory | null>(null)
-  const [feature, setFeature] = useState<SyntheticFeature | null>(null)
-  const [difficulty, setDifficulty] = useState<SynthesisDifficulty | null>(null)
-  const [synthesisOpen, setSynthesisOpen] = useState(false)
+  const search = useSyncExternalStore(
+    subscribeToFilters,
+    getFilterSearch,
+    getServerFilterSearch,
+  )
+  const params = new URLSearchParams(search)
+  const query = params.get('q') ?? ''
+  const category = normalizeCatalogQuery(params.get('category'))
+  const active = CATEGORIES.find((c) => c.id === category)?.id ?? null
+  const feature = FEATURES.find((f) => f === params.get('synthesis')) ?? null
+  const difficulty = DIFFICULTIES.find((d) => d === params.get('difficulty')) ?? null
+  const [synthesisOverride, setSynthesisOverride] = useState<boolean | null>(null)
+  const synthesisOpen = synthesisOverride ?? Boolean(feature || difficulty)
   const [selected, setSelected] = useState<string[]>([])
 
   useEffect(() => {
@@ -64,51 +109,6 @@ export default function CatalogPage() {
           .slice(0, MAX_COMPARE)
         setSelected(valid)
       }
-    } catch {
-      /* ignore */
-    }
-  }, [])
-
-  // Deep-link support: arrive from a chip via ?synthesis=<feature> and/or
-  // ?difficulty=<grade> (synthesis page counts, compare badges, detail chips).
-  useEffect(() => {
-    try {
-      const params = new URLSearchParams(window.location.search)
-      const f = params.get('synthesis')
-      if (f && FEATURES.includes(f as SyntheticFeature)) {
-        setFeature(f as SyntheticFeature)
-        setSynthesisOpen(true)
-      }
-      const d = params.get('difficulty')
-      if (d && DIFFICULTIES.includes(d as SynthesisDifficulty)) {
-        setDifficulty(d as SynthesisDifficulty)
-        setSynthesisOpen(true)
-      }
-    } catch {
-      /* ignore */
-    }
-  }, [])
-
-  // Keep the URL in sync so the active facets are shareable and survive reload.
-  const selectFeature = useCallback((f: SyntheticFeature | null) => {
-    setFeature(f)
-    try {
-      const url = new URL(window.location.href)
-      if (f) url.searchParams.set('synthesis', f)
-      else url.searchParams.delete('synthesis')
-      window.history.replaceState(null, '', url)
-    } catch {
-      /* ignore */
-    }
-  }, [])
-
-  const selectDifficulty = useCallback((d: SynthesisDifficulty | null) => {
-    setDifficulty(d)
-    try {
-      const url = new URL(window.location.href)
-      if (d) url.searchParams.set('difficulty', d)
-      else url.searchParams.delete('difficulty')
-      window.history.replaceState(null, '', url)
     } catch {
       /* ignore */
     }
@@ -133,7 +133,7 @@ export default function CatalogPage() {
   const clearSelected = useCallback(() => setSelected([]), [])
 
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase()
+    const q = normalizeCatalogQuery(query)
     // Browse (no query) shows the curated, listed set. A text query searches
     // the full catalog so unlisted entries stay findable by name/alias.
     const source = q ? PEPTIDES : LISTED_PEPTIDES
@@ -142,21 +142,15 @@ export default function CatalogPage() {
       if (feature && !(p.syntheticFeatures ?? []).includes(feature)) return false
       if (difficulty && p.synthesisDifficulty !== difficulty) return false
       if (!q) return true
-      const hay = [p.name, p.shortDescription, ...(p.aliases ?? [])]
-        .join(' ')
-        .toLowerCase()
-      return hay.includes(q)
+      return matchesBrowseQuery(p, q)
     })
   }, [query, active, feature, difficulty])
 
   function clearFilters() {
-    setQuery('')
-    setActive(null)
-    selectFeature(null)
-    selectDifficulty(null)
+    updateFilters({ q: null, category: null, synthesis: null, difficulty: null })
   }
 
-  const hasFilters = Boolean(query.trim() || active || feature || difficulty)
+  const hasFilters = Boolean(normalizeCatalogQuery(query) || active || feature || difficulty)
   const atCap = selected.length >= MAX_COMPARE
 
   return (
@@ -175,13 +169,13 @@ export default function CatalogPage() {
               type="search"
               aria-label="Search name or alias"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => updateFilters({ q: e.target.value }, 'replace')}
               placeholder="Search name or alias"
               className="w-full rounded-xl border border-hairline bg-fill py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#7EE0B5]/40"
             />
             {query && (
               <button
-                onClick={() => setQuery('')}
+                onClick={() => updateFilters({ q: null }, 'replace')}
                 aria-label="Clear search"
                 className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-ink/55 transition-colors hover:bg-ink/5 hover:text-ink"
               >
@@ -237,14 +231,14 @@ export default function CatalogPage() {
         <div className="mx-auto max-w-6xl space-y-3">
           {/* Category chips */}
           <div className="flex flex-wrap gap-1.5">
-            <Chip active={active === null} onClick={() => setActive(null)}>
+            <Chip active={active === null} onClick={() => updateFilters({ category: null })}>
               All
             </Chip>
             {CATEGORIES.map((c) => (
               <Chip
                 key={c.id}
                 active={active === c.id}
-                onClick={() => setActive(c.id)}
+                onClick={() => updateFilters({ category: c.id })}
               >
                 {c.label}
               </Chip>
@@ -257,7 +251,7 @@ export default function CatalogPage() {
             <button
               type="button"
               aria-expanded={synthesisOpen}
-              onClick={() => setSynthesisOpen((open) => !open)}
+              onClick={() => setSynthesisOverride(!synthesisOpen)}
               className={
                 'inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider transition-colors ' +
                 (synthesisOpen || difficulty || feature
@@ -276,7 +270,7 @@ export default function CatalogPage() {
                   <Chip
                     key={d}
                     active={difficulty === d}
-                    onClick={() => selectDifficulty(difficulty === d ? null : d)}
+                    onClick={() => updateFilters({ difficulty: difficulty === d ? null : d })}
                   >
                     {SYNTHESIS_DIFFICULTY_LABEL[d]}
                   </Chip>
@@ -285,14 +279,14 @@ export default function CatalogPage() {
                   aria-hidden
                   className="mx-1 h-4 w-px shrink-0 self-center bg-ink/10"
                 />
-                <Chip active={feature === null} onClick={() => selectFeature(null)}>
+                <Chip active={feature === null} onClick={() => updateFilters({ synthesis: null })}>
                   Any feature
                 </Chip>
                 {FEATURES.map((f) => (
                   <Chip
                     key={f}
                     active={feature === f}
-                    onClick={() => selectFeature(feature === f ? null : f)}
+                    onClick={() => updateFilters({ synthesis: feature === f ? null : f })}
                   >
                     {f}
                   </Chip>

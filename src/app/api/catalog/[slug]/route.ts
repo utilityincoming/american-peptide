@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getPeptideBySlug } from '@/lib/peptides'
 import {
   apiHeaders,
+  catalogAccessError,
   apiMeta,
   serializePeptide,
   isBrowserDocumentRequest,
-  CORS_HEADERS,
 } from '@/lib/catalog-api'
 import { enforceApiAccess } from '@/lib/api-auth'
 import { getLatestResearch } from '@/lib/freshness'
@@ -32,12 +32,12 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
   }
 
   const access = await enforceApiAccess(req, 'catalog')
-  if (!access.ok) return access.response
+  if (!access.ok) return catalogAccessError(access.response)
 
   if (!peptide) {
     return NextResponse.json(
       { ...apiMeta(), error: `No peptide with slug '${slug}'.` },
-      { status: 404, headers: CORS_HEADERS },
+      { status: 404, headers: apiHeaders(access.headers) },
     )
   }
 
@@ -50,10 +50,10 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
       peptide: serializePeptide(peptide),
       latestResearch,
     },
-    { headers: { ...apiHeaders(), ...access.headers } },
+    { headers: apiHeaders(access.headers) },
   )
 }
 
 export function OPTIONS() {
-  return new NextResponse(null, { status: 204, headers: CORS_HEADERS })
+  return new NextResponse(null, { status: 204, headers: apiHeaders() })
 }
