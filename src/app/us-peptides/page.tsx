@@ -12,7 +12,6 @@ import {
   ChevronRight,
   Scale,
   Activity,
-  Send,
 } from 'lucide-react'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
 import {
@@ -23,8 +22,6 @@ import {
   TRUST_WEIGHTS,
   VENDOR_TIERS,
 } from '@/lib/vendors'
-import { IS_APP_BUILD } from '@/lib/platform'
-import { COMMUNITY_HREF } from '@/lib/community'
 
 const SITE = 'https://americanpeptide.com'
 const PATH = '/us-peptides'
@@ -574,40 +571,6 @@ export default function MadeInUsaPage() {
                 </div>
               </div>
             </div>
-
-            {/* The American Peptide community - a place to help and be helped, not
-                a vendor endorsement. Gated off the Play build with the buying layer. */}
-            {!IS_APP_BUILD && (
-              <div className="rounded-xl border border-accent/20 bg-gradient-to-br from-[#7EE0B5]/[0.07] to-transparent p-5">
-                <div className="mb-3 flex items-center gap-3">
-                  <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#7EE0B5] text-[#0E1512]">
-                    <Send className="h-4 w-4" strokeWidth={2} />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <p className="text-sm font-semibold text-ink/85">The community</p>
-                      <span className="rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
-                        Open
-                      </span>
-                    </div>
-                    <p className="text-xs text-ink/55">Telegram · researchers</p>
-                  </div>
-                </div>
-                <p className="mb-4 text-xs leading-relaxed text-ink/55">
-                  Some knowledge only moves person to person. That&rsquo;s what the
-                  room is for.
-                </p>
-                <a
-                  href={COMMUNITY_HREF}
-                  target="_blank"
-                  rel="nofollow noopener"
-                  className="flex items-center justify-center gap-2 rounded-lg bg-[#7EE0B5] px-4 py-2.5 text-sm font-semibold text-[#0E1512] transition-opacity hover:opacity-90"
-                >
-                  Join the group
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
-            )}
 
             {/* Related */}
             <div className="rounded-xl border border-hairline bg-fill p-5">
