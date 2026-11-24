@@ -53,6 +53,11 @@ const endpoints = [
   },
   {
     method: 'GET',
+    path: '/api/v2/catalog',
+    desc: 'List entries in slug order. Example request is /api/v2/catalog?limit=25. Follow pagination.nextOffset with the same filters until it is null. The page limit is 100.',
+  },
+  {
+    method: 'GET',
     path: '/api/catalog/{slug}',
     desc: 'A single peptide by slug, e.g. /api/catalog/semaglutide.',
   },

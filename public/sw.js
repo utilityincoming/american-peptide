@@ -20,8 +20,8 @@
 
 // Bump on any change to a stable-filename precached/static asset (the app
 // icons, favicons, offline page) so returning visitors evict the old cache and
-// re-fetch. v8: refresh the flat app icons.
-const CACHE_VERSION = 'v8'
+// re-fetch. v9: keep metered API responses out of offline caches.
+const CACHE_VERSION = 'v9'
 const CACHE_NAME = `amp-offline-${CACHE_VERSION}`
 const REFERENCE_CACHE = 'amp-reference-v1'
 
@@ -44,8 +44,7 @@ const IS_LOCALHOST =
   HOST === '::1' ||
   HOST === '[::1]'
 
-// Precache the core hubs + the open catalog JSON on install, so the first
-// offline launch has working entry points and all peptide data on hand.
+// Precache the core HTML hubs for offline navigation.
 const PRECACHE_URLS = [
   '/',
   '/offline',
@@ -57,7 +56,6 @@ const PRECACHE_URLS = [
   '/tools/reconstitution-calculator',
   '/developers',
   '/manifest.json',
-  '/api/catalog',
 ]
 
 self.addEventListener('install', (event) => {
@@ -95,7 +93,13 @@ self.addEventListener('activate', (event) => {
             .map((k) => caches.delete(k)),
         ),
       )
-      .then(() => self.clients.claim()),
+      .then(async () => {
+        if (await caches.has(REFERENCE_CACHE)) {
+          const reference = await caches.open(REFERENCE_CACHE)
+          await reference.delete('/api/catalog')
+        }
+        await self.clients.claim()
+      }),
   )
 })
 
@@ -115,7 +119,9 @@ self.addEventListener('message', (event) => {
       await Promise.all(
         data.urls.map(async (url) => {
           try {
-            const res = await fetch(url, { cache: 'reload' })
+            const target = new URL(url, self.location.origin)
+            if (target.origin !== self.location.origin || target.pathname.startsWith('/api/')) return
+            const res = await fetch(target, { cache: 'reload' })
             if (res.ok) {
               await cache.put(url, res)
               cached += 1
@@ -163,24 +169,28 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return
 
   const url = new URL(request.url)
-  if (url.origin !== self.location.origin) return
+  if (url.origin !== self.location.origin || url.pathname.startsWith('/api/')) return
 
   // Network-first for HTML routes — fresh content when online, cached fallback
   // when offline. caches.match() searches ALL caches, so a page saved in the
   // reference cache is served offline even if never visited this session.
   if (isHtmlRequest(request)) {
+    // Catalog filters are applied on the client. The same shell serves
+    // offline deep links without storing individual search terms.
+    const cacheKey = url.pathname === '/catalog' ? new URL('/catalog', url).href : request
     event.respondWith(
       fetch(request)
         .then((res) => {
-          const copy = res.clone()
-          caches
-            .open(CACHE_NAME)
-            .then((cache) => cache.put(request, copy))
-            .catch(() => {})
+          if (res.ok) {
+            const copy = res.clone()
+            event.waitUntil(
+              caches.open(CACHE_NAME).then((cache) => cache.put(cacheKey, copy)).catch(() => {}),
+            )
+          }
           return res
         })
         .catch(() =>
-          caches.match(request).then(
+          caches.match(cacheKey).then(
             (cached) =>
               cached ||
               caches.match(OFFLINE_FALLBACK).then(

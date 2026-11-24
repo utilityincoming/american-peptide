@@ -14,6 +14,8 @@ import {
   API_ATTRIBUTION,
 } from './catalog-api'
 
+import { CATALOG_PAGE_DEFAULT, CATALOG_PAGE_MAX, CATALOG_QUERY_MAX } from './catalog-v2'
+
 const LICENSE_URL = 'https://creativecommons.org/licenses/by/4.0/'
 
 // A nullable string/number/integer schema (OpenAPI 3.1 / JSON Schema style).
@@ -94,6 +96,45 @@ export function openApiSpec() {
               },
             },
             '400': { $ref: '#/components/responses/Error' },
+            '429': { $ref: '#/components/responses/Error' },
+          },
+        },
+      },
+      '/api/v2/catalog': {
+        get: {
+          tags: ['catalog'],
+          operationId: 'listCatalogV2',
+          summary: 'List catalog entries with bounded pagination',
+          description: 'Filters combine with AND. Entries sort by slug ascending. Follow nextOffset until it is null. Use the same filters on each page. Unknown or repeated parameters are rejected.',
+          security: [{}, { ApiKeyHeader: [] }, { BearerAuth: [] }],
+          parameters: [
+            { name: 'category', in: 'query', schema: { type: 'string' }, example: 'metabolic' },
+            { name: 'area', in: 'query', schema: { type: 'string' }, example: 'weight-loss' },
+            { name: 'fda', in: 'query', schema: { type: 'boolean' } },
+            { name: 'q', in: 'query', schema: { type: 'string', maxLength: CATALOG_QUERY_MAX } },
+            {
+              name: 'limit', in: 'query',
+              schema: { type: 'integer', minimum: 1, maximum: CATALOG_PAGE_MAX, default: CATALOG_PAGE_DEFAULT },
+            },
+            {
+              name: 'offset', in: 'query',
+              schema: { type: 'integer', minimum: 0, maximum: Number.MAX_SAFE_INTEGER, default: 0 },
+            },
+          ],
+          responses: {
+            '200': {
+              description: 'A page of matching entries.',
+              content: {
+                'application/json': { schema: { $ref: '#/components/schemas/CatalogPageResponse' } },
+              },
+            },
+            '400': {
+              description: 'Invalid parameters.',
+              content: {
+                'application/json': { schema: { $ref: '#/components/schemas/CatalogQueryError' } },
+              },
+            },
+            '401': { $ref: '#/components/responses/Error' },
             '429': { $ref: '#/components/responses/Error' },
           },
         },
@@ -320,6 +361,50 @@ export function openApiSpec() {
             trials: { type: 'array', items: { $ref: '#/components/schemas/RecentTrial' } },
             articles: { type: 'array', items: { $ref: '#/components/schemas/RecentArticle' } },
             fetchedAt: { type: 'string', format: 'date-time' },
+          },
+        },
+        CatalogPageResponse: {
+          allOf: [
+            { $ref: '#/components/schemas/ApiMeta' },
+            {
+              type: 'object',
+              required: ['pagination', 'peptides'],
+              properties: {
+                version: { const: '2.0' },
+                pagination: {
+                  type: 'object',
+                  required: ['limit', 'offset', 'total', 'nextOffset'],
+                  properties: {
+                    limit: { type: 'integer' },
+                    offset: { type: 'integer' },
+                    total: { type: 'integer' },
+                    nextOffset: nullable('integer'),
+                  },
+                },
+                peptides: { type: 'array', items: { $ref: '#/components/schemas/Peptide' } },
+              },
+            },
+          ],
+        },
+        CatalogQueryError: {
+          type: 'object',
+          required: ['error'],
+          properties: {
+            error: {
+              type: 'object',
+              required: ['code', 'issues'],
+              properties: {
+                code: { const: 'INVALID_QUERY' },
+                issues: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    required: ['field', 'message'],
+                    properties: { field: { type: 'string' }, message: { type: 'string' } },
+                  },
+                },
+              },
+            },
           },
         },
         CatalogListResponse: {

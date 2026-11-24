@@ -2,6 +2,7 @@
 //
 // Exposes a clean, public reference shape of each peptide.
 
+import { createCatalogMatcher } from './catalog-query'
 import { PEPTIDES, getCategoryLabel, type Peptide } from './peptides'
 import {
   getAreasForPeptide,
@@ -26,8 +27,24 @@ export const CACHE_HEADERS: Record<string, string> = {
   'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
 }
 
-export function apiHeaders(): Record<string, string> {
-  return { ...CORS_HEADERS, ...CACHE_HEADERS }
+// Metered responses contain request-specific usage headers. Only their
+// underlying catalog data may be reused across callers.
+export function apiHeaders(usageHeaders?: Record<string, string>): Record<string, string> {
+  return {
+    ...CORS_HEADERS,
+    ...usageHeaders,
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-API-Key',
+    'Access-Control-Expose-Headers':
+      'X-API-Tier, RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset, X-Quota-Limit, X-Quota-Remaining, Retry-After',
+    'Cache-Control': 'private, no-store',
+  }
+}
+
+export function catalogAccessError(response: Response): Response {
+  for (const [name, value] of Object.entries(apiHeaders())) {
+    response.headers.set(name, value)
+  }
+  return response
 }
 
 export interface ApiPeptide {
@@ -54,7 +71,18 @@ export interface ApiPeptide {
   url: string
 }
 
+// The deployed dataset is immutable and each deploy creates a new cache.
+const serializedPeptides = new WeakMap<Peptide, ApiPeptide>()
+
 export function serializePeptide(p: Peptide): ApiPeptide {
+  const cached = serializedPeptides.get(p)
+  if (cached) return cached
+  const serialized = buildPeptideResponse(p)
+  serializedPeptides.set(p, serialized)
+  return serialized
+}
+
+function buildPeptideResponse(p: Peptide): ApiPeptide {
   return {
     slug: p.slug,
     name: p.name,
@@ -84,6 +112,10 @@ export function serializePeptide(p: Peptide): ApiPeptide {
   }
 }
 
+const matchesApiQuery = createCatalogMatcher(true)
+const MAX_FILTER_CACHE_ENTRIES = 64
+const filterResults = new Map<string, readonly Peptide[]>()
+
 export interface PeptideFilter {
   category?: string | null
   area?: string | null
@@ -98,11 +130,28 @@ export interface PeptideFilter {
  */
 export function filterPeptides(
   f: PeptideFilter,
-): { items: Peptide[] } | { error: string } {
-  let items: Peptide[] = PEPTIDES
+): { items: readonly Peptide[] } | { error: string } {
+  const area = f.area?.toLowerCase() || null
+  const category = f.category?.toLowerCase() || null
+  const q = f.q?.toLowerCase() || null
+  const key =
+    [area, category, q].every((value) => !value || value.length <= 200)
+      ? JSON.stringify([area, category, q, Boolean(f.fdaOnly)])
+      : null
 
-  if (f.area) {
-    const meta = getResearchAreaBySlug(f.area.toLowerCase())
+  if (key !== null) {
+    const cached = filterResults.get(key)
+    if (cached) {
+      filterResults.delete(key)
+      filterResults.set(key, cached)
+      return { items: cached }
+    }
+  }
+
+  let items = PEPTIDES
+
+  if (area) {
+    const meta = getResearchAreaBySlug(area)
     if (!meta) {
       return {
         error: `Unknown research area '${f.area}'. See documentation for valid slugs.`,
@@ -111,21 +160,20 @@ export function filterPeptides(
     items = getPeptidesForArea(meta)
   }
 
-  if (f.category) {
-    const cat = f.category.toLowerCase()
-    items = items.filter((p) => p.categories.some((c) => c.toLowerCase() === cat))
+  if (category) {
+    items = items.filter((p) => p.categories.some((c) => c.toLowerCase() === category))
   }
 
   if (f.fdaOnly) items = items.filter((p) => p.fdaApproved)
 
-  if (f.q) {
-    const q = f.q.toLowerCase()
-    items = items.filter((p) => {
-      const hay = [p.name, p.shortDescription, p.description, ...(p.aliases ?? [])]
-        .join(' ')
-        .toLowerCase()
-      return hay.includes(q)
-    })
+  if (q) items = items.filter((p) => matchesApiQuery(p, q))
+
+  if (key !== null) {
+    if (filterResults.size >= MAX_FILTER_CACHE_ENTRIES) {
+      const oldest = filterResults.keys().next()
+      if (!oldest.done) filterResults.delete(oldest.value)
+    }
+    filterResults.set(key, items)
   }
 
   return { items }

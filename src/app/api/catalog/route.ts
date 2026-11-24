@@ -3,12 +3,13 @@ import { CATEGORIES } from '@/lib/peptides'
 import { RESEARCH_AREAS } from '@/lib/research-areas'
 import {
   apiHeaders,
+  catalogAccessError,
   apiMeta,
   filterPeptides,
   serializePeptide,
   isBrowserDocumentRequest,
-  CORS_HEADERS,
 } from '@/lib/catalog-api'
+import { normalizeCatalogQuery } from '@/lib/catalog-query'
 import { enforceApiAccess } from '@/lib/api-auth'
 
 export const runtime = 'nodejs'
@@ -33,18 +34,18 @@ export async function GET(req: NextRequest) {
 
   // API clients (not browser navigations): apply tiered access + metering.
   const access = await enforceApiAccess(req, 'catalog')
-  if (!access.ok) return access.response
+  if (!access.ok) return catalogAccessError(access.response)
 
-  const category = sp.get('category')?.trim().toLowerCase() || null
-  const area = sp.get('area')?.trim().toLowerCase() || null
+  const category = normalizeCatalogQuery(sp.get('category'))
+  const area = normalizeCatalogQuery(sp.get('area'))
   const fdaOnly = sp.get('fda') === 'true'
-  const q = sp.get('q')?.trim().toLowerCase() || null
+  const q = normalizeCatalogQuery(sp.get('q'))
 
   const result = filterPeptides({ category, area, fdaOnly, q })
   if ('error' in result) {
     return NextResponse.json(
       { ...apiMeta(), error: result.error },
-      { status: 400, headers: CORS_HEADERS },
+      { status: 400, headers: apiHeaders(access.headers) },
     )
   }
   const items = result.items
@@ -62,10 +63,10 @@ export async function GET(req: NextRequest) {
       count: items.length,
       peptides: items.map(serializePeptide),
     },
-    { headers: { ...apiHeaders(), ...access.headers } },
+    { headers: apiHeaders(access.headers) },
   )
 }
 
 export function OPTIONS() {
-  return new NextResponse(null, { status: 204, headers: CORS_HEADERS })
+  return new NextResponse(null, { status: 204, headers: apiHeaders() })
 }

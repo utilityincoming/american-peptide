@@ -17,7 +17,6 @@ function buildReferenceUrls(): string[] {
     '/glossary',
     '/research-areas',
     '/tools/reconstitution-calculator',
-    '/api/catalog',
     ...CATEGORIES.map((c) => `/catalog/category/${c.id}`),
     ...RESEARCH_AREAS.map((a) => `/research-areas/${a.slug}`),
     ...PEPTIDES.map((p) => `/catalog/${p.slug}`),
