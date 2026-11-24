@@ -185,11 +185,7 @@ export default function CatalogPage() {
               Peptide research reference
             </div>
             <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
-              The peptide reference catalog,
-              <br />
-              <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
-                built for research transparency.
-              </span>
+              Research peptide catalog
             </h1>
             <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
               Browse a curated reference of {PEPTIDES.length}+ research peptides. Each entry
