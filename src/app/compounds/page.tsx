@@ -2,11 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
   ArrowRight,
-  Database,
-  Dna,
   FlaskConical,
   Layers,
 } from 'lucide-react'
+import { CompoundSearchIcon, PeptideForgeIcon } from '@/components/ResearchToolIcons'
 import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES, type Peptide } from '@/lib/peptides'
 import CompoundSearch from './CompoundSearch'
 
@@ -104,7 +103,7 @@ export default function CompoundsPage() {
         />
         <div className="relative mx-auto max-w-6xl">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
-            <FlaskConical className="h-3 w-3" />
+            <CompoundSearchIcon className="h-3 w-3" />
             Peptide reference &amp; compound lookup
           </div>
           <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
@@ -133,7 +132,7 @@ export default function CompoundsPage() {
               href="#pubchem-search"
               className="inline-flex items-center gap-2 rounded-xl border border-hairline-strong px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-accent/30 hover:text-ink"
             >
-              <Database className="h-4 w-4 text-accent" />
+              <CompoundSearchIcon className="h-4 w-4 text-accent" />
               Search PubChem
             </a>
           </div>
@@ -148,7 +147,7 @@ export default function CompoundsPage() {
             className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-accent/20 bg-gradient-to-br from-[#7EE0B5]/[0.08] to-transparent p-5 transition-all hover:border-accent/35 hover:shadow-[0_8px_40px_rgba(126,224,181,0.08)]"
           >
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
-              <Dna className="h-5 w-5" strokeWidth={1.75} />
+              <PeptideForgeIcon className="h-5 w-5" />
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
@@ -266,7 +265,7 @@ export default function CompoundsPage() {
         <section id="pubchem-search" className="scroll-mt-6">
           <div className="mb-5">
             <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-hairline-strong bg-fill px-3 py-1 text-[11px] font-medium text-ink/55">
-              <Database className="h-3 w-3 text-accent/70" />
+              <CompoundSearchIcon className="h-3 w-3 text-accent/70" />
               Beyond the catalog
             </div>
             <h2 className="text-xl font-bold tracking-tight md:text-2xl">

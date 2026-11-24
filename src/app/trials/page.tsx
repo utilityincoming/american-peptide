@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
-import { Search, ExternalLink, Activity, Users } from 'lucide-react'
+import { Search, ExternalLink, Users } from 'lucide-react'
+import { ClinicalPulseIcon } from '@/components/ResearchToolIcons'
 import { Skeleton } from '@/components/Skeleton'
 
 interface Trial {
@@ -86,7 +87,7 @@ export default function TrialsPage() {
       {/* ── Page identity ── */}
       <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-accent/15">
-          <Activity className="h-4 w-4 text-accent" strokeWidth={1.75} />
+          <ClinicalPulseIcon className="h-4 w-4 text-accent" />
         </div>
         <div>
           <span className="text-sm font-medium">Clinical Trials</span>
