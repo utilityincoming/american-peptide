@@ -14,7 +14,7 @@ import path from 'node:path'
 //   and beacons to *.google-analytics.com / *.analytics.google.com.
 // - Ahrefs Web Analytics loads analytics.js from analytics.ahrefs.com and
 //   beacons back to the same origin.
-// - No iframes, remote images, blobs, or workers are used.
+// - PubChem structure thumbnails are loaded through the same-origin image optimizer.
 const csp = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -120,6 +120,14 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'pubchem.ncbi.nlm.nih.gov',
+        pathname: '/rest/pug/compound/cid/*/PNG',
+        search: '?image_size=600x600',
+      },
+    ],
   },
 }
 

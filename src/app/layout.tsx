@@ -60,14 +60,17 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '32x32' },
-      { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32-light.png', sizes: '32x32', type: 'image/png', media: '(prefers-color-scheme: light)' },
+      { url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any', media: '(prefers-color-scheme: dark)' },
+      { url: '/favicon-light.svg', type: 'image/svg+xml', sizes: 'any', media: '(prefers-color-scheme: light)' },
     ],
     apple: [
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
       { url: '/apple-touch-icon-167x167.png', sizes: '167x167', type: 'image/png' },
       { url: '/apple-touch-icon-152x152.png', sizes: '152x152', type: 'image/png' },
+      { url: '/apple-touch-icon-light.png', sizes: '180x180', type: 'image/png', media: '(prefers-color-scheme: light)' },
     ],
   },
   openGraph: {

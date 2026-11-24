@@ -20,8 +20,8 @@
 
 // Bump on any change to a stable-filename precached/static asset (the app
 // icons, favicons, offline page) so returning visitors evict the old cache and
-// re-fetch. v7: refresh the optimized + maskable app icons.
-const CACHE_VERSION = 'v7'
+// re-fetch. v8: refresh the flat app icons.
+const CACHE_VERSION = 'v8'
 const CACHE_NAME = `amp-offline-${CACHE_VERSION}`
 const REFERENCE_CACHE = 'amp-reference-v1'
 

@@ -24,6 +24,7 @@ import {
   type SyntheticFeature,
   type SynthesisDifficulty,
 } from '@/lib/peptides'
+import CatalogMotif from '@/components/CatalogMotif'
 import OfflineReference from '@/components/OfflineReference'
 import { getVendor, isAffiliate, vendorHref } from '@/lib/vendors'
 
@@ -468,6 +469,10 @@ function PeptideCard({
           Compare
         </button>
       </div>
+
+      {BROWSE_SPOTLIGHT.some((slug) => slug === peptide.slug) && peptide.categories[0] && (
+        <CatalogMotif category={peptide.categories[0]} className="block h-auto w-32 text-accent" />
+      )}
 
       <ul className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-hairline pb-3 text-xs text-ink/75">
         {peptide.categories.slice(0, 3).map((cat) => (

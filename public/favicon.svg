@@ -1,36 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="AmericanPeptide">
-  <!-- Canonical brand mark: a three-residue peptide molecule, matching the hero
-       molecule's visual language. Same geometry as the flat glyph in
-       src/components/BrandMark.tsx, in the site token palette.
-       Regenerate the PNG icons after editing: node scripts/generate-icons.mjs -->
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#16201C"/>
-      <stop offset="1" stop-color="#070B09"/>
-    </linearGradient>
-    <radialGradient id="node" cx="36%" cy="30%" r="78%">
-      <stop offset="0%" stop-color="#C7E9D8"/>
-      <stop offset="45%" stop-color="#7EE0B5"/>
-      <stop offset="100%" stop-color="#1E6B52"/>
-    </radialGradient>
-    <linearGradient id="bond" x1="0" y1="0" x2="32" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#7EE0B5"/>
-      <stop offset="1" stop-color="#D2FBE6"/>
-    </linearGradient>
-  </defs>
-
-  <rect width="32" height="32" rx="7" fill="url(#bg)"/>
-
-  <polyline points="9,21 16,11 23,21" fill="none"
-            stroke="url(#bond)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <circle cx="9"  cy="21" r="4.1" fill="url(#node)"/>
-  <circle cx="16" cy="11" r="4.6" fill="url(#node)"/>
-  <circle cx="23" cy="21" r="4.1" fill="url(#node)"/>
-
-  <g fill="#ffffff" fill-opacity="0.55">
-    <circle cx="7.4"  cy="19.4" r="1.2"/>
-    <circle cx="14.3" cy="9.4"  r="1.3"/>
-    <circle cx="21.4" cy="19.4" r="1.2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="American Peptide">
+  <rect width="32" height="32" rx="7" fill="#121C18"/>
+  <path d="M8 21 16 11l8 10" fill="none" stroke="#7EE0B5" stroke-width="2.33" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#7EE0B5">
+    <circle cx="8" cy="21" r="2.7"/>
+    <circle cx="16" cy="11" r="2.7"/>
+    <circle cx="24" cy="21" r="2.7"/>
   </g>
 </svg>

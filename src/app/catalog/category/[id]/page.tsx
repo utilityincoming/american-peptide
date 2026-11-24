@@ -14,6 +14,7 @@ import {
   type Peptide,
   type PeptideCategory,
 } from '@/lib/peptides'
+import CatalogMotif from '@/components/CatalogMotif'
 import { getCategoryContent } from '@/lib/category-content'
 
 const SITE = 'https://americanpeptide.com'
@@ -141,32 +142,26 @@ export default async function CategoryPage({ params }: RouteParams) {
 
       {/* ── Hero ── */}
       <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-50"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle, rgba(126,224,181,0.10) 1px, transparent 1px)',
-            backgroundSize: '28px 28px',
-          }}
-        />
-        <div className="relative mx-auto max-w-4xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
-            <Layers className="h-3 w-3" />
-            Catalog category · {peptides.length} entr
-            {peptides.length === 1 ? 'y' : 'ies'}
-          </div>
-          <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
-            {content?.heading ?? `${meta.label} Peptides`}
-          </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
-            {content?.tagline ?? meta.blurb}
-          </p>
-          {content?.intro && (
-            <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-ink/60">
-              {content.intro}
+        <div className="relative mx-auto grid max-w-5xl items-center gap-6 md:grid-cols-[1fr_minmax(0,250px)] lg:grid-cols-[1fr_320px]">
+          <div>
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
+              <Layers className="h-3 w-3" />
+              Catalog category · {peptides.length} entr
+              {peptides.length === 1 ? 'y' : 'ies'}
+            </div>
+            <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
+              {content?.heading ?? `${meta.label} Peptides`}
+            </h1>
+            <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
+              {content?.tagline ?? meta.blurb}
             </p>
-          )}
+            {content?.intro && (
+              <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-ink/60">
+                {content.intro}
+              </p>
+            )}
+          </div>
+          <CatalogMotif category={meta.id} className="block h-auto w-full max-w-80 text-accent" />
         </div>
       </section>
 

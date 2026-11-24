@@ -565,14 +565,16 @@ function SyringeDiagram({ units }: { units: number }) {
   return (
     <svg
       viewBox={`0 0 ${VB_W} ${VB_H}`}
-      className="h-auto w-full"
+      width={VB_W}
+      height={VB_H}
+      className="h-auto w-full text-ink"
       role="img"
       aria-label={`U-100 insulin syringe filled to ${clamped.toFixed(1)} units`}
     >
       {/* Plunger */}
-      <rect x="10" y="40" width="20" height="22" rx="3" fill="#2A3548" />
-      <rect x="30" y="44" width="58" height="14" rx="2" fill="#1A2336" />
-      <rect x="86" y="38" width="6" height="26" rx="1" fill="#3A4A66" />
+      <rect x="10" y="40" width="20" height="22" rx="3" fill="currentColor" fillOpacity=".7" />
+      <rect x="30" y="44" width="58" height="14" rx="2" fill="currentColor" fillOpacity=".35" />
+      <rect x="86" y="38" width="6" height="26" rx="1" fill="currentColor" fillOpacity=".7" />
 
       {/* Barrel */}
       <rect
@@ -582,7 +584,7 @@ function SyringeDiagram({ units }: { units: number }) {
         height={BARREL_H}
         rx="2"
         fill="var(--panel)"
-        stroke="#2A3548"
+        stroke="currentColor"
         strokeWidth="1"
       />
 
@@ -594,7 +596,7 @@ function SyringeDiagram({ units }: { units: number }) {
           width={fillW}
           height={BARREL_H}
           rx="2"
-          fill="#7EE0B5"
+          fill="var(--accent)"
           fillOpacity="0.28"
         />
       )}
@@ -604,26 +606,22 @@ function SyringeDiagram({ units }: { units: number }) {
           y1={BARREL_Y - 2}
           x2={BARREL_X + fillW}
           y2={BARREL_Y + BARREL_H + 2}
-          stroke="#7EE0B5"
+          stroke="var(--accent)"
           strokeWidth="1.5"
         />
       )}
 
       {/* Minor ticks */}
-      {minorTicks.map((t) => {
-        const x = BARREL_X + (t / 100) * BARREL_W
-        return (
-          <line
-            key={`min-${t}`}
-            x1={x}
-            y1={BARREL_Y}
-            x2={x}
-            y2={BARREL_Y + 4}
-            stroke="#3A4A66"
-            strokeWidth="0.5"
-          />
-        )
-      })}
+      <path
+        d={minorTicks.map((tick) => {
+          const x = BARREL_X + (tick / 100) * BARREL_W
+          return `M${x.toFixed(1)} ${BARREL_Y}v4`
+        }).join('')}
+        fill="none"
+        stroke="currentColor"
+        strokeOpacity=".55"
+        strokeWidth=".5"
+      />
 
       {/* Major ticks + labels */}
       {majorTicks.map((t) => {
@@ -635,14 +633,14 @@ function SyringeDiagram({ units }: { units: number }) {
               y1={BARREL_Y}
               x2={x}
               y2={BARREL_Y + 8}
-              stroke="#5A6B85"
+              stroke="currentColor"
               strokeWidth="1"
             />
             <text
               x={x}
               y={BARREL_Y - 4}
               textAnchor="middle"
-              className="fill-ink/40"
+              className="fill-ink/80"
               style={{ fontSize: '9px', fontFamily: 'monospace' }}
             >
               {t}
@@ -654,7 +652,7 @@ function SyringeDiagram({ units }: { units: number }) {
       {/* Needle hub */}
       <polygon
         points={`${BARREL_X + BARREL_W},${BARREL_Y} ${BARREL_X + BARREL_W + 18},${BARREL_Y + 6} ${BARREL_X + BARREL_W + 18},${BARREL_Y + BARREL_H - 6} ${BARREL_X + BARREL_W},${BARREL_Y + BARREL_H}`}
-        fill="#2A3548"
+        fill="currentColor"
       />
       {/* Needle */}
       <line
@@ -662,7 +660,7 @@ function SyringeDiagram({ units }: { units: number }) {
         y1={BARREL_Y + BARREL_H / 2}
         x2={BARREL_X + BARREL_W + 80}
         y2={BARREL_Y + BARREL_H / 2}
-        stroke="#5A6B85"
+        stroke="currentColor"
         strokeWidth="1.5"
       />
 
@@ -675,9 +673,9 @@ function SyringeDiagram({ units }: { units: number }) {
             width="48"
             height="18"
             rx="3"
-            fill="#7EE0B5"
+            fill="var(--accent)"
             fillOpacity="0.15"
-            stroke="#7EE0B5"
+            stroke="var(--accent)"
             strokeOpacity="0.4"
             strokeWidth="0.75"
           />
@@ -685,7 +683,7 @@ function SyringeDiagram({ units }: { units: number }) {
             x={Math.max(BARREL_X + 24, Math.min(labelX, BARREL_X + BARREL_W - 24))}
             y={BARREL_Y + BARREL_H + 21}
             textAnchor="middle"
-            className="fill-[#7EE0B5]"
+            className="fill-accent"
             style={{ fontSize: '11px', fontFamily: 'monospace', fontWeight: 600 }}
           >
             {clamped.toFixed(1)} u

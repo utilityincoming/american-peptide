@@ -1,0 +1,178 @@
+{
+  "assets": [
+    {
+      "file": "src/components/CatalogMotif.tsx",
+      "slot": "11 category headers, Catalog featured-entry cards and homepage Featured entries",
+      "generationPrompt": "Draw an abstract five-residue trace on a 320\u00d7160 plate with 20-unit margins, fixed central highlight, sparse guides and 1.75-unit rounded monoline. Vary node height by category. No text or chemical identity.",
+      "theme": "Theme tokens"
+    },
+    {
+      "file": "src/components/HeroSequence.tsx",
+      "slot": "Existing homepage hero",
+      "generationPrompt": "Retain the existing responsive annotated sequence SVG.",
+      "theme": "Theme tokens"
+    },
+    {
+      "file": "src/app/tools/reconstitution-calculator/page.tsx",
+      "slot": "U-100 scale illustration",
+      "generationPrompt": "Use theme-aware ink and accent with a single path for minor graduations. Retain original scale geometry and accessible readout.",
+      "theme": "Theme tokens"
+    },
+    {
+      "file": "src/app/compounds/CompoundSearch.tsx",
+      "slot": "Compound Search structure cards",
+      "generationPrompt": "Request official PubChem 600\u00d7600 diagrams and serve via the Next image optimizer. Do not redraw scientific source data.",
+      "theme": "Light paper on both themes"
+    },
+    {
+      "file": "src/app/catalog/[slug]/opengraph-image.tsx",
+      "slot": "/catalog/[slug] OG/share card, generated PNG 1200\u00d7630",
+      "generationPrompt": "Place a simple residue trace and flat mint wordmark on dark basalt. Render page-specific text in code and keep title dominant at 300 px.",
+      "theme": "Fixed dark share card"
+    },
+    {
+      "file": "src/app/catalog/opengraph-image.tsx",
+      "slot": "/catalog OG/share card, generated PNG 1200\u00d7630",
+      "generationPrompt": "Place a simple residue trace and flat mint wordmark on dark basalt. Render page-specific text in code and keep title dominant at 300 px.",
+      "theme": "Fixed dark share card"
+    },
+    {
+      "file": "src/app/compounds/builder/opengraph-image.tsx",
+      "slot": "/compounds/builder OG/share card, generated PNG 1200\u00d7630",
+      "generationPrompt": "Place a simple residue trace and flat mint wordmark on dark basalt. Render page-specific text in code and keep title dominant at 300 px.",
+      "theme": "Fixed dark share card"
+    },
+    {
+      "file": "src/app/compounds/opengraph-image.tsx",
+      "slot": "/compounds OG/share card, generated PNG 1200\u00d7630",
+      "generationPrompt": "Place a simple residue trace and flat mint wordmark on dark basalt. Render page-specific text in code and keep title dominant at 300 px.",
+      "theme": "Fixed dark share card"
+    },
+    {
+      "file": "src/app/opengraph-image.tsx",
+      "slot": "/ OG/share card, generated PNG 1200\u00d7630",
+      "generationPrompt": "Place a simple residue trace and flat mint wordmark on dark basalt. Render page-specific text in code and keep title dominant at 300 px.",
+      "theme": "Fixed dark share card"
+    },
+    {
+      "file": "src/app/research/opengraph-image.tsx",
+      "slot": "/research OG/share card, generated PNG 1200\u00d7630",
+      "generationPrompt": "Place a simple residue trace and flat mint wordmark on dark basalt. Render page-specific text in code and keep title dominant at 300 px.",
+      "theme": "Fixed dark share card"
+    },
+    {
+      "file": "src/app/tools/reconstitution-calculator/opengraph-image.tsx",
+      "slot": "/tools/reconstitution-calculator OG/share card, generated PNG 1200\u00d7630",
+      "generationPrompt": "Place a simple residue trace and flat mint wordmark on dark basalt. Render page-specific text in code and keep title dominant at 300 px.",
+      "theme": "Fixed dark share card"
+    },
+    {
+      "file": "src/app/trials/opengraph-image.tsx",
+      "slot": "/trials OG/share card, generated PNG 1200\u00d7630",
+      "generationPrompt": "Place a simple residue trace and flat mint wordmark on dark basalt. Render page-specific text in code and keep title dominant at 300 px.",
+      "theme": "Fixed dark share card"
+    },
+    {
+      "file": "src/lib/og.tsx",
+      "slot": "Shared OG composition",
+      "generationPrompt": "Render flat scientific accents and live typography into a 1200\u00d7630 share composition.",
+      "theme": "Fixed dark share card"
+    },
+    {
+      "file": "public/android-chrome-192x192.png",
+      "slot": "PWA or Android launcher icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Dark"
+    },
+    {
+      "file": "public/android-chrome-512x512-light.png",
+      "slot": "PWA or Android launcher icon alternate export",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Light"
+    },
+    {
+      "file": "public/android-chrome-512x512.png",
+      "slot": "PWA or Android launcher icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Dark"
+    },
+    {
+      "file": "public/apple-touch-icon-152x152.png",
+      "slot": "iOS touch icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Dark"
+    },
+    {
+      "file": "public/apple-touch-icon-167x167.png",
+      "slot": "iOS touch icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Dark"
+    },
+    {
+      "file": "public/apple-touch-icon-light.png",
+      "slot": "iOS touch icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Light"
+    },
+    {
+      "file": "public/apple-touch-icon.png",
+      "slot": "iOS touch icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Dark"
+    },
+    {
+      "file": "public/favicon-16x16.png",
+      "slot": "browser tab icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Dark"
+    },
+    {
+      "file": "public/favicon-32x32-light.png",
+      "slot": "browser tab icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Light"
+    },
+    {
+      "file": "public/favicon-32x32.png",
+      "slot": "browser tab icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Dark"
+    },
+    {
+      "file": "public/favicon-light.svg",
+      "slot": "browser tab icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Light"
+    },
+    {
+      "file": "public/favicon.ico",
+      "slot": "browser tab icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Dark"
+    },
+    {
+      "file": "public/favicon.svg",
+      "slot": "browser tab icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Dark"
+    },
+    {
+      "file": "public/maskable-192x192.png",
+      "slot": "PWA or Android launcher icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Dark"
+    },
+    {
+      "file": "public/maskable-512x512.png",
+      "slot": "PWA or Android launcher icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Dark"
+    },
+    {
+      "file": "public/maskable.svg",
+      "slot": "PWA or Android launcher icon",
+      "generationPrompt": "Flatten the three-residue junction into a 32-unit tile. Use round joins, solid nodes, and the matching cream/green or basalt/mint palette. Preserve safe area on maskable and touch exports.",
+      "theme": "Dark"
+    }
+  ]
+}
