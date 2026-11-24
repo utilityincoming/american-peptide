@@ -307,33 +307,34 @@ export default function CatalogPage() {
               </div>
             </div>
           </div>
-          {ABSIM && isAffiliate(ABSIM) && (
-            <div className="mt-4 flex flex-col items-start gap-1">
-              <a
-                href={vendorHref(ABSIM)}
-                rel="sponsored nofollow noopener"
-                target="_blank"
-                aria-describedby="absim-catalog-disclosure"
-                onClick={() => sendGAEvent('event', 'affiliate_click', {
-                  vendor: 'absim-peptides',
-                  placement: 'catalog_intro',
-                })}
-                className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-accent/30 bg-accent/[0.08] px-4 py-2 text-sm font-medium text-accent transition-colors hover:bg-accent/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-              >
-                Browse research compounds at ABSIM
-                <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-              </a>
-              <p id="absim-catalog-disclosure" className="text-xs leading-relaxed text-ink/65">
-                We may earn a commission if you purchase through this link.
-              </p>
-            </div>
-          )}
         </div>
       </section>
 
       {/* ── Filters ── */}
       <section className="border-b border-hairline bg-surface/95 px-6 py-4 md:sticky md:top-0 md:z-30 md:px-10">
         <div className="mx-auto max-w-6xl space-y-3">
+          {/* Search */}
+          <div className="relative">
+            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/55" />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => updateFilters({ q: e.target.value || null })}
+              aria-label="Search name or alias"
+              placeholder="Search name or alias"
+              className="w-full rounded-xl border border-hairline bg-fill py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#7EE0B5]/40"
+            />
+            {query && (
+              <button
+                onClick={() => updateFilters({ q: null })}
+                aria-label="Clear search"
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-ink/55 transition-colors hover:bg-ink/5 hover:text-ink"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
+          </div>
+
           {/* Category chips */}
           <div className="flex flex-wrap gap-1.5">
             <Chip active={active === null} onClick={() => updateFilters({ category: null })}>
