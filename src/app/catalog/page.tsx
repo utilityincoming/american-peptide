@@ -711,7 +711,6 @@ function PeptideCard({
             <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
           </span>
         </div>
-      </div>
 
       {BROWSE_SPOTLIGHT.some((slug) => slug === peptide.slug) && peptide.categories[0] && (
         <CatalogMotif category={peptide.categories[0]} className="block h-auto w-32 text-accent" />
