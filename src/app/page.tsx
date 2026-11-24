@@ -8,6 +8,7 @@ import FaqAccordion from '@/components/FaqAccordion'
 import DynamicFaqs from '@/components/DynamicFaqs'
 import { DotField, Glow } from '@/components/Backdrop'
 import ContourDivider from '@/components/ContourDivider'
+import CatalogMotif from '@/components/CatalogMotif'
 import HeroSequence from '@/components/HeroSequence'
 
 // Home-page metadata. The root layout's title is a generic "AI-Powered Peptide
@@ -404,9 +405,12 @@ export default function HomePage() {
 
             {/* Right column — peptide preview chips */}
             <div className="relative">
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/55">
-                Featured entries
-              </p>
+              <div className="mb-3 flex items-center justify-between gap-4">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/75">
+                  Featured entries
+                </p>
+                <CatalogMotif category="metabolic" className="block h-auto w-32 text-accent" />
+              </div>
               <div className="flex flex-wrap gap-2">
                 {SPOTLIGHT_SLUGS.map((slug) => {
                   const p = PEPTIDES.find((x) => x.slug === slug)

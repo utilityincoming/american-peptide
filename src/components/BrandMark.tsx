@@ -15,16 +15,16 @@ export function BrandGlyph({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" fill="currentColor" className={className} aria-hidden>
       <polyline
-        points="9,21 16,11 23,21"
+        points="8,21 16,11 24,21"
         fill="none"
         stroke="currentColor"
-        strokeWidth="3"
+        strokeWidth="2.33"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="9" cy="21" r="4.1" />
-      <circle cx="16" cy="11" r="4.6" />
-      <circle cx="23" cy="21" r="4.1" />
+      <circle cx="8" cy="21" r="2.7" />
+      <circle cx="16" cy="11" r="2.7" />
+      <circle cx="24" cy="21" r="2.7" />
     </svg>
   )
 }

@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+
 import { useState, useEffect } from 'react'
 import { Search, ExternalLink } from 'lucide-react'
 import { Skeleton, SkeletonMolecule } from '@/components/Skeleton'
@@ -162,11 +164,12 @@ function CompoundCard({ compound }: { compound: Compound }) {
         {imgError ? (
           <span className="text-xs text-ink/55">Structure unavailable</span>
         ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={`https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${compound.cid}/PNG`}
+          <Image
+            src={`https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${compound.cid}/PNG?image_size=600x600`}
             alt={`2D structure of ${compound.name}`}
-            className="max-h-full max-w-full object-contain"
+            width={160}
+            height={160}
+            className="h-auto max-h-full max-w-full rounded-md bg-white object-contain"
             onError={() => setImgError(true)}
             loading="lazy"
           />

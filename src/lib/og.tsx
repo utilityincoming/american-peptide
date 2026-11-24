@@ -97,13 +97,13 @@ function Molecule({
         points={nodes.map((n) => `${n.x},${n.y}`).join(' ')}
         fill="none"
         stroke={accent}
-        strokeWidth={Math.max(4, Math.round(r * 0.5))}
+        strokeWidth="4"
         strokeOpacity={0.55}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       {nodes.map((n, i) => (
-        <circle key={i} cx={n.x} cy={n.y} r={r} fill={accent} fillOpacity={0.92} />
+        <circle key={i} cx={n.x} cy={n.y} r={r} fill="#121C18" stroke={accent} strokeWidth="4" />
       ))}
     </svg>
   )
@@ -126,16 +126,16 @@ function BrandChip() {
     >
       <svg width={34} height={34} viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
         <polyline
-          points="9,21 16,11 23,21"
+          points="8,21 16,11 24,21"
           fill="none"
           stroke="#0E1512"
           strokeWidth={3}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <circle cx="9" cy="21" r="4.1" fill="#0E1512" />
-        <circle cx="16" cy="11" r="4.6" fill="#0E1512" />
-        <circle cx="23" cy="21" r="4.1" fill="#0E1512" />
+        <circle cx="8" cy="21" r="2.7" fill="#0E1512" />
+        <circle cx="16" cy="11" r="2.7" fill="#0E1512" />
+        <circle cx="24" cy="21" r="2.7" fill="#0E1512" />
       </svg>
     </div>
   )
@@ -194,14 +194,13 @@ export function ogImage({
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: '72px',
-        backgroundColor: '#0E1512',
-        backgroundImage: `radial-gradient(900px 520px at 88% -12%, ${rgba(accent, 0.2)}, transparent), radial-gradient(760px 520px at -8% 118%, ${rgba(accent, 0.12)}, transparent)`,
-        color: '#ffffff',
+        backgroundColor: '#121C18',
+        color: '#F4F8F6',
         fontFamily: '"Space Grotesk", sans-serif',
       }}
     >
       {/* Molecular signature — faint peptide chain anchored bottom-right. */}
-      <div style={{ position: 'absolute', right: 40, bottom: 92, display: 'flex', opacity: 0.22 }}>
+      <div style={{ position: 'absolute', right: 48, bottom: 106, display: 'flex', opacity: 0.22 }}>
         <Molecule residues={nodeCount} accent={accent} width={560} height={300} />
       </div>
 
@@ -210,7 +209,7 @@ export function ogImage({
         <BrandChip />
         <div style={{ display: 'flex', fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em' }}>
           <span>American</span>
-          <span style={{ color: 'rgba(255,255,255,0.45)' }}>Peptide</span>
+          <span style={{ color: '#F4F8F6' }}>Peptide</span>
         </div>
       </div>
 
@@ -262,7 +261,7 @@ export function ogImage({
               display: 'flex',
               fontSize: 30,
               lineHeight: 1.35,
-              color: 'rgba(255,255,255,0.62)',
+              color: '#F4F8F6',
               marginTop: 26,
               maxWidth: 900,
             }}
