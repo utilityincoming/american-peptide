@@ -12,7 +12,6 @@ import {
   LayoutGrid,
   Plus,
   Search,
-  Sparkles,
   X,
 } from 'lucide-react'
 import {
@@ -150,42 +149,50 @@ export default function CatalogPage() {
     })
   }, [query, active, feature, difficulty])
 
+  function clearFilters() {
+    setQuery('')
+    setActive(null)
+    selectFeature(null)
+    selectDifficulty(null)
+  }
+
+  const hasFilters = Boolean(query.trim() || active || feature || difficulty)
   const atCap = selected.length >= MAX_COMPARE
 
   return (
     <div className="min-h-screen bg-surface text-ink">
-      {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-hairline px-6 py-16 md:px-10">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-50"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle, rgba(126,224,181,0.10) 1px, transparent 1px)',
-            backgroundSize: '28px 28px',
-          }}
-        />
-        <div className="relative mx-auto max-w-6xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3.5 py-1 text-[11px] font-medium text-accent">
-            <Sparkles className="h-3 w-3" />
-            Peptide research reference
-          </div>
-          <h1 className="mb-4 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
-            The peptide reference catalog,
-            <br />
-            <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
-              built for research transparency.
-            </span>
+      <section className="border-b border-hairline px-6 py-7 md:px-10 md:py-10">
+        <div className="mx-auto max-w-6xl">
+          <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
+            Research peptide catalog
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
-            Browse a curated reference of {PEPTIDES.length}+ research peptides. Each entry
-            captures mechanism, sequence, structure, and the research areas it’s
-            studied for — with manufacturing and quality context from the synthesis guide.
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/65 md:text-base">
+            Search by name or alias. Compare sequences, molecular weights, and research evidence.
           </p>
+          <div className="relative mt-4 max-w-xl">
+            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/55" />
+            <input
+              type="search"
+              aria-label="Search name or alias"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search name or alias"
+              className="w-full rounded-xl border border-hairline bg-fill py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#7EE0B5]/40"
+            />
+            {query && (
+              <button
+                onClick={() => setQuery('')}
+                aria-label="Clear search"
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-ink/55 transition-colors hover:bg-ink/5 hover:text-ink"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
+          </div>
 
           {/* In-section features, surfaced on the page instead of a sub-nav.
               Compare also works inline — tick peptides below to stack the bar. */}
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-4 flex flex-wrap gap-2">
             <Link
               href="/catalog/compare"
               className="inline-flex items-center gap-2 rounded-xl border border-hairline-strong px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-accent/30 hover:text-ink"
@@ -202,7 +209,7 @@ export default function CatalogPage() {
             </Link>
           </div>
           {ABSIM && isAffiliate(ABSIM) && (
-            <div className="mt-5 flex flex-col items-start gap-2">
+            <div className="mt-4 flex flex-col items-start gap-1">
               <a
                 href={vendorHref(ABSIM)}
                 rel="sponsored nofollow noopener"
@@ -226,29 +233,8 @@ export default function CatalogPage() {
       </section>
 
       {/* ── Filters ── */}
-      <section className="sticky top-0 z-30 border-b border-hairline bg-surface/85 px-6 py-4 backdrop-blur md:px-10">
+      <section className="border-b border-hairline bg-surface/95 px-6 py-4 md:sticky md:top-0 md:z-30 md:px-10">
         <div className="mx-auto max-w-6xl space-y-3">
-          {/* Search */}
-          <div className="relative">
-            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/55" />
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search name or alias"
-              className="w-full rounded-xl border border-hairline bg-fill py-3 pl-10 pr-10 text-sm text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#7EE0B5]/40"
-            />
-            {query && (
-              <button
-                onClick={() => setQuery('')}
-                aria-label="Clear search"
-                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-ink/55 transition-colors hover:bg-ink/5 hover:text-ink"
-              >
-                <X className="h-3.5 w-3.5" />
-              </button>
-            )}
-          </div>
-
           {/* Category chips */}
           <div className="flex flex-wrap gap-1.5">
             <Chip active={active === null} onClick={() => setActive(null)}>
@@ -314,23 +300,9 @@ export default function CatalogPage() {
               </div>
             )}
           </div>
-        </div>
-      </section>
-
-      {/* ── Grid ── */}
-      <section
-        className={
-          selected.length > 0
-            ? 'px-6 pb-28 pt-12 md:px-10'
-            : 'px-6 py-12 md:px-10'
-        }
-      >
-        <div className="mx-auto max-w-6xl">
-          <OfflineReference />
-
-          <div className="mb-5 flex items-center justify-between text-xs text-ink/55">
-            <span>
-              {query || active || feature || difficulty
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-ink/55">
+            <span role="status">
+              {hasFilters
                 ? `${filtered.length} result${filtered.length === 1 ? '' : 's'}${
                     active
                       ? ` in ${CATEGORIES.find((c) => c.id === active)?.label}`
@@ -342,20 +314,29 @@ export default function CatalogPage() {
                   }${feature ? ` with ${feature}` : ''}`
                 : `${filtered.length} peptide${filtered.length === 1 ? '' : 's'}`}
             </span>
-            {(query || active || feature || difficulty) && (
+            {hasFilters && filtered.length > 0 && (
               <button
-                onClick={() => {
-                  setQuery('')
-                  setActive(null)
-                  selectFeature(null)
-                  selectDifficulty(null)
-                }}
+                type="button"
+                onClick={clearFilters}
                 className="text-accent/80 transition-colors hover:text-accent"
               >
-                Reset filters
+                Clear filters
               </button>
             )}
           </div>
+        </div>
+      </section>
+
+      {/* ── Grid ── */}
+      <section
+        className={
+          selected.length > 0
+            ? 'px-6 pb-28 pt-6 md:px-10'
+            : 'px-6 py-6 md:px-10'
+        }
+      >
+        <div className="mx-auto max-w-6xl">
+          <OfflineReference />
 
           {active && (
             <Link
@@ -374,7 +355,7 @@ export default function CatalogPage() {
           )}
 
           {filtered.length === 0 ? (
-            <EmptyState />
+            <EmptyState query={query.trim()} onClear={clearFilters} />
           ) : (
             <div className="space-y-10">
               {groupBrowse(filtered).map((group) => (
@@ -637,13 +618,19 @@ function Chip({
   )
 }
 
-function EmptyState() {
+function EmptyState({ query, onClear }: { query: string; onClear: () => void }) {
   return (
-    <div className="rounded-2xl border border-dashed border-hairline bg-fill px-6 py-16 text-center">
-      <p className="text-sm text-ink/50">No peptides match those filters.</p>
-      <p className="mt-1 text-xs text-ink/60">
-        Try a broader search or reset the category filter.
+    <div className="rounded-2xl border border-dashed border-hairline bg-fill px-6 py-12 text-center">
+      <p className="break-words text-sm font-medium text-ink">
+        {query ? `No results for “${query}”` : 'No peptides match these filters.'}
       </p>
+      <button
+        type="button"
+        onClick={onClear}
+        className="mt-3 rounded-lg border border-hairline-strong px-4 py-2 text-sm text-accent hover:bg-fill-strong"
+      >
+        Clear filters
+      </button>
     </div>
   )
 }
