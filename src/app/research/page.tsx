@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback, useReducer } from 'react'
-import { Send, Dna, SquarePen } from 'lucide-react'
+import { Send, SquarePen } from 'lucide-react'
+import { PeptideAgentIcon } from '@/components/ResearchToolIcons'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -148,7 +149,7 @@ function TypingIndicator() {
 function AgentAvatar() {
   return (
     <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-accent/15">
-      <Dna className="h-4 w-4 text-accent" strokeWidth={1.75} />
+      <PeptideAgentIcon className="h-4 w-4 text-accent" />
     </div>
   )
 }
@@ -574,7 +575,7 @@ export default function ResearchPage() {
             {/* Hero — value proposition */}
             <div className="mb-6 text-center">
               <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent/15">
-                <Dna className="h-6 w-6 text-accent" strokeWidth={1.75} />
+                <PeptideAgentIcon className="h-6 w-6 text-accent" />
               </div>
               <p className="mb-1.5 text-xs font-medium uppercase tracking-[0.18em] text-accent/80">
                 Peptide Agent

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, Dna, BarChart3, FlaskConical, Search, Sparkles, Syringe, Telescope } from 'lucide-react'
+import { ArrowRight, FlaskConical, Search, Sparkles, Syringe, Telescope } from 'lucide-react'
+import { ClinicalPulseIcon, CompoundSearchIcon, PeptideAgentIcon, PeptideForgeIcon } from '@/components/ResearchToolIcons'
 import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES, BROWSE_SPOTLIGHT } from '@/lib/peptides'
 import { STATIC_FAQS, faqPageJsonLd } from '@/lib/faqs'
 import FaqAccordion from '@/components/FaqAccordion'
@@ -41,7 +42,7 @@ const SPOTLIGHT_SLUGS = BROWSE_SPOTLIGHT
 
 const features = [
   {
-    Icon: Sparkles,
+    Icon: PeptideAgentIcon,
     name: 'Peptide Agent',
     badge: 'AI Assistant',
     href: '/research',
@@ -49,7 +50,7 @@ const features = [
       'Ask in plain language and get citation-backed answers — the agent cross-references PubChem structures, ClinicalTrials.gov studies, and mechanisms into structured evidence.',
   },
   {
-    Icon: Dna,
+    Icon: PeptideForgeIcon,
     name: 'PeptideForge',
     badge: 'Interactive Builder',
     href: '/compounds/builder',
@@ -57,7 +58,7 @@ const features = [
       'Build a peptide residue by residue and watch mass, hydropathy, and net charge update live. Clear chemistry challenges to earn XP — a hands-on way to learn sequence design.',
   },
   {
-    Icon: BarChart3,
+    Icon: ClinicalPulseIcon,
     name: 'ClinicalPulse',
     badge: 'Trial Intelligence',
     href: '/trials',
@@ -65,7 +66,7 @@ const features = [
       'Real-time surveillance of peptide-based clinical trials across ClinicalTrials.gov and WHO ICTRP. Surface recruitment trends, endpoint shifts, and competitive pipeline movements.',
   },
   {
-    Icon: FlaskConical,
+    Icon: CompoundSearchIcon,
     name: 'Compound Search',
     badge: 'PubChem Explorer',
     href: '/compounds',
@@ -157,19 +158,19 @@ export default function HomePage() {
             <div className="mx-auto mb-10 flex flex-wrap gap-2 lg:mx-0 lg:max-w-lg">
               {[
                 {
-                  Icon: Dna,
+                  Icon: PeptideForgeIcon,
                   label: 'PeptideForge',
                   desc: 'Build residue by residue',
                   href: '/compounds/builder',
                 },
                 {
-                  Icon: Sparkles,
+                  Icon: PeptideAgentIcon,
                   label: 'Research Agent',
                   desc: 'Citations included',
                   href: '/research',
                 },
                 {
-                  Icon: BarChart3,
+                  Icon: ClinicalPulseIcon,
                   label: 'Trial Intelligence',
                   desc: 'Live ClinicalTrials data',
                   href: '/trials',
@@ -180,7 +181,7 @@ export default function HomePage() {
                   href={href}
                   className="group flex flex-1 basis-[28%] min-w-[128px] flex-col items-center gap-1.5 rounded-xl border border-hairline bg-fill px-2 py-3 text-center transition-all hover:border-accent/30 hover:bg-fill-strong"
                 >
-                  <Icon className="h-4 w-4 text-accent/70 transition-colors group-hover:text-accent" strokeWidth={1.75} />
+                  <Icon className="h-4 w-4 text-accent/70 transition-colors group-hover:text-accent" />
                   <span className="text-[11px] font-semibold text-ink/80">{label}</span>
                   <span className="text-[10px] leading-tight text-ink/55">{desc}</span>
                 </Link>
@@ -194,7 +195,7 @@ export default function HomePage() {
                 href="/research"
                 className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#7EE0B5] px-6 py-3.5 text-[15px] font-semibold text-[#0E1512] shadow-[0_0_0px_rgba(126,224,181,0)] transition-all hover:bg-[#A6F0CC] hover:shadow-[0_0_40px_rgba(126,224,181,0.35)]"
               >
-                <Sparkles className="h-4 w-4" />
+                <PeptideAgentIcon className="h-4 w-4" />
                 Ask the Peptide Agent
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
@@ -472,7 +473,7 @@ export default function HomePage() {
 
               {/* Icon */}
               <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
-                <Icon className="h-5 w-5" strokeWidth={1.75} />
+                <Icon className="h-5 w-5" />
               </div>
 
               {/* Module type */}
@@ -582,7 +583,7 @@ export default function HomePage() {
             href="/research"
             className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-[#7EE0B5] px-5 py-2.5 text-sm font-semibold text-[#0E1512] transition-colors hover:bg-[#A6F0CC]"
           >
-            <Sparkles className="h-4 w-4" />
+            <PeptideAgentIcon className="h-4 w-4" />
             Ask the Agent
           </Link>
         </div>

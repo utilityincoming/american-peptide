@@ -13,13 +13,12 @@ import {
   Award,
   Check,
   Delete,
-  Dna,
   Eraser,
   FlaskConical,
-  Sparkles,
   Trophy,
   Zap,
 } from 'lucide-react'
+import { PeptideForgeIcon } from '@/components/ResearchToolIcons'
 import {
   AMINO_ACIDS,
   AA_BY_CODE,
@@ -253,7 +252,7 @@ export default function PeptideForgePage() {
         </Link>
         <span className="text-ink/20">/</span>
         <span className="flex items-center gap-1.5 text-sm font-medium">
-          <Dna className="h-4 w-4 text-accent" />
+          <PeptideForgeIcon className="h-4 w-4 text-accent" />
           PeptideForge
         </span>
       </header>
@@ -272,7 +271,7 @@ export default function PeptideForgePage() {
         <div className="relative mx-auto flex max-w-5xl flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.08] px-3 py-1 text-[11px] font-medium text-accent">
-              <Sparkles className="h-3 w-3" />
+              <PeptideForgeIcon className="h-3 w-3" />
               PeptideForge · Build & score your own peptide
             </div>
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
