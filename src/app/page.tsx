@@ -138,7 +138,7 @@ export default function HomePage() {
             <h1 className="mb-6 text-5xl font-bold leading-[1.04] tracking-tight md:text-6xl">
               <span className="text-ink">The only peptide app</span>
               <br />
-              <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
+              <span className="text-accent">
                 you can actually trust
               </span>
             </h1>
@@ -284,7 +284,7 @@ export default function HomePage() {
               <h2 className="mb-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-[40px]">
                 Every dose, down to the
                 <br />
-                <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
+                <span className="text-accent">
                   tick mark.
                 </span>
               </h2>
@@ -379,7 +379,7 @@ export default function HomePage() {
               <h2 className="mb-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-[40px]">
                 The peptide reference
                 <br />
-                <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
+                <span className="text-accent">
                   catalog is live.
                 </span>
               </h2>
@@ -535,7 +535,7 @@ export default function HomePage() {
           </div>
           <h2 className="mb-4 text-3xl font-bold leading-[1.1] tracking-tight md:text-4xl">
             Every source,{' '}
-            <span className="bg-gradient-to-r from-[#7EE0B5] via-[#D2FBE6] to-[#7EE0B5] bg-clip-text text-transparent">
+            <span className="text-accent">
               in the open.
             </span>
           </h2>
