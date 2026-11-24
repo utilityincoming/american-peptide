@@ -19,6 +19,7 @@ import {
   type QuotaStatus,
 } from '@/lib/agent-quota'
 import { passSalesEnabled, PASS_PRICE_LABEL, PASS_DAYS } from '@/lib/agent-pass'
+import { chunkForStream, toolLabel } from '@/lib/agent-stream'
 
 // ── Hardening knobs ──────────────────────────────────────────────────────────
 const EFFORT = process.env.AGENT_EFFORT ?? 'medium' // low | medium | high | max
@@ -247,6 +248,7 @@ async function runAnthropicAgent(
   cleaned: Msg[],
   systemSuffix: SystemBlock[],
   groundingOn: boolean,
+  onTool: (name: string) => void = () => {},
 ): Promise<{
   text: string
   stop?: string
@@ -291,6 +293,13 @@ async function runAnthropicAgent(
       const toolResults = []
       for (const tu of toolUses) {
         if (DEBUG) console.log(`[chat] tool ${tu.name}`)
+        if (tu.name) {
+          try {
+            onTool(tu.name)
+          } catch {
+            // best-effort progress reporting
+          }
+        }
         const { content: out, isError } = await executeAgentTool(tu.name, tu.input ?? {})
         toolTexts.push(out)
         toolResults.push({ type: 'tool_result', tool_use_id: tu.id, content: out, is_error: isError })
@@ -368,11 +377,15 @@ export async function POST(request: NextRequest) {
   // Grounding is ON unless the caller explicitly sends grounding:false. The only
   // caller that does is the eval's A/B baseline arm — normal UI traffic omits it.
   let groundingOn = true
+  // Streaming (SSE) is opt-in via stream:true. The site UI sends it; the eval /
+  // owner and any other caller get the unchanged single-shot JSON response.
+  let wantsStream = false
   try {
     const body = await request.json()
     rawMessages = body?.messages
     rawContext = body?.context
     if (body?.grounding === false) groundingOn = false
+    if (body?.stream === true) wantsStream = true
   } catch {
     return Response.json({ error: 'Invalid request body' }, { status: 400 })
   }
@@ -469,6 +482,74 @@ export async function POST(request: NextRequest) {
   const modelsAllowed = run.allowed
   const quota = run.quota
 
+  const ctx: ComposeCtx = {
+    modelsAllowed,
+    quota,
+    veniceKey,
+    grokKey,
+    anthropicKey,
+    veniceSystem,
+    systemSuffix,
+    cleaned,
+    groundingOn,
+    facts,
+    run,
+  }
+
+  // Single-shot JSON — the eval / owner and any non-streaming caller. Unchanged.
+  if (!wantsStream) {
+    const r = await composeAnswer(ctx, () => {})
+    return respond(r.body, r.quota, r.httpStatus)
+  }
+
+  // Streaming (the site UI): identical composition — same provider ladder, same
+  // safety guardrails — but grounding progress is pushed live and the finished,
+  // already-sanitized answer is delivered in blocks. Nothing unvetted is ever
+  // streamed: the text is composed and guard-railed in full before the first
+  // delta leaves the server.
+  return streamAnswer(ctx, run, cookieHeaders)
+}
+
+interface ComposeCtx {
+  modelsAllowed: boolean
+  quota: QuotaStatus | null
+  veniceKey?: string
+  grokKey?: string
+  anthropicKey?: string
+  veniceSystem: string
+  systemSuffix: SystemBlock[]
+  cleaned: Msg[]
+  groundingOn: boolean
+  facts: string
+  run: Awaited<ReturnType<typeof reserveRun>>
+}
+
+interface ComposeResult {
+  httpStatus: number
+  body: Record<string, unknown>
+  quota: QuotaStatus | null
+}
+
+// The answer composition, shared verbatim by the JSON and streaming paths: the
+// Venice → Grok → Anthropic ladder, the reference floor, and BOTH output-side
+// guardrails. `onTool` is notified as each grounding tool runs (a no-op for the
+// JSON path). Returns the exact response body + HTTP status + quota the JSON
+// responder would have sent, so streaming can never diverge from it.
+async function composeAnswer(ctx: ComposeCtx, onTool: (name: string) => void): Promise<ComposeResult> {
+  const {
+    modelsAllowed,
+    quota,
+    veniceKey,
+    grokKey,
+    anthropicKey,
+    veniceSystem,
+    systemSuffix,
+    cleaned,
+    groundingOn,
+    facts,
+    run,
+  } = ctx
+
   let finalText = ''
   let lastStop: string | undefined
   let provider: 'venice' | 'grok' | 'anthropic' | 'reference' = 'reference'
@@ -480,7 +561,7 @@ export async function POST(request: NextRequest) {
   // Primary: Venice. Grounding tools are honored unless the caller turned
   // grounding off (the eval's A/B baseline), matching the Anthropic path.
   if (modelsAllowed && veniceKey) {
-    const v = await runVeniceAgent(veniceSystem, cleaned, { disableTools: !groundingOn })
+    const v = await runVeniceAgent(veniceSystem, cleaned, { disableTools: !groundingOn, onTool })
     void meter('chat', { 'tokens_in:venice': v.usage.input, 'tokens_out:venice': v.usage.output })
     if (v.ok && v.text) {
       finalText = v.text
@@ -496,7 +577,7 @@ export async function POST(request: NextRequest) {
   // because it costs less per search; same system string and tools as Venice.
   if (modelsAllowed && !finalText && grokKey) {
     if (DEBUG) console.log('[chat] falling back to grok')
-    const g = await runGrokAgent(veniceSystem, cleaned, { disableTools: !groundingOn })
+    const g = await runGrokAgent(veniceSystem, cleaned, { disableTools: !groundingOn, onTool })
     void meter('chat', { 'tokens_in:grok': g.usage.input, 'tokens_out:grok': g.usage.output })
     if (g.ok && g.text) {
       finalText = g.text
@@ -512,7 +593,7 @@ export async function POST(request: NextRequest) {
   // Backup: the Anthropic failover chain + full agentic loop.
   if (modelsAllowed && !finalText && anthropicKey) {
     if (DEBUG) console.log('[chat] falling back to anthropic backup')
-    const a = await runAnthropicAgent(anthropicKey, cleaned, systemSuffix, groundingOn)
+    const a = await runAnthropicAgent(anthropicKey, cleaned, systemSuffix, groundingOn, onTool)
     void meter('chat', { 'tokens_in:anthropic': a.usage.input, 'tokens_out:anthropic': a.usage.output })
     lastStop = a.stop
     if (a.text) {
@@ -551,25 +632,26 @@ export async function POST(request: NextRequest) {
       // was never called. Serve the matching reference entry if there is one.
       if (reference) {
         noteTurn()
-        return respond(
-          {
+        return {
+          httpStatus: 200,
+          quota,
+          body: {
             role: 'assistant',
             content: `The research agent has reached its capacity for today, but here's the relevant entry from the AmericanPeptide.com reference:\n\n${reference}`,
             degraded: true,
             provider: 'reference',
           },
-          quota,
-        )
+        }
       }
-      return respond(
-        {
+      return {
+        httpStatus: 503,
+        quota,
+        body: {
           error:
             'The research agent has reached its capacity for today. The catalog, research-area guides, and clinical trials dashboard are still available — please try the agent again tomorrow.',
           code: 'capacity',
         },
-        quota,
-        503,
-      )
+      }
     }
 
     if (lastStop === 'refusal') {
@@ -582,20 +664,21 @@ export async function POST(request: NextRequest) {
       // reference content if it matches the question rather than surfacing a 502.
       if (reference) {
         noteTurn()
-        return respond(
-          {
+        return {
+          httpStatus: 200,
+          quota: quota && { ...quota, remaining: Math.min(quota.limit, quota.remaining + 1) },
+          body: {
             role: 'assistant',
             content: `The research model is briefly unavailable, but here's the relevant entry from the AmericanPeptide.com reference:\n\n${reference}`,
             degraded: true,
           },
-          quota && { ...quota, remaining: Math.min(quota.limit, quota.remaining + 1) },
-        )
+        }
       }
-      return respond(
-        { error: 'The model service is temporarily unavailable. Please try again.' },
-        quota && { ...quota, remaining: Math.min(quota.limit, quota.remaining + 1) },
-        502,
-      )
+      return {
+        httpStatus: 502,
+        quota: quota && { ...quota, remaining: Math.min(quota.limit, quota.remaining + 1) },
+        body: { error: 'The model service is temporarily unavailable. Please try again.' },
+      }
     } else {
       finalText = reference
         ? `Here's the relevant entry from the AmericanPeptide.com reference:\n\n${reference}`
@@ -641,18 +724,96 @@ export async function POST(request: NextRequest) {
 
   if (provider !== 'reference') void meter('chat', { answered: 1, [`provider:${provider}`]: 1 })
 
-  return respond(
-    {
+  return {
+    httpStatus: 200,
+    // A reference-floor answer was refunded above; report the allowance as such.
+    quota:
+      quota && provider === 'reference'
+        ? { ...quota, remaining: Math.min(quota.limit, quota.remaining + 1) }
+        : quota,
+    body: {
       role: 'assistant',
       content: safe.text,
       provider,
       ...(lastStop === 'refusal' ? { stop: 'refusal' } : {}),
     },
-    // A reference-floor answer was refunded above; report the allowance as such.
-    quota && provider === 'reference'
-      ? { ...quota, remaining: Math.min(quota.limit, quota.remaining + 1) }
-      : quota,
-  )
+  }
+}
+
+// ── Streaming (SSE) delivery ──────────────────────────────────────────────────
+// The composed, fully-sanitized answer is sent as `data:` events: a `tool` event
+// per distinct grounding source as it runs, `delta` events carrying the answer in
+// render-safe blocks, and a final `done` event with the same metadata (quota,
+// pass, provider, degraded/code/stop/error) the JSON body carries.
+const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms))
+
+function streamAnswer(ctx: ComposeCtx, run: ComposeCtx['run'], cookieHeaders: Record<string, string>): Response {
+  const encoder = new TextEncoder()
+  const stream = new ReadableStream<Uint8Array>({
+    async start(controller) {
+      const send = (obj: Record<string, unknown>) => {
+        try {
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify(obj)}\n\n`))
+        } catch {
+          // controller already closed (client disconnected) — nothing to do
+        }
+      }
+      try {
+        // Collapse repeated tool names so each distinct source is shown once.
+        const seen = new Set<string>()
+        const onTool = (name: string) => {
+          const label = toolLabel(name)
+          if (seen.has(label)) return
+          seen.add(label)
+          send({ t: 'tool', label })
+        }
+
+        const r = await composeAnswer(ctx, onTool)
+        const content = typeof r.body.content === 'string' ? r.body.content : ''
+        for (const block of chunkForStream(content)) {
+          send({ t: 'delta', text: block })
+          await sleep(26) // gentle reveal; bounded so a long answer never drags
+        }
+        send({
+          t: 'done',
+          content,
+          provider: (r.body.provider as string | undefined) ?? null,
+          degraded: Boolean(r.body.degraded),
+          ...(r.body.code ? { code: r.body.code } : {}),
+          ...(r.body.stop ? { stop: r.body.stop } : {}),
+          ...(r.body.error ? { error: r.body.error } : {}),
+          quota: r.quota,
+          pass: run.pass ?? null,
+        })
+      } catch (err) {
+        if (DEBUG) console.error('[chat] stream composition failed', err)
+        send({
+          t: 'done',
+          error: 'The model service is temporarily unavailable. Please try again.',
+          quota: null,
+          pass: run.pass ?? null,
+        })
+      } finally {
+        try {
+          controller.close()
+        } catch {
+          // already closed
+        }
+      }
+    },
+  })
+
+  return new Response(stream, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/event-stream; charset=utf-8',
+      'Cache-Control': 'no-store, no-transform',
+      Connection: 'keep-alive',
+      // Defeat proxy buffering so events arrive as produced, not in one flush.
+      'X-Accel-Buffering': 'no',
+      ...cookieHeaders,
+    },
+  })
 }
 
 // GET /api/chat — the caller's remaining free allowance, without consuming any.

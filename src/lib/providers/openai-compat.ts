@@ -64,6 +64,10 @@ export interface OaiAgentOpts {
    *  + the injected system context. Mirrors the Anthropic path's disableTools;
    *  used by the eval's grounding-off A/B arm. */
   disableTools?: boolean
+  /** Notified with each grounding tool's name as it is about to run, so a
+   *  streaming caller can surface live progress ("Searching PubMed…"). Must not
+   *  throw and must be cheap — it is called inline in the agent loop. */
+  onTool?: (name: string) => void
 }
 
 /**
@@ -143,6 +147,13 @@ export async function runOpenAiCompatAgent(
         } catch {
           // Malformed arguments — hand the tool an empty input; its executor
           // returns a "no result" string rather than throwing.
+        }
+        if (tc.function?.name) {
+          try {
+            opts.onTool?.(tc.function.name)
+          } catch {
+            // progress reporting is best-effort — never let it break the loop
+          }
         }
         const { content } = await executeAgentTool(tc.function?.name, input)
         toolTexts.push(content)
