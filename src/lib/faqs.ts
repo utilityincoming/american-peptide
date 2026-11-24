@@ -69,7 +69,7 @@ export const STATIC_FAQS: Faq[] = [
     id: 'coa-purity',
     question: 'What is a COA, and why does purity matter?',
     answer:
-      "A certificate of analysis (COA) is the third-party lab report documenting a peptide's identity and purity — typically by HPLC and mass spectrometry. Purity matters because impurities and truncated sequences can confound results, so reading the COA is how you separate a clean compound from a questionable one.",
+      "A certificate of analysis (COA) reports test results for a specific lot. Match the lot number on the report to the material. Then check who issued the report, whether an independent lab performed the testing, and which methods were used. Identity and purity results answer different questions. Identity testing checks what the material is, and purity testing helps you assess whether impurities could affect your results.",
     cta: { label: 'Decode a COA', href: '/tools/coa-decoder' },
   },
   {

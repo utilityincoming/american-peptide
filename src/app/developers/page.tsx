@@ -100,9 +100,9 @@ const endpoints = [
 
 const params = [
   { name: 'category', desc: 'Filter by catalog category id (e.g. metabolic).' },
-  { name: 'area', desc: 'Filter by research-area slug (e.g. weight-loss).' },
+  { name: 'area', desc: 'Filter by research-area slug. Example request is /api/catalog?area=weight-loss.' },
   { name: 'fda', desc: 'Set to true to return only FDA-approved peptides.' },
-  { name: 'q', desc: 'Free-text search over name, aliases, and description.' },
+  { name: 'q', desc: 'Search names, aliases, and descriptions. Example request is /api/catalog?q=Ozempic.' },
 ]
 
 const features = [
@@ -157,9 +157,8 @@ export default function DevelopersPage() {
             </span>
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
-            Build on the same {PEPTIDES.length}-peptide reference that powers
-            this site — mechanism, sequence, and PubChem-enriched chemistry as
-            structured JSON. No key, no signup. Free to embed with attribution.
+            The API provides {PEPTIDES.length} catalog entries as structured JSON,
+            with mechanism, sequence, and PubChem-enriched chemistry. No key, no signup. Free to embed with attribution.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link

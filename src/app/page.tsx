@@ -80,7 +80,7 @@ const features = [
 // borrowed public-database counts — the first number should be ours, the
 // scale of the sources we search backs it up.
 const stats = [
-  { value: `${LISTED_PEPTIDES.length}`, label: 'Cited Catalog Entries' },
+  { value: `${LISTED_PEPTIDES.length}`, label: 'Entries listed in the catalog' },
   { value: '400K+', label: 'Compounds Searchable via PubChem' },
   { value: '500K+', label: 'Clinical Trials Indexed' },
 ]
