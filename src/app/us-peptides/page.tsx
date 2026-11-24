@@ -101,13 +101,11 @@ const STANDARD = [
 ]
 
 const FAQS = [
+  // Sourcing & verification first — the questions researchers actually search —
+  // then the meta/legal questions grouped at the end.
   {
     q: 'Are research peptides made in the USA?',
     a: 'Yes. A number of suppliers synthesize, fill, or lyophilize research-grade peptides domestically, and several of the strongest now publish lot-matched third-party certificates of analysis by default. "Made in the USA" is only worth as much as the paperwork behind it, though — this page scores US suppliers on the lab evidence they actually publish, not on where a label says the vial was packed.',
-  },
-  {
-    q: 'Does AmericanPeptide sell peptides?',
-    a: 'No. AmericanPeptide is an independent research reference — not a store and not a manufacturer. We rank external US suppliers by the transparency signals that protect a researcher (third-party COAs, independent per-batch testing, published policies), and we may earn an affiliate commission on some outbound links. That relationship is disclosed on the page, and it never moves a vendor up the ranking — the score is derived only from published evidence.',
   },
   {
     q: 'How do I verify a US peptide supplier is legitimate?',
@@ -120,6 +118,10 @@ const FAQS = [
   {
     q: 'What is a per-batch COA and why does it matter?',
     a: 'A per-batch, lot-matched certificate of analysis tests every production batch and ties the result to the exact lot you receive. The weaker alternative is a single "golden batch" certificate produced once and reused across every future order — which tells you nothing about the vial in your hand. Per-batch testing is the line between a reference document and real, ongoing quality control.',
+  },
+  {
+    q: 'Does AmericanPeptide sell peptides?',
+    a: 'No. AmericanPeptide is an independent research reference — not a store and not a manufacturer. We rank external US suppliers by the transparency signals that protect a researcher (third-party COAs, independent per-batch testing, published policies), and we may earn an affiliate commission on some outbound links. That relationship is disclosed on the page, and it never moves a vendor up the ranking — the score is derived only from published evidence.',
   },
   {
     q: 'Is it legal to buy research peptides?',
@@ -229,10 +231,6 @@ export default function MadeInUsaPage() {
             scored every US supplier we list against it, on the lab evidence they
             publish, never on commission.
           </p>
-          <p className="mt-3 text-xs text-ink/55">
-            Research reference only. Not medical advice, dosing guidance, or an
-            offer for sale.
-          </p>
         </div>
       </section>
 
@@ -283,87 +281,6 @@ export default function MadeInUsaPage() {
                     <p className="text-xs leading-relaxed text-ink/55">{c.body}</p>
                   </div>
                 ))}
-              </div>
-              <p className="mt-3 text-xs text-ink/55">
-                Practical sourcing considerations for researchers — not legal
-                advice. Follow the regulations that apply where you are.
-              </p>
-            </section>
-
-            {/* The Standard */}
-            <section>
-              <h2 className="mb-1 text-xs font-semibold uppercase tracking-wider text-ink/55">
-                The Standard
-              </h2>
-              <p className="mb-6 text-sm leading-relaxed text-ink/55">
-                One transparent 100-point scale, built from the signals that
-                actually protect a researcher. Every point is earned from
-                published evidence — a supplier can never buy a better score.
-              </p>
-
-              {/* Segmented rubric bar — widths are the point weights */}
-              <div className="mb-2 flex h-3.5 w-full overflow-hidden rounded-full border border-hairline-strong">
-                {STANDARD.map((s) => (
-                  <div
-                    key={s.key}
-                    style={{ width: `${s.pts}%`, backgroundColor: s.color }}
-                    title={`${s.label} — ${s.pts} pts`}
-                  />
-                ))}
-              </div>
-              <div className="mb-6 flex justify-between text-[10px] font-medium text-ink/55">
-                <span>0</span>
-                <span>100 points</span>
-              </div>
-
-              <div className="space-y-3">
-                {STANDARD.map((s) => (
-                  <div
-                    key={s.key}
-                    className="flex items-start gap-3 rounded-xl border border-hairline bg-fill p-4"
-                  >
-                    <div
-                      className="mt-0.5 flex h-7 w-11 shrink-0 items-center justify-center rounded-md text-xs font-bold"
-                      style={{ backgroundColor: `${s.color}1A`, color: s.color }}
-                    >
-                      {s.pts}
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-ink/90">{s.label}</p>
-                      <p className="text-xs leading-relaxed text-ink/55">{s.body}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Tiers */}
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                {VENDOR_TIERS.map((tier) => (
-                  <div
-                    key={tier.id}
-                    className="rounded-xl border border-hairline bg-fill p-4"
-                  >
-                    <p className="mb-1 text-sm font-semibold text-ink/85">{tier.label}</p>
-                    <p className="text-xs leading-relaxed text-ink/50">{tier.blurb}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-5 flex flex-wrap gap-3">
-                <Link
-                  href="/tools/coa-decoder"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
-                >
-                  Decode a COA
-                  <ArrowRight className="h-3 w-3" />
-                </Link>
-                <Link
-                  href="/methodology"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-fill px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
-                >
-                  How we build the reference
-                  <ArrowRight className="h-3 w-3" />
-                </Link>
               </div>
             </section>
 
@@ -447,20 +364,28 @@ export default function MadeInUsaPage() {
                                 )}
 
                                 {signals.length > 0 && (
-                                  <ul className="mb-4 grid gap-1.5 text-xs sm:grid-cols-2">
-                                    {signals.map((s) => (
-                                      <li
-                                        key={s}
-                                        className="flex items-start gap-1.5 text-ink/65"
-                                      >
-                                        <Check
-                                          className="mt-0.5 h-3 w-3 shrink-0 text-accent"
-                                          strokeWidth={2.5}
-                                        />
-                                        {s}
-                                      </li>
-                                    ))}
-                                  </ul>
+                                  <details className="group mb-4">
+                                    <summary className="flex cursor-pointer list-none items-center gap-1.5 text-xs font-medium text-ink/70 transition-colors hover:text-ink">
+                                      <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-accent" />
+                                      {signals.length} trust{' '}
+                                      {signals.length === 1 ? 'signal' : 'signals'}
+                                      <ChevronRight className="h-3 w-3 text-ink/40 transition-transform group-open:rotate-90" />
+                                    </summary>
+                                    <ul className="mt-2.5 grid gap-1.5 text-xs sm:grid-cols-2">
+                                      {signals.map((s) => (
+                                        <li
+                                          key={s}
+                                          className="flex items-start gap-1.5 text-ink/65"
+                                        >
+                                          <Check
+                                            className="mt-0.5 h-3 w-3 shrink-0 text-accent"
+                                            strokeWidth={2.5}
+                                          />
+                                          {s}
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </details>
                                 )}
 
                                 <div className="flex flex-wrap items-center gap-3">
@@ -510,6 +435,93 @@ export default function MadeInUsaPage() {
                   </p>
                 </>
               )}
+            </section>
+
+            {/* The Standard — collapsible. The directory leads; the full rubric
+                sits below for readers who want the scoring detail. */}
+            <section>
+              <details className="group rounded-xl border border-hairline bg-fill">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-5">
+                  <div>
+                    <h2 className="text-xs font-semibold uppercase tracking-wider text-ink/55">
+                      How scoring works — the 100-point standard
+                    </h2>
+                    <p className="mt-1 text-sm leading-relaxed text-ink/55">
+                      One transparent scale, built from the signals that actually
+                      protect a researcher. Every point is earned from published
+                      evidence — a supplier can never buy a better score.
+                    </p>
+                  </div>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-ink/40 transition-transform group-open:rotate-90" />
+                </summary>
+
+                <div className="border-t border-hairline p-5">
+                  {/* Segmented rubric bar — widths are the point weights */}
+                  <div className="mb-2 flex h-3.5 w-full overflow-hidden rounded-full border border-hairline-strong">
+                    {STANDARD.map((s) => (
+                      <div
+                        key={s.key}
+                        style={{ width: `${s.pts}%`, backgroundColor: s.color }}
+                        title={`${s.label} — ${s.pts} pts`}
+                      />
+                    ))}
+                  </div>
+                  <div className="mb-6 flex justify-between text-[10px] font-medium text-ink/55">
+                    <span>0</span>
+                    <span>100 points</span>
+                  </div>
+
+                  <div className="space-y-3">
+                    {STANDARD.map((s) => (
+                      <div
+                        key={s.key}
+                        className="flex items-start gap-3 rounded-xl border border-hairline bg-surface p-4"
+                      >
+                        <div
+                          className="mt-0.5 flex h-7 w-11 shrink-0 items-center justify-center rounded-md text-xs font-bold"
+                          style={{ backgroundColor: `${s.color}1A`, color: s.color }}
+                        >
+                          {s.pts}
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-ink/90">{s.label}</p>
+                          <p className="text-xs leading-relaxed text-ink/55">{s.body}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Tiers */}
+                  <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                    {VENDOR_TIERS.map((tier) => (
+                      <div
+                        key={tier.id}
+                        className="rounded-xl border border-hairline bg-surface p-4"
+                      >
+                        <p className="mb-1 text-sm font-semibold text-ink/85">{tier.label}</p>
+                        <p className="text-xs leading-relaxed text-ink/50">{tier.blurb}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    <Link
+                      href="/tools/coa-decoder"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-surface px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
+                    >
+                      Decode a COA
+                      <ArrowRight className="h-3 w-3" />
+                    </Link>
+                    <Link
+                      href="/methodology"
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-surface px-3 py-2 text-xs font-medium text-ink/70 transition-colors hover:border-accent/30 hover:text-accent"
+                    >
+                      How we build the reference
+                      <ArrowRight className="h-3 w-3" />
+                    </Link>
+                  </div>
+                </div>
+              </details>
             </section>
 
             {/* FAQ */}
