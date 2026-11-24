@@ -157,9 +157,8 @@ export default function DevelopersPage() {
             </span>
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
-            Build on the same {PEPTIDES.length}-peptide reference that powers
-            this site — mechanism, sequence, and PubChem-enriched chemistry as
-            structured JSON. No key, no signup. Free to embed with attribution.
+            The API provides {PEPTIDES.length} catalog entries as structured JSON,
+            with mechanism, sequence, and PubChem-enriched chemistry. No key, no signup. Free to embed with attribution.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link

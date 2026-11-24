@@ -167,7 +167,7 @@ export default function CatalogPage() {
             Research peptide catalog
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/65 md:text-base">
-            Search by name, alias, or words in a short description. Compare sequences, molecular weights, and research evidence.
+            Search by name, alias, or words in a short description. Search can also find entries outside the browse list.
           </p>
           <div className="relative mt-4 max-w-xl">
             <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/55" />
