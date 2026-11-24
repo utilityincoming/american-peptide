@@ -439,7 +439,7 @@ export default function CatalogPage() {
                   }
                   className="text-accent/80 transition-colors hover:text-accent"
                 >
-                  Clear filters
+                  Reset filters
                 </button>
               )}
               <div
