@@ -100,9 +100,9 @@ const endpoints = [
 
 const params = [
   { name: 'category', desc: 'Filter by catalog category id (e.g. metabolic).' },
-  { name: 'area', desc: 'Filter by research-area slug (e.g. weight-loss).' },
+  { name: 'area', desc: 'Filter by research-area slug. Example request is /api/catalog?area=weight-loss.' },
   { name: 'fda', desc: 'Set to true to return only FDA-approved peptides.' },
-  { name: 'q', desc: 'Free-text search over name, aliases, and description.' },
+  { name: 'q', desc: 'Search names, aliases, and descriptions. Example request is /api/catalog?q=Ozempic.' },
 ]
 
 const features = [
