@@ -638,8 +638,42 @@ function PeptideCard({
             <p className="mt-0.5 text-xs text-ink/70">aka {peptide.aliases[0]}</p>
           )}
         </div>
+        <button
+          type="button"
+          onClick={onToggle}
+          disabled={disableAdd}
+          aria-pressed={selected}
+          aria-label={
+            selected
+              ? `Remove ${peptide.name} from comparison`
+              : disableAdd
+              ? `Comparison full (max ${MAX_COMPARE})`
+              : `Add ${peptide.name} to comparison`
+          }
+          className={
+            'relative z-20 inline-flex h-7 shrink-0 items-center gap-1 rounded-md border px-2 text-[11px] font-medium transition-colors ' +
+            (selected
+              ? 'border-accent/45 bg-accent/15 text-accent'
+              : disableAdd
+              ? 'cursor-not-allowed border-hairline bg-fill text-ink/25'
+              : 'border-hairline-strong bg-fill-strong text-ink/55 hover:border-accent/40 hover:text-accent')
+          }
+        >
+          {selected ? (
+            <>
+              <Check className="h-3 w-3" />
+              Compare
+            </>
+          ) : (
+            <>
+              <Plus className="h-3 w-3" />
+              Compare
+            </>
+          )}
+        </button>
+      </div>
 
-        <p className="mb-4 line-clamp-3 flex-1 text-[13px] leading-relaxed text-ink/55">
+      <p className="mb-4 line-clamp-3 flex-1 text-[13px] leading-relaxed text-ink/55">
           {peptide.shortDescription}
         </p>
 
