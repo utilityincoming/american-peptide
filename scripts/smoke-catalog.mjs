@@ -9,8 +9,8 @@ const browser = await chromium.launch(
 )
 
 try {
-  for (const width of [375, 1280]) {
-    const context = await browser.newContext({ viewport: { width, height: 900 } })
+  for (const viewport of [{ width: 375, height: 640 }, { width: 1280, height: 900 }]) {
+    const context = await browser.newContext({ viewport })
     try {
       await context.route('**/*', (route) =>
         new URL(route.request().url()).origin === origin ? route.continue() : route.abort(),
@@ -28,13 +28,19 @@ try {
       await page.goto(origin + '/catalog')
       await page.getByRole('button', { name: 'I understand', exact: true }).click()
 
+      await page.getByRole('heading', { name: 'Research peptide catalog' }).waitFor()
+      const search = page.getByRole('searchbox', { name: 'Search name or alias' })
+      const searchBox = await search.boundingBox()
+      assert(searchBox && searchBox.y >= 0 && searchBox.y + searchBox.height <= viewport.height)
+      assert.equal(await page.evaluate(() => window.scrollY), 0)
+
       const referral = page.getByRole('link', { name: 'Browse research compounds at ABSIM' })
       const disclosure = page.getByText('We may earn a commission if you purchase through this link.', {
         exact: true,
       })
       await disclosure.waitFor()
       const button = await referral.boundingBox()
-      assert(button && button.x >= 0 && button.x + button.width <= width && button.height >= 44)
+      assert(button && button.x >= 0 && button.x + button.width <= viewport.width && button.height >= 44)
 
       const [vendorPage] = await Promise.all([
         context.waitForEvent('page'),
@@ -47,7 +53,10 @@ try {
       })
       await vendorPage.close()
 
-      const search = page.getByPlaceholder('Search name or alias')
+      await search.fill('no-such-compound')
+      await page.getByText('No results for “no-such-compound”', { exact: true }).waitFor()
+      await page.getByRole('button', { name: 'Clear filters', exact: true }).click()
+      assert.equal(await search.inputValue(), '')
       await search.fill('BPC-157')
       await page.getByRole('link', { name: 'View BPC-157', exact: true }).waitFor()
       await page.getByRole('link', { name: 'View Semaglutide', exact: true }).waitFor({ state: 'hidden' })
@@ -70,7 +79,7 @@ try {
         status: 302,
         location: 'https://absimpeptides.com/product/bpc-157/?ref=americanpeptide',
       })
-      console.log(`Catalog smoke passed at ${width}px`)
+      console.log(`Catalog smoke passed at ${viewport.width}px`)
     } finally {
       await context.close()
     }
