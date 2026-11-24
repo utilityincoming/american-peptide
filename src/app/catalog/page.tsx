@@ -439,7 +439,7 @@ export default function CatalogPage() {
                   }
                   className="text-accent/80 transition-colors hover:text-accent"
                 >
-                  Reset filters
+                  Clear filters
                 </button>
               )}
               <div
@@ -938,9 +938,9 @@ function EmptyState({ query, onClear }: { query: string; onClear: () => void }) 
         type="button"
         onClick={onClear}
         className="mt-3 rounded-lg border border-hairline-strong px-4 py-2 text-sm text-accent hover:bg-fill-strong"
-      >
-        Clear filters
-      </button>
+        >
+        Reset all filters
+        </button>
     </div>
   )
 }
