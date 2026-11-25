@@ -42,6 +42,7 @@ import { IS_APP_BUILD } from '@/lib/platform'
 import { getPubchemVerification } from '@/lib/verification'
 import { molecularWeightClaim, molecularFormulaClaim } from '@/lib/evidence'
 import { catalogClaims, isLoadBearing, reconPresetFor, reconPresetClaims } from '@/lib/evidence/from-catalog'
+import { reconcileCompoundSources } from '@/lib/evidence/from-vendors'
 import { TierBadge, EvidenceFloor } from '@/components/evidence'
 import { getLatestResearch } from '@/lib/freshness'
 import AgentPrompt from '@/components/AgentPrompt'
@@ -52,12 +53,7 @@ import LastUpdated from '@/components/LastUpdated'
 import SequenceGlyph from '@/components/SequenceGlyph'
 import ThymosinBeta4Figure from '@/components/ThymosinBeta4Figure'
 import {
-  getSpotlightVendor,
-  getVendorsForPeptide,
-  hasSourcingPage,
-  trustScore,
   vendorHref,
-  vendorsByTier,
   type Vendor,
 } from '@/lib/vendors'
 
@@ -834,13 +830,13 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
               )
             })()}
 
-            {/* Sources panel — live trust-ranked vendors, else status */}
+            {/* Sources panel — live trust-ranked vendors via generalized reconciliation helper, else status */}
             {(() => {
-              const vendors = getVendorsForPeptide(peptide.slug)
+              const reconciliation = reconcileCompoundSources(peptide.slug)
               // No vendors means two different things. On the Play build it's
               // the whole directory being hidden; on the web it's a compound the
               // peptide market doesn't supply. Same emptiness, opposite reasons.
-              if (!vendors.length)
+              if (!reconciliation.isReconciled)
                 return IS_APP_BUILD ? (
                   <ReferenceEdition />
                 ) : (
@@ -848,10 +844,10 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 )
               return (
                 <div className="space-y-2">
-                  <SourcesPanel vendors={vendors} slug={peptide.slug} />
+                  <SourcesPanel slug={peptide.slug} />
                   {/* Deep link to the tiered sourcing aggregator — only where it
                       exists, gated by the same rule /sources generates from. */}
-                  {hasSourcingPage(peptide.slug) && (
+                  {reconciliation.hasSourcingPage && (
                     <Link
                       href={`/sources/${peptide.slug}`}
                       className="flex items-center justify-between gap-2 rounded-2xl border border-accent/25 bg-accent/[0.05] px-5 py-3.5 text-sm font-medium text-accent transition-colors hover:bg-accent/[0.09]"
@@ -1021,18 +1017,23 @@ function ReferenceCompoundPanel({ peptide }: { peptide: Peptide }) {
   )
 }
 
-function SourcesPanel({ vendors, slug }: { vendors: Vendor[]; slug: string }) {
-  // A paid featured partner is NOT pulled out or pinned above the tiers — it
-  // ranks in its honest tier like any other vendor, carrying only a quiet inline
-  // "Featured partner · paid" badge so the placement stays disclosed without
-  // dominating the panel. The trust-ranked order is never disturbed.
-  const featured = getSpotlightVendor(slug)
+function SourcesPanel({ slug }: { slug: string }) {
+  // Reconciles vendor transparency bands onto the evidence-tier scale (3P / VEN / COMM)
+  // via the generalized GHK-Cu reconciliation helper. A paid featured partner is
+  // NOT pulled out or pinned above the tiers — it ranks in its honest tier like
+  // any other vendor, carrying only a quiet inline "Featured partner · paid" badge.
+  const reconciliation = reconcileCompoundSources(slug)
 
   const CAP = 8
-  const shown = vendors.slice(0, CAP)
-  const hidden = vendors.length - shown.length
-  // Group the already trust-ranked list into tiers; each tier keeps trust order.
-  const groups = vendorsByTier(shown)
+  const shown = reconciliation.sources.slice(0, CAP)
+  const hidden = reconciliation.sources.length - shown.length
+  const shownIds = new Set(shown.map((s) => s.vendor.id))
+  const groups = reconciliation.groups
+    .map((g) => ({
+      ...g,
+      sources: g.sources.filter((s) => shownIds.has(s.vendor.id)),
+    }))
+    .filter((g) => g.sources.length > 0)
 
   return (
     <div className="overflow-hidden rounded-2xl border border-accent/15 bg-accent/[0.04] p-5">
@@ -1048,25 +1049,28 @@ function SourcesPanel({ vendors, slug }: { vendors: Vendor[]; slug: string }) {
 
       <div className="space-y-6">
         {groups.map((group, gi) => (
-          <div key={group.tier.id}>
-            <div className="mb-1 flex items-baseline gap-2">
+          <div key={group.band.id}>
+            <div className="mb-1 flex flex-wrap items-center gap-2">
+              <TierBadge tier={group.claimTier} />
               <h4 className="text-[11px] font-semibold uppercase tracking-wider text-accent/80">
-                {group.tier.label}
+                {group.band.label}
               </h4>
-              <span className="text-[10px] text-ink/55">{group.vendors.length}</span>
+              <span className="text-[10px] text-ink/55">{group.sources.length}</span>
             </div>
             <p className="mb-3 text-[11px] leading-relaxed text-ink/55">
-              {group.tier.blurb}
+              {group.band.blurb}
             </p>
             <div className="space-y-4">
-              {group.vendors.map((v, j) => (
+              {group.sources.map((src, j) => (
                 <VendorCard
-                  key={v.id}
-                  vendor={v}
+                  key={src.vendor.id}
+                  vendor={src.vendor}
+                  claim={src.claim}
+                  score={src.trustScore}
                   slug={slug}
                   isFirst={j === 0}
                   badge={
-                    featured?.id === v.id
+                    src.featured
                       ? 'featured'
                       : gi === 0 && j === 0
                         ? 'best'
@@ -1092,18 +1096,21 @@ function SourcesPanel({ vendors, slug }: { vendors: Vendor[]; slug: string }) {
 
 function VendorCard({
   vendor,
+  claim,
+  score,
   slug,
   isFirst,
   badge,
 }: {
   vendor: Vendor
+  claim: ReturnType<typeof reconcileCompoundSources>['sources'][number]['claim']
+  score: number
   /** The compound being viewed — routes the outbound to its product deep link. */
   slug: string
   isFirst: boolean
   /** 'best' = top of the trust ranking. 'featured' = paid placement, disclosed as such. */
   badge?: 'best' | 'featured'
 }) {
-  const score = trustScore(vendor)
   const t = vendor.trust
   const hasAbsimListing =
     vendor.id === 'absim-peptides' &&
@@ -1137,6 +1144,7 @@ function VendorCard({
           )}
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
+          <TierBadge claim={claim} showDate />
           <span className="rounded-full border border-hairline-strong px-2 py-0.5 text-[10px] font-semibold text-ink/70">
             {score}/100
           </span>

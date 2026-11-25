@@ -124,9 +124,12 @@ const {
   catalogClaims,
   identityClaims,
   isLoadBearing,
+  primaryResearchClaims,
   reconPresetClaims,
 } = await import('../src/lib/evidence/from-catalog')
-const { vendorPurityClaim } = await import('../src/lib/evidence/from-vendors')
+const { reconcileCompoundSources, vendorPurityClaim } = await import(
+  '../src/lib/evidence/from-vendors'
+)
 
 interface JsonSchema {
   required: string[]
@@ -522,11 +525,18 @@ export function runEvidenceAudit(now: number = Date.now()): AuditReport {
   const auditedClaims: AuditedClaimRecord[] = []
   const issues: SchemaIssue[] = []
 
-  // 1. Collect all catalog identity claims
+  // 1. Collect all catalog identity and primary research claims
   for (const peptide of PEPTIDES) {
     for (const c of identityClaims(peptide)) {
       auditedClaims.push({
         sourceId: `catalog:${peptide.slug}`,
+        surface: 'catalog-identity',
+        claim: c,
+      })
+    }
+    for (const c of primaryResearchClaims(peptide)) {
+      auditedClaims.push({
+        sourceId: `research:${peptide.slug}`,
         surface: 'catalog-identity',
         claim: c,
       })
@@ -620,25 +630,23 @@ export function runEvidenceAudit(now: number = Date.now()): AuditReport {
     }
   }
 
-  // 5. GHK-Cu source reconciliation snapshot
-  const ghkIdClaims = identityClaims({ slug: 'ghk-cu' })
-  const ghkVendors = getVendorsForPeptide('ghk-cu')
-  const ghkVendorClaims = ghkVendors.map((v) => {
-    const c = vendorPurityClaim(v)
+  // 5. GHK-Cu source reconciliation snapshot via generalized reconcileCompoundSources helper
+  const ghkRec = reconcileCompoundSources('ghk-cu', { now })
+  const ghkVendorClaims = ghkRec.sources.map((s) => {
     return {
-      vendorId: v.id,
-      vendorName: v.name,
-      tier: c.tier,
-      shortTier: TIERS[c.tier].short,
-      value: c.value,
-      retrievedAt: c.provenance.retrieved_at || null,
-      perBatchTesting: v.trust.perBatchTesting,
-      freshness: freshnessFor(c, now),
+      vendorId: s.vendor.id,
+      vendorName: s.vendor.name,
+      tier: s.tier,
+      shortTier: s.shortTier,
+      value: s.claim.value,
+      retrievedAt: s.claim.provenance.retrieved_at || null,
+      perBatchTesting: s.vendor.trust.perBatchTesting,
+      freshness: s.freshness,
     }
   })
   const ghkFloorCheck = verifyFloorNeverExceedsWeakest(
     'sources:ghk-cu',
-    ghkVendors.map(vendorPurityClaim),
+    ghkRec.purityClaims,
     () => true,
   )
 
@@ -742,7 +750,7 @@ export function runEvidenceAudit(now: number = Date.now()): AuditReport {
     },
     ghkCuReconciliation: {
       slug: 'ghk-cu',
-      identityTier: ghkIdClaims[0]?.tier ?? null,
+      identityTier: ghkRec.identityTier,
       vendorClaims: ghkVendorClaims,
       computedFloor: ghkFloorCheck.floor,
       floorMatchesWeakestLoadBearing: ghkFloorCheck.passed,
