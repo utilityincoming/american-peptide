@@ -1,45 +1,51 @@
-const residues = [
-  [94, 263],
-  [151, 225],
-  [209, 259],
-  [269, 181],
-  [329, 201],
-  [382, 126],
-] as const
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
-/** Decorative sequence schematic. The surrounding hero copy carries the meaning. */
-export default function HeroSequence() {
+export default function HeroSequence({
+  href,
+  name,
+  sequence,
+}: {
+  href: string
+  name: string
+  sequence: string
+}) {
+  const residues = Array.from(sequence)
+
   return (
-    <svg
-      viewBox="0 0 480 360"
-      width="480"
-      height="360"
-      className="block h-auto w-full text-[color:color-mix(in_srgb,var(--accent)_65%,var(--ink))]"
-      aria-hidden="true"
-      focusable="false"
-      fill="none"
+    <figure
+      aria-labelledby="hero-sequence-title"
+      className="min-w-0 border border-hairline bg-panel"
     >
-      <g stroke="currentColor" opacity=".19">
-        <path d="M48 83h384M48 130h384M48 177h384M48 224h384M48 271h384M48 318h384M48 83v235m64-235v235m64-235v235m64-235v235m64-235v235m64-235v235m64-235v235" />
-        <path d="M48 83h12m-12 0v12m384-12h-12m12 0v12M48 318h12m-12 0v-12m384 12h-12m12 0v-12" strokeWidth="2" />
-      </g>
-      <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M139 101h71l34 34 25 46m113-55v-25h35M94 263v37h55" strokeDasharray="3 5" opacity=".52" />
-        <path d="m94 263 57-38 58 34 60-78 60 20 53-75" strokeWidth="2" />
-        <g fill="var(--surface)">
-          {residues.map(([x, y]) => (
-            <circle key={x} cx={x} cy={y} r="8" />
+      <figcaption className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-hairline px-4 py-3 sm:px-6">
+        <span id="hero-sequence-title" className="font-semibold">{name} primary sequence</span>
+        <span className="font-scientific text-xs text-ink-muted">{residues.length} residues</span>
+      </figcaption>
+
+      <div className="px-4 py-4 sm:px-6">
+        <ol
+          aria-hidden="true"
+          className="grid grid-cols-5 gap-px border border-hairline bg-hairline font-scientific"
+        >
+          {residues.map((letter, index) => (
+            <li key={index} className="flex flex-col items-center gap-1 bg-panel py-2">
+              <span className="text-xs text-ink-muted">{String(index + 1).padStart(2, '0')}</span>
+              <span className="text-base font-semibold text-accent">{letter}</span>
+            </li>
           ))}
-        </g>
-        <circle cx="269" cy="181" r="19" fill="currentColor" fillOpacity=".08" strokeOpacity=".48" />
-        <circle cx="269" cy="181" r="4" fill="currentColor" stroke="none" />
-      </g>
-      <g className="font-mono" fill="currentColor" fontSize="10" letterSpacing="1">
-        <text x="48" y="64">SEQUENCE SCHEMATIC</text>
-        <text x="139" y="94">RESIDUE</text>
-        <text x="48" y="339">N-TERMINUS</text>
-        <text x="432" y="339" textAnchor="end">C-TERMINUS</text>
-      </g>
-    </svg>
+        </ol>
+        <code className="mt-3 block break-all font-scientific text-sm text-ink">{sequence}</code>
+      </div>
+
+      <div className="border-t border-hairline px-4 py-3 sm:px-6">
+        <Link
+          href={href}
+          className="inline-flex min-h-8 items-center gap-2 text-sm font-medium text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          Read the {name} monograph
+          <ArrowRight aria-hidden="true" className="h-4 w-4 shrink-0" />
+        </Link>
+      </div>
+    </figure>
   )
 }
