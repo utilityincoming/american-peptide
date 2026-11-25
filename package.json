@@ -18,7 +18,8 @@
     "eval": "node scripts/eval-agent.mjs",
     "gsc": "node scripts/gsc-report.mjs",
     "check:org-drift": "node --experimental-strip-types scripts/check-org-drift.mjs",
-    "audit:evidence": "node --experimental-strip-types scripts/audit-evidence.ts"
+    "audit:evidence": "node --experimental-strip-types scripts/audit-evidence.ts",
+    "sync:trial-diffs": "node --experimental-strip-types scripts/sync-trial-diffs.ts"
   },
   "dependencies": {
     "@next/third-parties": "16.4.6",

@@ -38,6 +38,9 @@ yarn-error.log*
 /reports/
 *gsc-sa*.json
 
+# Local literature sync cache
+/.cache/
+
 # vercel
 .vercel
 

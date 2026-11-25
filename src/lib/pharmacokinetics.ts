@@ -183,6 +183,100 @@ export function clearanceTime(halfLife: number, fraction = 0.03): number {
   return timeToFraction(halfLife, fraction)
 }
 
+export interface PkCurvePoint {
+  /** Elapsed time in hours. */
+  hour: number
+  /** Relative concentration (1.0 = single-dose initial peak). */
+  concentration: number
+  /** Whether this time point sits at or beyond the ~97% steady-state threshold (repeated mode). */
+  inSteadyStateWindow?: boolean
+  /** Whether this time point sits in the washout/clearance window (<= 50% remaining in decay mode). */
+  inClearanceWindow?: boolean
+}
+
+export const PK_SCOPE_NOTE = 'Computed reference estimate — not medical guidance'
+
+/**
+ * Sample a single-dose first-order elimination curve over `[0, totalHours]`
+ * (defaults to `clearanceTime(halfLife, 0.03)`, i.e. ~5 half-lives).
+ * Returns an exact output array of `steps + 1` points suitable for SVG plotting.
+ */
+export function buildDecayCurve(
+  halfLife: number,
+  options?: { totalHours?: number; steps?: number },
+): PkCurvePoint[] {
+  if (!(halfLife > 0)) return []
+  const totalHours =
+    options?.totalHours && options.totalHours > 0
+      ? options.totalHours
+      : clearanceTime(halfLife, 0.03)
+  const steps = Math.max(8, Math.min(240, options?.steps ?? 60))
+  const points: PkCurvePoint[] = []
+  for (let i = 0; i <= steps; i++) {
+    const hour = (totalHours * i) / steps
+    const concentration = fractionRemaining(halfLife, hour)
+    points.push({
+      hour,
+      concentration,
+      inClearanceWindow: hour >= halfLife,
+    })
+  }
+  return points
+}
+
+/**
+ * Sample a repeated-dosing accumulation curve (fixed unit dose 1.0 every
+ * `intervalHours`) over `[0, totalHours]` using superposition of single-dose
+ * first-order decay (`fractionRemaining`).
+ */
+export function buildAccumulationCurve(
+  halfLife: number,
+  intervalHours: number,
+  options?: { totalHours?: number; steps?: number },
+): PkCurvePoint[] {
+  if (!(halfLife > 0) || !(intervalHours > 0)) return []
+  const tss = timeToSteadyState(halfLife, 0.97)
+  const defaultSpan = Math.max(tss * 1.25, intervalHours * 4)
+  const totalHours =
+    options?.totalHours && options.totalHours > 0 ? options.totalHours : defaultSpan
+  const steps = Math.max(16, Math.min(360, options?.steps ?? 120))
+
+  // Superposition of doses at t = 0, τ, 2τ, ... up to `hour`
+  const concAt = (hour: number): number => {
+    const doseCount = Math.floor(hour / intervalHours) + 1
+    let sum = 0
+    for (let k = 0; k < doseCount; k++) {
+      const elapsed = hour - k * intervalHours
+      if (elapsed >= 0) {
+        sum += fractionRemaining(halfLife, elapsed)
+      }
+    }
+    return sum
+  }
+
+  // Include exact pre-dose trough and post-dose peak points at each dosing boundary
+  // so sawtooth peaks/troughs render sharply in the SVG polyline.
+  const sampleTimes = new Set<number>()
+  for (let i = 0; i <= steps; i++) {
+    sampleTimes.add((totalHours * i) / steps)
+  }
+  const maxDoses = Math.min(60, Math.floor(totalHours / intervalHours))
+  for (let k = 1; k <= maxDoses; k++) {
+    const doseTime = k * intervalHours
+    if (doseTime <= totalHours) {
+      if (doseTime > 1e-4) sampleTimes.add(doseTime - 1e-4)
+      sampleTimes.add(doseTime)
+    }
+  }
+
+  const sortedHours = Array.from(sampleTimes).sort((a, b) => a - b)
+  return sortedHours.map((hour) => ({
+    hour,
+    concentration: concAt(hour),
+    inSteadyStateWindow: hour >= tss,
+  }))
+}
+
 // --- Interaction check ------------------------------------------------------
 
 export interface InteractionNote {

@@ -20,6 +20,12 @@ import {
 } from '@/lib/reconstitution-presets'
 import { reconstitute, solveWaterForDraw } from '@/lib/reconstitution'
 import PkCalculators from '@/components/PkCalculators'
+import OfflineStatus from '@/components/OfflineStatus'
+import { getPeptideBySlug, type Peptide } from '@/lib/peptides'
+import { getPubchemVerification } from '@/lib/verification'
+import { molecularWeightClaim, molecularFormulaClaim } from '@/lib/evidence'
+import { reconPresetClaims } from '@/lib/evidence/from-catalog'
+import { TierBadge } from '@/components/evidence'
 
 const VIAL_PRESETS_MG = [2, 5, 10, 15, 20, 30, 50]
 const DOSE_PRESETS_MCG = [100, 250, 500, 750, 1000, 1500, 2000]
@@ -68,14 +74,24 @@ export default function CalculatorBetaPage() {
   const [waterMl, setWaterMl] = useState('2')
   const [drawUnits, setDrawUnits] = useState('20')
   const [loaded, setLoaded] = useState<ReconPreset | null>(null)
+  const [hydratedPeptide, setHydratedPeptide] = useState<Peptide | null>(null)
+  const [hydratedMw, setHydratedMw] = useState<number | null>(null)
   const [copied, setCopied] = useState(false)
 
-  // Prefill from a shared link.
+  // Prefill from a shared link or ?compound=<slug>&mw=<value> catalog handoff.
   useEffect(() => {
     const p = new URLSearchParams(window.location.search)
-    // A ?compound= or ?pep= slug seeds the vial/water/dose from the catalog preset;
-    // explicit params below then override any of those fields.
+    // A ?compound= or ?pep= slug seeds the vial/water/dose from the catalog preset
+    // and hydrates catalog metadata + evidence tier badges; explicit params below
+    // then override any of those fields.
     const pep = p.get('compound') ?? p.get('pep')
+    const mwParam = p.get('mw')
+    if (pep) {
+      const catalogPep = getPeptideBySlug(pep) ?? null
+      setHydratedPeptide(catalogPep)
+      const parsedMw = mwParam ? parsePositive(mwParam) : 0
+      setHydratedMw(parsedMw > 0 ? parsedMw : (catalogPep?.molecularWeight ?? null))
+    }
     const preset = pep ? RECON_PRESETS.find((x) => x.slug === pep) ?? null : null
     if (preset) {
       setMeasurement('mcg')
@@ -93,9 +109,9 @@ export default function CalculatorBetaPage() {
     const fm = p.get('f')
     if (fm === 'pen') setForm('pen')
     else if (fm === 'vial') setForm('vial')
-    const v = p.get('v')
-    const d = p.get('d')
-    const w = p.get('w')
+    const v = p.get('v') ?? p.get('vial')
+    const d = p.get('d') ?? p.get('dose')
+    const w = p.get('w') ?? p.get('water')
     const u = p.get('u')
     if (w) setWaterMl(w)
     if (u) setDrawUnits(u)
@@ -160,8 +176,15 @@ export default function CalculatorBetaPage() {
     setDoseMcg(String(p.doseMcg))
     setWaterMl(String(p.waterMl))
     setLoaded(p)
+    const catalogPep = getPeptideBySlug(p.slug) ?? null
+    setHydratedPeptide(catalogPep)
+    setHydratedMw(catalogPep?.molecularWeight ?? null)
   }
-  const clearLoaded = () => setLoaded(null)
+  const clearLoaded = () => {
+    setLoaded(null)
+    setHydratedPeptide(null)
+    setHydratedMw(null)
+  }
   // Changing measurement or form invalidates the "loaded" label (its numbers
   // were a vial recipe), so drop it when the user switches context.
   const selectMeasurement = (m: Measurement) => {
@@ -220,6 +243,11 @@ export default function CalculatorBetaPage() {
 
   const share = async () => {
     const p = new URLSearchParams()
+    const activeSlug = loaded?.slug ?? hydratedPeptide?.slug
+    if (activeSlug) {
+      p.set('compound', activeSlug)
+      if (hydratedMw) p.set('mw', String(hydratedMw))
+    }
     p.set('m', measurement)
     p.set('mode', mode === 'reverse' ? 'r' : 'f')
     p.set('f', form)
@@ -227,7 +255,6 @@ export default function CalculatorBetaPage() {
     p.set('d', doseValue)
     p.set('w', waterMl)
     p.set('u', drawUnits)
-    if (loaded) p.set('pep', loaded.slug)
     const url = `${window.location.origin}${window.location.pathname}?${p.toString()}`
     try {
       await navigator.clipboard.writeText(url)
@@ -252,6 +279,9 @@ export default function CalculatorBetaPage() {
       </header>
 
       <main className="mx-auto max-w-4xl px-4 py-8 md:px-6">
+        {/* ── Offline status / install ── */}
+        <OfflineStatus />
+
         {/* ── Beta banner ── */}
         <div className="mb-6 flex items-start gap-3 rounded-2xl border border-amber-500/20 bg-amber-500/[0.05] p-4">
           <FlaskConical
@@ -369,25 +399,60 @@ export default function CalculatorBetaPage() {
                 </span>
               </label>
               <PeptidePicker loaded={loaded} onSelect={loadPreset} onClear={clearLoaded} />
-              {loaded && (
-                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border border-accent/20 bg-accent/[0.05] px-3 py-2 text-[11px] text-ink/55">
-                  <span>
-                    Loaded <span className="font-semibold text-accent">{loaded.name}</span> ·{' '}
-                    {loaded.vialMg}mg vial · {loaded.waterMl}mL ·{' '}
-                    {loaded.doseMcg >= 1000
-                      ? `${(loaded.doseMcg / 1000).toLocaleString(undefined, { maximumFractionDigits: 2 })}mg`
-                      : `${loaded.doseMcg}mcg`}{' '}
-                    reference amount
-                  </span>
-                  {loaded.note && <span className="text-amber-400/80">{loaded.note}</span>}
-                  <Link
-                    href={`/catalog/${loaded.slug}`}
-                    className="inline-flex items-center gap-1 font-medium text-accent hover:underline"
-                  >
-                    View profile <ExternalLink className="h-3 w-3" />
-                  </Link>
-                </div>
-              )}
+              {(loaded || hydratedPeptide) && (() => {
+                const activeSlug = loaded?.slug ?? hydratedPeptide?.slug ?? ''
+                const verification = activeSlug ? getPubchemVerification(activeSlug) : undefined
+                const mwClaim = molecularWeightClaim(verification)
+                const mfClaim = molecularFormulaClaim(verification)
+                const presetClaim = loaded ? reconPresetClaims(loaded)[0] : null
+                const displayName = loaded?.name ?? hydratedPeptide?.name ?? activeSlug
+                const displayMw = hydratedMw ?? hydratedPeptide?.molecularWeight ?? null
+                const displayFormula = hydratedPeptide?.molecularFormula ?? verification?.molecularFormula ?? null
+                return (
+                  <div className="mt-2 rounded-xl border border-accent/25 bg-accent/[0.05] px-3.5 py-2.5 text-xs text-ink/70">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                        <span>
+                          Loaded <span className="font-semibold text-accent">{displayName}</span>
+                        </span>
+                        {loaded && (
+                          <span>
+                            · {loaded.vialMg}mg vial · {loaded.waterMl}mL ·{' '}
+                            {loaded.doseMcg >= 1000
+                              ? `${(loaded.doseMcg / 1000).toLocaleString(undefined, { maximumFractionDigits: 2 })}mg`
+                              : `${loaded.doseMcg}mcg`}{' '}
+                            reference amount
+                          </span>
+                        )}
+                        {presetClaim && <TierBadge claim={presetClaim} showDate />}
+                      </span>
+                      <Link
+                        href={`/catalog/${activeSlug}`}
+                        className="inline-flex items-center gap-1 font-medium text-accent hover:underline"
+                      >
+                        View profile <ExternalLink className="h-3 w-3" />
+                      </Link>
+                    </div>
+                    {(displayMw || displayFormula || loaded?.note) && (
+                      <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-hairline pt-1.5 text-[11px] text-ink/60">
+                        {displayMw && (
+                          <span className="inline-flex items-center gap-1.5">
+                            <span className="font-mono">MW {displayMw.toLocaleString()} Da</span>
+                            {mwClaim && <TierBadge claim={mwClaim} showDate />}
+                          </span>
+                        )}
+                        {displayFormula && (
+                          <span className="inline-flex items-center gap-1.5">
+                            <span className="font-mono">{displayFormula}</span>
+                            {mfClaim && <TierBadge claim={mfClaim} showDate />}
+                          </span>
+                        )}
+                        {loaded?.note && <span className="text-amber-400/80">{loaded.note}</span>}
+                      </div>
+                    )}
+                  </div>
+                )
+              })()}
               <p className="mt-1.5 text-[10px] leading-relaxed text-ink/55">
                 Preset vial sizes and volumes reflect how these compounds are commonly supplied
                 and dissolved for laboratory research. Amounts are calculation reference points
@@ -687,7 +752,7 @@ export default function CalculatorBetaPage() {
         </section>
 
         <section className="mb-10">
-          <PkCalculators />
+          <PkCalculators initialSlug={loaded?.slug ?? hydratedPeptide?.slug} />
         </section>
       </main>
     </div>
