@@ -9,6 +9,9 @@ import {
   interactionCheck,
   getPk,
   pkWithHalfLife,
+  buildDecayCurve,
+  buildAccumulationCurve,
+  PK_SCOPE_NOTE,
 } from '@/lib/pharmacokinetics'
 
 // Single-compartment first-order elimination. Values below are derived from
@@ -108,5 +111,37 @@ describe('data integrity', () => {
   })
   it('keeps BPC-157 half-life null (no established human figure)', () => {
     expect(getPk('bpc-157')?.halfLifeHours).toBeNull()
+  })
+})
+
+describe('buildDecayCurve & buildAccumulationCurve', () => {
+  it('samples single-dose first-order decay from 1.0 down to ~0.03 and flags clearance window', () => {
+    const pts = buildDecayCurve(24, { steps: 40 })
+    expect(pts).toHaveLength(41)
+    expect(pts[0].hour).toBe(0)
+    expect(pts[0].concentration).toBeCloseTo(1, 10)
+    expect(pts[0].inClearanceWindow).toBe(false)
+
+    const last = pts[pts.length - 1]
+    expect(last.concentration).toBeCloseTo(0.03, 5)
+    expect(last.inClearanceWindow).toBe(true)
+    expect(PK_SCOPE_NOTE).toBe('Computed reference estimate — not medical guidance')
+  })
+
+  it('samples repeated-dosing accumulation curve and marks points beyond timeToSteadyState', () => {
+    const pts = buildAccumulationCurve(24, 24, { steps: 60 })
+    expect(pts.length).toBeGreaterThan(60)
+    expect(pts[0].hour).toBe(0)
+    expect(pts[0].concentration).toBeCloseTo(1, 10)
+    expect(pts[0].inSteadyStateWindow).toBe(false)
+
+    const tss = timeToSteadyState(24, 0.97)
+    const steadyPoints = pts.filter((p) => p.inSteadyStateWindow)
+    expect(steadyPoints.length).toBeGreaterThan(0)
+    expect(steadyPoints[0].hour).toBeGreaterThanOrEqual(tss)
+    // With interval = halfLife = 24h, steady-state peak approaches 2.0 and trough approaches 1.0
+    const maxSteady = Math.max(...steadyPoints.map((p) => p.concentration))
+    expect(maxSteady).toBeGreaterThan(1.9)
+    expect(maxSteady).toBeLessThanOrEqual(2.01)
   })
 })

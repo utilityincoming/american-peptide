@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "updatedAt": "2026-11-24T00:00:00.000Z",
+  "note": "Committed baseline snapshot for scripts/sync-trial-diffs.ts. Staged diffs never auto-edit catalog monographs, editorial summaries, or evidence tiers.",
+  "compounds": {
+    "ghk-cu": {
+      "slug": "ghk-cu",
+      "name": "GHK-Cu (Copper Peptide)",
+      "query": "GHK-Cu",
+      "fetchedAt": "2026-11-24T00:00:00.000Z",
+      "trials": [],
+      "articles": [
+        {
+          "pmid": "39945112",
+          "title": "Glycyl-L-Histidyl-L-Lysine-Cu2+ (GHK-Cu) in Tissue Remodeling and Wound Repair",
+          "journal": "Int J Mol Sci",
+          "date": "2025 Feb",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39945112/"
+        }
+      ]
+    },
+    "semaglutide": {
+      "slug": "semaglutide",
+      "name": "Semaglutide",
+      "query": "Semaglutide",
+      "fetchedAt": "2026-11-24T00:00:00.000Z",
+      "trials": [
+        {
+          "nctId": "NCT05567796",
+          "title": "A Research Study to See How Semaglutide Helps People With Excess Body Weight",
+          "status": "RECRUITING",
+          "phase": "PHASE3",
+          "lastUpdate": "2026-10-15",
+          "url": "https://clinicaltrials.gov/study/NCT05567796"
+        }
+      ],
+      "articles": []
+    }
+  }
+}

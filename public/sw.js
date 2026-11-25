@@ -54,6 +54,8 @@ const PRECACHE_URLS = [
   '/glossary',
   '/research-areas',
   '/tools/reconstitution-calculator',
+  '/tools/calculator-beta',
+  '/tools/blend-calculator',
   '/developers',
   '/manifest.json',
 ]
@@ -175,9 +177,18 @@ self.addEventListener('fetch', (event) => {
   // when offline. caches.match() searches ALL caches, so a page saved in the
   // reference cache is served offline even if never visited this session.
   if (isHtmlRequest(request)) {
-    // Catalog filters are applied on the client. The same shell serves
-    // offline deep links without storing individual search terms.
-    const cacheKey = url.pathname === '/catalog' ? new URL('/catalog', url).href : request
+    // Catalog filters and calculator query params are applied on the client.
+    // Normalize their cache keys to the pathname so offline deep links
+    // (?compound=..., ?vial=...) hit the precached calculator/catalog shell.
+    const normalizePaths = [
+      '/catalog',
+      '/tools/reconstitution-calculator',
+      '/tools/calculator-beta',
+      '/tools/blend-calculator',
+    ]
+    const cacheKey = normalizePaths.includes(url.pathname)
+      ? new URL(url.pathname, url).href
+      : request
     event.respondWith(
       fetch(request)
         .then((res) => {
