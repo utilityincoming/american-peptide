@@ -13,6 +13,7 @@ import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar'
 import ResearchUseGate from '@/components/ResearchUseGate'
 import JsonLd from '@/components/JsonLd'
 import { siteGraphJsonLd } from '@/lib/schema'
+import { THEME_COLOR } from '@/lib/theme'
 import { SPLASH_DEVICES, splashAsset } from '@/lib/ios-splash'
 
 const geistSans = Geist({
@@ -111,8 +112,8 @@ export const metadata: Metadata = {
 
 // themeColor (mobile browser chrome) is driven by JS in the no-flash script
 // below so it tracks the actually-applied theme — OS preference *and* the
-// user's manual toggle — not just prefers-color-scheme. The <meta> default is
-// rendered in <head>; the script and ThemeToggle update its content.
+// user's manual toggle — not just prefers-color-scheme. The <meta> tag is
+// inserted before paint and updated by ThemeToggle.
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -131,9 +132,6 @@ export default function RootLayout({
   return (
     <html lang="en-US" suppressHydrationWarning>
       <head>
-        {/* Default chrome color (dark basalt); the script below flips it to
-            match the applied theme before paint. */}
-        <meta name="theme-color" content="#121C18" />
         {/* iOS standalone launch screens — one per device class, keyed by an
             exact media query, so an installed PWA opens on the branded dark
             surface instead of a white flash. Source: src/lib/ios-splash.ts;
@@ -157,7 +155,24 @@ export default function RootLayout({
             syncs the mobile browser-chrome color to the resolved theme. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var s=localStorage.getItem('theme');var m=window.matchMedia('(prefers-color-scheme: light)').matches;var light=(s==='light'||(!s&&m));if(light){document.documentElement.classList.add('light');}var mc=document.querySelector('meta[name="theme-color"]');if(mc){mc.setAttribute('content',light?'#F6F3EC':'#121C18');}}catch(e){}})();`,
+            __html: `
+              (function () {
+                var stored;
+                try { stored = localStorage.getItem('theme'); } catch {}
+                var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+                var light = stored === 'light' || (!stored && prefersLight);
+                document.documentElement.classList.toggle('light', light);
+                // Create the tag outside React so hydration cannot recreate it
+                // with a stale default after a stored light theme is applied.
+                var meta = document.querySelector('meta[name="theme-color"]');
+                if (!meta) {
+                  meta = document.createElement('meta');
+                  meta.name = 'theme-color';
+                  document.head.appendChild(meta);
+                }
+                meta.content = light ? '${THEME_COLOR.light}' : '${THEME_COLOR.dark}';
+              })();
+            `,
           }}
         />
         {/* Dev self-heal: a service worker registered by a prior production

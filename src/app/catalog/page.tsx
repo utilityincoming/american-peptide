@@ -174,7 +174,7 @@ export default function CatalogPage() {
   return (
     <div className="min-h-screen bg-surface text-ink">
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b border-hairline px-6 py-14 md:px-10 md:py-16">
+      <section className="relative overflow-hidden border-b border-hairline px-6 py-8 md:px-10 md:py-16">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-50"

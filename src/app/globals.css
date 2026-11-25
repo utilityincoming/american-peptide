@@ -1,21 +1,7 @@
 @import "tailwindcss";
 
-/* ── Theme tokens ──────────────────────────────────────────────────────────
-   The UI is built on a neutral "ink" (foreground/overlay) over a "surface"
-   (page background). The brand accent is a clear leaf green — bright enough
-   to read as text on the dark surface and as a label on filled buttons, with
-   the survey-paper light theme using a deeper green that still clears body
-   text contrast. Tokens are CSS variables so a single class swap on <html>
-   flips the whole palette. Opacity modifiers (e.g. text-ink/40,
-   border-ink/[0.06]) keep working via Tailwind's color-mix.
-
-   Two brand accents (terracotta, ocean) join the primary for cartographic
-   accents; the category accents (amber/red) stay reserved for their semantic
-   evidence-tier / regulatory roles and are NOT part of the brand palette, so a
-   copper flourish never collides with a "declined" warning.
-
-   Default (no class) = dark, the established brand look. `html.light` opts in
-   to light mode — the no-flash script in layout.tsx sets it before paint. */
+/* Shared theme roles. Dark basalt is the default; html.light applies the
+   archival light palette. Category accents keep their existing semantic roles. */
 :root {
   --ink: #F4F8F6;          /* soft white — easier on long reads than pure white */
   --surface: #121C18;      /* page background — lifted basalt so green separates */
@@ -41,16 +27,26 @@
   --fill: rgba(255, 255, 255, 0.025);           /* subtle panel/control fill */
   --fill-strong: rgba(255, 255, 255, 0.05);     /* hover/active fill */
 
+  --ink-muted: #B0BCB6;
+  --research-notice: #282216;
+  --research-notice-ink: #F4D69A;
+  --research-notice-border: #775D31;
+  --shell-motion: 150ms cubic-bezier(0.2, 0, 0, 1);
+
   --background: var(--surface);
   --foreground: var(--ink);
 }
 
 html.light {
-  --ink: #1C2622;          /* warm dark ink on survey-paper surfaces */
-  --surface: #F6F3EC;      /* warm "survey paper" — easier on long reads than clinical white */
-  --surface-deep: #ECE6D8;
+  --ink: #111315;
+  --ink-muted: #4C5054;
+  --surface: #F8F8F6;
+  --surface-deep: #EFEFEB;
   --panel: #FFFFFF;
-  --accent: #0F6B44;       /* deeper leaf green — body-text contrast on survey paper */
+  --accent: #1D4ED8;
+  --research-notice: #FFF8E9;
+  --research-notice-ink: #53370E;
+  --research-notice-border: #C7A669;
   --accent-terra: #A85A2C; /* darker terracotta for legible text on light */
   --accent-ocean: #2E6A8E; /* darker ocean for legible text on light */
   --accent-indigo: #4F46E5;
@@ -58,18 +54,20 @@ html.light {
   --accent-purple: #7C3AED;
   --accent-amber: #9A6412; /* darker amber for legible text on light */
   --accent-red: #B14A3F;   /* darker clay-red for legible text on light */
-  /* Warm-ink washes, pitched stronger than the dark theme's white ones so
-     borders and fills stay visible on the near-white survey-paper surface. */
-  --hairline: rgba(28, 38, 34, 0.12);
-  --hairline-strong: rgba(28, 38, 34, 0.22);
-  --fill: rgba(28, 38, 34, 0.04);
-  --fill-strong: rgba(28, 38, 34, 0.07);
+  --hairline: #D6D8D5;
+  --hairline-strong: #898E88;
+  --fill: #FFFFFF;
+  --fill-strong: #EFEFEB;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-research-notice: var(--research-notice);
+  --color-research-notice-ink: var(--research-notice-ink);
+  --color-research-notice-border: var(--research-notice-border);
   --color-surface: var(--surface);
   --color-surface-deep: var(--surface-deep);
   --color-panel: var(--panel);
@@ -99,12 +97,39 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+@utility font-scientific {
+  font-family: var(--font-geist-mono), monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility site-shell-container {
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 1.5rem;
+  }
+}
+
+.site-shell :is(a, button, input):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (forced-colors: active) {
+  .site-shell :is(a, button, input):focus-visible {
+    outline-color: Highlight;
+  }
 }
 
 /* Smooth the flip; don't animate on first paint or for reduced-motion users. */
 html.theme-ready body,
 html.theme-ready body * {
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition: background-color var(--shell-motion), border-color var(--shell-motion), color var(--shell-motion);
 }
 @media (prefers-reduced-motion: reduce) {
   html.theme-ready body,

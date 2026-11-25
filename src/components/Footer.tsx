@@ -34,11 +34,11 @@ const COMPANY_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-hairline bg-surface px-6 py-10 md:px-10">
-      <div className="mx-auto max-w-6xl space-y-5">
+    <footer className="site-shell border-t border-hairline bg-surface py-10">
+      <div className="site-shell-container space-y-5">
         <BrandMark />
 
-        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink/55">
+        <nav aria-label="Site resources" className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink-muted">
           {LINKS.map((l) => (
             <Link
               key={l.href}
@@ -50,9 +50,9 @@ export default function Footer() {
           ))}
         </nav>
 
-        <div className="rounded-xl border border-amber-500/15 bg-amber-500/[0.04] px-5 py-4">
-          <p className="text-xs leading-relaxed text-amber-400/60">
-            <span className="font-semibold text-amber-400/80">Research Disclaimer: </span>
+        <div className="border border-research-notice-border bg-research-notice px-5 py-4">
+          <p className="text-sm leading-relaxed text-research-notice-ink">
+            <span className="font-semibold">Research Disclaimer: </span>
             AmericanPeptide.com is an AI-assisted computational research platform, not a
             medical device or clinical decision-support system. All AI-generated outputs —
             including peptide sequences, binding predictions, and literature syntheses —
@@ -65,7 +65,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col gap-3 border-t border-hairline pt-5 sm:flex-row sm:items-center sm:justify-between">
-          <nav className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-ink/55">
+          <nav aria-label="About AmericanPeptide" className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-ink-muted">
             {COMPANY_LINKS.map((l) => (
               <Link
                 key={l.href}
@@ -77,7 +77,7 @@ export default function Footer() {
             ))}
           </nav>
 
-          <p className="text-xs text-ink/55">© 2026 AmericanPeptide.com</p>
+          <p className="text-xs text-ink-muted">© 2026 AmericanPeptide.com</p>
         </div>
       </div>
     </footer>
