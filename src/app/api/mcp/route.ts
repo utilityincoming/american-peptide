@@ -200,18 +200,29 @@ const handler = createMcpHandler(
       'reconstitute_vial',
       {
         description:
-          'Deterministic reconstitution dilution calculator: concentration (mcg/mL, mg/mL, and optional µM molar concentration if molecular weight or a catalog peptide is supplied), U-100 syringe draw units, whole doses per vial, and optional reverse-solve for water volume from target_draw_units. Always attaches the canonical /methods scope note. Refuses personal dosing/prescribing advice.',
+          'Deterministic reconstitution dilution calculator for a peptide vial, an IU-standardized biologic, or a pre-filled GLP-1 pen: concentration (mcg/mL, mg/mL, optional µM molarity, or IU/mL), U-100 syringe draw units, whole doses per vial/pen, and optional reverse-solve for water volume from target_draw_units. Always attaches the canonical /methods scope note. Refuses personal dosing/prescribing advice.',
         inputSchema: z.object({
-          vial_mg: z.number().describe('Peptide mass in the vial, in milligrams.'),
-          dose_mcg: z.number().describe('Target amount per draw, in micrograms.'),
+          unit: z
+            .enum(['mcg', 'iu'])
+            .optional()
+            .describe('Dose measurement: "mcg" for mg-vial peptides (default), "iu" for IU-standardized biologics.'),
+          form: z
+            .enum(['vial', 'pen'])
+            .optional()
+            .describe('Container: "vial" (default) or "pen" for a pre-filled GLP-1 pen (uses fill_ml, no water). Pen is mcg only.'),
+          vial_mg: z.number().optional().describe('Peptide mass in the vial or pen strength, in milligrams (unit="mcg").'),
+          dose_mcg: z.number().optional().describe('Target amount per draw, in micrograms (unit="mcg").'),
+          vial_iu: z.number().optional().describe('Biologic content of the vial, in international units (unit="iu").'),
+          dose_iu: z.number().optional().describe('Target amount per draw, in international units (unit="iu").'),
           water_ml: z
             .number()
             .optional()
-            .describe('Bacteriostatic water added, in milliliters (optional if target_draw_units is given).'),
+            .describe('Bacteriostatic water added, in milliliters (optional if target_draw_units is given; not used for pens).'),
+          fill_ml: z.number().optional().describe('Pre-filled pen solution volume in milliliters (form="pen" only).'),
           target_draw_units: z
             .number()
             .optional()
-            .describe('Optional target U-100 syringe units per draw to reverse-solve required water_ml.'),
+            .describe('Optional target U-100 syringe units per draw to reverse-solve required water_ml (vial form only).'),
           peptide: z
             .string()
             .optional()
@@ -230,6 +241,26 @@ const handler = createMcpHandler(
         const r = await executeAgentTool('reconstitute_vial', args as Record<string, unknown>)
         if (r.isError) return errorText(r.content)
         if (!r.content.trim().startsWith('{')) return errorText(r.content)
+        const parsed = JSON.parse(r.content) as Record<string, unknown>
+        if (typeof parsed.error === 'string') return errorText(r.content)
+        return text(r.content)
+      },
+    )
+
+    server.registerTool(
+      'cost_per_dose',
+      {
+        description:
+          'Deterministic cost-per-dose and doses-per-vial calculator from a vial mass (mg), a dose (mcg), and an optional vial price. Always attaches the canonical /methods scope note.',
+        inputSchema: z.object({
+          vial_mg: z.number().describe('Peptide mass in the vial, in milligrams.'),
+          dose_mcg: z.number().describe('Amount per dose, in micrograms.'),
+          vial_cost: z.number().optional().describe('Optional vial price to divide across the doses.'),
+        }),
+      },
+      async (args) => {
+        const r = await executeAgentTool('cost_per_dose', args as Record<string, unknown>)
+        if (r.isError) return errorText(r.content)
         const parsed = JSON.parse(r.content) as Record<string, unknown>
         if (typeof parsed.error === 'string') return errorText(r.content)
         return text(r.content)

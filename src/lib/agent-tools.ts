@@ -7,6 +7,7 @@
 import {
   computeBlend,
   computeCoaGrade,
+  computeCostPerDose,
   computePharmacokinetics,
   computeReconstitution,
   computeVendorRank,
@@ -82,16 +83,29 @@ export const AGENT_TOOLS: AgentTool[] = [
   {
     name: 'reconstitute_vial',
     description:
-      'Compute reconstitution dilution for a peptide vial: concentration (mcg/mL, mg/mL, and optional µM molar concentration if molecular weight or a catalog peptide is supplied), U-100 syringe units, whole doses, and optional reverse-solve for water volume from target_draw_units. Call this whenever the user gives a vial mass, a dose, and a volume of bacteriostatic water (or target draw units) and wants the draw or concentration. Pass numbers only — do not calculate unit or concentration math yourself.',
+      'Compute reconstitution dilution for a peptide vial, an IU-standardized biologic, or a pre-filled GLP-1 pen: concentration (mcg/mL, mg/mL, and optional µM molar concentration if molecular weight or a catalog peptide is supplied, or IU/mL for biologics), U-100 syringe units, whole doses, and optional reverse-solve for water volume from target_draw_units. Call this whenever the user gives a vial mass/strength, a dose, and a volume of bacteriostatic water (or a target draw, or a pen fill volume) and wants the draw or concentration. Pass numbers only — do not calculate unit or concentration math yourself.',
     input_schema: {
       type: 'object',
       properties: {
-        vial_mg: { type: 'number', description: 'Peptide mass in the vial, in milligrams.' },
-        dose_mcg: { type: 'number', description: 'Target amount per draw, in micrograms.' },
-        water_ml: { type: 'number', description: 'Bacteriostatic water added, in milliliters (optional if target_draw_units is given).' },
+        unit: {
+          type: 'string',
+          enum: ['mcg', 'iu'],
+          description: 'Dose measurement: "mcg" for mg-vial peptides (default, supports molar), "iu" for IU-standardized biologics (HGH, HCG).',
+        },
+        form: {
+          type: 'string',
+          enum: ['vial', 'pen'],
+          description: 'Container: "vial" for a reconstituted lyophilized vial (default), "pen" for a pre-filled GLP-1 pen already in solution (uses fill_ml, no water added). Pen is mcg only.',
+        },
+        vial_mg: { type: 'number', description: 'Peptide mass in the vial (or pen strength), in milligrams. Use for unit="mcg".' },
+        dose_mcg: { type: 'number', description: 'Target amount per draw, in micrograms. Use for unit="mcg".' },
+        vial_iu: { type: 'number', description: 'Biologic content of the vial, in international units. Use for unit="iu".' },
+        dose_iu: { type: 'number', description: 'Target amount per draw, in international units. Use for unit="iu".' },
+        water_ml: { type: 'number', description: 'Bacteriostatic water added, in milliliters (optional if target_draw_units is given; not used for pens).' },
+        fill_ml: { type: 'number', description: 'Pre-filled pen solution volume in milliliters (form="pen" only).' },
         target_draw_units: {
           type: 'number',
-          description: 'Optional target U-100 syringe units per draw to reverse-solve the required water_ml.',
+          description: 'Optional target U-100 syringe units per draw to reverse-solve the required water_ml (vial form only).',
         },
         peptide: {
           type: 'string',
@@ -105,6 +119,20 @@ export const AGENT_TOOLS: AgentTool[] = [
           type: 'boolean',
           description: 'Set true when molarity (µM) or nmol is specifically requested, so missing molecular weight is reported cleanly.',
         },
+      },
+      required: ['dose_mcg'],
+    },
+  },
+  {
+    name: 'cost_per_dose',
+    description:
+      'Deterministic cost-per-dose and doses-per-vial from a vial mass (mg), a dose (mcg), and an optional vial price. Call this whenever the user asks how many doses a vial yields or what each dose costs. Never divide the vial price or dose count yourself.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        vial_mg: { type: 'number', description: 'Peptide mass in the vial, in milligrams.' },
+        dose_mcg: { type: 'number', description: 'Amount per dose, in micrograms.' },
+        vial_cost: { type: 'number', description: 'Optional vial price to divide across the doses.' },
       },
       required: ['vial_mg', 'dose_mcg'],
     },
@@ -365,6 +393,9 @@ export async function executeAgentTool(
         break
       case 'reconstitute_vial':
         out = computeReconstitution(input)
+        break
+      case 'cost_per_dose':
+        out = computeCostPerDose(input)
         break
       case 'screen_blend':
         out = computeBlend(input)
