@@ -5,6 +5,7 @@
 // model context / cost.
 
 import {
+  computeBlend,
   computeCoaGrade,
   computePharmacokinetics,
   computeReconstitution,
@@ -81,31 +82,86 @@ export const AGENT_TOOLS: AgentTool[] = [
   {
     name: 'reconstitute_vial',
     description:
-      'Compute reconstitution dilution for a peptide vial: concentration, U-100 syringe units, and whole doses. Call this whenever the user gives a vial mass, a dose, and a volume of bacteriostatic water and wants the draw. Pass numbers only — do not calculate the draw yourself.',
+      'Compute reconstitution dilution for a peptide vial: concentration (mcg/mL, mg/mL, and optional µM molar concentration if molecular weight or a catalog peptide is supplied), U-100 syringe units, whole doses, and optional reverse-solve for water volume from target_draw_units. Call this whenever the user gives a vial mass, a dose, and a volume of bacteriostatic water (or target draw units) and wants the draw or concentration. Pass numbers only — do not calculate unit or concentration math yourself.',
     input_schema: {
       type: 'object',
       properties: {
         vial_mg: { type: 'number', description: 'Peptide mass in the vial, in milligrams.' },
         dose_mcg: { type: 'number', description: 'Target amount per draw, in micrograms.' },
-        water_ml: { type: 'number', description: 'Bacteriostatic water added, in milliliters.' },
+        water_ml: { type: 'number', description: 'Bacteriostatic water added, in milliliters (optional if target_draw_units is given).' },
+        target_draw_units: {
+          type: 'number',
+          description: 'Optional target U-100 syringe units per draw to reverse-solve the required water_ml.',
+        },
+        peptide: {
+          type: 'string',
+          description: 'Optional catalog peptide slug or name to resolve verified molecular weight for molar concentration (µM / nmol).',
+        },
+        molecular_weight_da: {
+          type: 'number',
+          description: 'Optional explicit molecular weight in Daltons (g/mol) for molar concentration.',
+        },
+        require_molar: {
+          type: 'boolean',
+          description: 'Set true when molarity (µM) or nmol is specifically requested, so missing molecular weight is reported cleanly.',
+        },
       },
-      required: ['vial_mg', 'dose_mcg', 'water_ml'],
+      required: ['vial_mg', 'dose_mcg'],
+    },
+  },
+  {
+    name: 'screen_blend',
+    description:
+      'Deterministic post-reconstitution blend compatibility screen and shared-vial draw calculator. Screens 2–10 catalog peptides at a buffer pH (default 5.7) for opposite net charge, isoelectric point proximity, hydrophobicity (GRAVY), free cysteines, copper–thiol oxidation, fibril formation, and labeled syringe incompatibilities. When mass_mg, dose_mcg, and water_ml are provided, also computes the shared-vial draw volume, limiting dose count, and over-delivery percentages. Never compute blend ratios or compatibility yourself — call this tool.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        peptides: {
+          type: 'array',
+          description: 'Peptides in the blend (each with a catalog slug or name, plus optional mass_mg and dose_mcg for shared-vial math).',
+          items: {
+            type: 'object',
+            properties: {
+              slug: { type: 'string', description: 'Catalog peptide slug, e.g. "bpc-157" or "ghk-cu".' },
+              name: { type: 'string', description: 'Peptide name if slug is not known.' },
+              mass_mg: { type: 'number', description: 'Optional vial mass in mg transferred into the shared blend.' },
+              dose_mcg: { type: 'number', description: 'Optional intended dose in mcg per draw for this component.' },
+            },
+          },
+        },
+        buffer_ph: {
+          type: 'number',
+          description: 'Optional buffer pH (0–14, defaults to 5.7 for bacteriostatic water).',
+        },
+        water_ml: {
+          type: 'number',
+          description: 'Optional total bacteriostatic water volume in mL when computing shared-vial blend draws.',
+        },
+      },
+      required: ['peptides'],
     },
   },
   {
     name: 'peptide_half_life',
     description:
-      'Look up the site half-life table for a catalog peptide and the derived steady-state and clearance times. Call this before stating a half-life, dosing interval, accumulation, or time-to-steady-state. If the tool says no half-life is stored, say so — do not recall one.',
+      'Look up the site half-life table for a catalog peptide (or pass an explicit hypothetical half_life_hours) and compute single-compartment pharmacokinetic estimates: time to steady state (97%), clearance time (97%), repeat-dose accumulation ratio, peak-to-trough ratio, and fraction remaining at elapsed_hours. Call this before stating a half-life, dosing interval, accumulation, decay, or time-to-steady-state. Never compute exponential decay or accumulation math yourself.',
     input_schema: {
       type: 'object',
       properties: {
-        name: { type: 'string', description: 'Catalog peptide name, e.g. "semaglutide".' },
+        name: { type: 'string', description: 'Catalog peptide name or slug, e.g. "semaglutide".' },
+        half_life_hours: {
+          type: 'number',
+          description: 'Optional explicit hypothetical half-life in hours for single-compartment PK math.',
+        },
         interval_hours: {
           type: 'number',
-          description: 'Optional repeat-dose interval in hours, to compute accumulation.',
+          description: 'Optional repeat-dose interval in hours, to compute accumulation and peak-to-trough ratio.',
+        },
+        elapsed_hours: {
+          type: 'number',
+          description: 'Optional hours elapsed since a single dose, to compute fraction and percent remaining.',
         },
       },
-      required: ['name'],
     },
   },
   {
@@ -309,6 +365,9 @@ export async function executeAgentTool(
         break
       case 'reconstitute_vial':
         out = computeReconstitution(input)
+        break
+      case 'screen_blend':
+        out = computeBlend(input)
         break
       case 'peptide_half_life':
         out = computePharmacokinetics(input)

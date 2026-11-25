@@ -10,6 +10,7 @@ export const TOOL_LABELS: Record<string, string> = {
   search_pubmed: 'Searching PubMed',
   search_uniprot: 'Searching UniProt',
   reconstitute_vial: 'Calculating reconstitution',
+  screen_blend: 'Screening blend compatibility',
   peptide_half_life: 'Computing half-life',
   rank_vendors: 'Ranking vendors',
   grade_coa: 'Grading the certificate',
