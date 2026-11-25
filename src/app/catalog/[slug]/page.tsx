@@ -134,6 +134,14 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
   const areas = getAreasForPeptide(peptide)
   const latest = await getLatestResearch(peptide)
 
+  const verification = getPubchemVerification(peptide.slug)
+  const mwClaim = molecularWeightClaim(verification)
+  const mfClaim = molecularFormulaClaim(verification)
+  const hasIdentifiers = Boolean(
+    peptide.molecularWeight || peptide.molecularFormula || peptide.cas ||
+    peptide.pubchemCid || peptide.uniprotId,
+  )
+
   const url = `${SITE}/catalog/${peptide.slug}`
 
   const sameAs: string[] = []
@@ -243,14 +251,12 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
       label: 'UniProt entry',
       href: `https://www.uniprot.org/uniprotkb/${peptide.uniprotId}`,
     })
-  references.push({
-    label: 'PubMed literature search',
-    href: `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(peptide.name)}`,
-  })
-  references.push({
-    label: 'ClinicalTrials.gov search',
-    href: `https://clinicaltrials.gov/search?term=${encodeURIComponent(peptide.name)}`,
-  })
+  const pubmedSearch = `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(peptide.name)}`
+  const trialSearch = `https://clinicaltrials.gov/search?term=${encodeURIComponent(peptide.name)}`
+  references.push(
+    { label: 'PubMed literature search', href: pubmedSearch },
+    { label: 'ClinicalTrials.gov search', href: trialSearch },
+  )
 
   return (
     <div className="min-h-screen bg-surface text-ink">
@@ -292,7 +298,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
       </header>
 
       {/* ── Title block ── */}
-      <section className="border-b border-hairline px-6 py-12 md:px-10">
+      <section className="border-b border-hairline px-4 py-10 md:px-6 md:py-12">
         <div className="mx-auto max-w-5xl">
           <div className="mb-4 flex flex-wrap items-center gap-2">
             {peptide.categories.map((cat) => (
@@ -341,10 +347,10 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
       </section>
 
       {/* ── Body grid ── */}
-      <section className="px-6 py-12 md:px-10">
-        <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[1fr_320px]">
+      <section className="px-4 py-10 md:px-6 md:py-12">
+        <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
           {/* Main column */}
-          <div className="space-y-8">
+          <div className="min-w-0 space-y-8">
             {(peptide.slug === 'thymosin-beta-4' || peptide.slug === 'tb-500') && (
               <Block title="How the chain is used">
                 <div className="rounded-2xl border border-hairline bg-fill p-4 text-ink">
@@ -353,16 +359,124 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
               </Block>
             )}
 
-            {peptide.sequence && (
-              <Block title="Primary structure">
-                <div className="rounded-2xl border border-hairline bg-fill p-5">
-                  <SequenceGlyph sequence={peptide.sequence} />
-                  <p className="mt-3 font-mono text-[11px] text-ink/55">
-                    {peptide.sequence.replace(/[^A-Za-z]/g, '').length} residues · single-letter
-                    amino-acid sequence
-                  </p>
-                </div>
-              </Block>
+            {(peptide.sequence || hasIdentifiers || verification) && (
+              <section aria-labelledby="monograph-identity" className="border border-hairline bg-panel p-4 sm:p-6">
+                <h2 id="monograph-identity" className="mb-4 text-2xl font-semibold text-ink">
+                  Identity
+                </h2>
+                {peptide.sequence && (
+                  <figure className="mb-4">
+                    <figcaption className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                      <span className="text-sm font-medium">Primary structure</span>
+                      <span className="font-scientific text-xs text-ink-muted">
+                        {peptide.sequence.replace(/[^A-Za-z]/g, '').length} residues
+                      </span>
+                    </figcaption>
+                    <SequenceGlyph sequence={peptide.sequence} />
+                    <code className="mt-2 block break-all font-scientific text-sm text-ink">
+                      {peptide.sequence}
+                    </code>
+                  </figure>
+                )}
+                {hasIdentifiers && (
+                  <dl className="grid gap-x-6 gap-y-4 border-t border-hairline pt-4 text-sm sm:grid-cols-2">
+                    {peptide.molecularWeight && (
+                      <Row
+                        label="Molecular weight"
+                        value={
+                          <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
+                            <span className="font-scientific">{`${peptide.molecularWeight.toLocaleString()} Da`}</span>
+                            {mwClaim && <TierBadge claim={mwClaim} showDate />}
+                          </span>
+                        }
+                      />
+                    )}
+                    {peptide.molecularFormula && (
+                      <Row
+                        label="Molecular formula"
+                        value={
+                          <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
+                            <span className="break-all font-scientific text-sm text-ink">
+                              {peptide.molecularFormula}
+                            </span>
+                            {mfClaim && <TierBadge claim={mfClaim} showDate />}
+                          </span>
+                        }
+                      />
+                    )}
+                    {peptide.cas && <Row label="CAS" value={peptide.cas} mono />}
+                    {peptide.pubchemCid && (
+                      <Row
+                        label="PubChem CID"
+                        value={
+                          <a
+                            href={`https://pubchem.ncbi.nlm.nih.gov/compound/${peptide.pubchemCid}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1 font-scientific text-accent underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                          >
+                            {peptide.pubchemCid}
+                            <ArrowUpRight aria-hidden="true" className="h-3 w-3" />
+                          </a>
+                        }
+                      />
+                    )}
+                    {peptide.uniprotId && (
+                      <Row
+                        label="UniProt"
+                        value={
+                          <a
+                            href={`https://www.uniprot.org/uniprotkb/${peptide.uniprotId}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1 font-scientific text-accent underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                          >
+                            {peptide.uniprotId}
+                            <ArrowUpRight aria-hidden="true" className="h-3 w-3" />
+                          </a>
+                        }
+                      />
+                    )}
+                  </dl>
+                )}
+                {verification && (
+                  <div className="mt-5 border-t border-hairline pt-4">
+                    <div className="mb-2 flex items-center gap-2">
+                      <ShieldCheck className="h-4 w-4 text-accent" strokeWidth={2} />
+                      <h3 className="text-sm font-semibold text-accent">Chemistry verified</h3>
+                    </div>
+                    <p className="text-sm leading-relaxed text-ink-muted">
+                      Cross-referenced against the PubChem reference record on{' '}
+                      <span className="text-ink/75">{verification.checkedAt}</span>
+                      {verification.molecularFormula ? (
+                        <>
+                          {' '}— formula{' '}
+                          <span className="font-mono text-ink/75">{verification.molecularFormula}</span>
+                        </>
+                      ) : null}
+                      .
+                    </p>
+                    <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1.5">
+                      <a
+                        href={`https://pubchem.ncbi.nlm.nih.gov/compound/${verification.cid}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 text-sm font-medium text-accent underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                      >
+                        Verify on PubChem · CID {verification.cid}
+                        <ArrowUpRight aria-hidden="true" className="h-3 w-3" />
+                      </a>
+                      <Link
+                        href="/methodology"
+                        className="inline-flex items-center gap-1 text-[13px] text-ink/50 transition-colors hover:text-accent"
+                      >
+                        How we verify
+                        <ArrowRight className="h-3 w-3" />
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </section>
             )}
 
             <Block title="Overview">
@@ -533,12 +647,17 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
 
             {(latest.trials.length > 0 || latest.articles.length > 0) && (
               <Block title="Latest research">
-                <p className="mb-4 text-xs leading-relaxed text-ink/55">
-                  Recent clinical trials and publications mentioning{' '}
-                  <span className="text-ink/60">{latest.query}</span>, pulled
-                  automatically from ClinicalTrials.gov and PubMed and refreshed
-                  daily. Listings are unfiltered search results, not curated
-                  endorsements.
+                <p className="mb-4 text-sm leading-relaxed text-ink-muted">
+                  Recent clinical trials and publications mentioning {latest.query}. The
+                  listings are refreshed daily and show unfiltered search results.
+                  AmericanPeptide does not endorse specific results. Search for {peptide.name} on{' '}
+                  <a href={trialSearch} className="text-accent underline underline-offset-4">
+                    ClinicalTrials.gov
+                  </a>{' '}
+                  or in{' '}
+                  <a href={pubmedSearch} className="text-accent underline underline-offset-4">
+                    PubMed
+                  </a>.
                 </p>
                 <div className="grid gap-6 md:grid-cols-2">
                   {latest.trials.length > 0 && (
@@ -560,7 +679,8 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                                 {t.title}
                               </span>
                               <span className="mt-1 block text-[11px] text-ink/55">
-                                {[t.status, t.phase, t.nctId].filter(Boolean).join(' · ')}
+                                {[t.status, t.phase].filter(Boolean).map((item) => `${item} · `)}
+                                <span className="font-scientific">{t.nctId}</span>
                               </span>
                             </a>
                           </li>
@@ -587,7 +707,8 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                                 {a.title}
                               </span>
                               <span className="mt-1 block text-[11px] text-ink/55">
-                                {[a.journal, a.date, `PMID ${a.pmid}`].filter(Boolean).join(' · ')}
+                                {[a.journal, a.date].filter(Boolean).map((item) => `${item} · `)}
+                                <span className="font-scientific">PMID {a.pmid}</span>
                               </span>
                             </a>
                           </li>
@@ -682,88 +803,6 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
 
           {/* Sidebar */}
           <aside className="space-y-6">
-            {/* Identity panel */}
-            <div className="rounded-2xl border border-hairline bg-fill p-5">
-              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
-                Identity
-              </h3>
-              <dl className="space-y-3 text-sm">
-                {(() => {
-                  // Reference-tier provenance on the two identity claims that are
-                  // cross-checked against PubChem — the badge carries the check
-                  // date, so the value shows not just what it is but when its
-                  // chemistry was last confirmed. The Standard, on every monograph.
-                  const verification = getPubchemVerification(peptide.slug)
-                  const mwClaim = molecularWeightClaim(verification)
-                  const mfClaim = molecularFormulaClaim(verification)
-                  return (
-                    <>
-                      {peptide.molecularWeight && (
-                        <Row
-                          label="Molecular weight"
-                          value={
-                            <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
-                              {`${peptide.molecularWeight.toLocaleString()} Da`}
-                              {mwClaim && <TierBadge claim={mwClaim} showDate />}
-                            </span>
-                          }
-                        />
-                      )}
-                      {peptide.molecularFormula && (
-                        <Row
-                          label="Molecular formula"
-                          value={
-                            <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-1">
-                              <span className="break-all font-mono text-xs text-ink/85">
-                                {peptide.molecularFormula}
-                              </span>
-                              {mfClaim && <TierBadge claim={mfClaim} showDate />}
-                            </span>
-                          }
-                        />
-                      )}
-                    </>
-                  )
-                })()}
-                {peptide.sequence && (
-                  <Row label="Sequence" value={peptide.sequence} mono />
-                )}
-                {peptide.cas && <Row label="CAS" value={peptide.cas} mono />}
-                {peptide.pubchemCid && (
-                  <Row
-                    label="PubChem CID"
-                    value={
-                      <a
-                        href={`https://pubchem.ncbi.nlm.nih.gov/compound/${peptide.pubchemCid}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-accent hover:underline"
-                      >
-                        {peptide.pubchemCid}
-                        <ArrowUpRight className="h-3 w-3" />
-                      </a>
-                    }
-                  />
-                )}
-                {peptide.uniprotId && (
-                  <Row
-                    label="UniProt"
-                    value={
-                      <a
-                        href={`https://www.uniprot.org/uniprotkb/${peptide.uniprotId}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-accent hover:underline"
-                      >
-                        {peptide.uniprotId}
-                        <ArrowUpRight className="h-3 w-3" />
-                      </a>
-                    }
-                  />
-                )}
-              </dl>
-            </div>
-
             {/* Reference figures — the calculator's preset for this compound,
                 each number carrying its claim tier. These are curated conventions
                 (community tier, §9), stamped with the presets' curation date. */}
@@ -826,50 +865,6 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
               )
             })()}
 
-            {/* Verified-provenance panel — shown only for entries confirmed
-                against a PubChem record by the fact-QA pass. */}
-            {(() => {
-              const v = getPubchemVerification(peptide.slug)
-              if (!v) return null
-              return (
-                <div className="rounded-2xl border border-accent/25 bg-accent/[0.05] p-5">
-                  <div className="mb-2 flex items-center gap-2">
-                    <ShieldCheck className="h-4 w-4 text-accent" strokeWidth={2} />
-                    <h3 className="text-sm font-semibold text-accent">Chemistry verified</h3>
-                  </div>
-                  <p className="text-[13px] leading-relaxed text-ink/60">
-                    Cross-referenced against the PubChem reference record on{' '}
-                    <span className="text-ink/75">{v.checkedAt}</span>
-                    {v.molecularFormula ? (
-                      <>
-                        {' '}— formula{' '}
-                        <span className="font-mono text-ink/75">{v.molecularFormula}</span>
-                      </>
-                    ) : null}
-                    .
-                  </p>
-                  <div className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1.5">
-                    <a
-                      href={`https://pubchem.ncbi.nlm.nih.gov/compound/${v.cid}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1 text-[13px] font-medium text-accent hover:underline"
-                    >
-                      Verify on PubChem · CID {v.cid}
-                      <ArrowUpRight className="h-3 w-3" />
-                    </a>
-                    <Link
-                      href="/methodology"
-                      className="inline-flex items-center gap-1 text-[13px] text-ink/50 transition-colors hover:text-accent"
-                    >
-                      How we verify
-                      <ArrowRight className="h-3 w-3" />
-                    </Link>
-                  </div>
-                </div>
-              )
-            })()}
-
             {/* Sources panel — live trust-ranked vendors, else status */}
             {(() => {
               const vendors = getVendorsForPeptide(peptide.slug)
@@ -905,10 +900,10 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
 
             {/* Further reading — generated authoritative sources */}
             <div className="rounded-2xl border border-hairline bg-fill p-5">
-              <h3 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink/55">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-ink">
                 <BookOpen className="h-3.5 w-3.5" />
                 Further reading
-              </h3>
+              </h2>
               <ul className="space-y-2.5">
                 {references.map((r) => (
                   <li key={r.href}>
@@ -931,9 +926,9 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
             </div>
 
             {/* Disclaimer */}
-            <div className="rounded-xl border border-amber-500/15 bg-amber-500/[0.04] px-4 py-3">
-              <p className="text-[11px] leading-relaxed text-amber-400/65">
-                <span className="font-semibold text-amber-400/85">
+            <div className="border border-research-notice-border bg-research-notice px-4 py-3">
+              <p className="text-xs leading-relaxed text-research-notice-ink">
+                <span className="font-semibold">
                   Research use only.
                 </span>{' '}
                 Catalog entries are educational references — not offers for sale or
@@ -957,7 +952,7 @@ function Block({
 }) {
   return (
     <div>
-      <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/55">
+      <h2 className="mb-3 text-2xl font-semibold leading-tight text-ink">
         {title}
       </h2>
       {children}
@@ -976,13 +971,13 @@ function Row({
 }) {
   return (
     <div className="flex flex-col gap-0.5">
-      <dt className="text-[10px] uppercase tracking-wider text-ink/55">
+      <dt className="text-xs font-medium text-ink-muted">
         {label}
       </dt>
       <dd
         className={
           mono
-            ? 'break-all font-mono text-xs text-ink/85'
+            ? 'break-all font-scientific text-sm text-ink'
             : 'text-sm text-ink/85'
         }
       >
