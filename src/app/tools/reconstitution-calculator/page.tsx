@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { Syringe, AlertTriangle, ArrowRight, Link2, Check } from 'lucide-react'
 import OfflineStatus from '@/components/OfflineStatus'
@@ -138,7 +138,7 @@ export default function ReconstitutionCalculatorPage() {
         </div>
 
         {/* ── Inputs ── */}
-        <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
+        <section className="mb-6 rounded-2xl border border-hairline bg-fill p-5 md:p-6 [&_:is(button,input):focus-visible]:outline-2 [&_:is(button,input):focus-visible]:outline-offset-2 [&_:is(button,input):focus-visible]:outline-accent">
           <div className="mb-5 flex items-center justify-between gap-3">
             <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
               Inputs
@@ -237,7 +237,7 @@ export default function ReconstitutionCalculatorPage() {
 
         {/* ── Reference table ── */}
         <section className="mb-10 rounded-2xl border border-hairline bg-fill p-5 md:p-6">
-          <h2 className="mb-1 text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
+          <h2 id="quick-reference" className="mb-1 text-sm font-semibold uppercase tracking-[0.15em] text-accent/70">
             Quick Reference
           </h2>
           <p className="mb-4 text-xs text-ink/55">
@@ -475,10 +475,13 @@ function NumberField({
   presetLabel?: (n: number) => string
   onPreset?: (n: number) => void
 }) {
+  const inputId = useId()
+  const hintId = hint ? `${inputId}-hint` : undefined
+
   return (
     <div>
-      <label className="mb-1.5 block text-xs font-medium text-ink/55">
-        {label} <span className="text-ink/55">({unit})</span>
+      <label htmlFor={inputId} className="mb-1.5 block text-xs font-medium text-ink-muted">
+        {label} ({unit})
       </label>
       {presets && presetLabel && onPreset && (
         <div className="mb-2 flex flex-wrap gap-1.5">
@@ -486,6 +489,7 @@ function NumberField({
             <button
               key={n}
               type="button"
+              aria-pressed={String(n) === value}
               onClick={() => onPreset(n)}
               className={`rounded-full border px-2.5 py-0.5 text-[11px] transition-colors ${
                 String(n) === value
@@ -499,15 +503,17 @@ function NumberField({
         </div>
       )}
       <input
+        id={inputId}
+        aria-describedby={hintId}
         type="number"
         inputMode="decimal"
         min={0}
         step="any"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-xl border border-hairline bg-fill px-4 py-2.5 font-mono text-base text-ink outline-none transition-colors focus:border-accent/40"
+        className="w-full rounded-xl border border-hairline bg-fill px-4 py-2.5 font-scientific text-base text-ink transition-colors focus:border-accent/40"
       />
-      {hint && <p className="mt-1 text-[10px] text-ink/55">{hint}</p>}
+      {hint && <p id={hintId} className="mt-1 text-xs text-ink-muted">{hint}</p>}
     </div>
   )
 }
@@ -702,14 +708,21 @@ function ReferenceTable({
   currentWater: number
 }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-hairline">
+    <div
+      role="region"
+      aria-labelledby="quick-reference"
+      tabIndex={0}
+      className="overflow-x-auto rounded-xl border border-hairline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
       <table className="w-full border-collapse text-xs">
+        <caption className="sr-only">Concentration in mcg per 0.1 mL by vial size and water volume</caption>
         <thead>
           <tr className="bg-fill-strong">
-            <th className="px-3 py-2.5 text-left font-medium text-ink/55">Vial \ Water</th>
+            <th scope="col" className="px-3 py-2.5 text-left font-medium text-ink/55">Vial \ Water</th>
             {REF_WATERS.map((w) => (
               <th
                 key={w}
+                scope="col"
                 className="px-3 py-2.5 text-right font-mono font-medium text-ink/55"
               >
                 {w} mL
@@ -720,7 +733,7 @@ function ReferenceTable({
         <tbody>
           {REF_VIALS.map((v) => (
             <tr key={v} className="border-t border-hairline">
-              <td className="px-3 py-2.5 font-mono text-ink/65">{v} mg</td>
+              <th scope="row" className="px-3 py-2.5 text-left font-scientific font-normal text-ink/65">{v} mg</th>
               {REF_WATERS.map((w) => {
                 const conc = (v * 100) / w
                 const isCurrent = v === currentVial && w === currentWater
