@@ -277,12 +277,16 @@ export default function CommandPalette() {
 
   useEffect(() => {
     if (!open) return
+    const previousFocus = document.activeElement
     const t = window.setTimeout(() => inputRef.current?.focus(), 10)
     const prevOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     return () => {
       window.clearTimeout(t)
       document.body.style.overflow = prevOverflow
+      if (previousFocus instanceof HTMLElement && previousFocus.isConnected) {
+        previousFocus.focus({ preventScroll: true })
+      }
     }
   }, [open])
 
@@ -310,10 +314,6 @@ export default function CommandPalette() {
   )
 
   const onInputKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Escape') {
-      setOpen(false)
-      return
-    }
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       setSelected((s) => (flat.length ? (s + 1) % flat.length : 0))
@@ -344,11 +344,32 @@ export default function CommandPalette() {
           role="dialog"
           aria-modal="true"
           aria-label="Site search"
+          onKeyDown={(event) => {
+            if (event.key === 'Escape') {
+              event.preventDefault()
+              event.stopPropagation()
+              setOpen(false)
+            }
+            if (event.key === 'Tab') {
+              const controls = event.currentTarget.querySelectorAll<HTMLElement>(
+                'button:not([tabindex="-1"]), input',
+              )
+              const first = controls[0]
+              const last = controls[controls.length - 1]
+              const from = event.shiftKey ? first : last
+              const to = event.shiftKey ? last : first
+              if (event.target === from) {
+                event.preventDefault()
+                to?.focus()
+              }
+            }
+          }}
           className="fixed inset-0 z-[60] flex items-start justify-center px-4 pt-[12vh] pb-8"
         >
           <button
             type="button"
-            aria-label="Close search"
+            aria-hidden="true"
+            tabIndex={-1}
             onClick={() => setOpen(false)}
             className="absolute inset-0 bg-surface-deep/75 backdrop-blur-sm"
           />
@@ -381,9 +402,14 @@ export default function CommandPalette() {
                   <X className="h-3.5 w-3.5" />
                 </button>
               )}
-              <kbd className="hidden rounded border border-hairline-strong bg-fill px-1.5 py-0.5 font-mono text-[10px] text-ink/55 sm:inline">
-                esc
-              </kbd>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                aria-label="Close search"
+                className="rounded-md p-1 text-ink-muted transition-colors hover:bg-fill-strong hover:text-ink"
+              >
+                <X className="h-4 w-4" />
+              </button>
             </div>
 
             <div

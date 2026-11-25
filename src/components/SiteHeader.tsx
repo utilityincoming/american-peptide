@@ -30,6 +30,7 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false)
   const agentActive = isActive(pathname, ['/research'])
   const headerRef = useRef<HTMLElement>(null)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     setOpen(false)
@@ -53,7 +54,10 @@ export default function SiteHeader() {
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
+      if (e.key === 'Escape' && !e.defaultPrevented) {
+        setOpen(false)
+        menuButtonRef.current?.focus()
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -62,19 +66,19 @@ export default function SiteHeader() {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-40 border-b border-hairline bg-surface/85 backdrop-blur supports-[backdrop-filter]:bg-surface/70"
+      className="site-shell sticky top-0 z-40 border-b border-hairline bg-surface"
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
+      <div className="site-shell-container flex items-center justify-between py-3">
         <BrandMark />
 
         <div className="flex items-center gap-2">
-          <nav className="hidden items-center gap-1.5 md:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-1.5 md:flex">
             {/* Lead feature: the Peptide Agent */}
             <Link
               href="/research"
               aria-current={agentActive ? 'page' : undefined}
               className={
-                'inline-flex items-center gap-1.5 rounded-lg border px-3.5 py-1.5 text-sm font-medium transition-all ' +
+                'inline-flex items-center gap-1.5 rounded-lg border px-3.5 py-1.5 text-sm font-medium transition-colors ' +
                 (agentActive
                   ? 'border-accent/50 bg-accent/20 text-accent'
                   : 'border-accent/30 bg-accent/10 text-accent hover:border-accent/50 hover:bg-accent/20')
@@ -94,7 +98,7 @@ export default function SiteHeader() {
                   className={
                     active
                       ? 'rounded-lg px-3 py-1.5 text-sm font-medium text-accent'
-                      : 'rounded-lg px-3 py-1.5 text-sm text-ink/65 transition-colors hover:bg-fill-strong hover:text-ink'
+                      : 'rounded-lg px-3 py-1.5 text-sm text-ink-muted transition-colors hover:bg-fill-strong hover:text-ink'
                   }
                 >
                   {link.label}
@@ -108,6 +112,7 @@ export default function SiteHeader() {
           <ThemeToggle />
 
           <button
+            ref={menuButtonRef}
             type="button"
             aria-expanded={open}
             aria-controls="site-mobile-nav"
@@ -120,37 +125,35 @@ export default function SiteHeader() {
         </div>
       </div>
 
-      {open && (
-        <div id="site-mobile-nav" className="border-t border-hairline bg-surface/95 backdrop-blur md:hidden">
-          <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3">
-            <Link
-              href="/research"
-              aria-current={agentActive ? 'page' : undefined}
-              className="mb-1 flex items-center gap-2 rounded-lg border border-accent/30 bg-accent/10 px-3 py-2 text-sm font-medium text-accent"
-            >
-              <Sparkles className="h-4 w-4" />
-              Peptide Agent
-            </Link>
-            {NAV_LINKS.map((link) => {
-              const active = isActive(pathname, link.match)
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  aria-current={active ? 'page' : undefined}
-                  className={
-                    active
-                      ? 'rounded-lg bg-accent/[0.08] px-3 py-2 text-sm font-medium text-accent'
-                      : 'rounded-lg px-3 py-2 text-sm text-ink/70 transition-colors hover:bg-fill-strong hover:text-ink'
-                  }
-                >
-                  {link.label}
-                </Link>
-              )
-            })}
-          </nav>
-        </div>
-      )}
+      <div id="site-mobile-nav" hidden={!open} className="border-t border-hairline bg-surface md:hidden">
+        <nav aria-label="Primary" className="site-shell-container flex flex-col gap-1 py-3">
+          <Link
+            href="/research"
+            aria-current={agentActive ? 'page' : undefined}
+            className="mb-1 flex items-center gap-2 rounded-lg border border-accent/30 bg-accent/10 px-3 py-2 text-sm font-medium text-accent"
+          >
+            <Sparkles className="h-4 w-4" />
+            Peptide Agent
+          </Link>
+          {NAV_LINKS.map((link) => {
+            const active = isActive(pathname, link.match)
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? 'page' : undefined}
+                className={
+                  active
+                    ? 'rounded-lg bg-accent/[0.08] px-3 py-2 text-sm font-medium text-accent'
+                    : 'rounded-lg px-3 py-2 text-sm text-ink-muted transition-colors hover:bg-fill-strong hover:text-ink'
+                }
+              >
+                {link.label}
+              </Link>
+            )
+          })}
+        </nav>
+      </div>
     </header>
   )
 }

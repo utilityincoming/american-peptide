@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Moon, Sun } from 'lucide-react'
+import { THEME_COLOR } from '@/lib/theme'
 
 type Theme = 'light' | 'dark'
 
@@ -26,7 +27,7 @@ export default function ThemeToggle() {
     // Keep the mobile browser-chrome color in sync with the applied theme.
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', next === 'light' ? '#F7F9FB' : '#0E1512')
+      ?.setAttribute('content', THEME_COLOR[next])
     try {
       localStorage.setItem('theme', next)
     } catch {
