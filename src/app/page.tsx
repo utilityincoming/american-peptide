@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, FlaskConical, Search, Sparkles, Syringe, Telescope } from 'lucide-react'
 import { ClinicalPulseIcon, CompoundSearchIcon, PeptideAgentIcon, PeptideForgeIcon } from '@/components/ResearchToolIcons'
-import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES, BROWSE_SPOTLIGHT } from '@/lib/peptides'
+import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES, BROWSE_SPOTLIGHT, getPeptideBySlug } from '@/lib/peptides'
 import { STATIC_FAQS, faqPageJsonLd } from '@/lib/faqs'
 import FaqAccordion from '@/components/FaqAccordion'
 import DynamicFaqs from '@/components/DynamicFaqs'
@@ -40,6 +40,7 @@ export const metadata: Metadata = {
 }
 
 const SPOTLIGHT_SLUGS = BROWSE_SPOTLIGHT
+const HERO_PEPTIDE = getPeptideBySlug('bpc-157')
 
 const features = [
   {
@@ -81,8 +82,8 @@ const features = [
 // scale of the sources we search backs it up.
 const stats = [
   { value: `${LISTED_PEPTIDES.length}`, label: 'Entries listed in the catalog' },
-  { value: '400K+', label: 'Compounds Searchable via PubChem' },
-  { value: '500K+', label: 'Clinical Trials Indexed' },
+  { value: '400K+', label: 'Compounds searchable via PubChem' },
+  { value: '500K+', label: 'Clinical trials indexed' },
 ]
 
 const steps = [
@@ -107,7 +108,7 @@ const steps = [
 ]
 
 // Section vertical rhythm: content sections use `pb-24` as the standard beat.
-// Exceptions are deliberate — the hero leads with `pt-12 md:pt-20 pb-20`, the
+// The hero uses a shorter opening interval on mobile; the
 // paired promo cards sit tight (`pb-12` then `pb-24`), and the last section
 // before the footer takes one larger `pb-32` break. Keep new sections on `pb-24`.
 export default function HomePage() {
@@ -122,145 +123,58 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface/60" />
       </div>
 
-      {/* ── Hero ── */}
-      <section className="relative z-10 mx-auto max-w-6xl px-6 pb-20 pt-12 md:px-10 md:pt-20">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-          {/* Left — copy */}
-          <div className="text-center lg:text-left">
-            {/* Status badge */}
-            <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.08] px-4 py-1.5 text-xs font-medium text-accent">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#7EE0B5] opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#7EE0B5]" />
-              </span>
-              Cited reference · Chemistry-grade · Works offline
-            </div>
+      <section aria-labelledby="home-title" className="relative z-10 bg-surface">
+        <div className="mx-auto max-w-6xl px-4 pb-12 pt-10 md:px-6 md:pb-20 md:pt-20">
+          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+            <div>
+              <h1 id="home-title" className="mb-4 max-w-xl text-balance text-4xl font-medium leading-[1.05] md:text-6xl">
+                A cited peptide reference
+              </h1>
+              <p className="mb-6 max-w-lg text-base leading-relaxed text-ink-muted md:text-lg">
+                Look up peptide sequences and their sources, explore clinical trials, and use
+                research calculators. The Peptide Agent cites the sources behind its answers.
+              </p>
 
-            {/* Headline — the USP: the only peptide app you can trust */}
-            <h1 className="mb-6 text-5xl font-bold leading-[1.04] tracking-tight md:text-6xl">
-              <span className="text-ink">The only peptide app</span>
-              <br />
-              <span className="text-accent">
-                you can actually trust
-              </span>
-            </h1>
-
-            {/* Subtitle */}
-            <p className="mx-auto mb-8 max-w-xl text-lg leading-relaxed text-ink/60 md:text-xl lg:mx-0">
-              Cited, chemistry-grade reference plus AI answers that show their sources —
-              catalog, calculators, and trial data ready at the bench, even with no signal.
-            </p>
-
-            {/* Capability strip — three tools, named.
-                flex-wrap instead of a fixed 3-col grid: tiles hold a readable
-                min width and reflow to 2-up (then 1-up) on narrow phones rather
-                than squeezing three columns of 10px text. `flex-1` lets a lone
-                wrapped tile stretch to fill its row so there's no orphan gap. */}
-            <div className="mx-auto mb-10 flex flex-wrap gap-2 lg:mx-0 lg:max-w-lg">
-              {[
-                {
-                  Icon: PeptideForgeIcon,
-                  label: 'PeptideForge',
-                  desc: 'Build residue by residue',
-                  href: '/compounds/builder',
-                },
-                {
-                  Icon: PeptideAgentIcon,
-                  label: 'Research Agent',
-                  desc: 'Citations included',
-                  href: '/research',
-                },
-                {
-                  Icon: ClinicalPulseIcon,
-                  label: 'Trial Intelligence',
-                  desc: 'Live ClinicalTrials data',
-                  href: '/trials',
-                },
-              ].map(({ Icon, label, desc, href }) => (
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                 <Link
-                  key={label}
-                  href={href}
-                  className="group flex flex-1 basis-[28%] min-w-[128px] flex-col items-center gap-1.5 rounded-xl border border-hairline bg-fill px-2 py-3 text-center transition-all hover:border-accent/30 hover:bg-fill-strong"
+                  href="/catalog"
+                  className="inline-flex min-h-11 items-center gap-2 bg-ink px-4 py-2 text-sm font-semibold text-surface transition-colors hover:bg-ink-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
-                  <Icon className="h-4 w-4 text-accent/70 transition-colors group-hover:text-accent" />
-                  <span className="text-[11px] font-semibold text-ink/80">{label}</span>
-                  <span className="text-[10px] leading-tight text-ink/55">{desc}</span>
+                  Browse the catalog
+                  <ArrowRight aria-hidden="true" className="h-4 w-4 shrink-0" />
                 </Link>
-              ))}
-            </div>
-
-            {/* CTAs — the Agent leads; the calculator is the bench tool people
-                come back to, so it sits right beside it as a prominent secondary. */}
-            <div className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
-              <Link
-                href="/research"
-                className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#7EE0B5] px-6 py-3.5 text-[15px] font-semibold text-[#0E1512] shadow-[0_0_0px_rgba(126,224,181,0)] transition-all hover:bg-[#A6F0CC] hover:shadow-[0_0_40px_rgba(126,224,181,0.35)]"
-              >
-                <PeptideAgentIcon className="h-4 w-4" />
-                Ask the Peptide Agent
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-              <Link
-                href="/tools/reconstitution-calculator"
-                className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-accent/30 bg-accent/[0.07] px-6 py-3.5 text-[15px] font-semibold text-accent transition-all hover:border-accent/50 hover:bg-accent/[0.12]"
-              >
-                <Syringe className="h-4 w-4" />
-                Open the calculator
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-              <Link
-                href="/catalog"
-                className="group inline-flex items-center justify-center gap-1.5 whitespace-nowrap px-2 py-3.5 text-[15px] font-medium text-ink/55 transition-colors hover:text-ink"
-              >
-                Browse the catalog
-                <ArrowRight className="h-4 w-4 text-ink/55 transition-all group-hover:translate-x-0.5 group-hover:text-accent" />
-              </Link>
-            </div>
-
-            {/* Starter prompt — deep-links into the Agent and auto-asks on load */}
-            <p className="mt-5 text-center text-xs text-ink/55 lg:text-left">
-              Try:{' '}
-              <Link
-                href={`/research?q=${encodeURIComponent('What GLP-1 analogs are in Phase 3 trials?')}`}
-                className="text-accent/80 underline decoration-accent/30 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent/60"
-              >
-                &ldquo;What GLP-1 analogs are in Phase 3 trials?&rdquo;
-              </Link>
-            </p>
-          </div>
-
-          {/* Keep the decorative art in the existing desktop hero slot. */}
-          <div className="relative mx-auto hidden aspect-square w-full lg:grid lg:items-center">
-            <HeroSequence />
-          </div>
-        </div>
-
-        {/* Real catalog example — links to the entry so the spec is verifiable */}
-        <Link
-          href="/catalog/bpc-157"
-          className="group mx-auto mt-14 flex max-w-xl items-center justify-center gap-x-2 gap-y-1 overflow-hidden rounded-xl border border-hairline bg-fill px-5 py-3.5 text-center font-mono text-xs transition-colors hover:border-accent/25 md:text-sm"
-        >
-          <span className="text-ink/55">BPC-157 · </span>
-          <span className="text-accent/80">GEPPPGKPADDAGLV</span>
-          <span className="text-ink/55"> · 15 residues</span>
-          <ArrowRight className="h-3.5 w-3.5 text-ink/25 transition-all group-hover:translate-x-0.5 group-hover:text-accent" />
-        </Link>
-
-        {/* Sourcing line — every catalog entry is cited, not asserted */}
-        <p className="mt-4 text-center text-xs tracking-wide text-ink/60 italic">
-          Every sequence traced to its source — not asserted, cited.
-        </p>
-
-        {/* Stats row */}
-        <div className="mt-12 grid grid-cols-3 gap-4 border-t border-hairline pt-10">
-          {stats.map(({ value, label }) => (
-            <div key={label} className="text-center">
-              <div className="font-display text-3xl font-bold tracking-tight text-accent md:text-4xl">
-                {value}
+                <Link
+                  href="/tools/reconstitution-calculator"
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                >
+                  Open the calculator
+                </Link>
+                <Link
+                  href="/research"
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                >
+                  Ask the Peptide Agent
+                </Link>
               </div>
-              <div className="mt-1 text-xs text-ink/50 md:text-sm">{label}</div>
             </div>
-          ))}
+
+            {HERO_PEPTIDE?.sequence && (
+              <HeroSequence
+                href={`/catalog/${HERO_PEPTIDE.slug}`}
+                name={HERO_PEPTIDE.name}
+                sequence={HERO_PEPTIDE.sequence}
+              />
+            )}
+          </div>
+
+          <dl className="mt-8 grid grid-cols-3 gap-3 border-t border-hairline pt-5 sm:gap-6 md:mt-12">
+            {stats.map(({ value, label }) => (
+              <div key={label} className="flex flex-col">
+                <dt className="text-xs text-ink-muted md:text-sm">{label}</dt>
+                <dd className="order-first font-scientific text-xl font-semibold text-ink md:text-3xl">{value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
