@@ -1,31 +1,27 @@
 import { ArrowUpRight, Check, Info } from 'lucide-react'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
 import {
-  getSpotlightVendor,
-  getVendorsForPeptide,
   isAffiliate,
   shipsToLabel,
-  trustScore,
   vendorHref,
-  vendorTier,
-  VENDOR_TIERS,
 } from '@/lib/vendors'
-import { vendorClaimTier, vendorPurityClaim } from '@/lib/evidence/from-vendors'
+import { reconcileCompoundSources } from '@/lib/evidence/from-vendors'
 import { TierBadge } from '@/components/evidence'
 
 /**
  * The GHK-Cu aggregator's core surface, reusable for any compound: vendors that
  * carry `slug`, ranked STRICTLY by the provenance tier of their purity claim
- * (documented → third_party, claimed → vendor_reported), with trustScore as the
- * within-tier order. Placement is by tier, not commission — the paid partner is
- * disclosed inline at its honest tier, never pinned above it. A missing COA date
- * is surfaced rather than hidden, and read correctly: a warning for a static,
- * reused certificate, a neutral note for a vendor that dates every lot. Renders
- * nothing on the Play (TWA) build, where the vendor helpers gate outbound links.
+ * (documented → third_party, claimed → vendor_reported, unvetted → community),
+ * with trustScore as the within-tier order. Placement is by tier, not commission
+ * — the paid partner is disclosed inline at its honest tier, never pinned above
+ * it. A missing COA date is surfaced rather than hidden, and read correctly: a
+ * warning for a static, reused certificate, a neutral note for a vendor that
+ * dates every lot. Renders nothing on the Play (TWA) build, where the vendor
+ * helpers gate outbound links.
  */
 export default function SourceComparison({ slug }: { slug: string }) {
-  const vendors = getVendorsForPeptide(slug)
-  if (vendors.length === 0) {
+  const reconciliation = reconcileCompoundSources(slug)
+  if (!reconciliation.isReconciled) {
     return (
       <p className="rounded-xl border border-hairline bg-fill p-5 text-sm text-ink/55">
         No trust-ranked sources are on file for this compound yet.
@@ -33,30 +29,22 @@ export default function SourceComparison({ slug }: { slug: string }) {
     )
   }
 
-  const spotlight = getSpotlightVendor(slug)
-  const groups = VENDOR_TIERS.map((band) => ({
-    band,
-    vendors: vendors.filter((v) => vendorTier(v) === band.id),
-  })).filter((g) => g.vendors.length > 0)
-
   return (
     <div className="space-y-8">
-      {groups.map(({ band, vendors: bandVendors }) => {
-        const claimTier = vendorClaimTier(bandVendors[0])
+      {reconciliation.groups.map(({ band, claimTier, sources }) => {
         return (
           <div key={band.id}>
             <div className="mb-1.5 flex flex-wrap items-center gap-2.5">
               <TierBadge tier={claimTier} />
               <h3 className="text-sm font-semibold text-ink/85">{band.label}</h3>
               <span className="text-xs text-ink/55">
-                {bandVendors.length} source{bandVendors.length === 1 ? '' : 's'}
+                {sources.length} source{sources.length === 1 ? '' : 's'}
               </span>
             </div>
             <p className="mb-3 text-xs leading-relaxed text-ink/55">{band.blurb}</p>
 
             <div className="space-y-3">
-              {bandVendors.map((v) => {
-                const claim = vendorPurityClaim(v)
+              {sources.map(({ vendor: v, claim, trustScore: score, featured }) => {
                 const hasPct = typeof claim.value === 'number'
                 const t = v.trust
                 const signals: string[] = []
@@ -65,7 +53,6 @@ export default function SourceComparison({ slug }: { slug: string }) {
                 if (t.reshipPolicy) signals.push('Reship on loss')
                 if (t.refundPolicy) signals.push('Refund policy')
                 const affiliate = isAffiliate(v)
-                const featured = spotlight?.id === v.id
                 const ships = shipsToLabel(v)
 
                 return (
@@ -90,7 +77,7 @@ export default function SourceComparison({ slug }: { slug: string }) {
                           className="block text-[11px] tabular-nums text-ink/55"
                           title="Transparency score — the within-tier sort key"
                         >
-                          {trustScore(v)}/100
+                          {score}/100
                         </span>
                         {ships && (
                           <span className="mt-0.5 block text-[10px] text-ink/55">{ships}</span>

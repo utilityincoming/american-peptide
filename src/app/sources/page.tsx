@@ -3,9 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowRight, Layers, ShieldCheck } from 'lucide-react'
 import { PEPTIDES, CATEGORIES } from '@/lib/peptides'
-import { getVendorsForPeptide, hasSourcingPage, SOURCING_PAGE_MIN_VENDORS } from '@/lib/vendors'
-import { vendorPurityClaim } from '@/lib/evidence/from-vendors'
-import { computeEvidenceFloor } from '@/lib/evidence/types'
+import { hasSourcingPage, SOURCING_PAGE_MIN_VENDORS } from '@/lib/vendors'
+import { reconcileCompoundSources } from '@/lib/evidence/from-vendors'
 import { EvidenceFloor } from '@/components/evidence'
 
 const SITE = 'https://americanpeptide.com'
@@ -39,13 +38,13 @@ export default function SourcesIndexPage() {
   if (sourced.length === 0) notFound()
 
   const entries = sourced.map((p) => {
-    const vendors = getVendorsForPeptide(p.slug)
+    const reconciliation = reconcileCompoundSources(p.slug)
     return {
       peptide: p,
-      vendorCount: vendors.length,
+      vendorCount: reconciliation.sources.length,
       // Same floor the slug page shows: the weakest LOAD-BEARING claim, which
       // for sourcing is the vendor purities — not reference-grade chemistry.
-      floor: computeEvidenceFloor(vendors.map(vendorPurityClaim)),
+      floor: reconciliation.sourcingFloor,
     }
   })
 
