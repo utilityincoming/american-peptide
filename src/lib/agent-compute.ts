@@ -1,20 +1,41 @@
-// Deterministic tools for the research agent. Each one calls a pure function
-// the site already trusts (reconstitution, half-life, vendor trust, COA grade)
-// and returns a short JSON string. The model decides when to call them; it
-// does not invent the number.
+// Deterministic tools for the research agent and remote MCP server. Each one
+// calls a pure TypeScript calculator function (reconstitution, blend math,
+// blend compatibility screening, single-compartment pharmacokinetics, vendor
+// trust ranking, COA grading) and returns a JSON payload stamped with the
+// canonical scope note from /methods (SCOPE_NOTES.reference:
+// "Unit arithmetic or a registry lookup from the stated inputs. This is a
+// value, not a dosing recommendation.").
+//
+// The LLM never computes unit, concentration, molar, or PK arithmetic natively —
+// all arithmetic routes through our deterministic TypeScript modules. Personal
+// dosing/protocol recommendation requests are refused while explicit
+// hypothetical numeric inputs return deterministic arithmetic.
 
 import { matchPeptides } from '@/lib/agent-context'
+import { blend, overDeliveryNote, type BlendComponent } from '@/lib/blend'
+import { DEFAULT_BUFFER_PH, screenBlend, type BlendMember } from '@/lib/blend-screen'
 import { analyzeCoa } from '@/lib/coa'
+import { SCOPE_NOTES } from '@/lib/evidence/types'
+import { getPeptideBySlug, PEPTIDES, type Peptide } from '@/lib/peptides'
 import {
   accumulationRatio,
   clearanceTime,
+  fractionRemaining,
   getPk,
   halfLifeMidpoint,
+  interactionCheck,
+  peakTroughRatio,
   timeToSteadyState,
 } from '@/lib/pharmacokinetics'
-import { reconstitute } from '@/lib/reconstitution'
+import { reconstitute, solveWaterForDraw } from '@/lib/reconstitution'
 import { getVendorsForPeptide, hasSourcingPage, trustScore, vendorTier } from '@/lib/vendors'
 import { API_SITE } from '@/lib/catalog-api'
+
+/** Canonical /methods scope note required on every calculator tool output. */
+export const CANONICAL_CALC_SCOPE_NOTE = SCOPE_NOTES.reference
+
+const PERSONAL_ADVICE_RE =
+  /\b(prescribe|prescription|what\s+dose\s+should\s+i\s+take|how\s+much\s+should\s+i\s+(?:take|inject|pin)|my\s+personal\s+(?:dose|protocol|regimen)|diagnose\s+me|medical\s+advice\s+for\s+me|treat\s+my)\b/i
 
 function num(v: unknown): number | null {
   const n = typeof v === 'number' ? v : typeof v === 'string' && v.trim() !== '' ? Number(v) : NaN
@@ -27,70 +48,415 @@ function round(n: number, digits = 3): number {
   return Math.round(n * f) / f
 }
 
+function checkPersonalAdviceRefusal(input: Record<string, unknown>): string | null {
+  for (const val of Object.values(input)) {
+    if (typeof val === 'string' && PERSONAL_ADVICE_RE.test(val)) {
+      return JSON.stringify({
+        error:
+          'Refused: calculator tools perform deterministic unit arithmetic from explicit hypothetical inputs only and cannot provide personal dosing, prescribing, or medical protocol advice.',
+        code: 'personal_dosing_refused',
+        scope_note: CANONICAL_CALC_SCOPE_NOTE,
+      })
+    }
+  }
+  return null
+}
+
+function resolveCatalogPeptide(query: string): Peptide | undefined {
+  const q = query.trim().toLowerCase()
+  if (!q) return undefined
+  return (
+    getPeptideBySlug(q) ??
+    PEPTIDES.find(
+      (p) =>
+        p.name.toLowerCase() === q ||
+        (p.aliases ?? []).some((a) => a.toLowerCase() === q),
+    ) ??
+    matchPeptides(query, 1)[0]
+  )
+}
+
+/**
+ * Resolve molecular weight (g/mol = Da) from explicit `molecular_weight_da` or
+ * from a catalog `peptide` slug/name. Returns `{ mw, peptide, error }` so
+ * callers can cleanly report missing MW when molar concentration is requested.
+ */
+function resolveMolecularWeight(input: Record<string, unknown>): {
+  mw: number | null
+  peptide?: Peptide
+  missingMwError?: string
+} {
+  const explicitMw = num(input.molecular_weight_da)
+  const peptideName = typeof input.peptide === 'string' ? input.peptide.trim() : ''
+  const peptide = peptideName ? resolveCatalogPeptide(peptideName) : undefined
+
+  if (explicitMw !== null) {
+    if (explicitMw <= 0 || explicitMw > 1_000_000) {
+      return {
+        mw: null,
+        peptide,
+        missingMwError: 'Invalid molecular_weight_da: molecular weight must be a positive number (Da / g/mol).',
+      }
+    }
+    return { mw: explicitMw, peptide }
+  }
+
+  if (peptideName) {
+    if (!peptide) {
+      return {
+        mw: null,
+        missingMwError: `Missing molecular weight: no catalog compound matched "${peptideName.slice(0, 80)}" and no explicit molecular_weight_da was provided. Do not invent a molecular weight.`,
+      }
+    }
+    if (peptide.molecularWeight == null || peptide.molecularWeight <= 0) {
+      return {
+        mw: null,
+        peptide,
+        missingMwError: `Missing molecular weight: catalog entry "${peptide.name}" (${peptide.slug}) has no stored molecularWeight (e.g. mixture/extract or uncharacterized biologic) and no explicit molecular_weight_da was provided. Do not invent a molecular weight.`,
+      }
+    }
+    return { mw: peptide.molecularWeight, peptide }
+  }
+
+  if (input.require_molar === true) {
+    return {
+      mw: null,
+      missingMwError:
+        'Missing molecular weight: provide `molecular_weight_da` or a catalog `peptide` with a verified molecular weight to compute molar concentration.',
+    }
+  }
+
+  return { mw: null }
+}
+
 export function computeReconstitution(input: Record<string, unknown>): string {
+  const refused = checkPersonalAdviceRefusal(input)
+  if (refused) return refused
+
   const vialMg = num(input.vial_mg)
   const doseMcg = num(input.dose_mcg)
   const waterMl = num(input.water_ml)
-  if (vialMg == null || doseMcg == null || waterMl == null) {
-    return 'Need vial_mg, dose_mcg, and water_ml as numbers.'
+  const targetDrawUnits = num(input.target_draw_units)
+
+  if (vialMg == null || doseMcg == null || (waterMl == null && targetDrawUnits == null)) {
+    return 'Need vial_mg, dose_mcg, and water_ml (or target_draw_units) as numbers.'
   }
-  if (vialMg <= 0 || vialMg > 10000 || doseMcg <= 0 || doseMcg > 1_000_000 || waterMl <= 0 || waterMl > 100) {
+
+  if (vialMg <= 0 || vialMg > 10000 || doseMcg <= 0 || doseMcg > 1_000_000) {
     return 'Values out of range. vial_mg and dose_mcg must be positive; water_ml must be between 0 and 100.'
   }
-  const r = reconstitute({ vialAmount: vialMg * 1000, dose: doseMcg, waterMl })
-  return JSON.stringify({
+
+  // Optional reverse-solve: when target_draw_units is provided without water_ml
+  // (or alongside it), solve for the water volume needed on a U-100 syringe.
+  let effectiveWaterMl = waterMl
+  let solvedWaterMl: number | undefined
+  if (targetDrawUnits !== null) {
+    if (targetDrawUnits <= 0 || targetDrawUnits > 1000) {
+      return 'Values out of range. target_draw_units must be between 0 and 1000.'
+    }
+    solvedWaterMl = solveWaterForDraw(vialMg * 1000, doseMcg, targetDrawUnits)
+    if (effectiveWaterMl == null) effectiveWaterMl = solvedWaterMl
+  }
+
+  if (effectiveWaterMl == null || effectiveWaterMl <= 0 || effectiveWaterMl > 100) {
+    return 'Values out of range. vial_mg and dose_mcg must be positive; water_ml must be between 0 and 100.'
+  }
+
+  const mwInfo = resolveMolecularWeight(input)
+  if (mwInfo.missingMwError) {
+    return JSON.stringify({
+      source: 'reconstitution',
+      error: mwInfo.missingMwError,
+      code: 'missing_molecular_weight',
+      scope_note: CANONICAL_CALC_SCOPE_NOTE,
+    })
+  }
+
+  const r = reconstitute({ vialAmount: vialMg * 1000, dose: doseMcg, waterMl: effectiveWaterMl })
+
+  const payload: Record<string, unknown> = {
     source: 'reconstitution',
-    note: 'Dilution math only. Not a dosing recommendation. U-100 syringe: 100 units = 1 mL.',
+    scope_note: CANONICAL_CALC_SCOPE_NOTE,
+    note: `${CANONICAL_CALC_SCOPE_NOTE} U-100 syringe: 100 units = 1 mL.`,
     vialMg,
     doseMcg,
-    waterMl,
+    waterMl: round(effectiveWaterMl, 4),
     concentrationMcgPerMl: round(r.concentrationPerMl, 2),
+    concentrationMgPerMl: round(r.concentrationPerMl / 1000, 4),
+    concentrationPerTickMcg: round(r.concentrationPerTick, 2),
     drawMl: round(r.volumePerInjectionMl, 4),
     drawUnitsU100: round(r.unitsPerInjection, 2),
     wholeDosesPerVial: r.dosesPerVial,
+  }
+
+  if (solvedWaterMl !== undefined) {
+    payload.targetDrawUnits = targetDrawUnits
+    payload.solvedWaterMl = round(solvedWaterMl, 4)
+  }
+
+  if (mwInfo.peptide) {
+    payload.peptide = {
+      slug: mwInfo.peptide.slug,
+      name: mwInfo.peptide.name,
+      molecularWeightDa: mwInfo.peptide.molecularWeight ?? null,
+    }
+  }
+
+  if (mwInfo.mw !== null && mwInfo.mw > 0) {
+    // concentrationPerMl is mcg/mL = mg/L. Dividing by MW (g/mol) gives mmol/L (mM);
+    // multiplying by 1000 gives µmol/L (µM). doseMcg / MW gives nmol per draw.
+    const molarityUmolPerL = (r.concentrationPerMl / mwInfo.mw) * 1000
+    const doseNmol = (doseMcg / mwInfo.mw) * 1000
+    payload.molecularWeightDa = mwInfo.mw
+    payload.molarConcentrationUmolPerL = round(molarityUmolPerL, 3)
+    payload.doseNmol = round(doseNmol, 3)
+  }
+
+  return JSON.stringify(payload)
+}
+
+export function computeBlend(input: Record<string, unknown>): string {
+  const refused = checkPersonalAdviceRefusal(input)
+  if (refused) return refused
+
+  const rawPeptides = input.peptides ?? input.components
+  if (!Array.isArray(rawPeptides) || rawPeptides.length === 0) {
+    return JSON.stringify({
+      source: 'blend-screen',
+      error: 'Provide a non-empty `peptides` array (e.g. [{ slug: "bpc-157", mass_mg: 5, dose_mcg: 250 }, { slug: "tb-500", mass_mg: 5, dose_mcg: 250 }]).',
+      code: 'invalid_input',
+      scope_note: CANONICAL_CALC_SCOPE_NOTE,
+    })
+  }
+
+  if (rawPeptides.length > 10) {
+    return JSON.stringify({
+      source: 'blend-screen',
+      error: 'A blend calculation supports at most 10 peptides at once.',
+      code: 'invalid_input',
+      scope_note: CANONICAL_CALC_SCOPE_NOTE,
+    })
+  }
+
+  const members: BlendMember[] = []
+  const mathRows: BlendComponent[] = []
+  let hasAnyMathInput = false
+
+  for (const item of rawPeptides) {
+    if (typeof item === 'string') {
+      const trimmed = item.trim()
+      if (!trimmed) {
+        return JSON.stringify({
+          source: 'blend-screen',
+          error: 'Each peptide entry must have a non-empty name or slug.',
+          code: 'invalid_input',
+          scope_note: CANONICAL_CALC_SCOPE_NOTE,
+        })
+      }
+      members.push({ slug: trimmed.toLowerCase(), name: trimmed })
+      continue
+    }
+    if (item && typeof item === 'object') {
+      const obj = item as Record<string, unknown>
+      const slug = typeof obj.slug === 'string' ? obj.slug.trim() : undefined
+      const name = typeof obj.name === 'string' ? obj.name.trim() : slug
+      if (!slug && !name) {
+        return JSON.stringify({
+          source: 'blend-screen',
+          error: 'Each peptide entry must specify a `slug` or `name`.',
+          code: 'invalid_input',
+          scope_note: CANONICAL_CALC_SCOPE_NOTE,
+        })
+      }
+      members.push({ slug, name })
+
+      const massMg = num(obj.mass_mg ?? obj.massMg)
+      const doseMcg = num(obj.dose_mcg ?? obj.doseMcg)
+      if (massMg !== null || doseMcg !== null) {
+        hasAnyMathInput = true
+        if (massMg === null || doseMcg === null || massMg <= 0 || massMg > 10000 || doseMcg <= 0 || doseMcg > 1_000_000) {
+          return JSON.stringify({
+            source: 'blend-screen',
+            error: `Invalid mass_mg or dose_mcg for "${name ?? slug}". Both mass_mg and dose_mcg must be positive numbers when computing shared-vial blend draws.`,
+            code: 'invalid_input',
+            scope_note: CANONICAL_CALC_SCOPE_NOTE,
+          })
+        }
+        mathRows.push({ name: name ?? slug, massMg, doseMcg })
+      }
+    }
+  }
+
+  const rawPh = input.buffer_ph ?? input.pH
+  let pH = DEFAULT_BUFFER_PH
+  if (rawPh !== undefined && rawPh !== null && rawPh !== '') {
+    const parsedPh = num(rawPh)
+    if (parsedPh === null || parsedPh < 0 || parsedPh > 14) {
+      return JSON.stringify({
+        source: 'blend-screen',
+        error: 'Invalid buffer_ph: pH must be a number between 0 and 14.',
+        code: 'invalid_input',
+        scope_note: CANONICAL_CALC_SCOPE_NOTE,
+      })
+    }
+    pH = parsedPh
+  }
+
+  const screen = screenBlend(members, pH)
+
+  let blendMath: Record<string, unknown> | null = null
+  const rawWater = input.water_ml ?? input.waterMl
+  if (hasAnyMathInput || (rawWater !== undefined && rawWater !== null && rawWater !== '')) {
+    const waterMl = num(rawWater)
+    if (waterMl === null || waterMl <= 0 || waterMl > 100) {
+      return JSON.stringify({
+        source: 'blend-screen',
+        error: 'Invalid water_ml: provide a positive water_ml (0 < water_ml <= 100) when computing shared-vial blend draws.',
+        code: 'invalid_input',
+        scope_note: CANONICAL_CALC_SCOPE_NOTE,
+      })
+    }
+    if (mathRows.length === 0) {
+      return JSON.stringify({
+        source: 'blend-screen',
+        error: 'Provide positive mass_mg and dose_mcg on each peptide component to compute shared-vial draw volume.',
+        code: 'invalid_input',
+        scope_note: CANONICAL_CALC_SCOPE_NOTE,
+      })
+    }
+    const b = blend(waterMl, mathRows)
+    blendMath = {
+      waterMl: b.waterMl,
+      wholeDoses: b.doses,
+      drawMl: round(b.drawMl, 4),
+      drawUnitsU100: round(b.units, 2),
+      components: b.components.map((c) => ({
+        name: c.name ?? null,
+        massMg: c.massMg,
+        intendedDoseMcg: c.doseMcg,
+        standaloneDoses: round(c.standaloneDoses, 2),
+        deliveredMcg: round(c.deliveredMcg, 2),
+        overPercent: round(c.overFraction * 100, 2),
+        overDeliveryWarning: overDeliveryNote(c.overFraction),
+      })),
+    }
+  }
+
+  return JSON.stringify({
+    source: 'blend-screen',
+    scope_note: CANONICAL_CALC_SCOPE_NOTE,
+    note: `${CANONICAL_CALC_SCOPE_NOTE} Physical compatibility screen is a Henderson–Hasselbalch charge/pI and Kyte–Doolittle GRAVY estimate, not a formulation study.`,
+    pH: screen.pH,
+    peptides: screen.peptides.map((p) => ({
+      slug: p.slug,
+      name: p.name,
+      hasSequence: p.hasSequence,
+      charge: p.charge !== null ? round(p.charge, 2) : null,
+      pi: p.pi !== null ? round(p.pi, 2) : null,
+      gravy: p.gravy !== null ? round(p.gravy, 2) : null,
+      cysteines: p.cysteines,
+    })),
+    flags: screen.flags,
+    unresolved: screen.unresolved,
+    handlingNotes: screen.notes,
+    ...(blendMath ? { sharedVialDraw: blendMath } : {}),
   })
 }
 
 export function computePharmacokinetics(input: Record<string, unknown>): string {
+  const refused = checkPersonalAdviceRefusal(input)
+  if (refused) return refused
+
   const name = String(input.name ?? '').trim()
-  if (!name) return 'Need a compound name.'
-  const peptide = matchPeptides(name, 1)[0]
-  if (!peptide) return `No catalog peptide matched "${name.slice(0, 80)}". Do not invent a half-life.`
-  const pk = getPk(peptide.slug)
-  if (!pk?.halfLifeHours) {
+  const explicitHalfLife = num(input.half_life_hours)
+
+  if (!name && explicitHalfLife === null) {
+    return 'Need a compound name or an explicit half_life_hours.'
+  }
+
+  if (explicitHalfLife !== null && (explicitHalfLife <= 0 || explicitHalfLife > 24 * 365)) {
+    return 'Invalid half_life_hours: must be a positive number of hours.'
+  }
+
+  const interval = num(input.interval_hours)
+  if (input.interval_hours !== undefined && input.interval_hours !== null && input.interval_hours !== '') {
+    if (interval === null || interval <= 0 || interval > 24 * 60) {
+      return 'Invalid interval_hours: must be a positive number between 0 and 1440 hours.'
+    }
+  }
+
+  const elapsed = num(input.elapsed_hours)
+  if (input.elapsed_hours !== undefined && input.elapsed_hours !== null && input.elapsed_hours !== '') {
+    if (elapsed === null || elapsed < 0 || elapsed > 24 * 365) {
+      return 'Invalid elapsed_hours: must be a non-negative number of hours.'
+    }
+  }
+
+  let peptide: Peptide | undefined
+  if (name) {
+    peptide = resolveCatalogPeptide(name)
+    if (!peptide && explicitHalfLife === null) {
+      return `No catalog peptide matched "${name.slice(0, 80)}". Do not invent a half-life.`
+    }
+  }
+
+  const pk = peptide ? getPk(peptide.slug) : undefined
+  if (!pk?.halfLifeHours && explicitHalfLife === null) {
     return JSON.stringify({
       source: 'pharmacokinetics',
-      name: peptide.name,
-      slug: peptide.slug,
+      scope_note: CANONICAL_CALC_SCOPE_NOTE,
+      name: peptide?.name ?? name,
+      slug: peptide?.slug ?? null,
       halfLifeHours: null,
-      note: 'No published human half-life is stored for this compound. Do not invent one.',
+      note: `${CANONICAL_CALC_SCOPE_NOTE} No published human half-life is stored for this compound. Do not invent one.`,
     })
   }
-  const mid = halfLifeMidpoint(pk.halfLifeHours)
-  const interval = num(input.interval_hours)
+
+  const mid = explicitHalfLife !== null ? explicitHalfLife : halfLifeMidpoint(pk!.halfLifeHours!)
   const body: Record<string, unknown> = {
     source: 'pharmacokinetics',
-    note: 'Single-compartment approximation from the site half-life table. Research reference, not a regimen.',
-    name: peptide.name,
-    slug: peptide.slug,
-    halfLifeHours: pk.halfLifeHours,
+    scope_note: CANONICAL_CALC_SCOPE_NOTE,
+    note: `${CANONICAL_CALC_SCOPE_NOTE} Single-compartment approximation from the site half-life table.`,
+    name: peptide?.name ?? (name || 'Hypothetical input'),
+    slug: peptide?.slug ?? null,
+    halfLifeHours: pk?.halfLifeHours ?? { low: mid, high: mid },
     halfLifeMidpointHours: round(mid, 2),
     hoursToSteadyState: round(timeToSteadyState(mid), 1),
     hoursToClear: round(clearanceTime(mid), 1),
-    sourceNote: pk.sourceNote,
-    page: `${API_SITE}/catalog/${peptide.slug}`,
+    sourceNote:
+      explicitHalfLife !== null
+        ? 'Explicit hypothetical half_life_hours input'
+        : pk?.sourceNote ?? null,
+    page: peptide ? `${API_SITE}/catalog/${peptide.slug}` : null,
   }
+
   if (interval != null && interval > 0 && interval <= 24 * 60) {
     body.intervalHours = interval
     body.accumulationRatio = round(accumulationRatio(mid, interval), 2)
+    body.peakTroughRatio = round(peakTroughRatio(mid, interval), 2)
   }
+
+  if (elapsed != null && elapsed >= 0) {
+    body.elapsedHours = elapsed
+    body.fractionRemaining = round(fractionRemaining(mid, elapsed), 4)
+    body.percentRemaining = round(fractionRemaining(mid, elapsed) * 100, 2)
+  }
+
+  if (Array.isArray(input.compare_slugs) && peptide) {
+    const slugs = [
+      peptide.slug,
+      ...input.compare_slugs.map((s) => String(s).trim().toLowerCase()).filter(Boolean),
+    ]
+    body.interactions = interactionCheck(slugs)
+  }
+
   return JSON.stringify(body)
 }
 
 export function computeVendorRank(input: Record<string, unknown>): string {
   const name = String(input.name ?? '').trim()
   if (!name) return 'Need a compound name.'
-  const peptide = matchPeptides(name, 1)[0]
+  const peptide = resolveCatalogPeptide(name)
   if (!peptide) return `No catalog peptide matched "${name.slice(0, 80)}".`
   const vendors = getVendorsForPeptide(peptide.slug).slice(0, 5).map((v) => ({
     name: v.name,
@@ -104,6 +470,7 @@ export function computeVendorRank(input: Record<string, unknown>): string {
   }))
   return JSON.stringify({
     source: 'vendor-trust',
+    scope_note: CANONICAL_CALC_SCOPE_NOTE,
     note: 'Ranked by published transparency signals only. Not a quality guarantee and not ordered by commission.',
     name: peptide.name,
     slug: peptide.slug,
@@ -118,6 +485,7 @@ export function computeCoaGrade(input: Record<string, unknown>): string {
   const report = analyzeCoa(text.slice(0, 8000))
   return JSON.stringify({
     source: 'coa-grade',
+    scope_note: CANONICAL_CALC_SCOPE_NOTE,
     note: 'Rule-based read of the pasted text against the site transparency checklist. Not a lab verification.',
     detected: report.detectedPeptide,
     grade: report.score.grade,

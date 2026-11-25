@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { Blend, Plus, Trash2, AlertTriangle } from 'lucide-react'
 import { RECON_PRESET_GROUPS } from '@/lib/reconstitution-presets'
+import { blend, OVER_FRACTION_HIGHLIGHT } from '@/lib/blend'
 import {
   DEFAULT_BUFFER_PH,
   screenBlend,
@@ -66,31 +67,38 @@ export default function BlendCalculatorPage() {
 
   const calc = useMemo(() => {
     const water = parsePositive(waterMl)
-    const items = rows.map((r) => ({
-      name: r.name.trim(),
-      mass: parsePositive(r.mass),
-      dose: parsePositive(r.dose),
+    const result = blend(
+      water,
+      rows.map((r) => ({
+        name: r.name.trim(),
+        massMg: parsePositive(r.mass),
+        doseMcg: parsePositive(r.dose),
+      })),
+    )
+
+    const perPeptide = result.components.map((c) => ({
+      name: c.name ?? '',
+      mass: c.massMg,
+      dose: c.doseMcg,
+      ok: c.valid,
+      deliveredMcg: c.deliveredMcg,
+      overPct: c.overFraction * 100,
     }))
-    const valid = items.filter((i) => i.mass > 0 && i.dose > 0)
 
-    // Doses each peptide could supply on its own, at its desired dose.
-    const standalone = valid.map((i) => (i.mass * 1000) / i.dose)
-    // The blend is limited by the scarcest peptide — that sets whole doses.
-    const doses = standalone.length ? Math.floor(Math.min(...standalone)) : 0
-    const drawMl = doses > 0 && water > 0 ? water / doses : 0
-    const units = drawMl * 100
+    const anyOver = result.components.some(
+      (c) => c.valid && c.overFraction > OVER_FRACTION_HIGHLIGHT,
+    )
+    const validCount = result.components.filter((c) => c.valid).length
 
-    const perPeptide = items.map((i) => {
-      const ok = i.mass > 0 && i.dose > 0
-      const deliveredMcg = doses > 0 && ok ? (i.mass * 1000) / doses : 0
-      const overPct =
-        ok && i.dose > 0 ? ((deliveredMcg - i.dose) / i.dose) * 100 : 0
-      return { ...i, ok, deliveredMcg, overPct }
-    })
-
-    const anyOver = perPeptide.some((p) => p.ok && p.overPct > 2)
-
-    return { water, doses, drawMl, units, perPeptide, anyOver, validCount: valid.length }
+    return {
+      water: result.waterMl,
+      doses: result.doses,
+      drawMl: result.drawMl,
+      units: result.units,
+      perPeptide,
+      anyOver,
+      validCount,
+    }
   }, [waterMl, rows])
 
   const screen = useMemo(() => {

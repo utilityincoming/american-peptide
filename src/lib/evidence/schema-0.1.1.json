@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://americanpeptide.org/standards/evidence-tier/0.1.1/schema.json",
+  "title": "American Peptide Evidence Tier Claim",
+  "description": "A single factual claim under Evidence Tier Schema 0.1.1. The tier records provenance, not confidence and not study-design strength. Version 0.1 of the public text is frozen at https://americanpeptide.org/standards/evidence-tier/v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["field", "value", "tier", "freshness", "estimate_kind", "scope_note", "provenance"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "field": { "type": "string", "minLength": 1, "description": "Stable machine name, for example half_life_subcutaneous." },
+    "value": { "type": ["number", "string"] },
+    "unit": { "type": "string" },
+    "range": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "type": "number" },
+      "description": "Reported spread. Not a confidence interval unless the scope note says so."
+    },
+    "tier": { "$ref": "#/$defs/tier" },
+    "freshness": { "enum": ["current", "stale", "superseded", "retracted"] },
+    "estimate_kind": { "$ref": "#/$defs/estimateKind" },
+    "scope_note": {
+      "type": "string",
+      "description": "Mandatory for every tier whose weight is below clinical (preclinical, third_party, vendor_reported, community). Recommended for reference."
+    },
+    "scope": {
+      "type": "string",
+      "description": "Optional species/route/matrix key, for example human.sc or rat.im. A mismatch blocks supersession. Added in 0.1.1; omitting it preserves 0.1.0 behavior."
+    },
+    "superseded_by": { "type": "string" },
+    "provenance": { "$ref": "#/$defs/provenance" }
+  },
+  "$defs": {
+    "tier": {
+      "enum": ["reference", "clinical", "preclinical", "third_party", "vendor_reported", "community"],
+      "description": "Weights: reference 60, clinical 50, preclinical 40, third_party 30, vendor_reported 20, community 10."
+    },
+    "estimateKind": {
+      "enum": ["identity", "computed", "pharmacokinetic", "pharmacodynamic", "purity", "dose_convention", "commercial"]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_type", "source_name", "retrieved_at", "schema_version"],
+      "properties": {
+        "source_type": { "enum": ["registry", "publication", "trial", "assay", "vendor", "aggregate"] },
+        "source_name": { "type": "string", "minLength": 1 },
+        "source_id": { "type": "string" },
+        "source_url": { "type": "string" },
+        "retrieved_at": { "type": "string", "format": "date-time", "description": "ISO 8601. A claim without a retrieval date is invalid." },
+        "method": { "type": "string" },
+        "n": { "type": "integer", "minimum": 0 },
+        "schema_version": { "const": "0.1.1" }
+      }
+    }
+  }
+}

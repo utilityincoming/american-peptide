@@ -195,6 +195,118 @@ const handler = createMcpHandler(
         return r.isError ? errorText(r.content) : text(r.content)
       },
     )
+
+    server.registerTool(
+      'reconstitute_vial',
+      {
+        description:
+          'Deterministic reconstitution dilution calculator: concentration (mcg/mL, mg/mL, and optional µM molar concentration if molecular weight or a catalog peptide is supplied), U-100 syringe draw units, whole doses per vial, and optional reverse-solve for water volume from target_draw_units. Always attaches the canonical /methods scope note. Refuses personal dosing/prescribing advice.',
+        inputSchema: z.object({
+          vial_mg: z.number().describe('Peptide mass in the vial, in milligrams.'),
+          dose_mcg: z.number().describe('Target amount per draw, in micrograms.'),
+          water_ml: z
+            .number()
+            .optional()
+            .describe('Bacteriostatic water added, in milliliters (optional if target_draw_units is given).'),
+          target_draw_units: z
+            .number()
+            .optional()
+            .describe('Optional target U-100 syringe units per draw to reverse-solve required water_ml.'),
+          peptide: z
+            .string()
+            .optional()
+            .describe('Optional catalog peptide slug or name to resolve verified molecular weight for molar concentration.'),
+          molecular_weight_da: z
+            .number()
+            .optional()
+            .describe('Optional explicit molecular weight in Daltons (g/mol) for molar concentration.'),
+          require_molar: z
+            .boolean()
+            .optional()
+            .describe('Set true when molarity (µM) or nmol is required so missing molecular weight is reported cleanly.'),
+        }),
+      },
+      async (args) => {
+        const r = await executeAgentTool('reconstitute_vial', args as Record<string, unknown>)
+        if (r.isError) return errorText(r.content)
+        if (!r.content.trim().startsWith('{')) return errorText(r.content)
+        const parsed = JSON.parse(r.content) as Record<string, unknown>
+        if (typeof parsed.error === 'string') return errorText(r.content)
+        return text(r.content)
+      },
+    )
+
+    server.registerTool(
+      'screen_blend',
+      {
+        description:
+          'Deterministic post-reconstitution blend compatibility screen and shared-vial draw calculator. Screens 2–10 catalog peptides at a buffer pH (default 5.7) for opposite net charge, isoelectric point proximity, hydrophobicity (GRAVY), free cysteines, copper–thiol oxidation, fibril formation, and labeled syringe incompatibilities. When mass_mg, dose_mcg, and water_ml are provided, also computes shared-vial draw volume, limiting dose count, and over-delivery percentages. Always attaches the canonical /methods scope note.',
+        inputSchema: z.object({
+          peptides: z
+            .array(
+              z.object({
+                slug: z.string().optional().describe('Catalog peptide slug, e.g. "bpc-157" or "ghk-cu".'),
+                name: z.string().optional().describe('Peptide name if slug is not known.'),
+                mass_mg: z
+                  .number()
+                  .optional()
+                  .describe('Optional vial mass in mg transferred into the shared blend.'),
+                dose_mcg: z
+                  .number()
+                  .optional()
+                  .describe('Optional intended dose in mcg per draw for this component.'),
+              }),
+            )
+            .describe('Peptides in the blend.'),
+          buffer_ph: z
+            .number()
+            .optional()
+            .describe('Optional buffer pH (0–14, defaults to 5.7 for bacteriostatic water).'),
+          water_ml: z
+            .number()
+            .optional()
+            .describe('Optional total bacteriostatic water volume in mL for shared-vial draw math.'),
+        }),
+      },
+      async (args) => {
+        const r = await executeAgentTool('screen_blend', args as Record<string, unknown>)
+        if (r.isError) return errorText(r.content)
+        const parsed = JSON.parse(r.content) as Record<string, unknown>
+        if (typeof parsed.error === 'string') return errorText(r.content)
+        return text(r.content)
+      },
+    )
+
+    server.registerTool(
+      'peptide_half_life',
+      {
+        description:
+          'Deterministic single-compartment pharmacokinetic calculator and catalog half-life lookup. Computes time to steady state (97%), clearance time (97%), repeat-dose accumulation ratio, peak-to-trough ratio, and fraction remaining at elapsed_hours from the catalog half-life table or an explicit hypothetical half_life_hours input. Always attaches the canonical /methods scope note.',
+        inputSchema: z.object({
+          name: z.string().optional().describe('Catalog peptide name or slug, e.g. "semaglutide".'),
+          half_life_hours: z
+            .number()
+            .optional()
+            .describe('Optional explicit hypothetical half-life in hours for single-compartment PK math.'),
+          interval_hours: z
+            .number()
+            .optional()
+            .describe('Optional repeat-dose interval in hours to compute accumulation and peak-to-trough ratio.'),
+          elapsed_hours: z
+            .number()
+            .optional()
+            .describe('Optional hours elapsed since a single dose to compute fraction and percent remaining.'),
+        }),
+      },
+      async (args) => {
+        const r = await executeAgentTool('peptide_half_life', args as Record<string, unknown>)
+        if (r.isError) return errorText(r.content)
+        if (!r.content.trim().startsWith('{')) return errorText(r.content)
+        const parsed = JSON.parse(r.content) as Record<string, unknown>
+        if (typeof parsed.error === 'string') return errorText(r.content)
+        return text(r.content)
+      },
+    )
   },
   {
     serverInfo: { name: 'american-peptide', version: '1.0.0' },
