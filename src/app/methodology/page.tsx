@@ -13,7 +13,7 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
-import { PEPTIDES } from '@/lib/peptides'
+import { CATALOG_COUNT } from '@/lib/peptides'
 import { PUBCHEM_VERIFIED } from '@/lib/verification'
 import { VENDORS, VENDOR_TIERS, TRUST_WEIGHTS, type VendorTier } from '@/lib/vendors'
 import { TierBadge, EvidenceFloor } from '@/components/evidence'
@@ -29,7 +29,6 @@ import {
 const SITE = 'https://americanpeptide.com'
 
 const VERIFIED_COUNT = Object.keys(PUBCHEM_VERIFIED).length
-const CATALOG_COUNT = PEPTIDES.length
 const ACTIVE_VENDOR_COUNT = VENDORS.filter((v) => v.affiliate?.active).length
 // Most recent PubChem cross-check date across the manifest.
 const LAST_CHECKED = Object.values(PUBCHEM_VERIFIED)

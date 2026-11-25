@@ -10,7 +10,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from 'lucide-react'
-import { LISTED_PEPTIDES, CATEGORIES } from '@/lib/peptides'
+import { CATEGORIES, CATALOG_COUNT, CATEGORY_COUNT } from '@/lib/peptides'
 import { COMPARISONS } from '@/lib/comparisons'
 import { GLOSSARY } from '@/lib/glossary'
 import { RESEARCH_AREAS } from '@/lib/research-areas'
@@ -21,8 +21,8 @@ const SITE = 'https://americanpeptide.com'
 
 // Every headline number is read from the data layer so the kit can't drift out
 // of sync with the live catalog — the same discipline the rest of the site uses.
-const catalogCount = LISTED_PEPTIDES.length
-const categoryCount = CATEGORIES.length
+const catalogCount = CATALOG_COUNT
+const categoryCount = CATEGORY_COUNT
 const comparisonCount = COMPARISONS.length
 const glossaryCount = GLOSSARY.length
 const areaCount = RESEARCH_AREAS.length

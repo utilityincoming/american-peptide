@@ -6,7 +6,7 @@ import {
   Layers,
 } from 'lucide-react'
 import { CompoundSearchIcon, PeptideForgeIcon } from '@/components/ResearchToolIcons'
-import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES, type Peptide } from '@/lib/peptides'
+import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES, CATALOG_COUNT, type Peptide } from '@/lib/peptides'
 import CompoundSearch from './CompoundSearch'
 
 const SITE = 'https://americanpeptide.com'
@@ -113,7 +113,7 @@ export default function CompoundsPage() {
             </span>
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
-            Start with our verified monographs — {LISTED_PEPTIDES.length}{' '}
+            Start with our verified monographs — {CATALOG_COUNT}{' '}
             research peptides with mechanism, sequence, structure, and the
             research
             context our team has reviewed. Need something beyond the catalog?
@@ -203,7 +203,7 @@ export default function CompoundsPage() {
               href="/catalog"
               className="hidden shrink-0 items-center gap-1 text-sm font-medium text-accent transition-colors hover:text-[#D2FBE6] sm:inline-flex"
             >
-              All {LISTED_PEPTIDES.length}
+              All {CATALOG_COUNT}
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
@@ -222,7 +222,7 @@ export default function CompoundsPage() {
               Every compound, by category
             </h2>
             <p className="mt-1 text-sm text-ink/50">
-              The complete verified index — {LISTED_PEPTIDES.length} entries
+              The complete verified index — {CATALOG_COUNT} entries
               across {grouped.length} research categories.
             </p>
           </div>

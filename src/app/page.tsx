@@ -2,7 +2,17 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, FlaskConical, Search, Sparkles, Syringe, Telescope } from 'lucide-react'
 import { ClinicalPulseIcon, CompoundSearchIcon, PeptideAgentIcon, PeptideForgeIcon } from '@/components/ResearchToolIcons'
-import { PEPTIDES, LISTED_PEPTIDES, CATEGORIES, BROWSE_SPOTLIGHT, getPeptideBySlug } from '@/lib/peptides'
+import {
+  PEPTIDES,
+  CATEGORIES,
+  BROWSE_SPOTLIGHT,
+  CATALOG_COUNT,
+  CATEGORY_COUNT,
+  CATALOG_FDA_APPROVED_COUNT,
+  CATALOG_FULL_SEQUENCE_COUNT,
+  CATALOG_MORE_BEYOND_SPOTLIGHT_COUNT,
+  getPeptideBySlug,
+} from '@/lib/peptides'
 import { STATIC_FAQS, faqPageJsonLd } from '@/lib/faqs'
 import FaqAccordion from '@/components/FaqAccordion'
 import DynamicFaqs from '@/components/DynamicFaqs'
@@ -81,7 +91,7 @@ const features = [
 // borrowed public-database counts — the first number should be ours, the
 // scale of the sources we search backs it up.
 const stats = [
-  { value: `${LISTED_PEPTIDES.length}`, label: 'Entries listed in the catalog' },
+  { value: `${CATALOG_COUNT}`, label: 'Entries listed in the catalog' },
   { value: '400K+', label: 'Compounds searchable via PubChem' },
   { value: '500K+', label: 'Clinical trials indexed' },
 ]
@@ -301,7 +311,7 @@ export default function HomePage() {
               </h2>
 
               <p className="mb-6 max-w-md text-[15px] leading-relaxed text-ink/55">
-                Browse {LISTED_PEPTIDES.length} research peptides across {CATEGORIES.length} categories — each
+                Browse {CATALOG_COUNT} research peptides across {CATEGORY_COUNT} categories — each
                 entry carries mechanism, sequence, and PubChem-enriched chemistry, with
                 manufacturing and quality context from the synthesis guide.
               </p>
@@ -312,7 +322,7 @@ export default function HomePage() {
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
                 <span className="text-xs text-ink/55">
-                  {LISTED_PEPTIDES.filter((p) => p.fdaApproved).length} FDA-approved · {LISTED_PEPTIDES.filter((p) => p.sequence).length} with full sequence
+                  {CATALOG_FDA_APPROVED_COUNT} FDA-approved · {CATALOG_FULL_SEQUENCE_COUNT} with full sequence
                 </span>
               </div>
             </div>
@@ -344,7 +354,7 @@ export default function HomePage() {
                   )
                 })}
                 <span className="inline-flex items-center rounded-lg border border-dashed border-hairline-strong bg-transparent px-2.5 py-1.5 text-xs text-ink/55">
-                  +{LISTED_PEPTIDES.length - SPOTLIGHT_SLUGS.length} more
+                  +{CATALOG_MORE_BEYOND_SPOTLIGHT_COUNT} more
                 </span>
               </div>
 

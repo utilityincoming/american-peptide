@@ -66,7 +66,7 @@ const TOOLS: Tool[] = [
   },
   {
     href: '/compounds',
-    name: 'Compounds',
+    name: 'Compound Search',
     desc: 'Verified peptide monographs plus a live PubChem compound lookup.',
     Icon: Search,
   },

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ShieldCheck, Lock } from 'lucide-react'
+import { PRIVACY_EMAIL } from '@/lib/contact'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -273,10 +274,10 @@ export default function PrivacyPage() {
             <p>
               Questions about this policy or your information? Email us at{' '}
               <a
-                href="mailto:americanpeptides@gmail.com"
+                href={`mailto:${PRIVACY_EMAIL}`}
                 className="font-medium text-accent underline-offset-2 hover:underline"
               >
-                americanpeptides@gmail.com
+                {PRIVACY_EMAIL}
               </a>{' '}
               or use our{' '}
               <Link

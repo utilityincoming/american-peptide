@@ -6459,12 +6459,35 @@ export const LISTED_PEPTIDES: Peptide[] = PEPTIDES.filter((p) => !p.unlisted).so
   compareBrowseRank,
 )
 
+/**
+ * Single source of truth for catalog counts across every human-facing page
+ * (homepage, /catalog, /compounds, /about, /developers, /methodology, /press)
+ * and machine-readable surface (/llms.txt, /llms-full.txt, /api/mcp).
+ *
+ * - `CATALOG_COUNT` is the curated, listed catalog size (LISTED_PEPTIDES.length).
+ * - `TOTAL_PEPTIDE_RECORDS` is the full internal registry including unlisted
+ *   reference records (PEPTIDES.length).
+ */
+export const CATALOG_COUNT = LISTED_PEPTIDES.length
+export const TOTAL_PEPTIDE_RECORDS = PEPTIDES.length
+export const CATEGORY_COUNT = CATEGORIES.length
+export const CATALOG_FDA_APPROVED_COUNT = LISTED_PEPTIDES.filter(
+  (p) => Boolean(p.fdaApproved),
+).length
+export const CATALOG_FULL_SEQUENCE_COUNT = LISTED_PEPTIDES.filter(
+  (p) => Boolean(p.sequence),
+).length
+export const CATALOG_MORE_BEYOND_SPOTLIGHT_COUNT = Math.max(
+  0,
+  LISTED_PEPTIDES.length - BROWSE_SPOTLIGHT.length,
+)
+
 export function getPeptideBySlug(slug: string): Peptide | undefined {
   return PEPTIDES.find((p) => p.slug === slug)
 }
 
 export function getPeptidesByCategory(category: PeptideCategory): Peptide[] {
-  return PEPTIDES.filter((p) => p.categories.includes(category))
+  return LISTED_PEPTIDES.filter((p) => p.categories.includes(category))
 }
 
 /** Resolve a blend's `components` slugs to catalog entries, preserving order. */

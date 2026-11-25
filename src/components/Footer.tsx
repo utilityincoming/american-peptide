@@ -11,8 +11,11 @@ const LINKS = [
   { href: '/', label: 'Home' },
   // The sourcing link is web-only: the Play/TWA build ships no affiliate layer.
   ...(IS_APP_BUILD ? [] : [{ href: '/us-peptides', label: 'Buy Peptides' }]),
-  { href: '/compounds', label: 'Compounds' },
+  { href: '/catalog', label: 'Catalog' },
+  { href: '/compounds', label: 'Compound Search' },
   { href: '/tools/calculator-beta', label: 'Peptide Calculator Beta' },
+  { href: '/tools/coa-decoder', label: 'COA Decoder' },
+  { href: '/tools/design-lab', label: 'Design Lab' },
   { href: '/developers', label: 'Developers / API' },
 ]
 

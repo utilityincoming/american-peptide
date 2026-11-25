@@ -124,7 +124,7 @@ const PAGES: CommandItem[] = [
   {
     id: 'page-compounds',
     kind: 'page',
-    label: 'Compounds',
+    label: 'Compound Search',
     subtitle: 'Verified monographs + PubChem lookup',
     href: '/compounds',
     keywords: 'compounds monograph catalog pubchem structure molecule chemistry cid',

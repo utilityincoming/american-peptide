@@ -4,14 +4,27 @@ import {
   buildCalculatorHandoffUrl,
   buildCorrectionHandoffUrl,
   molecularEntityJsonLd,
+  siteGraphJsonLd,
   webPageJsonLd,
 } from '@/lib/schema'
-import { PEPTIDES } from '@/lib/peptides'
+import {
+  PEPTIDES,
+  LISTED_PEPTIDES,
+  CATALOG_COUNT,
+  CATEGORY_COUNT,
+  CATALOG_FDA_APPROVED_COUNT,
+  CATALOG_FULL_SEQUENCE_COUNT,
+  CATALOG_MORE_BEYOND_SPOTLIGHT_COUNT,
+  BROWSE_SPOTLIGHT,
+} from '@/lib/peptides'
+import { RESEARCH_AREAS_MAPPED_COUNT } from '@/lib/research-areas'
+import { CONTACT_EMAIL, PRIVACY_EMAIL, TODO_CONFIRM_CONTACT_MAILBOX } from '@/lib/contact'
 
 const FORBIDDEN_SCHEMA_TYPES = new Set([
   'Product',
   'Offer',
   'AggregateOffer',
+  'Store',
   'Drug',
   'MedicalEntity',
   'MedicalWebPage',
@@ -87,6 +100,43 @@ describe('molecularEntityJsonLd — strict reference-only schema', () => {
         expect(FORBIDDEN_SCHEMA_KEYS.has(k)).toBe(false)
       }
     }
+  })
+  it('emits valid layout-level Organization and WebSite JSON-LD with disambiguation and zero outbound americanpeptide.org links', () => {
+    const graph = siteGraphJsonLd()
+    const raw = JSON.stringify(graph)
+    expect(raw).not.toContain('americanpeptide.org')
+    expect(graph['@context']).toBe('https://schema.org')
+    const [org, site] = graph['@graph']
+    expect(org['@type']).toBe('Organization')
+    expect(org.url).toBe('https://americanpeptide.com')
+    expect(org.disambiguatingDescription).toContain('American Peptide Company')
+    expect(site['@type']).toBe('WebSite')
+    expect(site.url).toBe('https://americanpeptide.com')
+    expect(site.license).toBe('https://creativecommons.org/licenses/by/4.0/')
+
+    const { types, keys } = collectTypesAndKeys(graph)
+    for (const t of types) {
+      expect(FORBIDDEN_SCHEMA_TYPES.has(t)).toBe(false)
+    }
+    for (const k of keys) {
+      expect(FORBIDDEN_SCHEMA_KEYS.has(k)).toBe(false)
+    }
+  })
+
+  it('keeps catalog counts and @americanpeptide.com contact addresses consistent from a single source of truth', () => {
+    expect(CATALOG_COUNT).toBe(LISTED_PEPTIDES.length)
+    expect(CATALOG_FDA_APPROVED_COUNT).toBe(LISTED_PEPTIDES.filter((p) => p.fdaApproved).length)
+    expect(CATALOG_FULL_SEQUENCE_COUNT).toBe(LISTED_PEPTIDES.filter((p) => p.sequence).length)
+    expect(CATALOG_MORE_BEYOND_SPOTLIGHT_COUNT).toBe(
+      LISTED_PEPTIDES.length - BROWSE_SPOTLIGHT.length,
+    )
+    expect(CATEGORY_COUNT).toBe(11)
+    expect(RESEARCH_AREAS_MAPPED_COUNT).toBeGreaterThan(0)
+    expect(RESEARCH_AREAS_MAPPED_COUNT).toBeLessThanOrEqual(CATALOG_COUNT)
+
+    expect(CONTACT_EMAIL).toMatch(/@americanpeptide\.com$/)
+    expect(PRIVACY_EMAIL).toMatch(/@americanpeptide\.com$/)
+    expect(TODO_CONFIRM_CONTACT_MAILBOX).toBe(true)
   })
 })
 

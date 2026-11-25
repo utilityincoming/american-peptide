@@ -12,7 +12,7 @@
 
 import { createMcpHandler } from 'mcp-handler'
 import { z } from 'zod'
-import { PEPTIDES, CATEGORIES, getPeptideBySlug } from '@/lib/peptides'
+import { PEPTIDES, CATALOG_COUNT, CATEGORIES, getPeptideBySlug } from '@/lib/peptides'
 import { RESEARCH_AREAS, getResearchAreaBySlug } from '@/lib/research-areas'
 import { COMPARISONS, getComparison } from '@/lib/comparisons'
 import { executeAgentTool } from '@/lib/agent-tools'
@@ -50,7 +50,7 @@ const handler = createMcpHandler(
     server.registerTool(
       'search_peptides',
       {
-        description: `Search the AmericanPeptide.com catalog of ${PEPTIDES.length} research peptides. Filter by free-text query (name, alias, description), catalog category, research area, or FDA approval. Returns compact summaries with slugs — call get_peptide with a slug for the full reference. Data is ${API_LICENSE}, attribution ${API_ATTRIBUTION}.`,
+        description: `Search the AmericanPeptide.com catalog of ${CATALOG_COUNT} research peptides. Filter by free-text query (name, alias, description), catalog category, research area, or FDA approval. Returns compact summaries with slugs — call get_peptide with a slug for the full reference. Data is ${API_LICENSE}, attribution ${API_ATTRIBUTION}.`,
         inputSchema: z.object({
           query: z.string().optional().describe('Free-text search over name, aliases, and description, e.g. "GLP-1" or "Ozempic".'),
           category: z.enum(CATEGORY_IDS).optional().describe('Catalog category id.'),

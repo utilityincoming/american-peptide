@@ -12,7 +12,7 @@ import { BrandMark } from './BrandMark'
 // top-level categories; their deep links surface as the in-page SectionNav.
 // Trials is no longer top-level — it lives at the tail of the Research section.
 const NAV_LINKS = [
-  { href: '/catalog', label: 'Catalog', match: ['/catalog', '/workspace'] },
+  { href: '/catalog', label: 'Catalog', match: ['/catalog', '/compounds', '/workspace'] },
   {
     href: '/research-areas',
     label: 'Research',

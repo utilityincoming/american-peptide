@@ -39,15 +39,14 @@ const jsonLd = {
   '@type': 'WebApplication',
   name: 'Peptide Reconstitution Calculator',
   url: 'https://americanpeptide.com/tools/reconstitution-calculator',
-  applicationCategory: 'HealthApplication',
+  applicationCategory: 'EducationalApplication',
+  isAccessibleForFree: true,
+  license: 'https://creativecommons.org/licenses/by/4.0/',
   author: {
     '@type': 'Organization',
+    '@id': 'https://americanpeptide.com/#organization',
     name: 'AmericanPeptide.com',
-  },
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
+    url: 'https://americanpeptide.com',
   },
 }
 

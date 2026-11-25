@@ -19,6 +19,9 @@ import {
   LISTED_PEPTIDES,
   BROWSE_SPOTLIGHT,
   CATEGORIES,
+  CATALOG_COUNT,
+  CATEGORY_COUNT,
+  CATALOG_FDA_APPROVED_COUNT,
   SYNTHESIS_DIFFICULTY_LABEL,
   type Peptide,
   type SyntheticFeature,
@@ -166,10 +169,6 @@ export default function CatalogPage() {
 
   const hasFilters = Boolean(normalizeCatalogQuery(query) || active || feature || difficulty)
   const atCap = selected.length >= MAX_COMPARE
-  const fdaCount = useMemo(
-    () => PEPTIDES.filter((p) => p.fdaApproved).length,
-    [],
-  )
 
   return (
     <div className="min-h-screen bg-surface text-ink">
@@ -198,7 +197,7 @@ export default function CatalogPage() {
               Research peptide catalog
             </h1>
             <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
-              Browse a curated reference of {PEPTIDES.length}+ research peptides. Each entry
+              Browse a curated reference of {CATALOG_COUNT} research peptides. Each entry
               captures mechanism, sequence, structure, and the research areas it’s
               studied for — with manufacturing and quality context from the synthesis guide.
             </p>
@@ -298,19 +297,19 @@ export default function CatalogPage() {
               <div className="mt-3 grid grid-cols-3 gap-2 border-t border-hairline pt-3 text-center">
                 <div>
                   <div className="text-lg font-semibold tracking-tight text-ink">
-                    {PEPTIDES.length}+
+                    {CATALOG_COUNT}
                   </div>
                   <div className="text-[11px] text-ink/50">Entries</div>
                 </div>
                 <div>
                   <div className="text-lg font-semibold tracking-tight text-ink">
-                    {CATEGORIES.length}
+                    {CATEGORY_COUNT}
                   </div>
-                  <div className="text-[11px] text-ink/50">Research areas</div>
+                  <div className="text-[11px] text-ink/50">Categories</div>
                 </div>
                 <div>
                   <div className="text-lg font-semibold tracking-tight text-accent">
-                    {fdaCount}
+                    {CATALOG_FDA_APPROVED_COUNT}
                   </div>
                   <div className="text-[11px] text-ink/50">FDA-approved</div>
                 </div>
