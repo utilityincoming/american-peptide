@@ -16,6 +16,22 @@ import { Sparkles, ArrowRight } from 'lucide-react'
 export type AgentContext = {
   kind: 'compound' | 'research-area' | 'comparison'
   slug: string
+  name?: string
+  pubchemCid?: number
+  uniprotId?: string
+  nctIds?: string[]
+}
+
+function buildIdentifierScope(ctx?: AgentContext): string {
+  if (!ctx || ctx.kind !== 'compound') return ''
+  const ids: string[] = []
+  if (ctx.pubchemCid) ids.push(`PubChem CID ${ctx.pubchemCid}`)
+  if (ctx.uniprotId) ids.push(`UniProt ${ctx.uniprotId}`)
+  if (ctx.nctIds && ctx.nctIds.length > 0) {
+    const clean = ctx.nctIds.filter((id) => /^NCT\d+$/i.test(id)).slice(0, 3)
+    if (clean.length > 0) ids.push(`NCT ${clean.join(', ')}`)
+  }
+  return ids.length > 0 ? ` (${ids.join(' · ')})` : ''
 }
 
 const DEFAULT_EXAMPLES = [
@@ -43,8 +59,10 @@ export default function AgentPrompt({
   function ask(question: string) {
     const text = question.trim()
     if (!text) return
+    const scope = buildIdentifierScope(context)
+    const scopedText = scope && !text.includes(scope) ? `${text}${scope}` : text
     const ctx = context ? `&ctx=${encodeURIComponent(`${context.kind}:${context.slug}`)}` : ''
-    router.push(`/research?q=${encodeURIComponent(text)}${ctx}`)
+    router.push(`/research?q=${encodeURIComponent(scopedText)}${ctx}`)
   }
 
   return (

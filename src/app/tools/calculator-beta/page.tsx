@@ -73,9 +73,9 @@ export default function CalculatorBetaPage() {
   // Prefill from a shared link.
   useEffect(() => {
     const p = new URLSearchParams(window.location.search)
-    // A ?pep= slug seeds the vial/water/dose from the catalog preset; explicit
-    // params below then override any of those fields.
-    const pep = p.get('pep')
+    // A ?compound= or ?pep= slug seeds the vial/water/dose from the catalog preset;
+    // explicit params below then override any of those fields.
+    const pep = p.get('compound') ?? p.get('pep')
     const preset = pep ? RECON_PRESETS.find((x) => x.slug === pep) ?? null : null
     if (preset) {
       setMeasurement('mcg')
