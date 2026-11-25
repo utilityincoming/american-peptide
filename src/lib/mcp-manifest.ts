@@ -71,4 +71,19 @@ export const MCP_TOOLS: McpToolManifest[] = [
     description:
       'Look up a compound in PubChem to confirm identity and physicochemical properties (CID, formula, weight, IUPAC name, SMILES).',
   },
+  {
+    name: 'reconstitute_vial',
+    description:
+      'Deterministic reconstitution dilution calculator: concentration (mcg/mL, mg/mL, and optional µM molarity), U-100 syringe draw units, whole doses per vial, and reverse-solve for water volume.',
+  },
+  {
+    name: 'screen_blend',
+    description:
+      'Deterministic post-reconstitution blend compatibility screen (charge, pI, GRAVY, cysteines, labeled incompatibilities) and shared-vial blend draw calculator.',
+  },
+  {
+    name: 'peptide_half_life',
+    description:
+      'Deterministic single-compartment pharmacokinetic calculator (steady-state, clearance, accumulation ratio, peak-to-trough, fraction remaining) backed by the catalog half-life table.',
+  },
 ]

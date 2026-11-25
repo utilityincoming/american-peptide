@@ -17,6 +17,12 @@ import {
   reconPresetFor,
 } from '@/lib/evidence/from-catalog'
 import { RECON_PRESETS, RECON_PRESETS_CURATED_AT } from '@/lib/reconstitution-presets'
+import {
+  checkNormativeClaimRules,
+  runEvidenceAudit,
+  validateAgainstJsonSchema,
+  verifyFloorNeverExceedsWeakest,
+} from '../../../scripts/audit-evidence'
 
 // The Standard is the trust layer under every number on the site. These tests
 // pin the schema rules (§3–§9) and the catalog bridge so a data or logic edit
@@ -152,5 +158,75 @@ describe('catalog bridge', () => {
     // A verified compound with no preset has no load-bearing figure → no floor.
     expect(reconPresetFor('glutathione')).toBeUndefined()
     expect(computeEvidenceFloor(catalogClaims({ slug: 'glutathione' }), isLoadBearing)).toBeNull()
+  })
+})
+
+describe('audit-evidence CLI & schema-0.1.1 validation', () => {
+  it('validates compliant claims against schema-0.1.1.json and rejects invalid ones', () => {
+    expect(validateAgainstJsonSchema(mkClaim(), 'test:ok')).toEqual([])
+
+    const badSchemaVersion = mkClaim({
+      provenance: {
+        source_type: 'publication',
+        source_name: 'PubMed',
+        retrieved_at: '2026-01-01',
+        schema_version: '0.1.0' as typeof SCHEMA_VERSION,
+      },
+    })
+    expect(
+      validateAgainstJsonSchema(badSchemaVersion, 'test:ver').some((i) =>
+        i.message.includes('schema_version'),
+      ),
+    ).toBe(true)
+  })
+
+  it('enforces normative scope-note, verification-window, and floor rules', () => {
+    const missingScope = mkClaim({ tier: 'third_party', scope_note: '' })
+    expect(
+      checkNormativeClaimRules(missingScope, 'test:scope').some((i) => i.rule === 'scope-note'),
+    ).toBe(true)
+
+    const staleCommercial = mkClaim({
+      tier: 'vendor_reported',
+      estimate_kind: 'commercial',
+      provenance: {
+        source_type: 'vendor',
+        source_name: 'Vendor',
+        retrieved_at: '2026-01-01',
+        schema_version: SCHEMA_VERSION,
+      },
+    })
+    const staleIssues = checkNormativeClaimRules(
+      staleCommercial,
+      'test:stale',
+      Date.parse('2026-03-01'),
+    )
+    expect(staleIssues.some((i) => i.rule === 'verification-window')).toBe(true)
+
+    const floorCheck = verifyFloorNeverExceedsWeakest(
+      'sources:ghk-cu',
+      [
+        mkClaim({ tier: 'third_party', estimate_kind: 'purity' }),
+        mkClaim({ tier: 'vendor_reported', estimate_kind: 'purity' }),
+      ],
+      () => true,
+    )
+    expect(floorCheck.passed).toBe(true)
+    expect(floorCheck.floor).toBe('vendor_reported')
+  })
+
+  it('produces a deterministic read-only audit report with GHK-Cu reconciliation and compound gaps', () => {
+    const report = runEvidenceAudit(Date.parse('2026-11-01'))
+    expect(report.schemaVersion).toBe('0.1.1')
+    expect(report.summary.floorChecksFailed).toBe(0)
+    expect(report.summary.normativeViolations).toBe(0)
+    expect(report.ghkCuReconciliation.slug).toBe('ghk-cu')
+    expect(report.ghkCuReconciliation.identityTier).toBe('reference')
+    expect(report.ghkCuReconciliation.computedFloor).toBe('vendor_reported')
+    expect(report.ghkCuReconciliation.floorMatchesWeakestLoadBearing).toBe(true)
+    expect(report.compoundGaps.length).toBe(report.summary.totalCatalogCompounds)
+    // Top gap compound must be missing REF and 3P coverage
+    expect(report.compoundGaps[0].refComplete).toBe(false)
+    expect(report.compoundGaps[0].missing3p).toBe(true)
   })
 })

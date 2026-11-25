@@ -19,6 +19,7 @@ import { VENDORS, VENDOR_TIERS, TRUST_WEIGHTS, type VendorTier } from '@/lib/ven
 import { TierBadge, EvidenceFloor } from '@/components/evidence'
 import {
   molecularWeightClaim,
+  SCHEMA_VERSION,
   TIERS as TIER_META,
   TIER_ORDER,
   type Claim,
@@ -477,7 +478,7 @@ function demoClaim(field: string, tier: Tier, kind: Claim['estimate_kind']): Cla
       source_type: 'aggregate',
       source_name: 'illustrative',
       retrieved_at: '2026-07-20',
-      schema_version: '0.1.0',
+      schema_version: SCHEMA_VERSION,
     },
   }
 }

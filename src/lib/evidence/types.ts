@@ -1,4 +1,4 @@
-// lib/evidence — the Validation Tier Schema ("the Standard"), v0.1.0
+// lib/evidence — the Validation Tier Schema ("the Standard"), v0.1.1
 // ---------------------------------------------------------------------------
 // AmericanPeptide.com's claim-level evidence-tiering standard. Every factual
 // claim rendered on the site carries a tier, a scope note, and a provenance
@@ -24,7 +24,7 @@
 //     A `clinical`-tier claim can rest on any human-trial phase; the phase is the
 //     study's strength, the tier is where this specific number came from.
 
-export const SCHEMA_VERSION = '0.1.0' as const
+export const SCHEMA_VERSION = '0.1.1' as const
 export type SchemaVersion = typeof SCHEMA_VERSION
 
 // ── Tiers ──────────────────────────────────────────────────────────────────
