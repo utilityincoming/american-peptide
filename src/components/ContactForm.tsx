@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useMemo, useState } from 'react'
+import { useEffect, useId, useMemo, useState } from 'react'
 import { ArrowRight, Mail } from 'lucide-react'
 
 // Where messages land. Single inbox; the topic only shapes the subject line so
@@ -23,23 +23,56 @@ export default function ContactForm() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+  const [prefilledRef, setPrefilledRef] = useState<{ compound: string; section: string } | null>(null)
   const nameId = useId()
   const emailId = useId()
   const msgId = useId()
 
+  useEffect(() => {
+    const sp = new URLSearchParams(window.location.search)
+    const t = sp.get('topic')
+    if (
+      t === 'agent' ||
+      t === 'correction' ||
+      t === 'data' ||
+      t === 'partnership' ||
+      t === 'general'
+    ) {
+      setTopic(t)
+    }
+    const compound = sp.get('compound')?.trim() ?? ''
+    const section = sp.get('section')?.trim() ?? ''
+    if (compound) {
+      setTopic('correction')
+      const cleanSection = section || 'Identity & citations'
+      setPrefilledRef({ compound, section: cleanSection })
+      setMessage(
+        (prev) =>
+          prev ||
+          `Compound: ${compound}\nSection: ${cleanSection}\n\nCorrection or citation note:\n`,
+      )
+    }
+  }, [])
+
   const mailtoHref = useMemo(() => {
     const to = INBOX
     const label = TOPICS.find((t) => t.value === topic)?.label ?? 'Inquiry'
-    const subject = `[${label}] ${name ? `from ${name}` : 'AmericanPeptide.com'}`
+    const refTag = prefilledRef
+      ? ` ${prefilledRef.compound} (${prefilledRef.section})`
+      : ''
+    const subject = `[${label}]${refTag} ${name ? `from ${name}` : 'AmericanPeptide.com'}`
     const body = `${message}\n\n— ${name || 'A researcher'}${
       email ? ` (${email})` : ''
     }`
     return `mailto:${to}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`
-  }, [topic, name, email, message])
+  }, [topic, name, email, message, prefilledRef])
 
-  const canSend = email.trim() !== '' && message.trim() !== ''
+  // Zero-PII support: email and name are optional for catalog corrections / citation flags;
+  // clicking "Send message" opens the visitor's local mail client directly (nothing stored on server).
+  const canSend =
+    message.trim() !== '' && (topic === 'correction' || email.trim() !== '')
 
   return (
     <form
@@ -112,10 +145,10 @@ export default function ContactForm() {
               type="email"
               inputMode="email"
               autoComplete="email"
-              required
+              required={topic !== 'correction'}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@lab.org"
+              placeholder={topic === 'correction' ? 'Optional for corrections' : 'you@lab.org'}
               className="w-full rounded-xl border border-hairline bg-fill py-2.5 pl-9 pr-3 text-sm text-ink placeholder:text-ink/55 focus:border-accent/40 focus:outline-none focus:ring-1 focus:ring-[#7EE0B5]/40"
             />
           </div>

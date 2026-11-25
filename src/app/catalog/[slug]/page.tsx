@@ -1,7 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { breadcrumbJsonLd, medicalWebPageJsonLd } from '@/lib/schema'
+import {
+  breadcrumbJsonLd,
+  buildAgentHandoffUrl,
+  buildCalculatorHandoffUrl,
+  buildCorrectionHandoffUrl,
+  molecularEntityJsonLd,
+  webPageJsonLd,
+} from '@/lib/schema'
 import {
   ArrowRight,
   ArrowUpRight,
@@ -10,6 +17,7 @@ import {
   Check,
   Droplets,
   Factory,
+  Flag,
   FlaskConical,
   HelpCircle,
   Info,
@@ -17,6 +25,8 @@ import {
   Newspaper,
   ShieldCheck,
   Snowflake,
+  Sparkles,
+  Syringe,
 } from 'lucide-react'
 import {
   PEPTIDES,
@@ -57,33 +67,6 @@ const SITE = 'https://americanpeptide.com'
 // stays current without rebuilding. External fetches in getLatestResearch are
 // themselves day-cached and fail soft, so this never blocks or breaks a render.
 export const revalidate = 86400
-
-const DRUG_METADATA: Record<string, {
-  drugClass: string
-  administrationRoute: string
-  brandName?: string[]
-}> = {
-  semaglutide: {
-    drugClass: 'GLP-1 receptor agonist',
-    administrationRoute: 'subcutaneous injection; oral tablet',
-    brandName: ['Ozempic', 'Wegovy', 'Rybelsus'],
-  },
-  tirzepatide: {
-    drugClass: 'GLP-1/GIP dual receptor agonist',
-    administrationRoute: 'subcutaneous injection',
-    brandName: ['Mounjaro', 'Zepbound'],
-  },
-  tesamorelin: {
-    drugClass: 'GHRH analog',
-    administrationRoute: 'subcutaneous injection',
-    brandName: ['Egrifta'],
-  },
-  'pt-141': {
-    drugClass: 'Melanocortin receptor agonist',
-    administrationRoute: 'subcutaneous injection',
-    brandName: ['Vyleesi'],
-  },
-}
 
 interface RouteParams {
   params: Promise<{ slug: string }>
@@ -143,47 +126,12 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
   )
 
   const url = `${SITE}/catalog/${peptide.slug}`
+  const nctIds = latest.trials.map((t) => t.nctId).filter(Boolean).slice(0, 3)
 
-  const sameAs: string[] = []
-  if (peptide.pubchemCid)
-    sameAs.push(`https://pubchem.ncbi.nlm.nih.gov/compound/${peptide.pubchemCid}`)
-  if (peptide.uniprotId)
-    sameAs.push(`https://www.uniprot.org/uniprotkb/${peptide.uniprotId}`)
-
-  const identifier: {
-    '@type': 'PropertyValue'
-    propertyID: string
-    value: string
-  }[] = []
-  if (peptide.cas)
-    identifier.push({ '@type': 'PropertyValue', propertyID: 'CAS', value: peptide.cas })
-  if (peptide.pubchemCid)
-    identifier.push({
-      '@type': 'PropertyValue',
-      propertyID: 'PubChem CID',
-      value: String(peptide.pubchemCid),
-    })
-  if (peptide.uniprotId)
-    identifier.push({
-      '@type': 'PropertyValue',
-      propertyID: 'UniProt',
-      value: peptide.uniprotId,
-    })
-
-  const substanceLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ChemicalSubstance',
-    '@id': `${url}#substance`,
-    name: peptide.name,
-    description: peptide.shortDescription,
-    url,
-    ...(peptide.aliases?.length ? { alternateName: peptide.aliases } : {}),
-    ...(peptide.molecularFormula
-      ? { molecularFormula: peptide.molecularFormula }
-      : {}),
-    ...(sameAs.length ? { sameAs } : {}),
-    ...(identifier.length ? { identifier } : {}),
-  }
+  // Strict reference-only JSON-LD: MolecularEntity derived strictly from
+  // verified catalog fields (name, molecularWeight, sameAs PubChem/UniProt URLs,
+  // license: CC BY 4.0). Zero Product, Offer, Drug, or MedicalEntity fields.
+  const entityLd = molecularEntityJsonLd(peptide)
 
   const breadcrumbLd = breadcrumbJsonLd([
     { name: 'Catalog', path: '/catalog' },
@@ -192,12 +140,12 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
 
   // The catalog page's live "Latest research" section is refreshed on each daily
   // ISR revalidation; fetchedAt is that real timestamp — an honest dateModified.
-  const webPageLd = medicalWebPageJsonLd({
+  const webPageLd = webPageJsonLd({
     url,
     name: `${peptide.name} — AmericanPeptide.com Catalog`,
     description: peptide.shortDescription,
     dateModified: latest.fetchedAt,
-    mainEntityId: `${url}#substance`,
+    mainEntityId: `${url}#entity`,
   })
 
   const faqLd = peptide.faqs?.length
@@ -212,31 +160,23 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
       }
     : null
 
-  const drugMeta = DRUG_METADATA[peptide.slug]
-  const drugLd =
-    peptide.fdaApproved && drugMeta
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'Drug',
-          name: peptide.name,
-          description: peptide.shortDescription,
-          url,
-          ...(peptide.aliases?.length ? { alternateName: peptide.aliases } : {}),
-          drugClass: drugMeta.drugClass,
-          ...(peptide.mechanism ? { mechanismOfAction: peptide.mechanism } : {}),
-          administrationRoute: drugMeta.administrationRoute,
-          legalStatus: 'PrescriptionOnly',
-          recognizingAuthority: {
-            '@type': 'Organization',
-            name: 'U.S. Food and Drug Administration',
-            url: 'https://www.fda.gov',
-          },
-          ...(drugMeta.brandName?.length
-            ? { brand: drugMeta.brandName.map((b) => ({ '@type': 'Brand', name: b })) }
-            : {}),
-          ...(sameAs.length ? { sameAs } : {}),
-        }
-      : null
+  const preset = reconPresetFor(peptide.slug)
+  const calcHandoffHref = buildCalculatorHandoffUrl({
+    slug: peptide.slug,
+    molecularWeight: peptide.molecularWeight,
+    preset,
+  })
+  const agentHandoffHref = buildAgentHandoffUrl({
+    slug: peptide.slug,
+    name: peptide.name,
+    pubchemCid: peptide.pubchemCid,
+    uniprotId: peptide.uniprotId,
+    nctIds,
+  })
+  const correctionHref = buildCorrectionHandoffUrl({
+    slug: peptide.slug,
+    section: 'Identity & citations',
+  })
 
   // Authoritative external references, generated from identifiers/name — no
   // fabricated citations. Rendered as a "Further reading" block.
@@ -262,7 +202,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
     <div className="min-h-screen bg-surface text-ink">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(substanceLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(entityLd) }}
       />
       <script
         type="application/ld+json"
@@ -276,12 +216,6 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
-        />
-      )}
-      {drugLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(drugLd) }}
         />
       )}
 
@@ -476,6 +410,36 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                     </div>
                   </div>
                 )}
+
+                {/* Stateless tool handoffs & zero-PII correction link */}
+                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-hairline pt-4">
+                  {!preset && (
+                    <Link
+                      href={calcHandoffHref}
+                      className="group inline-flex items-center gap-1.5 text-xs font-medium text-accent transition-colors hover:underline"
+                    >
+                      <Syringe className="h-3.5 w-3.5 shrink-0" />
+                      Open in reconstitution calculator
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  )}
+                  <Link
+                    href={agentHandoffHref}
+                    className="group inline-flex items-center gap-1.5 text-xs font-medium text-accent transition-colors hover:underline"
+                  >
+                    <Sparkles className="h-3.5 w-3.5 shrink-0" />
+                    Research {peptide.name} in Peptide Agent
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                  <Link
+                    href={correctionHref}
+                    className="group inline-flex items-center gap-1.5 text-xs text-ink/55 transition-colors hover:text-accent"
+                  >
+                    <Flag className="h-3.5 w-3.5 shrink-0 text-ink/45 group-hover:text-accent" />
+                    Suggest correction / Flag citation
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                </div>
               </section>
             )}
 
@@ -790,7 +754,14 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
             )}
 
             <AgentPrompt
-              context={{ kind: 'compound', slug: peptide.slug }}
+              context={{
+                kind: 'compound',
+                slug: peptide.slug,
+                name: peptide.name,
+                pubchemCid: peptide.pubchemCid,
+                uniprotId: peptide.uniprotId,
+                nctIds,
+              }}
               heading={`Ask the Agent about ${peptide.name}`}
               subhead={`Dosing protocols, mechanism, comparisons, and the latest trials — citation-backed answers grounded in PubMed, PubChem, and ClinicalTrials.gov.`}
               examples={[
@@ -807,10 +778,8 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                 each number carrying its claim tier. These are curated conventions
                 (community tier, §9), stamped with the presets' curation date. */}
             {(() => {
-              const preset = reconPresetFor(peptide.slug)
               if (!preset) return null
               const [amount, vial, water] = reconPresetClaims(preset)
-              const href = `/tools/reconstitution-calculator?vial=${preset.vialMg}&dose=${preset.doseMcg}&water=${preset.waterMl}`
               const fmtAmount = (mcg: number) =>
                 mcg >= 1000 ? `${(mcg / 1000).toLocaleString()} mg` : `${mcg.toLocaleString()} mcg`
               return (
@@ -855,7 +824,7 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
                     <p className="mt-3 text-[11px] leading-relaxed text-ink/55">{preset.note}</p>
                   )}
                   <Link
-                    href={href}
+                    href={calcHandoffHref}
                     className="group mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-accent"
                   >
                     Open in the reconstitution calculator

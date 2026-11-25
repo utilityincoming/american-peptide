@@ -97,10 +97,35 @@ export function freshnessProps(dateModified?: string, datePublished?: string) {
 
 /**
  * A page-level entity for content whose primary node isn't itself a
- * CreativeWork — e.g. a catalog page whose subject is a ChemicalSubstance, so
+ * CreativeWork — e.g. a catalog page whose subject is a MolecularEntity, so
  * the dateModified must live on the *page*, not the compound. Linked into the
  * site graph by @id (isPartOf the WebSite, published by the Organization).
  */
+export function webPageJsonLd(opts: {
+  url: string
+  name: string
+  description?: string
+  dateModified: string
+  datePublished?: string
+  /** @id of the primary entity this page is about (e.g. `${url}#entity`). */
+  mainEntityId?: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${opts.url}#webpage`,
+    url: opts.url,
+    name: opts.name,
+    ...(opts.description ? { description: opts.description } : {}),
+    inLanguage: 'en-US',
+    license: LICENSE_URL,
+    isPartOf: { '@id': WEBSITE_ID },
+    publisher: { '@id': ORG_ID },
+    ...freshnessProps(opts.dateModified, opts.datePublished),
+    ...(opts.mainEntityId ? { mainEntity: { '@id': opts.mainEntityId } } : {}),
+  }
+}
+
 export function medicalWebPageJsonLd(opts: {
   url: string
   name: string
@@ -123,6 +148,150 @@ export function medicalWebPageJsonLd(opts: {
     ...freshnessProps(opts.dateModified, opts.datePublished),
     ...(opts.mainEntityId ? { mainEntity: { '@id': opts.mainEntityId } } : {}),
   }
+}
+
+export interface MolecularEntityInput {
+  slug: string
+  name: string
+  shortDescription?: string
+  aliases?: string[]
+  molecularFormula?: string
+  molecularWeight?: number
+  cas?: string
+  pubchemCid?: number
+  uniprotId?: string
+}
+
+/**
+ * Strict reference-only JSON-LD for a catalog compound monograph using
+ * Schema.org MolecularEntity. Derived strictly from verified catalog fields —
+ * emits zero Product, Offer, Drug, or MedicalEntity properties.
+ */
+export function molecularEntityJsonLd(peptide: MolecularEntityInput) {
+  const url = `${SITE}/catalog/${peptide.slug}`
+  const sameAs: string[] = []
+  if (peptide.pubchemCid) {
+    sameAs.push(`https://pubchem.ncbi.nlm.nih.gov/compound/${peptide.pubchemCid}`)
+  }
+  if (peptide.uniprotId) {
+    sameAs.push(`https://www.uniprot.org/uniprotkb/${peptide.uniprotId}`)
+  }
+
+  const identifier: {
+    '@type': 'PropertyValue'
+    propertyID: string
+    value: string
+  }[] = []
+  if (peptide.cas) {
+    identifier.push({ '@type': 'PropertyValue', propertyID: 'CAS', value: peptide.cas })
+  }
+  if (peptide.pubchemCid) {
+    identifier.push({
+      '@type': 'PropertyValue',
+      propertyID: 'PubChem CID',
+      value: String(peptide.pubchemCid),
+    })
+  }
+  if (peptide.uniprotId) {
+    identifier.push({
+      '@type': 'PropertyValue',
+      propertyID: 'UniProt',
+      value: peptide.uniprotId,
+    })
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'MolecularEntity',
+    '@id': `${url}#entity`,
+    name: peptide.name,
+    ...(peptide.shortDescription ? { description: peptide.shortDescription } : {}),
+    url,
+    license: LICENSE_URL,
+    ...(peptide.aliases?.length ? { alternateName: peptide.aliases } : {}),
+    ...(peptide.molecularFormula ? { molecularFormula: peptide.molecularFormula } : {}),
+    ...(typeof peptide.molecularWeight === 'number' && Number.isFinite(peptide.molecularWeight)
+      ? {
+          molecularWeight: {
+            '@type': 'QuantitativeValue',
+            value: peptide.molecularWeight,
+            unitText: 'g/mol',
+          },
+        }
+      : {}),
+    ...(sameAs.length ? { sameAs } : {}),
+    ...(identifier.length ? { identifier } : {}),
+  }
+}
+
+/**
+ * Build a stateless calculator handoff URL (?compound=<slug>&mw=<value> plus
+ * optional preset vial/dose/water parameters). Uses URL params only, zero server state.
+ */
+export function buildCalculatorHandoffUrl(opts: {
+  slug: string
+  molecularWeight?: number
+  preset?: { vialMg: number; doseMcg: number; waterMl: number } | null
+  basePath?: string
+}): string {
+  const basePath = opts.basePath ?? '/tools/reconstitution-calculator'
+  const sp = new URLSearchParams()
+  sp.set('compound', opts.slug)
+  if (typeof opts.molecularWeight === 'number' && Number.isFinite(opts.molecularWeight)) {
+    sp.set('mw', String(opts.molecularWeight))
+  }
+  if (opts.preset) {
+    sp.set('vial', String(opts.preset.vialMg))
+    sp.set('dose', String(opts.preset.doseMcg))
+    sp.set('water', String(opts.preset.waterMl))
+  }
+  return `${basePath}?${sp.toString()}`
+}
+
+/**
+ * Build a stateless Peptide Agent handoff URL (?q=<compound_name> scoped with
+ * verified identifiers: PubChem CID, UniProt ID, and NCT IDs).
+ */
+export function buildAgentHandoffUrl(opts: {
+  slug: string
+  name: string
+  question?: string
+  pubchemCid?: number
+  uniprotId?: string
+  nctIds?: string[]
+}): string {
+  const ids: string[] = []
+  if (opts.pubchemCid) ids.push(`PubChem CID ${opts.pubchemCid}`)
+  if (opts.uniprotId) ids.push(`UniProt ${opts.uniprotId}`)
+  if (opts.nctIds && opts.nctIds.length > 0) {
+    const cleanNcts = opts.nctIds.filter((id) => /^NCT\d+$/i.test(id)).slice(0, 3)
+    if (cleanNcts.length > 0) ids.push(`NCT ${cleanNcts.join(', ')}`)
+  }
+  const idScope = ids.length > 0 ? ` (${ids.join(' · ')})` : ''
+  const q = opts.question
+    ? opts.question.includes(idScope) || !idScope
+      ? opts.question
+      : `${opts.question} ${idScope}`
+    : `${opts.name}${idScope}`
+  const sp = new URLSearchParams()
+  sp.set('q', q)
+  sp.set('ctx', `compound:${opts.slug}`)
+  return `/research?${sp.toString()}`
+}
+
+/**
+ * Build a zero-PII correction / citation flag link routed to /about/contact,
+ * pre-filled only with the compound slug and section name.
+ */
+export function buildCorrectionHandoffUrl(opts: {
+  slug: string
+  section: string
+}): string {
+  const sp = new URLSearchParams()
+  sp.set('topic', 'correction')
+  sp.set('compound', opts.slug)
+  sp.set('section', opts.section)
+  return `/about/contact?${sp.toString()}`
 }
 
 // ── Breadcrumbs ──────────────────────────────────────────────────────────────

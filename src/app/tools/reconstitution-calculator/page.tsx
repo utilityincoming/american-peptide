@@ -7,6 +7,8 @@ import OfflineStatus from '@/components/OfflineStatus'
 import FaqAccordion from '@/components/FaqAccordion'
 import { RECON_FAQS } from './faqs'
 import { reconstitute } from '@/lib/reconstitution'
+import { RECON_PRESETS } from '@/lib/reconstitution-presets'
+import { getPeptideBySlug } from '@/lib/peptides'
 
 const VIAL_PRESETS = [1, 2, 5, 10, 15, 20, 30, 50]
 const DOSE_PRESETS = [100, 250, 500, 1000, 2000, 2500, 5000]
@@ -30,6 +32,11 @@ export default function ReconstitutionCalculatorPage() {
   const [vialMg, setVialMg] = useState('5')
   const [doseMcg, setDoseMcg] = useState('250')
   const [waterMl, setWaterMl] = useState('2')
+  const [compoundCtx, setCompoundCtx] = useState<{
+    slug: string
+    name: string
+    mw?: number
+  } | null>(null)
 
   // Only start writing the URL after the user actually changes something, so a
   // freshly-opened page keeps a clean URL. Hydration from a shared link does not
@@ -52,11 +59,28 @@ export default function ReconstitutionCalculatorPage() {
     setWaterMl(v)
   }
 
-  // Hydrate state from the URL once, on mount, from explicit vial/dose/water
-  // params. This does not mark the page dirty, so an unshared visit leaves the
-  // URL untouched.
+  // Hydrate state from the URL once, on mount, from explicit compound/mw and
+  // vial/dose/water params. This does not mark the page dirty, so an unshared
+  // visit leaves the URL untouched.
   useEffect(() => {
     const sp = new URLSearchParams(window.location.search)
+    const compoundSlug = sp.get('compound') ?? sp.get('pep')
+    const mwParam = sp.get('mw')
+    if (compoundSlug) {
+      const pep = getPeptideBySlug(compoundSlug)
+      const preset = RECON_PRESETS.find((x) => x.slug === compoundSlug)
+      if (preset) {
+        setVialMg(String(preset.vialMg))
+        setDoseMcg(String(preset.doseMcg))
+        setWaterMl(String(preset.waterMl))
+      }
+      const parsedMw = mwParam ? parsePositive(mwParam) : 0
+      setCompoundCtx({
+        slug: compoundSlug,
+        name: pep?.name ?? preset?.name ?? compoundSlug,
+        mw: parsedMw > 0 ? parsedMw : pep?.molecularWeight,
+      })
+    }
     const v = sp.get('vial')
     const d = sp.get('dose')
     const w = sp.get('water')
@@ -70,12 +94,16 @@ export default function ReconstitutionCalculatorPage() {
   useEffect(() => {
     if (!dirty.current) return
     const sp = new URLSearchParams()
+    if (compoundCtx) {
+      sp.set('compound', compoundCtx.slug)
+      if (compoundCtx.mw) sp.set('mw', String(compoundCtx.mw))
+    }
     if (parsePositive(vialMg)) sp.set('vial', vialMg)
     if (parsePositive(doseMcg)) sp.set('dose', doseMcg)
     if (parsePositive(waterMl)) sp.set('water', waterMl)
     const qs = sp.toString()
     window.history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname)
-  }, [vialMg, doseMcg, waterMl])
+  }, [vialMg, doseMcg, waterMl, compoundCtx])
 
   const calc = useMemo(() => {
     const vial = parsePositive(vialMg)
@@ -145,6 +173,31 @@ export default function ReconstitutionCalculatorPage() {
             </h2>
             <CopyLinkButton />
           </div>
+
+          {compoundCtx && (
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-accent/25 bg-accent/[0.06] px-3.5 py-2.5 text-xs text-ink/70">
+              <span>
+                Compound handoff:{' '}
+                <Link
+                  href={`/catalog/${compoundCtx.slug}`}
+                  className="font-semibold text-accent hover:underline"
+                >
+                  {compoundCtx.name}
+                </Link>
+                {compoundCtx.mw ? (
+                  <span className="ml-2 font-mono text-ink/60">
+                    MW {compoundCtx.mw.toLocaleString()} Da
+                  </span>
+                ) : null}
+              </span>
+              <Link
+                href={`/catalog/${compoundCtx.slug}`}
+                className="text-[11px] font-medium text-accent hover:underline"
+              >
+                Back to monograph →
+              </Link>
+            </div>
+          )}
 
           {/* ── Research-use disclaimer ── */}
           <p className="mb-6 text-[10px] leading-relaxed text-ink/55">
