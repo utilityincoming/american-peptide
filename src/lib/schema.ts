@@ -32,9 +32,12 @@ function organizationNode() {
     '@type': 'Organization',
     '@id': ORG_ID,
     name: API_ATTRIBUTION,
+    alternateName: 'American Peptide',
     url: SITE,
     description:
-      'An AI-assisted research platform and open reference for peptide science.',
+      'An AI-assisted research platform and open reference for peptide science — distinct from the defunct reagent supplier American Peptide Company.',
+    disambiguatingDescription:
+      'Independent peptide science reference and computational research platform at https://americanpeptide.com (not a chemical storefront, pharmacy, or the former American Peptide Company reagent manufacturer).',
     logo: {
       '@type': 'ImageObject',
       url: `${SITE}/apple-touch-icon.png`,
@@ -42,9 +45,7 @@ function organizationNode() {
       height: 180,
     },
     foundingDate: '2026',
-    // Add every profile you actually control — GitHub, LinkedIn, Crunchbase,
-    // Wikidata — as they go live. sameAs is how an answer engine reconciles
-    // this site with a known entity in its graph.
+    // Self-contained social/authority links only (never americanpeptide.org).
     sameAs: ['https://x.com/USPeptide'],
   }
 }
@@ -55,6 +56,9 @@ function webSiteNode() {
     '@id': WEBSITE_ID,
     url: SITE,
     name: 'AmericanPeptide.com',
+    alternateName: 'American Peptide',
+    description:
+      'Open, citation-backed reference catalog and computational tools for peptide science.',
     inLanguage: 'en-US',
     publisher: { '@id': ORG_ID },
     license: LICENSE_URL,
@@ -79,7 +83,7 @@ function webSiteNode() {
 export function siteGraphJsonLd() {
   return {
     '@context': 'https://schema.org',
-    '@graph': [organizationNode(), webSiteNode()],
+    '@graph': [organizationNode(), webSiteNode()] as const,
   }
 }
 

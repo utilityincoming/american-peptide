@@ -13,6 +13,8 @@
 
 import {
   PEPTIDES,
+  LISTED_PEPTIDES,
+  CATALOG_COUNT,
   CATEGORIES,
   getCategoryLabel,
   getPeptidesByCategory,
@@ -248,13 +250,13 @@ export function llmsIndexMarkdown(): string {
   lines.push(
     '# AmericanPeptide.com',
     '',
-    '> AI-powered peptide research reference: a PubChem-enriched catalog of research peptides, indication guides, head-to-head comparisons, clinical-trial intelligence, and an open CC BY 4.0 JSON API.',
+    `> AI-powered peptide research reference: a PubChem-enriched catalog of ${CATALOG_COUNT} research peptides, indication guides, head-to-head comparisons, clinical-trial intelligence, and an open CC BY 4.0 JSON API.`,
     '',
     `All catalog data is licensed ${API_LICENSE} with attribution to ${API_ATTRIBUTION}. Every peptide page has a markdown twin at /catalog/{slug}.md, and the whole catalog is available as one document at /llms-full.txt. This is a research platform, not a medical device — content describes published research, not clinical recommendations.`,
     '',
   )
 
-  lines.push('## Peptide catalog')
+  lines.push(`## Peptide catalog (${CATALOG_COUNT} entries)`)
   lines.push('')
   const seen = new Set<string>()
   for (const cat of CATEGORIES) {
@@ -320,6 +322,9 @@ export function llmsIndexMarkdown(): string {
     `- [Clinical trials dashboard](${API_SITE}/trials): live ClinicalTrials.gov intelligence.`,
     `- [Compound search](${API_SITE}/compounds): PubChem-backed compound explorer.`,
     `- [Reconstitution calculator](${API_SITE}/tools/reconstitution-calculator): research-prep math.`,
+    `- [COA decoder](${API_SITE}/tools/coa-decoder): certificate of analysis transparency grader & salt-aware MS cross-check.`,
+    `- [Design Lab](${API_SITE}/tools/design-lab): sequence properties (MW, pI, net charge, GRAVY, ε280).`,
+    `- [Methodology](${API_SITE}/methodology): PubChem verification & evidence-tier standard.`,
     '',
   )
 
@@ -469,12 +474,12 @@ export function llmsFullMarkdown(): string {
   const header = [
     '# AmericanPeptide.com — Full Peptide Catalog',
     '',
-    `> ${PEPTIDES.length} research peptides with PubChem-enriched chemistry, mechanisms, research areas, and FAQs. License: ${API_LICENSE}, attribution: ${API_ATTRIBUTION}.`,
+    `> ${CATALOG_COUNT} research peptides with PubChem-enriched chemistry, mechanisms, research areas, and FAQs. License: ${API_LICENSE}, attribution: ${API_ATTRIBUTION}.`,
     '',
     `Curated index: ${API_SITE}/llms.txt · JSON API: ${API_SITE}/api/catalog · Docs: ${API_SITE}/developers`,
     '',
   ].join('\n')
 
-  const body = PEPTIDES.map((p) => peptideMarkdown(p)).join('\n\n')
+  const body = LISTED_PEPTIDES.map((p) => peptideMarkdown(p)).join('\n\n')
   return `${header}\n${body}\n`
 }

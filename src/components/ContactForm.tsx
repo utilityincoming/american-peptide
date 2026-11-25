@@ -2,11 +2,11 @@
 
 import { useEffect, useId, useMemo, useState } from 'react'
 import { ArrowRight, Mail } from 'lucide-react'
+import { CONTACT_EMAIL } from '@/lib/contact'
 
-// Where messages land. Single inbox; the topic only shapes the subject line so
-// it's easy to triage. Kept out of the visible markup so the address isn't
-// scrapeable from the page.
-const INBOX = 'americanpeptides@gmail.com'
+// Where messages land. Single inbox configured via src/lib/contact.ts
+// (NEXT_PUBLIC_CONTACT_EMAIL, defaulting to contact@americanpeptide.com).
+const INBOX = CONTACT_EMAIL
 
 type Topic = 'agent' | 'correction' | 'data' | 'partnership' | 'general'
 

@@ -73,8 +73,8 @@ const nextConfig: NextConfig = {
       },
     ]
   },
-  // Legacy bespoke comparison URLs → programmatic /compare/[pair]. 301 to
-  // preserve any accrued link equity.
+  // Legacy bespoke comparison URLs → programmatic /compare/[pair], plus short
+  // tool aliases (/design-lab, /coa-decoder) and /compounds/:slug → /catalog/:slug.
   async redirects() {
     return [
       {
@@ -85,6 +85,21 @@ const nextConfig: NextConfig = {
       {
         source: '/cjc-1295-vs-ipamorelin',
         destination: '/compare/cjc-1295-vs-ipamorelin',
+        permanent: true,
+      },
+      {
+        source: '/design-lab',
+        destination: '/tools/design-lab',
+        permanent: true,
+      },
+      {
+        source: '/coa-decoder',
+        destination: '/tools/coa-decoder',
+        permanent: true,
+      },
+      {
+        source: '/compounds/:slug((?!builder$|opengraph-image$)[^/]+)',
+        destination: '/catalog/:slug',
         permanent: true,
       },
     ]

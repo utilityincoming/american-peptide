@@ -21,9 +21,10 @@ const jsonLd = {
   '@type': 'WebApplication',
   name: 'Peptide COA Decoder',
   url: `${SITE}/tools/coa-decoder`,
-  applicationCategory: 'HealthApplication',
-  author: { '@type': 'Organization', name: 'AmericanPeptide.com' },
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  applicationCategory: 'EducationalApplication',
+  isAccessibleForFree: true,
+  license: 'https://creativecommons.org/licenses/by/4.0/',
+  author: { '@type': 'Organization', '@id': `${SITE}/#organization`, name: 'AmericanPeptide.com', url: SITE },
 }
 
 export default function CoaDecoderLayout({ children }: { children: React.ReactNode }) {

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Code2, Database, Scale, Zap } from 'lucide-react'
-import { PEPTIDES } from '@/lib/peptides'
+import { CATALOG_COUNT } from '@/lib/peptides'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -162,7 +162,7 @@ export default function DevelopersPage() {
             </span>
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
-            The API provides {PEPTIDES.length} catalog entries as structured JSON,
+            The API provides {CATALOG_COUNT} catalog entries as structured JSON,
             with mechanism, sequence, and PubChem-enriched chemistry. No key, no signup. Free to embed with attribution.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
@@ -412,6 +412,51 @@ https://americanpeptide.com/api/mcp
 claude mcp add --transport http american-peptide \\
   https://americanpeptide.com/api/mcp`}
               </pre>
+            </div>
+          </div>
+
+          {/* Related tools & methodology */}
+          <div>
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/55">
+              Bench tools &amp; verification standard
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-3">
+              <Link
+                href="/methodology"
+                className="group rounded-2xl border border-hairline bg-fill p-5 transition-colors hover:border-accent/25 hover:bg-fill-strong"
+              >
+                <h3 className="mb-1.5 flex items-center justify-between text-sm font-semibold text-ink">
+                  Methodology &amp; Evidence Standard
+                  <ArrowRight className="h-3.5 w-3.5 text-accent transition-transform group-hover:translate-x-0.5" />
+                </h3>
+                <p className="text-xs leading-relaxed text-ink/55">
+                  How catalog chemistry is cross-checked against PubChem and claims are tiered under the Validation Tier Schema.
+                </p>
+              </Link>
+              <Link
+                href="/tools/coa-decoder"
+                className="group rounded-2xl border border-hairline bg-fill p-5 transition-colors hover:border-accent/25 hover:bg-fill-strong"
+              >
+                <h3 className="mb-1.5 flex items-center justify-between text-sm font-semibold text-ink">
+                  COA Decoder
+                  <ArrowRight className="h-3.5 w-3.5 text-accent transition-transform group-hover:translate-x-0.5" />
+                </h3>
+                <p className="text-xs leading-relaxed text-ink/55">
+                  Deterministic Certificate of Analysis grader and salt-aware MS cross-check (also exposed via MCP as analyze_coa).
+                </p>
+              </Link>
+              <Link
+                href="/tools/design-lab"
+                className="group rounded-2xl border border-hairline bg-fill p-5 transition-colors hover:border-accent/25 hover:bg-fill-strong"
+              >
+                <h3 className="mb-1.5 flex items-center justify-between text-sm font-semibold text-ink">
+                  Sequence Design Lab
+                  <ArrowRight className="h-3.5 w-3.5 text-accent transition-transform group-hover:translate-x-0.5" />
+                </h3>
+                <p className="text-xs leading-relaxed text-ink/55">
+                  Compute molecular weight, isoelectric point (pI), net charge, GRAVY hydropathy, and synthesis-difficulty flags.
+                </p>
+              </Link>
             </div>
           </div>
 

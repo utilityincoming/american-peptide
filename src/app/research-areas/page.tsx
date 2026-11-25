@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Activity, BookOpenCheck, Compass, FlaskConical, Layers, Route } from 'lucide-react'
-import { RESEARCH_AREAS, getPeptidesForArea } from '@/lib/research-areas'
+import { RESEARCH_AREAS, RESEARCH_AREAS_MAPPED_COUNT, getPeptidesForArea } from '@/lib/research-areas'
 import Toolkit from '@/components/Toolkit'
 import LearnMore from '@/components/LearnMore'
 import AgentPrompt from '@/components/AgentPrompt'
@@ -27,9 +27,7 @@ export default function ResearchAreasPage() {
     const peptides = getPeptidesForArea(a)
     return { area: a, count: peptides.length, preview: peptides.slice(0, 3) }
   })
-  const totalEntries = new Set(
-    RESEARCH_AREAS.flatMap((a) => getPeptidesForArea(a).map((p) => p.slug)),
-  ).size
+  const totalEntries = RESEARCH_AREAS_MAPPED_COUNT
 
   const collectionLd = {
     '@context': 'https://schema.org',

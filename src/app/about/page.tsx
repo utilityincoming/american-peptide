@@ -13,7 +13,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from 'lucide-react'
-import { PEPTIDES } from '@/lib/peptides'
+import { CATALOG_COUNT } from '@/lib/peptides'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -44,7 +44,7 @@ const principles = [
   {
     Icon: BookOpen,
     title: 'Open by default',
-    body: `The full ${PEPTIDES.length}-peptide catalog is free to read, query, and redistribute under CC BY 4.0 — with a markdown twin and MCP server so agents can cite it directly.`,
+    body: `The full ${CATALOG_COUNT}-peptide catalog is free to read, query, and redistribute under CC BY 4.0 — with a markdown twin and MCP server so agents can cite it directly.`,
   },
   {
     Icon: BadgeCheck,
@@ -68,7 +68,7 @@ const pillars = [
   {
     Icon: FlaskConical,
     label: 'Open catalog',
-    body: `${PEPTIDES.length} peptides with PubChem-enriched chemistry, sequences, identifiers, and editorial background.`,
+    body: `${CATALOG_COUNT} peptides with PubChem-enriched chemistry, sequences, identifiers, and editorial background.`,
     href: '/catalog',
   },
   {

@@ -9,7 +9,7 @@
 // which absorbs the free-text variants in the data (e.g. "Obesity" and
 // "Obesity (historical)" both match the "obesity" matcher).
 
-import { PEPTIDES, type Peptide, type PeptideCategory } from './peptides'
+import { LISTED_PEPTIDES, type Peptide, type PeptideCategory } from './peptides'
 
 export interface ResearchArea {
   slug: string
@@ -474,10 +474,15 @@ function peptideMatchesArea(peptide: Peptide, area: ResearchArea): boolean {
   return areas.some((a) => area.matchers.some((m) => a.includes(m)))
 }
 
-/** Peptides studied in a given research area. */
+/** Peptides studied in a given research area (from the listed catalog). */
 export function getPeptidesForArea(area: ResearchArea): Peptide[] {
-  return PEPTIDES.filter((p) => peptideMatchesArea(p, area))
+  return LISTED_PEPTIDES.filter((p) => peptideMatchesArea(p, area))
 }
+
+/** Unique listed catalog entries mapped to at least one research area. */
+export const RESEARCH_AREAS_MAPPED_COUNT = new Set(
+  RESEARCH_AREAS.flatMap((a) => getPeptidesForArea(a).map((p) => p.slug)),
+).size
 
 /** Research areas a given peptide maps to (for cross-linking from peptide pages). */
 export function getAreasForPeptide(peptide: Peptide): ResearchArea[] {
