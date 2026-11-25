@@ -74,7 +74,12 @@ export const MCP_TOOLS: McpToolManifest[] = [
   {
     name: 'reconstitute_vial',
     description:
-      'Deterministic reconstitution dilution calculator: concentration (mcg/mL, mg/mL, and optional µM molarity), U-100 syringe draw units, whole doses per vial, and reverse-solve for water volume.',
+      'Deterministic reconstitution dilution calculator for a peptide vial, IU-standardized biologic, or pre-filled GLP-1 pen: concentration (mcg/mL, mg/mL, optional µM molarity, or IU/mL), U-100 syringe draw units, whole doses, and reverse-solve for water volume.',
+  },
+  {
+    name: 'cost_per_dose',
+    description:
+      'Deterministic cost-per-dose and doses-per-vial calculator from a vial mass (mg), a dose (mcg), and an optional vial price.',
   },
   {
     name: 'screen_blend',

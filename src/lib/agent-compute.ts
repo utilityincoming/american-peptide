@@ -133,10 +133,135 @@ export function computeReconstitution(input: Record<string, unknown>): string {
   const refused = checkPersonalAdviceRefusal(input)
   if (refused) return refused
 
+  // Measurement + container form select which deterministic path runs — the same
+  // branches the on-site reconstitution calculator exposes:
+  //   unit 'mcg' (default): mg-vial peptides dosed in micrograms (supports molar).
+  //   unit 'iu':            IU-standardized biologics (e.g. HGH/HCG) in international units.
+  //   form 'pen':           a pre-filled GLP-1 pen already in solution (fill_ml, no water, no reverse-solve).
+  const unit = String(input.unit ?? 'mcg').trim().toLowerCase()
+  if (unit !== 'mcg' && unit !== 'iu') {
+    return 'Invalid unit: use "mcg" (mg-vial peptides) or "iu" (IU-standardized biologics).'
+  }
+  const form = String(input.form ?? 'vial').trim().toLowerCase()
+  if (form !== 'vial' && form !== 'pen') {
+    return 'Invalid form: use "vial" (reconstituted lyophilized vial) or "pen" (pre-filled GLP-1 pen).'
+  }
+  const isIu = unit === 'iu'
+  const isPen = form === 'pen'
+  if (isPen && isIu) {
+    return 'Pen form is a peptide (mcg) format only — IU-standardized biologics are not supplied as pre-filled pens.'
+  }
+
+  // ── IU-standardized biologics ──────────────────────────────────────────────
+  // Vial content and dose are both in international units; the dilution math is
+  // unit-agnostic (reconstitute() works in whatever unit the vial is expressed).
+  // Molar concentration is not computed for IU biologics (no fixed Da-per-IU).
+  if (isIu) {
+    const vialIu = num(input.vial_iu)
+    const doseIu = num(input.dose_iu)
+    const waterMl = num(input.water_ml)
+    const targetDrawUnits = num(input.target_draw_units)
+    if (vialIu == null || doseIu == null || (waterMl == null && targetDrawUnits == null)) {
+      return 'Need vial_iu, dose_iu, and water_ml (or target_draw_units) as numbers for an IU biologic.'
+    }
+    if (vialIu <= 0 || vialIu > 100000 || doseIu <= 0 || doseIu > 100000) {
+      return 'Values out of range. vial_iu and dose_iu must be positive (0–100000 IU).'
+    }
+    let effectiveWaterMl = waterMl
+    let solvedWaterMl: number | undefined
+    if (targetDrawUnits !== null) {
+      if (targetDrawUnits <= 0 || targetDrawUnits > 1000) {
+        return 'Values out of range. target_draw_units must be between 0 and 1000.'
+      }
+      solvedWaterMl = solveWaterForDraw(vialIu, doseIu, targetDrawUnits)
+      if (effectiveWaterMl == null) effectiveWaterMl = solvedWaterMl
+    }
+    if (effectiveWaterMl == null || effectiveWaterMl <= 0 || effectiveWaterMl > 100) {
+      return 'Values out of range. water_ml must be between 0 and 100.'
+    }
+    const r = reconstitute({ vialAmount: vialIu, dose: doseIu, waterMl: effectiveWaterMl })
+    const payload: Record<string, unknown> = {
+      source: 'reconstitution',
+      unit: 'iu',
+      form: 'vial',
+      scope_note: CANONICAL_CALC_SCOPE_NOTE,
+      note: `${CANONICAL_CALC_SCOPE_NOTE} U-100 syringe: 100 units = 1 mL. IU biologic — no molar concentration.`,
+      vialIu,
+      doseIu,
+      waterMl: round(effectiveWaterMl, 4),
+      concentrationIuPerMl: round(r.concentrationPerMl, 3),
+      concentrationIuPerTick: round(r.concentrationPerTick, 3),
+      drawMl: round(r.volumePerInjectionMl, 4),
+      drawUnitsU100: round(r.unitsPerInjection, 2),
+      wholeDosesPerVial: r.dosesPerVial,
+    }
+    if (solvedWaterMl !== undefined) {
+      payload.targetDrawUnits = targetDrawUnits
+      payload.solvedWaterMl = round(solvedWaterMl, 4)
+    }
+    return JSON.stringify(payload)
+  }
+
+  // ── Peptide (mcg) paths: reconstituted vial or pre-filled pen ───────────────
   const vialMg = num(input.vial_mg)
   const doseMcg = num(input.dose_mcg)
+  // A pen arrives in solution: its liquid volume is the factory fill (fill_ml),
+  // there is no bacteriostatic water to add, and nothing to reverse-solve.
   const waterMl = num(input.water_ml)
-  const targetDrawUnits = num(input.target_draw_units)
+  const fillMl = num(input.fill_ml)
+  const targetDrawUnits = isPen ? null : num(input.target_draw_units)
+
+  if (isPen) {
+    const penVol = fillMl ?? waterMl
+    if (vialMg == null || doseMcg == null || penVol == null) {
+      return 'Need vial_mg (pen strength), dose_mcg, and fill_ml (pre-filled pen volume) as numbers for a pen.'
+    }
+    if (vialMg <= 0 || vialMg > 10000 || doseMcg <= 0 || doseMcg > 1_000_000) {
+      return 'Values out of range. vial_mg and dose_mcg must be positive.'
+    }
+    if (penVol <= 0 || penVol > 100) {
+      return 'Values out of range. fill_ml must be between 0 and 100.'
+    }
+    const mwInfo = resolveMolecularWeight(input)
+    if (mwInfo.missingMwError) {
+      return JSON.stringify({
+        source: 'reconstitution',
+        error: mwInfo.missingMwError,
+        code: 'missing_molecular_weight',
+        scope_note: CANONICAL_CALC_SCOPE_NOTE,
+      })
+    }
+    const r = reconstitute({ vialAmount: vialMg * 1000, dose: doseMcg, waterMl: penVol })
+    const payload: Record<string, unknown> = {
+      source: 'reconstitution',
+      unit: 'mcg',
+      form: 'pen',
+      scope_note: CANONICAL_CALC_SCOPE_NOTE,
+      note: `${CANONICAL_CALC_SCOPE_NOTE} Pre-filled pen already in solution — no bacteriostatic water added. U-100 syringe: 100 units = 1 mL.`,
+      penStrengthMg: vialMg,
+      doseMcg,
+      fillMl: round(penVol, 4),
+      concentrationMcgPerMl: round(r.concentrationPerMl, 2),
+      concentrationMgPerMl: round(r.concentrationPerMl / 1000, 4),
+      concentrationPerTickMcg: round(r.concentrationPerTick, 2),
+      drawMl: round(r.volumePerInjectionMl, 4),
+      drawUnitsU100: round(r.unitsPerInjection, 2),
+      wholeDosesPerPen: r.dosesPerVial,
+    }
+    if (mwInfo.peptide) {
+      payload.peptide = {
+        slug: mwInfo.peptide.slug,
+        name: mwInfo.peptide.name,
+        molecularWeightDa: mwInfo.peptide.molecularWeight ?? null,
+      }
+    }
+    if (mwInfo.mw !== null && mwInfo.mw > 0) {
+      payload.molecularWeightDa = mwInfo.mw
+      payload.molarConcentrationUmolPerL = round((r.concentrationPerMl / mwInfo.mw) * 1000, 3)
+      payload.doseNmol = round((doseMcg / mwInfo.mw) * 1000, 3)
+    }
+    return JSON.stringify(payload)
+  }
 
   if (vialMg == null || doseMcg == null || (waterMl == null && targetDrawUnits == null)) {
     return 'Need vial_mg, dose_mcg, and water_ml (or target_draw_units) as numbers.'
@@ -176,6 +301,8 @@ export function computeReconstitution(input: Record<string, unknown>): string {
 
   const payload: Record<string, unknown> = {
     source: 'reconstitution',
+    unit: 'mcg',
+    form: 'vial',
     scope_note: CANONICAL_CALC_SCOPE_NOTE,
     note: `${CANONICAL_CALC_SCOPE_NOTE} U-100 syringe: 100 units = 1 mL.`,
     vialMg,
@@ -213,6 +340,63 @@ export function computeReconstitution(input: Record<string, unknown>): string {
   }
 
   return JSON.stringify(payload)
+}
+
+/**
+ * Deterministic cost-per-dose and doses-per-vial from a vial mass (mg), a dose
+ * (mcg), and an optional vial cost. Mirrors the on-site tracker calculator so
+ * the agent never does this division natively.
+ */
+export function computeCostPerDose(input: Record<string, unknown>): string {
+  const refused = checkPersonalAdviceRefusal(input)
+  if (refused) return refused
+
+  const vialMg = num(input.vial_mg)
+  const doseMcg = num(input.dose_mcg)
+  const cost = num(input.vial_cost)
+
+  if (vialMg == null || doseMcg == null) {
+    return JSON.stringify({
+      source: 'cost-per-dose',
+      error: 'Need vial_mg and dose_mcg as numbers (vial_cost optional).',
+      code: 'invalid_input',
+      scope_note: CANONICAL_CALC_SCOPE_NOTE,
+    })
+  }
+  if (vialMg <= 0 || vialMg > 10000 || doseMcg <= 0 || doseMcg > 1_000_000) {
+    return JSON.stringify({
+      source: 'cost-per-dose',
+      error: 'Values out of range. vial_mg and dose_mcg must be positive.',
+      code: 'invalid_input',
+      scope_note: CANONICAL_CALC_SCOPE_NOTE,
+    })
+  }
+  if (cost !== null && (cost < 0 || cost > 1_000_000)) {
+    return JSON.stringify({
+      source: 'cost-per-dose',
+      error: 'Invalid vial_cost: must be a non-negative number.',
+      code: 'invalid_input',
+      scope_note: CANONICAL_CALC_SCOPE_NOTE,
+    })
+  }
+
+  // Doses per vial = vial mass ÷ dose; cost per dose divides the vial price
+  // across them. Identical math to lib/tracker.costPerDose, inlined here so the
+  // server route stays decoupled from the localStorage-backed tracker module.
+  const dosesPerVial = (vialMg * 1000) / doseMcg
+  const perDose = cost !== null && cost > 0 ? cost / dosesPerVial : null
+
+  return JSON.stringify({
+    source: 'cost-per-dose',
+    scope_note: CANONICAL_CALC_SCOPE_NOTE,
+    note: `${CANONICAL_CALC_SCOPE_NOTE} Doses per vial = vial mass ÷ dose.`,
+    vialMg,
+    doseMcg,
+    vialCost: cost !== null && cost > 0 ? cost : null,
+    dosesPerVial: round(dosesPerVial, 2),
+    wholeDosesPerVial: Math.floor(dosesPerVial),
+    costPerDose: perDose != null ? round(perDose, 2) : null,
+  })
 }
 
 export function computeBlend(input: Record<string, unknown>): string {
