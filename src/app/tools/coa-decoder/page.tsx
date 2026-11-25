@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import {
   AlertTriangle,
@@ -17,7 +17,14 @@ import {
   ShieldCheck,
   Upload,
 } from 'lucide-react'
-import type { CoaReport, FieldStatus } from '@/lib/coa'
+import {
+  analyzeCoa,
+  buildCoaTextFromQuickEntry,
+  type CoaReport,
+  type FieldStatus,
+  type QuickEntryCoaInput,
+} from '@/lib/coa'
+import { LISTED_PEPTIDES } from '@/lib/peptides'
 
 const SAMPLE_COA = `CERTIFICATE OF ANALYSIS
 
@@ -81,21 +88,47 @@ const RUBRIC: { label: string; weight: number }[] = [
   { label: 'Test methods named', weight: 1 },
 ]
 
+const SCANNED_PDF_MIN_NON_WS_CHARS = 40
+
 // Extract text from a PDF entirely in the browser (pdfjs is lazy-loaded so it
-// never weighs down the initial page). The worker is pulled from a CDN matching
-// the installed version. Scanned/image-only PDFs yield no text — handled above.
-async function extractPdfText(file: File): Promise<string> {
+// never weighs down the initial page). When the PDF has < 40 non-whitespace
+// characters (a scanned or image-only certificate), we keep the raw ArrayBuffer
+// in memory so page 1 can be rendered to a client-only <canvas> beside the
+// manual quick-entry drawer — zero OCR bundle bloat, never uploaded or logged.
+async function extractPdfContent(
+  file: File,
+): Promise<{ text: string; nonWsCount: number; pdfBuffer: ArrayBuffer }> {
   const pdfjs = await import('pdfjs-dist')
   pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
-  const data = await file.arrayBuffer()
-  const doc = await pdfjs.getDocument({ data }).promise
+  const pdfBuffer = await file.arrayBuffer()
+  const doc = await pdfjs.getDocument({ data: pdfBuffer.slice(0) }).promise
   let out = ''
   for (let i = 1; i <= doc.numPages; i++) {
     const page = await doc.getPage(i)
     const content = await page.getTextContent()
     out += content.items.map((it) => (it as { str?: string }).str ?? '').join(' ') + '\n'
   }
-  return out.trim()
+  const trimmed = out.trim()
+  const nonWsCount = trimmed.replace(/\s+/g, '').length
+  return { text: trimmed, nonWsCount, pdfBuffer }
+}
+
+async function renderPdfPage1ToCanvas(
+  pdfBuffer: ArrayBuffer,
+  canvas: HTMLCanvasElement,
+): Promise<void> {
+  const pdfjs = await import('pdfjs-dist')
+  pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
+  const doc = await pdfjs.getDocument({ data: pdfBuffer.slice(0) }).promise
+  const page = await doc.getPage(1)
+  const baseViewport = page.getViewport({ scale: 1 })
+  const scale = Math.min(2.0, Math.max(1.1, 760 / Math.max(1, baseViewport.width)))
+  const viewport = page.getViewport({ scale })
+  canvas.width = Math.floor(viewport.width)
+  canvas.height = Math.floor(viewport.height)
+  const canvasContext = canvas.getContext('2d')
+  if (!canvasContext) return
+  await page.render({ canvasContext, canvas, viewport }).promise
 }
 
 function reportToText(r: CoaReport): string {
@@ -106,7 +139,11 @@ function reportToText(r: CoaReport): string {
     lines.push(`  [${f.status === 'good' ? 'x' : ' '}] ${f.label}${f.value ? `: ${f.value}` : ''}`)
   if (r.catalogChecks.length) {
     lines.push('', 'Identity cross-check vs verified reference:')
-    for (const c of r.catalogChecks) lines.push(`  ${c.label}: COA ${c.claimed} vs ${c.reference} — ${c.verdict}`)
+    for (const c of r.catalogChecks) {
+      const species = c.msMatch?.speciesLabel ? ` [${c.msMatch.speciesLabel}]` : ''
+      lines.push(`  ${c.label}: COA ${c.claimed} vs ${c.reference} — ${c.verdict}${species}`)
+      lines.push(`    ${c.note}`)
+    }
   }
   if (r.featureChecks.length) {
     lines.push('', 'Tests that matter for this peptide:')
@@ -121,6 +158,18 @@ function reportToText(r: CoaReport): string {
   return lines.join('\n')
 }
 
+const EMPTY_QUICK_ENTRY: QuickEntryCoaInput = {
+  peptideName: '',
+  purityPct: '',
+  observedMassDa: '',
+  counterion: 'Acetate',
+  waterPct: '',
+  netContentPct: '',
+  endotoxinEu: '',
+  labName: '',
+  batchOrTaskId: '',
+}
+
 export default function CoaDecoderPage() {
   const [text, setText] = useState('')
   const [report, setReport] = useState<CoaReport | null>(null)
@@ -130,6 +179,41 @@ export default function CoaDecoderPage() {
   const [copied, setCopied] = useState<string | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
 
+  // Scanned-PDF fallback state: client-only page-1 <canvas> preview + inline quick-entry drawer
+  const [scannedPdfBuffer, setScannedPdfBuffer] = useState<ArrayBuffer | null>(null)
+  const [scannedPdfName, setScannedPdfName] = useState<string | null>(null)
+  const [quickDrawerOpen, setQuickDrawerOpen] = useState(false)
+  const [quickEntry, setQuickEntry] = useState<QuickEntryCoaInput>(EMPTY_QUICK_ENTRY)
+  const previewCanvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    if (!scannedPdfBuffer || !quickDrawerOpen || !previewCanvasRef.current) return
+    let cancelled = false
+    void (async () => {
+      try {
+        if (!cancelled && previewCanvasRef.current) {
+          await renderPdfPage1ToCanvas(scannedPdfBuffer, previewCanvasRef.current)
+        }
+      } catch {
+        // Preview rendering is best-effort; the manual quick-entry drawer still works.
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [scannedPdfBuffer, quickDrawerOpen])
+
+  function updateQuickField<K extends keyof QuickEntryCoaInput>(key: K, value: string) {
+    setQuickEntry((prev) => ({ ...prev, [key]: value }))
+  }
+
+  function gradeFromQuickEntry() {
+    setError(null)
+    const synthesized = buildCoaTextFromQuickEntry(quickEntry)
+    setText(synthesized)
+    setReport(analyzeCoa(synthesized))
+  }
+
   async function handleFile(file: File | undefined) {
     if (!file) return
     setError(null)
@@ -138,19 +222,37 @@ export default function CoaDecoderPage() {
     try {
       setFileBusy(true)
       if (isPdf) {
-        const extracted = await extractPdfText(file)
-        if (extracted.length < 20) {
-          setError(
-            'Could not read text from that PDF — it may be a scanned image. Paste the COA text instead.',
+        const { text: extracted, nonWsCount, pdfBuffer } = await extractPdfContent(file)
+        if (nonWsCount < SCANNED_PDF_MIN_NON_WS_CHARS) {
+          setScannedPdfBuffer(pdfBuffer)
+          setScannedPdfName(file.name)
+          setQuickDrawerOpen(true)
+          const stem = file.name.replace(/\.pdf$/i, '').replace(/[_-]+/g, ' ').trim()
+          const matchedCatalog = LISTED_PEPTIDES.find(
+            (p) =>
+              stem.toLowerCase().includes(p.slug.replace(/-/g, ' ')) ||
+              stem.toLowerCase().includes(p.name.toLowerCase()),
           )
+          if (matchedCatalog) {
+            setQuickEntry((prev) => ({
+              ...prev,
+              peptideName: prev.peptideName || matchedCatalog.name,
+            }))
+          }
           return
         }
+        setScannedPdfBuffer(null)
+        setScannedPdfName(null)
+        setQuickDrawerOpen(false)
         setText(extracted)
       } else {
+        setScannedPdfBuffer(null)
+        setScannedPdfName(null)
+        setQuickDrawerOpen(false)
         setText((await file.text()).slice(0, 20000))
       }
     } catch {
-      setError('Could not read that file. Paste the COA text instead.')
+      setError('Could not read that file. Paste the COA text or use the manual quick-entry drawer below.')
     } finally {
       setFileBusy(false)
     }
@@ -171,14 +273,8 @@ export default function CoaDecoderPage() {
     setError(null)
     setReport(null)
     try {
-      const res = await fetch('/api/coa', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text }),
-      })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || 'Analysis failed.')
-      setReport(data as CoaReport)
+      // Deterministic client-side grading — never sends raw COA text to /api/chat.
+      setReport(analyzeCoa(text))
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Something went wrong.')
     } finally {
@@ -271,6 +367,12 @@ export default function CoaDecoderPage() {
                 Upload PDF
               </button>
               <button
+                onClick={() => setQuickDrawerOpen((v) => !v)}
+                className="rounded-xl border border-hairline-strong px-4 py-2.5 text-sm font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
+              >
+                {quickDrawerOpen ? 'Hide quick-entry drawer' : 'Scanned COA quick-entry'}
+              </button>
+              <button
                 onClick={() => setText(SAMPLE_COA)}
                 className="rounded-xl border border-hairline-strong px-4 py-2.5 text-sm font-medium text-ink/60 transition-colors hover:border-ink/20 hover:text-ink"
               >
@@ -282,12 +384,16 @@ export default function CoaDecoderPage() {
               >
                 Disulfide sample
               </button>
-              {(text || report) && (
+              {(text || report || scannedPdfBuffer) && (
                 <button
                   onClick={() => {
                     setText('')
                     setReport(null)
                     setError(null)
+                    setScannedPdfBuffer(null)
+                    setScannedPdfName(null)
+                    setQuickDrawerOpen(false)
+                    setQuickEntry(EMPTY_QUICK_ENTRY)
                   }}
                   className="rounded-xl px-4 py-2.5 text-sm font-medium text-ink/55 transition-colors hover:text-ink/70"
                 >
@@ -296,6 +402,197 @@ export default function CoaDecoderPage() {
               )}
             </div>
             {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
+
+            {/* Scanned-PDF Graceful Fallback: Client-only <canvas> preview of page 1 + inline manual quick-entry drawer */}
+            {quickDrawerOpen && (
+              <div className="mt-5 rounded-2xl border border-accent/30 bg-fill p-5">
+                <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="h-4 w-4 text-accent" />
+                      <h2 className="text-sm font-semibold text-ink/90">
+                        {scannedPdfBuffer
+                          ? `Scanned PDF detected${scannedPdfName ? ` (${scannedPdfName})` : ''} — Manual Quick-Entry`
+                          : 'Manual COA Quick-Entry Drawer'}
+                      </h2>
+                    </div>
+                    <p className="mt-1 text-xs leading-relaxed text-ink/55">
+                      {scannedPdfBuffer
+                        ? 'This PDF has fewer than 40 selectable characters (likely a scanned image). Page 1 is rendered locally below — never uploaded or logged. Enter the key figures from the certificate to grade and cross-check it deterministically.'
+                        : 'Transcribe the key figures from a scanned or image-only certificate to grade it against the transparency checklist and salt-aware MS reference.'}
+                    </p>
+                  </div>
+                  <span className="inline-flex items-center gap-1 rounded-full border border-accent/25 bg-accent/[0.08] px-2.5 py-0.5 text-[10px] font-medium text-accent">
+                    <Lock className="h-3 w-3" />
+                    Client-only · 0 bytes uploaded
+                  </span>
+                </div>
+
+                <div className={scannedPdfBuffer ? 'grid gap-6 lg:grid-cols-2' : ''}>
+                  {scannedPdfBuffer && (
+                    <div className="overflow-hidden rounded-xl border border-hairline bg-surface p-3">
+                      <p className="mb-2 font-mono text-[11px] uppercase tracking-wider text-ink/50">
+                        Page 1 local preview (canvas)
+                      </p>
+                      <div className="max-h-[520px] overflow-auto rounded-lg border border-hairline bg-white/95 p-2">
+                        <canvas
+                          ref={previewCanvasRef}
+                          aria-label="Scanned COA PDF page 1 preview"
+                          className="mx-auto block h-auto max-w-full"
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="space-y-3.5">
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-medium text-ink/70">
+                          Compound / Peptide
+                        </span>
+                        <input
+                          type="text"
+                          list="coa-catalog-peptides"
+                          value={quickEntry.peptideName ?? ''}
+                          onChange={(e) => updateQuickField('peptideName', e.target.value)}
+                          placeholder="e.g. BPC-157 or GHK-Cu"
+                          className="w-full rounded-xl border border-hairline bg-surface px-3 py-2 text-sm text-ink/85 placeholder:text-ink/30 focus:border-accent/40 focus:outline-none"
+                        />
+                        <datalist id="coa-catalog-peptides">
+                          {LISTED_PEPTIDES.map((p) => (
+                            <option key={p.slug} value={p.name} />
+                          ))}
+                        </datalist>
+                      </label>
+
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-medium text-ink/70">
+                          HPLC Purity (%)
+                        </span>
+                        <input
+                          type="text"
+                          inputMode="decimal"
+                          value={quickEntry.purityPct ?? ''}
+                          onChange={(e) => updateQuickField('purityPct', e.target.value)}
+                          placeholder="e.g. 99.1"
+                          className="w-full rounded-xl border border-hairline bg-surface px-3 py-2 font-mono text-sm text-ink/85 placeholder:text-ink/30 focus:border-accent/40 focus:outline-none"
+                        />
+                      </label>
+
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-medium text-ink/70">
+                          Observed MS (Da or m/z)
+                        </span>
+                        <input
+                          type="text"
+                          inputMode="decimal"
+                          value={quickEntry.observedMassDa ?? ''}
+                          onChange={(e) => updateQuickField('observedMassDa', e.target.value)}
+                          placeholder="e.g. 1419.5 or 710.8"
+                          className="w-full rounded-xl border border-hairline bg-surface px-3 py-2 font-mono text-sm text-ink/85 placeholder:text-ink/30 focus:border-accent/40 focus:outline-none"
+                        />
+                      </label>
+
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-medium text-ink/70">
+                          Stated Counterion / Salt
+                        </span>
+                        <select
+                          value={quickEntry.counterion ?? 'Acetate'}
+                          onChange={(e) => updateQuickField('counterion', e.target.value)}
+                          className="w-full rounded-xl border border-hairline bg-surface px-3 py-2 text-sm text-ink/85 focus:border-accent/40 focus:outline-none"
+                        >
+                          <option value="Acetate">Acetate</option>
+                          <option value="TFA">TFA (Trifluoroacetate)</option>
+                          <option value="None">Not stated on COA</option>
+                        </select>
+                      </label>
+
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-medium text-ink/70">
+                          Net Peptide Content (%)
+                        </span>
+                        <input
+                          type="text"
+                          inputMode="decimal"
+                          value={quickEntry.netContentPct ?? ''}
+                          onChange={(e) => updateQuickField('netContentPct', e.target.value)}
+                          placeholder="e.g. 84.2 (leave blank if omitted)"
+                          className="w-full rounded-xl border border-hairline bg-surface px-3 py-2 font-mono text-sm text-ink/85 placeholder:text-ink/30 focus:border-accent/40 focus:outline-none"
+                        />
+                      </label>
+
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-medium text-ink/70">
+                          Water Content (%)
+                        </span>
+                        <input
+                          type="text"
+                          inputMode="decimal"
+                          value={quickEntry.waterPct ?? ''}
+                          onChange={(e) => updateQuickField('waterPct', e.target.value)}
+                          placeholder="e.g. 4.8 (leave blank if omitted)"
+                          className="w-full rounded-xl border border-hairline bg-surface px-3 py-2 font-mono text-sm text-ink/85 placeholder:text-ink/30 focus:border-accent/40 focus:outline-none"
+                        />
+                      </label>
+
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-medium text-ink/70">
+                          Endotoxin (EU/mg)
+                        </span>
+                        <input
+                          type="text"
+                          value={quickEntry.endotoxinEu ?? ''}
+                          onChange={(e) => updateQuickField('endotoxinEu', e.target.value)}
+                          placeholder="e.g. <0.5 (leave blank if omitted)"
+                          className="w-full rounded-xl border border-hairline bg-surface px-3 py-2 font-mono text-sm text-ink/85 placeholder:text-ink/30 focus:border-accent/40 focus:outline-none"
+                        />
+                      </label>
+
+                      <label className="block">
+                        <span className="mb-1 block text-xs font-medium text-ink/70">
+                          Testing Lab Name
+                        </span>
+                        <input
+                          type="text"
+                          value={quickEntry.labName ?? ''}
+                          onChange={(e) => updateQuickField('labName', e.target.value)}
+                          placeholder="e.g. Janoshik or MZ Biolabs"
+                          className="w-full rounded-xl border border-hairline bg-surface px-3 py-2 text-sm text-ink/85 placeholder:text-ink/30 focus:border-accent/40 focus:outline-none"
+                        />
+                      </label>
+                    </div>
+
+                    <label className="block">
+                      <span className="mb-1 block text-xs font-medium text-ink/70">
+                        Batch / Lot / Task ID
+                      </span>
+                      <input
+                        type="text"
+                        value={quickEntry.batchOrTaskId ?? ''}
+                        onChange={(e) => updateQuickField('batchOrTaskId', e.target.value)}
+                        placeholder="e.g. AP-240517 or Task #48219"
+                        className="w-full rounded-xl border border-hairline bg-surface px-3 py-2 font-mono text-sm text-ink/85 placeholder:text-ink/30 focus:border-accent/40 focus:outline-none"
+                      />
+                    </label>
+
+                    <div className="flex flex-wrap items-center gap-3 pt-1">
+                      <button
+                        type="button"
+                        onClick={gradeFromQuickEntry}
+                        className="inline-flex items-center gap-1.5 rounded-xl bg-[#7EE0B5] px-4 py-2 text-xs font-semibold text-[#0E1512] transition-colors hover:bg-[#A6F0CC]"
+                      >
+                        <FileSearch className="h-3.5 w-3.5" />
+                        Grade & Cross-Check Quick Entry
+                      </button>
+                      <span className="text-[11px] text-ink/50">
+                        Populates the COA text box and runs the salt-aware MS cross-check.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <details className="group mt-4 rounded-xl border border-hairline bg-fill [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex cursor-pointer items-center justify-between gap-3 px-4 py-3 text-xs font-medium text-ink/50 hover:text-ink/75">
@@ -405,6 +702,11 @@ export default function CoaDecoderPage() {
                             >
                               {c.verdict}
                             </span>
+                            {c.msMatch && c.msMatch.matched && (
+                              <span className="ml-2 inline-flex items-center rounded-full border border-accent/25 bg-accent/[0.08] px-2 py-0.5 font-mono text-[10px] font-medium text-accent">
+                                {c.msMatch.speciesLabel}
+                              </span>
+                            )}
                             <span className="mt-0.5 block text-xs text-ink/55">{c.note}</span>
                           </span>
                         </div>

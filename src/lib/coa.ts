@@ -31,6 +31,31 @@ export interface CoaField {
   action?: string
 }
 
+export type MsMatchKind =
+  | 'free_base'
+  | 'm_plus_h'
+  | 'm_plus_2h'
+  | 'acetate_salt'
+  | 'tfa_salt'
+  | 'cu_complex'
+  | 'cu_apo_ligand'
+  | 'mismatch'
+
+export interface MsCrossCheckResult {
+  matched: boolean
+  kind: MsMatchKind
+  /** Short machine/human label for the matched species, e.g. "[M+2H]2+" or "TFA salt (+114.02 Da)". */
+  speciesLabel: string
+  /** Theoretical Da (or m/z) of the matched candidate species. */
+  expectedMass: number
+  /** Signed difference (observed - expectedMass) in Da. */
+  deltaDa: number
+  /** Tolerance applied for this candidate in Da. */
+  toleranceDa: number
+  /** Deterministic human-readable note explaining the match or mismatch. */
+  note: string
+}
+
 export interface CatalogCheck {
   field: 'molecularWeight' | 'molecularFormula' | 'sequence' | 'cas'
   label: string
@@ -38,6 +63,8 @@ export interface CatalogCheck {
   reference: string
   verdict: 'match' | 'mismatch' | 'unverified'
   note: string
+  /** Populated on molecularWeight checks with the salt/adduct offset match details. */
+  msMatch?: MsCrossCheckResult
 }
 
 /**
@@ -77,6 +104,247 @@ export interface CoaReport {
   }
 }
 
+// ── Canonical Salt & Adduct Mass Offsets (Da) ─────────────────────────────────
+// Used by matchObservedMass() to deterministically reconcile an observed MS peak
+// (or stated salt formula weight) against our verified PubChem / catalog MW.
+export const PROTON_MASS_DA = 1.0078
+export const ACETATE_OFFSET_DA = 60.05 // Acetic acid (CH3COOH) salt adduct
+export const TFA_OFFSET_DA = 114.02 // Trifluoroacetic acid (CF3COOH) salt adduct
+export const CU_COMPLEX_OFFSET_DA = 61.53 // Cu(II) coordination net shift: +Cu (63.546) − 2H (2.016)
+export const GHK_FREE_LIGAND_MW_DA = 340.38 // Bare GHK tripeptide (C14H24N6O4)
+export const GHK_CU_COMPLEX_MW_DA = 400.9 // Verified PubChem GHK-Cu complex (CID 139035031)
+
+function round2(n: number): number {
+  return Math.round(n * 100) / 100
+}
+
+/**
+ * Deterministic salt- and adduct-aware MS cross-check.
+ *
+ * Compares an observed mass-spec peak (or stated MW) against the compound's
+ * verified reference MW plus common analytical/formulation offsets:
+ *   • Free base (M)
+ *   • Protonated ESI adducts: [M+H]+ ((M + 1.0078)/1) and [M+2H]2+ ((M + 2.0156)/2)
+ *   • Acetate salt (+60.05 Da) and TFA salt (+114.02 Da)
+ *   • Cu2+ complexation for GHK-Cu / GHK (and copper peptides): matches both the
+ *     Cu2+-coordinated complex (~400.9–401.9 Da) and the bare GHK ligand (~340.38 Da,
+ *     often observed when ESI acid mobile phase dissociates Cu2+).
+ */
+export function matchObservedMass(
+  observedDa: number,
+  referenceMw: number,
+  options?: { slug?: string; syntheticFeatures?: SyntheticFeature[] },
+): MsCrossCheckResult {
+  const slug = options?.slug?.toLowerCase() ?? ''
+  const isCopperComplex =
+    slug === 'ghk-cu' ||
+    slug === 'ahk-cu' ||
+    (options?.syntheticFeatures ?? []).includes('Copper complex')
+
+  // Base tolerance accommodates monoisotopic vs average isotopic mass differences
+  // across peptide lengths (~0.8 Da per 1400 Da, ~2.5 Da per 4500 Da) plus typical
+  // single-quadrupole / MALDI-TOF reporting precision.
+  const baseTol = Math.max(1.8, referenceMw * 0.0012)
+
+  interface Candidate {
+    kind: Exclude<MsMatchKind, 'mismatch'>
+    speciesLabel: string
+    expectedMass: number
+    toleranceDa: number
+    priority: number
+    buildNote: (obs: number, exp: number, delta: number) => string
+  }
+
+  const candidates: Candidate[] = [
+    {
+      kind: 'free_base',
+      speciesLabel: 'Free base (M)',
+      expectedMass: referenceMw,
+      toleranceDa: baseTol,
+      priority: 1,
+      buildNote: (obs, exp) =>
+        `Matches verified free-base reference mass (${round2(exp)} Da; observed ${round2(obs)} Da) — consistent with the expected peptide identity.`,
+    },
+    {
+      kind: 'm_plus_h',
+      speciesLabel: '[M+H]+ adduct',
+      expectedMass: referenceMw + PROTON_MASS_DA,
+      toleranceDa: baseTol,
+      priority: 2,
+      buildNote: (obs, exp) =>
+        `Matches single-charged [M+H]+ ion (${round2(exp)} Da = M + 1.01 Da; observed ${round2(obs)} Da) — standard positive-mode ESI/MALDI protonated peak.`,
+    },
+    {
+      kind: 'm_plus_2h',
+      speciesLabel: '[M+2H]2+ doubly charged ion',
+      expectedMass: (referenceMw + 2 * PROTON_MASS_DA) / 2,
+      toleranceDa: Math.max(1.2, baseTol * 0.6),
+      priority: 3,
+      buildNote: (obs, exp) =>
+        `Matches doubly charged [M+2H]2+ ion (m/z ${round2(exp)} = (M + 2.02) / 2; observed ${round2(obs)}) — common in ESI-MS for peptides with basic residues.`,
+    },
+    {
+      kind: 'acetate_salt',
+      speciesLabel: 'Acetate salt (+60.05 Da)',
+      expectedMass: referenceMw + ACETATE_OFFSET_DA,
+      toleranceDa: Math.max(2.0, baseTol),
+      priority: 4,
+      buildNote: (obs, exp) =>
+        `Matches mono-acetate salt form (${round2(exp)} Da = free base ${round2(referenceMw)} Da + 60.05 Da acetate; observed ${round2(obs)} Da).`,
+    },
+    {
+      kind: 'tfa_salt',
+      speciesLabel: 'TFA salt (+114.02 Da)',
+      expectedMass: referenceMw + TFA_OFFSET_DA,
+      toleranceDa: Math.max(2.0, baseTol),
+      priority: 5,
+      buildNote: (obs, exp) =>
+        `Matches mono-TFA (trifluoroacetate) salt form (${round2(exp)} Da = free base ${round2(referenceMw)} Da + 114.02 Da TFA; observed ${round2(obs)} Da).`,
+    },
+  ]
+
+  // Copper-complex special cases: GHK-Cu (reference ~400.9–401.9 Da) and bare GHK (~340.38 Da)
+  if (slug === 'ghk-cu' || isCopperComplex) {
+    const cuComplexMass = slug === 'ghk-cu' ? GHK_CU_COMPLEX_MW_DA : referenceMw
+    // Remove generic free_base and m_plus_h on the copper complex so 400.9–402.9 Da
+    // reports cleanly as cu_complex rather than tying with [M+H]+ of the anionic PubChem record.
+    for (let i = candidates.length - 1; i >= 0; i--) {
+      if (candidates[i].kind === 'free_base' || candidates[i].kind === 'm_plus_h') {
+        candidates.splice(i, 1)
+      }
+    }
+    candidates.unshift({
+      kind: 'cu_complex',
+      speciesLabel: 'Cu2+ coordination complex ([M+Cu−2H] / GHK-Cu)',
+      expectedMass: cuComplexMass,
+      toleranceDa: 2.5,
+      priority: 0,
+      buildNote: (obs) =>
+        `Matches the Cu2+-coordinated copper-peptide complex (expected ~${round2(cuComplexMass)}–402.9 Da; observed ${round2(obs)} Da) — confirms copper-bound complex mass.`,
+    })
+    const apoMass =
+      slug === 'ghk-cu' ? GHK_FREE_LIGAND_MW_DA : round2(referenceMw - CU_COMPLEX_OFFSET_DA)
+    candidates.push({
+      kind: 'cu_apo_ligand',
+      speciesLabel: 'Uncomplexed free ligand (M − Cu2+)',
+      expectedMass: apoMass,
+      toleranceDa: 2.2,
+      priority: 3,
+      buildNote: (obs, exp) =>
+        `Matches the uncomplexed free tripeptide ligand (${round2(exp)} Da = Cu2+ complex minus ~61.5 Da Cu2+ shift; observed ${round2(obs)} Da) — acidic ESI-MS mobile phases frequently dissociate Cu2+ and detect the bare peptide.`,
+    })
+  } else if (slug === 'ghk') {
+    candidates.push({
+      kind: 'cu_complex',
+      speciesLabel: 'Cu2+ complex (+61.53 Da / GHK-Cu)',
+      expectedMass: referenceMw + CU_COMPLEX_OFFSET_DA,
+      toleranceDa: 2.5,
+      priority: 4,
+      buildNote: (obs, exp) =>
+        `Matches the Cu2+-coordinated GHK-Cu complex (${round2(exp)} Da = free GHK ${round2(referenceMw)} Da + 61.53 Da Cu2+ shift; observed ${round2(obs)} Da).`,
+    })
+  }
+
+  const hits = candidates
+    .map((c) => {
+      const delta = observedDa - c.expectedMass
+      const absDelta = Math.abs(delta)
+      return { c, delta, absDelta, within: absDelta <= c.toleranceDa }
+    })
+    .filter((h) => h.within)
+    .sort((a, b) => {
+      if (Math.abs(a.absDelta - b.absDelta) > 0.6) return a.absDelta - b.absDelta
+      return a.c.priority - b.c.priority
+    })
+
+  if (hits.length > 0) {
+    const best = hits[0]
+    return {
+      matched: true,
+      kind: best.c.kind,
+      speciesLabel: best.c.speciesLabel,
+      expectedMass: round2(best.c.expectedMass),
+      deltaDa: round2(best.delta),
+      toleranceDa: round2(best.c.toleranceDa),
+      note: best.c.buildNote(observedDa, best.c.expectedMass, best.delta),
+    }
+  }
+
+  const delta = round2(observedDa - referenceMw)
+  const sign = delta > 0 ? `+${delta}` : `${delta}`
+  return {
+    matched: false,
+    kind: 'mismatch',
+    speciesLabel: 'Unmatched mass',
+    expectedMass: round2(referenceMw),
+    deltaDa: delta,
+    toleranceDa: round2(baseTol),
+    note: `Does not match the verified reference mass (${round2(referenceMw)} Da; Δ ${sign} Da) or standard adduct/salt offsets ([M+H]+, [M+2H]2+, acetate +60.05 Da, TFA +114.02 Da${
+      isCopperComplex || slug === 'ghk' ? ', Cu2+ complex' : ''
+    }) — verify product identity.`,
+  }
+}
+
+// ── Quick-entry builder for Scanned-PDF Fallback ─────────────────────────────
+
+export interface QuickEntryCoaInput {
+  peptideName?: string
+  purityPct?: string
+  observedMassDa?: string
+  counterion?: string
+  waterPct?: string
+  netContentPct?: string
+  endotoxinEu?: string
+  labName?: string
+  batchOrTaskId?: string
+}
+
+/**
+ * Format structured fields from the scanned-PDF quick-entry drawer into a
+ * canonical COA text block that `analyzeCoa()` grades deterministically.
+ */
+export function buildCoaTextFromQuickEntry(entry: QuickEntryCoaInput): string {
+  const lines: string[] = ['CERTIFICATE OF ANALYSIS (Scanned PDF Manual Entry)']
+  if (entry.peptideName?.trim()) lines.push(`Product: ${entry.peptideName.trim()}`)
+  if (entry.labName?.trim()) lines.push(`Testing Laboratory: ${entry.labName.trim()}`)
+  if (entry.batchOrTaskId?.trim()) {
+    lines.push(`Lot / Batch No.: ${entry.batchOrTaskId.trim()}`)
+    lines.push(`Test Date: Verified on scanned certificate`)
+  }
+  if (entry.purityPct?.trim()) {
+    const clean = entry.purityPct.trim().replace(/%$/, '')
+    lines.push(`Purity (RP-HPLC): ${clean} %`)
+  }
+  if (entry.observedMassDa?.trim()) {
+    const clean = entry.observedMassDa.trim().replace(/\s*(?:da|g\/mol|m\/z)$/i, '')
+    lines.push(`Identity (ESI-MS): Observed mass ${clean} Da`)
+  }
+  if (entry.netContentPct?.trim()) {
+    const clean = entry.netContentPct.trim().replace(/%$/, '')
+    lines.push(`Net Peptide Content: ${clean} %`)
+  }
+  if (entry.counterion?.trim() && entry.counterion.trim().toLowerCase() !== 'none') {
+    lines.push(`Counterion: ${entry.counterion.trim()}`)
+  }
+  if (entry.waterPct?.trim()) {
+    const clean = entry.waterPct.trim().replace(/%$/, '')
+    lines.push(`Water Content (Karl Fischer): ${clean} %`)
+  }
+  if (entry.endotoxinEu?.trim()) {
+    const clean = entry.endotoxinEu.trim().replace(/\s*eu(?:\/mg)?$/i, '')
+    lines.push(`Endotoxin (LAL): ${clean} EU/mg`)
+  }
+
+  const methods: string[] = []
+  if (entry.purityPct?.trim()) methods.push('RP-HPLC')
+  if (entry.observedMassDa?.trim()) methods.push('ESI-MS')
+  if (entry.waterPct?.trim()) methods.push('Karl Fischer')
+  if (methods.length > 0) {
+    lines.push(`Test Methods: ${methods.join(', ')}`)
+  }
+  return lines.join('\n')
+}
+
 // ── Small extraction helpers ──────────────────────────────────────────────────
 
 function firstMatch(text: string, re: RegExp): RegExpMatchArray | null {
@@ -99,7 +367,13 @@ function detectPeptide(text: string): Peptide | null {
     const candidates = [p.name.replace(/\s*\(.*?\)\s*/g, ' ').trim(), ...(p.aliases ?? []), p.slug.replace(/-/g, ' ')]
     for (const cand of candidates) {
       const c = cand.toLowerCase().trim()
-      if (c.length >= 4 && lower.includes(c) && c.length > bestLen) {
+      if (c.length >= 3 && lower.includes(c) && c.length > bestLen) {
+        if (c.length === 3) {
+          const esc = c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+          if (!new RegExp(`(?:^|[^a-z0-9])${esc}(?:[^a-z0-9]|$)`, 'i').test(lower)) {
+            continue
+          }
+        }
         best = p
         bestLen = c.length
       }
@@ -121,10 +395,10 @@ function detectPurity(text: string): { value: string | null; pct: number | null 
 }
 
 function hasMassSpec(text: string): { found: boolean; value: string | null } {
-  if (!/\b(mass\s*spec|ms\b|esi|maldi|lc[-\s]?ms|\[m\s*\+\s*h\]|m\/z|exact mass|observed mass|found mass)/i.test(text)) {
+  if (!/\b(mass\s*spec|ms\b|esi|maldi|lc[-\s]?ms|\[m\s*\+\s*\d*h\]|m\/z|exact mass|observed mass|found mass)/i.test(text)) {
     return { found: false, value: null }
   }
-  const m = firstMatch(text, /(?:observed|found|measured|exact)[^\d]{0,20}(\d{3,6}(?:\.\d+)?)/i)
+  const m = firstMatch(text, /(?:observed|found|measured|exact|\[m\s*\+\s*\d*h\]\d*\+?)[^\d]{0,20}(\d{2,6}(?:\.\d+)?)/i)
   return { found: true, value: m ? m[1] : null }
 }
 
@@ -152,7 +426,7 @@ function detectEndotoxin(text: string): string | null {
 }
 
 function detectLotAndDates(text: string): string | null {
-  const lot = firstMatch(text, /(?:lot|batch)\s*(?:no\.?|number|#)?[:\s]*([A-Za-z0-9][A-Za-z0-9\-]{2,})/i)
+  const lot = firstMatch(text, /(?:lot|batch|task)\s*(?:no\.?|number|id|#)?[:\s]*([A-Za-z0-9][A-Za-z0-9\-_]{2,})/i)
   const date = /(manufactur|production|date of analysis|test\s*date|re-?test|expir|valid\s*until|valid\s*through)/i.test(text)
   if (lot && date) return `lot ${lot[1]} + dated`
   if (lot) return `lot ${lot[1]}`
@@ -166,19 +440,25 @@ function hasMethods(text: string): boolean {
 }
 
 function detectClaimedMW(text: string): { value: number; source: string } | null {
-  // A labeled molecular weight is the cleanest signal…
+  // Prefer an MS observed/measured/exact mass when present, since that is the
+  // empirical peak on the certificate (free base, [M+H]+, [M+2H]2+, or salt).
+  const mass = firstMatch(
+    text,
+    /(?:observed|found|measured|exact|monoisotopic)\s*(?:mass|m\/z)[:\s~=]*(?:\[m\+\d*h\]\d*\+?\s*)?([\d,]+(?:\.\d+)?)/i,
+  )
+  if (mass && num(mass[1]) != null) return { value: num(mass[1]) as number, source: 'observed mass (MS)' }
+
+  const adduct = firstMatch(
+    text,
+    /\[m\s*\+\s*\d*h\]\d*\+?[:\s~=]*([\d,]+(?:\.\d+)?)/i,
+  )
+  if (adduct && num(adduct[1]) != null) return { value: num(adduct[1]) as number, source: 'observed ion (MS)' }
+
   const mw = firstMatch(
     text,
     /(?:molecular\s*weight|mol(?:\.|ecular)?\s*wt\.?|\bm\.?w\.?\b)[:\s~=]*([\d,]+(?:\.\d+)?)\s*(?:g\/mol|da|dalton)?/i,
   )
   if (mw && num(mw[1]) != null) return { value: num(mw[1]) as number, source: 'molecular weight' }
-  // …but most COAs state an MS observed/exact mass instead, which is just as
-  // good for an identity cross-check (±1 Da for an [M+H]+ adduct).
-  const mass = firstMatch(
-    text,
-    /(?:observed|found|measured|exact|monoisotopic)\s*mass[:\s~=]*\[?m?\+?h?\]?\+?\s*([\d,]+(?:\.\d+)?)/i,
-  )
-  if (mass && num(mass[1]) != null) return { value: num(mass[1]) as number, source: 'observed mass (MS)' }
   return null
 }
 
@@ -202,17 +482,18 @@ function buildCatalogChecks(text: string, peptide: Peptide): CatalogCheck[] {
 
   const claimedMW = detectClaimedMW(text)
   if (claimedMW != null && refMW != null) {
-    const tol = Math.max(2, refMW * 0.01)
-    const match = Math.abs(claimedMW.value - refMW) <= tol
+    const msMatch = matchObservedMass(claimedMW.value, refMW, {
+      slug: peptide.slug,
+      syntheticFeatures: peptide.syntheticFeatures,
+    })
     checks.push({
       field: 'molecularWeight',
-      label: 'Molecular weight',
-      claimed: `${claimedMW.value} (${claimedMW.source})`,
+      label: 'Molecular weight / MS',
+      claimed: `${claimedMW.value} Da (${claimedMW.source})`,
       reference: `${refMW} Da${verified ? ' (verified)' : ''}`,
-      verdict: match ? 'match' : 'mismatch',
-      note: match
-        ? 'Matches the reference value for this peptide — the stated mass is consistent with the right molecule.'
-        : 'Does not match the reference — verify the product identity or that the right reference was used.',
+      verdict: msMatch.matched ? 'match' : 'mismatch',
+      note: msMatch.note,
+      msMatch,
     })
   }
 
