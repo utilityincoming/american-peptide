@@ -5,6 +5,7 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 import {
   applyTrialFilters,
   filtersToSearchParams,
+  mergeTrials,
   phaseDistribution,
   rapidUpdates,
   readSavedViews,
@@ -13,7 +14,11 @@ import {
 } from '@/lib/research-workspace/pulse'
 import type { PulseFilters, SavedPulseView, TrialRecord } from '@/lib/research-workspace/types'
 
-const cache = new Map<string, { trials: TrialRecord[]; total: number }>()
+const PAGE = 40
+/** Stop after five pages so a broad query cannot walk the whole registry. */
+const MAX_LOADED = PAGE * 5
+
+const cache = new Map<string, { trials: TrialRecord[]; total: number; nextPageToken: string | null }>()
 
 export default function ClinicalPulse({
   filters,
@@ -25,6 +30,8 @@ export default function ClinicalPulse({
   const [draftQuery, setDraftQuery] = useState(filters.query)
   const [trials, setTrials] = useState<TrialRecord[]>([])
   const [total, setTotal] = useState(0)
+  const [nextToken, setNextToken] = useState<string | null>(null)
+  const [loadingMore, setLoadingMore] = useState(false)
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading')
   const [error, setError] = useState('')
   const [views, setViews] = useState<SavedPulseView[]>([])
@@ -44,6 +51,7 @@ export default function ClinicalPulse({
     if (hit) {
       setTrials(hit.trials)
       setTotal(hit.total)
+      setNextToken(hit.nextPageToken)
       setState('ready')
       return
     }
@@ -52,13 +60,15 @@ export default function ClinicalPulse({
     setError('')
     const timer = window.setTimeout(async () => {
       try {
-        const res = await fetch(`/api/trials?query=${encodeURIComponent(q)}&pageSize=40`, { signal: ctrl.signal })
+        const res = await fetch(`/api/trials?query=${encodeURIComponent(q)}&pageSize=${PAGE}`, { signal: ctrl.signal })
         const json = await res.json()
         if (!res.ok) throw new Error(json.error || 'ClinicalTrials.gov request failed')
         const next = (json.trials ?? []) as TrialRecord[]
-        cache.set(q, { trials: next, total: json.totalCount ?? next.length })
+        const token = typeof json.nextPageToken === 'string' ? json.nextPageToken : null
+        cache.set(q, { trials: next, total: json.totalCount ?? next.length, nextPageToken: token })
         setTrials(next)
         setTotal(json.totalCount ?? next.length)
+        setNextToken(token)
         setState('ready')
       } catch (err) {
         if ((err as Error).name === 'AbortError') return
@@ -79,7 +89,36 @@ export default function ClinicalPulse({
   const flow = useMemo(() => indicationFlow(shown), [shown])
   const phaseOptions = useMemo(() => phaseDistribution(trials).map((d) => d.phase), [trials])
 
+  async function loadMore() {
+    const q = filters.query.trim() || 'peptide therapeutics'
+    if (!nextToken || loadingMore || trials.length >= MAX_LOADED) return
+    setLoadingMore(true)
+    setError('')
+    try {
+      const res = await fetch(
+        `/api/trials?query=${encodeURIComponent(q)}&pageSize=${PAGE}&pageToken=${encodeURIComponent(nextToken)}`,
+      )
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.error || 'ClinicalTrials.gov request failed')
+      const incoming = (json.trials ?? []) as TrialRecord[]
+      const token = typeof json.nextPageToken === 'string' ? json.nextPageToken : null
+      const merged = mergeTrials(trials, incoming).slice(0, MAX_LOADED)
+      const capped = merged.length >= MAX_LOADED ? null : token
+      const reported = typeof json.totalCount === 'number' ? json.totalCount : null
+      const nextTotal = reported != null && reported >= total ? reported : total
+      cache.set(q, { trials: merged, total: nextTotal, nextPageToken: capped })
+      setTrials(merged)
+      setTotal(nextTotal)
+      setNextToken(capped)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Could not load the next page')
+    } finally {
+      setLoadingMore(false)
+    }
+  }
+
   const share = typeof window === 'undefined' ? '' : `${window.location.origin}/research-workspace?${filtersToSearchParams(filters, 'pulse')}`
+  const canLoadMore = Boolean(nextToken) && trials.length < MAX_LOADED && trials.length < total
 
   return (
     <div className="space-y-6">
@@ -180,15 +219,22 @@ export default function ClinicalPulse({
         </div>
       )}
       {state === 'ready' && shown.length === 0 && (
-        <p className="rounded-xl border border-dashed border-hairline p-8 text-center text-sm text-ink/55">
-          No studies in this page of results match the filters. The registry reports {total} hits for the query; this view loads the first 40.
-        </p>
+        <div className="rounded-xl border border-dashed border-hairline p-8 text-center text-sm text-ink/55">
+          <p>
+            None of the {trials.length} loaded studies match these filters. The registry reports about {total} hits for the query.
+          </p>
+          {canLoadMore && (
+            <button type="button" className="mt-3 rounded-lg border border-hairline px-3 py-1.5 text-sm text-ink" onClick={loadMore} disabled={loadingMore}>
+              {loadingMore ? 'Loading…' : 'Load the next page'}
+            </button>
+          )}
+        </div>
       )}
 
       {state === 'ready' && shown.length > 0 && (
         <>
           <div className="grid gap-3 md:grid-cols-3">
-            <Signal title="In this page" body={`${shown.length} of ${trials.length} loaded studies. Registry total about ${total}.`} />
+            <Signal title="Loaded" body={`${shown.length} match of ${trials.length} loaded. Registry total about ${total}. Filters apply to loaded studies.`} />
             <Signal
               title="Whitespace"
               body={gaps.length ? `Filters removed every study in: ${gaps.join(', ')}.` : 'Every phase in the loaded set still has at least one study.'}
@@ -258,6 +304,12 @@ export default function ClinicalPulse({
               </tbody>
             </table>
           </div>
+          {canLoadMore && (
+            <button type="button" className="rounded-lg border border-hairline px-3 py-1.5 text-sm" onClick={loadMore} disabled={loadingMore}>
+              {loadingMore ? 'Loading…' : `Load ${PAGE} more`}
+            </button>
+          )}
+          {error && state === 'ready' && <p className="text-sm text-rose-300" role="alert">{error}</p>}
         </>
       )}
     </div>

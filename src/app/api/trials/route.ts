@@ -26,6 +26,7 @@ interface RawStudy {
 interface RawResponse {
   studies?: RawStudy[]
   totalCount?: number
+  nextPageToken?: string
 }
 
 export interface Trial {
@@ -53,11 +54,16 @@ export async function GET(request: NextRequest) {
   const term = request.nextUrl.searchParams.get('query')?.trim() || 'peptide therapeutics'
   const requested = Number(request.nextUrl.searchParams.get('pageSize') ?? '20')
   const pageSize = Number.isFinite(requested) ? Math.min(50, Math.max(1, Math.floor(requested))) : 20
+  // ClinicalTrials.gov page tokens are opaque. Reject anything that is not a
+  // short URL-safe token so this route cannot be used as an open proxy.
+  const pageToken = request.nextUrl.searchParams.get('pageToken') ?? ''
+  const safeToken = /^[A-Za-z0-9._~-]{1,200}$/.test(pageToken) ? pageToken : ''
 
   const url = new URL('https://clinicaltrials.gov/api/v2/studies')
   url.searchParams.set('query.term', term)
   url.searchParams.set('pageSize', String(pageSize))
   url.searchParams.set('countTotal', 'true')
+  if (safeToken) url.searchParams.set('pageToken', safeToken)
 
   const upstream = await fetch(url.toString(), { headers: { accept: 'application/json' } })
 
@@ -91,6 +97,9 @@ export async function GET(request: NextRequest) {
 
   return Response.json({
     trials,
-    totalCount: data.totalCount ?? trials.length,
+    // A paged request reports totalCount as the page size. Keep the grand total
+    // on the first page only.
+    totalCount: safeToken ? null : (data.totalCount ?? trials.length),
+    nextPageToken: data.nextPageToken ?? null,
   })
 }

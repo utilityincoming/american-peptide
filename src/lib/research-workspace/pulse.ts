@@ -19,6 +19,13 @@ const PHASE_ORDER = [
   'N/A',
 ]
 
+/** Append a registry page, dropping duplicate NCT IDs. */
+export function mergeTrials(existing: TrialRecord[], incoming: TrialRecord[]): TrialRecord[] {
+  const seen = new Set(existing.map((t) => t.nctId))
+  const extra = incoming.filter((t) => t.nctId && !seen.has(t.nctId))
+  return extra.length ? [...existing, ...extra] : existing
+}
+
 export function applyTrialFilters(trials: TrialRecord[], filters: PulseFilters): TrialRecord[] {
   const condition = filters.condition.trim().toLowerCase()
   const sponsor = filters.sponsor.trim().toLowerCase()
