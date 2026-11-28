@@ -162,6 +162,14 @@ const PAGES: CommandItem[] = [
     keywords: 'coa certificate of analysis purity hplc mass spec peptide content endotoxin quality grade transparency',
   },
   {
+    id: 'page-lab-tools',
+    kind: 'page',
+    label: 'Lab Tools',
+    subtitle: 'Batch COAs, catalog feed, sourcing intake',
+    href: '/tools/lab',
+    keywords: 'lab tools batch coa catalog api key sourcing standard intake scorecard',
+  },
+  {
     id: 'page-tracker',
     kind: 'page',
     label: 'Protocol Tracker (Beta)',

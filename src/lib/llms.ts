@@ -323,6 +323,7 @@ export function llmsIndexMarkdown(): string {
     `- [Compound search](${API_SITE}/compounds): PubChem-backed compound explorer.`,
     `- [Reconstitution calculator](${API_SITE}/tools/reconstitution-calculator): research-prep math.`,
     `- [COA decoder](${API_SITE}/tools/coa-decoder): certificate of analysis transparency grader & salt-aware MS cross-check.`,
+    `- [Lab tools](${API_SITE}/tools/lab): batch COA review, keyed catalog feed, and a sourcing-standard intake preview.`,
     `- [Design Lab](${API_SITE}/tools/design-lab): sequence properties (MW, pI, net charge, GRAVY, ε280).`,
     `- [Research Workspace](${API_SITE}/research-workspace): compare 2–4 catalog peptides, scan ClinicalTrials.gov, and explore a sequence.`,
     `- [Methodology](${API_SITE}/methodology): PubChem verification & evidence-tier standard.`,

@@ -25,6 +25,7 @@ import {
   type QuickEntryCoaInput,
 } from '@/lib/coa'
 import { LISTED_PEPTIDES } from '@/lib/peptides'
+import { extractPdfText, SCANNED_PDF_MIN_NON_WS_CHARS } from '@/lib/coa-pdf'
 
 const SAMPLE_COA = `CERTIFICATE OF ANALYSIS
 
@@ -88,29 +89,10 @@ const RUBRIC: { label: string; weight: number }[] = [
   { label: 'Test methods named', weight: 1 },
 ]
 
-const SCANNED_PDF_MIN_NON_WS_CHARS = 40
-
-// Extract text from a PDF entirely in the browser (pdfjs is lazy-loaded so it
-// never weighs down the initial page). When the PDF has < 40 non-whitespace
-// characters (a scanned or image-only certificate), we keep the raw ArrayBuffer
-// in memory so page 1 can be rendered to a client-only <canvas> beside the
-// manual quick-entry drawer — zero OCR bundle bloat, never uploaded or logged.
-async function extractPdfContent(
-  file: File,
-): Promise<{ text: string; nonWsCount: number; pdfBuffer: ArrayBuffer }> {
-  const pdfjs = await import('pdfjs-dist')
-  pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
+async function extractPdfContent(file: File): Promise<{ text: string; nonWsCount: number; pdfBuffer: ArrayBuffer }> {
   const pdfBuffer = await file.arrayBuffer()
-  const doc = await pdfjs.getDocument({ data: pdfBuffer.slice(0) }).promise
-  let out = ''
-  for (let i = 1; i <= doc.numPages; i++) {
-    const page = await doc.getPage(i)
-    const content = await page.getTextContent()
-    out += content.items.map((it) => (it as { str?: string }).str ?? '').join(' ') + '\n'
-  }
-  const trimmed = out.trim()
-  const nonWsCount = trimmed.replace(/\s+/g, '').length
-  return { text: trimmed, nonWsCount, pdfBuffer }
+  const extracted = await extractPdfText(new File([pdfBuffer], file.name, { type: file.type }))
+  return { ...extracted, pdfBuffer }
 }
 
 async function renderPdfPage1ToCanvas(

@@ -53,6 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/research-workspace', priority: 0.7 },
     { path: '/tools/reconstitution-calculator', priority: 0.8 },
     { path: '/tools/coa-decoder', priority: 0.8 },
+    { path: '/tools/lab', priority: 0.6 },
     // /tools/tracker is intentionally omitted — a private, local-first beta
     // logbook marked noindex (same reasoning as /workspace), so it must not be
     // advertised for crawling.
