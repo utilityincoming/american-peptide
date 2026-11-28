@@ -76,7 +76,7 @@ export default function SiteHeader() {
       className="site-shell sticky top-0 z-40 border-b border-hairline bg-surface"
     >
       <div className="site-shell-container flex items-center justify-between py-3">
-        <BrandMark />
+        <BrandMark className="shrink-0 [&>span]:sr-only md:[&>span]:not-sr-only" />
 
         <div className="flex items-center gap-2">
           <nav aria-label="Primary" className="hidden items-center gap-1.5 md:flex">
@@ -114,6 +114,19 @@ export default function SiteHeader() {
             })}
           </nav>
 
+          <nav aria-label="Catalog and tools" className="flex gap-3 text-sm text-ink-muted md:hidden">
+            {MOBILE_QUICK_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={isNavActive(pathname, link) ? 'page' : undefined}
+                className="py-1 hover:text-ink aria-[current=page]:text-accent"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
           <CommandPalette />
 
           <ThemeToggle />
@@ -131,19 +144,6 @@ export default function SiteHeader() {
           </button>
         </div>
       </div>
-
-      <nav aria-label="Catalog and tools" className="site-shell-container flex gap-4 pb-2 text-sm text-ink-muted md:hidden">
-        {MOBILE_QUICK_LINKS.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            aria-current={isNavActive(pathname, link) ? 'page' : undefined}
-            className="py-1 hover:text-ink aria-[current=page]:text-accent"
-          >
-            {link.label}
-          </Link>
-        ))}
-      </nav>
 
       <div id="site-mobile-nav" hidden={!open} className="border-t border-hairline bg-surface md:hidden">
         <nav aria-label="Primary" className="site-shell-container flex flex-col gap-1 py-3">
