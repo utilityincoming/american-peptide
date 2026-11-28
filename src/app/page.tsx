@@ -35,17 +35,17 @@ import HeroSequence from '@/components/HeroSequence'
 export const metadata: Metadata = {
   // Standalone title: the home page keeps its own brand treatment rather than
   // the "<page> | AmericanPeptide.com" template from the root layout.
-  title: { absolute: 'American Peptide — The Cited US Peptide Reference' },
+  title: { absolute: 'American Peptide — Cited Research Reference, Not a Store' },
   description:
-    'Research peptides: a cited catalog of US-made peptides, dosing calculators, clinical-trial data, and a citation-backed Peptide Agent. Research use only.',
+    'Cited peptide research reference: sequences, trial evidence, and lab tools for semaglutide, tirzepatide, BPC-157, and the open catalog. Not a store.',
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     siteName: 'AmericanPeptide.com',
     url: '/',
-    title: 'American Peptide — The Cited US Peptide Reference',
+    title: 'American Peptide — Cited Research Reference, Not a Store',
     description:
-      'Research peptides: a cited catalog of US-made peptides, dosing calculators, clinical-trial data, and a citation-backed Peptide Agent. Research use only.',
+      'Cited peptide research reference: sequences, trial evidence, and lab tools for semaglutide, tirzepatide, BPC-157, and the open catalog. Not a store.',
   },
 }
 

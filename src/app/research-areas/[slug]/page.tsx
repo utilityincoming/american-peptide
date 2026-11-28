@@ -11,6 +11,7 @@ import {
   getPeptidesForArea,
 } from '@/lib/research-areas'
 import AgentPrompt from '@/components/AgentPrompt'
+import GlossaryText from '@/components/GlossaryText'
 import EvidenceContext from '@/components/EvidenceContext'
 import Toolkit from '@/components/Toolkit'
 import LastUpdated from '@/components/LastUpdated'
@@ -131,6 +132,30 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
           <p className="max-w-2xl text-base leading-relaxed text-ink/55 md:text-lg">
             {area.tagline}
           </p>
+          <nav aria-label="Catalog for this area" className="mt-5 flex flex-wrap gap-2 text-xs">
+            {(area.featuredSlugs ?? []).slice(0, 4).map((slug) => {
+              const peptide = peptides.find((item) => item.slug === slug)
+              if (!peptide) return null
+              return (
+                <Link
+                  key={slug}
+                  href={`/catalog/${slug}`}
+                  className="rounded-full border border-accent/30 px-3 py-1 text-accent hover:bg-accent/10"
+                >
+                  {peptide.name} monograph
+                </Link>
+              )
+            })}
+            {area.relatedCategories.map((cat) => (
+              <Link
+                key={cat}
+                href={`/catalog/category/${cat}`}
+                className="rounded-full border border-hairline px-3 py-1 text-ink/70 hover:text-accent"
+              >
+                {CATEGORIES.find((item) => item.id === cat)?.label ?? cat} catalog
+              </Link>
+            ))}
+          </nav>
           <LastUpdated date={area.updated} className="mt-4 text-[11px] text-ink/55" />
         </div>
       </section>
@@ -147,7 +172,7 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
               <div className="space-y-4">
                 {area.intro.map((para, i) => (
                   <p key={i} className="text-sm leading-relaxed text-ink/65">
-                    {para}
+                    {i === 0 ? <GlossaryText text={para} /> : para}
                   </p>
                 ))}
               </div>
