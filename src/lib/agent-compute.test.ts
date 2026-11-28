@@ -4,6 +4,7 @@ import {
   CANONICAL_CALC_SCOPE_NOTE,
   computeBlend,
   computeCoaGrade,
+  computeCostPerDose,
   computePharmacokinetics,
   computeReconstitution,
   computeVendorRank,
@@ -213,10 +214,77 @@ describe('compute tools', () => {
     expect(body.percent).toBeGreaterThan(0)
   })
 
-  it('exposes reconstitute_vial, screen_blend, and peptide_half_life in both AGENT_TOOLS and MCP_TOOLS', async () => {
+  it('reconstitutes an IU-standardized biologic in international units without molar concentration', () => {
+    // 10 IU vial in 1 mL → 10 IU/mL; a 2 IU dose draws 0.2 mL = 20 U-100 units; 5 whole doses.
+    const body = JSON.parse(
+      computeReconstitution({ unit: 'iu', vial_iu: 10, dose_iu: 2, water_ml: 1 }),
+    )
+    expect(body.unit).toBe('iu')
+    expect(body.concentrationIuPerMl).toBe(10)
+    expect(body.drawUnitsU100).toBe(20)
+    expect(body.drawMl).toBe(0.2)
+    expect(body.wholeDosesPerVial).toBe(5)
+    // IU biologics carry no molar concentration.
+    expect(body.molarConcentrationUmolPerL).toBeUndefined()
+    expect(body.concentrationMcgPerMl).toBeUndefined()
+    expect(body.scope_note).toBe(CANONICAL_CALC_SCOPE_NOTE)
+
+    // Reverse-solve the fill volume from a target draw for an IU biologic.
+    // 12 IU vial, 4 IU dose at 25 U-100 units → 0.75 mL (16 IU/mL, 0.25 mL draw).
+    const solved = JSON.parse(
+      computeReconstitution({ unit: 'iu', vial_iu: 12, dose_iu: 4, target_draw_units: 25 }),
+    )
+    expect(solved.solvedWaterMl).toBe(0.75)
+    expect(solved.drawUnitsU100).toBe(25)
+  })
+
+  it('computes a pre-filled GLP-1 pen aliquot from the factory fill volume (no water added)', () => {
+    // A 10 mg tirzepatide pen pre-filled to 2 mL → 5000 mcg/mL; a 2500 mcg step
+    // draws 0.5 mL = 50 U-100 units; 4 whole doses per pen.
+    const body = JSON.parse(
+      computeReconstitution({ form: 'pen', vial_mg: 10, dose_mcg: 2500, fill_ml: 2 }),
+    )
+    expect(body.form).toBe('pen')
+    expect(body.penStrengthMg).toBe(10)
+    expect(body.fillMl).toBe(2)
+    expect(body.concentrationMcgPerMl).toBe(5000)
+    expect(body.drawMl).toBe(0.5)
+    expect(body.drawUnitsU100).toBe(50)
+    expect(body.wholeDosesPerPen).toBe(4)
+    expect(body.note).toMatch(/no bacteriostatic water/i)
+    expect(body.scope_note).toBe(CANONICAL_CALC_SCOPE_NOTE)
+  })
+
+  it('rejects an IU pen (biologics are not pre-filled pens) and missing IU inputs', () => {
+    expect(computeReconstitution({ unit: 'iu', form: 'pen', vial_iu: 10, dose_iu: 2, fill_ml: 1 })).toMatch(
+      /not supplied as pre-filled pens/,
+    )
+    expect(computeReconstitution({ unit: 'iu', dose_iu: 2, water_ml: 1 })).toMatch(/Need vial_iu/)
+    expect(computeReconstitution({ form: 'pen', vial_mg: 10, dose_mcg: 2500 })).toMatch(/Need vial_mg/)
+  })
+
+  it('computes doses per vial and cost per dose deterministically', () => {
+    const body = JSON.parse(computeCostPerDose({ vial_mg: 10, dose_mcg: 250, vial_cost: 80 }))
+    expect(body.dosesPerVial).toBe(40)
+    expect(body.wholeDosesPerVial).toBe(40)
+    expect(body.costPerDose).toBe(2)
+    expect(body.scope_note).toBe(CANONICAL_CALC_SCOPE_NOTE)
+
+    // Cost optional: doses still computed, costPerDose null.
+    const noCost = JSON.parse(computeCostPerDose({ vial_mg: 5, dose_mcg: 250 }))
+    expect(noCost.dosesPerVial).toBe(20)
+    expect(noCost.costPerDose).toBeNull()
+
+    // Invalid input reports cleanly with the scope note.
+    const bad = JSON.parse(computeCostPerDose({ vial_mg: 0, dose_mcg: 250 }))
+    expect(bad.code).toBe('invalid_input')
+    expect(bad.scope_note).toBe(CANONICAL_CALC_SCOPE_NOTE)
+  })
+
+  it('exposes reconstitute_vial, cost_per_dose, screen_blend, and peptide_half_life in both AGENT_TOOLS and MCP_TOOLS', async () => {
     const agentNames = AGENT_TOOLS.map((t) => t.name)
     const mcpNames = MCP_TOOLS.map((t) => t.name)
-    for (const calcTool of ['reconstitute_vial', 'screen_blend', 'peptide_half_life']) {
+    for (const calcTool of ['reconstitute_vial', 'cost_per_dose', 'screen_blend', 'peptide_half_life']) {
       expect(agentNames).toContain(calcTool)
       expect(mcpNames).toContain(calcTool)
     }
@@ -226,6 +294,19 @@ describe('compute tools', () => {
     expect(resPk.content).toContain('150')
     expect(resPk.content).toContain('184')
     expect(resPk.content).toContain(CANONICAL_CALC_SCOPE_NOTE)
+
+    const resCost = await executeAgentTool('cost_per_dose', { vial_mg: 10, dose_mcg: 250, vial_cost: 80 })
+    expect(resCost.isError).toBe(false)
+    expect(JSON.parse(resCost.content).costPerDose).toBe(2)
+
+    const resIu = await executeAgentTool('reconstitute_vial', {
+      unit: 'iu',
+      vial_iu: 10,
+      dose_iu: 2,
+      water_ml: 1,
+    })
+    expect(resIu.isError).toBe(false)
+    expect(JSON.parse(resIu.content).concentrationIuPerMl).toBe(10)
 
     const resBlend = await executeAgentTool('screen_blend', {
       peptides: [{ slug: 'pramlintide' }, { slug: 'insulin' }],

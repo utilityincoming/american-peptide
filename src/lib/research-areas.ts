@@ -23,6 +23,8 @@ export interface ResearchArea {
   intro: string[]
   /** Lowercase substrings matched against peptide.researchAreas. */
   matchers: string[]
+  /** Canonical primary-indication compound slugs prioritized first on preview chips and area guides. */
+  featuredSlugs?: string[]
   /** Catalog categories to cross-link from this area. */
   relatedCategories: PeptideCategory[]
   /** Indication-level FAQs — render on the page and emit FAQPage schema. */
@@ -51,6 +53,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'obstructive sleep apnea',
       'cardiovascular risk',
     ],
+    featuredSlugs: ['semaglutide', 'tirzepatide', 'retatrutide', 'cagrilintide', 'cagrisema'],
     relatedCategories: ['metabolic'],
     faqs: [
       {
@@ -86,6 +89,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'cardioprotection',
       'tissue repair',
     ],
+    featuredSlugs: ['bpc-157', 'tb-500', 'ghk-cu', 'thymosin-beta-4', 'b7-33'],
     relatedCategories: ['healing-repair'],
     faqs: [
       {
@@ -114,6 +118,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'Proposed mechanisms include modulation of BDNF and other neurotrophins, regulation of monoaminergic and GABAergic tone, and protection of neuronal mitochondria. The blood–brain-barrier permeability of a given sequence is a central variable, and much of the clinical literature originates outside large Western registries.',
     ],
     matchers: ['cognition', 'cognitive', 'neuroprotection', 'stroke', 'neurodegeneration'],
+    featuredSlugs: ['semax', 'selank', 'cerebrolysin', 'dihexa', 'pinealon'],
     relatedCategories: ['cognitive'],
     faqs: [
       {
@@ -142,6 +147,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'Investigated mechanisms include modulation of the stress (HPA) axis, neurotrophic support, and effects on serotonergic and GABAergic signaling. As with other neuroactive peptides, much of the human data is early-stage and concentrated in specific research traditions.',
     ],
     matchers: ['anxiety', 'stress physiology', 'mood'],
+    featuredSlugs: ['selank', 'dsip', 'oxytocin'],
     relatedCategories: ['cognitive'],
     faqs: [
       {
@@ -170,6 +176,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'Research interest centers on how these peptides influence slow-wave sleep, melatonin-adjacent pathways, and the interaction between the sleep system and the stress axis. The field overlaps substantially with aging biology, where circadian decline is a recurring theme.',
     ],
     matchers: ['sleep', 'circadian', 'pineal'],
+    featuredSlugs: ['dsip', 'epitalon'],
     relatedCategories: ['cognitive', 'longevity'],
     faqs: [
       {
@@ -198,6 +205,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'Compounds studied here often originate as endogenous regulatory peptides whose expression falls with age. Because aging endpoints are slow and multifactorial, this area leans heavily on biomarker studies, model organisms, and mechanistic work rather than large outcome trials.',
     ],
     matchers: ['aging biology', 'nad+', 'sarcopenia', 'senescence'],
+    featuredSlugs: ['epitalon', 'mots-c', 'foxo4-dri', 'humanin', 'nad-plus'],
     relatedCategories: ['longevity', 'mitochondrial'],
     faqs: [
       {
@@ -226,6 +234,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'Common endpoints include GH pulse amplitude, downstream IGF-1 elevation, and body-composition changes such as visceral-fat reduction and lean-mass support. Preserving the physiological pulsatility and feedback of the GH axis is a defining research consideration for this class.',
     ],
     matchers: ['gh ', 'growth hormone', 'igf', 'pituitary', 'body composition'],
+    featuredSlugs: ['cjc-1295-no-dac', 'ipamorelin', 'sermorelin', 'cjc-1295-with-dac', 'mk-677'],
     relatedCategories: ['growth-hormone'],
     faqs: [
       {
@@ -255,6 +264,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'Almost all of them act on a single control system: the activin/myostatin axis. Myostatin and activin A are TGF-β-superfamily brakes on muscle growth that signal through the activin type II receptors (ActRII) and the Smad2/3 pathway; follistatin is the body’s natural antagonist. The therapeutic strategy is to release that brake — with ligand-neutralizing antibodies (trevogrumab against myostatin, garetosmab against activin A), a precursor-selective antibody (apitegromab), or a receptor blocker (bimagrumab) — usually on top of an incretin drug. The clinical readouts converge: in the Phase 2 COURAGE and EMBRAZE trials, adding these agents preserved roughly half to 80% of the lean mass that a GLP-1 drug alone would have cost. None is yet approved for muscle preservation, though garetosmab (Pasatru) reached FDA approval in August 2026 for the rare bone disease FOP — the first drug of the axis to reach the market.',
     ],
     matchers: ['muscle preservation', 'muscle wasting', 'sarcopenia', 'cachexia', 'muscle building'],
+    featuredSlugs: ['myostatin', 'follistatin', '5-amino-1mq'],
     relatedCategories: ['growth-hormone', 'metabolic'],
     faqs: [
       {
@@ -287,6 +297,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'Research endpoints include measures of skin elasticity and wrinkle depth, follicular density and anagen duration, and UV-response markers. Many of these peptides overlap with tissue-repair biology, reflecting shared pathways in matrix remodeling and angiogenesis.',
     ],
     matchers: ['skin aging', 'hair follicle', 'hair growth', 'pigmentation', 'photoprotection'],
+    featuredSlugs: ['ghk-cu', 'ahk-cu', 'melanotan-1', 'melanotan-2'],
     relatedCategories: ['cosmetic'],
     faqs: [
       {
@@ -315,6 +326,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'Endpoints range from hypoactive sexual desire disorder (HSDD) and CNS-mediated arousal to reproductive-endocrine applications such as hypothalamic amenorrhea and the study of puberty. Because these peptides act centrally and on hormone cascades, dose timing and feedback regulation are key research variables.',
     ],
     matchers: ['sexual', 'hsdd', 'reproductive', 'amenorrhea', 'puberty', 'erectile'],
+    featuredSlugs: ['pt-141', 'kisspeptin-10', 'gonadorelin', 'melanotan-2'],
     relatedCategories: ['reproductive', 'cosmetic'],
     faqs: [
       {
@@ -352,6 +364,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'oncology',
       'atopic dermatitis',
     ],
+    featuredSlugs: ['thymosin-alpha-1', 'kpv', 'll-37', 'thymalin', 'thymogen'],
     relatedCategories: ['immune'],
     faqs: [
       {
@@ -380,6 +393,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'Research endpoints include cardiolipin stabilization and electron-transport efficiency, exercise capacity and metabolic flexibility, and inherited or acquired mitochondrial dysfunction such as mitochondrial myopathy, Barth syndrome, and heart failure. The area overlaps closely with aging and metabolic research.',
     ],
     matchers: ['mitochondri', 'barth syndrome', 'bioenergetic', 'heart failure', 'exercise physiology'],
+    featuredSlugs: ['ss-31', 'mots-c', 'nad-plus', 'glutathione'],
     relatedCategories: ['mitochondrial', 'longevity'],
     faqs: [
       {
@@ -408,6 +422,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'The series began with animal-tissue extracts (the "Cytomax" preparations such as Thymalin) and moved to defined synthetic short peptides (the "Cytogens" — Vilon, Epitalon, Vesugen, Pinealon, Bronchogen, Cardiogen, Pancragen). The central, still-debated hypothesis is that these peptides enter the cell, reach the nucleus, and bind sequence-specific promoter regions of DNA, switching on tissue-relevant genes that fall silent with age. Crucially, almost all clinical and lifespan data come from a single research tradition with limited independent Western replication — so this area is framed as preliminary and evidence-graded, not promotional. It is a research reference, not medical advice.',
     ],
     matchers: ['bioregulator'],
+    featuredSlugs: ['epitalon', 'thymalin', 'pinealon', 'vilon', 'vesugen'],
     relatedCategories: ['bioregulator', 'longevity', 'immune'],
     faqs: [
       {
@@ -440,6 +455,7 @@ export const RESEARCH_AREAS: ResearchArea[] = [
       'The recurring theme is that the native hormone is frequently a poor drug, and the engineering is the story. Somatostatin lasts minutes, so the medicine is octreotide — a minimized, protease-resistant cyclic analog with D-amino acids. Human amylin aggregates, so pramlintide substitutes three prolines to break the β-sheet and make the peptide synthesizable and shelf-stable. Vasopressin becomes desmopressin through a D-arginine and a deamination; ACTH is truncated to its active 1–24 fragment as cosyntropin. Each is a distinct design tactic, and each entry pairs it with the concrete purity failure modes — deletion sequences, disulfide isomers, des-acyl by-product — that a certificate of analysis has to rule out. This is a synthesis and educational reference, not medical advice.',
     ],
     matchers: ['peptide hormone'],
+    featuredSlugs: ['pramlintide', 'vasopressin', 'acth', 'oxytocin', 'somatostatin'],
     relatedCategories: ['peptide-hormone', 'metabolic', 'growth-hormone'],
     faqs: [
       {
@@ -474,9 +490,66 @@ function peptideMatchesArea(peptide: Peptide, area: ResearchArea): boolean {
   return areas.some((a) => area.matchers.some((m) => a.includes(m)))
 }
 
-/** Peptides studied in a given research area (from the listed catalog). */
+/**
+ * Primary-indication relevance weight for ordering compounds within a research
+ * area. Higher scores sort first so canonical primary-indication compounds
+ * appear ahead of secondary or off-category matches:
+ *   1. Explicit `area.featuredSlugs` priority (canonical compounds for the area)
+ *   2. Primary category match (`area.relatedCategories.includes(peptide.categories[0])`)
+ *   3. Secondary category overlap (`peptide.categories.some(c => area.relatedCategories.includes(c))`)
+ *   4. Primary researchArea position (index of the first matching `peptide.researchAreas` entry)
+ *   5. Single-compound entry ahead of multi-compound blends
+ */
+export function computeAreaRelevanceScore(
+  peptide: Peptide,
+  area: ResearchArea,
+): number {
+  let score = 0
+
+  const featuredIdx = area.featuredSlugs?.indexOf(peptide.slug) ?? -1
+  if (featuredIdx !== -1) {
+    score += 5000 - featuredIdx * 200
+  }
+
+  const primaryCategory = peptide.categories[0]
+  if (primaryCategory && area.relatedCategories.includes(primaryCategory)) {
+    score += 300
+  } else if (peptide.categories.some((c) => area.relatedCategories.includes(c))) {
+    score += 150
+  }
+
+  const lowerAreas = (peptide.researchAreas ?? []).map((a) => a.toLowerCase())
+  const firstMatchIdx = lowerAreas.findIndex((a) =>
+    area.matchers.some((m) => a.includes(m)),
+  )
+  if (firstMatchIdx === 0) {
+    score += 80
+  } else if (firstMatchIdx === 1) {
+    score += 40
+  } else if (firstMatchIdx > 1) {
+    score += Math.max(0, 20 - firstMatchIdx * 5)
+  }
+
+  if (!peptide.components || peptide.components.length === 0) {
+    score += 10
+  }
+
+  return score
+}
+
+/**
+ * Peptides studied in a given research area (from the listed catalog), sorted
+ * by primary-indication relevance so canonical compounds appear first ahead of
+ * secondary-indication matches.
+ */
 export function getPeptidesForArea(area: ResearchArea): Peptide[] {
-  return LISTED_PEPTIDES.filter((p) => peptideMatchesArea(p, area))
+  const indexBySlug = new Map(LISTED_PEPTIDES.map((p, idx) => [p.slug, idx]))
+  return LISTED_PEPTIDES.filter((p) => peptideMatchesArea(p, area)).sort((a, b) => {
+    const scoreDiff =
+      computeAreaRelevanceScore(b, area) - computeAreaRelevanceScore(a, area)
+    if (scoreDiff !== 0) return scoreDiff
+    return (indexBySlug.get(a.slug) ?? 0) - (indexBySlug.get(b.slug) ?? 0)
+  })
 }
 
 /** Unique listed catalog entries mapped to at least one research area. */

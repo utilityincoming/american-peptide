@@ -4,10 +4,8 @@ import { notFound } from 'next/navigation'
 import { ArrowRight, BadgeCheck, Layers } from 'lucide-react'
 import { getPeptideBySlug, PEPTIDES } from '@/lib/peptides'
 import { PUBCHEM_VERIFIED } from '@/lib/verification'
-import { molecularFormulaClaim, molecularWeightClaim } from '@/lib/evidence'
-import { vendorPurityClaim } from '@/lib/evidence/from-vendors'
-import { computeEvidenceFloor, type Claim } from '@/lib/evidence/types'
-import { getVendorsForPeptide, hasSourcingPage } from '@/lib/vendors'
+import { reconcileCompoundSources } from '@/lib/evidence/from-vendors'
+import { hasSourcingPage } from '@/lib/vendors'
 import { TierBadge, EvidenceFloor } from '@/components/evidence'
 import SourceComparison from '@/components/SourceComparison'
 
@@ -59,18 +57,11 @@ export default async function SourcesPage({
   if (!peptide) notFound()
 
   const verification = PUBCHEM_VERIFIED[slug]
-  const identityClaims: Claim[] = []
-  if (verification) {
-    const mw = molecularWeightClaim(verification)
-    const mf = molecularFormulaClaim(verification)
-    if (mw) identityClaims.push(mw)
-    if (mf) identityClaims.push(mf)
-  }
-
-  const vendors = getVendorsForPeptide(slug)
+  const reconciliation = reconcileCompoundSources(slug)
+  const identityClaims = reconciliation.identityClaims
   // The sourcing floor is the weakest LOAD-BEARING claim — the vendor purities,
   // not the reference-grade chemistry above them.
-  const floor = computeEvidenceFloor(vendors.map(vendorPurityClaim))
+  const floor = reconciliation.sourcingFloor
 
   // Sibling discovery: other sourced compounds that share a category with this
   // one, most-related (most shared categories) first. Broadening past the single

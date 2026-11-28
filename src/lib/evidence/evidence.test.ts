@@ -12,10 +12,20 @@ import {
 } from '@/lib/evidence/types'
 import {
   catalogClaims,
+  isCommunityContextClaim,
   isLoadBearing,
+  monographEvidenceSummary,
   reconPresetClaims,
   reconPresetFor,
 } from '@/lib/evidence/from-catalog'
+import { reconcileCompoundSources } from '@/lib/evidence/from-vendors'
+import {
+  RESEARCH_AREAS,
+  computeAreaRelevanceScore,
+  getPeptidesForArea,
+  getResearchAreaBySlug,
+} from '@/lib/research-areas'
+import type { Vendor } from '@/lib/vendors'
 import { RECON_PRESETS, RECON_PRESETS_CURATED_AT } from '@/lib/reconstitution-presets'
 import {
   checkNormativeClaimRules,
@@ -151,13 +161,232 @@ describe('catalog bridge', () => {
     }
   })
 
-  it('floors a monograph on its figures, not its chemistry', () => {
-    const bpc = catalogClaims({ slug: 'bpc-157' })
-    expect(bpc.some((c) => c.estimate_kind === 'identity')).toBe(true)
-    expect(computeEvidenceFloor(bpc, isLoadBearing)?.floor).toBe('community')
-    // A verified compound with no preset has no load-bearing figure → no floor.
+  it('floors a monograph on its load-bearing primary research evidence (CLIN/PRE), separating optional community preset conventions (COMM)', () => {
+    // Cagrilintide: REF chemistry (2) + CLIN research/PK (2) + optional COMM presets (3)
+    const cagriClaims = catalogClaims({ slug: 'cagrilintide' })
+    const cagriFloor = computeEvidenceFloor(cagriClaims, isLoadBearing)
+    expect(cagriFloor?.floor).toBe('clinical')
+    expect(cagriFloor?.distribution).toEqual({
+      clinical: 2,
+    })
+    const cagriSummary = monographEvidenceSummary({ slug: 'cagrilintide' })
+    expect(cagriSummary.primaryFloor?.floor).toBe('clinical')
+    expect(cagriSummary.primaryFloor?.distribution).toEqual({
+      clinical: 2,
+    })
+    expect(cagriSummary.referenceCount).toBe(2)
+    expect(cagriSummary.communityCount).toBe(3)
+    expect(cagriClaims.filter(isCommunityContextClaim)).toHaveLength(3)
+
+    // BPC-157: REF chemistry (2) + PRE research (1) + optional COMM presets (3)
+    const bpcClaims = catalogClaims({ slug: 'bpc-157' })
+    expect(bpcClaims.some((c) => c.estimate_kind === 'identity')).toBe(true)
+    const bpcFloor = computeEvidenceFloor(bpcClaims, isLoadBearing)
+    expect(bpcFloor?.floor).toBe('preclinical')
+    expect(bpcFloor?.distribution).toEqual({
+      preclinical: 1,
+    })
+    const bpcSummary = monographEvidenceSummary({ slug: 'bpc-157' })
+    expect(bpcSummary.referenceCount).toBe(2)
+    expect(bpcSummary.communityCount).toBe(3)
+
+    // GHK-Cu & AHK-Cu: REF chemistry (2) + PRE research (1) + optional COMM presets (3)
+    const ghkFloor = computeEvidenceFloor(catalogClaims({ slug: 'ghk-cu' }), isLoadBearing)
+    expect(ghkFloor?.floor).toBe('preclinical')
+    const ahkFloor = computeEvidenceFloor(catalogClaims({ slug: 'ahk-cu' }), isLoadBearing)
+    expect(ahkFloor?.floor).toBe('preclinical')
+
+    // Glutathione: no preset (0 COMM), verified REF chemistry (2) + PRE research (1)
     expect(reconPresetFor('glutathione')).toBeUndefined()
-    expect(computeEvidenceFloor(catalogClaims({ slug: 'glutathione' }), isLoadBearing)).toBeNull()
+    const glutFloor = computeEvidenceFloor(catalogClaims({ slug: 'glutathione' }), isLoadBearing)
+    expect(glutFloor?.floor).toBe('preclinical')
+    expect(glutFloor?.distribution).toEqual({
+      preclinical: 1,
+    })
+  })
+
+  it('compares mixed-tier evidence floors: monograph (REF + CLIN + COMM) vs sourcing (REF + 3P + VEN + COMM)', () => {
+    // Monograph mixed tiers (REF + CLIN + optional COMM): floor is CLIN when using monograph isLoadBearing
+    const mixedMonograph: Claim[] = [
+      mkClaim({ field: 'molecular_weight', tier: 'reference', estimate_kind: 'identity' }),
+      mkClaim({ field: 'primary_research_evidence', tier: 'clinical', estimate_kind: 'pharmacodynamic', scope_note: '' }),
+      mkClaim({ field: 'reference_amount', tier: 'community', estimate_kind: 'dose_convention', scope_note: SCOPE_NOTES.dose_convention }),
+    ]
+    expect(computeEvidenceFloor(mixedMonograph, isLoadBearing)?.floor).toBe('clinical')
+
+    // Sourcing mixed tiers (REF + 3P + VEN): identity is excluded from sourcing floor, so VEN is the floor
+    const mixedSourcing: Claim[] = [
+      mkClaim({ field: 'molecular_weight', tier: 'reference', estimate_kind: 'identity' }),
+      mkClaim({ field: 'listed_purity', tier: 'third_party', estimate_kind: 'purity', scope_note: SCOPE_NOTES.third_party }),
+      mkClaim({ field: 'listed_purity', tier: 'vendor_reported', estimate_kind: 'purity', scope_note: SCOPE_NOTES.vendor_reported }),
+    ]
+    expect(
+      computeEvidenceFloor(mixedSourcing, (c) => c.estimate_kind !== 'identity')?.floor,
+    ).toBe('vendor_reported')
+
+    // Sourcing mixed tiers with an unvetted community source (REF + VEN + COMM purity): floor drops to COMM
+    const mixedSourcingWithComm: Claim[] = [
+      ...mixedSourcing,
+      mkClaim({ field: 'listed_purity', tier: 'community', estimate_kind: 'purity', scope_note: SCOPE_NOTES.community }),
+    ]
+    expect(
+      computeEvidenceFloor(mixedSourcingWithComm, (c) => c.estimate_kind !== 'identity')?.floor,
+    ).toBe('community')
+  })
+})
+
+describe('generalized GHK-Cu compound source reconciliation', () => {
+  it('reconciles GHK-Cu across 3P and VEN vendor tiers with REF chemistry and VEN sourcing floor', () => {
+    const ghk = reconcileCompoundSources('ghk-cu')
+    expect(ghk.isReconciled).toBe(true)
+    expect(ghk.hasSourcingPage).toBe(true)
+    expect(ghk.identityTier).toBe('reference')
+    expect(ghk.identityClaims.length).toBeGreaterThanOrEqual(2)
+    expect(ghk.topSourceTier).toBe('third_party')
+    expect(ghk.sourcingFloor?.floor).toBe('vendor_reported')
+    expect(ghk.tierCounts).toEqual({
+      third_party: 2,
+      vendor_reported: 1,
+    })
+  })
+
+  it('lets any compound opt into 3P / VEN / COMM badges via verified vendor records while keeping unreconciled compounds cleanly unpopulated', () => {
+    // Cagrilintide has 2 documented (3P) vendors and 0 VEN vendors → floor is third_party (3P)
+    const cagri = reconcileCompoundSources('cagrilintide')
+    expect(cagri.isReconciled).toBe(true)
+    expect(cagri.sourcingFloor?.floor).toBe('third_party')
+    expect(cagri.tierCounts).toEqual({ third_party: 2 })
+
+    // Unreconciled reference-only compound (e.g. insulin / secretin) stays cleanly unpopulated
+    const secretin = reconcileCompoundSources('secretin')
+    expect(secretin.isReconciled).toBe(false)
+    expect(secretin.hasSourcingPage).toBe(false)
+    expect(secretin.sources).toEqual([])
+    expect(secretin.groups).toEqual([])
+    expect(secretin.sourcingFloor).toBeNull()
+    expect(secretin.topSourceTier).toBeNull()
+
+    // Custom vendor injection with 3P + VEN + COMM tiers reconciles and orders strictly by tier weight then trustScore
+    const mockVendors: Vendor[] = [
+      {
+        id: 'unvetted-source',
+        name: 'Unvetted Source',
+        url: 'https://unvetted.example',
+        blurb: 'No COA on file',
+        peptides: ['ghk-cu'],
+        shipsTo: ['us'],
+        trust: {
+          coaOnFile: false,
+          thirdPartyTested: false,
+          perBatchTesting: false,
+          reshipPolicy: false,
+          refundPolicy: false,
+        },
+      },
+      {
+        id: 'claimed-source',
+        name: 'Claimed Source',
+        url: 'https://claimed.example',
+        blurb: 'Static COA on file',
+        peptides: ['ghk-cu'],
+        shipsTo: ['us'],
+        trust: {
+          coaOnFile: true,
+          thirdPartyTested: false,
+          perBatchTesting: false,
+          purityPct: 98,
+          reshipPolicy: false,
+          refundPolicy: true,
+        },
+      },
+      {
+        id: 'documented-source',
+        name: 'Documented Source',
+        url: 'https://documented.example',
+        blurb: 'Per-batch 3P COA',
+        peptides: ['ghk-cu'],
+        shipsTo: ['us'],
+        trust: {
+          coaOnFile: true,
+          thirdPartyTested: true,
+          perBatchTesting: true,
+          purityPct: 99,
+          coaDate: '2026-11-01',
+          reshipPolicy: true,
+          refundPolicy: true,
+        },
+      },
+    ]
+    const custom = reconcileCompoundSources('ghk-cu', { vendors: mockVendors })
+    expect(custom.sources.map((s) => s.tier)).toEqual([
+      'third_party',
+      'vendor_reported',
+      'community',
+    ])
+    expect(custom.sourcingFloor?.floor).toBe('community')
+    expect(custom.tierCounts).toEqual({
+      third_party: 1,
+      vendor_reported: 1,
+      community: 1,
+    })
+    for (const c of custom.purityClaims) {
+      expect(validateClaim({ ...c, provenance: { ...c.provenance, retrieved_at: '2026-11-01' } })).toEqual([])
+    }
+  })
+})
+
+describe('research-areas primary-indication ranking', () => {
+  it('ranks canonical primary-indication compounds ahead of secondary matches on Sleep & Circadian and Cognition & Neuroprotection', () => {
+    const sleepArea = getResearchAreaBySlug('sleep-circadian')!
+    const sleepPeptides = getPeptidesForArea(sleepArea)
+    expect(sleepPeptides.slice(0, 2).map((p) => p.slug)).toEqual(['dsip', 'epitalon'])
+    // Secondary metabolic/GH matches (Tirzepatide for OSA, MK-677) sort after primary sleep/circadian peptides
+    expect(
+      computeAreaRelevanceScore(sleepPeptides[0], sleepArea),
+    ).toBeGreaterThan(
+      computeAreaRelevanceScore(
+        sleepPeptides.find((p) => p.slug === 'tirzepatide')!,
+        sleepArea,
+      ),
+    )
+
+    const cogArea = getResearchAreaBySlug('cognition-neuroprotection')!
+    const cogPeptides = getPeptidesForArea(cogArea)
+    expect(cogPeptides.slice(0, 3).map((p) => p.slug)).toEqual([
+      'semax',
+      'selank',
+      'cerebrolysin',
+    ])
+    // Secondary matches (EPO, Tesamorelin) sort after canonical cognitive peptides
+    const semaxScore = computeAreaRelevanceScore(
+      cogPeptides.find((p) => p.slug === 'semax')!,
+      cogArea,
+    )
+    const epoScore = computeAreaRelevanceScore(
+      cogPeptides.find((p) => p.slug === 'epo')!,
+      cogArea,
+    )
+    const tesaScore = computeAreaRelevanceScore(
+      cogPeptides.find((p) => p.slug === 'tesamorelin')!,
+      cogArea,
+    )
+    expect(semaxScore).toBeGreaterThan(epoScore)
+    expect(semaxScore).toBeGreaterThan(tesaScore)
+  })
+
+  it('orders featured canonical compounds first across every research area', () => {
+    for (const area of RESEARCH_AREAS) {
+      const peptides = getPeptidesForArea(area)
+      expect(peptides.length).toBeGreaterThan(0)
+      if (area.featuredSlugs && area.featuredSlugs.length > 0) {
+        const presentFeatured = area.featuredSlugs.filter((slug) =>
+          peptides.some((p) => p.slug === slug),
+        )
+        expect(peptides.slice(0, presentFeatured.length).map((p) => p.slug)).toEqual(
+          presentFeatured,
+        )
+      }
+    }
   })
 })
 
