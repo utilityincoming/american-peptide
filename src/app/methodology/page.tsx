@@ -13,6 +13,7 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import AffiliateDisclosure from '@/components/AffiliateDisclosure'
+import { breadcrumbJsonLd } from '@/lib/schema'
 import { CATALOG_COUNT } from '@/lib/peptides'
 import { PUBCHEM_VERIFIED } from '@/lib/verification'
 import { VENDORS, VENDOR_TIERS, TRUST_WEIGHTS, type VendorTier } from '@/lib/vendors'
@@ -105,14 +106,7 @@ export default function MethodologyPage() {
     isPartOf: { '@type': 'WebSite', name: 'AmericanPeptide.com', url: SITE },
   }
 
-  const breadcrumbLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
-      { '@type': 'ListItem', position: 2, name: 'The Standard', item: `${SITE}/methodology` },
-    ],
-  }
+  const breadcrumbLd = breadcrumbJsonLd([{ name: 'The Standard', path: '/methodology' }])
 
   return (
     <div className="min-h-screen bg-surface text-ink">

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { webApplicationJsonLd } from '@/lib/schema'
+import { breadcrumbJsonLd, webApplicationJsonLd } from '@/lib/schema'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -16,6 +16,9 @@ export default function DesignLabLayout({
 }: {
   children: React.ReactNode
 }) {
+  const breadcrumbLd = breadcrumbJsonLd([
+    { name: 'Design Lab', path: '/tools/design-lab' },
+  ])
   const jsonLd = webApplicationJsonLd({
     name: 'Peptide Design Lab',
     description:
@@ -25,6 +28,7 @@ export default function DesignLabLayout({
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       {children}
     </>
   )

@@ -4,6 +4,7 @@ import {
   buildCalculatorHandoffUrl,
   buildCorrectionHandoffUrl,
   datasetJsonLd,
+  breadcrumbJsonLd,
   molecularEntityJsonLd,
   siteGraphJsonLd,
   webApplicationJsonLd,
@@ -211,5 +212,14 @@ describe('dataset and web application schema', () => {
     expect(ld['@type']).toBe('WebApplication')
     expect(ld.url).toBe('https://americanpeptide.com/tools/design-lab')
     expect(ld.operatingSystem).toBe('Web browser')
+  })
+
+  it('builds a Home-rooted breadcrumb for a tool page', () => {
+    const ld = breadcrumbJsonLd([
+      { name: 'COA Decoder', path: '/tools/coa-decoder' },
+    ])
+    expect(ld['@type']).toBe('BreadcrumbList')
+    expect(ld.itemListElement[0]).toMatchObject({ name: 'Home', item: 'https://americanpeptide.com/' })
+    expect(ld.itemListElement[1].item).toBe('https://americanpeptide.com/tools/coa-decoder')
   })
 })

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, BookText } from 'lucide-react'
 import { GLOSSARY, glossaryByCategory } from '@/lib/glossary'
+import { breadcrumbJsonLd } from '@/lib/schema'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -35,19 +36,7 @@ export default function GlossaryPage() {
     })),
   }
 
-  const breadcrumbLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Glossary',
-        item: `${SITE}/glossary`,
-      },
-    ],
-  }
+  const breadcrumbLd = breadcrumbJsonLd([{ name: 'Glossary', path: '/glossary' }])
 
   return (
     <div className="min-h-screen bg-surface text-ink">
