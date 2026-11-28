@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { alignSequences, chargeCurve, hydropathyWindow, mutationDeltas, rowsToCsv } from './sequence'
-import { applyTrialFilters, phaseDistribution, rapidUpdates, whitespacePhases } from './pulse'
+import { applyTrialFilters, mergeTrials, phaseDistribution, rapidUpdates, whitespacePhases } from './pulse'
 import type { TrialRecord } from './types'
 
 describe('alignSequences', () => {
@@ -72,6 +72,16 @@ const TRIALS: TrialRecord[] = [
     startDate: '2019-01-01',
   },
 ]
+
+describe('mergeTrials', () => {
+  it('appends new studies and drops a repeated NCT id', () => {
+    const merged = mergeTrials(TRIALS, [
+      TRIALS[0],
+      { ...TRIALS[1], nctId: 'NCT3', title: 'Third' },
+    ])
+    expect(merged.map((t) => t.nctId)).toEqual(['NCT1', 'NCT2', 'NCT3'])
+  })
+})
 
 describe('pulse filters', () => {
   it('filters by phase, status, and condition', () => {
