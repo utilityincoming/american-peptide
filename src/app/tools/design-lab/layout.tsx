@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { webApplicationJsonLd } from '@/lib/schema'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -15,5 +16,16 @@ export default function DesignLabLayout({
 }: {
   children: React.ReactNode
 }) {
-  return children
+  const jsonLd = webApplicationJsonLd({
+    name: 'Peptide Design Lab',
+    description:
+      'Experimental peptide design lab for molecular weight, charge, isoelectric point, GRAVY, and extinction coefficient.',
+    path: '/tools/design-lab',
+  })
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {children}
+    </>
+  )
 }

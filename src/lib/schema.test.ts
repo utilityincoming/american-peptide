@@ -3,8 +3,10 @@ import {
   buildAgentHandoffUrl,
   buildCalculatorHandoffUrl,
   buildCorrectionHandoffUrl,
+  datasetJsonLd,
   molecularEntityJsonLd,
   siteGraphJsonLd,
+  webApplicationJsonLd,
   webPageJsonLd,
 } from '@/lib/schema'
 import {
@@ -184,5 +186,30 @@ describe('stateless tool handoffs & zero-PII correction URLs', () => {
     expect(parsed.searchParams.get('topic')).toBe('correction')
     expect(parsed.searchParams.get('compound')).toBe('ghk-cu')
     expect(parsed.searchParams.get('section')).toBe('Identity & citations')
+  })
+})
+
+describe('dataset and web application schema', () => {
+  it('marks a monograph as a CC BY research dataset with identifiers', () => {
+    const bpc = PEPTIDES.find((p) => p.slug === 'bpc-157')!
+    const ld = datasetJsonLd(bpc)
+    const { types, keys } = collectTypesAndKeys(ld)
+    expect(ld['@type']).toBe('Dataset')
+    expect(ld.license).toContain('creativecommons.org/licenses/by/4.0')
+    expect(ld.description).toMatch(/Not medical advice/)
+    expect(JSON.stringify(ld.identifier)).toContain('PubChem CID')
+    for (const type of types) expect(FORBIDDEN_SCHEMA_TYPES.has(type)).toBe(false)
+    for (const key of keys) expect(FORBIDDEN_SCHEMA_KEYS.has(key)).toBe(false)
+  })
+
+  it('describes a tool as a browser educational application', () => {
+    const ld = webApplicationJsonLd({
+      name: 'Peptide Design Lab',
+      description: 'Live sequence properties.',
+      path: '/tools/design-lab',
+    })
+    expect(ld['@type']).toBe('WebApplication')
+    expect(ld.url).toBe('https://americanpeptide.com/tools/design-lab')
+    expect(ld.operatingSystem).toBe('Web browser')
   })
 })
