@@ -21,9 +21,10 @@ const SECTIONS: Section[] = [
   // Catalog section removed — Compare and Workspace are surfaced on the catalog
   // page itself, so the whole catalog/compare/workspace area has no sub-nav.
   {
-    match: ['/research', '/research-areas', '/synthesis', '/learn', '/glossary', '/trials'],
+    match: ['/research', '/research-areas', '/synthesis', '/learn', '/glossary', '/trials', '/research-workspace'],
     tabs: [
       { href: '/research', label: 'Peptide Agent' },
+      { href: '/research-workspace', label: 'Workspace' },
       { href: '/research-areas', label: 'Research Areas' },
       { href: '/synthesis', label: 'Synthesis' },
       { href: '/learn/compatibility', label: 'Compatibility' },

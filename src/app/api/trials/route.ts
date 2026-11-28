@@ -9,10 +9,13 @@ interface RawStudy {
     }
     statusModule?: {
       overallStatus?: string
+      lastUpdatePostDateStruct?: { date?: string }
+      startDateStruct?: { date?: string }
     }
     sponsorCollaboratorsModule?: {
       leadSponsor?: { name?: string }
     }
+    conditionsModule?: { conditions?: string[] }
     designModule?: {
       phases?: string[]
       enrollmentInfo?: { count?: number }
@@ -32,6 +35,9 @@ export interface Trial {
   phases: string[]
   sponsor: string | null
   enrollment: number | null
+  conditions: string[]
+  lastUpdate: string | null
+  startDate: string | null
 }
 
 const PHASE_LABEL: Record<string, string> = {
@@ -45,10 +51,12 @@ const PHASE_LABEL: Record<string, string> = {
 
 export async function GET(request: NextRequest) {
   const term = request.nextUrl.searchParams.get('query')?.trim() || 'peptide therapeutics'
+  const requested = Number(request.nextUrl.searchParams.get('pageSize') ?? '20')
+  const pageSize = Number.isFinite(requested) ? Math.min(50, Math.max(1, Math.floor(requested))) : 20
 
   const url = new URL('https://clinicaltrials.gov/api/v2/studies')
   url.searchParams.set('query.term', term)
-  url.searchParams.set('pageSize', '20')
+  url.searchParams.set('pageSize', String(pageSize))
   url.searchParams.set('countTotal', 'true')
 
   const upstream = await fetch(url.toString(), { headers: { accept: 'application/json' } })
@@ -75,6 +83,9 @@ export async function GET(request: NextRequest) {
       phases,
       sponsor: p.sponsorCollaboratorsModule?.leadSponsor?.name ?? null,
       enrollment: p.designModule?.enrollmentInfo?.count ?? null,
+      conditions: p.conditionsModule?.conditions ?? [],
+      lastUpdate: p.statusModule?.lastUpdatePostDateStruct?.date ?? null,
+      startDate: p.statusModule?.startDateStruct?.date ?? null,
     }
   })
 
