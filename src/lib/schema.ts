@@ -316,6 +316,65 @@ export interface Crumb {
  *     { name: peptide.name, path: `/catalog/${peptide.slug}` },
  *   ])
  */
+/** FAQPage from questions already rendered on the page. */
+export function faqPageJsonLd(faqs: { q: string; a: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: { '@type': 'Answer', text: faq.a },
+    })),
+  }
+}
+
+/**
+ * Dataset for a monograph's reference record. Sits beside MolecularEntity.
+ * It describes the catalog record, not a product for sale.
+ */
+export function datasetJsonLd(peptide: MolecularEntityInput) {
+  const url = `${SITE}/catalog/${peptide.slug}`
+  const identifier: { '@type': 'PropertyValue'; propertyID: string; value: string }[] = []
+  if (peptide.cas) identifier.push({ '@type': 'PropertyValue', propertyID: 'CAS', value: peptide.cas })
+  if (peptide.pubchemCid) {
+    identifier.push({ '@type': 'PropertyValue', propertyID: 'PubChem CID', value: String(peptide.pubchemCid) })
+  }
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    '@id': `${url}#dataset`,
+    name: `${peptide.name} research reference`,
+    description: `${peptide.shortDescription ?? peptide.name} Computational reference data for research and education. Not medical advice and not an offer for sale. Catalog data © ${API_ATTRIBUTION}, CC BY 4.0.`,
+    url,
+    license: LICENSE_URL,
+    creator: { '@id': ORG_ID, '@type': 'Organization', name: API_ATTRIBUTION },
+    isAccessibleForFree: true,
+    ...(identifier.length ? { identifier } : {}),
+    additionalProperty: {
+      '@type': 'PropertyValue',
+      name: 'disclaimer',
+      value: 'Research reference only. Computational outputs are hypotheses and require experimental validation.',
+    },
+  }
+}
+
+/** WebApplication for an interactive research tool. */
+export function webApplicationJsonLd(opts: { name: string; description: string; path: string }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: opts.name,
+    description: `${opts.description} Research and education only. Not medical advice.`,
+    url: absolute(opts.path),
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Web browser',
+    isAccessibleForFree: true,
+    license: LICENSE_URL,
+    provider: { '@id': ORG_ID },
+  }
+}
+
 export function breadcrumbJsonLd(trail: Crumb[]) {
   const items: Crumb[] = [{ name: 'Home', path: '/' }, ...trail]
   return {

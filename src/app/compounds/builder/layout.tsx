@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { webApplicationJsonLd } from '@/lib/schema'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -19,5 +20,15 @@ export default function BuilderLayout({
 }: {
   children: React.ReactNode
 }) {
-  return children
+  const jsonLd = webApplicationJsonLd({
+    name: 'PeptideForge',
+    description: 'Interactive peptide builder that updates molecular properties as residues change.',
+    path: '/compounds/builder',
+  })
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {children}
+    </>
+  )
 }

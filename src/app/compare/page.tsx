@@ -79,24 +79,35 @@ export default function CompareIndexPage() {
       <section className="px-6 py-12 md:px-10">
         <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2">
           {COMPARISONS.map((c) => (
-            <Link
+            <article
               key={c.slug}
-              href={`/compare/${c.slug}`}
               className="group flex flex-col rounded-2xl border border-hairline bg-fill p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:bg-fill-strong hover:shadow-[0_18px_50px_-12px_rgba(126,224,181,0.12)]"
             >
-              <div className="mb-3 flex flex-wrap items-center gap-2 text-sm font-semibold">
+              <Link href={`/compare/${c.slug}`} className="mb-3 flex flex-wrap items-center gap-2 text-sm font-semibold">
                 <span style={{ color: '#7EE0B5' }}>{c.aName}</span>
                 <span className="text-ink/25">vs</span>
                 <span style={{ color: '#818CF8' }}>{c.bName}</span>
-              </div>
-              <p className="mb-5 flex-1 text-[13px] leading-relaxed text-ink/50">
+              </Link>
+              <p className="mb-3 flex-1 text-[13px] leading-relaxed text-ink/50">
                 {c.headline.charAt(0).toUpperCase() + c.headline.slice(1)}.
               </p>
-              <span className="flex items-center gap-1 text-[11px] text-accent/70 transition-colors group-hover:text-accent">
-                Read comparison
+              <p className="mb-4 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-ink/55">
+                {c.aSlug && (
+                  <Link href={`/catalog/${c.aSlug}`} className="hover:text-accent">
+                    {c.aName} monograph
+                  </Link>
+                )}
+                {c.bSlug && (
+                  <Link href={`/catalog/${c.bSlug}`} className="hover:text-accent">
+                    {c.bName} monograph
+                  </Link>
+                )}
+              </p>
+              <Link href={`/compare/${c.slug}`} className="flex items-center gap-1 text-[11px] text-accent/70 transition-colors group-hover:text-accent">
+                Read {c.aName} vs {c.bName}
                 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </Link>
+              </Link>
+            </article>
           ))}
         </div>
       </section>

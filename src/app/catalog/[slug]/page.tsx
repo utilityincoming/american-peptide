@@ -6,6 +6,8 @@ import {
   buildAgentHandoffUrl,
   buildCalculatorHandoffUrl,
   buildCorrectionHandoffUrl,
+  datasetJsonLd,
+  faqPageJsonLd,
   molecularEntityJsonLd,
   webPageJsonLd,
 } from '@/lib/schema'
@@ -38,6 +40,8 @@ import {
   type Peptide,
 } from '@/lib/peptides'
 import { getAreasForPeptide } from '@/lib/research-areas'
+import { comparisonsFor } from '@/lib/comparisons'
+import GlossaryText from '@/components/GlossaryText'
 import { IS_APP_BUILD } from '@/lib/platform'
 import { getPubchemVerification } from '@/lib/verification'
 import { molecularWeightClaim, molecularFormulaClaim } from '@/lib/evidence'
@@ -144,17 +148,9 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
     mainEntityId: `${url}#entity`,
   })
 
-  const faqLd = peptide.faqs?.length
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: peptide.faqs.map((f) => ({
-          '@type': 'Question',
-          name: f.q,
-          acceptedAnswer: { '@type': 'Answer', text: f.a },
-        })),
-      }
-    : null
+  const faqLd = peptide.faqs?.length ? faqPageJsonLd(peptide.faqs) : null
+  const datasetLd = datasetJsonLd(peptide)
+  const headToHeads = comparisonsFor([peptide.slug]).slice(0, 2)
 
   const preset = reconPresetFor(peptide.slug)
   const calcHandoffHref = buildCalculatorHandoffUrl({
@@ -199,6 +195,10 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(entityLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(datasetLd) }}
       />
       <script
         type="application/ld+json"
@@ -256,8 +256,43 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
             </p>
           )}
           <p className="max-w-3xl text-base leading-relaxed text-ink/65 md:text-lg">
-            {peptide.shortDescription}
+            <GlossaryText text={peptide.shortDescription} />
           </p>
+          <nav aria-label="Explore" className="mt-5 flex flex-wrap gap-2 text-xs">
+            {areas.map((area) => (
+              <Link
+                key={area.slug}
+                href={`/research-areas/${area.slug}`}
+                className="rounded-full border border-accent/30 px-3 py-1 text-accent hover:bg-accent/10"
+              >
+                {area.label} research
+              </Link>
+            ))}
+            <Link href="/synthesis" className="rounded-full border border-hairline px-3 py-1 text-ink/70 hover:text-accent">
+              Synthesis guide
+            </Link>
+            <Link href={calcHandoffHref} className="rounded-full border border-hairline px-3 py-1 text-ink/70 hover:text-accent">
+              Reconstitution calculator
+            </Link>
+            <Link href="/tools/coa-decoder" className="rounded-full border border-hairline px-3 py-1 text-ink/70 hover:text-accent">
+              COA decoder
+            </Link>
+            <Link href="/methodology" className="rounded-full border border-hairline px-3 py-1 text-ink/70 hover:text-accent">
+              Methodology
+            </Link>
+            <Link href="/us-peptides" className="rounded-full border border-hairline px-3 py-1 text-ink/70 hover:text-accent">
+              US sourcing standard
+            </Link>
+            {headToHeads.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/compare/${item.slug}`}
+                className="rounded-full border border-hairline px-3 py-1 text-ink/70 hover:text-accent"
+              >
+                {item.aName} vs {item.bName}
+              </Link>
+            ))}
+          </nav>
           {/* Page-level evidence rollup (the Standard §3): the LOWEST tier among
               the monograph's load-bearing figures, so a reader calibrates before
               scrolling. Identity claims are excluded; a page with no empirical

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { breadcrumbJsonLd, freshnessProps, WEBSITE_ID } from '@/lib/schema'
+import { breadcrumbJsonLd, faqPageJsonLd, freshnessProps, WEBSITE_ID } from '@/lib/schema'
+import { comparisonsFor } from '@/lib/comparisons'
 import { ArrowRight, ArrowLeft, HelpCircle, Layers } from 'lucide-react'
 import { CATEGORIES, type Peptide } from '@/lib/peptides'
 import {
@@ -75,17 +76,8 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
     { name: area.label, path: `/research-areas/${area.slug}` },
   ])
 
-  const faqLd = area.faqs.length
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: area.faqs.map((f) => ({
-          '@type': 'Question',
-          name: f.q,
-          acceptedAnswer: { '@type': 'Answer', text: f.a },
-        })),
-      }
-    : null
+  const faqLd = area.faqs.length ? faqPageJsonLd(area.faqs) : null
+  const areaComparisons = comparisonsFor(peptides.map((p) => p.slug)).slice(0, 3)
 
   return (
     <div className="min-h-screen bg-surface text-ink">
@@ -216,6 +208,23 @@ export default async function ResearchAreaPage({ params }: RouteParams) {
 
           {/* Sidebar */}
           <aside className="space-y-6">
+            {areaComparisons.length > 0 && (
+              <div className="rounded-2xl border border-hairline bg-fill p-5">
+                <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink/55">
+                  Head-to-head comparisons
+                </h3>
+                <ul className="space-y-2 text-sm">
+                  {areaComparisons.map((item) => (
+                    <li key={item.slug}>
+                      <Link href={`/compare/${item.slug}`} className="text-accent hover:underline">
+                        {item.aName} vs {item.bName}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {/* Related categories */}
             {area.relatedCategories.length > 0 && (
               <div className="rounded-2xl border border-hairline bg-fill p-5">
