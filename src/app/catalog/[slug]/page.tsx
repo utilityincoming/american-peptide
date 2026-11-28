@@ -42,6 +42,8 @@ import {
 import { getAreasForPeptide } from '@/lib/research-areas'
 import { comparisonsFor } from '@/lib/comparisons'
 import GlossaryText from '@/components/GlossaryText'
+import { monographDescription, monographTitle } from '@/lib/page-meta'
+import { RESEARCH_AREAS } from '@/lib/research-areas'
 import { IS_APP_BUILD } from '@/lib/platform'
 import { getPubchemVerification } from '@/lib/verification'
 import { molecularWeightClaim, molecularFormulaClaim } from '@/lib/evidence'
@@ -83,15 +85,15 @@ export async function generateMetadata({ params }: RouteParams): Promise<Metadat
 
   const url = `${SITE}/catalog/${peptide.slug}`
   return {
-    title: `${peptide.name} — Sequence & Mechanism`,
-    description: peptide.shortDescription,
+    title: monographTitle(peptide.name, peptide.slug),
+    description: monographDescription(peptide.slug, peptide.shortDescription),
     alternates: {
       canonical: url,
       types: { 'text/markdown': `${url}.md` },
     },
     openGraph: {
-      title: `${peptide.name} — AmericanPeptide.com Catalog`,
-      description: peptide.shortDescription,
+      title: monographTitle(peptide.name, peptide.slug),
+      description: monographDescription(peptide.slug, peptide.shortDescription),
       url,
       type: 'article',
     },
@@ -610,15 +612,26 @@ export default async function PeptideDetailPage({ params }: RouteParams) {
             {peptide.researchAreas && peptide.researchAreas.length > 0 && (
               <Block title="Research areas">
                 <ul className="grid gap-2 sm:grid-cols-2">
-                  {peptide.researchAreas.map((area) => (
+                  {peptide.researchAreas.map((area) => {
+                    const guide = RESEARCH_AREAS.find((item) =>
+                      item.matchers.some((matcher) => area.toLowerCase().includes(matcher)),
+                    )
+                    return (
                     <li
                       key={area}
                       className="flex items-center gap-2 rounded-lg border border-hairline bg-fill px-3 py-2 text-sm text-ink/65"
                     >
                       <FlaskConical className="h-3.5 w-3.5 text-accent/70" />
-                      {area}
+                      {guide ? (
+                        <Link href={`/research-areas/${guide.slug}`} className="hover:text-accent">
+                          {area} research guide
+                        </Link>
+                      ) : (
+                        area
+                      )}
                     </li>
-                  ))}
+                    )
+                  })}
                 </ul>
               </Block>
             )}

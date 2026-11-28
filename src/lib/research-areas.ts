@@ -36,9 +36,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'weight-loss',
     label: 'Weight Loss & Metabolic Health',
     tagline: 'Incretin and metabolic peptides studied for glycemic control and fat loss.',
-    metaTitle: 'Weight Loss & Metabolic Peptides',
+    metaTitle: 'Weight-loss peptides — sequence & evidence',
     metaDescription:
-      'Research reference for metabolic peptides studied in obesity, type 2 diabetes, and MASH — GLP-1/GIP/glucagon agonists, amylin analogs, and adipose-targeting compounds.',
+      'Cited research guide to semaglutide, tirzepatide, and retatrutide: sequence, mechanism, trial evidence, and catalog links. Not a store.',
     intro: [
       'Metabolic peptides are among the most clinically validated classes in modern medicine. The incretin axis — GLP-1, GIP, and glucagon receptor signaling — coordinates insulin secretion, satiety, gastric emptying, and energy expenditure, and engineered agonists of these receptors now anchor the treatment of type 2 diabetes and obesity.',
       'Research in this area spans single-, dual-, and triple-receptor agonists, amylin analogs, and adipose-selective fragments. Endpoints commonly studied include glycemic control, body-weight reduction, MASH/hepatic-fat resolution, and cardiovascular risk — with half-life extension (fatty-acid acylation, DPP-4 resistance) a recurring engineering theme.',
@@ -74,9 +74,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'wound-healing',
     label: 'Wound Healing & Tissue Repair',
     tagline: 'Regenerative peptides studied for soft-tissue, tendon, and vascular repair.',
-    metaTitle: 'Wound Healing & Tissue Repair Peptides',
+    metaTitle: 'Tissue-repair peptides — sequence & evidence',
     metaDescription:
-      'Research reference for regenerative peptides studied in wound healing, tendinopathy, and tissue repair — angiogenesis, cytoprotection, and extracellular-matrix remodeling.',
+      'Cited research guide to BPC-157, TB-500, and related repair peptides: sequence, evidence notes, and catalog links. Not a store.',
     intro: [
       'Tissue-repair peptides are studied for their effects on angiogenesis, fibroblast and keratinocyte activity, and the cytoprotective signaling that governs how injured tissue recovers. The interest spans dermal wounds, tendon and ligament injury, cartilage, and ischemic or post-surgical repair models.',
       'Mechanisms under investigation include up-regulation of growth-factor receptor expression, modulation of the nitric-oxide system, actin sequestration and cell migration, and copper-dependent remodeling of the extracellular matrix. Most evidence here is preclinical, making rigorous model selection and endpoint definition especially important.',
@@ -197,9 +197,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'longevity-aging',
     label: 'Longevity & Aging',
     tagline: 'Peptides studied across the aging axis — senescence, NAD+, and resilience.',
-    metaTitle: 'Longevity & Aging Peptides',
+    metaTitle: 'Longevity peptides — sequence & evidence',
     metaDescription:
-      'Research reference for peptides studied in aging biology — telomere and senescence pathways, NAD+ metabolism, mitochondrial function, and healthspan endpoints.',
+      'Cited research guide to aging-related peptides: sequence, mechanism notes, catalog links, and evidence context. Not a store.',
     intro: [
       'Longevity research examines peptides that act on the hallmarks of aging: cellular senescence, mitochondrial decline, telomere maintenance, NAD+ metabolism, and the gradual loss of circadian and hormonal regulation. The goal in most models is healthspan — preserving function — rather than a single disease endpoint.',
       'Compounds studied here often originate as endogenous regulatory peptides whose expression falls with age. Because aging endpoints are slow and multifactorial, this area leans heavily on biomarker studies, model organisms, and mechanistic work rather than large outcome trials.',
@@ -226,9 +226,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'growth-hormone-axis',
     label: 'Growth Hormone & Body Composition',
     tagline: 'Secretagogues studied for GH release, IGF-1, and body composition.',
-    metaTitle: 'Growth Hormone & Body Composition Peptides',
+    metaTitle: 'Growth-hormone peptides — sequence & evidence',
     metaDescription:
-      'Research reference for growth-hormone secretagogues — GHRH analogs and GHRPs studied for pulsatile GH release, IGF-1 elevation, and body-composition endpoints.',
+      'Cited research guide to GHRH and ghrelin-axis peptides: sequence, evidence notes, and links into the catalog. Not a store.',
     intro: [
       'Growth-hormone secretagogues are studied for their ability to stimulate the body’s own pulsatile GH release rather than supplying exogenous hormone. The two principal classes — GHRH analogs and growth-hormone-releasing peptides (GHRPs) — act on distinct receptors and are frequently studied in combination for synergistic effect.',
       'Common endpoints include GH pulse amplitude, downstream IGF-1 elevation, and body-composition changes such as visceral-fat reduction and lean-mass support. Preserving the physiological pulsatility and feedback of the GH axis is a defining research consideration for this class.',
@@ -255,9 +255,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'muscle-lean-mass',
     label: 'Muscle Preservation & Lean Mass',
     tagline: 'The activin/myostatin axis studied to preserve muscle during GLP-1 weight loss.',
-    metaTitle: 'Muscle Preservation & Lean Mass Peptides',
+    metaTitle: 'Muscle-preservation peptides — sequence & evidence',
     metaDescription:
-      'Research reference for the activin/myostatin axis — myostatin, follistatin, and the antibodies (apitegromab, trevogrumab, garetosmab, bimagrumab) studied to preserve lean mass during GLP-1 weight loss.',
+      'Cited research guide to lean-mass peptides: sequence, mechanism notes, catalog links, and evidence context. Not a store.',
     updated: '2026-09-13',
     intro: [
       'The GLP-1 era created a new research question: not just how much weight comes off, but what kind. Across trials, roughly a quarter to 40% of the weight lost on semaglutide and tirzepatide is lean mass rather than fat — a concern about the *quality* of weight loss as these drugs scale to tens of millions of people. This area collects the compounds studied to keep the muscle while the fat goes.',
@@ -347,9 +347,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     slug: 'immune-inflammation',
     label: 'Immune & Inflammation',
     tagline: 'Thymic and host-defense peptides studied for immune modulation.',
-    metaTitle: 'Immune & Inflammation Peptides',
+    metaTitle: 'Immune peptides — sequence & evidence',
     metaDescription:
-      'Research reference for immunomodulatory peptides studied in inflammation, innate immunity, and infection — thymic peptides, antimicrobial peptides, and anti-inflammatory fragments.',
+      'Cited research guide to immune and inflammation peptides: sequence, evidence notes, and catalog links. Not a store.',
     intro: [
       'Immunoactive peptides are studied for their ability to modulate both innate and adaptive immunity — restoring T-cell function, regulating cytokine balance, and providing direct antimicrobial activity. The class includes thymic peptides, host-defense (antimicrobial) peptides, and short anti-inflammatory fragments.',
       'Research contexts span chronic viral infection, sepsis and oncology adjunct settings, antimicrobial-resistance models, and inflammatory conditions such as IBD and atopic dermatitis. Host-defense peptides are of particular interest as the antibiotic-resistance crisis renews attention on innate-immune mechanisms.',

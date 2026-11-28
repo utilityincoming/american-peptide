@@ -1,15 +1,16 @@
 import type { Metadata } from 'next'
 import { faqPageJsonLd } from '@/lib/faqs'
 import { breadcrumbJsonLd, webApplicationJsonLd } from '@/lib/schema'
+import RelatedCatalog from '@/components/RelatedCatalog'
 import { RECON_FAQS } from './faqs'
 
 const SITE = 'https://americanpeptide.com'
 const url = `${SITE}/tools/reconstitution-calculator`
 
 export const metadata: Metadata = {
-  title: 'Peptide Reconstitution Calculator',
+  title: 'Reconstitution calculator — volume and dose',
   description:
-    'Free peptide reconstitution calculator. Calculate bacteriostatic water volume, concentration per injection, and dosing from vial size and desired dose. Essential tool for peptide researchers.',
+    'Research calculator for bacteriostatic water volume and concentration from vial size and target dose. Cited reference tool, not a store.',
   alternates: { canonical: url },
   keywords: [
     'peptide reconstitution calculator',
@@ -21,17 +22,17 @@ export const metadata: Metadata = {
     'peptide mixing calculator',
   ],
   openGraph: {
-    title: 'Peptide Reconstitution Calculator',
+    title: 'Reconstitution calculator — volume and dose',
     description:
-      'Free calculator for bacteriostatic water volume, concentration per injection, and dose — straight from vial size and target dose.',
+      'Research calculator for bacteriostatic water volume and concentration from vial size and target dose. Cited reference tool, not a store.',
     url,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Peptide Reconstitution Calculator | AmericanPeptide.com',
+    title: 'Reconstitution calculator — volume and dose',
     description:
-      'Free calculator: bacteriostatic water volume, concentration per unit, and dose from vial size and target dose.',
+      'Research calculator for bacteriostatic water volume and concentration from vial size and target dose. Cited reference tool, not a store.',
   },
 }
 
@@ -69,6 +70,7 @@ export default function ReconstitutionCalculatorLayout({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd(RECON_FAQS)) }}
       />
       {children}
+      <RelatedCatalog slugs={['semaglutide', 'tirzepatide', 'bpc-157', 'tb-500']} heading="Use with these peptides" />
     </>
   )
 }

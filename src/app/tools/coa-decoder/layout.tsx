@@ -1,17 +1,18 @@
 import type { Metadata } from 'next'
 import { breadcrumbJsonLd, webApplicationJsonLd } from '@/lib/schema'
+import RelatedCatalog from '@/components/RelatedCatalog'
 
 const SITE = 'https://americanpeptide.com'
 
 export const metadata: Metadata = {
-  title: 'COA Decoder — Read & Grade a Peptide COA',
+  title: 'COA decoder — purity, identity, endotoxin',
   description:
-    'Paste a peptide Certificate of Analysis and get every field explained — HPLC purity, mass-spec identity, endotoxin — plus a transparency grade. Free.',
+    'Research tool that explains HPLC purity, mass-spec identity, and endotoxin fields on a peptide COA. Cited reference, not a store.',
   alternates: { canonical: `${SITE}/tools/coa-decoder` },
   openGraph: {
-    title: 'COA Decoder — Read & Grade a Peptide Certificate of Analysis',
+    title: 'COA decoder — purity, identity, endotoxin',
     description:
-      'Decode and grade a peptide COA: purity, identity, net content, endotoxin, and a transparency score. Free.',
+      'Research tool that explains HPLC purity, mass-spec identity, and endotoxin fields on a peptide COA. Cited reference, not a store.',
     url: `${SITE}/tools/coa-decoder`,
     type: 'website',
   },
@@ -35,6 +36,7 @@ export default function CoaDecoderLayout({ children }: { children: React.ReactNo
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       {children}
+      <RelatedCatalog slugs={['bpc-157', 'tb-500', 'ghk-cu', 'semaglutide']} heading="Use with these peptides" />
     </>
   )
 }

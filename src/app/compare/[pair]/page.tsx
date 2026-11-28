@@ -169,6 +169,23 @@ export default async function ComparePage({ params }: RouteParams) {
           <p className="mt-3 text-xs text-ink/55">
             Research reference only. Not medical advice, prescribing guidance, or a product recommendation.
           </p>
+          <nav aria-label="Related research" className="mt-5 flex flex-wrap gap-2 text-xs">
+            {c.aSlug && (
+              <Link href={`/catalog/${c.aSlug}`} className="rounded-full border border-accent/30 px-3 py-1 text-accent">
+                {c.aName} monograph
+              </Link>
+            )}
+            {c.bSlug && (
+              <Link href={`/catalog/${c.bSlug}`} className="rounded-full border border-accent/30 px-3 py-1 text-accent">
+                {c.bName} monograph
+              </Link>
+            )}
+            {c.relatedAreas?.map((slug) => (
+              <Link key={slug} href={`/research-areas/${slug}`} className="rounded-full border border-hairline px-3 py-1 text-ink/70 hover:text-accent">
+                {slug.replace(/-/g, ' ')} research guide
+              </Link>
+            ))}
+          </nav>
         </div>
       </section>
 
