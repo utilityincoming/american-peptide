@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { faqPageJsonLd } from '@/lib/faqs'
+import { breadcrumbJsonLd, webApplicationJsonLd } from '@/lib/schema'
 import { RECON_FAQS } from './faqs'
 
 const SITE = 'https://americanpeptide.com'
@@ -34,21 +35,16 @@ export const metadata: Metadata = {
   },
 }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebApplication',
+const jsonLd = webApplicationJsonLd({
   name: 'Peptide Reconstitution Calculator',
-  url: 'https://americanpeptide.com/tools/reconstitution-calculator',
-  applicationCategory: 'EducationalApplication',
-  isAccessibleForFree: true,
-  license: 'https://creativecommons.org/licenses/by/4.0/',
-  author: {
-    '@type': 'Organization',
-    '@id': 'https://americanpeptide.com/#organization',
-    name: 'AmericanPeptide.com',
-    url: 'https://americanpeptide.com',
-  },
-}
+  description:
+    'Calculate bacteriostatic water volume and concentration from vial size and target dose.',
+  path: '/tools/reconstitution-calculator',
+})
+
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: 'Reconstitution Calculator', path: '/tools/reconstitution-calculator' },
+])
 
 export default function ReconstitutionCalculatorLayout({
   children,
@@ -60,6 +56,10 @@ export default function ReconstitutionCalculatorLayout({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       {/* FAQPage structured data for the on-page Reconstitution FAQ. Server-
           rendered here so it's in the initial HTML; the visible accordion in

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { webApplicationJsonLd } from '@/lib/schema'
+import { breadcrumbJsonLd, webApplicationJsonLd } from '@/lib/schema'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -20,6 +20,10 @@ export default function BuilderLayout({
 }: {
   children: React.ReactNode
 }) {
+  const breadcrumbLd = breadcrumbJsonLd([
+    { name: 'Compounds', path: '/compounds' },
+    { name: 'PeptideForge', path: '/compounds/builder' },
+  ])
   const jsonLd = webApplicationJsonLd({
     name: 'PeptideForge',
     description: 'Interactive peptide builder that updates molecular properties as residues change.',
@@ -28,6 +32,7 @@ export default function BuilderLayout({
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       {children}
     </>
   )

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, GitCompare } from 'lucide-react'
 import { COMPARISONS } from '@/lib/comparisons'
+import { breadcrumbJsonLd } from '@/lib/schema'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -43,8 +44,16 @@ export default function CompareIndexPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd([{ name: 'Comparisons', path: '/compare' }])),
+        }}
+      />
 
       <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
+        <Link href="/" className="text-sm text-ink/55 hover:text-ink">Home</Link>
+        <span className="text-ink/20">/</span>
         <span className="flex items-center gap-1.5 text-sm font-medium">
           <GitCompare className="h-4 w-4 text-accent" />
           Comparisons

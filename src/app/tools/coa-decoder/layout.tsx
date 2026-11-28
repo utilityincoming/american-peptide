@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { breadcrumbJsonLd, webApplicationJsonLd } from '@/lib/schema'
 
 const SITE = 'https://americanpeptide.com'
 
@@ -16,21 +17,23 @@ export const metadata: Metadata = {
   },
 }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebApplication',
+const jsonLd = webApplicationJsonLd({
   name: 'Peptide COA Decoder',
-  url: `${SITE}/tools/coa-decoder`,
-  applicationCategory: 'EducationalApplication',
-  isAccessibleForFree: true,
-  license: 'https://creativecommons.org/licenses/by/4.0/',
-  author: { '@type': 'Organization', '@id': `${SITE}/#organization`, name: 'AmericanPeptide.com', url: SITE },
-}
+  description:
+    'Paste a peptide Certificate of Analysis and get purity, identity, and endotoxin fields explained.',
+  path: '/tools/coa-decoder',
+})
+
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: 'Tools', path: '/tools/reconstitution-calculator' },
+  { name: 'COA Decoder', path: '/tools/coa-decoder' },
+])
 
 export default function CoaDecoderLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       {children}
     </>
   )
