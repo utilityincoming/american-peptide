@@ -39,6 +39,12 @@ const TOOLS: Tool[] = [
     badge: 'New',
   },
   {
+    href: '/research-workspace',
+    name: 'Research Workspace',
+    desc: 'Compare peptides, scan trials, and calculate sequence properties in one place.',
+    Icon: Beaker,
+  },
+  {
     href: '/tools/design-lab',
     name: 'Design Lab',
     desc: 'Sequence properties — pI, ε280, net charge & synthesis-difficulty flags.',

@@ -90,6 +90,14 @@ const PAGES: CommandItem[] = [
     keywords: 'design lab sequence properties molecular weight net charge isoelectric point pi gravy hydropathy extinction coefficient builder beta',
   },
   {
+    id: 'page-research-workspace',
+    kind: 'page',
+    label: 'Research Workspace',
+    subtitle: 'Compare peptides, trial pulse, sequence explorer',
+    href: '/research-workspace',
+    keywords: 'research workspace compare peptides clinical trials hydropathy gravy sequence forge pulse',
+  },
+  {
     id: 'page-research-areas',
     kind: 'page',
     label: 'Research Areas',

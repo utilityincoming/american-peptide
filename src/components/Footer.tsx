@@ -16,6 +16,7 @@ const LINKS = [
   { href: '/tools/calculator-beta', label: 'Peptide Calculator Beta' },
   { href: '/tools/coa-decoder', label: 'COA Decoder' },
   { href: '/tools/design-lab', label: 'Design Lab' },
+  { href: '/research-workspace', label: 'Research Workspace' },
   { href: '/developers', label: 'Developers / API' },
 ]
 

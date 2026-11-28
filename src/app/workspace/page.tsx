@@ -142,10 +142,10 @@ export default function WorkspacePage() {
                   Browse the catalog <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/tools/design-lab"
+                  href="/research-workspace"
                   className="inline-flex items-center gap-1.5 rounded-xl border border-hairline-strong px-5 py-2.5 text-sm font-medium text-ink/60 hover:border-ink/20 hover:text-ink"
                 >
-                  <FlaskRound className="h-4 w-4" /> Open Design Lab
+                  <FlaskRound className="h-4 w-4" /> Research Workspace
                 </Link>
               </div>
             </div>

@@ -324,6 +324,7 @@ export function llmsIndexMarkdown(): string {
     `- [Reconstitution calculator](${API_SITE}/tools/reconstitution-calculator): research-prep math.`,
     `- [COA decoder](${API_SITE}/tools/coa-decoder): certificate of analysis transparency grader & salt-aware MS cross-check.`,
     `- [Design Lab](${API_SITE}/tools/design-lab): sequence properties (MW, pI, net charge, GRAVY, ε280).`,
+    `- [Research Workspace](${API_SITE}/research-workspace): compare 2–4 catalog peptides, scan ClinicalTrials.gov, and explore a sequence.`,
     `- [Methodology](${API_SITE}/methodology): PubChem verification & evidence-tier standard.`,
     '',
   )
