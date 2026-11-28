@@ -25,6 +25,8 @@ export interface CompareRow {
   pubchemCid: number | null
   uniprotId: string | null
   researchAreas: string[]
+  /** PubChem verification date from the monograph manifest, when present. */
+  verifiedOn: string | null
 }
 
 export interface TrialRecord {
@@ -59,7 +61,7 @@ export interface SavedPulseView {
 export interface DiffCell {
   a: string
   b: string
-  kind: 'match' | 'sub' | 'gap'
+  kind: 'match' | 'sub' | 'gap' | 'nonstandard'
 }
 
 export interface MutationDelta {

@@ -1,12 +1,15 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
-import { LISTED_PEPTIDES, CATEGORIES } from '@/lib/peptides'
+import { CATEGORIES } from '@/lib/peptides'
+import { RESEARCH_AREAS } from '@/lib/research-areas'
 import { toCompareRow } from '@/lib/research-workspace/catalog'
-import { alignSequences, rowsToCsv, sequenceCardMarkdown } from '@/lib/research-workspace/sequence'
+import { loadCatalog, type CatalogRecord } from '@/lib/research-workspace/catalog-client'
+import { alignSequences, residueTokens, rowsToCsv, sequenceCardMarkdown } from '@/lib/research-workspace/sequence'
 import type { CompareRow } from '@/lib/research-workspace/types'
 import { ChargeChart, HydropathyChart, PropertyBars, seriesColor } from './PropertyCharts'
+import MethodsPanel from './MethodsPanel'
 
 const MAX = 4
 
@@ -19,19 +22,58 @@ export default function CompareDashboard({
 }) {
   const [q, setQ] = useState('')
   const [category, setCategory] = useState('')
+  const [area, setArea] = useState('')
   const [notice, setNotice] = useState('')
+  const [catalog, setCatalog] = useState<CatalogRecord[]>([])
+  const [catalogState, setCatalogState] = useState<'loading' | 'ready' | 'error'>('loading')
+  const [catalogNote, setCatalogNote] = useState<string | null>(null)
+  const [fetchedAt, setFetchedAt] = useState('')
+
+  useEffect(() => {
+    let cancelled = false
+    loadCatalog()
+      .then((loaded) => {
+        if (cancelled) return
+        setCatalog(loaded.records)
+        setFetchedAt(loaded.fetchedAt)
+        setCatalogNote(loaded.notice)
+        setCatalogState('ready')
+      })
+      .catch(() => {
+        if (!cancelled) setCatalogState('error')
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const rows = useMemo(() => {
     return ids
-      .map((slug) => LISTED_PEPTIDES.find((p) => p.slug === slug))
-      .filter((p): p is NonNullable<typeof p> => Boolean(p))
-      .map(toCompareRow)
-  }, [ids])
+      .map((slug) => catalog.find((p) => p.slug === slug))
+      .filter((p): p is CatalogRecord => Boolean(p))
+      .map((record) =>
+        toCompareRow({
+          slug: record.slug,
+          name: record.name,
+          categories: record.categories as never,
+          shortDescription: '',
+          description: '',
+          sequence: record.sequence ?? undefined,
+          molecularWeight: record.molecularWeight ?? undefined,
+          molecularFormula: record.molecularFormula ?? undefined,
+          pubchemCid: record.pubchemCid ?? undefined,
+          uniprotId: record.uniprotId ?? undefined,
+          fdaApproved: record.fdaApproved,
+          researchAreas: record.researchAreas,
+        }),
+      )
+  }, [ids, catalog])
 
   const matches = useMemo(() => {
     const query = q.trim().toLowerCase()
-    return LISTED_PEPTIDES.filter((p) => {
-      if (category && !p.categories.includes(category as (typeof p.categories)[number])) return false
+    return catalog.filter((p) => {
+      if (category && !p.categories.includes(category)) return false
+      if (area && !p.areaSlugs.includes(area)) return false
       if (!query) return true
       return (
         p.name.toLowerCase().includes(query) ||
@@ -39,7 +81,7 @@ export default function CompareDashboard({
         (p.aliases ?? []).some((a) => a.toLowerCase().includes(query))
       )
     }).slice(0, 80)
-  }, [q, category])
+  }, [q, category, area, catalog])
 
   function toggle(slug: string) {
     if (ids.includes(slug)) {
@@ -75,10 +117,16 @@ export default function CompareDashboard({
     URL.revokeObjectURL(url)
   }
 
+  const calculatedAt = new Date().toISOString()
   const markdown = sequenceCardMarkdown({
     title: `Peptide comparison: ${rows.map((r) => r.name).join(' vs ') || 'none selected'}`,
     sequence: rows.map((r) => `${r.name}: ${r.sequence || 'sequence not in catalog'}`).join('\n'),
-    lines: rows.flatMap((r) => [
+    lines: [
+      { label: 'Calculated at', value: calculatedAt },
+      { label: 'Catalog fetched at', value: fetchedAt || 'not loaded' },
+      ...rows.flatMap((r) => [
+      { label: `${r.name} slug`, value: r.slug },
+      { label: `${r.name} monograph`, value: `https://americanpeptide.com/catalog/${r.slug}` },
       { label: `${r.name} length`, value: fmt(r.length) },
       { label: `${r.name} MW (Da)`, value: `${fmtNum(r.molecularWeight)} (${r.massSource})` },
       { label: `${r.name} formula`, value: r.formula ?? 'not in catalog' },
@@ -86,13 +134,16 @@ export default function CompareDashboard({
       { label: `${r.name} GRAVY`, value: fmtNum(r.gravy) },
       { label: `${r.name} FDA flag`, value: r.fdaApproved ? 'approved drug' : 'not flagged approved' },
       { label: `${r.name} PubChem`, value: r.pubchemCid ? String(r.pubchemCid) : 'none' },
+      { label: `${r.name} PubChem checked`, value: r.verifiedOn ?? 'not in the verification manifest' },
     ]),
+    ],
   })
 
   const csv = rowsToCsv(
-    ['slug', 'name', 'length', 'mw', 'mass_source', 'formula', 'charge_pH7.4', 'gravy', 'pi', 'fda', 'pubchem', 'areas'],
+    ['slug', 'url', 'name', 'length', 'mw', 'mass_source', 'formula', 'charge_pH7.4', 'gravy', 'pi', 'fda', 'pubchem', 'verified_on', 'calculated_at', 'areas'],
     rows.map((r) => [
       r.slug,
+      `https://americanpeptide.com/catalog/${r.slug}`,
       r.name,
       fmt(r.length),
       fmtNum(r.molecularWeight),
@@ -103,6 +154,8 @@ export default function CompareDashboard({
       fmtNum(r.pi),
       r.fdaApproved ? 'yes' : 'no',
       r.pubchemCid ? String(r.pubchemCid) : '',
+      r.verifiedOn ?? '',
+      calculatedAt,
       r.researchAreas.join('; '),
     ]),
   )
@@ -138,8 +191,27 @@ export default function CompareDashboard({
               </option>
             ))}
           </select>
+          <label className="mt-3 block text-xs text-ink/55" htmlFor="cmp-area">
+            Research area
+          </label>
+          <select
+            id="cmp-area"
+            value={area}
+            onChange={(e) => setArea(e.target.value)}
+            className="mt-1 w-full rounded-lg border border-hairline bg-surface px-3 py-2 text-sm"
+          >
+            <option value="">All research areas</option>
+            {RESEARCH_AREAS.map((item) => (
+              <option key={item.slug} value={item.slug}>
+                {item.label}
+              </option>
+            ))}
+          </select>
+          {catalogState === 'loading' && <p className="mt-3 text-sm text-ink/55" role="status">Loading the catalog…</p>}
+          {catalogState === 'error' && <p className="mt-3 text-sm text-rose-300" role="alert">The catalog request failed.</p>}
+          {catalogNote && <p className="mt-3 text-xs text-amber-200/90">{catalogNote}</p>}
           <ul className="mt-3 max-h-72 overflow-auto" role="listbox" aria-label="Catalog matches" aria-multiselectable="true">
-            {matches.length === 0 && <li className="px-1 py-6 text-sm text-ink/50">No catalog matches.</li>}
+            {catalogState === 'ready' && matches.length === 0 && <li className="px-1 py-6 text-sm text-ink/50">No catalog matches.</li>}
             {matches.map((p) => {
               const on = ids.includes(p.slug)
               return (
@@ -247,15 +319,18 @@ export default function CompareDashboard({
         </div>
       )}
 
-      {pair && pair[0].codes.length > 0 && pair[1].codes.length > 0 && (
+      {pair && residueTokens(pair[0].sequence).length > 0 && residueTokens(pair[1].sequence).length > 0 && (
         <SequenceDiff a={pair[0]} b={pair[1]} />
       )}
+      <MethodsPanel items={COMPARE_METHODS} />
     </div>
   )
 }
 
 function SequenceDiff({ a, b }: { a: CompareRow; b: CompareRow }) {
-  const cells = alignSequences(a.codes.join(''), b.codes.join(''))
+  const left = residueTokens(a.sequence)
+  const right = residueTokens(b.sequence)
+  const cells = alignSequences(left.map((token) => token.label), right.map((token) => token.label))
   const subs = cells.filter((c) => c.kind !== 'match').length
   return (
     <section aria-label="Sequence difference" className="rounded-2xl border border-hairline bg-fill p-4">
@@ -266,12 +341,12 @@ function SequenceDiff({ a, b }: { a: CompareRow; b: CompareRow }) {
       <div className="mt-3 space-y-1 overflow-x-auto font-mono text-xs leading-6">
         <p className="whitespace-nowrap">
           {cells.map((c, i) => (
-            <span key={`a${i}`} className={c.kind === 'match' ? 'text-ink/70' : 'bg-rose-400/20 text-rose-200'}>{c.a}</span>
+            <span key={`a${i}`} className={c.kind === 'match' ? 'text-ink/70' : c.kind === 'nonstandard' ? 'bg-amber-400/20 text-amber-100' : 'bg-rose-400/20 text-rose-200'}>{c.a}</span>
           ))}
         </p>
         <p className="whitespace-nowrap">
           {cells.map((c, i) => (
-            <span key={`b${i}`} className={c.kind === 'match' ? 'text-ink/70' : 'bg-rose-400/20 text-rose-200'}>{c.b}</span>
+            <span key={`b${i}`} className={c.kind === 'match' ? 'text-ink/70' : c.kind === 'nonstandard' ? 'bg-amber-400/20 text-amber-100' : 'bg-rose-400/20 text-rose-200'}>{c.b}</span>
           ))}
         </p>
       </div>
@@ -302,6 +377,14 @@ function fmtNum(n: number | null): string {
 function trialSearch(name: string): string {
   return `https://clinicaltrials.gov/search?term=${encodeURIComponent(name)}`
 }
+
+const COMPARE_METHODS = [
+  { term: 'Mass', text: 'Catalog molecular weight when the monograph has one. Otherwise the average residue mass from the Design Lab table, plus one water. Missing sequence and missing mass both stay blank.' },
+  { term: 'Charge and pI', text: 'Henderson–Hasselbalch with the Design Lab pKa set. A hypothesis, not a measured titration.' },
+  { term: 'GRAVY and hydropathy', text: 'Kyte–Doolittle. The plot uses a 7-residue window and one shared vertical scale.' },
+  { term: 'Sequence diff', text: 'Standard residues align as one-letter codes. Names the catalog does not map (linkers, unusual residues) stay visible and are marked instead of being dropped.' },
+  { term: 'Verification date', text: 'The date this site last checked that slug against PubChem. It is not a ClinicalTrials.gov date and it is absent when the slug is not in the verification manifest.' },
+]
 
 const btn =
   'rounded-lg border border-hairline px-3 py-1.5 text-xs font-medium text-ink/80 hover:border-accent hover:text-accent'
