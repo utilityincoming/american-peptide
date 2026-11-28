@@ -3,6 +3,7 @@
 import { useCallback } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import ClinicalPulse from './ClinicalPulse'
+import WorkspaceErrorBoundary from './WorkspaceErrorBoundary'
 import CompareDashboard from './CompareDashboard'
 import PeptideForge from './PeptideForge'
 import ResearchDisclaimer from './ResearchDisclaimer'
@@ -95,9 +96,11 @@ export default function ResearchWorkspace() {
         </div>
         <p className="mt-3 text-sm text-ink/50">{TOOLS.find((t) => t.id === tool)?.blurb}</p>
         <div className="mt-6" role="tabpanel" id={`panel-${tool}`} aria-labelledby={`tab-${tool}`}>
-          {tool === 'compare' && <CompareDashboard ids={ids} onIds={setIds} />}
-          {tool === 'pulse' && <ClinicalPulse filters={filtersFromSearchParams(params)} onChange={setFilters} />}
-          {tool === 'forge' && <PeptideForge initial={(params.get('seq') ?? '').toUpperCase()} onSequence={setSequence} />}
+          <WorkspaceErrorBoundary key={tool}>
+            {tool === 'compare' && <CompareDashboard ids={ids} onIds={setIds} />}
+            {tool === 'pulse' && <ClinicalPulse filters={filtersFromSearchParams(params)} onChange={setFilters} />}
+            {tool === 'forge' && <PeptideForge initial={(params.get('seq') ?? '').toUpperCase()} onSequence={setSequence} />}
+          </WorkspaceErrorBoundary>
         </div>
       </div>
     </div>

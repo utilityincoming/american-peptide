@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { enforceApiAccess } from '@/lib/api-auth'
-import { apiHeaders, catalogAccessError, apiMeta, filterPeptides, serializePeptide } from '@/lib/catalog-api'
+import { apiHeaders, catalogAccessError, apiMeta, catalogEtag, filterPeptides, serializePeptide } from '@/lib/catalog-api'
 import { CATALOG_PAGE_DEFAULT, parseCatalogV2 } from '@/lib/catalog-v2'
 
 export const runtime = 'nodejs'
@@ -10,6 +10,11 @@ export async function GET(req: NextRequest) {
   const access = await enforceApiAccess(req, 'catalog')
   if (!access.ok) return catalogAccessError(access.response)
   const headers = apiHeaders(access.headers)
+  const etag = catalogEtag()
+  headers.ETag = etag
+  if (req.headers.get('if-none-match') === etag) {
+    return new NextResponse(null, { status: 304, headers })
+  }
   const parsed = parseCatalogV2(req.nextUrl.searchParams)
   if ('errors' in parsed) {
     return NextResponse.json(

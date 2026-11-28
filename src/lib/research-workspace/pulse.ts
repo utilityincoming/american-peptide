@@ -1,3 +1,4 @@
+import { RESEARCH_AREAS } from '@/lib/research-areas'
 import type { PulseFilters, TrialRecord } from './types'
 
 export const EMPTY_FILTERS: PulseFilters = {
@@ -44,6 +45,136 @@ export function applyTrialFilters(trials: TrialRecord[], filters: PulseFilters):
     if (filters.to && !stamp) return false
     return true
   })
+}
+
+export type StatusClass = 'recruiting' | 'active' | 'completed' | 'stopped' | 'other'
+
+const STATUS_CLASS: Record<string, StatusClass> = {
+  RECRUITING: 'recruiting',
+  ENROLLING_BY_INVITATION: 'recruiting',
+  ACTIVE_NOT_RECRUITING: 'active',
+  NOT_YET_RECRUITING: 'active',
+  COMPLETED: 'completed',
+  TERMINATED: 'stopped',
+  WITHDRAWN: 'stopped',
+  SUSPENDED: 'stopped',
+}
+
+const PHASE_KEY: Record<string, string> = {
+  'Early Phase 1': 'early1',
+  'Phase 1': '1',
+  'Phase 2': '2',
+  'Phase 3': '3',
+  'Phase 4': '4',
+  'N/A': 'na',
+}
+
+export interface IndexedTrial extends TrialRecord {
+  phaseKeys: string[]
+  statusClass: StatusClass
+  /** Research-area slugs whose matchers hit a listed condition. Computed once. */
+  areaSlugs: string[]
+}
+
+export function indexTrial(trial: TrialRecord): IndexedTrial {
+  const conditions = trial.conditions.join(' | ').toLowerCase()
+  const areaSlugs = RESEARCH_AREAS.filter((area) =>
+    area.matchers.some((matcher) => conditions.includes(matcher)),
+  ).map((area) => area.slug)
+  return {
+    ...trial,
+    phaseKeys: (trial.phases.length ? trial.phases : ['N/A']).map((phase) => PHASE_KEY[phase] ?? 'na'),
+    statusClass: STATUS_CLASS[trial.status] ?? 'other',
+    areaSlugs,
+  }
+}
+
+export function filterIndexed(
+  trials: IndexedTrial[],
+  filters: PulseFilters,
+): IndexedTrial[] {
+  return trials.filter((trial) => {
+    if (filters.phase && !trial.phaseKeys.includes(filters.phase) && !trial.phases.includes(filters.phase)) {
+      return false
+    }
+    if (filters.status && trial.statusClass !== filters.status) return false
+    if (filters.condition && !trial.areaSlugs.includes(filters.condition)) return false
+    if (filters.sponsor && trial.sponsor !== filters.sponsor) return false
+    const stamp = trial.lastUpdate
+    if (filters.from && (!stamp || stamp < filters.from)) return false
+    if (filters.to && (!stamp || stamp > filters.to)) return false
+    return true
+  })
+}
+
+export interface TrialDelta {
+  nctId: string
+  title: string
+  field: 'status' | 'enrollment' | 'lastUpdate'
+  before: string
+  after: string
+}
+
+/** Field changes against a prior snapshot. New studies are not called changes. */
+export function trialDeltas(previous: TrialRecord[], next: TrialRecord[]): TrialDelta[] {
+  const prior = new Map(previous.map((trial) => [trial.nctId, trial]))
+  const deltas: TrialDelta[] = []
+  for (const trial of next) {
+    const old = prior.get(trial.nctId)
+    if (!old) continue
+    if (old.status !== trial.status) {
+      deltas.push({ nctId: trial.nctId, title: trial.title, field: 'status', before: old.status, after: trial.status })
+    }
+    if (old.enrollment !== trial.enrollment) {
+      deltas.push({
+        nctId: trial.nctId,
+        title: trial.title,
+        field: 'enrollment',
+        before: old.enrollment == null ? 'not listed' : String(old.enrollment),
+        after: trial.enrollment == null ? 'not listed' : String(trial.enrollment),
+      })
+    }
+    if ((old.lastUpdate ?? '') !== (trial.lastUpdate ?? '')) {
+      deltas.push({
+        nctId: trial.nctId,
+        title: trial.title,
+        field: 'lastUpdate',
+        before: old.lastUpdate ?? 'not listed',
+        after: trial.lastUpdate ?? 'not listed',
+      })
+    }
+  }
+  return deltas
+}
+
+const SNAPSHOT_KEY = 'amp-pulse-snapshot-v1'
+
+export interface PulseSnapshot {
+  savedAt: string
+  query: string
+  trials: TrialRecord[]
+}
+
+export function readPulseSnapshot(query: string): PulseSnapshot | null {
+  if (typeof window === 'undefined') return null
+  try {
+    const raw = localStorage.getItem(SNAPSHOT_KEY)
+    if (!raw) return null
+    const parsed = JSON.parse(raw) as PulseSnapshot
+    if (!parsed || parsed.query !== query || !Array.isArray(parsed.trials)) return null
+    return parsed
+  } catch {
+    return null
+  }
+}
+
+export function writePulseSnapshot(snapshot: PulseSnapshot): void {
+  if (typeof window === 'undefined') return
+  try {
+    localStorage.setItem(SNAPSHOT_KEY, JSON.stringify(snapshot))
+  } catch {
+    /* private mode */
+  }
 }
 
 export function phaseDistribution(trials: TrialRecord[]): { phase: string; count: number }[] {

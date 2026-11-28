@@ -2,6 +2,7 @@
 //
 // Exposes a clean, public reference shape of each peptide.
 
+import { createHash } from 'node:crypto'
 import { createCatalogMatcher } from './catalog-query'
 import { PEPTIDES, getCategoryLabel, type Peptide } from './peptides'
 import {
@@ -35,7 +36,7 @@ export function apiHeaders(usageHeaders?: Record<string, string>): Record<string
     ...usageHeaders,
     'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-API-Key',
     'Access-Control-Expose-Headers':
-      'X-API-Tier, RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset, X-Quota-Limit, X-Quota-Remaining, Retry-After',
+      'ETag, X-API-Tier, RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset, X-Quota-Limit, X-Quota-Remaining, Retry-After',
     'Cache-Control': 'private, no-store',
   }
 }
@@ -190,6 +191,24 @@ export function isBrowserDocumentRequest(req: Request): boolean {
   // Fallback for clients that don't send Sec-Fetch-* (older browsers/crawlers).
   const accept = req.headers.get('accept') || ''
   return accept.includes('text/html') && !accept.includes('application/json')
+}
+
+let catalogTag: string | null = null
+
+/** Weak ETag for the in-memory catalog. Changes when slug, sequence, or mass changes. */
+export function catalogEtag(): string {
+  if (catalogTag) return catalogTag
+  const hash = createHash('sha1')
+  for (const peptide of PEPTIDES) {
+    hash.update(peptide.slug)
+    hash.update('\0')
+    hash.update(peptide.sequence ?? '')
+    hash.update('\0')
+    hash.update(String(peptide.molecularWeight ?? ''))
+    hash.update('\0')
+  }
+  catalogTag = `W/"${hash.digest('hex').slice(0, 20)}"`
+  return catalogTag
 }
 
 export function apiMeta() {

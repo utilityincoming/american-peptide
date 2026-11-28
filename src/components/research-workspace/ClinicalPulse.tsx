@@ -2,17 +2,24 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { RESEARCH_AREAS } from '@/lib/research-areas'
 import {
-  applyTrialFilters,
+  filterIndexed,
   filtersToSearchParams,
+  indexTrial,
   mergeTrials,
   phaseDistribution,
   rapidUpdates,
+  readPulseSnapshot,
   readSavedViews,
+  trialDeltas,
   whitespacePhases,
+  writePulseSnapshot,
   writeSavedView,
+  type TrialDelta,
 } from '@/lib/research-workspace/pulse'
 import type { PulseFilters, SavedPulseView, TrialRecord } from '@/lib/research-workspace/types'
+import MethodsPanel from './MethodsPanel'
 
 const PAGE = 40
 /** Stop after five pages so a broad query cannot walk the whole registry. */
@@ -35,6 +42,10 @@ export default function ClinicalPulse({
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading')
   const [error, setError] = useState('')
   const [views, setViews] = useState<SavedPulseView[]>([])
+  const [asOf, setAsOf] = useState<string | null>(null)
+  const [staleNote, setStaleNote] = useState<string | null>(null)
+  const [deltas, setDeltas] = useState<TrialDelta[]>([])
+  const [windowStart, setWindowStart] = useState(0)
   const [viewName, setViewName] = useState('')
 
   useEffect(() => {
@@ -65,6 +76,12 @@ export default function ClinicalPulse({
         if (!res.ok) throw new Error(json.error || 'ClinicalTrials.gov request failed')
         const next = (json.trials ?? []) as TrialRecord[]
         const token = typeof json.nextPageToken === 'string' ? json.nextPageToken : null
+        const prior = readPulseSnapshot(q)
+        setDeltas(prior ? trialDeltas(prior.trials, next) : [])
+        const stamp = new Date().toISOString()
+        writePulseSnapshot({ savedAt: stamp, query: q, trials: next })
+        setAsOf(stamp)
+        setStaleNote(null)
         cache.set(q, { trials: next, total: json.totalCount ?? next.length, nextPageToken: token })
         setTrials(next)
         setTotal(json.totalCount ?? next.length)
@@ -72,6 +89,16 @@ export default function ClinicalPulse({
         setState('ready')
       } catch (err) {
         if ((err as Error).name === 'AbortError') return
+        const prior = readPulseSnapshot(q)
+        if (prior) {
+          setTrials(prior.trials)
+          setTotal(prior.trials.length)
+          setAsOf(prior.savedAt)
+          setStaleNote(`Live registry unavailable. Showing the snapshot from ${prior.savedAt}.`)
+          setDeltas([])
+          setState('ready')
+          return
+        }
         setState('error')
         setError(err instanceof Error ? err.message : 'Could not load trials')
       }
@@ -82,13 +109,16 @@ export default function ClinicalPulse({
     }
   }, [filters.query])
 
-  const shown = useMemo(() => applyTrialFilters(trials, filters), [trials, filters])
+  useEffect(() => {
+    setWindowStart(0)
+  }, [filters.phase, filters.status, filters.condition, filters.sponsor, filters.from, filters.to, filters.query])
+
+  const indexed = useMemo(() => trials.map(indexTrial), [trials])
+  const shown = useMemo(() => filterIndexed(indexed, filters), [indexed, filters])
   const phases = useMemo(() => phaseDistribution(shown), [shown])
   const gaps = useMemo(() => whitespacePhases(trials, shown), [trials, shown])
   const recent = useMemo(() => rapidUpdates(shown, new Date().toISOString().slice(0, 10)), [shown])
   const flow = useMemo(() => indicationFlow(shown), [shown])
-  const phaseOptions = useMemo(() => phaseDistribution(trials).map((d) => d.phase), [trials])
-
   async function loadMore() {
     const q = filters.query.trim() || 'peptide therapeutics'
     if (!nextToken || loadingMore || trials.length >= MAX_LOADED) return
@@ -106,6 +136,7 @@ export default function ClinicalPulse({
       const capped = merged.length >= MAX_LOADED ? null : token
       const reported = typeof json.totalCount === 'number' ? json.totalCount : null
       const nextTotal = reported != null && reported >= total ? reported : total
+      writePulseSnapshot({ savedAt: new Date().toISOString(), query: q, trials: merged })
       cache.set(q, { trials: merged, total: nextTotal, nextPageToken: capped })
       setTrials(merged)
       setTotal(nextTotal)
@@ -135,19 +166,39 @@ export default function ClinicalPulse({
         <Field label="Phase" id="pulse-phase">
           <select id="pulse-phase" className={input} value={filters.phase} onChange={(e) => onChange({ ...filters, phase: e.target.value })}>
             <option value="">Any phase</option>
-            {phaseOptions.map((p) => (
-              <option key={p}>{p}</option>
+            <option value="early1">Early Phase 1</option>
+            <option value="1">Phase 1</option>
+            <option value="2">Phase 2</option>
+            <option value="3">Phase 3</option>
+            <option value="4">Phase 4</option>
+            <option value="na">Not applicable</option>
+          </select>
+        </Field>
+        <Field label="Status" id="pulse-status">
+          <select id="pulse-status" className={input} value={filters.status} onChange={(e) => onChange({ ...filters, status: e.target.value })}>
+            <option value="">Any status class</option>
+            <option value="recruiting">Recruiting</option>
+            <option value="active">Active, not recruiting</option>
+            <option value="completed">Completed</option>
+            <option value="stopped">Stopped</option>
+            <option value="other">Other</option>
+          </select>
+        </Field>
+        <Field label="Research area" id="pulse-cond">
+          <select id="pulse-cond" className={input} value={filters.condition} onChange={(e) => onChange({ ...filters, condition: e.target.value })}>
+            <option value="">Any mapped area</option>
+            {RESEARCH_AREAS.map((area) => (
+              <option key={area.slug} value={area.slug}>{area.label}</option>
             ))}
           </select>
         </Field>
-        <Field label="Status contains" id="pulse-status">
-          <input id="pulse-status" className={input} value={filters.status} placeholder="RECRUITING" onChange={(e) => onChange({ ...filters, status: e.target.value })} />
-        </Field>
-        <Field label="Condition or title" id="pulse-cond">
-          <input id="pulse-cond" className={input} value={filters.condition} onChange={(e) => onChange({ ...filters, condition: e.target.value })} />
-        </Field>
         <Field label="Sponsor" id="pulse-sponsor">
-          <input id="pulse-sponsor" className={input} value={filters.sponsor} onChange={(e) => onChange({ ...filters, sponsor: e.target.value })} />
+          <select id="pulse-sponsor" className={input} value={filters.sponsor} onChange={(e) => onChange({ ...filters, sponsor: e.target.value })}>
+            <option value="">Any sponsor in this load</option>
+            {[...new Set(trials.map((trial) => trial.sponsor).filter((name): name is string => Boolean(name)))].sort().map((name) => (
+              <option key={name} value={name}>{name}</option>
+            ))}
+          </select>
         </Field>
         <div className="grid grid-cols-2 gap-2">
           <Field label="Updated from" id="pulse-from">
@@ -205,6 +256,21 @@ export default function ClinicalPulse({
         )}
       </form>
 
+      {asOf && <p className="text-xs text-ink/50">Data as of {asOf}. Counts below are derived from the loaded studies, not a ranking.</p>}
+      {staleNote && <p className="rounded-xl border border-amber-500/40 bg-amber-500/10 p-3 text-sm" role="status">{staleNote}</p>}
+      {deltas.length > 0 && (
+        <section className="rounded-2xl border border-hairline p-4" aria-label="Changes since the last snapshot">
+          <h2 className="text-sm font-medium">Changes since the previous snapshot</h2>
+          <ul className="mt-2 space-y-1 text-sm text-ink/75">
+            {deltas.slice(0, 12).map((delta) => (
+              <li key={`${delta.nctId}-${delta.field}`}>
+                <a className="text-accent hover:underline" href={`https://clinicaltrials.gov/study/${delta.nctId}`}>{delta.nctId}</a>
+                {' '}{delta.field}: {delta.before} → {delta.after}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       {state === 'loading' && <p className="text-sm text-ink/55" role="status">Loading ClinicalTrials.gov…</p>}
       {state === 'error' && (
         <div className="rounded-xl border border-rose-400/40 bg-rose-400/10 p-4 text-sm" role="alert">
@@ -288,7 +354,7 @@ export default function ClinicalPulse({
                 </tr>
               </thead>
               <tbody>
-                {shown.map((t) => (
+                {shown.slice(windowStart, windowStart + 25).map((t) => (
                   <tr key={t.nctId} className="border-t border-hairline">
                     <td className="px-3 py-2">
                       <a className="font-medium text-accent hover:underline" href={`https://clinicaltrials.gov/study/${t.nctId}`}>
@@ -298,11 +364,20 @@ export default function ClinicalPulse({
                     </td>
                     <td className="px-3 py-2">{t.status.replaceAll('_', ' ')}</td>
                     <td className="px-3 py-2">{t.phases.join(', ') || '—'}</td>
-                    <td className="px-3 py-2">{t.lastUpdate ?? '—'}</td>
+                    <td className="px-3 py-2">{t.lastUpdate ?? 'Status date not in this registry record'}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+          <div className="flex gap-2 text-sm">
+            <button type="button" className="rounded-lg border border-hairline px-3 py-1.5" disabled={windowStart === 0} onClick={() => setWindowStart((n) => Math.max(0, n - 25))}>
+              Previous rows
+            </button>
+            <button type="button" className="rounded-lg border border-hairline px-3 py-1.5" disabled={windowStart + 25 >= shown.length} onClick={() => setWindowStart((n) => n + 25)}>
+              Next rows
+            </button>
+            <span className="self-center text-xs text-ink/45">Rows {shown.length === 0 ? 0 : windowStart + 1}–{Math.min(windowStart + 25, shown.length)} of {shown.length}</span>
           </div>
           {canLoadMore && (
             <button type="button" className="rounded-lg border border-hairline px-3 py-1.5 text-sm" onClick={loadMore} disabled={loadingMore}>
@@ -310,11 +385,19 @@ export default function ClinicalPulse({
             </button>
           )}
           {error && state === 'ready' && <p className="text-sm text-rose-300" role="alert">{error}</p>}
+          <MethodsPanel items={PULSE_METHODS} />
         </>
       )}
     </div>
   )
 }
+
+const PULSE_METHODS = [
+  { term: 'Source', text: 'ClinicalTrials.gov v2 studies API, through /api/trials. Each row links to the official study page. The status date is the registry last-update date when the record includes one.' },
+  { term: 'Filters', text: 'Phase and status are normalized classes. Indication is a research-area slug assigned when a listed condition matches that area’s matchers. Sponsor is an exact name from the loaded set.' },
+  { term: 'Deltas', text: 'Compared with the previous snapshot for the same query stored in this browser. Only status, enrollment, and last-update changes on a study that was already loaded are listed.' },
+  { term: 'Derived counts', text: 'Phase bars and the indication flow describe the loaded studies after filters. They are not a ranking and they are not a recommendation.' },
+]
 
 function indicationFlow(trials: TrialRecord[]): { condition: string; total: number; parts: { phase: string; count: number; color: string }[] }[] {
   const colors = ['#7EE0B5', '#7DD3FC', '#C4B5FD', '#F9A8D4', '#FDE68A']

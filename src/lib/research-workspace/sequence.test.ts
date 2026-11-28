@@ -1,19 +1,32 @@
 import { describe, expect, it } from 'vitest'
-import { alignSequences, chargeCurve, hydropathyWindow, mutationDeltas, rowsToCsv } from './sequence'
-import { applyTrialFilters, mergeTrials, phaseDistribution, rapidUpdates, whitespacePhases } from './pulse'
+import { alignSequences, chargeCurve, hydropathyWindow, mutationDeltas, residueTokens, rowsToCsv } from './sequence'
+import { applyTrialFilters, filterIndexed, indexTrial, mergeTrials, phaseDistribution, rapidUpdates, trialDeltas, whitespacePhases } from './pulse'
 import type { TrialRecord } from './types'
 
 describe('alignSequences', () => {
   it('marks substitutions and keeps equal residues', () => {
-    const cells = alignSequences('ACDE', 'ACFE')
+    const cells = alignSequences('ACDE'.split(''), 'ACFE'.split(''))
     expect(cells.map((c) => c.kind).join('')).toBe('matchmatchsubmatch')
     expect(cells[2]).toEqual({ a: 'D', b: 'F', kind: 'sub' })
   })
 
   it('inserts a gap when lengths differ', () => {
-    const cells = alignSequences('AAA', 'AAAA')
+    const cells = alignSequences(['A', 'A', 'A'], ['A', 'A', 'A', 'A'])
     expect(cells.filter((c) => c.kind === 'gap')).toHaveLength(1)
     expect(cells.filter((c) => c.a === 'A' && c.b === 'A')).toHaveLength(3)
+  })
+})
+
+describe('residueTokens', () => {
+  it('keeps an unknown name instead of dropping it', () => {
+    const tokens = residueTokens('Ac-Ala-Aib-Gly-NH2')
+    expect(tokens.map((t) => t.label)).toEqual(['A', 'Aib', 'G'])
+    expect(tokens[1].standard).toBe(false)
+    const cells = alignSequences(
+      tokens.map((t) => t.label),
+      ['A', 'A', 'G'],
+    )
+    expect(cells.some((c) => c.kind === 'nonstandard')).toBe(true)
   })
 })
 
@@ -80,6 +93,31 @@ describe('mergeTrials', () => {
       { ...TRIALS[1], nctId: 'NCT3', title: 'Third' },
     ])
     expect(merged.map((t) => t.nctId)).toEqual(['NCT1', 'NCT2', 'NCT3'])
+  })
+})
+
+describe('trial index', () => {
+  it('maps a condition onto a research-area slug and filters exactly', () => {
+    const indexed = TRIALS.map(indexTrial)
+    const weight = indexed.find((t) => t.nctId === 'NCT1')
+    expect(weight?.areaSlugs).toContain('weight-loss')
+    expect(weight?.statusClass).toBe('recruiting')
+    const shown = filterIndexed(indexed, {
+      query: '',
+      phase: '2',
+      status: 'recruiting',
+      condition: 'weight-loss',
+      sponsor: 'Acme',
+      from: '',
+      to: '',
+    })
+    expect(shown.map((t) => t.nctId)).toEqual(['NCT1'])
+  })
+
+  it('reports only fields that changed', () => {
+    const next = [{ ...TRIALS[0], status: 'COMPLETED', enrollment: 12 }]
+    const deltas = trialDeltas(TRIALS, next)
+    expect(deltas.map((d) => d.field).sort()).toEqual(['enrollment', 'status'])
   })
 })
 

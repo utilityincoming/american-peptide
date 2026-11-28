@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { GET, OPTIONS } from '@/app/api/v2/catalog/route'
 import { GET as getLegacyCatalog } from '@/app/api/catalog/route'
 import { enforceApiAccess } from './api-auth'
-import { filterPeptides } from './catalog-api'
+import { catalogEtag, filterPeptides } from './catalog-api'
 
 vi.mock('./api-auth', () => ({
   enforceApiAccess: vi.fn().mockResolvedValue({
@@ -71,6 +71,15 @@ describe('catalog HTTP contracts', () => {
     expect(response.headers.get('retry-after')).toBe('30')
     expect(response.headers.get('cache-control')).toBe('private, no-store')
     expect(OPTIONS().headers.get('access-control-allow-headers')).toContain('Authorization')
+  })
+
+  it('returns 304 when the catalog ETag matches', async () => {
+    const etag = catalogEtag()
+    const response = await GET(new NextRequest('https://americanpeptide.com/api/v2/catalog?limit=1', {
+      headers: { 'if-none-match': etag },
+    }))
+    expect(response.status).toBe(304)
+    expect(response.headers.get('etag')).toBe(etag)
   })
 
   it('keeps the v1 response shape and query handling', async () => {

@@ -2,7 +2,7 @@
 // Hydropathy is Kyte–Doolittle (amino-acids.ts). Charge uses chargeAtPH.
 
 import { AA_BY_CODE, AMINO_ACIDS, gravy, peptideMass } from '@/lib/amino-acids'
-import { chargeAtPH, type ChargeMods } from '@/lib/peptide-properties'
+import { chargeAtPH, STANDARD_AA, type ChargeMods } from '@/lib/peptide-properties'
 import type { DiffCell, MutationDelta } from './types'
 
 export const ATTRIBUTION =
@@ -57,7 +57,41 @@ export function chargeCurve(
  * Global alignment (Needleman–Wunsch, match +1 / mismatch −1 / gap −1).
  * Catalog sequences are short, so the O(n·m) table is fine on the client.
  */
-export function alignSequences(a: string, b: string): DiffCell[] {
+const NAMED: Record<string, string> = {
+  ala: 'A', arg: 'R', asn: 'N', asp: 'D', cys: 'C', glu: 'E', gln: 'Q', gly: 'G',
+  his: 'H', ile: 'I', leu: 'L', lys: 'K', met: 'M', phe: 'F', pro: 'P', ser: 'S',
+  thr: 'T', trp: 'W', tyr: 'Y', val: 'V',
+}
+
+/**
+ * Residue tokens in catalog order. Standard residues keep a one-letter label.
+ * Anything else (D-amino acids written out, linkers, unknown names) stays as
+ * written and is marked non-standard so the diff does not pretend it is a
+ * substitution of a coded amino acid.
+ */
+export function residueTokens(raw: string): { label: string; standard: boolean }[] {
+  const head = raw.split(' (')[0]?.trim().replace(/-NH2$/i, '').replace(/-NHEt$/i, '') ?? ''
+  if (!head) return []
+  const parts = head.split('-').map((part) => part.trim()).filter(Boolean)
+  const named = parts.some((part) => /[a-z]/.test(part) && part.length > 1)
+  if (named) {
+    const tokens: { label: string; standard: boolean }[] = []
+    for (const part of parts) {
+      const key = part.replace(/^D-/i, '').replace(/^L-/i, '').toLowerCase().replace(/[^a-z0-9]/g, '')
+      if (key === 'ac' || key === 'nh2' || key === 'nhet') continue
+      const code = NAMED[key]
+      tokens.push(code ? { label: code, standard: true } : { label: part, standard: false })
+    }
+    return tokens
+  }
+  const runs = head.match(/[A-Za-z]+/g) ?? []
+  return runs.join('').split('').map((letter) => {
+    const label = letter.toUpperCase()
+    return { label, standard: STANDARD_AA.includes(label) }
+  })
+}
+
+export function alignSequences(a: string[], b: string[]): DiffCell[] {
   const n = a.length
   const m = b.length
   const score = Array.from({ length: n + 1 }, () => new Array<number>(m + 1).fill(0))
@@ -78,10 +112,13 @@ export function alignSequences(a: string, b: string): DiffCell[] {
     if (i > 0 && j > 0) {
       const diag = score[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 1 : -1)
       if (score[i][j] === diag) {
+        const left = a[i - 1]
+        const right = b[j - 1]
+        const standard = left.length === 1 && right.length === 1 && STANDARD_AA.includes(left) && STANDARD_AA.includes(right)
         cells.push({
-          a: a[i - 1],
-          b: b[j - 1],
-          kind: a[i - 1] === b[j - 1] ? 'match' : 'sub',
+          a: left,
+          b: right,
+          kind: left === right ? 'match' : standard ? 'sub' : 'nonstandard',
         })
         i--
         j--

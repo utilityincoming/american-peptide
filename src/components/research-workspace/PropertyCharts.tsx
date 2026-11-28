@@ -45,7 +45,7 @@ export function HydropathyChart({ chains }: { chains: Chain[] }) {
         <LineChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
           <CartesianGrid stroke="rgba(255,255,255,0.06)" />
           <XAxis dataKey="pos" stroke="rgba(255,255,255,0.35)" fontSize={11} />
-          <YAxis stroke="rgba(255,255,255,0.35)" fontSize={11} width={36} />
+          <YAxis stroke="rgba(255,255,255,0.35)" fontSize={11} width={36} domain={sharedDomain(data, usable.length)} />
           <Tooltip contentStyle={tooltipStyle} />
           <Legend />
           {usable.map((c, i) => (
@@ -83,7 +83,7 @@ export function ChargeChart({ chains }: { chains: Chain[] }) {
         <LineChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
           <CartesianGrid stroke="rgba(255,255,255,0.06)" />
           <XAxis dataKey="ph" stroke="rgba(255,255,255,0.35)" fontSize={11} />
-          <YAxis stroke="rgba(255,255,255,0.35)" fontSize={11} width={36} />
+          <YAxis stroke="rgba(255,255,255,0.35)" fontSize={11} width={36} domain={sharedDomain(data, usable.length)} />
           <Tooltip contentStyle={tooltipStyle} />
           <Legend />
           {usable.map((c, i) => (
@@ -108,8 +108,8 @@ export function PropertyBars({
 }: {
   rows: { name: string; gravy: number | null; charge: number | null; length: number | null }[]
 }) {
-  const data = rows.map((r) => ({
-    name: r.name.length > 16 ? `${r.name.slice(0, 14)}…` : r.name,
+  const data = rows.map((r, index) => ({
+    name: r.name.length > 22 ? `${r.name.slice(0, 18)}… (${index + 1})` : r.name,
     GRAVY: r.gravy,
     'Charge @ 7.4': r.charge,
     Length: r.length,
@@ -159,6 +159,21 @@ function EmptyChart({ label }: { label: string }) {
       {label}
     </div>
   )
+}
+
+function sharedDomain(data: Record<string, number | null>[], series: number): [number, number] {
+  const values: number[] = []
+  for (const row of data) {
+    for (let i = 0; i < series; i++) {
+      const value = row[`s${i}`]
+      if (typeof value === 'number') values.push(value)
+    }
+  }
+  if (values.length === 0) return [0, 1]
+  const min = Math.min(...values)
+  const max = Math.max(...values)
+  const pad = Math.max(0.2, (max - min) * 0.08)
+  return [min - pad, max + pad]
 }
 
 const tooltipStyle = {

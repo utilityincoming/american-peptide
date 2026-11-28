@@ -7,6 +7,7 @@ import {
 } from '@/lib/peptide-properties'
 import { gravy, peptideMass } from '@/lib/amino-acids'
 import { CATEGORIES, type Peptide } from '@/lib/peptides'
+import { getPubchemVerification } from '@/lib/verification'
 import type { CompareRow } from './types'
 
 const CATEGORY_LABEL = new Map(CATEGORIES.map((c) => [c.id, c.label]))
@@ -53,6 +54,7 @@ export function toCompareRow(peptide: Peptide): CompareRow {
     pubchemCid: peptide.pubchemCid ?? null,
     uniprotId: peptide.uniprotId ?? null,
     researchAreas: peptide.researchAreas ?? [],
+    verifiedOn: getPubchemVerification(peptide.slug)?.checkedAt ?? null,
   }
 }
 
