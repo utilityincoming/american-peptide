@@ -370,7 +370,6 @@ export function webApplicationJsonLd(opts: { name: string; description: string; 
     applicationCategory: 'EducationalApplication',
     operatingSystem: 'Web browser',
     isAccessibleForFree: true,
-    license: LICENSE_URL,
     provider: { '@id': ORG_ID },
   }
 }

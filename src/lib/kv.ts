@@ -12,7 +12,15 @@
 
 const UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL
 const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN
-const upstashEnabled = Boolean(UPSTASH_URL && UPSTASH_TOKEN)
+export const upstashEnabled = Boolean(UPSTASH_URL && UPSTASH_TOKEN)
+
+const runtime = globalThis as typeof globalThis & { __ampWarnedMissingRedis?: boolean }
+
+export function warnIfRedisMissing(): void {
+  if (upstashEnabled || process.env.NODE_ENV !== 'production' || runtime.__ampWarnedMissingRedis) return
+  runtime.__ampWarnedMissingRedis = true
+  console.warn('[redis] Set UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN in production. Limiting, metering, keys, and lookup caching are currently per instance.')
+}
 
 export interface Kv {
   readonly persistent: boolean
@@ -49,11 +57,12 @@ async function upstash(command: (string | number)[]): Promise<unknown> {
     signal: AbortSignal.timeout(2500),
   })
   if (!res.ok) throw new Error(`upstash ${res.status}`)
-  const data = (await res.json()) as { result: unknown }
+  const data = (await res.json()) as { result?: unknown; error?: string }
+  if (data.error || !('result' in data)) throw new Error('Upstash command failed')
   return data.result
 }
 
-async function upstashPipeline(commands: (string | number)[][]): Promise<unknown[]> {
+export async function upstashPipeline(commands: (string | number)[][]): Promise<unknown[]> {
   const res = await fetch(`${UPSTASH_URL}/pipeline`, {
     method: 'POST',
     headers: {
@@ -64,7 +73,10 @@ async function upstashPipeline(commands: (string | number)[][]): Promise<unknown
     signal: AbortSignal.timeout(2500),
   })
   if (!res.ok) throw new Error(`upstash ${res.status}`)
-  const data = (await res.json()) as { result: unknown }[]
+  const data = (await res.json()) as { result?: unknown; error?: string }[]
+  if (!Array.isArray(data) || data.length !== commands.length || data.some((d) => d.error || !('result' in d))) {
+    throw new Error('Upstash pipeline failed')
+  }
   return data.map((d) => d.result)
 }
 
@@ -154,6 +166,7 @@ function live(entry: { exp: number | null } | undefined): boolean {
 const memoryKv: Kv = {
   persistent: false,
   async get(key) {
+    warnIfRedisMissing()
     const e = strings.get(key)
     if (!live(e)) {
       strings.delete(key)
@@ -162,9 +175,11 @@ const memoryKv: Kv = {
     return e!.value
   },
   async set(key, value, exSec) {
+    warnIfRedisMissing()
     strings.set(key, { value, exp: exSec ? Date.now() + exSec * 1000 : null })
   },
   async incrWithExpiry(key, exSec) {
+    warnIfRedisMissing()
     const e = strings.get(key)
     const current = live(e) ? Number(e!.value) || 0 : 0
     const next = current + 1
@@ -173,6 +188,7 @@ const memoryKv: Kv = {
     return next
   },
   async incr(key) {
+    warnIfRedisMissing()
     const e = strings.get(key)
     const current = live(e) ? Number(e!.value) || 0 : 0
     const next = current + 1
@@ -180,6 +196,7 @@ const memoryKv: Kv = {
     return next
   },
   async incrBy(key, by, exSec) {
+    warnIfRedisMissing()
     const e = strings.get(key)
     const next = (live(e) ? Number(e!.value) || 0 : 0) + by
     const exp = live(e) ? e!.exp : exSec == null ? null : Date.now() + exSec * 1000
@@ -187,6 +204,7 @@ const memoryKv: Kv = {
     return next
   },
   async hincrby(key, field, by) {
+    warnIfRedisMissing()
     const h = hashes.get(key) ?? new Map<string, string>()
     const next = (Number(h.get(field)) || 0) + by
     h.set(field, String(next))
@@ -194,24 +212,29 @@ const memoryKv: Kv = {
     return next
   },
   async hset(key, obj) {
+    warnIfRedisMissing()
     const h = hashes.get(key) ?? new Map<string, string>()
     for (const [k, v] of Object.entries(obj)) h.set(k, v)
     hashes.set(key, h)
   },
   async hgetall(key) {
+    warnIfRedisMissing()
     const h = hashes.get(key)
     if (!h || h.size === 0) return null
     return Object.fromEntries(h)
   },
   async sadd(key, member) {
+    warnIfRedisMissing()
     const s = sets.get(key) ?? new Set<string>()
     s.add(member)
     sets.set(key, s)
   },
   async smembers(key) {
+    warnIfRedisMissing()
     return [...(sets.get(key) ?? [])]
   },
   async del(key) {
+    warnIfRedisMissing()
     strings.delete(key)
     hashes.delete(key)
     sets.delete(key)
@@ -219,3 +242,59 @@ const memoryKv: Kv = {
 }
 
 export const kv: Kv = upstashEnabled ? upstashKv : memoryKv
+
+// A separate bounded store keeps expendable response data away from keys and counters.
+const responses = new Map<string, { value: string; expiresAt: number }>()
+const pendingResponses = new Map<string, Promise<unknown>>()
+const MAX_CACHED_RESPONSES = 256
+const MAX_RESPONSE_CHARS = 256 * 1024
+
+export async function cachedLookup(
+  key: string,
+  ttlSeconds: number,
+  load: () => Promise<unknown>,
+): Promise<unknown> {
+  warnIfRedisMissing()
+  const cacheKey = `agent-lookup:v1:${key}`
+  const pending = pendingResponses.get(cacheKey)
+  if (pending) return pending
+
+  const task = (async () => {
+    const local = responses.get(cacheKey)
+    if (local && local.expiresAt > Date.now()) return JSON.parse(local.value) as unknown
+    responses.delete(cacheKey)
+
+    if (upstashEnabled) {
+      try {
+        const hit = await kv.get(cacheKey)
+        if (hit !== null) return JSON.parse(hit) as unknown
+      } catch {
+        // A cache outage can still serve a fresh upstream lookup.
+      }
+    }
+
+    const result = await load()
+    const value = JSON.stringify(result)
+    if (value === undefined || value.length > MAX_RESPONSE_CHARS) return result
+
+    if (responses.size >= MAX_CACHED_RESPONSES) {
+      const oldest = responses.keys().next()
+      if (!oldest.done) responses.delete(oldest.value)
+    }
+    responses.set(cacheKey, { value, expiresAt: Date.now() + ttlSeconds * 1000 })
+    if (upstashEnabled) {
+      try {
+        await kv.set(cacheKey, value, ttlSeconds)
+      } catch {
+        // The process-local copy is still available.
+      }
+    }
+    return result
+  })()
+  pendingResponses.set(cacheKey, task)
+  try {
+    return await task
+  } finally {
+    pendingResponses.delete(cacheKey)
+  }
+}

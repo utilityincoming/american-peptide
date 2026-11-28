@@ -26,7 +26,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // ── Muscle preservation / body-composition cluster ────
     { path: '/muscle-preservation', priority: 0.9 },
     // ── Comparisons index ─────────────────────────────────
-    { path: '/compare', priority: 0.8 },
     // ── Longevity cluster ─────────────────────────────────
     { path: '/longevity-peptides', priority: 0.8 },
     // ── Cognitive cluster ─────────────────────────────────
@@ -50,6 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/compounds', priority: 0.8 },
     // /compounds/builder is intentionally omitted — it's a noindex learning game.
     { path: '/trials', priority: 0.8 },
+    { path: '/tools', priority: 0.7 },
     { path: '/research-workspace', priority: 0.7 },
     { path: '/tools/reconstitution-calculator', priority: 0.8 },
     { path: '/tools/coa-decoder', priority: 0.8 },

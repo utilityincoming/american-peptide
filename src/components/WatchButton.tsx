@@ -30,11 +30,11 @@ export default function WatchButton({ slug }: { slug: string }) {
         style={{ opacity: ready ? 1 : 0.6 }}
       >
         {watched ? <Check className="h-4 w-4" /> : <Star className="h-4 w-4" />}
-        {watched ? 'In your workspace' : 'Add to workspace'}
+        {watched ? 'In Saved Workspace' : 'Add to Saved Workspace'}
       </button>
       {watched && ready && (
         <Link href="/workspace" className="text-xs text-ink/55 underline-offset-2 hover:text-accent hover:underline">
-          View workspace →
+          View Saved Workspace →
         </Link>
       )}
     </div>

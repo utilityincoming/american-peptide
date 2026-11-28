@@ -1,5 +1,7 @@
 'use client'
 
+import { COMPARE, DESIGN_LAB, PEPTIDE_FORGE, RESEARCH_WORKSPACE } from '@/lib/page-meta'
+
 import {
   useCallback,
   useEffect,
@@ -34,6 +36,9 @@ interface CommandItem {
 }
 
 const PAGES: CommandItem[] = [
+  { id: 'page-compare', kind: 'page', label: COMPARE.label, subtitle: COMPARE.description, href: COMPARE.href, keywords: 'compare head to head comparison guides' },
+  { id: 'page-tools', kind: 'page', label: 'Tools', href: '/tools', keywords: 'tools directory calculators lab' },
+  { id: 'page-calculator-beta', kind: 'page', label: 'Peptide Calculator (Beta)', href: '/tools/calculator-beta', keywords: 'calculator beta experimental conversions' },
   {
     id: 'page-home',
     kind: 'page',
@@ -76,7 +81,7 @@ const PAGES: CommandItem[] = [
   {
     id: 'page-blend-calculator',
     kind: 'page',
-    label: 'Blend Calculator (Beta)',
+    label: 'Blend Calculator',
     subtitle: 'Combine peptides into one vial — blend math',
     href: '/tools/blend-calculator',
     keywords: 'blend calculator combine mix multiple peptides one vial doses draw volume beta',
@@ -84,17 +89,17 @@ const PAGES: CommandItem[] = [
   {
     id: 'page-design-lab',
     kind: 'page',
-    label: 'Design Lab (Beta)',
-    subtitle: 'Sequence properties: MW, charge, pI, GRAVY, ε280',
-    href: '/tools/design-lab',
+    label: DESIGN_LAB.label,
+    subtitle: DESIGN_LAB.description,
+    href: DESIGN_LAB.href,
     keywords: 'design lab sequence properties molecular weight net charge isoelectric point pi gravy hydropathy extinction coefficient builder beta',
   },
   {
     id: 'page-research-workspace',
     kind: 'page',
-    label: 'Research Workspace',
-    subtitle: 'Compare peptides, trial pulse, sequence explorer',
-    href: '/research-workspace',
+    label: RESEARCH_WORKSPACE.label,
+    subtitle: RESEARCH_WORKSPACE.description,
+    href: RESEARCH_WORKSPACE.href,
     keywords: 'research workspace compare peptides clinical trials hydropathy gravy sequence forge pulse',
   },
   {
@@ -140,9 +145,9 @@ const PAGES: CommandItem[] = [
   {
     id: 'page-builder',
     kind: 'page',
-    label: 'PeptideForge',
-    subtitle: 'Build a peptide & earn XP',
-    href: '/compounds/builder',
+    label: PEPTIDE_FORGE.label,
+    subtitle: PEPTIDE_FORGE.description,
+    href: PEPTIDE_FORGE.href,
     keywords: 'peptideforge builder build amino acid sequence game xp challenge',
   },
   {
@@ -172,7 +177,7 @@ const PAGES: CommandItem[] = [
   {
     id: 'page-tracker',
     kind: 'page',
-    label: 'Protocol Tracker (Beta)',
+    label: 'Protocol Tracker',
     subtitle: 'Private local-first log, protocols & vial stock',
     href: '/tools/tracker',
     keywords: 'tracker protocol log logbook plan stock vial dose cost per dose private local offline bench record beta',
@@ -180,7 +185,7 @@ const PAGES: CommandItem[] = [
   {
     id: 'page-workspace',
     kind: 'page',
-    label: 'Workspace',
+    label: 'Saved Workspace',
     subtitle: 'Your watchlist, latest research & saved designs',
     href: '/workspace',
     keywords: 'workspace watchlist saved designs my peptides tracking latest research personal',

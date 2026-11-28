@@ -1,3 +1,4 @@
+import { COMPARE, DESIGN_LAB, PEPTIDE_FORGE, RESEARCH_WORKSPACE } from '@/lib/page-meta'
 import Link from 'next/link'
 import { IS_APP_BUILD } from '@/lib/platform'
 import { BrandMark } from './BrandMark'
@@ -13,11 +14,14 @@ const LINKS = [
   ...(IS_APP_BUILD ? [] : [{ href: '/us-peptides', label: 'Buy Peptides' }]),
   { href: '/catalog', label: 'Catalog' },
   { href: '/compounds', label: 'Compound Search' },
-  { href: '/tools/calculator-beta', label: 'Peptide Calculator Beta' },
+  { href: '/tools', label: 'Tools' },
+  COMPARE,
+  { href: '/tools/reconstitution-calculator', label: 'Reconstitution Calculator' },
   { href: '/tools/coa-decoder', label: 'COA Decoder' },
   { href: '/tools/lab', label: 'Lab Tools' },
-  { href: '/tools/design-lab', label: 'Design Lab' },
-  { href: '/research-workspace', label: 'Research Workspace' },
+  DESIGN_LAB,
+  PEPTIDE_FORGE,
+  RESEARCH_WORKSPACE,
   { href: '/developers', label: 'Developers / API' },
 ]
 

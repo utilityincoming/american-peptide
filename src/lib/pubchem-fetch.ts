@@ -96,27 +96,25 @@ function backoffMs(res: Response | null, attempt: number): number {
  */
 export async function pubchemFetch(
   url: string,
-  { timeoutMs = 8000 }: { timeoutMs?: number } = {},
+  { timeoutMs = 8000, signal }: { timeoutMs?: number; signal?: AbortSignal } = {},
 ): Promise<Response | null> {
   // Already established that PubChem isn't answering us — don't spend a slot,
   // a retry, or a backoff sleep proving it again.
-  if (tripped) return null
+  if (tripped || signal?.aborted) return null
 
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     await reserveSlot()
 
-    const ctrl = new AbortController()
-    const timer = setTimeout(() => ctrl.abort(), timeoutMs)
+    if (signal?.aborted) return null
+    const timeout = AbortSignal.timeout(timeoutMs)
     let res: Response | null = null
     try {
       res = await fetch(url, {
-        signal: ctrl.signal,
+        signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
         headers: { Accept: 'application/json', 'User-Agent': USER_AGENT },
       })
     } catch {
       res = null // network error or timeout — retried like a 5xx
-    } finally {
-      clearTimeout(timer)
     }
 
     if (res?.ok) {
@@ -131,6 +129,8 @@ export async function pubchemFetch(
       return res
     }
 
+    void res?.body?.cancel().catch(() => {})
+    if (signal?.aborted) return null
     if (attempt < MAX_RETRIES) await sleep(backoffMs(res, attempt))
   }
 

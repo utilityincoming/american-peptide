@@ -78,6 +78,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/compare',
+        destination: '/catalog/compare#comparison-guides',
+        permanent: true,
+      },
+      {
         source: '/semaglutide-vs-tirzepatide',
         destination: '/compare/semaglutide-vs-tirzepatide',
         permanent: true,

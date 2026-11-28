@@ -50,3 +50,27 @@ function trimDescription(text: string): string {
   const combined = `${base}${suffix}`
   return combined.length <= 165 ? combined : combined.slice(0, 160)
 }
+
+export const COMPARE = {
+  href: '/catalog/compare',
+  label: 'Compare Catalog Peptides',
+  description: 'Compare catalog records side by side and read guides on peptide mechanisms, trial evidence, and key differences.',
+}
+
+export const PEPTIDE_FORGE = {
+  href: '/compounds/builder',
+  label: 'PeptideForge',
+  description: 'Build a peptide one amino acid at a time and earn XP by completing chemistry challenges.',
+}
+
+export const DESIGN_LAB = {
+  href: '/tools/design-lab',
+  label: 'Design Lab',
+  description: 'Paste or load a peptide sequence to calculate mass, charge at a chosen pH, and other sequence properties.',
+}
+
+export const RESEARCH_WORKSPACE = {
+  href: '/research-workspace',
+  label: 'Research Workspace',
+  description: 'Align catalog sequences, export comparison tables, monitor trial updates, and explore single-residue changes.',
+}

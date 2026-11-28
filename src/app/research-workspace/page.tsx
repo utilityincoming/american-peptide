@@ -1,19 +1,16 @@
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import ResearchWorkspace from '@/components/research-workspace/ResearchWorkspace'
-
-const SITE = 'https://americanpeptide.com'
+import { RESEARCH_WORKSPACE } from '@/lib/page-meta'
 
 export const metadata: Metadata = {
-  title: 'Research Workspace — compare, trials, sequence lab',
-  description:
-    'Compare catalog peptides, scan ClinicalTrials.gov peptide studies, and calculate sequence properties. Research estimates only — not medical advice. Catalog data CC BY 4.0, AmericanPeptide.com.',
-  alternates: { canonical: `${SITE}/research-workspace` },
+  title: RESEARCH_WORKSPACE.label,
+  description: RESEARCH_WORKSPACE.description,
+  alternates: { canonical: RESEARCH_WORKSPACE.href },
   openGraph: {
-    title: 'Research Workspace — AmericanPeptide.com',
-    description:
-      'Side-by-side peptide comparison, a clinical-trial pulse, and a live sequence property explorer.',
-    url: `${SITE}/research-workspace`,
+    title: RESEARCH_WORKSPACE.label,
+    description: RESEARCH_WORKSPACE.description,
+    url: RESEARCH_WORKSPACE.href,
     type: 'website',
   },
 }

@@ -28,13 +28,15 @@ Catalog copy is research-framed and licensed CC BY 4.0.
 | Area | Open |
 |---|---|
 | Catalog | `/catalog`, `/catalog/[slug]`, `/research-areas`, `/glossary`, `/synthesis`, `/methodology` |
-| Editorial comparisons | `/compare`, `/compare/[pair]` |
-| Research Workspace | `/research-workspace` — live compare of 2–4 peptides, ClinicalPulse, PeptideForge |
-| Bench tools | `/tools/reconstitution-calculator`, `/tools/coa-decoder`, `/tools/design-lab`, `/tools/lab` |
+| Catalog comparisons and guides | `/catalog/compare`, `/compare/[pair]` |
+| Research Workspace | `/research-workspace` — sequence alignment and exports, trial monitoring, residue substitutions |
+| Tools directory | `/tools` |
 | Peptide Agent | `/research`, `/research/pass` |
 | Developers | `/developers`, `GET /api/v2/catalog`, `POST /api/mcp` |
 
-PeptideForge, the residue-by-residue builder, is `/compounds/builder`. Design Lab at `/tools/design-lab` is the sequence property bench. They are different pages. `/catalog/compare` remains as an older side-by-side view; new editorial pairs live under `/compare`.
+Open **Tools** from the header for the tools directory, or **Catalog** for compound search, categories, comparisons, and Saved Workspace. **PeptideForge** (`/compounds/builder`) is the amino-acid builder with challenges. **Design Lab** (`/tools/design-lab`) calculates properties from pasted or catalog sequences. The Research Workspace retains its shared compare, trial, and substitution views.
+
+**Compare Catalog Peptides** (`/catalog/compare`) now includes the Comparison Guides index. The former `/compare` index redirects there. Individual guides keep their `/compare/[pair]` URLs.
 
 ## What it is
 
@@ -52,6 +54,8 @@ The agent (`src/lib/agent-tools.ts`, served at `/api/chat`) calls free, key-less
 | `search_uniprot` | [UniProt](https://www.uniprot.org/) — protein and sequence data |
 | `search_clinical_trials` | [ClinicalTrials.gov v2](https://clinicaltrials.gov/) — trial status and endpoints |
 | `search_pubmed` | [PubMed E-utilities](https://www.ncbi.nlm.nih.gov/pmc/tools/developers/) — literature |
+
+Successful lookup responses are cached for one hour for ClinicalTrials.gov, six hours for PubMed, and 24 hours for PubChem and UniProt. Upstash shares the cache across instances. A bounded local cache covers development and Redis outages. Upstream calls have timeouts and retry transient failures.
 
 Provider order and failover live in `src/app/api/chat`. Claude's model chain is in `src/lib/models.ts`. `AGENT_MODEL` overrides the Anthropic primary. `/api/analyze-peptide` and `/api/jobs/fact-qa` stay on Claude.
 
@@ -91,22 +95,27 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-Browsing, the catalog, and the bench tools run with no keys. The Peptide Agent needs the provider keys named in [`.env.example`](.env.example) (Venice, xAI, and Anthropic). Redis, Stripe, and GA are optional and degrade in local dev.
+Browsing, the catalog, and the bench tools run with no keys. The Peptide Agent requires at least one provider key. Redis, Stripe, and GA can be left blank for local browsing.
 
 ## Environment variables
 
-Full notes are in [`.env.example`](.env.example).
+Copy [`.env.example`](.env.example) to `.env.local` for Next.js. Standalone scripts read exported environment variables. The example lists all overrides and defaults.
 
-| Variable | Required | Purpose |
-|---|---|---|
-| `VENICE_API_KEY`, `XAI_API_KEY`, Anthropic key | For the agent | `/api/chat` provider ladder. Structured routes use the Anthropic key |
-| `AGENT_PASS_PRICE_CENTS` | Optional | Research Pass price in cents. Code default is `1500` ($15). The example file shows another value |
-| `UPSTASH_REDIS_REST_URL` / `_TOKEN` | Prod-recommended | Durable rate limiting, API keys, and usage |
-| `ADMIN_SECRET` | Prod (admin) | Protects `GET /api/admin/usage`. Falls back to `CRON_SECRET` |
-| `CRON_SECRET` | Prod (jobs) | Authorizes scheduled jobs such as `/api/jobs/fact-qa` |
-| `NEXT_PUBLIC_GA_ID` | Optional | GA4 measurement ID (production only) |
-| `AGENT_MODEL` / `AGENT_EFFORT` / `AGENT_DEBUG` | Optional | Anthropic model, reasoning effort, debug logging |
-| `NEXT_PUBLIC_PLATFORM`, `ANDROID_PACKAGE_NAME`, `ANDROID_SHA` | Optional | Android TWA. `NEXT_PUBLIC_PLATFORM=android` drops affiliate links |
+| Variables | Use |
+|---|---|
+| `VENICE_API_KEY`, `XAI_API_KEY`, `ANTHROPIC_API_KEY` | Chat tries Venice, then xAI Grok, then Anthropic. It skips unconfigured providers and falls back to published references if configured providers fail. Anthropic also powers structured analysis, optional LLM fact QA, and the eval judge. |
+| `VENICE_BASE_URL`, `VENICE_MODEL`, `VENICE_TOOLS`, `VENICE_DISABLE_THINKING` | Optional Venice settings. Default model is `qwen-3-6-plus`, with grounding tools enabled. |
+| `GROK_BASE_URL`, `GROK_MODELS`, `GROK_TOOLS` | Optional xAI settings. Defaults try `grok-4.3` then `grok-4.7`, with grounding tools enabled. |
+| `AGENT_MODEL`, `AGENT_EFFORT`, `AGENT_DEBUG` | Anthropic defaults to `claude-opus-4-8` then `claude-sonnet-4-6`. Chat effort defaults to `medium`. Debug logging is off. |
+| `AGENT_FREE_DAILY`, `AGENT_IP_DAILY_MAX`, `AGENT_DAILY_CEILING`, `AGENT_QUOTA`, `AGENT_BYPASS_KEY` | Optional quota and eval settings. Defaults are 5 requests per visitor, 3× the visitor allowance per IP, and 1,200 free model runs across both routes per UTC day. The bypass key falls back to `ADMIN_SECRET`. |
+| `STRIPE_SECRET_KEY`, `STRIPE_API_BASE`, `AGENT_PASS_PRICE_CENTS`, `AGENT_PASS_DAYS`, `AGENT_PASS_DAILY_MAX` | Stripe key enables paid checkout. Defaults are 1,500 cents ($15), 30 days, and 200 runs per pass per UTC day. The Stripe base URL defaults to `https://api.stripe.com`. |
+| `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` | Set both for production-wide limits, quotas, metering, API keys, and lookup caching. Local fallback is per instance. Production logs a warning if either is missing. |
+| `ADMIN_SECRET`, `CRON_SECRET` | Required for the respective production admin and scheduled job endpoints. Admin endpoints can use `CRON_SECRET` when `ADMIN_SECRET` is unset. |
+| `NEXT_PUBLIC_PLATFORM`, `NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_REDIRECT_ORIGIN`, `NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_PRIVACY_EMAIL` | Optional build-time settings for the Android TWA, GA4, affiliate redirect origin, and public contact details. Set `NEXT_PUBLIC_PLATFORM=android` for the affiliate-free Play build. |
+| `ANDROID_PACKAGE_NAME`, `ANDROID_SHA256_FINGERPRINTS` | Digital Asset Links for the TWA. The default package is `com.americanpeptide.calculator`. Supply comma-separated signing certificate fingerprints to verify app links. |
+| `REFERRAL_POSTBACK_SECRET_<VENDOR_ID>` | Required only for a partner's signed conversion postbacks. |
+| `ORG_DIR`, `GSC_SITE_URL`, `GSC_SA_KEY_FILE`, `CATALOG_SMOKE_ORIGIN`, `PLAYWRIGHT_CHROMIUM_EXECUTABLE`, `CATALOG_REPORT_COMPLETENESS` | CLI and test settings. The drift check defaults to the sibling `american-peptide-org` checkout. Search Console reporting requires a service-account file and a property URL. |
+| `NODE_ENV`, `VITEST`, `GITHUB_STEP_SUMMARY`, `PORT` | Supplied by the framework, test runner, CI, or screenshot script. |
 
 ## Scripts
 
@@ -129,8 +138,8 @@ Full notes are in [`.env.example`](.env.example).
 src/
 ├── app/
 │   ├── catalog/                 # Catalog, categories, [slug] monographs
-│   ├── compare/                 # Editorial head-to-head pairs
-│   ├── research-workspace/      # Compare, ClinicalPulse, PeptideForge
+│   ├── compare/                 # Editorial comparison guide detail pages
+│   ├── research-workspace/      # Alignment, exports, trial monitor, substitutions
 │   ├── research/                # Peptide Agent and Research Pass
 │   ├── tools/                   # Calculator, COA decoder, Design Lab, lab tools
 │   ├── compounds/builder/       # PeptideForge
@@ -154,7 +163,7 @@ Optimized for **Vercel** (Analytics, Speed Insights, and Cron). Set the variable
 ## License and attribution
 
 - **Content** (catalog copy, research summaries, glossary) is **CC BY 4.0**. Reuse it with attribution to AmericanPeptide.com. API and MCP responses include that attribution.
-- **Code** is unlicensed / all rights reserved unless a `LICENSE` file says otherwise.
+- **Code** is all rights reserved except where a file or accompanying notice grants a separate license. See [LICENSE](LICENSE) for scope and attribution.
 
 ## Disclaimer
 

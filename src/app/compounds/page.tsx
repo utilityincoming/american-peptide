@@ -1,3 +1,4 @@
+import { DESIGN_LAB, PEPTIDE_FORGE } from '@/lib/page-meta'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
@@ -143,7 +144,7 @@ export default function CompoundsPage() {
         {/* ── Interactive tools ── */}
         <div className="mb-12 grid gap-4 sm:grid-cols-2">
           <Link
-            href="/compounds/builder"
+            href={PEPTIDE_FORGE.href}
             className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-accent/20 bg-gradient-to-br from-[#7EE0B5]/[0.08] to-transparent p-5 transition-all hover:border-accent/35 hover:shadow-[0_8px_40px_rgba(126,224,181,0.08)]"
           >
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
@@ -151,21 +152,20 @@ export default function CompoundsPage() {
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
-                <h2 className="text-sm font-semibold text-ink">PeptideForge</h2>
+                <h2 className="text-sm font-semibold text-ink">{PEPTIDE_FORGE.label}</h2>
                 <span className="rounded-full border border-accent/25 bg-accent/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-accent">
                   Builder
                 </span>
               </div>
               <p className="mt-0.5 text-xs text-ink/55">
-                Build a peptide residue by residue — live chemistry, challenges,
-                and XP.
+                {PEPTIDE_FORGE.description}
               </p>
             </div>
             <ArrowRight className="h-4 w-4 shrink-0 text-accent transition-transform group-hover:translate-x-0.5" />
           </Link>
 
           <Link
-            href="/tools/design-lab"
+            href={DESIGN_LAB.href}
             className="group flex items-center gap-4 overflow-hidden rounded-2xl border border-hairline bg-fill p-5 transition-all hover:border-accent/25 hover:bg-fill-strong"
           >
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-hairline-strong bg-fill-strong text-accent">
@@ -173,14 +173,13 @@ export default function CompoundsPage() {
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
-                <h2 className="text-sm font-semibold text-ink">Design Lab</h2>
+                <h2 className="text-sm font-semibold text-ink">{DESIGN_LAB.label}</h2>
                 <span className="rounded-full border border-hairline-strong bg-fill-strong px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-ink/50">
                   Beta
                 </span>
               </div>
               <p className="mt-0.5 text-xs text-ink/55">
-                Sequence properties — pI, &epsilon;280, net charge, and
-                synthesis-difficulty flags.
+                {DESIGN_LAB.description}
               </p>
             </div>
             <ArrowRight className="h-4 w-4 shrink-0 text-accent transition-transform group-hover:translate-x-0.5" />

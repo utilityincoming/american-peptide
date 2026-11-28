@@ -1,3 +1,4 @@
+import { COMPARE, DESIGN_LAB, PEPTIDE_FORGE, RESEARCH_WORKSPACE } from '@/lib/page-meta'
 import Link from 'next/link'
 import {
   ArrowUpRight,
@@ -24,6 +25,11 @@ interface Tool {
 }
 
 const TOOLS: Tool[] = [
+  { href: COMPARE.href, name: COMPARE.label, desc: COMPARE.description, Icon: Search },
+  { href: '/trials', name: 'Clinical Trials', desc: 'Search the ClinicalTrials.gov registry.', Icon: Search },
+  { href: '/tools/blend-calculator', name: 'Blend Calculator', desc: 'Calculate the volumes for a multi-peptide blend.', Icon: Calculator },
+  { href: '/tools/calculator-beta', name: 'Peptide Calculator (Beta)', desc: 'Experimental calculator modes and unit conversions.', Icon: Calculator },
+  { href: '/tools/lab', name: 'Lab Tools', desc: 'Review batch COAs, access the catalog feed, and submit sourcing information.', Icon: Beaker },
   {
     href: '/research',
     name: 'Peptide Agent',
@@ -32,22 +38,22 @@ const TOOLS: Tool[] = [
     badge: 'AI',
   },
   {
-    href: '/compounds/builder',
-    name: 'PeptideForge',
-    desc: 'Build a peptide residue by residue with live chemistry, challenges & XP.',
+    href: PEPTIDE_FORGE.href,
+    name: PEPTIDE_FORGE.label,
+    desc: PEPTIDE_FORGE.description,
     Icon: Dna,
     badge: 'New',
   },
   {
-    href: '/research-workspace',
-    name: 'Research Workspace',
-    desc: 'Compare peptides, scan trials, and calculate sequence properties in one place.',
+    href: RESEARCH_WORKSPACE.href,
+    name: RESEARCH_WORKSPACE.label,
+    desc: RESEARCH_WORKSPACE.description,
     Icon: Beaker,
   },
   {
-    href: '/tools/design-lab',
-    name: 'Design Lab',
-    desc: 'Sequence properties — pI, ε280, net charge & synthesis-difficulty flags.',
+    href: DESIGN_LAB.href,
+    name: DESIGN_LAB.label,
+    desc: DESIGN_LAB.description,
     Icon: Beaker,
     badge: 'Beta',
   },
@@ -81,9 +87,11 @@ const TOOLS: Tool[] = [
 export default function Toolkit({
   title = 'Hands-on tools',
   subtitle = 'Put the science to work — interactive utilities that run right here.',
+  heading: Heading = 'h2',
   exclude = [],
   className = '',
 }: {
+  heading?: 'h1' | 'h2'
   title?: string
   subtitle?: string
   exclude?: string[]
@@ -92,9 +100,10 @@ export default function Toolkit({
   const tools = TOOLS.filter((t) => !exclude.includes(t.href))
   if (tools.length === 0) return null
 
+  const CardHeading = Heading === 'h1' ? 'h2' : 'h3'
   return (
     <section className={className}>
-      <h2 className="text-lg font-semibold tracking-tight md:text-xl">{title}</h2>
+      <Heading className="text-lg font-semibold tracking-tight md:text-xl">{title}</Heading>
       {subtitle && <p className="mt-1 text-sm text-ink/50">{subtitle}</p>}
       <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {tools.map((t) => (
@@ -114,7 +123,7 @@ export default function Toolkit({
               )}
             </div>
             <div className="flex items-center gap-1.5">
-              <h3 className="text-sm font-semibold text-ink/90">{t.name}</h3>
+              <CardHeading className="text-sm font-semibold text-ink/90">{t.name}</CardHeading>
               <ArrowUpRight className="h-3.5 w-3.5 text-ink/55 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />
             </div>
             <p className="mt-1 text-[13px] leading-relaxed text-ink/50">{t.desc}</p>

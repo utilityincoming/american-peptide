@@ -1,5 +1,7 @@
 'use client'
 
+import { DESIGN_LAB, PEPTIDE_FORGE } from '@/lib/page-meta'
+
 import {
   useCallback,
   useEffect,
@@ -278,8 +280,8 @@ export default function PeptideForgePage() {
               Forge a peptide, residue by residue
             </h1>
             <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/55 md:text-base">
-              Tap amino acids to grow a chain and watch the chemistry update
-              live. Clear challenges to earn XP and level up your bench cred.
+              {PEPTIDE_FORGE.description}{' '}
+              <Link href={DESIGN_LAB.href} className="text-accent hover:underline">Calculate sequence properties in {DESIGN_LAB.label}</Link>.
             </p>
           </div>
 

@@ -106,7 +106,7 @@ export default function WorkspacePage() {
       <header className="flex items-center gap-2 border-b border-hairline px-4 py-3 md:px-6">
         <span className="flex items-center gap-1.5 text-sm font-medium">
           <Star className="h-4 w-4 text-accent" />
-          Workspace
+          Saved Workspace
         </span>
       </header>
 

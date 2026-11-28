@@ -53,10 +53,10 @@ export default function HeadToHeadGrid({
       </div>
 
       <Link
-        href="/compare"
+        href="/catalog/compare#comparison-guides"
         className="group mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-accent"
       >
-        All comparisons
+        All comparison guides
         <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
       </Link>
     </section>

@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+import { COMPARE, DESIGN_LAB, RESEARCH_WORKSPACE } from '@/lib/page-meta'
 import { useCallback } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import ClinicalPulse from './ClinicalPulse'
@@ -11,9 +13,9 @@ import { filtersFromSearchParams, filtersToSearchParams } from '@/lib/research-w
 import type { PulseFilters, WorkspaceTool } from '@/lib/research-workspace/types'
 
 const TOOLS: { id: WorkspaceTool; label: string; blurb: string }[] = [
-  { id: 'compare', label: 'Compare', blurb: 'Two to four catalog peptides, side by side.' },
-  { id: 'pulse', label: 'ClinicalPulse', blurb: 'Peptide-related trials from ClinicalTrials.gov.' },
-  { id: 'forge', label: 'PeptideForge', blurb: 'Live sequence properties and substitution deltas.' },
+  { id: 'compare', label: 'Sequence Alignment & Exports', blurb: 'Two to four catalog peptides, side by side.' },
+  { id: 'pulse', label: 'Trial Monitor', blurb: 'Peptide-related trials from ClinicalTrials.gov.' },
+  { id: 'forge', label: 'Substitution Explorer', blurb: 'Live sequence properties and substitution deltas.' },
 ]
 
 function toolOf(raw: string | null): WorkspaceTool {
@@ -69,12 +71,15 @@ export default function ResearchWorkspace() {
   return (
     <div className="min-h-screen bg-surface text-ink">
       <div className="mx-auto max-w-6xl px-4 py-8 md:px-8">
-        <p className="text-xs uppercase tracking-[0.16em] text-accent">Research workspace</p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">Compare, trials, and sequence math</h1>
+        <h1 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">{RESEARCH_WORKSPACE.label}</h1>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-ink/60">
-          One place for catalog comparisons, a ClinicalTrials.gov slice, and a sequence calculator.
-          Numbers are estimates. Sources stay linked: the catalog monograph, PubChem when a CID exists, and the official trial record.
+          {RESEARCH_WORKSPACE.description}
         </p>
+        <nav aria-label="Standalone research tools" className="mt-4 flex flex-wrap gap-4 text-sm text-accent">
+          <Link href={COMPARE.href}>{COMPARE.label}</Link>
+          <Link href="/trials">Clinical Trials</Link>
+          <Link href={DESIGN_LAB.href}>{DESIGN_LAB.label}</Link>
+        </nav>
         <div className="mt-5">
           <ResearchDisclaimer />
         </div>

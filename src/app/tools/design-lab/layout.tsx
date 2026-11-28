@@ -1,13 +1,11 @@
+import { DESIGN_LAB } from '@/lib/page-meta'
 import type { Metadata } from 'next'
 import { breadcrumbJsonLd, webApplicationJsonLd } from '@/lib/schema'
 
-const SITE = 'https://americanpeptide.com'
-
 export const metadata: Metadata = {
-  title: 'Peptide Design Lab (Beta)',
-  description:
-    'Experimental, research-use peptide design lab: build or load a sequence and get live molecular weight, pH-dependent net charge, isoelectric point, GRAVY, and 280 nm extinction coefficient.',
-  alternates: { canonical: `${SITE}/tools/design-lab` },
+  title: DESIGN_LAB.label,
+  description: DESIGN_LAB.description,
+  alternates: { canonical: DESIGN_LAB.href },
   robots: { index: false, follow: false },
 }
 
@@ -17,13 +15,12 @@ export default function DesignLabLayout({
   children: React.ReactNode
 }) {
   const breadcrumbLd = breadcrumbJsonLd([
-    { name: 'Design Lab', path: '/tools/design-lab' },
+    { name: DESIGN_LAB.label, path: DESIGN_LAB.href },
   ])
   const jsonLd = webApplicationJsonLd({
-    name: 'Peptide Design Lab',
-    description:
-      'Experimental peptide design lab for molecular weight, charge, isoelectric point, GRAVY, and extinction coefficient.',
-    path: '/tools/design-lab',
+    name: DESIGN_LAB.label,
+    description: DESIGN_LAB.description,
+    path: DESIGN_LAB.href,
   })
   return (
     <>

@@ -1,5 +1,7 @@
 'use client'
 
+import { DESIGN_LAB, PEPTIDE_FORGE } from '@/lib/page-meta'
+
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
@@ -318,7 +320,7 @@ export default function DesignLabPage() {
         <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md bg-accent/15">
           <Dna className="h-4 w-4 text-accent" strokeWidth={1.75} />
         </div>
-        <span className="text-sm font-medium">Design Lab</span>
+        <span className="text-sm font-medium">{DESIGN_LAB.label}</span>
         <span className="rounded-full border border-amber-500/30 bg-amber-500/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-amber-400/80">
           Beta
         </span>
@@ -334,10 +336,10 @@ export default function DesignLabPage() {
             estimates — cross-check before relying on them. Prefer a hands-on,
             gamified build? Try{' '}
             <Link
-              href="/compounds/builder"
+              href={PEPTIDE_FORGE.href}
               className="text-accent underline-offset-2 hover:underline"
             >
-              PeptideForge
+              {PEPTIDE_FORGE.label}
             </Link>
             .
           </p>
@@ -346,12 +348,10 @@ export default function DesignLabPage() {
         {/* ── Heading ── */}
         <div className="mb-8">
           <h1 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
-            Peptide Design Lab
+            {DESIGN_LAB.label}
           </h1>
           <p className="max-w-2xl text-sm leading-relaxed text-ink/55 md:text-base">
-            Build a sequence, paste one, or load a catalog peptide — then read
-            molecular weight, pH-dependent net charge, isoelectric point, GRAVY,
-            and the 280&nbsp;nm extinction coefficient in real time.
+            {DESIGN_LAB.description}
           </p>
         </div>
 
