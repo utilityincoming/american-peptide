@@ -104,9 +104,11 @@ export default function ClinicalPulse({
       const token = typeof json.nextPageToken === 'string' ? json.nextPageToken : null
       const merged = mergeTrials(trials, incoming).slice(0, MAX_LOADED)
       const capped = merged.length >= MAX_LOADED ? null : token
-      cache.set(q, { trials: merged, total: json.totalCount ?? total, nextPageToken: capped })
+      const reported = typeof json.totalCount === 'number' ? json.totalCount : null
+      const nextTotal = reported != null && reported >= total ? reported : total
+      cache.set(q, { trials: merged, total: nextTotal, nextPageToken: capped })
       setTrials(merged)
-      setTotal(json.totalCount ?? total)
+      setTotal(nextTotal)
       setNextToken(capped)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not load the next page')

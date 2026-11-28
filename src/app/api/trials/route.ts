@@ -97,7 +97,9 @@ export async function GET(request: NextRequest) {
 
   return Response.json({
     trials,
-    totalCount: data.totalCount ?? trials.length,
+    // A paged request reports totalCount as the page size. Keep the grand total
+    // on the first page only.
+    totalCount: safeToken ? null : (data.totalCount ?? trials.length),
     nextPageToken: data.nextPageToken ?? null,
   })
 }
