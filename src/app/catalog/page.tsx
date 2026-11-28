@@ -204,20 +204,23 @@ export default function CatalogPage() {
 
             {/* In-section features, surfaced on the page instead of a sub-nav.
                 Compare also works inline — tick peptides below to stack the bar. */}
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <Link href="/compounds" className="text-sm font-medium text-accent hover:underline">
+                Compound Search
+              </Link>
               <Link
                 href="/catalog/compare"
                 className="inline-flex items-center gap-2 rounded-xl border border-hairline-strong px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-accent/30 hover:text-ink"
               >
                 <GitCompareArrows className="h-4 w-4 text-accent" />
-                Compare side-by-side
+                Compare Catalog Peptides
               </Link>
               <Link
                 href="/workspace"
                 className="inline-flex items-center gap-2 rounded-xl border border-hairline-strong px-5 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:border-accent/30 hover:text-ink"
               >
                 <LayoutGrid className="h-4 w-4 text-accent" />
-                Research Workspace
+                Saved Workspace
               </Link>
             </div>
           </div>

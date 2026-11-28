@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { RESEARCH_WORKSPACE } from '@/lib/page-meta'
 import { usePathname } from 'next/navigation'
 
 // Contextual, in-page section sub-navigation. Instead of header dropdowns, the
@@ -24,7 +25,7 @@ const SECTIONS: Section[] = [
     match: ['/research', '/research-areas', '/synthesis', '/learn', '/glossary', '/trials', '/research-workspace'],
     tabs: [
       { href: '/research', label: 'Peptide Agent' },
-      { href: '/research-workspace', label: 'Workspace' },
+      RESEARCH_WORKSPACE,
       { href: '/research-areas', label: 'Research Areas' },
       { href: '/synthesis', label: 'Synthesis' },
       { href: '/learn/compatibility', label: 'Compatibility' },

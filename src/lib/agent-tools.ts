@@ -12,6 +12,9 @@ import {
   computeReconstitution,
   computeVendorRank,
 } from '@/lib/agent-compute'
+import { createHash } from 'node:crypto'
+import { setTimeout as delay } from 'node:timers/promises'
+import { cachedLookup } from '@/lib/kv'
 import { pubchemFetch } from '@/lib/pubchem-fetch'
 
 export interface AgentTool {
@@ -225,25 +228,64 @@ function truncate(s: string, max = MAX_TOOL_RESULT_CHARS): string {
   return s.length > max ? s.slice(0, max) + '\n…[truncated]' : s
 }
 
-async function fetchJson(url: string): Promise<unknown> {
-  const ctrl = new AbortController()
-  const timer = setTimeout(() => ctrl.abort(), TOOL_TIMEOUT_MS)
-  try {
-    const res = await fetch(url, { signal: ctrl.signal, headers: { Accept: 'application/json' } })
-    if (!res.ok) throw new Error(`HTTP ${res.status}`)
-    return await res.json()
-  } finally {
-    clearTimeout(timer)
-  }
+const TRANSIENT_STATUS = new Set([408, 429, 500, 502, 503, 504])
+const HOUR_SECONDS = 3600
+
+function cacheKey(url: string): string {
+  return createHash('sha256').update(url).digest('hex')
 }
 
-// PubChem gets its own door: shared rate limiting + retry on throttling, which
-// the other upstreams (ClinicalTrials, PubMed) neither need nor should share a
-// budget with. See lib/pubchem-fetch.ts.
-async function fetchPubchemJson(url: string): Promise<unknown> {
-  const res = await pubchemFetch(url, { timeoutMs: TOOL_TIMEOUT_MS })
-  if (!res?.ok) throw new Error(`HTTP ${res?.status ?? 'throttled'}`)
-  return await res.json()
+function retryDelay(res: Response): number {
+  const header = res.headers.get('retry-after')
+  if (!header) return 250
+  const seconds = Number(header)
+  const ms = Number.isFinite(seconds) ? seconds * 1000 : Date.parse(header) - Date.now()
+  return Number.isFinite(ms) ? Math.max(0, ms) : 250
+}
+
+async function loadJson(url: string): Promise<unknown> {
+  const deadline = AbortSignal.timeout(TOOL_TIMEOUT_MS)
+  for (const attempt of [0, 1]) {
+    const signal = AbortSignal.any([deadline, AbortSignal.timeout(3500)])
+    let res: Response
+    try {
+      res = await fetch(url, { signal, headers: { Accept: 'application/json' }, cache: 'no-store' })
+      if (res.ok) return await res.json()
+    } catch (error) {
+      if (attempt || deadline.aborted || error instanceof SyntaxError) throw error
+      await delay(250, undefined, { signal: deadline })
+      continue
+    }
+
+    void res.body?.cancel().catch(() => {})
+    const wait = retryDelay(res)
+    if (attempt || !TRANSIENT_STATUS.has(res.status) || wait > 1000) throw new Error(`HTTP ${res.status}`)
+    await delay(wait, undefined, { signal: deadline })
+  }
+  throw new Error('Upstream lookup failed')
+}
+
+function fetchJson(url: string, ttlSeconds: number): Promise<unknown> {
+  return cachedLookup(cacheKey(url), ttlSeconds, () => loadJson(url))
+}
+
+function fetchPubchemJson(url: string): Promise<unknown> {
+  return cachedLookup(cacheKey(url), 24 * HOUR_SECONDS, async () => {
+    const signal = AbortSignal.timeout(TOOL_TIMEOUT_MS)
+    // Stop waiting at the deadline even when the shared PubChem queue is busy.
+    const response = await new Promise<Response | null>((resolve, reject) => {
+      const abort = () => reject(signal.reason)
+      signal.addEventListener('abort', abort, { once: true })
+      pubchemFetch(url, { timeoutMs: 3500, signal }).then(resolve, reject).finally(() => {
+        signal.removeEventListener('abort', abort)
+      })
+    })
+    if (!response?.ok) {
+      void response?.body?.cancel().catch(() => {})
+      throw new Error(`HTTP ${response?.status ?? 'throttled'}`)
+    }
+    return await response.json()
+  })
 }
 
 // Narrow helper: read a nested path defensively from an unknown JSON value.
@@ -284,6 +326,7 @@ async function searchTrials(query: string): Promise<string> {
   const enc = encodeURIComponent(query)
   const data = await fetchJson(
     `https://clinicaltrials.gov/api/v2/studies?query.term=${enc}&pageSize=5`,
+    HOUR_SECONDS,
   )
   const raw = pick(data, 'studies')
   const studies = Array.isArray(raw)
@@ -309,12 +352,14 @@ async function searchPubmed(query: string): Promise<string> {
   const enc = encodeURIComponent(query)
   const search = await fetchJson(
     `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${enc}&retmax=5&retmode=json`,
+    6 * HOUR_SECONDS,
   )
   const idsRaw = pick(search, 'esearchresult', 'idlist')
   const ids = Array.isArray(idsRaw) ? (idsRaw as string[]) : []
   if (ids.length === 0) return `No PubMed results for "${query}".`
   const sum = await fetchJson(
     `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=${ids.join(',')}&retmode=json`,
+    6 * HOUR_SECONDS,
   )
   const articles = ids.map((id) => {
     const r = pick(sum, 'result', id) as Record<string, unknown> | undefined
@@ -340,6 +385,7 @@ async function searchUniprot(query: string): Promise<string> {
   const enc = encodeURIComponent(`${query} AND reviewed:true`)
   const data = await fetchJson(
     `https://rest.uniprot.org/uniprotkb/search?query=${enc}&format=json&size=3&fields=accession,id,protein_name,gene_primary,organism_name,length,cc_function,sequence`,
+    24 * HOUR_SECONDS,
   )
   const results = pick(data, 'results')
   const entries = Array.isArray(results)

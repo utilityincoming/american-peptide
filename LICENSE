@@ -1,0 +1,16 @@
+AmericanPeptide.com repository licensing
+
+Original application source code and build scripts in this repository are
+all rights reserved unless a file or accompanying notice grants a separate
+license. This notice grants no general source code license. Existing
+file-level licenses, including the MIT notice for src/lib/blend.ts, apply
+to the files they cover. Third-party material remains subject to its own terms.
+
+Original AmericanPeptide.com catalog data and editorial research content,
+including catalog entries, research summaries, and glossary entries, are
+licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
+Attribute reuse to AmericanPeptide.com, link to the license, and indicate
+whether changes were made. This content license does not cover the
+application source code or third-party material.
+
+https://creativecommons.org/licenses/by/4.0/

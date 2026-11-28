@@ -1,3 +1,5 @@
+import { upstashEnabled, upstashPipeline, warnIfRedisMissing } from './kv'
+
 // Lightweight, dependency-free rate limiter for the AI API routes.
 //
 // Goal: protect the Anthropic budget from abuse/runaway clients ("maximize
@@ -27,10 +29,6 @@ interface RateLimitOptions {
   /** Window length in seconds. */
   windowSec: number
 }
-
-const UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL
-const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN
-const upstashEnabled = Boolean(UPSTASH_URL && UPSTASH_TOKEN)
 
 // ── In-memory store ──────────────────────────────────────────────────────────
 const memory = new Map<string, { count: number; reset: number }>()
@@ -74,25 +72,12 @@ async function upstashLimit(
   key: string,
   { limit, windowSec }: RateLimitOptions,
 ): Promise<RateLimitResult> {
-  const res = await fetch(`${UPSTASH_URL}/pipeline`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${UPSTASH_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify([
-      ['INCR', key],
-      ['EXPIRE', key, String(windowSec), 'NX'],
-      ['PTTL', key],
-    ]),
-    // Don't let a slow Redis stall the user-facing request.
-    signal: AbortSignal.timeout(2000),
-  })
-
-  if (!res.ok) throw new Error(`upstash ${res.status}`)
-  const data = (await res.json()) as Array<{ result: number }>
-  const count = data[0]?.result ?? 1
-  const pttl = data[2]?.result ?? windowSec * 1000
+  const [count, , pttl] = await upstashPipeline([
+    ['INCR', key],
+    ['EXPIRE', key, windowSec, 'NX'],
+    ['PTTL', key],
+  ])
+  if (typeof count !== 'number' || typeof pttl !== 'number') throw new Error('Invalid Upstash rate-limit counters')
   const reset = Math.ceil((Date.now() + (pttl > 0 ? pttl : windowSec * 1000)) / 1000)
 
   if (count > limit) {
@@ -109,10 +94,10 @@ async function upstashLimit(
 
 /**
  * Check and consume one unit against the rate limit for `key`.
- * Fails open (allows the request) if the durable store errors — availability
- * over strictness for a user-facing endpoint.
+ * Falls back to the per-instance limiter if Redis is unavailable.
  */
 export async function rateLimit(key: string, opts: RateLimitOptions): Promise<RateLimitResult> {
+  warnIfRedisMissing()
   if (upstashEnabled) {
     try {
       return await upstashLimit(key, opts)

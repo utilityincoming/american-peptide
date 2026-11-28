@@ -1,3 +1,4 @@
+import { DESIGN_LAB, PEPTIDE_FORGE, RESEARCH_WORKSPACE } from '@/lib/page-meta'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, FlaskConical, Search, Sparkles, Syringe, Telescope } from 'lucide-react'
@@ -63,19 +64,31 @@ const features = [
   },
   {
     Icon: PeptideForgeIcon,
-    name: 'PeptideForge',
+    name: PEPTIDE_FORGE.label,
     badge: 'Interactive Builder',
-    href: '/compounds/builder',
-    description:
-      'Build a peptide residue by residue and watch mass, hydropathy, and net charge update live. Clear chemistry challenges to earn XP — a hands-on way to learn sequence design.',
+    href: PEPTIDE_FORGE.href,
+    description: PEPTIDE_FORGE.description,
+  },
+  {
+    Icon: FlaskConical,
+    name: DESIGN_LAB.label,
+    badge: 'Sequence Properties',
+    href: DESIGN_LAB.href,
+    description: DESIGN_LAB.description,
   },
   {
     Icon: ClinicalPulseIcon,
-    name: 'ClinicalPulse',
+    name: 'Clinical Trials',
     badge: 'Trial Intelligence',
     href: '/trials',
     description:
-      'Real-time surveillance of peptide-based clinical trials across ClinicalTrials.gov and WHO ICTRP. Surface recruitment trends, endpoint shifts, and competitive pipeline movements.',
+      'Search ClinicalTrials.gov for peptide studies and open the official records.',
+  },
+  {
+    Icon: Telescope,
+    name: RESEARCH_WORKSPACE.label,
+    href: RESEARCH_WORKSPACE.href,
+    description: RESEARCH_WORKSPACE.description,
   },
   {
     Icon: CompoundSearchIcon,
@@ -384,12 +397,12 @@ export default function HomePage() {
           <h2 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
             Research Modules
           </h2>
-          <p className="text-sm text-ink/55 md:text-base">
-            Four integrated tools. One unified research environment.
-          </p>
+          <Link href="/tools" className="text-sm font-medium text-accent hover:underline">
+            Browse all tools
+          </Link>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {features.map(({ Icon, name, badge, href, description }) => (
             <Link
               key={name}
@@ -405,9 +418,11 @@ export default function HomePage() {
               </div>
 
               {/* Module type */}
-              <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-accent/60">
-                {badge}
-              </p>
+              {badge && (
+                <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-accent/60">
+                  {badge}
+                </p>
+              )}
 
               {/* Name */}
               <h3 className="mb-3 text-xl font-semibold tracking-tight">{name}</h3>

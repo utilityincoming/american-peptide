@@ -12,17 +12,24 @@ import { BrandMark } from './BrandMark'
 // top-level categories; their deep links surface as the in-page SectionNav.
 // Trials is no longer top-level — it lives at the tail of the Research section.
 const NAV_LINKS = [
-  { href: '/catalog', label: 'Catalog', match: ['/catalog', '/compounds', '/workspace'] },
+  { href: '/catalog', label: 'Catalog', match: ['/catalog', '/compounds', '/workspace', '/compare'] },
   {
     href: '/research-areas',
     label: 'Research',
-    match: ['/research-areas', '/synthesis', '/learn', '/glossary', '/trials', '/research-workspace'],
+    match: ['/research-areas', '/synthesis', '/learn', '/glossary', '/trials'],
   },
-  { href: '/tools/reconstitution-calculator', label: 'Calculator', match: ['/tools'] },
+  { href: '/tools', label: 'Tools', match: ['/tools', '/research-workspace', '/compounds/builder'] },
 ] as const
+
+const MOBILE_QUICK_LINKS = NAV_LINKS.filter((link) => link.href !== '/research-areas')
+const MOBILE_MENU_LINKS = NAV_LINKS.filter((link) => link.href === '/research-areas')
 
 function isActive(pathname: string, prefixes: readonly string[]) {
   return prefixes.some((p) => pathname === p || pathname.startsWith(`${p}/`))
+}
+
+function isNavActive(pathname: string, link: (typeof NAV_LINKS)[number]) {
+  return pathname === '/compounds/builder' ? link.href === '/tools' : isActive(pathname, link.match)
 }
 
 export default function SiteHeader() {
@@ -69,7 +76,7 @@ export default function SiteHeader() {
       className="site-shell sticky top-0 z-40 border-b border-hairline bg-surface"
     >
       <div className="site-shell-container flex items-center justify-between py-3">
-        <BrandMark />
+        <BrandMark className="shrink-0 [&>span]:sr-only md:[&>span]:not-sr-only" />
 
         <div className="flex items-center gap-2">
           <nav aria-label="Primary" className="hidden items-center gap-1.5 md:flex">
@@ -89,7 +96,7 @@ export default function SiteHeader() {
             </Link>
 
             {NAV_LINKS.map((link) => {
-              const active = isActive(pathname, link.match)
+              const active = isNavActive(pathname, link)
               return (
                 <Link
                   key={link.href}
@@ -105,6 +112,19 @@ export default function SiteHeader() {
                 </Link>
               )
             })}
+          </nav>
+
+          <nav aria-label="Catalog and tools" className="flex gap-3 text-sm text-ink-muted md:hidden">
+            {MOBILE_QUICK_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={isNavActive(pathname, link) ? 'page' : undefined}
+                className="py-1 hover:text-ink aria-[current=page]:text-accent"
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
 
           <CommandPalette />
@@ -135,8 +155,8 @@ export default function SiteHeader() {
             <Sparkles className="h-4 w-4" />
             Peptide Agent
           </Link>
-          {NAV_LINKS.map((link) => {
-            const active = isActive(pathname, link.match)
+          {MOBILE_MENU_LINKS.map((link) => {
+            const active = isNavActive(pathname, link)
             return (
               <Link
                 key={link.href}

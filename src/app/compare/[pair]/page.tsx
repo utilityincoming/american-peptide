@@ -372,7 +372,7 @@ export default async function ComparePage({ params }: RouteParams) {
             <EvidenceContext
               peptideSlugs={peptideSlugs}
               areaSlugs={c.relatedAreas}
-              moreLinks={[{ href: '/compare', label: 'All comparisons' }]}
+              moreLinks={[{ href: '/catalog/compare#comparison-guides', label: 'All comparison guides' }]}
             />
           </aside>
         </div>

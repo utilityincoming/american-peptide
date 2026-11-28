@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import ComparisonGuides from '@/components/ComparisonGuides'
+import { COMPARE, RESEARCH_WORKSPACE } from '@/lib/page-meta'
+import { breadcrumbJsonLd } from '@/lib/schema'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Check, Minus } from 'lucide-react'
 import {
@@ -13,10 +16,11 @@ const SITE = 'https://americanpeptide.com'
 const MAX_COMPARE = 4
 
 interface Props {
-  searchParams: Promise<{ ids?: string }>
+  searchParams: Promise<{ ids?: string | string[] }>
 }
 
-function parseIds(raw: string | undefined): string[] {
+function parseIds(raw: string | string[] | undefined): string[] {
+  if (Array.isArray(raw)) raw = raw.join(',')
   if (!raw) return []
   return raw
     .split(',')
@@ -45,17 +49,16 @@ export async function generateMetadata({
   const { ids } = await searchParams
   const peptides = resolvePeptides(parseIds(ids))
   if (peptides.length < 2) {
-    const title = 'Compare peptides — AmericanPeptide.com Catalog'
-    const description =
-      'Side-by-side comparison of research peptides — sequence, molecular weight, mechanism, synthesis difficulty, FDA status, and PubChem identifiers.'
+    const title = COMPARE.label
+    const description = COMPARE.description
     return {
       title,
       description,
-      alternates: { canonical: `${SITE}/catalog/compare` },
+      alternates: { canonical: `${SITE}${COMPARE.href}` },
       openGraph: {
         title,
         description,
-        url: `${SITE}/catalog/compare`,
+        url: `${SITE}${COMPARE.href}`,
         type: 'website',
       },
     }
@@ -63,7 +66,7 @@ export async function generateMetadata({
   const names = peptides.map((p) => p.name).join(' vs ')
   const title = `Compare: ${names} — AmericanPeptide.com Catalog`
   const description = `Side-by-side comparison of ${names}: sequence, molecular weight, mechanism, synthesis difficulty, FDA status, and PubChem identifiers.`
-  const url = `${SITE}/catalog/compare?ids=${peptides
+  const url = `${SITE}${COMPARE.href}?ids=${peptides
     .map((p) => p.slug)
     .join(',')}`
   return {
@@ -93,20 +96,12 @@ export default async function ComparePage({ searchParams }: Props) {
         }
       : null
 
-  const breadcrumbLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
-      { '@type': 'ListItem', position: 2, name: 'Catalog', item: `${SITE}/catalog` },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: 'Compare',
-        item: `${SITE}/catalog/compare`,
-      },
-    ],
-  }
+  const breadcrumbLd = breadcrumbJsonLd([
+    { name: 'Catalog', path: '/catalog' },
+    { name: COMPARE.label, path: COMPARE.href },
+  ])
+  const workspaceParams = new URLSearchParams({ tool: 'compare' })
+  if (peptides.length) workspaceParams.set('ids', peptides.map((p) => p.slug).join(','))
 
   return (
     <div className="min-h-screen bg-surface text-ink">
@@ -129,13 +124,13 @@ export default async function ComparePage({ searchParams }: Props) {
           Catalog
         </Link>
         <span className="text-ink/20">/</span>
-        <span className="truncate text-sm font-medium">Compare</span>
+        <span className="truncate text-sm font-medium">{COMPARE.label}</span>
       </header>
 
       <section className="border-b border-hairline px-6 py-10 md:px-10">
         <div className="mx-auto max-w-6xl">
           <h1 className="mb-3 text-3xl font-bold tracking-tight md:text-4xl">
-            Compare peptides
+            {COMPARE.label}
           </h1>
           <p className="max-w-2xl text-sm leading-relaxed text-ink/55 md:text-base">
             Side-by-side reference for sequence, molecular weight, mechanism,
@@ -149,6 +144,10 @@ export default async function ComparePage({ searchParams }: Props) {
             </Link>
             .
           </p>
+          <div className="mt-4 flex flex-wrap gap-4 text-sm text-accent">
+            <Link href="#comparison-guides">Comparison Guides</Link>
+            <Link href={`${RESEARCH_WORKSPACE.href}?${workspaceParams}`}>Sequence Alignment &amp; Exports</Link>
+          </div>
         </div>
       </section>
 
@@ -157,6 +156,7 @@ export default async function ComparePage({ searchParams }: Props) {
       ) : (
         <ComparisonGrid peptides={peptides} />
       )}
+      <ComparisonGuides />
     </div>
   )
 }

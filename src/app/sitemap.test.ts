@@ -22,6 +22,8 @@ describe('sitemap', () => {
 
   it('declares the catalog comparator landing surface', () => {
     expect(urlSet.has(`${SITE}/catalog/compare`)).toBe(true)
+    expect(urlSet.has(`${SITE}/compare`)).toBe(false)
+    expect(urlSet.has(`${SITE}/tools`)).toBe(true)
   })
 
   it('uses the bare origin for the homepage — no trailing slash', () => {
